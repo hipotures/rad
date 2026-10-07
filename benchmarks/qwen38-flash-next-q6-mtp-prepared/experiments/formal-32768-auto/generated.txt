@@ -1,0 +1,39 @@
+We need respond to user. Need act as senior systems engineer, analyze provided repo excerpt. Need identify nontrivial risk, trace control/data flow across files, invariants, propose robust fix as unified diff against excerpt where practical. Include tests, failure injection, compatibility, performance, alternatives. Need continue through implementation details/test strategy. We need think deeply. We have files: .devops/tools.sh, CMakeLists.txt, app/CMakeLists.txt, app/download.cpp, app/llama.cpp, build-xcframework.sh, ci/run.sh, cmake toolchains, common/CMakeLists.txt, common/arg.cpp beginning. Likely codebase llama.cpp. Need identify a risk in excerpt. Let's inspect likely issues.
+
+Potential risk: app/llama.cpp router uses command table and exec/func with argc-1, argv+1. For download, print path. Could be memory safety? It uses static command struct with vector<string> aliases; initialization okay. main reads argv[1], matches. It sets env LLAMA_APP_CMD. Hidden commands include quantize etc. Potential bug: matches for flags: if cmd.flags and arg.size()>2 and arg[0]=='-' and arg[1]=='--', erase two. For command "--version" matches? yes. But for arg "-v"? no. Not major.
+
+Another risk: .devops/tools.sh: --all-in-one uses `exec ./llama-quantize` inside loop. exec replaces shell, so only first quantization runs. Also if model already exists skip; but exec prevents continuing. That's correctness risk. It says Execute --convert & --quantize but does not convert and only one quantize. Also uses ls glob without quotes, word splitting. Could be issue but not cross-file. Nontrivial correctness: shell script exec loop bug. Need propose fix? But user asks systems engineer reviewing repository excerpt; risk correctness concurrency memory-safety state-management. .devops/tools.sh exec in loop is a correctness/state risk. But likely want code-level more complex.
+
+Potential concurrency/memory safety in app/download.cpp? `common_models_handler` init/apply, exception. Need know common? Not enough.
+
+Potential CMake risk: LLAMA_BUILD_MTMD option. `option(LLAMA_BUILD_MTMD ...)` placed after if(LLAMA_BUILD_TOOLS). If LLAMA_BUILD_TOOLS OFF but LLAMA_BUILD_COMMON ON? Condition: if (LLAMA_BUILD_MTMD AND NOT (LLAMA_BUILD_COMMON AND LLAMA_BUILD_TOOLS)) add_subdirectory(tools/mtmd). But mtmd maybe depends on common? Could be double target? Hmm.
+
+Potential risk in app/llama.cpp: commands are hidden or not. `llama_update` uses system(...) with curl pipe sh. Security? state.
+
+Potential risk in `main`: if command func uses argv shifted but child processes re-invoke? env LLAMA_APP_CMD. If llama_server starts subprocesses, they need command? Not in excerpt.
+
+Potential risk: app CMake uses license_generate after target_sources? `license_add_file` in foreach for licenses before license_generate; also top CMake `license_add_file("llama.cpp" "LICENSE")` before add_subdirectory? Yes root adds license file before app; global property persists. Then app globs licenses and calls license_generate target. Good. But `file(GLOB EXTRA_LICENSES "${CMAKE_SOURCE_DIR}/licenses/LICENSE-*")` in app: uses CMAKE_SOURCE_DIR not PROJECT? If llama.cpp included as subdir, licenses relative source root. Fine. If no licenses? license_generate uses global property, target must exist.
+
+Potential risk: `add_executable(${TARGET} llama.cpp download.cpp)` in app/CMakeLists.txt; target named llama-app but OUTPUT_NAME llama. Links to impl libs. license_generate adds generated license.cpp to llama-app only. But other tools? maybe not.
+
+Potential risk: app/download.cpp returns paths for model/mmproj/speculative draft. If model download failed but params.model.path nonempty and file exists? Maybe okay.
+
+Potential risk: `common_params_parse` with LLAMA_EXAMPLE_DOWNLOAD and no source. It checks has_source. But if hf_repo preset prints path. Not.
+
+Potential risk: `matches` function: `std::string arg` copy. If arg is `--version`, for commands with flags true, erase. But for normal commands, if user passes `--server`, arg not match because only alias "server" and cmd.flags default false. However main arg is first argument; for serve command, flags default false so `--serve` doesn't match? Actually flags true only version/licenses/help. The help says Usage: <command>, so not issue. But maybe compatibility: `llama --server` might fail? In original llama.cpp maybe `--server` supported? Not sure. Could be state.
+
+Potential risk: `setenv` in main before calling cmd.func; if command func is llama_server, and it forks subprocess to re-invoke itself with command? It sets LLAMA_APP_CMD to cmd.name. But if child subprocess inherits environment but uses argv? Maybe okay. If llama_app runs a command that then launches another app without setting? Not.
+
+Potential risk: `llama_update` `return system(...)` returns exit status; on Unix system returns termination status, not exit code? Actually system returns exit status encoded, but returning to main then process exits with that encoded value? If main returns system return, may be nonzero weird. Not major.
+
+Potential risk in `build-xcframework.sh`: combine_static_libraries uses `xcrun libtool -static` for multiple libs, then `xcrun clang++ -dynamiclib -Wl,-force_load combined.a`. Potential issue for iOS simulator with multiple archs and min_version flag for visionOS simulator: uses `-mtargetos=xros...-simulator` maybe invalid? Could cause App Store validation? Hmm.
+
+Potential risk in `build-xcframework.sh`: It builds frameworks with same target names? It uses same dSYM name, xcodebuild create-xcframework multiple `-framework` and `-debug-symbols`. If multiple frameworks from different platforms same debug symbols name? xcodebuild accepts pairs; okay. But if BUILD_SHARED_LIBS=OFF and LLAMA_BUILD_COMMON=OFF but LLAMA_BUILD_MTMD=ON; combine_static_libraries expects libmtmd.a, vendor-hash etc. OK.
+
+Potential risk in ci/run.sh: uses `test $ret -eq 0 && gg_run ctest_debug`; test returns 1 if ret not 0, but due to `&&` it doesn't exit because set -e? ci/run.sh doesn't have set -e globally? It sets inside functions. Fine. But `test $ret -eq 0 && ...` under set -e not global. Good.
+
+Potential risk in ci/run.sh: `gg_run_qwen3_0_6b` quantizes from bf16 to q2_k etc and then check ppl; not concurrency.
+
+Potential memory-safety: In common/arg.cpp excerpt not much.
+
+Maybe best risk: app/llama.cpp router and subprocess spawning: The `main` sets `LLAMA_APP_CMD` but then calls `cmd.func(argc - 1, argv + 1)`. For hidden commands that may spawn child processes (server with tools/subproc/router) expecting to invoke the binary with subcommands

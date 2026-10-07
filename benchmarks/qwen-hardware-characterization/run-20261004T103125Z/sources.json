@@ -1,0 +1,52 @@
+{
+  "retrieved_utc": "2026-10-04T10:41:26.834516+00:00",
+  "sources": [
+    {
+      "url": "https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html",
+      "version": "13.4",
+      "used_for": "pageable asynchronous behavior and completed transfer timing"
+    },
+    {
+      "url": "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html",
+      "version": "13.4",
+      "used_for": "pinned buffers, overlap, error checks"
+    },
+    {
+      "url": "https://fio.readthedocs.io/en/latest/fio_doc.html",
+      "version_note": "online latest documentation; local pinned 3.43 help/HOWTO is authoritative"
+    },
+    {
+      "url": "https://github.com/axboe/fio",
+      "tag": "fio-3.43",
+      "commit": "d2dcd7e053d1902d2420f151c83990e6acdd9f8c"
+    },
+    {
+      "url": "https://github.com/NVIDIA/nvbandwidth",
+      "commit": "82fc4e8c6afa0babb8687793678f615b3b8d793e",
+      "scope": "README inspected; optional independent tool not executed"
+    },
+    {
+      "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+      "scope": "delegation safety; no writable user quota hierarchy"
+    }
+  ],
+  "build_command": "nvcc -O3 -std=c++17 -arch=sm_89 -Xcompiler=-fopenmp -Xcompiler=-pthread src/hwbench.cu -lcublas -o hwbench",
+  "code_hashes": {
+    "hwbench": "beadd399662183eeb4ab4db473dea77e9ce8bf470bb6685686a6564cf706ca95",
+    "campaign.py": "2ee4479ff9eee239b3a46b1dd1f53b0bf0a7c04f377de9738692050ab344b51b",
+    "src/hwbench.cu": "bc9beb24382b17ab4614ad831b078d01ec1f675647c9b12538212aee5370b755",
+    "launch_events.py": "4d621241dfde1214a0ab5391974f6e1e6aa41f7827a3db286dff701ab8641440"
+  },
+  "python_packages": {
+    "command": [
+      "uv",
+      "pip",
+      "freeze",
+      "--python",
+      "/srv/ai/benchmarks/qwen-hardware-characterization/.venv/bin/python"
+    ],
+    "returncode": 0,
+    "stdout": "contourpy==1.4.0\ncycler==0.12.1\nfonttools==4.66.1\nkiwisolver==1.5.1\nmatplotlib==3.10.7\nnumpy==2.3.4\npackaging==26.3\npillow==12.3.0\npyparsing==3.3.3\npython-dateutil==2.9.0.post0\nsix==1.17.0\n",
+    "stderr": "Using Python 3.14.7 environment at: /srv/ai/benchmarks/qwen-hardware-characterization/.venv\n"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "audit_time_utc": "2026-08-30T22:30:05Z",
+  "target": {
+    "path": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-20260829-unsloth-IQ4XS/UD-IQ4_XS/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf",
+    "architecture": "qwen4exp",
+    "block_count": 48,
+    "embedding_length": 2560,
+    "hyperconnection_count": 4,
+    "compatibility_basis": "same Qwen3.8-Flash-Next architecture and dimensions"
+  },
+  "candidates": [
+    {
+      "source_repository": "dzannotti/Qwen3.8-Flash-Next-MTP-GGUF",
+      "repository_revision": "0b2551d191548168d3254ddea4ab943a5ef4f809",
+      "path": "/srv/ai/models/Qwen3.8-Flash-Next-MTP-GGUF-20260829-dzannotti/Qwen3.8-Flash-Next-MTP-Q4_K_M.gguf",
+      "size_bytes": 2622313344,
+      "sha256": "1f2a6991237d5412c9582b654e89e3aaa5a0fd33206d2b6d1813b15c475f4c02",
+      "architecture": "qwen4exp",
+      "declared_block_count": 49,
+      "nextn_predict_layers": 1,
+      "tensor_count": 34,
+      "quantization": "mixed Q4_K/Q5_0/Q6_K/Q8_0/BF16/F32",
+      "true_model_specific_mtp": true,
+      "loadable_by_current_qwen4exp_handler": false,
+      "reason": "requires the adjacent model-specific patch; patch conflicts with current source"
+    },
+    {
+      "source_repository": "quimmedes/Qwen3.8-Flash-Next-MTP-GGUF",
+      "repository_revision": "fb84e51f3777024a5d0cef40c95e9c4df6b7a4b4",
+      "path": "/srv/ai/models/Qwen3.8-Flash-Next-MTP-GGUF-20260830-quimmedes/mtp-Qwen3.8-Flash-Next-Q4_K_M.gguf",
+      "size_bytes": 2786245792,
+      "sha256": "4563303ab6e7d40f409750fd48af76bf33dd76b0773951cbf484109107de8140",
+      "architecture": "qwen4exp",
+      "declared_block_count": 49,
+      "nextn_predict_layers": 1,
+      "tensor_count": 35,
+      "quantization": "mixed Q4_K/Q5_0/Q6_K/Q8_0/BF16/F32",
+      "true_model_specific_mtp": true,
+      "loadable_by_current_qwen4exp_handler": false,
+      "reason": "current handler has no nextn tensor loader or Qwen4Exp MTP graph"
+    },
+    {
+      "source_repository": "Jundot/Qwen3.8-Flash-Next-oQ4e-mtp",
+      "repository_revision": "2615fc0e976e65c2f3b55daca3a948f1cdc5b9f8",
+      "local_path": null,
+      "downloaded": false,
+      "approximate_total_size": "~100 GB integrated target quantization",
+      "format": "safetensors/oMLX integrated target plus MTP",
+      "nextn_predict_layers": 1,
+      "true_model_specific_mtp": true,
+      "compatible_as_llama_cpp_sidecar": false,
+      "reason": "public working oMLX format, not a standalone current-llama.cpp GGUF sidecar"
+    }
+  ],
+  "required_tensor_families": [
+    "token_embd/output",
+    "nextn.enorm",
+    "nextn.hnorm",
+    "nextn.eh_proj",
+    "one sparse-attention block q/k/v/output and norms",
+    "QSA indexer q/k and norms",
+    "512 routed expert up/gate/down tensors",
+    "shared expert and router tensors",
+    "attention/FFN hyperconnection mixers",
+    "output hyperconnection projection"
+  ],
+  "large_downloads_performed": false
+}

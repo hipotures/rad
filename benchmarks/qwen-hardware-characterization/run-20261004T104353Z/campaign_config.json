@@ -1,0 +1,51 @@
+{
+  "run_directory": "/srv/ai/benchmarks/qwen-hardware-characterization/run-20261004T104353Z",
+  "scratch": {
+    "virtiofs": "/srv/ai/benchmarks/qwen-hardware-characterization/run-20261004T104353Z/scratch-virtiofs",
+    "ext4": "/home/user/DEV/test20261001_1/hwchar-scratch-20261004T104353Z"
+  },
+  "max_campaign_seconds": 21600,
+  "formal_seconds": 60.0,
+  "warmup_seconds": 15.0,
+  "formal_repeats": 3,
+  "max_write_gib": 512,
+  "corpus_gib_per_path": 16,
+  "code_hash": "beadd399662183eeb4ab4db473dea77e9ce8bf470bb6685686a6564cf706ca95",
+  "python_hash": "10abc6da83f869246701c824c033a1ce44f2529a542996e6a960025cf75130cf",
+  "source_hash": "bc9beb24382b17ab4614ad831b078d01ec1f675647c9b12538212aee5370b755",
+  "created_wall": 1791110633.948623,
+  "safety": {
+    "ram_available_min": "max(16 GiB,15% MemTotal)",
+    "total_anonymous_pinned_limit": "min(64 GiB,50% initial available)",
+    "gpu_free_min_gib": 3,
+    "gpu_temperature_abort_C": 80,
+    "filesystem_free_min": "max(32 GiB,15% capacity)",
+    "watchdog_seconds": 180
+  },
+  "build_command": "nvcc -O3 -std=c++17 -arch=sm_89 -Xcompiler=-fopenmp -Xcompiler=-pthread src/hwbench.cu -lcublas -o hwbench",
+  "fio_launch_provenance": {
+    "installed_utc": "2026-10-04T11:33:40.175016+00:00",
+    "before_any_formal_fio": true,
+    "native_binary_sha256": "b7c0048c91fda35a56359dff7ce6b08d68b631c8264b8172504f4cd234ba4e3c",
+    "wrapper_sha256": "9bf391ec05c6f3d84307f3ea30779e3ba5d95f52b466556f33d04b54e47ec5bd",
+    "native_binary_preserved": "/srv/ai/benchmarks/qwen-hardware-characterization/deps/fio/.native/fio",
+    "scope": [
+      "auxiliary state files constrained to private scratch directory",
+      "verify_state_save disabled",
+      "complete CRC32C readback after measured write/end-fsync, outside measured window"
+    ],
+    "unchanged": [
+      "read/write I/O algorithm",
+      "engine",
+      "data block sizes",
+      "queue depths",
+      "direct setting",
+      "rate limit",
+      "timed runtime and warmup"
+    ],
+    "python_launcher_sha256": "3226b8310d31578e8ae326c0b51058ac524b0134326570fcfe45730162e07f11",
+    "thread_mode": 1,
+    "readback": "complete 256 MiB CRC32C with explicit byte-count gate, separate process after timed write and end-fsync",
+    "updated_utc": "2026-10-04T11:40:39.842571+00:00"
+  }
+}

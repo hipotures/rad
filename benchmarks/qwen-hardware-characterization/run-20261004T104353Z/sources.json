@@ -1,0 +1,79 @@
+{
+  "retrieved_utc": "2026-10-04T10:49:43.608919+00:00",
+  "sources": [
+    {
+      "url": "https://docs.nvidia.com/cuda/cuda-runtime-api/api-sync-behavior.html",
+      "version": "13.4",
+      "used_for": "pageable asynchronous behavior and completed transfer timing"
+    },
+    {
+      "url": "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html",
+      "version": "13.4",
+      "used_for": "pinned buffers, overlap, error checks"
+    },
+    {
+      "url": "https://fio.readthedocs.io/en/latest/fio_doc.html",
+      "version_note": "online latest documentation; local pinned 3.43 help/HOWTO is authoritative"
+    },
+    {
+      "url": "https://github.com/axboe/fio",
+      "tag": "fio-3.43",
+      "commit": "d2dcd7e053d1902d2420f151c83990e6acdd9f8c"
+    },
+    {
+      "url": "https://github.com/NVIDIA/nvbandwidth",
+      "commit": "82fc4e8c6afa0babb8687793678f615b3b8d793e",
+      "scope": "README inspected; optional independent tool not executed"
+    },
+    {
+      "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+      "scope": "delegation safety; no writable user quota hierarchy"
+    }
+  ],
+  "build_command": "nvcc -O3 -std=c++17 -arch=sm_89 -Xcompiler=-fopenmp -Xcompiler=-pthread src/hwbench.cu -lcublas -o hwbench",
+  "code_hashes": {
+    "hwbench": "beadd399662183eeb4ab4db473dea77e9ce8bf470bb6685686a6564cf706ca95",
+    "campaign.py": "10abc6da83f869246701c824c033a1ce44f2529a542996e6a960025cf75130cf",
+    "src/hwbench.cu": "bc9beb24382b17ab4614ad831b078d01ec1f675647c9b12538212aee5370b755",
+    "launch_events.py": "4d621241dfde1214a0ab5391974f6e1e6aa41f7827a3db286dff701ab8641440"
+  },
+  "python_packages": {
+    "command": [
+      "uv",
+      "pip",
+      "freeze",
+      "--python",
+      "/srv/ai/benchmarks/qwen-hardware-characterization/.venv/bin/python"
+    ],
+    "returncode": 0,
+    "stdout": "contourpy==1.4.0\ncycler==0.12.1\nfonttools==4.66.1\nkiwisolver==1.5.1\nmatplotlib==3.10.7\nnumpy==2.3.4\npackaging==26.3\npillow==12.3.0\npyparsing==3.3.3\npython-dateutil==2.9.0.post0\nsix==1.17.0\n",
+    "stderr": "Using Python 3.14.7 environment at: /srv/ai/benchmarks/qwen-hardware-characterization/.venv\n"
+  },
+  "uv_python": "/srv/ai/benchmarks/qwen-hardware-characterization/.venv/bin/python",
+  "build_artifacts": "code/",
+  "fio_launch_provenance": {
+    "installed_utc": "2026-10-04T11:33:40.175016+00:00",
+    "before_any_formal_fio": true,
+    "native_binary_sha256": "b7c0048c91fda35a56359dff7ce6b08d68b631c8264b8172504f4cd234ba4e3c",
+    "wrapper_sha256": "9bf391ec05c6f3d84307f3ea30779e3ba5d95f52b466556f33d04b54e47ec5bd",
+    "native_binary_preserved": "/srv/ai/benchmarks/qwen-hardware-characterization/deps/fio/.native/fio",
+    "scope": [
+      "auxiliary state files constrained to private scratch directory",
+      "verify_state_save disabled",
+      "complete CRC32C readback after measured write/end-fsync, outside measured window"
+    ],
+    "unchanged": [
+      "read/write I/O algorithm",
+      "engine",
+      "data block sizes",
+      "queue depths",
+      "direct setting",
+      "rate limit",
+      "timed runtime and warmup"
+    ],
+    "python_launcher_sha256": "3226b8310d31578e8ae326c0b51058ac524b0134326570fcfe45730162e07f11",
+    "thread_mode": 1,
+    "readback": "complete 256 MiB CRC32C with explicit byte-count gate, separate process after timed write and end-fsync",
+    "updated_utc": "2026-10-04T11:40:39.842571+00:00"
+  }
+}

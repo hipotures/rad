@@ -20,6 +20,9 @@ ROOT = Path(__file__).resolve().parents[1]
 STUDY = "iq3s-residency-20261004T230051Z"
 MAX_BYTES = 1024 * 1024
 MAX_STAGED_BYTES = 20 * MAX_BYTES
+ROOT_FILES = {"README.md", "AGENTS.md", "LICENSE", ".gitignore",
+              "QWEN38_FLASH_NEXT_LATEST_REPORT.md", "QWEN38_FLASH_NEXT_PHASE2_LATEST_REPORT.md",
+              "QWEN38_FLASH_NEXT_PHASE3_LATEST_REPORT.md"}
 LEGACY_EXTENSIONS = {
     ".md", ".py", ".sh", ".c", ".cpp", ".cu", ".h", ".hpp", ".cuh",
     ".json", ".jsonl", ".csv", ".txt", ".patch", ".diff", ".toml",
@@ -69,8 +72,8 @@ def reason(path, data=None):
     """Check artifact role/size; audit can supply the actual indexed bytes."""
     relative = path.relative_to(ROOT)
     parts = relative.parts
-    if parts[0] not in {STUDY, "docs", "tools", "research"}:
-        if not (len(parts) == 1 and path.name in {"README.md", "AGENTS.md", "LICENSE", ".gitignore"}):
+    if parts[0] not in {STUDY, "docs", "tools", "research", "benchmarks", "launchers"}:
+        if not (len(parts) == 1 and path.name in ROOT_FILES):
             return "outside-managed-research"
     if path.is_symlink():
         return "local-symlink"
@@ -81,15 +84,29 @@ def reason(path, data=None):
     if "sources" in parts and "open-jev" in parts:
         return "third-party-source-snapshot"
     blocked = set(parts[:-1]) & LOCAL_DIRS
-    if parts[0] == "research" and "logs" in parts[:-1]:
+    if parts[0] in {"research", "launchers"} and "logs" in parts[:-1]:
         blocked.add("logs")
+    if parts[0] == "benchmarks":
+        environments = {"models", "cache", ".uv-cache", "uv-cache", "deps",
+                        "python-packages", "hf-xet-lib", "hf-xet-env"}
+        if set(parts[:-1]) & environments:
+            return "benchmark-local-environment"
+        payload_dirs = {"logs", "samples", "prompts", "responses"}
+        if set(parts[:-1]) & payload_dirs and path.suffix != ".md":
+            return "benchmark-execution-payload"
+        if "runtime" in parts and "llama.cpp" in parts:
+            return "third-party-source-snapshot"
+        # These are the project's authored CUDA kernels, not a source checkout.
+        if parts[:2] == ("benchmarks", "qwen-hardware-characterization"):
+            blocked.discard("src")
     if parts[0] == STUDY and any(parts[i:i+2] == ("git", "builds") for i in range(len(parts)-2)):
         # This is provenance (commands/patches/logs), not a compiled build tree.
         blocked.discard("builds")
     hard = blocked - {"raw", "data", "inputs"}
     if hard:
         return "local-directory:" + sorted(hard)[0]
-    if blocked and path.name not in CONTRACTS and not path.name.endswith("-manifest.json"):
+    reference_doc = parts[0] == "benchmarks" and path.suffix in {".md", ".patch", ".diff"}
+    if blocked and not reference_doc and path.name not in CONTRACTS and not path.name.endswith("-manifest.json"):
         return "local-payload-directory"
     if path.name == "owned-process.json" or path.name.endswith(".pid"):
         return "transient-process-state"
@@ -97,6 +114,8 @@ def reason(path, data=None):
         return "token-id-payload"
     names = LEGACY_NAMES if parts[0] == STUDY else NAMES
     extensions = LEGACY_EXTENSIONS if parts[0] == STUDY else EXTENSIONS
+    if parts[0] == "benchmarks":
+        extensions = extensions | {".tsv", ".stdout", ".stderr", ".sha256"}
     if path.name not in names and path.suffix not in extensions:
         return "non-durable-format"
     if path.suffix == ".png" and not ({"plots", "figures"} & set(parts)):
@@ -131,7 +150,7 @@ def reason(path, data=None):
                 return len(value) > 128 or any(rows(v) for v in value)
             return isinstance(value, dict) and any(rows(v) for v in value.values())
         # Hash/provenance inventories are durable references to local payloads.
-        inventory = any(word in path.name for word in ["manifest", "inventory", "index", "catalog"]) or parts[:2] == ("docs", "compact-results")
+        inventory = any(word in path.name for word in ["manifest", "inventory", "index", "catalog"]) or parts[:2] == ("docs", "compact-results") or relative == Path("docs/external-workspaces.json")
         if size > 128 * 1024 and not inventory and rows(parsed):
             return "row-level-result-dump"
     return None
@@ -186,7 +205,7 @@ def compact_results(excluded):
     return generated
 
 def workspace_files():
-    for directory in [ROOT / STUDY, ROOT / "docs", ROOT / "tools", ROOT / "research"]:
+    for directory in [ROOT / STUDY, ROOT / "docs", ROOT / "tools", ROOT / "research", ROOT / "benchmarks", ROOT / "launchers"]:
         if not directory.exists():
             continue
         for parent, dirs, files in os.walk(directory, followlinks=False):
@@ -199,7 +218,7 @@ def workspace_files():
             dirs[:] = sorted(d for d in dirs if d not in {".git", ".venv", ".analysis-venv", "__pycache__", "node_modules", "site-packages", "dist-packages"} and not d.endswith("venv") and not (Path(parent) / d / "pyvenv.cfg").is_file() and not (Path(parent) / d).is_symlink())
             for name in sorted(files):
                 yield Path(parent) / name
-    for name in ["AGENTS.md", "LICENSE", ".gitignore", "README.md"]:
+    for name in sorted(ROOT_FILES):
         if (ROOT / name).is_file():
             yield ROOT / name
 

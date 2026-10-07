@@ -6,6 +6,8 @@ This repository is the persistent execution workspace for the RaD project.
 
 The canonical remote is `hipotures/rad` on GitHub. On this host the checkout root is `/srv/ai/research`; the old timestamped study is a child directory. If launched elsewhere, locate this checkout or use a clone of the canonical repository and verify its origin before creating task files. Do not treat an arbitrary current directory as the research repository.
 
+Historical `/srv/ai/benchmarks` and the timestamped residency laboratory are parts of the same research record. Durable benchmark files are versioned under `benchmarks/`; user-owned serving starters/configurations are under `launchers/`. Read `docs/workspaces.md` and the shared index before deciding that only the current directory belongs to the project. External execution locations remain stable; the recorded mappings distinguish the Git snapshot from the live workspace.
+
 Agents working here are research executors. They are given a concrete goal and are expected to investigate, test, analyze, implement, measure, document, and preserve results. Do not stop at planning when the requested work can be carried out.
 
 The surrounding ChatGPT project is used for discussion, synthesis, interpretation, and deciding the next research direction. This repository is where those directions are executed and made durable.
@@ -207,6 +209,8 @@ Verify important changes with tests, reproductions, benchmarks, or direct inspec
 ## Artifacts and Persistence
 
 Important results must not exist only in terminal output, chat history, temporary directories, or an agent's local workspace.
+
+User-owned launchers and their exact configurations are durable source, even when they currently live outside the checkout. Preserve them and their provenance; a compiled executable or model is a separate local artifact. Check historical benchmark/launcher roots when importing related work. Do not move live files or rewrite launcher paths just to make them tracked. Preserve useful report shortcuts as portable relative Markdown links instead of absolute filesystem symlinks.
 
 Store durable, reasonably small artifacts in the relevant research directory, including as appropriate:
 

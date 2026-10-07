@@ -1,0 +1,27 @@
+{
+  "run_directory": "/srv/ai/benchmarks/qwen-hardware-characterization/run-20261004T103125Z",
+  "scratch": {
+    "virtiofs": "/srv/ai/benchmarks/qwen-hardware-characterization/run-20261004T103125Z/scratch-virtiofs",
+    "ext4": "/home/user/DEV/test20261001_1/hwchar-scratch-20261004T103125Z"
+  },
+  "max_campaign_seconds": 21600,
+  "formal_seconds": 60.0,
+  "warmup_seconds": 15.0,
+  "formal_repeats": 3,
+  "max_write_gib": 512,
+  "corpus_gib_per_path": 16,
+  "code_hash": "beadd399662183eeb4ab4db473dea77e9ce8bf470bb6685686a6564cf706ca95",
+  "python_hash": "2ee4479ff9eee239b3a46b1dd1f53b0bf0a7c04f377de9738692050ab344b51b",
+  "source_hash": "bc9beb24382b17ab4614ad831b078d01ec1f675647c9b12538212aee5370b755",
+  "created_wall": 1791109885.7441027,
+  "safety": {
+    "ram_available_min": "max(16 GiB,15% MemTotal)",
+    "total_anonymous_pinned_limit": "min(64 GiB,50% initial available)",
+    "gpu_free_min_gib": 3,
+    "gpu_temperature_abort_C": 80,
+    "filesystem_free_min": "max(32 GiB,15% capacity)",
+    "watchdog_seconds": 180
+  },
+  "build_command": "nvcc -O3 -std=c++17 -arch=sm_89 -Xcompiler=-fopenmp -Xcompiler=-pthread src/hwbench.cu -lcublas -o hwbench",
+  "python_executable": "/srv/ai/benchmarks/qwen-hardware-characterization/.venv/bin/python"
+}

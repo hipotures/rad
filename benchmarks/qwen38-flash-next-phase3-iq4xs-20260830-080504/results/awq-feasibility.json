@@ -1,0 +1,25 @@
+{
+  "classification": "NO-GO",
+  "download_full_checkpoint": false,
+  "model_repo": "wtdcode/Qwen3.8-Flash-Next-AWQ-W4A16",
+  "model_repo_revision": "0939125b929543a783ce700c90e36dd1a575c00c",
+  "vllm_backport_revision": "13acfebd73e062b3c9004f1adee6fd568de2968f",
+  "index_total_bytes_including_mtp": 180725866024,
+  "main_weight_payload_bytes": 175480345080,
+  "ple_bytes": 102400491520,
+  "non_ple_bytes": 73079853560,
+  "non_ple_gib": 68.06184869259596,
+  "tp2_lower_bound_gib_per_rank_after_ple_offload": 34.03092434629798,
+  "physical_vram_mib_per_gpu": 24564,
+  "physical_vram_gib_per_gpu": 23.98828125,
+  "minimum_deficit_gib_per_rank_before_kv_and_runtime_buffers": 10.04264309629798,
+  "reason": "The documented model-specific path offloads PLE only. The remaining weights require at least 34.03 GiB per TP=2 rank, exceeding each 23.99 GiB GPU by 10.04 GiB before KV cache, CUDA graphs, activations, and safety margin. The documented launch uses TP=4 plus expert parallelism on 4x A100 80GB. Generic vLLM CPU offload exists, but no source or model evidence establishes a supported performant two-24GB path for the additional routed weights.",
+  "evidence": {
+    "quantization": "AWQ INT4 symmetric group-size 128 for routed experts; ignored tensors remain BF16",
+    "ple_tensor_count": 128,
+    "routed_expert_bytes": 62286594048,
+    "other_non_ple_bytes": 10793259512,
+    "documented_runtime": "wtdcode vllm-backport with VLLM_PLE_CPU_OFFLOAD=1, --tp 4, --enable-expert-parallel",
+    "full_shards_not_downloaded": true
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "campaign": "qwen38-flash-next-q6-mtp-placement-sweep-v2",
+  "runtime": {
+    "server_path": "/srv/ai/benchmarks/qwen38-flash-next-q6-mtp-prepared/runtime/build/bin/llama-server",
+    "commit": "586b15ef8ef9488140c64a71424589cec1a6a9a2"
+  },
+  "target": {
+    "first_shard": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-20260829-unsloth-Q6/UD-Q6_K_XL/Qwen3.8-Flash-Next-UD-Q6_K_XL-00001-of-00006.gguf"
+  },
+  "draft": {
+    "path": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-20260901-unsloth-MTP-Q8_0/mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf",
+    "device": "CUDA1",
+    "n_max": 3
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 18090,
+    "threads": 16,
+    "threads_batch": 16,
+    "batch": 512,
+    "ubatch": 128,
+    "cache_type_k": "q8_0",
+    "cache_type_v": "q8_0"
+  },
+  "search": {
+    "contexts": [
+      131072,
+      65536,
+      32768
+    ],
+    "start_ncmoe": {
+      "131072": 41,
+      "65536": 41,
+      "32768": 40
+    },
+    "min_ncmoe": 34,
+    "tensor_splits": [
+      "70,30",
+      "75,25",
+      "80,20",
+      "82,18",
+      "84,16",
+      "85,15",
+      "87,13",
+      "90,10",
+      "92,8"
+    ]
+  },
+  "safety": {
+    "minimum_peak_free_vram_mib_each_gpu": 1200,
+    "startup_timeout_seconds": 420,
+    "smoke_timeout_seconds": 900,
+    "telemetry_interval_seconds": 0.2
+  },
+  "smoke": {
+    "prompt": "Inspect the following Python function and return exactly one concise improvement suggestion:\n\ndef f(xs):\n    return [x*x for x in xs if x % 2 == 0]\n",
+    "max_tokens": 64,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 1,
+    "seed": 380409,
+    "thinking": false
+  },
+  "selection": {
+    "rule": "lowest safe ncmoe; within that ncmoe maximize minimum PEAK-free VRAM, then minimize peak-used imbalance, then smoke wall time"
+  }
+}

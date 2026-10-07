@@ -1,0 +1,31 @@
+git commit buun: 7a918624b81210af3e3731291360da83bf022f39
+llama-server --version: version: 0.3.0-dev (build 11723, commit 7a918624b)
+built with GNU 15.2.0 for Linux x86_64
+start command: /srv/ai/buun-llama-cpp/build/bin/llama-server -m /srv/ai/models/Qwen3.8-Flash-Next-GGUF-20260829-unsloth-Q6/UD-Q6_K_XL/Qwen3.8-Flash-Next-UD-Q6_K_XL-00001-of-00006.gguf -c 163840 -np 1 -fa on -ctk q8_0 -ctv q8_0 -b 512 -ub 128 -t 16 -tb 16 -dev CUDA0\,CUDA1 -sm layer -ngl all -ot exps=CPU --fit on --moe-cache soft --moe-cache-expert-parallel auto --spec-type draft-mtp --spec-draft-model /srv/ai/models/Qwen3.8-Flash-Next-GGUF-20260901-unsloth-MTP-Q8_0/mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf --spec-draft-n-max 3 --host 0.0.0.0 --port 18089 
+0.00.176.404 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.177.915 W srv  llama_server: -----------------
+0.00.177.918 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.00.177.918 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.00.177.918 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.00.177.918 W srv  llama_server: -----------------
+0.00.461.095 I srv    load_model: loading model '/srv/ai/models/Qwen3.8-Flash-Next-GGUF-20260829-unsloth-Q6/UD-Q6_K_XL/Qwen3.8-Flash-Next-UD-Q6_K_XL-00001-of-00006.gguf'
+0.00.461.115 I srv    load_model: auto-enabled kv-unified: single-slot server doesn't need separate KV stream
+VMEAN tap: no live V layers — add disabled
+VMEAN tap: no live V layers — add disabled
+0.11.288.305 I cmn  common_init_: MoE cache: mode=soft budget=free-minus-reserve; use -lv 4 for resolved backend state, actual pools, and statistics
+0.11.485.254 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.13.981.862 I cmn          init: llama threadpool init, n_threads = 16
+TCQ1 decode: K/V codebooks (K=baked-in V=baked-in) hotswap=0
+TCQ decode: context-adaptive V alpha enabled
+TCQ1 decode: K/V codebooks (K=baked-in V=baked-in) hotswap=0
+0.58.801.145 W model has unused tensor blk.48.indexer.q_proj.weight (size = 2621440 bytes) -- ignoring
+0.58.801.154 W model has unused tensor blk.48.indexer.k_proj.weight (size = 655360 bytes) -- ignoring
+0.58.801.155 W model has unused tensor blk.48.indexer.q_norm.weight (size = 512 bytes) -- ignoring
+0.58.801.157 W model has unused tensor blk.48.indexer.k_norm.weight (size = 512 bytes) -- ignoring
+1.00.116.090 I srv    load_model: computation-frontier ratchet: legacy reads authoritative, flip after 1024 qualifying agreements
+1.00.116.097 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 163840, kv_unified = 'true'
+1.00.120.212 I slot   load_model: id  0 | task -1 | speculative decoding context initialized
+1.00.128.525 I srv    load_model: decayed-frequency host-cache authority is enabled
+1.00.133.454 I srv          init: chat template supports preserving reasoning, consider enabling it via --reasoning-preserve
+1.00.133.494 I srv  llama_server: model loaded
+1.00.133.498 I srv  llama_server: listening on http://0.0.0.0:18089

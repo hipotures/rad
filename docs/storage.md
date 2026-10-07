@@ -5,6 +5,16 @@ The repository root is `/srv/ai/research`; the original workspace is its
 absolute paths. GitHub contains a selective snapshot of durable work, not an
 execution-environment backup.
 
+The same repository also versions durable files from the original
+`/srv/ai/benchmarks` and `/srv/ai/launchers` roots under `benchmarks/` and
+`launchers/`. The [workspace map](workspaces.md) describes their relationship.
+Originals stay at their execution paths; tracked copies preserve reports,
+authored source, exact configurations, source patches and compact evidence.
+The [external-workspace manifest](external-workspaces.json) identifies every
+verbatim copy by bytes/hash and records omissions and portable report aliases.
+Use `python3 tools/import_external_workspaces.py verify` on this host to compare
+the retained files with both their recorded hashes and their originals.
+
 | Material | Location/policy |
 |---|---|
 | Reports, goals, decisions, audits and source-group splits | Tracked verbatim. |

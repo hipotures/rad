@@ -1,0 +1,351 @@
+{
+  "scenarios": [
+    {
+      "id": "immutable-store-inclusive",
+      "family": "I",
+      "args": [
+        "--mode",
+        "store",
+        "--op",
+        "inclusive"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations"
+    },
+    {
+      "id": "immutable-store-pack",
+      "family": "I",
+      "args": [
+        "--mode",
+        "store",
+        "--op",
+        "pack"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations"
+    },
+    {
+      "id": "immutable-store-exchange",
+      "family": "I",
+      "args": [
+        "--mode",
+        "store",
+        "--op",
+        "exchange"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations"
+    },
+    {
+      "id": "rolling-monitor-ranked",
+      "family": "I",
+      "args": [
+        "--mode",
+        "monitor"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations"
+    },
+    {
+      "id": "rolling-monitor-cooperative",
+      "family": "I",
+      "args": [
+        "--mode",
+        "monitor",
+        "--op",
+        "cooperative"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations",
+      "nice": 10
+    },
+    {
+      "id": "rolling-monitor-cgroup25",
+      "family": "I",
+      "args": [
+        "--user",
+        "--scope",
+        "--quiet",
+        "--collect",
+        "--expand-environment=no",
+        "--unit=hwchar-monitor-run-20261004T104353Z",
+        "-p",
+        "CPUQuota=25%",
+        "/srv/ai/benchmarks/qwen-hardware-characterization/operations",
+        "--mode",
+        "monitor"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "systemd-run",
+      "cpu_quota": "25000 100000"
+    },
+    {
+      "id": "rolling-monitor-interference-A",
+      "family": "I",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "8",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations",
+      "pair": "rolling-monitor",
+      "arm": "A"
+    },
+    {
+      "id": "rolling-monitor-interference-B",
+      "family": "I",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "8",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations",
+      "pair": "rolling-monitor",
+      "arm": "B",
+      "sidecar": [
+        "--mode",
+        "monitor",
+        "--op",
+        "cooperative"
+      ]
+    },
+    {
+      "id": "pipeline-stage-diagnostic-virtiofs",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline-stages",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "3"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations",
+      "storage": "virtiofs",
+      "instrumented": true
+    },
+    {
+      "id": "pipeline-stage-diagnostic-ext4",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline-stages",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "3"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations",
+      "storage": "ext4",
+      "instrumented": true
+    },
+    {
+      "id": "burst-timeseries-diagnostic",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--rate",
+        "104857600",
+        "--burst",
+        "3145728000"
+      ],
+      "seconds": 60,
+      "warmup": 15,
+      "repeats": 1,
+      "headline": false,
+      "binary": "operations",
+      "instrumented": true
+    },
+    {
+      "id": "reverse-active-virtiofs",
+      "family": "G",
+      "args": [
+        "--mode",
+        "reverse",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations",
+      "storage": "virtiofs",
+      "write": true,
+      "instrumented": true
+    },
+    {
+      "id": "reverse-active-ext4",
+      "family": "G",
+      "args": [
+        "--mode",
+        "reverse",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 3,
+      "headline": false,
+      "binary": "operations",
+      "storage": "ext4",
+      "write": true,
+      "instrumented": true
+    },
+    {
+      "id": "ram-read-t1",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "read",
+        "--threads",
+        "1",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15,
+      "repeats": 1,
+      "replacement_repetition": 3,
+      "binary": "hwbench",
+      "headline": false
+    },
+    {
+      "id": "interference-dispatch-524288000-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 1,
+      "pair": "dispatch-524288000",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true,
+      "replacement_repetition": 4,
+      "binary": "hwbench",
+      "anomaly_followup": true
+    },
+    {
+      "id": "interference-dispatch-524288000-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--rate",
+        "524288000"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 1,
+      "pair": "dispatch-524288000",
+      "arm": "B",
+      "requested_rate": 524288000,
+      "headline": true,
+      "replacement_repetition": 4,
+      "binary": "hwbench",
+      "anomaly_followup": true
+    },
+    {
+      "id": "interference-dispatch-524288000-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 1,
+      "pair": "dispatch-524288000",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true,
+      "replacement_repetition": 5,
+      "binary": "hwbench",
+      "anomaly_followup": true
+    },
+    {
+      "id": "interference-dispatch-524288000-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--rate",
+        "524288000"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 1,
+      "pair": "dispatch-524288000",
+      "arm": "B",
+      "requested_rate": 524288000,
+      "headline": true,
+      "replacement_repetition": 5,
+      "binary": "hwbench",
+      "anomaly_followup": true
+    }
+  ],
+  "estimated_seconds": 2018.0,
+  "deadline_wall": 1791132233.948623,
+  "core_pid": 1007755,
+  "ordering": "build/smoke only when core PID is absent and progress is terminal; then sequential scenarios; no performance pooled across binary hashes"
+}

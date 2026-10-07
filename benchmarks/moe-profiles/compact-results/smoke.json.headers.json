@@ -1,0 +1,44 @@
+{
+  "source": "/srv/ai/benchmarks/moe-profiles/smoke.json",
+  "source_bytes": 762418,
+  "source_sha256": "584ecbaf0a7889a67f73136574c3b32e23dee1714c299a03313532643532af5b",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "schema_version": "qwen4exp.moe_profile.v1",
+    "instrumentation_base_commit": "586b15ef8ef9488140c64a71424589cec1a6a9a2",
+    "architecture": "qwen4exp",
+    "target_layers": 48,
+    "experts_per_layer": 512,
+    "top_k_observed": 10,
+    "classification": {
+      "decode_like": "ffn_moe_topk batch tokens <= decode_max_batch; includes MTP verification batches",
+      "prefill_like": "ffn_moe_topk batch tokens > decode_max_batch",
+      "decode_max_batch": 16
+    },
+    "notes": [
+      "Counts represent executed target expert selections, including speculative candidates that may later be rejected.",
+      "The trailing MTP-only block (layer 48) is excluded.",
+      "Sampling changes observation frequency only; it does not alter router scores or selected experts.",
+      "Profiler callbacks can materially slow inference; do not use profiled runs as throughput benchmarks."
+    ],
+    "errors": {
+      "invalid_expert_ids": 0,
+      "type_mismatches": 0,
+      "topk_shape_mismatches": 0
+    },
+    "phases": {
+      "prefill_like": {
+        "sampling_stride": 1,
+        "layers": {
+          "omitted_list_items": 48
+        }
+      },
+      "decode_like": {
+        "sampling_stride": 1,
+        "layers": {
+          "omitted_list_items": 48
+        }
+      }
+    }
+  }
+}

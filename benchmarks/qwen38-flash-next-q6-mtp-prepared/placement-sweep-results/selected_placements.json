@@ -1,0 +1,53 @@
+{
+  "campaign": "qwen38-flash-next-q6-mtp-placement-sweep",
+  "completed_at": "2026-09-01T23:28:44.007345+00:00",
+  "runtime_commit": "586b15ef8ef9488140c64a71424589cec1a6a9a2",
+  "selected": {
+    "131072": {
+      "draft_device": "CUDA1",
+      "draft_n_max": 3,
+      "gpu_expert_layers": 7,
+      "ncmoe": 41,
+      "post_smoke_vram_free_mib": [
+        17068.0,
+        2502.0
+      ],
+      "post_smoke_vram_used_mib": [
+        7016.0,
+        21582.0
+      ],
+      "tensor_split": "70,30"
+    },
+    "32768": {
+      "draft_device": "CUDA1",
+      "draft_n_max": 3,
+      "gpu_expert_layers": 8,
+      "ncmoe": 40,
+      "post_smoke_vram_free_mib": [
+        18230.0,
+        1394.0
+      ],
+      "post_smoke_vram_used_mib": [
+        5854.0,
+        22690.0
+      ],
+      "tensor_split": "70,30"
+    },
+    "65536": {
+      "draft_device": "CUDA1",
+      "draft_n_max": 3,
+      "gpu_expert_layers": 7,
+      "ncmoe": 41,
+      "post_smoke_vram_free_mib": [
+        17840.0,
+        3206.0
+      ],
+      "post_smoke_vram_used_mib": [
+        6244.0,
+        20878.0
+      ],
+      "tensor_split": "70,30"
+    }
+  },
+  "selection_rule": "lowest safe ncmoe; for that ncmoe choose most balanced free VRAM"
+}

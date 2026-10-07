@@ -1,4 +1,13 @@
-# Expert-residency research index
+# RaD research index
+
+RaD combines the historical benchmark work and later residency investigations.
+The [benchmark archive](../benchmarks/README.md) indexes earlier Qwen phases,
+runtime/MTP studies, hardware characterization, Strata campaigns and retained
+source/configuration/results. The [starter index](../launchers/README.md) links
+the user launchers and every preserved 128K laboratory starter. The
+[workspace map](workspaces.md) explains original execution paths and Git copies.
+
+The table below covers the residency branch of this wider research record.
 
 The investigation covers expert placement, CPU/GPU coordination and real-copy
 scheduling in frozen Strata/Qwen environments. Campaign reports define their

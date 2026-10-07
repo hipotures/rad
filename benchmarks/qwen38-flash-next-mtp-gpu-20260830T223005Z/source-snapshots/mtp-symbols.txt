@@ -1,0 +1,79 @@
+/srv/ai/llama.cpp-qwen4exp/src/models/qwen4exp.cpp:27:    hparams.n_embd_out_impl = hparams.dsv4_hc_mult * hparams.n_embd;
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1221:    ml.get_key(LLM_KV_EMBEDDING_LENGTH_OUT,    hparams.n_embd_out_impl, false);
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1240:        ml.get_key(LLM_KV_EMBEDDING_LENGTH, hparams.n_embd_out_impl);
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1582:            if (!layer.nextn.eh_proj_s && layer.nextn.eh_proj) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1583:                layer.nextn.eh_proj_s = create_tensor(tn(LLM_TENSOR_NEXTN_EH_PROJ, "scale", i), {1}, TENSOR_NOT_REQUIRED);
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1585:            if (!layer.nextn.shared_head_head_s && layer.nextn.shared_head_head) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1586:                layer.nextn.shared_head_head_s = create_tensor(tn(LLM_TENSOR_NEXTN_SHARED_HEAD_HEAD, "scale", i), {1}, TENSOR_NOT_REQUIRED);
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1647:            if (!layer.nextn.eh_proj_in_s && layer.nextn.eh_proj) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1648:                layer.nextn.eh_proj_in_s = create_tensor(tn(LLM_TENSOR_NEXTN_EH_PROJ, "input_scale", i), {1}, TENSOR_NOT_REQUIRED);
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1650:            if (!layer.nextn.shared_head_head_in_s && layer.nextn.shared_head_head) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1651:                layer.nextn.shared_head_head_in_s = create_tensor(tn(LLM_TENSOR_NEXTN_SHARED_HEAD_HEAD, "input_scale", i), {1}, TENSOR_NOT_REQUIRED);
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:1931:        LLAMA_LOG_INFO("%s: n_embd_out            = %u\n",     __func__, hparams.n_embd_out());
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2090:            LLAMA_LOG_INFO("%s: n_layer_nextn         = %d\n",     __func__, hparams.n_layer_nextn);
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2254:                if (params.ctx_type == LLAMA_CONTEXT_TYPE_MTP && hparams.n_layer_nextn > 0) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2257:                    // nextn layer(s) - same pattern as the hybrid Qwen3.5 MTP context.
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2279:                    // Main context: DSA cache for the trunk layers only - the nextn
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2282:                    if (hparams.n_layer_nextn > 0) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2308:                if (params.ctx_type == LLAMA_CONTEXT_TYPE_MTP && hparams.n_layer_nextn > 0) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2309:                    // MTP draft context: plain attention KV cache holding only the nextn layer
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2333:                    if (hparams.n_layer_nextn > 0) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2566:                            hparams.n_layer_nextn > 0) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2725:int32_t llama_model_n_embd_out(const llama_model * model) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2726:    return model->hparams.n_embd_out();
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2733:int32_t llama_model_n_layer_nextn(const llama_model * model) {
+/srv/ai/llama.cpp-qwen4exp/src/llama-model.cpp:2734:    return model->hparams.n_layer_nextn;
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:13:#include "../src/llama-ext.h" // staging API: llama_set_embeddings_nextn / llama_get_embeddings_nextn_ith (used by MTP)
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:518:                llama_set_embeddings_nextn(ctx_tgt, true, /*masked*/ false);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:526:        llama_set_embeddings_nextn(ctx_dft, true, /*masked*/ true);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:611:                : llama_get_embeddings_nextn(ctx_tgt);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:647:            const float * g_embd_chunk = llama_get_embeddings_nextn(ctx_dft);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:784:                const float * prenorm = llama_get_embeddings_nextn_ith(ctx_dft, i_batch);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1023:        llama_set_embeddings_nextn(ctx_dft, true, /*masked*/ true);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1141:                const float * inp_g = llama_get_embeddings_nextn(ctx_dft);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1222:                const float * conf = params.p_min > 0.0f ? llama_get_embeddings_nextn(ctx_dft) : nullptr;
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1298:    //   chain_heads (step35): n_mtp_layers trained heads, one per draft step.
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1300:    int32_t n_mtp_layers  = 1;
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1302:    bool    chain_heads   = false;   // derived in the ctor: n_mtp_layers > 1 && !is_mem_shared
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1307:    std::vector<std::vector<float>> pending_h;   // [n_seq][n_embd]
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1314:    std::vector<std::vector<float>> verify_h;
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1315:    std::vector<int32_t> verify_h_rows;
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1328:        n_embd = llama_model_n_embd_out(llama_get_model(ctx_dft));
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1329:        GGML_ASSERT(n_embd == llama_model_n_embd_out(llama_get_model(ctx_tgt)) &&
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1330:                "MTP input row width must match the target h_nextn width");
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1331:        n_mtp_layers = std::max(1, (int) llama_model_n_layer_nextn(llama_get_model(ctx_dft)));
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1374:        llama_set_embeddings_nextn(ctx_tgt, true, /*masked*/ false);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1375:        llama_set_embeddings_nextn(ctx_dft, true, /*masked*/ true);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1378:        chain_heads   = n_mtp_layers > 1 && !is_mem_shared;
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1380:        if (chain_heads) {
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1381:            this->params.n_max = std::min(this->params.n_max, n_mtp_layers);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1390:        pending_h.assign(n_seq, std::vector<float>(n_embd, 0.0f));
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1396:        verify_h.assign(n_seq, {});
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1397:        verify_h_rows.assign(n_seq, 0);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1486:                const float * h_tgt = llama_get_embeddings_nextn(ctx_tgt);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1500:                set_h(i_batch_beg[seq_id], pending_h[seq_id].data());
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1506:            for (int head = 0; head < n_mtp_layers; ++head) {
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1507:                if (chain_heads) {
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1515:                    llama_set_nextn_layer_offset(ctx_dft, head);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1527:            if (chain_heads) {
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1528:                llama_set_nextn_layer_offset(ctx_dft, 0); // restore default for non-draft decodes
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1541:            verify_h_rows[seq_id] = n_rows;
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1542:            verify_h[seq_id].resize((size_t) n_rows * n_embd);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1545:                const float * h = llama_get_embeddings_nextn_ith(ctx_tgt, i_batch_beg[seq_id] + i);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1546:                std::memcpy(verify_h[seq_id].data() + (size_t) i * n_embd, h, row_bytes);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1549:            std::memcpy(pending_h[seq_id].data(),
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1550:                    verify_h[seq_id].data() + (size_t) (n_rows - 1) * n_embd, row_bytes);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1579:            std::memcpy(batch.embd + (size_t) (batch.n_tokens - 1) * n_embd, pending_h[seq_id].data(), row_bytes);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1583:            if (chain_heads) {
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1584:                chain_h[seq_id].assign(pending_h[seq_id].begin(), pending_h[seq_id].end());
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1597:            if (chain_heads) {
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1604:                llama_set_nextn_layer_offset(ctx_dft, i);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1626:                const float * h_row = llama_get_embeddings_nextn_ith(ctx_dft, i_last[seq_id]);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1660:                if (chain_heads) {
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1691:        if (chain_heads) {
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1692:            llama_set_nextn_layer_offset(ctx_dft, 0); // restore default for non-draft decodes
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1712:        const int32_t n_rows = verify_h_rows[seq_id];
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:1719:        std::memcpy(pending_h[seq_id].data(), verify_h[seq_id].data() + (size_t) i_h * n_embd, row_bytes);
+/srv/ai/llama.cpp-qwen4exp/common/speculative.cpp:2264:        if (gguf_find_tensor(gguf_ctx.get(), ("blk." + std::to_string(block_count - 1) + ".nextn.eh_proj.weight").c_str()) >= 0) {
+/srv/ai/llama.cpp-qwen4exp/conversion/qwen4exp.py:30:    supports_mtp_export = False
+/srv/ai/llama.cpp-qwen4exp/conversion/qwen4exp.py:31:    no_mtp = True

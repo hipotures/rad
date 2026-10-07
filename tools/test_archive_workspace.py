@@ -7,6 +7,9 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
+
+import import_external_workspaces as importer
 
 
 REPOSITORY = Path(__file__).resolve().parents[1]
@@ -97,6 +100,62 @@ class PublicationTests(unittest.TestCase):
             result = subprocess.run(["git", "check-ignore", "--quiet", relative], cwd=self.root)
             self.assertEqual(result.returncode, 0, relative)
             self.assertEqual(ARCHIVE.reason(path), "non-durable-format")
+
+    def test_benchmark_source_and_user_launchers_are_durable(self):
+        for relative in ["benchmarks/qwen-hardware-characterization/src/hwbench.cu",
+                         "benchmarks/qwen-hardware-characterization/run-example/code-final/src/operations.cu",
+                         "benchmarks/campaign/report.md", "benchmarks/campaign/raw/reference.md",
+                         "launchers/user/start-128k.sh", "launchers/user/configs/128k.json"]:
+            path = self.write(relative, "Small durable source or reference.\n")
+            result = subprocess.run(["git", "check-ignore", "--quiet", relative], cwd=self.root)
+            self.assertEqual(result.returncode, 1, relative)
+            self.assertIsNone(ARCHIVE.reason(path))
+            self.git("add", "--", relative)
+        status, report, _ = self.audit()
+        self.assertEqual(status, 0, report)
+        for relative in ["launchers/user/logs/engine.log", "benchmarks/campaign/samples/telemetry.jsonl",
+                         "benchmarks/campaign/raw/dump.json", "benchmarks/campaign/repos/checkout.py"]:
+            path = self.write(relative, "Disposable execution payload.\n")
+            result = subprocess.run(["git", "check-ignore", "--quiet", relative], cwd=self.root)
+            self.assertEqual(result.returncode, 0, relative)
+            self.assertIsNotNone(ARCHIVE.reason(path))
+
+    def test_portable_root_report_shortcuts_are_tracked(self):
+        for name in sorted(n for n in ARCHIVE.ROOT_FILES if n.startswith("QWEN38_")):
+            path = self.write(name, "[Preserved report](benchmarks/study/REPORT.md)\n")
+            result = subprocess.run(["git", "check-ignore", "--quiet", name], cwd=self.root)
+            self.assertEqual(result.returncode, 1, name)
+            self.assertIsNone(ARCHIVE.reason(path))
+
+    def test_external_import_preserves_originals_and_refuses_overwrite(self):
+        source = self.root / "source-fixtures"
+        bench = source / "benchmarks"
+        launchers = source / "launchers"
+        bench.mkdir(parents=True)
+        launchers.mkdir()
+        report = self.write("source-fixtures/benchmarks/study/report.md", "Historical evidence.\n")
+        payload = self.write("source-fixtures/benchmarks/study/oversized.txt", "x" * (ARCHIVE.MAX_BYTES + 1))
+        self.write("source-fixtures/benchmarks/study/raw/dump.json", '{"raw": true}\n')
+        starter = self.write("source-fixtures/launchers/user/start-128k.sh", "#!/usr/bin/env bash\nexit 0\n")
+        starter.chmod(0o755)
+        with patch.multiple(importer, ROOT=self.root, CATALOG=self.root / "docs/external-workspaces.json",
+                            SOURCES={"benchmarks": bench, "launchers": launchers}), \
+             patch.object(importer.archive, "ROOT", self.root), patch.object(importer, "aliases", return_value=[]):
+            selected, excluded, exports = importer.plan()
+            self.assertEqual(len(selected), 2)
+            self.assertTrue(any(r["reason"] == "large-artifact" for r in excluded))
+            importer.copy(selected, excluded, exports)
+            self.assertEqual((self.root / "benchmarks/study/report.md").read_bytes(), report.read_bytes())
+            self.assertTrue((self.root / "launchers/user/start-128k.sh").stat().st_mode & 0o111)
+            self.assertFalse((self.root / "benchmarks/study/oversized.txt").exists())
+            self.assertTrue(payload.is_file())
+            with contextlib.redirect_stdout(io.StringIO()):
+                importer.verify()
+            self.write("benchmarks/study/report.md", "Unrelated edit to preserve.\n")
+            with self.assertRaisesRegex(RuntimeError, "Preserve different existing destination"):
+                importer.copy(selected, excluded, exports)
+            self.assertEqual((self.root / "benchmarks/study/report.md").read_text(), "Unrelated edit to preserve.\n")
+            self.assertEqual(report.read_text(), "Historical evidence.\n")
 
     def test_force_added_work_payload_fails(self):
         relative = "research/fresh/work/checkout.py"

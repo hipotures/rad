@@ -1,0 +1,66 @@
+We need answer user's request. Need produce substantial self-contained engineering analysis and implementation proposal, identify nontrivial risk from repo excerpt, trace control/data flow, invariants, propose robust fix as unified diff where practical, tests, failure injection, compatibility, performance, check assumptions, discuss alternative, continue implementation details/test strategy. Need use same language as user's request? User is English. Need think in English. We have a huge repo excerpt. Need inspect code, find risk. We need output final with detailed analysis, diff, tests.
+
+Need choose a nontrivial issue. Need be based on excerpt. Let's parse potential problems.
+
+Files: .devops/tools.sh has all-in-one bug: for loop uses $1/$2 but then exec llama-quantize in loop? Also after shift, $1? Not likely senior? Could mention. But ask likely about unified binary app/llama.cpp command routing. There is setenv LLAMA_APP_CMD before cmd.func. But for visible commands? Maybe download? Hidden commands? The router uses argv shifted. It sets env LLAMA_APP_CMD to cmd.name. For hidden commands, if child re-invokes, maybe need preserve? In app/llama.cpp, visible commands serve, cli, download. hidden completion etc. It uses `cmd.func(argc - 1, argv + 1)`, and sets LLAMA_APP_CMD. But if server spawns subprocess? common/subproc? We don't see subproc.cpp. Could be router mode child processes? Need maybe known issue: unified binary app uses LLAMA_APP_CMD to determine which subcommand to run in subprocess? We need trace. There is common_models_handler and download. Need find correctness/risk.
+
+Potential risk in common/arg.cpp parsing: argument with two values `opt.handler_str_str` but parser does `check_arg(i); std::string val = argv[++i];` then `check_arg(i); std::string val2 = argv[++i];` and if handler_str_str exists, continue; if no handler_str_str? Then it loops? Let's inspect: inside parse_cli_args. For each opt:
+- if handler_void, handler_bool continue.
+- check_arg(i); val = argv[++i];
+- if handler_int continue
+- if handler_string continue
+- // arg with 2 values
+- check_arg(i); val2 = argv[++i];
+- if handler_str_str continue
+If option defines no handler? Then after consuming val and val2, if no str_str, it falls out of try block without continuing? Actually no `else` after str_str? The code:
+```
+try {
+ if (opt.handler_void) ...
+ if (opt.handler_bool) ...
+
+ // arg with single value
+ check_arg(i);
+ std::string val = argv[++i];
+ if (opt.handler_int) ...
+ if (opt.handler_string) ...
+
+ // arg with 2 values
+ check_arg(i);
+ std::string val2 = argv[++i];
+ if (opt.handler_str_str) ...
+} catch (...)
+```
+If option has no handlers but matches, it consumes extra argument erroneously. But all options likely have handlers. Not strong.
+
+Another risk: `common_models_handler_apply` uses lambda captures `params` by reference in tasks? Let's examine:
+```
+auto add_tasks = [&opts, &tasks](const hf_cache::hf_files & model_files, const hf_cache::hf_file & primary, common_params_model & model) {
+ for ...
+   tasks.emplace_back(model_file, opts, [&, is_primary]() {
+      if (is_primary) model.path = hf_cache::finalize_file(model_file);
+      else ...
+   });
+};
+```
+`&` captures local variables from `common_models_handler_apply`: tasks, opts? It captures `model_file` by reference? In C++, `[&]` captures by reference all odr-used variables, including loop variable `model_file`? The lambda stored in tasks captures local `model_file` by reference? The loop variable `model_file` is a reference to vector element? `auto & model_file = model_files[i];` captured by reference; if tasks executed after function continues, vector model_files persists during call? It calls common_download_run_tasks before returning? The on_done called later in same function after tasks run; vector still alive. But `is_primary` by value. Fine.
+Later sidecar tasks capture `plan_spec.mtp` by reference: `[&]` captures plan_spec etc; fine within function. But potential use-after-scope? `common_download_run_tasks` executes tasks synchronously? Probably yes? Not shown. If asynchronous? likely tasks run parallel and waits. Then on_done after run tasks. OK.
+
+But bigger risk: `common_models_handler_apply` duplicate tasks map:
+```
+std::unordered_map<std::string, common_download_task *> unique_tasks;
+for (auto & task : tasks) {
+ auto it = unique_tasks.find(task.local_path);
+ if (it == unique_tasks.end()) { unique_tasks[task.local_path] = &task; }
+}
+std::vector<common_download_task> unique_tasks_vec;
+for (auto & pair : unique_tasks) { unique_tasks_vec.push_back(*pair.second); }
+common_download_run_tasks(unique_tasks_vec);
+```
+But it says if duplicated files found, only download once (but still call on_done for each task). Yet code discards duplicate tasks! It only stores first task per local_path, then after run, loop over tasks calls on_done for all, so duplicate on_done called. That matches comment. But if duplicate first task's on_done only updates one model path, while duplicate task on_done also called; it may set same path? Need if same local path but different primary semantics? Could be okay. But if duplicate task with different `on_done` should both run; after run all tasks on_done. It uses `unique_tasks_vec` with copies of first task only; duplicate task on_done still executed by later loop because loop over original tasks. But if on_done depends on task internal state? Fine.
+Potential issue: If duplicate tasks have different URLs but same local path, downloading once uses first URL; if first is not the intended? For same local path maybe same model file. But could be primary vs sidecar? Hmm.
+
+Another known risk: app router child process environment. In `app/llama.cpp`, command names and aliases. If user runs `llama server`, sets LLAMA_APP_CMD=serve. But if server child uses `llama` binary and `LLAMA_APP_CMD`? In server router, subprocess may spawn with `--server`? Not in excerpt.
+
+Potential risk: `common_models_handler_apply` sets params.models_preset and clears model for preset. But in app/download.cpp, after apply, if models_preset nonempty, print preset path and return. Good. But `common_params_parse_ex` skip model download for server/download, so `params.model.path` may be empty. OK.
+
+Potential issue: `common_models_handler_init` plan for draft: if `spec_types_is_default(params)`, opts_spec downloads all sidecars. But `opts.download_mmproj` true maybe for draft repo? It copies opts including download_mmproj. If draft repo is speculative, it might download mmproj? maybe not harmful but

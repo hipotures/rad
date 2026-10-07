@@ -1,0 +1,26 @@
+--- operations.cu:pre-run
++++ operations.cu:delta-filtered
+@@ -32,9 +32,12 @@
+         memcpy(e.blob.data(),e.gate.data(),e.gate.size());memcpy(e.blob.data()+third,e.up.data(),e.up.size());memcpy(e.blob.data()+2*third,e.down.data(),e.down.size());e.fingerprint=signature(e.blob);
+     }
+     std::vector<Buffer*>slots;for(int j=0;j<4;j++)slots.push_back(new Buffer(a.device,8ULL<<20,"pinned"));
+-    std::vector<unsigned char>exchange(8ULL<<20);std::vector<int>resident(4,-1);std::vector<uint64_t>generation(4,0);uint64_t sequence=0,published=0,clean_evictions=0,exchange_bytes=0;
++    std::vector<unsigned char>exchange(8ULL<<20);std::vector<int>resident(4,-1);std::vector<uint64_t>generation(4,0);uint64_t sequence=0,published=0,clean_evictions=0,exchange_bytes=0,already_resident_skips=0;
+     auto s=sustain(a,[&](bool measured,Stats&r){
+-        size_t slot=sequence%4,id=mix(sequence+27)%experts.size();auto b=slots[slot];const auto&e=experts[id];size_t n=e.blob.size();
++        size_t slot=sequence%4,id=mix(sequence+27)%experts.size();
++        // The incoming residency delta excludes IDs already published in any slot.
++        if(std::find(resident.begin(),resident.end(),int(id))!=resident.end()){if(measured)already_resident_skips++;sequence++;return;}
++        auto b=slots[slot];const auto&e=experts[id];size_t n=e.blob.size();
+         CU(cudaSetDevice(a.device));CU(cudaStreamSynchronize(b->stream));
+         if(resident[slot]>=0){if(a.op=="exchange"){
+             size_t old=experts[resident[slot]].blob.size();CU(cudaMemcpyAsync(exchange.data(),b->d,old,cudaMemcpyDeviceToHost,b->stream));CU(cudaStreamSynchronize(b->stream));check(exchange.data(),experts[resident[slot]].blob.data(),old);if(measured)exchange_bytes+=old;
+@@ -54,7 +57,7 @@
+     }
+     for(const auto&e:experts)if(signature(e.blob)!=e.fingerprint)throw std::runtime_error("VERIFICATION_FAILED: immutable backing changed");
+     s.legs+=exchange_bytes;
+-    std::cerr<<"STORE_DIAGNOSTICS {\"immutable_experts\":96,\"gpu_slots\":4,\"published\":"<<published<<",\"clean_evictions_without_D2H\":"<<clean_evictions<<",\"exchange_D2H_bytes\":"<<exchange_bytes<<",\"host_backing_unchanged\":true,\"exchange_note\":\"validation oracle retained outside simulated noninclusive cache\"}"<<std::endl;emit(s);
++    std::cerr<<"STORE_DIAGNOSTICS {\"immutable_experts\":96,\"gpu_slots\":4,\"published\":"<<published<<",\"already_resident_delta_skips\":"<<already_resident_skips<<",\"clean_evictions_without_D2H\":"<<clean_evictions<<",\"exchange_D2H_bytes\":"<<exchange_bytes<<",\"host_backing_unchanged\":true,\"exchange_note\":\"validation oracle retained outside simulated noninclusive cache\"}"<<std::endl;emit(s);
+ }
+ void timed_pipeline(Args a){
+     int fd=open(a.file.c_str(),O_RDONLY|O_DIRECT|O_NOFOLLOW);struct stat fs;if(fd<0||fstat(fd,&fs)||!S_ISREG(fs.st_mode))throw std::runtime_error("diagnostic pipeline requires regular file");

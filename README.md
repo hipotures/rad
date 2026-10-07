@@ -4,6 +4,19 @@ RaD preserves research code, evidence and conclusions. This repository is the
 durable record; large execution payloads remain in the local working storage.
 The connected repository is [hipotures/rad](https://github.com/hipotures/rad).
 
+The [benchmark archive](benchmarks/README.md) preserves earlier Qwen phases,
+Strata comparisons, hardware characterization, scripts, configurations,
+patches and compact results from `/srv/ai/benchmarks`. These investigations and
+the residency laboratory belong to the same RaD project. Find serving scripts
+and their configurations in the [starter index](launchers/README.md), including
+direct links to every preserved `start-128k.sh`.
+
+The familiar report shortcuts are now portable links:
+[Qwen first phase](QWEN38_FLASH_NEXT_LATEST_REPORT.md),
+[phase 2](QWEN38_FLASH_NEXT_PHASE2_LATEST_REPORT.md) and
+[phase 3](QWEN38_FLASH_NEXT_PHASE3_LATEST_REPORT.md).
+See the [workspace map](docs/workspaces.md) for Git and local execution paths.
+
 The existing expert-residency investigation stays in
 [iq3s-residency-20261004T230051Z](iq3s-residency-20261004T230051Z/).
 Its original absolute path remains

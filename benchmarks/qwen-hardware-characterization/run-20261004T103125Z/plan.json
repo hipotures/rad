@@ -1,0 +1,2402 @@
+{
+  "scenarios": [
+    {
+      "id": "idle-telemetry",
+      "family": "A",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "idle",
+      "headline": false
+    },
+    {
+      "id": "ram-read-t1",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "read",
+        "--threads",
+        "1",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "ram-read-t4",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "read",
+        "--threads",
+        "4",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "ram-read-t16",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "read",
+        "--threads",
+        "16",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "ram-copy-t1",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "copy",
+        "--threads",
+        "1",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "ram-copy-t4",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "copy",
+        "--threads",
+        "4",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "ram-copy-t16",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "copy",
+        "--threads",
+        "16",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "ram-triad-t1",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "1",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "ram-triad-t4",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "4",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "ram-triad-t16",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "16",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "ram-gather-segments",
+      "family": "B",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "gather",
+        "--threads",
+        "8",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-local-copy",
+      "family": "C",
+      "args": [
+        "--mode",
+        "local",
+        "--op",
+        "copy",
+        "--device",
+        "0",
+        "--bytes",
+        "268435456"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-gemm-large",
+      "family": "C",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "large",
+        "--device",
+        "0",
+        "--bytes",
+        "268435456"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-gemm-small",
+      "family": "C",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--device",
+        "0",
+        "--bytes",
+        "268435456"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-local-copy",
+      "family": "C",
+      "args": [
+        "--mode",
+        "local",
+        "--op",
+        "copy",
+        "--device",
+        "1",
+        "--bytes",
+        "268435456"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-gemm-large",
+      "family": "C",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "large",
+        "--device",
+        "1",
+        "--bytes",
+        "268435456"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-gemm-small",
+      "family": "C",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--device",
+        "1",
+        "--bytes",
+        "268435456"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "both-gpu-gemm",
+      "family": "C",
+      "args": [
+        "--mode",
+        "gemm"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "concurrent_device": true,
+      "headline": false
+    },
+    {
+      "id": "gpu0-gemm-low-telemetry",
+      "family": "A",
+      "args": [
+        "--mode",
+        "gemm"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "cadence": 5,
+      "headline": false
+    },
+    {
+      "id": "gpu0-h2d-pageable-4096",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-h2d-pageable-3145728",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-h2d-pageable-67108864",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-h2d-pinned-4096",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-h2d-pinned-3145728",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": true
+    },
+    {
+      "id": "gpu0-h2d-pinned-67108864",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-d2h-pageable-4096",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-d2h-pageable-3145728",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-d2h-pageable-67108864",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-d2h-pinned-4096",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-d2h-pinned-3145728",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": true
+    },
+    {
+      "id": "gpu0-d2h-pinned-67108864",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-stage-expert",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--kind",
+        "stage",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-pinned-double-bulk",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "0",
+        "--buffers",
+        "2",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-registration",
+      "family": "D",
+      "args": [
+        "--mode",
+        "registration",
+        "--device",
+        "0",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-mapped-coalesced",
+      "family": "D",
+      "args": [
+        "--mode",
+        "mapped",
+        "--device",
+        "0",
+        "--bytes",
+        "536870912"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-mapped-scatter",
+      "family": "D",
+      "args": [
+        "--mode",
+        "mapped",
+        "--device",
+        "0",
+        "--bytes",
+        "536870912",
+        "--scatter"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-h2d-pageable-4096",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-h2d-pageable-3145728",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-h2d-pageable-67108864",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-h2d-pinned-4096",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-h2d-pinned-3145728",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": true
+    },
+    {
+      "id": "gpu1-h2d-pinned-67108864",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "h2d",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-d2h-pageable-4096",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-d2h-pageable-3145728",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-d2h-pageable-67108864",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pageable",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-d2h-pinned-4096",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-d2h-pinned-3145728",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": true
+    },
+    {
+      "id": "gpu1-d2h-pinned-67108864",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--direction",
+        "d2h",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-stage-expert",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--kind",
+        "stage",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-pinned-double-bulk",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--device",
+        "1",
+        "--buffers",
+        "2",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-mapped-coalesced",
+      "family": "D",
+      "args": [
+        "--mode",
+        "mapped",
+        "--device",
+        "1",
+        "--bytes",
+        "536870912"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu1-mapped-scatter",
+      "family": "D",
+      "args": [
+        "--mode",
+        "mapped",
+        "--device",
+        "1",
+        "--bytes",
+        "536870912",
+        "--scatter"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "both-h2d",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--both",
+        "--direction",
+        "h2d",
+        "--bytes",
+        "67108864",
+        "--buffers",
+        "2"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "both-d2h",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--both",
+        "--direction",
+        "d2h",
+        "--bytes",
+        "67108864",
+        "--buffers",
+        "2"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "both-mixed",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--both",
+        "--direction",
+        "mixed",
+        "--bytes",
+        "67108864",
+        "--buffers",
+        "2"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "gpu0-bidirectional",
+      "family": "D",
+      "args": [
+        "--mode",
+        "transfer",
+        "--direction",
+        "bidir",
+        "--buffers",
+        "2",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-0-1-4096-serial",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "0",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-0-1-3145728-serial",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "0",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-0-1-67108864-serial",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "0",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-0-1-bulk-double",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "0",
+        "--bytes",
+        "67108864",
+        "--buffers",
+        "2"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "peer-0-1",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "0",
+        "--kind",
+        "peer",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-1-0-4096-serial",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "1",
+        "--bytes",
+        "4096"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-1-0-3145728-serial",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "1",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-1-0-67108864-serial",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "1",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-1-0-bulk-double",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "1",
+        "--bytes",
+        "67108864",
+        "--buffers",
+        "2"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "peer-1-0",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--device",
+        "1",
+        "--kind",
+        "peer",
+        "--bytes",
+        "67108864"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-roundtrip-activation",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--bytes",
+        "32768",
+        "--op",
+        "roundtrip"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "bridge-bidirectional",
+      "family": "E",
+      "args": [
+        "--mode",
+        "bridge",
+        "--bytes",
+        "67108864",
+        "--buffers",
+        "2"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "concurrent_device": true,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-first-pass",
+      "family": "F",
+      "args": [],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 1,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "read",
+      "bs": 1048576,
+      "direct": false,
+      "depth": 1,
+      "first_pass": true,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-read-1048576-direct0-qd1",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "read",
+      "bs": 1048576,
+      "direct": false,
+      "depth": 1,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-read-1048576-direct1-qd8",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "read",
+      "bs": 1048576,
+      "direct": true,
+      "depth": 8,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-randread-4096-direct1-qd1",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "randread",
+      "bs": 4096,
+      "direct": true,
+      "depth": 1,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-randread-4096-direct1-qd16",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "randread",
+      "bs": 4096,
+      "direct": true,
+      "depth": 16,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-randread-262144-direct1-qd8",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "randread",
+      "bs": 262144,
+      "direct": true,
+      "depth": 8,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-randread-3145728-direct1-qd1",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "randread",
+      "bs": 3145728,
+      "direct": true,
+      "depth": 1,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-randread-3145728-direct1-qd8",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "randread",
+      "bs": 3145728,
+      "direct": true,
+      "depth": 8,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-randread-3145728-direct0-qd1",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "randread",
+      "bs": 3145728,
+      "direct": false,
+      "depth": 1,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-write-durable",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "virtiofs",
+      "rw": "write",
+      "bs": 1048576,
+      "direct": true,
+      "depth": 8,
+      "write": true,
+      "headline": false
+    },
+    {
+      "id": "virtiofs-pipeline-gpu0-b1",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "pinned",
+        "--device",
+        "0",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "1",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "virtiofs",
+      "headline": false
+    },
+    {
+      "id": "virtiofs-pipeline-gpu0-b3",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "pinned",
+        "--device",
+        "0",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "3",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "virtiofs",
+      "headline": false
+    },
+    {
+      "id": "virtiofs-pipeline-bulk",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "seq",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "67108864",
+        "--buffers",
+        "3",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "virtiofs",
+      "headline": false
+    },
+    {
+      "id": "virtiofs-pipeline-shared-both",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "2",
+        "--both",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "virtiofs",
+      "headline": false
+    },
+    {
+      "id": "ext4-first-pass",
+      "family": "F",
+      "args": [],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 1,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "read",
+      "bs": 1048576,
+      "direct": false,
+      "depth": 1,
+      "first_pass": true,
+      "headline": false
+    },
+    {
+      "id": "ext4-read-1048576-direct0-qd1",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "read",
+      "bs": 1048576,
+      "direct": false,
+      "depth": 1,
+      "headline": false
+    },
+    {
+      "id": "ext4-read-1048576-direct1-qd8",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "read",
+      "bs": 1048576,
+      "direct": true,
+      "depth": 8,
+      "headline": false
+    },
+    {
+      "id": "ext4-randread-4096-direct1-qd1",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "randread",
+      "bs": 4096,
+      "direct": true,
+      "depth": 1,
+      "headline": false
+    },
+    {
+      "id": "ext4-randread-4096-direct1-qd16",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "randread",
+      "bs": 4096,
+      "direct": true,
+      "depth": 16,
+      "headline": false
+    },
+    {
+      "id": "ext4-randread-262144-direct1-qd8",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "randread",
+      "bs": 262144,
+      "direct": true,
+      "depth": 8,
+      "headline": false
+    },
+    {
+      "id": "ext4-randread-3145728-direct1-qd1",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "randread",
+      "bs": 3145728,
+      "direct": true,
+      "depth": 1,
+      "headline": false
+    },
+    {
+      "id": "ext4-randread-3145728-direct1-qd8",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "randread",
+      "bs": 3145728,
+      "direct": true,
+      "depth": 8,
+      "headline": false
+    },
+    {
+      "id": "ext4-randread-3145728-direct0-qd1",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "randread",
+      "bs": 3145728,
+      "direct": false,
+      "depth": 1,
+      "headline": false
+    },
+    {
+      "id": "ext4-write-durable",
+      "family": "F",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "fio",
+      "storage": "ext4",
+      "rw": "write",
+      "bs": 1048576,
+      "direct": true,
+      "depth": 8,
+      "write": true,
+      "headline": false
+    },
+    {
+      "id": "ext4-pipeline-gpu0-b1",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "pinned",
+        "--device",
+        "0",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "1",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "ext4",
+      "headline": false
+    },
+    {
+      "id": "ext4-pipeline-gpu0-b3",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "pinned",
+        "--device",
+        "0",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "3",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "ext4",
+      "headline": false
+    },
+    {
+      "id": "ext4-pipeline-gpu1-b1",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "pinned",
+        "--device",
+        "1",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "1",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "ext4",
+      "headline": false
+    },
+    {
+      "id": "ext4-pipeline-gpu1-b3",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "pinned",
+        "--device",
+        "1",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "3",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "ext4",
+      "headline": false
+    },
+    {
+      "id": "ext4-pipeline-stage",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "stage",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "3",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "ext4",
+      "headline": false
+    },
+    {
+      "id": "ext4-pipeline-readers2",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "3",
+        "--threads",
+        "2",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "ext4",
+      "headline": false
+    },
+    {
+      "id": "ext4-pipeline-bulk",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "seq",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "67108864",
+        "--buffers",
+        "3",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "ext4",
+      "headline": false
+    },
+    {
+      "id": "ext4-pipeline-shared-both",
+      "family": "G",
+      "args": [
+        "--mode",
+        "pipeline",
+        "--op",
+        "random",
+        "--kind",
+        "pinned",
+        "--bytes",
+        "3145728",
+        "--buffers",
+        "2",
+        "--both",
+        "--direct"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "ext4",
+      "headline": false
+    },
+    {
+      "id": "interference-gemm-104857600-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "gemm-104857600",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-gemm-104857600-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--rate",
+        "104857600"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "gemm-104857600",
+      "arm": "B",
+      "requested_rate": 104857600,
+      "headline": true
+    },
+    {
+      "id": "interference-gemm-2147483648-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "gemm-2147483648",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-gemm-2147483648-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--rate",
+        "2147483648"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "gemm-2147483648",
+      "arm": "B",
+      "requested_rate": 2147483648,
+      "headline": true
+    },
+    {
+      "id": "interference-dispatch-104857600-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "dispatch-104857600",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-dispatch-104857600-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--rate",
+        "104857600"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "dispatch-104857600",
+      "arm": "B",
+      "requested_rate": 104857600,
+      "headline": true
+    },
+    {
+      "id": "interference-dispatch-524288000-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "dispatch-524288000",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-dispatch-524288000-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--rate",
+        "524288000"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "dispatch-524288000",
+      "arm": "B",
+      "requested_rate": 524288000,
+      "headline": true
+    },
+    {
+      "id": "interference-dispatch-2147483648-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "dispatch-2147483648",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-dispatch-2147483648-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--rate",
+        "2147483648"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "dispatch-2147483648",
+      "arm": "B",
+      "requested_rate": 2147483648,
+      "headline": true
+    },
+    {
+      "id": "interference-cpu-104857600-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "8",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "cpu-104857600",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-cpu-104857600-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "8",
+        "--bytes",
+        "1073741824",
+        "--rate",
+        "104857600"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "cpu-104857600",
+      "arm": "B",
+      "requested_rate": 104857600,
+      "headline": true
+    },
+    {
+      "id": "interference-cpu-2147483648-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "8",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "cpu-2147483648",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-cpu-2147483648-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "8",
+        "--bytes",
+        "1073741824",
+        "--rate",
+        "2147483648"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "cpu-2147483648",
+      "arm": "B",
+      "requested_rate": 2147483648,
+      "headline": true
+    },
+    {
+      "id": "interference-burst30s-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "burst30s",
+      "arm": "A",
+      "requested_rate": 0,
+      "burst_bytes": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-burst30s-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--rate",
+        "104857600",
+        "--burst",
+        "3145728000"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "burst30s",
+      "arm": "B",
+      "requested_rate": 104857600,
+      "burst_bytes": 3145728000,
+      "headline": true
+    },
+    {
+      "id": "interference-both-gpus-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "concurrent_device": true,
+      "pair": "both-gpus",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-both-gpus-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--rate",
+        "524288000"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "concurrent_device": true,
+      "pair": "both-gpus",
+      "arm": "B",
+      "requested_rate": 524288000,
+      "headline": true
+    },
+    {
+      "id": "residency-contiguous",
+      "family": "I",
+      "args": [
+        "--mode",
+        "residency",
+        "--op",
+        "contiguous"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "residency-pack",
+      "family": "I",
+      "args": [
+        "--mode",
+        "residency",
+        "--op",
+        "pack"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "residency-noninclusive",
+      "family": "I",
+      "args": [
+        "--mode",
+        "residency",
+        "--op",
+        "noninclusive"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "controller-ranked-plan",
+      "family": "I",
+      "args": [
+        "--mode",
+        "controller"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false
+    },
+    {
+      "id": "interference-combined-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "combined"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "combined",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-storage-ext4-A",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "storage-ext4",
+      "arm": "A",
+      "requested_rate": 0,
+      "headline": true
+    },
+    {
+      "id": "interference-combined-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "combined",
+        "--rate",
+        "524288000"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "combined",
+      "arm": "B",
+      "requested_rate": 524288000,
+      "headline": true
+    },
+    {
+      "id": "interference-storage-ext4-B",
+      "family": "H",
+      "args": [
+        "--mode",
+        "gemm",
+        "--op",
+        "small",
+        "--rate",
+        "524288000"
+      ],
+      "seconds": 60.0,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "storage-ext4",
+      "arm": "B",
+      "requested_rate": 524288000,
+      "headline": true,
+      "storage": "ext4"
+    },
+    {
+      "id": "virtiofs-reverse-durable",
+      "family": "G",
+      "args": [
+        "--mode",
+        "reverse",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "virtiofs",
+      "write": true,
+      "headline": false
+    },
+    {
+      "id": "ext4-reverse-durable",
+      "family": "G",
+      "args": [
+        "--mode",
+        "reverse",
+        "--bytes",
+        "3145728"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "storage": "ext4",
+      "write": true,
+      "headline": false
+    },
+    {
+      "id": "controller-cooperative",
+      "family": "I",
+      "args": [
+        "--mode",
+        "controller",
+        "--op",
+        "cooperative"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "headline": false,
+      "nice": 10
+    },
+    {
+      "id": "interference-controller-A",
+      "family": "I",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "8",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "controller",
+      "arm": "A",
+      "headline": false
+    },
+    {
+      "id": "interference-controller-B",
+      "family": "I",
+      "args": [
+        "--mode",
+        "ram",
+        "--op",
+        "triad",
+        "--threads",
+        "8",
+        "--bytes",
+        "1073741824"
+      ],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "pair": "controller",
+      "arm": "B",
+      "headline": false,
+      "sidecar": [
+        "--mode",
+        "controller",
+        "--op",
+        "cooperative"
+      ]
+    },
+    {
+      "id": "process-cuda-initialization-events",
+      "family": "A",
+      "args": [],
+      "seconds": 20,
+      "warmup": 15.0,
+      "repeats": 3,
+      "tool": "launch_events",
+      "headline": false
+    }
+  ],
+  "estimated_seconds": 19388.0,
+  "estimated_preparation_seconds": 900,
+  "estimated_logical_write_GiB": 64,
+  "supporting_windows": "20 seconds, 15 warmup, 3 repeats; 60 seconds all transfer interference and pinned 3MiB transfer headline cases",
+  "anomaly_reserve_seconds": 2212.0,
+  "families_required": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I"
+  ],
+  "controller_cgroup_quota": "UNSUPPORTED: no writable delegated user cgroup; no host configuration changed",
+  "preformal_revision2": "Combined CPU worker ready barrier fixes smoke setup race; reduced redundant storage GPU1/registration cases, before formal execution",
+  "estimated_logical_write_GiB_conservative": 100,
+  "initialization_event_observation": "three independent twenty-second windows of individual process/CUDA-context launches"
+}

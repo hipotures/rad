@@ -1,0 +1,45 @@
+{
+  "campaign": "qwen38-flash-next-q6-mtp-placement-sweep",
+  "runtime": {
+    "server_path": "/srv/ai/benchmarks/qwen38-flash-next-q6-mtp-prepared/runtime/build/bin/llama-server",
+    "commit": "586b15ef8ef9488140c64a71424589cec1a6a9a2"
+  },
+  "target": {
+    "first_shard": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-20260829-unsloth-Q6/UD-Q6_K_XL/Qwen3.8-Flash-Next-UD-Q6_K_XL-00001-of-00006.gguf"
+  },
+  "draft": {
+    "path": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-20260901-unsloth-MTP-Q8_0/mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf",
+    "device": "CUDA1",
+    "n_max": 3
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 18089,
+    "threads": 16,
+    "threads_batch": 16,
+    "batch": 512,
+    "ubatch": 128,
+    "cache_type_k": "q8_0",
+    "cache_type_v": "q8_0"
+  },
+  "contexts": [131072, 65536, 32768],
+  "search": {
+    "start_ncmoe": 47,
+    "min_ncmoe": 32,
+    "tensor_splits": ["60,40", "65,35", "55,45", "1,1", "70,30"],
+    "stop_after_first_ncmoe_without_safe_split": true
+  },
+  "safety": {
+    "min_free_vram_mib_each_gpu_after_smoke": 1200,
+    "startup_timeout_seconds": 420,
+    "smoke_timeout_seconds": 900
+  },
+  "smoke": {
+    "max_tokens": 96,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 1,
+    "seed": 380409,
+    "thinking_enabled": false
+  }
+}

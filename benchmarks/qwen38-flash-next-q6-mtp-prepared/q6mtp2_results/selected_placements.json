@@ -1,0 +1,68 @@
+{
+  "campaign": "qwen38-flash-next-q6-mtp-placement-sweep-v2",
+  "completed_at": "2026-09-02T12:05:01.059119+00:00",
+  "runtime_commit": "586b15ef8ef9488140c64a71424589cec1a6a9a2",
+  "selected": {
+    "131072": {
+      "draft_device": "CUDA1",
+      "draft_n_max": 3,
+      "gpu_expert_layers": 13,
+      "ncmoe": 35,
+      "peak_free_vram_mib": [
+        3177.0,
+        3429.0
+      ],
+      "peak_vram_used_mib": [
+        20906.0,
+        20654.0
+      ],
+      "smoke_server_tg_tps": 20.480247167325814,
+      "startup_vram_used_mib": [
+        20840.0,
+        20606.0
+      ],
+      "tensor_split": "82,18"
+    },
+    "32768": {
+      "draft_device": "CUDA1",
+      "draft_n_max": 3,
+      "gpu_expert_layers": 14,
+      "ncmoe": 34,
+      "peak_free_vram_mib": [
+        2461.0,
+        4205.0
+      ],
+      "peak_vram_used_mib": [
+        21622.0,
+        19878.0
+      ],
+      "smoke_server_tg_tps": 21.82899488797279,
+      "startup_vram_used_mib": [
+        21558.0,
+        19830.0
+      ],
+      "tensor_split": "82,18"
+    },
+    "65536": {
+      "draft_device": "CUDA1",
+      "draft_n_max": 3,
+      "gpu_expert_layers": 14,
+      "ncmoe": 34,
+      "peak_free_vram_mib": [
+        1977.0,
+        3945.0
+      ],
+      "peak_vram_used_mib": [
+        22106.0,
+        20138.0
+      ],
+      "smoke_server_tg_tps": 20.67003052274507,
+      "startup_vram_used_mib": [
+        22042.0,
+        20090.0
+      ],
+      "tensor_split": "82,18"
+    }
+  },
+  "selection_rule": "lowest safe ncmoe; within that ncmoe maximize minimum PEAK-free VRAM, then minimize peak-used imbalance, then smoke wall time"
+}

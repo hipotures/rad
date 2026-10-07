@@ -58,9 +58,14 @@
 !/LICENSE
 !/README.md
 !/.gitignore
+!/QWEN38_FLASH_NEXT_LATEST_REPORT.md
+!/QWEN38_FLASH_NEXT_PHASE2_LATEST_REPORT.md
+!/QWEN38_FLASH_NEXT_PHASE3_LATEST_REPORT.md
 !/docs/
 !/tools/
 !/research/
+!/benchmarks/
+!/launchers/
 !/iq3s-residency-20261004T230051Z/
 /storage/
 
@@ -83,6 +88,20 @@
 **/dist/
 **/target/
 /research/**/logs/
+/launchers/**/logs/
+/benchmarks/**/logs/
+/benchmarks/**/samples/
+/benchmarks/**/prompts/
+/benchmarks/**/responses/
+/benchmarks/**/models/
+/benchmarks/**/cache/
+/benchmarks/**/.uv-cache/
+/benchmarks/**/uv-cache/
+/benchmarks/**/deps/
+/benchmarks/**/python-packages/
+/benchmarks/**/hf-xet-lib/
+/benchmarks/**/hf-xet-env/
+/benchmarks/**/runtime/llama.cpp/
 **/src/
 **/source/
 **/build/
@@ -110,6 +129,24 @@
 **/.ssh/
 **/owned-process.json
 **/*.pid
+
+# Preserve authored hardware kernels and bounded benchmark capture formats.
+!/benchmarks/qwen-hardware-characterization/src/
+!/benchmarks/qwen-hardware-characterization/src/**
+!/benchmarks/qwen-hardware-characterization/run-*/code-final/src/
+!/benchmarks/qwen-hardware-characterization/run-*/code-final/src/**
+!/benchmarks/**/*.tsv
+!/benchmarks/**/*.stdout
+!/benchmarks/**/*.stderr
+!/benchmarks/**/*.sha256
+
+# Historical reference documents can live beside ignored payloads.
+!/benchmarks/**/raw/
+/benchmarks/**/raw/**
+!/benchmarks/**/raw/*.md
+!/benchmarks/**/responses/
+/benchmarks/**/responses/**
+!/benchmarks/**/responses/*.md
 
 # Bounded contracts in ignored payload directories are explicitly selected by
 # tools/archive_workspace.py. Existing campaign ignore files stay unchanged.
