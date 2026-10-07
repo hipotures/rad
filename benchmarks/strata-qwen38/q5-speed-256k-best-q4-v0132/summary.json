@@ -1,0 +1,552 @@
+{
+  "status": "COMPLETE",
+  "plan": {
+    "target_actual_prompt_tokens": 259500,
+    "output_tokens": 256,
+    "measured_requests": 3,
+    "warmup_requests": 1,
+    "GPU": [
+      0,
+      1
+    ],
+    "K": 24,
+    "kv": "int8",
+    "spec": 4,
+    "spec_min_p": 0.5,
+    "max_context": 262144,
+    "prefill": "32768",
+    "ple_io": "mmap",
+    "literal_saved_Q4_payloads": "PREFILL-32768-confirm-259500 warmup and runs1-3; only model alias changed",
+    "references": [
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/PREFILL-32768-confirm-259500-run1.json",
+        "sha256": "d5660ebc82d98ec04c01962290aaca0aea21be1be890964c495f73d7984ba453",
+        "pp_tps": 5338.0,
+        "tg_tps": 93.6,
+        "ttft_s": 49.13133524599834
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/PREFILL-32768-confirm-259500-run2.json",
+        "sha256": "ed8d695131d2d29796a8b0508b9270fb355230797ea86b806b11ca1851a735f3",
+        "pp_tps": 5665.0,
+        "tg_tps": 94.6,
+        "ttft_s": 46.3239580139998
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/PREFILL-32768-confirm-259500-run3.json",
+        "sha256": "93aee8fa20709071721f5d07e29f0f4cace453017fabeef44fa3ef110c3a3a98",
+        "pp_tps": 5667.0,
+        "tg_tps": 101.3,
+        "ttft_s": 46.294110550996265
+      }
+    ],
+    "comparison": "historical Q4 median and historical fastest run; NOT_CONTROLLED_A_B: required local Q5 runtime fallback+Q8 PLE mmap, different quant/cache capacity/adaptive cache history; no simultaneous rerun Q4",
+    "no_model_download_or_weight_change": true,
+    "created_utc": "2026-10-02T10:53:16.856775+00:00",
+    "Q4_effective_prefill_chunk": 16384,
+    "selection_criterion": "highest single measured Q4 TG at >=250000 actual tokens; IQ3_S and warmups excluded"
+  },
+  "measured": [
+    {
+      "model": "Q5-BEST-Q4-K24-259500",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 259500,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-02T11:07:48Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-speed-256k-best-q4-v0132/telemetry/Q5-BEST-Q4-K24-259500-run1.jsonl",
+      "samples": 687,
+      "peak_rss_gib": 140.11983108520508,
+      "min_mem_available_gib": 56.94364929199219,
+      "peak_ram_used_gib": 104.18896865844727,
+      "peak_vram0_gib": 23.30859375,
+      "peak_vram1_gib": 23.50390625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 259500,
+        "completion_tokens": 256,
+        "total_tokens": 259756,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP front door of the Strata project (plan v0.3 P8). It is a Python module that can be run as a script (`python -m serve.server`) and exposes an OpenAI-compatible and Anthropic-compatible API on top of a token-id engine. Its responsibilities, roughly in the order the file presents them:\n\n1. **Engine abstraction.** An `Engine` protocol maps token ids in \u2192 token ids out. Two implementations exist:\n   - `MockEngine` replays a scripted completion as token ids, so every API path (streaming, tools, cancellation, sampling) can be tested without a GPU.\n   - `StrataEngine` keeps one `strata --serve` process resident (weights, expert arena, VRAM tier load once) and talks to it over stdin/stdout with a small line protocol: `GEN <max_new> [sampling keys] <ids>` in, `T <id>` token lines, `PP` prompt-progress lines, `DONE ...` with per-request timing/reuse statistics, `ERR` for failures, and `READY <ctx> [stop]` at startup. It also parses `INFO key",
+      "reasoning": "",
+      "actual_prompt_tokens": 259500,
+      "generated_tokens": 256,
+      "ttft_s": 683.0188291849918,
+      "total_wall_s": 686.9230290949927,
+      "api_decode_wall_s": 3.904199910000898,
+      "prompt_processing_wall_s": 682.4243,
+      "decode_wall_s": 3.9283,
+      "pp_tps": 380.3,
+      "tg_tps": 65.2,
+      "draft_tokens": 248,
+      "accepted_tokens": 150,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 259500,
+        "prompt_ms": 682424.3,
+        "prompt_per_token_ms": 2.63,
+        "prompt_per_second": 380.3,
+        "predicted_n": 256,
+        "predicted_ms": 3928.3,
+        "predicted_per_token_ms": 15.345,
+        "predicted_per_second": 65.2,
+        "draft_n": 248,
+        "draft_n_accepted": 150,
+        "at": 1790939955
+      },
+      "acceptance_pct": 60.483870967741936,
+      "mean_accepted_length": 1.4150943396226414,
+      "final_logical_context_tokens": 259756,
+      "final_kv_occupancy_tokens": 259755,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 106,
+      "mean_committed_length": 2.4150943396226414,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.897
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 87189.160370721,
+      "t_first_monotonic_s": 87872.179199906,
+      "t_end_monotonic_s": 87876.083399816,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "381513": {
+          "pss_gib": 0.19666099548339844,
+          "pss_sample_wall": 1790939266.5140312,
+          "pss_read_wall_s": 0.004878801002632827
+        },
+        "381524": {
+          "pss_gib": 139.68349266052246,
+          "pss_sample_wall": 1790939267.8167913,
+          "pss_read_wall_s": 1.3027599579945672
+        }
+      },
+      "pss_after": {
+        "381513": {
+          "pss_gib": 0.19928550720214844,
+          "pss_sample_wall": 1790939955.4439206,
+          "pss_read_wall_s": 0.005024010999477468
+        },
+        "381524": {
+          "pss_gib": 139.70624256134033,
+          "pss_sample_wall": 1790939956.8063796,
+          "pss_read_wall_s": 1.3624585890065646
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "Q5-BEST-Q4-K24-259500",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/q5-speed-256k-best-q4-v0132/configs/Q5-BEST-Q4-K24-259500.json"
+    },
+    {
+      "model": "Q5-BEST-Q4-K24-259500",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 259500,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-02T11:19:19Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-speed-256k-best-q4-v0132/telemetry/Q5-BEST-Q4-K24-259500-run2.jsonl",
+      "samples": 663,
+      "peak_rss_gib": 140.1398582458496,
+      "min_mem_available_gib": 56.945960998535156,
+      "peak_ram_used_gib": 104.1866569519043,
+      "peak_vram0_gib": 23.30859375,
+      "peak_vram1_gib": 23.50390625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 259500,
+        "completion_tokens": 256,
+        "total_tokens": 259756,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP front door of Strata: it implements the OpenAI Chat Completions endpoint (`POST /v1/chat/completions`), the Anthropic Messages endpoint (`POST /v1/messages`), and the metadata endpoints (`GET /v1/models`, `/models`, `/props`, `/slots`, `/health`, `/mcp`) on top of *any* engine that maps token ids in to token ids out. The file is truncated mid-`Service`, but its architecture is fully visible:\n\n- **Engine adapters.** `Engine` is a protocol (`generate(ids, max_new, sampling, cancel) -> iterator of token ids`). `MockEngine` replays scripted text as token ids so every API path is testable without a GPU. `StrataEngine` keeps one `strata --serve` process resident (weights, expert arena, VRAM tier load once) and speaks a line protocol over stdin/stdout: `GEN <max_new> [sampling keys] <ids>` in, `T <id>` token lines, `PP` prompt-progress lines, `DONE ...` with per-request timing/reuse/tier statistics, `ERR` on failure. It narr",
+      "reasoning": "",
+      "actual_prompt_tokens": 259500,
+      "generated_tokens": 256,
+      "ttft_s": 658.6084968490031,
+      "total_wall_s": 662.3793771639903,
+      "api_decode_wall_s": 3.770880314987153,
+      "prompt_processing_wall_s": 657.9959,
+      "decode_wall_s": 3.8018,
+      "pp_tps": 394.4,
+      "tg_tps": 67.3,
+      "draft_tokens": 228,
+      "accepted_tokens": 160,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 259500,
+        "prompt_ms": 657995.9,
+        "prompt_per_token_ms": 2.536,
+        "prompt_per_second": 394.4,
+        "predicted_n": 256,
+        "predicted_ms": 3801.8,
+        "predicted_per_token_ms": 14.851,
+        "predicted_per_second": 67.3,
+        "draft_n": 228,
+        "draft_n_accepted": 160,
+        "at": 1790940622
+      },
+      "acceptance_pct": 70.17543859649123,
+      "mean_accepted_length": 1.6666666666666667,
+      "final_logical_context_tokens": 259756,
+      "final_kv_occupancy_tokens": 259755,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 96,
+      "mean_committed_length": 2.666666666666667,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.878
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 87880.589601539,
+      "t_first_monotonic_s": 88539.198098388,
+      "t_end_monotonic_s": 88542.968978703,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "381513": {
+          "pss_gib": 0.19928550720214844,
+          "pss_sample_wall": 1790939957.8050723,
+          "pss_read_wall_s": 0.004911152005661279
+        },
+        "381524": {
+          "pss_gib": 139.70624351501465,
+          "pss_sample_wall": 1790939959.190746,
+          "pss_read_wall_s": 1.3856732089916477
+        }
+      },
+      "pss_after": {
+        "381513": {
+          "pss_gib": 0.20099735260009766,
+          "pss_sample_wall": 1790940622.3272018,
+          "pss_read_wall_s": 0.004991520996554755
+        },
+        "381524": {
+          "pss_gib": 139.71483516693115,
+          "pss_sample_wall": 1790940623.6864574,
+          "pss_read_wall_s": 1.359255949006183
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "Q5-BEST-Q4-K24-259500",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/q5-speed-256k-best-q4-v0132/configs/Q5-BEST-Q4-K24-259500.json"
+    },
+    {
+      "model": "Q5-BEST-Q4-K24-259500",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 259500,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-02T11:30:26Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-speed-256k-best-q4-v0132/telemetry/Q5-BEST-Q4-K24-259500-run3.jsonl",
+      "samples": 634,
+      "peak_rss_gib": 140.20327377319336,
+      "min_mem_available_gib": 56.906375885009766,
+      "peak_ram_used_gib": 104.22624206542969,
+      "peak_vram0_gib": 23.30859375,
+      "peak_vram1_gib": 23.50390625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 259500,
+        "completion_tokens": 256,
+        "total_tokens": 259756,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP front door of the Strata project: it implements the OpenAI-compatible (`POST /v1/chat/completions`) and Anthropic-compatible (`POST /v1/messages`) APIs on top of a token-id engine, plus metadata endpoints (`GET /v1/models`, `/models`, `/props`, `/slots`, `/health`, `/mcp`, `/metrics`, `/status`). It is the \"plan v0.3 P8\" API layer: text goes in, token ids go to the engine, text deltas come back.\n\nKey pieces visible in the file:\n\n- **Engine abstraction.** An `Engine` protocol (`generate(ids, max_new, sampling, cancel) -> iterator of token ids`) with two implementations. `MockEngine` replays scripted completions so every API path is testable without a GPU. `StrataEngine` keeps one `strata --serve` process resident (weights, expert arena, VRAM tier load once) and speaks a line protocol over stdin/stdout: `GEN <max_new> [sampling keys] <ids>` in, `T <id>` token lines, `PP` prompt-progress lines, `DONE ...` with",
+      "reasoning": "",
+      "actual_prompt_tokens": 259500,
+      "generated_tokens": 256,
+      "ttft_s": 630.4719603479898,
+      "total_wall_s": 633.912871441993,
+      "api_decode_wall_s": 3.4409110940032406,
+      "prompt_processing_wall_s": 629.7671,
+      "decode_wall_s": 3.4709,
+      "pp_tps": 412.1,
+      "tg_tps": 73.8,
+      "draft_tokens": 230,
+      "accepted_tokens": 162,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 259500,
+        "prompt_ms": 629767.1,
+        "prompt_per_token_ms": 2.427,
+        "prompt_per_second": 412.1,
+        "predicted_n": 256,
+        "predicted_ms": 3470.9,
+        "predicted_per_token_ms": 13.558,
+        "predicted_per_second": 73.8,
+        "draft_n": 230,
+        "draft_n_accepted": 162,
+        "at": 1790941260
+      },
+      "acceptance_pct": 70.43478260869566,
+      "mean_accepted_length": 1.7234042553191489,
+      "final_logical_context_tokens": 259756,
+      "final_kv_occupancy_tokens": 259755,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 94,
+      "mean_committed_length": 2.723404255319149,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.881
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 88547.455204116,
+      "t_first_monotonic_s": 89177.927164464,
+      "t_end_monotonic_s": 89181.368075558,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "381513": {
+          "pss_gib": 0.20099830627441406,
+          "pss_sample_wall": 1790940624.62503,
+          "pss_read_wall_s": 0.004965681000612676
+        },
+        "381524": {
+          "pss_gib": 139.71483421325684,
+          "pss_sample_wall": 1790940625.9599874,
+          "pss_read_wall_s": 1.3349579219939187
+        }
+      },
+      "pss_after": {
+        "381513": {
+          "pss_gib": 0.2026681900024414,
+          "pss_sample_wall": 1790941260.7264748,
+          "pss_read_wall_s": 0.004973810995579697
+        },
+        "381524": {
+          "pss_gib": 139.71973609924316,
+          "pss_sample_wall": 1790941262.0371628,
+          "pss_read_wall_s": 1.3106886030000169
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "Q5-BEST-Q4-K24-259500",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/q5-speed-256k-best-q4-v0132/configs/Q5-BEST-Q4-K24-259500.json"
+    }
+  ],
+  "warmup": {
+    "model": "Q5-BEST-Q4-K24-259500",
+    "kind": "warmup",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 259500,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-02T10:55:09Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-speed-256k-best-q4-v0132/telemetry/Q5-BEST-Q4-K24-259500-warmup.jsonl",
+    "samples": 754,
+    "peak_rss_gib": 140.07232284545898,
+    "min_mem_available_gib": 57.01561737060547,
+    "peak_ram_used_gib": 104.11700057983398,
+    "peak_vram0_gib": 23.30859375,
+    "peak_vram1_gib": 23.50390625,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 259500,
+      "completion_tokens": 256,
+      "total_tokens": 259756,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP front door of Strata: it implements the OpenAI Chat Completions endpoint (`POST /v1/chat/completions`), the Anthropic Messages endpoint (`POST /v1/messages`), and the metadata endpoints (`GET /v1/models`, `/models`, `/props`, `/slots`, `/health`, `/mcp`) on top of any engine that maps token ids to token ids. It is the \"plan v0.3 P8\" API layer described in the module docstring: text goes in, token ids go to the engine, text deltas come out.\n\nKey pieces visible in the file:\n\n- **Engine abstraction.** An `Engine` protocol (`generate(ids, max_new, sampling, cancel) -> iterator of token ids`) with two implementations. `MockEngine` replays a scripted completion for tests without a GPU. `StrataEngine` keeps one `strata --serve` process resident (weights, expert arena, VRAM tier load once) and speaks a line protocol over stdin/stdout: `GEN <max_new> [sampling keys] <ids>` in, `T <id>` token lines, `PP` prompt-progress lines, `",
+    "reasoning": "",
+    "actual_prompt_tokens": 259500,
+    "generated_tokens": 256,
+    "ttft_s": 749.4853890920058,
+    "total_wall_s": 753.939443455005,
+    "api_decode_wall_s": 4.454054362999159,
+    "prompt_processing_wall_s": 748.9146,
+    "decode_wall_s": 4.4927,
+    "pp_tps": 346.5,
+    "tg_tps": 57.0,
+    "draft_tokens": 232,
+    "accepted_tokens": 162,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 259500,
+      "prompt_ms": 748914.6,
+      "prompt_per_token_ms": 2.886,
+      "prompt_per_second": 346.5,
+      "predicted_n": 256,
+      "predicted_ms": 4492.7,
+      "predicted_per_token_ms": 17.55,
+      "predicted_per_second": 57.0,
+      "draft_n": 232,
+      "draft_n_accepted": 162,
+      "at": 1790939263
+    },
+    "acceptance_pct": 69.82758620689656,
+    "mean_accepted_length": 1.7234042553191489,
+    "final_logical_context_tokens": 259756,
+    "final_kv_occupancy_tokens": 259755,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 94,
+    "mean_committed_length": 2.723404255319149,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.827
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 86430.858729888,
+    "t_first_monotonic_s": 87180.34411898,
+    "t_end_monotonic_s": 87184.798173343,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "length"
+    ],
+    "pss_before": {
+      "381513": {
+        "pss_gib": 0.183563232421875,
+        "pss_sample_wall": 1790938508.6870818,
+        "pss_read_wall_s": 0.0045490630000131205
+      },
+      "381524": {
+        "pss_gib": 96.33305931091309,
+        "pss_sample_wall": 1790938509.5064657,
+        "pss_read_wall_s": 0.819383141992148
+      }
+    },
+    "pss_after": {
+      "381513": {
+        "pss_gib": 0.19666099548339844,
+        "pss_sample_wall": 1790939264.1647902,
+        "pss_read_wall_s": 0.005413688995759003
+      },
+      "381524": {
+        "pss_gib": 139.68349647521973,
+        "pss_sample_wall": 1790939265.5437245,
+        "pss_read_wall_s": 1.3789333349996014
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "Q5-BEST-Q4-K24-259500",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/q5-speed-256k-best-q4-v0132/configs/Q5-BEST-Q4-K24-259500.json"
+  },
+  "started_utc": "2026-10-02T10:53:16Z",
+  "GPU_compute_apps_after": "",
+  "clean_checkout_tracked_unchanged": true,
+  "model_stat_unchanged": true,
+  "median": {
+    "pp_tps": 394.4,
+    "tg_tps": 67.3,
+    "ttft_s": 658.6084968490031,
+    "total_wall_s": 662.3793771639903,
+    "actual_prompt_tokens": 259500,
+    "generated_tokens": 256,
+    "peak_ram_used_gib": 104.18896865844727,
+    "peak_vram0_gib": 23.30859375,
+    "peak_vram1_gib": 23.50390625,
+    "min_mem_available_gib": 56.94364929199219,
+    "draft_tokens": 230,
+    "accepted_tokens": 160,
+    "prompt_processing_wall_s": 657.9959,
+    "decode_wall_s": 3.8018,
+    "peak_rss_gib": 140.1398582458496,
+    "mean_accepted_length": 1.6666666666666667,
+    "acceptance_pct": 70.17543859649123,
+    "final_kv_occupancy_tokens": 259755
+  },
+  "Q4_reference_median": {
+    "pp_tps": 5665.0,
+    "tg_tps": 94.6,
+    "ttft_s": 46.3239580139998
+  },
+  "Q4_reference_fastest": {
+    "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/PREFILL-32768-confirm-259500-run3.json",
+    "sha256": "93aee8fa20709071721f5d07e29f0f4cace453017fabeef44fa3ef110c3a3a98",
+    "pp_tps": 5667.0,
+    "tg_tps": 101.3,
+    "ttft_s": 46.294110550996265
+  },
+  "delta_vs_Q4_median_pct": {
+    "pp_tps": -93.03795233892322,
+    "tg_tps": -28.858350951374202,
+    "ttft_s": 1321.7448704403923
+  },
+  "peak_across_measured": {
+    "peak_ram_used_gib": 104.22624206542969,
+    "peak_vram0_gib": 23.30859375,
+    "peak_vram1_gib": 23.50390625,
+    "peak_rss_gib": 140.20327377319336
+  },
+  "prefill": {
+    "configured_chunk_tokens": 32768,
+    "actual_chunk_tokens": 16384,
+    "evidence": "logs/Q5-BEST-Q4-K24-259500-engine.log and references Q4 engine log; runtime reduced chunk to fit both expert caches"
+  },
+  "all_zero_prompt_reuse": true,
+  "all_no_abort": true,
+  "comparison_classification": "NOT_CONTROLLED_A_B",
+  "expert_file_stats": [
+    {
+      "run": 1,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.897
+      }
+    },
+    {
+      "run": 2,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.878
+      }
+    },
+    {
+      "run": 3,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.881
+      }
+    }
+  ],
+  "expert_io_note": "Normal expert counters report file_mb=0. Full routed arena in RAM. Native PLE mmap is separate; these counters do not prove absence of all physical host storage I/O on virtiofs."
+}

@@ -1,0 +1,180 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-OPT-case10.json",
+  "source_bytes": 300986,
+  "source_sha256": "99fbd4a87738b9eeb0c1a75a425ff0812e59526e0800282673329d1713a7a753",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-OPT",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 61,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-03T23:55:21Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-OPT-case10.jsonl",
+    "samples": 3,
+    "peak_rss_gib": 53.395381927490234,
+    "min_mem_available_gib": 103.60354995727539,
+    "peak_ram_used_gib": 57.52906799316406,
+    "peak_vram0_gib": 23.265625,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 61,
+      "completion_tokens": 27,
+      "total_tokens": 88,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "[{\"id\":1,\"square\":1},{\"id\":2,\"square\":4},{\"id\":3,\"square\":9}]",
+    "reasoning": "",
+    "actual_prompt_tokens": 61,
+    "generated_tokens": 27,
+    "ttft_s": 0.7119373460009228,
+    "total_wall_s": 2.121398246003082,
+    "api_decode_wall_s": 1.4094609000021592,
+    "prompt_processing_wall_s": 0.694,
+    "decode_wall_s": 0.5317000000000001,
+    "pp_tps": 87.9,
+    "tg_tps": 50.8,
+    "draft_tokens": 18,
+    "accepted_tokens": 16,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 61,
+      "prompt_ms": 694.0,
+      "prompt_per_token_ms": 11.377,
+      "prompt_per_second": 87.9,
+      "predicted_n": 27,
+      "predicted_ms": 531.7,
+      "predicted_per_token_ms": 19.693,
+      "predicted_per_second": 50.8,
+      "draft_n": 18,
+      "draft_n_accepted": 16,
+      "at": 1791071723
+    },
+    "acceptance_pct": 88.88888888888889,
+    "mean_accepted_length": 1.4545454545454546,
+    "final_logical_context_tokens": 88,
+    "final_kv_occupancy_tokens": 87,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 11,
+    "mean_committed_length": 2.4545454545454546,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.977
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 219642.416091234,
+    "t_first_monotonic_s": 219643.12802858,
+    "t_end_monotonic_s": 219644.53748948,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "stop"
+    ],
+    "pss_before": {
+      "891689": {
+        "pss_gib": 0.18427181243896484,
+        "pss_sample_wall": 1791071721.0899491,
+        "pss_read_wall_s": 0.00455048301955685
+      },
+      "891695": {
+        "pss_gib": 0.0005435943603515625,
+        "pss_sample_wall": 1791071721.0900412,
+        "pss_read_wall_s": 9.014000534079969e-05
+      },
+      "891696": {
+        "pss_gib": 53.02516460418701,
+        "pss_sample_wall": 1791071721.5457215,
+        "pss_read_wall_s": 0.4556814730167389
+      },
+      "891697": {
+        "pss_gib": 0.003360748291015625,
+        "pss_sample_wall": 1791071721.545897,
+        "pss_read_wall_s": 0.0001700790016911924
+      }
+    },
+    "pss_after": {
+      "891689": {
+        "pss_gib": 0.18427181243896484,
+        "pss_sample_wall": 1791071723.8845625,
+        "pss_read_wall_s": 0.004759940988151357
+      },
+      "891695": {
+        "pss_gib": 0.0005435943603515625,
+        "pss_sample_wall": 1791071723.8846529,
+        "pss_read_wall_s": 8.868001168593764e-05
+      },
+      "891696": {
+        "pss_gib": 53.02516746520996,
+        "pss_sample_wall": 1791071724.34179,
+        "pss_read_wall_s": 0.45713812598842196
+      },
+      "891697": {
+        "pss_gib": 0.0032625198364257812,
+        "pss_sample_wall": 1791071724.3419573,
+        "pss_read_wall_s": 0.00016157000209204853
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-OPT",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-OPT.json",
+    "input_ids_sha256": "e0140085ea4cd4408a5e3a40cc4634196e8c6b0538a0e202caad0cceab203e2d",
+    "output_text_sha256": "85b000508d166dd46e8b0a10c6fe8a38da2d43418c8225f9773ddffae91d7066",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 0,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "structured",
+    "generated_token_ids": [
+      58,
+      4754,
+      306,
+      763,
+      16,
+      1288,
+      36234,
+      763,
+      16,
+      35607,
+      306,
+      763,
+      17,
+      1288,
+      36234,
+      763,
+      19,
+      35607,
+      306,
+      763,
+      18,
+      1288,
+      36234,
+      763,
+      24,
+      24634,
+      248046
+    ]
+  }
+}

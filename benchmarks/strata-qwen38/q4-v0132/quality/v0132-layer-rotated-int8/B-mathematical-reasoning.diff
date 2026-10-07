@@ -1,0 +1,139 @@
+--- v0132-layer-default/B-mathematical-reasoning.txt
++++ v0132-layer-rotated-int8/B-mathematical-reasoning.txt
+@@ -2,38 +2,34 @@
+ 
+ ### Method 1: First Step Analysis (State-Based Approach)
+ 
+-Let $E$ be the expected total number of rolls needed to get two consecutive identical values.
++Let $E$ be the expected number of *additional* rolls needed to get a match, given that we have just rolled a die and do not yet have a match with the previous roll.
+ 
+-We can define the state of the process based on the history of the rolls. However, a simpler way is to look at the process step-by-step.
+-
+-Let $E$ be the expected number of *additional* rolls needed to finish the game, given that we have just rolled a die and the previous roll (if any) was different from the current one. Actually, let's define states more precisely:
+-
+-*   Let $E_0$ be the expected number of rolls needed starting from a "fresh" state (no previous roll, or the previous roll is irrelevant because we haven't started counting the pair yet). This is what we want to find.
+-*   Let $E_1$ be the expected number of *additional* rolls needed given that we have just rolled a value, and we are waiting for the next roll to match it.
++However, it is more precise to define states based on the history of the rolls.
++Let $E_0$ be the expected number of rolls needed starting from scratch (no previous roll).
++Let $E_1$ be the expected number of *additional* rolls needed given that we have just rolled a number, and we are waiting for the next roll to match it.
+ 
+ **Step 1: Analyze the first roll.**
+-We must roll the die at least once. Let this be roll 1.
+-After roll 1, we are in a state where we have a current value, and we need the next roll to match it.
++When we start, we must roll the die once. This roll establishes the "previous value" for the next comparison.
+ So, $E_0 = 1 + E_1$.
+ 
+ **Step 2: Analyze the state $E_1$.**
+ We have just rolled a value (say, $x$). We roll the die again.
+-*   **Case A (Match):** The new roll is $x$. The probability of this is $1/6$. The game ends. The number of additional rolls used is 1.
+-*   **Case B (No Match):** The new roll is not $x$. The probability of this is $5/6$. The game does not end. However, we have now rolled a new value (say, $y$). We are now in the exact same situation as we were after the first roll: we have a current value ($y$) and we need the next roll to match it. The number of additional rolls used so far is 1, and we still need $E_1$ more rolls on average from this new state.
++There are two possibilities for this next roll:
++1.  **Match:** The new roll is $x$. The probability of this is $1/6$. In this case, the process stops. We used 1 roll.
++2.  **No Match:** The new roll is not $x$. The probability of this is $5/6$. In this case, we have used 1 roll, and we are now in the same situation as before: we have a new "previous value" (the one we just rolled), and we need to wait for the next roll to match it. Thus, we are back in state $E_1$.
+ 
+-So, we can write the equation for $E_1$:
+-$$ E_1 = \frac{1}{6}(1) + \frac{5}{6}(1 + E_1) $$
++We can write the equation for $E_1$:
++$$ E_1 = 1 + \left( \frac{1}{6} \cdot 0 \right) + \left( \frac{5}{6} \cdot E_1 \right) $$
++*Explanation:* We always spend 1 roll. If we match (prob $1/6$), we need 0 more rolls. If we don't match (prob $5/6$), we need $E_1$ more rolls on average.
+ 
+ **Step 3: Solve for $E_1$.**
+-$$ E_1 = \frac{1}{6} + \frac{5}{6} + \frac{5}{6}E_1 $$
+ $$ E_1 = 1 + \frac{5}{6}E_1 $$
+ $$ E_1 - \frac{5}{6}E_1 = 1 $$
+ $$ \frac{1}{6}E_1 = 1 $$
+ $$ E_1 = 6 $$
+ 
+-**Step 4: Solve for $E_0$.**
+-Recall $E_0 = 1 + E_1$.
+-$$ E_0 = 1 + 6 = 7 $$
++**Step 4: Calculate $E_0$.**
++$$ E_0 = 1 + E_1 = 1 + 6 = 7 $$
+ 
+ Thus, the expected total number of rolls is **7**.
+ 
+@@ -41,49 +37,50 @@
+ 
+ ### Method 2: Definition of Expectation (Geometric Series Approach)
+ 
+-Let $N$ be the random variable representing the total number of rolls. We want to find $E[N]$.
+-The possible values for $N$ are $2, 3, 4, \dots$.
+-$N=k$ means the first $k-1$ rolls did not contain a consecutive match, but the $k$-th roll matched the $(k-1)$-th roll.
++Let $N$ be the random variable representing the total number of rolls.
++The process stops at roll $n$ if:
++1.  The first $n-1$ rolls do not contain any consecutive matches.
++2.  The $n$-th roll matches the $(n-1)$-th roll.
+ 
+-Let's determine the probability $P(N=k)$.
++Note that the first roll cannot form a pair with a previous roll. So, the minimum number of rolls is 2.
++Let's determine the probability $P(N=n)$ for $n \ge 2$.
+ 
+-*   **For $N=2$:**
+-    Roll 1 is anything. Roll 2 must match Roll 1.
+-    $P(N=2) = 1 \times \frac{1}{6} = \frac{1}{6}$.
++For the process to end exactly at roll $n$:
++-   Roll 1 is arbitrary (prob 1).
++-   Roll 2 must **not** match Roll 1 (prob $5/6$).
++-   Roll 3 must **not** match Roll 2 (prob $5/6$).
++-   ...
++-   Roll $n-1$ must **not** match Roll $n-2$ (prob $5/6$).
++-   Roll $n$ **must** match Roll $n-1$ (prob $1/6$).
+ 
+-*   **For $N=3$:**
+-    Roll 1 is anything. Roll 2 must *not* match Roll 1. Roll 3 must match Roll 2.
+-    $P(N=3) = 1 \times \frac{5}{6} \times \frac{1}{6} = \frac{5}{36}$.
++There are $n-2$ "non-matching" transitions between roll 1 and roll $n-1$, and 1 "matching" transition at the end.
++So, for $n \ge 2$:
++$$ P(N=n) = \left(\frac{5}{6}\right)^{n-2} \cdot \frac{1}{6} $$
+ 
+-*   **For $N=4$:**
+-    Roll 1 is anything. Roll 2 $\neq$ Roll 1. Roll 3 $\neq$ Roll 2. Roll 4 = Roll 3.
+-    $P(N=4) = 1 \times \frac{5}{6} \times \frac{5}{6} \times \frac{1}{6} = \frac{25}{216}$.
++Let's verify this is a valid probability distribution:
++$$ \sum_{n=2}^{\infty} P(N=n) = \sum_{n=2}^{\infty} \frac{1}{6} \left(\frac{5}{6}\right)^{n-2} $$
++Let $k = n-2$. As $n$ goes from 2 to $\infty$, $k$ goes from 0 to $\infty$.
++$$ \sum_{k=0}^{\infty} \frac{1}{6} \left(\frac{5}{6}\right)^{k} = \frac{1}{6} \cdot \frac{1}{1 - 5/6} = \frac{1}{6} \cdot \frac{1}{1/6} = 1 $$
++The probabilities sum to 1.
+ 
+-*   **General Case for $N=k$ ($k \ge 2$):**
+-    The first roll is arbitrary (prob 1).
+-    The next $k-2$ rolls must each differ from their immediate predecessor (prob $5/6$ each).
+-    The $k$-th roll must match the $(k-1)$-th roll (prob $1/6$).
+-    $$ P(N=k) = \left(\frac{5}{6}\right)^{k-2} \cdot \frac{1}{6} $$
++Now, calculate the expected value $E[N]$:
++$$ E[N] = \sum_{n=2}^{\infty} n \cdot P(N=n) = \sum_{n=2}^{\infty} n \cdot \frac{1}{6} \left(\frac{5}{6}\right)^{n-2} $$
+ 
+-Now, we calculate the expected value:
+-$$ E[N] = \sum_{k=2}^{\infty} k \cdot P(N=k) = \sum_{k=2}^{\infty} k \cdot \frac{1}{6} \left(\frac{5}{6}\right)^{k-2} $$
++Let $r = 5/6$.
++$$ E[N] = \frac{1}{6} \sum_{n=2}^{\infty} n r^{n-2} $$
++Let $k = n-2$, so $n = k+2$.
++$$ E[N] = \frac{1}{6} \sum_{k=0}^{\infty} (k+2) r^k $$
++$$ E[N] = \frac{1}{6} \left[ \sum_{k=0}^{\infty} k r^k + 2 \sum_{k=0}^{\infty} r^k \right] $$
+ 
+-Let $j = k-2$. Then $k = j+2$. When $k=2, j=0$.
+-$$ E[N] = \sum_{j=0}^{\infty} (j+2) \cdot \frac{1}{6} \left(\frac{5}{6}\right)^{j} $$
+-$$ E[N] = \frac{1}{6} \left[ \sum_{j=0}^{\infty} j \left(\frac{5}{6}\right)^{j} + 2 \sum_{j=0}^{\infty} \left(\frac{5}{6}\right)^{j} \right] $$
++We use the standard geometric series sums for $|r| < 1$:
++1.  $\sum_{k=0}^{\infty} r^k = \frac{1}{1-r}$
++2.  $\sum_{k=0}^{\infty} k r^k = \frac{r}{(1-r)^2}$
+ 
+-We use the standard geometric series formulas for $|r| < 1$:
+-1.  $\sum_{j=0}^{\infty} r^j = \frac{1}{1-r}$
+-2.  $\sum_{j=0}^{\infty} j r^j = \frac{r}{(1-r)^2}$
++Substitute $r = 5/6$:
++1.  $\sum_{k=0}^{\infty} r^k = \frac{1}{1/6} = 6$
++2.  $\sum_{k=0}^{\infty} k r^k = \frac{5/6}{(1/6)^2} = \frac{5/6}{1/36} = \frac{5}{6} \cdot 36 = 30$
+ 
+-Here, $r = \frac{5}{6}$.
+-Note that $1-r = 1 - \frac{5}{6} = \frac{1}{6}$.
+-
+-Calculate the sums:
+-1.  $\sum_{j=0}^{\infty} \left(\frac{5}{6}\right)^{j} = \frac{1}{1/6} = 6$
+-2.  $\sum_{j=0}^{\infty} j \left(\frac{5}{6}\right)^{j} = \frac{5/6}{(1/6)^2} = \frac{5/6}{1/36} = \frac{5}{6} \cdot 36 = 30$
+-
+-Substitute these back into the expression for $E[N]$:
++Now plug these back into the expectation formula:
+ $$ E[N] = \frac{1}{6} [ 30 + 2(6) ] $$
+ $$ E[N] = \frac{1}{6} [ 30 + 12 ] $$
+ $$ E[N] = \frac{42}{6} $$

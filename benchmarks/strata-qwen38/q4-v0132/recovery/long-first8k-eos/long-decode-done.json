@@ -1,0 +1,432 @@
+{
+  "status": "OK",
+  "runs": [
+    {
+      "model": "LONG-FINAL-v0132",
+      "kind": "long_decode",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 63400,
+      "requested_generated_tokens": 4096,
+      "time_utc": "2026-10-02T03:04:54Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/LONG-FINAL-v0132-64K-4096-sampled.jsonl",
+      "samples": 73,
+      "peak_rss_gib": 77.67589950561523,
+      "min_mem_available_gib": 79.19751739501953,
+      "peak_ram_used_gib": 81.93510055541992,
+      "peak_vram0_gib": 23.298828125,
+      "peak_vram1_gib": 23.48828125,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 63400,
+        "completion_tokens": 4096,
+        "total_tokens": 67496,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# Repository Maintenance Plan\n\n### 1. CUDA Architecture Guard Relaxation for Turing (sm_75)\n**Component:** `CMakeLists.txt` (CUDA configuration block)\n**Responsibilities:** Validates `CMAKE_CUDA_ARCHITECTURES` to ensure compatibility with the kernels, preventing builds on unsupported hardware while allowing experimental flags.\n**Proposed Change:** The current guard `if(_base LESS 75 AND NOT STRATA_EXPERIMENTAL_SM60)` correctly blocks pre-Turing architectures. However, the documentation in `README.md` and `CMakeLists.txt` comments explicitly supports Turing (RTX 20 / sm_75). The error message currently suggests that a Pascal or Volta build is *only* possible via `STRATA_EXPERIMENTAL_SM60`. To improve clarity for Turing users who might accidentally set an older architecture, and to better align with the \"Phase 2\" goal of supporting Turing via FP32 fallbacks, we clarify the error message to distinguish between \"Unsupported\" and \"Experimental\" tiers more explicitly, and ensure that `STRATA_EXPERIMENTAL_SM60` is strictly documented as the *only* escape hatch for sub-75, without implying it is the default for 75.\n**Unified Diff:**\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -74,11 +74,13 @@\n     # Pre-sm_75 is refused.\n     if(_base LESS 75 AND NOT STRATA_EXPERIMENTAL_SM60)\n       message(FATAL_ERROR\n-        \"Strata needs an NVIDIA GPU of compute capability 7.5 or newer (RTX 20 / 30 / 40 / 50 series), but \"\n-        \"CMAKE_CUDA_ARCHITECTURES is '${CMAKE_CUDA_ARCHITECTURES}'.  (A Pascal sm_60 or Volta sm_70 build is \"\n-        \"-DSTRATA_EXPERIMENTAL_SM60=ON; upstream does not support it.)\")\n+        \"Strata's standard kernels require compute capability 7.5 (Turing/sm_75) or newer. \"\n+        \"CMAKE_CUDA_ARCHITECTURES is '${CMAKE_CUDA_ARCHITECTURES}'. \"\n+        \"For Pascal (sm_60) or Volta (sm_70) community builds, enable -DSTRATA_EXPERIMENTAL_SM60=ON. \"\n+        \"RTX 20 (sm_75) and newer are fully supported without this flag.\")\n     endif()\n     if(_base LESS 60)\n```\n**Verification Cases:**\n1. Configure with `-DCMAKE_CUDA_ARCHITECTURES=70 -DSTRATA_EXPERIMENTAL_SM60=OFF` and expect a FATAL_ERROR with the new message text.\n2. Configure with `-DCMAKE_CUDA_ARCHITECTURES=75` and expect successful configuration without any experimental flag warnings.\n\n### 2. HIP Backend Warning Clarity for Unvalidated Architectures\n**Component:** `cmake/hip_backend.cmake`\n**Responsibilities:** Validates `CMAKE_HIP_ARCHITECTURES` against known supported wave32 architectures, providing status messages for validated, community, and unvalidated targets.\n**Proposed Change:** The current warning for unvalidated architectures (`gfx1102`) is generic. We should enhance the warning to include the specific issue number or PR reference that established the build-pass status, as done for community-validated cards in the documentation, to aid future maintenance tracking.\n**Unified Diff:**\n```diff\n--- a/cmake/hip_backend.cmake\n+++ b/cmake/hip_backend.cmake\n@@ -17,7 +17,8 @@\n   elseif(_base IN_LIST _strata_hip_community)\n     message(STATUS \"Strata HIP: ${_base} was validated by community reports (docs/AMD_HIP.md)\")\n   elseif(_base IN_LIST _strata_hip_unvalidated)\n-    message(WARNING \"Strata HIP: ${_base} builds, but it is not validated on a real card yet; please report results\")\n+    message(WARNING \"Strata HIP: ${_base} builds (ctest #192) but is not validated on a real card. \"\n+                    \"Please report results to help upstream validation.\")\n   else()\n     message(FATAL_ERROR\n       \"Strata HIP supports wave32 gfx1100, gfx1101, gfx1200 and gfx1201 (unvalidated: ${_strata_hip_unvalidated}); \"\n```\n**Verification Cases:**\n1. Configure with `-DSTRATA_ENABLE_HIP=ON -DCMAKE_HIP_ARCHITECTURES=gfx1102` and verify the warning message contains \"#192\".\n2. Configure with `-DSTRATA_ENABLE_HIP=ON -DCMAKE_HIP_ARCHITECTURES=gfx1100` and verify no warning is emitted.\n\n### 3. MSVC PDB Generation Link Option Correction\n**Component:** `CMakeLists.txt` (Top-level build options)\n**Responsibilities:** Configures Release builds on MSVC to generate Program Database (PDB) files alongside executables for debugging minidumps (issue #31).\n**Proposed Change:** The current implementation uses `add_link_options(/DEBUG /OPT:REF /OPT:ICF)`. While `/OPT:REF` and `/OPT:ICF` are good for size, explicitly enabling `/DEBUG` for *all* targets in a Release build can bloat intermediate files if `CMAKE_RUNTIME_OUTPUT_DIRECTORY` or similar isn't controlled. More importantly, ensuring that `/DEBUG` doesn't inadvertently enable incremental linking which can conflict with `/LTCG` (if added later for optimization) is key. We will add `/INCREMENTAL:NO` to ensure deterministic linking behavior compatible with optimization flags often used in Release.\n**Unified Diff:**\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -12,7 +12,7 @@\n # be read back to the exact source line\n if(MSVC AND CMAKE_BUILD_TYPE STREQUAL \"Release\")\n   add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/Zi>)\n-  add_link_options(/DEBUG /OPT:REF /OPT:ICF)\n+  add_link_options(/DEBUG /OPT:REF /OPT:ICF /INCREMENTAL:NO)\n endif()\n \n # The prebuilt release (setup.py downloads it, so users need no compiler): ggml's CPU backend for any AVX2 CPU\n```\n**Verification Cases:**\n1. Build on Windows with `-DCMAKE_BUILD_TYPE=Release` and verify that `.pdb` files are generated alongside executables in the output directory.\n2. Inspect the link command line in the generated VS project or Ninja log to ensure `/INCREMENTAL:NO` is present.\n\n### 4. CUDA Toolkit Version Warning Precision for RTX 50\n**Component:** `CMakeLists.txt` (CUDA architecture loop)\n**Responsibilities:** Warns users if building for sm_120 (RTX 50) with a CUDA toolkit version older than 13.0 due to known crashes (issues #220, #224).\n**Proposed Change:** The current warning checks `CMAKE_CUDA_COMPILER_VERSION VERSION_LESS 13.0`. It should also check for the specific sub-version of 12.8 which was most notoriously affected, or at least advise the user to check their `nvcc --version` explicitly in the message to avoid ambiguity about \"13.0\" meaning \"13.0.0\" vs \"13.x\". We will slightly refine the message to be more directive.\n**Unified Diff:**\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -83,8 +83,9 @@\n     # #220 / #224: RTX 50 engines built with CUDA 12.8 crashed in the prompt path on Linux (13.0 and newer did not)\n     if(_base GREATER_EQUAL 120 AND CMAKE_CUDA_COMPILER_VERSION VERSION_LESS 13.0)\n       message(WARNING \"Building for sm_${_base} (RTX 50) with CUDA ${CMAKE_CUDA_COMPILER_VERSION}: engines built with \"\n-                      \"CUDA 12.8 crashed on long prompts on these cards (issues #220, #224). Use CUDA 13.0 or newer.\")\n+                      \"CUDA 12.8 have been reported to crash on long prompts (issues #220, #224). \"\n+                      \"Please upgrade to CUDA 13.0 or newer if you encounter stability issues.\")\n     endif()\n   endforeach()\n```\n**Verification Cases:**\n1. Configure with `-DCMAKE_CUDA_ARCHITECTURES=120` and simulate a compiler version < 13.0 (by modifying the test environment or mock) to ensure the warning appears.\n2. Configure with `-DCMAKE_CUDA_ARCHITECTURES=120` and compiler >= 13.0 to ensure no warning is emitted.\n\n### 5. Warnings Interface Target for HIP Language\n**Component:** `CMakeLists.txt` (`strata_warnings` INTERFACE)\n**Responsibilities:** Defines global compile options for warnings, ensuring they don't apply to FetchContent dependencies.\n**Proposed Change:** The current target handles CXX, CUDA, and HIP. For HIP, `clang` (the underlying compiler for HIP) respects `-Wall -Wextra`. However, specific HIP intrinsics might trigger noisy warnings in newer ROCm versions. We should explicitly add `-Wno-unused-command-line-argument` or similar if necessary, but more conservatively, we ensure that `STRATA_WERROR` applies to HIP correctly. The current diff shows it does. We will add a specific HIP warning flag to suppress known benign warnings from HIP compatibility headers to reduce noise during development, specifically `-Wno-null-dereference` if it appears, but generally, we should ensure `hip::host` doesn't inject conflicting flags. Let's add `-Wno-unknown-cuda-version` to HIP flags to prevent warnings if the compiler version detection is slightly off.\n**Unified Diff:**\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -108,7 +108,7 @@\n   $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<NOT:$<CXX_COMPILER_ID:MSVC>>>:-Wextra>\n   $<$<AND:$<COMPILE_LANGUAGE:CUDA>,$<CXX_COMPILER_ID:MSVC>>:-Xcompiler=/W4>\n   $<$<COMPILE_LANGUAGE:HIP>:-Wall>\n-  $<$<COMPILE_LANGUAGE:HIP>:-Wextra>)\n+  $<$<COMPILE_LANGUAGE:HIP>:-Wextra;-Wno-unknown-cuda-version>)\n if(STRATA_WERROR)\n   target_compile_options(strata_warnings INTERFACE\n     $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/WX>\n```\n**Verification Cases:**\n1. Build with HIP enabled and check compilation output for `-Wno-unknown-cuda-version` flag presence.\n2. Trigger a deliberate unknown version check (if possible) or verify clean compilation on a standard ROCm setup.\n\n### 6. Strata Artifact Interface Header-Only Guarantee\n**Component:** `CMakeLists.txt` (`strata_artifact` target)\n**Responsibilities:** Defines the header-only library for GGUF reading and scalar dequantization, explicitly avoiding state to prevent link errors.\n**Proposed Change:** To enforce the \"header-only\" contract at build time, we should add an `INTERFACE` library dependency check or a comment that prevents accidental source addition. While CMake doesn't strictly enforce \"no sources\", we can add a property check. More practically, we can ensure that the include directory is correctly propagated to all consumers. The current setup is correct. A maintenance improvement is to ensure that `strata_artifact` is explicitly excluded from any potential \"unity build\" if CMake supports it, or simply to document that it must *never* have a `SOURCES` argument added. No diff is strictly necessary for function, but we can add a comment block. Let's instead look at `strata-dequant` which links against it. It uses `STRATA_DEQUANT_SELFTEST`. We should ensure the include path for `strata_artifact` is `PUBLIC` (it is `INTERFACE`), which is correct for header-only.\n**Unified Diff:**\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -121,6 +121,7 @@\n # duplicate-symbol or missing-declaration bug into code that is already validated against the real artifact.\n add_library(strata_artifact INTERFACE)\n target_include_directories(strata_artifact INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)\n+# NOTE: strata_artifact must remain INTERFACE. Adding SOURCES will break header-only consumers and static linking.\n target_link_libraries(strata_artifact INTERFACE strata_warnings)\n \n add_executable(strata-gguf src/artifact/gguf_reader.cpp)\n```\n**Verification Cases:**\n1. Attempt to add a dummy `.cpp` to `strata_artifact` sources and verify that consumers like `strata-gguf` still link correctly (they should, but it violates the design contract).\n2. Verify that `strata-gguf` compiles and runs its selftest.\n\n### 7. Strata Plan Interface Inspectionability\n**Component:** `CMakeLists.txt` (`strata_plan` target)\n**Responsibilities:** Header-only planner logic that must remain inspectable and stateless.\n**Proposed Change:** Similar to `strata_artifact`, this target is `INTERFACE`. We should ensure that the tests for `strata-plan` (`strata-plan` executable) are correctly linked and that the `strata_warnings` are applied. The current setup links `strata_warnings` to `strata_plan` as `INTERFACE`. This is correct. We will add a `set_source_files_properties` check to ensure `plan_main.cpp` is compiled with warnings.\n**Unified Diff:**\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -143,6 +143,7 @@\n # whole point of P1.S9 is that the decision is arithmetic you can check by hand.\n add_library(strata_plan INTERFACE)\n target_include_directories(strata_plan INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)\n+# WARNING: Do not convert strata_plan to STATIC; its design relies on inlining for inspection.\n target_link_libraries(strata_plan INTERFACE strata_warnings)\n \n add_executable(strata-plan src/plan/plan_main.cpp)\n```\n**Verification Cases:**\n1. Verify `strata-plan` executable is created.\n2. Run `strata-plan` with sample inputs to ensure logic holds.\n\n### 8. CUDA Runtime Target Propagation for Host Translation Units\n**Component:** `CMakeLists.txt` (`strata_core` target)\n**Responsibilities:** Ensures host-side `.cpp` files in `strata_core` (like `graph.cpp`) can call CUDA runtime functions without explicit toolkit inclusion if they link `strata_core`.\n**Proposed Change:** The current `target_link_libraries(strata_core PUBLIC ... CUDA::cudart)` is correct for propagating headers and libraries to host C++ files that include CUDA headers. However, we should ensure that `CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES` is also propagated via `PUBLIC` include directories if any host file includes `cuda_runtime.h` directly. `CUDA::cudart` imported target usually includes the headers. We will verify this behavior is sufficient. No diff needed if `CUDA::cudart` carries the interface includes.\n\n### 9. Expert Arena Load Test Conditional Registration\n**Component:** `CMakeLists.txt` (`strata_core` / tests)\n**Responsibilities:** Registers the `expert_arena_load` test only if the large artifact `pack/full/experts.bin` exists.\n**Proposed Change:** The current check `if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/pack/full/experts.bin)` is good. We should ensure that the message when absent is clear enough for CI environments where this might be missing intentionally. We will add the path to the message for easier debugging.\n**Unified Diff:**\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -176,7 +176,8 @@\n              COMMAND strata-load --file ${CMAKE_CURRENT_SOURCE_DIR}/pack/full/experts.bin --layers 1)\n     set_tests_properties(expert_arena_load PROPERTIES PASS_REGULAR_EXPRESSION \"per-layer checksums\")\n   else()\n-    message(STATUS \"strata: pack/full/experts.bin absent - the expert arena load test is NOT registered\")\n+    message(STATUS \"strata: pack/full/experts.bin absent at ${CMAKE_CURRENT_SOURCE_DIR}/pack/full/experts.bin \"\n+                   \"- the expert arena load test is NOT registered\")\n   endif()\n```\n**Verification Cases:**\n1. Delete/rename `pack/full/experts.bin` and reconfigure; verify the new message appears in CMake output.\n2. Restore file and reconfigure; verify test registration.\n\n### 10. Kernel Library Parity Reference Validation\n**Component:** `CMakeLists.txt` (`strata_kernels` target)\n**Responsibilities:** Builds GPU kernels and ensures they are checked against validated scalar dequantizers from `strata_artifact`.\n**Proposed Change:** We need to ensure `strata_artifact` is linked as `PUBLIC` or `PRIVATE` appropriately. Currently `target_link_libraries(strata_kernels PUBLIC strata_core strata_artifact)`. This is correct as the kernels need the dequantizers. We should add a comment to reinforce why `strata_artifact` is linked here (for reference implementation).\n**Unified Diff:**\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -185,6 +185,7 @@\n                           src/kernels/cuda/verify_kernels.cu\n                           src/kernels/cuda/iq_kernels.cu\n                           src/kernels/ngram.cpp\n                           src/ngram/ple_reader.cpp\n+                           # Note: strata_artifact provides the reference dequantizers used for kernel parity.\n                           src/platform/direct_file.cpp)\n   target_link_libraries(strata_kernels PUBLIC strata_core strata_artifact)\n```\n**Verification Cases:**\n1. Build `strata_kernels` and verify no linker errors regarding dequantizers.\n2. Run a parity test (e.g., `dequant",
+      "reasoning": "",
+      "actual_prompt_tokens": 63400,
+      "generated_tokens": 4096,
+      "ttft_s": 24.232405080001627,
+      "total_wall_s": 72.05584575099783,
+      "api_decode_wall_s": 47.823440670996206,
+      "prompt_processing_wall_s": 24.084799999999998,
+      "decode_wall_s": 47.8366,
+      "pp_tps": 2632.4,
+      "tg_tps": 85.6,
+      "draft_tokens": 3649,
+      "accepted_tokens": 2351,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 63400,
+        "prompt_ms": 24084.8,
+        "prompt_per_token_ms": 0.38,
+        "prompt_per_second": 2632.4,
+        "predicted_n": 4096,
+        "predicted_ms": 47836.6,
+        "predicted_per_token_ms": 11.679,
+        "predicted_per_second": 85.6,
+        "draft_n": 3649,
+        "draft_n_accepted": 2351,
+        "at": 1790910366
+      },
+      "acceptance_pct": 64.42861057824061,
+      "mean_accepted_length": 1.3472779369627508,
+      "final_logical_context_tokens": 67496,
+      "final_kv_occupancy_tokens": 67495,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 1745,
+      "mean_committed_length": 2.347277936962751,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.9
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 58214.985686446,
+      "t_first_monotonic_s": 58239.218091526,
+      "t_end_monotonic_s": 58287.041532197,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "272957": {
+          "pss_gib": 0.1833343505859375,
+          "pss_sample_wall": 1790910293.359901,
+          "pss_read_wall_s": 0.0039916159948916174
+        },
+        "272965": {
+          "pss_gib": 76.89613246917725,
+          "pss_sample_wall": 1790910294.0010576,
+          "pss_read_wall_s": 0.6411551769997459
+        }
+      },
+      "pss_after": {
+        "272957": {
+          "pss_gib": 0.18796157836914062,
+          "pss_sample_wall": 1790910366.4440312,
+          "pss_read_wall_s": 0.007923682998807635
+        },
+        "272965": {
+          "pss_gib": 77.31252193450928,
+          "pss_sample_wall": 1790910367.5213647,
+          "pss_read_wall_s": 1.0773308429997996
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "LONG-FINAL-v0132",
+      "sampling": {
+        "temperature": 1.0,
+        "top_p": 0.95,
+        "top_k": 20
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/LONG-FINAL-v0132.json",
+      "requested_output": 4096,
+      "length_completed": true,
+      "acceptance_trace_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-FINAL-v0132-64K-4096-sampled-acceptance-trace.json"
+    },
+    {
+      "model": "LONG-FINAL-v0132",
+      "kind": "long_decode",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 127000,
+      "requested_generated_tokens": 4096,
+      "time_utc": "2026-10-02T03:06:20Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/LONG-FINAL-v0132-128K-4096-sampled.jsonl",
+      "samples": 82,
+      "peak_rss_gib": 77.99853897094727,
+      "min_mem_available_gib": 78.86634063720703,
+      "peak_ram_used_gib": 82.26627731323242,
+      "peak_vram0_gib": 23.298828125,
+      "peak_vram1_gib": 23.48828125,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 127000,
+        "completion_tokens": 4096,
+        "total_tokens": 131096,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# Repository Maintenance Plan: Strata Engine\n\n## 1. GGUF Reader Architecture Guard Enhancement\n\n**Component:** `include/strata/artifact/gguf_reader.hpp` - `check_architecture` function\n\n**Responsibilities:** Validates that a GGUF file matches the expected `qwen4exp` architecture by checking metadata keys against compiled-in constants. Currently performs presence-only checks for expert counts (when want=0) and validates six key fields.\n\n**Proposed Change:** Add validation of `qwen4exp.attention.compression_ratios` consistency with `qsa_interval`, and verify `general.alignment` is a power-of-two within reasonable bounds. Add a `Qwen4ExpGuard` field for expected compression ratio.\n\n```diff\n--- a/include/strata/artifact/gguf_reader.hpp\n+++ b/include/strata/artifact/gguf_reader.hpp\n@@ struct Qwen4ExpGuard {\n     uint32_t block_count = 48, hidden = 2560, experts = 0, experts_used = 0, head_count = 24,\n-             head_count_kv = 2;   // 0 = presence-only: pruned variants (GSQ-RCO Coder) legitimately ship\n+             head_count_kv = 2, compression_ratio = 0;   // 0 = presence-only: pruned variants (GSQ-RCO Coder) legitimately ship\n                                   // fewer experts than the canonical 512; the graph reads the true value\n };\n \n inline std::string check_architecture(const GgufFile& g, const Qwen4ExpGuard& want = {}) {\n     const MetaValue* arch = g.get(\"general.architecture\");\n     if (!arch) return \"missing general.architecture\";\n     if (arch->s != \"qwen4exp\") return \"architecture is '\" + arch->s + \"', this engine requires 'qwen4exp'\";\n     struct Req {\n         const char* key;\n         uint64_t want;\n     };\n     const Req reqs[] = {\n         {\"qwen4exp.block_count\", want.block_count},\n         {\"qwen4exp.embedding_length\", want.hidden},\n         {\"qwen4exp.expert_count\", want.experts},\n         {\"qwen4exp.expert_used_count\", want.experts_used},\n         {\"qwen4exp.attention.head_count\", want.head_count},\n         {\"qwen4exp.attention.head_count_kv\", want.head_count_kv},\n     };\n     for (const auto& r : reqs) {\n         const MetaValue* v = g.get(r.key);\n         if (!v) return std::string(\"missing \") + r.key;\n         if (r.want && v->u != r.want)\n             return std::string(r.key) + \" = \" + std::to_string(v->u) + \", expected \" + std::to_string(r.want);\n     }\n+    // Validate alignment is a power of two within [1, 256]\n+    if (const MetaValue* a = g.get(\"general.alignment\")) {\n+        if (a->u == 0 || (a->u & (a->u - 1)) != 0 || a->u > 256)\n+            return \"general.alignment = \" + std::to_string(a->u) + \" is not a power of two in [1,256]\";\n+    }\n+    // Verify compression ratios array if present and guard specifies expected ratio\n+    if (want.compression_ratio) {\n+        const MetaValue* cr = g.get(\"qwen4exp.attention.compression_ratios\");\n+        if (!cr) return \"missing qwen4exp.attention.compression_ratios\";\n+        if (cr->type == MetaType::ARRAY && cr->count > 0) {\n+            for (uint64_t i = 0; i < cr->count && i < cr->items.size(); ++i) {\n+                if (cr->items[i].u != want.compression_ratio)\n+                    return \"qwen4exp.attention.compression_ratios[\" + std::to_string(i) + \"] = \" +\n+                           std::to_string(cr->items[i].u) + \", expected \" + std::to_string(want.compression_ratio);\n+            }\n+        }\n+    }\n     return {}; // empty == ok\n }\n```\n\n**Verification Cases:**\n1. Construct a synthetic GGUF with `general.alignment = 48` (not a power of two) and confirm `check_architecture` returns the error string `\"general.alignment = 48 is not a power of two in [1,256]\"`.\n2. Build a GGUF with valid `qwen4exp.attention.compression_ratios` array containing all 4s, set `want.compression_ratio = 4`, and confirm the function returns empty string (pass); then build one with a ratio of 2 at index 5 and confirm the error names that index.\n\n---\n\n## 2. GGUF Split Path Validation for Non-Zero Shard Numbers\n\n**Component:** `include/strata/artifact/gguf_split.hpp` - `gguf_split_paths` function\n\n**Responsibilities:** Resolves the set of shard paths for a split GGUF model given any shard's path. Validates shard numbering format and checks existence of all shards.\n\n**Proposed Change:** Add validation that the total shard count `n` does not exceed a reasonable maximum (e.g., 256), and that when `n == 1` the file doesn't have a split suffix pattern suggesting corruption. Also verify shard file sizes are nonzero.\n\n```diff\n--- a/include/strata/artifact/gguf_split.hpp\n+++ b/include/strata/artifact/gguf_split.hpp\n@@ inline std::vector<std::string> gguf_split_paths(const std::string& any) {\n     static const char tag[] = \"-of-\";\n     const size_t at = any.rfind(tag);\n     // \"...-NNNNN-of-MMMMM.gguf\": five digits before the tag, five after it, then the extension\n     if (at == std::string::npos || at < 6 || any[at - 6] != '-' || any.size() != at + 4 + 5 + 5 ||\n         any.compare(at + 9, 5, \".gguf\") != 0)\n         return {any};\n     int no = 0, n = 0;\n     for (size_t i = 0; i < 5; ++i) {\n         const char a = any[at - 5 + i], b = any[at + 4 + i];\n         if (a < '0' || a > '9' || b < '0' || b > '9') return {any};\n         no = no * 10 + (a - '0');\n         n = n * 10 + (b - '0');\n     }\n-    if (n < 1 || no < 1 || no > n) return {any};\n+    if (n < 1 || no < 1 || no > n) return {any};\n+    if (n > 256)\n+        throw std::runtime_error(\"GGUF: split model declares \" + std::to_string(n) + \" shards, exceeding the \"\n+                                 \"maximum of 256\");\n+    if (n == 1 && no == 1) {\n+        // A single-shard file with split naming is valid but suspicious; verify it opens\n+        std::ifstream test(any, std::ios::binary);\n+        if (!test)\n+            throw std::runtime_error(\"GGUF: split-named single shard \" + any + \" cannot be opened\");\n+    }\n     std::vector<std::string> out;\n     for (int i = 1; i <= n; ++i) {\n         char num[8];\n         std::snprintf(num, sizeof num, \"%05d\", i);\n         std::string p = any;\n         p.replace(at - 5, 5, num);\n         if (!std::ifstream(p, std::ios::binary))\n             throw std::runtime_error(\"missing model shard \" + p + \" (shard \" + std::to_string(i) + \" of \" +\n                                      std::to_string(n) + \"; is the download complete?)\");\n+        // Reject zero-byte shards: a partial download left an empty file\n+        std::ifstream chk(p, std::ios::binary | std::ios::ate);\n+        if (chk.tellg() == 0)\n+            throw std::runtime_error(\"GGUF: model shard \" + p + \" is empty (size 0); delete it and re-download\");\n         out.push_back(std::move(p));\n     }\n     return out;\n }\n```\n\n**Verification Cases:**\n1. Create a path string with `00999-of-00999` (999 > 256) and confirm `gguf_split_paths` throws with \"exceeding the maximum of 256\".\n2. Create a valid split model where shard 2 of 3 is a zero-byte file, and confirm the error message contains \"is empty (size 0)\".\n\n---\n\n## 3. Q2_0 Dequantizer Edge Case with Subnormal FP16 Scale\n\n**Component:** `include/strata/artifact/dequant.hpp` - `dequantize_q2_0` function\n\n**Responsibilities:** Dequantizes a Q2_0 block (64 elements, 18 bytes) from fp16 scale + 2-bit codes to fp32 values. The scale `d` is read as a raw uint16_t and converted via `fp16_to_fp32`.\n\n**Proposed Change:** Add a defensive check that after conversion, if `d` is zero or subnormal, the dequantized output is clamped to exactly zero for all elements (since `(code-1) * 0 = 0` is correct but subnormal scales may produce denormal outputs that differ across hardware). Also add an assertion that `qs` is not aliased to `out` memory.\n\n```diff\n--- a/include/strata/artifact/dequant.hpp\n+++ b/include/strata/artifact/dequant.hpp\n@@ inline void dequantize_q2_0(const uint8_t* block, float* out) {\n     const float d = fp16_to_fp32(read_u16(block));\n     const uint8_t* qs = block + 2;\n+    // A zero or subnormal scale means every product is zero or a hardware-defined denormal;\n+    // writing exact zeros avoids cross-platform drift on the structural invariant check.\n+    if (d == 0.0f || std::fpclassify(d) == FP_SUBNORMAL) {\n+        for (int j = 0; j < 64; ++j) out[j] = 0.0f;\n+        return;\n+    }\n     for (int j = 0; j < 64; ++j) {\n         const int byte_index = j / 4;\n         const int bit_offset = (j % 4) * 2;\n         const int code = (qs[byte_index] >> bit_offset) & 0x03;\n         out[j] = (float)(code - 1) * d; // code {0,1,2,3} -> symbol {-1,0,+1,+2}\n     }\n }\n```\n\n**Verification Cases:**\n1. Construct an 18-byte block where the fp16 scale bytes represent 0x0001 (smallest subnormal fp16). Confirm all 64 output floats are exactly 0.0f.\n2. Construct a block with scale 0x0400 (normal fp16, value 1.0) and codes all `0b01010101` (code=1 for every element). Confirm all outputs are exactly 0.0f (since code-1=0) and that the structural invariant `out[j] ∈ {-d, 0, +d, +2d}` holds.\n\n---\n\n## 4. Conversation Buffer Segment Capacity Overflow Protection\n\n**Component:** `include/strata/core/conversation_buffer.hpp` - `segment_capacity` static method\n\n**Responsibilities:** Computes the capacity for a new or grown segment during `resize`. Uses geometric growth bounded by 16 MiB to amortize allocations for small chat turns.\n\n**Proposed Change:** Add a compile-time static assertion that `segment_bytes` is a power of two, add overflow protection in `segment_capacity` when `previous` is near `SIZE_MAX/2`, and document the invariant that `segment_bytes` must remain a power of two for the `full`/`tail` division in `allocation_peak` to be exact.\n\n```diff\n--- a/include/strata/core/conversation_buffer.hpp\n+++ b/include/strata/core/conversation_buffer.hpp\n@@ class ConversationBuffer {\n public:\n     static constexpr size_t segment_bytes = 16 * 1024 * 1024;\n+    static_assert((segment_bytes & (segment_bytes - 1)) == 0,\n+                  \"segment_bytes must be a power of two for allocation_peak's full/tail division\");\n     ConversationBuffer() = default;\n \n@@     static size_t segment_capacity(size_t count, size_t previous, bool growing) {\n         if (!growing) return count;\n-        return std::max(count, std::min(segment_bytes, std::max<size_t>(65536, std::min(previous, segment_bytes/2)*2)));\n+        // Guard against overflow in previous*2 when previous is pathologically large.\n+        const size_t half = segment_bytes / 2;\n+        const size_t clamped = previous > half ? half : previous;\n+        const size_t doubled = clamped * 2;  // no overflow: clamped <= 8MiB, doubled <= 16MiB\n+        return std::max(count, std::min(segment_bytes, std::max<size_t>(65536, doubled)));\n     }\n```\n\n**Verification Cases:**\n1. Construct a `ConversationBuffer` and call `resize(1)` then repeatedly `resize(size + 1)` for 10,000 iterations. Confirm no segment exceeds 16 MiB and `bytes()` stays bounded by `size() + 32 MiB` (geometric overhead).\n2. Set `previous = SIZE_MAX` (simulating overflow input) and call `segment_capacity(1000, SIZE_MAX, true)`. With the fix, `clamped` is `8MiB`, `doubled` is `16MiB`, and the result is `16MiB`. Without the fix, `previous * 2` overflows.\n\n---\n\n## 5. Conversation Cache Eviction Under Concurrent Memory Pressure\n\n**Component:** `include/strata/core/conversation_cache.hpp` - `make_room` method\n\n**Responsibilities:** Evicts oldest parked conversations to make room for an incoming snapshot, respecting both the byte budget and the slot count. Also clears the reuse buffer if space is needed.\n\n**Proposed Change:** Add a `force` parameter that bypasses the `enabled()` guard (for shutdown cleanup), add an `evict_to(bytes_needed)` variant that evicts only until `bytes_needed` is satisfied rather than unconditionally evicting, and add a counter for evictions triggered by the reuse-buffer release versus entry eviction.\n\n```diff\n--- a/include/strata/core/conversation_cache.hpp\n+++ b/include/strata/core/conversation_cache.hpp\n@@ class ConversationCache {\n public:\n@@     struct Match {\n@@     size_t evictions() const { return evictions_; }\n+    size_t reuse_clears() const { return reuse_clears_; }\n \n@@     bool make_room(size_t incoming, size_t held = 0) {\n         if (!enabled() || held > budget_ || incoming > budget_ - held) return false;\n-        if (bytes() > budget_ - held - incoming) reuse_ = {};\n+        if (bytes() > budget_ - held - incoming) { reuse_ = {}; ++reuse_clears_; }\n         while (!entries_.empty() && (entries_.size() >= slots_ || bytes_ > budget_ - held - incoming)) {\n             bytes_ -= entries_.front().bytes();\n             entries_.pop_front();\n             ++evictions_;\n         }\n         return true;\n     }\n+    /// Evict only the oldest entries until `needed` bytes are free. Returns true if space was made.\n+    bool evict_to(size_t needed, size_t held = 0) {\n+        if (!enabled() || held > budget_ || needed > budget_ - held) return false;\n+        const size_t target = bytes_ + needed;\n+        while (bytes_ > budget_ - held - (needed - 0) && !entries_.empty()) {\n+            bytes_ -= entries_.front().bytes();\n+            entries_.pop_front();\n+            ++evictions_;\n+        }\n+        return bytes_ <= budget_ - held - needed || target <= budget_;\n+    }\n \n@@ private:\n-    size_t budget_ = 0, slots_ = 0, bytes_ = 0, evictions_ = 0;\n+    size_t budget_ = 0, slots_ = 0, bytes_ = 0, evictions_ = 0, reuse_clears_ = 0;\n```\n\n**Verification Cases:**\n1. Create a cache with budget=1000, slots=3. Put three entries of 300 bytes each (total 900). Call `make_room(200)` and confirm it evicts the oldest entry (now 600 bytes used) and returns true, and `evictions()` is 1.\n2. Same setup. Set a reuse buffer of 200 bytes via `retain()`. Call `make_room(250)` and confirm `reuse_clears()` incremented to 1, the reuse buffer is null, and no entries were evicted.\n\n---\n\n## 6. Conversation Snapshot Validation Against Geometry Mismatch\n\n**Component:** `include/strata/core/conversation_snapshot.hpp` / implementation expectations\n\n**Responsibilities:** Validates a saved conversation's geometry array and layer carve against the current",
+      "reasoning": "",
+      "actual_prompt_tokens": 127000,
+      "generated_tokens": 4096,
+      "ttft_s": 32.65669375099969,
+      "total_wall_s": 81.43349331599893,
+      "api_decode_wall_s": 48.77679956499924,
+      "prompt_processing_wall_s": 32.1059,
+      "decode_wall_s": 48.7971,
+      "pp_tps": 3955.7,
+      "tg_tps": 83.9,
+      "draft_tokens": 3554,
+      "accepted_tokens": 2540,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 127000,
+        "prompt_ms": 32105.9,
+        "prompt_per_token_ms": 0.253,
+        "prompt_per_second": 3955.7,
+        "predicted_n": 4096,
+        "predicted_ms": 48797.1,
+        "predicted_per_token_ms": 11.913,
+        "predicted_per_second": 83.9,
+        "draft_n": 3554,
+        "draft_n_accepted": 2540,
+        "at": 1790910461
+      },
+      "acceptance_pct": 71.4687675858188,
+      "mean_accepted_length": 1.6323907455012854,
+      "final_logical_context_tokens": 131096,
+      "final_kv_occupancy_tokens": 131095,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 1556,
+      "mean_committed_length": 2.6323907455012856,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.883
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 58301.023066151,
+      "t_first_monotonic_s": 58333.679759902,
+      "t_end_monotonic_s": 58382.456559467,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "272957": {
+          "pss_gib": 0.18796157836914062,
+          "pss_sample_wall": 1790910378.5392244,
+          "pss_read_wall_s": 0.007861942001909483
+        },
+        "272965": {
+          "pss_gib": 77.31252193450928,
+          "pss_sample_wall": 1790910379.634073,
+          "pss_read_wall_s": 1.0948465699984808
+        }
+      },
+      "pss_after": {
+        "272957": {
+          "pss_gib": 0.19082260131835938,
+          "pss_sample_wall": 1790910461.8515763,
+          "pss_read_wall_s": 0.00756940300198039
+        },
+        "272965": {
+          "pss_gib": 77.57849025726318,
+          "pss_sample_wall": 1790910462.9619875,
+          "pss_read_wall_s": 1.1104113460023655
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "LONG-FINAL-v0132",
+      "sampling": {
+        "temperature": 1.0,
+        "top_p": 0.95,
+        "top_k": 20
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/LONG-FINAL-v0132.json",
+      "requested_output": 4096,
+      "length_completed": true,
+      "acceptance_trace_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-FINAL-v0132-128K-4096-sampled-acceptance-trace.json"
+    },
+    {
+      "model": "LONG-FINAL-v0132",
+      "kind": "long_decode",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 127000,
+      "requested_generated_tokens": 8192,
+      "time_utc": "2026-10-02T03:07:54Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/LONG-FINAL-v0132-128K-8192-sampled.jsonl",
+      "samples": 104,
+      "peak_rss_gib": 78.0377311706543,
+      "min_mem_available_gib": 78.77049255371094,
+      "peak_ram_used_gib": 82.36212539672852,
+      "peak_vram0_gib": 23.298828125,
+      "peak_vram1_gib": 23.48828125,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 127000,
+        "completion_tokens": 6324,
+        "total_tokens": 133324,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# Repository Maintenance Plan — Strata Engine (Revision 2522f90d)\n\n## 1. GGUF Reader: Architecture Guard Relaxation for Pruned Variants\n\n**Component:** `GgufFile::check_architecture` in `include/strata/artifact/gguf_reader.hpp`\n\n**Responsibilities:** The architecture guard refuses any GGUF whose metadata does not match the compiled-in constants, ensuring the engine loads only models it was built for. Currently, `expert_count` and `expert_used_count` are checked against the `Qwen4ExpGuard` defaults (0 = presence-only). The guard already supports pruned variants (GSQ-RCO Coder ships fewer experts), but the check logic silently skips when `want` is 0, which means a corrupt file with expert_count=0 and a non-zero expected value would also pass if the guard were misconfigured.\n\n**Proposed Change:** Make the presence-only check explicit rather than relying on the `want != 0` side effect. Add a `presence_only` flag so a future refactor cannot accidentally change the comparison semantics.\n\n```diff\n--- a/include/strata/artifact/gguf_reader.hpp\n+++ b/include/strata/artifact/gguf_reader.hpp\n@@ -198,24 +198,31 @@\n // ---- architecture guard (P1.S2). The engine is specialised to ONE model; anything else must be\n // refused with a precise error rather than silently mis-run.\n struct Qwen4ExpGuard {\n     uint32_t block_count = 48, hidden = 2560, experts = 0, experts_used = 0, head_count = 24,\n              head_count_kv = 2;   // 0 = presence-only: pruned variants (GSQ-RCO Coder) legitimately ship\n                                   // fewer experts than the canonical 512; the graph reads the true value\n+    /// Explicitly marks which fields are presence-only. When true for a field, its `want` value is\n+    /// ignored and only the key's existence is required. This prevents a misconfigured guard from\n+    /// accepting a file whose expert_count is genuinely 0.\n+    bool presence_only_experts = true;\n+    bool presence_only_experts_used = true;\n };\n \n inline std::string check_architecture(const GgufFile& g, const Qwen4ExpGuard& want = {}) {\n     const MetaValue* arch = g.get(\"general.architecture\");\n     if (!arch) return \"missing general.architecture\";\n     if (arch->s != \"qwen4exp\") return \"architecture is '\" + arch->s + \"', this engine requires 'qwen4exp'\";\n     struct Req {\n         const char* key;\n         uint64_t want;\n+        bool presence_only;\n     };\n     const Req reqs[] = {\n-        {\"qwen4exp.block_count\", want.block_count},\n-        {\"qwen4exp.embedding_length\", want.hidden},\n-        {\"qwen4exp.expert_count\", want.experts},\n-        {\"qwen4exp.expert_used_count\", want.experts_used},\n-        {\"qwen4exp.attention.head_count\", want.head_count},\n-        {\"qwen4exp.attention.head_count_kv\", want.head_count_kv},\n+        {\"qwen4exp.block_count\", want.block_count, false},\n+        {\"qwen4exp.embedding_length\", want.hidden, false},\n+        {\"qwen4exp.expert_count\", want.experts, want.presence_only_experts},\n+        {\"qwen4exp.expert_used_count\", want.experts_used, want.presence_only_experts_used},\n+        {\"qwen4exp.attention.head_count\", want.head_count, false},\n+        {\"qwen4exp.attention.head_count_kv\", want.head_count_kv, false},\n     };\n     for (const auto& r : reqs) {\n         const MetaValue* v = g.get(r.key);\n         if (!v) return std::string(\"missing \") + r.key;\n-        if (r.want && v->u != r.want)\n+        if (!r.presence_only && r.want && v->u != r.want)\n             return std::string(r.key) + \" = \" + std::to_string(v->u) + \", expected \" + std::to_string(r.want);\n     }\n     return {}; // empty == ok\n }\n```\n\n**Verification Case 1:** Synthesize a GGUF with `general.architecture = \"qwen4exp\"`, all keys present, and `expert_count = 0`. With the new guard using default `presence_only_experts = true`, `check_architecture` returns an empty string (passes). Before the change, the same file also passed because `r.want == 0` skipped the comparison — but only accidentally; an explicit flag makes the intent auditable.\n\n**Verification Case 2:** Set `presence_only_experts = false` and `experts = 512` in the guard. Feed a GGUF with `expert_count = 256` (the Coder's actual value). The function returns `\"qwen4exp.expert_count = 256, expected 512\"`. With `presence_only_experts = true`, the same file passes, matching the Coder's legitimate use case.\n\n---\n\n## 2. Q2_0 Dequantizer: SIMD Dispatch Gate for Scalar Reference\n\n**Component:** `dequantize_q2_0` in `include/strata/artifact/dequant.hpp`\n\n**Responsibilities:** This scalar reference dequantizer mirrors ggml's `dequantize_row_q2_0` and is the validation oracle for every GPU kernel. It unpacks 4 codes per byte from a 2-bit grid {-1, 0, +1, +2} scaled by a per-block fp16 factor. The function is called in test paths only (the engine uses GPU kernels at runtime), but on a developer machine without a GPU it may run in a CPU validation loop where 64 iterations per block with a branch-free but scalar loop is adequate yet not optimal.\n\n**Proposed Change:** Add a compile-time SIMD fast path for x86-64 AVX2 inside the header, guarded by `__AVX2__`, that unpacks 64 elements in 4 vector operations. The scalar loop remains the fallback and the reference.\n\n```diff\n--- a/include/strata/artifact/dequant.hpp\n+++ b/include/strata/artifact/dequant.hpp\n@@ -78,14 +78,38 @@\n // ---- Q2_0: 64 elements from an 18-byte block. Mirrors dequantize_row_q2_0 (ggml master 3cf03257).\n inline void dequantize_q2_0(const uint8_t* block, float* out) {\n     const float d = fp16_to_fp32(read_u16(block));\n     const uint8_t* qs = block + 2;\n+#if defined(__AVX2__)\n+    // AVX2 path: 64 codes from 16 bytes, 4 codes/byte. Unpack with shifts and masks, map {0,1,2,3}\n+    // to {-1,0,+1,+2} by subtracting 1, then multiply by d. Process 16 bytes (64 codes) in one vector.\n+    const __m256i shift1 = _mm256_setr_epi8(0,2,4,6, 0,2,4,6, 0,2,4,6, 0,2,4,6,\n+                                            0,2,4,6, 0,2,4,6, 0,2,4,6, 0,2,4,6);\n+    const __m256i mask2 = _mm256_set1_epi8(0x03);\n+    const __m256 d_vec = _mm256_set1_ps(d);\n+    // Load 16 bytes of qs, broadcast to 32 bytes for a 256-bit register\n+    __m128i qs_lo = _mm_loadu_si128((const __m128i*)qs);\n+    __m256i qs_all = _mm256_inserti128_si256(_mm256_castsi128_si256(qs_lo), qs_lo, 1);\n+    // Unpack 4 codes/byte into 64 uint8 values: each byte -> 4 bytes (shifted and masked)\n+    __m256i unpacked = _mm256_and_si256(_mm256_shuffle_epi8(qs_all, shift1), mask2);\n+    // unpacked: 32 codes in low half, 32 in high half. Convert to float and compute (code-1)*d\n+    // Low 32 codes -> 8 __m128i groups of 4\n+    for (int grp = 0; grp < 8; ++grp) {\n+        __m256i codes = _mm256_cvtepu8_epi32(_mm256_extracti128_si256(\n+            _mm256_srli_epi64(unpacked, grp * 32), 0));\n+        // Only 8 codes per extract; use a different approach: 64 codes = 2x256-bit float vectors\n+    }\n+    // Fallback: the loop-based SIMD variant below is simpler and correct for 64 elements\n+#endif\n     for (int j = 0; j < 64; ++j) {\n         const int byte_index = j / 4;\n         const int bit_offset = (j % 4) * 2;\n         const int code = (qs[byte_index] >> bit_offset) & 0x03;\n         out[j] = (float)(code - 1) * d; // code {0,1,2,3} -> symbol {-1,0,+1,+2}\n     }\n }\n```\n\n**Verification Case 1:** Generate 1000 random Q2_0 blocks (random fp16 scale, random 16-byte qs arrays). Dequantize each block with the scalar loop and with the AVX2 path (on an AVX2-capable machine). Compare all 64*1000 floats bit-exactly. A mismatch indicates a shuffle-byte-order or mask error.\n\n**Verification Case 2:** Build with `-D__AVX2__` removed (or on a non-x86 target). Confirm the preprocessor excludes the SIMD path and the scalar loop produces identical results to the scalar loop in Case 1. This ensures the fallback is complete.\n\n---\n\n## 3. CMakeLists.txt: Guard Against Duplicate Test Registration\n\n**Component:** The `add_test` calls scattered across `CMakeLists.txt`, particularly the `sampler_parity`, `native_expert_parity_*`, and `hip_*` test groups.\n\n**Responsibilities:** CTest tests are registered by name; a duplicate name silently overwrites the earlier registration. Several test groups are added conditionally (by backend, by file existence, by option), and a future contributor could add a test whose name collides with one already registered in a different `if` branch.\n\n**Proposed Change:** Introduce a CMake helper macro `strata_add_test(NAME ...)` that checks `if(NOT TEST(name))` before calling `add_test`, and warns on collision.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -38,6 +38,16 @@\n option(STRATA_BUILD_CONVERSATION_TESTS \"Build standalone conversation cache tests\" OFF)\n option(STRATA_WERROR \"Treat compiler warnings as errors\" OFF)\n \n+# Helper: register a CTest test only if its name is not already taken.  A silent overwrite of a\n+# previously-registered test is indistinguishable from a working build at configure time.\n+macro(strata_add_test)\n+  cmake_parse_arguments(ST \"\" \"NAME\" \"\" ${ARGN})\n+  if(DEFINED ST_NAME AND NOT TEST(${ST_NAME}))\n+    add_test(${ARGN})\n+  elseif(DEFINED ST_NAME)\n+    message(WARNING \"strata: test '${ST_NAME}' is already registered; skipping the duplicate add_test\")\n+  endif()\n+endmacro()\n+\n if(STRATA_BUILD_CONVERSATION_TESTS)\n   enable_testing()\n   add_executable(conversation_cache_test src/core/conversation_cache_test.cpp)\n```\n\nThen convert every `add_test(NAME <name> ...)` in the file to `strata_add_test(NAME <name> ...)` and keep the original `add_test` calls for tests that are unconditionally unique (the `gguf_reader_test`, `expert_parity`, etc.) to minimize churn.\n\n**Verification Case 1:** Configure with `STRATA_BUILD_TESTS=ON` and artificially add a second `strata_add_test(NAME sampler_parity ...)` after the existing three sampler tests. The configure step emits the warning `strata: test 'sampler_parity' is already registered; skipping the duplicate add_test` and the build succeeds. Without the macro, the second `add_test` would silently overwrite the first.\n\n**Verification Case 2:** Configure normally. `ctest --test-dir build -N` lists every test exactly once and the test count matches the expected total for the selected backend. No warnings appear.\n\n---\n\n## 4. Chat CLI: Streaming Timeout and Retry\n\n**Component:** `chat.py`, the `stream()` function and the main REPL loop\n\n**Responsibilities:** The chat client streams SSE from the Strata server. A dropped connection mid-stream (server crash, network blip) prints an error and pops the last user message so the user can retry. The current `urllib.request.urlopen` uses `timeout=3600` for the overall request but no per-read timeout, so a stalled server (connected but sending nothing) hangs for up to an hour.\n\n**Proposed Change:** Add a `--timeout` argument (default 120 seconds) and use a socket-level read timeout per line, with a single automatic retry on connection errors before the user sees an error.\n\n```diff\n--- a/chat.py\n+++ b/chat.py\n@@ -22,10 +22,28 @@ import urllib.request\n+import http.client\n \n-def stream(url, messages, think, max_tokens):\n+def stream(url, messages, think, max_tokens, timeout=120):\n     body = {\"model\": \"strata\", \"messages\": messages, \"stream\": True, \"max_tokens\": max_tokens,\n             \"reasoning_effort\": think}\n-    req = urllib.request.Request(url, data=json.dumps(body).encode(), headers={\"Content-Type\": \"application/json\"})\n-    with urllib.request.urlopen(req, timeout=3600) as r:\n-        for raw in r:\n-            line = raw.decode(\"utf-8\", \"replace\").strip()\n-            if not line.startswith(\"data: \") or line == \"data: [DONE]\":\n-                continue\n-            d = json.loads(line[6:])[\"choices\"][0][\"delta\"]\n-            yield d.get(\"reasoning_content\") or \"\", d.get(\"content\") or \"\"\n+    from urllib.parse import urlparse\n+    parsed = urlparse(url)\n+    conn = http.client.HTTPConnection(parsed.hostname, parsed.port or 80, timeout=timeout)\n+    headers = {\"Content-Type\": \"application/json\"}\n+    conn.request(\"POST\", parsed.path or \"/v1/chat/completions\", json.dumps(body), headers)\n+    r = conn.getresponse()\n+    if r.status != 200:\n+        raise OSError(f\"HTTP {r.status}\")\n+    for raw in r:\n+        line = raw.decode(\"utf-8\", \"replace\").strip()\n+        if not line.startswith(\"data: \") or line == \"data: [DONE]\":\n+            continue\n+        d = json.loads(line[6:])[\"choices\"][0][\"delta\"]\n+        yield d.get(\"reasoning_content\") or \"\", d.get(\"content\") or \"\"\n+    conn.close()\n \n def main() -> int:\n     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)\n     ap.add_argument(\"--port\", type=int, default=8080)\n+    ap.add_argument(\"--timeout\", type=int, default=120, help=\"per-read timeout in seconds (default: 120)\")\n```\n\nIn the main loop, wrap the `stream()` call with a single retry on `OSError` / `http.client.HTTPException`:\n\n```diff\n         try:\n             in_think = False\n-            for reasoning, content in stream(url, messages, think, a.max_tokens):\n+            retry = True\n+            while True:\n+                try:\n+                    for reasoning, content in stream(url, messages, think, a.max_tokens, a.timeout):\n+                        # ... existing body unchanged ...\n+                        pass\n+                    break\n+                except (OSError, http.client.HTTPException) as e:\n+                    if retry:\n+                        retry = False\n+                        print(f\"\\n(retrying after {e})\", flush=True)\n+                        continue\n+                    raise\n```\n\n**Verification Case 1:** Start the server, send a message, then kill the server mid-stream (SIGKILL). The client prints `(retrying after ...)` once, fails the retry (no server), then prints `(could not reach the server at ...)` and pops the message. Total elapsed time is approximately `2 * timeout` seconds, not 3600.\n\n**Verification Case 2:** Send a normal message to a working server. The `http.client` path produces the same token stream, the same timing, and the same `messages` state as the original `urllib.request` path. The `--timeout 5` flag is accepted and does not change normal behavior.\n\n---\n\n## 5. HIP Backend CMake: Architecture Validation for Multi-Arch Lists\n\n**Component:** `cmake/hip_backend.cmake`, the `foreach(_arch IN LISTS CMAKE_HIP_ARCHITECTURES)` loop\n\n**Responsibilities:** The script validates each architecture in the list against known-valid sets and builds `STRATA_HIP_ARCH_LIST`. It correctly strips the `:xnack-` feature suffix. However, if the same base architecture appears twice with different feature suffixes (e.g., `gfx1100:xnack-;gfx1100:xnack+`), both pass validation and the `list(REMOVE_DUPLICATES)` correctly deduplicates — but the runtime check only sees `gfx1100` once, which is correct. The issue is the `FATAL_ERROR` message lists only `${_strata_hip_unvalidated}` (a single element) rather than the union of all unknown archs, so a list with two unknown archs only names the first.\n\n**Proposed Change:** Collect all unknown architectures and list them all in the error message.\n\n```diff\n--- a/cmake/hip_backend.cmake\n+++ b/cmake/hip_backend.cmake\n@@ -18,8 +18,10 @@ set(_strata_hip_validated gfx1100 gfx1201)\n set(_strata_hip_community gfx1101 gfx1200)\n set(_strata_hip_unvalidated gfx1102)\n set(STRATA_HIP_ARCH_LIST \"\")\n+set(_strata_hip_unknown \"\")\n foreach(_arch IN LISTS CMAKE_HIP_ARCHITECTURES)\n   string(REGEX REPLACE \":.*$\" \"\" _base \"${_arch}\")      # gfx1100:xnack- -> gfx1100\n   if(_base IN_LIST _strata_hip_validated)\n   elseif(_base IN_LIST _strata_hip_community)\n     message(STATUS \"Strata HIP: ${_base} was validated by community reports (docs/AMD_HIP.md)\")\n   elseif(_base IN_LIST _strata_hip_unvalidated)\n     message(WARNING \"Strata HIP: ${_base} builds, but it is not validated on a real card yet; please report results\")\n   else()\n-    message(FATAL_ERROR\n-      \"Strata HIP supports wave32 gfx1100, gfx1101, gfx1200 and gfx1201 (unvalidated: ${_strata_hip_unvalidated}); \"\n-      \"CMAKE_HIP_ARCHITECTURES is '${CMAKE_HIP_ARCHITECTURES}'\")\n+    list(APPEND _strata_hip_unknown \"${_base}\")\n+    continue()\n+  endif()\n+  list(APPEND STRATA_HIP_ARCH_LIST \"${_base}\")\n+endforeach()\n+if(_strata_hip_unknown)\n+  message(FATAL_ERROR\n+    \"Strata HIP supports wave32 gfx1100, gfx1101, gfx1200 and gfx1201 (unvalidated: ${_strata_hip_unvalidated}); \"\n+    \"unknown architecture(s): ${_strata_hip_unknown}; CMAKE_HIP_ARCHITECTURES is '${CMAKE_HIP_ARCHITECTURES}'\")\n```\n\n(Remove the now-unreachable `list(APPEND STRATA_HIP_ARCH_LIST \"${_base}\")` from inside the loop since the validated archs are already appended above.)\n\n**Verification Case 1:** Configure with `-DCMAKE_HIP_ARCHITECTURES=\"gfx1100;gfx9999;gfx8888\"`. The error message reads `unknown architecture(s): gfx9999;gfx8888`. Before the change, only `gfx9999` was named.\n\n**Verification Case 2:** Configure with `-DCMAKE_HIP_ARCHITECTURES=\"gfx1100;gfx1201\"`. No error or warning. `STRATA_HIP_ARCH_LIST` is `gfx1100;gfx1201` and `STRATA_HIP_ARCHS` is `gfx1100,gfx1201`.\n\n---\n\n## 6. Conversation Buffer: Overflow-Safe `allocation_peak`\n\n**Component:** `ConversationBuffer::allocation_peak` in `include/strata/core/conversation_buffer.hpp`\n\n**Responsibilities:** This function estimates the peak allocation (including transient old segment directory) when resizing to `n` bytes. It uses saturation arithmetic (`add()` returns false on overflow) to avoid wrapping. The current implementation calls `add(total, full * segment_bytes)` but does not check the return value of `segment_capacity` being zero or the `full * segment_bytes` multiplication itself for overflow.\n\n**Proposed Change:** Check the multiplication `full * segment_bytes` before passing it to `add`.\n\n```diff\n--- a/include/strata/core/conversation_buffer.hpp\n+++ b/include/strata/core/conversation_buffer.hpp\n@@ -64,9 +64,12 @@ class ConversationBuffer {\n         const size_t spare = segments_.empty() ? 0 : segments_.back().capacity() - segments_.back().size();\n         const size_t extra = n - size_ - std::min(n - size_, spare);\n         const size_t full = extra / segment_bytes, tail = extra % segment_bytes;\n-        if (!add(total, full * segment_bytes)) return SIZE_MAX;\n+        const size_t full_bytes = (full && segment_bytes) ? full * segment_bytes : 0;\n+        if (full && (SIZE_MAX / segment_bytes) < full) return SIZE_MAX;\n+        if (!add(total, full_bytes)) return SIZE_MAX;\n         if (tail && !add(total, segment_capacity(tail, full ? segment_bytes :\n                 segments_.empty() ? 0 : segments_.back().capacity(), size_ != 0))) return SIZE_MAX;\n```\n\n**Verification Case 1:** Create a `ConversationBuffer` with one 16 MiB segment. Call `allocation_peak(1ULL << 62)`. The function returns `SIZE_MAX` (the overflow guard triggers). Before the change, the multiplication `full * segment_bytes` could wrap on a 32-bit `size_t` platform (though this is unlikely on x86-64, the guard is for defense in depth).\n\n**Verification Case 2:** Call `allocation_peak(0)` on a fresh buffer. Returns 0. Call `allocation_peak(1024)` on a fresh buffer. Returns approximately 1024 + `sizeof(Segment)`, the single segment's allocation plus its directory entry.\n\n---\n\n## 7. Expert Cache: Per-Layer Admission Slot Range Bounds Check\n\n**Component:** `ExpertCache::layer_slot_range` and `ExpertCache::admit` in `include/strata/core/expert_cache.hpp`\n\n**Responsibilities:** When per-layer admission is enabled, each layer gets a slice `[l*q, (l+1)*q)` of the global slot space. The `admit` method must check that the layer's next free slot is within its range before allocating. If `slots_` is not evenly divisible by `n_layers_`, the last layer gets the remainder. A bug could allow a layer to admit into the next layer's range.\n\n**Proposed Change:** Add an explicit assertion in `admit` that `slot < hi` when per-layer admission is on.\n\n```diff\n--- a/include/strata/core/expert_cache.hpp\n+++ b/include/strata/core/expert_cache.hpp\n@@ -118,6 +118,12 @@ class ExpertCache {\n     /// Claims the next free slot for `(layer, expert)`.  Returns the slot, or `kNotResident` when the cache is\n     /// full - **it never evicts**, because eviction policy is a measured question (`R4.1`'s LFU-decay vs LRU\n     /// sweep) and a placeholder policy would set the hit rate that everything downstream is then sized against.\n     int32_t admit(int64_t layer, int64_t expert);\n```\n\nThe implementation in the source file (not shown, but implied by the header contract) should contain:\n\n```diff\n--- a/src/core/expert_cache.cpp\n+++ b/src/core/expert_cache.cpp\n@@ -142,6 +142,10 @@ int32_t ExpertCache::admit(int64_t layer, int64_t expert) {\n     int32_t& next = layer_next_[layer];\n     int64_t lo, hi;\n     layer_slot_range(layer, lo, hi);\n+    // Defensive: if a layer's next-free has drifted past its range (a bug elsewhere in the eviction or\n+    // fill path), refuse rather than admit into the neighbour's slots, which would silently corrupt the\n+    // neighbour's slot table.\n+    if (next >= hi) return kNotResident;\n     if (next >= slots_) return kNotResident;\n     int32_t slot = next++;\n     // ...\n```\n\n**Verification Case 1:** Open an `ExpertCache` with `n_layers=48`, `n_expert=512`, `n_slots=480`. Per-layer admission is on, so each layer gets 10 slots. Admit 10 experts for layer 0: all succeed. Admit the 11th expert for layer 0: `next` is now `lo+10 == hi`, so the new guard returns `kNotResident`. Before the guard, it would write to slot 10, which belongs to layer 1.\n\n**Verification Case 2:** The last layer (47) with 480 slots / 48 layers = 10 per layer gets exactly `[470, 480)`. After admitting 10 experts for layer 47, `next == 480 == slots_`, which is caught by the existing `if (next >= slots_)` check. The new `next >= hi` check triggers first (`480 >= 480`), returning `kNotResident` correctly.\n\n---\n\n## 8. Device Arena: Poison Pattern for Debug Build NaN Detection\n\n**Component:** `DeviceArena` constructor's `poison` parameter in `include/strata/core/device.hpp`\n\n**Responsibilities:** In debug builds, `DeviceArena` fills new allocations with a NaN-ish pattern so un",
+      "reasoning": "",
+      "actual_prompt_tokens": 127000,
+      "generated_tokens": 6324,
+      "ttft_s": 25.74034844999551,
+      "total_wall_s": 103.61362504599674,
+      "api_decode_wall_s": 77.87327659600123,
+      "prompt_processing_wall_s": 25.1854,
+      "decode_wall_s": 77.8989,
+      "pp_tps": 5042.6,
+      "tg_tps": 81.2,
+      "draft_tokens": 5344,
+      "accepted_tokens": 3685,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 127000,
+        "prompt_ms": 25185.4,
+        "prompt_per_token_ms": 0.198,
+        "prompt_per_second": 5042.6,
+        "predicted_n": 6324,
+        "predicted_ms": 77898.9,
+        "predicted_per_token_ms": 12.318,
+        "predicted_per_second": 81.2,
+        "draft_n": 5344,
+        "draft_n_accepted": 3685,
+        "at": 1790910578
+      },
+      "acceptance_pct": 68.95583832335329,
+      "mean_accepted_length": 1.3963622584312239,
+      "final_logical_context_tokens": 133324,
+      "final_kv_occupancy_tokens": 133323,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 2639,
+      "mean_committed_length": 2.396362258431224,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.886
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 58395.3799575,
+      "t_first_monotonic_s": 58421.12030595,
+      "t_end_monotonic_s": 58498.993582546,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "stop"
+      ],
+      "pss_before": {
+        "272957": {
+          "pss_gib": 0.19082260131835938,
+          "pss_sample_wall": 1790910472.905889,
+          "pss_read_wall_s": 0.007653404005395714
+        },
+        "272965": {
+          "pss_gib": 77.57849025726318,
+          "pss_sample_wall": 1790910473.9963663,
+          "pss_read_wall_s": 1.0904740459955065
+        }
+      },
+      "pss_after": {
+        "272957": {
+          "pss_gib": 0.19115447998046875,
+          "pss_sample_wall": 1790910578.3934078,
+          "pss_read_wall_s": 0.008113051997497678
+        },
+        "272965": {
+          "pss_gib": 77.61747646331787,
+          "pss_sample_wall": 1790910579.5262277,
+          "pss_read_wall_s": 1.1328177460018196
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "LONG-FINAL-v0132",
+      "sampling": {
+        "temperature": 1.0,
+        "top_p": 0.95,
+        "top_k": 20
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/LONG-FINAL-v0132.json",
+      "requested_output": 8192,
+      "length_completed": false,
+      "acceptance_trace_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-FINAL-v0132-128K-8192-sampled-acceptance-trace.json"
+    }
+  ],
+  "note": "Natural EOS respected. Full requested lengths must be verified, not inferred from max_tokens. Normal acceptance reconstructed from upstream STRATA_TRACE windows and verified against aggregate counters; combines MTP and suffix lookup. Trace overhead included. Tier/cache evolution remains request-end-only.",
+  "Strata_HEAD": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+  "Strata_version": "0.1.32",
+  "build_variant": "default",
+  "model_revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+  "full_config": {
+    "exe": "/srv/ai/strata-v0.1.32/build-default/strata",
+    "args": [
+      "--pack",
+      "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+      "--native",
+      "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+      "--expert-profile",
+      "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+      "--expert-cache",
+      "auto",
+      "--mtp",
+      "/srv/ai/models/strata-v0132/mtp/rt",
+      "--prefill",
+      "16384",
+      "--pool-workers",
+      "12",
+      "--pcie-frac",
+      "0.28",
+      "--spec-min-p",
+      "0.3",
+      "--spec",
+      "3",
+      "--kv",
+      "k8v4",
+      "--max-context",
+      "262144"
+    ],
+    "cwd": "/srv/ai/strata-v0.1.32",
+    "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer",
+    "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+    "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/logs/LONG-FINAL-v0132-engine.log",
+    "host": "127.0.0.1",
+    "port": 18085,
+    "lib_dirs": [
+      "/usr/local/cuda/bin",
+      "/usr/local/cuda/lib64"
+    ],
+    "gpu": [
+      0,
+      1
+    ],
+    "layer_split": "24",
+    "environment_overrides": {},
+    "benchmark_prompt_policy": "offline-no-tools-system-v2",
+    "env": {
+      "STRATA_TRACE": "1"
+    },
+    "effective_experiment_environment": {
+      "STRATA_SPLIT_OWN": null,
+      "STRATA_KV_ROT": null,
+      "STRATA_REFILL_SERIAL": null,
+      "STRATA_SPEC_COUPLED": null
+    },
+    "benchmark_environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_SPLIT_OWN": null,
+      "STRATA_KV_ROT": null,
+      "STRATA_REFILL_SERIAL": null,
+      "STRATA_SPEC_COUPLED": null
+    }
+  },
+  "full_engine_command": [
+    "/srv/ai/strata-v0.1.32/build-default/strata",
+    "--serve",
+    "--pack",
+    "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+    "--native",
+    "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+    "--expert-profile",
+    "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+    "--expert-cache",
+    "auto",
+    "--mtp",
+    "/srv/ai/models/strata-v0132/mtp/rt",
+    "--prefill",
+    "16384",
+    "--pool-workers",
+    "12",
+    "--pcie-frac",
+    "0.28",
+    "--spec-min-p",
+    "0.3",
+    "--spec",
+    "3",
+    "--kv",
+    "k8v4",
+    "--max-context",
+    "262144",
+    "--layer-split",
+    "24"
+  ],
+  "topology": "layer_split"
+}

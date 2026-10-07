@@ -1,0 +1,108 @@
+{
+  "base_tag": "v0.1.32",
+  "base_HEAD": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+  "checkout": "/srv/ai/strata-v0.1.32-q5",
+  "clean_checkout": "/srv/ai/strata-v0.1.32",
+  "clean_tracked_diff": "",
+  "build_variant": "default+local-metadata-loader+semantic-cpu-expert-fallback",
+  "patch": "/srv/ai/benchmarks/strata-qwen38/q5-loader-patch-v0132/metadata-only-gguf.patch",
+  "patch_SHA256": "24e7e430d62cf5f0331658320c0ba434201a2a9dba3de2f410272e1b91f75501",
+  "model_revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+  "model_stat_before": [
+    {
+      "path": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00001-of-00006.gguf",
+      "size": 10946618,
+      "mtime_ns": 1790930123819111460,
+      "inode": 33823955,
+      "expected_SHA256": "610922cdb1afe1094e95d7a3e86b12ee33317ebbf7320ac9344e21b6ae4bb69f"
+    },
+    {
+      "path": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00002-of-00006.gguf",
+      "size": 682434912,
+      "mtime_ns": 1790930132593114006,
+      "inode": 33823957,
+      "expected_SHA256": "494ca4ed3dbf97bc28da88af3890b8877b9032f909812d00c0526a9ca5e91d2e"
+    },
+    {
+      "path": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00003-of-00006.gguf",
+      "size": 54400261312,
+      "mtime_ns": 1790931800723567034,
+      "inode": 33823958,
+      "expected_SHA256": "34efd79a80a1ce540a517a5d56171924b66ce1c38b04c904f17ad6d8ef17cf20"
+    },
+    {
+      "path": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00004-of-00006.gguf",
+      "size": 49990245824,
+      "mtime_ns": 1790931702558541921,
+      "inode": 33823965,
+      "expected_SHA256": "9ee6bbe462e6830864382d629101490625b1c95afa15492b7ad550c7bed2dd13"
+    },
+    {
+      "path": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00005-of-00006.gguf",
+      "size": 49882416192,
+      "mtime_ns": 1790931476812484171,
+      "inode": 33823966,
+      "expected_SHA256": "0b2437f661f584030cb5aeb8fb1bb70f6422518a6746bfcc0304167c7b6b8beb"
+    },
+    {
+      "path": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00006-of-00006.gguf",
+      "size": 3320101792,
+      "mtime_ns": 1790930419865196896,
+      "inode": 33823960,
+      "expected_SHA256": "55dd96c5ad0863b06b6393151b9ad0ac727b8d58a62e02a296ca5d5ddbfee4a3"
+    }
+  ],
+  "regression_suite": "gguf_reader_test + gguf_split_test (both passed)",
+  "unpatched_regression": "metadata-only test fails only; tensor-bearing truncation and all old reader tests still pass",
+  "real_GGUF_header_test": "passed6shards/1224tensors; metadata-only data_start=file_size",
+  "scope": "Load/health and one8Kprompt64outputsmoke only; NO benchmark or warmup",
+  "finished_build": true,
+  "config": {
+    "exe": "/srv/ai/strata-v0.1.32-q5/build-default/strata",
+    "args": [
+      "--pack",
+      "/srv/ai/models/strata/packs/ud-q5_k_xl-v0132",
+      "--native",
+      "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00001-of-00006.gguf",
+      "--expert-profile",
+      "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+      "--expert-cache",
+      "auto",
+      "--prefill",
+      "auto",
+      "--spec",
+      "4",
+      "--spec-min-p",
+      "0.5",
+      "--mtp",
+      "/srv/ai/models/strata-v0132/mtp/rt",
+      "--kv",
+      "int8",
+      "--max-context",
+      "262144"
+    ],
+    "cwd": "/srv/ai/strata-v0.1.32-q5",
+    "tokenizer": "/srv/ai/models/strata/packs/ud-q5_k_xl-v0132/tokenizer",
+    "model_name": "qwen3.8-flash-next-ud-q5_k_xl",
+    "log": "/srv/ai/benchmarks/strata-qwen38/q5-loader-patch-v0132/logs/Q5-PATCH-SMOKE-engine.log",
+    "host": "127.0.0.1",
+    "port": 18085,
+    "lib_dirs": [
+      "/usr/local/cuda/bin",
+      "/usr/local/cuda/lib64"
+    ],
+    "gpu": [
+      0,
+      1
+    ],
+    "layer_split": "24",
+    "local_patch_sha256": "24e7e430d62cf5f0331658320c0ba434201a2a9dba3de2f410272e1b91f75501",
+    "build_variant": "default+local-q5-metadata-only-loader"
+  },
+  "captured": 1790933164.2632215,
+  "engine_SHA256": "bb4f920d5bed1aaa56cb1d917f259633395e8dd316fe3d56c354e45756510802",
+  "local_patch_sha256": "eaf9c752f4737553984c589e3f2374ed7e8fef5792ff693e8cd24370893b5e75",
+  "build_dir": "/srv/ai/strata-v0.1.32-q5/build-cpu-only",
+  "base_results": "/srv/ai/benchmarks/strata-qwen38/q5-loader-patch-v0132",
+  "started_utc": "2026-10-02T09:54:47.683863+00:00"
+}

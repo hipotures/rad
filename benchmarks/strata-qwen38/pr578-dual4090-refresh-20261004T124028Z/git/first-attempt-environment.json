@@ -1,0 +1,41 @@
+{
+  "frozen_main": "6f32ec070f23ced9f50e704d854d775da52591ab",
+  "release": "v0.1.39",
+  "builds": {
+    "control": {
+      "HEAD": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "git_status": "",
+      "configure": [
+        "/srv/ai/strata-pr578-refresh-20261004-control/.venv/bin/cmake",
+        "-S",
+        "/srv/ai/strata-pr578-refresh-20261004-control",
+        "-B",
+        "/srv/ai/strata-pr578-refresh-20261004-control/build-default",
+        "-G",
+        "Ninja",
+        "-DCMAKE_MAKE_PROGRAM=/srv/ai/strata-pr578-refresh-20261004-control/.venv/bin/ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DSTRATA_ENABLE_CUDA=ON",
+        "-DCMAKE_CUDA_ARCHITECTURES=89",
+        "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325",
+        "-DSTRATA_BUILD_TESTS=ON"
+      ],
+      "build": [
+        "/srv/ai/strata-pr578-refresh-20261004-control/.venv/bin/cmake",
+        "--build",
+        "/srv/ai/strata-pr578-refresh-20261004-control/build-default",
+        "-j",
+        "6"
+      ],
+      "binary": "/srv/ai/strata-pr578-refresh-20261004-control/build-default/strata",
+      "binary_SHA256": "871bb3b8ff217b6c53b517e3a5f77504e86c74877d6c717050e2034d3098840d",
+      "CTest_failed": [
+        "ple_parity",
+        "platform_memory_test",
+        "expert_parity",
+        "pool_test"
+      ]
+    }
+  },
+  "captured_wall": 1791130008.798416
+}

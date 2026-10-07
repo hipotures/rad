@@ -1,0 +1,798 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8661ccc..074321d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -933,6 +933,10 @@ if(STRATA_NATIVE_EXPERTS)
+     target_link_libraries(hip_ple_iq4 PRIVATE strata_kernels strata_hip_runtime ggml-base)
+   endif()
+   if(STRATA_ENABLE_CUDA OR STRATA_ENABLE_HIP)
++    add_executable(cpu_only_expert_test tests/core/cpu_only_expert_test.cpp)
++    target_link_libraries(cpu_only_expert_test PRIVATE strata_engine ggml-base)
++    add_test(NAME cpu_only_expert_test COMMAND cpu_only_expert_test)
++    set_tests_properties(cpu_only_expert_test PROPERTIES TIMEOUT 120)
+     add_executable(native_expert_parity src/kernels/native_expert_parity.cpp)
+     target_include_directories(native_expert_parity PRIVATE ${_strata_gpu_include_directories})
+     target_link_libraries(native_expert_parity PRIVATE strata_kernels strata_kernels_cpu strata_artifact ${_strata_gpu_runtime_target})
+@@ -954,6 +958,8 @@ if(STRATA_NATIVE_EXPERTS)
+   endif()
+   # #296's real-weight checks (OrcaRouter Q4_K_S files; docs/ORCA_Q4_K_S.md) - test programs, not part of a release
+   if(STRATA_ENABLE_CUDA AND STRATA_BUILD_TESTS)
++    add_executable(ple_q8_parity src/kernels/ple_q8_parity.cpp)
++    target_link_libraries(ple_q8_parity PRIVATE strata_kernels strata_artifact ggml-base ${_strata_gpu_runtime_target})
+     add_executable(ple_q5_parity src/kernels/ple_q5_parity.cpp)
+     target_link_libraries(ple_q5_parity PRIVATE strata_kernels strata_artifact ggml-base ${_strata_gpu_runtime_target})
+     add_executable(q5_projection_parity src/kernels/q5_projection_parity.cpp)
+diff --git a/include/strata/artifact/gguf_reader.hpp b/include/strata/artifact/gguf_reader.hpp
+index 298dc3b..626074f 100644
+--- a/include/strata/artifact/gguf_reader.hpp
++++ b/include/strata/artifact/gguf_reader.hpp
+@@ -455,7 +455,15 @@ private:
+             if (a->u) align = a->u;
+         alignment_ = align;
+         data_start_ = (c.pos() + align - 1) / align * align;
+-        if (data_start_ > size_) throw std::runtime_error("GGUF: data section starts past EOF");
++        if (data_start_ > size_) {
++            if (n_tensors == 0) {
++                // Metadata-only shard: there is no tensor data section,
++                // so trailing alignment padding is not required.
++                data_start_ = size_;
++            } else {
++                throw std::runtime_error("GGUF: data section starts past EOF");
++            }
++        }
+     }
+ 
+     std::string path_;
+diff --git a/include/strata/core/expert_source.hpp b/include/strata/core/expert_source.hpp
+index 84339ef..51a952f 100644
+--- a/include/strata/core/expert_source.hpp
++++ b/include/strata/core/expert_source.hpp
+@@ -222,6 +222,7 @@ struct ExpertDispatch {
+     int64_t layers = 0;
+     int64_t experts = 0;
+     int64_t missing = 0;
++    std::vector<int64_t> cpu_only_entries;
+ 
+     // ================================ R4: THE VRAM TIER, MEASURED BEFORE IT IS USED ================================
+     //
+diff --git a/include/strata/kernels/cpu/expert_layout.hpp b/include/strata/kernels/cpu/expert_layout.hpp
+index 9a8b991..2abb2b7 100644
+--- a/include/strata/kernels/cpu/expert_layout.hpp
++++ b/include/strata/kernels/cpu/expert_layout.hpp
+@@ -16,6 +16,8 @@
+ namespace strata::kernels::cpu {
+ 
+ struct ExpertLayout {
++    // Immutable after startup: unsupported GPU formats use the native CPU pool.
++    std::vector<uint8_t> gpu_supported;
+     bool native = false;
+     int64_t n_layers = 0, n_expert = NE;
+     std::vector<NativeFmt> fmt;           ///< per layer (native packs)
+@@ -56,6 +58,9 @@ void act_quant_any(const float* x, int n, ActQ& a);
+ 
+ /// The process-wide layout (canonical Q2_0 until `expert_layout_load` finds a native pack).
+ const ExpertLayout& expert_layout();
++/// Install GPU capabilities after CPU layout validation, before cache/graphs start.
++void expert_layout_gpu_support(const std::vector<uint8_t>& supported);
++bool expert_gpu_enabled(int64_t layer);
+ /// Reads `<pack_dir>/native_experts.txt` when it exists (a native pack), else sets the canonical layout.
+ /// Versions up to kExpertLayoutVersion are read; a newer one is refused (a newer packer wrote it).
+ bool expert_layout_load(const std::string& pack_dir, int64_t n_layers, int64_t n_expert, std::string& err);
+diff --git a/include/strata/kernels/ngram.hpp b/include/strata/kernels/ngram.hpp
+index 3c6f8fa..658eedd 100644
+--- a/include/strata/kernels/ngram.hpp
++++ b/include/strata/kernels/ngram.hpp
+@@ -46,7 +46,8 @@ inline constexpr float NG_RMS_EPS = 1e-6f;
+ inline constexpr uint64_t PLE_TABLE_ROWS = 320001536ull;
+ inline constexpr int PLE_ROW_BYTES = (PLE_HEAD_DIM / 32) * 18;           // 90: an IQ4_NL row
+ inline constexpr int PLE_ROW_BYTES_FP8 = PLE_HEAD_DIM;                   // 160: an F8_E4M3 row, one byte a value
+-inline constexpr int PLE_ROW_BYTES_MAX = PLE_ROW_BYTES_FP8;
++inline constexpr int PLE_ROW_BYTES_Q8_0 = (PLE_HEAD_DIM / 32) * 34;      // 170
++inline constexpr int PLE_ROW_BYTES_MAX = PLE_ROW_BYTES_Q8_0;
+ 
+ /// The artifact's own hash constants, transcribed from `docs/gguf-dump-shard1.txt`:
+ ///
+@@ -162,7 +163,7 @@ public:
+     /// True when `PleIoOptions::lock` was asked for and mlock succeeded (false: pages only pre-touched).
+     bool locked() const;
+     uint64_t rows() const;
+-    /// "IQ4_NL" or "F8_E4M3" (a GGUF from tools/ple_fp8_pack.py: type I8, strata.ple.format = f8_e4m3).
++    /// "IQ4_NL", "Q5_0", "Q8_0" or "F8_E4M3" (tagged I8 GGUF).
+     const char* format() const;
+ 
+     /// 16 row indices -> 2560 floats.  The gathered rows are flattened HEAD-SLOWEST: row h's 160 values
+diff --git a/src/artifact/gguf_reader_test.cpp b/src/artifact/gguf_reader_test.cpp
+index 70f1bc2..5550d0c 100644
+--- a/src/artifact/gguf_reader_test.cpp
++++ b/src/artifact/gguf_reader_test.cpp
+@@ -55,10 +55,63 @@ std::filesystem::path write_gguf(const std::vector<std::string>& names) {
+     std::ofstream(path, std::ios::binary).write(reinterpret_cast<const char*>(b.data()), (std::streamsize)b.size());
+     return path;
+ }
++
++// Complete metadata and optional tensor directory, but deliberately no alignment
++// padding or payload. The metadata-only case is a valid GGUF shard.
++std::filesystem::path write_unpadded_gguf(bool has_tensor, bool truncated_metadata = false) {
++    std::vector<uint8_t> b;
++    put<uint32_t>(b, 0x46554747u);
++    put<uint32_t>(b, 3);
++    put<uint64_t>(b, has_tensor ? 1 : 0);
++    put<uint64_t>(b, 1);
++    put_str(b, "general.name");
++    put<uint32_t>(b, 8);  // STRING
++    put_str(b, "metadata-only");
++    if (has_tensor) {
++        put_str(b, "t");
++        put<uint32_t>(b, 1);
++        put<uint64_t>(b, 8);
++        put<uint32_t>(b, 0);  // F32
++        put<uint64_t>(b, 0);
++    }
++    if (truncated_metadata) b.pop_back();
++    const auto path = std::filesystem::temp_directory_path() / "strata_gguf_unpadded_test.gguf";
++    std::ofstream(path, std::ios::binary).write(reinterpret_cast<const char*>(b.data()), (std::streamsize)b.size());
++    return path;
++}
+ }  // namespace
+ 
+ int main() {
+     std::printf("gguf_reader_test\n");
++    {
++        const auto path = write_unpadded_gguf(false);
++        std::string err;
++        bool valid = false;
++        try {
++            strata::GgufFile g(path.string());
++            const auto* name = g.get("general.name");
++            valid = g.tensors().empty() && name && name->s == "metadata-only" &&
++                    g.file_size() % g.alignment() != 0 && g.data_start() == g.file_size();
++        } catch (const std::exception& e) { err = e.what(); }
++        std::filesystem::remove(path);
++        check(err.empty() && valid, "metadata-only: EOF after metadata, no padding, empty data section");
++    }
++    {
++        const auto path = write_unpadded_gguf(true);
++        std::string err;
++        try { strata::GgufFile g(path.string()); }
++        catch (const std::exception& e) { err = e.what(); }
++        std::filesystem::remove(path);
++        check(err == "GGUF: data section starts past EOF", "one tensor: EOF before aligned data_start is still refused");
++    }
++    {
++        const auto path = write_unpadded_gguf(false, true);
++        std::string err;
++        try { strata::GgufFile g(path.string()); }
++        catch (const std::exception& e) { err = e.what(); }
++        std::filesystem::remove(path);
++        check(!err.empty(), "metadata-only: truncated metadata is still refused");
++    }
+     {
+         const auto path = write_gguf({"blk.0.attn_q.weight", "blk.0.attn_k.weight"});
+         std::string err;
+diff --git a/src/core/expert_cache.cpp b/src/core/expert_cache.cpp
+index 6eb0929..e04546a 100644
+--- a/src/core/expert_cache.cpp
++++ b/src/core/expert_cache.cpp
+@@ -1,5 +1,7 @@
+ // src/core/expert_cache.cpp - R4's slot storage and residency table.  Read the header first.
+ #include "strata/core/expert_cache.hpp"
++#include "strata/kernels/cpu/expert_layout.hpp"
++#include <algorithm>
+ 
+ #include <cuda_runtime.h>
+ 
+@@ -62,6 +64,9 @@ bool read_expert_profile(const std::string& path, int64_t n_layers, int64_t n_ex
+         }
+         ranked[(size_t) i] = {l, e};
+     }
++    ranked.erase(std::remove_if(ranked.begin(), ranked.end(), [](const auto& pair) {
++        return !strata::kernels::cpu::expert_gpu_enabled(pair.first);
++    }), ranked.end());
+     slots = (int64_t) want;
+     (void) version;   // a future format bumps it; the layout check above is what protects this reader today
+     return true;
+@@ -220,11 +225,13 @@ void ExpertCache::layer_slot_range(int64_t layer, int64_t& lo, int64_t& hi) cons
+ }
+ 
+ int32_t ExpertCache::slot_of(int64_t layer, int64_t expert) const {
++    if (!strata::kernels::cpu::expert_gpu_enabled(layer)) return kNotResident;
+     if (layer < 0 || layer >= n_layers_ || expert < 0 || expert >= n_expert_) return kNotResident;
+     return residency_[(size_t) (layer * n_expert_ + expert)];
+ }
+ 
+ int32_t ExpertCache::admit(int64_t layer, int64_t expert) {
++    if (!strata::kernels::cpu::expert_gpu_enabled(layer)) return kNotResident;
+     if (layer < 0 || layer >= n_layers_ || expert < 0 || expert >= n_expert_) return kNotResident;
+     const size_t at = (size_t) (layer * n_expert_ + expert);
+     if (residency_[at] != kNotResident) return residency_[at];
+diff --git a/src/core/expert_source.cpp b/src/core/expert_source.cpp
+index c426d3a..4bfbe70 100644
+--- a/src/core/expert_source.cpp
++++ b/src/core/expert_source.cpp
+@@ -1596,6 +1596,7 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+     if ((int64_t) d.act_multi.size() < n_tok) d.act_multi.resize((size_t) MAXT);
+     const ExpertLayout& lay = expert_layout();
+     const bool native = lay.native;
++    const bool gpu_enabled = expert_gpu_enabled(d.layers);
+     if (native && d.nact_multi.size() < (size_t) MAXT * kNativeActBytes) d.nact_multi.resize((size_t) MAXT * kNativeActBytes);
+     if (d.job_of.size() != (size_t) d.n_expert) d.job_of.assign((size_t) d.n_expert, (int16_t) -1);
+     if (d.jobs_multi.size() < (size_t) (n_tok * k)) d.jobs_multi.resize((size_t) (MAXT * k));
+@@ -1627,7 +1628,7 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+                 if (e >= 0 && e < d.n_expert && d.host_res[(size_t) d.layers * (size_t) d.n_expert + (size_t) e] < 0) ++nmiss;
+             }
+         }
+-        const bool pcie_ok = d.pcie_num > 0 && d.src->pcie_layer(d.layers);
++        const bool pcie_ok = gpu_enabled && d.pcie_num > 0 && d.src->pcie_layer(d.layers);
+         const int m = pcie_ok ? (nmiss * d.pcie_num) >> 8 : 0;
+         int miss_rank = 0, groups = 0, entries = 0, fetches = 0;
+         GpuPlanSink& P = *d.plan;
+@@ -1639,13 +1640,13 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+             int kd = -1;
+             unsigned long long ptr = 0;
+             if (e >= 0 && e < d.n_expert) {
+-                const int32_t slot = d.host_res[(size_t) d.layers * (size_t) d.n_expert + (size_t) e];
++                const int32_t slot = gpu_enabled ? d.host_res[(size_t) d.layers * (size_t) d.n_expert + (size_t) e] : -1;
+                 if (slot >= 0) {
+                     kd = 0;
+                     ptr = (unsigned long long) (d.cache_base + (d.cache_slot_off ? (size_t) d.cache_slot_off[slot]
+                                                                                  : (size_t) slot * (size_t) d.cache_blob));
+                 } else {
+-                    if (miss_rank >= nmiss - m && fetches < P.staging_cap && fetches < 64) {
++                    if (gpu_enabled && miss_rank >= nmiss - m && fetches < P.staging_cap && fetches < 64) {
+                         const uint8_t* src = d.src->pinned(d.layers, e) ? d.src->blob(d.layers, e) : nullptr;
+                         if (src != nullptr) {
+                             kd = 1;
+@@ -1697,11 +1698,11 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+     } else {
+         for (int64_t i = 0; i < n; ++i) {
+             const int32_t e = ids[i];
+-            kind[i] = (e >= 0 && e < d.n_expert && d.host_res != nullptr &&
++            kind[i] = (gpu_enabled && e >= 0 && e < d.n_expert && d.host_res != nullptr &&
+                        d.host_res[(size_t) d.layers * (size_t) d.n_expert + (size_t) e] >= 0) ? 0 : -1;
+         }
+     }
+-    if (d.remote_count > 0) {
++    if (gpu_enabled && d.remote_count > 0) {
+         static thread_local std::string remote_error;
+         for (int r = 0; r < d.remote_count; ++r) {
+             if (!d.remote[r]->begin(d.layers, x_f, ids, n_tok, k, kind, d.host_res, remote_error)) {
+@@ -1774,13 +1775,20 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+     pt("run", njobs);
+     if (native) d.pool->run_split_multi_native(lay.fmt[(size_t) d.layers], d.jobs_multi.data(), njobs);
+     else d.pool->run_split_multi(d.jobs_multi.data(), njobs);
+-    if (d.remote_count > 0) {
++    if (gpu_enabled && d.remote_count > 0) {
+         static thread_local std::string remote_error;
+         for (int r = 0; r < d.remote_count; ++r)
+             if (!d.remote[r]->finish(out, remote_error)) {
+                 d.failed = true; d.fail = remote_error.c_str(); d.fail_layer = d.layers; return;
+             }
+     }
++    if (!gpu_enabled) {
++        if (d.cpu_only_entries.size() < (size_t) lay.n_layers) d.cpu_only_entries.resize((size_t) lay.n_layers);
++        auto& total = d.cpu_only_entries[(size_t) d.layers];
++        if (total == 0) std::fprintf(stderr, "strata CPU-only decode: layer %lld CPU entries %lld GPU expert entries 0\n",
++                                     (long long) d.layers, (long long) n);
++        total += n;
++    }
+     const auto c4 = std::chrono::steady_clock::now();
+     pt("ran");
+     auto ms = [](auto a, auto b) { return std::chrono::duration<double, std::milli>(b - a).count(); };
+diff --git a/src/core/remote_experts.cpp b/src/core/remote_experts.cpp
+index 53d8d76..e22d607 100644
+--- a/src/core/remote_experts.cpp
++++ b/src/core/remote_experts.cpp
+@@ -138,6 +138,7 @@ bool RemoteExperts::open(int device, int slots, int64_t layers, int64_t experts,
+     selected.reserve((size_t) slots);
+     std::vector<uint8_t> picked(claimed.size(), 0);
+     for (const auto& pair : ranked) {
++        if (!strata::kernels::cpu::expert_gpu_enabled(pair.first)) continue;
+         if (pair.first < 0 || pair.first >= layers || pair.second < 0 || pair.second >= experts) continue;
+         const size_t index = (size_t) pair.first * (size_t) experts + (size_t) pair.second;
+         if (primary.slot_of(pair.first, pair.second) < 0 && !claimed[index] && !picked[index]) {
+@@ -243,7 +244,7 @@ bool RemoteExperts::begin(int64_t layer, const float* x, const int32_t* ids, int
+     }
+     std::fill(owned_.begin(), owned_.begin() + n, 0);
+     group_id_.clear(); ptr_.clear(); start_.clear(); dst_.clear(); tok_.clear(); original_row_.clear();
+-    if (!layers_present_[(size_t) layer]) return true;
++    if (!strata::kernels::cpu::expert_gpu_enabled(layer) || !layers_present_[(size_t) layer]) return true;
+     std::fill(group_of_.begin(), group_of_.begin() + n, -1);
+     for (int64_t i = 0; i < n; ++i) {
+         const int32_t e = ids[i];
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index 999f85d..1d7ef60 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -747,6 +747,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         const auto& lay = strata::kernels::cpu::expert_layout();
+         // plan v0.3 P6: the VRAM groups now; the PCIe groups once the copy engine has landed them in staging
+         auto grouped = [&](const unsigned long long* gp, const int32_t* gs, const int32_t* gn) {
++            if (!strata::kernels::cpu::expert_gpu_enabled(l)) return;
+             if (lay.native) {
+                 // the layer's GGUF formats (i-quant gate/up, Q2_0 / IQ4_NL down)
+                 const auto& f = lay.fmt[(size_t) l];
+diff --git a/src/kernels/cpu/expert_layout.cpp b/src/kernels/cpu/expert_layout.cpp
+index 4583b10..95f4498 100644
+--- a/src/kernels/cpu/expert_layout.cpp
++++ b/src/kernels/cpu/expert_layout.cpp
+@@ -20,6 +20,13 @@ ExpertLayout g_layout;
+ }
+ 
+ const ExpertLayout& expert_layout() { return g_layout; }
++void expert_layout_gpu_support(const std::vector<uint8_t>& supported) {
++    g_layout.gpu_supported = supported;
++}
++bool expert_gpu_enabled(int64_t layer) {
++    return g_layout.gpu_supported.empty() ||
++           (layer >= 0 && (size_t) layer < g_layout.gpu_supported.size() && g_layout.gpu_supported[(size_t) layer]);
++}
+ 
+ bool cpu_avx512_ok() {
+     static const bool ok = [] {
+diff --git a/src/kernels/ngram.cpp b/src/kernels/ngram.cpp
+index 1a1552b..7919ae5 100644
+--- a/src/kernels/ngram.cpp
++++ b/src/kernels/ngram.cpp
+@@ -139,6 +139,7 @@ struct PleTable::Impl {
+     GgufFile* file = nullptr;
+     const uint8_t* data = nullptr;
+     uint64_t n_rows = 0;
++    bool q8_0 = false;                // native Q8_0 rows: 5 x 34 bytes
+     bool q5_0 = false;                // #296: Q5_0 rows (110 B), the mapped reader only
+     mutable uint64_t bytes_read = 0;
+     // Direct mode (plan v0.3 P2): the mapping above is released after the header parse and every row comes
+@@ -157,6 +158,8 @@ struct PleTable::Impl {
+         if (fp8) fp8_e4m3_dequant_row(row, scale, out160);
+         else if (q5_0)
+             for (int b = 0; b < PLE_HEAD_DIM / 32; ++b) strata::dequantize_q5_0(row + (size_t) b * 22, out160 + b * 32);
++        else if (q8_0)
++            for (int b = 0; b < PLE_HEAD_DIM / 32; ++b) strata::dequantize_q8_0(row + (size_t) b * 34, out160 + b * 32);
+         else iq4nl_dequant_row(row, out160);
+     }
+ };
+@@ -192,7 +195,8 @@ bool PleTable::open(const std::string& gguf_path, std::string& err, const PleIoO
+     // shipped: I8 bytes marked strata.ple.format = f8_e4m3 with strata.ple.scale (tools/ple_fp8_pack.py)
+     impl_->fp8 = false;
+     impl_->q5_0 = std::strcmp(t->type_name(), "Q5_0") == 0;
+-    impl_->rb = impl_->q5_0 ? (PLE_HEAD_DIM / 32) * 22 : PLE_ROW_BYTES;
++    impl_->q8_0 = std::strcmp(t->type_name(), "Q8_0") == 0;
++    impl_->rb = impl_->q8_0 ? PLE_ROW_BYTES_Q8_0 : impl_->q5_0 ? (PLE_HEAD_DIM / 32) * 22 : PLE_ROW_BYTES;
+     if (std::strcmp(t->type_name(), "I8") == 0) {
+         const MetaValue* f = impl_->file->get("strata.ple.format");
+         const MetaValue* s = impl_->file->get("strata.ple.scale");
+@@ -204,15 +208,15 @@ bool PleTable::open(const std::string& gguf_path, std::string& err, const PleIoO
+         impl_->fp8 = true;
+         impl_->scale = (float) s->num();
+         impl_->rb = PLE_ROW_BYTES_FP8;
+-    } else if (!impl_->q5_0 && std::strcmp(t->type_name(), "IQ4_NL") != 0) {
+-        err = std::string("per_layer_token_embd.weight is ") + t->type_name() + ", not IQ4_NL, Q5_0 or FP8 (I8)";
++    } else if (!impl_->q5_0 && !impl_->q8_0 && std::strcmp(t->type_name(), "IQ4_NL") != 0) {
++        err = std::string("per_layer_token_embd.weight is ") + t->type_name() + ", not IQ4_NL, Q5_0, Q8_0 or FP8 (I8)";
+         close();
+         return false;
+     }
+     // The direct reader has fixed 90-byte rows. Keep it for IQ4_NL; Q5_0's
+     // 110-byte rows use the mapped path until that reader supports variable rows.
+-    if (impl_->q5_0 && io.mode == PleIo::Direct) {
+-        err = "Q5_0 PLE requires --ple-io mmap";
++    if ((impl_->q5_0 || impl_->q8_0) && io.mode == PleIo::Direct) {
++        err = std::string(impl_->q8_0 ? "Q8_0" : "Q5_0") + " PLE requires --ple-io mmap";
+         close();
+         return false;
+     }
+@@ -290,12 +294,13 @@ void PleTable::close() {
+     impl_->n_rows = 0;
+     impl_->rb = PLE_ROW_BYTES;
+     impl_->q5_0 = false;
++    impl_->q8_0 = false;
+     impl_->fp8 = false;
+ }
+ 
+ bool PleTable::is_open() const { return impl_->data != nullptr || impl_->reader.is_open(); }
+ bool PleTable::locked() const { return impl_->locked; }
+-const char* PleTable::format() const { return impl_->fp8 ? "F8_E4M3" : impl_->q5_0 ? "Q5_0" : "IQ4_NL"; }
++const char* PleTable::format() const { return impl_->fp8 ? "F8_E4M3" : impl_->q8_0 ? "Q8_0" : impl_->q5_0 ? "Q5_0" : "IQ4_NL"; }
+ PleIo PleTable::mode() const { return impl_->mode; }
+ uint64_t PleTable::rows() const { return impl_->n_rows; }
+ uint64_t PleTable::bytes_read() const { return impl_->bytes_read; }
+diff --git a/src/prefill/prefill.cpp b/src/prefill/prefill.cpp
+index 290b53d..f4ba2e6 100644
+--- a/src/prefill/prefill.cpp
++++ b/src/prefill/prefill.cpp
+@@ -6,6 +6,7 @@
+ 
+ #include "strata/core/layout.hpp"
+ #include "strata/kernels/cpu/expert.hpp"
++#include "strata/kernels/cpu/native_batch.hpp"
+ #include "strata/kernels/native_qsa_indexer.hpp"
+ #include "strata/kernels/ngram.hpp"
+ #include "strata/kernels/ple.hpp"
+@@ -330,6 +331,8 @@ struct Prefill::Impl {
+     uint8_t *grp_gu = nullptr, *grp_d = nullptr;
+     std::vector<int32_t> bounds_host;
+     std::unique_ptr<mmq::Context> mmq_ctx;
++    std::unique_ptr<strata::kernels::cpu::ExpertPool> cpu_only_pool;
++    std::vector<float> cpu_mixed, cpu_outputs;
+     std::vector<int32_t> ids_host, slot_host, src_host, cnt, off;
+     // The grouping tables in mapped pinned memory, [ids | slot | src] of T_max * K each, then the MMQ bounds: kernels
+     // read and write them in place.  A cudaMemcpyAsync of them queues behind the expert blobs the copy stream already
+@@ -1149,6 +1152,7 @@ bool Prefill::run(const int64_t* tokens, int64_t n, int64_t pos0, std::string& e
+             std::vector<Stager::Job> js;
+             for (int64_t l = LB; l < LE; ++l) {
+                 seq_start[(size_t) l] = seq.size();
++                if (!strata::kernels::cpu::expert_gpu_enabled(l)) continue;
+                 for (int32_t e = 0; e < m.g->n_expert; ++e) {
+                     if (m.host_res && m.cache && m.host_res[(size_t) l * m.g->n_expert + e] >= 0) continue;
+                     int job = -1;
+@@ -1615,9 +1619,39 @@ bool Prefill::run(const int64_t* tokens, int64_t n, int64_t pos0, std::string& e
+                     std::vector<int32_t> order;
+                     for (int32_t e = 0; e < m.g->n_expert; ++e) if (m.cnt[(size_t) e] > 0) order.push_back(e);
+                     const strata::kernels::cpu::ExpertLayout& lay = strata::kernels::cpu::expert_layout();
+-                    const bool use_mmq = mmq_plan().any && mmq_plan().layer[(size_t) l];
++                    const bool use_mmq = strata::kernels::cpu::expert_gpu_enabled(l) && mmq_plan().any && mmq_plan().layer[(size_t) l];
+                     const int mmq_gt = lay.native ? lay.fmt[(size_t) l].gu_type : 42;
+                     const int mmq_dt = lay.native ? lay.fmt[(size_t) l].d_type : 42;
++                    if (!strata::kernels::cpu::expert_gpu_enabled(l)) {
++                        if (!lay.native || !m.src) { err = "prefill: CPU-only layer needs native expert source"; return false; }
++                        if (!m.cpu_only_pool)
++                            m.cpu_only_pool = std::make_unique<strata::kernels::cpu::ExpertPool>(0, false, true);
++                        m.cpu_mixed.resize((size_t) T * N);
++                        m.cpu_outputs.resize((size_t) T * K * N);
++                        if (cudaMemcpyAsync(m.cpu_mixed.data(), m.mixed, (size_t) T * N * sizeof(float),
++                                            cudaMemcpyDeviceToHost, m.cs) != cudaSuccess ||
++                            cudaStreamSynchronize(m.cs) != cudaSuccess) {
++                            err = "prefill: CPU-only activation download failed"; return false;
++                        }
++                        const auto& f = lay.fmt[(size_t) l];
++                        try {
++                            for (int32_t e : order) {
++                                const uint8_t* blob = m.src->blob(l, e);
++                                strata::kernels::cpu::native_expert_batch(*m.cpu_only_pool, f, blob,
++                                    m.cpu_mixed.data(), T, src_h + m.off[(size_t) e], m.cnt[(size_t) e],
++                                    m.cpu_outputs.data() + (size_t) m.off[(size_t) e] * N);
++                            }
++                        } catch (const std::exception& ex) {
++                            err = std::string("prefill: CPU-only expert: ") + ex.what(); return false;
++                        }
++                        if (cudaMemcpyAsync(m.Dm, m.cpu_outputs.data(), (size_t) T * K * N * sizeof(float),
++                                            cudaMemcpyHostToDevice, m.cs) != cudaSuccess ||
++                            cudaStreamSynchronize(m.cs) != cudaSuccess) {
++                            err = "prefill: CPU-only output upload failed"; return false;
++                        }
++                        std::fprintf(stderr, "strata CPU-only prefill: layer %lld CPU entries %lld GPU expert entries 0\n",
++                                     (long long) l, (long long) T * K);
++                    } else {
+                     const size_t mmq_gub = use_mmq ? mmq::matrix_bytes(mmq_gt, 1280, N) : 0;
+                     const size_t mmq_db = use_mmq ? mmq::matrix_bytes(mmq_dt, N, 640) : 0;
+                     pt.mark(kPfGather, cs);
+@@ -1807,6 +1841,7 @@ bool Prefill::run(const int64_t* tokens, int64_t n, int64_t pos0, std::string& e
+                         }
+                         release_to(m.g->n_expert);
+                     }
++                    }
+                     pt.mark(kPfCombine, cs);
+                     moe_combine(m.Dm, m.slot_dev, m.w, m.shared, m.sg, m.bo, T, m.cs);
+                     // debug: STRATA_DBG_NAN=1 reports the first layer of a chunk whose MoE produced non-finite values
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 7f1e3e9..80b34b9 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -1673,16 +1673,22 @@ int main(int argc, char** argv) {
+         // anything is allocated: an unsupported down type used to exit from inside the first verify window, and
+         // an unsupported dequant type left the prompt path's fp16 buffer unwritten.
+         const auto& lay = strata::kernels::cpu::expert_layout();
++        std::vector<uint8_t> gpu_supported((size_t) lay.n_layers, 1);
+         for (int64_t l = 0; lay.native && l < (int64_t) lay.fmt.size(); ++l) {
+             const auto& f = lay.fmt[(size_t) l];
+             if (!strata::kernels::native_expert_supported(f.gu_type, f.d_type, f.n_embd, f.n_ff)) {
+-                std::fprintf(stderr, "strata generate: layer %lld's experts are %s/%s (ggml types %d/%d), which this "
+-                                     "engine has no GPU kernels for\n", (long long) l,
+-                             strata::ggml_type_name((uint32_t) f.gu_type), strata::ggml_type_name((uint32_t) f.d_type),
+-                             f.gu_type, f.d_type);
+-                return 1;
++                // expert_layout_load already validated the CPU dot products and geometry.
++                if (o.no_pool) {
++                    std::fprintf(stderr, "strata generate: CPU-only native experts require the expert pool\n");
++                    return 1;
++                }
++                gpu_supported[(size_t) l] = 0;
++                std::fprintf(stderr, "strata generate: layer %lld routed experts %s/%s: CPU_ONLY_FORMAT_FALLBACK "
++                                     "(GPU cache/PCIe/helper disabled)\n", (long long) l,
++                             strata::ggml_type_name((uint32_t) f.gu_type), strata::ggml_type_name((uint32_t) f.d_type));
+             }
+         }
++        strata::kernels::cpu::expert_layout_gpu_support(gpu_supported);
+     }
+     const bool native_pack = strata::kernels::cpu::expert_layout().native;
+     // STRATA_EARLY_REMOTE_CONTEXTS=1: create EVERY secondary context here, like CUDA1's.  Under WSL2 the driver's
+@@ -2931,7 +2937,7 @@ int main(int argc, char** argv) {
+                     seen[(size_t) pair.first * (size_t) g.n_expert + (size_t) pair.second] = 1;
+             for (int64_t e = 0; e < g.n_expert; ++e)
+                 for (int64_t l = 0; l < g.n_layers; ++l)
+-                    if (!seen[(size_t) l * (size_t) g.n_expert + (size_t) e])
++                    if (strata::kernels::cpu::expert_gpu_enabled(l) && !seen[(size_t) l * (size_t) g.n_expert + (size_t) e])
+                         ranked.emplace_back((int32_t) l, (int32_t) e);
+             std::fprintf(stderr, "strata generate: remote ranking: %zu profiled pairs, "
+                                  "%zu other pairs to fill CUDA1..3\n", profile.size(), ranked.size() - profile.size());
+@@ -4433,6 +4439,7 @@ int main(int argc, char** argv) {
+             std::vector<Swap> swaps;
+             std::vector<std::pair<float, int32_t>> cand, vict;
+             for (int64_t l = 0; l < g.n_layers; ++l) {
++                if (!strata::kernels::cpu::expert_gpu_enabled(l)) continue;
+                 cand.clear();
+                 vict.clear();
+                 const float* u = drive.d.usage.data() + l * g.n_expert;
+@@ -6025,6 +6032,7 @@ int main(int argc, char** argv) {
+             std::vector<Swap> swaps;
+             std::vector<std::pair<float, int32_t>> cand, vict;
+             for (int64_t l = 0; l < g.n_layers; ++l) {
++                if (!strata::kernels::cpu::expert_gpu_enabled(l)) continue;
+                 cand.clear();
+                 vict.clear();
+                 const float* u = drive.d.usage.data() + l * g.n_expert;
+diff --git a/tests/core/gguf_split_test.cpp b/tests/core/gguf_split_test.cpp
+index 3f137cc..e27beda 100644
+--- a/tests/core/gguf_split_test.cpp
++++ b/tests/core/gguf_split_test.cpp
+@@ -12,6 +12,7 @@
+ #include <chrono>
+ #include <cstdio>
+ #include <filesystem>
++#include <iterator>
+ #include <string>
+ #include <vector>
+ 
+@@ -115,6 +116,31 @@ int real_model(const std::string& any) {
+ int main(int argc, char** argv) {
+     if (argc == 3 && std::string(argv[1]) == "--real") return real_model(argv[2]);
+     std::printf("gguf_split_test\n");
++    {
++        TempDir d;
++        const auto paths = write_model(d.path, [](int i, auto& kv, auto&, uint64_t&) {
++            if (i == 0) kv.push_back(fixture::str("metadata.no_padding", "x"));
++        });
++        // The final metadata value ends in a nonzero byte. Remove only the
++        // fixture's trailing zero alignment padding from the metadata shard.
++        std::ifstream input(paths[0], std::ios::binary);
++        std::vector<char> bytes((std::istreambuf_iterator<char>(input)), std::istreambuf_iterator<char>());
++        input.close();
++        while (!bytes.empty() && bytes.back() == 0) bytes.pop_back();
++        fs::resize_file(paths[0], bytes.size());
++        bool valid = false;
++        std::string err;
++        try {
++            const strata::GgufModel m(paths);
++            size_t shard = 0;
++            const auto* t = m.find("output.weight", &shard);
++            valid = m.size() == 4 && m.meta().tensors().empty() &&
++                    m.meta().file_size() % m.meta().alignment() != 0 &&
++                    m.meta().data_start() == m.meta().file_size() &&
++                    t && shard == 1 && m.in_bounds(*t, shard);
++        } catch (const std::exception& e) { err = e.what(); }
++        check(err.empty() && valid, "split model: unpadded metadata-only shard, other tensor shards intact");
++    }
+     {
+         TempDir d;
+         const auto paths = write_model(d.path, same);
+diff --git a/include/strata/kernels/cpu/native_batch.hpp b/include/strata/kernels/cpu/native_batch.hpp
+new file mode 100644
+index 0000000..4ce13c7
+--- /dev/null
++++ b/include/strata/kernels/cpu/native_batch.hpp
+@@ -0,0 +1,30 @@
++// Bounded native CPU routed-expert batch, also used by CPU-only prefill.
++#pragma once
++#include "strata/kernels/cpu/pool.hpp"
++#include <algorithm>
++#include <stdexcept>
++namespace strata::kernels::cpu {
++// Inputs are FP32 token rows. src indexes tokens; outputs are consecutive expert-sorted rows.
++// No router weight here: the caller's combine applies it exactly once.
++inline void native_expert_batch(ExpertPool& pool, const NativeFmt& f, const uint8_t* blob,
++                               const float* mixed, int64_t tokens, const int32_t* src,
++                               int64_t count, float* out) {
++    if (!blob || count < 0 || f.n_embd != H || f.n_ff != FF)
++        throw std::invalid_argument("native CPU batch: invalid blob or geometry");
++    alignas(64) uint8_t act[MAXT][kNativeActBytes];
++    for (int64_t b = 0; b < count; b += MAXT) {
++        ExpertJobMulti job;
++        job.blob = blob;
++        job.nt = (int) std::min<int64_t>(MAXT, count - b);
++        for (int t = 0; t < job.nt; ++t) {
++            const int32_t token = src[b + t];
++            if (token < 0 || token >= tokens)
++                throw std::out_of_range("native CPU batch: token index out of range");
++            native_quant_act(f, mixed + (size_t) token * H, act[t]);
++            job.nact[t] = act[t];
++            job.out[t] = out + (size_t) (b + t) * H;
++        }
++        pool.run_split_multi_native(f, &job, 1);
++    }
++}
++} // namespace strata::kernels::cpu
+diff --git a/tests/core/cpu_only_expert_test.cpp b/tests/core/cpu_only_expert_test.cpp
+new file mode 100644
+index 0000000..58c8828
+--- /dev/null
++++ b/tests/core/cpu_only_expert_test.cpp
+@@ -0,0 +1,102 @@
++#include "strata/core/expert_source.hpp"
++#include "strata/core/remote_experts.hpp"
++#include "strata/kernels/cpu/expert_layout.hpp"
++#include "strata/kernels/cpu/native_batch.hpp"
++#include "strata/kernels/iq_kernels.hpp"
++#include "ggml.h"
++#include <filesystem>
++#include <fstream>
++#include <iostream>
++#include <vector>
++#include <cmath>
++#include <cstring>
++#include <unistd.h>
++using namespace strata::kernels::cpu;
++using namespace strata::core;
++struct Source : ExpertSource {
++    std::vector<uint8_t> bytes;
++    const uint8_t* blob(int64_t, int64_t) override { return bytes.data(); }
++    bool pinned(int64_t,int64_t) const override { return true; }
++    const uint8_t* device_alias(int64_t,int64_t) const override { return bytes.data(); }
++};
++struct Signals { int published=0, fetched=0, blobs=-1; };
++static void publish(void* p) { ++((Signals*)p)->published; }
++static void fetch(void* p,const uint8_t* const*,int n,size_t) { ++((Signals*)p)->fetched; ((Signals*)p)->blobs=n; }
++static void require(bool ok,const char* msg) { if (!ok) throw std::runtime_error(msg); std::cout<<"PASS "<<msg<<"\n"; }
++int main() try {
++    NativeFmt q6,q5; std::string err;
++    require(native_fmt(14,8,H,FF,q6,err),"CPU accepts Q6_K/Q8_0");
++    require(native_fmt(13,8,H,FF,q5,err),"CPU accepts Q5_K/Q8_0");
++    require(!strata::kernels::native_expert_supported(14,8,H,FF),"GPU still refuses Q6_K/Q8_0");
++    require(strata::kernels::native_expert_supported(13,8,H,FF),"GPU still accepts Q5_K/Q8_0");
++    auto dir=std::filesystem::temp_directory_path()/("strata-cpu-only-test-"+std::to_string(getpid()));
++    std::filesystem::create_directories(dir);
++    struct Cleanup { std::filesystem::path p; ~Cleanup(){std::filesystem::remove_all(p);} } cleanup{dir};
++    { std::ofstream f(dir/"native_experts.txt");
++      f<<"# strata native experts v3\n";
++      f<<"0 13 8 0 "<<q5.bytes<<" 0 0 0\n";
++      f<<"1 13 8 "<<2*q5.bytes<<" "<<q5.bytes<<" 0 0 0\n";
++      f<<"2 14 8 "<<4*q5.bytes<<" "<<q6.bytes<<" 0 0 0\n"; }
++    require(expert_layout_load(dir.string(),3,2,err),"mixed native layout loads");
++    std::vector<uint8_t> policy;
++    for (auto& f:expert_layout().fmt) policy.push_back(strata::kernels::native_expert_supported(f.gu_type,f.d_type,f.n_embd,f.n_ff));
++    expert_layout_gpu_support(policy);
++    require(expert_gpu_enabled(0)&&expert_gpu_enabled(1)&&!expert_gpu_enabled(2),"semantic per-layer GPU policy");
++    ExpertCache cache;
++    require(cache.open_sized({(int64_t)q5.bytes,(int64_t)q5.bytes},3,2,err),"GPU test cache opens");
++    require(cache.admit(2,0)==kNotResident&&cache.admit(2,1)==kNotResident,"CPU-only layer cannot get GPU slots");
++    require(cache.admit(0,0)==0&&cache.admit(1,0)==1,"other layers retain GPU slots");
++    Source src; src.bytes.resize(q6.bytes);
++    RemoteExperts remote; std::vector<uint8_t> claimed(6,0);
++    require(!remote.open(1,1,3,2,{{2,0}},cache,src,claimed,err) && err.find("no unclaimed experts")!=std::string::npos,
++            "helper GPU refuses a ranking containing only CPU-only experts");
++    { std::ofstream f(dir/"profile.bin",std::ios::binary);uint32_t h[5]={1,3,2,3,3};uint16_t pairs[6]={2,0,0,0,1,0};
++      f.write("STRP",4);f.write((char*)h,sizeof h);f.write((char*)pairs,sizeof pairs); }
++    std::vector<std::pair<int32_t,int32_t>> ranked;int64_t slots=0;
++    require(read_expert_profile((dir/"profile.bin").string(),3,2,ranked,slots,err) && ranked.size()==2 && ranked[0].first==0 && ranked[1].first==1,
++            "profile filter removes CPU-only layer and preserves other rankings");
++
++    std::vector<float> weights(H*FF);
++    for(size_t i=0;i<weights.size();++i) weights[i]=0.01f*std::sin(float(i%1009)*0.1f);
++    ggml_quantize_chunk(GGML_TYPE_Q6_K,weights.data(),src.bytes.data(),0,FF,H,nullptr);
++    ggml_quantize_chunk(GGML_TYPE_Q6_K,weights.data(),src.bytes.data()+q6.up_off,0,FF,H,nullptr);
++    ggml_quantize_chunk(GGML_TYPE_Q8_0,weights.data(),src.bytes.data()+q6.down_off,0,H,FF,nullptr);
++    constexpr int nt=19;
++    std::vector<float> x(nt*H), ref(nt*H), batch(nt*H);
++    std::vector<int32_t> order(nt);
++    alignas(64) uint8_t act[kNativeActBytes],hq[kNativeHBytes]; float ff[FF];
++    for(int t=0;t<nt;++t) {
++      for(int i=0;i<H;++i) x[t*H+i]=std::cos(float(i+t)*0.07f);
++      order[t]=(t*7)%nt;
++    }
++    for(int r=0;r<nt;++r) {
++      native_quant_act(q6,x.data()+order[r]*H,act); const void* a[]={act};float* fs[]={ff};
++      native_gu_rows(q6,src.bytes.data(),a,1,fs,0,FF); native_quant_h(q6,ff,hq);
++      const void* hs[]={hq};float* os[]={ref.data()+r*H};native_down_rows(q6,src.bytes.data(),hs,1,os,0,H);
++    }
++    ExpertPool pool(2,false,true);
++    native_expert_batch(pool,q6,src.bytes.data(),x.data(),nt,order.data(),nt,batch.data());
++    require(std::memcmp(ref.data(),batch.data(),ref.size()*4)==0,"prefill CPU batch: sorted mapping and MAXT tails match serial reference bitwise");
++    bool rejected=false; int32_t bad=nt;
++    try { native_expert_batch(pool,q6,src.bytes.data(),x.data(),nt,&bad,1,batch.data()); } catch(const std::out_of_range&) { rejected=true; }
++    require(rejected,"invalid prefill token index rejected");
++    ExpertDispatch d;d.pool=&pool;d.src=&src;d.layers=2;d.n_expert=2;
++    // Intentionally stale GPU residency + maximum PCIe fraction: policy must override both.
++    int32_t res[6]={0,0,0,0,0,0};d.host_res=res;d.pcie_num=256;d.cache_base=src.bytes.data();d.cache_blob=(int64_t)q5.bytes;
++    int32_t counts[4]={9,9,9,9},start[10]={},start2[10]={},dst[10]={},tok[10]={};
++    unsigned long long ptr[10]={},ptr2[10]={}; Signals sig;
++    GpuPlanSink plan;plan.cap=6;plan.staging_cap=8;plan.counts=counts;plan.start=start;plan.start2=start2;
++    plan.dst=dst;plan.tok=tok;plan.ptr=ptr;plan.ptr2=ptr2;plan.ctx=&sig;plan.publish=publish;plan.fetch=fetch;d.plan=&plan;
++    int32_t ids[6]={0,1,0,1,0,1};std::vector<float> out(6*H),expect(6*H);
++    for(int t=0;t<3;++t) { int32_t index=t;native_expert_batch(pool,q6,src.bytes.data(),x.data(),nt,&index,1,expect.data()+2*t*H);std::memcpy(expect.data()+(2*t+1)*H,expect.data()+2*t*H,H*4); }
++    expert_pool_dispatch_multi(d,x.data(),ids,3,2,out.data());
++    require(!d.failed,"CPU-only multi-token dispatch succeeds");
++    require(counts[0]==0&&counts[1]==0&&counts[2]==0&&sig.published==1&&sig.fetched==1&&sig.blobs==0,"zero GPU/PCIe groups preserve publication and fetch completion");
++    require(d.cache_hits==0&&d.pcie_experts==0&&d.cpu_only_entries[2]==6,"CPU-only decode accounts all entries on CPU");
++    require(std::memcmp(expect.data(),out.data(),out.size()*4)==0,"decode outputs match CPU reference and router weights are not applied twice");
++    // Supported layer retains GPU classification. Planner publishes; this unit test does not execute CUDA expert kernels.
++    d.layers=0;sig={};expert_pool_dispatch_multi(d,x.data(),ids,3,2,out.data());
++    require(!d.failed&&counts[0]==2&&counts[1]==6&&d.cache_hits==6,"supported layer retains GPU hit planning");
++    expert_layout_gpu_support({});
++    std::cout<<"ALL PASS\n";return 0;
++} catch(const std::exception& e) { std::cerr<<"FAIL "<<e.what()<<"\n";return 1; }
+diff --git a/src/kernels/ple_q8_parity.cpp b/src/kernels/ple_q8_parity.cpp
+new file mode 100644
+index 0000000..9748c6e
+--- /dev/null
++++ b/src/kernels/ple_q8_parity.cpp
+@@ -0,0 +1,72 @@
++// Real-artifact Q8_0 PLE rows against ggml's reference dequantizer.
++#define NOMINMAX
++#include "strata/artifact/gguf_reader.hpp"
++#include "strata/kernels/ngram.hpp"
++#include "ggml.h"
++
++#include <algorithm>
++#include <cmath>
++#include <cstdio>
++#include <string>
++#include <vector>
++
++int main(int argc, char** argv) {
++    if (argc != 2) {
++        std::fprintf(stderr, "usage: ple_q8_parity <gguf-containing-ple>\n");
++        return 2;
++    }
++    strata::GgufFile gguf(argv[1]);
++    const auto* tensor = gguf.find("per_layer_token_embd.weight");
++    if (!tensor || tensor->type != 8 || tensor->shape.size() != 2 || tensor->shape[0] != 160) {
++        std::fprintf(stderr, "expected Q8_0 PLE [160, N]\n");
++        return 2;
++    }
++    strata::kernels::PleIoOptions options;
++    options.mode = strata::kernels::PleIo::Mmap;
++    strata::kernels::PleTable table;
++    std::string err;
++    if (!table.open(argv[1], err, options)) {
++        std::fprintf(stderr, "%s\n", err.c_str());
++        return 1;
++    }
++    const uint64_t n_rows = table.rows();
++    const auto* traits = ggml_get_type_traits(GGML_TYPE_Q8_0);
++    const uint8_t* bytes = gguf.tensor_data(*tensor);
++    const uint32_t probes[] = {0, 1, 12345, 20000003, (uint32_t) (table.rows() - 1)};
++    double max_abs = 0.0;
++    for (uint32_t row : probes) {
++        float got[160], want[160];
++        table.read_row(row, got);
++        traits->to_float(bytes + (size_t) row * 170, want, 160);
++        for (int i = 0; i < 160; ++i)
++            max_abs = std::max(max_abs, (double) std::fabs(got[i] - want[i]));
++    }
++    uint32_t rows[16];
++    for (int i = 0; i < 16; ++i) rows[i] = probes[i % 5];
++    float batch[16 * 160];
++    if (!table.issue(rows) || !table.collect(batch, err)) {
++        std::fprintf(stderr, "collect: %s\n", err.c_str());
++        return 1;
++    }
++    for (int h = 0; h < 16; ++h) {
++        float want[160];
++        traits->to_float(bytes + (size_t) rows[h] * 170, want, 160);
++        for (int i = 0; i < 160; ++i)
++            max_abs = std::max(max_abs, (double) std::fabs(batch[h * 160 + i] - want[i]));
++    }
++    // Exercise bulk prefill reads and repeated heads as well as issue/collect.
++    std::vector<float> bulk(16 * 160);
++    if (!table.gather_batch(rows, 1, bulk.data(), err)) { std::fprintf(stderr, "%s\n", err.c_str()); return 1; }
++    for (int h = 0; h < 16; ++h) {
++        float want[160]; traits->to_float(bytes + (size_t) rows[h] * 170, want, 160);
++        for (int i = 0; i < 160; ++i) max_abs = std::max(max_abs, (double) std::fabs(bulk[h * 160 + i] - want[i]));
++    }
++    if (std::string(table.format()) != "Q8_0") return 1;
++    if (table.bytes_read() != (5 + 16 + 16) * 170) return 1;
++    table.close();
++    options.mode = strata::kernels::PleIo::Direct;
++    if (table.open(argv[1], err, options) || err != "Q8_0 PLE requires --ple-io mmap") return 1;
++    std::printf("Q8_0 PLE: %zu rows, max_abs %.3e %s\n", (size_t) n_rows, max_abs,
++                max_abs <= 1e-6 ? "PASS" : "FAIL");
++    return max_abs <= 1e-6 ? 0 : 1;
++}

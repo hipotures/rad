@@ -1,0 +1,60 @@
+--- v0132-layer-default/A-coding-debug.txt
++++ v0132-layer-k8v4/A-coding-debug.txt
+@@ -3,22 +3,37 @@
+ The provided function has two main issues:
+ 
+ 1.  **Input Mutation**: The line `intervals.sort()` sorts the input list in-place. This violates the requirement that "the input must not be mutated."
+-2.  **Incorrect Merging Logic**: The line `result[-1][1] = end` blindly replaces the end of the last interval with the current interval's end. This fails when the current interval is **nested** inside the last interval (e.g., merging `[1, 10]` and `[2, 5]`). In this case, the end should remain `10`, not become `5`. The correct logic is to take the **maximum** of the current end and the last interval's end.
++2.  **Incorrect Merge Logic**: The line `result[-1][1] = end` blindly replaces the end of the last interval with the current interval's end. This fails when the current interval is **nested** inside the last interval (e.g., merging `[1, 10]` and `[2, 5]`). In this case, the end should remain `10`, not become `5`. The correct logic is to take the **maximum** of the two ends.
+ 
+ ### Corrected Code
+ 
+ ```python
+ def merge_intervals(intervals):
++    """
++    Merges overlapping intervals.
++    
++    Args:
++        intervals: A list of lists, where each inner list is [start, end].
++        
++    Returns:
++        A new list of merged intervals. The input list is not mutated.
++    """
++    if not intervals:
++        return []
++    
+     # Create a sorted copy to avoid mutating the original input
+     sorted_intervals = sorted(intervals)
+     
+     result = []
+     for start, end in sorted_intervals:
+-        if result and start <= result[-1][1]:
+-            # Merge by taking the maximum end to handle nested intervals
++        # If result is empty or the current interval does not overlap with the last one
++        if not result or start > result[-1][1]:
++            result.append([start, end])
++        else:
++            # Overlap exists: update the end of the last interval to the max of both ends
++            # This handles both partial overlaps and nested intervals
+             result[-1][1] = max(result[-1][1], end)
+-        else:
+-            result.append([start, end])
++            
+     return result
+ ```
+ 
+@@ -26,10 +41,10 @@
+ 
+ #### 1. Nested Intervals
+ **Input:** `[[1, 10], [2, 5]]`  
+-**Expected Output:** `[[1, 10]]`  
+-**Explanation:** The interval `[2, 5]` is completely inside `[1, 10]`. The buggy code would incorrectly set the end to `5`, resulting in `[[1, 5]]`. The corrected code uses `max(10, 5)` to preserve the larger end.
++**Explanation:** The interval `[2, 5]` is completely inside `[1, 10]`. The buggy code would incorrectly set the end to `5`. The corrected code takes `max(10, 5)`, keeping the end as `10`.  
++**Output:** `[[1, 10]]`
+ 
+ #### 2. Touching Intervals
+-**Input:** `[[1, 3], [3, 5]]`  
+-**Expected Output:** `[[1, 5]]`  
+-**Explanation:** The intervals touch at point `3`. Since `start (3) <= result[-1][1] (3)`, they should be merged. The corrected code correctly merges them into `[1, 5]`.+**Input:** `[[1, 4], [4, 5]]`  
++**Explanation:** The intervals touch at point `4`. Since `start (4) <= result[-1][1] (4)`, they are considered overlapping and should be merged.  
++**Output:** `[[1, 5]]`

@@ -1,0 +1,125 @@
+{
+  "model": "CORRECT-EXT-CONTROL",
+  "kind": "correctness",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 58,
+  "requested_generated_tokens": 512,
+  "time_utc": "2026-10-04T16:45:15Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/telemetry/CORRECT-EXT-CONTROL-case6.jsonl",
+  "samples": 7,
+  "peak_rss_gib": 53.389102935791016,
+  "min_mem_available_gib": 103.26040267944336,
+  "peak_ram_used_gib": 57.872215270996094,
+  "peak_vram0_gib": 23.26171875,
+  "peak_vram1_gib": 23.30859375,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 58,
+    "completion_tokens": 401,
+    "total_tokens": 459,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "```python\ndef binary_search(a, x):\n    \"\"\"\n    Perform binary search on a sorted list 'a' for element 'x'.\n    Returns the index of 'x' if found, otherwise returns -1.\n    \"\"\"\n    low = 0\n    high = len(a) - 1\n    \n    while low <= high:\n        mid = (low + high) // 2\n        if a[mid] == x:\n            return mid\n        elif a[mid] < x:\n            low = mid + 1\n        else:\n            high = mid - 1\n    \n    return -1\n\n\n# Tests\nif __name__ == \"__main__\":\n    # Test with empty list\n    assert binary_search([], 5) == -1, \"Failed: empty list\"\n    \n    # Test with missing item\n    assert binary_search([1, 3, 5, 7, 9], 4) == -1, \"Failed: missing item\"\n    \n    # Test with found item\n    assert binary_search([1, 3, 5, 7, 9], 5) == 2, \"Failed: found item\"\n    \n    # Test with first item\n    assert binary_search([1, 3, 5, 7, 9], 1) == 0, \"Failed: first item\"\n    \n    # Test with last item\n    assert binary_search([1, 3, 5, 7, 9], 9) == 4, \"Failed: last item\"\n    \n    # Test with single element list\n    assert binary_search([5], 5) == 0, \"Failed: single element found\"\n    assert binary_search([5], 3) == -1, \"Failed: single element not found\"\n    \n    print(\"All tests passed!\")\n```",
+  "reasoning": "",
+  "actual_prompt_tokens": 58,
+  "generated_tokens": 401,
+  "ttft_s": 0.7592239120276645,
+  "total_wall_s": 6.02138210600242,
+  "api_decode_wall_s": 5.262158193974756,
+  "prompt_processing_wall_s": 0.7434,
+  "decode_wall_s": 5.2736,
+  "pp_tps": 78.0,
+  "tg_tps": 76.0,
+  "draft_tokens": 331,
+  "accepted_tokens": 288,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 58,
+    "prompt_ms": 743.4,
+    "prompt_per_token_ms": 12.817,
+    "prompt_per_second": 78.0,
+    "predicted_n": 401,
+    "predicted_ms": 5273.6,
+    "predicted_per_token_ms": 13.151,
+    "predicted_per_second": 76.0,
+    "draft_n": 331,
+    "draft_n_accepted": 288,
+    "at": 1791132321
+  },
+  "acceptance_pct": 87.00906344410876,
+  "mean_accepted_length": 2.526315789473684,
+  "final_logical_context_tokens": 459,
+  "final_kv_occupancy_tokens": 459,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 114,
+  "mean_committed_length": 3.526315789473684,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.92
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 280236.81284405,
+  "t_first_monotonic_s": 280237.572067962,
+  "t_end_monotonic_s": 280242.834226156,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "1128085": {
+      "pss_gib": 0.1860370635986328,
+      "pss_sample_wall": 1791132315.726236,
+      "pss_read_wall_s": 0.007677205023355782
+    },
+    "1128095": {
+      "pss_gib": 53.02777290344238,
+      "pss_sample_wall": 1791132315.942355,
+      "pss_read_wall_s": 0.21611890400527045
+    }
+  },
+  "pss_after": {
+    "1128085": {
+      "pss_gib": 0.18607521057128906,
+      "pss_sample_wall": 1791132322.2456179,
+      "pss_read_wall_s": 0.008514383051078767
+    },
+    "1128095": {
+      "pss_gib": 53.02782917022705,
+      "pss_sample_wall": 1791132322.4776251,
+      "pss_read_wall_s": 0.23201020201668143
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "CORRECT-EXT-CONTROL",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/configs/CORRECT-EXT-CONTROL.json",
+  "replay_reference": null,
+  "input_ids_sha256": "7e13ad1968b58f8648fda539565b5009554eda2c4a961900e64ae388ec6582cc",
+  "input_token_ids_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/token-ids/7e13ad1968b58f8648fda539565b5009554eda2c4a961900e64ae388ec6582cc.json",
+  "output_text_sha256": "4f03c2b838c87a18a4aac27dc49e6414f13cd20c3ba4eac52f52d99b596ff8b1",
+  "cache_snapshots": [],
+  "boundary_counters": {
+    "CPU_fallback_entries": 14337,
+    "primary_expert_hits": 165509,
+    "primary_pcie_experts": 12406,
+    "CPU_missed_experts": 11621,
+    "verify_windows": 114,
+    "layers": 48,
+    "CPU_activation_quant_ms": 60.939772
+  },
+  "non_finite_head_diagnostic": false,
+  "actual_token_ids_match_api_count": true,
+  "CUDA_apps_at_request_end": "1128095, /srv/ai/strata-pr578-refresh-20261004-control/build-default/strata\n1128095, /srv/ai/strata-pr578-refresh-20261004-control/build-default/strata\n",
+  "foreign_CUDA_processes_at_request_end": [],
+  "valid": true,
+  "exclusion": null,
+  "original_case": 6
+}

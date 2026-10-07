@@ -1,0 +1,155 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-PRIORITY-case8.json",
+  "source_bytes": 302057,
+  "source_sha256": "5cf8551354e02c0bcff81e3c83ebd562aeeb23ee0bb5152c1e2e0ce1d94178e2",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-PRIORITY",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 48,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-04T01:06:22Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-PRIORITY-case8.jsonl",
+    "samples": 3,
+    "peak_rss_gib": 53.40387725830078,
+    "min_mem_available_gib": 103.56496810913086,
+    "peak_ram_used_gib": 57.567649841308594,
+    "peak_vram0_gib": 23.265625,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 48,
+      "completion_tokens": 88,
+      "total_tokens": 136,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "Subject: Rescheduling our meeting\n\nHi [Name],\n\nI hope you\u2019re having a good week.\n\nWould it be possible to move our meeting scheduled for Monday to Wednesday instead? I have a scheduling conflict that has come up, and Wednesday would work much better for me.\n\nPlease let me know if Wednesday works for you, and if so, what time slot would be best.\n\nBest regards,\n\n[Your Name]",
+    "reasoning": "",
+    "actual_prompt_tokens": 48,
+    "generated_tokens": 88,
+    "ttft_s": 0.4698603379947599,
+    "total_wall_s": 2.7192956230137497,
+    "api_decode_wall_s": 2.24943528501899,
+    "prompt_processing_wall_s": 0.4512,
+    "decode_wall_s": 1.0672000000000001,
+    "pp_tps": 106.4,
+    "tg_tps": 82.5,
+    "draft_tokens": 81,
+    "accepted_tokens": 54,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 48,
+      "prompt_ms": 451.2,
+      "prompt_per_token_ms": 9.4,
+      "prompt_per_second": 106.4,
+      "predicted_n": 88,
+      "predicted_ms": 1067.2,
+      "predicted_per_token_ms": 12.127,
+      "predicted_per_second": 82.5,
+      "draft_n": 81,
+      "draft_n_accepted": 54,
+      "at": 1791075984
+    },
+    "acceptance_pct": 66.66666666666667,
+    "mean_accepted_length": 1.588235294117647,
+    "final_logical_context_tokens": 136,
+    "final_kv_occupancy_tokens": 135,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 34,
+    "mean_committed_length": 2.5882352941176467,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.967
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 223903.04808247,
+    "t_first_monotonic_s": 223903.517942808,
+    "t_end_monotonic_s": 223905.767378093,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "stop"
+    ],
+    "pss_before": {
+      "922208": {
+        "pss_gib": 0.18714046478271484,
+        "pss_sample_wall": 1791075981.4339187,
+        "pss_read_wall_s": 0.008806576021015644
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075981.4341161,
+        "pss_read_wall_s": 0.00019452997366897762
+      },
+      "922225": {
+        "pss_gib": 53.03038692474365,
+        "pss_sample_wall": 1791075982.1766465,
+        "pss_read_wall_s": 0.7425311460101511
+      },
+      "922226": {
+        "pss_gib": 0.0031995773315429688,
+        "pss_sample_wall": 1791075982.176826,
+        "pss_read_wall_s": 0.00017489900346845388
+      }
+    },
+    "pss_after": {
+      "922208": {
+        "pss_gib": 0.18715953826904297,
+        "pss_sample_wall": 1791075985.1376016,
+        "pss_read_wall_s": 0.007835110009182245
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075985.1377597,
+        "pss_read_wall_s": 0.00015539900050498545
+      },
+      "922225": {
+        "pss_gib": 53.030402183532715,
+        "pss_sample_wall": 1791075985.8831818,
+        "pss_read_wall_s": 0.7454215660109185
+      },
+      "922226": {
+        "pss_gib": 0.0034503936767578125,
+        "pss_sample_wall": 1791075985.8834612,
+        "pss_read_wall_s": 0.0002709880063775927
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-PRIORITY",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-PRIORITY.json",
+    "input_ids_sha256": "39792b7f2a7acb4bb9df679efc14b042bc9b61385b17b2ed585eae0cf55b7f97",
+    "input_token_ids_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/token-ids/39792b7f2a7acb4bb9df679efc14b042bc9b61385b17b2ed585eae0cf55b7f97.json",
+    "output_text_sha256": "5edd9e76a7213025a34d07abb36fead88f70bfeb2c52a378da90838b93f66a72",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 0,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "prose",
+    "generated_token_ids": {
+      "omitted_list_items": 88
+    }
+  }
+}

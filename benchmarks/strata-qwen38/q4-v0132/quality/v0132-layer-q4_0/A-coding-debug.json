@@ -1,0 +1,104 @@
+{
+  "model": "QUALITY-v0132-layer-q4_0",
+  "kind": "quality",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 132,
+  "requested_generated_tokens": 1536,
+  "time_utc": "2026-10-02T04:40:48Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/QUALITY-v0132-layer-q4_0-A-coding-debug.jsonl",
+  "samples": 8,
+  "peak_rss_gib": 77.26161575317383,
+  "min_mem_available_gib": 79.20802307128906,
+  "peak_ram_used_gib": 81.92459487915039,
+  "peak_vram0_gib": 23.30859375,
+  "peak_vram1_gib": 23.5,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 132,
+    "completion_tokens": 580,
+    "total_tokens": 712,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "### Bug Analysis\n\nThe provided function has two main issues:\n\n1.  **Input Mutation**: The line `intervals.sort()` sorts the list **in-place**. This violates the requirement that \"the input must not be mutated.\" If the caller passes a list and expects it to remain unchanged, this function will corrupt their data.\n2.  **Incorrect Merging Logic**: The line `result[-1][1] = end` blindly replaces the end of the last interval with the current interval's end. This is incorrect when the current interval is **nested** inside the last interval (e.g., merging `[1, 10]` and `[2, 5]`). In this case, the end should remain `10`, not become `5`. The correct logic is to take the **maximum** of the two ends.\n\n### Corrected Code\n\n```python\ndef merge_intervals(intervals):\n    \"\"\"\n    Merges overlapping intervals.\n    \n    Args:\n        intervals: A list of lists/tuples, where each inner list/tuple is [start, end].\n        \n    Returns:\n        A new list of merged intervals. The input list is not mutated.\n    \"\"\"\n    if not intervals:\n        return []\n    \n    # Create a sorted copy to avoid mutating the original input\n    sorted_intervals = sorted(intervals)\n    \n    result = []\n    for start, end in sorted_intervals:\n        if result and start <= result[-1][1]:\n            # Overlapping or touching: update the end to the max of current and previous end\n            result[-1][1] = max(result[-1][1], end)\n        else:\n            # No overlap: append a new interval\n            result.append([start, end])\n            \n    return result\n```\n\n### Edge-Case Examples\n\n#### Edge Case 1: Nested Intervals\n**Input:** `[[1, 10], [2, 5]]`  \n**Explanation:** The second interval `[2, 5]` is completely inside `[1, 10]`. The buggy code would incorrectly set the end to `5`. The corrected code uses `max(10, 5)` to keep the end as `10`.  \n**Output:** `[[1, 10]]`\n\n#### Edge Case 2: Touching Intervals\n**Input:** `[[1, 5], [5, 10]]`  \n**Explanation:** The intervals touch at point `5`. Since `start (5) <= result[-1][1] (5)`, they are merged. The end becomes `max(5, 10) = 10`.  \n**Output:** `[[1, 10]]`",
+  "reasoning": "",
+  "actual_prompt_tokens": 132,
+  "generated_tokens": 580,
+  "ttft_s": 1.2550893090010504,
+  "total_wall_s": 7.192070977995172,
+  "api_decode_wall_s": 5.936981668994122,
+  "prompt_processing_wall_s": 1.2377,
+  "decode_wall_s": 5.9498999999999995,
+  "pp_tps": 106.6,
+  "tg_tps": 97.5,
+  "draft_tokens": 533,
+  "accepted_tokens": 381,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 132,
+    "prompt_ms": 1237.7,
+    "prompt_per_token_ms": 9.377,
+    "prompt_per_second": 106.6,
+    "predicted_n": 580,
+    "predicted_ms": 5949.9,
+    "predicted_per_token_ms": 10.258,
+    "predicted_per_second": 97.5,
+    "draft_n": 533,
+    "draft_n_accepted": 381,
+    "at": 1790916055
+  },
+  "acceptance_pct": 71.48217636022514,
+  "mean_accepted_length": 1.914572864321608,
+  "final_logical_context_tokens": 712,
+  "final_kv_occupancy_tokens": 711,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 199,
+  "mean_committed_length": 2.914572864321608,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.904
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 63969.545016953,
+  "t_first_monotonic_s": 63970.800106262,
+  "t_end_monotonic_s": 63976.737087931,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "314078": {
+      "pss_gib": 0.18340015411376953,
+      "pss_sample_wall": 1790916048.023829,
+      "pss_read_wall_s": 0.004609693998645525
+    },
+    "314088": {
+      "pss_gib": 76.90249252319336,
+      "pss_sample_wall": 1790916048.674967,
+      "pss_read_wall_s": 0.6511379160001525
+    }
+  },
+  "pss_after": {
+    "314078": {
+      "pss_gib": 0.1834115982055664,
+      "pss_sample_wall": 1790916056.0855975,
+      "pss_read_wall_s": 0.004665354004828259
+    },
+    "314088": {
+      "pss_gib": 76.90286636352539,
+      "pss_sample_wall": 1790916056.803843,
+      "pss_read_wall_s": 0.7182432199988398
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "QUALITY-v0132-layer-q4_0",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/QUALITY-v0132-layer-q4_0.json"
+}

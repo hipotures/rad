@@ -1,0 +1,632 @@
+{
+  "status": "COMPLETE",
+  "plan": {
+    "target_actual_prompt_tokens": 31400,
+    "output_tokens": 256,
+    "measured_requests": 3,
+    "warmup_requests": 1,
+    "GPU": [
+      0,
+      1
+    ],
+    "K": 24,
+    "kv": "int8",
+    "spec": 4,
+    "spec_min_p": 0.5,
+    "max_context": 262144,
+    "prefill": "auto",
+    "ple_io": "mmap",
+    "literal_saved_Q4_payloads": "only model alias changed; distinct saved nonces; tokenizer equality and occupancy checked before each request",
+    "references": [
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/raw/PP-CONTROL-31400-run1.json",
+        "sha256": "44800983d7533f1b25ee4aed7f20ddf233baf65f8c3b74800c82f4fc09c3c064",
+        "pp_tps": 2602.5,
+        "tg_tps": 88.5,
+        "ttft_s": 12.153225862995896
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/raw/PP-CONTROL-31400-run2.json",
+        "sha256": "44e78d99c383bc19d06a776f538aafc8ead509caae25eee0d0b172a1508f6c91",
+        "pp_tps": 2614.9,
+        "tg_tps": 121.8,
+        "ttft_s": 12.087620884005446
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/raw/PP-CONTROL-31400-run3.json",
+        "sha256": "65df95135bb4c73c596d92d76a63246591bdbae88c452c9699b77666a6e983e1",
+        "pp_tps": 2615.0,
+        "tg_tps": 120.7,
+        "ttft_s": 12.090956312000344
+      }
+    ],
+    "comparison": "historical Q4 median and historical fastest run; NOT_CONTROLLED_A_B: required local Q5 runtime fallback+Q8 PLE mmap, different quant/cache capacity/adaptive cache history; no simultaneous rerun Q4",
+    "no_model_download_or_weight_change": true,
+    "created_utc": "2026-10-02T10:40:28.340204+00:00"
+  },
+  "measured": [
+    {
+      "model": "Q5-BEST-Q4-K24-31400",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 31400,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-02T10:44:05Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-speed-best-q4-v0132/telemetry/Q5-BEST-Q4-K24-31400-run1.jsonl",
+      "samples": 89,
+      "peak_rss_gib": 109.5729866027832,
+      "min_mem_available_gib": 59.33728790283203,
+      "peak_ram_used_gib": 101.79533004760742,
+      "peak_vram0_gib": 23.306640625,
+      "peak_vram1_gib": 23.5,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 31400,
+        "completion_tokens": 256,
+        "total_tokens": 31656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "The last file, `docs/AMD_HIP_PERFORMANCE.md`, is a performance-evidence document for Strata's experimental AMD HIP backend, specifically targeting the RX 7900 XTX (gfx1100 architecture). It serves as a companion to the main `docs/AMD_HIP.md` installation guide, but focuses exclusively on the *measured* configuration, the exact environment required to reproduce those measurements, and the methodology used to validate performance claims.\n\nThe document begins by stating that this opt-in Linux `gfx1100` backend supersedes the initial support from PR #94. It lists the key technical additions that make this backend viable: HIP MMQ (Matrix Multiply Quantized) kernels, an optional calibrated dense hipBLASLt GEMM path, native prefill batching, and specific host-memory/SSD paths. It emphasizes that HIP blocking expert uploads use a single reusable pinned staging buffer to avoid the overhead of repeated pageable-source registrations, which is critical for performance when streaming experts from RAM to VRAM.\n\nThe core of the document is the \"Reproduce the configuration\" section. It provides the exact environment variables needed to match the measured performance arm:\n- `STRATA_PREFILL_MMQ=1",
+      "reasoning": "",
+      "actual_prompt_tokens": 31400,
+      "generated_tokens": 256,
+      "ttft_s": 84.5672788679949,
+      "total_wall_s": 88.04274969099788,
+      "api_decode_wall_s": 3.475470823002979,
+      "prompt_processing_wall_s": 84.47460000000001,
+      "decode_wall_s": 3.4943,
+      "pp_tps": 371.7,
+      "tg_tps": 73.3,
+      "draft_tokens": 237,
+      "accepted_tokens": 154,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 31400,
+        "prompt_ms": 84474.6,
+        "prompt_per_token_ms": 2.69,
+        "prompt_per_second": 371.7,
+        "predicted_n": 256,
+        "predicted_ms": 3494.3,
+        "predicted_per_token_ms": 13.65,
+        "predicted_per_second": 73.3,
+        "draft_n": 237,
+        "draft_n_accepted": 154,
+        "at": 1790937933
+      },
+      "acceptance_pct": 64.9789029535865,
+      "mean_accepted_length": 1.4951456310679612,
+      "final_logical_context_tokens": 31656,
+      "final_kv_occupancy_tokens": 31656,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 103,
+      "mean_committed_length": 2.4951456310679614,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.903
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 85766.516827026,
+      "t_first_monotonic_s": 85851.084105894,
+      "t_end_monotonic_s": 85854.559576717,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "378178": {
+          "pss_gib": 0.18618297576904297,
+          "pss_sample_wall": 1790937844.5565064,
+          "pss_read_wall_s": 0.004224132004310377
+        },
+        "378188": {
+          "pss_gib": 109.07525253295898,
+          "pss_sample_wall": 1790937845.5845716,
+          "pss_read_wall_s": 1.0280570939939935
+        }
+      },
+      "pss_after": {
+        "378178": {
+          "pss_gib": 0.18660640716552734,
+          "pss_sample_wall": 1790937933.9409254,
+          "pss_read_wall_s": 0.004478443006519228
+        },
+        "378188": {
+          "pss_gib": 109.21175765991211,
+          "pss_sample_wall": 1790937934.9688954,
+          "pss_read_wall_s": 1.027969762988505
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "Q5-BEST-Q4-K24-31400",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/q5-speed-best-q4-v0132/configs/Q5-BEST-Q4-K24-31400.json"
+    },
+    {
+      "model": "Q5-BEST-Q4-K24-31400",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 31400,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-02T10:45:36Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-speed-best-q4-v0132/telemetry/Q5-BEST-Q4-K24-31400-run2.jsonl",
+      "samples": 88,
+      "peak_rss_gib": 109.61267852783203,
+      "min_mem_available_gib": 59.3492317199707,
+      "peak_ram_used_gib": 101.78338623046875,
+      "peak_vram0_gib": 23.306640625,
+      "peak_vram1_gib": 23.5,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 31400,
+        "completion_tokens": 256,
+        "total_tokens": 31656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "The last file, `docs/AMD_HIP_PERFORMANCE.md`, is a performance-evidence document for Strata's experimental AMD HIP backend, specifically targeting the RX 7900 XTX (gfx1100) architecture. It serves as a companion to the main `docs/AMD_HIP.md` installation guide, but focuses exclusively on the *measured* configuration, the exact environment variables required to reproduce the benchmark, and the specific hardware/software stack used to validate the backend's performance claims.\n\nThe document begins by establishing that this opt-in Linux `gfx1100` backend supersedes the initial support in PR #94. It details the technical additions that make this backend viable, such as HIP MMQ, optional calibrated dense hipBLASLt GEMM, native prefill batching, and specific host-memory/SSD paths. It emphasizes that HIP blocking expert uploads use a reusable pinned staging buffer to avoid repeated pageable-source registrations, which is a critical optimization for this hardware.\n\nThe core of the document is the \"Reproduce the configuration\" section. It provides the exact `export` commands needed to set the environment variables for the measured arm: `STRATA_PREFILL_MMQ=1`, `STRATA_HIP",
+      "reasoning": "",
+      "actual_prompt_tokens": 31400,
+      "generated_tokens": 256,
+      "ttft_s": 84.5758215720125,
+      "total_wall_s": 87.47629634500481,
+      "api_decode_wall_s": 2.900474772992311,
+      "prompt_processing_wall_s": 84.4847,
+      "decode_wall_s": 2.9221999999999997,
+      "pp_tps": 371.7,
+      "tg_tps": 87.6,
+      "draft_tokens": 204,
+      "accepted_tokens": 161,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 31400,
+        "prompt_ms": 84484.7,
+        "prompt_per_token_ms": 2.691,
+        "prompt_per_second": 371.7,
+        "predicted_n": 256,
+        "predicted_ms": 2922.2,
+        "predicted_per_token_ms": 11.415,
+        "predicted_per_second": 87.6,
+        "draft_n": 204,
+        "draft_n_accepted": 161,
+        "at": 1790938023
+      },
+      "acceptance_pct": 78.92156862745098,
+      "mean_accepted_length": 1.6428571428571428,
+      "final_logical_context_tokens": 31656,
+      "final_kv_occupancy_tokens": 31658,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 98,
+      "mean_committed_length": 2.642857142857143,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.909
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 85857.058377317,
+      "t_first_monotonic_s": 85941.634198889,
+      "t_end_monotonic_s": 85944.534673662,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "378178": {
+          "pss_gib": 0.18660640716552734,
+          "pss_sample_wall": 1790937935.0997624,
+          "pss_read_wall_s": 0.004005584996775724
+        },
+        "378188": {
+          "pss_gib": 109.21175765991211,
+          "pss_sample_wall": 1790937936.1272233,
+          "pss_read_wall_s": 1.027459775999887
+        }
+      },
+      "pss_after": {
+        "378178": {
+          "pss_gib": 0.18686485290527344,
+          "pss_sample_wall": 1790938023.8863337,
+          "pss_read_wall_s": 0.0044841630005976185
+        },
+        "378188": {
+          "pss_gib": 109.26014709472656,
+          "pss_sample_wall": 1790938024.91882,
+          "pss_read_wall_s": 1.032486386000528
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "Q5-BEST-Q4-K24-31400",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/q5-speed-best-q4-v0132/configs/Q5-BEST-Q4-K24-31400.json"
+    },
+    {
+      "model": "Q5-BEST-Q4-K24-31400",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 31400,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-02T10:47:06Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-speed-best-q4-v0132/telemetry/Q5-BEST-Q4-K24-31400-run3.jsonl",
+      "samples": 88,
+      "peak_rss_gib": 109.68491744995117,
+      "min_mem_available_gib": 59.32583236694336,
+      "peak_ram_used_gib": 101.8067855834961,
+      "peak_vram0_gib": 23.306640625,
+      "peak_vram1_gib": 23.5,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 31400,
+        "completion_tokens": 256,
+        "total_tokens": 31656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "The last file, `docs/AMD_HIP_PERFORMANCE.md`, is a performance-evidence document for Strata's experimental AMD HIP backend, specifically targeting the RX 7900 XTX (gfx1100) on Linux. It serves as a companion to the main `docs/AMD_HIP.md` installation guide, but its focus is narrower: it documents the exact configuration, environment variables, and benchmarking methodology used to validate the performance of the HIP backend, ensuring that results are reproducible and not conflated with historical data.\n\nThe document begins by stating that this opt-in Linux `gfx1100` backend supersedes the initial support from PR #94. It lists the key technical additions retained and added, such as HIP runtime compatibility, wave32 integer-dot support, native mmap layout validation, MTP (Multi-Token Prediction), HIP MMQ (Matrix Multiply Quantized) kernels, optional calibrated dense hipBLASLt GEMM, and native prefill batching. It emphasizes that HIP blocking expert uploads use a reusable pinned staging buffer to avoid repeated pageable-source registrations, which is a critical optimization for memory bandwidth.\n\nThe \"Reproduce the configuration\" section is the core of the document. It instructs users to",
+      "reasoning": "",
+      "actual_prompt_tokens": 31400,
+      "generated_tokens": 256,
+      "ttft_s": 84.61901608300104,
+      "total_wall_s": 87.82198577400413,
+      "api_decode_wall_s": 3.2029696910030907,
+      "prompt_processing_wall_s": 84.5293,
+      "decode_wall_s": 3.2236,
+      "pp_tps": 371.5,
+      "tg_tps": 79.4,
+      "draft_tokens": 235,
+      "accepted_tokens": 159,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 31400,
+        "prompt_ms": 84529.3,
+        "prompt_per_token_ms": 2.692,
+        "prompt_per_second": 371.5,
+        "predicted_n": 256,
+        "predicted_ms": 3223.6,
+        "predicted_per_token_ms": 12.592,
+        "predicted_per_second": 79.4,
+        "draft_n": 235,
+        "draft_n_accepted": 159,
+        "at": 1790938113
+      },
+      "acceptance_pct": 67.65957446808511,
+      "mean_accepted_length": 1.59,
+      "final_logical_context_tokens": 31656,
+      "final_kv_occupancy_tokens": 31658,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 100,
+      "mean_committed_length": 2.59,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.906
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 85947.02407066,
+      "t_first_monotonic_s": 86031.643086743,
+      "t_end_monotonic_s": 86034.846056434,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "378178": {
+          "pss_gib": 0.18686580657958984,
+          "pss_sample_wall": 1790938025.0441353,
+          "pss_read_wall_s": 0.004057824000483379
+        },
+        "378188": {
+          "pss_gib": 109.26014709472656,
+          "pss_sample_wall": 1790938026.0932565,
+          "pss_read_wall_s": 1.0491206419974333
+        }
+      },
+      "pss_after": {
+        "378178": {
+          "pss_gib": 0.1870746612548828,
+          "pss_sample_wall": 1790938114.1949234,
+          "pss_read_wall_s": 0.004888331008260138
+        },
+        "378188": {
+          "pss_gib": 109.340576171875,
+          "pss_sample_wall": 1790938115.256521,
+          "pss_read_wall_s": 1.061596212995937
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "Q5-BEST-Q4-K24-31400",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/q5-speed-best-q4-v0132/configs/Q5-BEST-Q4-K24-31400.json"
+    }
+  ],
+  "warmup": {
+    "model": "Q5-BEST-Q4-K24-31400",
+    "kind": "warmup",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 31400,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-02T10:42:06Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-speed-best-q4-v0132/telemetry/Q5-BEST-Q4-K24-31400-warmup.jsonl",
+    "samples": 117,
+    "peak_rss_gib": 109.42073822021484,
+    "min_mem_available_gib": 59.35002136230469,
+    "peak_ram_used_gib": 101.78259658813477,
+    "peak_vram0_gib": 23.306640625,
+    "peak_vram1_gib": 23.5,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 31400,
+      "completion_tokens": 256,
+      "total_tokens": 31656,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "The last file, `docs/AMD_HIP_PERFORMANCE.md`, is the performance-evidence companion to the experimental AMD HIP backend documentation. Its purpose is to record, in a reproducible and auditable way, exactly how the RX 7900 XTX (gfx1100) HIP backend was measured, what configuration produced the reported numbers, and what the limits of those measurements are. It is not a user-facing install guide (that is `AMD_HIP.md`); it is a lab notebook that lets a reviewer or a future maintainer re-create the benchmark and judge whether a change helped or hurt.\n\nConcretely, the file does four things. First, it states provenance: it says this opt-in Linux gfx1100 backend supersedes the initial support in PR #94, and it lists what was retained from that PR (HIP runtime and wave32 integer-dot compatibility, native mmap layout validation, MTP) versus what was added on top (HIP MMQ, optional calibrated dense hipBLASLt GEMM, native prefill batching, the host-memory/SSD paths, and a single reusable pinned staging buffer for blocking expert uploads to avoid repeated pageable-source registrations). Second, it gives a \"",
+    "reasoning": "",
+    "actual_prompt_tokens": 31400,
+    "generated_tokens": 256,
+    "ttft_s": 112.46035002400458,
+    "total_wall_s": 116.44857528999273,
+    "api_decode_wall_s": 3.9882252659881487,
+    "prompt_processing_wall_s": 112.2745,
+    "decode_wall_s": 4.0282,
+    "pp_tps": 279.7,
+    "tg_tps": 63.6,
+    "draft_tokens": 233,
+    "accepted_tokens": 150,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 31400,
+      "prompt_ms": 112274.5,
+      "prompt_per_token_ms": 3.576,
+      "prompt_per_second": 279.7,
+      "predicted_n": 256,
+      "predicted_ms": 4028.2,
+      "predicted_per_token_ms": 15.735,
+      "predicted_per_second": 63.6,
+      "draft_n": 233,
+      "draft_n_accepted": 150,
+      "at": 1790937843
+    },
+    "acceptance_pct": 64.37768240343348,
+    "mean_accepted_length": 1.4150943396226414,
+    "final_logical_context_tokens": 31656,
+    "final_kv_occupancy_tokens": 31655,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 106,
+    "mean_committed_length": 2.4150943396226414,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.866
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 85647.5767721,
+    "t_first_monotonic_s": 85760.037122124,
+    "t_end_monotonic_s": 85764.02534739,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "length"
+    ],
+    "pss_before": {
+      "378178": {
+        "pss_gib": 0.1835165023803711,
+        "pss_sample_wall": 1790937725.2466629,
+        "pss_read_wall_s": 0.007131991995265707
+      },
+      "378188": {
+        "pss_gib": 95.38207244873047,
+        "pss_sample_wall": 1790937726.5652819,
+        "pss_read_wall_s": 1.3186167549865786
+      }
+    },
+    "pss_after": {
+      "378178": {
+        "pss_gib": 0.18618297576904297,
+        "pss_sample_wall": 1790937843.3745334,
+        "pss_read_wall_s": 0.004957781013217755
+      },
+      "378188": {
+        "pss_gib": 109.07525253295898,
+        "pss_sample_wall": 1790937844.4222958,
+        "pss_read_wall_s": 1.047761426991201
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "Q5-BEST-Q4-K24-31400",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/q5-speed-best-q4-v0132/configs/Q5-BEST-Q4-K24-31400.json"
+  },
+  "started_utc": "2026-10-02T10:40:28Z",
+  "GPU_compute_apps_after": "",
+  "clean_checkout_tracked_unchanged": true,
+  "model_stat_unchanged": true,
+  "median": {
+    "pp_tps": 371.7,
+    "tg_tps": 79.4,
+    "ttft_s": 84.5758215720125,
+    "total_wall_s": 87.82198577400413,
+    "actual_prompt_tokens": 31400,
+    "generated_tokens": 256,
+    "peak_ram_used_gib": 101.79533004760742,
+    "peak_vram0_gib": 23.306640625,
+    "peak_vram1_gib": 23.5,
+    "min_mem_available_gib": 59.33728790283203,
+    "draft_tokens": 235,
+    "accepted_tokens": 159,
+    "prompt_processing_wall_s": 84.4847,
+    "decode_wall_s": 3.2236,
+    "peak_rss_gib": 109.61267852783203,
+    "mean_accepted_length": 1.59,
+    "mtp_acceptance_pct": 67.65957446808511
+  },
+  "Q4_reference_median": {
+    "pp_tps": 2614.9,
+    "tg_tps": 120.7,
+    "ttft_s": 12.090956312000344
+  },
+  "Q4_reference_fastest": {
+    "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/raw/PP-CONTROL-31400-run2.json",
+    "sha256": "44e78d99c383bc19d06a776f538aafc8ead509caae25eee0d0b172a1508f6c91",
+    "pp_tps": 2614.9,
+    "tg_tps": 121.8,
+    "ttft_s": 12.087620884005446
+  },
+  "delta_vs_Q4_median_pct": {
+    "pp_tps": -85.78530727752496,
+    "tg_tps": -34.21706710853355,
+    "ttft_s": 599.4965442730986
+  },
+  "peak_across_measured": {
+    "peak_ram_used_gib": 101.8067855834961,
+    "peak_vram0_gib": 23.306640625,
+    "peak_vram1_gib": 23.5
+  },
+  "all_measured_zero_reuse": true,
+  "all_measured_no_abort": true,
+  "expert_decode_tier_stats": [
+    {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.903
+    },
+    {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.909
+    },
+    {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.906
+    }
+  ],
+  "logical_expert_file_bytes_MB_measured": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "telemetry_cpu_summary": [
+    {
+      "run": 1,
+      "sample_count": 89,
+      "mean_process_cpu_pct": 157.48876404494382,
+      "peak_process_cpu_pct": 1580.3,
+      "mean_system_cpu_pct": 10.634831460674157,
+      "gpus_example_schema": [
+        {
+          "index": 0,
+          "util_pct": 0.0,
+          "power_w": 92.92,
+          "vram_gib": 23.306640625,
+          "total_gib": 23.98828125,
+          "sm_mhz": 2625.0,
+          "memory_mhz": 10251.0,
+          "pcie_gen": "4",
+          "pcie_width": "8"
+        },
+        {
+          "index": 1,
+          "util_pct": 0.0,
+          "power_w": 83.55,
+          "vram_gib": 23.5,
+          "total_gib": 23.98828125,
+          "sm_mhz": 2625.0,
+          "memory_mhz": 10251.0,
+          "pcie_gen": "4",
+          "pcie_width": "8"
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "sample_count": 88,
+      "mean_process_cpu_pct": 141.5431818181818,
+      "peak_process_cpu_pct": 1586.4,
+      "mean_system_cpu_pct": 9.496590909090909,
+      "gpus_example_schema": [
+        {
+          "index": 0,
+          "util_pct": 0.0,
+          "power_w": 86.65,
+          "vram_gib": 23.306640625,
+          "total_gib": 23.98828125,
+          "sm_mhz": 2625.0,
+          "memory_mhz": 10251.0,
+          "pcie_gen": "4",
+          "pcie_width": "8"
+        },
+        {
+          "index": 1,
+          "util_pct": 0.0,
+          "power_w": 80.52,
+          "vram_gib": 23.5,
+          "total_gib": 23.98828125,
+          "sm_mhz": 2625.0,
+          "memory_mhz": 10251.0,
+          "pcie_gen": "4",
+          "pcie_width": "8"
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "sample_count": 88,
+      "mean_process_cpu_pct": 140.52954545454546,
+      "peak_process_cpu_pct": 1583.1,
+      "mean_system_cpu_pct": 9.582954545454545,
+      "gpus_example_schema": [
+        {
+          "index": 0,
+          "util_pct": 0.0,
+          "power_w": 86.12,
+          "vram_gib": 23.306640625,
+          "total_gib": 23.98828125,
+          "sm_mhz": 2625.0,
+          "memory_mhz": 10251.0,
+          "pcie_gen": "4",
+          "pcie_width": "8"
+        },
+        {
+          "index": 1,
+          "util_pct": 0.0,
+          "power_w": 80.26,
+          "vram_gib": 23.5,
+          "total_gib": 23.98828125,
+          "sm_mhz": 2625.0,
+          "memory_mhz": 10251.0,
+          "pcie_gen": "4",
+          "pcie_width": "8"
+        }
+      ]
+    }
+  ]
+}

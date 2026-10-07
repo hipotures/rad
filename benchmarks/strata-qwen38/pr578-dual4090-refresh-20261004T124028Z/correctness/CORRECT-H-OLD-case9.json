@@ -1,0 +1,165 @@
+{
+  "model": "CORRECT-H-OLD",
+  "kind": "correctness",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 57,
+  "requested_generated_tokens": 256,
+  "time_utc": "2026-10-04T16:40:27Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/telemetry/CORRECT-H-OLD-case9.jsonl",
+  "samples": 2,
+  "peak_rss_gib": 53.403846740722656,
+  "min_mem_available_gib": 103.49600982666016,
+  "peak_ram_used_gib": 57.6366081237793,
+  "peak_vram0_gib": 23.26171875,
+  "peak_vram1_gib": 23.30859375,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 57,
+    "completion_tokens": 18,
+    "total_tokens": 75,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "{\"name\": \"test\", \"count\": 3, \"enabled\": true}",
+  "reasoning": "",
+  "actual_prompt_tokens": 57,
+  "generated_tokens": 18,
+  "ttft_s": 0.7390971679706126,
+  "total_wall_s": 1.078965407970827,
+  "api_decode_wall_s": 0.3398682400002144,
+  "prompt_processing_wall_s": 0.721,
+  "decode_wall_s": 0.3533,
+  "pp_tps": 79.1,
+  "tg_tps": 50.9,
+  "draft_tokens": 15,
+  "accepted_tokens": 15,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 57,
+    "prompt_ms": 721.0,
+    "prompt_per_token_ms": 12.649,
+    "prompt_per_second": 79.1,
+    "predicted_n": 18,
+    "predicted_ms": 353.3,
+    "predicted_per_token_ms": 19.628,
+    "predicted_per_second": 50.9,
+    "draft_n": 15,
+    "draft_n_accepted": 15,
+    "at": 1791132028
+  },
+  "acceptance_pct": 100.0,
+  "mean_accepted_length": 2.5,
+  "final_logical_context_tokens": 75,
+  "final_kv_occupancy_tokens": 77,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 6,
+  "mean_committed_length": 3.5,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.839
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 279948.698979926,
+  "t_first_monotonic_s": 279949.438077094,
+  "t_end_monotonic_s": 279949.777945334,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "1126322": {
+      "pss_gib": 0.18613529205322266,
+      "pss_sample_wall": 1791132027.5930362,
+      "pss_read_wall_s": 0.007945423014461994
+    },
+    "1126332": {
+      "pss_gib": 0.0005245208740234375,
+      "pss_sample_wall": 1791132027.5932028,
+      "pss_read_wall_s": 0.00016342895105481148
+    },
+    "1126333": {
+      "pss_gib": 53.031375885009766,
+      "pss_sample_wall": 1791132027.8266966,
+      "pss_read_wall_s": 0.2334940079599619
+    },
+    "1126334": {
+      "pss_gib": 0.0032930374145507812,
+      "pss_sample_wall": 1791132027.8270082,
+      "pss_read_wall_s": 0.0003029489889740944
+    }
+  },
+  "pss_after": {
+    "1126322": {
+      "pss_gib": 0.18613529205322266,
+      "pss_sample_wall": 1791132029.152089,
+      "pss_read_wall_s": 0.008362893015146255
+    },
+    "1126332": {
+      "pss_gib": 0.0005245208740234375,
+      "pss_sample_wall": 1791132029.1523957,
+      "pss_read_wall_s": 0.00029947899747639894
+    },
+    "1126333": {
+      "pss_gib": 53.03137969970703,
+      "pss_sample_wall": 1791132029.395329,
+      "pss_read_wall_s": 0.2429346870048903
+    },
+    "1126334": {
+      "pss_gib": 0.0032835006713867188,
+      "pss_sample_wall": 1791132029.3956735,
+      "pss_read_wall_s": 0.00033792899921536446
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "CORRECT-H-OLD",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/configs/CORRECT-H-OLD.json",
+  "replay_reference": null,
+  "input_ids_sha256": "9d48c9377c33ef1da6a07cb474d24b698f57eda9913f6ac788adec5dd6d65cfa",
+  "input_token_ids_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/token-ids/9d48c9377c33ef1da6a07cb474d24b698f57eda9913f6ac788adec5dd6d65cfa.json",
+  "output_text_sha256": "dd17343885eb9b1ab8467a8465b724f47f172416d00eeb2892a21e937911123b",
+  "cache_snapshots": [],
+  "boundary_counters": {
+    "CPU_fallback_entries": 1158,
+    "primary_expert_hits": 6047,
+    "primary_pcie_experts": 1027,
+    "CPU_missed_experts": 829,
+    "verify_windows": 6,
+    "layers": 48,
+    "CPU_activation_quant_ms": 2.872381
+  },
+  "non_finite_head_diagnostic": false,
+  "actual_token_ids_match_api_count": true,
+  "CUDA_apps_at_request_end": "1126333, /srv/ai/strata-pr578-refresh-20261004-control/build-default/strata\n1126333, /srv/ai/strata-pr578-refresh-20261004-control/build-default/strata\n",
+  "foreign_CUDA_processes_at_request_end": [],
+  "valid": true,
+  "exclusion": null,
+  "category": "structured",
+  "generated_token_ids": [
+    4754,
+    591,
+    763,
+    328,
+    1877,
+    487,
+    328,
+    1767,
+    763,
+    220,
+    18,
+    11,
+    328,
+    15401,
+    763,
+    804,
+    92,
+    248046
+  ]
+}

@@ -1,0 +1,49 @@
+### Bug Analysis
+
+The provided function has two main issues:
+
+1.  **Input Mutation**: The line `intervals.sort()` sorts the list **in-place**. This violates the requirement that "the input must not be mutated." If the caller passes a list and expects it to remain unchanged, this function will corrupt their data.
+2.  **Incorrect Merging Logic**: The line `result[-1][1] = end` blindly replaces the end of the last interval with the current interval's end. This is incorrect when the current interval is **nested** inside the last interval (e.g., merging `[1, 10]` and `[2, 5]`). In this case, the end should remain `10`, not become `5`. The correct logic is to take the **maximum** of the two ends.
+
+### Corrected Code
+
+```python
+def merge_intervals(intervals):
+    """
+    Merges overlapping intervals.
+    
+    Args:
+        intervals: A list of lists/tuples, where each inner list/tuple is [start, end].
+        
+    Returns:
+        A new list of merged intervals. The input list is not mutated.
+    """
+    if not intervals:
+        return []
+    
+    # Create a sorted copy to avoid mutating the original input
+    sorted_intervals = sorted(intervals)
+    
+    result = []
+    for start, end in sorted_intervals:
+        if result and start <= result[-1][1]:
+            # Overlapping or touching: update the end to the max of current and previous end
+            result[-1][1] = max(result[-1][1], end)
+        else:
+            # No overlap: append a new interval
+            result.append([start, end])
+            
+    return result
+```
+
+### Edge-Case Examples
+
+#### Edge Case 1: Nested Intervals
+**Input:** `[[1, 10], [2, 5]]`  
+**Explanation:** The second interval `[2, 5]` is completely inside `[1, 10]`. The buggy code would incorrectly set the end to `5`. The corrected code uses `max(10, 5)` to keep the end as `10`.  
+**Output:** `[[1, 10]]`
+
+#### Edge Case 2: Touching Intervals
+**Input:** `[[1, 5], [5, 10]]`  
+**Explanation:** The intervals touch at point `5`. Since `start (5) <= result[-1][1] (5)`, they are merged. The end becomes `max(5, 10) = 10`.  
+**Output:** `[[1, 10]]`

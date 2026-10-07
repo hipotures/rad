@@ -1,0 +1,31 @@
+--- v0131
++++ v0138-replay
+@@ -1,13 +1,23 @@
+ I'll start by reading the last file in the repository listing to understand what it does.
+ 
+-The last file is `docs/AMD_HIP_PERFORMANCE.md`. Let me examine it carefully.
++The last file is `docs/AMD_HIP_PERFORMANCE.md`. Let me read it carefully.
+ 
+-## What the last file does
++```
++# RX 7900 XTX support and performance evidence
+ 
+-`docs/AMD_HIP_PERFORMANCE.md` is a performance-evidence document for Strata's experimental AMD HIP backend, specifically targeting the RX 7900 XTX (gfx1100, RDNA3). It is a companion to `docs/AMD_HIP.md` (the install/build guide) and focuses on *how the measured configuration is reproduced and what the numbers mean*.
++This opt-in Linux `gfx1100` backend supersedes the initial support in
++[PR #94](https://github.com/Niko1221/Strata/pull/94). It retains HIP runtime and
++wave32 integer-dot compatibility, native mmap layout validation, and MTP, then
++adds HIP MMQ, optional calibrated dense hipBLASLt GEMM, native prefill batching,
++and the host-memory / SSD paths used by the measured configuration. HIP blocking
++expert uploads use one reusable pinned staging buffer, including prompt-cache
++refills, to avoid repeated pageable-source registrations.
+ 
+-Its structure is:
++## Reproduce the configuration
+ 
+-1. **Scope statement.** It declares that this opt-in Linux `gfx1100` backend supersedes the initial support in PR #94, retaining HIP runtime and wave32 integer-dot compatibility, native mmap layout validation, and MTP, then adding HIP MMQ, optional calibrated dense hipBLASLt GEMM, native prefill batching, and host-memory/SSD paths. It notes that HIP blocking expert uploads use one reusable pinned staging buffer to avoid repeated pageable-source registrations.
++Build instructions are in [AMD_HIP.md](AMD_HIP.md). Use the repository-pinned
++llama.cpp dependency; do not silently substitute another revision. Build with
++`STRATA_PREFILL_MMQ=ON` and use these runtime variables for the measured arm:
+ 
+-2. **Reproduce the configuration.** It gives the build instructions pointer, the pinned+```sh
++export STRATA

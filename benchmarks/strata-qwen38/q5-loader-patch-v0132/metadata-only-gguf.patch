@@ -1,0 +1,133 @@
+diff --git a/include/strata/artifact/gguf_reader.hpp b/include/strata/artifact/gguf_reader.hpp
+index 298dc3b..626074f 100644
+--- a/include/strata/artifact/gguf_reader.hpp
++++ b/include/strata/artifact/gguf_reader.hpp
+@@ -455,7 +455,15 @@ private:
+             if (a->u) align = a->u;
+         alignment_ = align;
+         data_start_ = (c.pos() + align - 1) / align * align;
+-        if (data_start_ > size_) throw std::runtime_error("GGUF: data section starts past EOF");
++        if (data_start_ > size_) {
++            if (n_tensors == 0) {
++                // Metadata-only shard: there is no tensor data section,
++                // so trailing alignment padding is not required.
++                data_start_ = size_;
++            } else {
++                throw std::runtime_error("GGUF: data section starts past EOF");
++            }
++        }
+     }
+ 
+     std::string path_;
+diff --git a/src/artifact/gguf_reader_test.cpp b/src/artifact/gguf_reader_test.cpp
+index 70f1bc2..5550d0c 100644
+--- a/src/artifact/gguf_reader_test.cpp
++++ b/src/artifact/gguf_reader_test.cpp
+@@ -55,10 +55,63 @@ std::filesystem::path write_gguf(const std::vector<std::string>& names) {
+     std::ofstream(path, std::ios::binary).write(reinterpret_cast<const char*>(b.data()), (std::streamsize)b.size());
+     return path;
+ }
++
++// Complete metadata and optional tensor directory, but deliberately no alignment
++// padding or payload. The metadata-only case is a valid GGUF shard.
++std::filesystem::path write_unpadded_gguf(bool has_tensor, bool truncated_metadata = false) {
++    std::vector<uint8_t> b;
++    put<uint32_t>(b, 0x46554747u);
++    put<uint32_t>(b, 3);
++    put<uint64_t>(b, has_tensor ? 1 : 0);
++    put<uint64_t>(b, 1);
++    put_str(b, "general.name");
++    put<uint32_t>(b, 8);  // STRING
++    put_str(b, "metadata-only");
++    if (has_tensor) {
++        put_str(b, "t");
++        put<uint32_t>(b, 1);
++        put<uint64_t>(b, 8);
++        put<uint32_t>(b, 0);  // F32
++        put<uint64_t>(b, 0);
++    }
++    if (truncated_metadata) b.pop_back();
++    const auto path = std::filesystem::temp_directory_path() / "strata_gguf_unpadded_test.gguf";
++    std::ofstream(path, std::ios::binary).write(reinterpret_cast<const char*>(b.data()), (std::streamsize)b.size());
++    return path;
++}
+ }  // namespace
+ 
+ int main() {
+     std::printf("gguf_reader_test\n");
++    {
++        const auto path = write_unpadded_gguf(false);
++        std::string err;
++        bool valid = false;
++        try {
++            strata::GgufFile g(path.string());
++            const auto* name = g.get("general.name");
++            valid = g.tensors().empty() && name && name->s == "metadata-only" &&
++                    g.file_size() % g.alignment() != 0 && g.data_start() == g.file_size();
++        } catch (const std::exception& e) { err = e.what(); }
++        std::filesystem::remove(path);
++        check(err.empty() && valid, "metadata-only: EOF after metadata, no padding, empty data section");
++    }
++    {
++        const auto path = write_unpadded_gguf(true);
++        std::string err;
++        try { strata::GgufFile g(path.string()); }
++        catch (const std::exception& e) { err = e.what(); }
++        std::filesystem::remove(path);
++        check(err == "GGUF: data section starts past EOF", "one tensor: EOF before aligned data_start is still refused");
++    }
++    {
++        const auto path = write_unpadded_gguf(false, true);
++        std::string err;
++        try { strata::GgufFile g(path.string()); }
++        catch (const std::exception& e) { err = e.what(); }
++        std::filesystem::remove(path);
++        check(!err.empty(), "metadata-only: truncated metadata is still refused");
++    }
+     {
+         const auto path = write_gguf({"blk.0.attn_q.weight", "blk.0.attn_k.weight"});
+         std::string err;
+diff --git a/tests/core/gguf_split_test.cpp b/tests/core/gguf_split_test.cpp
+index 3f137cc..e27beda 100644
+--- a/tests/core/gguf_split_test.cpp
++++ b/tests/core/gguf_split_test.cpp
+@@ -12,6 +12,7 @@
+ #include <chrono>
+ #include <cstdio>
+ #include <filesystem>
++#include <iterator>
+ #include <string>
+ #include <vector>
+ 
+@@ -115,6 +116,31 @@ int real_model(const std::string& any) {
+ int main(int argc, char** argv) {
+     if (argc == 3 && std::string(argv[1]) == "--real") return real_model(argv[2]);
+     std::printf("gguf_split_test\n");
++    {
++        TempDir d;
++        const auto paths = write_model(d.path, [](int i, auto& kv, auto&, uint64_t&) {
++            if (i == 0) kv.push_back(fixture::str("metadata.no_padding", "x"));
++        });
++        // The final metadata value ends in a nonzero byte. Remove only the
++        // fixture's trailing zero alignment padding from the metadata shard.
++        std::ifstream input(paths[0], std::ios::binary);
++        std::vector<char> bytes((std::istreambuf_iterator<char>(input)), std::istreambuf_iterator<char>());
++        input.close();
++        while (!bytes.empty() && bytes.back() == 0) bytes.pop_back();
++        fs::resize_file(paths[0], bytes.size());
++        bool valid = false;
++        std::string err;
++        try {
++            const strata::GgufModel m(paths);
++            size_t shard = 0;
++            const auto* t = m.find("output.weight", &shard);
++            valid = m.size() == 4 && m.meta().tensors().empty() &&
++                    m.meta().file_size() % m.meta().alignment() != 0 &&
++                    m.meta().data_start() == m.meta().file_size() &&
++                    t && shard == 1 && m.in_bounds(*t, shard);
++        } catch (const std::exception& e) { err = e.what(); }
++        check(err.empty() && valid, "split model: unpadded metadata-only shard, other tensor shards intact");
++    }
+     {
+         TempDir d;
+         const auto paths = write_model(d.path, same);

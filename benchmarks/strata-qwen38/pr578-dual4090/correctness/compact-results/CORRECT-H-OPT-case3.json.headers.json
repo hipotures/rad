@@ -1,0 +1,154 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-OPT-case3.json",
+  "source_bytes": 302849,
+  "source_sha256": "0b054361d996c78910c0de73d557e486a6005c5fdd129c468666492d91337396",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-OPT",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 55,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-03T23:54:45Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-OPT-case3.jsonl",
+    "samples": 5,
+    "peak_rss_gib": 53.395111083984375,
+    "min_mem_available_gib": 103.51283645629883,
+    "peak_ram_used_gib": 57.619781494140625,
+    "peak_vram0_gib": 23.265625,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 55,
+      "completion_tokens": 175,
+      "total_tokens": 230,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "To find the probability that the sum of two fair six-sided dice is 7, we first determine the total number of possible outcomes. Since each die has 6 faces, there are $6 \\times 6 = 36$ equally likely outcomes.\n\nNext, we identify the outcomes where the sum is 7. These pairs are:\n1. $(1, 6)$\n2. $(2, 5)$\n3. $(3, 4)$\n4. $(4, 3)$\n5. $(5, 2)$\n6. $(6, 1)$\n\nThere are 6 favorable outcomes. Therefore, the probability is the ratio of favorable outcomes to total outcomes:\n$$ \\frac{6}{36} = \\frac{1}{6} $$\n\nThe probability is **1/6**.",
+    "reasoning": "",
+    "actual_prompt_tokens": 55,
+    "generated_tokens": 175,
+    "ttft_s": 0.6818069069995545,
+    "total_wall_s": 4.463936266023666,
+    "api_decode_wall_s": 3.782129359024111,
+    "prompt_processing_wall_s": 0.6657000000000001,
+    "decode_wall_s": 2.9671999999999996,
+    "pp_tps": 82.6,
+    "tg_tps": 59.0,
+    "draft_tokens": 153,
+    "accepted_tokens": 125,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 55,
+      "prompt_ms": 665.7,
+      "prompt_per_token_ms": 12.104,
+      "prompt_per_second": 82.6,
+      "predicted_n": 175,
+      "predicted_ms": 2967.2,
+      "predicted_per_token_ms": 16.955,
+      "predicted_per_second": 59.0,
+      "draft_n": 153,
+      "draft_n_accepted": 125,
+      "at": 1791071689
+    },
+    "acceptance_pct": 81.69934640522875,
+    "mean_accepted_length": 2.358490566037736,
+    "final_logical_context_tokens": 230,
+    "final_kv_occupancy_tokens": 232,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 53,
+    "mean_committed_length": 3.358490566037736,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.978
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 219606.033313648,
+    "t_first_monotonic_s": 219606.715120555,
+    "t_end_monotonic_s": 219610.497249914,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "stop"
+    ],
+    "pss_before": {
+      "891689": {
+        "pss_gib": 0.18421077728271484,
+        "pss_sample_wall": 1791071684.7099147,
+        "pss_read_wall_s": 0.004717581003205851
+      },
+      "891695": {
+        "pss_gib": 0.0005435943603515625,
+        "pss_sample_wall": 1791071684.7100081,
+        "pss_read_wall_s": 9.181900531984866e-05
+      },
+      "891696": {
+        "pss_gib": 53.0249080657959,
+        "pss_sample_wall": 1791071685.1636183,
+        "pss_read_wall_s": 0.4536107209860347
+      },
+      "891697": {
+        "pss_gib": 0.0032014846801757812,
+        "pss_sample_wall": 1791071685.1638,
+        "pss_read_wall_s": 0.0001770799863152206
+      }
+    },
+    "pss_after": {
+      "891689": {
+        "pss_gib": 0.1842184066772461,
+        "pss_sample_wall": 1791071689.8441045,
+        "pss_read_wall_s": 0.004800241003977135
+      },
+      "891695": {
+        "pss_gib": 0.0005435943603515625,
+        "pss_sample_wall": 1791071689.8441935,
+        "pss_read_wall_s": 8.796900510787964e-05
+      },
+      "891696": {
+        "pss_gib": 53.02495861053467,
+        "pss_sample_wall": 1791071690.2961183,
+        "pss_read_wall_s": 0.4519250279990956
+      },
+      "891697": {
+        "pss_gib": 0.0031995773315429688,
+        "pss_sample_wall": 1791071690.2962852,
+        "pss_read_wall_s": 0.0001611999759916216
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-OPT",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-OPT.json",
+    "input_ids_sha256": "b57269927104abfe26699a7ada981aa8e016c9848689514d746ea3a0c715d219",
+    "output_text_sha256": "591cd09f43bd6e911624ccd9b3bc8517dfc625b9972197f7875aeb4119dbbbaa",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 0,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "math",
+    "generated_token_ids": {
+      "omitted_list_items": 175
+    }
+  }
+}

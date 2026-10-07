@@ -1,0 +1,90 @@
+To find the expected total number of rolls until two consecutive rolls have the same value, we can model this problem using states and linear equations (First Step Analysis) or by using the definition of expectation with geometric series.
+
+### Method 1: First Step Analysis (State-Based Approach)
+
+Let $E$ be the expected number of *additional* rolls needed to get a match, given that we have just rolled a die and do not yet have a match with the previous roll.
+
+However, it is more precise to define states based on the history of the rolls.
+Let $E_0$ be the expected number of rolls needed starting from scratch (no previous roll).
+Let $E_1$ be the expected number of *additional* rolls needed given that we have just rolled a number, and we are waiting for the next roll to match it.
+
+**Step 1: Analyze the first roll.**
+When we start, we must roll the die once. This roll establishes the "current value" we need to match.
+So, $E_0 = 1 + E_1$.
+
+**Step 2: Analyze the state $E_1$.**
+We have just rolled a value (say, $x$). We roll again.
+There are two possibilities for this next roll:
+1.  **Match:** The new roll is $x$. The probability of this is $1/6$. In this case, the process stops. We used 1 roll.
+2.  **No Match:** The new roll is not $x$. The probability of this is $5/6$. In this case, we have used 1 roll, and we are now in the same situation as before: we have a new current value (the one we just rolled), and we need to wait for the next roll to match it. So, we are back in state $E_1$.
+
+We can write the equation for $E_1$:
+$$ E_1 = 1 + \left( \frac{1}{6} \cdot 0 \right) + \left( \frac{5}{6} \cdot E_1 \right) $$
+*Explanation:* We always spend 1 roll to make the attempt. If we match (prob $1/6$), we need 0 more rolls. If we don't match (prob $5/6$), we need $E_1$ more rolls on average.
+
+**Step 3: Solve for $E_1$.**
+$$ E_1 = 1 + \frac{5}{6}E_1 $$
+$$ E_1 - \frac{5}{6}E_1 = 1 $$
+$$ \frac{1}{6}E_1 = 1 $$
+$$ E_1 = 6 $$
+
+**Step 4: Calculate $E_0$.**
+$$ E_0 = 1 + E_1 = 1 + 6 = 7 $$
+
+Thus, the expected total number of rolls is **7**.
+
+---
+
+### Method 2: Definition of Expectation (Geometric Series Approach)
+
+Let $N$ be the random variable representing the total number of rolls.
+The process stops at roll $n$ if:
+1.  The first $n-1$ rolls do not contain any consecutive matches.
+2.  The $n$-th roll matches the $(n-1)$-th roll.
+
+Note that the first roll cannot form a pair with a previous roll. So, the earliest possible stopping time is $n=2$.
+
+Let's determine the probability $P(N=n)$ for $n \ge 2$.
+For the process to end exactly at roll $n$:
+-   Roll 1 is arbitrary (prob 1).
+-   Roll 2 must **not** match Roll 1 (prob $5/6$).
+-   Roll 3 must **not** match Roll 2 (prob $5/6$).
+-   ...
+-   Roll $n-1$ must **not** match Roll $n-2$ (prob $5/6$).
+-   Roll $n$ **must** match Roll $n-1$ (prob $1/6$).
+
+There are $n-2$ "non-matching" transitions between roll 1 and roll $n-1$, and 1 "matching" transition at the end.
+So, for $n \ge 2$:
+$$ P(N=n) = \left(\frac{5}{6}\right)^{n-2} \cdot \frac{1}{6} $$
+
+Let $k = n-2$. As $n$ goes from $2$ to $\infty$, $k$ goes from $0$ to $\infty$.
+$$ P(N=k+2) = \left(\frac{5}{6}\right)^{k} \cdot \frac{1}{6} $$
+
+The expected value $E[N]$ is:
+$$ E[N] = \sum_{n=2}^{\infty} n \cdot P(N=n) $$
+Substitute $n = k+2$:
+$$ E[N] = \sum_{k=0}^{\infty} (k+2) \cdot \left(\frac{5}{6}\right)^{k} \cdot \frac{1}{6} $$
+$$ E[N] = \frac{1}{6} \left[ \sum_{k=0}^{\infty} k \left(\frac{5}{6}\right)^{k} + 2 \sum_{k=0}^{\infty} \left(\frac{5}{6}\right)^{k} \right] $$
+
+We use the standard geometric series formulas for $|r| < 1$:
+1.  $\sum_{k=0}^{\infty} r^k = \frac{1}{1-r}$
+2.  $\sum_{k=0}^{\infty} k r^k = \frac{r}{(1-r)^2}$
+
+Here, $r = 5/6$.
+$$ 1-r = 1 - \frac{5}{6} = \frac{1}{6} $$
+
+Calculate the sums:
+1.  $\sum_{k=0}^{\infty} \left(\frac{5}{6}\right)^{k} = \frac{1}{1/6} = 6$
+2.  $\sum_{k=0}^{\infty} k \left(\frac{5}{6}\right)^{k} = \frac{5/6}{(1/6)^2} = \frac{5/6}{1/36} = \frac{5}{6} \cdot 36 = 30$
+
+Substitute these back into the expectation equation:
+$$ E[N] = \frac{1}{6} [ 30 + 2(6) ] $$
+$$ E[N] = \frac{1}{6} [ 30 + 12 ] $$
+$$ E[N] = \frac{42}{6} $$
+$$ E[N] = 7 $$
+
+### Conclusion
+
+Both methods yield the same result.
+
+The expected total number of rolls is **7**.

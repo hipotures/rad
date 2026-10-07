@@ -1,0 +1,104 @@
+{
+  "model": "QUALITY-v0132-final",
+  "kind": "quality",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 102,
+  "requested_generated_tokens": 8192,
+  "time_utc": "2026-10-02T04:43:42Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/QUALITY-v0132-final-C-repository-architecture.jsonl",
+  "samples": 29,
+  "peak_rss_gib": 77.2664680480957,
+  "min_mem_available_gib": 79.51870727539062,
+  "peak_ram_used_gib": 81.61391067504883,
+  "peak_vram0_gib": 23.298828125,
+  "peak_vram1_gib": 23.48828125,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 2611,
+    "total_tokens": 2713,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "# Repository Architecture: Local Coding-Agent Service\n\n## 1. High-Level Overview\n\nThis service is a **single-node, single-GPU** inference server that:\n- Exposes an **OpenAI-compatible `/v1/chat/completions`** endpoint with SSE streaming.\n- Runs **one resident GPU inference process** (e.g., via `llama.cpp`, `vLLM`, or `transformers` with a persistent worker).\n- **Serializes requests** through a queue to avoid GPU contention.\n- **Records per-request metrics** (latency, tokens, cache hits, errors).\n- Handles **cancellation**, **process failure recovery**, and **prompt cache correctness** across clients.\n\n### Key Design Principles\n1. **Separation of concerns**: API layer, queueing, inference worker, metrics, and cache management are isolated.\n2. **Resilience**: The GPU worker is a separate process; crashes are detected and recovered without losing queued requests.\n3. **Cache correctness**: Prompt caching is scoped per-client-session and invalidated on model reload or cache eviction.\n4. **Backpressure**: Queue depth limits prevent memory exhaustion.\n\n---\n\n## 2. Module Boundaries\n\n```\n┌─────────────────────────────────────────────────────────┐\n│                   API Layer (FastAPI)                    │\n│  - OpenAI-compatible endpoints                           │\n│  - Request validation & parsing                          │\n│  - SSE streaming response                                │\n│  - Cancellation propagation                              │\n└───────────────┬─────────────────────────────────────────┘\n                │\n┌───────────────▼─────────────────────────────────────────┐\n│              Request Queue & Scheduler                   │\n│  - FIFO queue with priority support                      │\n│  - Backpressure (max queue size)                         │\n│  - Request lifecycle tracking                            │\n└───────────────┬─────────────────────────────────────────┘\n                │\n┌───────────────▼─────────────────────────────────────────┐\n│           Inference Worker (Subprocess)                  │\n│  - Resident GPU process (e.g., llama.cpp server)         │\n│  - Health check & heartbeat                              │\n│  - Process supervision & restart                         │\n└───────────────┬─────────────────────────────────────────┘\n                │\n┌───────────────▼─────────────────────────────────────────┐\n│           Prompt Cache Manager                           │\n│  - Per-client-session cache keys                         │\n│  - Cache hit/miss tracking                               │\n│  - Invalidation on model reload                          │\n└───────────────┬─────────────────────────────────────────┘\n                │\n┌───────────────▼─────────────────────────────────────────┐\n│           Metrics Collector                              │\n│  - Per-request metrics (latency, tokens, cache status)   │\n│  - Aggregation & export (Prometheus/JSON)                │\n└─────────────────────────────────────────────────────────┘\n```\n\n### Module Responsibilities\n\n| Module | Responsibility |\n|--------|---------------|\n| **API Layer** | HTTP handling, OpenAI schema compliance, SSE streaming, cancellation via `asyncio.CancelledError` |\n| **Queue** | Serialize requests, enforce max queue depth, track request state (`queued`, `processing`, `done`, `cancelled`) |\n| **Inference Worker** | Run GPU inference in a subprocess, expose a simple IPC interface (Unix socket or stdin/stdout), handle model loading |\n| **Cache Manager** | Maintain prompt cache keys per client session, detect cache hits, invalidate on model change |\n| **Metrics** | Record start/end times, token counts, cache hit/miss, error codes; expose `/metrics` endpoint |\n\n---\n\n## 3. Concrete File Tree\n\n```\ncoding-agent-service/\n├── pyproject.toml              # Dependencies: fastapi, uvicorn, pydantic, prometheus-client\n├── README.md\n├── Dockerfile\n├── docker-compose.yml\n│\n├── src/\n│   ├── __init__.py\n│   ├── main.py                 # Entry point: starts API, worker, metrics\n│   │\n│   ├── api/\n│   │   ├── __init__.py\n│   │   ├── routes.py           # FastAPI routes: /v1/chat/completions, /health, /metrics\n│   │   ├── schemas.py          # Pydantic models for OpenAI request/response\n│   │   └── streaming.py        # SSE generator, cancellation handling\n│   │\n│   ├── queue/\n│   │   ├── __init__.py\n│   │   ├── request_queue.py    # Async FIFO queue with backpressure\n│   │   └── request_state.py    # Enum: QUEUED, PROCESSING, DONE, CANCELLED, FAILED\n│   │\n│   ├── worker/\n│   │   ├── __init__.py\n│   │   ├── inference_worker.py # Subprocess manager: start, stop, restart, health check\n│   │   ├── ipc_protocol.py     # Message format for worker communication (JSON over Unix socket)\n│   │   └── worker_client.py    # Client to send requests to worker, receive streaming chunks\n│   │\n│   ├── cache/\n│   │   ├── __init__.py\n│   │   ├── prompt_cache.py     # Cache key generation, hit/miss detection, invalidation\n│   │   └── session_manager.py  # Track client sessions, associate cache keys\n│   │\n│   ├── metrics/\n│   │   ├── __init__.py\n│   │   ├── collector.py        # Record per-request metrics\n│   │   └── exporter.py         # Prometheus metrics endpoint\n│   │\n│   └── config/\n│       ├── __init__.py\n│       └── settings.py         # Model path, GPU device, queue limits, cache TTL\n│\n├── tests/\n│   ├── test_api.py\n│   ├── test_queue.py\n│   ├── test_worker_recovery.py\n│   ├── test_cache_correctness.py\n│   └── test_metrics.py\n│\n├── scripts/\n│   ├── start_worker.sh         # Launch GPU inference subprocess\n│   └── health_check.py         # Standalone health check script\n│\n└── docs/\n    ├── architecture.md\n    └── cache_strategy.md\n```\n\n---\n\n## 4. Key Mechanisms\n\n### 4.1 Cancellation\n\n- **Client disconnects**: FastAPI detects `asyncio.CancelledError` in the SSE generator.\n- **Propagation**: The API layer marks the request as `CANCELLED` in the queue and sends a `cancel` message to the worker via IPC.\n- **Worker behavior**: The worker checks for cancellation between token generations and aborts inference, freeing GPU memory.\n- **Queue cleanup**: Cancelled requests are removed from the queue; no response is sent.\n\n```python\n# In streaming.py\nasync def stream_response(request_id: str, queue: RequestQueue):\n    try:\n        async for chunk in queue.get_stream(request_id):\n            yield f\"data: {json.dumps(chunk)}\\n\\n\"\n    except asyncio.CancelledError:\n        await queue.cancel(request_id)\n        raise\n```\n\n### 4.2 Process Failure Recovery\n\n- **Heartbeat**: The worker sends a heartbeat every 5 seconds via IPC.\n- **Supervisor**: The main process monitors the worker. If no heartbeat for 15 seconds, it:\n  1. Kills the worker process.\n  2. Restarts it with the same model.\n  3. Re-queues any requests that were `PROCESSING` at the time of failure (they are retried).\n- **Idempotency**: Requests are assigned unique IDs. The worker tracks in-flight requests; on restart, it discards stale state.\n- **Graceful degradation**: If the worker fails repeatedly, the API returns `503 Service Unavailable` with a retry-after header.\n\n```python\n# In inference_worker.py\nclass WorkerSupervisor:\n    async def monitor(self):\n        while True:\n            if not self.worker.is_alive():\n                await self.restart_worker()\n                await self.requeue_inflight_requests()\n            await asyncio.sleep(5)\n```\n\n### 4.3 Prompt Cache Correctness Across Clients\n\n**Problem**: Prompt caching (e.g., KV cache in vLLM or llama.cpp) is shared across requests. If Client A and Client B send different prompts, cache entries must not leak or cause incorrect completions.\n\n**Solution**:\n1. **Cache key = hash(model_version + prompt_prefix + client_session_id)**:\n   - Each client session gets a unique ID (from `X-Client-Session` header or generated).\n   - The cache key includes the session ID, so Client A’s cache entries are never reused for Client B.\n2. **Cache isolation**: The worker maintains separate KV cache slots per session. When a new session starts, it gets a fresh cache slot.\n3. **Invalidation**:\n   - On model reload, all cache slots are cleared.\n   - On session timeout (e.g., 5 minutes of inactivity), the cache slot is evicted.\n4. **Cache hit detection**: Before inference, the cache manager checks if the prompt prefix matches an existing cache slot for the same session. If yes, the worker skips re-computing the prefix.\n\n```python\n# In prompt_cache.py\ndef get_cache_key(model_version: str, prompt_prefix: str, session_id: str) -> str:\n    return hashlib.sha256(f\"{model_version}:{prompt_prefix}:{session_id}\".encode()).hexdigest()\n```\n\n---\n\n## 5. Two Tradeoffs\n\n### Tradeoff 1: Sequential Queueing vs. Concurrent Batching\n\n| Aspect | Sequential Queueing (Chosen) | Concurrent Batching |\n|--------|------------------------------|---------------------|\n| **GPU Utilization** | Lower: GPU idle between requests | Higher: Multiple requests batched |\n| **Latency** | Predictable: No queuing delay from batching | Variable: Requests wait for batch window |\n| **Complexity** | Simple: One request at a time | Complex: Batch scheduler, dynamic batching |\n| **Cache Correctness** | Easier: One active cache slot | Harder: Multiple cache slots, eviction policy |\n| **Failure Recovery** | Simpler: Retry one request | Harder: Retry multiple requests, partial failures |\n\n**Why sequential?** For a coding-agent service, requests are often long (code generation) and latency-sensitive. Predictable latency and simpler cache management outweigh GPU utilization gains. Batching can be added later if throughput becomes a bottleneck.\n\n### Tradeoff 2: Subprocess Worker vs. In-Process Inference\n\n| Aspect | Subprocess Worker (Chosen) | In-Process Inference |\n|--------|----------------------------|----------------------|\n| **Isolation** | High: GPU crashes don’t kill API | Low: GPU OOM crashes entire service |\n| **Recovery** | Easy: Restart subprocess | Hard: Requires process restart, loses state |\n| **Overhead** | IPC latency (~1–5 ms per chunk) | Zero IPC overhead |\n| **Resource Sharing** | Separate memory spaces | Shared memory, potential conflicts |\n| **Debugging** | Harder: Two processes to monitor | Easier: Single process |\n\n**Why subprocess?** GPU inference is prone to OOM errors, CUDA context corruption, and segfaults. Isolating the worker ensures the API remains responsive and can recover gracefully. The IPC overhead is negligible compared to inference time (hundreds of ms per token).\n\n---\n\n## 6. Summary\n\nThis architecture prioritizes **reliability** and **cache correctness** over raw throughput. By isolating the GPU worker, serializing requests, and scoping prompt caches per client session, the service remains stable under failure and avoids cross-client cache contamination. The modular design allows future enhancements (e.g., batching, multi-GPU) without rewriting core components.",
+  "reasoning": "",
+  "actual_prompt_tokens": 102,
+  "generated_tokens": 2611,
+  "ttft_s": 1.5828761200027657,
+  "total_wall_s": 28.596832985997025,
+  "api_decode_wall_s": 27.01395686599426,
+  "prompt_processing_wall_s": 1.5603,
+  "decode_wall_s": 27.032799999999998,
+  "pp_tps": 65.4,
+  "tg_tps": 96.6,
+  "draft_tokens": 2238,
+  "accepted_tokens": 1441,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 102,
+    "prompt_ms": 1560.3,
+    "prompt_per_token_ms": 15.297,
+    "prompt_per_second": 65.4,
+    "predicted_n": 2611,
+    "predicted_ms": 27032.8,
+    "predicted_per_token_ms": 10.353,
+    "predicted_per_second": 96.6,
+    "draft_n": 2238,
+    "draft_n_accepted": 1441,
+    "at": 1790916251
+  },
+  "acceptance_pct": 64.38784629133154,
+  "mean_accepted_length": 1.2316239316239317,
+  "final_logical_context_tokens": 2713,
+  "final_kv_occupancy_tokens": 2712,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 1170,
+  "mean_committed_length": 2.2316239316239317,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.922
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 64143.770265387,
+  "t_first_monotonic_s": 64145.353141507,
+  "t_end_monotonic_s": 64172.367098373,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "315414": {
+      "pss_gib": 0.18342208862304688,
+      "pss_sample_wall": 1790916222.2593505,
+      "pss_read_wall_s": 0.004553022998152301
+    },
+    "315424": {
+      "pss_gib": 76.9076099395752,
+      "pss_sample_wall": 1790916222.9001338,
+      "pss_read_wall_s": 0.6407826539943926
+    }
+  },
+  "pss_after": {
+    "315414": {
+      "pss_gib": 0.18341827392578125,
+      "pss_sample_wall": 1790916251.7381601,
+      "pss_read_wall_s": 0.0046237229980761185
+    },
+    "315424": {
+      "pss_gib": 76.9076099395752,
+      "pss_sample_wall": 1790916252.403435,
+      "pss_read_wall_s": 0.6652749179993407
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "QUALITY-v0132-final",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/QUALITY-v0132-final.json"
+}

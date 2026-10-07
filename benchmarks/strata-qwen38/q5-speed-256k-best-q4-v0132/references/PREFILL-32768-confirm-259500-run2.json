@@ -1,0 +1,174 @@
+{
+  "model": "PREFILL-32768-confirm-259500",
+  "kind": "candidate",
+  "context": "259500",
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 259500,
+  "requested_generated_tokens": 256,
+  "time_utc": "2026-10-02T00:31:52Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/PREFILL-32768-confirm-259500-run2.jsonl",
+  "samples": 50,
+  "peak_rss_gib": 78.1846809387207,
+  "min_mem_available_gib": 78.50072479248047,
+  "peak_ram_used_gib": 82.63189315795898,
+  "peak_vram0_gib": 23.298828125,
+  "peak_vram1_gib": 23.4921875,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 259500,
+    "completion_tokens": 256,
+    "total_tokens": 259756,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP front door of Strata: it is the process that listens on port 8080 and turns OpenAI/Anthropic API requests into token-id work for the C++ engine, then streams the engine's token output back as text. Its main pieces are:\n\n- **Engine adapters.** `Engine` is a protocol (`generate(ids, max_new, sampling, cancel) -> iterator of token ids`). `MockEngine` replays a scripted completion for tests without a GPU. `StrataEngine` keeps one `strata --serve` process resident (weights, expert arena and VRAM tier load once), talks to it over stdin/stdout with `GEN <max_new> [sampling keys] <ids>` lines, and reads back `T <id>` token lines, `PP` prompt-progress lines, `DONE ...` timing lines, `ERR` and `INFO`/`READY` startup lines. It also handles engine death (`EngineDied`, with a `death_note()` that reads the log tail to distinguish the issue-#29 watchdog from an OOM kill), mid-request cancellation via a `STOP` line, and unload/restart (`unload",
+  "reasoning": "",
+  "actual_prompt_tokens": 259500,
+  "generated_tokens": 256,
+  "ttft_s": 46.3239580139998,
+  "total_wall_s": 49.01083383800142,
+  "api_decode_wall_s": 2.6868758240016177,
+  "prompt_processing_wall_s": 45.8077,
+  "decode_wall_s": 2.7075,
+  "pp_tps": 5665.0,
+  "tg_tps": 94.6,
+  "draft_tokens": 245,
+  "accepted_tokens": 151,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 259500,
+    "prompt_ms": 45807.7,
+    "prompt_per_token_ms": 0.177,
+    "prompt_per_second": 5665.0,
+    "predicted_n": 256,
+    "predicted_ms": 2707.5,
+    "predicted_per_token_ms": 10.576,
+    "predicted_per_second": 94.6,
+    "draft_n": 245,
+    "draft_n_accepted": 151,
+    "at": 1790901161
+  },
+  "acceptance_pct": 61.63265306122449,
+  "mean_accepted_length": 1.438095238095238,
+  "final_logical_context_tokens": 259756,
+  "final_kv_occupancy_tokens": 259755,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 105,
+  "mean_committed_length": 2.4380952380952383,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.956
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 49032.879701332,
+  "t_first_monotonic_s": 49079.203659346,
+  "t_end_monotonic_s": 49081.89053517,
+  "pss_before": {
+    "219430": {
+      "pss_gib": 0.19825267791748047,
+      "pss_sample_wall": 1790901110.8907013,
+      "pss_read_wall_s": 0.004754802997922525
+    },
+    "219440": {
+      "pss_gib": 77.6644058227539,
+      "pss_sample_wall": 1790901111.5386348,
+      "pss_read_wall_s": 0.647933271000511
+    }
+  },
+  "pss_after": {
+    "219430": {
+      "pss_gib": 0.2009267807006836,
+      "pss_sample_wall": 1790901161.2772512,
+      "pss_read_wall_s": 0.004585082999255974
+    },
+    "219440": {
+      "pss_gib": 77.69862365722656,
+      "pss_sample_wall": 1790901161.9164262,
+      "pss_read_wall_s": 0.6391750530019635
+    }
+  },
+  "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+  "candidate": "PREFILL-32768-confirm-259500",
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/PREFILL-32768-confirm-259500.json",
+  "Strata_HEAD": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+  "Strata_version": "0.1.32",
+  "build_variant": "default",
+  "model_revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+  "full_config": {
+    "exe": "/srv/ai/strata-v0.1.32/build-default/strata",
+    "args": [
+      "--pack",
+      "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+      "--native",
+      "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+      "--expert-profile",
+      "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+      "--expert-cache",
+      "auto",
+      "--spec",
+      "4",
+      "--spec-min-p",
+      "0.5",
+      "--mtp",
+      "/srv/ai/models/strata-v0132/mtp/rt",
+      "--kv",
+      "int8",
+      "--max-context",
+      "262144",
+      "--prefill",
+      "32768"
+    ],
+    "cwd": "/srv/ai/strata-v0.1.32",
+    "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer",
+    "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+    "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/logs/PREFILL-32768-confirm-259500-engine.log",
+    "host": "127.0.0.1",
+    "port": 18085,
+    "lib_dirs": [
+      "/usr/local/cuda/bin",
+      "/usr/local/cuda/lib64"
+    ],
+    "gpu": [
+      0,
+      1
+    ],
+    "layer_split": "24",
+    "effective_experiment_environment": {
+      "STRATA_SPLIT_OWN": null,
+      "STRATA_KV_ROT": null,
+      "STRATA_REFILL_SERIAL": null,
+      "STRATA_SPEC_COUPLED": null
+    }
+  },
+  "full_engine_command": [
+    "/srv/ai/strata-v0.1.32/build-default/strata",
+    "--serve",
+    "--pack",
+    "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+    "--native",
+    "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+    "--expert-profile",
+    "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+    "--expert-cache",
+    "auto",
+    "--spec",
+    "4",
+    "--spec-min-p",
+    "0.5",
+    "--mtp",
+    "/srv/ai/models/strata-v0132/mtp/rt",
+    "--kv",
+    "int8",
+    "--max-context",
+    "262144",
+    "--prefill",
+    "32768",
+    "--layer-split",
+    "24"
+  ],
+  "topology": "layer_split"
+}

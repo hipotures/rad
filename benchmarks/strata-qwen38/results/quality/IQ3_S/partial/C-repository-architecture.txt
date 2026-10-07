@@ -1,0 +1,102 @@
+# Repository Architecture: Local Coding-Agent Service
+
+## Overview
+
+This service exposes an OpenAI-compatible streaming API, manages a single resident GPU inference process, queues requests sequentially, and records per-request metrics. The design prioritizes **correctness under concurrency**, **resilience to process failure**, and **prompt cache integrity** across multiple clients.
+
+---
+
+## Module Boundaries
+
+### 1. `api/` — HTTP Interface Layer
+- **Responsibility**: Accept HTTP requests, validate OpenAI-compatible payloads, translate to internal request objects, stream responses back.
+- **Boundary**: Does **not** know about GPU processes, queues, or caching. It only interacts with the `queue` and `metrics` modules.
+- **Key types**:
+  - `ChatCompletionRequest` (parsed from JSON)
+  - `StreamResponse` (SSE chunks)
+  - `RequestContext` (carries client ID, request ID, cancellation token)
+
+### 2. `queue/` — Request Serialization & Scheduling
+- **Responsibility**: Enforce sequential execution of requests against the single GPU process. Maintain FIFO order. Handle backpressure.
+- **Boundary**: Does **not** execute inference. It hands off validated requests to the `inference` module and receives results. It owns the queue state and cancellation propagation.
+- **Key types**:
+  - `RequestQueue` (thread-safe, bounded)
+  - `QueuedRequest` (wraps `ChatCompletionRequest` + `RequestContext`)
+  - `QueueStats` (depth, wait time, throughput)
+
+### 3. `inference/` — GPU Process Management & Execution
+- **Responsibility**: Own the lifecycle of the resident GPU inference process. Send prompts, receive token streams, handle process crashes/restarts.
+- **Boundary**: Does **not** know about HTTP, clients, or metrics. It exposes a simple interface: `submit(prompt, context) -> AsyncIterator[Token]`. It is the **only** module that touches the GPU process.
+- **Key types**:
+  - `InferenceProcess` (manages subprocess, health checks, restart logic)
+  - `TokenStream` (async iterator over generated tokens)
+  - `ProcessState` (RUNNING, CRASHED, RESTARTING)
+
+### 4. `cache/` — Prompt Cache Management
+- **Responsibility**: Maintain a prompt cache that is **correct across clients**. Ensure that cached prefixes are only reused when safe (same model, same tokenizer, no contamination between clients).
+- **Boundary**: Does **not** know about HTTP or queueing. It is consulted by `inference` before submitting a prompt. It must be thread-safe and aware of client isolation.
+- **Key types**:
+  - `PromptCache` (keyed by `(model, tokenizer_version, prefix_hash)`)
+  - `CacheEntry` (prefix tokens, KV cache state, TTL, client_id for audit)
+  - `CachePolicy` (eviction, TTL, max size)
+
+### 5. `metrics/` — Per-Request Metrics Collection
+- **Responsibility**: Record latency, token counts, cache hits/misses, queue wait time, and process health per request.
+- **Boundary**: Does **not** affect request flow. It is a passive observer. It receives events from `api`, `queue`, `inference`, and `cache`.
+- **Key types**:
+  - `RequestMetrics` (structured log entry)
+  - `MetricsCollector` (aggregates and exposes via `/metrics` endpoint)
+
+### 6. `config/` — Configuration & Model Metadata
+- **Responsibility**: Load model paths, tokenizer configs, cache settings, queue limits, and process restart policies.
+- **Boundary**: Read-only at runtime. Provides typed config objects to all other modules.
+
+### 7. `main.py` — Composition Root
+- **Responsibility**: Wire together all modules. Start the HTTP server, initialize the inference process, start the queue worker, register metrics.
+
+---
+
+## Cancellation Flow
+
+Cancellation must propagate cleanly from HTTP client disconnect to GPU process without leaving orphaned state.
+
+1. **HTTP Layer**: When a client disconnects, the `api` module detects it (via `asyncio.CancelledError` or connection close). It marks the `RequestContext` as cancelled and notifies the `queue`.
+2. **Queue Layer**: The `queue` removes the request from the pending queue if not yet started. If already in-flight, it signals the `inference` module via a cancellation token attached to the `QueuedRequest`.
+3. **Inference Layer**: The `inference` module checks the cancellation token between token generations. If cancelled, it:
+   - Stops sending further tokens to the client.
+   - **Does not** kill the GPU process (it is shared).
+   - Cleans up any per-request state (e.g., partial cache entries).
+4. **Cache Layer**: If a request was cancelled mid-generation, any partial KV cache state is **discarded** (not committed to the cache) to prevent contamination.
+5. **Metrics Layer**: Records the cancellation event with reason (`client_disconnect`, `timeout`, etc.).
+
+**Key invariant**: Cancellation never restarts the GPU process. It only aborts the current generation.
+
+---
+
+## Process Failure Recovery
+
+The single GPU process is a single point of failure. Recovery must be automatic and transparent to queued requests.
+
+1. **Health Monitoring**: The `inference` module periodically pings the GPU process (e.g., via a dummy token generation or heartbeat). If the process exits unexpectedly or becomes unresponsive, it transitions to `CRASHED` state.
+2. **Queue Pausing**: Upon crash detection, the `queue` stops dispatching new requests. In-flight requests are marked as failed with a `process_crash` error.
+3. **Restart Logic**: The `inference` module attempts to restart the GPU process with exponential backoff (e.g., 1s, 2s, 4s, max 30s). It reloads the model and tokenizer.
+4. **Cache Invalidation**: On restart, the **entire prompt cache is invalidated** because the KV cache state is lost. The `cache` module clears all entries.
+5. **Queue Resumption**: Once the process is healthy again, the `queue` resumes dispatching. Failed requests are **not** automatically retried (to avoid duplicate side effects); clients must retry explicitly.
+6. **Metrics**: Crash events, restart attempts, and downtime are recorded.
+
+**Key invariant**: The cache is always consistent with the live process state. A restart always clears the cache.
+
+---
+
+## Prompt Cache Correctness Across Clients
+
+This is the most subtle correctness concern. Naive caching can leak data between clients or produce incorrect results.
+
+### Cache Key Design
+The cache key is:
+```
+(model_id, tokenizer_version, prefix_hash, client_id)
+```
+- **`model_id` + `tokenizer_version`**: Ensures cache entries are not reused across different models or tokenizer updates.
+- **`prefix_hash`**: Hash of the tokenized prompt prefix (up to the point of divergence).
+- **`client_id`**:

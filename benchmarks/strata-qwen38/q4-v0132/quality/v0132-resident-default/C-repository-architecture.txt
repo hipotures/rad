@@ -1,0 +1,284 @@
+# Repository Architecture: Local Coding-Agent Service
+
+## 1. High-Level Overview
+
+This service acts as a **single-GPU, single-process inference gateway**. It exposes an OpenAI-compatible `/v1/chat/completions` endpoint, serializes requests to a resident GPU worker, streams tokens back to clients, and records metrics. The core challenge is **correctness under concurrency** (multiple clients, one GPU) and **prompt cache integrity** (KV-cache reuse across turns from the same conversation, but isolation across clients).
+
+### Key Design Principles
+- **Single Writer to GPU**: One resident process owns the GPU context. All inference requests are queued and executed sequentially.
+- **Stateless HTTP Layer**: The HTTP server does not hold inference state; it delegates to a queue and streams results.
+- **Conversation-Scoped Caching**: Prompt caching (KV-cache) is keyed by `conversation_id` (or session token), not by client IP or API key. Cache entries are evicted on TTL or LRU.
+- **Graceful Degradation**: If the GPU worker crashes, the queue fails fast with a 503, and the supervisor restarts the worker.
+
+---
+
+## 2. Module Boundaries
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                   HTTP Server (FastAPI)                  │
+│  - Validates OpenAI-compatible request schema            │
+│  - Extracts conversation_id (from header or body)        │
+│  - Enqueues request into RequestQueue                    │
+│  - Streams SSE responses from ResultStream               │
+│  - Handles cancellation via client disconnect            │
+└───────────────┬─────────────────────────┬───────────────┘
+                │                         │
+        ┌───────▼────────┐       ┌────────▼─────────┐
+        │  RequestQueue  │       │  ResultStream    │
+        │  (asyncio.Queue)│       │  (asyncio.Queue) │
+        │  - FIFO order  │       │  - Per-request   │
+        │  - Bounded     │       │    token stream  │
+        └───────┬────────┘       └────────▲─────────┘
+                │                         │
+        ┌───────▼─────────────────────────┴───────────────┐
+        │              GPU Worker Process                  │
+        │  - Resident process (separate from HTTP server)  │
+        │  - Loads model once at startup                   │
+        │  - Executes inference sequentially               │
+        │  - Manages KV-cache per conversation_id          │
+        │  - Emits tokens to ResultStream                  │
+        │  - Reports metrics to MetricsCollector           │
+        └──────────────────────────────────────────────────┘
+                │
+        ┌───────▼──────────────────────────────────────────┐
+        │              MetricsCollector                    │
+        │  - Per-request: latency, tokens, cache hit/miss  │
+        │  - Aggregates into Prometheus-compatible format  │
+        └──────────────────────────────────────────────────┘
+```
+
+### Module Responsibilities
+
+| Module | Responsibility |
+|--------|---------------|
+| `api/` | HTTP routing, request validation, SSE streaming, cancellation detection |
+| `queue/` | Async FIFO queue for inference requests; backpressure handling |
+| `worker/` | Resident GPU process; model loading, inference loop, KV-cache management |
+| `cache/` | Conversation-scoped KV-cache store; TTL/LRU eviction; cache key derivation |
+| `metrics/` | Per-request metric collection; Prometheus exposition |
+| `supervisor/` | Monitors GPU worker health; restarts on crash; graceful shutdown |
+| `config/` | Configuration loading (model path, GPU device, cache TTL, queue size) |
+
+---
+
+## 3. Concrete File Tree
+
+```
+coding-agent-service/
+├── pyproject.toml
+├── README.md
+├── Dockerfile
+├── docker-compose.yml
+├── config/
+│   ├── __init__.py
+│   ├── settings.py          # Pydantic settings: model_path, gpu_device, cache_ttl, queue_max_size
+│   └── logging.py           # Structured logging config
+├── src/
+│   ├── __init__.py
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── main.py          # FastAPI app factory
+│   │   ├── routes.py        # /v1/chat/completions endpoint
+│   │   ├── schemas.py       # Pydantic models for OpenAI-compatible requests/responses
+│   │   └── streaming.py     # SSE generator that reads from ResultStream
+│   ├── queue/
+│   │   ├── __init__.py
+│   │   ├── request_queue.py # Async FIFO queue with bounded size
+│   │   └── result_stream.py # Per-request async queue for token streaming
+│   ├── worker/
+│   │   ├── __init__.py
+│   │   ├── gpu_worker.py    # Resident process: loads model, runs inference loop
+│   │   ├── inference.py     # Core inference logic: tokenize, generate, detokenize
+│   │   └── kv_cache.py      # KV-cache manager: store/retrieve per conversation_id
+│   ├── cache/
+│   │   ├── __init__.py
+│   │   ├── conversation_cache.py  # LRU/TTL cache for KV states
+│   │   └── cache_key.py           # Derive cache key from conversation_id + model version
+│   ├── metrics/
+│   │   ├── __init__.py
+│   │   ├── collector.py     # Collects per-request metrics
+│   │   └── prometheus.py    # Exposes /metrics endpoint
+│   ├── supervisor/
+│   │   ├── __init__.py
+│   │   ├── process_manager.py  # Starts/stops GPU worker; monitors health
+│   │   └── health_check.py     # Heartbeat mechanism between HTTP server and worker
+│   └── utils/
+│       ├── __init__.py
+│       ├── cancellation.py  # Detects client disconnect, propagates cancellation
+│       └── logging.py       # Structured log helpers
+├── tests/
+│   ├── __init__.py
+│   ├── test_api.py
+│   ├── test_queue.py
+│   ├── test_cache.py
+│   ├── test_worker.py
+│   └── test_metrics.py
+└── scripts/
+    ├── start_service.py     # Entry point: starts supervisor + HTTP server
+    └── benchmark.py         # Load test script
+```
+
+---
+
+## 4. Cancellation Handling
+
+### Problem
+Clients may disconnect mid-stream. The GPU worker must stop generating tokens for that request to free resources for queued requests.
+
+### Solution
+1. **Client Disconnect Detection**: FastAPI’s `Request` object provides `await request.is_disconnected()`. The SSE generator checks this periodically.
+2. **Cancellation Token**: Each request carries an `asyncio.Event` or `asyncio.CancelledError` propagation.
+3. **Worker Cooperation**: The GPU worker checks a cancellation flag between token generations. If set, it aborts generation, cleans up partial KV-cache state, and emits a final `stop` token.
+
+```python
+# In api/streaming.py
+async def stream_response(request: Request, result_queue: asyncio.Queue):
+    try:
+        while True:
+            if await request.is_disconnected():
+                await result_queue.put({"type": "cancel"})
+                break
+            try:
+                token = await asyncio.wait_for(result_queue.get(), timeout=0.1)
+            except asyncio.TimeoutError:
+                continue
+            if token["type"] == "done":
+                break
+            yield f"data: {json.dumps(token)}\n\n"
+    except asyncio.CancelledError:
+        await result_queue.put({"type": "cancel"})
+        raise
+```
+
+```python
+# In worker/inference.py
+async def generate_tokens(request: InferenceRequest):
+    for token in model.generate(...):
+        if request.cancel_event.is_set():
+            break
+        await request.result_queue.put({"token": token})
+    await request.result_queue.put({"type": "done"})
+```
+
+---
+
+## 5. Process Failure Recovery
+
+### Problem
+The GPU worker may crash due to OOM, CUDA errors, or model bugs. The HTTP server must not hang waiting for results.
+
+### Solution
+1. **Supervisor Pattern**: A separate process (`supervisor/process_manager.py`) spawns the GPU worker as a subprocess. It monitors the worker’s heartbeat.
+2. **Heartbeat Mechanism**: The worker writes a timestamp to a shared file or sends a UDP heartbeat every N seconds. The supervisor checks this.
+3. **Fail-Fast Queue**: If the worker is dead, the `RequestQueue` rejects new requests with `503 Service Unavailable`. In-flight requests receive an error token.
+4. **Restart Strategy**: The supervisor restarts the worker with exponential backoff. On restart, the KV-cache is lost (acceptable for local service; clients retry).
+
+```python
+# In supervisor/process_manager.py
+class ProcessManager:
+    def __init__(self, worker_cmd: list[str]):
+        self.worker_cmd = worker_cmd
+        self.process: Optional[subprocess.Popen] = None
+        self.last_heartbeat: float = 0.0
+
+    async def monitor(self):
+        while True:
+            if self.process is None or self.process.poll() is not None:
+                logger.error("GPU worker died, restarting...")
+                self._restart_worker()
+            elif time.time() - self.last_heartbeat > HEARTBEAT_TIMEOUT:
+                logger.error("GPU worker heartbeat timeout, killing...")
+                self.process.kill()
+                self._restart_worker()
+            await asyncio.sleep(1)
+
+    def _restart_worker(self):
+        self.process = subprocess.Popen(self.worker_cmd)
+        self.last_heartbeat = time.time()
+```
+
+---
+
+## 6. Prompt Caching Correctness Across Clients
+
+### Problem
+KV-cache reuse is beneficial for multi-turn conversations. However, if two clients share the same `conversation_id` (e.g., due to a bug or malicious intent), they could corrupt each other’s cache. Conversely, if cache keys are too granular (e.g., per-client), cache hit rates drop.
+
+### Solution
+1. **Cache Key Derivation**: The cache key is `sha256(conversation_id + model_version + system_prompt_hash)`. This ensures:
+   - Same conversation → same cache key → cache hit.
+   - Different model version → different key → no stale cache.
+   - Different system prompt → different key → no cross-contamination.
+2. **Conversation ID Source**: The `conversation_id` is extracted from:
+   - A custom header `X-Conversation-ID` (preferred), or
+   - The last message’s `name` field (if using OpenAI’s `name` for session tracking), or
+   - A client-provided `user` field in the request body.
+3. **Isolation Guarantee**: The cache is **not** keyed by client IP or API key. This is safe because:
+   - The service is local/trusted (single-user or team-internal).
+   - If multi-tenant, add an `X-Tenant-ID` header to the cache key.
+4. **Cache Eviction**: LRU with TTL (e.g., 10 minutes). On eviction, the KV-cache state is freed. If a subsequent request misses the cache, it re-computes the full prompt (correct but slower).
+
+```python
+# In cache/cache_key.py
+def derive_cache_key(conversation_id: str, model_version: str, system_prompt: str) -> str:
+    raw = f"{conversation_id}:{model_version}:{hashlib.sha256(system_prompt.encode()).hexdigest()}"
+    return hashlib.sha256(raw.encode()).hexdigest()
+```
+
+```python
+# In worker/kv_cache.py
+class KVCacheManager:
+    def __init__(self, max_size: int, ttl_seconds: int):
+        self.cache: OrderedDict[str, KVState] = OrderedDict()
+        self.ttl = ttl_seconds
+
+    def get(self, key: str) -> Optional[KVState]:
+        if key not in self.cache:
+            return None
+        state = self.cache[key]
+        if time.time() - state.timestamp > self.ttl:
+            del self.cache[key]
+            return None
+        self.cache.move_to_end(key)  # LRU update
+        return state
+
+    def put(self, key: str, state: KVState):
+        if key in self.cache:
+            self.cache.move_to_end(key)
+        self.cache[key] = state
+        if len(self.cache) > self.max_size:
+            self.cache.popitem(last=False)  # Evict LRU
+```
+
+---
+
+## 7. Two Tradeoffs
+
+### Tradeoff 1: Sequential Queueing vs. Batched Inference
+
+| Aspect | Sequential (Chosen) | Batched |
+|--------|---------------------|---------|
+| **Latency** | Predictable per-request latency; no head-of-line blocking beyond queue wait | Lower throughput per token; higher latency for short requests due to batching delay |
+| **Complexity** | Simple; one request at a time on GPU | Complex; requires dynamic batching, padding, and KV-cache alignment across batch items |
+| **Cache Correctness** | Trivial; one conversation at a time | Hard; KV-cache states for different conversations in a batch must be isolated and merged correctly |
+| **GPU Utilization** | Lower; GPU idle between tokens if generation is slow | Higher; better GPU utilization via parallel token generation |
+
+**Why Sequential?** For a local coding-agent, latency predictability and cache correctness outweigh throughput. Batching introduces significant complexity in KV-cache management (e.g., handling different sequence lengths, attention masks) and risks cache corruption. A single-user or small-team service benefits more from simplicity and correctness.
+
+### Tradeoff 2: Resident Process vs. On-Demand Process Spawning
+
+| Aspect | Resident (Chosen) | On-Demand |
+|--------|-------------------|-----------|
+| **Startup Latency** | Zero; model loaded once at service start | High; model load takes 10–60s per request |
+| **Memory** | Constant; model stays in VRAM | Variable; VRAM freed between requests |
+| **Failure Recovery** | Complex; requires supervisor and heartbeat | Simple; each request is isolated; crash affects only one request |
+| **Cache Persistence** | KV-cache can persist across requests | KV-cache lost between requests; no reuse |
+
+**Why Resident?** Prompt caching is a core feature. On-demand spawning would negate cache benefits and introduce unacceptable latency for interactive coding agents. The complexity of process supervision is justified by the performance gain.
+
+---
+
+## 8. Summary
+
+This architecture prioritizes **correctness** (cache isolation, cancellation, failure recovery) and **simplicity** (sequential queueing, resident process) over maximum throughput. It is suitable for local or small-team coding-agent deployments where predictable latency and cache reuse are critical. The module boundaries enforce separation of concerns, making each component testable and replaceable.

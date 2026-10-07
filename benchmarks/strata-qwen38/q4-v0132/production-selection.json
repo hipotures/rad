@@ -1,0 +1,65 @@
+{
+  "status": "SELECTED_FROM_VERIFIED_EVIDENCE",
+  "created": 1790914242.48814,
+  "matrix_label": "FINAL-v0132-Q4-attempt2",
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4.json",
+  "long_summary": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/long-decode-done.json",
+  "agent_labels": {
+    "63400": "AGENT-63400-v0132",
+    "127000": "AGENT-127000-v0132-natural-eos-session"
+  },
+  "phase_terminals": {
+    "agent128": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/phase-agent128-natural-outcomes-terminal.json"
+  },
+  "accepted_phase_statuses": {
+    "agent128": [
+      "COMPLETE",
+      "MEASURED_WITH_SHORT_TURNS"
+    ]
+  },
+  "classification": "TESTED_K8V4_SPEED_FINALIST_WITH_NEGATIVE_LENGTH_OUTCOMES",
+  "rationale": "K8V4 won confirmed speedselection and completed finalmatrix/long lengths. Full11-request128K lifecycle now measured, recording any below256 naturalEOS as negative outputlength outcomes without masking, suppression, or process restart. INT8 fullmatrix/long and agentdiagnostics preserved separately: agent64 short235; no proof of increased stability or quality. This selection is not a claim of universal correctness or suitability; literal qualityparity and downstreamworkloads remain required.",
+  "controlled_AB": false,
+  "agentic_output_minimum_met": false,
+  "negative_output_outcomes": [
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/AGENT-127000-v0132-natural-eos-session-turn6.json",
+      "turn": 6,
+      "generated_tokens": 103,
+      "status": "SHORT_OUTPUT_BELOW_REQUIRED256",
+      "retained": true
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/AGENT-127000-v0132-natural-eos-session-turn8.json",
+      "turn": 8,
+      "generated_tokens": 171,
+      "status": "SHORT_OUTPUT_BELOW_REQUIRED256",
+      "retained": true
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/AGENT-127000-v0132-natural-eos-session-turn9.json",
+      "turn": 9,
+      "generated_tokens": 97,
+      "status": "SHORT_OUTPUT_BELOW_REQUIRED256",
+      "retained": true
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/AGENT-127000-v0132-natural-eos-session-turn10.json",
+      "turn": 10,
+      "generated_tokens": 13,
+      "status": "SHORT_OUTPUT_BELOW_REQUIRED256",
+      "retained": true
+    }
+  ],
+  "INT8_not_promoted": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/evidence/int8-agent64-short-review.json",
+  "retained_original_manifests": [
+    "final-matrix-attempt.json",
+    "agent-attempts.json"
+  ],
+  "evidence": [
+    "/srv/ai/benchmarks/strata-qwen38/q4-v0132/evidence/final-matrix-progress-independent-audit.json",
+    "/srv/ai/benchmarks/strata-qwen38/q4-v0132/evidence/long-progress-independent-audit.json",
+    "/srv/ai/benchmarks/strata-qwen38/q4-v0132/evidence/agent-natural-outcomes-independent-audit.json",
+    "/srv/ai/benchmarks/strata-qwen38/q4-v0132/evidence/int8-agent64-short-review.json"
+  ]
+}

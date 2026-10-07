@@ -1,0 +1,34 @@
+smoke: OK actual=42 PP=49.5 TG=34.6 
+Smoke passed; waiting for manual text review marker
+64K run1: exact prompt tokens=63300
+speed-64k-1: OK actual=63300 PP=1416.7 TG=36.6 
+64K run2: exact prompt tokens=63300
+speed-64k-2: OK actual=63300 PP=1539.8 TG=44.2 
+64K run3: exact prompt tokens=63299
+speed-64k-3: OK actual=63299 PP=1539.3 TG=43.4 
+quality-A-coding-debug: OK actual=132 PP=60.5 TG=42.8 
+quality-B-mathematical-reasoning: OK actual=82 PP=47.4 TG=52.9 
+quality-C-repository-architecture: OK actual=102 PP=48.1 TG=44.8 
+{
+  "load_ok": true,
+  "smoke_ok": true,
+  "resident_expert_gib": 56.45,
+  "speed_median": {
+    "actual_prompt_tokens": 63300,
+    "generated_tokens": 256,
+    "pp_tps": 1539.3,
+    "prompt_processing_wall_s": 41.1222,
+    "ttft_s": 41.27222788299696,
+    "tg_tps": 43.4,
+    "decode_wall_s": 5.8995,
+    "peak_ram_used_gib": 65.29090881347656,
+    "peak_rss_gib": 133.25035095214844,
+    "peak_vram0_gib": 23.484375
+  },
+  "quality_files": {
+    "A-coding-debug": "/srv/ai/benchmarks/strata-qwen38/results/quality/UD-Q4_K_XL/A-coding-debug.txt",
+    "B-mathematical-reasoning": "/srv/ai/benchmarks/strata-qwen38/results/quality/UD-Q4_K_XL/B-mathematical-reasoning.txt",
+    "C-repository-architecture": "/srv/ai/benchmarks/strata-qwen38/results/quality/UD-Q4_K_XL/C-repository-architecture.txt"
+  },
+  "problem": null
+}

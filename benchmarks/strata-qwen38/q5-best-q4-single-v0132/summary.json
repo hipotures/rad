@@ -1,0 +1,46 @@
+{
+  "status": "Q5_LOAD_FAILED_UPSTREAM_GGUF_READER",
+  "plan": {
+    "model_revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+    "Strata_HEAD": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+    "version": "0.1.32",
+    "build_variant": "default",
+    "Q4_reference": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/raw/PP-CONTROL-31400-run2.json",
+    "Q4_reference_sha256": "44e78d99c383bc19d06a776f538aafc8ead509caae25eee0d0b172a1508f6c91",
+    "Q4_reference_TG": 121.8,
+    "Q4_reference_PP": 2614.9,
+    "routed_expert_bytes": 98369536000,
+    "routed_expert_GiB": 91.61376953125,
+    "identical_tokenizer_files": [
+      "vocab.json",
+      "merges.txt",
+      "token_type.json",
+      "chat_template.jinja"
+    ],
+    "measured_requests_planned": 1,
+    "context": 31400,
+    "generated_tokens": 256,
+    "comparison_limitation": "Historical Q4 best single run, not simultaneous controlled A/B; same literal payload except model alias and same engine flags, different quant/GPU cache capacity/adaptive cache history. One warmup not recreation of full previous control matrix request order."
+  },
+  "error": "RuntimeError('Engine exited 1')",
+  "failure_evidence": {
+    "status": "Q5_LOAD_FAILED_UPSTREAM_GGUF_READER",
+    "first_shard": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00001-of-00006.gguf",
+    "size_bytes": 10946618,
+    "tensor_count": 0,
+    "metadata_count": 67,
+    "actual_SHA256": "610922cdb1afe1094e95d7a3e86b12ee33317ebbf7320ac9344e21b6ae4bb69f",
+    "expected_SHA256": "610922cdb1afe1094e95d7a3e86b12ee33317ebbf7320ac9344e21b6ae4bb69f",
+    "GGUF_data_alignment_default_32": 10946624,
+    "load_error": "GGUF: data section starts past EOF",
+    "source": "/srv/ai/strata-v0.1.32/include/strata/artifact/gguf_reader.hpp:458",
+    "smoke_requests": 0,
+    "warmup_requests": 0,
+    "measured_requests": 0,
+    "engine_exit_code": 1,
+    "no_engine_patch": true,
+    "no_model_modification": true,
+    "timestamp": 1790932469.4579656
+  },
+  "n_measured": 0
+}

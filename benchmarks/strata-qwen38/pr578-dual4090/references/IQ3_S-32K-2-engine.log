@@ -1,0 +1,7 @@
+strata decode timing: 98 windows, avg T 3.22, 2.61 tokens/window, 19.91 ms/window = verify 17.42 (GPU-reach wait 7.19 + per-layer host 0.53 [plan 0.08 actq 0.35 jobs 0.13 CPU 0.52] + stage 1.58) + commit/emit 0.59 + draft 1.90; per layer-window: CPU experts 0.20 (0.21 entries), VRAM hits 32.03, PCIe 0.00
+strata serve: prompt 31400 tokens = 0 reused + 31400 read in 6748 ms (4653.0 tok/s), 256 generated in 1952 ms (131.2 tok/s), drafts accepted 158 of 218, 2 checkpoints
+strata serve: decode expert cache hit rate: 99.3% (150648 hits / 151657 lookups)
+strata serve: stage 0: 367 windows; per window: wait for the GPU 6.985 ms, pool + plan 0.779 ms, host staging 2.306 ms, commit 0.284 ms
+strata serve: stage 1: 367 windows; per window: wait for the GPU 6.314 ms, pool + plan 0.807 ms, host staging 0.000 ms, commit 0.246 ms
+strata serve: KV streaming: 96.99% of 992088 block reads hit VRAM, 120.5 MiB read from RAM
+strata serve: suffix drafts: 9 windows, 32 of 45 drafts accepted

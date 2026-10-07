@@ -1,0 +1,82 @@
+{
+  "exe": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-PRIORITY-engine.sh",
+  "args": [
+    "--pack",
+    "/srv/ai/models/strata/packs/iq3_s",
+    "--native",
+    "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+    "--ple-gguf",
+    "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+    "--expert-profile",
+    "/srv/ai/strata/data/expert-profile.bin",
+    "--prefill",
+    "auto",
+    "--spec",
+    "4",
+    "--spec-min-p",
+    "0.5",
+    "--mtp",
+    "/srv/ai/models/strata/mtp/rt",
+    "--max-context",
+    "262144",
+    "--kv",
+    "int8",
+    "--kv-resident",
+    "32768",
+    "--suffix-draft",
+    "0",
+    "--pool-workers",
+    "15",
+    "--expert-cache",
+    "6567",
+    "--expert-cache-device1",
+    "11796",
+    "--remote-expert-opt"
+  ],
+  "cwd": "/srv/ai/strata-pr578-helper-priority",
+  "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+  "model_name": "qwen3.8-flash-next-iq3_s",
+  "log": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/logs/CORRECT-H-PRIORITY-engine.log",
+  "lib_dirs": [
+    "/usr/local/cuda/bin",
+    "/usr/local/cuda/lib64"
+  ],
+  "port": 18085,
+  "gpu": 0,
+  "gpus_asked": true,
+  "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+  "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+  "environment_overrides": {},
+  "env": {
+    "STRATA_SPLIT_TIMING": "1",
+    "STRATA_DECODE_TIMING": "1",
+    "CUDA_VISIBLE_DEVICES": "0,1"
+  },
+  "host": "127.0.0.1",
+  "Strata_HEAD": "ec511d128247ccf25a1ec94168481bd053d35dfd",
+  "build_variant": "PR578-local-helper-priority-fix",
+  "upstream_base": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+  "PR_head": "b28121ff6ef117bec2558b3ece7e188dd33a2b7e",
+  "extra_env": {
+    "STRATA_BENCH_CACHE_SNAPSHOT": "1",
+    "STRATA_DBG_NAN": "1"
+  },
+  "binary_sha256": "dd26a82efe6aa9aac2adfe9194560e5cf6328734ab388d229b55496c03fdcace",
+  "local_algorithm_fix": "optimized helper ownership before primary PCIe quota",
+  "local_algorithm_fix_commit": "ec511d1",
+  "effective_experiment_environment": {
+    "STRATA_SPLIT_OWN": null,
+    "STRATA_KV_ROT": null,
+    "STRATA_REFILL_SERIAL": null,
+    "STRATA_SPEC_COUPLED": null
+  },
+  "benchmark_environment": {
+    "CUDA_VISIBLE_DEVICES": "0,1",
+    "STRATA_SPLIT_TIMING": "1",
+    "STRATA_DECODE_TIMING": "1",
+    "STRATA_SPLIT_OWN": null,
+    "STRATA_KV_ROT": null,
+    "STRATA_REFILL_SERIAL": null,
+    "STRATA_SPEC_COUPLED": null
+  }
+}

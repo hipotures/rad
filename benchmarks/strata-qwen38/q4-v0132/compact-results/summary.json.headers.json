@@ -1,0 +1,1429 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/summary.json",
+  "source_bytes": 2645279,
+  "source_sha256": "649fb88f64ccacc5705c8da8b4713ce1441be5775bd36b4f36371f7f725322a4",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "status": "ASSEMBLED_REQUIRES_INDEPENDENT_FINAL_AUDIT",
+    "created": 1790917473.991642,
+    "records": {
+      "omitted_list_items": 381
+    },
+    "final_context_matrix": [
+      {
+        "target": 31400,
+        "actual_prompt_tokens": 31400,
+        "PP": 3446.0,
+        "TG": 108.2,
+        "TTFT": 9.201227874000324,
+        "runs": [
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "31400",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 31400,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T02:53:43Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx31400-run1.jsonl",
+            "samples": 12,
+            "peak_rss_gib": 77.45706558227539,
+            "min_mem_available_gib": 79.1994400024414,
+            "peak_ram_used_gib": 81.93317794799805,
+            "peak_vram0_gib": 23.2890625,
+            "peak_vram1_gib": 23.478515625,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 31400,
+              "completion_tokens": 256,
+              "total_tokens": 31656,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "The last file in the repository excerpt is `docs/AMD_HIP_PERFORMANCE.md`. This document serves as the technical evidence and configuration guide for the experimental AMD HIP backend, specifically targeting the RX 7900 XTX (gfx1100 architecture). Its primary purpose is to validate the performance claims of the HIP backend, superseding the initial support introduced in PR #94. It details the specific build configurations, runtime environment variables, and benchmarking methodologies required to reproduce the reported performance metrics.\n\nThe document outlines the \"Reproduce the configuration\" section, which instructs users to build with `STRATA_PREFILL_MMQ=ON` and set specific environment variables like `STRATA_PREFILL_MMQ=1`, `STRATA_HIPBLASLT_TUNING`, `STRATA_PREFILL_RING=96`, and `STRATA_IO_THREADS=32`. It emphasizes that the supplied tuning table is strictly calibrated for gfx1100 and hipBLASLt version 100100, warning that it is not universal. The text describes the measured engine configuration, which includes using the Orca Flash Next IQ3_XXS model, native packing, mmap experts, resident CPU experts, and specific prefill and speculation",
+            "reasoning": "",
+            "actual_prompt_tokens": 31400,
+            "generated_tokens": 256,
+            "ttft_s": 9.185761528002331,
+            "total_wall_s": 11.466523103998043,
+            "api_decode_wall_s": 2.2807615759957116,
+            "prompt_processing_wall_s": 9.1029,
+            "decode_wall_s": 2.2942,
+            "pp_tps": 3449.5,
+            "tg_tps": 111.6,
+            "draft_tokens": 203,
+            "accepted_tokens": 149,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 31400,
+              "prompt_ms": 9102.9,
+              "prompt_per_token_ms": 0.29,
+              "prompt_per_second": 3449.5,
+              "predicted_n": 256,
+              "predicted_ms": 2294.2,
+              "predicted_per_token_ms": 8.962,
+              "predicted_per_second": 111.6,
+              "draft_n": 203,
+              "draft_n_accepted": 149,
+              "at": 1790909635
+            },
+            "acceptance_pct": 73.39901477832512,
+            "mean_accepted_length": 1.3925233644859814,
+            "final_logical_context_tokens": 31656,
+            "final_kv_occupancy_tokens": 31655,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 107,
+            "mean_committed_length": 2.3925233644859816,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.951
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57544.654936991,
+            "t_first_monotonic_s": 57553.840698519,
+            "t_end_monotonic_s": 57556.121460095,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.1855001449584961,
+                "pss_sample_wall": 1790909623.0901425,
+                "pss_read_wall_s": 0.003989656004705466
+              },
+              "268582": {
+                "pss_gib": 77.09384250640869,
+                "pss_sample_wall": 1790909623.72563,
+                "pss_read_wall_s": 0.6354876159966807
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.18573665618896484,
+                "pss_sample_wall": 1790909635.466954,
+                "pss_read_wall_s": 0.0050570309977047145
+              },
+              "268582": {
+                "pss_gib": 77.09581089019775,
+                "pss_sample_wall": 1790909636.1350484,
+                "pss_read_wall_s": 0.6680925409964402
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          },
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "31400",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 31400,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T02:53:57Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx31400-run2.jsonl",
+            "samples": 12,
+            "peak_rss_gib": 77.47565078735352,
+            "min_mem_available_gib": 79.29743194580078,
+            "peak_ram_used_gib": 81.83518600463867,
+            "peak_vram0_gib": 23.2890625,
+            "peak_vram1_gib": 23.478515625,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 31400,
+              "completion_tokens": 256,
+              "total_tokens": 31656,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "The last file, `docs/AMD_HIP_PERFORMANCE.md`, is a performance-evidence and reproduction document for Strata\u2019s experimental AMD HIP backend, specifically for the RX 7900 XTX / gfx1100 path. Its purpose is not to introduce new code, but to make a measured configuration reproducible and auditable. It explains that this opt-in Linux `gfx1100` backend supersedes the initial support in PR #94 while retaining the core compatibility pieces: HIP runtime, wave32 integer-dot kernels, native mmap layout validation, and MTP. On top of that, it adds HIP MMQ, optional calibrated dense hipBLASLt GEMM, native prefill batching, and host-memory / SSD paths used by the measured setup. It also notes that HIP blocking expert uploads use one reusable pinned staging buffer, including prompt-cache refills, to avoid repeated pageable-source registrations.\n\nThe document then gives a concrete reproduction recipe. It points readers to `docs/AMD_HIP.md` for build instructions and warns to use the repository-pinned llama.cpp dependency rather than silently substituting another revision. It tells users to build with `STRATA_PREFILL_MMQ=ON` and to export several runtime variables",
+            "reasoning": "",
+            "actual_prompt_tokens": 31400,
+            "generated_tokens": 256,
+            "ttft_s": 9.201227874000324,
+            "total_wall_s": 11.553825185001187,
+            "api_decode_wall_s": 2.3525973110008636,
+            "prompt_processing_wall_s": 9.112,
+            "decode_wall_s": 2.3659,
+            "pp_tps": 3446.0,
+            "tg_tps": 108.2,
+            "draft_tokens": 211,
+            "accepted_tokens": 142,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 31400,
+              "prompt_ms": 9112.0,
+              "prompt_per_token_ms": 0.29,
+              "prompt_per_second": 3446.0,
+              "predicted_n": 256,
+              "predicted_ms": 2365.9,
+              "predicted_per_token_ms": 9.242,
+              "predicted_per_second": 108.2,
+              "draft_n": 211,
+              "draft_n_accepted": 142,
+              "at": 1790909649
+            },
+            "acceptance_pct": 67.29857819905213,
+            "mean_accepted_length": 1.2347826086956522,
+            "final_logical_context_tokens": 31656,
+            "final_kv_occupancy_tokens": 31656,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 115,
+            "mean_committed_length": 2.234782608695652,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.956
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57558.71360822,
+            "t_first_monotonic_s": 57567.914836094,
+            "t_end_monotonic_s": 57570.267433405,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.18573665618896484,
+                "pss_sample_wall": 1790909637.1383111,
+                "pss_read_wall_s": 0.004589623000356369
+              },
+              "268582": {
+                "pss_gib": 77.09581089019775,
+                "pss_sample_wall": 1790909637.784342,
+                "pss_read_wall_s": 0.6460303889980423
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.18595314025878906,
+                "pss_sample_wall": 1790909649.6130068,
+                "pss_read_wall_s": 0.004557215004751924
+              },
+              "268582": {
+                "pss_gib": 77.1141710281372,
+                "pss_sample_wall": 1790909650.277316,
+                "pss_read_wall_s": 0.6643085339965182
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          },
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "31400",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 31400,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T02:54:11Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx31400-run3.jsonl",
+            "samples": 12,
+            "peak_rss_gib": 77.4788932800293,
+            "min_mem_available_gib": 79.37912368774414,
+            "peak_ram_used_gib": 81.75349426269531,
+            "peak_vram0_gib": 23.2890625,
+            "peak_vram1_gib": 23.478515625,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 31400,
+              "completion_tokens": 256,
+              "total_tokens": 31656,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "The last file, `docs/AMD_HIP_PERFORMANCE.md`, documents the performance evidence and reproduction steps for the experimental AMD HIP backend, specifically focusing on the RX 7900 XTX (gfx1100) support. It serves as a technical companion to `docs/AMD_HIP.md`, moving beyond basic installation instructions to provide rigorous benchmarking methodology, configuration details, and validation results.\n\nThe document begins by establishing that this backend supersedes initial support from PR #94, retaining core compatibility features like HIP runtime and wave32 integer-dot operations while adding advanced capabilities such as HIP MMQ (Matrix Multiply Quantized) kernels, optional calibrated dense hipBLASLt GEMM paths, and native prefill batching. It emphasizes that these optimizations are opt-in and do not alter the default CUDA selection.\n\nA significant portion of the file is dedicated to \"Reproduce the configuration,\" providing exact environment variables and runtime flags necessary to replicate the measured performance. It specifies exporting `STRATA_PREFILL_MMQ=1` and pointing `STRATA_HIPBLASLT_TUNING` to a specific tuning table (`gfx1100-hipblaslt-100100.txt`), warning that this table is architecture",
+            "reasoning": "",
+            "actual_prompt_tokens": 31400,
+            "generated_tokens": 256,
+            "ttft_s": 9.260996853001416,
+            "total_wall_s": 11.716714670001238,
+            "api_decode_wall_s": 2.4557178169998224,
+            "prompt_processing_wall_s": 9.180200000000001,
+            "decode_wall_s": 2.4685,
+            "pp_tps": 3420.4,
+            "tg_tps": 103.7,
+            "draft_tokens": 213,
+            "accepted_tokens": 141,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 31400,
+              "prompt_ms": 9180.2,
+              "prompt_per_token_ms": 0.292,
+              "prompt_per_second": 3420.4,
+              "predicted_n": 256,
+              "predicted_ms": 2468.5,
+              "predicted_per_token_ms": 9.643,
+              "predicted_per_second": 103.7,
+              "draft_n": 213,
+              "draft_n_accepted": 141,
+              "at": 1790909663
+            },
+            "acceptance_pct": 66.19718309859155,
+            "mean_accepted_length": 1.2260869565217392,
+            "final_logical_context_tokens": 31656,
+            "final_kv_occupancy_tokens": 31655,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 115,
+            "mean_committed_length": 2.226086956521739,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.963
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57572.707901976,
+            "t_first_monotonic_s": 57581.968898829,
+            "t_end_monotonic_s": 57584.424616646,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.18595409393310547,
+                "pss_sample_wall": 1790909651.139137,
+                "pss_read_wall_s": 0.004671893999329768
+              },
+              "268582": {
+                "pss_gib": 77.1141710281372,
+                "pss_sample_wall": 1790909651.7764363,
+                "pss_read_wall_s": 0.6372979500010842
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.1862173080444336,
+                "pss_sample_wall": 1790909663.7807848,
+                "pss_read_wall_s": 0.007991652004420757
+              },
+              "268582": {
+                "pss_gib": 77.11711978912354,
+                "pss_sample_wall": 1790909664.839442,
+                "pss_read_wall_s": 1.0586558209979557
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          }
+        ]
+      },
+      {
+        "target": 63400,
+        "actual_prompt_tokens": 63400,
+        "PP": 4474.9,
+        "TG": 105.5,
+        "TTFT": 14.322223968003527,
+        "runs": [
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "63400",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 63400,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T02:54:52Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx63400-run1.jsonl",
+            "samples": 17,
+            "peak_rss_gib": 77.76740264892578,
+            "min_mem_available_gib": 79.10588836669922,
+            "peak_ram_used_gib": 82.02672958374023,
+            "peak_vram0_gib": 23.298828125,
+            "peak_vram1_gib": 23.48828125,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 63400,
+              "completion_tokens": 256,
+              "total_tokens": 63656,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "The last file shown is `docs/media/make_figures.py`. It is a Python script that generates the two SVG illustrations used in the README's \"How does it work?\" section: `docs/media/how-it-works.svg` and `docs/media/guess-and-check.svg`. The script is designed to produce figures that visually match the Strata web application's design system, pulling its colors from `serve/web/tokens.css`, its icons from `serve/web/sprite.svg`, and its font (Outfit, SIL OFL 1.1) from `serve/web/fonts/outfit-latin-wght.woff2`.\n\nThe script works by constructing SVG markup as Python strings. It defines a CSS block (`CSS`) that embeds the Outfit font as a base64-encoded data URI and declares color classes for both light and dark modes using a `@media (prefers-color-scheme: dark)` query. The color palette mirrors the app's design tokens: accent green (`#10b981` light, `#34d399` dark), info blue, warning amber, danger red, and neutral grays for backgrounds, cards, text, and muted labels.\n\nSeveral helper functions build SVG elements:\n-",
+            "reasoning": "",
+            "actual_prompt_tokens": 63400,
+            "generated_tokens": 256,
+            "ttft_s": 14.300411794996762,
+            "total_wall_s": 16.87984549399698,
+            "api_decode_wall_s": 2.5794336990002193,
+            "prompt_processing_wall_s": 14.162799999999999,
+            "decode_wall_s": 2.5935,
+            "pp_tps": 4476.5,
+            "tg_tps": 98.7,
+            "draft_tokens": 218,
+            "accepted_tokens": 144,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 63400,
+              "prompt_ms": 14162.8,
+              "prompt_per_token_ms": 0.223,
+              "prompt_per_second": 4476.5,
+              "predicted_n": 256,
+              "predicted_ms": 2593.5,
+              "predicted_per_token_ms": 10.131,
+              "predicted_per_second": 98.7,
+              "draft_n": 218,
+              "draft_n_accepted": 144,
+              "at": 1790909709
+            },
+            "acceptance_pct": 66.05504587155963,
+            "mean_accepted_length": 1.263157894736842,
+            "final_logical_context_tokens": 63656,
+            "final_kv_occupancy_tokens": 63657,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 114,
+            "mean_committed_length": 2.263157894736842,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.948
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57613.219724961,
+            "t_first_monotonic_s": 57627.520136756,
+            "t_end_monotonic_s": 57630.099570455,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.1878223419189453,
+                "pss_sample_wall": 1790909691.5882921,
+                "pss_read_wall_s": 0.00453516400011722
+              },
+              "268582": {
+                "pss_gib": 77.40186023712158,
+                "pss_sample_wall": 1790909692.2285879,
+                "pss_read_wall_s": 0.6402953399956459
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.1882495880126953,
+                "pss_sample_wall": 1790909709.446224,
+                "pss_read_wall_s": 0.0045676240042666905
+              },
+              "268582": {
+                "pss_gib": 77.40359592437744,
+                "pss_sample_wall": 1790909710.1228995,
+                "pss_read_wall_s": 0.6766755200005719
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          },
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "63400",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 63400,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T02:55:12Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx63400-run2.jsonl",
+            "samples": 17,
+            "peak_rss_gib": 77.78607177734375,
+            "min_mem_available_gib": 79.03888320922852,
+            "peak_ram_used_gib": 82.09373474121094,
+            "peak_vram0_gib": 23.298828125,
+            "peak_vram1_gib": 23.48828125,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 63400,
+              "completion_tokens": 256,
+              "total_tokens": 63656,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "The file `docs/media/make_figures.py` is a Python script designed to programmatically generate the SVG illustrations used in the Strata project's README, specifically the \"How does it work?\" section. Its primary goal is to ensure that these diagrams visually match the Strata web application's design system, including its specific color palette, typography, and iconography.\n\n### Explanation of Functionality\n\n1.  **Design System Integration**:\n    The script begins by defining a CSS string (`CSS`) that mirrors the styles found in the Strata web app (`serve/web/tokens.css`). This includes:\n    *   **Fonts**: It embeds the \"Outfit\" font as a base64-encoded WOFF2 file, ensuring the text in the SVG renders with the correct typeface regardless of the viewer's installed fonts.\n    *   **Colors**: It defines CSS classes for various semantic colors (accent, info, warning, danger) and structural elements (background, card, muted text). Crucially, it includes a `@media (prefers-color-scheme: dark)` block, allowing the generated SVGs to automatically adapt to light or dark mode based on the user's system settings.\n    *   **Icons**: It reads an",
+            "reasoning": "",
+            "actual_prompt_tokens": 63400,
+            "generated_tokens": 256,
+            "ttft_s": 14.322223968003527,
+            "total_wall_s": 16.732754525000928,
+            "api_decode_wall_s": 2.4105305569974007,
+            "prompt_processing_wall_s": 14.1678,
+            "decode_wall_s": 2.4267,
+            "pp_tps": 4474.9,
+            "tg_tps": 105.5,
+            "draft_tokens": 208,
+            "accepted_tokens": 148,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 63400,
+              "prompt_ms": 14167.8,
+              "prompt_per_token_ms": 0.223,
+              "prompt_per_second": 4474.9,
+              "predicted_n": 256,
+              "predicted_ms": 2426.7,
+              "predicted_per_token_ms": 9.479,
+              "predicted_per_second": 105.5,
+              "draft_n": 208,
+              "draft_n_accepted": 148,
+              "at": 1790909729
+            },
+            "acceptance_pct": 71.15384615384616,
+            "mean_accepted_length": 1.3703703703703705,
+            "final_logical_context_tokens": 63656,
+            "final_kv_occupancy_tokens": 63655,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 108,
+            "mean_committed_length": 2.3703703703703702,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.966
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57633.795046094,
+            "t_first_monotonic_s": 57648.117270062,
+            "t_end_monotonic_s": 57650.527800619,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.18825054168701172,
+                "pss_sample_wall": 1790909712.13562,
+                "pss_read_wall_s": 0.00469018400326604
+              },
+              "268582": {
+                "pss_gib": 77.40359592437744,
+                "pss_sample_wall": 1790909712.7972152,
+                "pss_read_wall_s": 0.661594402998162
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.18868541717529297,
+                "pss_sample_wall": 1790909729.8839674,
+                "pss_read_wall_s": 0.00832819099741755
+              },
+              "268582": {
+                "pss_gib": 77.42183017730713,
+                "pss_sample_wall": 1790909731.003344,
+                "pss_read_wall_s": 1.1193763369956287
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          },
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "63400",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 63400,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T02:55:34Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx63400-run3.jsonl",
+            "samples": 17,
+            "peak_rss_gib": 77.78651428222656,
+            "min_mem_available_gib": 79.05719757080078,
+            "peak_ram_used_gib": 82.07542037963867,
+            "peak_vram0_gib": 23.298828125,
+            "peak_vram1_gib": 23.48828125,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 63400,
+              "completion_tokens": 256,
+              "total_tokens": 63656,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "The file `docs/media/make_figures.py` is a Python script that programmatically generates the two SVG illustrations used in the Strata project's `README.md` under the \"How does it work?\" section: `docs/media/how-it-works.svg` and `docs/media/guess-and-check.svg`. Its primary goal is to ensure these diagrams visually match the Strata web application's design system, specifically its color palette, typography, and iconography.\n\nThe script begins by defining the root directory and locating necessary assets: the SVG sprite sheet (`serve/web/sprite.svg`) which contains icon definitions, and the Outfit font file (`serve/web/fonts/outfit-latin-wght.woff2`). It embeds the font as a base64-encoded string within the generated SVG's CSS to ensure the text renders correctly regardless of the viewer's installed fonts. The CSS block defines a comprehensive set of CSS variables and classes for light and dark modes, mirroring the web app's `tokens.css`. This includes colors for backgrounds, cards, text, accents (green), info (blue), warnings (yellow), and dangers (red), along with specific classes for icons and lines.\n\nThe script provides several helper functions to construct SVG elements:\n1.  `",
+            "reasoning": "",
+            "actual_prompt_tokens": 63400,
+            "generated_tokens": 256,
+            "ttft_s": 14.41631472500012,
+            "total_wall_s": 16.82943102200079,
+            "api_decode_wall_s": 2.41311629700067,
+            "prompt_processing_wall_s": 14.2331,
+            "decode_wall_s": 2.426,
+            "pp_tps": 4454.4,
+            "tg_tps": 105.5,
+            "draft_tokens": 218,
+            "accepted_tokens": 140,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 63400,
+              "prompt_ms": 14233.1,
+              "prompt_per_token_ms": 0.224,
+              "prompt_per_second": 4454.4,
+              "predicted_n": 256,
+              "predicted_ms": 2426.0,
+              "predicted_per_token_ms": 9.477,
+              "predicted_per_second": 105.5,
+              "draft_n": 218,
+              "draft_n_accepted": 140,
+              "at": 1790909751
+            },
+            "acceptance_pct": 64.22018348623853,
+            "mean_accepted_length": 1.1864406779661016,
+            "final_logical_context_tokens": 63656,
+            "final_kv_occupancy_tokens": 63657,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 118,
+            "mean_committed_length": 2.1864406779661016,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.974
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57655.187724372,
+            "t_first_monotonic_s": 57669.604039097,
+            "t_end_monotonic_s": 57672.017155394,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.18868541717529297,
+                "pss_sample_wall": 1790909733.544563,
+                "pss_read_wall_s": 0.004550684003334027
+              },
+              "268582": {
+                "pss_gib": 77.42183017730713,
+                "pss_sample_wall": 1790909734.186284,
+                "pss_read_wall_s": 0.6417197839982691
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.18912029266357422,
+                "pss_sample_wall": 1790909751.3632576,
+                "pss_read_wall_s": 0.004557832995487843
+              },
+              "268582": {
+                "pss_gib": 77.42183780670166,
+                "pss_sample_wall": 1790909752.019391,
+                "pss_read_wall_s": 0.6561341929991613
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          }
+        ]
+      },
+      {
+        "target": 127000,
+        "actual_prompt_tokens": 127000,
+        "PP": 4964.6,
+        "TG": 106.6,
+        "TTFT": 25.847396855002444,
+        "runs": [
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "127000",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 127000,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T02:56:50Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx127000-run1.jsonl",
+            "samples": 30,
+            "peak_rss_gib": 78.15127944946289,
+            "min_mem_available_gib": 78.64947891235352,
+            "peak_ram_used_gib": 82.48313903808594,
+            "peak_vram0_gib": 23.298828125,
+            "peak_vram1_gib": 23.48828125,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 127000,
+              "completion_tokens": 256,
+              "total_tokens": 127256,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "# What `include/strata/core/session.hpp` does\n\n`session.hpp` is the header for the engine's host-side token loop: it declares the per-sequence state that spans all 48 layers and the functions that drive one token through them. It sits above `layer.hpp` (which composes a single block: gated-residual read \u2192 mixer \u2192 gated-residual write \u2192 MoE) and below the driver in `src/program/generate.cpp`, owning three things the layer code deliberately does not:\n\n1. **The `SessionState` struct.** Everything a sequence needs that is not a weight: the gated-residual stack `R` (hc \u00d7 n_embd, read and written by every block), 36 GDN recurrent/conv states packed into one `gdn_state` arena, 12 `QsaState` objects (KV pools, indexer pooled keys, rope tables, per-token step buffers), shared scratch for the GDN/QSA/MoE/block buffers, the `Doorbell` pointer for the GPU\u2194CPU expert handoff, and the PLE module's sequence state (`ple_prev`, `ple_token`, `ple_hist`, the whole `PleRun`). The comments record hard-won",
+            "reasoning": "",
+            "actual_prompt_tokens": 127000,
+            "generated_tokens": 256,
+            "ttft_s": 27.114816369001346,
+            "total_wall_s": 29.936210654996103,
+            "api_decode_wall_s": 2.8213942859947565,
+            "prompt_processing_wall_s": 26.5104,
+            "decode_wall_s": 2.8366,
+            "pp_tps": 4790.6,
+            "tg_tps": 90.2,
+            "draft_tokens": 219,
+            "accepted_tokens": 142,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 127000,
+              "prompt_ms": 26510.4,
+              "prompt_per_token_ms": 0.209,
+              "prompt_per_second": 4790.6,
+              "predicted_n": 256,
+              "predicted_ms": 2836.6,
+              "predicted_per_token_ms": 11.08,
+              "predicted_per_second": 90.2,
+              "draft_n": 219,
+              "draft_n_accepted": 142,
+              "at": 1790909840
+            },
+            "acceptance_pct": 64.84018264840182,
+            "mean_accepted_length": 1.2347826086956522,
+            "final_logical_context_tokens": 127256,
+            "final_kv_occupancy_tokens": 127256,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 115,
+            "mean_committed_length": 2.234782608695652,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.961
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57731.015892568,
+            "t_first_monotonic_s": 57758.130708937,
+            "t_end_monotonic_s": 57760.952103223,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.1921224594116211,
+                "pss_sample_wall": 1790909808.5135818,
+                "pss_read_wall_s": 0.007816022996848915
+              },
+              "268582": {
+                "pss_gib": 77.66925525665283,
+                "pss_sample_wall": 1790909809.6080837,
+                "pss_read_wall_s": 1.0945016339974245
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.19334697723388672,
+                "pss_sample_wall": 1790909840.3334787,
+                "pss_read_wall_s": 0.030419193004490808
+              },
+              "268582": {
+                "pss_gib": 77.67273044586182,
+                "pss_sample_wall": 1790909841.795063,
+                "pss_read_wall_s": 1.461581406998448
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          },
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "127000",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 127000,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T02:57:27Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx127000-run2.jsonl",
+            "samples": 29,
+            "peak_rss_gib": 78.10588836669922,
+            "min_mem_available_gib": 78.6258316040039,
+            "peak_ram_used_gib": 82.50678634643555,
+            "peak_vram0_gib": 23.298828125,
+            "peak_vram1_gib": 23.48828125,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 127000,
+              "completion_tokens": 256,
+              "total_tokens": 127256,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "## What the last file does\n\n`include/strata/core/session.hpp` is the header for Strata's single-token forward pass across all 48 layers of the Qwen4Exp model, plus the \"doorbell\" host/GPU handoff protocol that lets the CPU expert pool overlap with GPU work. It is the composition layer of the engine: `strata_core` knows devices and weights, `strata_kernels` knows arithmetic, and this file (with `src/core/session.cpp`, built into `strata_engine`) knows the *order* the arithmetic happens in.\n\nKey contents:\n\n- **`SessionState`** \u2014 everything a sequence needs that is not a weight: the gated-residual stack `R` (hc \u00d7 n_embd), 36 GDN recurrent/conv states, 12 QSA states (KV cache + sparse indexer + rope tables), shared scratch buffers (`GdnBuffers`, `QsaBuffers`, `MoEBuffers`, `BlockBuffers`), the expert-handoff `Doorbell` pointer, and the PLE (layer-1 per-layer embedding) sequence state (`ple_prev`, `ple_token`, `ple_hist`, and a whole `PleRun`). The PLE fields exist",
+            "reasoning": "",
+            "actual_prompt_tokens": 127000,
+            "generated_tokens": 256,
+            "ttft_s": 25.847396855002444,
+            "total_wall_s": 28.229220102999534,
+            "api_decode_wall_s": 2.38182324799709,
+            "prompt_processing_wall_s": 25.5809,
+            "decode_wall_s": 2.4004000000000003,
+            "pp_tps": 4964.6,
+            "tg_tps": 106.6,
+            "draft_tokens": 200,
+            "accepted_tokens": 148,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 127000,
+              "prompt_ms": 25580.9,
+              "prompt_per_token_ms": 0.201,
+              "prompt_per_second": 4964.6,
+              "predicted_n": 256,
+              "predicted_ms": 2400.4,
+              "predicted_per_token_ms": 9.377,
+              "predicted_per_second": 106.6,
+              "draft_n": 200,
+              "draft_n_accepted": 148,
+              "at": 1790909875
+            },
+            "acceptance_pct": 74.0,
+            "mean_accepted_length": 1.3703703703703705,
+            "final_logical_context_tokens": 127256,
+            "final_kv_occupancy_tokens": 127255,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 108,
+            "mean_committed_length": 2.3703703703703702,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.963
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57767.998723956,
+            "t_first_monotonic_s": 57793.846120811,
+            "t_end_monotonic_s": 57796.227944059,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.19334697723388672,
+                "pss_sample_wall": 1790909846.1723607,
+                "pss_read_wall_s": 0.009785465997993015
+              },
+              "268582": {
+                "pss_gib": 77.67273044586182,
+                "pss_sample_wall": 1790909846.905975,
+                "pss_read_wall_s": 0.7336134389988729
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.19415569305419922,
+                "pss_sample_wall": 1790909875.5742,
+                "pss_read_wall_s": 0.004658104000554886
+              },
+              "268582": {
+                "pss_gib": 77.68132877349854,
+                "pss_sample_wall": 1790909876.2282953,
+                "pss_read_wall_s": 0.6540955790042062
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          },
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "127000",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 127000,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T02:58:01Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx127000-run3.jsonl",
+            "samples": 29,
+            "peak_rss_gib": 78.10671615600586,
+            "min_mem_available_gib": 78.6272201538086,
+            "peak_ram_used_gib": 82.50539779663086,
+            "peak_vram0_gib": 23.298828125,
+            "peak_vram1_gib": 23.48828125,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 127000,
+              "completion_tokens": 256,
+              "total_tokens": 127256,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "## What the last file does\n\n`include/strata/core/session.hpp` is the header for Strata's single-token forward pass across all 48 layers of the Qwen4Exp model. It is the composition layer that sits above the individual kernels (`strata_kernels`) and the device/weight machinery (`strata_core`), and its job is to own the *order* of operations across layers plus the state that outlives a single layer.\n\nThe central type is `SessionState`, which bundles everything a sequence needs that is not a weight:\n\n- The gated-residual stack `R` (shape `(hc, n_embd)`), read and written by every block.\n- 12 QSA states (KV cache plus the sparse indexer's pooled keys, rope tables, per-token step buffers) and 36 GDN states (recurrent state plus convolution history), because `is_qsa_layer` splits the 48 layers 12/36 and the two state kinds share nothing.\n- Shared scratch buffers (`GdnBuffers`, `QsaBuffers`, `MoEBuffers`, `BlockBuffers`) carved once from device arenas so the token path performs zero allocations (the P2.T10 requirement",
+            "reasoning": "",
+            "actual_prompt_tokens": 127000,
+            "generated_tokens": 256,
+            "ttft_s": 25.777909899996303,
+            "total_wall_s": 28.112413354996534,
+            "api_decode_wall_s": 2.334503455000231,
+            "prompt_processing_wall_s": 25.518,
+            "decode_wall_s": 2.3486,
+            "pp_tps": 4976.9,
+            "tg_tps": 109.0,
+            "draft_tokens": 198,
+            "accepted_tokens": 151,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 127000,
+              "prompt_ms": 25518.0,
+              "prompt_per_token_ms": 0.201,
+              "prompt_per_second": 4976.9,
+              "predicted_n": 256,
+              "predicted_ms": 2348.6,
+              "predicted_per_token_ms": 9.174,
+              "predicted_per_second": 109.0,
+              "draft_n": 198,
+              "draft_n_accepted": 151,
+              "at": 1790909910
+            },
+            "acceptance_pct": 76.26262626262626,
+            "mean_accepted_length": 1.4245283018867925,
+            "final_logical_context_tokens": 127256,
+            "final_kv_occupancy_tokens": 127256,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 106,
+            "mean_committed_length": 2.4245283018867925,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.959
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57802.764235385,
+            "t_first_monotonic_s": 57828.542145285,
+            "t_end_monotonic_s": 57830.87664874,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.19415569305419922,
+                "pss_sample_wall": 1790909881.0012586,
+                "pss_read_wall_s": 0.0047116529967752285
+              },
+              "268582": {
+                "pss_gib": 77.68132877349854,
+                "pss_sample_wall": 1790909881.655778,
+                "pss_read_wall_s": 0.6545194389982498
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.19497966766357422,
+                "pss_sample_wall": 1790909910.2226806,
+                "pss_read_wall_s": 0.004776023000886198
+              },
+              "268582": {
+                "pss_gib": 77.68133640289307,
+                "pss_sample_wall": 1790909910.8869495,
+                "pss_read_wall_s": 0.6642685539991362
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          }
+        ]
+      },
+      {
+        "target": 259500,
+        "actual_prompt_tokens": 259500,
+        "PP": 5570.5,
+        "TG": 95.0,
+        "TTFT": 47.10402336699917,
+        "runs": [
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "259500",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 259500,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T03:00:00Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx259500-run1.jsonl",
+            "samples": 71,
+            "peak_rss_gib": 78.15803527832031,
+            "min_mem_available_gib": 78.45867919921875,
+            "peak_ram_used_gib": 82.6739387512207,
+            "peak_vram0_gib": 23.298828125,
+            "peak_vram1_gib": 23.48828125,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 259500,
+              "completion_tokens": 256,
+              "total_tokens": 259756,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP front door of Strata: it is the process that listens on a port (default 8080) and speaks the OpenAI Chat Completions and Anthropic Messages APIs to clients, while talking to the C++ engine over a pipe. It is pure Python and touches no GPU \u2014 its job is to translate text into token ids, hand them to an engine, and stream the engine's token ids back as text deltas.\n\nThe module defines several cooperating pieces:\n\n- **Engine adapters.** `Engine` is a protocol (`generate(ids, max_new, sampling, cancel) -> iterator of token ids`). `MockEngine` replays a scripted completion for tests without a GPU. `StrataEngine` keeps one `strata --serve` process resident (so the 34\u201355 GB expert arena and VRAM tier load once), writes `GEN <max_new> <keys> <ids>` lines to its stdin, and reads `T <id>` / `PP ...` / `DONE ...` / `ERR ...` lines back. A pump thread feeds a `queue.Queue` so the request loop can wait with a 10-second timeout and",
+            "reasoning": "",
+            "actual_prompt_tokens": 259500,
+            "generated_tokens": 256,
+            "ttft_s": 67.98846476000472,
+            "total_wall_s": 70.68178627100133,
+            "api_decode_wall_s": 2.6933215109966113,
+            "prompt_processing_wall_s": 67.4622,
+            "decode_wall_s": 2.7166,
+            "pp_tps": 3846.6,
+            "tg_tps": 94.2,
+            "draft_tokens": 216,
+            "accepted_tokens": 144,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 259500,
+              "prompt_ms": 67462.2,
+              "prompt_per_token_ms": 0.26,
+              "prompt_per_second": 3846.6,
+              "predicted_n": 256,
+              "predicted_ms": 2716.6,
+              "predicted_per_token_ms": 10.612,
+              "predicted_per_second": 94.2,
+              "draft_n": 216,
+              "draft_n_accepted": 144,
+              "at": 1790910070
+            },
+            "acceptance_pct": 66.66666666666667,
+            "mean_accepted_length": 1.2857142857142858,
+            "final_logical_context_tokens": 259756,
+            "final_kv_occupancy_tokens": 259755,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 112,
+            "mean_committed_length": 2.2857142857142856,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.958
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 57920.989541225,
+            "t_first_monotonic_s": 57988.978005985,
+            "t_end_monotonic_s": 57991.671327496,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.20215892791748047,
+                "pss_sample_wall": 1790909998.9774814,
+                "pss_read_wall_s": 0.004779292001330759
+              },
+              "268582": {
+                "pss_gib": 77.6859712600708,
+                "pss_sample_wall": 1790909999.63989,
+                "pss_read_wall_s": 0.6624082819980686
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.20381832122802734,
+                "pss_sample_wall": 1790910071.0187714,
+                "pss_read_wall_s": 0.004892411998298485
+              },
+              "268582": {
+                "pss_gib": 77.70435047149658,
+                "pss_sample_wall": 1790910071.7052183,
+                "pss_read_wall_s": 0.6864468470012071
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          },
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "259500",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 259500,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T03:01:22Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx259500-run2.jsonl",
+            "samples": 50,
+            "peak_rss_gib": 78.14023971557617,
+            "min_mem_available_gib": 78.38640975952148,
+            "peak_ram_used_gib": 82.74620819091797,
+            "peak_vram0_gib": 23.298828125,
+            "peak_vram1_gib": 23.48828125,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 259500,
+              "completion_tokens": 256,
+              "total_tokens": 259756,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP front end of Strata: it is the process that listens on port 8080 (by default), speaks the OpenAI Chat Completions and Anthropic Messages APIs, and translates between text and the C++ engine's token-id protocol. It is the \"plan v0.3 P8\" API layer described in its docstring, and it is what `run-<model>.bat` / `run-<model>.sh` launch.\n\nIts responsibilities, as visible in the file:\n\n1. **Engine adapters.** The `Engine` protocol defines the boundary: `generate(ids, max_new, sampling, cancel) -> iterator of token ids`. Two implementations exist. `MockEngine` replays a scripted completion for tests without a GPU. `StrataEngine` keeps one `strata --serve` process resident (so the 34\u201355 GB expert arena and VRAM tier load once) and talks to it over stdin/stdout: it writes `GEN <max_new> [sampling keys] <ids>` (or `GENI ... <embeddings>` for image requests) and reads `T <id>` token lines, `PP",
+            "reasoning": "",
+            "actual_prompt_tokens": 259500,
+            "generated_tokens": 256,
+            "ttft_s": 47.10402336699917,
+            "total_wall_s": 49.6555968160028,
+            "api_decode_wall_s": 2.5515734490036266,
+            "prompt_processing_wall_s": 46.5851,
+            "decode_wall_s": 2.5682,
+            "pp_tps": 5570.5,
+            "tg_tps": 99.7,
+            "draft_tokens": 210,
+            "accepted_tokens": 149,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 259500,
+              "prompt_ms": 46585.1,
+              "prompt_per_token_ms": 0.18,
+              "prompt_per_second": 5570.5,
+              "predicted_n": 256,
+              "predicted_ms": 2568.2,
+              "predicted_per_token_ms": 10.032,
+              "predicted_per_second": 99.7,
+              "draft_n": 210,
+              "draft_n_accepted": 149,
+              "at": 1790910132
+            },
+            "acceptance_pct": 70.95238095238095,
+            "mean_accepted_length": 1.3796296296296295,
+            "final_logical_context_tokens": 259756,
+            "final_kv_occupancy_tokens": 259756,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 108,
+            "mean_committed_length": 2.3796296296296298,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.954
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 58003.391081561,
+            "t_first_monotonic_s": 58050.495104928,
+            "t_end_monotonic_s": 58053.046678377,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.20381832122802734,
+                "pss_sample_wall": 1790910081.4040196,
+                "pss_read_wall_s": 0.0048256520021823235
+              },
+              "268582": {
+                "pss_gib": 77.70434951782227,
+                "pss_sample_wall": 1790910082.0514443,
+                "pss_read_wall_s": 0.647423483998864
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.20548152923583984,
+                "pss_sample_wall": 1790910132.3935366,
+                "pss_read_wall_s": 0.004773741995450109
+              },
+              "268582": {
+                "pss_gib": 77.70435428619385,
+                "pss_sample_wall": 1790910133.0411394,
+                "pss_read_wall_s": 0.6476029339974048
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          },
+          {
+            "model": "FINAL-v0132-Q4-attempt2",
+            "kind": "candidate",
+            "context": "259500",
+            "repeat": null,
+            "actual_prompt_tokens_tokenizer": 259500,
+            "requested_generated_tokens": 256,
+            "time_utc": "2026-10-02T03:02:23Z",
+            "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/FINAL-v0132-Q4-attempt2-ctx259500-run3.jsonl",
+            "samples": 50,
+            "peak_rss_gib": 78.26620483398438,
+            "min_mem_available_gib": 78.32611846923828,
+            "peak_ram_used_gib": 82.80649948120117,
+            "peak_vram0_gib": 23.298828125,
+            "peak_vram1_gib": 23.48828125,
+            "abort": null,
+            "usage": {
+              "prompt_tokens": 259500,
+              "completion_tokens": 256,
+              "total_tokens": 259756,
+              "prompt_tokens_details": {
+                "cached_tokens": 0
+              }
+            },
+            "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP front door of the Strata engine: it is the process that a user's browser, `chat.py`, or any OpenAI/Anthropic-compatible client actually talks to, and it translates between text and the engine's token-id protocol. Its docstring states the contract plainly: the engine boundary is `Engine.generate(prompt_ids, max_new, sampling, cancel) -> iterator of token ids`, and everything above that boundary is text.\n\nThe file is organized in several layers:\n\n1. **Engine adapters.** `Engine` is a `Protocol` (structural typing) declaring `max_context` and `generate(...)`. Two implementations exist. `MockEngine` replays a scripted completion as token ids (optionally cycling through a list of scripts, one per turn, so tool-call-then-answer flows are testable without a GPU). `StrataEngine` keeps one `strata --serve` subprocess resident \u2014 weights, the expert arena, and the VRAM expert cache load once \u2014 and speaks a line protocol over its stdin/stdout: it writes `GEN <max_new> [sampling keys] <comma-separated ids>` (or `GENI ... <embeddings>` for",
+            "reasoning": "",
+            "actual_prompt_tokens": 259500,
+            "generated_tokens": 256,
+            "ttft_s": 47.01628165599686,
+            "total_wall_s": 49.69474021899805,
+            "api_decode_wall_s": 2.678458563001186,
+            "prompt_processing_wall_s": 46.497800000000005,
+            "decode_wall_s": 2.6948000000000003,
+            "pp_tps": 5580.9,
+            "tg_tps": 95.0,
+            "draft_tokens": 214,
+            "accepted_tokens": 143,
+            "cache_reused_tokens": 0,
+            "timings": {
+              "cache_n": 0,
+              "prompt_n": 259500,
+              "prompt_ms": 46497.8,
+              "prompt_per_token_ms": 0.179,
+              "prompt_per_second": 5580.9,
+              "predicted_n": 256,
+              "predicted_ms": 2694.8,
+              "predicted_per_token_ms": 10.527,
+              "predicted_per_second": 95.0,
+              "draft_n": 214,
+              "draft_n_accepted": 143,
+              "at": 1790910192
+            },
+            "acceptance_pct": 66.82242990654206,
+            "mean_accepted_length": 1.2434782608695651,
+            "final_logical_context_tokens": 259756,
+            "final_kv_occupancy_tokens": 259757,
+            "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+            "verify_rounds": 115,
+            "mean_committed_length": 2.243478260869565,
+            "expert_tiers": {
+              "ram_blobs": 0,
+              "file_blobs": 0,
+              "file_mb": 0.0,
+              "hit_rate": 0.964
+            },
+            "status": "OK",
+            "t_start_monotonic_s": 58063.990085541,
+            "t_first_monotonic_s": 58111.006367197,
+            "t_end_monotonic_s": 58113.68482576,
+            "pss_before": {
+              "268574": {
+                "pss_gib": 0.20548152923583984,
+                "pss_sample_wall": 1790910142.018945,
+                "pss_read_wall_s": 0.0048104439993039705
+              },
+              "268582": {
+                "pss_gib": 77.70435428619385,
+                "pss_sample_wall": 1790910142.6629934,
+                "pss_read_wall_s": 0.6440479439988849
+              }
+            },
+            "pss_after": {
+              "268574": {
+                "pss_gib": 0.20705223083496094,
+                "pss_sample_wall": 1790910193.0331197,
+                "pss_read_wall_s": 0.0053896300014457665
+              },
+              "268582": {
+                "pss_gib": 77.71905612945557,
+                "pss_sample_wall": 1790910193.7250445,
+                "pss_read_wall_s": 0.6919215070010978
+              }
+            },
+            "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+            "candidate": "FINAL-v0132-Q4-attempt2",
+            "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-attempt2.json"
+          }
+        ]
+      }
+    ],
+    "controlled_version_PP_comparison": {
+      "status": "COMPLETE_CONTROLLED_VERSION_AB",
+      "rows": [
+        {
+          "target": 8000,
+          "n_each": 2,
+          "paired_payloads_identical": true,
+          "actual_tokens_v0131": [
+            8000,
+            8000
+          ],
+          "actual_tokens_v0132": [
+            8000,
+            8000
+          ],
+          "pp_tps": {
+            "v0131": 1519.75,
+            "v0132": 1570.9,
+            "delta_percent": 3.3656851455831527
+          },
+          "tg_tps": {
+            "v0131": 105.45,
+            "v0132": 95.94999999999999,
+            "delta_percent": -9.009009009009016
+          },
+          "ttft_s": {
+            "v0131": 5.300931695503095,
+            "v0132": 5.15504433499882,
+            "delta_percent": -2.7521079101629486
+          },
+          "total_wall_s": {
+            "v0131": 7.721592107500328,
+            "v0132": 7.830203729998175,
+            "delta_percent": 1.4065962172794322
+          }
+        },
+        {
+          "target": 16000,
+          "n_each": 2,
+          "paired_payloads_identical": true,
+          "actual_tokens_v0131": [
+            16000,
+            16000
+          ],
+          "actual_tokens_v0132": [
+            16000,
+            16000
+          ],
+          "pp_tps": {
+            "v0131": 2089.55,
+            "v0132": 2156.8500000000004,
+            "delta_percent": 3.220789165131266
+          },
+          "tg_tps": {
+            "v0131": 102.80000000000001,
+            "v0132": 89.80000000000001,
+            "delta_percent": -12.645914396887159
+          },
+          "ttft_s": {
+            "v0131": 7.733997651503159,
+            "v0132": 7.522968862998823,
+            "delta_percent": -2.728586146691181
+          },
+          "total_wall_s": {
+            "v0131": 10.210856163503195,
+            "v0132": 10.39277806750033,
+            "delta_percent": 1.7816518133648929
+          }
+        },
+        {
+          "target": 31400,
+          "n_each": 3,
+          "paired_payloads_identical": true,
+          "actual_tokens_v0131": [
+            31400,
+            31400,
+            31400
+          ],
+          "actual_tokens_v0132": [
+            31400,
+            31400,
+            31400
+          ],
+          "pp_tps": {
+            "v0131": 2546.6,
+            "v0132": 2614.9,
+            "delta_percent": 2.6820073823922153
+          },
+          "tg_tps": {
+            "v0131": 106.7,
+            "v0132": 120.7,
+            "delta_percent": 13.120899718837853
+          },
+          "ttft_s": {
+            "v0131": 12.426166535995435,
+            "v0132": 12.090956312000344,
+            "delta_percent": -2.697615737114678
+          },
+          "total_wall_s": {
+            "v0131": 14.810106366996479,
+            "v0132": 14.19662518700352,
+            "delta_percent": -4.142314476282694
+          }
+        },
+        {
+          "target": 63400,
+          "n_each": 3,
+          "paired_payloads_identical": true,
+          "actual_tokens_v0131": [
+            63400,
+            63400,
+            63400
+          ],
+          "actual_tokens_v0132": [
+            63400,
+            63400,
+            63400
+          ],
+          "pp_tps": {
+            "v0131": 3004.0,
+            "v0132": 3045.0,
+            "delta_percent": 1.3648468708388872
+          },
+          "tg_tps": {
+            "v0131": 92.4,
+            "v0132": 106.4,
+            "delta_percent": 15.15151515151516
+          },
+          "ttft_s": {
+            "v0131": 21.252439568001137,
+            "v0132": 20.962908633999177,
+            "delta_percent": -1.362342111716408
+          },
+          "total_wall_s": {
+            "v0131": 23.979046264001227,
+            "v0132": 23.347764630998427,
+            "delta_percent": -2.6326386214555852
+          }
+        },
+        {
+          "target": 127000,
+          "n_each": 3,
+          "paired_payloads_identical": true,
+          "actual_tokens_v0131": [
+            127000,
+            127000,
+            127000
+          ],
+          "actual_tokens_v0132": [
+            127000,
+            127000,
+            127000
+          ],
+          "pp_tps": {
+            "v0131": 3271.7,
+            "v0132": 3296.5,
+            "delta_percent": 0.7580157104869034
+          },
+          "tg_tps": {
+            "v0131": 87.3,
+            "v0132": 101.1,
+            "delta_percent": 15.807560137457033
+          },
+          "ttft_s": {
+            "v0131": 39.11151377300121,
+            "v0132": 38.79916140699788,
+            "delta_percent": -0.7986199864729926
+          },
+          "total_wall_s": {
+            "v0131": 42.01744362699537,
+            "v0132": 41.34957941400353,
+            "delta_percent": -1.5894927328771513
+          }
+        },
+        {
+          "target": 259500,
+          "n_each": 3,
+          "paired_payloads_identical": true,
+          "actual_tokens_v0131": [
+            259500,
+            259500,
+            259500
+          ],
+          "actual_tokens_v0132": [
+            259500,
+            259500,
+            259500
+          ],
+          "pp_tps": {
+            "v0131": 3508.7,
+            "v0132": 3521.3,
+            "delta_percent": 0.3591073617009277
+          },
+          "tg_tps": {
+            "v0131": 91.7,
+            "v0132": 87.5,
+            "delta_percent": -4.580152671755733
+          },
+          "ttft_s": {
+            "v0131": 74.46654435300297,
+            "v0132": 74.2459394739999,
+            "delta_percent": -0.29624696690276897
+          },
+          "total_wall_s": {
+            "v0131": 77.4050675949984,
+            "v0132": 77.15975225099828,
+            "delta_percent": -0.3169241389771371
+          }
+        }
+      ],
+      "config_plan": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls-request-plan.json",
+      "scope": "Whole runtimeversion comparison, not isolatedpatchcausality; samepairedAPIpayloads,CLIsettings,byteidenticaldensepack/MTP, profile, corpus andphysicalGPU pair. Naturalruntime allocation/timing may differ. Filesystemcoldcache not controlled."
+    },
+    "limits": "Null means unavailable; no invented physicalSSD, per-GPU expert hits or prefill expert/PLE counters. Memory peaks cover whole request, including PP and TG. Medians and peaks must remain distinct."
+  }
+}

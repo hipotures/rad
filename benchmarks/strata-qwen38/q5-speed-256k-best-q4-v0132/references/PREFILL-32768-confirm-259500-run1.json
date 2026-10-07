@@ -1,0 +1,174 @@
+{
+  "model": "PREFILL-32768-confirm-259500",
+  "kind": "candidate",
+  "context": "259500",
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 259500,
+  "requested_generated_tokens": 256,
+  "time_utc": "2026-10-02T00:30:48Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/PREFILL-32768-confirm-259500-run1.jsonl",
+  "samples": 52,
+  "peak_rss_gib": 78.20110321044922,
+  "min_mem_available_gib": 78.5318603515625,
+  "peak_ram_used_gib": 82.60075759887695,
+  "peak_vram0_gib": 23.298828125,
+  "peak_vram1_gib": 23.4921875,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 259500,
+    "completion_tokens": 256,
+    "total_tokens": 259756,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP front door of the Strata project (plan v0.3 P8). It is a Python `ThreadingHTTPServer` that exposes an OpenAI-compatible (`POST /v1/chat/completions`) and an Anthropic-compatible (`POST /v1/messages`) API on top of a token-id engine, plus metadata endpoints (`/v1/models`, `/models`, `/props`, `/slots`, `/health`, `/metrics`, `/mcp`, `/status`). Its responsibilities, in the order the file organizes them:\n\n1. **Engine abstraction.** An `Engine` protocol maps token ids in → token ids out. Two implementations exist:\n   - `MockEngine` replays a scripted completion as token ids so every API path (streaming, tools, cancellation, tests) can be exercised without a GPU.\n   - `StrataEngine` keeps one `strata --serve` process resident (weights, expert arena, VRAM tier load once) and speaks a line protocol over its stdin/stdout: `GEN <max_new> [sampling keys] <ids>` (or `GENI` for image requests) in, `T <id>` token",
+  "reasoning": "",
+  "actual_prompt_tokens": 259500,
+  "generated_tokens": 256,
+  "ttft_s": 49.13133524599834,
+  "total_wall_s": 51.84597769899847,
+  "api_decode_wall_s": 2.714642453000124,
+  "prompt_processing_wall_s": 48.6134,
+  "decode_wall_s": 2.7353,
+  "pp_tps": 5338.0,
+  "tg_tps": 93.6,
+  "draft_tokens": 230,
+  "accepted_tokens": 158,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 259500,
+    "prompt_ms": 48613.4,
+    "prompt_per_token_ms": 0.187,
+    "prompt_per_second": 5338.0,
+    "predicted_n": 256,
+    "predicted_ms": 2735.3,
+    "predicted_per_token_ms": 10.685,
+    "predicted_per_second": 93.6,
+    "draft_n": 230,
+    "draft_n_accepted": 158,
+    "at": 1790901099
+  },
+  "acceptance_pct": 68.69565217391305,
+  "mean_accepted_length": 1.6122448979591837,
+  "final_logical_context_tokens": 259756,
+  "final_kv_occupancy_tokens": 259755,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 98,
+  "mean_committed_length": 2.612244897959184,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.943
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 48968.872728713,
+  "t_first_monotonic_s": 49018.004063959,
+  "t_end_monotonic_s": 49020.718706412,
+  "pss_before": {
+    "219430": {
+      "pss_gib": 0.19484996795654297,
+      "pss_sample_wall": 1790901046.9014692,
+      "pss_read_wall_s": 0.004733912996016443
+    },
+    "219440": {
+      "pss_gib": 77.56737899780273,
+      "pss_sample_wall": 1790901047.5416522,
+      "pss_read_wall_s": 0.6401818489975994
+    }
+  },
+  "pss_after": {
+    "219430": {
+      "pss_gib": 0.19825267791748047,
+      "pss_sample_wall": 1790901100.065853,
+      "pss_read_wall_s": 0.0048317920009139925
+    },
+    "219440": {
+      "pss_gib": 77.6644058227539,
+      "pss_sample_wall": 1790901100.727392,
+      "pss_read_wall_s": 0.6615383109965478
+    }
+  },
+  "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+  "candidate": "PREFILL-32768-confirm-259500",
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/PREFILL-32768-confirm-259500.json",
+  "Strata_HEAD": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+  "Strata_version": "0.1.32",
+  "build_variant": "default",
+  "model_revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+  "full_config": {
+    "exe": "/srv/ai/strata-v0.1.32/build-default/strata",
+    "args": [
+      "--pack",
+      "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+      "--native",
+      "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+      "--expert-profile",
+      "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+      "--expert-cache",
+      "auto",
+      "--spec",
+      "4",
+      "--spec-min-p",
+      "0.5",
+      "--mtp",
+      "/srv/ai/models/strata-v0132/mtp/rt",
+      "--kv",
+      "int8",
+      "--max-context",
+      "262144",
+      "--prefill",
+      "32768"
+    ],
+    "cwd": "/srv/ai/strata-v0.1.32",
+    "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer",
+    "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+    "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/logs/PREFILL-32768-confirm-259500-engine.log",
+    "host": "127.0.0.1",
+    "port": 18085,
+    "lib_dirs": [
+      "/usr/local/cuda/bin",
+      "/usr/local/cuda/lib64"
+    ],
+    "gpu": [
+      0,
+      1
+    ],
+    "layer_split": "24",
+    "effective_experiment_environment": {
+      "STRATA_SPLIT_OWN": null,
+      "STRATA_KV_ROT": null,
+      "STRATA_REFILL_SERIAL": null,
+      "STRATA_SPEC_COUPLED": null
+    }
+  },
+  "full_engine_command": [
+    "/srv/ai/strata-v0.1.32/build-default/strata",
+    "--serve",
+    "--pack",
+    "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+    "--native",
+    "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+    "--expert-profile",
+    "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+    "--expert-cache",
+    "auto",
+    "--spec",
+    "4",
+    "--spec-min-p",
+    "0.5",
+    "--mtp",
+    "/srv/ai/models/strata-v0132/mtp/rt",
+    "--kv",
+    "int8",
+    "--max-context",
+    "262144",
+    "--prefill",
+    "32768",
+    "--layer-split",
+    "24"
+  ],
+  "topology": "layer_split"
+}

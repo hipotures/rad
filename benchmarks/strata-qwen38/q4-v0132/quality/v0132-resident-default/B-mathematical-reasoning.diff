@@ -1,0 +1,61 @@
+--- v0131/B-mathematical-reasoning.txt
++++ v0132-resident-default/B-mathematical-reasoning.txt
+@@ -9,18 +9,18 @@
+ Let $E_1$ be the expected number of *additional* rolls needed given that we have just rolled a number, and we are waiting for the next roll to match it.
+ 
+ **Step 1: Analyze the first roll.**
+-When we start, we must roll the die once. This roll establishes the "previous value" for the next comparison.
++When we start, we must roll the die once. This roll establishes the "current value" we need to match.
+ So, $E_0 = 1 + E_1$.
+ 
+ **Step 2: Analyze the state $E_1$.**
+-We have just rolled a value (say, $x$). We roll the die again.
++We have just rolled a value (say, $x$). We roll again.
+ There are two possibilities for this next roll:
+ 1.  **Match:** The new roll is $x$. The probability of this is $1/6$. In this case, the process stops. We used 1 roll.
+-2.  **No Match:** The new roll is not $x$. The probability of this is $5/6$. In this case, we have used 1 roll, and we are now in the same situation as before: we have a new "previous value" (the one we just rolled), and we need to wait for the next roll to match it. Thus, we are back in state $E_1$.
++2.  **No Match:** The new roll is not $x$. The probability of this is $5/6$. In this case, we have used 1 roll, and we are now in the same situation as before: we have a new current value (the one we just rolled), and we need to wait for the next roll to match it. So, we are back in state $E_1$.
+ 
+ We can write the equation for $E_1$:
+ $$ E_1 = 1 + \left( \frac{1}{6} \cdot 0 \right) + \left( \frac{5}{6} \cdot E_1 \right) $$
+-*Explanation:* We always spend 1 roll. If we match (prob $1/6$), we need 0 more rolls. If we don't match (prob $5/6$), we need $E_1$ more rolls on average.
++*Explanation:* We always spend 1 roll to make the attempt. If we match (prob $1/6$), we need 0 more rolls. If we don't match (prob $5/6$), we need $E_1$ more rolls on average.
+ 
+ **Step 3: Solve for $E_1$.**
+ $$ E_1 = 1 + \frac{5}{6}E_1 $$
+@@ -60,26 +60,27 @@
+ Let $k = n-2$. As $n$ goes from $2$ to $\infty$, $k$ goes from $0$ to $\infty$.
+ $$ P(N=k+2) = \left(\frac{5}{6}\right)^{k} \cdot \frac{1}{6} $$
+ 
+-The expected value $E[N]$ is defined as:
++The expected value $E[N]$ is:
+ $$ E[N] = \sum_{n=2}^{\infty} n \cdot P(N=n) $$
+ Substitute $n = k+2$:
+ $$ E[N] = \sum_{k=0}^{\infty} (k+2) \cdot \left(\frac{5}{6}\right)^{k} \cdot \frac{1}{6} $$
+-$$ E[N] = \frac{1}{6} \left[ \sum_{k=0}^{\infty} k \left(\frac{5}{6}\right)^{k} + \sum_{k=0}^{\infty} 2 \left(\frac{5}{6}\right)^{k} \right] $$
++$$ E[N] = \frac{1}{6} \left[ \sum_{k=0}^{\infty} k \left(\frac{5}{6}\right)^{k} + 2 \sum_{k=0}^{\infty} \left(\frac{5}{6}\right)^{k} \right] $$
+ 
+ We use the standard geometric series formulas for $|r| < 1$:
+ 1.  $\sum_{k=0}^{\infty} r^k = \frac{1}{1-r}$
+ 2.  $\sum_{k=0}^{\infty} k r^k = \frac{r}{(1-r)^2}$
+ 
+ Here, $r = 5/6$.
+-First, calculate $1-r = 1 - 5/6 = 1/6$.
++$$ 1-r = 1 - \frac{5}{6} = \frac{1}{6} $$
+ 
+-**Term 1:** $\sum_{k=0}^{\infty} 2 \left(\frac{5}{6}\right)^{k} = 2 \cdot \frac{1}{1/6} = 2 \cdot 6 = 12$.
++Calculate the sums:
++1.  $\sum_{k=0}^{\infty} \left(\frac{5}{6}\right)^{k} = \frac{1}{1/6} = 6$
++2.  $\sum_{k=0}^{\infty} k \left(\frac{5}{6}\right)^{k} = \frac{5/6}{(1/6)^2} = \frac{5/6}{1/36} = \frac{5}{6} \cdot 36 = 30$
+ 
+-**Term 2:** $\sum_{k=0}^{\infty} k \left(\frac{5}{6}\right)^{k} = \frac{5/6}{(1/6)^2} = \frac{5/6}{1/36} = \frac{5}{6} \cdot 36 = 5 \cdot 6 = 30$.
+-
+-Now substitute these back into the expectation equation:
++Substitute these back into the expectation equation:
++$$ E[N] = \frac{1}{6} [ 30 + 2(6) ] $$
+ $$ E[N] = \frac{1}{6} [ 30 + 12 ] $$
+-$$ E[N] = \frac{1}{6} [ 42 ] $$
++$$ E[N] = \frac{42}{6} $$
+ $$ E[N] = 7 $$
+ 
+ ### Conclusion

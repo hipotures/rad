@@ -1,0 +1,217 @@
+6f32ec0 setup: a tip (not a change) for images on a 12 GB card: --vram-reserve-mib 1000 if a request stalls
+c2d1f19 setup: Unsloth's UD-IQ4_XS is a regular choice (no longer experimental); UD-Q4_K_XL stays experimental
+8b36fa0 docs: README refined + six translations
+1189218 Merge branch 'f-139b-par' into f-139-rel
+cb97e6c Merge branch 'f-139b-spd' into f-139-rel
+8e08550 Merge branch 'f-139b-arc' into f-139-rel
+baed889 Merge branch 'f-139b-old' into f-139-rel
+c6275a7 Merge branch 'f-139b-cpu' into f-139-rel
+5f19911 #583: the byte-budget ring only where it gains; short prompts keep 0.1.39's ring
+bc0fc49 setup: the CUDA 12 engine's driver floor per OS (Windows 527.41 -> 528, Linux 525); the wheel pins match the 12.9.1 toolkit
+5423a69 #583 default on (owner): STRATA_RING_BYTES=0 opts out; DETAILS.md with the measured quality
+63d8f90 setup: --remote-expert-opt recommended for 2+ GPU configs (#578)
+f166564 hip_compat: cudaFuncAttributePreferredSharedMemoryCarveout (#646's fused_gr carveout on HIP)
+06586e3 docs: STRATA_RING_BYTES=1 (#583, opt-in) with its RTX 5070 numbers and quality check
+a93c2ac serve (auto): the chunk and the ring are one budget, and the ring is the better buy
+8c968a5 #583 on 0.1.39b: the ring's byte budget and the loan's corrected count opt-in (STRATA_RING_BYTES=1)
+1a56d71 #465 setup: recommend "parallel" only where the experts mostly fit in VRAM
+0b651f8 #465 serve/test_parallel: the first request decodes long enough to overlap the others on a busy PC
+cef263f #465 docs: the final build's RTX 5070 numbers; the turn-checkpoint exactness check
+895a77b prefill: the streamed ring is a byte budget, so a native pack sets its own slot count
+831a90f #465 engine: INFO slot_cache=0|1 beside batch_slots (the server sends a lone slot request back to the solo path only when the slots keep their conversations)
+9556298 #465 a request left alone in a slot goes back to the solo path; docs: BATCHING.md for one GPU, measured on the RTX 5070
+ab86bb4 docs: Older CPUs (experimental) - what setup does on a CPU without AVX2, what was measured
+9564c73 #465 tools: batch_interleave_test.py (a prompt read beside decoding slots, BYIELD, a next turn from its slot); batch_test.py on Windows
+ec35cf0 cpu: preserve full thread affinity on Windows and Linux (#626)
+4795f98 #465 setup: --parallel N, and the count it recommends for the card
+bebfca9 #465 server: "parallel": N, slots in /metrics, one status per request, a long prompt gives way to a short one
+2fbbfa2 #465 engine: batch slots for one GPU - warn instead of refuse, windows over the active slots, slot conversation cache, prompts read beside decoding slots, BYIELD
+552da41 gfx906 build on 0.1.39: the segmented expert cache (#533) is CUDA-only there too; pinned.cu's std::max beside windows.h
+da3e9a1 docs/INTEL_ARC.md: the experimental Intel Arc engine - what you need, the build, what is tested and what is not
+031ff94 prefill gemm: STRATA_BF16_TC=2, a test mode that runs the FP16 path on any card (gemm_bf16_parity on sm_80+)
+f945515 #646: the single-matrix mmvq does not stage the IQ grids (10-20% slower on the RTX 5070 at 3-8 columns)
+ca1a7c0 setup: --backend sycl tests; Windows points at Linux (setup_intel reads sysfs, which WSL has not)
+deee447 #646 on 0.1.39b: the layer split and the CPU path as before, the resident plan for 8-token windows
+7ba023e sycl: strata-sycl.sh passes ONEAPI_DEVICE_SELECTOR into the container
+84876f7 sycl: stage_room reads the free VRAM (a layer split's later GPUs had none)
+5047172 sycl: port 0.1.39 (re-migration with dpct 2025.3, 3-way merge per docs/INTEL.md)
+58eee0a setup: the offer to share a model across two cards checks the model's own engine (CUDA 12 or 13)
+a43e080 docs: Older GPUs (experimental) - the support matrix, the CUDA 12 engine and how to opt in
+870ebe9 router_dot_parity: the router lookahead's AVX2 and AVX1 dots against a double reference
+9576724 setup: older NVIDIA GPUs through a second, experimental CUDA 12 engine; --cuda 12|13 (#395 #627 #540 #600 #601)
+1f57034 older CPUs (experimental): STRATA_ISA_FLOOR=avx|none, and setup compiles it instead of stopping (#394 #595 #623)
+3a64d02 iq_avx2: STRATA_IQ256_GATHER=0 keeps the scalar grid assembly (parse the value)
+dd24a55 iq: gather the AVX2 codebook from the grid table (STRATA_IQ256_GATHER)
+6d51272 pinned: back the Linux expert arena with transparent huge pages
+fc60278 prefill: a layer split's idle card streams a share of a one-chunk prompt's experts
+fa8dd5c bench: community report, 2x AMD Instinct MI50 (gfx906), Coder IQ1_M, 4K to 128K prompt tokens
+912f535 hip: retain native wave synchronization on HIP 7
+a62c1cd hip: preserve Q2_0 signed zero on gfx1012 with legacy HIP
+73fcc76 hip: add experimental gfx1012 support and legacy BLAS compatibility
+e0c175b gfx906 build (PR #638 follow-up): mrope.hpp's HIP include only in the gfx906 build; tests.list dropped
+44bd7ad refill: improve multi-GPU processing
+4d20d25 core: optimize remote expert helper decode
+ce1e9b2 fused_gr: the gfx906 fast norm/up launches only in the gfx906 build (CUDA and RDNA did not compile)
+f0b3d17 docs: gfx906 verify-window routing in the kernel table
+ccc09c2 gfx906: route the verify window's tokens in one BF16 projection + one top-k (bitwise the per-token calls)
+5c544dd gfx906: K-quant/Q5_1/Q8_0 experts take the CUDA layout; gr_down K-split opt-in; gfx906-aware ctest
+8534ee1 docs: gfx906 (Instinct MI50 / MI60, Radeon VII) build, kernels and measurements in AMD_HIP.md
+4d79aea hip: AMD gfx906 (Instinct MI50 / MI60, Radeon VII; wave64) as an opt-in build, STRATA_HIP_GFX906=ON
+1a3ee38 router lookahead: an AVX1 dot and a plain fallback for CPUs without AVX2 (Strata_Dirigo)
+8fb3c91 QSA attention: PR #540's kernel below sm_75 in the experimental build only
+e3978eb Merge PR #559 (blange48, crazyaimachine): batch slots, pipelined layer split, parking with a split
+5fa9e7f perf(volta): address review - keep BF16X2 remainder GEMMs on cuBLAS, keep Inf, share sq with spt, atomic cc cache
+fd95405 perf(qsa): cut the attention kernel's shuffles and q shared-memory traffic, bit-exact
+5398213 cmake: STRATA_ENABLE_SYCL, the experimental Intel Arc engine (sycl/, off by default)
+800ca98 Volta prompt attention and the Pascal BF16 path: compiled into the experimental build only (PR #600, #395 follow-up)
+b30e815 native experts without AVX2: Q2_0 layers on ggml-cpu, every AVX2 kernel gated (#595)
+b078be0 docs: point the BF16 note at #540 (the BF16-via-FP16 PR #593 was closed in its favor)
+f23ea57 bench: distribution check of the Volta prompt attention (teacher-forced KL, controls)
+7d6482a docs: NVIDIA_V100.md and the measurements of the Volta prompt attention
+06a90a2 qsa_prompt_attn: tensor-core kernel for Volta (sm_70, mma.m8n8k4)
+ff6f9f1 prefill gemm below sm_80: Volta on the FP16 path by default, Turing opt-in, Pascal through fp32 (#655 #540 #395)
+e82947f native experts: gate the AVX2 multi-token kernels on cpu_avx2_ok() (#394)
+016ea2e iq_avx2: the IQ2 sign table at compile time (no static constructor in an AVX2 file)
+055122c fix(cuda,decode): resolve sm_120 IQ3_S generic-pointer fault and restore 100% bit-exactness with main
+cfd3b72 perf(cuda,decode): zero-doorbell verify graph, sub-warp expert packing, shared-mem staging, and batched PLE/MTP
+ab8729e setup: --backend sycl, the Intel Arc engine (experimental, built from source; sycl/setup_intel.py)
+dd0ce1e iq_avx2: build the IQ2 sign table without a variable shift
+3f81bce BF16 tensor-core path: default on for all of compute capability 7.x (Volta too)
+f2fb7c1 sm_75: run the prompt path's BF16 products on the FP16 tensor cores
+357723a setup: gfx1031 (RX 6700 XT) wording and a test (PR #524 follow-up)
+78bb6dc forgot one spot to add in setup.py
+5bd5eec Added gfx1031 experimental support
+2f78b4d Merge PR #423 (maxfridbe): Intel Arc SYCL port of the engine, experimental
+96ccd2a sycl: the stream-all prompt walk by default when the VRAM holds >90% of the experts
+cce52db qsa_select: the top-k past the register kernel's reach on 1,024 threads with a histogram per warp (CUDA) - 9-12x at 262K-524K cells, a 243K-token prompt +26% on an RTX 3060
+daf3b7e sycl: port upstream 0.1.38
+a3277e3 Merge upstream main (0.1.38) into b70
+bd400f7 Layer split comment: KV streaming and images do run across a split
+cff608c Engine 0.1.39: the #577 file-tier regression fixed, the OpenAI Responses API (#451), #606 #620 #458 #533, PR batch; setup requires it
+13f70a3 layer split trim: opt-in on HIP too (STRATA_STAGE_TRIM=1, PR #639)
+0d5387f Merge branch 'f-139-big' into f-139-rel
+6491760 Merge branch 'f-139-prs' into f-139-rel
+ece2e5f Merge branch 'f-139-resp' into f-139-rel
+4fc8876 Merge branch 'f-139-ux' into f-139-rel
+bdd5f50 Merge branch 'f-139-eng' into f-139-rel
+138ce43 serve: a checkpoint that fails on the GPU sync says the GPU stopped responding (#613)
+1807086 tools: conversation_restore_speed.py, decode after a conversation-cache restore vs live (#528)
+645a579 prefill: step diagnosis and a HIP host-DMA switch for the gfx1201 prompt stalls (#579 #613 #541)
+d5469a9 verify: opt-in handshake trace for the gfx1030 timeouts, HIP A/B switches (#649)
+2b47285 setup: recommend the hybrid worker count only with more E-cores than P-cores (#642)
+d595a2b Hot VRAM resize, opt-in: a segmented expert cache, VRAM <reserve>, POST /v1/vram (#533)
+a481806 serve tests: the long fixture answer alternates two tokens (one repeated token is now ended at 256, #606)
+c062690 docs, setup help: --draft-vocab fr and its measured acceptance (#597)
+4f691be strata_mcp: UD-IQ4_XS in the built-in model table, as in setup.py (#621)
+f17d0ea File tier: the #577 re-check's log line on Windows only (the unbuffered reads exist there alone)
+e809f7f setup: Unsloth's UD-IQ4_XS as an experimental choice (#621)
+f0489c9 web: the Model settings card's Save is the primary button (#564)
+0ad8f70 serve: the OpenAI Responses API, POST /v1/responses (#451)
+4e8d036 web: a Model settings view for documented run config keys (#564)
+312f116 Docs: the five reading errors #604 found (the sixth, the n-gram table's unbuffered reads, is in #605's commit)
+0e17d1b SECURITY.md: how to report privately, and what the server exposes (#544)
+0890960 web: a Conversation cache card in the Monitor tab (#596)
+587bb07 Document the decode window profiler (STRATA_VERIFY_PROFILE + STRATA_DECODE_TIMING); --gpu-stages points to it on a native pack (#610)
+553f37b Hit rate: say the PCIe share beside it (#588)
+2bc2dc1 docs: the layer split's per-card dense weights (PR #639), STRATA_ARENA_MMAP (PR #640), make_profile --reorder (#587)
+c129c4c Windows Pascal/Volta source build: link the shared CUDA runtime only (#585)
+61479a8 serve + engine: opt-in "effort_position": "end" keeps the cached conversation when the effort changes (#458)
+0f8cbeb STRATA_ARENA_MMAP: write experts.bin only when the drive has room (PR #640 follow-up)
+12c099b layer split trim: on by default in the HIP builds, opt-in on CUDA (PR #639 follow-up)
+bb7c91b setup: STRATA_NVCC picks the CUDA toolkit; CUDA_HOME is looked at; glibc 2.43 + CUDA 12.9 and gcc 15 documented (#601)
+d533fe9 The expert arena checks the host RAM before it is allocated; the RAM probe reads cgroup v1 too (#633)
+e1e3aa9 docs: AMD_HIP.md - a calibration run by hand on Linux HIP is kept for its card (#566)
+71d41cd --ple-io direct on a rotational disk: warn at start, setup keeps the table in RAM, the stall report counts disk waits (#605)
+e43d072 serve: a literal <think> / </think> in a message is encoded as text (#537)
+0129f22 setup: a calibration on Linux HIP names the AMD card and is reused for it (#566)
+0cc4e86 setup: --draft-vocab fr - the English/code subset plus the tokens of French text (#597)
+3903aab serve: end a reply that repeats one token 256 times in a row (#606)
+19de7f4 q8_1 activations: keep the block's fp16 scale and sum finite (#606)
+0e9814a setup: recommend P-cores + half the E-cores as CPU expert workers on hybrid CPUs (#642)
+f12b99f setup: --vision-tokens N, the most image tokens a picture becomes (#625)
+537588f Parking with a layer split: the draft ring with the last stage, on its GPU; guards; trim log
+e90fbb4 make_profile: --reorder so a trace can rank ahead of a complete base
+fe49e22 setup: --no-browser / "open_browser": false keeps the chat page from opening (#609, #631)
+247b5a1 adaptive swaps: gather the pin spans only when they are pinned (PR #640 follow-up)
+3982ec7 layer_split: check it before the start, accept a JSON list, say the format with an example (#644)
+e30dd85 STRATA_ARENA_MMAP=1: the expert arena as a read-only mapped file (Linux), for small-RAM machines
+efec569 layer split trim: CUDA0 keeps every layer's router with --mmap-experts (PR #639 follow-up)
+e50f266 layer split: with explicit split points each GPU loads only its own layers' dense weights
+ca8125c setup: running it again keeps the run config's keys it does not write (#629)
+7c77eae Load the native head and the logits before the expert arena; name the free VRAM when they fail (#620)
+4f3973a serve: read the /load and /unload body before replying (#630)
+f4a2f0a File tier: decide unbuffered reads from the expert bytes it reads, again once the RAM copy is built (#577)
+e50592b serve: a malformed "tools" value is a 400, not a dropped connection (#592)
+d86dcb7 serve: restart() keeps 0.1.38's close() (PR #637 follow-up)
+2cb4bde serve: restart a dead engine for real - wait for the old process, retry the start, keep the last known context
+f67bf51 Parking with a layer split: the draft ring once, every stage's K/V reused, checkpoints moved not copied
+220ccbb Tests and docs: parking with a layer split, tools/parking_test.py, a Testing section
+e11166b Conversation parking with --layer-split
+c67052c server: a client that stops reading early keeps the engine in step
+ba707d8 Several conversations at once: batch slots, pipelined layer split, per-stage dense weights
+4ba35fd sycl: OpenAI logprobs on /v1/chat/completions (engine LP lines + server_intel)
+88c3ace sycl: port open upstream PRs #385 #463 #453 #374 #363 #407 #413 onto 0.1.35
+41ad902 sycl: port upstream 0.1.35 (re-migration of its changed engine files)
+e5c2836 Merge upstream main (0.1.35) into b70
+57bd713 sycl: pipeline the expert cache's profile fill (model load 3-4x faster)
+3ee292a sycl: read streamed experts from the right shard; fix IQ2_XS products (Swift 1.5 runs)
+26f8056 sycl: port upstream 0.1.33 (re-migration of its six engine files)
+a7ef65f Merge upstream main (0.1.33) into b70
+bf8e11d sycl: fix the prompt-slot borrow hang (stager event wait under L0 v2); borrow above 32K again
+35809f8 sycl: port upstream 0.1.32 (re-migration 3-way merge)
+33706a3 Merge upstream main (0.1.32) into b70; Intel code kept out of shared files
+46b366b sycl: parity tests wait like cudaMemcpy; drain the refill ring in long prompts
+3ed36e0 docs/INTEL.md: lanes per row of the expert kernels measured per verify round (no difference)
+4951fd0 sycl: refresh the port to upstream 0.1.31
+8bbefac PR hygiene: licenses for the vendored code, a generic Intel GPU sampler, no generated files
+f6c30c0 Merge upstream main (engine 0.1.31) into b70
+717e7e8 serve: Intel Arc readings in the Monitor tab; a model menu for hosts that swap models
+d9ebe6e docs/INTEL.md: the original Qwen3.8-Flash-Next IQ2_XS runs on the B70 (51-61 tok/s)
+6e6ca04 docs/INTEL.md: k8v4 long-context rows and the API figure on the current build
+381373c docs/INTEL.md: re-measured on the current build, long contexts included
+03c034e sycl: GR norm per (token, stream), aligned loads in the IQ3_XXS/IQ3_S/IQ2_S expert dots
+89e4de4 docs/INTEL.md: planned item 9, the original IQ2_XS with the expert overflow in the host mirror
+20a2ccf sycl: IQ4_NL expert dots with the codebook in registers and aligned loads (decode 70.8 -> 76.1 tok/s)
+288d57b docs/INTEL.md: current numbers up front (SYCL port 70.8 tok/s decode, 799 tok/s prompt)
+0800340 serve: log each request's client; SYCL wrapper without the image's health check
+dcf251c sycl: GR down projection sliced by columns (decode 65.5 -> 70.6 tok/s)
+d119113 sycl: wide Q8_0/IQ4_NL decode kernels, aligned Q6_K activation loads (decode 63.4 -> 65.6 tok/s)
+882764d sycl: decode 54 -> 62.6 tok/s: parallel resident plan, untiled GR down, wide Q4_K/Q5_K/IQ4_XS
+38a979d sycl: aligned loads for the Q6_K decode kernel (decode 45 -> 54 tok/s); PLE gather trace
+8aca6c8 sycl: SIMD16 variants of the decode mmvq kernels (opt-in STRATA_MMVQ_SG), mmvq_sg_bench
+1f79044 sycl: pinned host mirror for experts missing from VRAM, read by the device plan
+a574bff setup/docs: KV streaming for the SYCL engine from 64K - 256K context decodes at 31 tok/s (from 4-5)
+b40bf7b setup: Strata's SYCL engine on Intel cards when it is built; sycl: clean exit in serve mode
+4fa86aa sycl: serve the port - strata-sycl.sh runs the engine in the oneAPI image as server.py's exe (36 tok/s sampled)
+7f9a502 sycl: STRATA_DUMP_SEL (the prompt path's selected cells); INTEL.md - XMX v2 in the full matrix, selection overlap
+80be39e sycl: XMX prompt attention v2 (1.5x v1, k8v4 parity complete), long-context x KV-type table
+fc8a4de sycl: lend cache slots to the prompt path above a 32K context - 80,000 tokens at 1,062 tok/s, decode 35-40 after
+e3e97c9 sycl: refresh for upstream 0.1.28-0.1.29, fix the streamed-expert prompt path (stale ring pointers, stream-all hang)
+35a147f Merge remote-tracking branch 'origin/main' into b70
+51a9249 docs: INTEL.md - 80k tokens at 1,065 tok/s with 12 staging threads; the SSD is the floor of the streamed experts
+66699fb docs: INTEL.md - the 80,000-token prompt: the VRAM plan trap, expert streaming per chunk, where the 77 s go
+cbb4728 sycl: PLE rows - a 64-deep read queue and a short first prompt chunk (2,184 tokens 711 -> 765 tok/s, 8,000 857 -> 986)
+3249953 sycl: iq4_nl dequant as runs of 8 (0.024 -> 0.017 ms per expert), host timers around the prompt path's per-layer grouping
+bf804a1 sycl: the speed round - warm-up captures, commit/draft overlap, vector-store dequant, XMX kernels (opt-in), profiles
+b7d88b9 docs: INTEL.md - the merged port's numbers on the B70 (46.5 / 38.3 tok/s decode, 566 tok/s prompt)
+c3bb85b sycl: refresh the port for upstream 0.1.25-0.1.27 (re-migration merge), AOT divide rounding, hybrid K8V4 KV
+6a7c357 Merge remote-tracking branch 'origin/main' into b70
+52fb638 docs: 42.7 tok/s decode at the 2,185-token context with MTP (prompt 475 tok/s in the same run)
+511ae75 docs: 45.3 tok/s decode with the base model's MTP draft layer (87% accepted) - 1.8x llama.cpp on the same card
+8303db2 docs: like-for-like against llama.cpp on the same prompt - prompt 560 vs 138-319 tok/s, decode 20.8 vs 24-26
+20e5b1a sycl: Q6_K 16-byte-load kernel (wide projections only), mmvq bench correctness check; bandwidth probe
+6e02add sycl: long prompts - 693 tok/s at 2k tokens; the streaming source is a thread-safe 512-slot keyed cache
+c382f84 sycl: clean exit, per-kernel profiling, Q6_K unpack hoisted; measured: the mmvq kernels run at 110-130 GB/s warm
+36aa5bc sycl: fused multi-token router for 256 experts (was 512-only); 16.95 tok/s decode
+21c3f48 sycl: multi-entry expert dots - the resident-expert kernels 2.3x faster on iq3_xxs layers
+3600536 sycl: AOT build (bmg-g31) - 15.2 tok/s decode, 28.8 tok/s prompt, first token in 0.85 s, no JIT
+8c789e6 sycl: ~13 tok/s steady state, coherent 64-token output; window timing, eager stage profiler, docs
+35b58f9 sycl: first light - the SYCL engine generates correct text on the Arc Pro B70
+7021c80 sycl: the CUDA engine migrated to SYCL - builds with oneAPI, 19 of 22 kernel parity tests pass on the Arc Pro B70
+0741381 docs: 128k context proven on the B70 - a 105k-token prompt read at 424 tok/s
+34cae9e docs/INTEL.md: how much context fits on a 32 GB card, measured
+bcfcf40 gitignore: start-llama.sh, generated by setup on the Intel path
+5665315 README: the Intel Arc port and the rig it was tested on, up top
+8e1354b docs/INTEL.md: --port and --host, learned the hard way (8080 is open-webui here)
+43cd6bd setup: an Intel Arc path (no CUDA), and the run script starts llama-server itself
+2e4c95e serve: a llama.cpp engine behind the same boundary (--engine llama)

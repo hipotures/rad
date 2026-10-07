@@ -1,0 +1,5 @@
+{
+  "failure": "test_json_schema_text_format expected full schema validation but optional jsonschema was absent from upstream requirements.txt. Source structured.py documents object-only fallback without it.",
+  "resolution": "Install identical pinned jsonschema==4.26.0 in both isolated venvs; no upstream/source changes. Preserve initial failing test log; rerun full suite.",
+  "upstream_recommendation": "test_responses.py should skip schema-invalid expectations when optional jsonschema absent, or test dependencies should declare it."
+}

@@ -1,0 +1,209 @@
+# Repository Architecture: Local Coding-Agent Service
+
+## 1. High-Level Overview
+
+This service acts as a **single-process gateway** that:
+1. Accepts OpenAI-compatible `/v1/chat/completions` streaming requests.
+2. Serializes all inference requests through a **single resident GPU worker** (to avoid GPU contention and ensure deterministic resource usage).
+3. Manages **prompt caching** correctly across multiple clients by isolating cache contexts per session/client.
+4. Records per-request metrics (latency, token counts, cache hits/misses).
+5. Handles cancellation, process failure recovery, and graceful shutdown.
+
+### Key Design Principles
+- **Single GPU Worker**: One long-lived subprocess owns the GPU. The main service communicates via IPC (Unix domain sockets or named pipes).
+- **Sequential Queue**: Requests are queued and processed one-at-a-time to prevent GPU memory thrashing and ensure fairness.
+- **Client-Isolated Caching**: Prompt caches are keyed by `(client_id, conversation_id)` to prevent cross-client cache pollution.
+- **Crash Resilience**: If the GPU worker crashes, the service detects it, restarts it, and re-queues pending requests.
+
+---
+
+## 2. Module Boundaries
+
+| Module | Responsibility |
+|--------|----------------|
+| `api/` | HTTP server, OpenAI-compatible request parsing, streaming response formatting, client identification. |
+| `queue/` | In-memory FIFO queue with priority support, request lifecycle management, cancellation propagation. |
+| `worker/` | Manages the resident GPU inference subprocess, IPC communication, health checks, restart logic. |
+| `cache/` | Prompt cache manager: key generation, eviction policy, cache hit/miss tracking. Isolated per client/session. |
+| `metrics/` | Per-request metric collection, aggregation, export (Prometheus-compatible or JSON logs). |
+| `config/` | Configuration loading, validation, defaults. |
+| `models/` | Shared data structures: `Request`, `Response`, `Metrics`, `CacheEntry`. |
+| `utils/` | Logging, error handling, IPC helpers, tokenization utilities. |
+
+---
+
+## 3. Concrete File Tree
+
+```
+coding-agent-service/
+├── README.md
+├── pyproject.toml
+├── src/
+│   └── coding_agent/
+│       ├── __init__.py
+│       ├── main.py                  # Entry point: starts API server + worker manager
+│       ├── config/
+│       │   ├── __init__.py
+│       │   ├── loader.py            # Load YAML/env config
+│       │   └── schema.py            # Pydantic models for config
+│       ├── api/
+│       │   ├── __init__.py
+│       │   ├── server.py            # FastAPI/Starlette app setup
+│       │   ├── routes.py            # /v1/chat/completions endpoint
+│       │   ├── serializers.py       # OpenAI request/response parsing
+│       │   └── middleware.py        # Client ID extraction, logging
+│       ├── queue/
+│       │   ├── __init__.py
+│       │   ├── manager.py           # Async FIFO queue, request lifecycle
+│       │   ├── request.py           # QueuedRequest dataclass
+│       │   └── cancellation.py      # Cancellation token propagation
+│       ├── worker/
+│       │   ├── __init__.py
+│       │   ├── manager.py           # Subprocess lifecycle, restart logic
+│       │   ├── ipc.py               # Unix socket / pipe communication
+│       │   ├── protocol.py          # Message format for IPC
+│       │   └── health.py            # Heartbeat, crash detection
+│       ├── cache/
+│       │   ├── __init__.py
+│       │   ├── manager.py           # Cache orchestration
+│       │   ├── store.py             # In-memory LRU cache with TTL
+│       │   ├── keying.py            # Generate cache keys from (client_id, conv_id, prompt_hash)
+│       │   └── policy.py            # Eviction, TTL, size limits
+│       ├── metrics/
+│       │   ├── __init__.py
+│       │   ├── collector.py         # Per-request metric recording
+│       │   ├── exporter.py          # Prometheus / JSON log export
+│       │   └── models.py            # Metric dataclasses
+│       ├── models/
+│       │   ├── __init__.py
+│       │   ├── request.py           # InferenceRequest
+│       │   ├── response.py          # InferenceResponse, StreamChunk
+│       │   └── metrics.py           # RequestMetrics
+│       └── utils/
+│           ├── __init__.py
+│           ├── logging.py           # Structured logging setup
+│           ├── errors.py            # Custom exceptions
+│           └── tokens.py            # Token counting helpers
+├── tests/
+│   ├── test_api.py
+│   ├── test_queue.py
+│   ├── test_cache.py
+│   ├── test_worker_recovery.py
+│   └── test_metrics.py
+├── configs/
+│   └── default.yaml
+└── scripts/
+    └── run_worker.py                # Standalone GPU worker entry point
+```
+
+---
+
+## 4. Request Flow
+
+```
+Client → API Server → Queue Manager → Worker Manager → GPU Worker
+                ↓              ↓              ↓
+           Metrics        Cache Check     IPC Send
+           Collector       (hit/miss)      Stream Back
+```
+
+1. **API Layer**: Parses OpenAI request, extracts `client_id` (from header or API key), generates `request_id`.
+2. **Cache Check**: Before queuing, check if prompt is cached for this `(client_id, conversation_id)`. If hit, return cached response immediately (no GPU work).
+3. **Queue**: Enqueue `QueuedRequest` with cancellation token.
+4. **Worker Dispatch**: Worker manager pops next request, sends via IPC to GPU worker.
+5. **Streaming**: GPU worker streams tokens back via IPC. API layer forwards as SSE to client.
+6. **Metrics**: Record start/end time, token counts, cache status, errors.
+7. **Cache Update**: On successful completion, store full response in cache keyed by `(client_id, conversation_id, prompt_hash)`.
+
+---
+
+## 5. Cancellation
+
+- **Client Disconnect**: FastAPI detects client disconnect via `request.is_disconnected()`.
+- **Cancellation Token**: Each `QueuedRequest` holds an `asyncio.Event` or `anyio.CancelScope`.
+- **Propagation**:
+  - If request is **in queue**: Remove from queue, mark as cancelled.
+  - If request is **in-flight**: Send `CANCEL` message via IPC to GPU worker. Worker aborts generation, releases GPU memory.
+  - If request is **completed**: No-op.
+- **Cleanup**: Cancelled requests do not update cache. Metrics record `status=cancelled`.
+
+---
+
+## 6. Process Failure Recovery
+
+### Detection
+- **Heartbeat**: GPU worker sends periodic heartbeats via IPC. If missed for `N` seconds, mark as dead.
+- **Exit Code**: Monitor subprocess exit code. Non-zero exit → crash.
+
+### Recovery Steps
+1. **Detect Crash**: Worker manager detects dead subprocess.
+2. **Fail In-Flight Requests**: All requests currently being processed by the dead worker are marked as `failed` with error `WORKER_CRASH`.
+3. **Restart Worker**: Spawn new GPU worker subprocess with same model/config.
+4. **Re-queue Pending**: Requests still in queue remain queued. They will be processed by the new worker.
+5. **Notify Clients**: In-flight requests receive an error response. Clients can retry.
+6. **Cache Preservation**: Cache is in the main process, so it survives worker restarts.
+
+### Idempotency
+- Requests include a `request_id`. If a client retries with the same `request_id`, the service can check if it was already processed (via metrics store) and return the cached result if available.
+
+---
+
+## 7. Prompt Caching Correctness Across Clients
+
+### Problem
+If two clients send identical prompts, sharing a cache could leak data or cause incorrect responses if context differs.
+
+### Solution: Client-Isolated Cache Keys
+```python
+cache_key = hash(
+    client_id,          # Unique per API key or session
+    conversation_id,    # From request metadata
+    prompt_hash,        # SHA256 of serialized messages
+    model_version       # Model hash to invalidate on model update
+)
+```
+
+### Cache Store Design
+- **In-Memory LRU** with TTL (e.g., 1 hour).
+- **Per-Client Quotas**: Limit cache size per `client_id` to prevent one client from evicting others.
+- **No Cross-Client Sharing**: Even if prompts are identical, different `client_id` → different cache entries.
+- **Explicit Invalidation**: On model reload or config change, clear entire cache.
+
+### Why Not Share?
+- **Security**: Prevents information leakage between tenants.
+- **Correctness**: Different clients may have different system prompts, tools, or context windows.
+- **Simplicity**: Avoids complex cache coherence protocols.
+
+---
+
+## 8. Two Tradeoffs
+
+### Tradeoff 1: Sequential Queue vs. Parallel Batching
+
+| Aspect | Sequential Queue (Chosen) | Parallel Batching |
+|--------|---------------------------|-------------------|
+| **GPU Utilization** | Lower (idle between requests) | Higher (batch multiple requests) |
+| **Latency** | Predictable, no head-of-line blocking beyond queue | Lower average latency under load |
+| **Complexity** | Simple, deterministic | Complex: batch formation, timeout, partial failures |
+| **Memory** | Lower peak GPU memory | Higher peak (batch size × context) |
+| **Fairness** | Strict FIFO | Harder to guarantee fairness |
+
+**Why Sequential?** For a local coding-agent service, predictability and simplicity outweigh throughput. GPU memory is limited; batching risks OOM. Sequential processing ensures stable latency and easier debugging.
+
+### Tradeoff 2: In-Process Cache vs. External Cache (Redis)
+
+| Aspect | In-Process Cache (Chosen) | External Cache (Redis) |
+|--------|---------------------------|------------------------|
+| **Latency** | Sub-millisecond | ~1–5 ms network round-trip |
+| **Durability** | Lost on service restart | Survives restarts |
+| **Scalability** | Single-process only | Multi-process/service sharing |
+| **Complexity** | Minimal dependencies | Requires Redis deployment |
+| **Consistency** | Simple, no race conditions | Requires locking or versioning |
+
+**Why In-Process?** The service is single-process by design (one GPU worker). An external cache adds operational overhead and latency for marginal benefit. Cache is ephemeral (TTL-based), so durability is not critical. If scaling to multiple GPU workers is needed later, this can be revisited.
+
+---
+
+## 9. Summary
+
+This architecture prioritizes **simplicity, correctness, and resilience** for a local single-GPU service. By isolating the GPU worker, serializing requests, and using client-scoped caching, it avoids common pitfalls like cache pollution, GPU contention, and inconsistent state. Cancellation and crash recovery are handled at the orchestration layer, keeping the GPU worker stateless and easy to restart.

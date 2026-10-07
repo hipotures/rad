@@ -1,0 +1,298 @@
+--- v0132-layer-default/C-repository-architecture.txt
++++ v0132-layer-own/C-repository-architecture.txt
+@@ -5,30 +5,29 @@
+ This service acts as a **single-process gateway** that:
+ 1. Accepts OpenAI-compatible `/v1/chat/completions` streaming requests.
+ 2. Serializes all inference requests through a **single resident GPU worker** (to avoid GPU contention and ensure deterministic resource usage).
+-3. Manages **prompt caching** correctly across multiple clients by isolating cache contexts per session/client.
+-4. Records per-request metrics (latency, token counts, cache hits/misses).
+-5. Handles cancellation, process failure recovery, and graceful shutdown.
++3. Maintains **per-client prompt caches** to maximize KV-cache reuse across turns.
++4. Records granular metrics per request.
++5. Handles cancellation, process crashes, and backpressure gracefully.
+ 
+-### Key Design Principles
+-- **Single GPU Worker**: One long-lived subprocess owns the GPU. The main service communicates via IPC (Unix domain sockets or named pipes).
+-- **Sequential Queue**: All requests are queued and processed one-by-one to prevent GPU memory thrashing and ensure fairness.
+-- **Client-Isolated Prompt Caching**: Each client session gets its own cache context. The GPU worker maintains a cache per session ID, not globally.
+-- **Crash Resilience**: If the GPU worker crashes, the service detects it, restarts it, and fails pending requests with a retryable error.
++### Core Design Principles
++- **Single Writer to GPU**: One resident inference process owns the GPU. All requests are queued and executed sequentially.
++- **Stateful Caching per Client**: Prompt caching is keyed by `client_id` (or session ID) to prevent cross-client cache pollution.
++- **Decoupled Control Plane**: The HTTP server, queue, and GPU worker are separate modules communicating via channels/queues.
++- **Crash-Isolated Worker**: If the GPU worker crashes, the gateway detects it, restarts it, and fails pending requests with a retryable error.
+ 
+ ---
+ 
+ ## 2. Module Boundaries
+ 
+-| Module | Responsibility |
+-|--------|---------------|
+-| `api/` | HTTP server, OpenAI-compatible request parsing, streaming response formatting, authentication, rate limiting. |
+-| `queue/` | In-memory FIFO queue for inference requests. Enforces sequential processing. Handles backpressure. |
+-| `worker/` | Manages the lifecycle of the resident GPU inference subprocess. IPC communication, health checks, restart logic. |
+-| `cache/` | Prompt cache manager. Maps `session_id` → cache context. Ensures cache isolation between clients. |
+-| `metrics/` | Collects per-request metrics (latency, tokens, cache hits). Exposes `/metrics` endpoint. |
+-| `config/` | Configuration loading (model path, GPU device, cache size, timeouts). |
+-| `proto/` | Protobuf or JSON schema definitions for IPC messages between main service and GPU worker. |
+-| `logging/` | Structured logging with request IDs for tracing. |
++| Module | Responsibility | Key Interfaces |
++|--------|---------------|----------------|
++| `api` | HTTP server, OpenAI-compatible request parsing, streaming response formatting | `handle_chat_completion(req) -> Stream` |
++| `queue` | FIFO request queue, backpressure, cancellation propagation | `enqueue(req) -> Result<Stream, Error>`, `cancel(request_id)` |
++| `worker` | Resident GPU inference process, model loading, token generation | `run(model_path)`, `generate(prompt, cache_key) -> Stream` |
++| `cache` | Per-client prompt cache management, eviction, correctness guarantees | `get_or_create(client_id) -> CacheHandle`, `invalidate(client_id)` |
++| `metrics` | Per-request timing, token counts, queue depth, cache hit/miss | `record(request_id, metrics)` |
++| `recovery` | Worker health monitoring, restart logic, request failure handling | `monitor_worker()`, `on_worker_crash()` |
++| `config` | Configuration loading, validation | `load_config() -> Config` |
+ 
+ ---
+ 
+@@ -36,155 +35,139 @@
+ 
+ ```
+ coding-agent-service/
++├── Cargo.toml                 # Rust workspace root (or package.json for Node/TS)
+ ├── README.md
+-├── pyproject.toml
+-├── Dockerfile
+-├── docker-compose.yml
+-├── config/
+-│   ├── __init__.py
+-│   ├── settings.py          # Pydantic settings: model path, GPU device, cache size, timeouts
+-│   └── logging_config.py    # Structured logging setup
++├── docs/
++│   ├── architecture.md
++│   └── api-spec.md
+ ├── src/
+-│   ├── __init__.py
+-│   ├── main.py              # Entry point: starts API server, worker manager, metrics server
++│   ├── main.rs                # Entry point: wires modules together
+ │   ├── api/
+-│   │   ├── __init__.py
+-│   │   ├── server.py        # FastAPI/Starlette app, routes, middleware
+-│   │   ├── handlers.py      # Request handlers: /v1/chat/completions, /health, /metrics
+-│   │   ├── models.py        # Pydantic models for OpenAI-compatible requests/responses
+-│   │   └── auth.py          # API key validation, rate limiting
++│   │   ├── mod.rs             # HTTP server setup (axum/actix)
++│   │   ├── handlers.rs        # /v1/chat/completions handler
++│   │   ├── streaming.rs       # SSE/streaming response formatting
++│   │   └── types.rs           # OpenAI-compatible request/response structs
+ │   ├── queue/
+-│   │   ├── __init__.py
+-│   │   ├── request_queue.py # Async FIFO queue with backpressure
+-│   │   └── task.py          # InferenceTask dataclass: request, session_id, cancel_event, metrics
++│   │   ├── mod.rs             # Queue interface
++│   │   ├── fifo.rs            # FIFO queue implementation
++│   │   └── cancellation.rs    # Cancellation token propagation
+ │   ├── worker/
+-│   │   ├── __init__.py
+-│   │   ├── manager.py       # WorkerManager: starts/stops/restarts GPU subprocess, health checks
+-│   │   ├── ipc.py           # IPC client: sends requests to worker, receives streaming chunks
+-│   │   ├── protocol.py      # Message schemas for IPC (JSON or Protobuf)
+-│   │   └── gpu_worker.py    # Standalone script: loads model, runs inference, manages cache
++│   │   ├── mod.rs             # Worker lifecycle management
++│   │   ├── gpu_worker.rs      # Resident GPU inference process (subprocess or thread)
++│   │   ├── inference.rs       # Token generation loop, KV-cache interaction
++│   │   └── health.rs          # Heartbeat, crash detection
+ │   ├── cache/
+-│   │   ├── __init__.py
+-│   │   ├── manager.py       # CacheManager: per-session cache contexts, eviction policy
+-│   │   └── context.py       # CacheContext: stores KV cache state for a session
++│   │   ├── mod.rs             # Cache interface
++│   │   ├── per_client.rs      # Per-client prompt cache (LRU + TTL)
++│   │   └── correctness.rs     # Cache key derivation, invalidation rules
+ │   ├── metrics/
+-│   │   ├── __init__.py
+-│   │   ├── collector.py     # MetricsCollector: records latency, tokens, cache hits
+-│   │   └── exporter.py      # Prometheus-compatible metrics exporter
+-│   └── utils/
+-│       ├── __init__.py
+-│       ├── cancellation.py  # Cancellation token utilities
+-│       └── errors.py        # Custom exceptions: WorkerCrashed, QueueFull, CacheMiss
++│   │   ├── mod.rs             # Metrics collection interface
++│   │   ├── collector.rs       # Per-request metrics recording
++│   │   └── exporter.rs        # Prometheus/JSON export
++│   ├── recovery/
++│   │   ├── mod.rs             # Recovery orchestration
++│   │   ├── restart.rs         # Worker restart logic
++│   │   └── failover.rs        # Request failure handling
++│   └── config/
++│       ├── mod.rs             # Config loading
++│       └── schema.rs          # Config validation
+ ├── tests/
+-│   ├── __init__.py
+-│   ├── test_api.py
+-│   ├── test_queue.py
+-│   ├── test_worker.py
+-│   ├── test_cache.py
+-│   └── test_metrics.py
++│   ├── integration/
++│   │   ├── api_test.rs
++│   │   ├── cancellation_test.rs
++│   │   └── crash_recovery_test.rs
++│   └── unit/
++│       ├── cache_test.rs
++│       └── queue_test.rs
+ ├── scripts/
+-│   ├── start_worker.sh      # Helper to start GPU worker standalone for debugging
+-│   └── benchmark.py         # Load testing script
+-└── docs/
+-    ├── architecture.md
+-    └── api.md
++│   ├── start.sh               # Launch service
++│   └── healthcheck.sh         # Liveness probe
++└── config/
++    └── default.toml           # Default configuration
+ ```
+ 
+ ---
+ 
+-## 4. Detailed Design
++## 4. Key Mechanisms
+ 
+ ### 4.1 Request Flow
+ 
+ ```
+-Client → API Server → Queue → Worker Manager → GPU Worker → Cache → Response Stream
++Client → API Handler → Queue → Worker → GPU
++                ↓           ↓
++            Metrics     Cache Lookup
+ ```
+ 
+-1. **API Server** receives a `/v1/chat/completions` request.
+-2. Extracts `session_id` (from header `X-Session-ID` or derived from API key + conversation ID).
+-3. Creates an `InferenceTask` with:
+-   - Request payload
+-   - `session_id`
+-   - `cancel_event` (asyncio.Event)
+-   - `metrics` object
+-4. Enqueues the task into the `RequestQueue`.
+-5. **Worker Manager** pops the next task from the queue.
+-6. Sends the task to the **GPU Worker** via IPC, including the `session_id`.
+-7. **GPU Worker**:
+-   - Looks up the `CacheContext` for the `session_id`.
+-   - Runs inference with prompt caching enabled.
+-   - Streams tokens back via IPC.
+-   - Updates cache context after completion.
+-8. **API Server** streams tokens back to the client.
+-9. On completion, **Metrics Collector** records:
+-   - Total latency
+-   - Time in queue
+-   - Time in inference
+-   - Token counts (prompt, completion)
+-   - Cache hit/miss status
++1. **API Handler** parses the OpenAI request, extracts `client_id` (from header or session), and creates a `Request` object with a unique `request_id`.
++2. **Queue** enqueues the request. If the queue is full, it returns `429 Too Many Requests`.
++3. **Worker** dequeues the request, looks up the per-client cache, runs inference, and streams tokens back.
++4. **Metrics** records timestamps, token counts, cache hit/miss, and queue wait time.
++5. **API Handler** streams tokens back to the client via SSE.
+ 
+ ### 4.2 Cancellation
+ 
+-- **Client Disconnect**: If the client disconnects, the API server sets the `cancel_event` on the `InferenceTask`.
+-- **Queue Cancellation**: If the task is still in the queue, it is removed and marked as cancelled.
+-- **Worker Cancellation**: If the task is already being processed, the API server sends a `CANCEL` message to the GPU worker via IPC. The worker checks the cancellation flag between token generations and aborts inference.
+-- **Timeouts**: Each request has a configurable timeout. If exceeded, the task is cancelled.
++- Each request has a `CancellationToken` (e.g., `tokio::sync::watch` or `crossbeam::channel`).
++- When the client disconnects, the HTTP handler drops the response stream, which triggers cancellation.
++- The cancellation token is passed through the queue to the worker.
++- The worker checks the token between token generations and aborts if cancelled.
++- **Important**: Cancellation does **not** invalidate the cache. Partially generated tokens are discarded, but the cache state remains consistent because we only commit cache updates after successful completion.
+ 
+ ### 4.3 Process Failure Recovery
+ 
+-- **Health Checks**: The `WorkerManager` periodically pings the GPU worker via IPC. If no response within a timeout, the worker is considered dead.
+-- **Restart Strategy**:
+-  1. Detect worker crash (IPC connection closed or health check failure).
+-  2. Mark all in-flight tasks as failed with `WorkerCrashed` error.
+-  3. Restart the GPU worker subprocess.
+-  4. Clear all cache contexts (since the worker restarted, caches are lost).
+-  5. Resume processing new requests from the queue.
+-- **Graceful Shutdown**: On SIGTERM, the API server stops accepting new requests, drains the queue, and shuts down the worker.
++- The **GPU worker** runs as a separate OS process (or a supervised thread) to isolate GPU crashes.
++- The **recovery module** monitors the worker via:
++  - Heartbeat messages over a Unix socket or shared memory.
++  - Process exit code monitoring.
++- On crash:
++  1. All pending requests in the queue are marked as `Failed` with a retryable error (`503 Service Unavailable`).
++  2. The worker is restarted with the same model configuration.
++  3. The cache is **cleared** because the KV-cache state is lost with the process.
++  4. New requests proceed with cold cache.
++- **Why clear cache?** The KV-cache is tied to the model weights and internal state. After a restart, the cache is invalid. Keeping stale cache entries would cause incorrect outputs.
+ 
+-### 4.4 Prompt Caching Correctness
++### 4.4 Prompt Caching Correctness Across Clients
+ 
+-**Problem**: If two clients share the same GPU worker, their KV caches must not interfere.
++**Problem**: If two clients send similar prompts, sharing a cache could leak data or cause incorrect responses if the cache key is not unique.
+ 
+ **Solution**:
+-- Each `session_id` maps to a unique `CacheContext` in the GPU worker.
+-- The `CacheContext` stores:
+-  - KV cache tensors for the session
+-  - Last token position
+-  - Cache metadata (size, last access time)
+-- **Cache Isolation**: The GPU worker uses `session_id` to select the correct cache context before inference.
+-- **Cache Eviction**: LRU eviction per session. If total cache memory exceeds a limit, the least-recently-used session’s cache is evicted.
+-- **Cache Invalidation**: If a client sends a new conversation (different `session_id`), a new cache context is created. If the same `session_id` is reused, the existing cache is updated.
+-
+-**Key Insight**: The cache is **not** shared across sessions. This ensures correctness but may reduce cache hit rates for identical prompts from different clients. This is a deliberate tradeoff for isolation.
++- **Cache Key**: `(client_id, model_version, prompt_hash, generation_params_hash)`
++  - `client_id`: Derived from an API key, session ID, or IP + user-agent hash.
++  - `model_version`: Hash of model weights/config to prevent cross-model cache reuse.
++  - `prompt_hash`: SHA-256 of the normalized prompt (including system message).
++  - `generation_params_hash`: Hash of temperature, top_p, etc.
++- **Isolation**: Each client has its own cache namespace. No cross-client sharing.
++- **Eviction**: LRU + TTL per client. If a client is inactive for `T` seconds, its cache is evicted.
++- **Commit-on-Complete**: Cache entries are only written after a request completes successfully. Partial generations do not pollute the cache.
++- **Invalidation**: If the model is reloaded or updated, all caches are invalidated.
+ 
+ ---
+ 
+-## 5. Two Tradeoffs
++## 5. Tradeoffs
+ 
+-### Tradeoff 1: Sequential Queue vs. Parallel Inference
++### Tradeoff 1: Sequential Queueing vs. Parallelism
+ 
+-| Aspect | Sequential Queue (Chosen) | Parallel Inference |
+-|--------|---------------------------|--------------------|
+-| **GPU Memory** | Predictable, single model load | Risk of OOM with multiple concurrent requests |
+-| **Latency** | Higher tail latency (queuing delay) | Lower latency for concurrent requests |
+-| **Complexity** | Simple, deterministic | Complex scheduling, cache contention |
+-| **Fairness** | FIFO ensures fairness | Priority scheduling needed |
++| Aspect | Sequential (Chosen) | Parallel |
++|--------|---------------------|----------|
++| **GPU Utilization** | Lower (idle between requests) | Higher (batching possible) |
++| **Complexity** | Simple, deterministic | Complex (batching, memory management) |
++| **Latency** | Predictable, no interference | Variable, potential head-of-line blocking |
++| **Cache Correctness** | Easy (one request at a time) | Hard (concurrent cache access) |
+ 
+-**Why Sequential?** For a local coding-agent service, GPU memory is the bottleneck. Running multiple inferences concurrently risks OOM and cache thrashing. Sequential processing ensures stability and predictable resource usage. The tradeoff is higher latency under load, which is acceptable for a local service where throughput is less critical than reliability.
++**Why Sequential?** For a local coding-agent, simplicity and correctness outweigh throughput. GPU batching requires careful memory management and can introduce subtle bugs. Sequential processing ensures cache consistency and simplifies cancellation.
+ 
+-### Tradeoff 2: Per-Session Cache Isolation vs. Global Cache Sharing
++### Tradeoff 2: Per-Client Cache Isolation vs. Shared Cache
+ 
+-| Aspect | Per-Session Isolation (Chosen) | Global Cache Sharing |
+-|--------|--------------------------------|----------------------|
+-| **Correctness** | Guaranteed isolation, no cross-contamination | Risk of cache collisions, incorrect results |
+-| **Cache Hit Rate** | Lower (identical prompts from different clients miss) | Higher (shared prefixes benefit all clients) |
+-| **Memory Usage** | Higher (multiple cache contexts) | Lower (single shared cache) |
+-| **Complexity** | Simple, clear ownership | Complex eviction, locking, consistency |
++| Aspect | Per-Client (Chosen) | Shared |
++|--------|---------------------|--------|
++| **Cache Hit Rate** | Lower (no cross-client reuse) | Higher (common prompts shared) |
++| **Security** | Strong isolation | Risk of data leakage |
++| **Memory Usage** | Higher (duplicate entries) | Lower |
++| **Correctness** | Guaranteed | Requires careful key design |
+ 
+-**Why Per-Session?** Correctness is paramount for a coding-agent service. A cache collision could lead to incorrect code generation, which is unacceptable. Per-session isolation ensures that each client’s context is independent. The tradeoff is lower cache hit rates and higher memory usage, but this is acceptable for a local service with limited concurrent clients.
++**Why Per-Client?** Coding agents often handle sensitive code. Cross-client cache sharing risks leaking proprietary code. Per-client isolation is safer and simpler to reason about. The memory overhead is acceptable for a local service with limited concurrent clients.
+ 
+ ---
+ 
+ ## 6. Summary
+ 
+-This architecture prioritizes **correctness**, **stability**, and **simplicity** over maximum throughput. The sequential queue and per-session cache isolation ensure that the GPU worker operates predictably and that clients do not interfere with each other. Cancellation and failure recovery are handled at the worker manager level, ensuring that the service remains responsive even under adverse conditions.+This architecture prioritizes **correctness, simplicity, and safety** over raw throughput. By serializing GPU access, isolating caches per client, and using a crash-isolated worker, the service provides reliable OpenAI-compatible streaming with robust cancellation and recovery. The tradeoffs are deliberate: sacrificing some performance for predictability and security, which is appropriate for a local coding-agent use case.

@@ -1,0 +1,154 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-OLD-case5.json",
+  "source_bytes": 303857,
+  "source_sha256": "eed82a303775d9c6755369187bf9fb7ebdc091c1a76f3f585f5e9987212f266c",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-OLD",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 61,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-03T23:52:53Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-OLD-case5.jsonl",
+    "samples": 6,
+    "peak_rss_gib": 53.37162399291992,
+    "min_mem_available_gib": 103.60461044311523,
+    "peak_ram_used_gib": 57.52800750732422,
+    "peak_vram0_gib": 23.263671875,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 61,
+      "completion_tokens": 256,
+      "total_tokens": 317,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "### Explanation\n\nThe issue lies in how Python handles list multiplication and object references.\n\n1.  **`[0]*3`**: This creates a new list `[0, 0, 0]`.\n2.  **`[[0]*3]*2`**: This creates a list containing **two references to the same inner list object**. It does **not** create two independent lists.\n    *   Think of it as: `inner_list = [0, 0, 0]` then `a = [inner_list, inner_list]`.\n3.  **`a[0][0] = 1`**: Since `a[0]` and `a[1]` point to the exact same list in memory, modifying `a[0]` also modifies `a[1]`.\n\nYou can verify this by checking the identity of the inner lists:\n```python\na = [[0]*3]*2\nprint(a[0] is a[1])  # Output: True\n```\n\n### The Fix\n\nTo create independent rows, you must create a new list object for each row. The most common and Pythonic way is using a **list comprehension**:\n\n```python\na",
+    "reasoning": "",
+    "actual_prompt_tokens": 61,
+    "generated_tokens": 256,
+    "ttft_s": 0.8123173880157992,
+    "total_wall_s": 5.247849956009304,
+    "api_decode_wall_s": 4.435532567993505,
+    "prompt_processing_wall_s": 0.7967000000000001,
+    "decode_wall_s": 3.2706999999999997,
+    "pp_tps": 76.6,
+    "tg_tps": 78.3,
+    "draft_tokens": 218,
+    "accepted_tokens": 175,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 61,
+      "prompt_ms": 796.7,
+      "prompt_per_token_ms": 13.061,
+      "prompt_per_second": 76.6,
+      "predicted_n": 256,
+      "predicted_ms": 3270.7,
+      "predicted_per_token_ms": 12.776,
+      "predicted_per_second": 78.3,
+      "draft_n": 218,
+      "draft_n_accepted": 175,
+      "at": 1791071578
+    },
+    "acceptance_pct": 80.27522935779817,
+    "mean_accepted_length": 2.108433734939759,
+    "final_logical_context_tokens": 317,
+    "final_kv_occupancy_tokens": 318,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 83,
+    "mean_committed_length": 3.108433734939759,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.94
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 219494.549843906,
+    "t_first_monotonic_s": 219495.362161294,
+    "t_end_monotonic_s": 219499.797693862,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "length"
+    ],
+    "pss_before": {
+      "890890": {
+        "pss_gib": 0.18395137786865234,
+        "pss_sample_wall": 1791071572.9287283,
+        "pss_read_wall_s": 0.006914052995853126
+      },
+      "890899": {
+        "pss_gib": 0.0005216598510742188,
+        "pss_sample_wall": 1791071572.928889,
+        "pss_read_wall_s": 0.00015785900177434087
+      },
+      "890900": {
+        "pss_gib": 53.001731872558594,
+        "pss_sample_wall": 1791071573.6779346,
+        "pss_read_wall_s": 0.749045127973659
+      },
+      "890901": {
+        "pss_gib": 0.0032291412353515625,
+        "pss_sample_wall": 1791071573.6782353,
+        "pss_read_wall_s": 0.00029371900018304586
+      }
+    },
+    "pss_after": {
+      "890890": {
+        "pss_gib": 0.18397045135498047,
+        "pss_sample_wall": 1791071579.1535814,
+        "pss_read_wall_s": 0.007728199008852243
+      },
+      "890899": {
+        "pss_gib": 0.0005216598510742188,
+        "pss_sample_wall": 1791071579.1537435,
+        "pss_read_wall_s": 0.00015934999100863934
+      },
+      "890900": {
+        "pss_gib": 53.00175476074219,
+        "pss_sample_wall": 1791071579.8958943,
+        "pss_read_wall_s": 0.7421506449754816
+      },
+      "890901": {
+        "pss_gib": 0.0031604766845703125,
+        "pss_sample_wall": 1791071579.8961577,
+        "pss_read_wall_s": 0.0002570899960119277
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-OLD",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-OLD.json",
+    "input_ids_sha256": "d0f863d231f7f1991da68bb54065f5e12a2f3d6527ceb78390576b5204c582e5",
+    "output_text_sha256": "2f7e8fc1f489d40a227fa98f6b29e352154e51efacda33f325fb55d827f82451",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 2707,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "code",
+    "generated_token_ids": {
+      "omitted_list_items": 256
+    }
+  }
+}

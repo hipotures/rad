@@ -1,0 +1,288 @@
+{
+  "status": "VERIFIED_BOTH_PAIRS_WITH_CONFIG_DIFFERENCES",
+  "created": 1790914807.8079963,
+  "rows": [
+    {
+      "actual_prompt_tokens": 127000,
+      "classification": "NOT_CONTROLLED_A_B",
+      "same_exact_API_payload": true,
+      "old_full_config": {
+        "exe": "/srv/ai/strata/engine/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/ud-q4_k_xl",
+          "--native",
+          "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--adapt-every",
+          "4",
+          "--pool-workers",
+          "8",
+          "--pcie-frac",
+          "0.2",
+          "--spec",
+          "3",
+          "--spec-min-p",
+          "0.7",
+          "--kv",
+          "k8v4",
+          "--prefill",
+          "8192",
+          "--max-context",
+          "262144"
+        ],
+        "cwd": "/srv/ai/strata",
+        "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl/tokenizer",
+        "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+        "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/logs/COMPACTION-v0131-control-engine.log",
+        "host": "127.0.0.1",
+        "port": 18086,
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "gpu": [
+          0,
+          1
+        ],
+        "layer_split": "22"
+      },
+      "new_full_config": {
+        "exe": "/srv/ai/strata-v0.1.32/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+          "--native",
+          "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+          "--expert-profile",
+          "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--mtp",
+          "/srv/ai/models/strata-v0132/mtp/rt",
+          "--prefill",
+          "16384",
+          "--pool-workers",
+          "12",
+          "--pcie-frac",
+          "0.28",
+          "--spec-min-p",
+          "0.3",
+          "--spec",
+          "3",
+          "--kv",
+          "k8v4",
+          "--max-context",
+          "262144"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.32",
+        "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer",
+        "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+        "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/logs/COMPACTION-FINAL-v0132-engine.log",
+        "host": "127.0.0.1",
+        "port": 18085,
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "gpu": [
+          0,
+          1
+        ],
+        "layer_split": "24",
+        "environment_overrides": {},
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "old_generated_tokens": 1729,
+      "new_generated_tokens": 2013,
+      "metrics": {
+        "pp_tps": {
+          "v0131": 3003.5,
+          "v0132": 3722.2,
+          "delta_percent": 23.928749791909443
+        },
+        "tg_tps": {
+          "v0131": 92.3,
+          "v0132": 91.4,
+          "delta_percent": -0.9750812567713929
+        },
+        "ttft_s": {
+          "v0131": 42.609220869002456,
+          "v0132": 34.704752117999305,
+          "delta_percent": -18.551075541382467
+        },
+        "total_wall_s": {
+          "v0131": 61.33543910600565,
+          "v0132": 56.69774251700437,
+          "delta_percent": -7.5612022292462555
+        }
+      },
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-127000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-127000.json"
+      ],
+      "note": "Bestconfig before/after, K22/K24,prefill8192/16384,workers/minp/adaptive settings differ. Natural outputlengths differ. Not isolatedruntimeupgrade causality; controlledwholeversion pairedmatrix remains separate."
+    },
+    {
+      "actual_prompt_tokens": 250000,
+      "classification": "NOT_CONTROLLED_A_B",
+      "same_exact_API_payload": true,
+      "old_full_config": {
+        "exe": "/srv/ai/strata/engine/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/ud-q4_k_xl",
+          "--native",
+          "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--adapt-every",
+          "4",
+          "--pool-workers",
+          "8",
+          "--pcie-frac",
+          "0.2",
+          "--spec",
+          "3",
+          "--spec-min-p",
+          "0.7",
+          "--kv",
+          "k8v4",
+          "--prefill",
+          "8192",
+          "--max-context",
+          "262144"
+        ],
+        "cwd": "/srv/ai/strata",
+        "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl/tokenizer",
+        "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+        "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/logs/COMPACTION-v0131-control-engine.log",
+        "host": "127.0.0.1",
+        "port": 18086,
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "gpu": [
+          0,
+          1
+        ],
+        "layer_split": "22"
+      },
+      "new_full_config": {
+        "exe": "/srv/ai/strata-v0.1.32/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+          "--native",
+          "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+          "--expert-profile",
+          "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--mtp",
+          "/srv/ai/models/strata-v0132/mtp/rt",
+          "--prefill",
+          "16384",
+          "--pool-workers",
+          "12",
+          "--pcie-frac",
+          "0.28",
+          "--spec-min-p",
+          "0.3",
+          "--spec",
+          "3",
+          "--kv",
+          "k8v4",
+          "--max-context",
+          "262144"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.32",
+        "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer",
+        "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+        "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/logs/COMPACTION-FINAL-v0132-engine.log",
+        "host": "127.0.0.1",
+        "port": 18085,
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "gpu": [
+          0,
+          1
+        ],
+        "layer_split": "24",
+        "environment_overrides": {},
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "old_generated_tokens": 2685,
+      "new_generated_tokens": 2219,
+      "metrics": {
+        "pp_tps": {
+          "v0131": 3180.6,
+          "v0132": 5335.4,
+          "delta_percent": 67.748223605609
+        },
+        "tg_tps": {
+          "v0131": 89.0,
+          "v0132": 92.3,
+          "delta_percent": 3.707865168539315
+        },
+        "ttft_s": {
+          "v0131": 79.09663661699597,
+          "v0132": 47.42998356700264,
+          "delta_percent": -40.03539771650534
+        },
+        "total_wall_s": {
+          "v0131": 109.24730479999562,
+          "v0132": 71.44682309900236,
+          "delta_percent": -34.60083685377543
+        }
+      },
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-250000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-250000.json"
+      ],
+      "note": "Bestconfig before/after, K22/K24,prefill8192/16384,workers/minp/adaptive settings differ. Natural outputlengths differ. Not isolatedruntimeupgrade causality; controlledwholeversion pairedmatrix remains separate."
+    }
+  ]
+}

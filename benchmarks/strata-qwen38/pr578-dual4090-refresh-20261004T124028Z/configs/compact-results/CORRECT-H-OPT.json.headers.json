@@ -1,0 +1,72 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/configs/CORRECT-H-OPT.json",
+  "source_bytes": 299456,
+  "source_sha256": "711adfe10fe6574228f3e155e2fbb0e5f6d1b7a90f2e487d263d9fd96c84a6e3",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "exe": "/srv/ai/strata-pr578-refresh-20261004-optimized/build-default/strata",
+    "args": {
+      "omitted_list_items": 33
+    },
+    "cwd": "/srv/ai/strata-pr578-refresh-20261004-optimized",
+    "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+    "model_name": "qwen3.8-flash-next-iq3_s",
+    "log": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/logs/CORRECT-H-OPT-engine.log",
+    "lib_dirs": [
+      "/usr/local/cuda/bin",
+      "/usr/local/cuda/lib64"
+    ],
+    "port": 18085,
+    "gpu": 0,
+    "gpus_asked": true,
+    "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+    "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+    "environment_overrides": {},
+    "env": {
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "CUDA_VISIBLE_DEVICES": "0,1"
+    },
+    "host": "127.0.0.1",
+    "parallel": 1,
+    "Strata_HEAD": "6d2868c7b3f5e31881e47b6ad99537f25a50763a",
+    "build_variant": "optimized-clean-upstream-boundary-diagnostics-default-off",
+    "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "PR_head": "b28121ff6ef117bec2558b3ece7e188dd33a2b7e",
+    "extra_env": {
+      "STRATA_BENCH_CACHE_SNAPSHOT": "startup"
+    },
+    "binary_sha256": "7a03ce1d3703e397d76e295a56a92b055a272c7bb4401dbce94c62675a134e1c",
+    "required_initial_layout": {
+      "primary": 8586,
+      "primary_cli_uniform_budget": 6567,
+      "helper": 11796,
+      "snapshot": {
+        "phase": "startup",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 0,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      },
+      "layer_split_K": null,
+      "text_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/logs/H-OPT-DISCOVERY-engine.log",
+      "primary_pcie_probe_fraction_reported": null,
+      "stage_pcie_probe_fractions_reported": {},
+      "layer_slots_per_GPU": {
+        "0": 8586
+      },
+      "initial_resident_expert_count": 20382,
+      "initial_overlap": 0,
+      "initial_primary_ids_SHA256": "c37d6313c6f41402c6ca8d1253caf761f85ad0aa5c5a4ff91470fcd92930a568",
+      "initial_helper_ids_SHA256": "ac85b7e85729dbc7bdc41fe38cc2fd074e308233bf66805addb93558ad95422d",
+      "frozen_pcie_frac": 0.37
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-OPT-case1.json",
+  "source_bytes": 302534,
+  "source_sha256": "0acd777effab466fba85027d82d8977106399f476b7c682513559e5bdfb80431",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-OPT",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 49,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-03T23:54:33Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-OPT-case1.jsonl",
+    "samples": 5,
+    "peak_rss_gib": 53.39492416381836,
+    "min_mem_available_gib": 103.61026763916016,
+    "peak_ram_used_gib": 57.5223503112793,
+    "peak_vram0_gib": 23.263671875,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 49,
+      "completion_tokens": 162,
+      "total_tokens": 211,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "To compute $37 \\times 48$, we can break it down using the distributive property:\n\n$$\n37 \\times 48 = 37 \\times (50 - 2)\n$$\n\n1. Calculate $37 \\times 50$:\n   $$\n   37 \\times 50 = 1850\n   $$\n\n2. Calculate $37 \\times 2$:\n   $$\n   37 \\times 2 = 74\n   $$\n\n3. Subtract the second result from the first:\n   $$\n   1850 - 74 = 1776\n   $$\n\n**Final Result:**\n$$\n1776\n$$",
+    "reasoning": "",
+    "actual_prompt_tokens": 49,
+    "generated_tokens": 162,
+    "ttft_s": 0.6806054899934679,
+    "total_wall_s": 4.598643039993476,
+    "api_decode_wall_s": 3.918037550000008,
+    "prompt_processing_wall_s": 0.6409,
+    "decode_wall_s": 3.1115999999999997,
+    "pp_tps": 76.5,
+    "tg_tps": 52.1,
+    "draft_tokens": 139,
+    "accepted_tokens": 115,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 49,
+      "prompt_ms": 640.9,
+      "prompt_per_token_ms": 13.08,
+      "prompt_per_second": 76.5,
+      "predicted_n": 162,
+      "predicted_ms": 3111.6,
+      "predicted_per_token_ms": 19.207,
+      "predicted_per_second": 52.1,
+      "draft_n": 139,
+      "draft_n_accepted": 115,
+      "at": 1791071678
+    },
+    "acceptance_pct": 82.73381294964028,
+    "mean_accepted_length": 2.3958333333333335,
+    "final_logical_context_tokens": 211,
+    "final_kv_occupancy_tokens": 211,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 48,
+    "mean_committed_length": 3.3958333333333335,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.913
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 219594.448457688,
+    "t_first_monotonic_s": 219595.129063178,
+    "t_end_monotonic_s": 219599.047100728,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "stop"
+    ],
+    "pss_before": {
+      "891689": {
+        "pss_gib": 0.18393516540527344,
+        "pss_sample_wall": 1791071673.1109154,
+        "pss_read_wall_s": 0.004627412999980152
+      },
+      "891695": {
+        "pss_gib": 0.0005435943603515625,
+        "pss_sample_wall": 1791071673.11101,
+        "pss_read_wall_s": 9.278900688514113e-05
+      },
+      "891696": {
+        "pss_gib": 52.857736587524414,
+        "pss_sample_wall": 1791071673.578539,
+        "pss_read_wall_s": 0.4675294850021601
+      },
+      "891697": {
+        "pss_gib": 0.0033140182495117188,
+        "pss_sample_wall": 1791071673.5787044,
+        "pss_read_wall_s": 0.00016019900795072317
+      }
+    },
+    "pss_after": {
+      "891689": {
+        "pss_gib": 0.18417930603027344,
+        "pss_sample_wall": 1791071678.3944736,
+        "pss_read_wall_s": 0.00490785000147298
+      },
+      "891695": {
+        "pss_gib": 0.0005435943603515625,
+        "pss_sample_wall": 1791071678.39458,
+        "pss_read_wall_s": 0.00010457998723722994
+      },
+      "891696": {
+        "pss_gib": 53.02480506896973,
+        "pss_sample_wall": 1791071678.853087,
+        "pss_read_wall_s": 0.4585071309993509
+      },
+      "891697": {
+        "pss_gib": 0.0033140182495117188,
+        "pss_sample_wall": 1791071678.853238,
+        "pss_read_wall_s": 0.00014624898904003203
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-OPT",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-OPT.json",
+    "input_ids_sha256": "8e6a1b8233df6be7c2af2240fb6f4b53e236e85f72156b024a100e2f63564496",
+    "output_text_sha256": "57fe7af2b935be497fa62d30a5e516157506265a5f03833981d8007c21a15d9a",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 0,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "math",
+    "generated_token_ids": {
+      "omitted_list_items": 162
+    }
+  }
+}

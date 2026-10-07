@@ -1,0 +1,44 @@
+--- a/src/core/expert_source.cpp
++++ b/src/core/expert_source.cpp
+@@ -1888,6 +1888,13 @@
+             if (ids[i] >= 0 && ids[i] < d.n_expert) d.usage[(size_t) d.layers * (size_t) d.n_expert + (size_t) ids[i]] += 1.0f;
+     // ---- plan v0.3 P6: the GPU's share, decided and published FIRST so the GPU starts while the CPU works.
+     // Distinct experts in routing order; resident ones and the last pcie_num/256 of the missed ones go to the GPU.
++    // Optimized helper residents are already on a GPU: do not classify them as
++    // primary PCIe misses. Keep them unclaimed until RemoteExperts::begin below.
++    const auto optimized_helper_has = [&](int32_t e) {
++        for (int r = 0; r < d.remote_count; ++r)
++            if (d.remote[r]->optimized_decode() && d.remote[r]->has_expert(d.layers, e)) return true;
++        return false;
++    };
+     const int64_t n = n_tok * k;
+     int32_t kind[kMaxWindowEntries];       // per entry: -1 CPU, 0 VRAM, 1 PCIe
+     if (d.plan != nullptr && n <= kMaxWindowEntries && n <= d.plan->cap) {
+@@ -1901,7 +1908,7 @@
+                 distinct[nd++] = i;
+                 const int32_t e = ids[i];
+                 if (e >= 0 && e < d.n_expert && d.host_res[(size_t) d.layers * (size_t) d.n_expert + (size_t) e] < 0 &&
+-                    !(d.peer != nullptr && d.peer->has(d.layers, e))) ++nmiss;
++                    !(d.peer != nullptr && d.peer->has(d.layers, e)) && !optimized_helper_has(e)) ++nmiss;
+             }
+         }
+         const bool pcie_ok = d.pcie_num > 0 && d.src->pcie_layer(d.layers);
+@@ -1923,6 +1930,8 @@
+                                                                                  : (size_t) slot * (size_t) d.cache_blob));
+                 } else if (d.peer != nullptr && d.peer->has(d.layers, e)) {
+                     kd = 2;                        // multi-GPU: the second GPU computes it
++                } else if (optimized_helper_has(e)) {
++                    kd = -1;                       // helper claims this row below; not a PCIe candidate
+                 } else {
+                     if (miss_rank >= nmiss - m && fetches < P.staging_cap && fetches < 64) {
+                         const uint8_t* src = d.src->pinned(d.layers, e) ? d.src->blob(d.layers, e) : nullptr;
+--- a/include/strata/core/remote_experts.hpp
++++ b/include/strata/core/remote_experts.hpp
+@@ -38,6 +38,7 @@
+                std::string& err);
+     bool owns(int64_t index) const { return owned_[(size_t) index] != 0; }
+     bool optimized_decode() const { return remote_opt_ != nullptr; }
++    bool has_expert(int64_t layer, int32_t expert) const { return cache_.slot_of(layer, expert) >= 0; }
+     bool finish(float* out, std::string& err);
+     int64_t resident() const { return cache_.resident(); }
+     // Benchmark boundary snapshots only; no dispatch or cache policy changes.

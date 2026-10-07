@@ -1,0 +1,104 @@
+{
+  "model": "QUALITY-v0132-layer-k8v4",
+  "kind": "quality",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 102,
+  "requested_generated_tokens": 8192,
+  "time_utc": "2026-10-02T04:38:21Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/QUALITY-v0132-layer-k8v4-C-repository-architecture.jsonl",
+  "samples": 38,
+  "peak_rss_gib": 77.25241088867188,
+  "min_mem_available_gib": 79.12776184082031,
+  "peak_ram_used_gib": 82.00485610961914,
+  "peak_vram0_gib": 23.3046875,
+  "peak_vram1_gib": 23.494140625,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 3212,
+    "total_tokens": 3314,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "# Repository Architecture: Local Coding-Agent Service\n\n## 1. High-Level Overview\n\nThis service is a **single-node, single-GPU** inference server that:\n- Exposes an **OpenAI-compatible `/v1/chat/completions`** endpoint with SSE streaming.\n- Runs **one resident GPU inference process** (e.g., via `vLLM`, `TGI`, or a custom PyTorch server).\n- **Serializes requests** through a queue to avoid GPU contention.\n- **Records per-request metrics** (latency, tokens, cache hits, errors).\n- Handles **cancellation**, **process failure recovery**, and **prompt cache correctness** across clients.\n\n### Key Design Principles\n1. **Separation of concerns**: API layer, queueing, inference orchestration, metrics, and cache management are isolated modules.\n2. **Resilience**: The GPU process is treated as a fragile resource; the orchestrator monitors and restarts it.\n3. **Cache correctness**: Prompt caching is scoped per-client-session to prevent cross-client leakage and ensure deterministic behavior.\n4. **Observability**: Every request is traced with unique IDs, and metrics are emitted asynchronously to avoid blocking the hot path.\n\n---\n\n## 2. Module Boundaries\n\n```\n┌─────────────────────────────────────────────────────────┐\n│                   API Layer (FastAPI)                    │\n│  - OpenAI-compatible endpoints                           │\n│  - Request validation & parsing                          │\n│  - SSE streaming response                                │\n│  - Cancellation signal propagation                       │\n└──────────────────────┬──────────────────────────────────┘\n                       │\n┌──────────────────────▼──────────────────────────────────┐\n│              Request Queue & Orchestrator                │\n│  - FIFO queue for serialized GPU access                  │\n│  - Request lifecycle management                          │\n│  - Cancellation handling                                 │\n│  - Timeout enforcement                                   │\n└──────────────────────┬──────────────────────────────────┘\n                       │\n┌──────────────────────▼──────────────────────────────────┐\n│           Inference Process Manager                      │\n│  - Spawns/monitors/restarts GPU process                  │\n│  - Health checks & readiness probes                      │\n│  - IPC communication (gRPC/Unix socket)                  │\n│  - Graceful shutdown                                     │\n└──────────────────────┬──────────────────────────────────┘\n                       │\n┌──────────────────────▼──────────────────────────────────┐\n│              GPU Inference Process                       │\n│  - Loads model into VRAM                                 │\n│  - Executes inference                                    │\n│  - Streams tokens back via IPC                           │\n│  - Manages internal KV cache                             │\n└─────────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────────┐\n│              Prompt Cache Manager                        │\n│  - Per-client-session cache scoping                      │\n│  - Cache key generation (hash of messages + metadata)    │\n│  - Cache eviction policy (LRU/TTL)                       │\n│  - Cache hit/miss tracking                               │\n└─────────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────────┐\n│              Metrics & Tracing                           │\n│  - Per-request metrics collection                        │\n│  - Async metric emission                                 │\n│  - Structured logging                                    │\n│  - Prometheus-compatible metrics endpoint                │\n└─────────────────────────────────────────────────────────┘\n```\n\n### Module Responsibilities\n\n| Module | Responsibility |\n|--------|---------------|\n| **API Layer** | HTTP/SSE handling, request parsing, response formatting, cancellation detection |\n| **Queue & Orchestrator** | Serialize requests, manage request state machine, enforce timeouts, propagate cancellation |\n| **Inference Process Manager** | Lifecycle management of GPU process, health checks, IPC, restart logic |\n| **GPU Inference Process** | Model loading, inference execution, token streaming, internal KV cache |\n| **Prompt Cache Manager** | Cache scoping, key generation, eviction, hit/miss tracking |\n| **Metrics & Tracing** | Collect, aggregate, and expose metrics; structured logging |\n\n---\n\n## 3. Concrete File Tree\n\n```\ncoding-agent-service/\n├── README.md\n├── pyproject.toml\n├── Dockerfile\n├── docker-compose.yml\n├── config/\n│   ├── default.yaml          # Default configuration\n│   └── production.yaml       # Production overrides\n├── src/\n│   ├── __init__.py\n│   ├── main.py               # Entry point: starts API server\n│   ├── api/\n│   │   ├── __init__.py\n│   │   ├── routes.py         # FastAPI routes (/v1/chat/completions)\n│   │   ├── models.py         # Pydantic request/response models\n│   │   └── streaming.py      # SSE streaming helpers\n│   ├── queue/\n│   │   ├── __init__.py\n│   │   ├── orchestrator.py   # Request queue & lifecycle management\n│   │   ├── request.py        # Request dataclass with state machine\n│   │   └── cancellation.py   # Cancellation signal handling\n│   ├── inference/\n│   │   ├── __init__.py\n│   │   ├── process_manager.py # Spawn/monitor/restart GPU process\n│   │   ├── ipc_client.py     # Client for IPC with GPU process\n│   │   └── health.py         # Health check logic\n│   ├── cache/\n│   │   ├── __init__.py\n│   │   ├── manager.py        # Prompt cache manager\n│   │   ├── key_generator.py  # Cache key generation\n│   │   └── eviction.py       # LRU/TTL eviction policies\n│   ├── metrics/\n│   │   ├── __init__.py\n│   │   ├── collector.py      # Per-request metrics collection\n│   │   ├── emitter.py        # Async metric emission\n│   │   └── prometheus.py     # Prometheus metrics endpoint\n│   ├── config/\n│   │   ├── __init__.py\n│   │   └── loader.py         # Configuration loading\n│   └── utils/\n│       ├── __init__.py\n│       ├── logging.py        # Structured logging setup\n│       └── tracing.py        # Request tracing utilities\n├── gpu_process/\n│   ├── __init__.py\n│   ├── server.py             # GPU inference server (runs as separate process)\n│   ├── model_loader.py       # Model loading logic\n│   └── ipc_server.py         # IPC server for communication with main process\n├── tests/\n│   ├── __init__.py\n│   ├── test_api.py\n│   ├── test_queue.py\n│   ├── test_cache.py\n│   ├── test_metrics.py\n│   └── test_integration.py\n├── scripts/\n│   ├── start.sh              # Start service\n│   └── healthcheck.sh        # Health check script\n└── docs/\n    ├── architecture.md\n    └── api.md\n```\n\n---\n\n## 4. Key Design Details\n\n### 4.1 Request Flow\n\n```\nClient Request\n    │\n    ▼\nAPI Layer (routes.py)\n    │  - Parse request, generate request_id\n    │  - Check prompt cache (cache/manager.py)\n    │  - If cache hit: stream cached response\n    │  - If cache miss: enqueue request\n    │\n    ▼\nQueue Orchestrator (queue/orchestrator.py)\n    │  - Add request to FIFO queue\n    │  - Wait for GPU process readiness\n    │  - Send request to GPU process via IPC\n    │\n    ▼\nGPU Inference Process (gpu_process/server.py)\n    │  - Execute inference\n    │  - Stream tokens back via IPC\n    │\n    ▼\nAPI Layer\n    │  - Stream tokens to client via SSE\n    │  - On completion: update cache, emit metrics\n    │\n    ▼\nMetrics Collector (metrics/collector.py)\n    │  - Record latency, tokens, cache status\n    │  - Emit asynchronously\n```\n\n### 4.2 Cancellation Handling\n\n**Problem**: Client disconnects mid-stream. We must stop GPU inference to free resources.\n\n**Solution**:\n1. **API Layer** detects client disconnect via `request.is_disconnected()` in FastAPI.\n2. Sets a `cancelled` flag on the `Request` object.\n3. **Orchestrator** checks the flag before sending to GPU and during streaming.\n4. If cancelled, sends a `CANCEL` message via IPC to the GPU process.\n5. **GPU Process** stops inference and releases resources.\n6. **Metrics** record the cancellation event.\n\n```python\n# queue/orchestrator.py (simplified)\nasync def process_request(request: Request):\n    if request.cancelled:\n        return\n    \n    # Send to GPU process\n    async for token in ipc_client.stream_inference(request):\n        if request.cancelled:\n            await ipc_client.send_cancel(request.id)\n            break\n        yield token\n```\n\n### 4.3 Process Failure Recovery\n\n**Problem**: GPU process crashes (OOM, CUDA error, etc.).\n\n**Solution**:\n1. **Process Manager** monitors the GPU process via:\n   - Heartbeat messages over IPC\n   - OS-level process monitoring (`psutil`)\n2. On failure detection:\n   - Mark all in-flight requests as failed\n   - Restart the GPU process with exponential backoff\n   - Re-queue failed requests (optional, configurable)\n3. **Health Check Endpoint** (`/health`) returns `503` while restarting.\n\n```python\n# inference/process_manager.py (simplified)\nclass ProcessManager:\n    async def monitor(self):\n        while True:\n            if not self.process.is_alive():\n                logger.error(\"GPU process died, restarting...\")\n                await self.restart_with_backoff()\n            await asyncio.sleep(HEARTBEAT_INTERVAL)\n    \n    async def restart_with_backoff(self):\n        for attempt in range(MAX_RETRIES):\n            try:\n                self.process = await self.spawn_process()\n                await self.wait_for_ready()\n                return\n            except Exception as e:\n                await asyncio.sleep(BACKOFF_BASE * (2 ** attempt))\n        raise RuntimeError(\"Failed to restart GPU process\")\n```\n\n### 4.4 Prompt Cache Correctness Across Clients\n\n**Problem**: Different clients may send identical prompts. Naive caching could leak data or cause incorrect responses if cache keys don't account for client context.\n\n**Solution**:\n1. **Cache Key Generation** includes:\n   - Hash of the message content\n   - Client session ID (from API key or session header)\n   - Model version\n   - Temperature/top_p parameters (if they affect output)\n2. **Cache Scoping**: Each client's cache is isolated. No cross-client cache sharing.\n3. **Cache Eviction**: LRU with TTL to bound memory usage.\n4. **Cache Invalidation**: On model reload or configuration change, clear all caches.\n\n```python\n# cache/key_generator.py\ndef generate_cache_key(\n    messages: list[dict],\n    client_id: str,\n    model_version: str,\n    params: dict\n) -> str:\n    content_hash = hashlib.sha256(\n        json.dumps(messages, sort_keys=True).encode()\n    ).hexdigest()\n    param_hash = hashlib.sha256(\n        json.dumps(params, sort_keys=True).encode()\n    ).hexdigest()\n    return f\"{client_id}:{model_version}:{content_hash}:{param_hash}\"\n```\n\n**Why this works**:\n- **Isolation**: `client_id` in the key ensures no cross-client leakage.\n- **Determinism**: Including parameters ensures that different sampling settings don't share cache entries.\n- **Versioning**: `model_version` ensures cache invalidation on model updates.\n\n---\n\n## 5. Two Tradeoffs\n\n### Tradeoff 1: Serialized Queue vs. Concurrent Inference\n\n| Aspect | Serialized Queue (Chosen) | Concurrent Inference |\n|--------|--------------------------|---------------------|\n| **GPU Utilization** | Lower (idle between requests) | Higher (batching possible) |\n| **Complexity** | Simple, predictable | Complex (batching, scheduling) |\n| **Latency** | Higher for queued requests | Lower with batching |\n| **Memory** | Predictable | Variable, risk of OOM |\n| **Cache Correctness** | Easier to reason about | Harder with interleaved requests |\n\n**Decision**: Serialized queue is chosen for **simplicity and correctness**. For a local coding-agent service, throughput is less critical than reliability and cache correctness. If throughput becomes a bottleneck, we can introduce **micro-batching** (collect requests for 10–50ms) as an optimization without changing the core architecture.\n\n### Tradeoff 2: In-Process Cache vs. External Cache (Redis)\n\n| Aspect | In-Process Cache (Chosen) | External Cache (Redis) |\n|--------|--------------------------|----------------------|\n| **Latency** | Very low (memory access) | Higher (network round-trip) |\n| **Complexity** | Simple | Requires Redis deployment |\n| **Scalability** | Single-node only | Multi-node capable |\n| **Consistency** | Strong (single process) | Eventual consistency risks |\n| **Memory Pressure** | Competes with GPU process | Offloaded to Redis |\n\n**Decision**: In-process cache is chosen because:\n1. The service is **single-node** by design.\n2. **Latency** is critical for streaming responses.\n3. **Cache correctness** is easier with strong consistency in a single process.\n4. Redis adds operational complexity disproportionate to the benefit for a local service.\n\nIf multi-node scaling is needed in the future, the cache manager can be abstracted behind an interface, allowing a Redis-backed implementation without changing the rest of the system.\n\n---\n\n## 6. Summary\n\nThis architecture prioritizes **correctness, resilience, and simplicity** for a local, single-GPU coding-agent service. Key features:\n\n- **OpenAI-compatible API** with SSE streaming\n- **Serialized request queue** for predictable GPU access\n- **Robust process management** with automatic restart\n- **Per-client prompt caching** with proper key scoping\n- **Comprehensive metrics** for observability\n- **Clean module boundaries** for maintainability\n\nThe two main tradeoffs (serialized queue and in-process cache) are justified by the local, single-node deployment model, where simplicity and correctness outweigh raw throughput.",
+  "reasoning": "",
+  "actual_prompt_tokens": 102,
+  "generated_tokens": 3212,
+  "ttft_s": 1.6605374809951172,
+  "total_wall_s": 37.87714581999899,
+  "api_decode_wall_s": 36.21660833900387,
+  "prompt_processing_wall_s": 1.6082,
+  "decode_wall_s": 36.2605,
+  "pp_tps": 63.4,
+  "tg_tps": 88.6,
+  "draft_tokens": 2902,
+  "accepted_tokens": 2000,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 102,
+    "prompt_ms": 1608.2,
+    "prompt_per_token_ms": 15.767,
+    "prompt_per_second": 63.4,
+    "predicted_n": 3212,
+    "predicted_ms": 36260.5,
+    "predicted_per_token_ms": 11.289,
+    "predicted_per_second": 88.6,
+    "draft_n": 2902,
+    "draft_n_accepted": 2000,
+    "at": 1790915939
+  },
+  "acceptance_pct": 68.91798759476224,
+  "mean_accepted_length": 1.646090534979424,
+  "final_logical_context_tokens": 3314,
+  "final_kv_occupancy_tokens": 3316,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 1215,
+  "mean_committed_length": 2.646090534979424,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.934
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 63822.583782385,
+  "t_first_monotonic_s": 63824.244319866,
+  "t_end_monotonic_s": 63860.460928205,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "312711": {
+      "pss_gib": 0.1834564208984375,
+      "pss_sample_wall": 1790915900.6555758,
+      "pss_read_wall_s": 0.005611150998447556
+    },
+    "312721": {
+      "pss_gib": 76.89355278015137,
+      "pss_sample_wall": 1790915901.71142,
+      "pss_read_wall_s": 1.0558447610019357
+    }
+  },
+  "pss_after": {
+    "312711": {
+      "pss_gib": 0.18346786499023438,
+      "pss_sample_wall": 1790915939.8627005,
+      "pss_read_wall_s": 0.008222090000344906
+    },
+    "312721": {
+      "pss_gib": 76.89355182647705,
+      "pss_sample_wall": 1790915940.9228854,
+      "pss_read_wall_s": 1.0601816150010563
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "QUALITY-v0132-layer-k8v4",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/QUALITY-v0132-layer-k8v4.json"
+}

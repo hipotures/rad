@@ -1,0 +1,81 @@
+{
+  "status": "VERIFIED_SCREENING_RANK",
+  "created": 1790907610.6820414,
+  "measured_requests": 16,
+  "rule": "Geometric mean of independently recomputed median TG across actual128/256K first; PP secondary. All four formats legal and completed; warmup/smoke excluded.",
+  "rank": [
+    {
+      "kv": "k8v4",
+      "geometric_TG": 100.37320359538197,
+      "geometric_PP": 5313.93589324335,
+      "cells": [
+        {
+          "candidate": "KV-k8v4-127000-screen",
+          "median_PP": 5208.65,
+          "median_TG": 103.65
+        },
+        {
+          "candidate": "KV-k8v4-259500-screen",
+          "median_PP": 5421.35,
+          "median_TG": 97.19999999999999
+        }
+      ]
+    },
+    {
+      "kv": "int8",
+      "geometric_TG": 98.99829543987107,
+      "geometric_PP": 4796.331480934153,
+      "cells": [
+        {
+          "candidate": "KV-int8-127000-screen",
+          "median_PP": 5174.85,
+          "median_TG": 102.25
+        },
+        {
+          "candidate": "KV-int8-259500-screen",
+          "median_PP": 4445.5,
+          "median_TG": 95.85
+        }
+      ]
+    },
+    {
+      "kv": "rotated-int8",
+      "geometric_TG": 93.04656092516262,
+      "geometric_PP": 4893.261368964466,
+      "cells": [
+        {
+          "candidate": "KV-rotated-int8-127000-screen",
+          "median_PP": 5125.55,
+          "median_TG": 93.85
+        },
+        {
+          "candidate": "KV-rotated-int8-259500-screen",
+          "median_PP": 4671.5,
+          "median_TG": 92.25
+        }
+      ]
+    },
+    {
+      "kv": "q4_0",
+      "geometric_TG": 90.0499861188218,
+      "geometric_PP": 4402.192493519565,
+      "cells": [
+        {
+          "candidate": "KV-q4_0-127000-screen",
+          "median_PP": 4342.700000000001,
+          "median_TG": 90.1
+        },
+        {
+          "candidate": "KV-q4_0-259500-screen",
+          "median_PP": 4462.5,
+          "median_TG": 90.0
+        }
+      ]
+    }
+  ],
+  "expected_TOP2": [
+    "k8v4",
+    "int8"
+  ],
+  "production_selection": "PENDING n3 per length TOP2 confirmations and exact quality parity; screening ranking is not production winner."
+}

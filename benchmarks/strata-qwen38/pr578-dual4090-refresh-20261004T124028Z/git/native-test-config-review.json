@@ -1,0 +1,5 @@
+{
+  "finding": "CMake checks STRATA_NATIVE_EXPERTS around line438 before defining its default option at949. First configure omits four native cache tests despite runtime ultimately enabling native expert support; repeated configure includes them.",
+  "resolution": "Explicit identical -DSTRATA_NATIVE_EXPERTS=ON on both configure commands; build added cache/layout tests and run optimized full suite. Preserve initial test logs.",
+  "runtime_algorithm_change": false
+}

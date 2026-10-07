@@ -1,0 +1,104 @@
+{
+  "model": "QUALITY-v0132-layer-default",
+  "kind": "quality",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 82,
+  "requested_generated_tokens": 8192,
+  "time_utc": "2026-10-02T04:26:09Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/QUALITY-v0132-layer-default-B-mathematical-reasoning.jsonl",
+  "samples": 19,
+  "peak_rss_gib": 77.24940490722656,
+  "min_mem_available_gib": 79.3972053527832,
+  "peak_ram_used_gib": 81.73541259765625,
+  "peak_vram0_gib": 23.30078125,
+  "peak_vram1_gib": 23.494140625,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 82,
+    "completion_tokens": 1775,
+    "total_tokens": 1857,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "To find the expected total number of rolls until two consecutive rolls have the same value, we can model this problem using states and linear equations (First Step Analysis) or by using the definition of expectation with geometric series.\n\n### Method 1: First Step Analysis (State-Based Approach)\n\nLet $E$ be the expected total number of rolls needed to get two consecutive identical values.\n\nWe can define the state of the process based on the history of the rolls. However, a simpler way is to look at the process step-by-step.\n\nLet $E$ be the expected number of *additional* rolls needed to finish the game, given that we have just rolled a die and the previous roll (if any) was different from the current one. Actually, let's define states more precisely:\n\n*   Let $E_0$ be the expected number of rolls needed starting from a \"fresh\" state (no previous roll, or the previous roll is irrelevant because we haven't started counting the pair yet). This is what we want to find.\n*   Let $E_1$ be the expected number of *additional* rolls needed given that we have just rolled a value, and we are waiting for the next roll to match it.\n\n**Step 1: Analyze the first roll.**\nWe must roll the die at least once. Let this be roll 1.\nAfter roll 1, we are in a state where we have a current value, and we need the next roll to match it.\nSo, $E_0 = 1 + E_1$.\n\n**Step 2: Analyze the state $E_1$.**\nWe have just rolled a value (say, $x$). We roll the die again.\n*   **Case A (Match):** The new roll is $x$. The probability of this is $1/6$. The game ends. The number of additional rolls used is 1.\n*   **Case B (No Match):** The new roll is not $x$. The probability of this is $5/6$. The game does not end. However, we have now rolled a new value (say, $y$). We are now in the exact same situation as we were after the first roll: we have a current value ($y$) and we need the next roll to match it. The number of additional rolls used so far is 1, and we still need $E_1$ more rolls on average from this new state.\n\nSo, we can write the equation for $E_1$:\n$$ E_1 = \\frac{1}{6}(1) + \\frac{5}{6}(1 + E_1) $$\n\n**Step 3: Solve for $E_1$.**\n$$ E_1 = \\frac{1}{6} + \\frac{5}{6} + \\frac{5}{6}E_1 $$\n$$ E_1 = 1 + \\frac{5}{6}E_1 $$\n$$ E_1 - \\frac{5}{6}E_1 = 1 $$\n$$ \\frac{1}{6}E_1 = 1 $$\n$$ E_1 = 6 $$\n\n**Step 4: Solve for $E_0$.**\nRecall $E_0 = 1 + E_1$.\n$$ E_0 = 1 + 6 = 7 $$\n\nThus, the expected total number of rolls is **7**.\n\n---\n\n### Method 2: Definition of Expectation (Geometric Series Approach)\n\nLet $N$ be the random variable representing the total number of rolls. We want to find $E[N]$.\nThe possible values for $N$ are $2, 3, 4, \\dots$.\n$N=k$ means the first $k-1$ rolls did not contain a consecutive match, but the $k$-th roll matched the $(k-1)$-th roll.\n\nLet's determine the probability $P(N=k)$.\n\n*   **For $N=2$:**\n    Roll 1 is anything. Roll 2 must match Roll 1.\n    $P(N=2) = 1 \\times \\frac{1}{6} = \\frac{1}{6}$.\n\n*   **For $N=3$:**\n    Roll 1 is anything. Roll 2 must *not* match Roll 1. Roll 3 must match Roll 2.\n    $P(N=3) = 1 \\times \\frac{5}{6} \\times \\frac{1}{6} = \\frac{5}{36}$.\n\n*   **For $N=4$:**\n    Roll 1 is anything. Roll 2 $\\neq$ Roll 1. Roll 3 $\\neq$ Roll 2. Roll 4 = Roll 3.\n    $P(N=4) = 1 \\times \\frac{5}{6} \\times \\frac{5}{6} \\times \\frac{1}{6} = \\frac{25}{216}$.\n\n*   **General Case for $N=k$ ($k \\ge 2$):**\n    The first roll is arbitrary (prob 1).\n    The next $k-2$ rolls must each differ from their immediate predecessor (prob $5/6$ each).\n    The $k$-th roll must match the $(k-1)$-th roll (prob $1/6$).\n    $$ P(N=k) = \\left(\\frac{5}{6}\\right)^{k-2} \\cdot \\frac{1}{6} $$\n\nNow, we calculate the expected value:\n$$ E[N] = \\sum_{k=2}^{\\infty} k \\cdot P(N=k) = \\sum_{k=2}^{\\infty} k \\cdot \\frac{1}{6} \\left(\\frac{5}{6}\\right)^{k-2} $$\n\nLet $j = k-2$. Then $k = j+2$. When $k=2, j=0$.\n$$ E[N] = \\sum_{j=0}^{\\infty} (j+2) \\cdot \\frac{1}{6} \\left(\\frac{5}{6}\\right)^{j} $$\n$$ E[N] = \\frac{1}{6} \\left[ \\sum_{j=0}^{\\infty} j \\left(\\frac{5}{6}\\right)^{j} + 2 \\sum_{j=0}^{\\infty} \\left(\\frac{5}{6}\\right)^{j} \\right] $$\n\nWe use the standard geometric series formulas for $|r| < 1$:\n1.  $\\sum_{j=0}^{\\infty} r^j = \\frac{1}{1-r}$\n2.  $\\sum_{j=0}^{\\infty} j r^j = \\frac{r}{(1-r)^2}$\n\nHere, $r = \\frac{5}{6}$.\nNote that $1-r = 1 - \\frac{5}{6} = \\frac{1}{6}$.\n\nCalculate the sums:\n1.  $\\sum_{j=0}^{\\infty} \\left(\\frac{5}{6}\\right)^{j} = \\frac{1}{1/6} = 6$\n2.  $\\sum_{j=0}^{\\infty} j \\left(\\frac{5}{6}\\right)^{j} = \\frac{5/6}{(1/6)^2} = \\frac{5/6}{1/36} = \\frac{5}{6} \\cdot 36 = 30$\n\nSubstitute these back into the expression for $E[N]$:\n$$ E[N] = \\frac{1}{6} [ 30 + 2(6) ] $$\n$$ E[N] = \\frac{1}{6} [ 30 + 12 ] $$\n$$ E[N] = \\frac{42}{6} $$\n$$ E[N] = 7 $$\n\n### Conclusion\n\nBoth methods yield the same result.\n\nThe expected total number of rolls is **7**.",
+  "reasoning": "",
+  "actual_prompt_tokens": 82,
+  "generated_tokens": 1775,
+  "ttft_s": 1.1328119109966792,
+  "total_wall_s": 18.25991230699583,
+  "api_decode_wall_s": 17.12710039599915,
+  "prompt_processing_wall_s": 1.0993,
+  "decode_wall_s": 17.155900000000003,
+  "pp_tps": 74.6,
+  "tg_tps": 103.5,
+  "draft_tokens": 1521,
+  "accepted_tokens": 1217,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 82,
+    "prompt_ms": 1099.3,
+    "prompt_per_token_ms": 13.406,
+    "prompt_per_second": 74.6,
+    "predicted_n": 1775,
+    "predicted_ms": 17155.9,
+    "predicted_per_token_ms": 9.665,
+    "predicted_per_second": 103.5,
+    "draft_n": 1521,
+    "draft_n_accepted": 1217,
+    "at": 1790915187
+  },
+  "acceptance_pct": 80.01314924391848,
+  "mean_accepted_length": 2.1810035842293907,
+  "final_logical_context_tokens": 1857,
+  "final_kv_occupancy_tokens": 1856,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 558,
+  "mean_committed_length": 3.1810035842293907,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.933
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 63090.573293717,
+  "t_first_monotonic_s": 63091.706105628,
+  "t_end_monotonic_s": 63108.833206024,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "307504": {
+      "pss_gib": 0.18338394165039062,
+      "pss_sample_wall": 1790915168.830668,
+      "pss_read_wall_s": 0.005816389006213285
+    },
+    "307512": {
+      "pss_gib": 76.89057540893555,
+      "pss_sample_wall": 1790915169.7024403,
+      "pss_read_wall_s": 0.8717720200002077
+    }
+  },
+  "pss_after": {
+    "307504": {
+      "pss_gib": 0.1833953857421875,
+      "pss_sample_wall": 1790915188.2243965,
+      "pss_read_wall_s": 0.006340507999993861
+    },
+    "307512": {
+      "pss_gib": 76.89069843292236,
+      "pss_sample_wall": 1790915189.1292386,
+      "pss_read_wall_s": 0.9048417919984786
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "QUALITY-v0132-layer-default",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/QUALITY-v0132-layer-default.json"
+}

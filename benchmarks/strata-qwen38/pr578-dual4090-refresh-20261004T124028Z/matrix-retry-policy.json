@@ -1,0 +1,19 @@
+{
+  "reason": "Preserved original matrix attempt: legacy direct-tokenizer mismatch at64K; all retry input IDs now use upstream API encoder",
+  "final_labels": {
+    "LS-B": "LS-B-FINAL-TOKFIX",
+    "H-OPT-FIXED": "H-OPT-FIXED-FINAL-TOKFIX"
+  },
+  "superseded_labels": [
+    "LS-B-FINAL"
+  ],
+  "historical32K_IDs_unchanged": true,
+  "larger_context_payload_text_unchanged": true,
+  "comparability": "Both finalists share the same effective saved current-API token IDs; larger-context IDs differ from legacy direct encoding by official literal-tag handling.",
+  "cell_overrides": {
+    "H-OPT-FIXED": {
+      "31400": "H-OPT-FIXED-FINAL-TOKFIX-CLEAN32"
+    }
+  },
+  "clean32_reason": "Background summary analysis overlapped first decode and second prefill; entire three-run helper32K cell superseded by equal-warmup fresh-server replay after full matrix."
+}

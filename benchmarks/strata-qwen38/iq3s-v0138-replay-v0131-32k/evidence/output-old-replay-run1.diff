@@ -1,0 +1,14 @@
+--- v0131
++++ v0138-replay
+@@ -1,7 +1,9 @@
+ # What the last file does
+ 
+-`docs/AMD_HIP_PERFORMANCE.md` is the performance-evidence document for Strata's experimental AMD HIP backend (the `gfx1100` / RX 7900 XTX path, with related RDNA3/RDNA4 cards covered in the sibling `AMD_HIP.md`). Its purpose is to make a set of throughput measurements reproducible and to state exactly what those measurements do and do not prove. Concretely, the visible portion does four things:
++`docs/AMD_HIP_PERFORMANCE.md` is the performance-evidence companion to `docs/AMD_HIP.md`. Where the latter explains *how to install and build* the experimental AMD HIP backend (gfx1100/gfx1101/gfx1200/gfx1201), this file documents *what was measured, under exactly which conditions, and what the numbers mean*. Its purpose is to make the backend's performance claims reproducible and falsifiable rather than anecdotal.
+ 
+-1. **Scopes the claim.** It says this opt-in Linux `gfx1100` backend supersedes the original support in PR #94, and lists what it retains (HIP runtime, wave32 integer-dot compatibility, native mmap layout validation, MTP) versus what it adds (HIP MMQ, optional calibrated dense hipBLASLt GEMM, native prefill batching, host-memory/SSD paths, and a single reusable pinned staging buffer for blocking expert uploads). It also warns that HIP MMQ is opt-in at runtime and that default CUDA selection is preserved.
++Concretely, the file has four jobs:
+ 
+-2. **Gives the reproduction recipe.** It points to `AMD_HIP.md` for build steps, insists on the repository+1. **Scope and provenance.** It states that this opt-in Linux `gfx1100` backend supersedes the original support in PR #94, and lists what it retains (HIP runtime, wave32 integer-dot compatibility, native mmap layout validation, MTP) versus what it adds (HIP MMQ, optional calibrated dense hipBLASLt GEMM, native prefill batching, host-memory/SSD paths, and a single reusable pinned staging buffer for blocking expert uploads). It also pins the dependency contract: build against the repository-pinned llama.cpp revision, do not silently substitute another one.
++
++2. **A

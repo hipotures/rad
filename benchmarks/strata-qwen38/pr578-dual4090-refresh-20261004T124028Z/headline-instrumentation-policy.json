@@ -1,0 +1,20 @@
+{
+  "mode": "UNMODIFIED_UPSTREAM_BINARIES_NO_DEBUG",
+  "reason": "Predeclared repeated diagnostic ON/OFF comparison observed3.43% lower median ON; preserve all diagnostics but disable them for headline timing",
+  "profile": "/srv/ai/strata/data/expert-profile.bin",
+  "profile_SHA256": "8f59b4aa8873209dff11c11e37bcda9529a1335b724a1afeea37bf6388975baf",
+  "initial_layout_reference": "auto-capacities.json",
+  "fairness_basis": "Physical capacities logged before warmup. With identical native layout/profile/capacities, startup sets are deterministic; RemoteExperts::open excludes every primary-owned ID, fills selected capacity, then adaptation starts on requests. Initial overlap0 is an invariant, independently observed in paired startup diagnostics. Clean speed runs do not directly dump ID sets.",
+  "source_evidence": [
+    "src/core/remote_experts.cpp:147",
+    "src/core/remote_experts.cpp:175",
+    "src/program/generate.cpp:3629"
+  ],
+  "exact_CPU_fallback_basis": "Default decode cache lookups-hits equals native multi_entries; independently verified36 debug records (normal-counter-validation.json).",
+  "limitations": "Per-run clean speed cache-ID dumps unavailable; progression comes from separate diagnostic runs. Hardware PCIe counters and normal logical return-byte logs remain.",
+  "original_binary_SHA256": {
+    "control": "871bb3b8ff217b6c53b517e3a5f77504e86c74877d6c717050e2034d3098840d",
+    "optimized": "aa3fe53325ca9ad5f2e367e55d792b9d4f268546e5cb311ba3afd3b6807030d6"
+  },
+  "source_correction": "RemoteExpertOpt metadata is attached before cache open, but does not enter selection predicates; selected list uses ranked/profile/primary/claimed/capacity. Profile contains all24576 pairs."
+}

@@ -1,0 +1,44 @@
+{
+  "target_actual_prompt_tokens": 31400,
+  "output_tokens": 256,
+  "measured_requests": 3,
+  "warmup_requests": 1,
+  "GPU": [
+    0,
+    1
+  ],
+  "K": 24,
+  "kv": "int8",
+  "spec": 4,
+  "spec_min_p": 0.5,
+  "max_context": 262144,
+  "prefill": "auto",
+  "ple_io": "mmap",
+  "literal_saved_Q4_payloads": "only model alias changed; distinct saved nonces; tokenizer equality and occupancy checked before each request",
+  "references": [
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/raw/PP-CONTROL-31400-run1.json",
+      "sha256": "44800983d7533f1b25ee4aed7f20ddf233baf65f8c3b74800c82f4fc09c3c064",
+      "pp_tps": 2602.5,
+      "tg_tps": 88.5,
+      "ttft_s": 12.153225862995896
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/raw/PP-CONTROL-31400-run2.json",
+      "sha256": "44e78d99c383bc19d06a776f538aafc8ead509caae25eee0d0b172a1508f6c91",
+      "pp_tps": 2614.9,
+      "tg_tps": 121.8,
+      "ttft_s": 12.087620884005446
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/raw/PP-CONTROL-31400-run3.json",
+      "sha256": "65df95135bb4c73c596d92d76a63246591bdbae88c452c9699b77666a6e983e1",
+      "pp_tps": 2615.0,
+      "tg_tps": 120.7,
+      "ttft_s": 12.090956312000344
+    }
+  ],
+  "comparison": "historical Q4 median and historical fastest run; NOT_CONTROLLED_A_B: required local Q5 runtime fallback+Q8 PLE mmap, different quant/cache capacity/adaptive cache history; no simultaneous rerun Q4",
+  "no_model_download_or_weight_change": true,
+  "created_utc": "2026-10-02T10:40:28.340204+00:00"
+}

@@ -1,0 +1,104 @@
+{
+  "model": "QUALITY-v0132-layer-own",
+  "kind": "quality",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 102,
+  "requested_generated_tokens": 8192,
+  "time_utc": "2026-10-02T04:29:23Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/QUALITY-v0132-layer-own-C-repository-architecture.jsonl",
+  "samples": 46,
+  "peak_rss_gib": 77.26720809936523,
+  "min_mem_available_gib": 79.56847381591797,
+  "peak_ram_used_gib": 81.56414413452148,
+  "peak_vram0_gib": 19.033203125,
+  "peak_vram1_gib": 18.869140625,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 2204,
+    "total_tokens": 2306,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "# Repository Architecture: Local Coding-Agent Service\n\n## 1. High-Level Overview\n\nThis service acts as a **single-process gateway** that:\n1. Accepts OpenAI-compatible `/v1/chat/completions` streaming requests.\n2. Serializes all inference requests through a **single resident GPU worker** (to avoid GPU contention and ensure deterministic resource usage).\n3. Maintains **per-client prompt caches** to maximize KV-cache reuse across turns.\n4. Records granular metrics per request.\n5. Handles cancellation, process crashes, and backpressure gracefully.\n\n### Core Design Principles\n- **Single Writer to GPU**: One resident inference process owns the GPU. All requests are queued and executed sequentially.\n- **Stateful Caching per Client**: Prompt caching is keyed by `client_id` (or session ID) to prevent cross-client cache pollution.\n- **Decoupled Control Plane**: The HTTP server, queue, and GPU worker are separate modules communicating via channels/queues.\n- **Crash-Isolated Worker**: If the GPU worker crashes, the gateway detects it, restarts it, and fails pending requests with a retryable error.\n\n---\n\n## 2. Module Boundaries\n\n| Module | Responsibility | Key Interfaces |\n|--------|---------------|----------------|\n| `api` | HTTP server, OpenAI-compatible request parsing, streaming response formatting | `handle_chat_completion(req) -> Stream` |\n| `queue` | FIFO request queue, backpressure, cancellation propagation | `enqueue(req) -> Result<Stream, Error>`, `cancel(request_id)` |\n| `worker` | Resident GPU inference process, model loading, token generation | `run(model_path)`, `generate(prompt, cache_key) -> Stream` |\n| `cache` | Per-client prompt cache management, eviction, correctness guarantees | `get_or_create(client_id) -> CacheHandle`, `invalidate(client_id)` |\n| `metrics` | Per-request timing, token counts, queue depth, cache hit/miss | `record(request_id, metrics)` |\n| `recovery` | Worker health monitoring, restart logic, request failure handling | `monitor_worker()`, `on_worker_crash()` |\n| `config` | Configuration loading, validation | `load_config() -> Config` |\n\n---\n\n## 3. Concrete File Tree\n\n```\ncoding-agent-service/\n├── Cargo.toml                 # Rust workspace root (or package.json for Node/TS)\n├── README.md\n├── docs/\n│   ├── architecture.md\n│   └── api-spec.md\n├── src/\n│   ├── main.rs                # Entry point: wires modules together\n│   ├── api/\n│   │   ├── mod.rs             # HTTP server setup (axum/actix)\n│   │   ├── handlers.rs        # /v1/chat/completions handler\n│   │   ├── streaming.rs       # SSE/streaming response formatting\n│   │   └── types.rs           # OpenAI-compatible request/response structs\n│   ├── queue/\n│   │   ├── mod.rs             # Queue interface\n│   │   ├── fifo.rs            # FIFO queue implementation\n│   │   └── cancellation.rs    # Cancellation token propagation\n│   ├── worker/\n│   │   ├── mod.rs             # Worker lifecycle management\n│   │   ├── gpu_worker.rs      # Resident GPU inference process (subprocess or thread)\n│   │   ├── inference.rs       # Token generation loop, KV-cache interaction\n│   │   └── health.rs          # Heartbeat, crash detection\n│   ├── cache/\n│   │   ├── mod.rs             # Cache interface\n│   │   ├── per_client.rs      # Per-client prompt cache (LRU + TTL)\n│   │   └── correctness.rs     # Cache key derivation, invalidation rules\n│   ├── metrics/\n│   │   ├── mod.rs             # Metrics collection interface\n│   │   ├── collector.rs       # Per-request metrics recording\n│   │   └── exporter.rs        # Prometheus/JSON export\n│   ├── recovery/\n│   │   ├── mod.rs             # Recovery orchestration\n│   │   ├── restart.rs         # Worker restart logic\n│   │   └── failover.rs        # Request failure handling\n│   └── config/\n│       ├── mod.rs             # Config loading\n│       └── schema.rs          # Config validation\n├── tests/\n│   ├── integration/\n│   │   ├── api_test.rs\n│   │   ├── cancellation_test.rs\n│   │   └── crash_recovery_test.rs\n│   └── unit/\n│       ├── cache_test.rs\n│       └── queue_test.rs\n├── scripts/\n│   ├── start.sh               # Launch service\n│   └── healthcheck.sh         # Liveness probe\n└── config/\n    └── default.toml           # Default configuration\n```\n\n---\n\n## 4. Key Mechanisms\n\n### 4.1 Request Flow\n\n```\nClient → API Handler → Queue → Worker → GPU\n                ↓           ↓\n            Metrics     Cache Lookup\n```\n\n1. **API Handler** parses the OpenAI request, extracts `client_id` (from header or session), and creates a `Request` object with a unique `request_id`.\n2. **Queue** enqueues the request. If the queue is full, it returns `429 Too Many Requests`.\n3. **Worker** dequeues the request, looks up the per-client cache, runs inference, and streams tokens back.\n4. **Metrics** records timestamps, token counts, cache hit/miss, and queue wait time.\n5. **API Handler** streams tokens back to the client via SSE.\n\n### 4.2 Cancellation\n\n- Each request has a `CancellationToken` (e.g., `tokio::sync::watch` or `crossbeam::channel`).\n- When the client disconnects, the HTTP handler drops the response stream, which triggers cancellation.\n- The cancellation token is passed through the queue to the worker.\n- The worker checks the token between token generations and aborts if cancelled.\n- **Important**: Cancellation does **not** invalidate the cache. Partially generated tokens are discarded, but the cache state remains consistent because we only commit cache updates after successful completion.\n\n### 4.3 Process Failure Recovery\n\n- The **GPU worker** runs as a separate OS process (or a supervised thread) to isolate GPU crashes.\n- The **recovery module** monitors the worker via:\n  - Heartbeat messages over a Unix socket or shared memory.\n  - Process exit code monitoring.\n- On crash:\n  1. All pending requests in the queue are marked as `Failed` with a retryable error (`503 Service Unavailable`).\n  2. The worker is restarted with the same model configuration.\n  3. The cache is **cleared** because the KV-cache state is lost with the process.\n  4. New requests proceed with cold cache.\n- **Why clear cache?** The KV-cache is tied to the model weights and internal state. After a restart, the cache is invalid. Keeping stale cache entries would cause incorrect outputs.\n\n### 4.4 Prompt Caching Correctness Across Clients\n\n**Problem**: If two clients send similar prompts, sharing a cache could leak data or cause incorrect responses if the cache key is not unique.\n\n**Solution**:\n- **Cache Key**: `(client_id, model_version, prompt_hash, generation_params_hash)`\n  - `client_id`: Derived from an API key, session ID, or IP + user-agent hash.\n  - `model_version`: Hash of model weights/config to prevent cross-model cache reuse.\n  - `prompt_hash`: SHA-256 of the normalized prompt (including system message).\n  - `generation_params_hash`: Hash of temperature, top_p, etc.\n- **Isolation**: Each client has its own cache namespace. No cross-client sharing.\n- **Eviction**: LRU + TTL per client. If a client is inactive for `T` seconds, its cache is evicted.\n- **Commit-on-Complete**: Cache entries are only written after a request completes successfully. Partial generations do not pollute the cache.\n- **Invalidation**: If the model is reloaded or updated, all caches are invalidated.\n\n---\n\n## 5. Tradeoffs\n\n### Tradeoff 1: Sequential Queueing vs. Parallelism\n\n| Aspect | Sequential (Chosen) | Parallel |\n|--------|---------------------|----------|\n| **GPU Utilization** | Lower (idle between requests) | Higher (batching possible) |\n| **Complexity** | Simple, deterministic | Complex (batching, memory management) |\n| **Latency** | Predictable, no interference | Variable, potential head-of-line blocking |\n| **Cache Correctness** | Easy (one request at a time) | Hard (concurrent cache access) |\n\n**Why Sequential?** For a local coding-agent, simplicity and correctness outweigh throughput. GPU batching requires careful memory management and can introduce subtle bugs. Sequential processing ensures cache consistency and simplifies cancellation.\n\n### Tradeoff 2: Per-Client Cache Isolation vs. Shared Cache\n\n| Aspect | Per-Client (Chosen) | Shared |\n|--------|---------------------|--------|\n| **Cache Hit Rate** | Lower (no cross-client reuse) | Higher (common prompts shared) |\n| **Security** | Strong isolation | Risk of data leakage |\n| **Memory Usage** | Higher (duplicate entries) | Lower |\n| **Correctness** | Guaranteed | Requires careful key design |\n\n**Why Per-Client?** Coding agents often handle sensitive code. Cross-client cache sharing risks leaking proprietary code. Per-client isolation is safer and simpler to reason about. The memory overhead is acceptable for a local service with limited concurrent clients.\n\n---\n\n## 6. Summary\n\nThis architecture prioritizes **correctness, simplicity, and safety** over raw throughput. By serializing GPU access, isolating caches per client, and using a crash-isolated worker, the service provides reliable OpenAI-compatible streaming with robust cancellation and recovery. The tradeoffs are deliberate: sacrificing some performance for predictability and security, which is appropriate for a local coding-agent use case.",
+  "reasoning": "",
+  "actual_prompt_tokens": 102,
+  "generated_tokens": 2204,
+  "ttft_s": 2.279516170005081,
+  "total_wall_s": 45.17855710400181,
+  "api_decode_wall_s": 42.89904093399673,
+  "prompt_processing_wall_s": 2.2319,
+  "decode_wall_s": 42.9401,
+  "pp_tps": 45.7,
+  "tg_tps": 51.3,
+  "draft_tokens": 1913,
+  "accepted_tokens": 1300,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 102,
+    "prompt_ms": 2231.9,
+    "prompt_per_token_ms": 21.881,
+    "prompt_per_second": 45.7,
+    "predicted_n": 2204,
+    "predicted_ms": 42940.1,
+    "predicted_per_token_ms": 19.483,
+    "predicted_per_second": 51.3,
+    "draft_n": 1913,
+    "draft_n_accepted": 1300,
+    "at": 1790915408
+  },
+  "acceptance_pct": 67.95608991113434,
+  "mean_accepted_length": 1.4364640883977902,
+  "final_logical_context_tokens": 2306,
+  "final_kv_occupancy_tokens": 2306,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 905,
+  "mean_committed_length": 2.4364640883977904,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.741
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 63284.601587645,
+  "t_first_monotonic_s": 63286.881103815,
+  "t_end_monotonic_s": 63329.780144749,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "308699": {
+      "pss_gib": 0.1834125518798828,
+      "pss_sample_wall": 1790915362.8238482,
+      "pss_read_wall_s": 0.007195194993983023
+    },
+    "308709": {
+      "pss_gib": 76.90850830078125,
+      "pss_sample_wall": 1790915363.7301857,
+      "pss_read_wall_s": 0.9063360779982759
+    }
+  },
+  "pss_after": {
+    "308699": {
+      "pss_gib": 0.18341636657714844,
+      "pss_sample_wall": 1790915409.1645193,
+      "pss_read_wall_s": 0.0062085099998512305
+    },
+    "308709": {
+      "pss_gib": 76.90850830078125,
+      "pss_sample_wall": 1790915410.052915,
+      "pss_read_wall_s": 0.8883978619996924
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "QUALITY-v0132-layer-own",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/QUALITY-v0132-layer-own.json"
+}

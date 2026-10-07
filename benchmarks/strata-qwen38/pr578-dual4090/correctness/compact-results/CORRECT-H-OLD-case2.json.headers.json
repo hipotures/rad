@@ -1,0 +1,154 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-OLD-case2.json",
+  "source_bytes": 302860,
+  "source_sha256": "e546e68eb06d39726c5893116a057c89659f53fb3c6a51365fb7d29296f0a1aa",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-OLD",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 49,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-03T23:52:33Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-OLD-case2.jsonl",
+    "samples": 5,
+    "peak_rss_gib": 53.3714714050293,
+    "min_mem_available_gib": 103.38229751586914,
+    "peak_ram_used_gib": 57.75032043457031,
+    "peak_vram0_gib": 23.26171875,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 49,
+      "completion_tokens": 189,
+      "total_tokens": 238,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "To solve the equation $3x + 7 = 31$, follow these steps:\n\n**Step 1: Isolate the term with $x$.**\nSubtract 7 from both sides of the equation:\n$$3x = 31 - 7$$\n$$3x = 24$$\n\n**Step 2: Solve for $x$.**\nDivide both sides by 3:\n$$x = \\frac{24}{3}$$\n$$x = 8$$\n\n**Verification:**\nSubstitute $x = 8$ back into the original equation:\n$$3(8) + 7 = 31$$\n$$24 + 7 = 31$$\n$$31 = 31$$\n\nThe left side equals the right side, so the solution is correct.\n\n**Answer:**\n$$x = 8$$",
+    "reasoning": "",
+    "actual_prompt_tokens": 49,
+    "generated_tokens": 189,
+    "ttft_s": 0.7008713399991393,
+    "total_wall_s": 4.715561896999134,
+    "api_decode_wall_s": 4.014690556999994,
+    "prompt_processing_wall_s": 0.6817000000000001,
+    "decode_wall_s": 2.7672,
+    "pp_tps": 71.9,
+    "tg_tps": 68.3,
+    "draft_tokens": 156,
+    "accepted_tokens": 138,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 49,
+      "prompt_ms": 681.7,
+      "prompt_per_token_ms": 13.912,
+      "prompt_per_second": 71.9,
+      "predicted_n": 189,
+      "predicted_ms": 2767.2,
+      "predicted_per_token_ms": 14.641,
+      "predicted_per_second": 68.3,
+      "draft_n": 156,
+      "draft_n_accepted": 138,
+      "at": 1791071558
+    },
+    "acceptance_pct": 88.46153846153847,
+    "mean_accepted_length": 2.6037735849056602,
+    "final_logical_context_tokens": 238,
+    "final_kv_occupancy_tokens": 239,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 53,
+    "mean_committed_length": 3.6037735849056602,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.929
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 219474.582916681,
+    "t_first_monotonic_s": 219475.283788021,
+    "t_end_monotonic_s": 219479.298478578,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "stop"
+    ],
+    "pss_before": {
+      "890890": {
+        "pss_gib": 0.18391704559326172,
+        "pss_sample_wall": 1791071552.9494622,
+        "pss_read_wall_s": 0.00713894100044854
+      },
+      "890899": {
+        "pss_gib": 0.0005216598510742188,
+        "pss_sample_wall": 1791071552.9496164,
+        "pss_read_wall_s": 0.00015002998406998813
+      },
+      "890900": {
+        "pss_gib": 53.00153350830078,
+        "pss_sample_wall": 1791071553.7112327,
+        "pss_read_wall_s": 0.7616184689977672
+      },
+      "890901": {
+        "pss_gib": 0.0031909942626953125,
+        "pss_sample_wall": 1791071553.7115262,
+        "pss_read_wall_s": 0.00028566899709403515
+      }
+    },
+    "pss_after": {
+      "890890": {
+        "pss_gib": 0.18393230438232422,
+        "pss_sample_wall": 1791071558.6543517,
+        "pss_read_wall_s": 0.007457371015334502
+      },
+      "890899": {
+        "pss_gib": 0.0005216598510742188,
+        "pss_sample_wall": 1791071558.6545324,
+        "pss_read_wall_s": 0.00017471902538090944
+      },
+      "890900": {
+        "pss_gib": 53.00162887573242,
+        "pss_sample_wall": 1791071559.401751,
+        "pss_read_wall_s": 0.7472193359863013
+      },
+      "890901": {
+        "pss_gib": 0.0031299591064453125,
+        "pss_sample_wall": 1791071559.402029,
+        "pss_read_wall_s": 0.0002709789841901511
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-OLD",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-OLD.json",
+    "input_ids_sha256": "9fdce6e5d68a35c7555f824b0adb269de9f767eae0d17403f3787ee692c158a4",
+    "output_text_sha256": "8b395d0f4bff06e153b2351d654ff8ef0820a76cd4dcde07ec5a11ae90ce135e",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 1805,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "math",
+    "generated_token_ids": {
+      "omitted_list_items": 189
+    }
+  }
+}

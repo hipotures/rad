@@ -1,0 +1,332 @@
+# Strata v0.1.32 — COMPLETE_REVIEWED_WITH_NEGATIVE_EXPERIMENTAL_OUTCOMES
+
+## Running
+
+```json
+null
+```
+
+## Completed
+
+- v0.1.31 checkpoint and safe stop
+- exactv0.1.32 tag/commit verified
+- separate checkout/venv
+- all four GGUFstatidentities match previous SHAverifiedfiles
+- release/docs/CMake/source and compiledhelp audit complete
+- both separate builds compiled; exact embeddedversion0.1.32 verified
+- default selected; Q4-fast rejected by upstream numerical gate
+- both actualcompiledhelp files preserved
+- independent Q4 compatibilitypack, noexperts.bin
+- independentcopy existingMTP verified by upstream
+- officialsetup --gguf-dir/no-start COMPLETE with isolatedXDGsettings; originalshards restoredandstatverified
+- isolated serialharness and lowoverheadtelemetry ready
+- Q4-fast speedA/B explicitly notrun because upstream correctnessgate failed
+- singleGPUresident baseline smoke,warmup+3 actual63400,out256,reuse0 VERIFIED
+- auto/fullarena layer split and Kscreen/TOP2confirm COMPLETE
+- Controlledversion PPmatrix32measured withpairedpayloads COMPLETE
+- Prefill5screens/TOP2x3 at128/256K completed orunsupported documented
+- Prompt-path default/SPLIT_OWN/no-borrow64/128K screening and applicable confirmations
+- Default adaptive/static best split: warmup+3 each actual64K
+- Upstream calibrator plus workers/PCIe/minp sequential64K screens and best warmup+3
+- MTP specs2/3/4/5 n2actual1024 and TOP2n3; OFF unsupported documented
+- KV4formats128/256K n2screens and TOP2n3
+- Final context matrix actual32/64/128/256K n3 verified
+- Long actual64K4K/128K4K/128K8K completed; naturalEOS first8K retained separately
+- agent64 actualfinalconfiguration measurements complete
+- INT8 diagnostic agent128 full11/history independentlyverified
+- Separate INT8 actual32/64/128/256K matrix:12 measured requests independently verified
+- Full11-turn agent128 lifecycle measured with naturalEOS negatives disclosed; INT8notpromoted
+- compaction actualfinalconfiguration measurements complete
+- Isolated preservedv0.1.31 compaction2exactpayloadcontrols complete and independentlyverified; NOT_CONTROLLED_A_B
+- Quality residentdefault3literalresponses independentlyverified; nonidenticaltoarchivedv0.1.31, nojudge
+- Exactsaved3qualitypayloads: old/archive,newdefaults,opt-in outputs/SHA256/textdiff; no judge
+- Upstream needle actual32/128/256K depths10/50/90 completed
+- IQ3runtimeupgrade ONLY64/256K threeeach on previousconfig
+- Separate normal upstream prefill timing diagnostics128/256K, excluded from rankings
+- Offline artifacts assembled; completion unproven until independent manual audit
+- Independent final source/data/selection review covers latest sections0–26
+- All21 rendered plots inspected; split filter and MTP confirmations corrected
+- Concrete PP/TG bottleneck and practical Q4 vs IQ3 conclusions recorded without quality ranking
+- All automated checks verified; negative output targets and failed optional numerical gate explicitly retained
+
+## Pending
+
+
+## Current winners
+
+```json
+{
+  "build": "default",
+  "resident_baseline": {
+    "PP": 1518.3,
+    "TG": 40.9,
+    "TTFT": 41.91882341299788
+  },
+  "topology": {
+    "candidate": "SPLIT-K24-confirm-v0132",
+    "TG": 110.3,
+    "PP": 3216.4,
+    "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/SPLIT-K24-confirm-v0132.json"
+  },
+  "prefill": {
+    "status": "REVIEWED_FROM_RAW",
+    "selection_rule": "Geometric mean of confirmed median PP across actual127000/259500; TG secondary; default modes only. Equivalent actualchunk policies within3% use tested explicit actualsize. Explicit unchanged chunk interpreted with upstream no-reduction log contract.",
+    "equivalent_chunk_tie": {
+      "ranked_PP_leader": "32768",
+      "selected_explicit_size": "16384",
+      "reason": "Both tested policies resolve to samechunk; confirmed PP within3%. Prefer explicit actualsize rather than relying on startup shrink."
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/PREFILL-16384-confirm-127000.json",
+    "argument": "16384",
+    "rank": [
+      {
+        "argument": "32768",
+        "geometric_mean_PP": 5420.054473895996,
+        "geometric_mean_TG": 89.30162372543961,
+        "cells": [
+          {
+            "candidate": "PREFILL-32768-confirm-127000",
+            "target": 127000,
+            "median_PP": 5185.7,
+            "median_TG": 84.3
+          },
+          {
+            "candidate": "PREFILL-32768-confirm-259500",
+            "target": 259500,
+            "median_PP": 5665.0,
+            "median_TG": 94.6
+          }
+        ]
+      },
+      {
+        "argument": "16384",
+        "geometric_mean_PP": 5397.090942350333,
+        "geometric_mean_TG": 95.65605051432972,
+        "cells": [
+          {
+            "candidate": "PREFILL-16384-confirm-127000",
+            "target": 127000,
+            "median_PP": 5140.4,
+            "median_TG": 98.6
+          },
+          {
+            "candidate": "PREFILL-16384-confirm-259500",
+            "target": 259500,
+            "median_PP": 5666.6,
+            "median_TG": 92.8
+          }
+        ]
+      }
+    ],
+    "allocation_evidence": [
+      {
+        "candidate": "PREFILL-16384-confirm-127000",
+        "target": 127000,
+        "configured_prefill": "16384",
+        "resolved_chunk_tokens": 16384,
+        "resolution_events": [],
+        "initial_cache_loans": {
+          "GPU0": {
+            "slots": 2787,
+            "GiB_rounded": 8.16
+          },
+          "GPU1": {
+            "slots": 2798,
+            "total_slots": 4885,
+            "GiB_rounded": 8.15
+          }
+        },
+        "own_buffer_log_lines": [],
+        "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/logs/PREFILL-16384-confirm-127000-engine.log",
+        "note": "Loans are startup allocations before possible chunk retry; no invented per-request loan counters. Explicit unchanged chunk derives from argument and absence of upstream step-down log."
+      },
+      {
+        "candidate": "PREFILL-16384-confirm-259500",
+        "target": 259500,
+        "configured_prefill": "16384",
+        "resolved_chunk_tokens": 16384,
+        "resolution_events": [],
+        "initial_cache_loans": {
+          "GPU0": {
+            "slots": 2787,
+            "GiB_rounded": 8.16
+          },
+          "GPU1": {
+            "slots": 2798,
+            "total_slots": 4885,
+            "GiB_rounded": 8.15
+          }
+        },
+        "own_buffer_log_lines": [],
+        "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/logs/PREFILL-16384-confirm-259500-engine.log",
+        "note": "Loans are startup allocations before possible chunk retry; no invented per-request loan counters. Explicit unchanged chunk derives from argument and absence of upstream step-down log."
+      },
+      {
+        "candidate": "PREFILL-32768-confirm-127000",
+        "target": 127000,
+        "configured_prefill": "32768",
+        "resolved_chunk_tokens": 16384,
+        "resolution_events": [
+          "strata serve: prompt chunk 32768 -> 16384 tokens so its buffers fit in every expert cache"
+        ],
+        "initial_cache_loans": {
+          "GPU0": {
+            "slots": 2787,
+            "GiB_rounded": 8.16
+          },
+          "GPU1": {
+            "slots": 2798,
+            "total_slots": 4885,
+            "GiB_rounded": 8.15
+          }
+        },
+        "own_buffer_log_lines": [],
+        "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/logs/PREFILL-32768-confirm-127000-engine.log",
+        "note": "Loans are startup allocations before possible chunk retry; no invented per-request loan counters. Explicit unchanged chunk derives from argument and absence of upstream step-down log."
+      },
+      {
+        "candidate": "PREFILL-32768-confirm-259500",
+        "target": 259500,
+        "configured_prefill": "32768",
+        "resolved_chunk_tokens": 16384,
+        "resolution_events": [
+          "strata serve: prompt chunk 32768 -> 16384 tokens so its buffers fit in every expert cache"
+        ],
+        "initial_cache_loans": {
+          "GPU0": {
+            "slots": 2787,
+            "GiB_rounded": 8.16
+          },
+          "GPU1": {
+            "slots": 2798,
+            "total_slots": 4885,
+            "GiB_rounded": 8.15
+          }
+        },
+        "own_buffer_log_lines": [],
+        "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/logs/PREFILL-32768-confirm-259500-engine.log",
+        "note": "Loans are startup allocations before possible chunk retry; no invented per-request loan counters. Explicit unchanged chunk derives from argument and absence of upstream step-down log."
+      }
+    ]
+  },
+  "CPU_PCIe_minp": {
+    "candidate": "CAL-best-confirm",
+    "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/CAL-best-confirm.json",
+    "TG": 118.9,
+    "PP": 4662.7,
+    "review": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/calibration-confirmation-review.json"
+  },
+  "MTP": {
+    "candidate": "MTP-spec3-confirm-v0132",
+    "TG": 104.4,
+    "PP": 4641.6,
+    "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/MTP-spec3-confirm-v0132.json"
+  },
+  "final": {
+    "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4.json",
+    "kv": "k8v4",
+    "selection": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/production-selection.json",
+    "classification": "TESTED_K8V4_SPEED_FINALIST_WITH_NEGATIVE_LENGTH_OUTCOMES"
+  },
+  "INT8_stability_candidate": {
+    "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4-INT8-stability.json",
+    "status": "NOT_PROMOTED_AGENT64_SHORT235",
+    "review": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/evidence/int8-agent64-short-review.json",
+    "matrix": [
+      {
+        "target": 31400,
+        "n": 3,
+        "median_PP": 3416.8,
+        "median_TG": 107.6,
+        "median_TTFT": 9.276041117002023
+      },
+      {
+        "target": 63400,
+        "n": 3,
+        "median_PP": 4429.6,
+        "median_TG": 109.8,
+        "median_TTFT": 14.459547208993172
+      },
+      {
+        "target": 127000,
+        "n": 3,
+        "median_PP": 5172.9,
+        "median_TG": 102.6,
+        "median_TTFT": 24.807098739998764
+      },
+      {
+        "target": 259500,
+        "n": 3,
+        "median_PP": 5609.6,
+        "median_TG": 97.3,
+        "median_TTFT": 46.791643279997515
+      }
+    ]
+  }
+}
+```
+
+## Excluded runs
+
+```json
+[
+  {
+    "path": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/build-prepare-first-attempt.json",
+    "type": "preparation_only_no_request"
+  },
+  {
+    "candidate": "q4-fast",
+    "status": "NUMERICAL_GATE_FAILED",
+    "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/q4-fast-kernel-test.json",
+    "request_count": 0
+  },
+  {
+    "phase": "initialofficialsetup",
+    "request_count": 0,
+    "evidence": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/setup-relocation-recovery.json"
+  },
+  {
+    "candidate": "FINAL-v0132-Q4",
+    "status": "EXCLUDED_EARLY_TOOL_CALL_SHORT_OUTPUT",
+    "generated_tokens": 118,
+    "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-ctx31400-run1.json",
+    "retained": true
+  },
+  {
+    "candidate": "LONG-FINAL-v0132-128K-8192-sampled",
+    "status": "INCOMPLETE_REQUESTED_LENGTH_NATURAL_EOS",
+    "generated_tokens": 6324,
+    "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-FINAL-v0132-128K-8192-sampled.json",
+    "retained": true
+  },
+  {
+    "candidate": "AGENT-127000-v0132",
+    "status": "PARTIAL_SESSION_TURN8_SHORT188",
+    "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/AGENT-127000-v0132-turn8.json",
+    "retained": true
+  },
+  {
+    "candidate": "AGENT-127000-v0132-attempt2",
+    "status": "PARTIAL_SESSION_TURN5_SHORT95",
+    "retained": true,
+    "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/AGENT-127000-v0132-attempt2-turn5.json"
+  },
+  {
+    "candidate": "LONG-INT8-v0132-128K-8192-sampled",
+    "status": "NATURAL_EOS_6777_OF_8192",
+    "retained": true,
+    "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-INT8-v0132-128K-8192-sampled.json"
+  },
+  {
+    "candidate": "AGENT-63400-v0132-int8-validation",
+    "status": "PARTIAL_SESSION_TURN6_SHORT235",
+    "retained": true
+  }
+]
+```
+
+## Next exact action
+
+No benchmark work remains. Read report.md and saved quality responses. Production commands/configs are saved and have not been launched.
+
+Full authorized scope: PLAN.md. Old checkpoint: ../q4-max-sweep/V0131-CHECKPOINT.md/.json.

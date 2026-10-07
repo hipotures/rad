@@ -1,0 +1,98 @@
+[
+  {
+    "variant": "CURRENT",
+    "context": "32K-16K",
+    "mode": "long",
+    "runs": [],
+    "invalid": [
+      "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/raw/CURRENT-32K-16K-run1.json"
+    ],
+    "layout": {
+      "engine": {
+        "model": "qwen3.8-flash-next-iq3_s",
+        "max_context": 262144,
+        "images": false,
+        "version": "0.1.39",
+        "context": 262144,
+        "kv": "int8",
+        "kv_resident": 32768,
+        "expert_slots": 18489,
+        "expert_cache_mib": 35918,
+        "expert_slots_primary": 10112,
+        "expert_cache_primary_mib": 18671,
+        "spec": 4,
+        "mtp_max": 0,
+        "lookup": 0,
+        "vram_free_mib": 415,
+        "cvec": 0,
+        "arena_mib": 47962,
+        "pool_workers": 15,
+        "pcie_frac": "0.28",
+        "spec_min_p": "0.50",
+        "conversation_cache_mib": 0,
+        "conversation_cache_slots": 4,
+        "conversation_cache_min_free_mib": 2560,
+        "tail_role_token": -1,
+        "vram_elastic": 0,
+        "engine": "0.1.39"
+      },
+      "startup_log": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/logs/CURRENT-32K-16K-engine.log",
+      "primary_slots": 10112,
+      "helper_slots": null,
+      "layer_slots": {
+        "1": 8377
+      },
+      "K": "25",
+      "initial_overlap": null,
+      "initial_overlap_note": "Not enumerated by clean speed binary; existing historical diagnostics are separate evidence"
+    },
+    "status": "OPTIONAL_FIXED_LENGTH_UNAVAILABLE_EARLY_STOP"
+  },
+  {
+    "variant": "HELPER",
+    "context": "32K-16K",
+    "mode": "long",
+    "runs": [
+      "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/raw/HELPER-32K-16K-run1.json"
+    ],
+    "invalid": [
+      "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/raw/HELPER-32K-16K-run2.json"
+    ],
+    "layout": {
+      "engine": {
+        "model": "qwen3.8-flash-next-iq3_s",
+        "max_context": 262144,
+        "images": false,
+        "version": "0.1.38",
+        "context": 262144,
+        "kv": "int8",
+        "kv_resident": 32768,
+        "expert_slots": 20382,
+        "expert_cache_mib": 39765,
+        "expert_slots_primary": 8586,
+        "expert_cache_primary_mib": 16673,
+        "spec": 4,
+        "mtp_max": 0,
+        "lookup": 0,
+        "vram_free_mib": 415,
+        "cvec": 0,
+        "arena_mib": 47962,
+        "pool_workers": 15,
+        "pcie_frac": "0.37",
+        "spec_min_p": "0.50",
+        "conversation_cache_mib": 0,
+        "conversation_cache_slots": 4,
+        "conversation_cache_min_free_mib": 2560,
+        "engine": "0.1.38"
+      },
+      "startup_log": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/logs/HELPER-32K-16K-engine.log",
+      "primary_slots": 8586,
+      "helper_slots": 11796,
+      "layer_slots": {},
+      "K": null,
+      "initial_overlap": null,
+      "initial_overlap_note": "Not enumerated by clean speed binary; existing historical diagnostics are separate evidence"
+    },
+    "status": "OPTIONAL_FIXED_LENGTH_UNAVAILABLE_EARLY_STOP"
+  }
+]

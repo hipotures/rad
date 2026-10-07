@@ -1,0 +1,36 @@
+{
+  "pid": 222991,
+  "command": [
+    "/srv/ai/strata-v0.1.32/build-default/strata",
+    "--serve",
+    "--pack",
+    "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+    "--native",
+    "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+    "--expert-profile",
+    "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+    "--expert-cache",
+    "auto",
+    "--spec",
+    "4",
+    "--spec-min-p",
+    "0.5",
+    "--mtp",
+    "/srv/ai/models/strata-v0132/mtp/rt",
+    "--kv",
+    "int8",
+    "--max-context",
+    "262144",
+    "--prefill",
+    "16384",
+    "--layer-split",
+    "24"
+  ],
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "0,1",
+    "STRATA_SPLIT_OWN": "1",
+    "STRATA_KV_ROT": null,
+    "STRATA_SPEC_COUPLED": null,
+    "STRATA_REFILL_SERIAL": null
+  }
+}

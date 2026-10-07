@@ -1,0 +1,1238 @@
+{
+  "objective": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/objective.txt",
+  "status": "IN_PROGRESS",
+  "completed": [
+    "frozen environment and original configs captured",
+    "native ExpertSource code analysis",
+    "T2-auto: smoke,64K warmup,3measured",
+    "T1-arena: smoke,64K warmup,3measured",
+    "T0 resident control:actual63399 PP1534.7 TG43.7",
+    "Excluded high-overhead1HzPSS topology screens; PSS moved outside request timers",
+    "All9 low-overhead manual split screens completed"
+  ],
+  "active": "Detached driver174559; extended174562; AGENT-63400 engine174579",
+  "remaining": [
+    "static/adaptive and long adaptation",
+    "prefill128K/256K tuning",
+    "cold vs warm availability",
+    "2finalist full32K/64K/128K/256K matrix",
+    "4K/8K long decode sampling and greedy",
+    "64K/128K 11-turn sessions",
+    "128K/250K compaction",
+    "exactquality prompts INT8/alternativeKV and existingIQ3",
+    "upstream needle",
+    "finaltables/plots/commands/20answers/completion audit",
+    "One normal upstream STRATA_PREFILL_TIMING diagnostic after quality, then PP bottleneck interpretation"
+  ],
+  "process_handles": {
+    "topology_session": 16206,
+    "remaining_driver_session": 93371,
+    "topology_pid": 63327
+  },
+  "notes": "Live evidence in process files plus actual process cmdlines; PSS only between requests, RSS/RAM/CPU/GPU/API metrics1Hz. Original low-overhead phase1 remains valid.",
+  "prepared_not_completed": [
+    "tuning.py",
+    "contexts.py",
+    "extended.py",
+    "quality.py",
+    "plots.py",
+    "helper-capacity.py"
+  ],
+  "last_observed_epoch_s": 1790892801.918214,
+  "current_phase": "extended agentic64K session rerun after natural217tokenstop",
+  "active_process_evidence": {
+    "driver_pid": 174559,
+    "extended_pid": 174562,
+    "engine_pid": 174579,
+    "verified_epoch_s": 1790892801.9182134
+  },
+  "current_live_server": {
+    "pid": 146944,
+    "label": "prefill-8192-confirm",
+    "command": [
+      "/srv/ai/strata/.venv/bin/python",
+      "-m",
+      "serve.server",
+      "--engine",
+      "strata",
+      "--config",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/configs/prefill-8192-confirm-runtime.json",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "18083"
+    ],
+    "started": 1790888235.5670428
+  },
+  "prepared_not_executed": [
+    "render_report.py final20answers renderer",
+    "plots.py final-source manifest and long rolling/cumulative/resource curves",
+    "audit.py request-based completion checks",
+    "IQ3_S ready config and launcher",
+    "prefill-diagnostic.py: one127K phase timing request after all4phase terminal successes, excluded from performance ranking"
+  ],
+  "topology_phase_proof": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/remote-native-capacity-selection.json",
+  "tuning_initial_selection": {
+    "best_topology": "T3-K22-confirm",
+    "best_layer_topology": "T3-K22-confirm"
+  },
+  "adaptive_medians": {
+    "static_TG_tps": 86.0,
+    "adaptive_TG_tps": 111.4
+  },
+  "calibrator_pid": 93482,
+  "calibrator_engine_pid": 93487,
+  "calibrator_settings": {
+    "--pcie-frac": "0.00",
+    "--spec-min-p": "0.70",
+    "--pool-workers": "10"
+  },
+  "calibrator_short_prompt_confirm_gain_pct": 10.281517747858015,
+  "worker_screen_results": [
+    {
+      "candidate": "tune-workers-10",
+      "status": "OK",
+      "TG_tps": 95.9,
+      "PP_tps": 2242.8
+    },
+    {
+      "candidate": "tune-workers-12",
+      "status": "OK",
+      "TG_tps": 99.3,
+      "PP_tps": 2252.9
+    },
+    {
+      "candidate": "tune-workers-14",
+      "status": "OK",
+      "TG_tps": 97.2,
+      "PP_tps": 2249.6
+    },
+    {
+      "candidate": "tune-workers-16",
+      "status": "OK",
+      "TG_tps": 59.3,
+      "PP_tps": 2244.3
+    },
+    {
+      "candidate": "tune-workers-6",
+      "status": "OK",
+      "TG_tps": 95.9,
+      "PP_tps": 2235.0
+    },
+    {
+      "candidate": "tune-workers-8",
+      "status": "OK",
+      "TG_tps": 101.3,
+      "PP_tps": 2233.5
+    }
+  ],
+  "active_driver_pid": 174559,
+  "active_tool_session": null,
+  "excluded_MTP_path": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded",
+  "calibration_confirmation": {
+    "selected256_TG_tps": 104.1,
+    "default256_TG_tps": 111.4,
+    "post_MTP_default1024_control_required": false
+  },
+  "corrected_MTP_first_gate": [
+    {
+      "spec": 2,
+      "warmup_output": 1024,
+      "measured_outputs": [
+        1024,
+        1024
+      ],
+      "median_TG_tps": 102.75
+    },
+    {
+      "spec": 3,
+      "warmup_output": 1024,
+      "measured_outputs": [
+        1024,
+        1024
+      ],
+      "median_TG_tps": 105.2
+    },
+    {
+      "spec": 4,
+      "warmup_output": 1024,
+      "measured_outputs": [
+        1024,
+        1024
+      ],
+      "median_TG_tps": 99.65
+    },
+    {
+      "spec": 5,
+      "warmup_output": 1024,
+      "measured_outputs": [
+        1024,
+        1024
+      ],
+      "median_TG_tps": 107.6
+    }
+  ],
+  "active_contexts_pid": 153642,
+  "post_tuning_control": {
+    "default_TG_tps": 91.0,
+    "selected_TG_tps": 111.5,
+    "chosen": "MTP-spec3-confirm"
+  },
+  "KV_progress": {
+    "status": "KV_MATRIX_VERIFIED_COMPLETE",
+    "actual_measured_requests": 16,
+    "actual_warmup_requests": 8,
+    "results": [
+      {
+        "candidate": "KV-int8-stream",
+        "contexts": {
+          "127000": {
+            "measured_runs": 2,
+            "median_PP_tps": 2839.0,
+            "median_TG_tps": 99.05,
+            "median_TTFT_s": 44.9930411815003,
+            "min_MemAvailable_GiB": 76.42255020141602,
+            "expert_file_blobs": [
+              0,
+              0
+            ]
+          },
+          "259500": {
+            "measured_runs": 2,
+            "median_PP_tps": 2883.3500000000004,
+            "median_TG_tps": 92.9,
+            "median_TTFT_s": 90.5045909190012,
+            "min_MemAvailable_GiB": 76.21060943603516,
+            "expert_file_blobs": [
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "candidate": "KV-int8-full",
+        "contexts": {
+          "127000": {
+            "measured_runs": 2,
+            "median_PP_tps": 2955.7,
+            "median_TG_tps": 88.30000000000001,
+            "median_TTFT_s": 43.50191143849952,
+            "min_MemAvailable_GiB": 79.62368774414062,
+            "expert_file_blobs": [
+              0,
+              0
+            ]
+          },
+          "259500": {
+            "measured_runs": 2,
+            "median_PP_tps": 3162.25,
+            "median_TG_tps": 89.0,
+            "median_TTFT_s": 82.58133935250225,
+            "min_MemAvailable_GiB": 79.6110610961914,
+            "expert_file_blobs": [
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "candidate": "KV-k8v4",
+        "contexts": {
+          "127000": {
+            "measured_runs": 2,
+            "median_PP_tps": 3004.35,
+            "median_TG_tps": 97.44999999999999,
+            "median_TTFT_s": 42.54027832000065,
+            "min_MemAvailable_GiB": 79.62456512451172,
+            "expert_file_blobs": [
+              0,
+              0
+            ]
+          },
+          "259500": {
+            "measured_runs": 2,
+            "median_PP_tps": 3179.8,
+            "median_TG_tps": 96.5,
+            "median_TTFT_s": 82.11519891949865,
+            "min_MemAvailable_GiB": 79.4780044555664,
+            "expert_file_blobs": [
+              0,
+              0
+            ]
+          }
+        }
+      },
+      {
+        "candidate": "KV-q4_0",
+        "contexts": {
+          "127000": {
+            "measured_runs": 2,
+            "median_PP_tps": 3025.3,
+            "median_TG_tps": 92.85,
+            "median_TTFT_s": 42.288669442001265,
+            "min_MemAvailable_GiB": 79.49508666992188,
+            "expert_file_blobs": [
+              0,
+              0
+            ]
+          },
+          "259500": {
+            "measured_runs": 2,
+            "median_PP_tps": 3118.55,
+            "median_TG_tps": 87.19999999999999,
+            "median_TTFT_s": 84.06448378400091,
+            "min_MemAvailable_GiB": 79.48474884033203,
+            "expert_file_blobs": [
+              0,
+              0
+            ]
+          }
+        }
+      }
+    ],
+    "selected": "KV-k8v4",
+    "selected_INT8": "KV-int8-stream",
+    "selected_alternative": "KV-k8v4",
+    "quality_equivalence": "Not established; exact saved quality prompts will be replayed later",
+    "verified_at_epoch_s": 1790886757.2665162
+  },
+  "last_turn_classification": "progress: terminalfailedextendedstage andmissingownprocesses verified; incomplete6-turnattempt archived/excluded; externalagenticprompts improved andnewdetacheddriver launched",
+  "k8v4_smoke_verified": {
+    "status": "OK",
+    "actual_prompt": 8000,
+    "output": 64,
+    "KV": "k8v4",
+    "KV_resident": 0,
+    "GPU_cache_slots": 10616,
+    "arena_MiB": 73450
+  },
+  "k8v4_progress": {
+    "status": "VERIFIED_K8V4_GATE_COMPLETE",
+    "candidate": "KV-k8v4",
+    "contexts": {
+      "127000": {
+        "measured_runs": 2,
+        "median_PP_tps": 3004.35,
+        "median_TG_tps": 97.44999999999999,
+        "median_TTFT_s": 42.54027832000065,
+        "min_MemAvailable_GiB": 79.62456512451172,
+        "peak_VRAM0_GiB": 23.2890625,
+        "peak_VRAM1_GiB": 23.486328125,
+        "expert_file_blobs": [
+          0,
+          0
+        ]
+      },
+      "259500": {
+        "measured_runs": 2,
+        "median_PP_tps": 3179.8,
+        "median_TG_tps": 96.5,
+        "median_TTFT_s": 82.11519891949865,
+        "min_MemAvailable_GiB": 79.4780044555664,
+        "peak_VRAM0_GiB": 23.2890625,
+        "peak_VRAM1_GiB": 23.486328125,
+        "expert_file_blobs": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "q4_0_progress": {
+    "status": "128K_VERIFIED_256K_IN_PROGRESS",
+    "candidate": "KV-q4_0",
+    "actual_prompt_tokens": 127000,
+    "measured_runs": 2,
+    "median_PP_tps": 3025.3,
+    "median_TG_tps": 92.85,
+    "median_TTFT_s": 42.288669442001265,
+    "expert_file_blobs": [
+      0,
+      0
+    ],
+    "min_MemAvailable_GiB": 79.49508666992188
+  },
+  "prefill_progress": {
+    "status": "ALL_FIVE_PREFILL_SCREENS_VERIFIED",
+    "verified_candidates": [
+      {
+        "candidate": "prefill-auto",
+        "actual_prompt_tokens": 127000,
+        "actual_output_tokens": 256,
+        "requested_chunk": "auto",
+        "actual_chunk": 8192,
+        "PP_tps": 3012.0,
+        "TG_tps": 89.7,
+        "TTFT_s": 42.45811454300565,
+        "borrowed_GPU0_slots": 1656,
+        "borrowed_GPU1_slots": 1669,
+        "borrowed_GPU0_GiB_approx": 4.85,
+        "borrowed_GPU1_GiB_approx": 4.85,
+        "expert_file_blobs": 0
+      },
+      {
+        "candidate": "prefill-8192",
+        "actual_prompt_tokens": 127000,
+        "actual_output_tokens": 256,
+        "requested_chunk": "8192",
+        "actual_chunk": 8192,
+        "PP_tps": 3006.9,
+        "TG_tps": 93.4,
+        "TTFT_s": 42.494151589002286,
+        "borrowed_GPU0_slots": 1656,
+        "borrowed_GPU1_slots": 1669,
+        "borrowed_GPU0_GiB_approx": 4.85,
+        "borrowed_GPU1_GiB_approx": 4.85,
+        "expert_file_blobs": 0
+      },
+      {
+        "candidate": "prefill-6144",
+        "actual_prompt_tokens": 127000,
+        "actual_output_tokens": 256,
+        "requested_chunk": "6144",
+        "actual_chunk": 6144,
+        "PP_tps": 2419.2,
+        "TG_tps": 91.9,
+        "TTFT_s": 52.76018952100276,
+        "borrowed_GPU0_slots": 1374,
+        "borrowed_GPU1_slots": 1384,
+        "borrowed_GPU0_GiB_approx": 4.03,
+        "borrowed_GPU1_GiB_approx": 4.03,
+        "expert_file_blobs": 0
+      },
+      {
+        "candidate": "prefill-4096",
+        "actual_prompt_tokens": 127000,
+        "actual_output_tokens": 256,
+        "requested_chunk": "4096",
+        "actual_chunk": 4096,
+        "PP_tps": 1732.4,
+        "TG_tps": 87.5,
+        "TTFT_s": 73.56667592599842,
+        "borrowed_GPU0_slots": 1091,
+        "borrowed_GPU1_slots": 1100,
+        "borrowed_GPU0_GiB_approx": 3.2,
+        "borrowed_GPU1_GiB_approx": 3.2,
+        "expert_file_blobs": 0
+      },
+      {
+        "candidate": "prefill-2048",
+        "actual_prompt_tokens": 127000,
+        "actual_output_tokens": 256,
+        "requested_chunk": "2048",
+        "actual_chunk": 2048,
+        "PP_tps": 915.8,
+        "TG_tps": 63.6,
+        "TTFT_s": 139.26997217299504,
+        "borrowed_GPU0_slots": 809,
+        "borrowed_GPU1_slots": 816,
+        "borrowed_GPU0_GiB_approx": 2.37,
+        "borrowed_GPU1_GiB_approx": 2.38,
+        "expert_file_blobs": 0
+      }
+    ],
+    "top2_labels_by_PP": [
+      "prefill-auto",
+      "prefill-8192"
+    ],
+    "top2_actual_chunk": 8192,
+    "note": "The named auto and explicit8192 policies have the same effective chunk on this machine. Confirmations are reported as these two named configurations, not two distinct effective chunk lengths.",
+    "TOP2_confirmations": "COMPLETE verified128K3each and256K1each, with warmups",
+    "verified_at": 1790887694.925108
+  },
+  "prefill_auto_confirmation": {
+    "status": "AUTO128K_CONFIRM_VERIFIED",
+    "runs": 3,
+    "actual_prompt_tokens": 127000,
+    "outputs": [
+      256,
+      256,
+      256
+    ],
+    "median_PP_tps": 3014.6,
+    "median_TG_tps": 100.8,
+    "median_TTFT_s": 42.39357169000141,
+    "min_MemAvailable_GiB": 79.72237777709961,
+    "expert_file_blobs": [
+      0,
+      0,
+      0
+    ],
+    "remaining": "auto256K, explicit8192 confirmations128K/256K, then24final requests"
+  },
+  "prefill_auto_256K": {
+    "status": "AUTO256K_VERIFIED",
+    "measured_runs": 1,
+    "actual_prompt_tokens": 259500,
+    "output_tokens": 256,
+    "PP_tps": 3079.5,
+    "TG_tps": 86.8,
+    "TTFT_s": 85.38382453600207,
+    "min_MemAvailable_GiB": 79.73999404907227,
+    "expert_file_blobs": 0,
+    "note": "Single prefill TOP2 long-context check, not the future3run FINAL-A256K cell."
+  },
+  "prefill_8192_confirmation": {
+    "status": "EXPLICIT8192_128K_CONFIRM_VERIFIED",
+    "runs": 3,
+    "actual_prompt_tokens": 127000,
+    "outputs": [
+      256,
+      256,
+      256
+    ],
+    "median_PP_tps": 3015.8,
+    "median_TG_tps": 97.8,
+    "median_TTFT_s": 42.370361746994604,
+    "min_MemAvailable_GiB": 79.7603530883789,
+    "expert_tiers": [
+      {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.943
+      },
+      {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.953
+      },
+      {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.959
+      }
+    ],
+    "remaining": "explicit8192 256K check then final 24 requests"
+  },
+  "updated_epoch_s": 1790888862.3721237,
+  "current_verified_activity": "Detached driver153641; contexts153642; FINAL-B engine158385",
+  "prefill_8192_256K": {
+    "status": "EXPLICIT8192_256K_VERIFIED",
+    "measured_runs": 1,
+    "actual_prompt_tokens": 259500,
+    "output_tokens": 256,
+    "PP_tps": 3131.0,
+    "TG_tps": 93.4,
+    "TTFT_s": 83.40651898200304,
+    "min_MemAvailable_GiB": 79.7322769165039,
+    "expert_file_blobs": 0,
+    "note": "Single TOP2 prefill long-context check; not final3run256Kcell."
+  },
+  "prefill_selection": "prefill-8192-confirm",
+  "final_A_32K": {
+    "status": "VERIFIED",
+    "topology": "FINAL-A",
+    "actual_prompt_tokens": 31400,
+    "measured_runs": 3,
+    "median_PP_tps": 2424.0,
+    "median_TG_tps": 103.9,
+    "median_TTFT_s": 13.035481264996633,
+    "expert_file_blobs": [
+      0,
+      0,
+      0
+    ],
+    "min_MemAvailable_GiB": 80.34590530395508,
+    "sources": [
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run1.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run2.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run3.json"
+    ]
+  },
+  "final_A_64K": {
+    "status": "VERIFIED",
+    "topology": "FINAL-A",
+    "target_prompt_tokens": 63400,
+    "actual_prompt_tokens": [
+      63400,
+      63400,
+      63399
+    ],
+    "measured_runs": 3,
+    "median_PP_tps": 2793.2,
+    "median_TG_tps": 98.7,
+    "median_TTFT_s": 22.836598270994727,
+    "expert_file_blobs": [
+      0,
+      0,
+      0
+    ],
+    "min_MemAvailable_GiB": 80.08694839477539,
+    "sources": [
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run1.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run2.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run3.json"
+    ]
+  },
+  "interruption_recovery": {
+    "archive": "raw/interrupted-driver-20261001",
+    "cancelled_request_excluded": "FINAL-A actual127K run1",
+    "retained_complete_cells": [
+      31400,
+      63400
+    ],
+    "remaining_FINAL_A_cells": [
+      127000,
+      259500
+    ],
+    "detached_driver": "detached-driver-resume2.json",
+    "source_changes": "External harness resumes fully verified cells; no engine/config/weights changes"
+  },
+  "final_A_128K": {
+    "status": "VERIFIED",
+    "topology": "FINAL-A",
+    "target_prompt_tokens": 127000,
+    "actual_prompt_tokens": [
+      127000,
+      127000,
+      127000
+    ],
+    "measured_runs": 3,
+    "median_PP_tps": 2956.7,
+    "median_TG_tps": 86.9,
+    "median_TTFT_s": 43.209885336997104,
+    "expert_file_blobs": [
+      0,
+      0,
+      0
+    ],
+    "min_MemAvailable_GiB": 79.81358337402344,
+    "TG_runs": [
+      97.9,
+      82.3,
+      86.9
+    ],
+    "sources": [
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run1.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run2.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run3.json"
+    ],
+    "restart_runtime_proof": "raw/FINAL-A-resume-runtime-verification.json"
+  },
+  "final_A_matrix": {
+    "status": "FINAL_A_12_REQUESTS_VERIFIED",
+    "cells": [
+      {
+        "target": 31400,
+        "actual_prompt_tokens": [
+          31400,
+          31400,
+          31400
+        ],
+        "measured_runs": 3,
+        "median_PP_tps": 2424.0,
+        "median_TG_tps": 103.9,
+        "median_TTFT_s": 13.035481264996633,
+        "TG_observed_range": [
+          99.8,
+          109.3
+        ],
+        "expert_file_blobs": [
+          0,
+          0,
+          0
+        ],
+        "min_MemAvailable_GiB": 80.34590530395508
+      },
+      {
+        "target": 63400,
+        "actual_prompt_tokens": [
+          63400,
+          63400,
+          63399
+        ],
+        "measured_runs": 3,
+        "median_PP_tps": 2793.2,
+        "median_TG_tps": 98.7,
+        "median_TTFT_s": 22.836598270994727,
+        "TG_observed_range": [
+          97.5,
+          102.0
+        ],
+        "expert_file_blobs": [
+          0,
+          0,
+          0
+        ],
+        "min_MemAvailable_GiB": 80.08694839477539
+      },
+      {
+        "target": 127000,
+        "actual_prompt_tokens": [
+          127000,
+          127000,
+          127000
+        ],
+        "measured_runs": 3,
+        "median_PP_tps": 2956.7,
+        "median_TG_tps": 86.9,
+        "median_TTFT_s": 43.209885336997104,
+        "TG_observed_range": [
+          82.3,
+          97.9
+        ],
+        "expert_file_blobs": [
+          0,
+          0,
+          0
+        ],
+        "min_MemAvailable_GiB": 79.81358337402344
+      },
+      {
+        "target": 259500,
+        "actual_prompt_tokens": [
+          259500,
+          259500,
+          259500
+        ],
+        "measured_runs": 3,
+        "median_PP_tps": 3196.6,
+        "median_TG_tps": 92.1,
+        "median_TTFT_s": 82.36858696499985,
+        "TG_observed_range": [
+          90.2,
+          94.2
+        ],
+        "expert_file_blobs": [
+          0,
+          0,
+          0
+        ],
+        "min_MemAvailable_GiB": 79.5722427368164
+      }
+    ],
+    "retained_completed_cells": [
+      31400,
+      63400
+    ],
+    "max_context": 262144,
+    "scope": "Full FINAL-A speed matrix only; FINAL-B, extended, quality, diagnosis and final artifacts remain required.",
+    "verified_epoch_s": 1790890023.3696308
+  },
+  "final_B_smoke": {
+    "status": "VERIFIED",
+    "actual_prompt_tokens": 8000,
+    "generated_tokens": 64,
+    "PP_tps": 1056.1,
+    "TG_tps": 49.6,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.911
+    },
+    "max_context": 262144,
+    "helper_slots": 5806
+  },
+  "final_B_32K": {
+    "status": "VERIFIED",
+    "topology": "FINAL-B",
+    "target_prompt_tokens": 31400,
+    "actual_prompt_tokens": [
+      31400,
+      31400,
+      31400
+    ],
+    "measured_runs": 3,
+    "median_PP_tps": 1418.4,
+    "median_TG_tps": 61.3,
+    "median_TTFT_s": 22.243683404994954,
+    "expert_file_blobs": [
+      0,
+      0,
+      0
+    ],
+    "min_MemAvailable_GiB": 77.64754867553711,
+    "GPU1_remote_work": [
+      {
+        "expert_entries_entire_request": 13384,
+        "active_layer_launches": 3767,
+        "returned_MiB": 130.7
+      },
+      {
+        "expert_entries_entire_request": 13697,
+        "active_layer_launches": 3968,
+        "returned_MiB": 133.8
+      },
+      {
+        "expert_entries_entire_request": 12765,
+        "active_layer_launches": 3790,
+        "returned_MiB": 124.7
+      }
+    ],
+    "counter_scope": "GPU1 counts cover entire request including short-read header; do not combine with decode-only GPU0/CPU counts as exact shares.",
+    "sources": [
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-31400-run1.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-31400-run2.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-31400-run3.json"
+    ]
+  },
+  "final_B_64K": {
+    "status": "VERIFIED",
+    "topology": "FINAL-B",
+    "target_prompt_tokens": 63400,
+    "actual_prompt_tokens": [
+      63400,
+      63399,
+      63400
+    ],
+    "measured_runs": 3,
+    "median_PP_tps": 1447.6,
+    "median_TG_tps": 63.2,
+    "median_TTFT_s": 43.96083803199872,
+    "expert_file_blobs": [
+      0,
+      0,
+      0
+    ],
+    "min_MemAvailable_GiB": 77.40993118286133,
+    "sources": [
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-63400-run1.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-63400-run2.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-63400-run3.json"
+    ]
+  },
+  "long_acceptance_preparation": {
+    "status": "FIRST_ACTUAL_TRACE_VERIFIED; other3stillrequired",
+    "method": "Existing STRATA_TRACE verify-window position/width + final aggregate reconciliation",
+    "scope": "Four planned long requests only, combined MTP/suffix counters, logging overhead included",
+    "files": [
+      "trace_acceptance.py",
+      "raw/trace-parser-validation.json"
+    ],
+    "tests": "Synthetic boundary and mismatch checks passed; actual trace still unverified"
+  },
+  "final_B_128K": {
+    "status": "VERIFIED",
+    "topology": "FINAL-B",
+    "target_prompt_tokens": 127000,
+    "actual_prompt_tokens": [
+      127000,
+      127000,
+      127000
+    ],
+    "measured_runs": 3,
+    "median_PP_tps": 1440.5,
+    "median_TG_tps": 60.2,
+    "median_TTFT_s": 88.44565147200046,
+    "expert_file_blobs": [
+      0,
+      0,
+      0
+    ],
+    "min_MemAvailable_GiB": 77.04323959350586,
+    "sources": [
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-127000-run1.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-127000-run2.json",
+      "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-127000-run3.json"
+    ]
+  },
+  "final_B_256K_warmup": {
+    "status": "VERIFIED_WARMUP_EXCLUDED",
+    "actual_prompt_tokens": 259500,
+    "output_tokens": 256,
+    "PP_tps": 1429.0,
+    "TG_tps": 52.6,
+    "min_MemAvailable_GiB": 77.0467414855957,
+    "expert_file_blobs": 0
+  },
+  "final_B_256K_progress": {
+    "status": "PARTIAL_2_OF_3_VERIFIED",
+    "topology": "FINAL-B",
+    "target_prompt_tokens": 259500,
+    "measured_completed": 2,
+    "runs": [
+      {
+        "actual_prompt_tokens": 259500,
+        "generated_tokens": 256,
+        "pp_tps": 1414.9,
+        "tg_tps": 50.9,
+        "ttft_s": 184.57438341200032,
+        "min_mem_available_gib": 77.04771423339844,
+        "expert_tiers": {
+          "ram_blobs": 0,
+          "file_blobs": 0,
+          "file_mb": 0.0,
+          "hit_rate": 0.867
+        }
+      },
+      {
+        "actual_prompt_tokens": 259500,
+        "generated_tokens": 256,
+        "pp_tps": 1428.1,
+        "tg_tps": 57.3,
+        "ttft_s": 182.33224592100305,
+        "min_mem_available_gib": 77.01733779907227,
+        "expert_tiers": {
+          "ram_blobs": 0,
+          "file_blobs": 0,
+          "file_mb": 0.0,
+          "hit_rate": 0.853
+        }
+      }
+    ],
+    "remaining": "run3; final median still pending",
+    "verified_at": 1790891466.0224
+  },
+  "final_matrix": {
+    "status": "FULL_24_REQUEST_MATRIX_VERIFIED",
+    "models": {
+      "FINAL-A": [
+        {
+          "target_prompt_tokens": 31400,
+          "actual_prompt_tokens": [
+            31400,
+            31400,
+            31400
+          ],
+          "measured_runs": 3,
+          "median_PP_tps": 2424.0,
+          "median_TG_tps": 103.9,
+          "median_TTFT_s": 13.035481264996633,
+          "expert_file_blobs": [
+            0,
+            0,
+            0
+          ],
+          "min_MemAvailable_GiB": 80.34590530395508
+        },
+        {
+          "target_prompt_tokens": 63400,
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63399
+          ],
+          "measured_runs": 3,
+          "median_PP_tps": 2793.2,
+          "median_TG_tps": 98.7,
+          "median_TTFT_s": 22.836598270994727,
+          "expert_file_blobs": [
+            0,
+            0,
+            0
+          ],
+          "min_MemAvailable_GiB": 80.08694839477539
+        },
+        {
+          "target_prompt_tokens": 127000,
+          "actual_prompt_tokens": [
+            127000,
+            127000,
+            127000
+          ],
+          "measured_runs": 3,
+          "median_PP_tps": 2956.7,
+          "median_TG_tps": 86.9,
+          "median_TTFT_s": 43.209885336997104,
+          "expert_file_blobs": [
+            0,
+            0,
+            0
+          ],
+          "min_MemAvailable_GiB": 79.81358337402344
+        },
+        {
+          "target_prompt_tokens": 259500,
+          "actual_prompt_tokens": [
+            259500,
+            259500,
+            259500
+          ],
+          "measured_runs": 3,
+          "median_PP_tps": 3196.6,
+          "median_TG_tps": 92.1,
+          "median_TTFT_s": 82.36858696499985,
+          "expert_file_blobs": [
+            0,
+            0,
+            0
+          ],
+          "min_MemAvailable_GiB": 79.5722427368164
+        }
+      ],
+      "FINAL-B": [
+        {
+          "target_prompt_tokens": 31400,
+          "actual_prompt_tokens": [
+            31400,
+            31400,
+            31400
+          ],
+          "measured_runs": 3,
+          "median_PP_tps": 1418.4,
+          "median_TG_tps": 61.3,
+          "median_TTFT_s": 22.243683404994954,
+          "expert_file_blobs": [
+            0,
+            0,
+            0
+          ],
+          "min_MemAvailable_GiB": 77.64754867553711
+        },
+        {
+          "target_prompt_tokens": 63400,
+          "actual_prompt_tokens": [
+            63400,
+            63399,
+            63400
+          ],
+          "measured_runs": 3,
+          "median_PP_tps": 1447.6,
+          "median_TG_tps": 63.2,
+          "median_TTFT_s": 43.96083803199872,
+          "expert_file_blobs": [
+            0,
+            0,
+            0
+          ],
+          "min_MemAvailable_GiB": 77.40993118286133
+        },
+        {
+          "target_prompt_tokens": 127000,
+          "actual_prompt_tokens": [
+            127000,
+            127000,
+            127000
+          ],
+          "measured_runs": 3,
+          "median_PP_tps": 1440.5,
+          "median_TG_tps": 60.2,
+          "median_TTFT_s": 88.44565147200046,
+          "expert_file_blobs": [
+            0,
+            0,
+            0
+          ],
+          "min_MemAvailable_GiB": 77.04323959350586
+        },
+        {
+          "target_prompt_tokens": 259500,
+          "actual_prompt_tokens": [
+            259500,
+            259500,
+            259500
+          ],
+          "measured_runs": 3,
+          "median_PP_tps": 1428.1,
+          "median_TG_tps": 52.3,
+          "median_TTFT_s": 182.33224592100305,
+          "expert_file_blobs": [
+            0,
+            0,
+            0
+          ],
+          "min_MemAvailable_GiB": 76.99603652954102
+        }
+      ]
+    },
+    "measured_requests": 24,
+    "total_actual_prompt_tokens": 2887798,
+    "total_generated_tokens": 6144,
+    "prompt_message_SHA256": [
+      "b8ca27cae0e439b6722a65c0a1cd8ca24d3cd0a0ce3db56dd454fb5ed37cd92b",
+      "e165095b7377a022fd78e80b1d39fda79408081598a3aa29274e367a7b2abb2a",
+      "bd0cfd849eb127913859206fa8fc2b56941ca7be804578990d914fab17cb6974",
+      "43ee374e42675d544051eb75d959b8cdee7cde10e0b90f98dbc2851ff6e235ac",
+      "9165e9f2dba61b46e1d731479e409ac87c184a20b3ac8cf697b7380ac4a76648",
+      "84f0e87ced67bcb5a0fbc3404df5ef1d18e8bc5f18dc47fdec288a5e961771c0",
+      "3c957614e0989327acc5e63ed63675e0f7468e12aa7a2e6628f7ef7e87220e07",
+      "bf6846aabdb8e16854ad3158d1821d80116698e9de199bb0046b84ac34ab68ee",
+      "8fadcf0cece3435348befa510e575ddd330af08dc2614cba1a7dd7fc74ceeee8",
+      "a36780c7df6d3583548409fcb2725be84b9745a45ea2f28780a0ec3f483923ef",
+      "eae4ef517df46e1651152125112bc2264b7a2b694a9772e76305fffcf9f09a13",
+      "e36ad43c4243fc302346120902a38edac200a727a63a74869ffd2263cba953dc",
+      "6c2fa0c370bfca128e0be5dd2147c8d25e8b679e3480486a890c16b45da9f0df",
+      "a4f58a0c6fbe51a85cb50d51ed5c5559e255ef7cd0e71bd6bcb7aed0fdac3f30",
+      "0fdf1350fdf2d4ae2b9525bd19df0b252ae62808de26d86ddcd404c68564265d",
+      "a53b6a26f877b29c24be82b6d31c04c3d115fd9e263c80a71614d8425bcac13a",
+      "c97d1f0ad4014f8ba285c825f1c755d5e80e85ae07eb59ae1a4b84879f2cf8f3",
+      "63437e2ed93da5e88bedc6a04ac51b19cec1898ce9e46a3944854c6fb178adc6",
+      "3b5d2e59285b912aca1261d5c2404e7fbee22581f56ce2661dc4a1447dfd5ca5",
+      "1092779dc1d5eced6cc1b45b4ceffd0316ebefb914691785e0cd016ed3124d66",
+      "71530a3d5d0ba00f4b9bb6d3eea500a75cc7a58b5dc1cb1af0df581dd5e1d613",
+      "0f51a3abfccaa689acf4967d7c08a88599eb8937f70cb7505f3645d16dbd8256",
+      "986ca9f8ae69f962ca69f320768be28e01cd1b18301e99e023667af809b12b1a",
+      "c696f7918d5f8bcd7f4a244bd0288ab623634fce3d540e8332db6c336138155f"
+    ],
+    "max_context": 262144,
+    "min_MemAvailable_GiB": 76.99603652954102,
+    "expert_file_blobs_all_zero": true,
+    "phase_terminal": {
+      "exit_code": 0,
+      "ended": 1790891607.3088727,
+      "stage": "contexts"
+    },
+    "verified_epoch_s": 1790891675.9686766,
+    "scope": "Final context matrix only. Long, agentic, compaction, quality/needle, diagnosis, final report/plots and audit remain required."
+  },
+  "long_first_64K": {
+    "status": "FIRST_LONG64K_ACTUAL4096_AND_TRACE_VERIFIED",
+    "run": "LONG-FINAL-A-64K-4096-sampled",
+    "actual_prompt_tokens": 63400,
+    "generated_tokens": 4096,
+    "PP_tps": 2783.1,
+    "TG_tps": 89.4,
+    "TTFT_s": 22.93653611100308,
+    "wall_s": 68.75489007800206,
+    "normal_draft_acceptance_pct": 81.86206896551724,
+    "trace_windows": 1723,
+    "draft_offered": 2900,
+    "draft_accepted": 2374,
+    "expert_file_blobs": 0,
+    "min_MemAvailable_GiB": 80.15056991577148,
+    "remaining": "128K4096sampled,128K8192sampled,64K4096greedy; then agentic,compaction,quality/needle,phase diagnosis and finalartifacts",
+    "trace_note": "Normal upstream trace overhead included; MTP+suffix acceptance, not isolated MTP-only.",
+    "verified_epoch_s": 1790891837.3275046
+  },
+  "long_progress": {
+    "status": "ALL4_LONG_REQUESTS_AND_TRACES_VERIFIED",
+    "runs": [
+      {
+        "actual_prompt_tokens": 63400,
+        "requested_output": 4096,
+        "actual_generated": 4096,
+        "sampling": {
+          "temperature": 1.0,
+          "top_p": 0.95,
+          "top_k": 20
+        },
+        "PP_tps": 2783.1,
+        "TG_tps": 89.4,
+        "TTFT_s": 22.93653611100308,
+        "normal_draft_acceptance_pct": 81.86206896551724,
+        "verify_windows": 1723,
+        "expert_file_blobs": 0
+      },
+      {
+        "actual_prompt_tokens": 127000,
+        "requested_output": 4096,
+        "actual_generated": 4096,
+        "sampling": {
+          "temperature": 1.0,
+          "top_p": 0.95,
+          "top_k": 20
+        },
+        "PP_tps": 3015.2,
+        "TG_tps": 84.2,
+        "TTFT_s": 42.389182400998834,
+        "normal_draft_acceptance_pct": 82.35074626865672,
+        "verify_windows": 1891,
+        "expert_file_blobs": 0
+      },
+      {
+        "actual_prompt_tokens": 126999,
+        "requested_output": 8192,
+        "actual_generated": 8192,
+        "sampling": {
+          "temperature": 1.0,
+          "top_p": 0.95,
+          "top_k": 20
+        },
+        "PP_tps": 3005.6,
+        "TG_tps": 87.8,
+        "TTFT_s": 42.515298742000596,
+        "normal_draft_acceptance_pct": 83.58955362104093,
+        "verify_windows": 3679,
+        "expert_file_blobs": 0
+      },
+      {
+        "actual_prompt_tokens": 63400,
+        "requested_output": 4096,
+        "actual_generated": 4096,
+        "sampling": {
+          "temperature": 0
+        },
+        "PP_tps": 2777.3,
+        "TG_tps": 96.7,
+        "TTFT_s": 22.97356080800091,
+        "normal_draft_acceptance_pct": 87.87541713014461,
+        "verify_windows": 1726,
+        "expert_file_blobs": 0
+      }
+    ],
+    "total_generated_tokens": 20480,
+    "min_MemAvailable_GiB": 79.82130813598633,
+    "remaining": "Agentic2sessions, compaction2cases,quality/needle,PPdiagnosis,finalplots/report/integrityaudit",
+    "verified_epoch_s": 1790892195.3868074
+  },
+  "long_128K_8192": {
+    "status": "ACTUAL8192_LONG128K_AND_TRACE_VERIFIED",
+    "run": "LONG-FINAL-A-128K-8192-sampled",
+    "actual_prompt_tokens": 126999,
+    "generated_tokens": 8192,
+    "PP_tps": 3005.6,
+    "TG_tps": 87.8,
+    "TTFT_s": 42.515298742000596,
+    "wall_s": 135.7696550220062,
+    "normal_draft_acceptance_pct": 83.58955362104093,
+    "trace_windows": 3679,
+    "draft_offered": 5399,
+    "draft_accepted": 4513,
+    "expert_file_blobs": 0,
+    "min_MemAvailable_GiB": 79.82130813598633,
+    "verified_epoch_s": 1790892161.605905,
+    "remaining": "Greedy long reference, agentic, compaction, quality/needle, PPdiagnosis and finalartifacts"
+  },
+  "agentic_recovery": {
+    "status": "RERUN_STARTED",
+    "excluded": "raw/agentic-short-eos-excluded",
+    "failed_turn": 5,
+    "actual_output": 217,
+    "required_minimum": 256,
+    "changes": "Distinct real source files/review topics and six-section review instruction; selected runtime unchanged; exact quality prompts untouched; no EOS suppression",
+    "retained_complete_work": [
+      "final24matrix",
+      "all4longdecode"
+    ]
+  },
+  "agentic64K_progress": {
+    "status": "PARTIAL_3_OF_11_TURNS_VERIFIED",
+    "runs": [
+      {
+        "turn": 0,
+        "actual_prompt_tokens": 63399,
+        "generated_tokens": 1024,
+        "reused": 0,
+        "new_prompt_tokens_processed": 63399,
+        "new_tool_tokens": 0,
+        "source": null,
+        "TTFT_s": 24.827453109995986,
+        "PP_tps": 2568.9,
+        "TG_tps": 88.3
+      },
+      {
+        "turn": 1,
+        "actual_prompt_tokens": 65087,
+        "generated_tokens": 256,
+        "reused": 64423,
+        "new_prompt_tokens_processed": 664,
+        "new_tool_tokens": 650,
+        "source": "CMakeLists.txt",
+        "TTFT_s": 3.178502239003137,
+        "PP_tps": 229.5,
+        "TG_tps": 87.7
+      },
+      {
+        "turn": 2,
+        "actual_prompt_tokens": 66356,
+        "generated_tokens": 512,
+        "reused": 65342,
+        "new_prompt_tokens_processed": 1014,
+        "new_tool_tokens": 999,
+        "source": "serve/server.py",
+        "TTFT_s": 3.90620768199733,
+        "PP_tps": 281.9,
+        "TG_tps": 90.8
+      }
+    ],
+    "excluded_previous_attempt": "raw/agentic-short-eos-excluded",
+    "remaining": "turn3through10 plus entire128Ksession; do not treat partial session as complete",
+    "verified_epoch_s": 1790892801.9172037
+  }
+}

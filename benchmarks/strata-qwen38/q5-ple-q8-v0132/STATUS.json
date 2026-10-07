@@ -1,0 +1,23 @@
+{
+  "status": "Q8_0_PLE_AND_SMOKE_PASS",
+  "running": null,
+  "completed": [
+    "native Q8_0 PLE mmap: 170-byte rows, native decoder, larger buffers, format reporting",
+    "real Q8_0 PLE probes/issue-collect/bulk reads vs ggml: max_abs 0",
+    "7/7 regression CTests",
+    "Q5 single GPU READY + 64-token smoke with MTP",
+    "Q5 two GPU K24 READY + 64-token smoke with MTP",
+    "CPU-only layer 2 and GPU hits on supported layers observed"
+  ],
+  "pending": [
+    "whole-model same-GGUF llama.cpp greedy/top-token parity",
+    "32K/128K needle",
+    "long-context correctness/stability",
+    "speed only after correctness"
+  ],
+  "next_exact_action": "Correctness stage: prepare same-GGUF llama.cpp parity and 32K/128K needle. Current Q8_0 PLE addition and smoke validation completed; no process running.",
+  "current_winners": {},
+  "excluded_runs": [
+    "initial load with default direct PLE I/O failed: Q8_0 requires mmap; preserved raw/logs"
+  ]
+}

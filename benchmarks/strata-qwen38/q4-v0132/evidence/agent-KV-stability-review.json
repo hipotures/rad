@@ -1,0 +1,39 @@
+{
+  "status": "DIAGNOSTIC_COMPLETE_FINAL_VALIDATION_PENDING",
+  "created": 1790912528.2913737,
+  "K8V4_attempts": [
+    {
+      "label": "AGENT-127000-v0132",
+      "status": "PARTIAL",
+      "short_turn": 8,
+      "generated": 188
+    },
+    {
+      "label": "AGENT-127000-v0132-attempt2",
+      "status": "PARTIAL",
+      "short_turn": 5,
+      "generated": 95
+    }
+  ],
+  "INT8": {
+    "label": "AGENT-127000-v0132-int8-control",
+    "status": "COMPLETE_11_REQUESTS",
+    "full_history_verified": true,
+    "final_actual_context": 146183,
+    "followup_median_TTFT": 4.191741621001711,
+    "followup_median_TG": 87.8,
+    "evidence": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/evidence/agent-int8-control-independent-audit.json"
+  },
+  "engine_config_comparison": "Native args identical except --kv k8v4->int8; exe,cwd,tokenizer,gpus,K,systempolicy identical. Diagnostic label/log/metadata separate.",
+  "causality": "NOT_CONTROLLED_A_B: same task/sampling, independent nonce and sampled responses/history. KV causality and general stability unproven.",
+  "selection": "Prepare separate FINAL-v0132-Q4-INT8-stability candidate; retain K8V4 fastest config/matrix/results. No automatic production promotion from diagnostic.",
+  "pending_validation": [
+    "INT8 actual32/64/128/256K n3 finalmatrix with same offline policy",
+    "INT8 long64K4K/128K4K/128K8K",
+    "INT8 agent64 full11; existingINT8 agent128 independentlyverified underidentical engineargs",
+    "compaction128/250K and isolatedoldcontrols",
+    "literalquality/parity/needle",
+    "IQ3upgrade controls",
+    "diagnostics/offlineplots/report/fullpositiveaudit"
+  ]
+}

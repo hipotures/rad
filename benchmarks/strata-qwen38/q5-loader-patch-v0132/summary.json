@@ -1,0 +1,51 @@
+{
+  "status": "FAIL_NEXT_BLOCKER",
+  "scope": "load/health + exactly one64output smoke; no benchmark",
+  "base_HEAD": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+  "build_variant": "default+local-q5-metadata-only-loader",
+  "local_patch_sha256": "24e7e430d62cf5f0331658320c0ba434201a2a9dba3de2f410272e1b91f75501",
+  "measured_benchmark_requests": 0,
+  "error": "RuntimeError('Engine exited 1')",
+  "engine_log_tail": [
+    "strata generate: layer split across 2 GPUs: CUDA0, then CUDA1 (split 24)",
+    "strata generate: layer 2's experts are Q6_K/Q8_0 (ggml types 14/8), which this engine has no GPU kernels for"
+  ],
+  "relevant_engine_lines": [
+    "strata generate: layer split across 2 GPUs: CUDA0, then CUDA1 (split 24)",
+    "strata generate: layer 2's experts are Q6_K/Q8_0 (ggml types 14/8), which this engine has no GPU kernels for"
+  ],
+  "model_stat_unchanged": true,
+  "clean_checkout_tracked_unchanged": true,
+  "patch_unchanged": true,
+  "GPU_compute_apps_after": "",
+  "next_blocker": {
+    "layer": 2,
+    "formats": "Q6_K/Q8_0",
+    "tensors": [
+      {
+        "tensor": "blk.2.ffn_gate_exps.weight",
+        "ggml_type": 14,
+        "format": "Q6_K",
+        "shard": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00004-of-00006.gguf"
+      },
+      {
+        "tensor": "blk.2.ffn_up_exps.weight",
+        "ggml_type": 14,
+        "format": "Q6_K",
+        "shard": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00004-of-00006.gguf"
+      },
+      {
+        "tensor": "blk.2.ffn_down_exps.weight",
+        "ggml_type": 8,
+        "format": "Q8_0",
+        "shard": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00004-of-00006.gguf"
+      }
+    ],
+    "runtime_guard": "/srv/ai/strata-v0.1.32-q5/src/program/generate.cpp:1678",
+    "GPU_support_predicate": "/srv/ai/strata-v0.1.32-q5/src/kernels/cuda/iq_kernels.cu:1417",
+    "root_support_table": "/srv/ai/strata-v0.1.32-q5/src/kernels/cuda/iq_kernels.cu:1268",
+    "health_READY": false,
+    "generation_requests": 0,
+    "benchmark_requests": 0
+  }
+}

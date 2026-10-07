@@ -1,0 +1,443 @@
+{
+  "status": "COMPLETE_REQUIRES_REPORT_REVIEW",
+  "created": 1790917474.0999825,
+  "rows": [
+    {
+      "metric": "Q4 single GPU resident64K PP",
+      "v0131": 1539.3,
+      "v0132": 1518.3,
+      "delta_percent": -1.3642564802182844,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/results/q4-single-gpu/config.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/BASELINE-resident-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/results/q4-single-gpu/summary.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/BASELINE-resident-v0132-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/BASELINE-resident-v0132-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/BASELINE-resident-v0132-run3.json"
+      ],
+      "note": "Three actual outputs256 each. Oldactual63300/new63400; unique unpaired prompts, independent pack paths and naturally different allocations; no attribution to runtime alone."
+    },
+    {
+      "metric": "Q4 single GPU resident64K TG",
+      "v0131": 43.4,
+      "v0132": 40.9,
+      "delta_percent": -5.760368663594473,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/results/q4-single-gpu/config.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/BASELINE-resident-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/results/q4-single-gpu/summary.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/BASELINE-resident-v0132-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/BASELINE-resident-v0132-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/BASELINE-resident-v0132-run3.json"
+      ],
+      "note": "Three actual outputs256 each. Oldactual63300/new63400; unique unpaired prompts, independent pack paths and naturally different allocations; no attribution to runtime alone."
+    },
+    {
+      "metric": "Q4 best2GPU actual63400 PP",
+      "v0131": 2793.2,
+      "v0132": 4474.9,
+      "delta_percent": 60.206931118430475,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/configs/FINAL-A.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run3.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx63400-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx63400-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx63400-run3.json"
+      ],
+      "note": "Best-config before/after, not runtime-only A/B; final attempt2 adds an explicit offline/no-tools system instruction, so prompts are not controlled pairs. Layer split/KV/prefill/CPU/PCIe/MTP may differ; consult both full configurations."
+    },
+    {
+      "metric": "Q4 best2GPU actual63400 TG",
+      "v0131": 98.7,
+      "v0132": 105.5,
+      "delta_percent": 6.889564336372844,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/configs/FINAL-A.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run3.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx63400-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx63400-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx63400-run3.json"
+      ],
+      "note": "Best-config before/after, not runtime-only A/B; final attempt2 adds an explicit offline/no-tools system instruction, so prompts are not controlled pairs. Layer split/KV/prefill/CPU/PCIe/MTP may differ; consult both full configurations."
+    },
+    {
+      "metric": "Q4 best2GPU actual127000 PP",
+      "v0131": 2956.7,
+      "v0132": 4964.6,
+      "delta_percent": 67.9101701220956,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/configs/FINAL-A.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run3.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx127000-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx127000-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx127000-run3.json"
+      ],
+      "note": "Best-config before/after, not runtime-only A/B; final attempt2 adds an explicit offline/no-tools system instruction, so prompts are not controlled pairs. Layer split/KV/prefill/CPU/PCIe/MTP may differ; consult both full configurations."
+    },
+    {
+      "metric": "Q4 best2GPU actual127000 TG",
+      "v0131": 86.9,
+      "v0132": 106.6,
+      "delta_percent": 22.66973532796317,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/configs/FINAL-A.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run3.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx127000-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx127000-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx127000-run3.json"
+      ],
+      "note": "Best-config before/after, not runtime-only A/B; final attempt2 adds an explicit offline/no-tools system instruction, so prompts are not controlled pairs. Layer split/KV/prefill/CPU/PCIe/MTP may differ; consult both full configurations."
+    },
+    {
+      "metric": "Q4 best2GPU actual259500 PP",
+      "v0131": 3196.6,
+      "v0132": 5570.5,
+      "delta_percent": 74.26327973471814,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/configs/FINAL-A.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run3.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx259500-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx259500-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx259500-run3.json"
+      ],
+      "note": "Best-config before/after, not runtime-only A/B; final attempt2 adds an explicit offline/no-tools system instruction, so prompts are not controlled pairs. Layer split/KV/prefill/CPU/PCIe/MTP may differ; consult both full configurations."
+    },
+    {
+      "metric": "Q4 best2GPU actual259500 TG",
+      "v0131": 92.1,
+      "v0132": 95.0,
+      "delta_percent": 3.148751357220414,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/configs/FINAL-A.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/FINAL-v0132-Q4.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run3.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx259500-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx259500-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-ctx259500-run3.json"
+      ],
+      "note": "Best-config before/after, not runtime-only A/B; final attempt2 adds an explicit offline/no-tools system instruction, so prompts are not controlled pairs. Layer split/KV/prefill/CPU/PCIe/MTP may differ; consult both full configurations."
+    },
+    {
+      "metric": "Controlled sameK24 actual8000 PP",
+      "v0131": 1519.75,
+      "v0132": 1570.9,
+      "delta_percent": 3.3656851455831527,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual8000 TG",
+      "v0131": 105.45,
+      "v0132": 95.94999999999999,
+      "delta_percent": -9.009009009009016,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual16000 PP",
+      "v0131": 2089.55,
+      "v0132": 2156.8500000000004,
+      "delta_percent": 3.220789165131266,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual16000 TG",
+      "v0131": 102.80000000000001,
+      "v0132": 89.80000000000001,
+      "delta_percent": -12.645914396887159,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual31400 PP",
+      "v0131": 2546.6,
+      "v0132": 2614.9,
+      "delta_percent": 2.6820073823922153,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual31400 TG",
+      "v0131": 106.7,
+      "v0132": 120.7,
+      "delta_percent": 13.120899718837853,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual63400 PP",
+      "v0131": 3004.0,
+      "v0132": 3045.0,
+      "delta_percent": 1.3648468708388872,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual63400 TG",
+      "v0131": 92.4,
+      "v0132": 106.4,
+      "delta_percent": 15.15151515151516,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual127000 PP",
+      "v0131": 3271.7,
+      "v0132": 3296.5,
+      "delta_percent": 0.7580157104869034,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual127000 TG",
+      "v0131": 87.3,
+      "v0132": 101.1,
+      "delta_percent": 15.807560137457033,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual259500 PP",
+      "v0131": 3508.7,
+      "v0132": 3521.3,
+      "delta_percent": 0.3591073617009277,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Controlled sameK24 actual259500 TG",
+      "v0131": 91.7,
+      "v0132": 87.5,
+      "delta_percent": -4.580152671755733,
+      "classification": "CONTROLLED_WHOLE_VERSION_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131/configs/PP-CONTROL.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/comparison-pp-control.json"
+      ],
+      "note": "Pair-identical APIpayloads, same CLI settings and byte-identical dense/MTP/profile; natural allocator differences belong to runtime. Not isolated prompt-fix patch causality."
+    },
+    {
+      "metric": "Cold start processREADY single-resident",
+      "v0131": 104.05220912799996,
+      "v0132": 137.0852805760005,
+      "delta_percent": 31.746631546635285,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T0-control-startup.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/BASELINE-resident-v0132-startup.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T0-control-startup.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/BASELINE-resident-v0132-startup.json"
+      ],
+      "note": "Fresh process exec to healthREADY; physical filesystem cold cache not controlled, no drop_caches. Best split/config may differ. Timing excludes PSS snapshots."
+    },
+    {
+      "metric": "Cold start processREADY best2GPU",
+      "v0131": 64.07071970400284,
+      "v0132": 101.08001256500575,
+      "delta_percent": 57.76319203527027,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-startup.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-startup.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-startup.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/FINAL-v0132-Q4-attempt2-startup.json"
+      ],
+      "note": "Fresh process exec to healthREADY; physical filesystem cold cache not controlled, no drop_caches. Best split/config may differ. Timing excludes PSS snapshots."
+    },
+    {
+      "metric": "Compaction actual127000 wall s",
+      "v0131": 61.33543910600565,
+      "v0132": 56.69774251700437,
+      "delta_percent": -7.5612022292462555,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/configs/COMPACTION-v0131-control.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/COMPACTION-FINAL-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-127000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-127000.json"
+      ],
+      "note": "Exact identical saved transcript/request, <=4096 output cap; natural output lengths may differ. Immutableoldruntime comparison stored only in new namespace, oldcampaign staysfrozen. Best configurations differ."
+    },
+    {
+      "metric": "Compaction actual127000 PP",
+      "v0131": 3003.5,
+      "v0132": 3722.2,
+      "delta_percent": 23.928749791909443,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/configs/COMPACTION-v0131-control.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/COMPACTION-FINAL-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-127000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-127000.json"
+      ],
+      "note": "Exact identical saved transcript/request, <=4096 output cap; natural output lengths may differ. Immutableoldruntime comparison stored only in new namespace, oldcampaign staysfrozen. Best configurations differ."
+    },
+    {
+      "metric": "Compaction actual127000 TG",
+      "v0131": 92.3,
+      "v0132": 91.4,
+      "delta_percent": -0.9750812567713929,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/configs/COMPACTION-v0131-control.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/COMPACTION-FINAL-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-127000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-127000.json"
+      ],
+      "note": "Exact identical saved transcript/request, <=4096 output cap; natural output lengths may differ. Immutableoldruntime comparison stored only in new namespace, oldcampaign staysfrozen. Best configurations differ."
+    },
+    {
+      "metric": "Compaction actual127000 TTFT s",
+      "v0131": 42.609220869002456,
+      "v0132": 34.704752117999305,
+      "delta_percent": -18.551075541382467,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/configs/COMPACTION-v0131-control.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/COMPACTION-FINAL-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-127000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-127000.json"
+      ],
+      "note": "Exact identical saved transcript/request, <=4096 output cap; natural output lengths may differ. Immutableoldruntime comparison stored only in new namespace, oldcampaign staysfrozen. Best configurations differ."
+    },
+    {
+      "metric": "Compaction actual250000 wall s",
+      "v0131": 109.24730479999562,
+      "v0132": 71.44682309900236,
+      "delta_percent": -34.60083685377543,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/configs/COMPACTION-v0131-control.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/COMPACTION-FINAL-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-250000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-250000.json"
+      ],
+      "note": "Exact identical saved transcript/request, <=4096 output cap; natural output lengths may differ. Immutableoldruntime comparison stored only in new namespace, oldcampaign staysfrozen. Best configurations differ."
+    },
+    {
+      "metric": "Compaction actual250000 PP",
+      "v0131": 3180.6,
+      "v0132": 5335.4,
+      "delta_percent": 67.748223605609,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/configs/COMPACTION-v0131-control.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/COMPACTION-FINAL-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-250000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-250000.json"
+      ],
+      "note": "Exact identical saved transcript/request, <=4096 output cap; natural output lengths may differ. Immutableoldruntime comparison stored only in new namespace, oldcampaign staysfrozen. Best configurations differ."
+    },
+    {
+      "metric": "Compaction actual250000 TG",
+      "v0131": 89.0,
+      "v0132": 92.3,
+      "delta_percent": 3.707865168539315,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/configs/COMPACTION-v0131-control.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/COMPACTION-FINAL-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-250000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-250000.json"
+      ],
+      "note": "Exact identical saved transcript/request, <=4096 output cap; natural output lengths may differ. Immutableoldruntime comparison stored only in new namespace, oldcampaign staysfrozen. Best configurations differ."
+    },
+    {
+      "metric": "Compaction actual250000 TTFT s",
+      "v0131": 79.09663661699597,
+      "v0132": 47.42998356700264,
+      "delta_percent": -40.03539771650534,
+      "classification": "NOT_CONTROLLED_A_B",
+      "v0131_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/configs/COMPACTION-v0131-control.json",
+      "v0132_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/COMPACTION-FINAL-v0132.json",
+      "evidence": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0131-compaction/raw/COMPACTION-v0131-control-250000.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/COMPACTION-FINAL-v0132-250000.json"
+      ],
+      "note": "Exact identical saved transcript/request, <=4096 output cap; natural output lengths may differ. Immutableoldruntime comparison stored only in new namespace, oldcampaign staysfrozen. Best configurations differ."
+    }
+  ],
+  "scope": "Controlled upgrade pair rows are separate from best-config before/after; no inference that tuning gains are solely a runtime upgrade."
+}

@@ -1,0 +1,50 @@
+### Bug Analysis
+
+The provided function has two main issues:
+
+1.  **Input Mutation**: The line `intervals.sort()` sorts the input list in-place. This violates the requirement that "the input must not be mutated."
+2.  **Incorrect Merging Logic**: The line `result[-1][1] = end` blindly replaces the end of the last interval with the current interval's end. This fails when the current interval is **nested** inside the last interval (e.g., merging `[1, 10]` and `[2, 5]`). In this case, the end should remain `10`, not become `5`. The correct logic is to take the **maximum** of the current end and the last interval's end.
+
+### Corrected Code
+
+```python
+def merge_intervals(intervals):
+    """
+    Merges overlapping intervals.
+    
+    Args:
+        intervals: A list of lists, where each inner list is [start, end].
+        
+    Returns:
+        A new list of merged intervals. The input list is not mutated.
+    """
+    if not intervals:
+        return []
+    
+    # Create a sorted copy to avoid mutating the original input
+    sorted_intervals = sorted(intervals)
+    
+    result = []
+    for start, end in sorted_intervals:
+        # If result is empty or the current interval does not overlap with the last one
+        if not result or start > result[-1][1]:
+            result.append([start, end])
+        else:
+            # Overlap exists: update the end of the last interval to the max of both ends
+            # This handles both extending intervals and nested intervals
+            result[-1][1] = max(result[-1][1], end)
+            
+    return result
+```
+
+### Edge-Case Examples
+
+#### 1. Nested Intervals
+**Input:** `[[1, 10], [2, 5]]`  
+**Explanation:** The interval `[2, 5]` is completely inside `[1, 10]`. The buggy code would incorrectly set the end to `5`. The corrected code takes `max(10, 5)`, preserving the larger interval.  
+**Output:** `[[1, 10]]`
+
+#### 2. Touching Intervals
+**Input:** `[[1, 4], [4, 5]]`  
+**Explanation:** The intervals touch at point `4`. Since `start (4) <= result[-1][1] (4)`, they are considered overlapping and should be merged.  
+**Output:** `[[1, 5]]`

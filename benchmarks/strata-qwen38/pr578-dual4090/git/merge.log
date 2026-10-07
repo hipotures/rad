@@ -1,0 +1,15 @@
+Merge made by the 'ort' strategy.
+ CMakeLists.txt                            |   1 +
+ docs/SECOND_GPU.md                        |  32 +++++
+ include/strata/core/expert_cache.hpp      |   7 ++
+ include/strata/core/remote_expert_opt.hpp |  53 ++++++++
+ include/strata/core/remote_experts.hpp    |   6 +-
+ include/strata/core/verify.hpp            |   3 +
+ src/core/expert_source.cpp                |  14 ++-
+ src/core/remote_expert_opt.cu             | 194 ++++++++++++++++++++++++++++++
+ src/core/remote_experts.cpp               |  43 ++++---
+ src/core/verify.cpp                       |  10 +-
+ src/program/generate.cpp                  |  39 ++++--
+ 11 files changed, 370 insertions(+), 32 deletions(-)
+ create mode 100644 include/strata/core/remote_expert_opt.hpp
+ create mode 100644 src/core/remote_expert_opt.cu

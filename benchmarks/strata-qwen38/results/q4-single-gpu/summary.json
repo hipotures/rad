@@ -1,0 +1,417 @@
+{
+  "model": "Unsloth UD-Q4_K_XL",
+  "revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+  "strata_head": "9259cad4cfa3543cd3b8decab5962672b968c649",
+  "config": "/srv/ai/benchmarks/strata-qwen38/results/q4-single-gpu/config.json",
+  "resident_budget_gib": 80,
+  "mem_available_before_start_gib": 158.1191864013672,
+  "load_ok": true,
+  "smoke_ok": true,
+  "startup": {
+    "health": {
+      "status": "ok",
+      "max_context": 65536,
+      "model": "qwen3.8-flash-next-ud-q4_k_xl",
+      "images": false,
+      "api_key": false,
+      "loaded": true
+    },
+    "metrics": {
+      "engine": {
+        "model": "qwen3.8-flash-next-ud-q4_k_xl",
+        "max_context": 65536,
+        "images": false,
+        "version": "0.1.31",
+        "context": 65536,
+        "kv": "int8",
+        "kv_resident": 0,
+        "expert_slots": 5238,
+        "expert_cache_mib": 15644,
+        "expert_slots_primary": 5238,
+        "expert_cache_primary_mib": 15644,
+        "spec": 6,
+        "mtp_max": 4,
+        "lookup": 3,
+        "vram_free_mib": 273,
+        "cvec": 0,
+        "arena_mib": 57805,
+        "pool_workers": 15,
+        "pcie_frac": "0.28",
+        "spec_min_p": "0.50",
+        "conversation_cache_mib": 0,
+        "conversation_cache_slots": 4,
+        "conversation_cache_min_free_mib": 2560,
+        "engine": "0.1.31"
+      },
+      "live": {
+        "state": "idle",
+        "queued": 0,
+        "phase": null,
+        "prompt_tokens": null,
+        "prompt_read": null,
+        "prompt_total": null,
+        "generated": null,
+        "max_tokens": null,
+        "elapsed_s": null,
+        "tok_s": null,
+        "tok_s_mean": null,
+        "prefill_tok_s_mean": null,
+        "tok_s_window_s": null
+      },
+      "requests": [],
+      "requests_kept": 0,
+      "totals": {
+        "since": 1790871030.6193397,
+        "requests": 0,
+        "prompt_tokens": 0,
+        "reused": 0,
+        "output_tokens": 0,
+        "prompt_ms": 0.0,
+        "decode_ms": 0.0
+      },
+      "hardware": {
+        "gpu_util": 2,
+        "gpu_mem_used": 25469976576,
+        "gpu_mem_total": 25757220864,
+        "gpu_temp": 45,
+        "gpu_power": 54.329,
+        "gpu_power_limit": 480.0,
+        "gpu_pcie_gen": 4,
+        "gpu_pcie_gen_max": 4,
+        "gpu_pcie_width": 8,
+        "gpu_pcie_rx_mb": 1.0009765625,
+        "gpu_pcie_tx_mb": 2.5263671875,
+        "cpu": 0.0,
+        "ram_used": 69175803904,
+        "ram_total": 173014831104,
+        "disk_read_mb": null,
+        "disk_write_mb": null,
+        "tok_s": 0.0,
+        "tok_s_mean": 0.0,
+        "prefill_tok_s_mean": 0.0
+      },
+      "hardware_static": {
+        "gpu_name": "NVIDIA GeForce RTX 4090",
+        "gpu_count": 1,
+        "cpu_name": "AMD Ryzen 9 7950X3D 16-Core Processor",
+        "cores": 16,
+        "threads": 16,
+        "psutil": true
+      },
+      "history": {
+        "gpu_util": [
+          2
+        ],
+        "gpu_mem_used": [
+          25469976576
+        ],
+        "gpu_temp": [
+          45
+        ],
+        "gpu_power": [
+          54.33
+        ],
+        "gpu_pcie_rx_mb": [
+          1.0
+        ],
+        "cpu": [
+          0.0
+        ],
+        "ram_used": [
+          69175803904
+        ],
+        "disk_read_mb": [
+          null
+        ],
+        "tok_s": [
+          0.0
+        ],
+        "prefill_tok_s_mean": [
+          0.0
+        ]
+      },
+      "time": 1790871031.300044
+    }
+  },
+  "resident_expert_gib": 56.45,
+  "pinned_expert_gib": 56.45,
+  "residency_note": "Upstream RAM budget stores GPU-cache complement, not a duplicate of every GPU-cached expert. Read logs and tier counters to distinguish full RAM from RAM+VRAM coverage.",
+  "speed_runs": [
+    {
+      "model": "UD-Q4_K_XL-1GPU",
+      "kind": "measured",
+      "context": "64K",
+      "repeat": 1,
+      "actual_prompt_tokens_tokenizer": 63300,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-01T16:11:48Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/results/q4-single-gpu/telemetry/speed-64k-1.jsonl",
+      "samples": 52,
+      "peak_rss_gib": 133.23095703125,
+      "min_mem_available_gib": 95.85087203979492,
+      "peak_ram_used_gib": 65.28174591064453,
+      "peak_vram0_gib": 23.484375,
+      "peak_vram1_gib": 0.0009765625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 63300,
+        "completion_tokens": 256,
+        "total_tokens": 63556,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What `docs/media/make_figures.py` does\n\n`docs/media/make_figures.py` is a small, self-contained Python generator that produces the two SVG illustrations used in the README's \"How does it work?\" section: `docs/media/how-it-works.svg` and `docs/media/guess-and-check.svg`. Its stated goal is to render those figures in the *same visual language as the Strata web app* rather than as hand-drawn or externally-authored graphics, so that the documentation and the running product look like one coherent system.\n\nThe script achieves that coherence by reading three real assets out of the repository at generation time:\n\n1. **The app's color tokens.** The `CSS` string is a literal copy of the light/dark palette defined in `serve/web/tokens.css` (backgrounds, cards, accent green, info blue, warn amber, danger red, muted text, dots, arrows, etc.), wrapped in a `@media (prefers-color-scheme: dark)` block so the SVG automatically adapts to the reader's OS theme when embedded in a browser.\n2. **The app's icon set.** `SPRITE` loads `serve/web/sprite.svg`, and the `icon()` helper",
+      "reasoning": "",
+      "actual_prompt_tokens": 63300,
+      "generated_tokens": 256,
+      "ttft_s": 44.82434153200302,
+      "total_wall_s": 51.79303532100312,
+      "api_decode_wall_s": 6.968693789000099,
+      "prompt_processing_wall_s": 44.6809,
+      "decode_wall_s": 6.9921999999999995,
+      "pp_tps": 1416.7,
+      "tg_tps": 36.6,
+      "draft_tokens": 228,
+      "accepted_tokens": 151,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 63300,
+        "prompt_ms": 44680.9,
+        "prompt_per_token_ms": 0.706,
+        "prompt_per_second": 1416.7,
+        "predicted_n": 256,
+        "predicted_ms": 6992.2,
+        "predicted_per_token_ms": 27.313,
+        "predicted_per_second": 36.6,
+        "draft_n": 228,
+        "draft_n_accepted": 151,
+        "at": 1790871159
+      },
+      "acceptance_pct": 66.2280701754386,
+      "mean_accepted_length": 1.4245283018867925,
+      "final_logical_context_tokens": 63556,
+      "final_kv_occupancy_tokens": 63556,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 106,
+      "mean_committed_length": 2.4245283018867925,
+      "expert_tiers": {
+        "ram_blobs": 40414,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.742
+      },
+      "status": "OK",
+      "gpu0_util_pct_mean": 88.86538461538461,
+      "gpu0_power_w_mean": 190.74134615384617,
+      "system_cpu_pct_mean": 18.23846153846154,
+      "process_cpu_pct_mean": 276.0634615384615
+    },
+    {
+      "model": "UD-Q4_K_XL-1GPU",
+      "kind": "measured",
+      "context": "64K",
+      "repeat": 2,
+      "actual_prompt_tokens_tokenizer": 63300,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-01T16:12:42Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/results/q4-single-gpu/telemetry/speed-64k-2.jsonl",
+      "samples": 48,
+      "peak_rss_gib": 133.25035095214844,
+      "min_mem_available_gib": 95.84170913696289,
+      "peak_ram_used_gib": 65.29090881347656,
+      "peak_vram0_gib": 23.484375,
+      "peak_vram1_gib": 0.0009765625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 63300,
+        "completion_tokens": 256,
+        "total_tokens": 63556,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "## What the last file does\n\n`docs/media/make_figures.py` is a small, self-contained figure generator for the project's documentation. Its job is to produce the two SVG illustrations that the README embeds under the \"How does it work?\" section: `docs/media/how-it-works.svg` and `docs/media/guess-and-check.svg`. Rather than shipping hand-drawn SVGs that drift out of sync with the web app's look, the script *derives* the figures from the same assets the Strata web app uses, so the documentation always matches the product's visual identity.\n\nConcretely, it does the following:\n\n1. **Locates its inputs relative to the repo root.** `ROOT = Path(__file__).resolve().parents[2]` walks up from `docs/media/` to the repository root, and `OUT` points back at `docs/media/`. It then reads two files verbatim: `serve/web/sprite.svg` (the app's icon sprite sheet, a set of `<symbol>` elements) and `serve/web/fonts/outfit-latin-wght.woff2` (the Outfit variable font, licensed under SIL OFL 1.1). The font bytes are base64",
+      "reasoning": "",
+      "actual_prompt_tokens": 63300,
+      "generated_tokens": 256,
+      "ttft_s": 41.26489171100184,
+      "total_wall_s": 47.024773491000815,
+      "api_decode_wall_s": 5.759881779998977,
+      "prompt_processing_wall_s": 41.1095,
+      "decode_wall_s": 5.7939,
+      "pp_tps": 1539.8,
+      "tg_tps": 44.2,
+      "draft_tokens": 225,
+      "accepted_tokens": 161,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 63300,
+        "prompt_ms": 41109.5,
+        "prompt_per_token_ms": 0.649,
+        "prompt_per_second": 1539.8,
+        "predicted_n": 256,
+        "predicted_ms": 5793.9,
+        "predicted_per_token_ms": 22.632,
+        "predicted_per_second": 44.2,
+        "draft_n": 225,
+        "draft_n_accepted": 161,
+        "at": 1790871209
+      },
+      "acceptance_pct": 71.55555555555556,
+      "mean_accepted_length": 1.694736842105263,
+      "final_logical_context_tokens": 63556,
+      "final_kv_occupancy_tokens": 63555,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 95,
+      "mean_committed_length": 2.694736842105263,
+      "expert_tiers": {
+        "ram_blobs": 30815,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.803
+      },
+      "status": "OK",
+      "gpu0_util_pct_mean": 95.45833333333333,
+      "gpu0_power_w_mean": 201.0325,
+      "system_cpu_pct_mean": 17.833333333333332,
+      "process_cpu_pct_mean": 267.57916666666665
+    },
+    {
+      "model": "UD-Q4_K_XL-1GPU",
+      "kind": "measured",
+      "context": "64K",
+      "repeat": 3,
+      "actual_prompt_tokens_tokenizer": 63299,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-01T16:13:31Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/results/q4-single-gpu/telemetry/speed-64k-3.jsonl",
+      "samples": 48,
+      "peak_rss_gib": 133.25694274902344,
+      "min_mem_available_gib": 95.81252670288086,
+      "peak_ram_used_gib": 65.3200912475586,
+      "peak_vram0_gib": 23.484375,
+      "peak_vram1_gib": 0.0009765625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 63299,
+        "completion_tokens": 256,
+        "total_tokens": 63555,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What `docs/media/make_figures.py` does\n\n`docs/media/make_figures.py` is a small, self-contained Python generator that produces the two SVG illustrations used in the README's \"How does it work?\" section: `docs/media/how-it-works.svg` and `docs/media/guess-and-check.svg`. Its stated goal is to make those figures look like they belong to the Strata web app rather than being generic diagrams, and it achieves that by pulling three things directly from the app's own source tree:\n\n1. **Colors** — it embeds a CSS block (`CSS`) that mirrors the design tokens from `serve/web/tokens.css`: background, card, muted text, and the accent/info/warn/danger families, each with a light value and a dark value. The dark values live inside a `@media (prefers-color-scheme: dark)` block, so the generated SVG automatically follows the reader's system light/dark setting when opened in a browser.\n2. **Icons** — it reads `serve/web/sprite.svg` at import time into `SPRITE`, and the `icon()` helper extracts a single `<symbol id=\"...\">` body with a regex and re-emits it inside a",
+      "reasoning": "",
+      "actual_prompt_tokens": 63299,
+      "generated_tokens": 256,
+      "ttft_s": 41.27222788299696,
+      "total_wall_s": 47.143681604997255,
+      "api_decode_wall_s": 5.871453722000297,
+      "prompt_processing_wall_s": 41.1222,
+      "decode_wall_s": 5.8995,
+      "pp_tps": 1539.3,
+      "tg_tps": 43.4,
+      "draft_tokens": 235,
+      "accepted_tokens": 154,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 63299,
+        "prompt_ms": 41122.2,
+        "prompt_per_token_ms": 0.65,
+        "prompt_per_second": 1539.3,
+        "predicted_n": 256,
+        "predicted_ms": 5899.5,
+        "predicted_per_token_ms": 23.045,
+        "predicted_per_second": 43.4,
+        "draft_n": 235,
+        "draft_n_accepted": 154,
+        "at": 1790871259
+      },
+      "acceptance_pct": 65.53191489361703,
+      "mean_accepted_length": 1.4666666666666666,
+      "final_logical_context_tokens": 63555,
+      "final_kv_occupancy_tokens": 63557,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 105,
+      "mean_committed_length": 2.466666666666667,
+      "expert_tiers": {
+        "ram_blobs": 31505,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.812
+      },
+      "status": "OK",
+      "gpu0_util_pct_mean": 95.60416666666667,
+      "gpu0_power_w_mean": 200.52833333333334,
+      "system_cpu_pct_mean": 17.4375,
+      "process_cpu_pct_mean": 267.95208333333335
+    }
+  ],
+  "speed_median": {
+    "actual_prompt_tokens": 63300,
+    "generated_tokens": 256,
+    "pp_tps": 1539.3,
+    "prompt_processing_wall_s": 41.1222,
+    "ttft_s": 41.27222788299696,
+    "tg_tps": 43.4,
+    "decode_wall_s": 5.8995,
+    "peak_ram_used_gib": 65.29090881347656,
+    "peak_rss_gib": 133.25035095214844,
+    "peak_vram0_gib": 23.484375
+  },
+  "quality_files": {
+    "A-coding-debug": "/srv/ai/benchmarks/strata-qwen38/results/quality/UD-Q4_K_XL/A-coding-debug.txt",
+    "B-mathematical-reasoning": "/srv/ai/benchmarks/strata-qwen38/results/quality/UD-Q4_K_XL/B-mathematical-reasoning.txt",
+    "C-repository-architecture": "/srv/ai/benchmarks/strata-qwen38/results/quality/UD-Q4_K_XL/C-repository-architecture.txt"
+  },
+  "problem": "Upstream resident-budget copies only the GPU-cache complement; GPU-cached experts have no resident RAM duplicate and prefill/refill reads native GGUF files. No decode expert file reads observed.",
+  "peak_ram_used_gib": 65.3347053527832,
+  "peak_rss_gib": 133.25694274902344,
+  "peak_vram_gib": 23.484375,
+  "gpu1_peak_vram_gib": 0.0009765625,
+  "min_mem_available_gib": 95.79791259765625,
+  "storage_note": "/srv/ai is virtiofs; file_blobs/file_mb are logical routed-expert file reads, not physical host SSD counters.",
+  "decode_expert_file_reads": [
+    {
+      "ram_blobs": 40414,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.742
+    },
+    {
+      "ram_blobs": 30815,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.803
+    },
+    {
+      "ram_blobs": 31505,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.812
+    }
+  ],
+  "decode_expert_file_mb_total": 0,
+  "all_routed_experts_duplicated_in_ram": false,
+  "all_routed_experts_covered_by_ram_and_gpu": true,
+  "ram_expert_count": 19338,
+  "gpu_expert_count": 5238,
+  "gpu_expert_cache_gib": 15.28,
+  "decode_expert_ssd_reads_observed": false,
+  "validation": {
+    "smoke_ok": true,
+    "gpu0_only": true,
+    "measured_requests": 3,
+    "quality_requests": 3,
+    "quality_inputs_and_sampling_exactly_match_saved_IQ3_S": true,
+    "quality_answers_not_capped": true,
+    "speed_prompt_reuse_zero": true,
+    "decode_expert_file_reads_zero": true,
+    "no_experts_bin": true,
+    "strata_head_and_sources_unchanged": true
+  }
+}

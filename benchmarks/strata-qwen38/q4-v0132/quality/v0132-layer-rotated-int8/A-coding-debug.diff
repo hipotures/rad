@@ -1,0 +1,11 @@
+--- v0132-layer-default/A-coding-debug.txt
++++ v0132-layer-rotated-int8/A-coding-debug.txt
+@@ -3,7 +3,7 @@
+ The provided function has two main issues:
+ 
+ 1.  **Input Mutation**: The line `intervals.sort()` sorts the input list in-place. This violates the requirement that "the input must not be mutated."
+-2.  **Incorrect Merging Logic**: The line `result[-1][1] = end` blindly replaces the end of the last interval with the current interval's end. This fails when the current interval is **nested** inside the last interval (e.g., merging `[1, 10]` and `[2, 5]`). In this case, the end should remain `10`, not become `5`. The correct logic is to take the **maximum** of the current end and the last interval's end.
++2.  **Incorrect Merging Logic**: The line `result[-1][1] = end` blindly replaces the end of the last interval with the current `end`. This fails when the current interval is **nested** inside the last interval (e.g., merging `[1, 10]` and `[2, 5]`). In this case, the end should remain `10`, not become `5`. The correct logic is to take the **maximum** of the current end and the last interval's end.
+ 
+ ### Corrected Code
+ 

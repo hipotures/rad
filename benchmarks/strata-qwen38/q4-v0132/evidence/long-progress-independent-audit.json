@@ -1,0 +1,63 @@
+{
+  "status": "VERIFIED_COMPLETED_LONG_REQUESTS_ONLY",
+  "observed_at": 1790911005.5756183,
+  "requests": [
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-FINAL-v0132-64K-4096-sampled.json",
+      "actual_prompt_tokens": 63400,
+      "generated_tokens": 4096,
+      "PP": 2632.4,
+      "TG": 85.6,
+      "TTFT": 24.232405080001627,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.9
+      },
+      "normal_trace": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-FINAL-v0132-64K-4096-sampled-acceptance-trace.json"
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-FINAL-v0132-128K-4096-sampled.json",
+      "actual_prompt_tokens": 127000,
+      "generated_tokens": 4096,
+      "PP": 3955.7,
+      "TG": 83.9,
+      "TTFT": 32.65669375099969,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.883
+      },
+      "normal_trace": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-FINAL-v0132-128K-4096-sampled-acceptance-trace.json"
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-RETRY8K-v0132-128K-8192-sampled.json",
+      "actual_prompt_tokens": 127000,
+      "generated_tokens": 8192,
+      "PP": 3671.1,
+      "TG": 81.2,
+      "TTFT": 35.143383800001175,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.891
+      },
+      "normal_trace": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-RETRY8K-v0132-128K-8192-sampled-acceptance-trace.json"
+    }
+  ],
+  "incomplete_attempts": [
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/LONG-FINAL-v0132-128K-8192-sampled.json",
+      "requested": 8192,
+      "actual": 6324,
+      "reason": "Natural short output; not a full-length result",
+      "retained": true
+    }
+  ],
+  "completed_count": 3,
+  "required_count": 3,
+  "scope": "Completed enriched records only. Trace overhead included; combined MTP/suffix acceptance. Logical expert file fetch counters do not prove physical host SSD activity. API/tokenizer counts, sampling, runtime/model/config, RAM safety, trace aggregate and PSS timing independently checked."
+}

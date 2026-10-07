@@ -1,0 +1,169 @@
+# Repository Architecture: Local Coding-Agent Service
+
+## 1. High-Level Overview
+
+This service acts as a **single-GPU, single-process inference gateway**. It exposes an OpenAI-compatible `/v1/chat/completions` endpoint, serializes requests to a resident GPU worker, and provides observability. The core challenge is balancing **throughput** (via prompt caching) with **correctness** (isolating client contexts) and **resilience** (handling GPU process crashes).
+
+### Key Design Principles
+1.  **Single Writer, Multiple Readers**: One GPU process owns the model state. All requests are queued and processed sequentially to avoid race conditions on KV-cache.
+2.  **Stateless API Layer**: The HTTP server is stateless regarding model weights. It only manages request lifecycle and metrics.
+3.  **Explicit Cache Keys**: Prompt caching is not automatic; it is keyed by a deterministic hash of the *prefix* of the prompt, ensuring cross-client cache hits only when prefixes are identical.
+4.  **Process Isolation**: The GPU worker runs as a separate OS process. The API server communicates via IPC (Unix Domain Sockets or gRPC) and monitors worker health.
+
+---
+
+## 2. Module Boundaries
+
+| Module | Responsibility | Key Interfaces |
+|--------|----------------|----------------|
+| `api` | HTTP server, OpenAI schema validation, streaming response formatting, request queuing. | `POST /v1/chat/completions` |
+| `queue` | In-memory FIFO queue with priority support. Decouples API from GPU worker. | `enqueue(req)`, `dequeue()` |
+| `worker` | Resident GPU process. Loads model, manages KV-cache, executes inference. | `gRPC/UDS: Generate(prompt, cache_key) -> stream` |
+| `cache` | Manages prompt prefix caching. Maps `cache_key` → KV-cache slot ID. | `get_slot(key)`, `release_slot(id)` |
+| `metrics` | Collects per-request latency, token counts, cache hit/miss, GPU utilization. | `record(request_id, metrics)` |
+| `supervisor` | Monitors worker process health. Restarts worker on crash. | `start_worker()`, `on_crash()` |
+
+---
+
+## 3. Concrete File Tree
+
+```
+coding-agent-service/
+├── README.md
+├── pyproject.toml
+├── Dockerfile
+├── docker-compose.yml
+├── config/
+│   ├── default.yaml          # Model path, GPU device, queue size, cache limits
+│   └── logging.yaml
+├── src/
+│   ├── __init__.py
+│   ├── main.py               # Entry point: starts API server and supervisor
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── server.py         # FastAPI/Starlette app setup
+│   │   ├── routes.py         # /v1/chat/completions handler
+│   │   ├── schemas.py        # Pydantic models for OpenAI API
+│   │   └── streaming.py      # SSE (Server-Sent Events) formatter
+│   ├── queue/
+│   │   ├── __init__.py
+│   │   ├── manager.py        # Async queue with backpressure
+│   │   └── request.py        # Request object with metadata
+│   ├── worker/
+│   │   ├── __init__.py
+│   │   ├── process.py        # Subprocess launcher for GPU worker
+│   │   ├── ipc.py            # gRPC/UDS client for API↔Worker communication
+│   │   └── protocol.proto    # Protobuf definition for GenerateRequest/Response
+│   ├── cache/
+│   │   ├── __init__.py
+│   │   ├── manager.py        # LRU cache for KV-cache slots
+│   │   └── keying.py         # Deterministic prefix hashing logic
+│   ├── metrics/
+│   │   ├── __init__.py
+│   │   ├── collector.py      # Prometheus metrics exporter
+│   │   └── logger.py         # Structured JSON logging per request
+│   └── supervisor/
+│       ├── __init__.py
+│       └── health.py         # Worker health checks and restart logic
+├── tests/
+│   ├── test_api.py
+│   ├── test_cache_keying.py
+│   ├── test_worker_recovery.py
+│   └── test_streaming.py
+└── scripts/
+    ├── start_worker.py       # Standalone GPU worker entry point
+    └── benchmark.py          # Load testing script
+```
+
+---
+
+## 4. Detailed Design Decisions
+
+### A. Request Flow & Cancellation
+
+1.  **Client Request**: Client sends `POST /v1/chat/completions` with `stream: true`.
+2.  **API Layer**:
+    - Validates schema.
+    - Generates a unique `request_id`.
+    - Computes `cache_key` from the prompt prefix (see Section C).
+    - Enqueues a `Request` object into the `queue.manager`.
+    - Returns an SSE stream that listens for chunks from the worker.
+3.  **Queue**:
+    - If the queue is full, return `429 Too Many Requests`.
+    - The worker pulls one request at a time.
+4.  **Worker**:
+    - Receives request via IPC.
+    - Checks `cache.manager` for a valid KV-cache slot.
+    - Runs inference, streaming tokens back via IPC.
+5.  **Cancellation**:
+    - If the client disconnects, the API layer detects the closed connection.
+    - It sends a `CANCEL` signal to the worker via IPC, including the `request_id`.
+    - The worker checks for cancellation between token generations. If cancelled, it aborts inference, releases the KV-cache slot, and stops streaming.
+    - **Why this matters**: Without explicit cancellation, a disconnected client would still consume GPU resources until completion.
+
+### B. Process Failure Recovery
+
+- **Worker Crash**: If the GPU worker process dies (OOM, CUDA error), the `supervisor.health` module detects the broken IPC connection or non-zero exit code.
+- **Recovery Strategy**:
+  1.  **Fail Fast**: All in-flight requests are marked as `503 Service Unavailable` with a retry-after header.
+  2.  **Restart**: The supervisor spawns a new worker process.
+  3.  **Warmup**: The new worker loads the model and initializes the KV-cache. During warmup, the API server returns `503` for new requests.
+  4.  **No State Persistence**: KV-cache is volatile. After a crash, all cache slots are lost. This is acceptable because prompt caching is an optimization, not a correctness requirement.
+- **Why not checkpoint?** Checkpointing KV-cache is complex and slow. For a local coding agent, a 10–30 second restart is preferable to complex state management.
+
+### C. Prompt Caching Correctness Across Clients
+
+**Problem**: If Client A and Client B send identical prompts, can they share the KV-cache?  
+**Answer**: Yes, but only if the *prefix* is identical and the cache is managed correctly.
+
+**Implementation**:
+1.  **Cache Key Generation**:
+    - The `cache.keying` module computes a SHA-256 hash of the first N tokens of the prompt (e.g., first 512 tokens).
+    - `cache_key = hash(prompt[:512])`
+    - This ensures that only requests with identical prefixes can share cache slots.
+2.  **Cache Slot Management**:
+    - The `cache.manager` maintains a pool of KV-cache slots (e.g., 10 slots).
+    - When a request arrives:
+      - If `cache_key` exists in the pool and is not in use, reuse the slot.
+      - If not, allocate a new slot (evicting LRU if full).
+    - **Critical**: The KV-cache slot is *locked* during inference. No other request can use it until the current request completes or is cancelled.
+3.  **Cross-Client Safety**:
+    - Since the KV-cache is keyed by prompt prefix, not client ID, two clients with identical prompts will hit the same cache slot.
+    - This is safe because the model output for a given prefix is deterministic (assuming temperature=0 or consistent sampling).
+    - **Risk**: If temperature > 0, cache hits may produce different outputs. To mitigate, either:
+      - Disable caching for temperature > 0.
+      - Or, accept that cache hits are "best-effort" and may not be bit-identical.
+
+---
+
+## 5. Two Tradeoffs
+
+### Tradeoff 1: Sequential Queueing vs. Concurrent Batching
+
+- **Choice**: Sequential queueing (one request at a time).
+- **Pros**:
+  - Simple KV-cache management. No need to handle batched requests with different cache states.
+  - Predictable latency per request.
+  - Easier cancellation logic.
+- **Cons**:
+  - Low throughput. GPU is idle while waiting for the next request.
+  - Poor utilization for short requests.
+- **Alternative**: Continuous batching (like vLLM). This would improve throughput by 5–10x but requires complex cache management (PagedAttention) and makes cancellation harder. For a *local* coding agent, simplicity and correctness are more important than peak throughput.
+
+### Tradeoff 2: In-Process Worker vs. Separate Process
+
+- **Choice**: Separate GPU worker process.
+- **Pros**:
+  - Isolation. A CUDA crash does not take down the API server.
+  - Easier to restart the worker without dropping HTTP connections (clients can retry).
+  - Cleaner separation of concerns (API logic vs. GPU logic).
+- **Cons**:
+  - IPC overhead (serialization/deserialization of tokens).
+  - More complex deployment (two processes to manage).
+- **Alternative**: In-process worker (using `torch.multiprocessing` or threads). This reduces IPC overhead but risks crashing the entire service on GPU errors. For a local service, reliability is critical, so process isolation is preferred.
+
+---
+
+## 6. Summary
+
+This architecture prioritizes **correctness** and **resilience** over peak throughput. By using a separate GPU worker, explicit cache keying, and sequential queueing, it ensures that prompt caching is safe across clients and that failures are recoverable. The file tree reflects clear module boundaries, making it easy to test and extend.

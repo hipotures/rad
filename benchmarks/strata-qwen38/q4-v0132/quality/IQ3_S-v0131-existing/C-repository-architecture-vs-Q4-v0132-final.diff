@@ -1,0 +1,596 @@
+--- IQ3_S-v0131-existing/C-repository-architecture.txt
++++ v0132-final/C-repository-architecture.txt
+@@ -1,411 +1,226 @@
+ # Repository Architecture: Local Coding-Agent Service
+ 
+-## Overview
++## 1. High-Level Overview
+ 
+ This service is a **single-node, single-GPU** inference server that:
+-- Accepts OpenAI-compatible streaming chat completion requests
+-- Runs **one resident GPU inference process** (e.g., vLLM, llama.cpp, or a custom PyTorch server)
+-- **Queues requests sequentially** (no concurrent GPU execution)
+-- Records per-request metrics
+-- Supports cancellation and process failure recovery
+-- Maintains **prompt caching correctness** across clients
+-
+----
+-
+-## Module Boundaries
++- Exposes an **OpenAI-compatible `/v1/chat/completions`** endpoint with SSE streaming.
++- Runs **one resident GPU inference process** (e.g., via `llama.cpp`, `vLLM`, or `transformers` with a persistent worker).
++- **Serializes requests** through a queue to avoid GPU contention.
++- **Records per-request metrics** (latency, tokens, cache hits, errors).
++- Handles **cancellation**, **process failure recovery**, and **prompt cache correctness** across clients.
++
++### Key Design Principles
++1. **Separation of concerns**: API layer, queueing, inference worker, metrics, and cache management are isolated.
++2. **Resilience**: The GPU worker is a separate process; crashes are detected and recovered without losing queued requests.
++3. **Cache correctness**: Prompt caching is scoped per-client-session and invalidated on model reload or cache eviction.
++4. **Backpressure**: Queue depth limits prevent memory exhaustion.
++
++---
++
++## 2. Module Boundaries
+ 
+ ```
+ ┌─────────────────────────────────────────────────────────┐
+-│                   HTTP API Layer                         │
+-│  (FastAPI / aiohttp)                                    │
+-│  - Request parsing & validation                         │
+-│  - Streaming response formatting                        │
+-│  - Client connection management                         │
+-└──────────────────────┬──────────────────────────────────┘
+-                       │
+-┌──────────────────────▼──────────────────────────────────┐
++│                   API Layer (FastAPI)                    │
++│  - OpenAI-compatible endpoints                           │
++│  - Request validation & parsing                          │
++│  - SSE streaming response                                │
++│  - Cancellation propagation                              │
++└───────────────┬─────────────────────────────────────────┘
++                │
++┌───────────────▼─────────────────────────────────────────┐
+ │              Request Queue & Scheduler                   │
+-│  - FIFO queue of pending requests                       │
+-│  - Cancellation tokens per request                      │
+-│  - Sequential dispatch to GPU worker                    │
+-└──────────────────────┬──────────────────────────────────┘
+-                       │
+-┌──────────────────────▼──────────────────────────────────┐
+-│           GPU Inference Process (Subprocess)             │
+-│  - Long-running process with stdin/stdout IPC           │
+-│  - Loads model once, serves sequentially                │
+-│  - Supports prompt cache (KV cache)                     │
+-└──────────────────────┬──────────────────────────────────┘
+-                       │
+-┌──────────────────────▼──────────────────────────────────┐
+-│           Metrics & Logging Layer                        │
+-│  - Per-request timing, token counts, errors             │
+-│  - Structured logging (JSON)                            │
+-│  - Optional Prometheus metrics                          │
++│  - FIFO queue with priority support                      │
++│  - Backpressure (max queue size)                         │
++│  - Request lifecycle tracking                            │
++└───────────────┬─────────────────────────────────────────┘
++                │
++┌───────────────▼─────────────────────────────────────────┐
++│           Inference Worker (Subprocess)                  │
++│  - Resident GPU process (e.g., llama.cpp server)         │
++│  - Health check & heartbeat                              │
++│  - Process supervision & restart                         │
++└───────────────┬─────────────────────────────────────────┘
++                │
++┌───────────────▼─────────────────────────────────────────┐
++│           Prompt Cache Manager                           │
++│  - Per-client-session cache keys                         │
++│  - Cache hit/miss tracking                               │
++│  - Invalidation on model reload                          │
++└───────────────┬─────────────────────────────────────────┘
++                │
++┌───────────────▼─────────────────────────────────────────┐
++│           Metrics Collector                              │
++│  - Per-request metrics (latency, tokens, cache status)   │
++│  - Aggregation & export (Prometheus/JSON)                │
+ └─────────────────────────────────────────────────────────┘
+ ```
+ 
+-### Key Boundaries
+-
+-| Module | Responsibility | Does NOT do |
+-|--------|---------------|-------------|
+-| **API Layer** | HTTP parsing, auth, streaming format | GPU interaction, queueing logic |
+-| **Queue/Scheduler** | Order requests, handle cancellation, retry on failure | Model inference, HTTP handling |
+-| **GPU Worker** | Load model, run inference, manage KV cache | HTTP, queueing, metrics aggregation |
+-| **Metrics** | Collect and emit per-request stats | Business logic, request routing |
+-
+----
+-
+-## Concrete File Tree
++### Module Responsibilities
++
++| Module | Responsibility |
++|--------|---------------|
++| **API Layer** | HTTP handling, OpenAI schema compliance, SSE streaming, cancellation via `asyncio.CancelledError` |
++| **Queue** | Serialize requests, enforce max queue depth, track request state (`queued`, `processing`, `done`, `cancelled`) |
++| **Inference Worker** | Run GPU inference in a subprocess, expose a simple IPC interface (Unix socket or stdin/stdout), handle model loading |
++| **Cache Manager** | Maintain prompt cache keys per client session, detect cache hits, invalidate on model change |
++| **Metrics** | Record start/end times, token counts, cache hit/miss, error codes; expose `/metrics` endpoint |
++
++---
++
++## 3. Concrete File Tree
+ 
+ ```
+ coding-agent-service/
++├── pyproject.toml              # Dependencies: fastapi, uvicorn, pydantic, prometheus-client
+ ├── README.md
+-├── pyproject.toml
+ ├── Dockerfile
+ ├── docker-compose.yml
+ │
+ ├── src/
+ │   ├── __init__.py
++│   ├── main.py                 # Entry point: starts API, worker, metrics
+ │   │
+ │   ├── api/
+ │   │   ├── __init__.py
+-│   │   ├── server.py          # FastAPI app, routes, streaming
+-│   │   ├── models.py          # Pydantic request/response schemas
+-│   │   └── middleware.py      # Auth, logging middleware
++│   │   ├── routes.py           # FastAPI routes: /v1/chat/completions, /health, /metrics
++│   │   ├── schemas.py          # Pydantic models for OpenAI request/response
++│   │   └── streaming.py        # SSE generator, cancellation handling
+ │   │
+ │   ├── queue/
+ │   │   ├── __init__.py
+-│   │   ├── scheduler.py       # FIFO queue, dispatch loop
+-│   │   ├── request.py         # Request wrapper with cancellation token
+-│   │   └── cancellation.py    # Cancellation token management
+-│   │
+-│   ├── gpu/
+-│   │   ├── __init__.py
+-│   │   ├── worker.py          # Subprocess manager for GPU inference
+-│   │   ├── ipc.py             # stdin/stdout JSON-RPC protocol
+-│   │   ├── cache.py           # Prompt cache key management
+-│   │   └── health.py          # Health check, restart logic
++│   │   ├── request_queue.py    # Async FIFO queue with backpressure
++│   │   └── request_state.py    # Enum: QUEUED, PROCESSING, DONE, CANCELLED, FAILED
++│   │
++│   ├── worker/
++│   │   ├── __init__.py
++│   │   ├── inference_worker.py # Subprocess manager: start, stop, restart, health check
++│   │   ├── ipc_protocol.py     # Message format for worker communication (JSON over Unix socket)
++│   │   └── worker_client.py    # Client to send requests to worker, receive streaming chunks
++│   │
++│   ├── cache/
++│   │   ├── __init__.py
++│   │   ├── prompt_cache.py     # Cache key generation, hit/miss detection, invalidation
++│   │   └── session_manager.py  # Track client sessions, associate cache keys
+ │   │
+ │   ├── metrics/
+ │   │   ├── __init__.py
+-│   │   ├── collector.py       # Per-request metric collection
+-│   │   ├── prometheus.py      # Prometheus exporter (optional)
+-│   │   └── logger.py          # Structured JSON logging
+-│   │
+-│   ├── config/
+-│   │   ├── __init__.py
+-│   │   └── settings.py        # Env-based configuration
+-│   │
+-│   └── main.py                # Entry point: start API + scheduler + worker
++│   │   ├── collector.py        # Record per-request metrics
++│   │   └── exporter.py         # Prometheus metrics endpoint
++│   │
++│   └── config/
++│       ├── __init__.py
++│       └── settings.py         # Model path, GPU device, queue limits, cache TTL
+ │
+ ├── tests/
+ │   ├── test_api.py
+-│   ├── test_scheduler.py
+-│   ├── test_gpu_worker.py
+-│   ├── test_cancellation.py
+-│   └── test_cache.py
++│   ├── test_queue.py
++│   ├── test_worker_recovery.py
++│   ├── test_cache_correctness.py
++│   └── test_metrics.py
+ │
+ ├── scripts/
+-│   ├── start.sh
+-│   └── healthcheck.sh
++│   ├── start_worker.sh         # Launch GPU inference subprocess
++│   └── health_check.py         # Standalone health check script
+ │
+ └── docs/
+     ├── architecture.md
+-    └── api.md
+-```
+-
+----
+-
+-## Core Design Details
+-
+-### 1. Sequential Queueing & Cancellation
++    └── cache_strategy.md
++```
++
++---
++
++## 4. Key Mechanisms
++
++### 4.1 Cancellation
++
++- **Client disconnects**: FastAPI detects `asyncio.CancelledError` in the SSE generator.
++- **Propagation**: The API layer marks the request as `CANCELLED` in the queue and sends a `cancel` message to the worker via IPC.
++- **Worker behavior**: The worker checks for cancellation between token generations and aborts inference, freeing GPU memory.
++- **Queue cleanup**: Cancelled requests are removed from the queue; no response is sent.
+ 
+ ```python
+-# src/queue/request.py
+-import asyncio
+-from dataclasses import dataclass, field
+-from typing import Any
+-
+-@dataclass
+-class QueuedRequest:
+-    id: str
+-    payload: dict
+-    client_id: str
+-    cancel_event: asyncio.Event = field(default_factory=asyncio.Event)
+-    future: asyncio.Future = field(default_factory=lambda: asyncio.get_event_loop().create_future())
+-```
++# In streaming.py
++async def stream_response(request_id: str, queue: RequestQueue):
++    try:
++        async for chunk in queue.get_stream(request_id):
++            yield f"data: {json.dumps(chunk)}\n\n"
++    except asyncio.CancelledError:
++        await queue.cancel(request_id)
++        raise
++```
++
++### 4.2 Process Failure Recovery
++
++- **Heartbeat**: The worker sends a heartbeat every 5 seconds via IPC.
++- **Supervisor**: The main process monitors the worker. If no heartbeat for 15 seconds, it:
++  1. Kills the worker process.
++  2. Restarts it with the same model.
++  3. Re-queues any requests that were `PROCESSING` at the time of failure (they are retried).
++- **Idempotency**: Requests are assigned unique IDs. The worker tracks in-flight requests; on restart, it discards stale state.
++- **Graceful degradation**: If the worker fails repeatedly, the API returns `503 Service Unavailable` with a retry-after header.
+ 
+ ```python
+-# src/queue/scheduler.py
+-import asyncio
+-from collections import deque
+-from src.queue.request import QueuedRequest
+-from src.gpu.worker import GPUWorker
+-
+-class Scheduler:
+-    def __init__(self, worker: GPUWorker):
+-        self._queue: deque[QueuedRequest] = deque()
+-        self._worker = worker
+-        self._running = False
+-
+-    async def enqueue(self, req: QueuedRequest) -> asyncio.Future:
+-        self._queue.append(req)
+-        return req.future
+-
+-    async def run(self):
+-        self._running = True
+-        while self._running:
+-            if not self._queue:
+-                await asyncio.sleep(0.01)
+-                continue
+-
+-            req = self._queue.popleft()
+-
+-            # Check cancellation before dispatch
+-            if req.cancel_event.is_set():
+-                req.future.set_exception(asyncio.CancelledError())
+-                continue
+-
+-            try:
+-                result = await self._worker.infer(req.payload, req.cancel_event)
+-                req.future.set_result(result)
+-            except asyncio.CancelledError:
+-                req.future.set_exception(asyncio.CancelledError())
+-            except Exception as e:
+-                req.future.set_exception(e)
+-```
+-
+-**Cancellation flow:**
+-1. Client disconnects → API layer sets `cancel_event` on the `QueuedRequest`
+-2. If request is still in queue → skipped, future cancelled
+-3. If request is in-flight → GPU worker checks `cancel_event` between token generations and aborts
+-
+-### 2. GPU Worker as Subprocess
++# In inference_worker.py
++class WorkerSupervisor:
++    async def monitor(self):
++        while True:
++            if not self.worker.is_alive():
++                await self.restart_worker()
++                await self.requeue_inflight_requests()
++            await asyncio.sleep(5)
++```
++
++### 4.3 Prompt Cache Correctness Across Clients
++
++**Problem**: Prompt caching (e.g., KV cache in vLLM or llama.cpp) is shared across requests. If Client A and Client B send different prompts, cache entries must not leak or cause incorrect completions.
++
++**Solution**:
++1. **Cache key = hash(model_version + prompt_prefix + client_session_id)**:
++   - Each client session gets a unique ID (from `X-Client-Session` header or generated).
++   - The cache key includes the session ID, so Client A’s cache entries are never reused for Client B.
++2. **Cache isolation**: The worker maintains separate KV cache slots per session. When a new session starts, it gets a fresh cache slot.
++3. **Invalidation**:
++   - On model reload, all cache slots are cleared.
++   - On session timeout (e.g., 5 minutes of inactivity), the cache slot is evicted.
++4. **Cache hit detection**: Before inference, the cache manager checks if the prompt prefix matches an existing cache slot for the same session. If yes, the worker skips re-computing the prefix.
+ 
+ ```python
+-# src/gpu/worker.py
+-import asyncio
+-import json
+-import subprocess
+-from typing import AsyncGenerator
+-
+-class GPUWorker:
+-    def __init__(self, model_path: str):
+-        self._proc = None
+-        self._model_path = model_path
+-        self._lock = asyncio.Lock()  # Ensure sequential access
+-
+-    async def start(self):
+-        self._proc = await asyncio.create_subprocess_exec(
+-            "python", "-m", "gpu_inference_server",
+-            "--model", self._model_path,
+-            stdin=asyncio.subprocess.PIPE,
+-            stdout=asyncio.subprocess.PIPE,
+-            stderr=asyncio.subprocess.PIPE,
+-        )
+-
+-    async def infer(self, payload: dict, cancel_event: asyncio.Event) -> AsyncGenerator[str, None]:
+-        async with self._lock:
+-            # Send request to subprocess
+-            self._proc.stdin.write(json.dumps(payload).encode() + b"\n")
+-            await self._proc.stdin.drain()
+-
+-            # Stream tokens back
+-            while True:
+-                if cancel_event.is_set():
+-                    # Send abort signal to subprocess
+-                    self._proc.stdin.write(b'{"action": "abort"}\n')
+-                    await self._proc.stdin.drain()
+-                    break
+-
+-                line = await self._proc.stdout.readline()
+-                if not line:
+-                    break
+-
+-                token_data = json.loads(line)
+-                if token_data.get("done"):
+-                    break
+-                yield token_data["token"]
+-
+-    async def restart(self):
+-        """Restart GPU worker after crash."""
+-        if self._proc:
+-            self._proc.terminate()
+-            await self._proc.wait()
+-        await self.start()
+-```
+-
+-### 3. Process Failure Recovery
+-
+-```python
+-# src/gpu/health.py
+-import asyncio
+-import logging
+-
+-logger = logging.getLogger(__name__)
+-
+-class GPUHealthMonitor:
+-    def __init__(self, worker: GPUWorker, scheduler: Scheduler):
+-        self._worker = worker
+-        self._scheduler = scheduler
+-        self._monitor_task = None
+-
+-    async def start(self):
+-        self._monitor_task = asyncio.create_task(self._monitor_loop())
+-
+-    async def _monitor_loop(self):
+-        while True:
+-            try:
+-                # Simple health check: send ping to subprocess
+-                await self._worker.ping()
+-            except Exception as e:
+-                logger.error(f"GPU worker failed: {e}. Restarting...")
+-                await self._worker.restart()
+-                # Re-enqueue any pending requests? No — they were already dispatched.
+-                # Failed in-flight requests will have their futures set to exception.
+-            await asyncio.sleep(5)
+-```
+-
+-**Recovery strategy:**
+-- If GPU worker crashes mid-request → the `asyncio.Future` for that request gets an exception
+-- Client receives an error response (500 or stream termination)
+-- Worker is restarted automatically
+-- **No automatic retry** of failed requests (to avoid duplicate side effects); client must retry explicitly
+-
+-### 4. Prompt Caching Correctness Across Clients
+-
+-This is the most subtle part. Prompt caching (KV cache reuse) is **only safe when the prefix is identical**. Different clients may send different system prompts, different conversation histories, or different model parameters.
+-
+-**Strategy: Cache key = hash of (model_id, system_prompt, conversation_prefix, temperature, top_p, etc.)**
+-
+-```python
+-# src/gpu/cache.py
+-import hashlib
+-import json
+-from typing import Optional
+-
+-class PromptCacheManager:
+-    def __init__(self):
+-        # Maps cache_key -> last_used_timestamp, token_count
+-        self._cache_registry: dict[str, dict] = {}
+-        self._max_cache_entries = 100
+-
+-    def compute_cache_key(self, payload: dict) -> str:
+-        """
+-        Compute a deterministic key for prompt caching.
+-        Only the *prefix* that can be cached is included.
+-        """
+-        cacheable_parts = {
+-            "model": payload.get("model"),
+-            "messages": payload.get("messages", [])[:-1],  # Exclude last user message
+-            "temperature": payload.get("temperature", 1.0),
+-            "top_p": payload.get("top_p", 1.0),
+-            "system_prompt": payload.get("system_prompt", ""),
+-        }
+-        key_str = json.dumps(cacheable_parts, sort_keys=True)
+-        return hashlib.sha256(key_str.encode()).hexdigest()
+-
+-    def should_use_cache(self, cache_key: str) -> bool:
+-        """Check if this prefix has been seen recently."""
+-        return cache_key in self._cache_registry
+-
+-    def record_cache_hit(self, cache_key: str, token_count: int):
+-        self._cache_registry[cache_key] = {
+-            "last_used": time.time(),
+-            "token_count": token_count,
+-        }
+-        # Evict old entries if needed
+-        if len(self._cache_registry) > self._max_cache_entries:
+-            oldest = min(self._cache_registry.items(), key=lambda x: x[1]["last_used"])
+-            del self._cache_registry[oldest[0]]
+-```
+-
+-**How the GPU worker uses this:**
+-
+-```python
+-# In gpu_inference_server (subprocess)
+-def handle_request(payload: dict):
+-    cache_key = compute_cache_key(payload)
+-
+-    if cache_key in kv_cache:
+-        # Reuse KV cache for prefix, only compute new tokens
+-        prefix_tokens = kv_cache[cache_key]
+-        # Generate only the new suffix
+-        for token in generate_suffix(prefix_tokens, payload["messages"][-1]):
+-            yield token
+-    else:
+-        # Full generation, then store KV cache
+-        tokens = generate_full(payload)
+-        kv_cache[cache_key] = extract_kv_cache(payload)
+-        for token in tokens:
+-            yield token
+-```
+-
+-**Critical correctness rules:**
+-1. **Cache key must include all parameters that affect generation** (temperature, top_p, model version)
+-2. **Only the prefix is cached** — the last user message is never part of the cache key
+-3. **Cache is per-model-instance** — if model is reloaded, cache is invalidated
+-4. **No cross-client cache sharing unless prefixes are byte-identical** — this is enforced by the hash
+-
+----
+-
+-## Two Tradeoffs
+-
+-### Tradeoff 1: Sequential Queueing vs. Throughput
+-
+-**Choice:** Sequential queueing (one request at a time on GPU)
+-
+-**Pros:**
+-- Simple correctness: no race conditions on KV cache
+-- Predictable latency per request
+-- Easy cancellation: only one request in-flight
+-- Lower memory pressure (one KV cache active at a time)
+-
+-**Cons:**
+-- **Low throughput**: if one request takes 10s, all others wait
+-- Poor utilization if GPU can handle batched requests
+-- No speculative execution or parallel decoding
+-
+-**Alternative considered:** Batched inference (vLLM-style continuous batching)
+-- Would improve throughput 2–5x
+-- But complicates cancellation (must abort specific sequences in a batch)
+-- KV cache management becomes complex (multiple prefixes in one cache)
+-- Harder to guarantee per-request metrics accuracy
+-
+-**Decision:** For a *coding agent* where requests are often long and interactive, sequential is acceptable. Users expect turn-by-turn interaction, not high-throughput batch processing.
+-
+-### Tradeoff 2: Subprocess Isolation vs. In-Process GPU Access
+-
+-**Choice:** GPU inference runs as a **separate subprocess**
+-
+-**Pros:**
+-- **Crash isolation**: GPU segfaults don't kill the API server
+-- **Clean restart**: can restart GPU worker without restarting HTTP server
+-- **Memory isolation**: GPU memory leaks don't affect API process
+-- **Simpler debugging**: can attach debugger to GPU process independently
+-
+-**Cons:**
+-- **IPC overhead**: JSON serialization/deserialization of tokens adds latency (~1–5ms per token)
+-- **Complexity**: need to manage subprocess lifecycle, stdin/stdout pipes, health checks
+-- **No shared memory**: cannot share KV cache state directly with API layer
+-
+-**Alternative considered:** In-process GPU inference (load model in same Python process)
+-- Lower latency (no IPC)
+-- Simpler code
+-- But: a GPU crash kills the entire service; no clean restart; harder to isolate failures
+-
+-**Decision:** Subprocess isolation is worth the IPC overhead for **reliability**. A coding agent service must survive GPU driver crashes, CUDA OOM errors, and model loading failures without taking down the HTTP endpoint. The 1–5ms/token overhead is negligible compared to GPU inference time (10–100ms/token).
+-
+----
+-
+-## Summary
+-
+-| Concern | Solution |
+-|---------|----------|
+-| **Module boundaries** | API → Queue → GPU Worker → Metrics, each with clear interfaces |
+-| **Cancellation** | `asyncio.Event` per request; checked before dispatch and during generation |
+-| **Process failure** | Subprocess restart with health monitor; failed requests get error responses |
+-| **Prompt caching** | Hash-based cache key including all generation-affecting params; prefix-only caching |
+-| **Tradeoff 1** | Sequential queueing sacrifices throughput for simplicity and correctness |
+-| **Tradeoff 2** | Subprocess isolation sacrifices latency for reliability and crash recovery |+# In prompt_cache.py
++def get_cache_key(model_version: str, prompt_prefix: str, session_id: str) -> str:
++    return hashlib.sha256(f"{model_version}:{prompt_prefix}:{session_id}".encode()).hexdigest()
++```
++
++---
++
++## 5. Two Tradeoffs
++
++### Tradeoff 1: Sequential Queueing vs. Concurrent Batching
++
++| Aspect | Sequential Queueing (Chosen) | Concurrent Batching |
++|--------|------------------------------|---------------------|
++| **GPU Utilization** | Lower: GPU idle between requests | Higher: Multiple requests batched |
++| **Latency** | Predictable: No queuing delay from batching | Variable: Requests wait for batch window |
++| **Complexity** | Simple: One request at a time | Complex: Batch scheduler, dynamic batching |
++| **Cache Correctness** | Easier: One active cache slot | Harder: Multiple cache slots, eviction policy |
++| **Failure Recovery** | Simpler: Retry one request | Harder: Retry multiple requests, partial failures |
++
++**Why sequential?** For a coding-agent service, requests are often long (code generation) and latency-sensitive. Predictable latency and simpler cache management outweigh GPU utilization gains. Batching can be added later if throughput becomes a bottleneck.
++
++### Tradeoff 2: Subprocess Worker vs. In-Process Inference
++
++| Aspect | Subprocess Worker (Chosen) | In-Process Inference |
++|--------|----------------------------|----------------------|
++| **Isolation** | High: GPU crashes don’t kill API | Low: GPU OOM crashes entire service |
++| **Recovery** | Easy: Restart subprocess | Hard: Requires process restart, loses state |
++| **Overhead** | IPC latency (~1–5 ms per chunk) | Zero IPC overhead |
++| **Resource Sharing** | Separate memory spaces | Shared memory, potential conflicts |
++| **Debugging** | Harder: Two processes to monitor | Easier: Single process |
++
++**Why subprocess?** GPU inference is prone to OOM errors, CUDA context corruption, and segfaults. Isolating the worker ensures the API remains responsive and can recover gracefully. The IPC overhead is negligible compared to inference time (hundreds of ms per token).
++
++---
++
++## 6. Summary
++
++This architecture prioritizes **reliability** and **cache correctness** over raw throughput. By isolating the GPU worker, serializing requests, and scoping prompt caches per client session, the service remains stable under failure and avoids cross-client cache contamination. The modular design allows future enhancements (e.g., batching, multi-GPU) without rewriting core components.

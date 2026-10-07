@@ -1,0 +1,732 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ff8766b20..4ad6ec120 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -348,6 +348,7 @@ if(STRATA_ENABLE_CUDA OR STRATA_ENABLE_HIP)
+   # library is the honest shape of the dependency graph: core knows about devices and weights, kernels know
+   # about arithmetic, and this one knows the ORDER the arithmetic happens in.
+   add_library(strata_engine STATIC src/core/layer.cpp src/core/session.cpp src/core/expert_source.cpp src/core/remote_experts.cpp
++    src/core/remote_expert_opt.cu
+     src/core/expert_cache.cpp src/core/native_head.cpp src/core/native_dense.cpp src/core/verify.cpp src/core/mtp.cpp
+     src/core/conversation_snapshot.cpp src/core/conversation_state.cpp src/core/conversation_memory.cpp src/core/peer_experts.cpp)
+   target_include_directories(strata_engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+diff --git a/docs/SECOND_GPU.md b/docs/SECOND_GPU.md
+index 179b9b3fa..11f4ea249 100644
+--- a/docs/SECOND_GPU.md
++++ b/docs/SECOND_GPU.md
+@@ -84,6 +84,38 @@ The existing warning about the CUDA0 expert-cache GPU hit path still applies:
+ its outputs diverge from cache-off runs. Treat performance as experimental
+ until the generated tokens have been validated.
+ 
++## Optional helper decode optimization
++
++`--remote-expert-opt` (default off, `--serve` only) optimizes the CUDA1-3
++helper caches above. The primary cache avoids admitting experts already held
++by a helper, and helpers replace cold experts with frequently routed CPU
++misses using their existing same-layer slots. Each helper reduces its expert
++outputs to a weighted partial sum on its GPU before returning one vector per
++token. Tokens with no CPU expert work skip CPU activation quantization.
++
++For an existing server configuration with CUDA0 as the primary and CUDA1 as a
++helper, use these engine arguments alongside the model and profile arguments:
++
++```text
++--expert-cache auto --expert-cache-device1 auto --remote-expert-opt
++```
++
++`--expert-cache-device1`, `--expert-cache-device2` and
++`--expert-cache-device3` now also accept `auto`: fill each helper from its
++assigned ranking using actual aligned expert bytes and free VRAM, retaining
++the existing 512 MiB allowance. Explicit numeric budgets still work. This is
++startup capacity sizing, not throughput balancing; with several helpers a
++card's truncated candidate tail is not redistributed to another card.
++
++The optimization uses the existing host scheduling and pinned-host transport,
++not P2P or tensor parallelism. Each layer still waits for its participating
++helpers. It changes floating-point summation order, so enabled output is not
++claimed to be bitwise identical. Only two-card CUDA operation has been measured;
++three/four cards and HIP have not been validated. Without the switch, the
++existing decode path remains in use. This does not optimize the separate
++`--peer-device` path below or change its existing incompatibility with helper
++caches.
++
+ ## Peer tier (`--peer-device`)
+ 
+ `--peer-device N` puts a second adaptive expert cache on CUDA device N. It
+diff --git a/include/strata/core/expert_cache.hpp b/include/strata/core/expert_cache.hpp
+index 4a708355f..accd274e8 100644
+--- a/include/strata/core/expert_cache.hpp
++++ b/include/strata/core/expert_cache.hpp
+@@ -108,6 +108,13 @@ class ExpertCache {
+     /// sweep) and a placeholder policy would set the hit rate that everything downstream is then sized against.
+     int32_t admit(int64_t layer, int64_t expert);
+ 
++    /// Publish a same-layer replacement after its slot copy has completed.
++    void replace(int64_t layer, int32_t old_expert, int32_t new_expert) {
++        auto& old = residency_[(size_t) layer * n_expert_ + old_expert];
++        residency_[(size_t) layer * n_expert_ + new_expert] = old;
++        old = kNotResident;
++    }
++
+     /// **R4.2g: GIVE EACH LAYER ITS OWN SLOTS.  ROUND 328 MEASURED WHY THE GLOBAL FORM CANNOT WORK.**
+     ///
+     /// `admit`'s original policy hands out slots in ARRIVAL ORDER from one counter shared by every layer
+diff --git a/include/strata/core/remote_expert_opt.hpp b/include/strata/core/remote_expert_opt.hpp
+new file mode 100644
+index 000000000..5eb488c73
+--- /dev/null
++++ b/include/strata/core/remote_expert_opt.hpp
+@@ -0,0 +1,53 @@
++#pragma once
++
++#include <cstddef>
++#include <cstdint>
++#include <string>
++#include <utility>
++#include <vector>
++
++namespace strata::core {
++class RemoteExperts;
++class ExpertSource;
++
++// Remote Expert Decode Optimization v1 on existing helper caches. One instance per serial engine.
++class RemoteExpertOpt {
++public:
++    RemoteExpertOpt() = default;
++    ~RemoteExpertOpt();
++    RemoteExpertOpt(const RemoteExpertOpt&) = delete;
++    RemoteExpertOpt& operator=(const RemoteExpertOpt&) = delete;
++
++    void attach(RemoteExperts& remote); // before RemoteExperts::open
++    bool init(std::string& err);        // after all helper caches are open
++    bool owns(int64_t layer, int32_t expert) const;
++    bool adapt(const std::vector<float>& usage, const std::vector<int32_t>& primary,
++               const std::vector<std::pair<int32_t, int32_t>>& pending, int max_swaps,
++               ExpertSource& source);
++
++    // Bracket the existing pool callback; its signature and dispatch remain unchanged.
++    void begin(const float* weights, int token_begin, int tokens);
++    void end() { weights_ = nullptr; }
++    void copy_rows(float* dst, const float* src, int token_begin, int tokens,
++                   const int32_t* hit_rows, const int32_t* count, void* stream) const;
++    void combine(float* dst, float* scratch, int token_begin, int tokens,
++                 const uint32_t* skip, uint32_t ring, void* stream) const;
++
++private:
++    friend class RemoteExperts;
++    static size_t metadata_bytes();
++    bool active() const { return weights_ != nullptr; }
++    void prepare(const RemoteExperts& remote, void* metadata) const;
++    bool reduce(RemoteExperts& remote, const void* metadata, std::string& err);
++    void accumulate(const RemoteExperts& remote);
++
++    struct Peer { RemoteExperts* remote; float* sum = nullptr; };
++    std::vector<Peer> peers_;
++    float* h_sum_ = nullptr;
++    float* m_sum_ = nullptr;
++    int32_t* h_mask_ = nullptr;
++    int32_t* m_mask_ = nullptr;
++    const float* weights_ = nullptr;
++    int token_begin_ = 0, tokens_ = 0;
++};
++} // namespace strata::core
+diff --git a/include/strata/core/remote_experts.hpp b/include/strata/core/remote_experts.hpp
+index 805bc950f..224d24f5f 100644
+--- a/include/strata/core/remote_experts.hpp
++++ b/include/strata/core/remote_experts.hpp
+@@ -11,6 +11,7 @@
+ #include <vector>
+ 
+ namespace strata::core {
++class RemoteExpertOpt;
+ 
+ /// A static, profile-filled expert tier on another CUDA device. CUDA0 keeps all
+ /// dense weights and state; results return through the existing pinned CPU rows.
+@@ -27,7 +28,7 @@ class RemoteExperts {
+     bool open(int device, int slots, int64_t layers, int64_t experts,
+               const std::vector<std::pair<int32_t, int32_t>>& ranked,
+               const ExpertCache& primary, ExpertSource& source,
+-              std::vector<uint8_t>& claimed, std::string& err);
++              std::vector<uint8_t>& claimed, std::string& err, bool auto_size = false);
+     void close();
+ 
+     /// `kind` is the primary verifier's classification (-1 = CPU candidate),
+@@ -36,6 +37,7 @@ class RemoteExperts {
+                int64_t k, const int32_t* kind, const int32_t* primary_res,
+                std::string& err);
+     bool owns(int64_t index) const { return owned_[(size_t) index] != 0; }
++    bool optimized_decode() const { return remote_opt_ != nullptr; }
+     bool finish(float* out, std::string& err);
+     int64_t resident() const { return cache_.resident(); }
+     int64_t computed() const { return computed_; }
+@@ -48,6 +50,8 @@ class RemoteExperts {
+     double ms_wait() const { return ms_wait_; }
+ 
+ private:
++    friend class RemoteExpertOpt;
++    RemoteExpertOpt* remote_opt_ = nullptr;
+     int device_ = -1;
+     int64_t n_expert_ = 0;
+     int32_t groups_ = 0;
+diff --git a/include/strata/core/verify.hpp b/include/strata/core/verify.hpp
+index b80d10bd2..990adcec2 100644
+--- a/include/strata/core/verify.hpp
++++ b/include/strata/core/verify.hpp
+@@ -38,6 +38,7 @@
+ namespace strata::core {
+ 
+ class NativeHead;
++class RemoteExpertOpt;
+ 
+ /// The CPU pool for a window: x_f (n_tok, n_embd), ids (n_tok, k) -> out (n_tok * k, n_embd), hit rows zeroed.
+ using PoolMultiFn = void (*)(void* user, const float* x_f, const int32_t* ids, int64_t n_tok, int64_t k, float* out,
+@@ -57,6 +58,7 @@ class Verifier {
+     ~Verifier();
+     Verifier(const Verifier&) = delete;
+     Verifier& operator=(const Verifier&) = delete;
++    void set_remote_expert_opt(RemoteExpertOpt* opt) { remote_opt_ = opt; } // before init/capture
+ 
+     /// The watchdog's view of the window in flight (issue #31): the layer, the GPU's sequence, the flags.
+     void diag(std::FILE* f) const;
+@@ -161,6 +163,7 @@ class Verifier {
+     std::string profile_report();
+ 
+ private:
++    RemoteExpertOpt* remote_opt_ = nullptr;
+     bool capture(int T, std::string& err);
+     strata::kernels::SamplerParams sampling_ = [] {
+         strata::kernels::SamplerParams s;
+diff --git a/src/core/expert_source.cpp b/src/core/expert_source.cpp
+index c64909f54..66b242058 100644
+--- a/src/core/expert_source.cpp
++++ b/src/core/expert_source.cpp
+@@ -2001,13 +2001,15 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+         }
+     }
+     const auto c1 = std::chrono::steady_clock::now();
+-    if (native && lay.fmt[(size_t) d.layers].gu_type == 42)   // a native Q2_0 pack: the Q2_0 kernels' activations
+-        for (int64_t t = 0; t < n_tok; ++t) act_quant_any(x_f + (size_t) t * H, H, d.act_multi[(size_t) t]);
+-    else if (native)
+-        for (int64_t t = 0; t < n_tok; ++t)
++    const bool ep = d.remote_count > 0 && d.remote[0]->optimized_decode();
++    for (int64_t t = 0; t < n_tok; ++t) {
++        if (ep && std::all_of(kind + t * k, kind + (t + 1) * k, [](int32_t v) { return v >= 0; })) continue;
++        if (native && lay.fmt[(size_t) d.layers].gu_type == 42)
++            act_quant_any(x_f + (size_t) t * H, H, d.act_multi[(size_t) t]);
++        else if (native)
+             native_quant_act(lay.fmt[(size_t) d.layers], x_f + (size_t) t * H, d.nact_multi.data() + (size_t) t * kNativeActBytes);
+-    else
+-        for (int64_t t = 0; t < n_tok; ++t) act_quant_q8_1(x_f + (size_t) t * H, H, d.act_multi[(size_t) t]);
++        else act_quant_q8_1(x_f + (size_t) t * H, H, d.act_multi[(size_t) t]);
++    }
+     const auto c2 = std::chrono::steady_clock::now();
+     {   // CS-T: the experts the CPU computes, fetched together (the GGUF in place reads them on several threads)
+         static thread_local std::vector<int64_t> miss;
+diff --git a/src/core/remote_expert_opt.cu b/src/core/remote_expert_opt.cu
+new file mode 100644
+index 000000000..229781c80
+--- /dev/null
++++ b/src/core/remote_expert_opt.cu
+@@ -0,0 +1,194 @@
++#include "strata/core/remote_expert_opt.hpp"
++#include "strata/core/remote_experts.hpp"
++#include "strata/core/on_device.hpp"
++#include "strata/kernels/cpu/expert_layout.hpp"
++#include "strata/kernels/elementwise.hpp"
++#include "strata/kernels/verify_kernels.hpp"
++
++#include <algorithm>
++#include <cstring>
++
++namespace strata::core {
++namespace {
++constexpr int64_t H = strata::kernels::cpu::H;
++constexpr int K = 10, MAXT = strata::kernels::cpu::MAXT, CAP = MAXT * K;
++struct ReduceMeta { int32_t row[CAP]; float weight[CAP]; };
++
++bool check(cudaError_t status, std::string& err) {
++    if (status == cudaSuccess) return true;
++    err = std::string("remote expert decode optimization: ") + cudaGetErrorString(status);
++    return false;
++}
++
++__global__ void reduce_experts(const float* parts, const ReduceMeta* meta, float* sum) {
++    const int t = blockIdx.y, c = blockIdx.x * blockDim.x + threadIdx.x;
++    if (c >= H) return;
++    float v = 0.0f;
++    for (int j = 0; j < K; ++j) {
++        const int i = t * K + j, r = meta->row[i];
++        if (r >= 0) v += parts[(int64_t) r * H + c] * meta->weight[i];
++    }
++    sum[(int64_t) t * H + c] = v;
++}
++
++// Like the upstream mapped-row copy, also skip rows returned in the remote sum.
++__global__ void copy_cpu_rows(float4* dst, const volatile float4* src, const int32_t* mask,
++                              const int32_t* hit_rows, const int32_t* count) {
++    const int row = blockIdx.x;
++    __shared__ int skip;
++    if (threadIdx.x == 0) {
++        int s = mask[row];
++        for (int i = 0; i < *count; ++i) s |= hit_rows[i] == row;
++        skip = s;
++    }
++    __syncthreads();
++    const int64_t start = (int64_t) row * (H / 4);
++    for (int i = threadIdx.x; i < H / 4; i += blockDim.x)
++        dst[start + i] = skip ? make_float4(0, 0, 0, 0) : const_cast<const float4*>(src)[start + i];
++}
++} // namespace
++
++void RemoteExpertOpt::attach(RemoteExperts& remote) {
++    remote.remote_opt_ = this;
++    peers_.push_back({&remote});
++}
++
++bool RemoteExpertOpt::init(std::string& err) {
++    void* mapped = nullptr;
++    if (!check(cudaHostAlloc((void**) &h_sum_, MAXT * (H + K) * sizeof(float),
++                             cudaHostAllocPortable | cudaHostAllocMapped), err) ||
++        !check(cudaHostGetDevicePointer(&mapped, h_sum_, 0), err)) return false;
++    m_sum_ = (float*) mapped;
++    h_mask_ = reinterpret_cast<int32_t*>(h_sum_ + MAXT * H);
++    m_mask_ = reinterpret_cast<int32_t*>(m_sum_ + MAXT * H);
++    for (auto& p : peers_) {
++        const OnDevice on(p.remote->device_);
++        if (!check(cudaMalloc((void**) &p.sum, MAXT * H * sizeof(float)), err)) return false;
++    }
++    return true;
++}
++
++RemoteExpertOpt::~RemoteExpertOpt() {
++    for (auto& p : peers_) {
++        const OnDevice on(p.remote->device_);
++        if (p.remote->stream_) cudaStreamSynchronize(p.remote->stream_);
++        if (p.sum) cudaFree(p.sum);
++        p.remote->remote_opt_ = nullptr;
++    }
++    if (h_sum_) cudaFreeHost(h_sum_);
++}
++
++size_t RemoteExpertOpt::metadata_bytes() { return sizeof(ReduceMeta); }
++
++void RemoteExpertOpt::begin(const float* weights, int token_begin, int tokens) {
++    weights_ = weights;
++    token_begin_ = token_begin;
++    tokens_ = tokens;
++    std::memset(h_sum_ + token_begin * H, 0, tokens * H * sizeof(float));
++    std::memset(h_mask_ + token_begin * K, 0, tokens * K * sizeof(int32_t));
++}
++
++void RemoteExpertOpt::prepare(const RemoteExperts& remote, void* metadata) const {
++    auto* m = (ReduceMeta*) metadata;
++    std::fill(m->row, m->row + tokens_ * K, -1);
++    for (size_t i = 0; i < remote.original_row_.size(); ++i)
++        m->row[remote.original_row_[i]] = (int32_t) i;
++    std::memcpy(m->weight, weights_, tokens_ * K * sizeof(float));
++}
++
++bool RemoteExpertOpt::reduce(RemoteExperts& remote, const void* metadata, std::string& err) {
++    const auto& p = *std::find_if(peers_.begin(), peers_.end(), [&](const Peer& p) { return p.remote == &remote; });
++    reduce_experts<<<dim3((H + 255) / 256, tokens_), 256, 0, remote.stream_>>>(
++        remote.d_out_, (const ReduceMeta*) metadata, p.sum);
++    return check(cudaMemcpyAsync(remote.h_out_, p.sum, tokens_ * H * sizeof(float),
++                                  cudaMemcpyDeviceToHost, remote.stream_), err);
++}
++
++void RemoteExpertOpt::accumulate(const RemoteExperts& remote) {
++    for (int64_t i = 0; i < tokens_ * H; ++i) h_sum_[token_begin_ * H + i] += remote.h_out_[i];
++    for (int i = 0; i < tokens_ * K; ++i)
++        h_mask_[token_begin_ * K + i] |= remote.owned_[(size_t) i] != 0;
++}
++
++void RemoteExpertOpt::copy_rows(float* dst, const float* src, int token_begin, int tokens,
++                         const int32_t* hit_rows, const int32_t* count, void* stream) const {
++    copy_cpu_rows<<<tokens * K, 128, 0, (cudaStream_t) stream>>>(
++        (float4*) dst, (const volatile float4*) src, m_mask_ + token_begin * K, hit_rows, count);
++}
++
++void RemoteExpertOpt::combine(float* dst, float* scratch, int token_begin, int tokens,
++                       const uint32_t* skip, uint32_t ring, void* stream) const {
++    const float* sum = m_sum_ + token_begin * H;
++    if (skip) {
++        // An all-primary device-planned group bypasses the host: ignore its stale sum.
++        strata::kernels::copy_or_zero_from_mapped(scratch, sum, tokens * H, skip, ring, stream);
++        sum = scratch;
++    }
++    strata::kernels::add_inplace(dst, sum, tokens * H, stream);
++}
++
++bool RemoteExpertOpt::owns(int64_t layer, int32_t expert) const {
++    for (const auto& p : peers_)
++        if (p.remote->cache_.slot_of(layer, expert) >= 0) return true;
++    return false;
++}
++
++bool RemoteExpertOpt::adapt(const std::vector<float>& usage, const std::vector<int32_t>& primary,
++                     const std::vector<std::pair<int32_t, int32_t>>& pending, int max_swaps,
++                     ExpertSource& source) {
++    if (max_swaps <= 0) return true;
++    const auto& lay = strata::kernels::cpu::expert_layout();
++    std::vector<uint8_t> resident(primary.size(), 0);
++    for (size_t i = 0; i < primary.size(); ++i) resident[i] = primary[i] >= 0;
++    for (const auto& [i, slot] : pending) resident[(size_t) i] = 1;
++    for (const auto& p : peers_) {
++        const auto& r = *p.remote;
++        for (int32_t l = 0; l < (int32_t) r.layers_present_.size(); ++l)
++            for (int32_t e = 0; e < r.n_expert_; ++e)
++                if (r.cache_.slot_of(l, e) >= 0) resident[(size_t) l * r.n_expert_ + e] = 1;
++    }
++    struct Swap { float gain; int32_t layer, in, out; };
++    std::string err;
++    for (auto& p : peers_) {
++        auto& r = *p.remote;
++        std::vector<Swap> swaps;
++        std::vector<std::pair<float, int32_t>> candidates, victims;
++        for (int32_t l = 0; l < (int32_t) r.layers_present_.size(); ++l) {
++            candidates.clear(); victims.clear();
++            const size_t base = (size_t) l * r.n_expert_;
++            float primary_cold = 1.0e30f;
++            for (int32_t e = 0; e < r.n_expert_; ++e) {
++                const float u = usage[base + e];
++                if (primary[base + e] >= 0) primary_cold = std::min(primary_cold, u);
++                if (r.cache_.slot_of(l, e) >= 0) victims.emplace_back(u, e);
++                else if (!resident[base + e] && u >= 2.0f) candidates.emplace_back(u, e);
++            }
++            const size_t n = std::min(candidates.size(), victims.size());
++            if (!n) continue;
++            std::sort(candidates.begin(), candidates.end(), [](auto& a, auto& b) { return a.first > b.first; });
++            std::partial_sort(victims.begin(), victims.begin() + n, victims.end(),
++                              [](auto& a, auto& b) { return a.first < b.first; });
++            for (size_t i = 0; i < n; ++i) {
++                if (victims[i].first > primary_cold) break;
++                if (candidates[i].first < victims[i].first + 1.5f) break;
++                swaps.push_back({candidates[i].first - victims[i].first, l, candidates[i].second, victims[i].second});
++            }
++        }
++        std::sort(swaps.begin(), swaps.end(), [](auto& a, auto& b) { return a.gain > b.gain; });
++        if ((int) swaps.size() > max_swaps) swaps.resize((size_t) max_swaps);
++        if (swaps.empty()) continue;
++        const OnDevice on(r.device_);
++        for (const auto& s : swaps)
++            if (!r.cache_.fill_slot(r.cache_.slot_of(s.layer, s.out), source.blob(s.layer, s.in),
++                                    r.stream_, err, (int64_t) lay.blob_bytes(s.layer))) return false;
++        if (!check(cudaStreamSynchronize(r.stream_), err)) return false;
++        for (const auto& s : swaps) {
++            r.cache_.replace(s.layer, s.out, s.in);
++            const size_t base = (size_t) s.layer * r.n_expert_;
++            resident[base + s.out] = 0;
++            resident[base + s.in] = 1;
++        }
++    }
++    return true;
++}
++} // namespace strata::core
+diff --git a/src/core/remote_experts.cpp b/src/core/remote_experts.cpp
+index 53d8d7643..1b6969e82 100644
+--- a/src/core/remote_experts.cpp
++++ b/src/core/remote_experts.cpp
+@@ -1,4 +1,5 @@
+ #include "strata/core/remote_experts.hpp"
++#include "strata/core/remote_expert_opt.hpp"
+ 
+ #include "strata/kernels/cpu/expert_layout.hpp"
+ #include "strata/kernels/iq_kernels.hpp"
+@@ -120,7 +121,7 @@ void RemoteExperts::close() {
+ bool RemoteExperts::open(int device, int slots, int64_t layers, int64_t experts,
+                          const std::vector<std::pair<int32_t, int32_t>>& ranked,
+                          const ExpertCache& primary, ExpertSource& source,
+-                         std::vector<uint8_t>& claimed, std::string& err) {
++                         std::vector<uint8_t>& claimed, std::string& err, bool auto_size) {
+     close();
+     int count = 0;
+     if (!check(cudaGetDeviceCount(&count), "cudaGetDeviceCount", err, device)) return false;
+@@ -134,29 +135,34 @@ bool RemoteExperts::open(int device, int slots, int64_t layers, int64_t experts,
+     device_ = device;
+     n_expert_ = experts;
+     const auto& lay = strata::kernels::cpu::expert_layout();
++    size_t free_bytes = 0, total_bytes = 0;
++    if (!check(cudaMemGetInfo(&free_bytes, &total_bytes), "free memory", err, device)) { close(); return false; }
++    uint64_t needed = 0;
+     std::vector<std::pair<int32_t, int32_t>> selected;
+-    selected.reserve((size_t) slots);
++    selected.reserve((size_t) std::min<int64_t>(slots, layers * experts));
+     std::vector<uint8_t> picked(claimed.size(), 0);
+     for (const auto& pair : ranked) {
+         if (pair.first < 0 || pair.first >= layers || pair.second < 0 || pair.second >= experts) continue;
+         const size_t index = (size_t) pair.first * (size_t) experts + (size_t) pair.second;
+         if (primary.slot_of(pair.first, pair.second) < 0 && !claimed[index] && !picked[index]) {
++            const uint64_t bytes = lay.native ? (lay.blob_bytes(pair.first) + 255) / 256 * 256 : lay.max_blob;
++            if (auto_size && needed + bytes + (512ull << 20) > free_bytes) break;
+             selected.push_back(pair);
++            needed += bytes;
+             picked[index] = 1;
+             if ((int) selected.size() >= slots) break;
+         }
+     }
+-    if (selected.empty()) { err = "CUDA" + std::to_string(device) + " experts: no unclaimed experts remain"; close(); return false; }
++    if (selected.empty()) {
++        err = "CUDA" + std::to_string(device) + (auto_size ? " experts: no unclaimed expert fits with 512 MiB free"
++                                                          : " experts: no unclaimed experts remain");
++        close(); return false;
++    }
+     std::vector<int64_t> sizes;
+     if (lay.native) {
+         sizes.reserve(selected.size());
+         for (const auto& pair : selected) sizes.push_back((int64_t) lay.blob_bytes(pair.first));
+     }
+-    size_t free_bytes = 0, total_bytes = 0;
+-    if (!check(cudaMemGetInfo(&free_bytes, &total_bytes), "free memory", err, device)) { close(); return false; }
+-    uint64_t needed = 0;
+-    for (const auto& pair : selected)
+-        needed += lay.native ? (lay.blob_bytes(pair.first) + 255) / 256 * 256 : lay.max_blob;
+     // Leave room for the CUDA context, staging and later driver allocations, especially under WDDM.
+     if (needed + (512ull << 20) > free_bytes) {
+         err = "CUDA" + std::to_string(device) + " experts: slots leave less than 512 MiB free; reduce --expert-cache-device" + std::to_string(device);
+@@ -185,17 +191,18 @@ bool RemoteExperts::open(int device, int slots, int64_t layers, int64_t experts,
+     const size_t scratch = std::max<size_t>(
+         (size_t) strata::kernels::moe_hit_grouped_scratch_bytes(CAP, H, FF),
+         strata::kernels::native_expert_scratch_bytes(CAP, FF));
++    const size_t meta_bytes = sizeof(RemoteMeta) + (remote_opt_ ? remote_opt_->metadata_bytes() : 0);
+     const bool allocated =
+         check(cudaStreamCreateWithFlags(&stream_, cudaStreamNonBlocking), "stream", err, device) &&
+         check(cudaHostAlloc((void**) &h_x_, (size_t) CAP * H * sizeof(float), cudaHostAllocPortable | cudaHostAllocMapped), "input staging", err, device) &&
+         check(cudaHostAlloc((void**) &h_out_, (size_t) CAP * H * sizeof(float), cudaHostAllocPortable | cudaHostAllocMapped), "result staging", err, device) &&
+-        check(cudaHostAlloc(&h_meta_, sizeof(RemoteMeta), cudaHostAllocPortable), "metadata staging", err, device) &&
++        check(cudaHostAlloc(&h_meta_, meta_bytes, cudaHostAllocPortable), "metadata staging", err, device) &&
+         check(cudaMalloc((void**) &d_x_, (size_t) CAP * H * sizeof(float)), "input", err, device) &&
+         check(cudaMalloc((void**) &d_out_, (size_t) CAP * H * sizeof(float)), "result", err, device) &&
+         check(cudaMalloc((void**) &d_q8_, (size_t) CAP * (H / 32) * 36), "activation", err, device) &&
+         check(cudaMalloc((void**) &d_scales_, (size_t) CAP * (H / 32) * sizeof(float)), "activation scales", err, device) &&
+         check(cudaMalloc(&d_scratch_, scratch), "scratch", err, device) &&
+-        check(cudaMalloc(&d_meta_, sizeof(RemoteMeta)), "group metadata", err, device);
++        check(cudaMalloc(&d_meta_, meta_bytes), "group metadata", err, device);
+     if (!allocated) { close(); return false; }
+     // Zero-copy: the helper reads its input from, and writes its compact rows into, the pinned host buffers
+     // directly - two copies fewer per layer, each of which is a PCIe round trip.  STRATA_REMOTE_ZEROCOPY=0 copies.
+@@ -284,13 +291,16 @@ bool RemoteExperts::begin(int64_t layer, const float* x, const int32_t* ids, int
+     std::memcpy(meta->dst, dst_.data(), dst_.size() * sizeof(dst_[0]));
+     std::memcpy(meta->tok, tok_.data(), tok_.size() * sizeof(tok_[0]));
+     meta->count = (int32_t) group_id_.size();
++    const bool reduce = remote_opt_ && remote_opt_->active();
++    if (reduce) remote_opt_->prepare(*this, meta + 1);
+     DeviceScope scope(device_);
+     if (!scope.ok) { err = scope.error(device_); return false; }
+     groups_ = (int32_t) group_id_.size();
+     const cudaStream_t s = stream_;
+     const bool staged =
+         (zero_copy_ || check(cudaMemcpyAsync(d_x_, h_x_, (size_t) n_tok * H * sizeof(float), cudaMemcpyHostToDevice, s), "copy input", err, device_)) &&
+-        check(cudaMemcpyAsync(d_meta_, h_meta_, sizeof(RemoteMeta), cudaMemcpyHostToDevice, s), "copy group metadata", err, device_);
++        check(cudaMemcpyAsync(d_meta_, h_meta_, sizeof(RemoteMeta) + (reduce ? remote_opt_->metadata_bytes() : 0),
++                              cudaMemcpyHostToDevice, s), "copy group metadata", err, device_);
+     if (!staged) return false;
+     const auto& lay = strata::kernels::cpu::expert_layout();
+     if (lay.native) {
+@@ -298,14 +308,16 @@ bool RemoteExperts::begin(int64_t layer, const float* x, const int32_t* ids, int
+         const auto& fmt = lay.fmt[(size_t) layer];
+         auto L = strata::kernels::native_expert_layout(fmt.gu_type, fmt.d_type, fmt.n_embd, fmt.n_ff);
+         strata::kernels::native_expert_grouped(L, d_ptr_, d_start_, d_count_, d_dst_, d_tok_,
+-                                               groups_, (int64_t) dst_.size(), d_q8_, d_scratch_, zero_copy_ ? z_out_ : d_out_, s);
++                                               groups_, (int64_t) dst_.size(), d_q8_, d_scratch_, zero_copy_ && !reduce ? z_out_ : d_out_, s);
+     } else {
+         strata::kernels::quantize_q8_0_scaled(zero_copy_ ? z_x_ : d_x_, d_q8_, d_scales_, n_tok * H, s);
+         strata::kernels::moe_grouped_s2(d_ptr_, d_start_, d_count_, d_dst_, d_tok_,
+-                                        groups_, (int64_t) dst_.size(), d_q8_, d_scales_, d_scratch_, zero_copy_ ? z_out_ : d_out_, s);
++                                        groups_, (int64_t) dst_.size(), d_q8_, d_scales_, d_scratch_, zero_copy_ && !reduce ? z_out_ : d_out_, s);
+     }
+-    const uint64_t compact_bytes = (uint64_t) dst_.size() * H * sizeof(float);
+-    if (!zero_copy_ && !check(cudaMemcpyAsync(h_out_, d_out_, (size_t) compact_bytes, cudaMemcpyDeviceToHost, s),
++    const uint64_t compact_bytes = (uint64_t) (reduce ? n_tok : dst_.size()) * H * sizeof(float);
++    if (reduce) {
++        if (!remote_opt_->reduce(*this, (RemoteMeta*) d_meta_ + 1, err)) return false;
++    } else if (!zero_copy_ && !check(cudaMemcpyAsync(h_out_, d_out_, (size_t) compact_bytes, cudaMemcpyDeviceToHost, s),
+                "copy results", err, device_)) return false;
+     ++launched_layers_;
+     returned_bytes_ += compact_bytes;
+@@ -320,6 +332,7 @@ bool RemoteExperts::finish(float* out, std::string& err) {
+     const auto w0 = std::chrono::steady_clock::now();
+     if (!check(cudaStreamSynchronize(stream_), "finish", err, device_)) return false;
+     ms_wait_ += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - w0).count();
++    if (remote_opt_ && remote_opt_->active()) { remote_opt_->accumulate(*this); return true; }
+     for (size_t i = 0; i < original_row_.size(); ++i)
+         std::memcpy(out + (size_t) original_row_[i] * H, h_out_ + i * H, (size_t) H * sizeof(float));
+     return true;
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index f956d7315..63e350c8f 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -1,5 +1,6 @@
+ // src/core/verify.cpp - see include/strata/core/verify.hpp.
+ #include "strata/core/verify.hpp"
++#include "strata/core/remote_expert_opt.hpp"
+ #if defined(_WIN32)
+ #include <intrin.h>
+ #endif
+@@ -784,7 +785,10 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         } else {
+             wait_flag_ge(m_flag_, ring, cs);               // the CPU's share is in the mapped rows
+             stamp(l, 23, grp);
+-            if (dec_batch)   // only the CPU rows cross PCIe (p_dst[0, counts[1]) = the GPU's own rows)
++            if (remote_opt_)
++                remote_opt_->copy_rows(parts_ + (size_t) tb * K * N, m_ymiss_ + (size_t) tb * K * N,
++                               tb, n, p_dst, p_counts + 1, cs);
++            else if (dec_batch)   // only the CPU rows cross PCIe (p_dst[0, counts[1]) = the GPU's own rows)
+                 copy_rows_from_mapped(parts_ + (size_t) tb * K * N, m_ymiss_ + (size_t) tb * K * N, (int64_t) n * K, N,
+                                       p_dst, p_counts + 1, cs);
+             else
+@@ -801,6 +805,8 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             mb.weights = w_ + t * K; mb.shared = shared_ + t * N;
+             if (!moe_combine_parts(g, l, K, mb, parts_ + (size_t) t * K * N, bo_ + t * N, cs, err)) return false;
+         }
++        if (remote_opt_) remote_opt_->combine(bo_ + tb * N, y_dummy_ + tb * N, tb, n,
++                              device_plan_ ? skip_ + grp : nullptr, ring, cs);
+         stamp(l, 24, grp);
+         if (l == g.n_layers - 1) {
+             for (int t = tb; t < te; ++t) gr_write(Rt(t), bo_ + t * N, inj2_ + t * HC, gs, Rt(t), cs);
+@@ -1104,9 +1110,11 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
+         set_plan_slot(grp);
+         const int tb = gtb[grp], n = gte[grp] - gtb[grp];
+         progress_at("verify window: the CPU experts of layer", l);
++        if (remote_opt_) remote_opt_->begin(h_w_ + (size_t) tb * ss.k, tb, n);
+         if (pool != nullptr)
+             pool(user, h_x_ + (size_t) tb * g.n_embd, h_ids_ + (size_t) tb * ss.k, n, ss.k,
+                  h_ymiss_ + (size_t) tb * ss.k * g.n_embd, l);
++        if (remote_opt_) remote_opt_->end();
+         VDBG("layer %lld served\n", (long long) l);
+         progress_tick();
+         std::atomic_thread_fence(std::memory_order_seq_cst);
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index a7c77d0ef..e84392353 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -15,6 +15,7 @@
+ // (`phase-2-correct-engine.md:5-9`).  What it is FOR is the honest tok/s figure and the logit dump.
+ 
+ #include "strata/core/device.hpp"
++#include "strata/core/remote_expert_opt.hpp"
+ #include "strata/core/expert_cache.hpp"
+ #include "strata/core/conversation_snapshot.hpp"
+ #include "strata/core/conversation_memory.hpp"
+@@ -289,6 +290,8 @@ struct Options {
+     /// measurement found nothing - see `expert_cache_per_layer`.
+     int expert_cache = 0;
+     std::array<int, 3> expert_cache_remote{}; ///< CUDA1..3 slots; CUDA0 keeps dense/state/MTP
++    std::array<bool, 3> expert_cache_remote_auto{};
++    bool remote_expert_opt = false; ///< optional optimization of the existing remote-expert decode path
+     std::string expert_cache_remote_placement = "stripe"; ///< stripe experts or assign complete layers to CUDA1..3
+     bool expert_cache_cpu_order = false;
+     /// **R4.2g.  ROUND 328 MEASURED THAT THE GLOBAL ADMISSION POLICY CANNOT WORK, AND THIS IS THE FIX.**
+@@ -562,9 +565,10 @@ void usage() {
+                  "                       GPU via `moe_hit_grouped_s2`.  DEFAULT 0.  Measured at 4096 slots\n"
+                  "                       with --expert-cache-per-layer: 54.4%% hits, CPU pool drain 19.1 -> 10.3\n"
+                  "                       ms/token, -2.7 ms/token end to end.\n"
+-                 "  --expert-cache-device1 N  pre-fill N experts on CUDA1 (experimental)\n"
+-                 "  --expert-cache-device2 N  pre-fill N more experts on CUDA2\n"
+-                 "  --expert-cache-device3 N  pre-fill N more experts on CUDA3\n"
++                 "  --expert-cache-device1 N|auto  fill CUDA1 with N experts or as many as fit\n"
++                 "  --expert-cache-device2 N|auto  fill CUDA2 with more experts\n"
++                 "  --expert-cache-device3 N|auto  fill CUDA3 with more experts\n"
++                 "  --remote-expert-opt   enable remote-expert decode optimizations (serve mode)\n"
+                  "  --expert-cache-remote-placement stripe|layer  distribute expert ranks or whole\n"
+                  "                       layers across CUDA1..3 (default: stripe)\n"
+                  "  --peer-device N      a second GPU as an adaptive expert-cache tier (rows over P2P; it also\n"
+@@ -1193,9 +1197,13 @@ int main(int argc, char** argv) {
+             const std::string v = next("--expert-cache");
+             o.expert_cache = (v == "auto") ? -1 : std::atoi(v.c_str());
+         }
+-        else if (a == "--expert-cache-device1") o.expert_cache_remote[0] = std::atoi(next("--expert-cache-device1"));
+-        else if (a == "--expert-cache-device2") o.expert_cache_remote[1] = std::atoi(next("--expert-cache-device2"));
+-        else if (a == "--expert-cache-device3") o.expert_cache_remote[2] = std::atoi(next("--expert-cache-device3"));
++        else if (a == "--expert-cache-device1" || a == "--expert-cache-device2" || a == "--expert-cache-device3") {
++            const size_t r = (size_t) (a.back() - '1');
++            const std::string v = next(a.c_str());
++            o.expert_cache_remote_auto[r] = v == "auto";
++            o.expert_cache_remote[r] = v == "auto" ? std::numeric_limits<int>::max() : std::atoi(v.c_str());
++        }
++        else if (a == "--remote-expert-opt") o.remote_expert_opt = true;
+         else if (a == "--expert-cache-remote-placement")
+             o.expert_cache_remote_placement = next("--expert-cache-remote-placement");
+         else if (a == "--vram-reserve-mib") { o.vram_reserve_mib = std::atoi(next("--vram-reserve-mib")); o.vram_reserve_given = true; }
+@@ -1713,6 +1721,10 @@ int main(int argc, char** argv) {
+         std::fprintf(stderr, "strata generate: --expert-cache-remote-placement must be stripe or layer\n");
+         return 2;
+     }
++    if (o.remote_expert_opt && !o.serve) {
++        std::fprintf(stderr, "strata generate: --remote-expert-opt requires --serve\n");
++        return 2;
++    }
+     // the peer tier is the second card's only user: a layer split or a remote expert cache would put a second engine
+     // part (and a second copy of the same experts) on it
+     if (o.peer_device >= 1 && (!o.layer_split.empty() || o.expert_cache_remote[0] > 0)) {
+@@ -3168,6 +3180,8 @@ int main(int argc, char** argv) {
+         std::fprintf(stderr, "strata generate: layer split: CUDA0 runs layers 0-%lld\n", (long long) (split_at[0] - 1));
+ 
+     std::array<strata::core::RemoteExperts, 3> remote_experts;
++    std::unique_ptr<strata::core::RemoteExpertOpt> remote_opt;
++    if (o.remote_expert_opt && o.expert_cache_remote[0] > 0) remote_opt = std::make_unique<strata::core::RemoteExpertOpt>();
+     const bool multi_remote = o.expert_cache_remote[1] > 0 || o.expert_cache_remote[2] > 0;
+     if (o.expert_cache_remote[0] > 0) {
+         if (o.expert_cache <= 0 || profile.empty() || o.no_pool) {
+@@ -3181,7 +3195,8 @@ int main(int argc, char** argv) {
+                 for (const auto& pr : st->profile)
+                     if (st->cache.slot_of(pr.first, pr.second) < 0) ranked.push_back(pr);
+         }
+-        if (multi_remote) {
++        if (multi_remote || std::any_of(o.expert_cache_remote_auto.begin(), o.expert_cache_remote_auto.end(),
++                                        [](bool automatic) { return automatic; })) {
+             // The shipped frequency profile names only 8000 of 24576 experts. Once exhausted,
+             // fill remaining VRAM from unranked pairs in expert-then-layer order: this spreads
+             // the tail across all layers instead of concentrating it on layer zero.
+@@ -3239,8 +3254,10 @@ int main(int argc, char** argv) {
+                 if (st->cache.slot_of(pr.first, pr.second) >= 0)
+                     claimed[(size_t) pr.first * (size_t) g.n_expert + (size_t) pr.second] = 1;
+         for (int r = 0; r < 3; ++r) if (o.expert_cache_remote[(size_t) r] > 0) {
++            if (remote_opt) remote_opt->attach(remote_experts[(size_t) r]);
+             if (!remote_experts[(size_t) r].open(remote_dev[r], o.expert_cache_remote[(size_t) r],
+-                     g.n_layers, g.n_expert, by_device[(size_t) r], xcache, *srcp, claimed, err)) {
++                     g.n_layers, g.n_expert, by_device[(size_t) r], xcache, *srcp, claimed, err,
++                     o.expert_cache_remote_auto[(size_t) r])) {
+                 std::fprintf(stderr, "strata generate: %s\n", err.c_str());
+                 return 1;
+             }
+@@ -3269,6 +3286,7 @@ int main(int argc, char** argv) {
+                      (long long) (peer.resident() + xcache.slots()), (long long) (g.n_layers * g.n_expert));
+     }
+ 
++    if (remote_opt && !remote_opt->init(err)) { std::fprintf(stderr, "strata generate: %s\n", err.c_str()); return 1; }
+     Drive drive;
+     for (int r = 0; r < 3; ++r) if (o.expert_cache_remote[(size_t) r] > 0)
+         drive.d.remote[drive.d.remote_count++] = &remote_experts[(size_t) r];
+@@ -4505,6 +4523,7 @@ int main(int argc, char** argv) {
+                     vs.blob = thits.blob;
+                     vs.slot_off = gs.cache.slot_offsets();
+                     vs.n_slots = gs.cache.slots();
++                    gs.ver.set_remote_expert_opt(remote_opt.get());
+                     ok_s = gs.ver.init(gs.wt, g, gs.ss, vs, gs.head.loaded() ? &gs.head : nullptr, o.spec, err);
+                     split_drive.cache_base[st] = gs.cache.device_slot(0);
+                     split_drive.cache_slot_off[st] = gs.cache.slot_offsets();
+@@ -4522,6 +4541,7 @@ int main(int argc, char** argv) {
+                           " (CUDA" + std::to_string(split_same ? 0 : stages[(size_t) st - 1]->dev) + ")";
+             std::fprintf(stderr, "strata serve: layer split: layers %s, one hand-off per window\n", plan_s.c_str());
+         }
++        ver.set_remote_expert_opt(remote_opt.get());
+         if (!ver.init(wt, g, ss, vh, native_head.loaded() ? &native_head : nullptr, o.spec, err) ||
+             !mtp.bind(last_st ? last_st->wt : wt, last_st ? &last_st->head : &native_head, ver.final_R_all(), err)) {
+             std::fprintf(stderr, "strata serve: %s\n", err.c_str());
+@@ -4793,6 +4813,7 @@ int main(int argc, char** argv) {
+         // the VRAM tier follows the conversation (the same rule as the speculative loop below)
+         auto adapt = [&]() -> bool {
+             if (!pending.empty()) return true;   // the previous swaps are still in flight
++            if (remote_opt && !remote_opt->adapt(drive.d.usage, host_res, pending, o.adapt_swaps, *srcp)) return false;
+             struct Swap { float gain; int32_t layer, in, out; };
+             std::vector<Swap> swaps;
+             std::vector<std::pair<float, int32_t>> cand, vict;
+@@ -4802,7 +4823,7 @@ int main(int argc, char** argv) {
+                 const float* u = drive.d.usage.data() + l * g.n_expert;
+                 const int32_t* r = host_res.data() + l * g.n_expert;
+                 for (int32_t e = 0; e < (int32_t) g.n_expert; ++e) {
+-                    if (r[e] < 0) { if (u[e] >= 2.0f && !(peer.valid() && peer.has(l, e))) cand.emplace_back(u[e], e); }
++                    if (r[e] < 0) { if (u[e] >= 2.0f && !(peer.valid() && peer.has(l, e)) && !(remote_opt && remote_opt->owns(l, e))) cand.emplace_back(u[e], e); }
+                     else vict.emplace_back(u[e], e);
+                 }
+                 if (cand.empty() || vict.empty()) continue;

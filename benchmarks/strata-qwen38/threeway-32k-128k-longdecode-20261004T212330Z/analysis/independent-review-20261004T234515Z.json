@@ -1,0 +1,108 @@
+{
+  "status": "PASS",
+  "timestamp_UTC": "20261004T234515Z",
+  "checks": {
+    "CURRENT-128K-three-valid": true,
+    "CURRENT-32K-three-valid": true,
+    "HELPER-128K-three-valid": true,
+    "HELPER-32K-three-valid": true,
+    "V0138-128K-three-valid": true,
+    "V0138-32K-three-valid": true,
+    "six-cells-18-unique-primary-raw": true,
+    "identical-warmup-input-output-hashes": true,
+    "raw-footer-payload-ids-settings-medians": true,
+    "CURRENT-binary-hash": true,
+    "HELPER-binary-hash": true,
+    "V0138-binary-hash": true,
+    "model-stat-unchanged": true,
+    "no-gpu-compute-process": true,
+    "required-artifacts-present": true
+  },
+  "cells_recomputed_from_raw": [
+    {
+      "config": "CURRENT",
+      "context": "128K",
+      "actual_prompt_tokens": 127028,
+      "pp_tps": 5908.3,
+      "tg_tps": 132.0,
+      "tg_tps_min": 124.7,
+      "tg_tps_max": 135.1,
+      "ttft_s": 21.98302089801291
+    },
+    {
+      "config": "CURRENT",
+      "context": "32K",
+      "actual_prompt_tokens": 31407,
+      "pp_tps": 4776.3,
+      "tg_tps": 143.4,
+      "tg_tps_min": 136.3,
+      "tg_tps_max": 161.5,
+      "ttft_s": 6.726342723995913
+    },
+    {
+      "config": "HELPER",
+      "context": "128K",
+      "actual_prompt_tokens": 127026,
+      "pp_tps": 2372.5,
+      "tg_tps": 106.9,
+      "tg_tps_min": 105.2,
+      "tg_tps_max": 143.2,
+      "ttft_s": 54.05081803695066
+    },
+    {
+      "config": "HELPER",
+      "context": "32K",
+      "actual_prompt_tokens": 31407,
+      "pp_tps": 2433.7,
+      "tg_tps": 129.2,
+      "tg_tps_min": 123.5,
+      "tg_tps_max": 153.0,
+      "ttft_s": 13.053129384992644
+    },
+    {
+      "config": "V0138",
+      "context": "128K",
+      "actual_prompt_tokens": 127026,
+      "pp_tps": 5687.6,
+      "tg_tps": 96.5,
+      "tg_tps_min": 96.3,
+      "tg_tps_max": 108.7,
+      "ttft_s": 22.85584051499609
+    },
+    {
+      "config": "V0138",
+      "context": "32K",
+      "actual_prompt_tokens": 31407,
+      "pp_tps": 4652.5,
+      "tg_tps": 126.8,
+      "tg_tps_min": 107.1,
+      "tg_tps_max": 154.0,
+      "ttft_s": 6.89888080797391
+    }
+  ],
+  "measurements_added": 0,
+  "existing_results_overwritten": false,
+  "API_footer_rounding_differences": [
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/raw/HELPER-32K-run2.json",
+      "API_PP": 2433.7,
+      "footer_PP": 2433.6,
+      "API_TG": 129.2,
+      "footer_TG": 129.2
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/raw/V0138-32K-run2.json",
+      "API_PP": 4652.5,
+      "footer_PP": 4652.6,
+      "API_TG": 126.8,
+      "footer_TG": 126.8
+    }
+  ],
+  "review_repair": "First review assertion incorrectly required bit-exact API/footer rounding agreement. Preserved raw API rates and integer-millisecond footer differ by 0.1 PP tok/s in two rows. No measurement or runtime changed.",
+  "limitations": [
+    "128K CURRENT input IDs differ from older APIs",
+    "Progression uses bracketed 1 Hz client timestamps",
+    "No interval cache/MTP identity counters in headline binaries",
+    "Optional16K fixed-length comparison incomplete after natural EOS"
+  ]
+}

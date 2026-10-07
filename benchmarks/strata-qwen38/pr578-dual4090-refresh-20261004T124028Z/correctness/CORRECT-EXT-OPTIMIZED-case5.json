@@ -1,0 +1,125 @@
+{
+  "model": "CORRECT-EXT-OPTIMIZED",
+  "kind": "correctness",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 61,
+  "requested_generated_tokens": 512,
+  "time_utc": "2026-10-04T16:46:26Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/telemetry/CORRECT-EXT-OPTIMIZED-case5.jsonl",
+  "samples": 8,
+  "peak_rss_gib": 53.39046096801758,
+  "min_mem_available_gib": 103.25818634033203,
+  "peak_ram_used_gib": 57.87443161010742,
+  "peak_vram0_gib": 23.26171875,
+  "peak_vram1_gib": 23.30859375,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 61,
+    "completion_tokens": 440,
+    "total_tokens": 501,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "### Explanation\n\nThe issue lies in how Python handles list multiplication and object references.\n\n1.  **`[0]*3`**: This creates a new list `[0, 0, 0]`.\n2.  **`[[0]*3]*2`**: This creates a list containing **two references to the same inner list object**. It does **not** create two independent lists.\n    *   Think of it as: `inner_list = [0, 0, 0]` then `a = [inner_list, inner_list]`.\n3.  **`a[0][0] = 1`**: Since `a[0]` and `a[1]` point to the exact same list in memory, modifying `a[0]` also modifies `a[1]`.\n\nYou can verify this by checking the identity of the inner lists:\n```python\na = [[0]*3]*2\nprint(a[0] is a[1])  # Output: True\n```\n\n### Fix\n\nTo create independent rows, you must create a new list object for each row. The most common and Pythonic way is using a **list comprehension**:\n\n```python\na = [[0]*3 for _ in range(2)]\na[0][0] = 1\nprint(a)  # Output: [[1, 0, 0], [0, 0, 0]]\n```\n\n### Alternative Fixes\n\n1.  **Explicitly define each row:**\n    ```python\n    a = [[0, 0, 0], [0, 0, 0]]\n    ```\n\n2.  **Use `copy()` or `list()` to ensure new objects:**\n    ```python\n    row = [0]*3\n    a = [row.copy(), row.copy()]\n    ```\n\n### Key Takeaway\nNever use `*` to replicate mutable objects (like lists, dicts, or sets) in a nested structure. Always use list comprehensions or explicit construction to ensure each element is a distinct object.",
+  "reasoning": "",
+  "actual_prompt_tokens": 61,
+  "generated_tokens": 440,
+  "ttft_s": 0.8944386469665915,
+  "total_wall_s": 7.403791403979994,
+  "api_decode_wall_s": 6.509352757013403,
+  "prompt_processing_wall_s": 0.8665,
+  "decode_wall_s": 6.5335,
+  "pp_tps": 70.4,
+  "tg_tps": 67.3,
+  "draft_tokens": 366,
+  "accepted_tokens": 294,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 61,
+    "prompt_ms": 866.5,
+    "prompt_per_token_ms": 14.205,
+    "prompt_per_second": 70.4,
+    "predicted_n": 440,
+    "predicted_ms": 6533.5,
+    "predicted_per_token_ms": 14.849,
+    "predicted_per_second": 67.3,
+    "draft_n": 366,
+    "draft_n_accepted": 294,
+    "at": 1791132393
+  },
+  "acceptance_pct": 80.32786885245902,
+  "mean_accepted_length": 1.9864864864864864,
+  "final_logical_context_tokens": 501,
+  "final_kv_occupancy_tokens": 502,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 148,
+  "mean_committed_length": 2.9864864864864864,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.98
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 280306.907808931,
+  "t_first_monotonic_s": 280307.802247578,
+  "t_end_monotonic_s": 280314.311600335,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "1128601": {
+      "pss_gib": 0.18579864501953125,
+      "pss_sample_wall": 1791132385.8737047,
+      "pss_read_wall_s": 0.00618080998538062
+    },
+    "1128609": {
+      "pss_gib": 52.86377429962158,
+      "pss_sample_wall": 1791132386.0374365,
+      "pss_read_wall_s": 0.16372869099723175
+    }
+  },
+  "pss_after": {
+    "1128601": {
+      "pss_gib": 0.18599891662597656,
+      "pss_sample_wall": 1791132393.671294,
+      "pss_read_wall_s": 0.006562278023920953
+    },
+    "1128609": {
+      "pss_gib": 53.02921485900879,
+      "pss_sample_wall": 1791132393.8653202,
+      "pss_read_wall_s": 0.19402596802683547
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "CORRECT-EXT-OPTIMIZED",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/configs/CORRECT-EXT-OPTIMIZED.json",
+  "replay_reference": null,
+  "input_ids_sha256": "d0f863d231f7f1991da68bb54065f5e12a2f3d6527ceb78390576b5204c582e5",
+  "input_token_ids_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/token-ids/d0f863d231f7f1991da68bb54065f5e12a2f3d6527ceb78390576b5204c582e5.json",
+  "output_text_sha256": "a2b68352af87336cdfb473d91340c7b27c322bd111840234ea388eaa5426041a",
+  "cache_snapshots": [],
+  "boundary_counters": {
+    "CPU_fallback_entries": 3191,
+    "primary_expert_hits": 158348,
+    "primary_pcie_experts": 19357,
+    "CPU_missed_experts": 2659,
+    "verify_windows": 148,
+    "layers": 48,
+    "CPU_activation_quant_ms": 7.672851
+  },
+  "non_finite_head_diagnostic": false,
+  "actual_token_ids_match_api_count": true,
+  "CUDA_apps_at_request_end": "1128609, /srv/ai/strata-pr578-refresh-20261004-optimized/build-default/strata\n1128609, /srv/ai/strata-pr578-refresh-20261004-optimized/build-default/strata\n",
+  "foreign_CUDA_processes_at_request_end": [],
+  "valid": true,
+  "exclusion": null,
+  "original_case": 5
+}

@@ -1,0 +1,52 @@
+{
+  "benchmark_allowed": true,
+  "scope": "Same default-off boundary-only diff in both local checkouts; full native suites rerun after rebuild",
+  "variants": {
+    "control": {
+      "native_passed": 66,
+      "native_skipped": 2,
+      "environmental_failures": [
+        "ple_parity",
+        "platform_memory_test",
+        "expert_parity",
+        "pool_test"
+      ],
+      "build": {
+        "command": [
+          "/srv/ai/strata-pr578-refresh-20261004-control/.venv/bin/cmake",
+          "--build",
+          "/srv/ai/strata-pr578-refresh-20261004-control/build-default",
+          "-j",
+          "6"
+        ],
+        "HEAD": "e15f4f0218c8e2e60ff42d61313c824ba82f6373",
+        "binary_SHA256": "4c66850583c672440c2bba9a2bbb89ab218e959068b1d35fe5d1595df6f52f77",
+        "ctest_returncode": 8
+      },
+      "classification_reference": "test-review.json"
+    },
+    "optimized": {
+      "native_passed": 66,
+      "native_skipped": 2,
+      "environmental_failures": [
+        "ple_parity",
+        "platform_memory_test",
+        "expert_parity",
+        "pool_test"
+      ],
+      "build": {
+        "command": [
+          "/srv/ai/strata-pr578-refresh-20261004-optimized/.venv/bin/cmake",
+          "--build",
+          "/srv/ai/strata-pr578-refresh-20261004-optimized/build-default",
+          "-j",
+          "6"
+        ],
+        "HEAD": "6d2868c7b3f5e31881e47b6ad99537f25a50763a",
+        "binary_SHA256": "7a03ce1d3703e397d76e295a56a92b055a272c7bb4401dbce94c62675a134e1c",
+        "ctest_returncode": 8
+      },
+      "classification_reference": "test-review.json"
+    }
+  }
+}

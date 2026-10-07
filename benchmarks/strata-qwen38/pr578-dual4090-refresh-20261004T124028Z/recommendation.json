@@ -1,0 +1,4 @@
+{
+  "recommendation": "KEEP_LAYER_SPLIT",
+  "reason": "Layer split wins both steady2048 decode and all four actual-context cells by more than5%, with higher PP and lower TTFT. Optimized helper improved the primary short32K batch over original helper, but regressed on steady2048 decode; it does not replace layer split for these measured workloads."
+}

@@ -1,0 +1,181 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-PRIORITY-case10.json",
+  "source_bytes": 301170,
+  "source_sha256": "f097ac6c67fdf29a4d847b4b43b1b165c75379a2d8fd2e2cad4445e5763f24ac",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-PRIORITY",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 61,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-04T01:06:29Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-PRIORITY-case10.jsonl",
+    "samples": 2,
+    "peak_rss_gib": 53.40390396118164,
+    "min_mem_available_gib": 103.59896850585938,
+    "peak_ram_used_gib": 57.53364944458008,
+    "peak_vram0_gib": 23.265625,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 61,
+      "completion_tokens": 27,
+      "total_tokens": 88,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "[{\"id\":1,\"square\":1},{\"id\":2,\"square\":4},{\"id\":3,\"square\":9}]",
+    "reasoning": "",
+    "actual_prompt_tokens": 61,
+    "generated_tokens": 27,
+    "ttft_s": 0.5147014340036549,
+    "total_wall_s": 1.9124919160094578,
+    "api_decode_wall_s": 1.397790482005803,
+    "prompt_processing_wall_s": 0.49760000000000004,
+    "decode_wall_s": 0.2656,
+    "pp_tps": 122.6,
+    "tg_tps": 101.7,
+    "draft_tokens": 21,
+    "accepted_tokens": 16,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 61,
+      "prompt_ms": 497.6,
+      "prompt_per_token_ms": 8.157,
+      "prompt_per_second": 122.6,
+      "predicted_n": 27,
+      "predicted_ms": 265.6,
+      "predicted_per_token_ms": 9.837,
+      "predicted_per_second": 101.7,
+      "draft_n": 21,
+      "draft_n_accepted": 16,
+      "at": 1791075991
+    },
+    "acceptance_pct": 76.19047619047619,
+    "mean_accepted_length": 1.4545454545454546,
+    "final_logical_context_tokens": 88,
+    "final_kv_occupancy_tokens": 87,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 11,
+    "mean_committed_length": 2.4545454545454546,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.971
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 223910.595356947,
+    "t_first_monotonic_s": 223911.110058381,
+    "t_end_monotonic_s": 223912.507848863,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "stop"
+    ],
+    "pss_before": {
+      "922208": {
+        "pss_gib": 0.18715953826904297,
+        "pss_sample_wall": 1791075988.9858732,
+        "pss_read_wall_s": 0.007667989993933588
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075988.9860554,
+        "pss_read_wall_s": 0.00017715999274514616
+      },
+      "922225": {
+        "pss_gib": 53.030409812927246,
+        "pss_sample_wall": 1791075989.7101355,
+        "pss_read_wall_s": 0.7240808580245357
+      },
+      "922226": {
+        "pss_gib": 0.00325775146484375,
+        "pss_sample_wall": 1791075989.7103715,
+        "pss_read_wall_s": 0.0002224890049546957
+      }
+    },
+    "pss_after": {
+      "922208": {
+        "pss_gib": 0.18715953826904297,
+        "pss_sample_wall": 1791075991.8625603,
+        "pss_read_wall_s": 0.008360038016689941
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075991.862658,
+        "pss_read_wall_s": 9.58290183916688e-05
+      },
+      "922225": {
+        "pss_gib": 53.03041458129883,
+        "pss_sample_wall": 1791075992.5952845,
+        "pss_read_wall_s": 0.7326286649913527
+      },
+      "922226": {
+        "pss_gib": 0.00489044189453125,
+        "pss_sample_wall": 1791075992.5955005,
+        "pss_read_wall_s": 0.00020858901552855968
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-PRIORITY",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-PRIORITY.json",
+    "input_ids_sha256": "e0140085ea4cd4408a5e3a40cc4634196e8c6b0538a0e202caad0cceab203e2d",
+    "input_token_ids_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/token-ids/e0140085ea4cd4408a5e3a40cc4634196e8c6b0538a0e202caad0cceab203e2d.json",
+    "output_text_sha256": "85b000508d166dd46e8b0a10c6fe8a38da2d43418c8225f9773ddffae91d7066",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 0,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "structured",
+    "generated_token_ids": [
+      58,
+      4754,
+      306,
+      763,
+      16,
+      1288,
+      36234,
+      763,
+      16,
+      35607,
+      306,
+      763,
+      17,
+      1288,
+      36234,
+      763,
+      19,
+      35607,
+      306,
+      763,
+      18,
+      1288,
+      36234,
+      763,
+      24,
+      24634,
+      248046
+    ]
+  }
+}

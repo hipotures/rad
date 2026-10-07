@@ -1,0 +1,13 @@
+{
+  "status": "SOURCE_VERIFIED_ARENA_COUNTER_NOT_APPLICABLE",
+  "normal_protocol_fields": "src FileExpertSource ram_reads/file_reads; generate.cpp explicitly documents zero with arena",
+  "expert_tiers_zeros_are_measured_arena_disk_reads": false,
+  "decode_backing": "ArenaExpertSource::blob returns pointer into preloaded anonymous pinned arena; no file operation",
+  "logical_expert_file_reads_decode": "UNAVAILABLE for arena: mmap/complement counters are not applicable",
+  "source_paths": [
+    "src/program/generate.cpp:7108",
+    "src/program/generate.cpp:7378",
+    "src/core/expert_source.cpp:2973"
+  ],
+  "interpretation": "No expert SSD streaming in this preloaded full-arena path by implementation and startup evidence; zeros in API must not be cited as an independent arena SSD-read measurement."
+}

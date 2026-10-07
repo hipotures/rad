@@ -1,0 +1,131 @@
+{
+  "source": "User change-plan message, sections0–26; latest instruction overrides incomplete v0.1.31 objective.",
+  "requirements": {
+    "0": {
+      "status": "COMPLETE",
+      "evidence": "../q4-max-sweep/V0131-CHECKPOINT.json; preserved raw files; process/GPUstop proof"
+    },
+    "1": {
+      "status": "COMPLETE",
+      "evidence": "../q4-max-sweep/V0131-CHECKPOINT.json; preserved raw files; process/GPUstop proof"
+    },
+    "2": {
+      "status": "COMPLETE",
+      "evidence": "../q4-max-sweep/V0131-CHECKPOINT.json; preserved raw files; process/GPUstop proof"
+    },
+    "3": {
+      "status": "COMPLETE",
+      "evidence": "environment.json; raw/builds-terminal.json"
+    },
+    "4": {
+      "status": "COMPLETE",
+      "evidence": "raw/model-provenance.json; raw/local-setup-terminal.json; raw/setup-relocation-recovery.json"
+    },
+    "5": {
+      "status": "COMPLETE",
+      "evidence": "release-delta.md; evidence/help-default.txt; evidence/help-q4-fast.txt"
+    },
+    "6": {
+      "status": "COMPLETE_WITH_REJECTED_OPTIONAL_CANDIDATE",
+      "evidence": "raw/q4-fast-kernel-test.json; raw/builds-terminal.json",
+      "reason": "Bothbuilds compiled; Q4-fast failed upstream unwritten/nonfinite numericalgate, no speedrequests on rejectedcandidate; default selected."
+    },
+    "7": {
+      "status": "COMPLETE",
+      "evidence": "raw/phase-baseline-terminal.json; raw/baseline-summary.json; 3standalone request/results; evidence/baseline-independent-final-audit.json independently validates all three raw requests including exact model revision and PSS snapshots outside client clocks"
+    },
+    "8": {
+      "status": "COMPLETE",
+      "evidence": "raw/phase-topology-terminal.json; raw/topology-selection.json; standalone auto/screens/TOP2 results"
+    },
+    "9": {
+      "status": "COMPLETE",
+      "evidence": "comparison-pp-control.json/.md/.csv; controls/v0131/raw and controls/v0132/raw; raw/phase-pp-control-terminal.json; evidence/control-profile-byteidentity.json"
+    },
+    "10": {
+      "status": "COMPLETE",
+      "evidence": "raw/phase-prefill-terminal.json; raw/prefill-selection.json; raw/prefill-policy-reviewed.json; 17standalone measuredresults; raw/prefill-allocation-evidence.json"
+    },
+    "11": {
+      "status": "COMPLETE",
+      "evidence": "raw/phase-prompt-modes-terminal.json; evidence/prompt-placement-independent-audit.json; six standalone screens"
+    },
+    "12": {
+      "status": "COMPLETE",
+      "evidence": "raw/phase-placement-terminal.json; evidence/prompt-placement-independent-audit.json; six standalone measured results"
+    },
+    "13": {
+      "status": "COMPLETE",
+      "evidence": "raw/phase-calibration-terminal.json; evidence/calibration-independent-audit.json; raw/calibration-confirmation-review.json; 78native and12real64K requests"
+    },
+    "14": {
+      "status": "COMPLETE",
+      "evidence": "raw/phase-mtp-terminal.json; evidence/mtp-independent-audit.json; 14standalone real63400/1024 rawresults; OFFguard evidence"
+    },
+    "15": {
+      "status": "COMPLETE",
+      "evidence": "raw/phase-kv-terminal.json; all28standalone measured requests; evidence/kv-progress-independent-audit.json; evidence/kv-screen-ranking-independent-audit.json; evidence/kv-final-selection-independent-audit.json. Four formats legally screened, TOP2 n3 each128/256K confirmed, K8V4 selected without kv-resident.",
+      "observed_at": 1790909053.5178447
+    },
+    "16": {
+      "status": "COMPLETE",
+      "observed_at": 1790910261.0958128,
+      "evidence": "raw/phase-final-matrix-terminal.json and exit0; evidence/final-matrix-progress-independent-audit.json independently verifies all12 measured requests at actual31400/63400/127000/259500, 256generated, greedy/reuse0, exactHEAD/revision/build/commands and PSS outside timing. New label FINAL-v0132-Q4-attempt2 with explicit offline-no-tools-system-v2 system policy. First short/tool-call attempt retained and excluded. Historical comparisons with different system policy NOT_CONTROLLED_A_B.",
+      "INT8_candidate_validation": {
+        "status": "MEASURED_NOT_PROMOTED",
+        "observed_at": 1790914174.6539037,
+        "matrix_measured": 12,
+        "evidence": "evidence/int8-final-matrix-progress-independent-audit.json, int8-long-outcomes-independent-audit.json, int8-agent64-short-review.json. INT8 fullmatrix; long4K cases full, optional8K6777; agent64 stopped235. NoKVcausality/stability/qualityclaim. K8V4 speedselection retained."
+      }
+    },
+    "17": {
+      "status": "COMPLETE",
+      "observed_at": 1790911027.6241193,
+      "evidence": "raw/phase-long-terminal.json and evidence/long-progress-independent-audit.json prove full63400+4096,127000+4096,127000+8192 sampled requests with API/tokenizer equality, legalK24/K8V4, zero reuse, trace counters and PSS snapshots outside timers. Original8K attempt naturalEOS6324 retained; one separately labeled same-task/newnonce retry achieved8192. Both reportable, no EOS suppression."
+    },
+    "18": {
+      "status": "MEASURED_WITH_NEGATIVE_OUTPUT_TARGET_OUTCOMES",
+      "observed_at": 1790914386.862672,
+      "evidence": "evidence/agent-natural-outcomes-independent-audit.json and agent128-final-output-outcomes.json. Bothfull11requests/23messagehistories verified;64Kallwithinrange;128Kfourfollowups103/171/97/13below256minimum. Sameengine, realpositiveprefixreuse, naturalEOSretained, noforcedoutput. Explicitunmettarget, not claimedfullrequestedlengthsuccess."
+    },
+    "19": {
+      "status": "COMPLETE_MEASURED_AND_INDEPENDENTLY_VERIFIED",
+      "observed_at": 1790914807.809447,
+      "evidence": "evidence/compaction-progress-independent-audit.json proves2newactual127000/250000/cap<=4096/history/PSS/safety and bothimmutableoldexactpayloadcontrols. evidence/compaction-paired-payload-comparison.json storesbothfullconfigs/naturaloutputcounts/deltas andNOT_CONTROLLED_A_B."
+    },
+    "20": {
+      "status": "COMPLETE_MEASURED_AND_INDEPENDENTLY_VERIFIED",
+      "observed_at": 1790917278.4473743,
+      "quality_verified_variants": 8,
+      "quality_verified_responses": 24,
+      "quality_evidence": "evidence/quality-progress-independent-audit.json provesall8x3literalpayloads andcanonicalraw/output/stream/reasoning/toolcalls/hash/diff/runtime/config/PSS/safety. quality/IQ3_S-v0131-existing/source-manifest.json preserves3originalIQ3answers andexactrequestcompatibility/literalQ4finaldiffs; no newIQ3qualityinference orjudge.",
+      "needle_evidence": "evidence/needle-independent-audit.json: all9 literal upstream corpus/depth/payload token counts verified, found9/9; no quality judge"
+    },
+    "21": {
+      "status": "COMPLETE_REVIEWED",
+      "evidence": "comparison-upgrade.json/.csv/.md with full config differences and NOT_CONTROLLED_A_B; controlled whole-version paired payloads separately; both compaction controls; cold starts"
+    },
+    "22": {
+      "status": "COMPLETE_INDEPENDENTLY_VERIFIED",
+      "observed_at": 1790917725.033253,
+      "evidence": "evidence/IQ3-upgrade-independent-audit.json provesbothrequiredactual63400/259500 n3, outputs256, greedy/no reuse, API/tokenizer/usage, revision/defaultruntime, RAM/PSSoutside clocks; previousCLIflags/profile/MTP/tokenizer/GPU/auto identical. Autoactual25old/new; promptsnotpair-identical, onlytwo contextstested."
+    },
+    "23": {
+      "status": "COMPLETE_REVIEWED",
+      "evidence": "completion-audit.json: all2993 old files and4 GGUF stat identities preserved; runtime sources clean and exact frozen HEADs; new canonical raw records carry full provenance"
+    },
+    "24": {
+      "status": "COMPLETE_REVIEWED",
+      "evidence": "completion-audit.json plus independent per-phase PSS-before/after timestamp checks; RSS/CPU/GPU/RAM/I/O sampled without1Hz PSS"
+    },
+    "25": {
+      "status": "COMPLETE_REVIEWED",
+      "evidence": "STATUS.json/.md final checkpoint, RESUME.md final action; all phase evidence retained"
+    },
+    "26": {
+      "status": "COMPLETE_REVIEWED",
+      "evidence": "report.md answers all20 questions; source-scoped bottleneck and OpenCode conclusions reviewed;21PNG/SVG inspected and corrected; both production config/commands saved"
+    }
+  },
+  "fidelity": "Allnewresults under q4-v0132; v0.1.31 is checkpointed baseline, not completed campaign."
+}

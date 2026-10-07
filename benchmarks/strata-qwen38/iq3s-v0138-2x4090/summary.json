@@ -1,0 +1,4385 @@
+{
+  "status": "COMPLETE",
+  "completed_utc": "2026-10-03T17:54:23Z",
+  "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+  "version": "0.1.38",
+  "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+  "environment": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/environment.json",
+  "model_provenance": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/model-provenance.json",
+  "model_stat_unchanged": true,
+  "layout": {
+    "selected_layer_split_K": 25,
+    "GPU0_slots": 10112,
+    "GPU1_slots": 8376,
+    "GPU0_expert_cache_gib": 18.23,
+    "GPU1_expert_cache_gib": 16.84,
+    "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge."
+  },
+  "cells": [
+    {
+      "target_prompt_tokens": 31400,
+      "actual_prompt_tokens": [
+        31400,
+        31400,
+        31400
+      ],
+      "actual_prompt_median": 31400,
+      "n": 3,
+      "split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "raw_paths": [
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-31400-measured1-attempt1.json",
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-31400-measured2-attempt1.json",
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-31400-measured3-attempt1.json"
+      ],
+      "pp_tps": {
+        "min": 4591.7,
+        "median": 4597.4,
+        "max": 4661.9
+      },
+      "tg_tps": {
+        "min": 96.1,
+        "median": 101.8,
+        "max": 137.9
+      },
+      "ttft_s": {
+        "min": 6.814167370990617,
+        "median": 6.976697709003929,
+        "max": 6.994112626009155
+      },
+      "total_wall_s": {
+        "min": 8.65966661699349,
+        "median": 9.489575329003856,
+        "max": 9.630473313998664
+      },
+      "prompt_processing_wall_s": {
+        "min": 6.735399999999999,
+        "median": 6.829899999999999,
+        "max": 6.8385
+      },
+      "decode_wall_s": {
+        "min": 1.8565999999999998,
+        "median": 2.5139,
+        "max": 2.6634
+      },
+      "acceptance_pct": {
+        "min": 72.56637168141593,
+        "median": 74.28571428571429,
+        "max": 76.84729064039409
+      },
+      "mean_accepted_length": {
+        "min": 1.5145631067961165,
+        "median": 1.5445544554455446,
+        "max": 1.7263157894736842
+      },
+      "draft_tokens": {
+        "min": 203,
+        "median": 210,
+        "max": 226
+      },
+      "accepted_tokens": {
+        "min": 156,
+        "median": 156,
+        "max": 164
+      },
+      "peak_ram_used_gib": {
+        "min": 58.79658126831055,
+        "median": 58.809349060058594,
+        "max": 58.822669982910156
+      },
+      "peak_rss_gib": {
+        "min": 54.60610580444336,
+        "median": 54.608280181884766,
+        "max": 54.617828369140625
+      },
+      "peak_vram0_gib": {
+        "min": 23.294921875,
+        "median": 23.294921875,
+        "max": 23.294921875
+      },
+      "peak_vram1_gib": {
+        "min": 23.416015625,
+        "median": 23.416015625,
+        "max": 23.416015625
+      },
+      "hit_rate_median": 0.994,
+      "expert_file_mb_decode": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "decode_telemetry": {
+        "system_cpu_pct_mean_median": 62.233333333333334,
+        "system_cpu_pct_peak_median": 89.2,
+        "process_cpu_pct_mean_median": 985.5,
+        "process_cpu_pct_peak_median": 1412.3,
+        "samples_per_run": [
+          3,
+          3,
+          2
+        ],
+        "GPU0_util_pct_mean_median": 43.666666666666664,
+        "GPU0_power_w_mean_median": 132.79666666666665,
+        "GPU1_util_pct_mean_median": 62.666666666666664,
+        "GPU1_power_w_mean_median": 170.35
+      },
+      "prefill_telemetry": {
+        "system_cpu_pct_mean_median": 7.116666666666666,
+        "system_cpu_pct_peak_median": 7.2,
+        "process_cpu_pct_mean_median": 100.83333333333333,
+        "process_cpu_pct_peak_median": 102.1,
+        "samples_per_run": [
+          6,
+          6,
+          6
+        ],
+        "GPU0_util_pct_mean_median": 77.66666666666667,
+        "GPU0_power_w_mean_median": 253.90333333333334,
+        "GPU1_util_pct_mean_median": 81.83333333333333,
+        "GPU1_power_w_mean_median": 239.42
+      }
+    },
+    {
+      "target_prompt_tokens": 63400,
+      "actual_prompt_tokens": [
+        63400,
+        63400,
+        63400
+      ],
+      "actual_prompt_median": 63400,
+      "n": 3,
+      "split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "raw_paths": [
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-63400-measured1-attempt1.json",
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-63400-measured2-attempt1.json",
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-63400-measured3-attempt1.json"
+      ],
+      "pp_tps": {
+        "min": 5395.8,
+        "median": 5437.3,
+        "max": 5437.5
+      },
+      "tg_tps": {
+        "min": 118.1,
+        "median": 122.6,
+        "max": 126.3
+      },
+      "ttft_s": {
+        "min": 11.8005818699894,
+        "median": 11.80933200000436,
+        "max": 11.884172262012726
+      },
+      "total_wall_s": {
+        "min": 13.823329065024154,
+        "median": 13.954542594990926,
+        "max": 13.958902337995823
+      },
+      "prompt_processing_wall_s": {
+        "min": 11.6597,
+        "median": 11.660200000000001,
+        "max": 11.749799999999999
+      },
+      "decode_wall_s": {
+        "min": 2.0268,
+        "median": 2.0878,
+        "max": 2.1679
+      },
+      "acceptance_pct": {
+        "min": 67.47572815533981,
+        "median": 68.4931506849315,
+        "max": 74.14634146341463
+      },
+      "mean_accepted_length": {
+        "min": 1.188034188034188,
+        "median": 1.4150943396226414,
+        "max": 1.4476190476190476
+      },
+      "draft_tokens": {
+        "min": 205,
+        "median": 206,
+        "max": 219
+      },
+      "accepted_tokens": {
+        "min": 139,
+        "median": 150,
+        "max": 152
+      },
+      "peak_ram_used_gib": {
+        "min": 59.088741302490234,
+        "median": 59.11727523803711,
+        "max": 59.12081527709961
+      },
+      "peak_rss_gib": {
+        "min": 54.862586975097656,
+        "median": 54.863487243652344,
+        "max": 54.86410903930664
+      },
+      "peak_vram0_gib": {
+        "min": 23.294921875,
+        "median": 23.294921875,
+        "max": 23.294921875
+      },
+      "peak_vram1_gib": {
+        "min": 23.416015625,
+        "median": 23.416015625,
+        "max": 23.416015625
+      },
+      "hit_rate_median": 0.994,
+      "expert_file_mb_decode": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "decode_telemetry": {
+        "system_cpu_pct_mean_median": 49.849999999999994,
+        "system_cpu_pct_peak_median": 73.6,
+        "process_cpu_pct_mean_median": 791.8,
+        "process_cpu_pct_peak_median": 1174.9,
+        "samples_per_run": [
+          2,
+          2,
+          2
+        ],
+        "GPU0_util_pct_mean_median": 31.5,
+        "GPU0_power_w_mean_median": 132.2,
+        "GPU1_util_pct_mean_median": 73.5,
+        "GPU1_power_w_mean_median": 183.33499999999998
+      },
+      "prefill_telemetry": {
+        "system_cpu_pct_mean_median": 7.0,
+        "system_cpu_pct_peak_median": 7.4,
+        "process_cpu_pct_mean_median": 102.36363636363636,
+        "process_cpu_pct_peak_median": 105.3,
+        "samples_per_run": [
+          11,
+          11,
+          11
+        ],
+        "GPU0_util_pct_mean_median": 79.81818181818181,
+        "GPU0_power_w_mean_median": 278.9145454545455,
+        "GPU1_util_pct_mean_median": 87.81818181818181,
+        "GPU1_power_w_mean_median": 257.9218181818182
+      }
+    },
+    {
+      "target_prompt_tokens": 127000,
+      "actual_prompt_tokens": [
+        127000,
+        127000,
+        127000
+      ],
+      "actual_prompt_median": 127000,
+      "n": 3,
+      "split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "raw_paths": [
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-127000-measured1-attempt1.json",
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-127000-measured2-attempt1.json",
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-127000-measured3-attempt1.json"
+      ],
+      "pp_tps": {
+        "min": 5695.0,
+        "median": 5707.1,
+        "max": 5710.6
+      },
+      "tg_tps": {
+        "min": 118.3,
+        "median": 120.5,
+        "max": 130.3
+      },
+      "ttft_s": {
+        "min": 22.48823571400135,
+        "median": 22.502544112998294,
+        "max": 22.552161779021844
+      },
+      "total_wall_s": {
+        "min": 24.451109097979497,
+        "median": 24.63409382198006,
+        "max": 24.659340376005275
+      },
+      "prompt_processing_wall_s": {
+        "min": 22.2392,
+        "median": 22.2531,
+        "max": 22.300099999999997
+      },
+      "decode_wall_s": {
+        "min": 1.9643,
+        "median": 2.124,
+        "max": 2.1637
+      },
+      "acceptance_pct": {
+        "min": 68.44444444444444,
+        "median": 73.89162561576354,
+        "max": 75.57603686635944
+      },
+      "mean_accepted_length": {
+        "min": 1.4150943396226414,
+        "median": 1.4951456310679612,
+        "max": 1.7634408602150538
+      },
+      "draft_tokens": {
+        "min": 203,
+        "median": 217,
+        "max": 225
+      },
+      "accepted_tokens": {
+        "min": 150,
+        "median": 154,
+        "max": 164
+      },
+      "peak_ram_used_gib": {
+        "min": 59.47483444213867,
+        "median": 59.518157958984375,
+        "max": 59.56257629394531
+      },
+      "peak_rss_gib": {
+        "min": 55.159488677978516,
+        "median": 55.163848876953125,
+        "max": 55.21034240722656
+      },
+      "peak_vram0_gib": {
+        "min": 23.294921875,
+        "median": 23.294921875,
+        "max": 23.294921875
+      },
+      "peak_vram1_gib": {
+        "min": 23.416015625,
+        "median": 23.416015625,
+        "max": 23.416015625
+      },
+      "hit_rate_median": 0.994,
+      "expert_file_mb_decode": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "decode_telemetry": {
+        "system_cpu_pct_mean_median": 69.75,
+        "system_cpu_pct_peak_median": 93.0,
+        "process_cpu_pct_mean_median": 1109.75,
+        "process_cpu_pct_peak_median": 1475.4,
+        "samples_per_run": [
+          2,
+          2,
+          2
+        ],
+        "GPU0_util_pct_mean_median": 41.0,
+        "GPU0_power_w_mean_median": 146.095,
+        "GPU1_util_pct_mean_median": 51.0,
+        "GPU1_power_w_mean_median": 174.6
+      },
+      "prefill_telemetry": {
+        "system_cpu_pct_mean_median": 9.636363636363637,
+        "system_cpu_pct_peak_median": 15.8,
+        "process_cpu_pct_mean_median": 128.90454545454546,
+        "process_cpu_pct_peak_median": 179.1,
+        "samples_per_run": [
+          22,
+          22,
+          22
+        ],
+        "GPU0_util_pct_mean_median": 82.81818181818181,
+        "GPU0_power_w_mean_median": 292.2977272727273,
+        "GPU1_util_pct_mean_median": 90.86363636363636,
+        "GPU1_power_w_mean_median": 270.3231818181818
+      }
+    },
+    {
+      "target_prompt_tokens": 259500,
+      "actual_prompt_tokens": [
+        259500,
+        259500,
+        259500
+      ],
+      "actual_prompt_median": 259500,
+      "n": 3,
+      "split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "raw_paths": [
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-259500-measured1-attempt1.json",
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-259500-measured2-attempt1.json",
+        "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-259500-measured3-attempt1.json"
+      ],
+      "pp_tps": {
+        "min": 5688.3,
+        "median": 5688.5,
+        "max": 5700.7
+      },
+      "tg_tps": {
+        "min": 110.3,
+        "median": 114.7,
+        "max": 119.8
+      },
+      "ttft_s": {
+        "min": 46.030900351994205,
+        "median": 46.11456630198518,
+        "max": 46.12078563999967
+      },
+      "total_wall_s": {
+        "min": 48.23163884499809,
+        "median": 48.33112382699619,
+        "max": 48.332066543982364
+      },
+      "prompt_processing_wall_s": {
+        "min": 45.521,
+        "median": 45.6181,
+        "max": 45.62
+      },
+      "decode_wall_s": {
+        "min": 2.1363000000000003,
+        "median": 2.2315,
+        "max": 2.3207
+      },
+      "acceptance_pct": {
+        "min": 63.9344262295082,
+        "median": 72.2466960352423,
+        "max": 74.53703703703704
+      },
+      "mean_accepted_length": {
+        "min": 1.5294117647058822,
+        "median": 1.6597938144329898,
+        "max": 1.7446808510638299
+      },
+      "draft_tokens": {
+        "min": 216,
+        "median": 227,
+        "max": 244
+      },
+      "accepted_tokens": {
+        "min": 156,
+        "median": 161,
+        "max": 164
+      },
+      "peak_ram_used_gib": {
+        "min": 59.51913070678711,
+        "median": 59.5540885925293,
+        "max": 59.5922966003418
+      },
+      "peak_rss_gib": {
+        "min": 55.193687438964844,
+        "median": 55.196533203125,
+        "max": 55.199771881103516
+      },
+      "peak_vram0_gib": {
+        "min": 23.294921875,
+        "median": 23.294921875,
+        "max": 23.294921875
+      },
+      "peak_vram1_gib": {
+        "min": 23.416015625,
+        "median": 23.416015625,
+        "max": 23.416015625
+      },
+      "hit_rate_median": 0.995,
+      "expert_file_mb_decode": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "decode_telemetry": {
+        "system_cpu_pct_mean_median": 86.85,
+        "system_cpu_pct_peak_median": 93.1,
+        "process_cpu_pct_mean_median": 1384.7,
+        "process_cpu_pct_peak_median": 1482.0,
+        "samples_per_run": [
+          2,
+          2,
+          2
+        ],
+        "GPU0_util_pct_mean_median": 42.0,
+        "GPU0_power_w_mean_median": 162.3,
+        "GPU1_util_pct_mean_median": 49.5,
+        "GPU1_power_w_mean_median": 183.23000000000002
+      },
+      "prefill_telemetry": {
+        "system_cpu_pct_mean_median": 12.734782608695653,
+        "system_cpu_pct_peak_median": 24.6,
+        "process_cpu_pct_mean_median": 164.38260869565218,
+        "process_cpu_pct_peak_median": 268.0,
+        "samples_per_run": [
+          46,
+          46,
+          46
+        ],
+        "GPU0_util_pct_mean_median": 86.21739130434783,
+        "GPU0_power_w_mean_median": 302.64630434782606,
+        "GPU1_util_pct_mean_median": 95.54347826086956,
+        "GPU1_power_w_mean_median": 281.4226086956522
+      }
+    }
+  ],
+  "old_comparison": [
+    {
+      "version": "0.1.32",
+      "target": 63400,
+      "n": 3,
+      "raw_paths": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/IQ3-upgrade-control-63400-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/IQ3-upgrade-control-63400-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/IQ3-upgrade-control-63400-run3.json"
+      ],
+      "PP_median": 5306.4,
+      "TG_median": 126.3,
+      "TTFT_median": 12.088617110006453,
+      "classification": "NOT_CONTROLLED_A_B",
+      "note": "New unique prompt payloads, same old production config except runtime and offline system policy; historical data, no alternating A/B.",
+      "PP_delta_pct": 2.466832504145944,
+      "TG_delta_pct": -2.9295328582739533
+    },
+    {
+      "version": "0.1.32",
+      "target": 259500,
+      "n": 3,
+      "raw_paths": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/IQ3-upgrade-control-259500-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/IQ3-upgrade-control-259500-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/IQ3-upgrade-control-259500-run3.json"
+      ],
+      "PP_median": 5623.0,
+      "TG_median": 108.0,
+      "TTFT_median": 46.656608981997124,
+      "classification": "NOT_CONTROLLED_A_B",
+      "note": "New unique prompt payloads, same old production config except runtime and offline system policy; historical data, no alternating A/B.",
+      "PP_delta_pct": 1.1648586163969465,
+      "TG_delta_pct": 6.203703703703711
+    },
+    {
+      "version": "0.1.31",
+      "target": 31400,
+      "n": 3,
+      "raw_paths": [
+        "/srv/ai/benchmarks/strata-qwen38/results/raw/IQ3_S-32K-1.json",
+        "/srv/ai/benchmarks/strata-qwen38/results/raw/IQ3_S-32K-2.json",
+        "/srv/ai/benchmarks/strata-qwen38/results/raw/IQ3_S-32K-3.json"
+      ],
+      "PP_median": 4652.5,
+      "TG_median": 131.2,
+      "classification": "NOT_CONTROLLED_A_B",
+      "note": "Original campaign HEAD9259cad4 / v0.1.31. No v0.1.32 measured32K/128K IQ3_S raw records found. Earlier campaign; different runtime/payloads, retained only as explicitly versioned descriptive baseline."
+    },
+    {
+      "version": "0.1.31",
+      "target": 127000,
+      "n": 3,
+      "raw_paths": [
+        "/srv/ai/benchmarks/strata-qwen38/results/raw/IQ3_S-128K-1.json",
+        "/srv/ai/benchmarks/strata-qwen38/results/raw/IQ3_S-128K-2.json",
+        "/srv/ai/benchmarks/strata-qwen38/results/raw/IQ3_S-128K-3.json"
+      ],
+      "PP_median": 5827.3,
+      "TG_median": 114.9,
+      "classification": "NOT_CONTROLLED_A_B",
+      "note": "Original campaign HEAD9259cad4 / v0.1.31. No v0.1.32 measured32K/128K IQ3_S raw records found. Earlier campaign; different runtime/payloads, retained only as explicitly versioned descriptive baseline."
+    }
+  ],
+  "RTX5090_comparison": [
+    {
+      "actual_prompt_target": 31400,
+      "RTX5090_TG_user_supplied": 170.4,
+      "our_2x4090_TG_median": 101.8,
+      "difference_pct": -40.25821596244131,
+      "classification": "NOT_CONTROLLED_A_B",
+      "note": "External reference values supplied by user; different machine/potentiallyconfig, not independently verified published raw data."
+    },
+    {
+      "actual_prompt_target": 259500,
+      "RTX5090_TG_user_supplied": 152.5,
+      "our_2x4090_TG_median": 114.7,
+      "difference_pct": -24.786885245901637,
+      "classification": "NOT_CONTROLLED_A_B",
+      "note": "External reference values supplied by user; different machine/potentiallyconfig, not independently verified published raw data."
+    }
+  ],
+  "warmups_excluded": 4,
+  "invalid_runs": [],
+  "GPU_apps_after": "",
+  "git_status_after": "",
+  "measured_raw": [
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 31400,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:43:28Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-31400-measured1-attempt1.jsonl",
+      "samples": 10,
+      "peak_rss_gib": 54.60610580444336,
+      "min_mem_available_gib": 102.3360366821289,
+      "peak_ram_used_gib": 58.79658126831055,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 31400,
+        "completion_tokens": 256,
+        "total_tokens": 31656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "The last file in the supplied set is `docs/AMD_HIP_PERFORMANCE.md`. It is a documentation file, not source code, and it serves as the performance-evidence companion to `docs/AMD_HIP.md`. Its purpose is to record the measured configuration, reproduction steps, and benchmark results for the experimental AMD HIP backend on the RX 7900 XTX (gfx1100), so that a reader can reproduce the exact conditions under which the reported numbers were obtained and can distinguish validated claims from unvalidated ones.\n\nThe file opens by stating that this opt-in Linux gfx1100 backend supersedes the initial support in PR #94, and it lists what is retained from that earlier work (HIP runtime, wave32 integer-dot compatibility, native mmap layout validation, MTP) and what is added (HIP MMQ, optional calibrated dense hipBLASLt GEMM, native prefill batching, host-memory/SSD paths, and a single reusable pinned staging buffer for blocking expert uploads). It then gives a \"Reproduce the configuration\" section that points to `AMD_HIP.md` for build instructions, insists on the repository-pinned llama.cpp dependency, and specifies the exact environment variables for the measured arm",
+      "reasoning": "",
+      "actual_prompt_tokens": 31400,
+      "generated_tokens": 256,
+      "ttft_s": 6.976697709003929,
+      "total_wall_s": 9.630473313998664,
+      "api_decode_wall_s": 2.6537756049947347,
+      "prompt_processing_wall_s": 6.829899999999999,
+      "decode_wall_s": 2.6634,
+      "pp_tps": 4597.4,
+      "tg_tps": 96.1,
+      "draft_tokens": 210,
+      "accepted_tokens": 156,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 31400,
+        "prompt_ms": 6829.9,
+        "prompt_per_token_ms": 0.218,
+        "prompt_per_second": 4597.4,
+        "predicted_n": 256,
+        "predicted_ms": 2663.4,
+        "predicted_per_token_ms": 10.404,
+        "predicted_per_second": 96.1,
+        "draft_n": 210,
+        "draft_n_accepted": 156,
+        "at": 1791049418
+      },
+      "acceptance_pct": 74.28571428571429,
+      "mean_accepted_length": 1.5445544554455446,
+      "final_logical_context_tokens": 31656,
+      "final_kv_occupancy_tokens": 31656,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 101,
+      "mean_committed_length": 2.5445544554455446,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.991
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197329.857378725,
+      "t_first_monotonic_s": 197336.834076434,
+      "t_end_monotonic_s": 197339.487852039,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.1893634796142578,
+          "pss_sample_wall": 1791049408.0918028,
+          "pss_read_wall_s": 0.003816276992438361
+        },
+        "829932": {
+          "pss_gib": 54.220112800598145,
+          "pss_sample_wall": 1791049408.8611972,
+          "pss_read_wall_s": 0.7693939469754696
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.1897430419921875,
+          "pss_sample_wall": 1791049418.848365,
+          "pss_read_wall_s": 0.004174254019744694
+        },
+        "829932": {
+          "pss_gib": 54.241360664367676,
+          "pss_sample_wall": 1791049419.6224732,
+          "pss_read_wall_s": 0.7741086710011587
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 31400,
+      "repeat_tag": "31400-measured1-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 9,
+          "system_cpu_pct_mean": 26.833333333333332,
+          "system_cpu_pct_peak": 92.8,
+          "process_cpu_pct_mean": 416.6888888888889,
+          "process_cpu_pct_peak": 1471.4,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 56.888888888888886,
+              "power_w_mean": 211.89333333333335
+            },
+            "1": {
+              "util_pct_mean": 75.11111111111111,
+              "power_w_mean": 214.04666666666668
+            }
+          }
+        },
+        "prefill": {
+          "samples": 6,
+          "system_cpu_pct_mean": 7.283333333333333,
+          "system_cpu_pct_peak": 7.5,
+          "process_cpu_pct_mean": 101.15,
+          "process_cpu_pct_peak": 103.0,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 72.33333333333333,
+              "power_w_mean": 251.44166666666666
+            },
+            "1": {
+              "util_pct_mean": 81.33333333333333,
+              "power_w_mean": 235.895
+            }
+          }
+        },
+        "decode": {
+          "samples": 3,
+          "system_cpu_pct_mean": 65.93333333333334,
+          "system_cpu_pct_peak": 92.8,
+          "process_cpu_pct_mean": 1047.7666666666667,
+          "process_cpu_pct_peak": 1471.4,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 26.0,
+              "power_w_mean": 132.79666666666665
+            },
+            "1": {
+              "util_pct_mean": 62.666666666666664,
+              "power_w_mean": 170.35
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.991
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 6,
+            "RX_MB_s_mean": 9196.5,
+            "TX_MB_s_mean": 1153.0
+          },
+          "1": {
+            "samples": 6,
+            "RX_MB_s_mean": 6360.333333333333,
+            "TX_MB_s_mean": 944.1666666666666
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 3,
+            "RX_MB_s_mean": 52.333333333333336,
+            "TX_MB_s_mean": 75.0
+          },
+          "1": {
+            "samples": 3,
+            "RX_MB_s_mean": 122.0,
+            "TX_MB_s_mean": 16.666666666666668
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 31400,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:43:42Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-31400-measured2-attempt1.jsonl",
+      "samples": 10,
+      "peak_rss_gib": 54.608280181884766,
+      "min_mem_available_gib": 102.32326889038086,
+      "peak_ram_used_gib": 58.809349060058594,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 31400,
+        "completion_tokens": 256,
+        "total_tokens": 31656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "To understand the function of the last file, `docs/AMD_HIP_PERFORMANCE.md`, we must look at its role within the broader Strata Engine repository. This document serves as the definitive technical and empirical record for the experimental AMD HIP backend, specifically targeting the RDNA3 architecture (gfx1100, such as the RX 7900 XTX). While `docs/AMD_HIP.md` provides the high-level installation and build instructions, `AMD_HIP_PERFORMANCE.md` dives into the exact configuration, environment variables, and benchmarking methodology required to achieve and verify the performance numbers claimed by the project.\n\nThe file is structured into three main sections:\n1. **Context and Supersession:** It clarifies that this backend supersedes an earlier PR (#94) and lists the specific technical features added, such as HIP MMQ, calibrated dense hipBLASLt GEMM, and native prefill batching.\n2. **Reproduce the Configuration:** This is the most critical section for users and developers. It provides the exact `export` commands for environment variables (`STRATA_PREFILL_MMQ`, `STRATA_HIPBLASLT_TUNING`, etc.) and the specific command-line arguments for the `str",
+      "reasoning": "",
+      "actual_prompt_tokens": 31400,
+      "generated_tokens": 256,
+      "ttft_s": 6.994112626009155,
+      "total_wall_s": 9.489575329003856,
+      "api_decode_wall_s": 2.4954627029947005,
+      "prompt_processing_wall_s": 6.8385,
+      "decode_wall_s": 2.5139,
+      "pp_tps": 4591.7,
+      "tg_tps": 101.8,
+      "draft_tokens": 203,
+      "accepted_tokens": 156,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 31400,
+        "prompt_ms": 6838.5,
+        "prompt_per_token_ms": 0.218,
+        "prompt_per_second": 4591.7,
+        "predicted_n": 256,
+        "predicted_ms": 2513.9,
+        "predicted_per_token_ms": 9.82,
+        "predicted_per_second": 101.8,
+        "draft_n": 203,
+        "draft_n_accepted": 156,
+        "at": 1791049432
+      },
+      "acceptance_pct": 76.84729064039409,
+      "mean_accepted_length": 1.5145631067961165,
+      "final_logical_context_tokens": 31656,
+      "final_kv_occupancy_tokens": 31658,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 103,
+      "mean_committed_length": 2.5145631067961167,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.995
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197343.723601516,
+      "t_first_monotonic_s": 197350.717714142,
+      "t_end_monotonic_s": 197353.213176845,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.1897430419921875,
+          "pss_sample_wall": 1791049421.9858947,
+          "pss_read_wall_s": 0.004081455001141876
+        },
+        "829932": {
+          "pss_gib": 54.241360664367676,
+          "pss_sample_wall": 1791049422.7357287,
+          "pss_read_wall_s": 0.7498302869789768
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.19121932983398438,
+          "pss_sample_wall": 1791049432.5797966,
+          "pss_read_wall_s": 0.004175694979494438
+        },
+        "829932": {
+          "pss_gib": 54.242058753967285,
+          "pss_sample_wall": 1791049433.3328621,
+          "pss_read_wall_s": 0.7530656149901915
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 31400,
+      "repeat_tag": "31400-measured2-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 9,
+          "system_cpu_pct_mean": 25.488888888888887,
+          "system_cpu_pct_peak": 89.1,
+          "process_cpu_pct_mean": 395.72222222222223,
+          "process_cpu_pct_peak": 1411.5,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 66.33333333333333,
+              "power_w_mean": 214.30555555555554
+            },
+            "1": {
+              "util_pct_mean": 77.0,
+              "power_w_mean": 216.27555555555557
+            }
+          }
+        },
+        "prefill": {
+          "samples": 6,
+          "system_cpu_pct_mean": 7.116666666666666,
+          "system_cpu_pct_peak": 7.2,
+          "process_cpu_pct_mean": 100.83333333333333,
+          "process_cpu_pct_peak": 102.1,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 77.66666666666667,
+              "power_w_mean": 257.28166666666664
+            },
+            "1": {
+              "util_pct_mean": 83.0,
+              "power_w_mean": 239.42
+            }
+          }
+        },
+        "decode": {
+          "samples": 3,
+          "system_cpu_pct_mean": 62.233333333333334,
+          "system_cpu_pct_peak": 89.1,
+          "process_cpu_pct_mean": 985.5,
+          "process_cpu_pct_peak": 1411.5,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 43.666666666666664,
+              "power_w_mean": 128.35333333333335
+            },
+            "1": {
+              "util_pct_mean": 65.0,
+              "power_w_mean": 169.98666666666668
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.995
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 7,
+            "RX_MB_s_mean": 3169.5714285714284,
+            "TX_MB_s_mean": 973.1428571428571
+          },
+          "1": {
+            "samples": 7,
+            "RX_MB_s_mean": 9680.714285714286,
+            "TX_MB_s_mean": 1212.5714285714287
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 3,
+            "RX_MB_s_mean": 124.66666666666667,
+            "TX_MB_s_mean": 57.666666666666664
+          },
+          "1": {
+            "samples": 3,
+            "RX_MB_s_mean": 33.0,
+            "TX_MB_s_mean": 31.666666666666668
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 31400,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:43:55Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-31400-measured3-attempt1.jsonl",
+      "samples": 9,
+      "peak_rss_gib": 54.617828369140625,
+      "min_mem_available_gib": 102.3099479675293,
+      "peak_ram_used_gib": 58.822669982910156,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 31400,
+        "completion_tokens": 256,
+        "total_tokens": 31656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "The last file, `docs/AMD_HIP_PERFORMANCE.md`, is the performance-evidence document for Strata\u2019s experimental AMD HIP backend. It is not a build guide (that is `docs/AMD_HIP.md`) but the record of *what was measured, under what configuration, and with what caveats*. Its purpose is to make the RX 7900 XTX (`gfx1100`) numbers reproducible and to prevent them from being read as a universal benchmark.\n\nConcretely, the file does four things. First, it states scope: this `gfx1100` backend supersedes the original PR #94 support, retaining HIP runtime and wave32 integer-dot compatibility, native mmap layout validation, and MTP, while adding HIP MMQ, an optional calibrated dense hipBLASLt GEMM path, native prefill batching, and the host-memory/SSD paths used by the measured configuration. It notes that HIP blocking expert uploads reuse one pinned staging buffer (including prompt-cache refills) to avoid repeated pageable-source registrations.\n\nSecond, it gives a reproduction recipe. It points to `AMD_HIP.md` for build steps, insists on the repository-pinned llama.cpp revision (no silent",
+      "reasoning": "",
+      "actual_prompt_tokens": 31400,
+      "generated_tokens": 256,
+      "ttft_s": 6.814167370990617,
+      "total_wall_s": 8.65966661699349,
+      "api_decode_wall_s": 1.8454992460028734,
+      "prompt_processing_wall_s": 6.735399999999999,
+      "decode_wall_s": 1.8565999999999998,
+      "pp_tps": 4661.9,
+      "tg_tps": 137.9,
+      "draft_tokens": 226,
+      "accepted_tokens": 164,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 31400,
+        "prompt_ms": 6735.4,
+        "prompt_per_token_ms": 0.215,
+        "prompt_per_second": 4661.9,
+        "predicted_n": 256,
+        "predicted_ms": 1856.6,
+        "predicted_per_token_ms": 7.252,
+        "predicted_per_second": 137.9,
+        "draft_n": 226,
+        "draft_n_accepted": 164,
+        "at": 1791049444
+      },
+      "acceptance_pct": 72.56637168141593,
+      "mean_accepted_length": 1.7263157894736842,
+      "final_logical_context_tokens": 31656,
+      "final_kv_occupancy_tokens": 31658,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 95,
+      "mean_committed_length": 2.7263157894736842,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.994
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197356.292077079,
+      "t_first_monotonic_s": 197363.10624445,
+      "t_end_monotonic_s": 197364.951743696,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.19121932983398438,
+          "pss_sample_wall": 1791049434.8952649,
+          "pss_read_wall_s": 0.002521941001759842
+        },
+        "829932": {
+          "pss_gib": 54.242058753967285,
+          "pss_sample_wall": 1791049435.3625045,
+          "pss_read_wall_s": 0.4672389790066518
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.19146347045898438,
+          "pss_sample_wall": 1791049444.2973843,
+          "pss_read_wall_s": 0.0026100699906237423
+        },
+        "829932": {
+          "pss_gib": 54.25136661529541,
+          "pss_sample_wall": 1791049444.7797413,
+          "pss_read_wall_s": 0.4823573839967139
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 31400,
+      "repeat_tag": "31400-measured3-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 8,
+          "system_cpu_pct_mean": 19.8125,
+          "system_cpu_pct_peak": 89.2,
+          "process_cpu_pct_mean": 307.8375,
+          "process_cpu_pct_peak": 1412.3,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 70.625,
+              "power_w_mean": 226.82500000000002
+            },
+            "1": {
+              "util_pct_mean": 74.125,
+              "power_w_mean": 227.38125
+            }
+          }
+        },
+        "prefill": {
+          "samples": 6,
+          "system_cpu_pct_mean": 6.933333333333334,
+          "system_cpu_pct_peak": 7.1,
+          "process_cpu_pct_mean": 100.81666666666666,
+          "process_cpu_pct_peak": 101.9,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 79.33333333333333,
+              "power_w_mean": 253.90333333333334
+            },
+            "1": {
+              "util_pct_mean": 81.83333333333333,
+              "power_w_mean": 241.585
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 58.45,
+          "system_cpu_pct_peak": 89.2,
+          "process_cpu_pct_mean": 928.9,
+          "process_cpu_pct_peak": 1412.3,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 44.5,
+              "power_w_mean": 145.59
+            },
+            "1": {
+              "util_pct_mean": 51.0,
+              "power_w_mean": 184.77
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.994
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 7,
+            "RX_MB_s_mean": 7291.0,
+            "TX_MB_s_mean": 742.2857142857143
+          },
+          "1": {
+            "samples": 7,
+            "RX_MB_s_mean": 5870.571428571428,
+            "TX_MB_s_mean": 902.5714285714286
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 2,
+            "RX_MB_s_mean": 132.5,
+            "TX_MB_s_mean": 39.5
+          },
+          "1": {
+            "samples": 2,
+            "RX_MB_s_mean": 13.5,
+            "TX_MB_s_mean": 72.0
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 63400,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:44:32Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-63400-measured1-attempt1.jsonl",
+      "samples": 14,
+      "peak_rss_gib": 54.862586975097656,
+      "min_mem_available_gib": 102.04387664794922,
+      "peak_ram_used_gib": 59.088741302490234,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 63400,
+        "completion_tokens": 256,
+        "total_tokens": 63656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What `docs/media/make_figures.py` does\n\n`docs/media/make_figures.py` is a small, self-contained Python generator that produces the two SVG illustrations used in the README's \"How does it work?\" section: `docs/media/how-it-works.svg` and `docs/media/guess-and-check.svg`. Its stated goal is to draw those figures in the *same visual language as the Strata web app itself*, rather than as hand-drawn or externally designed graphics. That intent shows up in three concrete mechanisms:\n\n1. **It reuses the app's own design tokens.** The `CSS` string embeds the app's color palette (`.acc`, `.info`, `.warn`, `.dan`, `.muted`, `.card`, `.bg`, etc.) and, crucially, a `@media (prefers-color-scheme: dark)` block, so the generated SVGs automatically adapt to the reader's light/dark system setting. The font is not referenced by name only: the script reads `serve/web/fonts/outfit-latin-wght.woff2`, base64-encodes it, and embeds it as a `@font-face` `data:` URL, so the SVG renders with Outfit even",
+      "reasoning": "",
+      "actual_prompt_tokens": 63400,
+      "generated_tokens": 256,
+      "ttft_s": 11.884172262012726,
+      "total_wall_s": 13.958902337995823,
+      "api_decode_wall_s": 2.0747300759830978,
+      "prompt_processing_wall_s": 11.749799999999999,
+      "decode_wall_s": 2.0878,
+      "pp_tps": 5395.8,
+      "tg_tps": 122.6,
+      "draft_tokens": 205,
+      "accepted_tokens": 152,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 63400,
+        "prompt_ms": 11749.8,
+        "prompt_per_token_ms": 0.185,
+        "prompt_per_second": 5395.8,
+        "predicted_n": 256,
+        "predicted_ms": 2087.8,
+        "predicted_per_token_ms": 8.155,
+        "predicted_per_second": 122.6,
+        "draft_n": 205,
+        "draft_n_accepted": 152,
+        "at": 1791049486
+      },
+      "acceptance_pct": 74.14634146341463,
+      "mean_accepted_length": 1.4476190476190476,
+      "final_logical_context_tokens": 63656,
+      "final_kv_occupancy_tokens": 63656,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 105,
+      "mean_committed_length": 2.447619047619048,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.994
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197392.922864105,
+      "t_first_monotonic_s": 197404.807036367,
+      "t_end_monotonic_s": 197406.881766443,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.19434356689453125,
+          "pss_sample_wall": 1791049471.457576,
+          "pss_read_wall_s": 0.0025468909880146384
+        },
+        "829932": {
+          "pss_gib": 54.49137592315674,
+          "pss_sample_wall": 1791049471.9428992,
+          "pss_read_wall_s": 0.48532200400950387
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.19547653198242188,
+          "pss_sample_wall": 1791049486.227029,
+          "pss_read_wall_s": 0.002669040986802429
+        },
+        "829932": {
+          "pss_gib": 54.49210834503174,
+          "pss_sample_wall": 1791049486.7059398,
+          "pss_read_wall_s": 0.47891053700004704
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 63400,
+      "repeat_tag": "63400-measured1-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 13,
+          "system_cpu_pct_mean": 13.930769230769231,
+          "system_cpu_pct_peak": 82.9,
+          "process_cpu_pct_mean": 213.1153846153846,
+          "process_cpu_pct_peak": 1318.7,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 65.84615384615384,
+              "power_w_mean": 253.83461538461538
+            },
+            "1": {
+              "util_pct_mean": 86.0,
+              "power_w_mean": 246.35076923076923
+            }
+          }
+        },
+        "prefill": {
+          "samples": 11,
+          "system_cpu_pct_mean": 7.090909090909091,
+          "system_cpu_pct_peak": 7.9,
+          "process_cpu_pct_mean": 102.52727272727273,
+          "process_cpu_pct_peak": 106.9,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 72.0909090909091,
+              "power_w_mean": 275.4190909090909
+            },
+            "1": {
+              "util_pct_mean": 88.18181818181819,
+              "power_w_mean": 257.9218181818182
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 51.550000000000004,
+          "system_cpu_pct_peak": 82.9,
+          "process_cpu_pct_mean": 821.35,
+          "process_cpu_pct_peak": 1318.7,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 31.5,
+              "power_w_mean": 135.12
+            },
+            "1": {
+              "util_pct_mean": 74.0,
+              "power_w_mean": 182.71
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.994
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 10,
+            "RX_MB_s_mean": 5226.1,
+            "TX_MB_s_mean": 766.9
+          },
+          "1": {
+            "samples": 10,
+            "RX_MB_s_mean": 9089.7,
+            "TX_MB_s_mean": 1421.1
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 3,
+            "RX_MB_s_mean": 140.0,
+            "TX_MB_s_mean": 59.666666666666664
+          },
+          "1": {
+            "samples": 3,
+            "RX_MB_s_mean": 64.0,
+            "TX_MB_s_mean": 46.666666666666664
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 63400,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:44:49Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-63400-measured2-attempt1.jsonl",
+      "samples": 14,
+      "peak_rss_gib": 54.863487243652344,
+      "min_mem_available_gib": 102.01534271240234,
+      "peak_ram_used_gib": 59.11727523803711,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 63400,
+        "completion_tokens": 256,
+        "total_tokens": 63656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What `docs/media/make_figures.py` does\n\n`docs/media/make_figures.py` is a small, self-contained Python generator that produces the two SVG illustrations used in the README's \"How does it work?\" section: `docs/media/how-it-works.svg` (the memory-tier / expert-distribution picture) and `docs/media/guess-and-check.svg` (the speculative-decoding picture). It is not part of the engine build; it is a documentation asset pipeline that runs with the standard library only (`base64`, `random`, `re`, `pathlib`).\n\nIts design goal is visual consistency with the Strata web app rather than with a generic diagram style. It achieves that in three ways:\n\n1. **Shared design tokens.** It reads `serve/web/tokens.css`-equivalent values by embedding a hard-coded CSS block (`CSS`) that mirrors the app's palette: accent green (`#10b981` light / `#34d399` dark), info blue, warn amber, danger red, plus card/background/muted colors. A `@media (prefers-color-scheme:dark)` block makes the figures follow the reader's system theme, so the same SVG",
+      "reasoning": "",
+      "actual_prompt_tokens": 63400,
+      "generated_tokens": 256,
+      "ttft_s": 11.80933200000436,
+      "total_wall_s": 13.823329065024154,
+      "api_decode_wall_s": 2.013997065019794,
+      "prompt_processing_wall_s": 11.660200000000001,
+      "decode_wall_s": 2.0268,
+      "pp_tps": 5437.3,
+      "tg_tps": 126.3,
+      "draft_tokens": 219,
+      "accepted_tokens": 150,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 63400,
+        "prompt_ms": 11660.2,
+        "prompt_per_token_ms": 0.184,
+        "prompt_per_second": 5437.3,
+        "predicted_n": 256,
+        "predicted_ms": 2026.8,
+        "predicted_per_token_ms": 7.917,
+        "predicted_per_second": 126.3,
+        "draft_n": 219,
+        "draft_n_accepted": 150,
+        "at": 1791049503
+      },
+      "acceptance_pct": 68.4931506849315,
+      "mean_accepted_length": 1.4150943396226414,
+      "final_logical_context_tokens": 63656,
+      "final_kv_occupancy_tokens": 63655,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 106,
+      "mean_committed_length": 2.4150943396226414,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.994
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197410.208718091,
+      "t_first_monotonic_s": 197422.018050091,
+      "t_end_monotonic_s": 197424.032047156,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.19547653198242188,
+          "pss_sample_wall": 1791049488.7302032,
+          "pss_read_wall_s": 0.0026137699896935374
+        },
+        "829932": {
+          "pss_gib": 54.49210834503174,
+          "pss_sample_wall": 1791049489.2142072,
+          "pss_read_wall_s": 0.48400237900204957
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.19607925415039062,
+          "pss_sample_wall": 1791049503.3787112,
+          "pss_read_wall_s": 0.0026095699868164957
+        },
+        "829932": {
+          "pss_gib": 54.49240589141846,
+          "pss_sample_wall": 1791049503.859923,
+          "pss_read_wall_s": 0.4812121689901687
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 63400,
+      "repeat_tag": "63400-measured2-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 13,
+          "system_cpu_pct_mean": 13.569230769230769,
+          "system_cpu_pct_peak": 73.6,
+          "process_cpu_pct_mean": 208.0076923076923,
+          "process_cpu_pct_peak": 1174.9,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 78.23076923076923,
+              "power_w_mean": 255.63153846153847
+            },
+            "1": {
+              "util_pct_mean": 82.38461538461539,
+              "power_w_mean": 249.7369230769231
+            }
+          }
+        },
+        "prefill": {
+          "samples": 11,
+          "system_cpu_pct_mean": 7.0,
+          "system_cpu_pct_peak": 7.2,
+          "process_cpu_pct_mean": 102.3,
+          "process_cpu_pct_peak": 104.3,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 79.81818181818181,
+              "power_w_mean": 278.9145454545455
+            },
+            "1": {
+              "util_pct_mean": 87.54545454545455,
+              "power_w_mean": 261.81
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 49.699999999999996,
+          "system_cpu_pct_peak": 73.6,
+          "process_cpu_pct_mean": 789.4000000000001,
+          "process_cpu_pct_peak": 1174.9,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 69.5,
+              "power_w_mean": 127.57499999999999
+            },
+            "1": {
+              "util_pct_mean": 54.0,
+              "power_w_mean": 183.33499999999998
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.994
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 11,
+            "RX_MB_s_mean": 7036.272727272727,
+            "TX_MB_s_mean": 2227.6363636363635
+          },
+          "1": {
+            "samples": 11,
+            "RX_MB_s_mean": 9845.727272727272,
+            "TX_MB_s_mean": 1131.6363636363637
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 2,
+            "RX_MB_s_mean": 1241.0,
+            "TX_MB_s_mean": 40.0
+          },
+          "1": {
+            "samples": 2,
+            "RX_MB_s_mean": 120.5,
+            "TX_MB_s_mean": 50.5
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 63400,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:45:06Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-63400-measured3-attempt1.jsonl",
+      "samples": 14,
+      "peak_rss_gib": 54.86410903930664,
+      "min_mem_available_gib": 102.01180267333984,
+      "peak_ram_used_gib": 59.12081527709961,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 63400,
+        "completion_tokens": 256,
+        "total_tokens": 63656,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What `docs/media/make_figures.py` does\n\n`docs/media/make_figures.py` is a small, self-contained Python generator that produces the two SVG illustrations used in the README's \"How does it work?\" section: `docs/media/how-it-works.svg` and `docs/media/guess-and-check.svg`. Its stated goal is to draw those figures in the *same visual language as the Strata web app itself*, so the documentation and the running product look like one design system rather than two.\n\nThe script does this in three layers:\n\n1. **Shared design tokens.** It reads three real assets from the repository: the app's icon sprite (`serve/web/sprite.svg`), its embedded font (`serve/web/fonts/outfit-latin-wght.woff2`, SIL OFL 1.1), and the app's CSS custom-property palette, which is *re-declared inline* in the generated SVG's `<style>` block (the `CSS` string). The font is base64-embedded so the SVG renders identically when opened directly in a browser, with no external fetches. The palette is duplicated for light and dark mode inside a `@media (prefers-color-scheme: dark)` block, so",
+      "reasoning": "",
+      "actual_prompt_tokens": 63400,
+      "generated_tokens": 256,
+      "ttft_s": 11.8005818699894,
+      "total_wall_s": 13.954542594990926,
+      "api_decode_wall_s": 2.153960725001525,
+      "prompt_processing_wall_s": 11.6597,
+      "decode_wall_s": 2.1679,
+      "pp_tps": 5437.5,
+      "tg_tps": 118.1,
+      "draft_tokens": 206,
+      "accepted_tokens": 139,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 63400,
+        "prompt_ms": 11659.7,
+        "prompt_per_token_ms": 0.184,
+        "prompt_per_second": 5437.5,
+        "predicted_n": 256,
+        "predicted_ms": 2167.9,
+        "predicted_per_token_ms": 8.468,
+        "predicted_per_second": 118.1,
+        "draft_n": 206,
+        "draft_n_accepted": 139,
+        "at": 1791049520
+      },
+      "acceptance_pct": 67.47572815533981,
+      "mean_accepted_length": 1.188034188034188,
+      "final_logical_context_tokens": 63656,
+      "final_kv_occupancy_tokens": 63655,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 117,
+      "mean_committed_length": 2.1880341880341883,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.997
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197427.075532248,
+      "t_first_monotonic_s": 197438.876114118,
+      "t_end_monotonic_s": 197441.030074843,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.19607925415039062,
+          "pss_sample_wall": 1791049505.6121411,
+          "pss_read_wall_s": 0.0026737109874375165
+        },
+        "829932": {
+          "pss_gib": 54.49240589141846,
+          "pss_sample_wall": 1791049506.0910177,
+          "pss_read_wall_s": 0.47887529598665424
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.196502685546875,
+          "pss_sample_wall": 1791049520.3932257,
+          "pss_read_wall_s": 0.0028955499874427915
+        },
+        "829932": {
+          "pss_gib": 54.49260330200195,
+          "pss_sample_wall": 1791049520.8723772,
+          "pss_read_wall_s": 0.4791508459893521
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 63400,
+      "repeat_tag": "63400-measured3-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 13,
+          "system_cpu_pct_mean": 13.569230769230769,
+          "system_cpu_pct_peak": 73.6,
+          "process_cpu_pct_mean": 208.43076923076922,
+          "process_cpu_pct_peak": 1174.3,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 71.38461538461539,
+              "power_w_mean": 258.6953846153846
+            },
+            "1": {
+              "util_pct_mean": 85.61538461538461,
+              "power_w_mean": 246.33307692307693
+            }
+          }
+        },
+        "prefill": {
+          "samples": 11,
+          "system_cpu_pct_mean": 6.972727272727273,
+          "system_cpu_pct_peak": 7.4,
+          "process_cpu_pct_mean": 102.36363636363636,
+          "process_cpu_pct_peak": 105.3,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 80.54545454545455,
+              "power_w_mean": 281.69454545454545
+            },
+            "1": {
+              "util_pct_mean": 87.81818181818181,
+              "power_w_mean": 256.27363636363634
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 49.849999999999994,
+          "system_cpu_pct_peak": 73.6,
+          "process_cpu_pct_mean": 791.8,
+          "process_cpu_pct_peak": 1174.3,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 21.0,
+              "power_w_mean": 132.2
+            },
+            "1": {
+              "util_pct_mean": 73.5,
+              "power_w_mean": 191.66
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.997
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 11,
+            "RX_MB_s_mean": 8322.727272727272,
+            "TX_MB_s_mean": 1048.090909090909
+          },
+          "1": {
+            "samples": 11,
+            "RX_MB_s_mean": 9434.181818181818,
+            "TX_MB_s_mean": 1039.0
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 2,
+            "RX_MB_s_mean": 22.5,
+            "TX_MB_s_mean": 40.0
+          },
+          "1": {
+            "samples": 2,
+            "RX_MB_s_mean": 112.0,
+            "TX_MB_s_mean": 42.5
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 127000,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:46:05Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-127000-measured1-attempt1.jsonl",
+      "samples": 25,
+      "peak_rss_gib": 55.21034240722656,
+      "min_mem_available_gib": 101.65778350830078,
+      "peak_ram_used_gib": 59.47483444213867,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 127000,
+        "completion_tokens": 256,
+        "total_tokens": 127256,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "## What the last file does\n\n`include/strata/core/session.hpp` is the header for the engine's top-level host loop: it declares the state a single sequence needs (`SessionState`) and the functions that drive one token through all 48 layers. Its central design decision is that CUDA graphs are captured per *layer*, not per *token*: everything that changes between tokens (position, step counts, expert ids) arrives through fixed-address device buffers, while the host loop decides when each layer runs. That host-side ordering is what lets the CPU expert pool overlap with GPU work via the doorbell protocol declared in `layer.hpp`.\n\nThe file's most important structural content is the `SessionState` struct. It owns:\n\n- The gated-residual stack `R` (hc \u00d7 n_embd), shared by every block.\n- Per-layer state for the two mixer families: 36 GDN recurrent/conv states and 12 QSA states (KV pools, indexer pools, rope tables), plus shared scratch arenas (`GdnBuffers`, `QsaBuffers`, `MoEBuffers`, `BlockBuffers`).\n- The layer-range carve (`layer_lo`/`layer_hi`, `qsa_ord0`, `gdn_ord",
+      "reasoning": "",
+      "actual_prompt_tokens": 127000,
+      "generated_tokens": 256,
+      "ttft_s": 22.552161779021844,
+      "total_wall_s": 24.659340376005275,
+      "api_decode_wall_s": 2.107178596983431,
+      "prompt_processing_wall_s": 22.300099999999997,
+      "decode_wall_s": 2.124,
+      "pp_tps": 5695.0,
+      "tg_tps": 120.5,
+      "draft_tokens": 203,
+      "accepted_tokens": 150,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 127000,
+        "prompt_ms": 22300.1,
+        "prompt_per_token_ms": 0.176,
+        "prompt_per_second": 5695.0,
+        "predicted_n": 256,
+        "predicted_ms": 2124.0,
+        "predicted_per_token_ms": 8.297,
+        "predicted_per_second": 120.5,
+        "draft_n": 203,
+        "draft_n_accepted": 150,
+        "at": 1791049589
+      },
+      "acceptance_pct": 73.89162561576354,
+      "mean_accepted_length": 1.4150943396226414,
+      "final_logical_context_tokens": 127256,
+      "final_kv_occupancy_tokens": 127255,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 106,
+      "mean_committed_length": 2.4150943396226414,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.993
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197486.025881591,
+      "t_first_monotonic_s": 197508.57804337,
+      "t_end_monotonic_s": 197510.685221967,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.2000579833984375,
+          "pss_sample_wall": 1791049564.4647512,
+          "pss_read_wall_s": 0.002644369989866391
+        },
+        "829932": {
+          "pss_gib": 54.7157678604126,
+          "pss_sample_wall": 1791049564.93626,
+          "pss_read_wall_s": 0.47150824300479144
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.2031097412109375,
+          "pss_sample_wall": 1791049590.0344684,
+          "pss_read_wall_s": 0.003042798984097317
+        },
+        "829932": {
+          "pss_gib": 54.72263431549072,
+          "pss_sample_wall": 1791049590.5049517,
+          "pss_read_wall_s": 0.47048258199356496
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 127000,
+      "repeat_tag": "127000-measured1-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 24,
+          "system_cpu_pct_mean": 15.25,
+          "system_cpu_pct_peak": 82.6,
+          "process_cpu_pct_mean": 211.025,
+          "process_cpu_pct_peak": 1316.7,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 78.0,
+              "power_w_mean": 279.69083333333333
+            },
+            "1": {
+              "util_pct_mean": 87.58333333333333,
+              "power_w_mean": 262.00708333333336
+            }
+          }
+        },
+        "prefill": {
+          "samples": 22,
+          "system_cpu_pct_mean": 10.64090909090909,
+          "system_cpu_pct_peak": 15.8,
+          "process_cpu_pct_mean": 134.9909090909091,
+          "process_cpu_pct_peak": 179.9,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 81.0909090909091,
+              "power_w_mean": 292.2977272727273
+            },
+            "1": {
+              "util_pct_mean": 90.86363636363636,
+              "power_w_mean": 269.9531818181818
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 65.94999999999999,
+          "system_cpu_pct_peak": 82.6,
+          "process_cpu_pct_mean": 1047.4,
+          "process_cpu_pct_peak": 1316.7,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 44.0,
+              "power_w_mean": 141.015
+            },
+            "1": {
+              "util_pct_mean": 51.5,
+              "power_w_mean": 174.6
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.993
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 20,
+            "RX_MB_s_mean": 7439.2,
+            "TX_MB_s_mean": 1229.95
+          },
+          "1": {
+            "samples": 20,
+            "RX_MB_s_mean": 10659.65,
+            "TX_MB_s_mean": 1380.15
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 2,
+            "RX_MB_s_mean": 49.0,
+            "TX_MB_s_mean": 31.0
+          },
+          "1": {
+            "samples": 2,
+            "RX_MB_s_mean": 30.5,
+            "TX_MB_s_mean": 29.0
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 127000,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:46:34Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-127000-measured2-attempt1.jsonl",
+      "samples": 25,
+      "peak_rss_gib": 55.159488677978516,
+      "min_mem_available_gib": 101.61445999145508,
+      "peak_ram_used_gib": 59.518157958984375,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 127000,
+        "completion_tokens": 256,
+        "total_tokens": 127256,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "## What the last file does\n\n`include/strata/core/session.hpp` is the header for the engine's per-sequence session state and the host-side loop that drives one token through all 48 layers of the model. It is the composition layer that sits above the per-block kernels (`layer.hpp`) and below the driver (`generate.cpp` / `serve`), and its job is to own everything that is *not* a weight but *is* per-sequence:\n\n- **`SessionState`** bundles the per-layer state and scratch: one shared `GdnBuffers` scratch set plus a per-layer `gdn_state` array for the 36 GDN layers; a `QsaState` per QSA layer (KV pools, indexer pooled keys, rope tables, per-token step counts in device memory) plus shared `QsaBuffers` scratch; the `MoEBuffers`, the `BlockBuffers` (the gated-residual stack `R`, `mixed`, `inject`, head scratch), and the pinned `Doorbell` handoff between GPU and CPU expert pool.\n- **The layer-range carve** (`layer_lo/layer_hi`, `qsa_ord0/qsa_alloc`, `gdn_ord0/gdn",
+      "reasoning": "",
+      "actual_prompt_tokens": 127000,
+      "generated_tokens": 256,
+      "ttft_s": 22.48823571400135,
+      "total_wall_s": 24.63409382198006,
+      "api_decode_wall_s": 2.145858107978711,
+      "prompt_processing_wall_s": 22.2392,
+      "decode_wall_s": 2.1637,
+      "pp_tps": 5710.6,
+      "tg_tps": 118.3,
+      "draft_tokens": 225,
+      "accepted_tokens": 154,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 127000,
+        "prompt_ms": 22239.2,
+        "prompt_per_token_ms": 0.175,
+        "prompt_per_second": 5710.6,
+        "predicted_n": 256,
+        "predicted_ms": 2163.7,
+        "predicted_per_token_ms": 8.452,
+        "predicted_per_second": 118.3,
+        "draft_n": 225,
+        "draft_n_accepted": 154,
+        "at": 1791049619
+      },
+      "acceptance_pct": 68.44444444444444,
+      "mean_accepted_length": 1.4951456310679612,
+      "final_logical_context_tokens": 127256,
+      "final_kv_occupancy_tokens": 127256,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 103,
+      "mean_committed_length": 2.4951456310679614,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.994
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197515.857843383,
+      "t_first_monotonic_s": 197538.346079097,
+      "t_end_monotonic_s": 197540.491937205,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.2031097412109375,
+          "pss_sample_wall": 1791049594.2981231,
+          "pss_read_wall_s": 0.0026726920041255653
+        },
+        "829932": {
+          "pss_gib": 54.72263431549072,
+          "pss_sample_wall": 1791049594.7652316,
+          "pss_read_wall_s": 0.4671065830043517
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.20395278930664062,
+          "pss_sample_wall": 1791049619.8410368,
+          "pss_read_wall_s": 0.0027816600049845874
+        },
+        "829932": {
+          "pss_gib": 54.72263813018799,
+          "pss_sample_wall": 1791049620.3219624,
+          "pss_read_wall_s": 0.48092438399908133
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 127000,
+      "repeat_tag": "127000-measured2-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 24,
+          "system_cpu_pct_mean": 14.645833333333334,
+          "system_cpu_pct_peak": 93.0,
+          "process_cpu_pct_mean": 210.64166666666668,
+          "process_cpu_pct_peak": 1475.4,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 84.75,
+              "power_w_mean": 280.84250000000003
+            },
+            "1": {
+              "util_pct_mean": 89.79166666666667,
+              "power_w_mean": 263.75958333333335
+            }
+          }
+        },
+        "prefill": {
+          "samples": 22,
+          "system_cpu_pct_mean": 9.636363636363637,
+          "system_cpu_pct_peak": 14.1,
+          "process_cpu_pct_mean": 128.90454545454546,
+          "process_cpu_pct_peak": 170.0,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 88.72727272727273,
+              "power_w_mean": 293.09227272727276
+            },
+            "1": {
+              "util_pct_mean": 93.31818181818181,
+              "power_w_mean": 271.9877272727273
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 69.75,
+          "system_cpu_pct_peak": 93.0,
+          "process_cpu_pct_mean": 1109.75,
+          "process_cpu_pct_peak": 1475.4,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 41.0,
+              "power_w_mean": 146.095
+            },
+            "1": {
+              "util_pct_mean": 51.0,
+              "power_w_mean": 173.25
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.994
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 21,
+            "RX_MB_s_mean": 7047.285714285715,
+            "TX_MB_s_mean": 926.6190476190476
+          },
+          "1": {
+            "samples": 21,
+            "RX_MB_s_mean": 9739.238095238095,
+            "TX_MB_s_mean": 1212.8095238095239
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 2,
+            "RX_MB_s_mean": 119.5,
+            "TX_MB_s_mean": 113.0
+          },
+          "1": {
+            "samples": 2,
+            "RX_MB_s_mean": 142.0,
+            "TX_MB_s_mean": 55.5
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 127000,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:47:05Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-127000-measured3-attempt1.jsonl",
+      "samples": 25,
+      "peak_rss_gib": 55.163848876953125,
+      "min_mem_available_gib": 101.57004165649414,
+      "peak_ram_used_gib": 59.56257629394531,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 127000,
+        "completion_tokens": 256,
+        "total_tokens": 127256,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "## What the last file does\n\n`include/strata/core/session.hpp` is the header for the engine's per-sequence session state and the host-side loop that drives one token through all 48 layers. It is the composition point where the per-layer kernels (`layer.hpp`), the gated-residual stack, the two mixer families (36 GDN layers and 12 QSA layers, selected by `is_qsa_layer`), and the CPU expert pool meet.\n\nThe central type is `SessionState`, which owns everything a sequence needs that is *not* a weight:\n\n- **Per-layer state.** `gdn_state` holds the 36 GDN recurrences plus conv history; `qsa_states` holds the 12 QSA KV pools and indexer state (with a shared RoPE table borrowed via `qsa_states[primary]`). Scratch buffers (`gdn`, `qsa_bufs`, `moe`, `block`) are shared because layers never run concurrently.\n- **The gated residual stack `R`** \u2014 `(hc, n_embd)` floats, read and written by every block.\n- **The layer-range carve** (`layer_lo/layer_hi`, `qsa_ord0",
+      "reasoning": "",
+      "actual_prompt_tokens": 127000,
+      "generated_tokens": 256,
+      "ttft_s": 22.502544112998294,
+      "total_wall_s": 24.451109097979497,
+      "api_decode_wall_s": 1.9485649849812035,
+      "prompt_processing_wall_s": 22.2531,
+      "decode_wall_s": 1.9643,
+      "pp_tps": 5707.1,
+      "tg_tps": 130.3,
+      "draft_tokens": 217,
+      "accepted_tokens": 164,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 127000,
+        "prompt_ms": 22253.1,
+        "prompt_per_token_ms": 0.175,
+        "prompt_per_second": 5707.1,
+        "predicted_n": 256,
+        "predicted_ms": 1964.3,
+        "predicted_per_token_ms": 7.673,
+        "predicted_per_second": 130.3,
+        "draft_n": 217,
+        "draft_n_accepted": 164,
+        "at": 1791049650
+      },
+      "acceptance_pct": 75.57603686635944,
+      "mean_accepted_length": 1.7634408602150538,
+      "final_logical_context_tokens": 127256,
+      "final_kv_occupancy_tokens": 127256,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 93,
+      "mean_committed_length": 2.763440860215054,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.995
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197546.500629131,
+      "t_first_monotonic_s": 197569.003173244,
+      "t_end_monotonic_s": 197570.951738229,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.20395278930664062,
+          "pss_sample_wall": 1791049624.9338064,
+          "pss_read_wall_s": 0.002746980026131496
+        },
+        "829932": {
+          "pss_gib": 54.722639083862305,
+          "pss_sample_wall": 1791049625.4116275,
+          "pss_read_wall_s": 0.47782002500025555
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.2047882080078125,
+          "pss_sample_wall": 1791049650.2982972,
+          "pss_read_wall_s": 0.00277523000841029
+        },
+        "829932": {
+          "pss_gib": 54.72616672515869,
+          "pss_sample_wall": 1791049650.7657828,
+          "pss_read_wall_s": 0.4674857729987707
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 127000,
+      "repeat_tag": "127000-measured3-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 24,
+          "system_cpu_pct_mean": 14.641666666666667,
+          "system_cpu_pct_peak": 97.3,
+          "process_cpu_pct_mean": 211.82083333333333,
+          "process_cpu_pct_peak": 1545.5,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 79.33333333333333,
+              "power_w_mean": 277.92083333333335
+            },
+            "1": {
+              "util_pct_mean": 87.16666666666667,
+              "power_w_mean": 262.3829166666667
+            }
+          }
+        },
+        "prefill": {
+          "samples": 22,
+          "system_cpu_pct_mean": 9.427272727272728,
+          "system_cpu_pct_peak": 15.8,
+          "process_cpu_pct_mean": 126.75909090909092,
+          "process_cpu_pct_peak": 179.1,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 82.81818181818181,
+              "power_w_mean": 289.75272727272727
+            },
+            "1": {
+              "util_pct_mean": 90.72727272727273,
+              "power_w_mean": 270.3231818181818
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 72.0,
+          "system_cpu_pct_peak": 97.3,
+          "process_cpu_pct_mean": 1147.5,
+          "process_cpu_pct_peak": 1545.5,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 41.0,
+              "power_w_mean": 147.76999999999998
+            },
+            "1": {
+              "util_pct_mean": 48.0,
+              "power_w_mean": 175.04000000000002
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.995
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 21,
+            "RX_MB_s_mean": 7092.428571428572,
+            "TX_MB_s_mean": 747.6666666666666
+          },
+          "1": {
+            "samples": 21,
+            "RX_MB_s_mean": 12143.333333333334,
+            "TX_MB_s_mean": 1170.0
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 1,
+            "RX_MB_s_mean": 588.0,
+            "TX_MB_s_mean": 90.0
+          },
+          "1": {
+            "samples": 1,
+            "RX_MB_s_mean": 70.0,
+            "TX_MB_s_mean": 79.0
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 259500,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:48:51Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-259500-measured1-attempt1.jsonl",
+      "samples": 49,
+      "peak_rss_gib": 55.193687438964844,
+      "min_mem_available_gib": 101.54032135009766,
+      "peak_ram_used_gib": 59.5922966003418,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 259500,
+        "completion_tokens": 256,
+        "total_tokens": 259756,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "## What the last file does\n\n`serve/server.py` is the HTTP API layer of Strata (plan v0.3 P8). It exposes OpenAI Chat Completions (`POST /v1/chat/completions`) and Anthropic Messages (`POST /v1/messages`) endpoints, plus metadata endpoints (`/v1/models`, `/models`, `/props`, `/slots`, `/health`, `/mcp`), and translates between text and the engine's token-id protocol. Its main pieces:\n\n- **Engine adapters.** `Engine` is a protocol (`generate(ids, max_new, sampling, cancel) -> iterator of token ids`). `MockEngine` replays scripted completions for tests. `StrataEngine` keeps one resident `strata --serve` process, talks to it over stdin/stdout (`GEN <max_new> [sampling keys] <ids>` in, `T <id>` lines out, `DONE ...` at the end), parses `READY`, `INFO`, `PP` (prompt progress), and `DONE` lines into `self.last` (prompt/decode timings, drafts, hit rates, expert-tier counters). It handles engine death (`EngineDied`, `death_note()` reading the log tail for issue #2",
+      "reasoning": "",
+      "actual_prompt_tokens": 259500,
+      "generated_tokens": 256,
+      "ttft_s": 46.12078563999967,
+      "total_wall_s": 48.332066543982364,
+      "api_decode_wall_s": 2.211280903982697,
+      "prompt_processing_wall_s": 45.62,
+      "decode_wall_s": 2.2315,
+      "pp_tps": 5688.3,
+      "tg_tps": 114.7,
+      "draft_tokens": 216,
+      "accepted_tokens": 161,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 259500,
+        "prompt_ms": 45620.0,
+        "prompt_per_token_ms": 0.176,
+        "prompt_per_second": 5688.3,
+        "predicted_n": 256,
+        "predicted_ms": 2231.5,
+        "predicted_per_token_ms": 8.717,
+        "predicted_per_second": 114.7,
+        "draft_n": 216,
+        "draft_n_accepted": 161,
+        "at": 1791049780
+      },
+      "acceptance_pct": 74.53703703703704,
+      "mean_accepted_length": 1.6597938144329898,
+      "final_logical_context_tokens": 259756,
+      "final_kv_occupancy_tokens": 259757,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 97,
+      "mean_committed_length": 2.65979381443299,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.992
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197652.633546218,
+      "t_first_monotonic_s": 197698.754331858,
+      "t_end_monotonic_s": 197700.965612762,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.21207427978515625,
+          "pss_sample_wall": 1791049730.8398907,
+          "pss_read_wall_s": 0.002917238976806402
+        },
+        "829932": {
+          "pss_gib": 54.731709480285645,
+          "pss_sample_wall": 1791049731.3070533,
+          "pss_read_wall_s": 0.46716126301907934
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.21821212768554688,
+          "pss_sample_wall": 1791049780.3154056,
+          "pss_read_wall_s": 0.003011779976077378
+        },
+        "829932": {
+          "pss_gib": 54.74257755279541,
+          "pss_sample_wall": 1791049780.7839596,
+          "pss_read_wall_s": 0.4685538180056028
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 259500,
+      "repeat_tag": "259500-measured1-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 48,
+          "system_cpu_pct_mean": 15.389583333333334,
+          "system_cpu_pct_peak": 96.9,
+          "process_cpu_pct_mean": 212.59791666666666,
+          "process_cpu_pct_peak": 1539.5,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 84.64583333333333,
+              "power_w_mean": 296.79854166666667
+            },
+            "1": {
+              "util_pct_mean": 88.8125,
+              "power_w_mean": 275.80145833333336
+            }
+          }
+        },
+        "prefill": {
+          "samples": 46,
+          "system_cpu_pct_mean": 12.145652173913044,
+          "system_cpu_pct_peak": 25.0,
+          "process_cpu_pct_mean": 159.54347826086956,
+          "process_cpu_pct_peak": 268.0,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 86.45652173913044,
+              "power_w_mean": 302.64630434782606
+            },
+            "1": {
+              "util_pct_mean": 90.3695652173913,
+              "power_w_mean": 280.3854347826087
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 90.0,
+          "system_cpu_pct_peak": 96.9,
+          "process_cpu_pct_mean": 1432.85,
+          "process_cpu_pct_peak": 1539.5,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 43.0,
+              "power_w_mean": 162.3
+            },
+            "1": {
+              "util_pct_mean": 53.0,
+              "power_w_mean": 170.37
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.992
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 42,
+            "RX_MB_s_mean": 7539.738095238095,
+            "TX_MB_s_mean": 1497.8095238095239
+          },
+          "1": {
+            "samples": 42,
+            "RX_MB_s_mean": 9473.714285714286,
+            "TX_MB_s_mean": 1164.952380952381
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 3,
+            "RX_MB_s_mean": 218.33333333333334,
+            "TX_MB_s_mean": 65.66666666666667
+          },
+          "1": {
+            "samples": 3,
+            "RX_MB_s_mean": 392.0,
+            "TX_MB_s_mean": 21.0
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 259500,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:49:50Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-259500-measured2-attempt1.jsonl",
+      "samples": 49,
+      "peak_rss_gib": 55.196533203125,
+      "min_mem_available_gib": 101.61348724365234,
+      "peak_ram_used_gib": 59.51913070678711,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 259500,
+        "completion_tokens": 256,
+        "total_tokens": 259756,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What `serve/server.py` does\n\n`serve/server.py` is the HTTP API layer of the Strata project (plan v0.3 P8). It is the bridge between OpenAI/Anthropic-compatible clients and the C++ inference engine, and it deliberately owns *no* model logic: the engine boundary is \"token ids in, token ids out\" (`Engine.generate(prompt_ids, max_new, sampling, cancel) -> iterator of token ids`). Everything else \u2014 chat-template rendering, request normalization, incremental output parsing into reasoning/content/tool-call events \u2014 lives in `serve/frontend.py`, which this module imports.\n\nConcretely, the file provides:\n\n- **Endpoints.** `POST /v1/chat/completions` (OpenAI, streaming and non-streaming), `POST /v1/messages` (Anthropic), plus metadata endpoints (`/v1/models`, `/models`, `/props`, `/slots`, `/health`, `/mcp`). Requests whose prompt plus output cap exceed the engine context are rejected with 400, never silently truncated.\n- **Engine adapters.** `StrataEngine` keeps one resident `strata --serve` process, speaking a line protocol (`GEN <max_new> [sampling keys] <ids",
+      "reasoning": "",
+      "actual_prompt_tokens": 259500,
+      "generated_tokens": 256,
+      "ttft_s": 46.11456630198518,
+      "total_wall_s": 48.23163884499809,
+      "api_decode_wall_s": 2.1170725430129096,
+      "prompt_processing_wall_s": 45.6181,
+      "decode_wall_s": 2.1363000000000003,
+      "pp_tps": 5688.5,
+      "tg_tps": 119.8,
+      "draft_tokens": 227,
+      "accepted_tokens": 164,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 259500,
+        "prompt_ms": 45618.1,
+        "prompt_per_token_ms": 0.176,
+        "prompt_per_second": 5688.5,
+        "predicted_n": 256,
+        "predicted_ms": 2136.3,
+        "predicted_per_token_ms": 8.345,
+        "predicted_per_second": 119.8,
+        "draft_n": 227,
+        "draft_n_accepted": 164,
+        "at": 1791049838
+      },
+      "acceptance_pct": 72.2466960352423,
+      "mean_accepted_length": 1.7446808510638299,
+      "final_logical_context_tokens": 259756,
+      "final_kv_occupancy_tokens": 259757,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 94,
+      "mean_committed_length": 2.74468085106383,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.995
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197711.292461581,
+      "t_first_monotonic_s": 197757.407027883,
+      "t_end_monotonic_s": 197759.524100426,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.21821212768554688,
+          "pss_sample_wall": 1791049789.5068917,
+          "pss_read_wall_s": 0.002999969001393765
+        },
+        "829932": {
+          "pss_gib": 54.74257755279541,
+          "pss_sample_wall": 1791049789.9750001,
+          "pss_read_wall_s": 0.4681072109960951
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.2210540771484375,
+          "pss_sample_wall": 1791049838.8715975,
+          "pss_read_wall_s": 0.00320048799039796
+        },
+        "829932": {
+          "pss_gib": 54.742581367492676,
+          "pss_sample_wall": 1791049839.3511567,
+          "pss_read_wall_s": 0.4795594790193718
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 259500,
+      "repeat_tag": "259500-measured2-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 48,
+          "system_cpu_pct_mean": 15.835416666666667,
+          "system_cpu_pct_peak": 93.1,
+          "process_cpu_pct_mean": 215.25833333333333,
+          "process_cpu_pct_peak": 1482.0,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 83.875,
+              "power_w_mean": 296.48520833333333
+            },
+            "1": {
+              "util_pct_mean": 93.83333333333333,
+              "power_w_mean": 278.0204166666667
+            }
+          }
+        },
+        "prefill": {
+          "samples": 46,
+          "system_cpu_pct_mean": 12.747826086956522,
+          "system_cpu_pct_peak": 24.6,
+          "process_cpu_pct_mean": 164.41304347826087,
+          "process_cpu_pct_peak": 278.5,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 85.69565217391305,
+              "power_w_mean": 302.5604347826087
+            },
+            "1": {
+              "util_pct_mean": 95.76086956521739,
+              "power_w_mean": 281.9765217391304
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 86.85,
+          "system_cpu_pct_peak": 93.1,
+          "process_cpu_pct_mean": 1384.7,
+          "process_cpu_pct_peak": 1482.0,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 42.0,
+              "power_w_mean": 156.755
+            },
+            "1": {
+              "util_pct_mean": 49.5,
+              "power_w_mean": 187.03
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.995
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 42,
+            "RX_MB_s_mean": 8194.761904761905,
+            "TX_MB_s_mean": 1210.1666666666667
+          },
+          "1": {
+            "samples": 42,
+            "RX_MB_s_mean": 9312.92857142857,
+            "TX_MB_s_mean": 1214.3809523809523
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 2,
+            "RX_MB_s_mean": 87.5,
+            "TX_MB_s_mean": 49.0
+          },
+          "1": {
+            "samples": 2,
+            "RX_MB_s_mean": 29.0,
+            "TX_MB_s_mean": 29.0
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    },
+    {
+      "model": "IQ3S-v0138",
+      "kind": "measured",
+      "context": null,
+      "repeat": null,
+      "actual_prompt_tokens_tokenizer": 259500,
+      "requested_generated_tokens": 256,
+      "time_utc": "2026-10-03T17:50:48Z",
+      "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-259500-measured3-attempt1.jsonl",
+      "samples": 49,
+      "peak_rss_gib": 55.199771881103516,
+      "min_mem_available_gib": 101.57852935791016,
+      "peak_ram_used_gib": 59.5540885925293,
+      "peak_vram0_gib": 23.294921875,
+      "peak_vram1_gib": 23.416015625,
+      "abort": null,
+      "usage": {
+        "prompt_tokens": 259500,
+        "completion_tokens": 256,
+        "total_tokens": 259756,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "text": "# What the last file does\n\nThe final file in the listing is `serve/server.py`, the HTTP API layer of the Strata project (plan v0.3 P8). It is the bridge between OpenAI/Anthropic-compatible clients and the C++ inference engine, and it deliberately contains no model or GPU code: its boundary with the engine is \"token ids in, token ids out.\"\n\nIts responsibilities, as visible in the supplied portion:\n\n1. **Engine adapters.** `Engine` is a protocol (`generate(ids, max_new, sampling, cancel) -> Iterator[int]`). `MockEngine` replays a scripted completion for tests without a GPU. `StrataEngine` keeps one `strata --serve` process resident, speaks a line protocol over stdin/stdout (`GEN <max_new> [sampling keys] <ids>` in, `T <id>` / `PP ...` / `DONE ...` / `ERR ...` out), parses the `READY` handshake (context size, stop support), pumps stdout on a thread into a queue so a request can wait with a 10-second timeout and emit SSE heartbeats (`yield None`), forwards per-request sampling (temperature, top_p, top_k clamped to",
+      "reasoning": "",
+      "actual_prompt_tokens": 259500,
+      "generated_tokens": 256,
+      "ttft_s": 46.030900351994205,
+      "total_wall_s": 48.33112382699619,
+      "api_decode_wall_s": 2.300223475001985,
+      "prompt_processing_wall_s": 45.521,
+      "decode_wall_s": 2.3207,
+      "pp_tps": 5700.7,
+      "tg_tps": 110.3,
+      "draft_tokens": 244,
+      "accepted_tokens": 156,
+      "cache_reused_tokens": 0,
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 259500,
+        "prompt_ms": 45521.0,
+        "prompt_per_token_ms": 0.175,
+        "prompt_per_second": 5700.7,
+        "predicted_n": 256,
+        "predicted_ms": 2320.7,
+        "predicted_per_token_ms": 9.065,
+        "predicted_per_second": 110.3,
+        "draft_n": 244,
+        "draft_n_accepted": 156,
+        "at": 1791049896
+      },
+      "acceptance_pct": 63.9344262295082,
+      "mean_accepted_length": 1.5294117647058822,
+      "final_logical_context_tokens": 259756,
+      "final_kv_occupancy_tokens": 259757,
+      "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+      "verify_rounds": 102,
+      "mean_committed_length": 2.5294117647058822,
+      "expert_tiers": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.997
+      },
+      "status": "OK",
+      "t_start_monotonic_s": 197769.450194722,
+      "t_first_monotonic_s": 197815.481095074,
+      "t_end_monotonic_s": 197817.781318549,
+      "tool_call_events": [],
+      "finish_reasons": [
+        "length"
+      ],
+      "pss_before": {
+        "829922": {
+          "pss_gib": 0.2210540771484375,
+          "pss_sample_wall": 1791049847.6516793,
+          "pss_read_wall_s": 0.0030467379838228226
+        },
+        "829932": {
+          "pss_gib": 54.742581367492676,
+          "pss_sample_wall": 1791049848.1250796,
+          "pss_read_wall_s": 0.4733984310005326
+        }
+      },
+      "pss_after": {
+        "829922": {
+          "pss_gib": 0.22359466552734375,
+          "pss_sample_wall": 1791049897.1282349,
+          "pss_read_wall_s": 0.0031929280085023493
+        },
+        "829932": {
+          "pss_gib": 54.743279457092285,
+          "pss_sample_wall": 1791049897.6157005,
+          "pss_read_wall_s": 0.48746548101189546
+        }
+      },
+      "pss_note": "Outside timed request",
+      "candidate": "IQ3S-v0138",
+      "sampling": {
+        "temperature": 0
+      },
+      "config": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/configs/IQ3S-v0138.json",
+      "target_prompt_tokens": 259500,
+      "repeat_tag": "259500-measured3-attempt1",
+      "selected_layer_split_K": 25,
+      "GPU0_slots": 10112,
+      "GPU1_slots": 8376,
+      "GPU0_expert_cache_gib": 18.23,
+      "GPU1_expert_cache_gib": 16.84,
+      "note": "Startup cache capacity; prompt path can borrow slots temporarily. Not a per-request residency gauge.",
+      "telemetry_aggregates": {
+        "request": {
+          "samples": 48,
+          "system_cpu_pct_mean": 15.610416666666667,
+          "system_cpu_pct_peak": 89.0,
+          "process_cpu_pct_mean": 211.70833333333334,
+          "process_cpu_pct_peak": 1415.9,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 84.29166666666667,
+              "power_w_mean": 297.90416666666664
+            },
+            "1": {
+              "util_pct_mean": 93.5,
+              "power_w_mean": 277.33125
+            }
+          }
+        },
+        "prefill": {
+          "samples": 46,
+          "system_cpu_pct_mean": 12.734782608695653,
+          "system_cpu_pct_peak": 23.4,
+          "process_cpu_pct_mean": 164.38260869565218,
+          "process_cpu_pct_peak": 241.9,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 86.21739130434783,
+              "power_w_mean": 303.3832608695652
+            },
+            "1": {
+              "util_pct_mean": 95.54347826086956,
+              "power_w_mean": 281.4226086956522
+            }
+          }
+        },
+        "decode": {
+          "samples": 2,
+          "system_cpu_pct_mean": 81.75,
+          "system_cpu_pct_peak": 89.0,
+          "process_cpu_pct_mean": 1300.2,
+          "process_cpu_pct_peak": 1415.9,
+          "CPU_note": "Process CPU uses 100% per logical CPU; system CPU is normalized over 16 vCPUs. Decode256 is short: only a few1Hz samples. TTFT divides phases approximately.",
+          "GPU": {
+            "0": {
+              "util_pct_mean": 40.0,
+              "power_w_mean": 171.885
+            },
+            "1": {
+              "util_pct_mean": 46.5,
+              "power_w_mean": 183.23000000000002
+            }
+          }
+        }
+      },
+      "logical_expert_file_reads_decode": {
+        "ram_blobs": 0,
+        "file_blobs": 0,
+        "file_mb": 0.0,
+        "hit_rate": 0.997
+      },
+      "PCIe_telemetry_file": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/telemetry/IQ3S-v0138-pcie-dmon.log",
+      "PCIe_note": "Continuous nvidia-smi dmon PCIe RX/TX; raw timestamps permit phase alignment; unsupported counters remain unavailable.",
+      "valid_measured": true,
+      "invalid_reasons": [],
+      "Strata_HEAD": "99f3dbd0b21d1401b3769e0c0d963913607f380b",
+      "Strata_version": "0.1.38",
+      "build_variant": "default",
+      "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+      "full_config": {
+        "exe": "/srv/ai/strata-v0.1.38/build-default/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--expert-cache",
+          "auto",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--max-context",
+          "262144",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768"
+        ],
+        "cwd": "/srv/ai/strata-v0.1.38",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/logs/IQ3S-v0138-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18085,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "auto",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "environment_overrides": {},
+        "env": {
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "benchmark_prompt_policy": "offline-no-tools-system-v2",
+        "host": "127.0.0.1",
+        "effective_experiment_environment": {
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        },
+        "benchmark_environment": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_SPLIT_OWN": null,
+          "STRATA_KV_ROT": null,
+          "STRATA_REFILL_SERIAL": null,
+          "STRATA_SPEC_COUPLED": null
+        }
+      },
+      "full_engine_command": [
+        "/srv/ai/strata-v0.1.38/build-default/strata",
+        "--serve",
+        "--pack",
+        "/srv/ai/models/strata/packs/iq3_s",
+        "--native",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+        "--ple-gguf",
+        "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+        "--expert-profile",
+        "/srv/ai/strata/data/expert-profile.bin",
+        "--expert-cache",
+        "auto",
+        "--prefill",
+        "auto",
+        "--spec",
+        "4",
+        "--spec-min-p",
+        "0.5",
+        "--mtp",
+        "/srv/ai/models/strata/mtp/rt",
+        "--max-context",
+        "262144",
+        "--kv",
+        "int8",
+        "--kv-resident",
+        "32768",
+        "--layer-split",
+        "auto"
+      ],
+      "topology": "layer_split",
+      "PCIe_aggregates": {
+        "prefill": {
+          "0": {
+            "samples": 42,
+            "RX_MB_s_mean": 8693.309523809523,
+            "TX_MB_s_mean": 2158.785714285714
+          },
+          "1": {
+            "samples": 42,
+            "RX_MB_s_mean": 10697.5,
+            "TX_MB_s_mean": 1184.2142857142858
+          }
+        },
+        "decode": {
+          "0": {
+            "samples": 2,
+            "RX_MB_s_mean": 191.5,
+            "TX_MB_s_mean": 81.0
+          },
+          "1": {
+            "samples": 2,
+            "RX_MB_s_mean": 96.0,
+            "TX_MB_s_mean": 69.5
+          }
+        }
+      },
+      "PCIe_sampling_note": "nvidia-smi dmon1Hz, UTCsecond granularity; phase alignment approximate \u00b11s, sparse decode samples. Bandwidth counters not expert-specific."
+    }
+  ],
+  "independent_audit": {
+    "status": "PASS",
+    "measured_count": 12,
+    "unique_measured_nonce_count": 12,
+    "per_request": [
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-31400-measured1-attempt1.json",
+        "payload_sha256": "90291b39cd5422dca5c06710ea920485229ae50f846af72949cd5586be876585",
+        "nonce": "2803bdfe48b14c898a89c0835e7bb24e",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-31400-measured2-attempt1.json",
+        "payload_sha256": "3bd9d827a5ab9aff90c13df9889095f0e85ff135e3c58d7593693dac1e793f4b",
+        "nonce": "51ff1bc16a974ecba535bda19a2032b8",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-31400-measured3-attempt1.json",
+        "payload_sha256": "aae4e7be426a92e661cc62ef4c9cce183467f138513854b7548c4e6ad265ab07",
+        "nonce": "a45291eb47a74837bb1dbb10c0358281",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-63400-measured1-attempt1.json",
+        "payload_sha256": "6768857a45c75b9557cdd22441b57f7a6942b78c70e97a97ae885bd351aa71ca",
+        "nonce": "fd3e9b87da364428a55f3df7f0c86e39",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-63400-measured2-attempt1.json",
+        "payload_sha256": "6bf0d16a7373a51ef7a619c9b1158cad0512e64bd9d36eacc6f349c5512e5999",
+        "nonce": "e6ae14656e324e4b996df27d810812e0",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-63400-measured3-attempt1.json",
+        "payload_sha256": "51881b781db54509236674d110a697320024c13305238b904c68d757c70784d8",
+        "nonce": "ea3ce12409a24d198ef8d2f6a4c24842",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-127000-measured1-attempt1.json",
+        "payload_sha256": "36af136f68e523ef933e2ac9b51482bde1d9ae8607a4a861f05b054a22e21df4",
+        "nonce": "bfe8f916666a4ad5beede2e88d5de4e8",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-127000-measured2-attempt1.json",
+        "payload_sha256": "931eacc605498d8f59b47baffcf01225d2848674da18fae9dc78045e5c07ee9b",
+        "nonce": "bd67b040f17f4e4a9b47d67bfa00dd49",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-127000-measured3-attempt1.json",
+        "payload_sha256": "323b2234c1a4a846e80cf2d78b8a5a2b94f1552965c26413fd02f37b76244c2e",
+        "nonce": "660e87062a1f4994a7d2935d507b0285",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-259500-measured1-attempt1.json",
+        "payload_sha256": "fa4b1836b913d570fb389da4975224d43b7b8756f26a5abf609da8c01888da91",
+        "nonce": "1ccaf90e3d014ae8894d3286eac87393",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-259500-measured2-attempt1.json",
+        "payload_sha256": "4d993992065c0877cd7b3d83e17e1a42f9f33f7ff713a71c46261805742615e3",
+        "nonce": "ec338529ee99471a833b8d198c8553f3",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      },
+      {
+        "raw": "/srv/ai/benchmarks/strata-qwen38/iq3s-v0138-2x4090/raw/IQ3S-v0138-259500-measured3-attempt1.json",
+        "payload_sha256": "86b9857ea2c5085005a2ef78ade1aec67a37972af1a4b579e7eb2011176332e0",
+        "nonce": "55dcbea932e44ed5be55ddd5c4552d26",
+        "status": "VALID_256_OUTPUT_ZERO_REUSE_EXACT_ACTUAL_TOKENS"
+      }
+    ],
+    "model_files_unchanged": true,
+    "clean_upstream_checkout": true,
+    "GPU_apps_after": "",
+    "PSS_sampling": "Only before/after timed request, no live PSS read;1Hz sampler source preserved."
+  },
+  "decode_system_cpu_peak_all_runs": 97.3,
+  "decode_per_core_cpu_peak_all_runs": 100.0
+}

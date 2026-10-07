@@ -1,0 +1,104 @@
+{
+  "model": "QUALITY-v0132-layer-no-borrow",
+  "kind": "quality",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 102,
+  "requested_generated_tokens": 8192,
+  "time_utc": "2026-10-02T04:32:27Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/QUALITY-v0132-layer-no-borrow-C-repository-architecture.jsonl",
+  "samples": 47,
+  "peak_rss_gib": 77.26066589355469,
+  "min_mem_available_gib": 79.58396911621094,
+  "peak_ram_used_gib": 81.54864883422852,
+  "peak_vram0_gib": 19.033203125,
+  "peak_vram1_gib": 18.869140625,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 2482,
+    "total_tokens": 2584,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "# Repository Architecture: Local Coding-Agent Service\n\n## 1. High-Level Overview\n\nThis service acts as a **single-process gateway** that:\n1. Accepts OpenAI-compatible `/v1/chat/completions` streaming requests.\n2. Serializes all inference requests through a **single resident GPU worker** (to avoid GPU contention and ensure deterministic resource usage).\n3. Manages **prompt caching** correctly across multiple clients by isolating cache contexts per session/client.\n4. Records per-request metrics (latency, token counts, cache hits/misses).\n5. Handles cancellation, process failure recovery, and graceful shutdown.\n\n### Key Design Principles\n- **Single GPU Worker**: One long-lived subprocess owns the GPU. The main service communicates via IPC (Unix domain sockets or named pipes).\n- **Sequential Queue**: Requests are queued and processed one-at-a-time to prevent GPU memory thrashing and ensure fairness.\n- **Client-Isolated Caching**: Prompt caches are keyed by `(client_id, conversation_id)` to prevent cross-client cache pollution.\n- **Crash Resilience**: If the GPU worker crashes, the service detects it, restarts it, and re-queues pending requests.\n\n---\n\n## 2. Module Boundaries\n\n| Module | Responsibility |\n|--------|----------------|\n| `api/` | HTTP server, OpenAI-compatible request parsing, streaming response formatting, client identification. |\n| `queue/` | In-memory FIFO queue with priority support, request lifecycle management, cancellation propagation. |\n| `worker/` | Manages the resident GPU inference subprocess, IPC communication, health checks, restart logic. |\n| `cache/` | Prompt cache manager: key generation, eviction policy, cache hit/miss tracking. Isolated per client/session. |\n| `metrics/` | Per-request metric collection, aggregation, export (Prometheus-compatible or JSON logs). |\n| `config/` | Configuration loading, validation, defaults. |\n| `models/` | Shared data structures: `Request`, `Response`, `Metrics`, `CacheEntry`. |\n| `utils/` | Logging, error handling, IPC helpers, tokenization utilities. |\n\n---\n\n## 3. Concrete File Tree\n\n```\ncoding-agent-service/\n├── README.md\n├── pyproject.toml\n├── src/\n│   └── coding_agent/\n│       ├── __init__.py\n│       ├── main.py                  # Entry point: starts API server + worker manager\n│       ├── config/\n│       │   ├── __init__.py\n│       │   ├── loader.py            # Load YAML/env config\n│       │   └── schema.py            # Pydantic models for config\n│       ├── api/\n│       │   ├── __init__.py\n│       │   ├── server.py            # FastAPI/Starlette app setup\n│       │   ├── routes.py            # /v1/chat/completions endpoint\n│       │   ├── serializers.py       # OpenAI request/response parsing\n│       │   └── middleware.py        # Client ID extraction, logging\n│       ├── queue/\n│       │   ├── __init__.py\n│       │   ├── manager.py           # Async FIFO queue, request lifecycle\n│       │   ├── request.py           # QueuedRequest dataclass\n│       │   └── cancellation.py      # Cancellation token propagation\n│       ├── worker/\n│       │   ├── __init__.py\n│       │   ├── manager.py           # Subprocess lifecycle, restart logic\n│       │   ├── ipc.py               # Unix socket / pipe communication\n│       │   ├── protocol.py          # Message format for IPC\n│       │   └── health.py            # Heartbeat, crash detection\n│       ├── cache/\n│       │   ├── __init__.py\n│       │   ├── manager.py           # Cache orchestration\n│       │   ├── store.py             # In-memory LRU cache with TTL\n│       │   ├── keying.py            # Generate cache keys from (client_id, conv_id, prompt_hash)\n│       │   └── policy.py            # Eviction, TTL, size limits\n│       ├── metrics/\n│       │   ├── __init__.py\n│       │   ├── collector.py         # Per-request metric recording\n│       │   ├── exporter.py          # Prometheus / JSON log export\n│       │   └── models.py            # Metric dataclasses\n│       ├── models/\n│       │   ├── __init__.py\n│       │   ├── request.py           # InferenceRequest\n│       │   ├── response.py          # InferenceResponse, StreamChunk\n│       │   └── metrics.py           # RequestMetrics\n│       └── utils/\n│           ├── __init__.py\n│           ├── logging.py           # Structured logging setup\n│           ├── errors.py            # Custom exceptions\n│           └── tokens.py            # Token counting helpers\n├── tests/\n│   ├── test_api.py\n│   ├── test_queue.py\n│   ├── test_cache.py\n│   ├── test_worker_recovery.py\n│   └── test_metrics.py\n├── configs/\n│   └── default.yaml\n└── scripts/\n    └── run_worker.py                # Standalone GPU worker entry point\n```\n\n---\n\n## 4. Request Flow\n\n```\nClient → API Server → Queue Manager → Worker Manager → GPU Worker\n                ↓              ↓              ↓\n           Metrics        Cache Check     IPC Send\n           Collector       (hit/miss)      Stream Back\n```\n\n1. **API Layer**: Parses OpenAI request, extracts `client_id` (from header or API key), generates `request_id`.\n2. **Cache Check**: Before queuing, check if prompt is cached for this `(client_id, conversation_id)`. If hit, return cached response immediately (no GPU work).\n3. **Queue**: Enqueue `QueuedRequest` with cancellation token.\n4. **Worker Dispatch**: Worker manager pops next request, sends via IPC to GPU worker.\n5. **Streaming**: GPU worker streams tokens back via IPC. API layer forwards as SSE to client.\n6. **Metrics**: Record start/end time, token counts, cache status, errors.\n7. **Cache Update**: On successful completion, store full response in cache keyed by `(client_id, conversation_id, prompt_hash)`.\n\n---\n\n## 5. Cancellation\n\n- **Client Disconnect**: FastAPI detects client disconnect via `request.is_disconnected()`.\n- **Cancellation Token**: Each `QueuedRequest` holds an `asyncio.Event` or `anyio.CancelScope`.\n- **Propagation**:\n  - If request is **in queue**: Remove from queue, mark as cancelled.\n  - If request is **in-flight**: Send `CANCEL` message via IPC to GPU worker. Worker aborts generation, releases GPU memory.\n  - If request is **completed**: No-op.\n- **Cleanup**: Cancelled requests do not update cache. Metrics record `status=cancelled`.\n\n---\n\n## 6. Process Failure Recovery\n\n### Detection\n- **Heartbeat**: GPU worker sends periodic heartbeats via IPC. If missed for `N` seconds, mark as dead.\n- **Exit Code**: Monitor subprocess exit code. Non-zero exit → crash.\n\n### Recovery Steps\n1. **Detect Crash**: Worker manager detects dead subprocess.\n2. **Fail In-Flight Requests**: All requests currently being processed by the dead worker are marked as `failed` with error `WORKER_CRASH`.\n3. **Restart Worker**: Spawn new GPU worker subprocess with same model/config.\n4. **Re-queue Pending**: Requests still in queue remain queued. They will be processed by the new worker.\n5. **Notify Clients**: In-flight requests receive an error response. Clients can retry.\n6. **Cache Preservation**: Cache is in the main process, so it survives worker restarts.\n\n### Idempotency\n- Requests include a `request_id`. If a client retries with the same `request_id`, the service can check if it was already processed (via metrics store) and return the cached result if available.\n\n---\n\n## 7. Prompt Caching Correctness Across Clients\n\n### Problem\nIf two clients send identical prompts, sharing a cache could leak data or cause incorrect responses if context differs.\n\n### Solution: Client-Isolated Cache Keys\n```python\ncache_key = hash(\n    client_id,          # Unique per API key or session\n    conversation_id,    # From request metadata\n    prompt_hash,        # SHA256 of serialized messages\n    model_version       # Model hash to invalidate on model update\n)\n```\n\n### Cache Store Design\n- **In-Memory LRU** with TTL (e.g., 1 hour).\n- **Per-Client Quotas**: Limit cache size per `client_id` to prevent one client from evicting others.\n- **No Cross-Client Sharing**: Even if prompts are identical, different `client_id` → different cache entries.\n- **Explicit Invalidation**: On model reload or config change, clear entire cache.\n\n### Why Not Share?\n- **Security**: Prevents information leakage between tenants.\n- **Correctness**: Different clients may have different system prompts, tools, or context windows.\n- **Simplicity**: Avoids complex cache coherence protocols.\n\n---\n\n## 8. Two Tradeoffs\n\n### Tradeoff 1: Sequential Queue vs. Parallel Batching\n\n| Aspect | Sequential Queue (Chosen) | Parallel Batching |\n|--------|---------------------------|-------------------|\n| **GPU Utilization** | Lower (idle between requests) | Higher (batch multiple requests) |\n| **Latency** | Predictable, no head-of-line blocking beyond queue | Lower average latency under load |\n| **Complexity** | Simple, deterministic | Complex: batch formation, timeout, partial failures |\n| **Memory** | Lower peak GPU memory | Higher peak (batch size × context) |\n| **Fairness** | Strict FIFO | Harder to guarantee fairness |\n\n**Why Sequential?** For a local coding-agent service, predictability and simplicity outweigh throughput. GPU memory is limited; batching risks OOM. Sequential processing ensures stable latency and easier debugging.\n\n### Tradeoff 2: In-Process Cache vs. External Cache (Redis)\n\n| Aspect | In-Process Cache (Chosen) | External Cache (Redis) |\n|--------|---------------------------|------------------------|\n| **Latency** | Sub-millisecond | ~1–5 ms network round-trip |\n| **Durability** | Lost on service restart | Survives restarts |\n| **Scalability** | Single-process only | Multi-process/service sharing |\n| **Complexity** | Minimal dependencies | Requires Redis deployment |\n| **Consistency** | Simple, no race conditions | Requires locking or versioning |\n\n**Why In-Process?** The service is single-process by design (one GPU worker). An external cache adds operational overhead and latency for marginal benefit. Cache is ephemeral (TTL-based), so durability is not critical. If scaling to multiple GPU workers is needed later, this can be revisited.\n\n---\n\n## 9. Summary\n\nThis architecture prioritizes **simplicity, correctness, and resilience** for a local single-GPU service. By isolating the GPU worker, serializing requests, and using client-scoped caching, it avoids common pitfalls like cache pollution, GPU contention, and inconsistent state. Cancellation and crash recovery are handled at the orchestration layer, keeping the GPU worker stateless and easy to restart.",
+  "reasoning": "",
+  "actual_prompt_tokens": 102,
+  "generated_tokens": 2482,
+  "ttft_s": 2.1902958959981333,
+  "total_wall_s": 46.70103454299533,
+  "api_decode_wall_s": 44.5107386469972,
+  "prompt_processing_wall_s": 2.1546999999999996,
+  "decode_wall_s": 44.543099999999995,
+  "pp_tps": 47.3,
+  "tg_tps": 55.7,
+  "draft_tokens": 2171,
+  "accepted_tokens": 1470,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 102,
+    "prompt_ms": 2154.7,
+    "prompt_per_token_ms": 21.125,
+    "prompt_per_second": 47.3,
+    "predicted_n": 2482,
+    "predicted_ms": 44543.1,
+    "predicted_per_token_ms": 17.946,
+    "predicted_per_second": 55.7,
+    "draft_n": 2171,
+    "draft_n_accepted": 1470,
+    "at": 1790915594
+  },
+  "acceptance_pct": 67.71073238139107,
+  "mean_accepted_length": 1.4525691699604744,
+  "final_logical_context_tokens": 2584,
+  "final_kv_occupancy_tokens": 2583,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 1012,
+  "mean_committed_length": 2.4525691699604746,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.75
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 63468.43182065,
+  "t_first_monotonic_s": 63470.622116546,
+  "t_end_monotonic_s": 63515.132855193,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "310072": {
+      "pss_gib": 0.18345069885253906,
+      "pss_sample_wall": 1790915546.891126,
+      "pss_read_wall_s": 0.004554375002044253
+    },
+    "310080": {
+      "pss_gib": 76.9019660949707,
+      "pss_sample_wall": 1790915547.5612998,
+      "pss_read_wall_s": 0.6701723099977244
+    }
+  },
+  "pss_after": {
+    "310072": {
+      "pss_gib": 0.1834573745727539,
+      "pss_sample_wall": 1790915594.5231125,
+      "pss_read_wall_s": 0.008502049997332506
+    },
+    "310080": {
+      "pss_gib": 76.9019660949707,
+      "pss_sample_wall": 1790915595.5389926,
+      "pss_read_wall_s": 1.015879272003076
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "QUALITY-v0132-layer-no-borrow",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/QUALITY-v0132-layer-no-borrow.json"
+}

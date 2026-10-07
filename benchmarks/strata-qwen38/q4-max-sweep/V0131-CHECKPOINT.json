@@ -1,0 +1,2761 @@
+{
+  "status": "CHECKPOINT_V0131_NO_FURTHER_AUTOMATIC_PHASES",
+  "created": 1790893573.377029,
+  "version": {
+    "HEAD": "9259cad4cfa3543cd3b8decab5962672b968c649",
+    "tracked_git_status": "",
+    "version": "0.1.31",
+    "version_evidence": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-startup.json",
+    "engine_sha256": "94e6f39e637b06d312c5b5880be2ad7a093c0914aa77375649ab3dd95551ee26",
+    "build_info": {
+      "CMakeCache": "/srv/ai/strata/build/CMakeCache.txt",
+      "type": "Release",
+      "CUDA_arch": "89",
+      "CUDA_compiler": "/usr/local/cuda/bin/nvcc"
+    },
+    "environment_evidence": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/environment.json",
+    "CUDA": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Tue_Sep_01_08:45:21_PDT_2026\nCuda compilation tools, release 13.4, V13.4.92\nBuild cuda_13.4.r13.4/compiler.38855100_0",
+    "driver": "615.71.09\n615.71.09"
+  },
+  "phase_inventory": [
+    {
+      "phase": "single GPU resident",
+      "status": "COMPLETE",
+      "all_request_count": 2,
+      "measured_request_count": 1,
+      "smoke_warmup_count": 1,
+      "best_observed_by_TG": {
+        "candidate": "T0-control",
+        "actual_prompt_tokens": [
+          63399
+        ],
+        "output_tokens": 256,
+        "n": 1,
+        "PP_median": 1534.7,
+        "TG_median": 43.7,
+        "TTFT_median": 41.4581804820009,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T0-control-run1.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T0-control-run1-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "T0-control",
+          "actual_prompt_tokens": [
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1534.7,
+          "TG_median": 43.7,
+          "TTFT_median": 41.4581804820009,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T0-control-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T0-control-run1-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "single GPU full arena",
+      "status": "COMPLETE",
+      "all_request_count": 5,
+      "measured_request_count": 3,
+      "smoke_warmup_count": 2,
+      "best_observed_by_TG": {
+        "candidate": "T1-arena",
+        "actual_prompt_tokens": [
+          63400,
+          63400,
+          63400
+        ],
+        "output_tokens": 256,
+        "n": 3,
+        "PP_median": 1557.7,
+        "TG_median": 66.1,
+        "TTFT_median": 40.85351231200184,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run2.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run3.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run2-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run3-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "T1-arena",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 1557.7,
+          "TG_median": 66.1,
+          "TTFT_median": 40.85351231200184,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T1-arena-run3-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "2 GPU auto split",
+      "status": "COMPLETE",
+      "all_request_count": 5,
+      "measured_request_count": 3,
+      "smoke_warmup_count": 2,
+      "best_observed_by_TG": {
+        "candidate": "T2-auto",
+        "actual_prompt_tokens": [
+          63400,
+          63400,
+          63400
+        ],
+        "output_tokens": 256,
+        "n": 3,
+        "PP_median": 3179.5,
+        "TG_median": 104.3,
+        "TTFT_median": 20.075443524998263,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run2.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run3.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run2-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run3-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "T2-auto",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 3179.5,
+          "TG_median": 104.3,
+          "TTFT_median": 20.075443524998263,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T2-auto-run3-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "manual K screening",
+      "status": "COMPLETE",
+      "all_request_count": 18,
+      "measured_request_count": 9,
+      "smoke_warmup_count": 9,
+      "best_observed_by_TG": {
+        "candidate": "T3-K32",
+        "actual_prompt_tokens": [
+          63400
+        ],
+        "output_tokens": 256,
+        "n": 1,
+        "PP_median": 2160.9,
+        "TG_median": 96.4,
+        "TTFT_median": 29.47866727699875,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-run1.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-run1-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "T3-K32",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2160.9,
+          "TG_median": 96.4,
+          "TTFT_median": 29.47866727699875,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K26",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2268.3,
+          "TG_median": 94.7,
+          "TTFT_median": 28.093358375997923,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K26-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K26-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K22",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2234.2,
+          "TG_median": 94.0,
+          "TTFT_median": 28.512981625000975,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K24",
+          "actual_prompt_tokens": [
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2196.7,
+          "TG_median": 90.6,
+          "TTFT_median": 29.138736074000917,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K24-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K24-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K16",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2181.5,
+          "TG_median": 88.6,
+          "TTFT_median": 29.20402831300089,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K16-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K16-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K12",
+          "actual_prompt_tokens": [
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2095.3,
+          "TG_median": 85.2,
+          "TTFT_median": 30.399502633001248,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K12-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K12-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K36",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2062.2,
+          "TG_median": 81.8,
+          "TTFT_median": 30.895678207001765,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K36-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K36-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K28",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2167.3,
+          "TG_median": 72.5,
+          "TTFT_median": 29.52939264300221,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K28-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K28-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K20",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2149.6,
+          "TG_median": 68.1,
+          "TTFT_median": 29.76697287999923,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K20-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K20-run1-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "TOP3 K confirmations",
+      "status": "COMPLETE",
+      "all_request_count": 15,
+      "measured_request_count": 9,
+      "smoke_warmup_count": 6,
+      "best_observed_by_TG": {
+        "candidate": "T3-K22-confirm",
+        "actual_prompt_tokens": [
+          63399,
+          63399,
+          63399
+        ],
+        "output_tokens": 256,
+        "n": 3,
+        "PP_median": 2928.3,
+        "TG_median": 112.5,
+        "TTFT_median": 21.78468229400096,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run2.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run3.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run2-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run3-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "T3-K22-confirm",
+          "actual_prompt_tokens": [
+            63399,
+            63399,
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 2928.3,
+          "TG_median": 112.5,
+          "TTFT_median": 21.78468229400096,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K22-confirm-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K26-confirm",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 3135.9,
+          "TG_median": 106.3,
+          "TTFT_median": 20.356940154000768,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K26-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K26-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K26-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K26-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K26-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K26-confirm-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "T3-K32-confirm",
+          "actual_prompt_tokens": [
+            63399,
+            63399,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 2470.1,
+          "TG_median": 80.7,
+          "TTFT_median": 25.93169765499988,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T3-K32-confirm-run3-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "helper stripe/layer and capacity",
+      "status": "COMPLETE",
+      "all_request_count": 49,
+      "measured_request_count": 26,
+      "smoke_warmup_count": 23,
+      "best_observed_by_TG": {
+        "candidate": "T4-layer-5806-confirm",
+        "actual_prompt_tokens": [
+          63400,
+          63400,
+          63400
+        ],
+        "output_tokens": 256,
+        "n": 3,
+        "PP_median": 1556.7,
+        "TG_median": 67.8,
+        "TTFT_median": 40.881584891001694,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run2.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run3.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run2-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run3-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "T4-layer-5806-confirm",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 1556.7,
+          "TG_median": 67.8,
+          "TTFT_median": 40.881584891001694,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-confirm-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-5225-confirm",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 1557.8,
+          "TG_median": 66.8,
+          "TTFT_median": 40.86401350100277,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5225-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5225-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5225-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5225-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5225-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5225-confirm-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-3693-confirm",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 1556.9,
+          "TG_median": 66.2,
+          "TTFT_median": 40.87798918000044,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-3693-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-3693-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-3693-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-3693-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-3693-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-3693-confirm-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-layer-5806",
+          "actual_prompt_tokens": [
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1554.0,
+          "TG_median": 62.5,
+          "TTFT_median": 40.93998506200296,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5806-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-3693",
+          "actual_prompt_tokens": [
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1555.2,
+          "TG_median": 61.5,
+          "TTFT_median": 40.905846661000396,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-3693-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-3693-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-layer-3693",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1554.4,
+          "TG_median": 59.9,
+          "TTFT_median": 40.933187442002236,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-3693-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-3693-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-layer-5540",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1554.6,
+          "TG_median": 59.7,
+          "TTFT_median": 40.92505668100057,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5540-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5540-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-6648",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1553.7,
+          "TG_median": 59.7,
+          "TTFT_median": 40.95040337399769,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-6648-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-6648-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-7387",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1555.3,
+          "TG_median": 59.4,
+          "TTFT_median": 40.90321275899987,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-7387-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-7387-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-5225",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1552.8,
+          "TG_median": 59.3,
+          "TTFT_median": 40.97372282099968,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5225-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5225-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-5806",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1545.6,
+          "TG_median": 58.9,
+          "TTFT_median": 41.31452415300009,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5806-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5806-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-4354",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1553.9,
+          "TG_median": 58.7,
+          "TTFT_median": 40.942136902998755,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-4354-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-4354-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-layer-4354",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1555.4,
+          "TG_median": 57.9,
+          "TTFT_median": 40.913263452002866,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-4354-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-4354-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-layer-5225",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1545.4,
+          "TG_median": 57.0,
+          "TTFT_median": 41.31419665600333,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5225-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-5225-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-layer-2903",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1553.2,
+          "TG_median": 56.4,
+          "TTFT_median": 40.96116632399935,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-2903-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-2903-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-5540",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1544.1,
+          "TG_median": 56.1,
+          "TTFT_median": 41.35453171699919,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5540-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-5540-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-layer-7387",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1555.3,
+          "TG_median": 55.1,
+          "TTFT_median": 40.90904276100264,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-7387-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-7387-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-2903",
+          "actual_prompt_tokens": [
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1548.9,
+          "TG_median": 55.0,
+          "TTFT_median": 41.21093464099977,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-2903-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-2903-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-stripe-7387-static",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1553.4,
+          "TG_median": 45.2,
+          "TTFT_median": 40.9627398900011,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-7387-static-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-stripe-7387-static-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "T4-layer-6648",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1544.2,
+          "TG_median": 43.2,
+          "TTFT_median": 41.34239359099956,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-6648-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/T4-layer-6648-run1-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "static/adaptive",
+      "status": "COMPLETE",
+      "all_request_count": 10,
+      "measured_request_count": 6,
+      "smoke_warmup_count": 4,
+      "best_observed_by_TG": {
+        "candidate": "adapt-adaptive",
+        "actual_prompt_tokens": [
+          63400,
+          63399,
+          63400
+        ],
+        "output_tokens": 256,
+        "n": 3,
+        "PP_median": 2928.0,
+        "TG_median": 111.4,
+        "TTFT_median": 21.789543013001094,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run2.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run3.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run2-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run3-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "adapt-adaptive",
+          "actual_prompt_tokens": [
+            63400,
+            63399,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 2928.0,
+          "TG_median": 111.4,
+          "TTFT_median": 21.789543013001094,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-adaptive-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "adapt-static",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 2925.8,
+          "TG_median": 86.0,
+          "TTFT_median": 21.806062756000756,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-static-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-static-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-static-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-static-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-static-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/adapt-static-run3-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "worker screening",
+      "status": "COMPLETE",
+      "all_request_count": 12,
+      "measured_request_count": 6,
+      "smoke_warmup_count": 6,
+      "best_observed_by_TG": {
+        "candidate": "tune-workers-8",
+        "actual_prompt_tokens": [
+          63400
+        ],
+        "output_tokens": 256,
+        "n": 1,
+        "PP_median": 2233.5,
+        "TG_median": 101.3,
+        "TTFT_median": 28.575269106000633,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-8-run1.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-8-run1-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "tune-workers-8",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2233.5,
+          "TG_median": 101.3,
+          "TTFT_median": 28.575269106000633,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-8-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-8-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "tune-workers-12",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2252.9,
+          "TG_median": 99.3,
+          "TTFT_median": 28.284605872999236,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-12-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-12-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "tune-workers-14",
+          "actual_prompt_tokens": [
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2249.6,
+          "TG_median": 97.2,
+          "TTFT_median": 28.47470102400257,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-14-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-14-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "tune-workers-10",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2242.8,
+          "TG_median": 95.9,
+          "TTFT_median": 28.404833519998647,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-10-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-10-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "tune-workers-6",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2235.0,
+          "TG_median": 95.9,
+          "TTFT_median": 28.50304669400066,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-6-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-6-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "tune-workers-16",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2244.3,
+          "TG_median": 59.3,
+          "TTFT_median": 28.388017138000578,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-16-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-workers-16-run1-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "PCIe fraction screening",
+      "status": "COMPLETE",
+      "all_request_count": 4,
+      "measured_request_count": 2,
+      "smoke_warmup_count": 2,
+      "best_observed_by_TG": {
+        "candidate": "tune-pcie-0.2",
+        "actual_prompt_tokens": [
+          63400
+        ],
+        "output_tokens": 256,
+        "n": 1,
+        "PP_median": 2233.8,
+        "TG_median": 98.6,
+        "TTFT_median": 28.534615876997123,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-pcie-0.2-run1.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-pcie-0.2-run1-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "tune-pcie-0.2",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2233.8,
+          "TG_median": 98.6,
+          "TTFT_median": 28.534615876997123,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-pcie-0.2-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-pcie-0.2-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "tune-pcie-0",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2238.6,
+          "TG_median": 98.4,
+          "TTFT_median": 28.47213263100275,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-pcie-0-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-pcie-0-run1-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "min-p screening",
+      "status": "COMPLETE",
+      "all_request_count": 6,
+      "measured_request_count": 3,
+      "smoke_warmup_count": 3,
+      "best_observed_by_TG": {
+        "candidate": "tune-minp-0.3",
+        "actual_prompt_tokens": [
+          63399
+        ],
+        "output_tokens": 256,
+        "n": 1,
+        "PP_median": 2142.2,
+        "TG_median": 99.3,
+        "TTFT_median": 29.743193811998935,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-minp-0.3-run1.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-minp-0.3-run1-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "tune-minp-0.3",
+          "actual_prompt_tokens": [
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2142.2,
+          "TG_median": 99.3,
+          "TTFT_median": 29.743193811998935,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-minp-0.3-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-minp-0.3-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "tune-minp-0.5",
+          "actual_prompt_tokens": [
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2266.8,
+          "TG_median": 98.1,
+          "TTFT_median": 28.121849436000048,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-minp-0.5-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-minp-0.5-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "tune-minp-0.7",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2263.3,
+          "TG_median": 95.9,
+          "TTFT_median": 28.165411195997876,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-minp-0.7-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-minp-0.7-run1-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "local confirmation",
+      "status": "COMPLETE",
+      "all_request_count": 5,
+      "measured_request_count": 3,
+      "smoke_warmup_count": 2,
+      "best_observed_by_TG": {
+        "candidate": "tune-best-confirm",
+        "actual_prompt_tokens": [
+          63400,
+          63400,
+          63399
+        ],
+        "output_tokens": 256,
+        "n": 3,
+        "PP_median": 2921.0,
+        "TG_median": 104.1,
+        "TTFT_median": 21.856369686996914,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run2.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run3.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run2-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run3-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "tune-best-confirm",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 2921.0,
+          "TG_median": 104.1,
+          "TTFT_median": 21.856369686996914,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/tune-best-confirm-run3-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "MTP and matched control",
+      "status": "COMPLETE",
+      "all_request_count": 36,
+      "measured_request_count": 20,
+      "smoke_warmup_count": 16,
+      "best_observed_by_TG": {
+        "candidate": "MTP-spec3-confirm",
+        "actual_prompt_tokens": [
+          63400,
+          63400,
+          63400
+        ],
+        "output_tokens": 1024,
+        "n": 3,
+        "PP_median": 2917.1,
+        "TG_median": 111.5,
+        "TTFT_median": 21.872384644000704,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run2.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run3.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run2-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run3-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "MTP-spec3-confirm",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 1024,
+          "n": 3,
+          "PP_median": 2917.1,
+          "TG_median": 111.5,
+          "TTFT_median": 21.872384644000704,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-confirm-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "MTP-spec5",
+          "actual_prompt_tokens": [
+            63400,
+            63400
+          ],
+          "output_tokens": 1024,
+          "n": 2,
+          "PP_median": 2929.5,
+          "TG_median": 107.6,
+          "TTFT_median": 21.779703814998356,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "MTP-spec5-confirm",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 1024,
+          "n": 3,
+          "PP_median": 2928.0,
+          "TG_median": 107.1,
+          "TTFT_median": 21.79595527100173,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec5-confirm-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "MTP-spec3",
+          "actual_prompt_tokens": [
+            63400,
+            63400
+          ],
+          "output_tokens": 1024,
+          "n": 2,
+          "PP_median": 2913.75,
+          "TG_median": 105.2,
+          "TTFT_median": 21.896568583499175,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec3-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "MTP-spec2",
+          "actual_prompt_tokens": [
+            63400,
+            63400
+          ],
+          "output_tokens": 1024,
+          "n": 2,
+          "PP_median": 2905.45,
+          "TG_median": 102.75,
+          "TTFT_median": 21.968641661500442,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec2-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec2-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec2-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec2-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "MTP-best-local-minp-confirm",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 1024,
+          "n": 3,
+          "PP_median": 2916.0,
+          "TG_median": 102.7,
+          "TTFT_median": 21.88997866200225,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-best-local-minp-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-best-local-minp-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-best-local-minp-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-best-local-minp-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-best-local-minp-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-best-local-minp-confirm-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "MTP-spec4",
+          "actual_prompt_tokens": [
+            63400,
+            63400
+          ],
+          "output_tokens": 1024,
+          "n": 2,
+          "PP_median": 2906.1,
+          "TG_median": 99.65,
+          "TTFT_median": 21.988742420000563,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec4-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec4-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec4-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-spec4-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "MTP-default-baseline-confirm",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63400
+          ],
+          "output_tokens": 1024,
+          "n": 3,
+          "PP_median": 2909.8,
+          "TG_median": 91.0,
+          "TTFT_median": 21.938988339999923,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-default-baseline-confirm-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-default-baseline-confirm-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-default-baseline-confirm-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-default-baseline-confirm-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-default-baseline-confirm-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/MTP-default-baseline-confirm-run3-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "KV matrix",
+      "status": "COMPLETE",
+      "all_request_count": 28,
+      "measured_request_count": 16,
+      "smoke_warmup_count": 12,
+      "best_observed_by_TG": {
+        "candidate": "KV-int8-stream",
+        "actual_prompt_tokens": [
+          127000,
+          127000
+        ],
+        "output_tokens": 256,
+        "n": 2,
+        "PP_median": 2839.0,
+        "TG_median": 99.05,
+        "TTFT_median": 44.9930411815003,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-127000-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-127000-run2.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-127000-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-127000-run2-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "KV-int8-stream",
+          "actual_prompt_tokens": [
+            127000,
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 2,
+          "PP_median": 2839.0,
+          "TG_median": 99.05,
+          "TTFT_median": 44.9930411815003,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-127000-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-127000-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-127000-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-127000-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "KV-k8v4",
+          "actual_prompt_tokens": [
+            127000,
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 2,
+          "PP_median": 3004.35,
+          "TG_median": 97.44999999999999,
+          "TTFT_median": 42.54027832000065,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-k8v4-127000-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-k8v4-127000-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-k8v4-127000-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-k8v4-127000-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "KV-k8v4",
+          "actual_prompt_tokens": [
+            259500,
+            259500
+          ],
+          "output_tokens": 256,
+          "n": 2,
+          "PP_median": 3179.8,
+          "TG_median": 96.5,
+          "TTFT_median": 82.11519891949865,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-k8v4-259500-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-k8v4-259500-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-k8v4-259500-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-k8v4-259500-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "KV-int8-stream",
+          "actual_prompt_tokens": [
+            259500,
+            259500
+          ],
+          "output_tokens": 256,
+          "n": 2,
+          "PP_median": 2883.3500000000004,
+          "TG_median": 92.9,
+          "TTFT_median": 90.5045909190012,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-259500-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-259500-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-259500-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-stream-259500-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "KV-q4_0",
+          "actual_prompt_tokens": [
+            127000,
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 2,
+          "PP_median": 3025.3,
+          "TG_median": 92.85,
+          "TTFT_median": 42.288669442001265,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-q4_0-127000-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-q4_0-127000-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-q4_0-127000-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-q4_0-127000-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "KV-int8-full",
+          "actual_prompt_tokens": [
+            259500,
+            259500
+          ],
+          "output_tokens": 256,
+          "n": 2,
+          "PP_median": 3162.25,
+          "TG_median": 89.0,
+          "TTFT_median": 82.58133935250225,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-full-259500-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-full-259500-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-full-259500-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-full-259500-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "KV-int8-full",
+          "actual_prompt_tokens": [
+            127000,
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 2,
+          "PP_median": 2955.7,
+          "TG_median": 88.30000000000001,
+          "TTFT_median": 43.50191143849952,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-full-127000-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-full-127000-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-full-127000-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-int8-full-127000-run2-request.json"
+          ]
+        },
+        {
+          "candidate": "KV-q4_0",
+          "actual_prompt_tokens": [
+            259500,
+            259500
+          ],
+          "output_tokens": 256,
+          "n": 2,
+          "PP_median": 3118.55,
+          "TG_median": 87.19999999999999,
+          "TTFT_median": 84.06448378400091,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-q4_0-259500-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-q4_0-259500-run2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-q4_0-259500-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/KV-q4_0-259500-run2-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "prefill chunk",
+      "status": "COMPLETE",
+      "all_request_count": 26,
+      "measured_request_count": 13,
+      "smoke_warmup_count": 13,
+      "best_observed_by_TG": {
+        "candidate": "prefill-auto-confirm",
+        "actual_prompt_tokens": [
+          127000,
+          127000,
+          127000
+        ],
+        "output_tokens": 256,
+        "n": 3,
+        "PP_median": 3014.6,
+        "TG_median": 100.8,
+        "TTFT_median": 42.39357169000141,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run2.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run3.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run2-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run3-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "prefill-auto-confirm",
+          "actual_prompt_tokens": [
+            127000,
+            127000,
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 3014.6,
+          "TG_median": 100.8,
+          "TTFT_median": 42.39357169000141,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-confirm-127000-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "prefill-8192-confirm",
+          "actual_prompt_tokens": [
+            127000,
+            127000,
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 3015.8,
+          "TG_median": 97.8,
+          "TTFT_median": 42.370361746994604,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-confirm-127000-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-confirm-127000-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-confirm-127000-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-confirm-127000-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-confirm-127000-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-confirm-127000-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "prefill-8192",
+          "actual_prompt_tokens": [
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 3006.9,
+          "TG_median": 93.4,
+          "TTFT_median": 42.494151589002286,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-127000-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-127000-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "prefill-8192-256K",
+          "actual_prompt_tokens": [
+            259500
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 3131.0,
+          "TG_median": 93.4,
+          "TTFT_median": 83.40651898200304,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-256K-259500-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-8192-256K-259500-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "prefill-6144",
+          "actual_prompt_tokens": [
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 2419.2,
+          "TG_median": 91.9,
+          "TTFT_median": 52.76018952100276,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-6144-127000-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-6144-127000-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "prefill-auto",
+          "actual_prompt_tokens": [
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 3012.0,
+          "TG_median": 89.7,
+          "TTFT_median": 42.45811454300565,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-127000-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-127000-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "prefill-4096",
+          "actual_prompt_tokens": [
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 1732.4,
+          "TG_median": 87.5,
+          "TTFT_median": 73.56667592599842,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-4096-127000-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-4096-127000-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "prefill-auto-256K",
+          "actual_prompt_tokens": [
+            259500
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 3079.5,
+          "TG_median": 86.8,
+          "TTFT_median": 85.38382453600207,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-256K-259500-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-auto-256K-259500-run1-request.json"
+          ]
+        },
+        {
+          "candidate": "prefill-2048",
+          "actual_prompt_tokens": [
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 1,
+          "PP_median": 915.8,
+          "TG_median": 63.6,
+          "TTFT_median": 139.26997217299504,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-2048-127000-run1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/prefill-2048-127000-run1-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "final matrices",
+      "status": "COMPLETE",
+      "all_request_count": 34,
+      "measured_request_count": 24,
+      "smoke_warmup_count": 10,
+      "best_observed_by_TG": {
+        "candidate": "FINAL-A",
+        "actual_prompt_tokens": [
+          31400,
+          31400,
+          31400
+        ],
+        "output_tokens": 256,
+        "n": 3,
+        "PP_median": 2424.0,
+        "TG_median": 103.9,
+        "TTFT_median": 13.035481264996633,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run1.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run2.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run3.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run1-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run2-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run3-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "FINAL-A",
+          "actual_prompt_tokens": [
+            31400,
+            31400,
+            31400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 2424.0,
+          "TG_median": 103.9,
+          "TTFT_median": 13.035481264996633,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-31400-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "FINAL-A",
+          "actual_prompt_tokens": [
+            63400,
+            63400,
+            63399
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 2793.2,
+          "TG_median": 98.7,
+          "TTFT_median": 22.836598270994727,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-63400-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "FINAL-A",
+          "actual_prompt_tokens": [
+            259500,
+            259500,
+            259500
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 3196.6,
+          "TG_median": 92.1,
+          "TTFT_median": 82.36858696499985,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-259500-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "FINAL-A",
+          "actual_prompt_tokens": [
+            127000,
+            127000,
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 2956.7,
+          "TG_median": 86.9,
+          "TTFT_median": 43.209885336997104,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-A-127000-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "FINAL-B",
+          "actual_prompt_tokens": [
+            63400,
+            63399,
+            63400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 1447.6,
+          "TG_median": 63.2,
+          "TTFT_median": 43.96083803199872,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-63400-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-63400-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-63400-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-63400-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-63400-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-63400-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "FINAL-B",
+          "actual_prompt_tokens": [
+            31400,
+            31400,
+            31400
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 1418.4,
+          "TG_median": 61.3,
+          "TTFT_median": 22.243683404994954,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-31400-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-31400-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-31400-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-31400-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-31400-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-31400-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "FINAL-B",
+          "actual_prompt_tokens": [
+            127000,
+            127000,
+            127000
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 1440.5,
+          "TG_median": 60.2,
+          "TTFT_median": 88.44565147200046,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-127000-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-127000-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-127000-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-127000-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-127000-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-127000-run3-request.json"
+          ]
+        },
+        {
+          "candidate": "FINAL-B",
+          "actual_prompt_tokens": [
+            259500,
+            259500,
+            259500
+          ],
+          "output_tokens": 256,
+          "n": 3,
+          "PP_median": 1428.1,
+          "TG_median": 52.3,
+          "TTFT_median": 182.33224592100305,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-259500-run1.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-259500-run2.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-259500-run3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-259500-run1-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-259500-run2-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/FINAL-B-259500-run3-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "long decode",
+      "status": "COMPLETE",
+      "all_request_count": 5,
+      "measured_request_count": 4,
+      "smoke_warmup_count": 1,
+      "best_observed_by_TG": {
+        "candidate": "LONG-FINAL-A",
+        "actual_prompt_tokens": [
+          63400,
+          63400
+        ],
+        "output_tokens": 4096,
+        "n": 2,
+        "PP_median": 2780.2,
+        "TG_median": 93.05000000000001,
+        "TTFT_median": 22.955048459501995,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-64K-4096-greedy.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-64K-4096-sampled.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-64K-4096-greedy-request.json",
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-64K-4096-sampled-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "LONG-FINAL-A",
+          "actual_prompt_tokens": [
+            63400,
+            63400
+          ],
+          "output_tokens": 4096,
+          "n": 2,
+          "PP_median": 2780.2,
+          "TG_median": 93.05000000000001,
+          "TTFT_median": 22.955048459501995,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-64K-4096-greedy.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-64K-4096-sampled.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-64K-4096-greedy-request.json",
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-64K-4096-sampled-request.json"
+          ]
+        },
+        {
+          "candidate": "LONG-FINAL-A",
+          "actual_prompt_tokens": [
+            126999
+          ],
+          "output_tokens": 8192,
+          "n": 1,
+          "PP_median": 3005.6,
+          "TG_median": 87.8,
+          "TTFT_median": 42.515298742000596,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-128K-8192-sampled.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-128K-8192-sampled-request.json"
+          ]
+        },
+        {
+          "candidate": "LONG-FINAL-A",
+          "actual_prompt_tokens": [
+            127000
+          ],
+          "output_tokens": 4096,
+          "n": 1,
+          "PP_median": 3015.2,
+          "TG_median": 84.2,
+          "TTFT_median": 42.389182400998834,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-128K-4096-sampled.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/LONG-FINAL-A-128K-4096-sampled-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "agentic",
+      "status": "PARTIAL",
+      "all_request_count": 11,
+      "measured_request_count": 11,
+      "smoke_warmup_count": 0,
+      "best_observed_by_TG": {
+        "candidate": "AGENT-63400",
+        "actual_prompt_tokens": [
+          72601
+        ],
+        "output_tokens": 1024,
+        "n": 1,
+        "PP_median": 404.6,
+        "TG_median": 97.7,
+        "TTFT_median": 5.0009042029996635,
+        "raw_results": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn4.json"
+        ],
+        "raw_requests": [
+          "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn4-request.json"
+        ]
+      },
+      "results": [
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            72601
+          ],
+          "output_tokens": 1024,
+          "n": 1,
+          "PP_median": 404.6,
+          "TG_median": 97.7,
+          "TTFT_median": 5.0009042029996635,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn4.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn4-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            84968
+          ],
+          "output_tokens": 864,
+          "n": 1,
+          "PP_median": 299.8,
+          "TG_median": 93.6,
+          "TTFT_median": 3.579005856998265,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn10.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn10-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            63400
+          ],
+          "output_tokens": 1024,
+          "n": 1,
+          "PP_median": 2581.8,
+          "TG_median": 93.0,
+          "TTFT_median": 24.720736900999327,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn0.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn0-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            78592
+          ],
+          "output_tokens": 1024,
+          "n": 1,
+          "PP_median": 328.3,
+          "TG_median": 92.9,
+          "TTFT_median": 4.783294034001301,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn7.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn7-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            69663
+          ],
+          "output_tokens": 1024,
+          "n": 1,
+          "PP_median": 332.4,
+          "TG_median": 92.1,
+          "TTFT_median": 4.711364938004408,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn3.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn3-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            67125
+          ],
+          "output_tokens": 1024,
+          "n": 1,
+          "PP_median": 288.6,
+          "TG_median": 91.9,
+          "TTFT_median": 3.666604975995142,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn2.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn2-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            76115
+          ],
+          "output_tokens": 965,
+          "n": 1,
+          "PP_median": 298.8,
+          "TG_median": 91.5,
+          "TTFT_median": 3.5854759740032023,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn6.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn6-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            83063
+          ],
+          "output_tokens": 892,
+          "n": 1,
+          "PP_median": 238.5,
+          "TG_median": 90.7,
+          "TTFT_median": 2.9661992659966927,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn9.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn9-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            81530
+          ],
+          "output_tokens": 870,
+          "n": 1,
+          "PP_median": 395.1,
+          "TG_median": 90.4,
+          "TTFT_median": 5.0340280669988715,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn8.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn8-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            74289
+          ],
+          "output_tokens": 813,
+          "n": 1,
+          "PP_median": 386.5,
+          "TG_median": 89.5,
+          "TTFT_median": 4.558026253005664,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn5.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn5-request.json"
+          ]
+        },
+        {
+          "candidate": "AGENT-63400",
+          "actual_prompt_tokens": [
+            65088
+          ],
+          "output_tokens": 1024,
+          "n": 1,
+          "PP_median": 386.9,
+          "TG_median": 89.4,
+          "TTFT_median": 4.544186025996169,
+          "raw_results": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn1.json"
+          ],
+          "raw_requests": [
+            "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-turn1-request.json"
+          ]
+        }
+      ],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "compaction",
+      "status": "NOT_EXECUTED",
+      "all_request_count": 0,
+      "measured_request_count": 0,
+      "smoke_warmup_count": 0,
+      "best_observed_by_TG": null,
+      "results": [],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "quality",
+      "status": "NOT_EXECUTED",
+      "all_request_count": 0,
+      "measured_request_count": 0,
+      "smoke_warmup_count": 0,
+      "best_observed_by_TG": null,
+      "results": [],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    },
+    {
+      "phase": "needle",
+      "status": "NOT_EXECUTED",
+      "all_request_count": 0,
+      "measured_request_count": 0,
+      "smoke_warmup_count": 0,
+      "best_observed_by_TG": null,
+      "results": [],
+      "scope_note": "Different output lengths/context/tasks are separate groups; ranking is descriptive, not controlled A/B."
+    }
+  ],
+  "calibrator": {
+    "status": "COMPLETE",
+    "path": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/calibration.json",
+    "settings": {
+      "--pcie-frac": "0.00",
+      "--spec-min-p": "0.70",
+      "--pool-workers": "10"
+    }
+  },
+  "excluded": [
+    {
+      "status": "EXCLUDED_TELEMETRY_PSS",
+      "path": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded",
+      "request_count": 14,
+      "raw_results": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K22-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K20-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K12-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K24-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K26-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K16-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K22-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K20-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K16-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K26-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K28-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K24-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K28-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/pss-1s-excluded/raw/T3-K12-run1.json"
+      ],
+      "note": "Preserved. 1Hz PSS scans of ~73GiB arena took ~0.65s, perturbing timing."
+    },
+    {
+      "status": "EXCLUDED_INCOMPLETE_OUTPUT",
+      "path": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded",
+      "request_count": 14,
+      "raw_results": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec3-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec2-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec2-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec4-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec3-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec5-warmup.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec2-warmup.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec5-smoke.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec3-warmup.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec2-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec4-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec4-run2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec5-run1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/mtp-original-task-excluded/raw/MTP-spec4-warmup.json"
+      ],
+      "note": "See archived reason/logs; not a completed candidate."
+    },
+    {
+      "status": "EXCLUDED_INCOMPLETE_AGENTIC_SESSION",
+      "path": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-short-eos-excluded",
+      "request_count": 6,
+      "raw_results": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-short-eos-excluded/raw/AGENT-63400-turn1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-short-eos-excluded/raw/AGENT-63400-turn2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-short-eos-excluded/raw/AGENT-63400-turn0.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-short-eos-excluded/raw/AGENT-63400-turn4.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-short-eos-excluded/raw/AGENT-63400-turn5.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-short-eos-excluded/raw/AGENT-63400-turn3.json"
+      ],
+      "note": "See archived reason/logs; not a completed candidate."
+    },
+    {
+      "status": "EXCLUDED_INCOMPLETE_AGENTIC_SESSION",
+      "path": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-distinct-files-short-eos-excluded",
+      "request_count": 5,
+      "raw_results": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-distinct-files-short-eos-excluded/raw/AGENT-63400-turn1.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-distinct-files-short-eos-excluded/raw/AGENT-63400-turn2.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-distinct-files-short-eos-excluded/raw/AGENT-63400-turn0.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-distinct-files-short-eos-excluded/raw/AGENT-63400-turn4.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/agentic-distinct-files-short-eos-excluded/raw/AGENT-63400-turn3.json"
+      ],
+      "note": "See archived reason/logs; not a completed candidate."
+    },
+    {
+      "status": "EXCLUDED_EXTERNAL_DRIVER_INTERRUPTION",
+      "path": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/interrupted-driver-20261001",
+      "request_count": 2,
+      "raw_results": [
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/interrupted-driver-20261001/raw/FINAL-A-127000-warmup.json",
+        "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/interrupted-driver-20261001/raw/FINAL-A-smoke.json"
+      ],
+      "note": "See archived reason/logs; not a completed candidate."
+    }
+  ],
+  "pending": [
+    {
+      "item": "Agentic multi-turn",
+      "goal": "11 uninterrupted turns from actual~64K and~128K, prefix reuse; initial1024 then256–1024 actual output, additions500–2000",
+      "candidates": [
+        "FINAL-A AGENT-63400 COMPLETE, do not rerun v0.1.31",
+        "FINAL-A AGENT-127000 not begun"
+      ],
+      "repetitions": "one full session per starting context",
+      "dependencies": "current candidate terminal/boundary; no engine patch",
+      "repeat_v0132": true
+    },
+    {
+      "item": "Compaction",
+      "goal": "Summarize actual saved coding-agent history at127000/250000 input to<=4096 output",
+      "candidates": [
+        "127000",
+        "250000"
+      ],
+      "repetitions": "one per context",
+      "dependencies": "completed saved agentic histories plus actual long requests/answers",
+      "repeat_v0132": true
+    },
+    {
+      "item": "Quality parity",
+      "goal": "Exact three saved IQ3 requests; full outputs, no judge",
+      "candidates": [
+        "FINAL-A INT8 streaming",
+        "FINAL-A k8v4",
+        "IQ3 existing copies"
+      ],
+      "repetitions": "three exact prompts per Q4 config",
+      "dependencies": "saved requests and selected configs",
+      "repeat_v0132": true
+    },
+    {
+      "item": "Needle",
+      "goal": "Existing upstream harness with tokenizer-sized prompt",
+      "candidates": [
+        "31400",
+        "127000",
+        "259500"
+      ],
+      "repetitions": "depth10/50/90 each, seed7,9requests",
+      "dependencies": "selected final config",
+      "repeat_v0132": true
+    },
+    {
+      "item": "Prefill phase diagnostic",
+      "goal": "Use upstream STRATA_PREFILL_TIMING, excluded from speed ranking",
+      "candidates": [
+        "8K smoke64output",
+        "127K256output"
+      ],
+      "repetitions": "one each",
+      "dependencies": "all timed stages done/no engine; currently NOT_EXECUTED",
+      "repeat_v0132": true
+    },
+    {
+      "item": "Final summaries/plots/report and audit",
+      "goal": "Regenerate full artifacts,15required plots+acceptance/resources,20answers and ready configs; inspect against raw evidence",
+      "candidates": [
+        "summarize.py",
+        "plots.py",
+        "render_report.py",
+        "audit.py"
+      ],
+      "repetitions": "one final generation and requirement audit",
+      "dependencies": "remaining measurements; old artifacts preliminary",
+      "repeat_v0132": true
+    }
+  ],
+  "scripts_read_and_frozen": {
+    "audit.py": {
+      "sha256": "08d25ab79713abdc253a28a49498998ce0a470b30cbcd15b149ee4a23fb0a066",
+      "lines": 146,
+      "functions": [
+        "read",
+        "check",
+        "config_arg",
+        "valid_speed_row",
+        "measured",
+        "main"
+      ]
+    },
+    "checkpoint-boundary-watch.py": {
+      "sha256": "e7d9624c8841ff154a79785288ddfa6cc76317775eaf9567b3196ef3eddbaba4",
+      "lines": 13,
+      "functions": []
+    },
+    "contexts.py": {
+      "sha256": "68a02ca30d4b7ef9a7b4099b7253e1e67847d12563ba7385c13e7984fa040535",
+      "lines": 81,
+      "functions": [
+        "measure",
+        "kv",
+        "prefill",
+        "finalists"
+      ]
+    },
+    "continue-topology.py": {
+      "sha256": "bb5cf54f0560c6305dd2ad54c6b70fca926c7d0f9ae2db0fb59a73c21bbbda92",
+      "lines": 16,
+      "functions": []
+    },
+    "extended.py": {
+      "sha256": "6802368f6689c142a72698ae8aa544ab0a2a56ccd338dd2bf6f7897db4be827b",
+      "lines": 121,
+      "functions": [
+        "upstream_window_trace",
+        "long_decode",
+        "tool_text",
+        "agentic",
+        "compaction"
+      ]
+    },
+    "helper-capacity.py": {
+      "sha256": "eaa7489939fee88b2cd00ce43f2fb843c5c6e07ae60fb25d02f288d3074da89d",
+      "lines": 49,
+      "functions": [
+        "main"
+      ]
+    },
+    "phase_telemetry.py": {
+      "sha256": "a3b2cb71b6efd89bd1d6097da690c8794ec5c5c7698bffa94f49042e6782bf9f",
+      "lines": 28,
+      "functions": [
+        "summarize"
+      ]
+    },
+    "plots.py": {
+      "sha256": "6c214875f42f63b940fce2ede0f0a080babef904a76862a84279032bfe7a7676",
+      "lines": 120,
+      "functions": [
+        "finish",
+        "fig",
+        "med",
+        "main"
+      ]
+    },
+    "post-tuning-control.py": {
+      "sha256": "0bbd990b622650c931aa842a1d7305608aea66e84174ac0e69b1ccff30e6f762",
+      "lines": 24,
+      "functions": [
+        "main"
+      ]
+    },
+    "prefill-diagnostic.py": {
+      "sha256": "90933a3c830ca7c2db6a6e60e749a92f85a11413283612ab430baa2f98114a69",
+      "lines": 27,
+      "functions": [
+        "main"
+      ]
+    },
+    "quality.py": {
+      "sha256": "d644d221948ee8f870dbed8169647b3cc52660ff61f90448516ca05e7b4cf5fe",
+      "lines": 75,
+      "functions": [
+        "sanity",
+        "needle"
+      ]
+    },
+    "remaining-driver.py": {
+      "sha256": "aa1691b8b00c6a6794d85bf9a60a3630816da2f56b676e0294dc64fc88b13435",
+      "lines": 19,
+      "functions": []
+    },
+    "render_report.py": {
+      "sha256": "bf0079c0e49cdec94bd40f81a928cc0d7dc33af78dfd3ad72374021f5a5a2885",
+      "lines": 115,
+      "functions": [
+        "load",
+        "fmt",
+        "med",
+        "table",
+        "code",
+        "cfgvalue",
+        "ready",
+        "main"
+      ]
+    },
+    "run.py": {
+      "sha256": "c9a26e30b00a07328b23582b6becb35f70e4e2d6333b1b74ad02ccb7df4f18f6",
+      "lines": 119,
+      "functions": [
+        "setarg",
+        "config",
+        "candidate"
+      ]
+    },
+    "summarize.py": {
+      "sha256": "aff0e3e25e647b26fcbe349efba39e1622d179963f2c1c10a30057ee7f899d67",
+      "lines": 80,
+      "functions": [
+        "avg",
+        "main"
+      ]
+    },
+    "telemetry.py": {
+      "sha256": "3847548befb851065a9e53a65e8a8b619d5ff077ca5e0d2a52418efd23e3cec1",
+      "lines": 47,
+      "functions": [
+        "capture_pss"
+      ]
+    },
+    "topology.py": {
+      "sha256": "15b8d7421ce6078f892d3740528025146781a6c552ea982d1fc9d42927ab91f1",
+      "lines": 44,
+      "functions": [
+        "clone",
+        "top",
+        "main"
+      ]
+    },
+    "trace_acceptance.py": {
+      "sha256": "f5ef196c5b705c355fd39064599a5f6f74512953eeec82622cab0d68a2f1ad38",
+      "lines": 24,
+      "functions": [
+        "reconstruct",
+        "save"
+      ]
+    },
+    "tuning.py": {
+      "sha256": "3713b4572de5146710ef988cceda33e20cbb4a527657a8c87ced9104a993dd04",
+      "lines": 81,
+      "functions": [
+        "batch",
+        "select_best",
+        "main"
+      ]
+    },
+    "workloads.py": {
+      "sha256": "3437a72b3c9373b635f5c9023f4ac21291534f96119a0de37e0c2c2d33193f28",
+      "lines": 70,
+      "functions": [
+        "stream",
+        "exact",
+        "request"
+      ]
+    }
+  },
+  "original_objective": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/checkpoint-plan/objective.txt",
+  "audit_scope": "Measured rows read from standalone raw request results, not copied from narrative logs. Stored aggregate selection files alone are not counted as requests. Smoke/warmup separated. No quality ranking.",
+  "limitations": [
+    "Physical host SSD traffic invisible behind virtiofs; logical expert file counters are not physical SSD proof.",
+    "Warm filesystem only; no safe physical cold-cache claim.",
+    "MTP OFF unsupported by current native serve guard.",
+    "Separate per-GPU routed hit/time-resolved cache/adaptive maps unavailable.",
+    "Existing summary/report/plots are preliminary and campaign incomplete."
+  ],
+  "safe_boundary": {
+    "status": "CANDIDATE_COMPLETE_PROCESS_STOPPED_AT_BOUNDARY",
+    "candidate": "AGENT-63400",
+    "pid": 177088,
+    "observed": 1790893536.4617677,
+    "parent_driver_stopped": 177087
+  },
+  "process_stop": {
+    "status": "STOPPED_AFTER_COMPLETE_AGENT63400",
+    "time": 1790893586.9263606,
+    "driver_pid": 177087,
+    "extended_pid": 177088,
+    "engine_pid": 177106,
+    "candidate_complete": true
+  },
+  "GPU_free_verified": {
+    "observed": 1790893892.861418,
+    "gpu": "index, memory.used [MiB], utilization.gpu [%]\n0, 1 MiB, 0 %\n1, 1 MiB, 0 %\n",
+    "compute_apps": "pid, gpu_uuid, used_gpu_memory [MiB]\n"
+  },
+  "agentic64K": {
+    "status": "COMPLETE",
+    "request_count": 11,
+    "history_messages": 23,
+    "raw_done": "/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/raw/AGENT-63400-done.json",
+    "agentic128K": "NOT_EXECUTED"
+  }
+}

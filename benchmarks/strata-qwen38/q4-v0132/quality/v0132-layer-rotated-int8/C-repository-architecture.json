@@ -1,0 +1,104 @@
+{
+  "model": "QUALITY-v0132-layer-rotated-int8",
+  "kind": "quality",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 102,
+  "requested_generated_tokens": 8192,
+  "time_utc": "2026-10-02T04:35:35Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/QUALITY-v0132-layer-rotated-int8-C-repository-architecture.jsonl",
+  "samples": 25,
+  "peak_rss_gib": 77.2545051574707,
+  "min_mem_available_gib": 79.55947875976562,
+  "peak_ram_used_gib": 81.57313919067383,
+  "peak_vram0_gib": 23.302734375,
+  "peak_vram1_gib": 23.498046875,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 102,
+    "completion_tokens": 2288,
+    "total_tokens": 2390,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "# Repository Architecture: Local Coding-Agent Service\n\n## 1. High-Level Overview\n\nThis service acts as a **single-GPU, single-process inference gateway**. It exposes an OpenAI-compatible `/v1/chat/completions` endpoint, serializes requests to a resident GPU worker, and provides observability. The core challenge is balancing **throughput** (via prompt caching) with **correctness** (isolating client contexts) and **resilience** (handling GPU process crashes).\n\n### Key Design Principles\n1.  **Single Writer, Multiple Readers**: One GPU process owns the model state. All requests are queued and processed sequentially to avoid race conditions on KV-cache.\n2.  **Stateless API Layer**: The HTTP server is stateless regarding model weights. It only manages request lifecycle and metrics.\n3.  **Explicit Cache Keys**: Prompt caching is not automatic; it is keyed by a deterministic hash of the *prefix* of the prompt, ensuring cross-client cache hits only when prefixes are identical.\n4.  **Process Isolation**: The GPU worker runs as a separate OS process. The API server communicates via IPC (Unix Domain Sockets or gRPC) and monitors worker health.\n\n---\n\n## 2. Module Boundaries\n\n| Module | Responsibility | Key Interfaces |\n|--------|----------------|----------------|\n| `api` | HTTP server, OpenAI schema validation, streaming response formatting, request queuing. | `POST /v1/chat/completions` |\n| `queue` | In-memory FIFO queue with priority support. Decouples API from GPU worker. | `enqueue(req)`, `dequeue()` |\n| `worker` | Resident GPU process. Loads model, manages KV-cache, executes inference. | `gRPC/UDS: Generate(prompt, cache_key) -> stream` |\n| `cache` | Manages prompt prefix caching. Maps `cache_key` → KV-cache slot ID. | `get_slot(key)`, `release_slot(id)` |\n| `metrics` | Collects per-request latency, token counts, cache hit/miss, GPU utilization. | `record(request_id, metrics)` |\n| `supervisor` | Monitors worker process health. Restarts worker on crash. | `start_worker()`, `on_crash()` |\n\n---\n\n## 3. Concrete File Tree\n\n```\ncoding-agent-service/\n├── README.md\n├── pyproject.toml\n├── Dockerfile\n├── docker-compose.yml\n├── config/\n│   ├── default.yaml          # Model path, GPU device, queue size, cache limits\n│   └── logging.yaml\n├── src/\n│   ├── __init__.py\n│   ├── main.py               # Entry point: starts API server and supervisor\n│   ├── api/\n│   │   ├── __init__.py\n│   │   ├── server.py         # FastAPI/Starlette app setup\n│   │   ├── routes.py         # /v1/chat/completions handler\n│   │   ├── schemas.py        # Pydantic models for OpenAI API\n│   │   └── streaming.py      # SSE (Server-Sent Events) formatter\n│   ├── queue/\n│   │   ├── __init__.py\n│   │   ├── manager.py        # Async queue with backpressure\n│   │   └── request.py        # Request object with metadata\n│   ├── worker/\n│   │   ├── __init__.py\n│   │   ├── process.py        # Subprocess launcher for GPU worker\n│   │   ├── ipc.py            # gRPC/UDS client for API↔Worker communication\n│   │   └── protocol.proto    # Protobuf definition for GenerateRequest/Response\n│   ├── cache/\n│   │   ├── __init__.py\n│   │   ├── manager.py        # LRU cache for KV-cache slots\n│   │   └── keying.py         # Deterministic prefix hashing logic\n│   ├── metrics/\n│   │   ├── __init__.py\n│   │   ├── collector.py      # Prometheus metrics exporter\n│   │   └── logger.py         # Structured JSON logging per request\n│   └── supervisor/\n│       ├── __init__.py\n│       └── health.py         # Worker health checks and restart logic\n├── tests/\n│   ├── test_api.py\n│   ├── test_cache_keying.py\n│   ├── test_worker_recovery.py\n│   └── test_streaming.py\n└── scripts/\n    ├── start_worker.py       # Standalone GPU worker entry point\n    └── benchmark.py          # Load testing script\n```\n\n---\n\n## 4. Detailed Design Decisions\n\n### A. Request Flow & Cancellation\n\n1.  **Client Request**: Client sends `POST /v1/chat/completions` with `stream: true`.\n2.  **API Layer**:\n    - Validates schema.\n    - Generates a unique `request_id`.\n    - Computes `cache_key` from the prompt prefix (see Section C).\n    - Enqueues a `Request` object into the `queue.manager`.\n    - Returns an SSE stream that listens for chunks from the worker.\n3.  **Queue**:\n    - If the queue is full, return `429 Too Many Requests`.\n    - The worker pulls one request at a time.\n4.  **Worker**:\n    - Receives request via IPC.\n    - Checks `cache.manager` for a valid KV-cache slot.\n    - Runs inference, streaming tokens back via IPC.\n5.  **Cancellation**:\n    - If the client disconnects, the API layer detects the closed connection.\n    - It sends a `CANCEL` signal to the worker via IPC, including the `request_id`.\n    - The worker checks for cancellation between token generations. If cancelled, it aborts inference, releases the KV-cache slot, and stops streaming.\n    - **Why this matters**: Without explicit cancellation, a disconnected client would still consume GPU resources until completion.\n\n### B. Process Failure Recovery\n\n- **Worker Crash**: If the GPU worker process dies (OOM, CUDA error), the `supervisor.health` module detects the broken IPC connection or non-zero exit code.\n- **Recovery Strategy**:\n  1.  **Fail Fast**: All in-flight requests are marked as `503 Service Unavailable` with a retry-after header.\n  2.  **Restart**: The supervisor spawns a new worker process.\n  3.  **Warmup**: The new worker loads the model and initializes the KV-cache. During warmup, the API server returns `503` for new requests.\n  4.  **No State Persistence**: KV-cache is volatile. After a crash, all cache slots are lost. This is acceptable because prompt caching is an optimization, not a correctness requirement.\n- **Why not checkpoint?** Checkpointing KV-cache is complex and slow. For a local coding agent, a 10–30 second restart is preferable to complex state management.\n\n### C. Prompt Caching Correctness Across Clients\n\n**Problem**: If Client A and Client B send identical prompts, can they share the KV-cache?  \n**Answer**: Yes, but only if the *prefix* is identical and the cache is managed correctly.\n\n**Implementation**:\n1.  **Cache Key Generation**:\n    - The `cache.keying` module computes a SHA-256 hash of the first N tokens of the prompt (e.g., first 512 tokens).\n    - `cache_key = hash(prompt[:512])`\n    - This ensures that only requests with identical prefixes can share cache slots.\n2.  **Cache Slot Management**:\n    - The `cache.manager` maintains a pool of KV-cache slots (e.g., 10 slots).\n    - When a request arrives:\n      - If `cache_key` exists in the pool and is not in use, reuse the slot.\n      - If not, allocate a new slot (evicting LRU if full).\n    - **Critical**: The KV-cache slot is *locked* during inference. No other request can use it until the current request completes or is cancelled.\n3.  **Cross-Client Safety**:\n    - Since the KV-cache is keyed by prompt prefix, not client ID, two clients with identical prompts will hit the same cache slot.\n    - This is safe because the model output for a given prefix is deterministic (assuming temperature=0 or consistent sampling).\n    - **Risk**: If temperature > 0, cache hits may produce different outputs. To mitigate, either:\n      - Disable caching for temperature > 0.\n      - Or, accept that cache hits are \"best-effort\" and may not be bit-identical.\n\n---\n\n## 5. Two Tradeoffs\n\n### Tradeoff 1: Sequential Queueing vs. Concurrent Batching\n\n- **Choice**: Sequential queueing (one request at a time).\n- **Pros**:\n  - Simple KV-cache management. No need to handle batched requests with different cache states.\n  - Predictable latency per request.\n  - Easier cancellation logic.\n- **Cons**:\n  - Low throughput. GPU is idle while waiting for the next request.\n  - Poor utilization for short requests.\n- **Alternative**: Continuous batching (like vLLM). This would improve throughput by 5–10x but requires complex cache management (PagedAttention) and makes cancellation harder. For a *local* coding agent, simplicity and correctness are more important than peak throughput.\n\n### Tradeoff 2: In-Process Worker vs. Separate Process\n\n- **Choice**: Separate GPU worker process.\n- **Pros**:\n  - Isolation. A CUDA crash does not take down the API server.\n  - Easier to restart the worker without dropping HTTP connections (clients can retry).\n  - Cleaner separation of concerns (API logic vs. GPU logic).\n- **Cons**:\n  - IPC overhead (serialization/deserialization of tokens).\n  - More complex deployment (two processes to manage).\n- **Alternative**: In-process worker (using `torch.multiprocessing` or threads). This reduces IPC overhead but risks crashing the entire service on GPU errors. For a local service, reliability is critical, so process isolation is preferred.\n\n---\n\n## 6. Summary\n\nThis architecture prioritizes **correctness** and **resilience** over peak throughput. By using a separate GPU worker, explicit cache keying, and sequential queueing, it ensures that prompt caching is safe across clients and that failures are recoverable. The file tree reflects clear module boundaries, making it easy to test and extend.",
+  "reasoning": "",
+  "actual_prompt_tokens": 102,
+  "generated_tokens": 2288,
+  "ttft_s": 1.537844374004635,
+  "total_wall_s": 24.924559564002266,
+  "api_decode_wall_s": 23.38671518999763,
+  "prompt_processing_wall_s": 1.5141,
+  "decode_wall_s": 23.4045,
+  "pp_tps": 67.4,
+  "tg_tps": 97.8,
+  "draft_tokens": 2037,
+  "accepted_tokens": 1373,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 102,
+    "prompt_ms": 1514.1,
+    "prompt_per_token_ms": 14.844,
+    "prompt_per_second": 67.4,
+    "predicted_n": 2288,
+    "predicted_ms": 23404.5,
+    "predicted_per_token_ms": 10.229,
+    "predicted_per_second": 97.8,
+    "draft_n": 2037,
+    "draft_n_accepted": 1373,
+    "at": 1790915760
+  },
+  "acceptance_pct": 67.40304369170349,
+  "mean_accepted_length": 1.4972737186477645,
+  "final_logical_context_tokens": 2390,
+  "final_kv_occupancy_tokens": 2391,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 917,
+  "mean_committed_length": 2.4972737186477643,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.933
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 63656.206225965,
+  "t_first_monotonic_s": 63657.744070339,
+  "t_end_monotonic_s": 63681.130785529,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "311476": {
+      "pss_gib": 0.1833820343017578,
+      "pss_sample_wall": 1790915734.6579537,
+      "pss_read_wall_s": 0.004622024993295781
+    },
+    "311484": {
+      "pss_gib": 76.89586067199707,
+      "pss_sample_wall": 1790915735.335594,
+      "pss_read_wall_s": 0.6776383830001578
+    }
+  },
+  "pss_after": {
+    "311476": {
+      "pss_gib": 0.18337440490722656,
+      "pss_sample_wall": 1790915760.5038357,
+      "pss_read_wall_s": 0.007033735004370101
+    },
+    "311484": {
+      "pss_gib": 76.89586448669434,
+      "pss_sample_wall": 1790915761.4277449,
+      "pss_read_wall_s": 0.9239072459968156
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "QUALITY-v0132-layer-rotated-int8",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/QUALITY-v0132-layer-rotated-int8.json"
+}

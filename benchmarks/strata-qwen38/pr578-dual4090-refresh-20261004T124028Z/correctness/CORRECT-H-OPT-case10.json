@@ -1,0 +1,174 @@
+{
+  "model": "CORRECT-H-OPT",
+  "kind": "correctness",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 61,
+  "requested_generated_tokens": 256,
+  "time_utc": "2026-10-04T16:42:12Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/telemetry/CORRECT-H-OPT-case10.jsonl",
+  "samples": 2,
+  "peak_rss_gib": 53.40017318725586,
+  "min_mem_available_gib": 103.45248413085938,
+  "peak_ram_used_gib": 57.68013381958008,
+  "peak_vram0_gib": 23.26171875,
+  "peak_vram1_gib": 23.30859375,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 61,
+    "completion_tokens": 27,
+    "total_tokens": 88,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "[{\"id\":1,\"square\":1},{\"id\":2,\"square\":4},{\"id\":3,\"square\":9}]",
+  "reasoning": "",
+  "actual_prompt_tokens": 61,
+  "generated_tokens": 27,
+  "ttft_s": 0.7658194309915416,
+  "total_wall_s": 1.327245008025784,
+  "api_decode_wall_s": 0.5614255770342425,
+  "prompt_processing_wall_s": 0.7481,
+  "decode_wall_s": 0.5737000000000001,
+  "pp_tps": 81.5,
+  "tg_tps": 47.1,
+  "draft_tokens": 21,
+  "accepted_tokens": 16,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 61,
+    "prompt_ms": 748.1,
+    "prompt_per_token_ms": 12.264,
+    "prompt_per_second": 81.5,
+    "predicted_n": 27,
+    "predicted_ms": 573.7,
+    "predicted_per_token_ms": 21.248,
+    "predicted_per_second": 47.1,
+    "draft_n": 21,
+    "draft_n_accepted": 16,
+    "at": 1791132133
+  },
+  "acceptance_pct": 76.19047619047619,
+  "mean_accepted_length": 1.4545454545454546,
+  "final_logical_context_tokens": 88,
+  "final_kv_occupancy_tokens": 87,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 11,
+  "mean_committed_length": 2.4545454545454546,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.982
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 280053.472993352,
+  "t_first_monotonic_s": 280054.238812783,
+  "t_end_monotonic_s": 280054.80023836,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "1127104": {
+      "pss_gib": 0.18604564666748047,
+      "pss_sample_wall": 1791132132.3672564,
+      "pss_read_wall_s": 0.007363466022070497
+    },
+    "1127114": {
+      "pss_gib": 0.0005197525024414062,
+      "pss_sample_wall": 1791132132.3674161,
+      "pss_read_wall_s": 0.0001562690013088286
+    },
+    "1127115": {
+      "pss_gib": 53.027798652648926,
+      "pss_sample_wall": 1791132132.6012046,
+      "pss_read_wall_s": 0.23379038699204102
+    },
+    "1127116": {
+      "pss_gib": 0.0033369064331054688,
+      "pss_sample_wall": 1791132132.6014547,
+      "pss_read_wall_s": 0.00024105998454615474
+    }
+  },
+  "pss_after": {
+    "1127104": {
+      "pss_gib": 0.18604564666748047,
+      "pss_sample_wall": 1791132134.1623542,
+      "pss_read_wall_s": 0.006556577980518341
+    },
+    "1127114": {
+      "pss_gib": 0.0005197525024414062,
+      "pss_sample_wall": 1791132134.1625626,
+      "pss_read_wall_s": 0.00020526902517303824
+    },
+    "1127115": {
+      "pss_gib": 53.02780246734619,
+      "pss_sample_wall": 1791132134.4014356,
+      "pss_read_wall_s": 0.23887349996948615
+    },
+    "1127116": {
+      "pss_gib": 0.0031309127807617188,
+      "pss_sample_wall": 1791132134.401746,
+      "pss_read_wall_s": 0.00030101905576884747
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "CORRECT-H-OPT",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/configs/CORRECT-H-OPT.json",
+  "replay_reference": null,
+  "input_ids_sha256": "e0140085ea4cd4408a5e3a40cc4634196e8c6b0538a0e202caad0cceab203e2d",
+  "input_token_ids_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/token-ids/e0140085ea4cd4408a5e3a40cc4634196e8c6b0538a0e202caad0cceab203e2d.json",
+  "output_text_sha256": "85b000508d166dd46e8b0a10c6fe8a38da2d43418c8225f9773ddffae91d7066",
+  "cache_snapshots": [],
+  "boundary_counters": {
+    "CPU_fallback_entries": 118,
+    "primary_expert_hits": 6266,
+    "primary_pcie_experts": 2324,
+    "CPU_missed_experts": 108,
+    "verify_windows": 11,
+    "layers": 48,
+    "CPU_activation_quant_ms": 0.374622
+  },
+  "non_finite_head_diagnostic": false,
+  "actual_token_ids_match_api_count": true,
+  "CUDA_apps_at_request_end": "1127115, /srv/ai/strata-pr578-refresh-20261004-optimized/build-default/strata\n1127115, /srv/ai/strata-pr578-refresh-20261004-optimized/build-default/strata\n",
+  "foreign_CUDA_processes_at_request_end": [],
+  "valid": true,
+  "exclusion": null,
+  "category": "structured",
+  "generated_token_ids": [
+    58,
+    4754,
+    306,
+    763,
+    16,
+    1288,
+    36234,
+    763,
+    16,
+    35607,
+    306,
+    763,
+    17,
+    1288,
+    36234,
+    763,
+    19,
+    35607,
+    306,
+    763,
+    18,
+    1288,
+    36234,
+    763,
+    24,
+    24634,
+    248046
+  ]
+}

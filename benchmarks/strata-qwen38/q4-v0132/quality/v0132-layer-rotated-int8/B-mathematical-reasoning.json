@@ -1,0 +1,104 @@
+{
+  "model": "QUALITY-v0132-layer-rotated-int8",
+  "kind": "quality",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 82,
+  "requested_generated_tokens": 8192,
+  "time_utc": "2026-10-02T04:35:18Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/telemetry/QUALITY-v0132-layer-rotated-int8-B-mathematical-reasoning.jsonl",
+  "samples": 16,
+  "peak_rss_gib": 77.25449752807617,
+  "min_mem_available_gib": 79.36594772338867,
+  "peak_ram_used_gib": 81.76667022705078,
+  "peak_vram0_gib": 23.302734375,
+  "peak_vram1_gib": 23.498046875,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 82,
+    "completion_tokens": 1680,
+    "total_tokens": 1762,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "To find the expected total number of rolls until two consecutive rolls have the same value, we can model this problem using states and linear equations (First Step Analysis) or by using the definition of expectation with geometric series.\n\n### Method 1: First Step Analysis (State-Based Approach)\n\nLet $E$ be the expected number of *additional* rolls needed to get a match, given that we have just rolled a die and do not yet have a match with the previous roll.\n\nHowever, it is more precise to define states based on the history of the rolls.\nLet $E_0$ be the expected number of rolls needed starting from scratch (no previous roll).\nLet $E_1$ be the expected number of *additional* rolls needed given that we have just rolled a number, and we are waiting for the next roll to match it.\n\n**Step 1: Analyze the first roll.**\nWhen we start, we must roll the die once. This roll establishes the \"previous value\" for the next comparison.\nSo, $E_0 = 1 + E_1$.\n\n**Step 2: Analyze the state $E_1$.**\nWe have just rolled a value (say, $x$). We roll the die again.\nThere are two possibilities for this next roll:\n1.  **Match:** The new roll is $x$. The probability of this is $1/6$. In this case, the process stops. We used 1 roll.\n2.  **No Match:** The new roll is not $x$. The probability of this is $5/6$. In this case, we have used 1 roll, and we are now in the same situation as before: we have a new \"previous value\" (the one we just rolled), and we need to wait for the next roll to match it. Thus, we are back in state $E_1$.\n\nWe can write the equation for $E_1$:\n$$ E_1 = 1 + \\left( \\frac{1}{6} \\cdot 0 \\right) + \\left( \\frac{5}{6} \\cdot E_1 \\right) $$\n*Explanation:* We always spend 1 roll. If we match (prob $1/6$), we need 0 more rolls. If we don't match (prob $5/6$), we need $E_1$ more rolls on average.\n\n**Step 3: Solve for $E_1$.**\n$$ E_1 = 1 + \\frac{5}{6}E_1 $$\n$$ E_1 - \\frac{5}{6}E_1 = 1 $$\n$$ \\frac{1}{6}E_1 = 1 $$\n$$ E_1 = 6 $$\n\n**Step 4: Calculate $E_0$.**\n$$ E_0 = 1 + E_1 = 1 + 6 = 7 $$\n\nThus, the expected total number of rolls is **7**.\n\n---\n\n### Method 2: Definition of Expectation (Geometric Series Approach)\n\nLet $N$ be the random variable representing the total number of rolls.\nThe process stops at roll $n$ if:\n1.  The first $n-1$ rolls do not contain any consecutive matches.\n2.  The $n$-th roll matches the $(n-1)$-th roll.\n\nNote that the first roll cannot form a pair with a previous roll. So, the minimum number of rolls is 2.\nLet's determine the probability $P(N=n)$ for $n \\ge 2$.\n\nFor the process to end exactly at roll $n$:\n-   Roll 1 is arbitrary (prob 1).\n-   Roll 2 must **not** match Roll 1 (prob $5/6$).\n-   Roll 3 must **not** match Roll 2 (prob $5/6$).\n-   ...\n-   Roll $n-1$ must **not** match Roll $n-2$ (prob $5/6$).\n-   Roll $n$ **must** match Roll $n-1$ (prob $1/6$).\n\nThere are $n-2$ \"non-matching\" transitions between roll 1 and roll $n-1$, and 1 \"matching\" transition at the end.\nSo, for $n \\ge 2$:\n$$ P(N=n) = \\left(\\frac{5}{6}\\right)^{n-2} \\cdot \\frac{1}{6} $$\n\nLet's verify this is a valid probability distribution:\n$$ \\sum_{n=2}^{\\infty} P(N=n) = \\sum_{n=2}^{\\infty} \\frac{1}{6} \\left(\\frac{5}{6}\\right)^{n-2} $$\nLet $k = n-2$. As $n$ goes from 2 to $\\infty$, $k$ goes from 0 to $\\infty$.\n$$ \\sum_{k=0}^{\\infty} \\frac{1}{6} \\left(\\frac{5}{6}\\right)^{k} = \\frac{1}{6} \\cdot \\frac{1}{1 - 5/6} = \\frac{1}{6} \\cdot \\frac{1}{1/6} = 1 $$\nThe probabilities sum to 1.\n\nNow, calculate the expected value $E[N]$:\n$$ E[N] = \\sum_{n=2}^{\\infty} n \\cdot P(N=n) = \\sum_{n=2}^{\\infty} n \\cdot \\frac{1}{6} \\left(\\frac{5}{6}\\right)^{n-2} $$\n\nLet $r = 5/6$.\n$$ E[N] = \\frac{1}{6} \\sum_{n=2}^{\\infty} n r^{n-2} $$\nLet $k = n-2$, so $n = k+2$.\n$$ E[N] = \\frac{1}{6} \\sum_{k=0}^{\\infty} (k+2) r^k $$\n$$ E[N] = \\frac{1}{6} \\left[ \\sum_{k=0}^{\\infty} k r^k + 2 \\sum_{k=0}^{\\infty} r^k \\right] $$\n\nWe use the standard geometric series sums for $|r| < 1$:\n1.  $\\sum_{k=0}^{\\infty} r^k = \\frac{1}{1-r}$\n2.  $\\sum_{k=0}^{\\infty} k r^k = \\frac{r}{(1-r)^2}$\n\nSubstitute $r = 5/6$:\n1.  $\\sum_{k=0}^{\\infty} r^k = \\frac{1}{1/6} = 6$\n2.  $\\sum_{k=0}^{\\infty} k r^k = \\frac{5/6}{(1/6)^2} = \\frac{5/6}{1/36} = \\frac{5}{6} \\cdot 36 = 30$\n\nNow plug these back into the expectation formula:\n$$ E[N] = \\frac{1}{6} [ 30 + 2(6) ] $$\n$$ E[N] = \\frac{1}{6} [ 30 + 12 ] $$\n$$ E[N] = \\frac{42}{6} $$\n$$ E[N] = 7 $$\n\n### Conclusion\n\nBoth methods yield the same result.\n\nThe expected total number of rolls is **7**.",
+  "reasoning": "",
+  "actual_prompt_tokens": 82,
+  "generated_tokens": 1680,
+  "ttft_s": 1.0452532690032967,
+  "total_wall_s": 15.32620173900068,
+  "api_decode_wall_s": 14.280948469997384,
+  "prompt_processing_wall_s": 1.0274,
+  "decode_wall_s": 14.2955,
+  "pp_tps": 79.8,
+  "tg_tps": 117.5,
+  "draft_tokens": 1443,
+  "accepted_tokens": 1154,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 82,
+    "prompt_ms": 1027.4,
+    "prompt_per_token_ms": 12.529,
+    "prompt_per_second": 79.8,
+    "predicted_n": 1680,
+    "predicted_ms": 14295.5,
+    "predicted_per_token_ms": 8.509,
+    "predicted_per_second": 117.5,
+    "draft_n": 1443,
+    "draft_n_accepted": 1154,
+    "at": 1790915733
+  },
+  "acceptance_pct": 79.97227997227998,
+  "mean_accepted_length": 2.193916349809886,
+  "final_logical_context_tokens": 1762,
+  "final_kv_occupancy_tokens": 1761,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 526,
+  "mean_committed_length": 3.193916349809886,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.93
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 63639.28893371,
+  "t_first_monotonic_s": 63640.334186979,
+  "t_end_monotonic_s": 63654.615135449,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "stop"
+  ],
+  "pss_before": {
+    "311476": {
+      "pss_gib": 0.18337440490722656,
+      "pss_sample_wall": 1790915717.7836514,
+      "pss_read_wall_s": 0.0035476269986247644
+    },
+    "311484": {
+      "pss_gib": 76.89566612243652,
+      "pss_sample_wall": 1790915718.418847,
+      "pss_read_wall_s": 0.6351948029987398
+    }
+  },
+  "pss_after": {
+    "311476": {
+      "pss_gib": 0.1833820343017578,
+      "pss_sample_wall": 1790915733.983931,
+      "pss_read_wall_s": 0.004569803997583222
+    },
+    "311484": {
+      "pss_gib": 76.89586067199707,
+      "pss_sample_wall": 1790915734.6391106,
+      "pss_read_wall_s": 0.6551798119980958
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "QUALITY-v0132-layer-rotated-int8",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/QUALITY-v0132-layer-rotated-int8.json"
+}

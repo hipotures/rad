@@ -1,0 +1,175 @@
+{
+  "model": "PP-CONTROL",
+  "kind": "controlled_version_AB",
+  "context": null,
+  "repeat": null,
+  "actual_prompt_tokens_tokenizer": 31400,
+  "requested_generated_tokens": 256,
+  "time_utc": "2026-10-01T23:45:47Z",
+  "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/telemetry/PP-CONTROL-31400-run1.jsonl",
+  "samples": 16,
+  "peak_rss_gib": 76.51424026489258,
+  "min_mem_available_gib": 80.42471313476562,
+  "peak_ram_used_gib": 80.70790481567383,
+  "peak_vram0_gib": 23.296875,
+  "peak_vram1_gib": 23.490234375,
+  "abort": null,
+  "usage": {
+    "prompt_tokens": 31400,
+    "completion_tokens": 256,
+    "total_tokens": 31656,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "text": "# Explanation of `docs/AMD_HIP_PERFORMANCE.md`\n\nThe last file in the repository listing is `docs/AMD_HIP_PERFORMANCE.md`, a documentation artifact that records the performance evidence, reproduction recipe, and measured configuration for Strata's experimental AMD HIP backend targeting the RX 7900 XTX (gfx1100). It is the companion document to `docs/AMD_HIP.md`: where `AMD_HIP.md` explains *how to install and build* the HIP backend, `AMD_HIP_PERFORMANCE.md` explains *what was measured, under exactly which conditions, and how a third party can reproduce those numbers*.\n\nThe document opens by stating that this opt-in Linux `gfx1100` backend supersedes the initial support introduced in PR #94. It enumerates what is retained from that earlier work — the HIP runtime and wave32 integer-dot compatibility, native mmap layout validation, and MTP (multi-token prediction) — and what is added on top: HIP MMQ (the GGML matrix-multiply-quantized path), an optional calibrated dense hipBLASLt GEMM, native prefill batching, and the host-memory / SSD paths used by the measured configuration. It also",
+  "reasoning": "",
+  "actual_prompt_tokens": 31400,
+  "generated_tokens": 256,
+  "ttft_s": 12.153225862995896,
+  "total_wall_s": 15.031557756999973,
+  "api_decode_wall_s": 2.878331894004077,
+  "prompt_processing_wall_s": 12.065100000000001,
+  "decode_wall_s": 2.8915,
+  "pp_tps": 2602.5,
+  "tg_tps": 88.5,
+  "draft_tokens": 217,
+  "accepted_tokens": 161,
+  "cache_reused_tokens": 0,
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 31400,
+    "prompt_ms": 12065.1,
+    "prompt_per_token_ms": 0.384,
+    "prompt_per_second": 2602.5,
+    "predicted_n": 256,
+    "predicted_ms": 2891.5,
+    "predicted_per_token_ms": 11.295,
+    "predicted_per_second": 88.5,
+    "draft_n": 217,
+    "draft_n_accepted": 161,
+    "at": 1790898362
+  },
+  "acceptance_pct": 74.19354838709677,
+  "mean_accepted_length": 1.694736842105263,
+  "final_logical_context_tokens": 31656,
+  "final_kv_occupancy_tokens": 31655,
+  "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+  "verify_rounds": 95,
+  "mean_committed_length": 2.694736842105263,
+  "expert_tiers": {
+    "ram_blobs": 0,
+    "file_blobs": 0,
+    "file_mb": 0.0,
+    "hit_rate": 0.96
+  },
+  "status": "OK",
+  "t_start_monotonic_s": 46268.661848978,
+  "t_first_monotonic_s": 46280.815074841,
+  "t_end_monotonic_s": 46283.693406735,
+  "tool_call_events": [],
+  "finish_reasons": [
+    "length"
+  ],
+  "pss_before": {
+    "203184": {
+      "pss_gib": 0.18650245666503906,
+      "pss_sample_wall": 1790898347.1025774,
+      "pss_read_wall_s": 0.0028892089976579882
+    },
+    "203194": {
+      "pss_gib": 76.14864253997803,
+      "pss_sample_wall": 1790898347.7311013,
+      "pss_read_wall_s": 0.6285227030020906
+    }
+  },
+  "pss_after": {
+    "203184": {
+      "pss_gib": 0.1867380142211914,
+      "pss_sample_wall": 1790898363.0742173,
+      "pss_read_wall_s": 0.003241767997678835
+    },
+    "203194": {
+      "pss_gib": 76.15238857269287,
+      "pss_sample_wall": 1790898363.7101367,
+      "pss_read_wall_s": 0.6359190870061866
+    }
+  },
+  "pss_note": "Outside timed request",
+  "candidate": "PP-CONTROL",
+  "sampling": {
+    "temperature": 0
+  },
+  "config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/configs/PP-CONTROL.json",
+  "Strata_HEAD": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+  "Strata_version": "0.1.32",
+  "build_variant": "default",
+  "model_revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+  "full_config": {
+    "exe": "/srv/ai/strata-v0.1.32/build-default/strata",
+    "args": [
+      "--pack",
+      "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+      "--native",
+      "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+      "--expert-profile",
+      "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+      "--expert-cache",
+      "auto",
+      "--prefill",
+      "auto",
+      "--spec",
+      "4",
+      "--spec-min-p",
+      "0.5",
+      "--mtp",
+      "/srv/ai/models/strata-v0132/mtp/rt",
+      "--kv",
+      "int8",
+      "--max-context",
+      "262144"
+    ],
+    "cwd": "/srv/ai/strata-v0.1.32",
+    "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer",
+    "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+    "log": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/controls/v0132/logs/control-engine.log",
+    "host": "127.0.0.1",
+    "port": 18086,
+    "lib_dirs": [
+      "/usr/local/cuda/bin",
+      "/usr/local/cuda/lib64"
+    ],
+    "gpu": [
+      0,
+      1
+    ],
+    "layer_split": "24"
+  },
+  "full_engine_command": [
+    "/srv/ai/strata-v0.1.32/build-default/strata",
+    "--serve",
+    "--pack",
+    "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+    "--native",
+    "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+    "--expert-profile",
+    "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+    "--expert-cache",
+    "auto",
+    "--prefill",
+    "auto",
+    "--spec",
+    "4",
+    "--spec-min-p",
+    "0.5",
+    "--mtp",
+    "/srv/ai/models/strata-v0132/mtp/rt",
+    "--kv",
+    "int8",
+    "--max-context",
+    "262144",
+    "--layer-split",
+    "24"
+  ],
+  "topology": "layer_split"
+}

@@ -1,0 +1,94 @@
+To find the expected total number of rolls until two consecutive rolls have the same value, we can model this problem using states and linear equations (First Step Analysis). We will then verify the result using a second method based on geometric distributions and conditional expectations.
+
+### Method 1: First Step Analysis (State Equations)
+
+Let $E$ be the expected total number of rolls needed to get two consecutive identical values, starting from the beginning (no previous roll).
+
+We can define the state of the process by the number of rolls made so far and whether the last roll matches the one before it. However, a more efficient way is to define states based on the "progress" toward the goal.
+
+Let:
+*   $E_0$ be the expected additional rolls needed when we have **no** previous roll to compare against (i.e., at the start).
+*   $E_1$ be the expected additional rolls needed when we have **one** previous roll, and we are waiting for the next roll to match it.
+
+**Step 1: Analyze the start ($E_0$)**
+At the very beginning, we must roll the die once. This roll establishes the "previous value" for the next comparison.
+$$ E_0 = 1 + E_1 $$
+Here, the "1" accounts for the first roll, and $E_1$ is the expected number of *additional* rolls needed given that we now have a previous value to match against.
+
+**Step 2: Analyze the state with one previous roll ($E_1$)**
+Suppose we have just rolled a value $v$. We roll again.
+*   With probability $p = \frac{1}{6}$, the new roll is also $v$. The process stops. We used 1 roll.
+*   With probability $q = \frac{5}{6}$, the new roll is not $v$. The process continues. We used 1 roll, and we are now in a state where we have a new "previous value" (the one we just rolled) to match against. This is effectively the same state as $E_1$ again (waiting for a match to the current last roll).
+
+So, the equation for $E_1$ is:
+$$ E_1 = 1 + \left( \frac{1}{6} \cdot 0 \right) + \left( \frac{5}{6} \cdot E_1 \right) $$
+*   The "1" is for the roll we just made.
+*   If it matches (prob $1/6$), we need 0 additional rolls.
+*   If it doesn't match (prob $5/6$), we need $E_1$ additional rolls on average.
+
+**Step 3: Solve for $E_1$**
+$$ E_1 = 1 + \frac{5}{6}E_1 $$
+$$ E_1 - \frac{5}{6}E_1 = 1 $$
+$$ \frac{1}{6}E_1 = 1 $$
+$$ E_1 = 6 $$
+
+**Step 4: Solve for $E_0$**
+Substitute $E_1 = 6$ into the equation for $E_0$:
+$$ E_0 = 1 + 6 = 7 $$
+
+Thus, the expected total number of rolls is **7**.
+
+---
+
+### Method 2: Geometric Distribution and Conditional Expectation
+
+Let $N$ be the total number of rolls. We can decompose the process into two parts:
+1.  The first roll.
+2.  The subsequent rolls until a match occurs.
+
+Let $X$ be the number of rolls *after* the first roll until a match occurs.
+The first roll is always required, so $N = 1 + X$.
+Therefore, $E[N] = 1 + E[X]$.
+
+Now, consider the sequence of rolls starting from the second roll: $R_2, R_3, R_4, \dots$
+We stop at the first index $k \ge 2$ such that $R_k = R_{k-1}$.
+Let $Y$ be the number of trials needed to get a "success" (a match with the previous roll) in a sequence of independent Bernoulli trials.
+
+However, there is a subtle dependency: the "success" probability at step $k$ depends on $R_{k-1}$. But notice that for any specific roll $R_k$, the probability that it matches the immediately preceding roll $R_{k-1}$ is always $\frac{1}{6}$, regardless of what $R_{k-1}$ was.
+
+Let's define indicator variables or use the property of geometric distributions carefully.
+Let $T$ be the number of rolls *after* the first one until the first match.
+Is $T$ geometrically distributed?
+Let's look at the sequence of comparisons:
+*   Compare $R_2$ with $R_1$: Match with prob $1/6$.
+*   If no match, compare $R_3$ with $R_2$: Match with prob $1/6$.
+*   If no match, compare $R_4$ with $R_3$: Match with prob $1/6$.
+
+The events "Match at step $k$" are not independent in the strict sense of the underlying die rolls, but the *waiting time* for the first success in a sequence of trials where each trial has success probability $p=1/6$ is a Geometric distribution.
+
+Let's verify this rigorously. Let $T$ be the number of additional rolls needed after the first roll.
+$P(T=1) = P(R_2 = R_1) = 1/6$.
+$P(T=2) = P(R_2 \neq R_1 \text{ and } R_3 = R_2)$.
+Since $R_1, R_2, R_3$ are independent:
+$P(R_2 \neq R_1) = 5/6$.
+Given $R_2 \neq R_1$, the probability $R_3 = R_2$ is still $1/6$ (since $R_3$ is independent of $R_1$ and $R_2$).
+So, $P(T=2) = \frac{5}{6} \cdot \frac{1}{6}$.
+
+Similarly, $P(T=k) = \left(\frac{5}{6}\right)^{k-1} \cdot \frac{1}{6}$.
+
+This is exactly the probability mass function of a Geometric distribution with parameter $p = \frac{1}{6}$, defined on the support $\{1, 2, 3, \dots\}$.
+
+The expected value of a Geometric distribution (counting the number of trials until the first success) is $\frac{1}{p}$.
+$$ E[T] = \frac{1}{1/6} = 6 $$
+
+Since $T$ represents the number of rolls *after* the first roll, the total expected number of rolls $E[N]$ is:
+$$ E[N] = 1 + E[T] = 1 + 6 = 7 $$
+
+### Conclusion
+
+Both methods yield the same result.
+
+1.  **State Equations**: $E = 1 + E_1$, $E_1 = 1 + \frac{5}{6}E_1 \implies E_1=6 \implies E=7$.
+2.  **Geometric Distribution**: The number of rolls after the first follows a Geometric distribution with $p=1/6$, so expected additional rolls is 6. Total rolls $1+6=7$.
+
+The expected total number of rolls is **7**.

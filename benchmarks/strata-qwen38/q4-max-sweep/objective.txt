@@ -1,0 +1,1079 @@
+ZADANIE: maksymalnie szeroka kampania benchmarkowa Strata dla
+Qwen3.8-Flash-Next Unsloth UD-Q4_K_XL na 2× RTX 4090.
+
+Nie chodzi już o jeden benchmark.
+Chcę znaleźć NAJLEPSZĄ możliwą konfigurację tego Q4 na tym konkretnym
+sprzęcie i zrozumieć, dlaczego jest najlepsza.
+
+Masz zgodę na szeroki sweep konfiguracji, ale:
+- NIE patchuj Strata;
+- NIE zmieniaj wag;
+- NIE pobieraj modelu ponownie;
+- NIE twórz nowych quantów;
+- NIE commituj ani nie pushuj;
+- używaj tylko funkcji obecnego upstreamu;
+- przed użyciem każdej mniej oczywistej flagi sprawdź aktualny
+  `--help`, docs i kod bieżącego checkoutu;
+- jeśli jakaś kombinacja jest jawnie unsupported, oznacz ją jako
+  UNSUPPORTED i idź dalej zamiast ją obchodzić.
+
+============================================================
+0. ISTNIEJĄCY STAN
+============================================================
+
+Sprzęt:
+
+- 2× RTX 4090 24 GiB
+- Ryzen 9 7950X3D
+- Linux VM
+- około 161–162 GiB RAM widocznego w VM
+- brak swap
+- szybki storage pod /srv/ai
+
+Strata:
+  /srv/ai/strata
+
+Benchmarki:
+  /srv/ai/benchmarks/strata-qwen38/
+
+Model Q4 został już:
+- pobrany;
+- sprawdzony SHA256;
+- spakowany przez `tools/iq_pack.py --compat-bf16`;
+- uruchomiony poprawnie na 1×4090;
+- NIE ma `experts.bin`.
+
+Model:
+  unsloth/Qwen3.8-Flash-Next-GGUF
+  UD-Q4_K_XL
+  revision:
+  38bb39ee97821de2c9009abb7e93950eec396e66
+
+Nie pobieraj nic ponownie.
+
+Znajdź istniejące ścieżki Q4, packa i MTP z obecnych configów/skryptów.
+
+Poprzedni poprawny Q4 single-GPU resident baseline:
+
+- resident budget: 80 GiB
+- RAM complement: 56.45 GiB
+- GPU expert cache: 15.28 GiB
+- 64K actual prompt ~= 63,300
+- PP median: 1539.3 t/s
+- TG median: 43.4 t/s
+- TTFT median: 41.27 s
+- decode expert file reads: 0
+- peak CUDA0 VRAM: 23.48 GiB
+
+Poprzedni IQ3_S 2×4090 baseline:
+
+32K:
+  PP 4652.5
+  TG 131.2
+
+64K:
+  PP 5438.7
+  TG 116.2
+
+128K:
+  PP 5827.3
+  TG 114.9
+
+256K:
+  PP 5841.0
+  TG 109.4
+
+Nie powtarzaj niepotrzebnie tych pełnych benchmarków,
+jeśli obecny Strata HEAD i metodologia są identyczne.
+Można zrobić jeden kontrolny IQ3_S 64K run.
+
+============================================================
+1. NAJPIERW ZABEZPIECZ REPRODUKOWALNOŚĆ
+============================================================
+
+Zapisz:
+
+- git HEAD Strata
+- Strata version
+- CUDA
+- driver
+- GPU names
+- CPU
+- RAM
+- PCIe topology (`nvidia-smi topo -m`)
+- PCIe link width/speed obu kart
+- kernel
+- VM environment
+- filesystem / mount type dla modelu
+- obecne configi Q4 i IQ3_S
+
+Od tego momentu NIE aktualizuj Strata.
+
+Wyniki zapisuj pod:
+
+/srv/ai/benchmarks/strata-qwen38/q4-max-sweep/
+
+Struktura:
+
+configs/
+logs/
+raw/
+telemetry/
+plots/
+quality/
+report.md
+summary.csv
+summary.json
+
+============================================================
+2. KLUCZOWE PYTANIE ARCHITEKTONICZNE
+============================================================
+
+Sprawdź w aktualnym kodzie dokładnie, jakie ExpertSource / host arena
+są dostępne dla native GGUF pack bez experts.bin.
+
+Chcę wiedzieć, czy Q4 może działać jako:
+
+GPU0 expert cache
++
+GPU1 expert cache
++
+CPU/RAM fallback
+
+BEZ:
+  --resident-cpu-experts
+  --resident-budget-gib
+
+Wiemy już, że `resident-cpu-experts` jest jawnie niekompatybilny z:
+- layer split;
+- remote expert caches.
+
+Nie próbuj usuwać tego guarda.
+
+Interesują nas zwykłe upstreamowe ścieżki, które NIE używają
+resident-cpu-experts.
+
+Przed benchmarkiem zapisz krótki:
+  architecture-notes.md
+
+z dokładnym opisem:
+- skąd przy każdym trybie pochodzą bytes ekspertów;
+- które ekspery są GPU-resident;
+- które liczy CPU;
+- czy CPU czyta z RAM/page cache czy bezpośrednio powoduje file reads;
+- czy native GGUF może mieć pełną host arena bez experts.bin;
+- czy jest tylko mmap/page-cache path;
+- jakie ograniczenia istnieją dla multi-GPU.
+
+Nie zgaduj. Oprzyj to na aktualnym kodzie.
+
+============================================================
+3. TOPOLOGIE DO PRZETESTOWANIA
+============================================================
+
+Przetestuj WSZYSTKIE poniższe, jeśli upstream je dopuszcza.
+
+------------------------------------------------------------
+T0 — SINGLE GPU RESIDENT BASELINE
+------------------------------------------------------------
+
+1× RTX4090.
+Obecna działająca konfiguracja:
+
+resident-budget-gib 80
+expert-cache auto
+MTP
+Q4
+KV int8
+
+Nie trzeba robić pełnej macierzy od nowa.
+Wystarczy 1 kontrolny 64K run, żeby upewnić się, że baseline się zgadza.
+
+------------------------------------------------------------
+T1 — SINGLE GPU, BEZ RESIDENT MODE
+------------------------------------------------------------
+
+CUDA0 only.
+
+Native GGUF source.
+Bez:
+  resident-budget-gib
+  resident-cpu-experts
+
+expert-cache auto
+CPU fallback normalnym upstreamowym trybem.
+
+Cel:
+sprawdzić koszt czystej file-backed / page-cache / arena ścieżki
+i porównać z T0.
+
+64K, 1 warmup + 3 runy.
+
+------------------------------------------------------------
+T2 — 2×GPU LAYER SPLIT AUTO
+------------------------------------------------------------
+
+TO JEST NAJWAŻNIEJSZY TEST.
+
+Native Q4.
+BEZ resident-cpu-experts.
+BEZ resident-budget-gib.
+
+GPU0 + GPU1.
+
+Użyj:
+  --layer-split auto
+
+oraz aktualnego dokumentowanego sposobu wyboru obu GPU.
+
+expert-profile:
+  standardowy profil Strata
+
+expert-cache:
+  auto na obu stage'ach
+
+CPU/RAM:
+  fallback dla ekspertów nieobecnych w cache obu kart.
+
+MTP normalne.
+
+Najpierw smoke 8K/64 tokeny.
+
+Jeśli działa:
+64K, 3 runy.
+
+Zapisz:
+- auto-selected K;
+- layers GPU0;
+- layers GPU1;
+- cache slots GPU0;
+- cache slots GPU1;
+- GiB expert cache per GPU;
+- weighted/profile coverage;
+- routed GPU hits GPU0;
+- routed GPU hits GPU1;
+- CPU misses;
+- file reads;
+- PCIe handoff;
+- PP/TG.
+
+------------------------------------------------------------
+T3 — 2×GPU MANUAL LAYER SPLIT
+------------------------------------------------------------
+
+Jeżeli T2 działa:
+
+Nie ufaj wyłącznie `auto`.
+
+Najpierw odczytaj K wybrany przez auto.
+
+Zrób szybki K sweep.
+
+Jeżeli K_auto = X, testuj w pierwszej kolejności:
+
+X-8
+X-4
+X-2
+X
+X+2
+X+4
+X+8
+
+pomijając wartości nieprawidłowe.
+
+Jeśli to nie pokrywa rozsądnie przestrzeni,
+dodaj orientacyjnie:
+
+12
+16
+20
+24
+28
+32
+36
+
+Nie rób 3 powtórzeń dla każdego K.
+
+Etap 1:
+- 1 warm run / K
+- actual ~64K
+- 256 output
+
+Wybierz TOP 3 według:
+- TG przede wszystkim;
+- PP jako drugie kryterium;
+- stabilność;
+- brak file thrash.
+
+TOP 3:
+- po 3 mierzone runy.
+
+Zapisz osobno:
+- PP
+- TG
+- TTFT
+- GPU hit ratios
+- CPU miss rate
+- GPU utilization
+- PCIe transfer
+- layer handoff time jeśli dostępne.
+
+------------------------------------------------------------
+T4 — GPU0 MAIN + GPU1 REMOTE/HELPER EXPERT CACHE
+------------------------------------------------------------
+
+BEZ layer split.
+
+GPU0:
+- dense model
+- KV/state
+- MTP
+- primary expert cache
+
+GPU1:
+- remote/helper expert cache
+
+CPU:
+- pozostali eksperci.
+
+Użyj upstreamowego:
+  expert-cache-remote / expert-cache-device1
+
+zgodnie z aktualnym docs/SECOND_GPU.md i `--help`.
+
+Nie używaj resident-cpu-experts.
+
+Przetestuj oba placementy, jeśli wspierane:
+
+A:
+  stripe
+
+B:
+  layer
+
+Najpierw:
+- auto/recommended remote cache size.
+
+Potem mały sweep rozmiaru cache GPU1.
+
+Nie zakładaj z góry slotów.
+Najpierw sprawdź:
+- ile VRAM jest dostępne;
+- jaki blob size ma Q4;
+- jaki zakres jest bezpieczny.
+
+Spróbuj około:
+- 50%
+- 75%
+- 90%
+maksymalnego bezpiecznego remote-cache capacity.
+
+Każdy candidate:
+- 1× 64K/256 output.
+
+TOP 2:
+- 3 repeats.
+
+Zapisz:
+- primary GPU hits;
+- remote GPU hits;
+- CPU misses;
+- remote PCIe bytes;
+- time waiting for remote GPU;
+- TG.
+
+Ten tryb może być wolniejszy od CPU fallbacku.
+Nie zakładaj, że druga karta pomaga.
+
+------------------------------------------------------------
+T5 — JEŚLI UPSTREAM MA NORMALNĄ FULL-RAM ARENA DLA NATIVE Q4
+------------------------------------------------------------
+
+Jeśli analiza kodu potwierdzi osobny tryb, w którym cały native Q4
+expert set można załadować do RAM bez `resident-cpu-experts`
+i jednocześnie użyć layer split / remote cache:
+
+przetestuj go.
+
+To może być najciekawsza konfiguracja:
+
+GPU0 hot experts
+GPU1 hot experts
+RAM all remaining experts
+CPU computes misses
+zero SSD experts
+
+Jeżeli takiej ścieżki NIE ma jako wspieranej opcji CLI/runtime:
+napisz:
+  FULL_RAM_NATIVE_MULTI_GPU_NOT_AVAILABLE
+
+i nie implementuj jej.
+
+============================================================
+4. EXPERT CACHE / ADAPTIVE PLACEMENT
+============================================================
+
+Dla najlepszego działającego layer-split topology sprawdź:
+
+A. upstream default / adaptive
+B. statyczny profile placement, jeśli można wyłączyć swaps
+C. adaptive swaps w normalnym defaultzie
+
+Nie eksperymentuj z prywatnymi profilami.
+
+Jeżeli istnieje:
+  --adapt-every
+  --adapt-swaps
+lub równoważne flagi,
+
+sprawdź aktualną dokumentację.
+
+Porównaj tylko:
+- static
+- default adaptive
+
+na 64K, po 3 runy.
+
+Jeżeli dynamic placement poprawia się dopiero po długiej generacji,
+zrób również jeden 4096-token decode.
+
+============================================================
+5. CPU / PCIe CALIBRATION
+============================================================
+
+Strata ma własne `--calibrate`.
+
+Dla najlepszego topology uruchom upstreamowy calibrator.
+
+Interesują nas:
+
+- pool-workers
+- pcie-frac
+- spec-min-p
+
+Zapisz wartości domyślne i wybrane przez calibrator.
+
+Potem zrób małe lokalne potwierdzenie.
+
+POOL WORKERS:
+
+Testuj:
+- calibrated
+- calibrated -4
+- calibrated +4
+
+oraz, jeśli nie zostały objęte:
+8
+12
+16
+
+Nie przekraczaj rozsądnie liczby fizycznych CPU cores.
+
+PCIE-FRAC:
+
+calibrated
+oraz sąsiednie sensowne wartości,
+np. +/- 0.15–0.25, clamp do [0,1].
+
+Nie rób pełnego cross-productu.
+
+SPEC-MIN-P:
+
+calibrated
+oraz:
+0.3
+0.5
+0.7
+
+jeśli aktualny runtime dopuszcza taki zakres.
+
+Najpierw pojedyncze runy 64K.
+TOP ustawienie potwierdź 3 razy.
+
+============================================================
+6. MTP / SPECULATIVE DECODING
+============================================================
+
+Dla najlepszego topology sprawdź wpływ MTP.
+
+Jeżeli aktualny runtime wspiera:
+
+spec:
+2
+3
+4
+5
+
+ewentualnie wyższe tylko jeśli dokumentacja sugeruje sens.
+
+spec-min-p:
+użyj najpierw wartości z calibratora.
+
+Dla każdego:
+- actual 64K
+- 1024 output tokens
+- 1 warmup
+- 2 measured runs
+
+Zbieraj:
+- drafted
+- accepted
+- acceptance %
+- mean accepted length
+- TG
+- verify window size
+- CPU misses/window
+- GPU hits/window.
+
+Potem dla najlepszych dwóch spec settings:
+3× powtórzenie.
+
+Dodatkowo wykonaj:
+MTP OFF
+jeśli runtime umożliwia bez zmiany modelu.
+
+Chcę znać:
+  raw non-MTP TG
+  MTP speedup
+
+Nie używaj nienatywnych speculative engines.
+
+============================================================
+7. KV CACHE MATRIX
+============================================================
+
+Dla najlepszego topology przetestuj:
+
+A:
+  --kv int8
+
+B:
+  --kv k8v4
+
+C:
+  --kv q4_0
+
+jeśli każdy jest wspierany przez ten topology.
+
+WAŻNE:
+k8v4 nie współpracuje z kv-resident streaming.
+Nie twórz niedozwolonych kombinacji.
+
+Dla INT8 sprawdź upstream default KV streaming dla 64K+.
+
+Dla każdego KV wariantu wykonaj:
+
+128K actual:
+- 1 warmup
+- 2 measured runs
+
+256K actual:
+- 1 warmup
+- 2 measured runs
+
+Zbieraj:
+- PP
+- TG
+- TTFT
+- VRAM
+- expert cache slots
+- GPU hit %
+- CPU miss %
+- RAM
+- KV bytes
+- file reads.
+
+Jeśli Q4_0 lub K8V4 zmienia output względem INT8:
+oznacz to w raporcie.
+Nie nazywaj wyników jakościowo równoważnymi bez testu.
+
+============================================================
+8. PREFILL / CHUNK SIZE
+============================================================
+
+Q4 ma szczególnie interesującą ścieżkę prefill,
+bo część formatów jest dequantowana do BF16.
+
+Dla najlepszego topology i najlepszego KV:
+
+przetestuj:
+
+prefill auto
+8192
+6144
+4096
+2048
+
+tylko wartości, które runtime faktycznie dopuszcza i które mieszczą się w VRAM.
+
+Test:
+actual ~128K
+256 output
+1 run na candidate
+
+TOP 2:
+3 repeats.
+
+Dodatkowo TOP 2 sprawdź przy ~256K.
+
+Zapisuj:
+- PP t/s
+- chunk wybrany przez auto
+- borrowed expert-cache slots
+- VRAM scratch
+- GPU util
+- PCIe
+- GGUF bytes read
+- PLE bytes read jeśli dostępne.
+
+============================================================
+9. COLD VS WARM FILE CACHE
+============================================================
+
+Q4 ma native GGUF source, więc chcę oddzielić:
+
+A. warm page-cache
+B. cold-ish filesystem path
+
+Nie wykonuj `drop_caches` jeśli wymaga to ingerencji w hosta
+lub może zakłócić inne systemy.
+
+Jeżeli można bezpiecznie uzyskać cold run przez:
+- restart VM nie jest wymagany;
+- użycie `vmtouch` tylko jeśli już jest;
+- odczyt nowego obszaru;
+- naturalny pierwszy start;
+
+to zmierz.
+
+Jeżeli nie:
+raportuj tylko warm.
+
+Nie instaluj ciężkich narzędzi.
+
+W każdym razie wyraźnie rozdziel:
+- expert file reads during prefill
+- expert file reads during decode
+- PLE file reads.
+
+============================================================
+10. FULL CONTEXT MATRIX FINALISTÓW
+============================================================
+
+Po wszystkich krótkich sweepach wybierz:
+
+FINAL-A:
+najlepszy 2×GPU topology pod TG/agentic workload.
+
+FINAL-B:
+drugi istotnie różny topology, np.:
+- helper GPU zamiast layer split;
+- albo single-GPU resident baseline,
+jeśli helper przegrywa.
+
+Dla FINAL-A i FINAL-B:
+
+32K:
+  prompt ~31,400
+
+64K:
+  ~63,400
+
+128K:
+  ~127,000
+
+256K:
+  ~259,500
+
+max context:
+  262144
+
+output:
+  256 tokens
+
+3 measured runs / point.
+
+Zero prompt reuse.
+
+Ta sama metodologia co poprzedni Strata benchmark.
+
+Zapisuj actual tokenizer count.
+
+============================================================
+11. LONG DECODE
+============================================================
+
+Krótkie 256 tokenów nie wystarczą.
+
+Dla FINAL-A:
+
+A:
+  64K prompt
+  4096 generated tokens
+
+B:
+  128K prompt
+  4096 generated tokens
+
+C:
+  jeśli stabilne:
+  128K prompt
+  8192 generated tokens
+
+Sampling:
+użyj realistycznego:
+  temperature 1.0
+  top_p 0.95
+  top_k 20
+
+oraz osobno jeden greedy reference.
+
+Loguj TG w czasie, np. co:
+- 100/250 tokenów
+albo zgodnie z normalnymi stats runtime.
+
+Chcę zobaczyć:
+- cumulative TG
+- rolling/local TG
+- MTP acceptance
+- expert hit rate
+- adaptive cache evolution
+- RAM
+- GPU util
+- power
+- CPU
+- PCIe
+- file reads.
+
+Wygeneruj:
+  TG vs generated token index
+  acceptance vs generated token index
+  GPU/CPU expert split vs time
+
+============================================================
+12. AGENTIC MULTI-TURN / KV REUSE
+============================================================
+
+Dla FINAL-A wykonaj symulację coding-agent session.
+
+Turn 1:
+- około 64K repo/code prompt
+- 1024 output
+
+Następnie 10 kolejnych turnów.
+Każdy dodaje:
+- 500–2000 tokenów "tool output"/kod/logi
+- request do modelu
+- 256–1024 output.
+
+Nie resetuj sesji.
+Użyj normalnego conversation/prompt cache Strata.
+
+Zbieraj dla każdego turnu:
+- existing prefix reused
+- new prompt tokens processed
+- TTFT
+- incremental PP
+- TG
+- total context
+- cache hit/reuse
+- wall time.
+
+Potem powtórz startując z ~128K.
+
+Celem jest workload podobny do OpenCode.
+
+============================================================
+13. COMPACTION-LIKE TEST
+============================================================
+
+To jest bardzo ważne po wcześniejszym problemie buun.
+
+Zbuduj prompt:
+- około 128K rzeczywistej historii coding-agent
+- zadanie: skompresować ją do <=4096 tokenów summary
+
+Zmierz:
+- PP
+- TTFT
+- generation TG
+- total wall
+
+Następnie:
+- około 250K historii
+- to samo zadanie
+- output <=4096
+
+To ma odpowiadać kosztowi realnego compaction.
+
+============================================================
+14. CORRECTNESS / QUALITY
+============================================================
+
+Nie rób ogromnego benchmarku jakości, ale sprawdź,
+czy agresywne ustawienia KV / topology nie psują modelu.
+
+Użyj istniejących 3 promptów:
+
+A coding/debugging
+B mathematical/reasoning
+C repository architecture
+
+Dla:
+- Q4 FINAL-A INT8
+- Q4 FINAL-A najlepszy alternatywny KV
+- IQ3_S existing answers
+
+Zapisz odpowiedzi.
+
+Nie używaj automatycznego LLM judge.
+
+Dodatkowo wykonaj upstreamowy long-context needle test,
+jeśli istnieje gotowy harness:
+
+32K
+128K
+256K
+
+Nie twórz własnego, jeśli upstreamowy jest dostępny.
+
+============================================================
+15. IQ3_S CONTROL
+============================================================
+
+Nie rób ponownie całej IQ3_S kampanii.
+
+Jeżeli Strata HEAD jest ten sam:
+użyj istniejących wyników.
+
+Jeżeli HEAD/config się zmienił:
+zrób tylko:
+
+64K × 3
+256K × 3
+
+na poprzedniej konfiguracji IQ3_S 2×4090.
+
+To będzie kontrola.
+
+============================================================
+16. TELEMETRIA
+============================================================
+
+Dla wszystkich istotnych runów zbieraj co ~1 s:
+
+GPU0:
+- utilization
+- memory
+- power
+- clocks
+- PCIe tx/rx jeśli dostępne
+
+GPU1:
+to samo
+
+CPU:
+- process CPU %
+- total CPU %
+- per-core jeśli łatwo
+
+RAM:
+- used
+- available
+- RSS/PSS jeśli dostępne
+
+I/O:
+- process read bytes
+- disk read throughput
+- GGUF expert-read counters z Strata
+- PLE reads jeśli raportowane.
+
+Nie mieszaj mapped RSS z faktycznie użytym physical RAM.
+Raportuj oba, jeśli można.
+
+============================================================
+17. WARUNKI ABORT
+============================================================
+
+Natychmiast przerwij candidate jeśli:
+
+- CUDA OOM;
+- host OOM;
+- MemAvailable < 10 GiB;
+- kernel/VM zaczyna ubijać procesy;
+- output ma NaN/corruption;
+- runtime crashuje;
+- filesystem zaczyna sustained thrash powodujący absurdalny latency;
+- konfiguracja jest jawnie unsupported.
+
+Nie naprawiaj tego patchem.
+
+============================================================
+18. JAK OGRANICZYĆ EKSPLOZJĘ KOMBINACJI
+============================================================
+
+To jest szeroka kampania, ale NIE rób pełnego Cartesian productu.
+
+Stosuj kolejne bramki:
+
+PHASE 1:
+topology viability
+→ 1 run 64K
+
+PHASE 2:
+topology tuning
+→ 1 run/candidate
+
+PHASE 3:
+TOP candidates
+→ 3 repeats 64K
+
+PHASE 4:
+KV / prefill / MTP tuning tylko dla najlepszego topology
+
+PHASE 5:
+pełna 32/64/128/256 macierz tylko dla FINAL-A i FINAL-B
+
+PHASE 6:
+long decode + agentic + compaction tylko FINAL-A.
+
+Jeżeli kandydat jest >30% wolniejszy od najlepszego
+i nie oferuje żadnej istotnej korzyści:
+nie rozwijaj go dalej.
+
+============================================================
+19. RAPORT
+============================================================
+
+summary.csv ma zawierać co najmniej:
+
+topology
+gpu_count
+layer_split
+remote_cache_mode
+remote_cache_slots
+resident_mode
+host_expert_source
+KV_mode
+KV_streaming
+prefill_chunk
+spec
+spec_min_p
+pool_workers
+pcie_frac
+actual_prompt_tokens
+output_tokens
+PP_tps
+TG_tps
+TTFT_s
+wall_s
+MTP_accept
+GPU0_cache_slots
+GPU1_cache_slots
+GPU0_hit_count
+GPU1_hit_count
+CPU_misses
+expert_file_reads
+expert_file_MB
+RAM_used
+MemAvailable
+VRAM0
+VRAM1
+GPU0_util
+GPU1_util
+GPU0_power
+GPU1_power
+
+============================================================
+20. WYKRESY
+============================================================
+
+Wygeneruj:
+
+1. TG vs context — final topologies
+2. PP vs context
+3. TTFT vs context
+4. TG vs layer split K
+5. TG vs remote-cache size
+6. TG vs MTP spec length
+7. MTP acceptance vs spec
+8. TG vs KV format
+9. PP vs prefill chunk
+10. GPU0/GPU1/CPU expert share
+11. TG through long 4K/8K generation
+12. expert hit rate through long generation
+13. TTFT per agentic turn
+14. incremental PP per agentic turn
+15. wall time compaction 128K vs 250K
+
+============================================================
+21. FINALNY RAPORT — NAJWAŻNIEJSZE PYTANIA
+============================================================
+
+Na końcu chcę jednoznaczne odpowiedzi:
+
+1. Czy Q4 native działa na 2×4090 bez resident-cpu-experts?
+2. Czy działa:
+   GPU0 experts + GPU1 experts + CPU fallback?
+3. Czy istnieje wspierana full-RAM native arena dla tego Q4,
+   czy host fallback pozostaje GGUF/page-cache?
+4. Który topology jest najszybszy:
+   - single resident
+   - layer split
+   - helper/remote GPU?
+5. Jaki layer split K jest najlepszy?
+6. Ile routed work wykonuje:
+   - GPU0
+   - GPU1
+   - CPU?
+7. Czy decode ma zero expert SSD reads?
+8. Co ogranicza PP?
+9. Co ogranicza TG?
+10. Jaki KV format jest najlepszy przy 128K i 256K?
+11. Jaki MTP spec/min-p jest najlepszy?
+12. Czy calibrator Strata pomaga na 7950X3D?
+13. Jaki jest PP/TG przy actual:
+    32K
+    64K
+    128K
+    256K?
+14. Jak Q4 wypada względem istniejącego IQ3_S 2×4090?
+15. Jak zachowuje się podczas 4096–8192 tokenów decode?
+16. Jak zachowuje się w multi-turn agentic workload?
+17. Ile trwa compaction-like request przy 128K i ~250K?
+18. Czy Q4 jest praktycznie sensowny do OpenCode?
+19. Jaka konfiguracja jest najlepsza do:
+    SPEED
+20. Jaka konfiguracja jest najlepsza do:
+    QUALITY / HIGHER-QUANT Q4
+
+Na koniec podaj gotowy finalny command/config dla najlepszego Q4
+oraz osobno dla najlepszego IQ3_S.
+
+============================================================
+22. WAŻNE
+============================================================
+
+Nie kończ kampanii tylko dlatego, że pierwszy layer-split jest wolny.
+
+Sprawdź:
+- auto split;
+- manual split;
+- remote helper cache;
+- stripe/layer placement;
+- CPU/PCIe calibration;
+- MTP;
+- KV;
+- prefill;
+- long context.
+
+Ale nie implementuj brakujących funkcji.
+
+Jeśli upstream czegoś nie obsługuje, wynik:
+  UNSUPPORTED_BY_CURRENT_UPSTREAM
+
+jest poprawnym wynikiem eksperymentu.
+
+Nie commituj.
+Nie pushuj.
+Nie modyfikuj upstreamowego kodu.

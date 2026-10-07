@@ -1,0 +1,26 @@
+{
+  "run": true,
+  "context": "32K",
+  "configs": [
+    "CURRENT",
+    "HELPER"
+  ],
+  "reason": "4096 whole-run medians143.4 vs129.2 differ11%, but2K\u20134K interval medians141.27 vs140.19 differ0.77%; helperrun2 has bracketed late acceleration, run3 helper exceeds current late rate. The late-decode ranking remains unresolved. Only top2 configurations at32K;128K needs no extension and has known tokenization mismatch.",
+  "output": 16384,
+  "warmup": "same4096/64 fixed",
+  "max_valid_runs_per_config": 3,
+  "policy": "Same saved long-output input/task, no prompt modification. Stop this optional confirmation if shared40-section workload naturally cannot sustain16384; preserve early stop and do not manufacture favourable workload.",
+  "outcome": "INCOMPLETE_FIXED_LENGTH_COMPARISON_NATURAL_EOS",
+  "results": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/analysis/confirmation-results.json",
+  "invalid_outputs": {
+    "CURRENT": 9689,
+    "HELPER": 13174
+  },
+  "valid_outputs": {
+    "HELPER": [
+      16384
+    ]
+  },
+  "valid_three_run_medians": false,
+  "final_action": "No prompt rewriting/repetition search; keep primary4096 matrix complete; optional diagnostic only"
+}

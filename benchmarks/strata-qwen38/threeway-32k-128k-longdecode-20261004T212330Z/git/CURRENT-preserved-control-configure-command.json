@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/srv/ai/strata-pr578-refresh-20261004-control/.venv/bin/cmake",
+    "-S",
+    "/srv/ai/strata-pr578-refresh-20261004-control",
+    "-B",
+    "/srv/ai/strata-pr578-refresh-20261004-control/build-default",
+    "-G",
+    "Ninja",
+    "-DCMAKE_MAKE_PROGRAM=/srv/ai/strata-pr578-refresh-20261004-control/.venv/bin/ninja",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DSTRATA_ENABLE_CUDA=ON",
+    "-DCMAKE_CUDA_ARCHITECTURES=89",
+    "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325",
+    "-DSTRATA_BUILD_TESTS=ON"
+  ],
+  "cwd": null,
+  "returncode": 0,
+  "log": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/logs/control-configure.log"
+}

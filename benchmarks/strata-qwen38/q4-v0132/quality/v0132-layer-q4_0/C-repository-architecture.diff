@@ -1,0 +1,433 @@
+--- v0132-layer-default/C-repository-architecture.txt
++++ v0132-layer-q4_0/C-repository-architecture.txt
+@@ -2,33 +2,69 @@
+ 
+ ## 1. High-Level Overview
+ 
+-This service acts as a **single-process gateway** that:
+-1. Accepts OpenAI-compatible `/v1/chat/completions` streaming requests.
+-2. Serializes all inference requests through a **single resident GPU worker** (to avoid GPU contention and ensure deterministic resource usage).
+-3. Manages **prompt caching** correctly across multiple clients by isolating cache contexts per session/client.
+-4. Records per-request metrics (latency, token counts, cache hits/misses).
+-5. Handles cancellation, process failure recovery, and graceful shutdown.
+-
+-### Key Design Principles
+-- **Single GPU Worker**: One long-lived subprocess owns the GPU. The main service communicates via IPC (Unix domain sockets or named pipes).
+-- **Sequential Queue**: All requests are queued and processed one-by-one to prevent GPU memory thrashing and ensure fairness.
+-- **Client-Isolated Prompt Caching**: Each client session gets its own cache context. The GPU worker maintains a cache per session ID, not globally.
+-- **Crash Resilience**: If the GPU worker crashes, the service detects it, restarts it, and fails pending requests with a retryable error.
++This service acts as a **single-GPU, single-process inference gateway**. It exposes an OpenAI-compatible `/v1/chat/completions` endpoint, serializes requests to a resident GPU process, streams tokens back to clients, and records metrics. The core challenges are:
++
++- **Sequential execution**: One GPU process → one active request at a time.
++- **Cancellation**: Clients may disconnect mid-stream; we must abort GPU work cleanly.
++- **Failure recovery**: If the GPU process crashes, we must restart it and resume accepting requests.
++- **Prompt caching correctness**: KV-cache reuse must be scoped per-client/session to avoid cross-contamination.
+ 
+ ---
+ 
+ ## 2. Module Boundaries
+ 
+-| Module | Responsibility |
+-|--------|---------------|
+-| `api/` | HTTP server, OpenAI-compatible request parsing, streaming response formatting, authentication, rate limiting. |
+-| `queue/` | In-memory FIFO queue for inference requests. Enforces sequential processing. Handles backpressure. |
+-| `worker/` | Manages the lifecycle of the resident GPU inference subprocess. IPC communication, health checks, restart logic. |
+-| `cache/` | Prompt cache manager. Maps `session_id` → cache context. Ensures cache isolation between clients. |
+-| `metrics/` | Collects per-request metrics (latency, tokens, cache hits). Exposes `/metrics` endpoint. |
+-| `config/` | Configuration loading (model path, GPU device, cache size, timeouts). |
+-| `proto/` | Protobuf or JSON schema definitions for IPC messages between main service and GPU worker. |
+-| `logging/` | Structured logging with request IDs for tracing. |
++```
++┌─────────────────────────────────────────────────────────┐
++│                   HTTP API Layer                         │
++│  (FastAPI/Starlette)                                     │
++│  - Request validation                                    │
++│  - OpenAI-compatible schema parsing                      │
++│  - SSE streaming response                                │
++│  - Client disconnect detection                           │
++└──────────────────────┬──────────────────────────────────┘
++                       │
++┌──────────────────────▼──────────────────────────────────┐
++│                   Request Queue                          │
++│  (asyncio.Queue or similar)                              │
++│  - FIFO ordering                                         │
++│  - Per-request metadata (client_id, session_id)          │
++│  - Cancellation tokens                                   │
++└──────────────────────┬──────────────────────────────────┘
++                       │
++┌──────────────────────▼──────────────────────────────────┐
++│              Inference Orchestrator                      │
++│  - Manages lifecycle of GPU worker process               │
++│  - Dispatches one request at a time                      │
++│  - Handles cancellation propagation                      │
++│  - Monitors worker health                                │
++└──────────────────────┬──────────────────────────────────┘
++                       │
++┌──────────────────────▼──────────────────────────────────┐
++│              GPU Worker Process                          │
++│  (Separate OS process, e.g., via multiprocessing)        │
++│  - Loads model into GPU memory                           │
++│  - Maintains KV-cache per session                        │
++│  - Streams tokens back via IPC (shared memory / pipe)    │
++│  - Responds to abort signals                             │
++└──────────────────────┬──────────────────────────────────┘
++                       │
++┌──────────────────────▼──────────────────────────────────┐
++│              Metrics & Logging                           │
++│  - Per-request latency, token counts, cache hits         │
++│  - Structured logs (JSON)                                │
++│  - Optional Prometheus exporter                          │
++└─────────────────────────────────────────────────────────┘
++```
++
++### Key Boundary Principles
++
++| Module | Responsibility | Does NOT Do |
++|--------|---------------|-------------|
++| **HTTP API** | Parse/validate requests, stream responses, detect disconnects | Touch GPU, manage queue |
++| **Request Queue** | Order requests, hold cancellation state | Execute inference |
++| **Orchestrator** | Lifecycle management, dispatch, health checks | Parse HTTP, format SSE |
++| **GPU Worker** | Model inference, KV-cache management | Know about HTTP or clients |
++| **Metrics** | Record timings, counters, logs | Influence control flow |
+ 
+ ---
+ 
+@@ -36,55 +72,59 @@
+ 
+ ```
+ coding-agent-service/
++├── pyproject.toml
+ ├── README.md
+-├── pyproject.toml
+ ├── Dockerfile
+ ├── docker-compose.yml
+-├── config/
+-│   ├── __init__.py
+-│   ├── settings.py          # Pydantic settings: model path, GPU device, cache size, timeouts
+-│   └── logging_config.py    # Structured logging setup
++│
+ ├── src/
+ │   ├── __init__.py
+-│   ├── main.py              # Entry point: starts API server, worker manager, metrics server
++│   ├── main.py                  # Entry point: starts API + orchestrator
++│   │
+ │   ├── api/
+ │   │   ├── __init__.py
+-│   │   ├── server.py        # FastAPI/Starlette app, routes, middleware
+-│   │   ├── handlers.py      # Request handlers: /v1/chat/completions, /health, /metrics
+-│   │   ├── models.py        # Pydantic models for OpenAI-compatible requests/responses
+-│   │   └── auth.py          # API key validation, rate limiting
++│   │   ├── routes.py            # FastAPI routes: /v1/chat/completions, /health
++│   │   ├── schemas.py           # Pydantic models for OpenAI-compatible requests/responses
++│   │   └── streaming.py         # SSE generator, disconnect detection
++│   │
+ │   ├── queue/
+ │   │   ├── __init__.py
+-│   │   ├── request_queue.py # Async FIFO queue with backpressure
+-│   │   └── task.py          # InferenceTask dataclass: request, session_id, cancel_event, metrics
++│   │   ├── request_queue.py     # asyncio.Queue wrapper with cancellation support
++│   │   └── request.py           # Request dataclass: id, client_id, session_id, messages, cancel_event
++│   │
++│   ├── orchestrator/
++│   │   ├── __init__.py
++│   │   ├── orchestrator.py      # Main loop: dequeue → dispatch → stream → cleanup
++│   │   ├── worker_manager.py    # Start/stop/restart GPU worker process
++│   │   └── ipc.py               # Shared memory / pipe protocol for token streaming
++│   │
+ │   ├── worker/
+ │   │   ├── __init__.py
+-│   │   ├── manager.py       # WorkerManager: starts/stops/restarts GPU subprocess, health checks
+-│   │   ├── ipc.py           # IPC client: sends requests to worker, receives streaming chunks
+-│   │   ├── protocol.py      # Message schemas for IPC (JSON or Protobuf)
+-│   │   └── gpu_worker.py    # Standalone script: loads model, runs inference, manages cache
+-│   ├── cache/
+-│   │   ├── __init__.py
+-│   │   ├── manager.py       # CacheManager: per-session cache contexts, eviction policy
+-│   │   └── context.py       # CacheContext: stores KV cache state for a session
++│   │   ├── gpu_worker.py        # Entry point for GPU process: loads model, listens for jobs
++│   │   ├── inference.py         # Core inference logic: generate tokens, manage KV-cache
++│   │   └── cache.py             # Per-session KV-cache manager (LRU eviction, isolation)
++│   │
+ │   ├── metrics/
+ │   │   ├── __init__.py
+-│   │   ├── collector.py     # MetricsCollector: records latency, tokens, cache hits
+-│   │   └── exporter.py      # Prometheus-compatible metrics exporter
+-│   └── utils/
++│   │   ├── recorder.py          # Record per-request metrics (latency, tokens, cache hits)
++│   │   └── exporter.py          # Optional Prometheus / JSON log exporter
++│   │
++│   └── config/
+ │       ├── __init__.py
+-│       ├── cancellation.py  # Cancellation token utilities
+-│       └── errors.py        # Custom exceptions: WorkerCrashed, QueueFull, CacheMiss
++│       └── settings.py          # Model path, GPU device, queue size, cache limits
++│
+ ├── tests/
+ │   ├── __init__.py
+-│   ├── test_api.py
+-│   ├── test_queue.py
+-│   ├── test_worker.py
+-│   ├── test_cache.py
+-│   └── test_metrics.py
++│   ├── test_api.py              # Unit tests for request parsing, streaming
++│   ├── test_queue.py            # Test cancellation, ordering
++│   ├── test_orchestrator.py     # Test worker restart, dispatch logic
++│   ├── test_worker.py           # Test inference, cache isolation
++│   └── test_metrics.py          # Test metric recording
++│
+ ├── scripts/
+-│   ├── start_worker.sh      # Helper to start GPU worker standalone for debugging
+-│   └── benchmark.py         # Load testing script
++│   ├── start_service.sh         # Launch service
++│   └── simulate_load.py         # Load test with multiple clients
++│
+ └── docs/
+     ├── architecture.md
+     └── api.md
+@@ -92,99 +132,151 @@
+ 
+ ---
+ 
+-## 4. Detailed Design
+-
+-### 4.1 Request Flow
+-
+-```
+-Client → API Server → Queue → Worker Manager → GPU Worker → Cache → Response Stream
+-```
+-
+-1. **API Server** receives a `/v1/chat/completions` request.
+-2. Extracts `session_id` (from header `X-Session-ID` or derived from API key + conversation ID).
+-3. Creates an `InferenceTask` with:
+-   - Request payload
+-   - `session_id`
+-   - `cancel_event` (asyncio.Event)
+-   - `metrics` object
+-4. Enqueues the task into the `RequestQueue`.
+-5. **Worker Manager** pops the next task from the queue.
+-6. Sends the task to the **GPU Worker** via IPC, including the `session_id`.
+-7. **GPU Worker**:
+-   - Looks up the `CacheContext` for the `session_id`.
+-   - Runs inference with prompt caching enabled.
+-   - Streams tokens back via IPC.
+-   - Updates cache context after completion.
+-8. **API Server** streams tokens back to the client.
+-9. On completion, **Metrics Collector** records:
+-   - Total latency
+-   - Time in queue
+-   - Time in inference
+-   - Token counts (prompt, completion)
+-   - Cache hit/miss status
+-
+-### 4.2 Cancellation
+-
+-- **Client Disconnect**: If the client disconnects, the API server sets the `cancel_event` on the `InferenceTask`.
+-- **Queue Cancellation**: If the task is still in the queue, it is removed and marked as cancelled.
+-- **Worker Cancellation**: If the task is already being processed, the API server sends a `CANCEL` message to the GPU worker via IPC. The worker checks the cancellation flag between token generations and aborts inference.
+-- **Timeouts**: Each request has a configurable timeout. If exceeded, the task is cancelled.
+-
+-### 4.3 Process Failure Recovery
+-
+-- **Health Checks**: The `WorkerManager` periodically pings the GPU worker via IPC. If no response within a timeout, the worker is considered dead.
+-- **Restart Strategy**:
+-  1. Detect worker crash (IPC connection closed or health check failure).
+-  2. Mark all in-flight tasks as failed with `WorkerCrashed` error.
+-  3. Restart the GPU worker subprocess.
+-  4. Clear all cache contexts (since the worker restarted, caches are lost).
+-  5. Resume processing new requests from the queue.
+-- **Graceful Shutdown**: On SIGTERM, the API server stops accepting new requests, drains the queue, and shuts down the worker.
+-
+-### 4.4 Prompt Caching Correctness
+-
+-**Problem**: If two clients share the same GPU worker, their KV caches must not interfere.
+-
+-**Solution**:
+-- Each `session_id` maps to a unique `CacheContext` in the GPU worker.
+-- The `CacheContext` stores:
+-  - KV cache tensors for the session
+-  - Last token position
+-  - Cache metadata (size, last access time)
+-- **Cache Isolation**: The GPU worker uses `session_id` to select the correct cache context before inference.
+-- **Cache Eviction**: LRU eviction per session. If total cache memory exceeds a limit, the least-recently-used session’s cache is evicted.
+-- **Cache Invalidation**: If a client sends a new conversation (different `session_id`), a new cache context is created. If the same `session_id` is reused, the existing cache is updated.
+-
+-**Key Insight**: The cache is **not** shared across sessions. This ensures correctness but may reduce cache hit rates for identical prompts from different clients. This is a deliberate tradeoff for isolation.
+-
+----
+-
+-## 5. Two Tradeoffs
+-
+-### Tradeoff 1: Sequential Queue vs. Parallel Inference
+-
+-| Aspect | Sequential Queue (Chosen) | Parallel Inference |
+-|--------|---------------------------|--------------------|
+-| **GPU Memory** | Predictable, single model load | Risk of OOM with multiple concurrent requests |
+-| **Latency** | Higher tail latency (queuing delay) | Lower latency for concurrent requests |
+-| **Complexity** | Simple, deterministic | Complex scheduling, cache contention |
+-| **Fairness** | FIFO ensures fairness | Priority scheduling needed |
+-
+-**Why Sequential?** For a local coding-agent service, GPU memory is the bottleneck. Running multiple inferences concurrently risks OOM and cache thrashing. Sequential processing ensures stability and predictable resource usage. The tradeoff is higher latency under load, which is acceptable for a local service where throughput is less critical than reliability.
+-
+-### Tradeoff 2: Per-Session Cache Isolation vs. Global Cache Sharing
+-
+-| Aspect | Per-Session Isolation (Chosen) | Global Cache Sharing |
+-|--------|--------------------------------|----------------------|
+-| **Correctness** | Guaranteed isolation, no cross-contamination | Risk of cache collisions, incorrect results |
+-| **Cache Hit Rate** | Lower (identical prompts from different clients miss) | Higher (shared prefixes benefit all clients) |
+-| **Memory Usage** | Higher (multiple cache contexts) | Lower (single shared cache) |
+-| **Complexity** | Simple, clear ownership | Complex eviction, locking, consistency |
+-
+-**Why Per-Session?** Correctness is paramount for a coding-agent service. A cache collision could lead to incorrect code generation, which is unacceptable. Per-session isolation ensures that each client’s context is independent. The tradeoff is lower cache hit rates and higher memory usage, but this is acceptable for a local service with limited concurrent clients.
+-
+----
+-
+-## 6. Summary
+-
+-This architecture prioritizes **correctness**, **stability**, and **simplicity** over maximum throughput. The sequential queue and per-session cache isolation ensure that the GPU worker operates predictably and that clients do not interfere with each other. Cancellation and failure recovery are handled at the worker manager level, ensuring that the service remains responsive even under adverse conditions.+## 4. Cancellation Flow
++
++```
++Client disconnects
++       │
++       ▼
++HTTP layer detects closed connection
++       │
++       ▼
++Sets Request.cancel_event = True
++       │
++       ▼
++Orchestrator checks cancel_event before/after each token batch
++       │
++       ├── If not yet dispatched: remove from queue, return 499
++       │
++       └── If currently running:
++              │
++              ▼
++         Send abort signal to GPU worker via IPC
++              │
++              ▼
++         GPU worker stops generation, releases KV-cache for that session
++              │
++              ▼
++         Orchestrator logs cancellation, records partial metrics
++              │
++              ▼
++         Next request dequeued
++```
++
++**Key design choice**: Cancellation is **cooperative**. The GPU worker checks a shared-memory flag between token batches. This avoids killing the process mid-inference, which could corrupt GPU state.
++
++---
++
++## 5. Process Failure Recovery
++
++```
++GPU Worker crashes
++       │
++       ▼
++Orchestrator detects broken IPC pipe / worker exit code != 0
++       │
++       ▼
++Mark current request as failed (500 error to client if still connected)
++       │
++       ▼
++Restart GPU worker process (with exponential backoff)
++       │
++       ▼
++Wait for worker to signal "ready" via IPC handshake
++       │
++       ▼
++Resume dequeuing requests
++```
++
++**Recovery guarantees**:
++- **No data loss**: Requests are not acknowledged until fully streamed. If the worker dies mid-stream, the client sees a truncated response and can retry.
++- **Idempotency**: Since requests are sequential and stateless from the API perspective, retries are safe.
++- **Cache invalidation**: On worker restart, all KV-caches are lost. This is acceptable because caches are ephemeral and per-session.
++
++---
++
++## 6. Prompt Caching Correctness Across Clients
++
++### Problem
++KV-cache reuse assumes the same prefix tokens. If Client A and Client B share a cache slot, Client B could see tokens generated for Client A’s context — a **security and correctness violation**.
++
++### Solution: Session-Scoped Caches
++
++```python
++# worker/cache.py
++class SessionCache:
++    """
++    Each session_id maps to an isolated KV-cache.
++    LRU eviction when total cache size exceeds limit.
++    """
++    def __init__(self, max_sessions: int = 100):
++        self._caches: OrderedDict[str, KVCache] = OrderedDict()
++        self._max_sessions = max_sessions
++
++    def get_or_create(self, session_id: str) -> KVCache:
++        if session_id in self._caches:
++            self._caches.move_to_end(session_id)  # LRU touch
++            return self._caches[session_id]
++        if len(self._caches) >= self._max_sessions:
++            _, evicted = self._caches.popitem(last=False)
++            evicted.release()  # Free GPU memory
++        cache = KVCache()
++        self._caches[session_id] = cache
++        return cache
++
++    def invalidate(self, session_id: str):
++        if session_id in self._caches:
++            self._caches.pop(session_id).release()
++```
++
++**How session_id is derived**:
++- From `X-Session-ID` header, or
++- From a hash of `(client_ip, user_id, conversation_id)` if provided in the request body.
++
++**Cache hit logic**:
++1. On request arrival, compute `session_id`.
++2. Look up existing KV-cache for that session.
++3. If found, reuse prefix tokens (up to the longest common prefix with the new messages).
++4. If not found, start fresh.
++5. On cancellation or session timeout, invalidate the cache.
++
++**Isolation guarantee**: Two different `session_id`s never share KV-cache memory. The orchestrator passes `session_id` to the worker with each request.
++
++---
++
++## 7. Two Tradeoffs
++
++### Tradeoff 1: Sequential Queueing vs. Batching
++
++| Aspect | Sequential (Chosen) | Batching |
++|--------|---------------------|----------|
++| **Latency** | Higher per-request latency (wait for queue) | Lower average latency for high throughput |
++| **Complexity** | Simple cancellation, simple cache management | Complex: batch-level cancellation, cache conflicts |
++| **GPU Utilization** | Lower (one request at a time) | Higher (multiple sequences in parallel) |
++| **Correctness** | Easy to reason about | Hard: interleaved tokens, cache invalidation |
++
++**Why sequential?** For a coding-agent service, requests are often long-running (thousands of tokens). Batching adds significant complexity for marginal gains when GPU memory is the bottleneck. Sequential execution makes cancellation and cache isolation trivial.
++
++### Tradeoff 2: Separate Process vs. In-Process GPU Worker
++
++| Aspect | Separate Process (Chosen) | In-Process |
++|--------|---------------------------|------------|
++| **Crash isolation** | GPU crash doesn’t kill API server | GPU crash kills entire service |
++| **IPC overhead** | Small latency per token (~10–100 µs) | Zero overhead |
++| **Memory sharing** | Requires shared memory / pipes | Direct access to model objects |
++| **Deployment** | More complex (process management) | Simpler |
++
++**Why separate process?** GPU inference libraries (e.g., vLLM, llama.cpp) can segfault or leak memory. Isolating the GPU worker ensures the HTTP API remains responsive for health checks and can restart the worker without downtime. The IPC overhead is negligible compared to token generation time (~10–50 ms/token).
++
++---
++
++## 8. Summary
++
++This architecture prioritizes **correctness and resilience** over raw throughput:
++
++- **Sequential queueing** simplifies cancellation and cache isolation.
++- **Process isolation** ensures API availability during GPU failures.
++- **Session-scoped KV-caches** prevent cross-client contamination.
++- **Cooperative cancellation** avoids GPU state corruption.
++
++The file tree cleanly separates concerns, making each module independently testable and replaceable.

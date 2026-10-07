@@ -1,0 +1,248 @@
+{
+  "status": "SMOKE_PASS_CORRECTNESS_PENDING",
+  "regressions": "7/7 PASS + real Q8_0 PLE parity PASS",
+  "smokes": [
+    {
+      "label": "Q5-PLE-Q8-1GPU-MMAP",
+      "status": "PASS",
+      "health": {
+        "status": "ok",
+        "max_context": 262144,
+        "model": "qwen3.8-flash-next-ud-q5_k_xl",
+        "images": false,
+        "api_key": false,
+        "loaded": true,
+        "service": "strata"
+      },
+      "smoke": {
+        "model": "Q5-PLE-Q8-1GPU-MMAP",
+        "kind": "smoke",
+        "context": "2048",
+        "repeat": null,
+        "actual_prompt_tokens_tokenizer": 2048,
+        "requested_generated_tokens": 64,
+        "time_utc": "2026-10-02T10:08:22Z",
+        "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-ple-q8-v0132/telemetry/Q5-PLE-Q8-1GPU-MMAP-smoke.jsonl",
+        "samples": 19,
+        "peak_rss_gib": 96.42729568481445,
+        "min_mem_available_gib": 61.868682861328125,
+        "peak_ram_used_gib": 99.26393508911133,
+        "peak_vram0_gib": 23.36328125,
+        "peak_vram1_gib": 0.0009765625,
+        "abort": null,
+        "usage": {
+          "prompt_tokens": 2048,
+          "completion_tokens": 64,
+          "total_tokens": 2112,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "text": "# Explanation of `CMakeLists.txt`\n\nThe `CMakeLists.txt` file serves as the primary build configuration script for the **Strata Engine**, a high-performance inference engine likely optimized for modern GPUs. It defines the project metadata, compiler standards, and conditional logic required to build the core library (`strata",
+        "reasoning": "",
+        "actual_prompt_tokens": 2048,
+        "generated_tokens": 64,
+        "ttft_s": 16.34531284699915,
+        "total_wall_s": 18.5047786560026,
+        "api_decode_wall_s": 2.15946580900345,
+        "prompt_processing_wall_s": 16.2824,
+        "decode_wall_s": 2.2124,
+        "pp_tps": 125.8,
+        "tg_tps": 28.9,
+        "draft_tokens": 61,
+        "accepted_tokens": 33,
+        "cache_reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2048,
+          "prompt_ms": 16282.4,
+          "prompt_per_token_ms": 7.95,
+          "prompt_per_second": 125.8,
+          "predicted_n": 64,
+          "predicted_ms": 2212.4,
+          "predicted_per_token_ms": 34.569,
+          "predicted_per_second": 28.9,
+          "draft_n": 61,
+          "draft_n_accepted": 33,
+          "at": 1790935720
+        },
+        "acceptance_pct": 54.09836065573771,
+        "mean_accepted_length": 1.03125,
+        "final_logical_context_tokens": 2112,
+        "final_kv_occupancy_tokens": 2112,
+        "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+        "verify_rounds": 32,
+        "mean_committed_length": 2.03125,
+        "expert_tiers": {
+          "ram_blobs": 0,
+          "file_blobs": 0,
+          "file_mb": 0.0,
+          "hit_rate": 0.587
+        },
+        "status": "OK",
+        "t_start_monotonic_s": 83623.067146501,
+        "t_first_monotonic_s": 83639.412459348,
+        "t_end_monotonic_s": 83641.571925157,
+        "pss_before": {
+          "372951": {
+            "pss_gib": 0.1838207244873047,
+            "pss_sample_wall": 1790935701.4091766,
+            "pss_read_wall_s": 0.0033797860087361187
+          },
+          "372965": {
+            "pss_gib": 94.18262386322021,
+            "pss_sample_wall": 1790935702.187578,
+            "pss_read_wall_s": 0.7784008870075922
+          }
+        },
+        "pss_after": {
+          "372951": {
+            "pss_gib": 0.1840190887451172,
+            "pss_sample_wall": 1790935720.9165678,
+            "pss_read_wall_s": 0.003747424008906819
+          },
+          "372965": {
+            "pss_gib": 96.16307258605957,
+            "pss_sample_wall": 1790935721.794484,
+            "pss_read_wall_s": 0.8779160940030124
+          }
+        },
+        "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+        "candidate": "Q5-PLE-Q8-1GPU-MMAP",
+        "config": "/srv/ai/benchmarks/strata-qwen38/q5-ple-q8-v0132/configs/Q5-PLE-Q8-1GPU-MMAP.json"
+      },
+      "cpu_only_log_lines": [
+        "strata generate: layer 2 routed experts Q6_K/Q8_0: CPU_ONLY_FORMAT_FALLBACK (GPU cache/PCIe/helper disabled)",
+        "strata CPU-only prefill: layer 2 CPU entries 20410 GPU expert entries 0",
+        "strata CPU-only decode: layer 2 CPU entries 60 GPU expert entries 0"
+      ]
+    },
+    {
+      "label": "Q5-PLE-Q8-2GPU-K24-MMAP",
+      "status": "PASS",
+      "health": {
+        "status": "ok",
+        "max_context": 262144,
+        "model": "qwen3.8-flash-next-ud-q5_k_xl",
+        "images": false,
+        "api_key": false,
+        "loaded": true,
+        "service": "strata"
+      },
+      "smoke": {
+        "model": "Q5-PLE-Q8-2GPU-K24-MMAP",
+        "kind": "smoke",
+        "context": "2048",
+        "repeat": null,
+        "actual_prompt_tokens_tokenizer": 2048,
+        "requested_generated_tokens": 64,
+        "time_utc": "2026-10-02T10:10:11Z",
+        "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/q5-ple-q8-v0132/telemetry/Q5-PLE-Q8-2GPU-K24-MMAP-smoke.jsonl",
+        "samples": 17,
+        "peak_rss_gib": 97.73221969604492,
+        "min_mem_available_gib": 60.14909362792969,
+        "peak_ram_used_gib": 100.98352432250977,
+        "peak_vram0_gib": 23.306640625,
+        "peak_vram1_gib": 23.498046875,
+        "abort": null,
+        "usage": {
+          "prompt_tokens": 2048,
+          "completion_tokens": 64,
+          "total_tokens": 2112,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "text": "# Explanation of `CMakeLists.txt`\n\nThe `CMakeLists.txt` file serves as the root build configuration for the **Strata Engine**, a high-performance inference engine likely optimized for modern GPUs (NVIDIA CUDA and AMD HIP). It orchestrates the compilation of C++ targets, manages optional GPU backend dependencies",
+        "reasoning": "",
+        "actual_prompt_tokens": 2048,
+        "generated_tokens": 64,
+        "ttft_s": 14.770327246995294,
+        "total_wall_s": 16.093821802001912,
+        "api_decode_wall_s": 1.3234945550066186,
+        "prompt_processing_wall_s": 14.707600000000001,
+        "decode_wall_s": 1.376,
+        "pp_tps": 139.2,
+        "tg_tps": 46.5,
+        "draft_tokens": 58,
+        "accepted_tokens": 36,
+        "cache_reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2048,
+          "prompt_ms": 14707.6,
+          "prompt_per_token_ms": 7.181,
+          "prompt_per_second": 139.2,
+          "predicted_n": 64,
+          "predicted_ms": 1376.0,
+          "predicted_per_token_ms": 21.5,
+          "predicted_per_second": 46.5,
+          "draft_n": 58,
+          "draft_n_accepted": 36,
+          "at": 1790935827
+        },
+        "acceptance_pct": 62.06896551724138,
+        "mean_accepted_length": 1.1612903225806452,
+        "final_logical_context_tokens": 2112,
+        "final_kv_occupancy_tokens": 2114,
+        "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+        "verify_rounds": 31,
+        "mean_committed_length": 2.161290322580645,
+        "expert_tiers": {
+          "ram_blobs": 0,
+          "file_blobs": 0,
+          "file_mb": 0.0,
+          "hit_rate": 0.844
+        },
+        "status": "OK",
+        "t_start_monotonic_s": 83732.238171662,
+        "t_first_monotonic_s": 83747.008498909,
+        "t_end_monotonic_s": 83748.331993464,
+        "pss_before": {
+          "373649": {
+            "pss_gib": 0.1837472915649414,
+            "pss_sample_wall": 1790935810.572185,
+            "pss_read_wall_s": 0.004489821003517136
+          },
+          "373658": {
+            "pss_gib": 95.37869262695312,
+            "pss_sample_wall": 1790935811.3638103,
+            "pss_read_wall_s": 0.7916244230000302
+          }
+        },
+        "pss_after": {
+          "373649": {
+            "pss_gib": 0.18395137786865234,
+            "pss_sample_wall": 1790935827.6798902,
+            "pss_read_wall_s": 0.004640182000002824
+          },
+          "373658": {
+            "pss_gib": 97.37733745574951,
+            "pss_sample_wall": 1790935828.5548997,
+            "pss_read_wall_s": 0.875009196010069
+          }
+        },
+        "pss_note": "smaps snapshots outside timed request; cached PSS in1Hz telemetry has timestamp",
+        "candidate": "Q5-PLE-Q8-2GPU-K24-MMAP",
+        "config": "/srv/ai/benchmarks/strata-qwen38/q5-ple-q8-v0132/configs/Q5-PLE-Q8-2GPU-K24-MMAP.json"
+      },
+      "cpu_only_log_lines": [
+        "strata generate: layer 2 routed experts Q6_K/Q8_0: CPU_ONLY_FORMAT_FALLBACK (GPU cache/PCIe/helper disabled)",
+        "strata CPU-only prefill: layer 2 CPU entries 20410 GPU expert entries 0",
+        "strata CPU-only decode: layer 2 CPU entries 60 GPU expert entries 0"
+      ]
+    }
+  ],
+  "benchmark_requests": 0,
+  "gpu_compute_apps_after": "",
+  "clean_checkout_tracked_unchanged": true,
+  "model_stat_unchanged": true,
+  "native_ple_Q8_0": "PASS_mmap",
+  "real_ple_reference_max_abs": 0,
+  "regression_ctests": "7/7 PASS",
+  "patch": "/srv/ai/benchmarks/strata-qwen38/q5-ple-q8-v0132/q5-loader-cpu-ple.patch",
+  "patch_sha256": "e71e4bb437849509b3cec8a25664cc280bd678bdf90017ae46b222befad6e29b",
+  "smoke_requests": 2,
+  "full_model_parity_validated": false,
+  "long_context_validated": false
+}

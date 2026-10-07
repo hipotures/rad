@@ -1,0 +1,155 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-PRIORITY-case5.json",
+  "source_bytes": 303973,
+  "source_sha256": "7c091e6cb1d615a7c0576cc3c3b72973fd73713dc78cd5d3fbee5d2da27ed4fc",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-PRIORITY",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 61,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-04T01:06:06Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-PRIORITY-case5.jsonl",
+    "samples": 4,
+    "peak_rss_gib": 53.403743743896484,
+    "min_mem_available_gib": 103.51224517822266,
+    "peak_ram_used_gib": 57.6203727722168,
+    "peak_vram0_gib": 23.265625,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 61,
+      "completion_tokens": 256,
+      "total_tokens": 317,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "### Explanation\n\nThe issue lies in how Python handles list multiplication and object references.\n\n1.  **`[0]*3`**: This creates a new list `[0, 0, 0]`.\n2.  **`[[0]*3]*2`**: This creates a list containing **two references to the same inner list object**. It does **not** create two independent lists.\n    *   Think of it as: `inner_list = [0, 0, 0]` then `a = [inner_list, inner_list]`.\n3.  **`a[0][0] = 1`**: Since `a[0]` and `a[1]` point to the exact same list object in memory, modifying `a[0]` also modifies `a[1]`.\n\nYou can verify this by checking the identity of the inner lists:\n```python\na = [[0]*3]*2\nprint(a[0] is a[1])  # Output: True\n```\n\n### The Fix\n\nTo create a list of independent lists, you must use a **list comprehension** or a loop. This ensures that a new list object is created for each row.\n\n",
+    "reasoning": "",
+    "actual_prompt_tokens": 61,
+    "generated_tokens": 256,
+    "ttft_s": 0.44458466800278984,
+    "total_wall_s": 3.8334341309964657,
+    "api_decode_wall_s": 3.388849462993676,
+    "prompt_processing_wall_s": 0.4284,
+    "decode_wall_s": 2.2329,
+    "pp_tps": 142.4,
+    "tg_tps": 114.6,
+    "draft_tokens": 225,
+    "accepted_tokens": 172,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 61,
+      "prompt_ms": 428.4,
+      "prompt_per_token_ms": 7.023,
+      "prompt_per_second": 142.4,
+      "predicted_n": 256,
+      "predicted_ms": 2232.9,
+      "predicted_per_token_ms": 8.722,
+      "predicted_per_second": 114.6,
+      "draft_n": 225,
+      "draft_n_accepted": 172,
+      "at": 1791075969
+    },
+    "acceptance_pct": 76.44444444444444,
+    "mean_accepted_length": 2.023529411764706,
+    "final_logical_context_tokens": 317,
+    "final_kv_occupancy_tokens": 317,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 85,
+    "mean_committed_length": 3.023529411764706,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.988
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 223886.954467999,
+    "t_first_monotonic_s": 223887.399052667,
+    "t_end_monotonic_s": 223890.78790213,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "length"
+    ],
+    "pss_before": {
+      "922208": {
+        "pss_gib": 0.1871175765991211,
+        "pss_sample_wall": 1791075965.3642354,
+        "pss_read_wall_s": 0.007509451010264456
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075965.3643923,
+        "pss_read_wall_s": 0.00015413900837302208
+      },
+      "922225": {
+        "pss_gib": 53.03027629852295,
+        "pss_sample_wall": 1791075966.0822513,
+        "pss_read_wall_s": 0.7178637429897208
+      },
+      "922226": {
+        "pss_gib": 0.0033140182495117188,
+        "pss_sample_wall": 1791075966.0825708,
+        "pss_read_wall_s": 0.00030628900276497006
+      }
+    },
+    "pss_after": {
+      "922208": {
+        "pss_gib": 0.1871175765991211,
+        "pss_sample_wall": 1791075970.1463003,
+        "pss_read_wall_s": 0.00792367898975499
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075970.146544,
+        "pss_read_wall_s": 0.00023798798792995512
+      },
+      "922225": {
+        "pss_gib": 53.03029155731201,
+        "pss_sample_wall": 1791075970.8792307,
+        "pss_read_wall_s": 0.7326864640053827
+      },
+      "922226": {
+        "pss_gib": 0.0034170150756835938,
+        "pss_sample_wall": 1791075970.8795254,
+        "pss_read_wall_s": 0.00028608899447135627
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-PRIORITY",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-PRIORITY.json",
+    "input_ids_sha256": "d0f863d231f7f1991da68bb54065f5e12a2f3d6527ceb78390576b5204c582e5",
+    "input_token_ids_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/token-ids/d0f863d231f7f1991da68bb54065f5e12a2f3d6527ceb78390576b5204c582e5.json",
+    "output_text_sha256": "a71ad7490405e0ed68b4e8d0270046527b245d2626ea0309633e39f08eef1bb0",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8582,
+        "helper_resident": 11796,
+        "overlap": 0,
+        "primary_ids": {
+          "omitted_list_items": 8582
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "code",
+    "generated_token_ids": {
+      "omitted_list_items": 256
+    }
+  }
+}

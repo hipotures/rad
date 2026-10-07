@@ -1,0 +1,155 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-PRIORITY-case7.json",
+  "source_bytes": 302810,
+  "source_sha256": "1df39bd2d6c5f7d5fb760cca1d4c2fcf90285ffd6323195c2263712a8aef2d1d",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-PRIORITY",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 43,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-04T01:06:17Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-PRIORITY-case7.jsonl",
+    "samples": 4,
+    "peak_rss_gib": 53.40386199951172,
+    "min_mem_available_gib": 103.56324768066406,
+    "peak_ram_used_gib": 57.56937026977539,
+    "peak_vram0_gib": 23.265625,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 43,
+      "completion_tokens": 131,
+      "total_tokens": 174,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "Seasons occur primarily because Earth's axis is tilted at an angle of approximately 23.5 degrees relative to its orbital plane around the Sun. As Earth travels along its orbit, this tilt causes different hemispheres to receive varying amounts of direct sunlight throughout the year. When a hemisphere is tilted toward the Sun, it experiences longer days and more concentrated solar energy, resulting in warmer summer temperatures. Conversely, when that same hemisphere is tilted away from the Sun, it receives less direct sunlight and shorter days, leading to cooler winter conditions. This consistent axial tilt, rather than the distance from the Sun, is the fundamental driver of the seasonal cycle.",
+    "reasoning": "",
+    "actual_prompt_tokens": 43,
+    "generated_tokens": 131,
+    "ttft_s": 0.38669493299676105,
+    "total_wall_s": 3.250970479013631,
+    "api_decode_wall_s": 2.86427554601687,
+    "prompt_processing_wall_s": 0.3703,
+    "decode_wall_s": 1.6683,
+    "pp_tps": 116.1,
+    "tg_tps": 78.5,
+    "draft_tokens": 129,
+    "accepted_tokens": 73,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 43,
+      "prompt_ms": 370.3,
+      "prompt_per_token_ms": 8.612,
+      "prompt_per_second": 116.1,
+      "predicted_n": 131,
+      "predicted_ms": 1668.3,
+      "predicted_per_token_ms": 12.735,
+      "predicted_per_second": 78.5,
+      "draft_n": 129,
+      "draft_n_accepted": 73,
+      "at": 1791075980
+    },
+    "acceptance_pct": 56.58914728682171,
+    "mean_accepted_length": 1.2166666666666666,
+    "final_logical_context_tokens": 174,
+    "final_kv_occupancy_tokens": 175,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 60,
+    "mean_committed_length": 2.216666666666667,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.958
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 223898.037390558,
+    "t_first_monotonic_s": 223898.424085491,
+    "t_end_monotonic_s": 223901.288361037,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "stop"
+    ],
+    "pss_before": {
+      "922208": {
+        "pss_gib": 0.1871175765991211,
+        "pss_sample_wall": 1791075976.4180036,
+        "pss_read_wall_s": 0.009375413996167481
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075976.418204,
+        "pss_read_wall_s": 0.00019756797701120377
+      },
+      "922225": {
+        "pss_gib": 53.030367851257324,
+        "pss_sample_wall": 1791075977.1647012,
+        "pss_read_wall_s": 0.7464967709966004
+      },
+      "922226": {
+        "pss_gib": 0.0031995773315429688,
+        "pss_sample_wall": 1791075977.1650796,
+        "pss_read_wall_s": 0.00036750800791196525
+      }
+    },
+    "pss_after": {
+      "922208": {
+        "pss_gib": 0.18714046478271484,
+        "pss_sample_wall": 1791075980.6476147,
+        "pss_read_wall_s": 0.00829756900202483
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075980.647772,
+        "pss_read_wall_s": 0.00015465900651179254
+      },
+      "922225": {
+        "pss_gib": 53.03038692474365,
+        "pss_sample_wall": 1791075981.3905818,
+        "pss_read_wall_s": 0.7428101740079001
+      },
+      "922226": {
+        "pss_gib": 0.0032377243041992188,
+        "pss_sample_wall": 1791075981.3908648,
+        "pss_read_wall_s": 0.0002739490009844303
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-PRIORITY",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-PRIORITY.json",
+    "input_ids_sha256": "976016b055348974d2773df99442cf7df7ed5213e2679b7c34097e0715a6343a",
+    "input_token_ids_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/token-ids/976016b055348974d2773df99442cf7df7ed5213e2679b7c34097e0715a6343a.json",
+    "output_text_sha256": "22c6506fe256b35526b55a140f4ce46c407067799ea3a3b3c280c3d9e0276d59",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 0,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "prose",
+    "generated_token_ids": {
+      "omitted_list_items": 131
+    }
+  }
+}

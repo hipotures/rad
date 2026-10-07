@@ -1,0 +1,154 @@
+# Repository Architecture: Local Coding-Agent Service
+
+## 1. High-Level Overview
+
+This service acts as a **single-GPU, single-process inference gateway**. It exposes an OpenAI-compatible `/v1/chat/completions` endpoint, serializes requests to a resident GPU worker, and provides observability. The core challenge is balancing **throughput** (via prompt caching) with **correctness** (isolating client contexts) and **resilience** (handling GPU process crashes).
+
+### Key Design Principles
+1.  **Single Writer, Multiple Readers**: One GPU process owns the model state. All requests are queued and processed sequentially to avoid GPU contention.
+2.  **Stateless API, Stateful Worker**: The HTTP layer is stateless. The GPU worker maintains a **prompt cache** keyed by a composite of `client_id` + `conversation_id` + `prompt_hash`.
+3.  **Graceful Degradation**: If the GPU process dies, the queue is drained with 503 errors, and the worker is restarted. In-flight requests are lost (no checkpointing of KV cache).
+4.  **Cancellation Propagation**: Client disconnects must cancel the queued request and, if possible, interrupt the GPU worker.
+
+---
+
+## 2. Module Boundaries
+
+| Module | Responsibility | Key Interfaces |
+|--------|----------------|----------------|
+| `api/` | HTTP server, request validation, streaming response, cancellation detection. | `POST /v1/chat/completions` |
+| `queue/` | In-memory FIFO queue with priority support, request lifecycle management. | `enqueue(req) -> request_id`, `dequeue() -> req` |
+| `worker/` | Resident GPU process. Loads model, manages KV cache, executes inference. | `process(req) -> stream_chunks` |
+| `cache/` | Prompt cache manager. Tracks active conversations, evicts stale entries. | `get_or_create(client_id, conv_id, prompt) -> cache_handle` |
+| `metrics/` | Collects per-request latency, token counts, cache hits/misses, GPU utilization. | `record(request_id, metrics)` |
+| `supervisor/` | Monitors worker health, restarts on crash, drains queue on shutdown. | `start_worker()`, `health_check()` |
+
+---
+
+## 3. Concrete File Tree
+
+```
+coding-agent-service/
+├── README.md
+├── pyproject.toml
+├── config/
+│   ├── default.yaml          # Model path, GPU device, cache TTL, queue size
+│   └── logging.yaml
+├── src/
+│   ├── __init__.py
+│   ├── main.py               # Entry point: starts supervisor, API server
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── server.py         # FastAPI/Starlette app, routes
+│   │   ├── models.py         # Pydantic models for OpenAI-compatible requests
+│   │   └── streaming.py      # SSE generator, cancellation handling
+│   ├── queue/
+│   │   ├── __init__.py
+│   │   ├── manager.py        # Async queue with request lifecycle
+│   │   └── request.py        # Request object: id, client_id, conv_id, prompt, status
+│   ├── worker/
+│   │   ├── __init__.py
+│   │   ├── gpu_worker.py     # Resident process: loads model, runs inference
+│   │   ├── cache_manager.py  # Manages KV cache per conversation
+│   │   └── inference.py      # Low-level model call, token generation
+│   ├── cache/
+│   │   ├── __init__.py
+│   │   ├── prompt_cache.py   # LRU cache for prompt embeddings/KV states
+│   │   └── eviction.py       # TTL-based and size-based eviction policies
+│   ├── metrics/
+│   │   ├── __init__.py
+│   │   ├── collector.py      # Aggregates metrics per request
+│   │   └── exporter.py       # Prometheus/JSON exporter
+│   ├── supervisor/
+│   │   ├── __init__.py
+│   │   ├── process_manager.py # Starts/stops GPU worker, monitors health
+│   │   └── recovery.py       # Handles worker crash, drains queue
+│   └── utils/
+│       ├── __init__.py
+│       ├── logging.py
+│       └── config.py
+├── tests/
+│   ├── test_api.py
+│   ├── test_queue.py
+│   ├── test_cache.py
+│   └── test_worker_recovery.py
+└── scripts/
+    ├── start_service.sh
+    └── benchmark.py
+```
+
+---
+
+## 4. Detailed Design
+
+### 4.1 Request Flow
+
+1. **Client** sends `POST /v1/chat/completions` with `stream: true`.
+2. **API Layer** validates request, extracts `client_id` (from API key or header) and `conversation_id` (from `user` field or custom header).
+3. **Queue Manager** creates a `Request` object with a unique `request_id`, assigns it to the queue, and returns a `request_id` to the client (or starts streaming immediately).
+4. **Worker** dequeues the request, checks the **Prompt Cache** for a matching `client_id + conversation_id + prompt_hash`.
+   - **Cache Hit**: Reuses KV cache, skips prefill, generates tokens.
+   - **Cache Miss**: Runs full prefill, stores KV cache in cache manager.
+5. **Streaming**: Worker yields tokens as they are generated. API layer forwards them as SSE chunks.
+6. **Completion**: Worker signals completion. API layer sends `[DONE]`. Metrics are recorded.
+
+### 4.2 Cancellation
+
+- **Client Disconnect**: The API layer detects client disconnect via `request.is_disconnected()` in the streaming generator.
+- **Queue Cancellation**: If the request is still in the queue, it is marked `CANCELLED` and skipped by the worker.
+- **Worker Cancellation**: If the request is being processed, the API layer sends a cancellation signal to the worker via a shared memory flag or IPC channel. The worker checks this flag between token generations and aborts if set.
+- **Cache Cleanup**: Cancelled requests do not update the prompt cache (to avoid partial state corruption).
+
+### 4.3 Process Failure Recovery
+
+- **Health Check**: The supervisor pings the worker every 5 seconds via a heartbeat file or IPC.
+- **Crash Detection**: If the worker process exits unexpectedly, the supervisor:
+  1. Marks all queued requests as `FAILED` with a 503 error.
+  2. Clears the prompt cache (since KV state is lost).
+  3. Restarts the worker process.
+  4. Resumes accepting new requests.
+- **No Checkpointing**: KV cache is not persisted to disk. Recovery is fast but loses cache state. This is acceptable for a local service where cache rebuild is cheap compared to complexity.
+
+### 4.4 Prompt Caching Correctness
+
+**Problem**: Different clients may have identical prompts but different conversation histories. Reusing KV cache across clients would leak context.
+
+**Solution**:
+- **Cache Key**: `hash(client_id + conversation_id + prompt_prefix)`
+- **Isolation**: Each client’s conversation is isolated. Even if two clients send the same prompt, they get separate cache entries.
+- **Eviction**: LRU + TTL. Entries older than 10 minutes or exceeding memory limits are evicted.
+- **Validation**: Before reusing a cache entry, verify that the `prompt_prefix` matches exactly. If the client sends a modified prompt, the cache is invalidated for that conversation.
+
+---
+
+## 5. Tradeoffs
+
+### Tradeoff 1: Sequential Processing vs. Throughput
+
+- **Choice**: Sequential processing (one request at a time).
+- **Pros**:
+  - Simple correctness: No race conditions on GPU memory or KV cache.
+  - Predictable latency: No interference between requests.
+  - Easier cancellation: Only one request is active at a time.
+- **Cons**:
+  - Low throughput: A long request blocks all others.
+  - Poor GPU utilization: GPU may be idle during I/O or token generation gaps.
+- **Alternative**: Batch processing or continuous batching (like vLLM). This would improve throughput but complicate cancellation, cache isolation, and failure recovery. For a local coding agent, simplicity and correctness are prioritized over raw throughput.
+
+### Tradeoff 2: In-Memory Cache vs. Persistent Cache
+
+- **Choice**: In-memory prompt cache (KV states stored in GPU/CPU RAM).
+- **Pros**:
+  - Fast access: No disk I/O overhead.
+  - Simple eviction: LRU/TTL policies are easy to implement.
+  - No consistency issues: Cache is tied to the worker process lifecycle.
+- **Cons**:
+  - Volatile: Cache is lost on worker restart or crash.
+  - Memory pressure: Large conversations can exhaust GPU memory, forcing eviction of useful cache entries.
+- **Alternative**: Persistent cache (e.g., Redis or disk-backed KV store). This would survive restarts but adds complexity, latency, and consistency challenges. For a local service, the cost of rebuilding cache after a crash is acceptable compared to the operational burden of a persistent cache.
+
+---
+
+## 6. Summary
+
+This architecture prioritizes **correctness** and **simplicity** for a local, single-GPU service. By serializing requests, isolating prompt caches per client/conversation, and using a supervisor for failure recovery, it provides a reliable OpenAI-compatible interface. The tradeoffs favor ease of implementation and debugging over maximum throughput, which is appropriate for a coding-agent use case where latency is less critical than reliability.

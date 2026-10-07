@@ -1,0 +1,84 @@
+To find the expected total number of rolls until two consecutive rolls have the same value, we can model this problem using states and linear equations (First Step Analysis) or by using the definition of expectation with geometric series.
+
+### Method 1: First Step Analysis (State-Based Approach)
+
+Let $E$ be the expected number of *additional* rolls needed to get a match, given that we have just rolled a die and do not yet have a match with the previous roll.
+
+However, it is more precise to define states based on the history of the rolls.
+Let $E_0$ be the expected number of rolls needed starting from scratch (no previous roll).
+Let $E_1$ be the expected number of *additional* rolls needed given that we have just rolled a number, and we are waiting for the next roll to match it.
+
+**Step 1: Analyze the first roll.**
+When we start, we must roll the die once. This roll establishes the "previous value" for the next comparison.
+So, $E_0 = 1 + E_1$.
+
+**Step 2: Analyze the state $E_1$.**
+We have just rolled a value (say, $x$). We roll the die again.
+There are two possibilities for this next roll:
+1.  **Match:** The new roll is equal to $x$. The probability of this is $1/6$. In this case, the process stops. We used 1 roll.
+2.  **No Match:** The new roll is not equal to $x$. The probability of this is $5/6$. In this case, we have used 1 roll, and we are now in the same situation as before: we have a new "previous value" (the one we just rolled), and we need to wait for the next roll to match it. So, we are back in state $E_1$, but we have already spent 1 roll.
+
+We can write the equation for $E_1$ as:
+$$ E_1 = 1 + \left( \frac{1}{6} \cdot 0 \right) + \left( \frac{5}{6} \cdot E_1 \right) $$
+*Explanation:* The "1" accounts for the roll we just made. If it matches (prob $1/6$), we need 0 more rolls. If it doesn't match (prob $5/6$), we need $E_1$ more rolls on average.
+
+**Step 3: Solve for $E_1$.**
+$$ E_1 = 1 + \frac{5}{6}E_1 $$
+$$ E_1 - \frac{5}{6}E_1 = 1 $$
+$$ \frac{1}{6}E_1 = 1 $$
+$$ E_1 = 6 $$
+
+**Step 4: Calculate $E_0$.**
+Recall $E_0 = 1 + E_1$.
+$$ E_0 = 1 + 6 = 7 $$
+
+Thus, the expected total number of rolls is **7**.
+
+---
+
+### Method 2: Definition of Expectation (Summation of Probabilities)
+
+Let $N$ be the random variable representing the total number of rolls. We want to find $E[N]$.
+The possible values for $N$ are $2, 3, 4, \dots$ (we need at least 2 rolls to have a pair).
+
+The probability that the process ends exactly at roll $n$ (i.e., the first match occurs at rolls $n-1$ and $n$) requires:
+1.  The first $n-2$ transitions must be non-matches.
+2.  The $(n-1)$-th transition (between roll $n-1$ and $n$) must be a match.
+
+Let's look at the sequence of rolls $R_1, R_2, \dots, R_n$.
+-   $R_1$ can be anything (prob 1).
+-   For $i = 2$ to $n-1$, we require $R_i \neq R_{i-1}$. The probability of a non-match is $5/6$.
+-   For the final step, we require $R_n = R_{n-1}$. The probability of a match is $1/6$.
+
+So, the probability that the stopping time is exactly $n$ is:
+$$ P(N=n) = \underbrace{1}_{R_1} \cdot \underbrace{\left(\frac{5}{6}\right)^{n-2}}_{\text{non-matches } R_2 \dots R_{n-1}} \cdot \underbrace{\frac{1}{6}}_{\text{match } R_n} $$
+Note: The exponent $n-2$ comes from the number of non-matching transitions required before the final match.
+-   If $n=2$: $P(N=2) = (5/6)^0 \cdot (1/6) = 1/6$. (Correct: $R_1$ any, $R_2=R_1$).
+-   If $n=3$: $P(N=3) = (5/6)^1 \cdot (1/6) = 5/36$. (Correct: $R_1$ any, $R_2 \neq R_1$, $R_3=R_2$).
+
+The expected value is:
+$$ E[N] = \sum_{n=2}^{\infty} n \cdot P(N=n) = \sum_{n=2}^{\infty} n \cdot \left(\frac{5}{6}\right)^{n-2} \cdot \frac{1}{6} $$
+
+Let $k = n-2$. Then $n = k+2$. As $n$ goes from $2$ to $\infty$, $k$ goes from $0$ to $\infty$.
+$$ E[N] = \frac{1}{6} \sum_{k=0}^{\infty} (k+2) \left(\frac{5}{6}\right)^k $$
+$$ E[N] = \frac{1}{6} \left[ \sum_{k=0}^{\infty} k \left(\frac{5}{6}\right)^k + 2 \sum_{k=0}^{\infty} \left(\frac{5}{6}\right)^k \right] $$
+
+We use the standard geometric series formulas for $|r| < 1$:
+1.  $\sum_{k=0}^{\infty} r^k = \frac{1}{1-r}$
+2.  $\sum_{k=0}^{\infty} k r^k = \frac{r}{(1-r)^2}$
+
+Here, $r = 5/6$.
+$$ \sum_{k=0}^{\infty} \left(\frac{5}{6}\right)^k = \frac{1}{1 - 5/6} = \frac{1}{1/6} = 6 $$
+$$ \sum_{k=0}^{\infty} k \left(\frac{5}{6}\right)^k = \frac{5/6}{(1 - 5/6)^2} = \frac{5/6}{(1/6)^2} = \frac{5/6}{1/36} = \frac{5}{6} \cdot 36 = 30 $$
+
+Substitute these back into the expectation equation:
+$$ E[N] = \frac{1}{6} [ 30 + 2(6) ] $$
+$$ E[N] = \frac{1}{6} [ 30 + 12 ] $$
+$$ E[N] = \frac{42}{6} $$
+$$ E[N] = 7 $$
+
+### Conclusion
+
+Both methods yield the same result.
+
+The expected total number of rolls is **7**.

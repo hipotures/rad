@@ -1,0 +1,46 @@
+{
+  "target_actual_prompt_tokens": 259500,
+  "output_tokens": 256,
+  "measured_requests": 3,
+  "warmup_requests": 1,
+  "GPU": [
+    0,
+    1
+  ],
+  "K": 24,
+  "kv": "int8",
+  "spec": 4,
+  "spec_min_p": 0.5,
+  "max_context": 262144,
+  "prefill": "32768",
+  "ple_io": "mmap",
+  "literal_saved_Q4_payloads": "PREFILL-32768-confirm-259500 warmup and runs1-3; only model alias changed",
+  "references": [
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/PREFILL-32768-confirm-259500-run1.json",
+      "sha256": "d5660ebc82d98ec04c01962290aaca0aea21be1be890964c495f73d7984ba453",
+      "pp_tps": 5338.0,
+      "tg_tps": 93.6,
+      "ttft_s": 49.13133524599834
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/PREFILL-32768-confirm-259500-run2.json",
+      "sha256": "ed8d695131d2d29796a8b0508b9270fb355230797ea86b806b11ca1851a735f3",
+      "pp_tps": 5665.0,
+      "tg_tps": 94.6,
+      "ttft_s": 46.3239580139998
+    },
+    {
+      "raw": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/raw/PREFILL-32768-confirm-259500-run3.json",
+      "sha256": "93aee8fa20709071721f5d07e29f0f4cace453017fabeef44fa3ef110c3a3a98",
+      "pp_tps": 5667.0,
+      "tg_tps": 101.3,
+      "ttft_s": 46.294110550996265
+    }
+  ],
+  "comparison": "historical Q4 median and historical fastest run; NOT_CONTROLLED_A_B: required local Q5 runtime fallback+Q8 PLE mmap, different quant/cache capacity/adaptive cache history; no simultaneous rerun Q4",
+  "no_model_download_or_weight_change": true,
+  "created_utc": "2026-10-02T10:53:16.856775+00:00",
+  "Q4_effective_prefill_chunk": 16384,
+  "selection_criterion": "highest single measured Q4 TG at >=250000 actual tokens; IQ3_S and warmups excluded"
+}

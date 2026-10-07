@@ -1,0 +1,155 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-PRIORITY-case6.json",
+  "source_bytes": 303944,
+  "source_sha256": "809a445387359f597646b83631579ee31406940e41b635c879266b1f4624a5fa",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-PRIORITY",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 58,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-04T01:06:11Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-PRIORITY-case6.jsonl",
+    "samples": 4,
+    "peak_rss_gib": 53.4038200378418,
+    "min_mem_available_gib": 103.58671951293945,
+    "peak_ram_used_gib": 57.5458984375,
+    "peak_vram0_gib": 23.265625,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 58,
+      "completion_tokens": 256,
+      "total_tokens": 314,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "```python\ndef binary_search(a, x):\n    \"\"\"\n    Perform binary search on a sorted list 'a' for element 'x'.\n    Returns the index of 'x' if found, otherwise returns -1.\n    \"\"\"\n    low = 0\n    high = len(a) - 1\n    \n    while low <= high:\n        mid = (low + high) // 2\n        if a[mid] == x:\n            return mid\n        elif a[mid] < x:\n            low = mid + 1\n        else:\n            high = mid - 1\n    \n    return -1\n\n\n# Tests\ndef test_binary_search():\n    # Test empty list\n    assert binary_search([], 5) == -1\n    \n    # Test missing item\n    assert binary_search([1, 3, 5, 7, 9], 4) == -1\n    \n    # Test found item\n    assert binary_search([1, 3, 5, 7, 9], 5) == 2\n    assert binary_search([1, 3, 5, 7, 9], 1) == 0\n    assert binary_search([1",
+    "reasoning": "",
+    "actual_prompt_tokens": 58,
+    "generated_tokens": 256,
+    "ttft_s": 0.49490286101354286,
+    "total_wall_s": 3.78376802400453,
+    "api_decode_wall_s": 3.2888651629909873,
+    "prompt_processing_wall_s": 0.4803,
+    "decode_wall_s": 2.0735,
+    "pp_tps": 120.8,
+    "tg_tps": 123.5,
+    "draft_tokens": 212,
+    "accepted_tokens": 181,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 58,
+      "prompt_ms": 480.3,
+      "prompt_per_token_ms": 8.281,
+      "prompt_per_second": 120.8,
+      "predicted_n": 256,
+      "predicted_ms": 2073.5,
+      "predicted_per_token_ms": 8.1,
+      "predicted_per_second": 123.5,
+      "draft_n": 212,
+      "draft_n_accepted": 181,
+      "at": 1791075975
+    },
+    "acceptance_pct": 85.37735849056604,
+    "mean_accepted_length": 2.4133333333333336,
+    "final_logical_context_tokens": 314,
+    "final_kv_occupancy_tokens": 313,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 75,
+    "mean_committed_length": 3.4133333333333336,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.97
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 223892.506138204,
+    "t_first_monotonic_s": 223893.001041065,
+    "t_end_monotonic_s": 223896.289906228,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "length"
+    ],
+    "pss_before": {
+      "922208": {
+        "pss_gib": 0.1871175765991211,
+        "pss_sample_wall": 1791075970.90516,
+        "pss_read_wall_s": 0.00756983199971728
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075970.9053166,
+        "pss_read_wall_s": 0.00015343900304287672
+      },
+      "922225": {
+        "pss_gib": 53.03029155731201,
+        "pss_sample_wall": 1791075971.6337397,
+        "pss_read_wall_s": 0.7284247010247782
+      },
+      "922226": {
+        "pss_gib": 0.0033140182495117188,
+        "pss_sample_wall": 1791075971.634044,
+        "pss_read_wall_s": 0.00029865800752304494
+      }
+    },
+    "pss_after": {
+      "922208": {
+        "pss_gib": 0.1871175765991211,
+        "pss_sample_wall": 1791075975.6475973,
+        "pss_read_wall_s": 0.00783834999310784
+      },
+      "922224": {
+        "pss_gib": 0.000545501708984375,
+        "pss_sample_wall": 1791075975.6477604,
+        "pss_read_wall_s": 0.0001599289826117456
+      },
+      "922225": {
+        "pss_gib": 53.030367851257324,
+        "pss_sample_wall": 1791075976.3906193,
+        "pss_read_wall_s": 0.7428603650187142
+      },
+      "922226": {
+        "pss_gib": 0.0032453536987304688,
+        "pss_sample_wall": 1791075976.3909912,
+        "pss_read_wall_s": 0.00036238800385035574
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-PRIORITY",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-PRIORITY.json",
+    "input_ids_sha256": "7e13ad1968b58f8648fda539565b5009554eda2c4a961900e64ae388ec6582cc",
+    "input_token_ids_path": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/token-ids/7e13ad1968b58f8648fda539565b5009554eda2c4a961900e64ae388ec6582cc.json",
+    "output_text_sha256": "393c2175da058bbfdaf8c9258a78d6aed418016dbdc603c2aacaea4da9d1edd1",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 0,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "code",
+    "generated_token_ids": {
+      "omitted_list_items": 256
+    }
+  }
+}

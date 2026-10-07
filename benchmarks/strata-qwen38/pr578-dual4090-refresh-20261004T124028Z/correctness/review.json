@@ -1,0 +1,31 @@
+{
+  "benchmark_allowed": true,
+  "scope": "Inspected full paired outputs for corruption; no model-quality ranking",
+  "paired_cases": 10,
+  "identical_inputs": 10,
+  "bit_identical_outputs": 4,
+  "divergent_free_generations": 6,
+  "non_finite_head_diagnostics": 0,
+  "structured_outputs": "Both requested JSON objects/arrays valid and equal",
+  "math_observations": "Both give1776, x8, probability1/6",
+  "initial_budget_limited_code_cases": [
+    5,
+    6
+  ],
+  "extensions": "Same two inputs per variant, max512, all4 natural stop and complete code; separate preserved outputs",
+  "binary_search_correctness": {
+    "control": {
+      "status": "PASS",
+      "generated_main_tests_executed": true,
+      "extra_edge_cases": 5,
+      "source_record": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/correctness/CORRECT-EXT-CONTROL-case6.json"
+    },
+    "optimized": {
+      "status": "PASS",
+      "generated_main_tests_executed": true,
+      "extra_edge_cases": 5,
+      "source_record": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/correctness/CORRECT-EXT-OPTIMIZED-case6.json"
+    }
+  },
+  "limitations": "Free-generation equality is not teacher-forced top1 or KL; small battery does not prove global parity. No LLM judge or quality scores."
+}

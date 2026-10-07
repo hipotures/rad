@@ -1,0 +1,49 @@
+{
+  "benchmark_allowed": true,
+  "scope": "Both identical frozen upstream v0.1.39 builds, 72 existing native tests, before local diagnostic patch",
+  "variants": {
+    "control": {
+      "native_passed": 66,
+      "native_skipped": 2,
+      "native_environmental_failures": [
+        "ple_parity",
+        "platform_memory_test",
+        "expert_parity",
+        "pool_test"
+      ],
+      "python_run": 268,
+      "python_skipped": 7,
+      "python_errors": 0,
+      "logs": [
+        "logs/control-ctest.log",
+        "logs/control-python-tests.log"
+      ]
+    },
+    "optimized": {
+      "native_passed": 66,
+      "native_skipped": 2,
+      "native_environmental_failures": [
+        "ple_parity",
+        "platform_memory_test",
+        "expert_parity",
+        "pool_test"
+      ],
+      "python_run": 268,
+      "python_skipped": 7,
+      "python_errors": 0,
+      "logs": [
+        "logs/optimized-ctest.log",
+        "logs/optimized-python-tests.log"
+      ]
+    }
+  },
+  "initial_python_failure_preserved": "logs/build-first-attempt/control-python-tests.log",
+  "dependency_resolution": "Identical jsonschema==4.26.0 in both isolated venvs; no engine/source changes",
+  "environmental_failures": {
+    "ple_parity": "Missing unrelated Q2_0 PLE fixture, exact cannot-open error",
+    "expert_parity": "Legacy Q2_0 pack/full/experts.bin fixture absent; IQ3_S is incompatible with this test fixture layout",
+    "pool_test": "Same absent legacy Q2_0 experts.bin; synthetic pool_stress passed",
+    "platform_memory_test": "mlock failed at guest RLIMIT_MEMLOCK; other platform/cache policy assertions passed; no system limit changes"
+  },
+  "limitations": "Fixture-dependent CPU tests remain unvalidated; actual IQ3_S paired helper correctness battery required before speed sweep."
+}

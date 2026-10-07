@@ -1,0 +1,39 @@
+{
+  "status": "STOP_NEXT_BLOCKER",
+  "regressions": "6/6 PASS",
+  "smokes": [],
+  "benchmark_requests": 0,
+  "error": "RuntimeError('Engine exited 1')",
+  "traceback": "Traceback (most recent call last):\n  File \"/srv/ai/benchmarks/strata-qwen38/q5-cpu-fallback-v0132/validate-smoke.py\", line 10, in <module>\n    with r.Session(label,cfg) as s:\n         ~~~~~~~~~^^^^^^^^^^^\n  File \"/srv/ai/benchmarks/strata-qwen38/q5-cpu-fallback-v0132/run.py\", line 85, in __enter__\n    if self.proc.poll() is not None:raise RuntimeError(f'Engine exited {self.proc.returncode}')\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: Engine exited 1\n",
+  "gpu_compute_apps_after": "",
+  "clean_checkout_tracked_unchanged": true,
+  "model_stat_unchanged": true,
+  "blocker": "PLE_Q8_0_NATIVE_TABLE_UNSUPPORTED",
+  "blocker_tensor": {
+    "tensor": "per_layer_token_embd.weight",
+    "shape": [
+      160,
+      320001536
+    ],
+    "ggml_type": 8,
+    "format": "Q8_0",
+    "bytes": 54400261120,
+    "shard": "/srv/ai/models/Qwen3.8-Flash-Next-GGUF-38bb39ee-unsloth-Q5/UD-Q5_K_XL/Qwen3.8-Flash-Next-UD-Q5_K_XL-00003-of-00006.gguf",
+    "absolute_offset": 192
+  },
+  "blocker_source": "src/kernels/ngram.cpp:208",
+  "blocker_message": "per_layer_token_embd.weight is Q8_0, not IQ4_NL, Q5_0 or FP8 (I8)",
+  "head": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+  "build_variant": "default+local-metadata-loader+semantic-cpu-expert-fallback",
+  "local_patch_sha256": "eaf9c752f4737553984c589e3f2374ed7e8fef5792ff693e8cd24370893b5e75",
+  "engine_sha256": "bb4f920d5bed1aaa56cb1d917f259633395e8dd316fe3d56c354e45756510802",
+  "load_attempts": 1,
+  "ready": false,
+  "generation_requests": 0,
+  "two_gpu_smoke": "NOT_RUN_FIRST_LOAD_FAILED",
+  "mtp_model_smoke": "NOT_RUN_FIRST_LOAD_FAILED",
+  "llama_cpp_parity": "NOT_RUN_FIRST_LOAD_FAILED",
+  "needles_32k_128k": "NOT_RUN_FIRST_LOAD_FAILED",
+  "q5_speed_benchmark": "NOT_RUN",
+  "engine_log": "/srv/ai/benchmarks/strata-qwen38/q5-cpu-fallback-v0132/logs/Q5-CPU-1GPU-engine.log"
+}

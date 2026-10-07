@@ -1,0 +1,154 @@
+{
+  "source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/correctness/CORRECT-H-OLD-case8.json",
+  "source_bytes": 302014,
+  "source_sha256": "53f9038c236688c1f53f37058c789ffe30f40503a524d7813918a24aee4a558d",
+  "scope": "Bounded scalar/header evidence, not the original schema or a replacement input. Lists over 32 items, long strings and node/depth excess are explicitly omitted.",
+  "compact_evidence": {
+    "model": "CORRECT-H-OLD",
+    "kind": "correctness",
+    "context": null,
+    "repeat": null,
+    "actual_prompt_tokens_tokenizer": 48,
+    "requested_generated_tokens": 256,
+    "time_utc": "2026-10-03T23:53:14Z",
+    "telemetry_file": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/telemetry/CORRECT-H-OLD-case8.jsonl",
+    "samples": 4,
+    "peak_rss_gib": 53.37178039550781,
+    "min_mem_available_gib": 103.61012649536133,
+    "peak_ram_used_gib": 57.522491455078125,
+    "peak_vram0_gib": 23.263671875,
+    "peak_vram1_gib": 23.30859375,
+    "abort": null,
+    "usage": {
+      "prompt_tokens": 48,
+      "completion_tokens": 100,
+      "total_tokens": 148,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "text": "Subject: Request to Reschedule Meeting: [Project Name/Topic]\n\nHi [Name],\n\nI hope you\u2019re having a good week.\n\nWould it be possible to move our meeting scheduled for Monday, [Date], to Wednesday, [Date]? I have a scheduling conflict that has come up, and Wednesday would work much better for me.\n\nPlease let me know if Wednesday works for you, or if another time might be more convenient.\n\nBest regards,\n\n[Your Name]",
+    "reasoning": "",
+    "actual_prompt_tokens": 48,
+    "generated_tokens": 100,
+    "ttft_s": 0.7558905110054184,
+    "total_wall_s": 3.978696489997674,
+    "api_decode_wall_s": 3.2228059789922554,
+    "prompt_processing_wall_s": 0.7386,
+    "decode_wall_s": 2.0551999999999997,
+    "pp_tps": 65.0,
+    "tg_tps": 48.7,
+    "draft_tokens": 98,
+    "accepted_tokens": 62,
+    "cache_reused_tokens": 0,
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 48,
+      "prompt_ms": 738.6,
+      "prompt_per_token_ms": 15.388,
+      "prompt_per_second": 65.0,
+      "predicted_n": 100,
+      "predicted_ms": 2055.2,
+      "predicted_per_token_ms": 20.552,
+      "predicted_per_second": 48.7,
+      "draft_n": 98,
+      "draft_n_accepted": 62,
+      "at": 1791071598
+    },
+    "acceptance_pct": 63.265306122448976,
+    "mean_accepted_length": 1.631578947368421,
+    "final_logical_context_tokens": 148,
+    "final_kv_occupancy_tokens": 147,
+    "kv_occupancy_note": "Derived committed occupancy: prompt-1 + verify_rounds + drafts_accepted; source semantics in pinned generate.cpp, not a direct KV gauge.",
+    "verify_rounds": 38,
+    "mean_committed_length": 2.6315789473684212,
+    "expert_tiers": {
+      "ram_blobs": 0,
+      "file_blobs": 0,
+      "file_mb": 0.0,
+      "hit_rate": 0.848
+    },
+    "status": "OK",
+    "t_start_monotonic_s": 219515.412172782,
+    "t_first_monotonic_s": 219516.168063293,
+    "t_end_monotonic_s": 219519.390869272,
+    "tool_call_events": [],
+    "finish_reasons": [
+      "stop"
+    ],
+    "pss_before": {
+      "890890": {
+        "pss_gib": 0.18401241302490234,
+        "pss_sample_wall": 1791071593.788766,
+        "pss_read_wall_s": 0.006720952980685979
+      },
+      "890899": {
+        "pss_gib": 0.0005216598510742188,
+        "pss_sample_wall": 1791071593.788913,
+        "pss_read_wall_s": 0.00014507901505567133
+      },
+      "890900": {
+        "pss_gib": 53.00183868408203,
+        "pss_sample_wall": 1791071594.540969,
+        "pss_read_wall_s": 0.7520573080109898
+      },
+      "890901": {
+        "pss_gib": 0.0031375885009765625,
+        "pss_sample_wall": 1791071594.5411549,
+        "pss_read_wall_s": 0.00017719899187795818
+      }
+    },
+    "pss_after": {
+      "890890": {
+        "pss_gib": 0.18402385711669922,
+        "pss_sample_wall": 1791071598.7495475,
+        "pss_read_wall_s": 0.008515266003087163
+      },
+      "890899": {
+        "pss_gib": 0.0005216598510742188,
+        "pss_sample_wall": 1791071598.749717,
+        "pss_read_wall_s": 0.00016812901594676077
+      },
+      "890900": {
+        "pss_gib": 53.00184631347656,
+        "pss_sample_wall": 1791071599.497908,
+        "pss_read_wall_s": 0.7481930509966332
+      },
+      "890901": {
+        "pss_gib": 0.003322601318359375,
+        "pss_sample_wall": 1791071599.4982774,
+        "pss_read_wall_s": 0.0003586089878808707
+      }
+    },
+    "pss_note": "Outside timed request",
+    "candidate": "CORRECT-H-OLD",
+    "sampling": {
+      "temperature": 0
+    },
+    "config": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090/configs/CORRECT-H-OLD.json",
+    "input_ids_sha256": "39792b7f2a7acb4bb9df679efc14b042bc9b61385b17b2ed585eae0cf55b7f97",
+    "output_text_sha256": "ebb924bbf6d02a2d8ed0921901327c2c6e7df9eecfe0cb2511cd8602ea35207f",
+    "cache_snapshots": [
+      {
+        "phase": "request_end",
+        "primary_capacity": 8586,
+        "helper_capacity": 11796,
+        "primary_resident": 8586,
+        "helper_resident": 11796,
+        "overlap": 3026,
+        "primary_ids": {
+          "omitted_list_items": 8586
+        },
+        "helper_ids": {
+          "omitted_list_items": 11796
+        }
+      }
+    ],
+    "valid": true,
+    "exclusion": null,
+    "category": "prose",
+    "generated_token_ids": {
+      "omitted_list_items": 100
+    }
+  }
+}

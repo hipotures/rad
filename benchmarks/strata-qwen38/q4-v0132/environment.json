@@ -1,0 +1,158 @@
+{
+  "tag": "v0.1.32",
+  "HEAD": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+  "source_frozen": true,
+  "captured": 1790893819.053223,
+  "commands": {
+    "git_status": {
+      "command": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "output": "?? third_party/llama.cpp-pinned/\n"
+    },
+    "compiler": {
+      "command": [
+        "c++",
+        "--version"
+      ],
+      "exit_code": 0,
+      "output": "c++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+    },
+    "CUDA": {
+      "command": [
+        "/usr/local/cuda/bin/nvcc",
+        "--version"
+      ],
+      "exit_code": 0,
+      "output": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Tue_Sep_01_08:45:21_PDT_2026\nCuda compilation tools, release 13.4, V13.4.92\nBuild cuda_13.4.r13.4/compiler.38855100_0\n"
+    },
+    "driver_GPU": {
+      "command": [
+        "nvidia-smi",
+        "--query-gpu=index,name,driver_version,memory.total,pci.bus_id,pcie.link.gen.current,pcie.link.gen.max,pcie.link.width.current,pcie.link.width.max",
+        "--format=csv"
+      ],
+      "exit_code": 0,
+      "output": "index, name, driver_version, memory.total [MiB], pci.bus_id, pcie.link.gen.current, pcie.link.gen.max, pcie.link.width.current, pcie.link.width.max\n0, NVIDIA GeForce RTX 4090, 615.71.09, 24564 MiB, 00000000:01:00.0, 1, 4, 8, 16\n1, NVIDIA GeForce RTX 4090, 615.71.09, 24564 MiB, 00000000:02:00.0, 1, 4, 8, 16\n"
+    },
+    "CPU": {
+      "command": [
+        "lscpu"
+      ],
+      "exit_code": 0,
+      "output": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  16\nOn-line CPU(s) list:                     0-15\nVendor ID:                               AuthenticAMD\nModel name:                              AMD Ryzen 9 7950X3D 16-Core Processor\nCPU family:                              25\nModel:                                   97\nThread(s) per core:                      1\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                2\nBogoMIPS:                                8400.03\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl xtopology cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw perfctr_core ssbd perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves user_shstk avx512_bf16 clzero xsaveerptr wbnoinvd arat npt lbrv nrip_save tsc_scale vmcb_clean flushbyasid pausefilter pfthreshold vgif vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid overflow_recov succor fsrm flush_l1d\nVirtualization:                          AMD-V\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               1 MiB (16 instances)\nL1i cache:                               1 MiB (16 instances)\nL2 cache:                                8 MiB (16 instances)\nL3 cache:                                256 MiB (16 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-15\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; Safe RET\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP disabled; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Mitigation; Clear CPU buffers\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n"
+    },
+    "RAM": {
+      "command": [
+        "cat",
+        "/proc/meminfo"
+      ],
+      "exit_code": 0,
+      "output": "MemTotal:       168959796 kB\nMemFree:        100296180 kB\nMemAvailable:   165799776 kB\nBuffers:           58948 kB\nCached:         66345940 kB\nSwapCached:            0 kB\nActive:          7482216 kB\nInactive:       59280436 kB\nActive(anon):     266436 kB\nInactive(anon):    96972 kB\nActive(file):    7215780 kB\nInactive(file): 59183464 kB\nUnevictable:        4000 kB\nMlocked:               0 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               820 kB\nWriteback:             0 kB\nAnonPages:        361856 kB\nMapped:           479712 kB\nShmem:              5680 kB\nKReclaimable:     601932 kB\nSlab:             518804 kB\nSReclaimable:     362468 kB\nSUnreclaim:       156336 kB\nKernelStack:        6832 kB\nPageTables:        11932 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    84479896 kB\nCommitted_AS:    1844112 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       71684 kB\nVmallocChunk:          0 kB\nPercpu:             8704 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:     34816 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:        10317440 kB\nUnaccepted:            0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      618316 kB\nDirectMap2M:    29790208 kB\nDirectMap1G:    143654912 kB\n"
+    },
+    "kernel": {
+      "command": [
+        "uname",
+        "-a"
+      ],
+      "exit_code": 0,
+      "output": "Linux gpu 7.0.0-34-generic #34-Ubuntu SMP PREEMPT_DYNAMIC Wed Sep  2 14:29:37 UTC 2026 x86_64 GNU/Linux\n"
+    },
+    "PCIe_topology": {
+      "command": [
+        "nvidia-smi",
+        "topo",
+        "-m"
+      ],
+      "exit_code": 0,
+      "output": "\t\u001b[4mGPU0\tGPU1\tCPU Affinity\tNUMA Affinity\tGPU NUMA ID\u001b[0m\nGPU0\t X \tPHB\t0-15\t0\t\tN/A\nGPU1\tPHB\t X \t0-15\t0\t\tN/A\n\nLegend:\n\n  X    = Self\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\n  PIX  = Connection traversing at most a single PCIe bridge\n  NV#  = Connection traversing a bonded set of # NVLinks\n"
+    },
+    "VM": {
+      "command": [
+        "systemd-detect-virt"
+      ],
+      "exit_code": 0,
+      "output": "kvm\n"
+    },
+    "mount": {
+      "command": [
+        "findmnt",
+        "-T",
+        "/srv/ai/models/strata/models/UD-Q4_K_XL"
+      ],
+      "exit_code": 0,
+      "output": "TARGET  SOURCE FSTYPE   OPTIONS\n/srv/ai ai     virtiofs rw,relatime\n"
+    },
+    "python": {
+      "command": [
+        ".venv/bin/python",
+        "--version"
+      ],
+      "exit_code": 0,
+      "output": "Python 3.14.4\n"
+    },
+    "pip": {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pip",
+        "freeze"
+      ],
+      "exit_code": 0,
+      "output": "certifi==2026.7.22\ncharset-normalizer==3.5.1\ncmake==4.4.3\nidna==3.20\nJinja2==3.1.6\nMarkupSafe==3.0.3\nninja==1.13.2\nnumpy==2.5.3\npillow==12.3.0\npsutil==7.2.2\nPyYAML==6.0.3\nregex==2026.9.10\nrequests==2.34.2\ntqdm==4.70.1\nurllib3==2.8.0\n"
+    }
+  },
+  "build_variants": {
+    "default": {
+      "configure": [
+        "/srv/ai/strata-v0.1.32/.venv/bin/cmake",
+        "-S",
+        "/srv/ai/strata-v0.1.32",
+        "-B",
+        "/srv/ai/strata-v0.1.32/build-default",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DSTRATA_ENABLE_CUDA=ON",
+        "-DCMAKE_CUDA_ARCHITECTURES=89",
+        "-DSTRATA_GGML_DIR=/srv/ai/strata-v0.1.32/third_party/llama.cpp-pinned",
+        "-DSTRATA_BUILD_TESTS=ON",
+        "-DSTRATA_MMQ_KQUANTS=OFF"
+      ],
+      "status": "COMPLETE",
+      "started": 1790893819.494917,
+      "ended": 1790894124.8248148,
+      "exe": "/srv/ai/strata-v0.1.32/build-default/strata",
+      "sha256": "8b30fd340b6d91c923abbcf91c25580c679b8c61ad18f88e51b7278478fb4071",
+      "version": "0.1.32"
+    },
+    "q4-fast": {
+      "configure": [
+        "/srv/ai/strata-v0.1.32/.venv/bin/cmake",
+        "-S",
+        "/srv/ai/strata-v0.1.32",
+        "-B",
+        "/srv/ai/strata-v0.1.32/build-q4-fast",
+        "-G",
+        "Ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DSTRATA_ENABLE_CUDA=ON",
+        "-DCMAKE_CUDA_ARCHITECTURES=89",
+        "-DSTRATA_GGML_DIR=/srv/ai/strata-v0.1.32/third_party/llama.cpp-pinned",
+        "-DSTRATA_BUILD_TESTS=ON",
+        "-DSTRATA_MMQ_KQUANTS=ON"
+      ],
+      "status": "COMPILED_NUMERICAL_TEST_FAILED",
+      "started": 1790893875.4442823,
+      "exe": "/srv/ai/strata-v0.1.32/build-q4-fast/strata",
+      "sha256": "0b12ad7eb8754f400ed953976d54f9512334e3a4635c07b7c3b119c37794a08b",
+      "version": "0.1.32",
+      "ended": 1790894124.9120436
+    }
+  },
+  "selected_build": "default",
+  "selection_reason": "Optional fast build failed upstream numerical correctness gate: Q4_K gate/up-1 unwritten or nonfinite; no fast benchmark launched, no engine patch."
+}

@@ -1,0 +1,61 @@
+{
+  "status": "COMPLETE_WITH_DOCUMENTED_NEGATIVES",
+  "running": null,
+  "completed": [
+    "Preserved source/patch/build/model/payload provenance verified",
+    "Common inference settings and per-runtime token-ID comparison recorded",
+    "Six fresh-server primary cells, identical4096/64 warmup,18 valid4096-output measured requests",
+    "Focused32K16K optional diagnostic completed with natural-EOS negatives; no fixed-length A/B median",
+    "Decode progression/burst analysis and17 explicit report answers",
+    "Final correctness-of-measurement audit PASS; servers stopped, both GPUs idle"
+  ],
+  "pending": [],
+  "current_winners": {
+    "32K": {
+      "config": "CURRENT",
+      "TG_median": 143.4,
+      "PP_median": 4776.3
+    },
+    "128K": {
+      "config": "CURRENT",
+      "TG_median": 132.0,
+      "PP_median": 5908.3
+    },
+    "recommendation": {
+      "recommendation": "BASELINE_CURRENT_LAYER_SPLIT",
+      "reason": "For this shared repository workload, current K=25 / PCIe fraction 0.28 wins the 4096-output median TG at both 32K and 128K and has the best PP/TTFT. At 32K the late 2K\u20134K helper/split estimates are nearly tied, and the 16K A/B is incomplete due natural EOS; no universal long-generation winner is claimed. Use current as the conservative frozen research reference. The 128K API token-ID difference is explicitly documented.",
+      "config": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/configs/CURRENT.json",
+      "source_HEAD": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "binary_sha256": "871bb3b8ff217b6c53b517e3a5f77504e86c74877d6c717050e2034d3098840d",
+      "scope": "Reference for upcoming residency research; no implementation authorized in this campaign"
+    }
+  },
+  "excluded_runs": [
+    {
+      "path": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/raw/CURRENT-32K-VALIDATION-run1.json",
+      "reason": "ORIGINAL_WORKLOAD_NATURAL_EOS",
+      "generated": 2036
+    },
+    {
+      "path": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/raw/CURRENT-32K-16K-run1.json",
+      "reason": "OPTIONAL_INCOMPLETE_FIXED_LENGTH_CONFIRMATION",
+      "generated": 9689
+    },
+    {
+      "path": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/raw/HELPER-32K-16K-run2.json",
+      "reason": "OPTIONAL_INCOMPLETE_FIXED_LENGTH_CONFIRMATION",
+      "generated": 13174
+    },
+    {
+      "path": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/raw/startup-telemetry-negative",
+      "reason": "Startup-only collector failure; no request sent"
+    }
+  ],
+  "next_exact_action": "Review report.md. Do not start selective-residency or predictive-cache implementation.",
+  "unresolved_questions": [
+    "No complete fixed-length16K A/B on the40-section workload",
+    "128K current API differs from older input IDs",
+    "Interval cache/MTP/miss identities and causal burst source unavailable"
+  ],
+  "finished_UTC": "2026-10-04T22:11:14Z"
+}
