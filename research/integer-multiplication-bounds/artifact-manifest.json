@@ -25,8 +25,47 @@
         "logs",
         "tmp"
       ]
+    },
+    {
+      "id": "math-environment",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/math",
+      "recovery": "regenerable",
+      "instructions": "uv venv --python3.14.7; uv pip install --python<env>/bin/python -r configs/math-requirements.txt",
+      "versions": "configs/math-environment.json"
+    },
+    {
+      "id": "gpu-environment",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/gpu",
+      "recovery": "regenerable",
+      "instructions": "configs/gpu-environment.json and gpu-requirements.txt; CUDA-compatible host required"
+    },
+    {
+      "id": "completed-circuit-search",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/finite",
+      "recovery": "regenerable from pinned upstream and authored code; compact and gzip evidence in Git",
+      "instructions": "individual run protocols and reproduce.md"
+    },
+    {
+      "id": "controller-search",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/frame-reuse",
+      "recovery": "regenerable",
+      "instructions": "code/frame_reuse*.py and run protocols; no modified dependency checkout needed"
+    },
+    {
+      "id": "gpu-discovery",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/labels",
+      "recovery": "regenerable bounded numerical runs, exact identical floating bytes not guaranteed across runtimes",
+      "instructions": "code/gpu_label_search.py and per-run protocols; best factors as completed gzip JSON when available; NPZ payloads remain external"
+    },
+    {
+      "id": "literature",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/inputs/review",
+      "recovery": "downloadable",
+      "instructions": "input-manifest.json and review run protocols; original downloaded PDFs/tar/HTML excluded from Git"
     }
   ],
   "irreplaceable_artifacts": [],
-  "status": "initial inventory"
+  "status": "active checkpoint; completed evidence archived, no private inputs",
+  "checkpoint_utc": "2026-10-07T23:15:38.634496+00:00",
+  "work_root_bytes_at_checkpoint": 739734718
 }

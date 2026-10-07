@@ -410,6 +410,7 @@ def main():
     result["elapsed_seconds"] = time.monotonic() - start
     encoded = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if args.output:
+        Path(args.output).parent.mkdir(parents=True, exist_ok=True)
         Path(args.output).write_text(encoded)
     print(encoded, end="")
 

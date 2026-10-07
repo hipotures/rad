@@ -1,0 +1,26 @@
+{
+  "campaign_id": "20261007T222521Z",
+  "status": "completed",
+  "attempt": "v2 after count-interface repair",
+  "upstream_revision": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 $MATH_PY code/frame_reuse_certificate.py --reference $REF --output $OUT",
+  "source_sha256": {
+    "frame_reuse.py": "3f286b5f775cc34d125695f4f1923dcec90aa9454b4a439c159718e6d7360bf6",
+    "frame_reuse_certificate.py": "9156b2648977b7b398739fa27508093719c310ed9669bdd22958987a14d9fba7",
+    "finite_block_search.py": "15bcf2741760cf07604b2e1278b6b1f696fc9ad7257b233c4614e7830e09d4f1"
+  },
+  "input_identity": "h50 global paired circuit; source-span rank order; deterministic maximum flow",
+  "wall_seconds": 56.24,
+  "cpu_user_seconds": 53.6,
+  "cpu_system_seconds": 2.59,
+  "peak_rss_kib": 3143692,
+  "swap_count": 0,
+  "failed_attempt": {
+    "log": "external logs/frame-reuse-certificate-v1.log; gzip evidence",
+    "reason": "original counts helper requires c.h,c.additions,c.outputs and assumes c+q, unlike replacement compiler",
+    "repaired_by": "explicit physical role count formula, independently compared with upstream helper on its original c+q case",
+    "source_hash": "not recorded before failure; reconstructed change described in report"
+  },
+  "source_output_sha256": "03fe4d01b67c0dbb58adb1abe51ad91956a34fddaaf7260c6504ec5b3943750f",
+  "source_hash_scope": "Compiler/certificate hashes match executed bytes. Imported factory hash records checkpoint bytes; its sole intervening change creates the CLI output parent directory, outside imported graph construction."
+}

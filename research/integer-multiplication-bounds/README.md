@@ -13,18 +13,23 @@ The ten-hour campaign `20261007T222521Z` began at
 2026-10-08 08:25:21 UTC. Substantive research is active. The pinned baseline
 passes all 85 tests and regenerates its certificates and patches unchanged.
 
-The first verified milestone is an aligned-pairing circuit with 494,250 side
-roles, compared with 509,194 in the pinned baseline. Under the retained upstream
-assumptions it supports the strict saving
-`738998782479/400000000000000000000000000000`, approximately
-`1.0650 * 2^-59`. This changes the circuit, not merely the rounding of the
-starting margin. The complete upstream theorem remains assumed.
+The current strongest verified composition supports the strict conditional
+saving `4775622313539/10^30`, more than `2.752958831579 * 2^-59`.
+It combines aligned pairing, increasing-frame retained controllers (487,650
+side roles), weighted Gaussian powers, and blocked local convolution. Exact
+parameter tuning follows those substantive changes. The complete upstream
+theorem remains assumed, and the enormous eventual cutoff is an asymptotic
+limitation. Research continues through the immutable deadline.
 
 - [Full goal](GOAL.md)
 - [Campaign clock, protocol and resume state](runs/20261007T222521Z-campaign/protocol.json)
 - [Working hypothesis ledger](reports/hypotheses.md)
 - [Evolving report](reports/campaign-20261007T222521Z.md)
 - [Aligned-pairing result and proof](reports/finite-aligned-pairing.md)
+- [Controller compiler and independent review](reports/frame-reuse.md)
+- [Weighted Gaussian estimate](reports/downstream-weighted-gaussian.md)
+- [Blocked convolution and review](reports/downstream-blocked-gaussian.md)
+- [Strongest strict parameters and scoped ceiling](reports/downstream-parameter-optimum.md)
 - [Reproduction and recovery](reproduce.md)
 
 Durable authored code, compact evidence and reports live here. Downloaded
