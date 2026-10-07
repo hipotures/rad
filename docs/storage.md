@@ -23,15 +23,17 @@ the retained files with both their recorded hashes and their originals.
 | Saved run contracts and fidelity/validation records | Selected explicitly, including bounded records inside ignored raw directories. |
 | Research plots | Bounded SVG/PNG exports tracked. |
 | Model weights, datasets, tapes, raw traces, telemetry, build output and environments | Local working storage; original provenance/hash manifests identify them. |
-| Large text result dumps | Local, even when their extension is JSON/CSV. Reports and the storage catalog retain their context/location. |
+| Complete JSON/JSONL/log/text evidence copies | Deterministic gzip under `evidence/`, strictly below 10 MiB compressed per file. Originals remain local; see [publication protocol](text-evidence.md). CSV is unchanged. |
 | Scalar/header evidence from large JSON results | Exported into docs/compact-results/ with original file path, bytes and SHA256; omitted arrays are explicit. |
-| Credentials and process/PID state | Excluded. |
+| Credentials/private configuration and live process authority | Excluded. Historical process JSON may be retained as gzip evidence, never used to control processes. |
 
 Publication limits individual durable artifacts to 1 MiB, with a 4 MiB limit
-for source patches and a 20 MiB budget for added/modified staged file content
+for source patches, strictly below 10 MiB for gzip text evidence, and a 20 MiB budget for added/modified staged file content
 per commit. The budget counts the complete changed blobs, not just diff lines;
-unchanged imported files are not charged to a new commit. Larger execution
-payloads stay local. Essential larger durable changes require a documented
+unchanged imported files are not charged to a new commit. Binary and excluded execution
+payloads stay local. The one-time full text backfill uses the indexed, scoped
+[512 MiB decision](text-evidence-backfill-policy.json); ordinary staged content
+still has its 20 MiB limit. This exception does not change subsequent defaults. Essential larger durable changes require a documented
 policy decision; never split a payload to evade the limits. These are this
 project's size choices, not claimed GitHub limits. Aggregate directories omit
 Git internals and environment package trees; apparent byte totals can differ
@@ -102,14 +104,17 @@ The complete local exclusion inventory is
 in their original manifests; this inventory does not invent hashes for files
 which lack one or rehash tens of gigabytes of payload unnecessarily.
 
-Token-ID arrays and request-message payloads are local data rather than compact
-results. Large row-level JSON results have bounded scalar/header exports in
+Token-ID arrays and request-message payloads are raw data rather than compact
+results. Complete copies in the four permitted text formats may now be archived
+as gzip evidence; older compact exports remain unchanged. Large row-level JSON results have bounded scalar/header exports in
 `docs/compact-results/`; the original files remain unchanged. These exports
 explicitly mark omitted arrays/strings and are not drop-in inputs for the
 research scripts. Workload catalogs and manifests retain provenance and
 reproduction addressing.
 
-A fresh clone contains the code and compact evidence. To reproduce measured
+A fresh clone contains the code, compact evidence and the retained gzip text
+archives. The archives contain complete source-file bytes and SHA256 manifests;
+they do not contain binary tapes, journals, weights or executables. To reproduce measured
 GPU runs, provision the exact weights, tape/initial-state sidecars, source and
 build dependencies listed in the relevant campaign, then follow its frozen
 reproduction commands. Existing binaries must match recorded hashes; ordinary

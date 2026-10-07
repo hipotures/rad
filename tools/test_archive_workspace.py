@@ -2,7 +2,10 @@
 import contextlib
 import importlib.util
 import io
+import gzip
+import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -48,10 +51,10 @@ class PublicationTests(unittest.TestCase):
             path.write_text(content)
         return path
 
-    def audit(self, staged_only=True):
+    def audit(self, staged_only=True, budget_policy=None):
         output = io.StringIO()
         with contextlib.redirect_stdout(output):
-            status = ARCHIVE.audit(staged_only=staged_only)
+            status = ARCHIVE.audit(staged_only=staged_only, budget_policy=budget_policy)
         report = json.loads((self.root / "storage/publication-audit.json").read_text())
         return status, report, output.getvalue()
 
@@ -248,6 +251,171 @@ class PublicationTests(unittest.TestCase):
         self.assertEqual(status, 0, report)
         self.assertEqual(report["files"], 0)
         self.assertEqual(report["staged_content_bytes"], 0)
+
+    def test_gzip_raw_text_is_not_ignored_and_expanded_size_is_not_plain_file_limit(self):
+        relative = 'research/fresh/evidence/run/raw/rows.json.gz'
+        original = json.dumps({'entries': ['measured service'] * 200000}).encode()
+        self.assertGreater(len(original), ARCHIVE.MAX_BYTES)
+        path = self.write(relative, gzip.compress(original, mtime=0))
+        self.assertEqual(subprocess.run(['git', 'check-ignore', '--quiet', relative], cwd=self.root).returncode, 1)
+        self.assertIsNone(ARCHIVE.reason(path))
+        self.git('add', '--', relative)
+        status, report, _ = self.audit()
+        self.assertEqual(status, 0, report)
+        self.assertEqual(report['staged_content_bytes'], path.stat().st_size)
+
+    def test_gzip_limit_is_exclusive_and_role_is_explicit(self):
+        relative = 'research/fresh/evidence/run/large.log.gz'
+        size = ARCHIVE.text_evidence.MAX_COMPRESSED_BYTES
+        path = self.write(relative, b'x' * size)
+        self.assertEqual(ARCHIVE.file_limit(path), size - 1)
+        self.git('add', '--', relative)
+        status, report, _ = self.audit()
+        self.assertEqual(status, 1)
+        self.assertFinding(report, 'large-artifact', relative)
+        for other in ['research/fresh/code/log.txt.gz', 'research/fresh/work/evidence/log.txt.gz',
+                      'research/fresh/evidence/weights.bin.gz', 'research/fresh/evidence/repos/file.txt.gz']:
+            self.assertIsNotNone(ARCHIVE.reason(self.write(other, gzip.compress(b'content', mtime=0))))
+
+    def test_compressed_indexed_credential_crosses_stream_boundary_and_cannot_be_hidden(self):
+        relative = 'research/fresh/evidence/run/engine.log.gz'
+        token = 'gh' + 'p_' + 'b' * 36
+        original = b' ' * (ARCHIVE.text_evidence.CHUNK_BYTES - 2) + token.encode() + b'\n'
+        self.write(relative, gzip.compress(original, mtime=0))
+        self.git('add', '--', relative)
+        self.write(relative, gzip.compress(b'Cleaned worktree.\n', mtime=0))
+        status, report, output = self.audit()
+        self.assertEqual(status, 1)
+        self.assertFinding(report, 'github-token', relative)
+        self.assertFinding(report, 'worktree changed after staging', relative)
+        self.assertNotIn(token, output)
+
+    def test_gzip_binary_invalid_utf8_corruption_and_truncation_fail(self):
+        samples = [(gzip.compress(b'payload\0bytes', mtime=0), 'binary-content'),
+                   (gzip.compress(b'bad\xff', mtime=0), 'non-utf8-content'),
+                   (gzip.compress(b'utf8 tail\xc3', mtime=0), 'non-utf8-content'),
+                   (gzip.compress(b'measurement', mtime=0)[:-3], 'invalid-gzip'),
+                   (b'plain text', 'invalid-gzip')]
+        damaged = bytearray(gzip.compress(b'measurement', mtime=0));damaged[-8] ^= 1
+        samples.append((bytes(damaged), 'invalid-gzip'))
+        malformed = bytearray(gzip.compress(b'measurement', mtime=0));malformed[10:14] = b'\xff\xff\xff\xff'
+        samples.append((bytes(malformed), 'invalid-gzip'))
+        for number, (data, expected) in enumerate(samples):
+            path = self.write(f'research/fresh/evidence/run/case{number}.log.gz', data)
+            self.assertEqual(ARCHIVE.reason(path), expected)
+
+    def test_gzip_staging_budget_counts_full_compressed_blobs(self):
+        # Random bytes represented as valid text provide realistic incompressible logs.
+        import random
+        rng = random.Random(20261007)
+        original = rng.randbytes(7500000).hex().encode()
+        data = gzip.compress(original, mtime=0)
+        self.assertLess(len(data), ARCHIVE.text_evidence.MAX_COMPRESSED_BYTES)
+        self.assertGreater(3 * len(data), ARCHIVE.MAX_STAGED_BYTES)
+        for number in range(3):
+            self.write(f'research/fresh/evidence/run/log{number}.txt.gz', data)
+        self.git('add', '--', 'research/fresh/evidence/')
+        status, report, _ = self.audit()
+        self.assertEqual(status, 1)
+        self.assertFinding(report, 'staged-content-budget')
+        self.assertEqual(report['staged_content_bytes'], 3 * len(data))
+        policy = self.write('docs/backfill-policy.json', json.dumps({
+            'decision': 'Explicit fixture for independent complete evidence files.',
+            'max_staged_content_bytes': 64 * ARCHIVE.MAX_BYTES,
+            'gzip_evidence_prefixes': ['research/fresh/evidence/run']}))
+        self.git('add', '--', 'docs/backfill-policy.json')
+        status, report, _ = self.audit(budget_policy=policy)
+        self.assertEqual(status, 0, report)
+        self.assertEqual(report['staged_content_limit_bytes'], 64 * ARCHIVE.MAX_BYTES)
+        self.assertEqual(report['ordinary_staged_content_bytes'], policy.stat().st_size)
+        value = json.loads(policy.read_text());value['gzip_evidence_prefixes'] = ['research/other/evidence/run']
+        policy.write_text(json.dumps(value));self.git('add', '--', 'docs/backfill-policy.json')
+        status, report, _ = self.audit(budget_policy=policy)
+        self.assertEqual(status, 1)
+        self.assertFinding(report, 'ordinary-staged-content-budget')
+        policy.write_text('Unstaged replacement cannot authorize the exception.')
+        with self.assertRaisesRegex(ValueError, 'indexed bytes'):
+            self.audit(budget_policy=policy)
+
+    def test_pack_is_deterministic_preserves_sources_and_reports_rejections(self):
+        source = self.root / 'originals'
+        source.mkdir()
+        good = self.write('originals/run/output.jsonl', '{"value": 1}\n' * 500)
+        bad = self.write('originals/run/nontext.txt', b'bin\0ary')
+        self.write('originals/run/tape.bin', b'physical payload')
+        self.write('originals/run/.env.txt', 'Private configuration.\n')
+        self.write('originals/run/repos/dependency.txt', 'Downloaded dependency.\n')
+        (source/'run/link.log').symlink_to(good)
+        before = good.read_bytes(), good.stat().st_mtime_ns, bad.read_bytes()
+        outputs = [self.root/'research/fresh/evidence/a', self.root/'research/fresh/evidence/b']
+        with contextlib.redirect_stdout(io.StringIO()):
+            first = ARCHIVE.text_evidence.pack(source, outputs[0], ARCHIVE.SECRETS)
+            ARCHIVE.text_evidence.pack(source, outputs[1], ARCHIVE.SECRETS)
+        self.assertEqual(first['files_archived'], 1)
+        a, b = outputs
+        self.assertEqual((a/'run/output.jsonl.gz').read_bytes(), (b/'run/output.jsonl.gz').read_bytes())
+        self.assertEqual((a/'archive-manifest.jsonl.gz').read_bytes(), (b/'archive-manifest.jsonl.gz').read_bytes())
+        self.assertEqual(gzip.decompress((a/'run/output.jsonl.gz').read_bytes()), before[0])
+        self.assertEqual((good.read_bytes(), good.stat().st_mtime_ns, bad.read_bytes()), before)
+        records = [json.loads(line) for line in gzip.decompress((a/'archive-manifest.jsonl.gz').read_bytes()).splitlines()]
+        archived = next(r for r in records[1:] if r['status'] == 'archived')
+        self.assertEqual(archived['original_sha256'], hashlib.sha256(before[0]).hexdigest())
+        self.assertTrue({'binary-content', 'non-text-format', 'private-configuration', 'local-symlink',
+                         'source-or-environment-directory'} <= set(first['skipped']))
+        with self.assertRaises(FileExistsError):
+            ARCHIVE.text_evidence.pack(source, a, ARCHIVE.SECRETS)
+
+    def test_pack_never_publishes_partial_or_oversized_compressed_files(self):
+        source = self.root/'originals';source.mkdir()
+        self.write('originals/large.log', ''.join(chr(33 + n % 80) for n in range(100000)))
+        destination = self.root/'research/fresh/evidence/small-cap'
+        with patch.object(ARCHIVE.text_evidence, 'MAX_COMPRESSED_BYTES', 80), contextlib.redirect_stdout(io.StringIO()):
+            # The manifest also exceeds this artificial cap, so the entire namespace aborts.
+            with self.assertRaises(ARCHIVE.text_evidence.TextRejected):
+                ARCHIVE.text_evidence.pack(source, destination, ARCHIVE.SECRETS)
+        self.assertFalse(destination.exists())
+        self.assertTrue((source/'large.log').exists())
+
+    def test_ignored_selection_skips_tracked_data_and_environment_trees(self):
+        good = self.write('research/fresh/raw/results.json', '{"value":42}\n')
+        owner = self.write('research/fresh/raw/owned-process.json', '{"pid":123,"historical":true}\n')
+        tracked = self.write('research/fresh/configs/seed.json', '{"seed":42}\n')
+        self.git('add', '--', str(tracked.relative_to(self.root)))
+        self.write('research/fresh/repos/dependency.json', '{"upstream":true}\n')
+        self.write('research/fresh/envs/cache.json', '{"environment":true}\n')
+        selected = ARCHIVE.ignored_text_paths()
+        self.assertEqual(set(selected), {str(good.relative_to(self.root)), str(owner.relative_to(self.root))})
+        destination = self.root/'docs/evidence/backfill'
+        with contextlib.redirect_stdout(io.StringIO()):
+            result = ARCHIVE.text_evidence.pack(self.root, destination, ARCHIVE.SECRETS, paths=selected)
+        self.assertEqual(result['files_archived'], 2)
+        self.assertIsNone(ARCHIVE.reason(destination/'research/fresh/raw/owned-process.json.gz'))
+        self.assertTrue(good.exists())
+
+    def test_nonregular_source_is_rejected_without_blocking(self):
+        fifo = self.root / 'pipe.log'
+        os.mkfifo(fifo)
+        with self.assertRaisesRegex(ARCHIVE.text_evidence.TextRejected, 'non-regular-source'):
+            ARCHIVE.text_evidence.compress_file(fifo, self.root/'pipe.log.gz', ARCHIVE.SECRETS, lambda: None)
+        self.assertFalse((self.root/'pipe.log.gz').exists())
+
+    def test_verify_detects_changed_original_archive_and_unlisted_content(self):
+        self.write('originals/run.log', 'Complete text evidence.\n' * 50)
+        destination = self.root/'docs/evidence/verified'
+        with contextlib.redirect_stdout(io.StringIO()):
+            ARCHIVE.text_evidence.pack(self.root/'originals', destination, ARCHIVE.SECRETS)
+        self.assertEqual(ARCHIVE.text_evidence.verify(destination, ARCHIVE.SECRETS, True)['files'], 1)
+        self.write('originals/run.log', 'Changed original.\n')
+        with self.assertRaisesRegex(ValueError, 'Current original differs'):
+            ARCHIVE.text_evidence.verify(destination, ARCHIVE.SECRETS, True)
+        self.assertEqual(ARCHIVE.text_evidence.verify(destination, ARCHIVE.SECRETS)['state'], 'PASS')
+        self.write('docs/evidence/verified/extra.log.gz', gzip.compress(b'Unlisted.\n', mtime=0))
+        with self.assertRaisesRegex(ValueError, 'unlisted files'):
+            ARCHIVE.text_evidence.verify(destination, ARCHIVE.SECRETS)
+        (destination/'extra.log.gz').unlink()
+        self.write('docs/evidence/verified/run.log.gz', gzip.compress(b'Replaced.\n', mtime=0))
+        with self.assertRaisesRegex(ValueError, 'Compressed identity mismatch'):
+            ARCHIVE.text_evidence.verify(destination, ARCHIVE.SECRETS)
 
 
 if __name__ == "__main__":

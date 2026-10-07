@@ -15,6 +15,7 @@ from pathlib import Path
 import re
 import subprocess
 import time
+import text_evidence
 
 ROOT = Path(__file__).resolve().parents[1]
 STUDY = "iq3s-residency-20261004T230051Z"
@@ -66,7 +67,21 @@ def save(path, value):
     os.replace(temp, path)
 
 def file_limit(path):
+    if path.suffix == '.gz':
+        return text_evidence.MAX_COMPRESSED_BYTES - 1
     return 4 * MAX_BYTES if path.suffix in {".patch", ".diff"} else MAX_BYTES
+
+def text_archive_location(path):
+    """Explicit evidence copies may retain raw text; execution directories stay local."""
+    parts = path.relative_to(ROOT).parts
+    if 'evidence' not in parts[:-1]:
+        return 'text-archive-outside-evidence'
+    marker = parts.index('evidence')
+    if set(parts[:marker]) & LOCAL_DIRS:
+        return 'text-archive-in-execution-directory'
+    if Path(path.stem).suffix.lower() not in text_evidence.EXTENSIONS:
+        return 'non-durable-format'
+    return text_evidence.path_reason(parts)
 
 def reason(path, data=None):
     """Check artifact role/size; audit can supply the actual indexed bytes."""
@@ -81,6 +96,22 @@ def reason(path, data=None):
         return "private-configuration"
     if any(p.endswith("venv") or p in {"site-packages", "dist-packages"} for p in parts[:-1]):
         return "local-directory:virtual-environment"
+    if path.suffix == '.gz':
+        why = text_archive_location(path)
+        if why:
+            return why
+        size = len(data) if data is not None else path.stat().st_size
+        if size > file_limit(path):
+            return 'large-artifact'
+        if data is None:
+            data = path.read_bytes()
+        last = time.monotonic()
+        def heartbeat():
+            nonlocal last
+            if time.monotonic() - last >= 25:
+                print('HEARTBEAT decompressed text archive audit', str(relative), flush=True)
+                last = time.monotonic()
+        return text_evidence.inspect_gzip(data, SECRETS, heartbeat)
     if "sources" in parts and "open-jev" in parts:
         return "third-party-source-snapshot"
     blocked = set(parts[:-1]) & LOCAL_DIRS
@@ -249,8 +280,36 @@ def plan():
             selected.append({"path": relative, "bytes": size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()})
     return selected, excluded, dict(sorted(grouped.items()))
 
-def audit(staged_only=False):
+def read_budget_policy(path):
+    """A larger evidence import needs a durable, indexed, explicitly scoped decision."""
+    if path is None:
+        return None
+    path = Path(path).absolute()
+    relative = path.relative_to(ROOT)
+    if path.suffix != '.json' or relative.parts[0] not in {'docs', 'research', STUDY}:
+        raise ValueError('Budget policy must be a durable managed JSON document')
+    data = git('show', ':' + str(relative), binary=True)
+    if path.is_symlink() or not path.is_file() or path.read_bytes() != data:
+        raise ValueError('Budget policy must match its indexed bytes')
+    value = json.loads(data)
+    amount = value['max_staged_content_bytes']
+    prefixes = value['gzip_evidence_prefixes']
+    if type(amount) is not int or not MAX_STAGED_BYTES < amount <= 512 * MAX_BYTES:
+        raise ValueError('Explicit evidence budget must be above 20 and at most 512 MiB')
+    if not value.get('decision') or not isinstance(prefixes, list) or not prefixes:
+        raise ValueError('Evidence budget needs a documented decision and scopes')
+    for prefix in prefixes:
+        p = Path(prefix)
+        if p.is_absolute() or '..' in p.parts or text_archive_location(ROOT / p / 'check.log.gz'):
+            raise ValueError('Invalid evidence budget scope')
+    return {'path': str(relative), 'sha256': hashlib.sha256(data).hexdigest(),
+            'max_staged_content_bytes': amount, 'gzip_evidence_prefixes': prefixes}
+
+def audit(staged_only=False, budget_policy=None):
     failures, total, staged_total, largest = [], 0, 0, []
+    decision = read_budget_policy(budget_policy)
+    staged_limit = decision['max_staged_content_bytes'] if decision else MAX_STAGED_BYTES
+    ordinary_staged = 0
     staged_paths = set(git("diff", "--cached", "--name-only", "--diff-filter=ACMRU", "-z").split("\0")) - {""}
     records = git("ls-files", "--stage", "-z", binary=True).decode().split("\0")
     entries = []
@@ -286,6 +345,10 @@ def audit(staged_only=False):
             total += size
             if relative in staged_paths:
                 staged_total += size
+                exceptional = decision and p.suffix == '.gz' and any(
+                    Path(relative).is_relative_to(prefix) for prefix in decision['gzip_evidence_prefixes'])
+                if not exceptional:
+                    ordinary_staged += size
             largest.append((size, relative))
             if size > file_limit(p):
                 failures.append({"path": relative, "reason": "large-artifact", "bytes": size})
@@ -301,7 +364,7 @@ def audit(staged_only=False):
             why = reason(p, data=data)
             if why:
                 failures.append({"path": relative, "reason": why})
-            for label, pattern in SECRETS:
+            for label, pattern in ([] if p.suffix == '.gz' else SECRETS):
                 if pattern.search(data):
                     failures.append({"path": relative, "reason": label})
             if p.is_symlink() or not p.is_file() or p.stat().st_size != size or p.read_bytes() != data:
@@ -311,30 +374,97 @@ def audit(staged_only=False):
                 last = time.monotonic()
         objects.stdin.close()
         objects.wait(timeout=10)
-    if staged_total > MAX_STAGED_BYTES:
-        failures.append({"reason": "staged-content-budget", "bytes": staged_total, "limit_bytes": MAX_STAGED_BYTES})
+    if staged_total > staged_limit:
+        failures.append({"reason": "staged-content-budget", "bytes": staged_total, "limit_bytes": staged_limit})
+    if decision and ordinary_staged > MAX_STAGED_BYTES:
+        failures.append({'reason': 'ordinary-staged-content-budget', 'bytes': ordinary_staged, 'limit_bytes': MAX_STAGED_BYTES})
     report = {
         "utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "state": "PASS" if not failures else "FAIL", "files": len(largest),
         "bytes": total, "largest_files": [{"path": p, "bytes": n} for n, p in sorted(largest, reverse=True)[:12]],
         "selection": "staged-changes" if staged_only else "entire-index",
-        "staged_content_bytes": staged_total, "staged_content_limit_bytes": MAX_STAGED_BYTES,
+        "staged_content_bytes": staged_total, "staged_content_limit_bytes": staged_limit,
+        'ordinary_staged_content_bytes': ordinary_staged, 'budget_policy': decision,
         "failures": failures,
-        "scope": "Index/worktree equality, role and size policy, no Git links/symlinks, UTF-8 text/bounded plots, recognizable credential formats. This is not a comprehensive secret detection guarantee.",
+        "scope": "Index/worktree equality, role and size policy, no Git links/symlinks, UTF-8 text/bounded plots, recognizable credential formats. Gzip evidence is checked after streaming decompression, including framing/CRC. This is not a comprehensive secret detection guarantee.",
     }
     save(ROOT / "storage/publication-audit.json", report)
     print(json.dumps(report, indent=2), flush=True)
     return 0 if not failures else 1
 
+def ignored_text_paths():
+    """Select existing ignored text in managed roots, without traversing dependencies."""
+    paths = []
+    last = time.monotonic()
+    for name in [STUDY, 'research', 'benchmarks', 'launchers', 'docs', 'tools']:
+        directory = ROOT / name
+        if not directory.exists():
+            continue
+        for parent, dirs, files in os.walk(directory, followlinks=False):
+            dirs[:] = sorted(d for d in dirs if d not in text_evidence.PRUNE
+                             and not d.endswith('venv') and not (Path(parent)/d).is_symlink())
+            for filename in sorted(files):
+                path = Path(parent) / filename
+                if path.suffix.lower() in text_evidence.EXTENSIONS:
+                    paths.append(str(path.relative_to(ROOT)))
+            if time.monotonic() - last >= 25:
+                print('HEARTBEAT ignored text selection', len(paths), flush=True)
+                last = time.monotonic()
+    if not paths:
+        return []
+    result = subprocess.run(['git', 'check-ignore', '--stdin', '-z'], cwd=ROOT,
+                            input='\0'.join(paths)+'\0', text=True, capture_output=True)
+    if result.returncode not in {0, 1}:
+        raise RuntimeError('git check-ignore failed: ' + result.stderr)
+    return sorted(set(result.stdout.split('\0')) - {''})
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["plan", "stage", "audit"])
+    parser.add_argument("command", choices=["plan", "stage", "audit", "pack-text", "pack-ignored-text", "verify-text"])
     parser.add_argument("--staged-only", action="store_true", help="Audit only changed indexed files; retain unrelated unstaged edits")
+    parser.add_argument('--source', type=Path, help='Completed task-owned text evidence directory')
+    parser.add_argument('--destination', type=Path, help='Fresh managed topic evidence namespace')
+    parser.add_argument('--budget-policy', type=Path, help='Indexed JSON decision for a scoped one-time evidence import')
+    parser.add_argument('--paths-from', type=Path, help='JSON list of frozen relative source paths for pack-text')
+    parser.add_argument('--check-originals', action='store_true', help='Compare an archive with current original bytes; requires local originals')
     args = parser.parse_args()
     if args.staged_only and args.command != "audit":
         parser.error("--staged-only is only supported by audit")
+    if args.budget_policy and args.command != 'audit':
+        parser.error('--budget-policy is only supported by audit')
+    if args.paths_from and args.command != 'pack-text':
+        parser.error('--paths-from is only supported by pack-text')
+    if args.check_originals and args.command != 'verify-text':
+        parser.error('--check-originals is only supported by verify-text')
+    if args.command == 'verify-text':
+        if not args.destination or args.source:
+            parser.error('verify-text requires --destination and no --source')
+        print(json.dumps(text_evidence.verify(args.destination, SECRETS, args.check_originals), indent=2), flush=True)
+        return
+    if args.command in {'pack-text', 'pack-ignored-text'}:
+        if not args.destination or (args.command == 'pack-text' and not args.source):
+            parser.error('pack-text requires --source and --destination; pack-ignored-text requires --destination')
+        if args.command == 'pack-ignored-text' and args.source:
+            parser.error('pack-ignored-text selects managed repository roots; do not supply --source')
+        destination = args.destination.absolute()
+        try:
+            location = text_archive_location(destination / 'archive-manifest.jsonl.gz')
+            managed = destination.relative_to(ROOT).parts[0] in {STUDY, 'research', 'benchmarks', 'launchers', 'docs', 'tools'}
+        except ValueError:
+            location, managed = 'outside-managed-research', False
+        if location or not managed:
+            parser.error(location or 'outside-managed-research')
+        selected = ignored_text_paths() if args.command == 'pack-ignored-text' else None
+        if args.paths_from:
+            selected = json.loads(args.paths_from.read_text())
+            if not isinstance(selected, list) or any(not isinstance(p, str) for p in selected):
+                parser.error('--paths-from must contain a JSON list of relative paths')
+        text_evidence.pack(args.source or ROOT, destination, SECRETS, paths=selected)
+        return
+    if args.source or args.destination:
+        parser.error('--source/--destination are only supported by pack-text')
     if args.command == "audit":
-        raise SystemExit(audit(staged_only=args.staged_only))
+        raise SystemExit(audit(staged_only=args.staged_only, budget_policy=args.budget_policy))
     selected, excluded, grouped = plan()
     generated = compact_results(excluded)
     save(ROOT / "storage/retention-plan.json", {"selected": selected, "excluded": excluded})

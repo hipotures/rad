@@ -7,6 +7,10 @@ source/configuration/results. The [starter index](../launchers/README.md) links
 the user launchers and every preserved 128K laboratory starter. The
 [workspace map](workspaces.md) explains original execution paths and Git copies.
 
+The [text evidence archive](text-evidence.md) preserves complete gzip copies
+of eligible historical ignored text and Phase 2 external text logs, with
+per-file identities and explicit omissions.
+
 The table below covers the residency branch of this wider research record.
 
 The investigation covers expert placement, CPU/GPU coordination and real-copy

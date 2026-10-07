@@ -494,5 +494,23 @@
     "sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
     "recovery": "Small checkpoint/export stored in Git; no retraining required"
   },
-  "recovery_limit": "No independent persistent backup destination identified for exact large tapes/raw observations. They remain on persistent local disk; local-host/storage loss would prevent exact byte-for-byte raw recovery. Compact outcomes and authored source/patches are retained in Git and published to the canonical GitHub repository; the original results commit is 22be02507a86db78b254630414ee4530fb47beb3. The restriction on push and PR was removed by the operator. No private-data upload."
+  "recovery_limit": "No independent persistent backup destination identified for exact large tapes/raw observations. They remain on persistent local disk; local-host/storage loss would prevent exact byte-for-byte raw recovery. Compact outcomes and authored source/patches are retained in Git and published to the canonical GitHub repository; the original results commit is 22be02507a86db78b254630414ee4530fb47beb3. The restriction on push and PR was removed by the operator. No private-data upload. Publication maintenance subsequently added complete eligible raw-text gzip copies and SHA256 manifests under evidence/. This resolves the retained text-only recovery gap after push; the binary tape/journal recovery gap remains.",
+  "text_evidence_publication": {
+    "protocol": "../../../../docs/text-evidence.md",
+    "archives": [
+      {
+        "path": "evidence/raw-text-v1",
+        "source_root": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/raw"
+      },
+      {
+        "path": "evidence/runner-logs-v1",
+        "source_root": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/logs"
+      },
+      {
+        "path": "evidence/reproduction-text-v1",
+        "source_root": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/tmp/reproduction-20261007T115759284279Z/raw"
+      }
+    ],
+    "scope": "Complete eligible JSON/JSONL/log/text copies and per-file SHA256 manifests. Binary tapes/journals and non-text payloads are excluded. Originals remain unchanged. Scientific measurements are unchanged."
+  }
 }

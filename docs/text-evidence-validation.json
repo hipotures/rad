@@ -1,0 +1,117 @@
+{
+  "task": "Full eligible ignored-text gzip backfill and required commit/push",
+  "schema": "rad-text-publication-validation-v1",
+  "archives": [
+    {
+      "namespace": "/srv/ai/research/docs/evidence/ignored-text-20261007-v1",
+      "state": "PASS",
+      "files": 19413,
+      "original_bytes": 3510449673,
+      "compressed_bytes": 320285448,
+      "manifest_bytes": 1543326,
+      "current_originals_checked": true,
+      "scope": "Every gzip framing/CRC, UTF-8, recognizable credentials, compressed and original SHA256/size, complete namespace membership."
+    },
+    {
+      "namespace": "/srv/ai/research/docs/evidence/historical-process-text-20261007-v1",
+      "state": "PASS",
+      "files": 63,
+      "original_bytes": 47047,
+      "compressed_bytes": 20253,
+      "manifest_bytes": 6812,
+      "current_originals_checked": true,
+      "scope": "Every gzip framing/CRC, UTF-8, recognizable credentials, compressed and original SHA256/size, complete namespace membership."
+    },
+    {
+      "namespace": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase2-20261007T093357Z/evidence/raw-text-v1",
+      "state": "PASS",
+      "files": 2362,
+      "original_bytes": 80759262,
+      "compressed_bytes": 7178657,
+      "manifest_bytes": 180432,
+      "current_originals_checked": true,
+      "scope": "Every gzip framing/CRC, UTF-8, recognizable credentials, compressed and original SHA256/size, complete namespace membership."
+    },
+    {
+      "namespace": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase2-20261007T093357Z/evidence/runner-logs-v1",
+      "state": "PASS",
+      "files": 26,
+      "original_bytes": 897586,
+      "compressed_bytes": 57969,
+      "manifest_bytes": 2425,
+      "current_originals_checked": true,
+      "scope": "Every gzip framing/CRC, UTF-8, recognizable credentials, compressed and original SHA256/size, complete namespace membership."
+    },
+    {
+      "namespace": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase2-20261007T093357Z/evidence/reproduction-text-v1",
+      "state": "PASS",
+      "files": 34,
+      "original_bytes": 1320646,
+      "compressed_bytes": 114710,
+      "manifest_bytes": 4104,
+      "current_originals_checked": true,
+      "scope": "Every gzip framing/CRC, UTF-8, recognizable credentials, compressed and original SHA256/size, complete namespace membership."
+    },
+    {
+      "namespace": "/srv/ai/research/docs/evidence/text-evidence-maintenance-20261007-v1",
+      "state": "PASS",
+      "files": 14,
+      "original_bytes": 2577868,
+      "compressed_bytes": 89529,
+      "manifest_bytes": 1894,
+      "current_originals_checked": true,
+      "scope": "Every gzip framing/CRC, UTF-8, recognizable credentials, compressed and original SHA256/size, complete namespace membership."
+    }
+  ],
+  "totals": {
+    "archived_source_files": 21912,
+    "original_bytes": 3596052082,
+    "compressed_bytes_including_manifests": 329485559
+  },
+  "tests": {
+    "state": "PASS",
+    "count": 25,
+    "elapsed_seconds": 5.026,
+    "log": "evidence/text-evidence-maintenance-20261007-v1/tests-final.log.gz"
+  },
+  "standard_gzip_readback": {
+    "state": "PASS",
+    "file": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase2-20261007T093357Z/evidence/raw-text-v1/code-archive-block1-ORACLE_FULL/collector-process.json.gz",
+    "original_sha256": "45a0e1c50436a51d085422caafe834937be657a273a9355a44eb1b534fa9b1bb",
+    "output": "/srv/ai/work/rad/text-evidence-maintenance/gzip-readback.txt"
+  },
+  "strict_compressed_limit_bytes": 10485760,
+  "default_staged_budget_bytes": 20971520,
+  "one_time_budget_policy": "text-evidence-backfill-policy.json",
+  "omission": {
+    "path": "iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/phase-a/cost-analysis.json",
+    "original_bytes": 132050206,
+    "reason": "Complete gzip crosses exclusive 10 MiB limit",
+    "full_compressed_bytes": null,
+    "repaired_oversize_retest": "PASS",
+    "split": false
+  },
+  "repairs": [
+    {
+      "issue": "First oversized source triggered Python gzip finalizer warning",
+      "repair": "Keep writer close path valid while discarding excess temporary output; reject complete namespace entry safely",
+      "valid_archives_affected": false,
+      "real_source_retest": "PASS"
+    },
+    {
+      "issue": "First pass omitted historical process records under transient policy",
+      "repair": "Preserve old manifest; retain all 63 records in historical supplement; copies are never live process authority"
+    },
+    {
+      "issue": "Administrative CLI invocation referenced a missing paths-list",
+      "outcome": "FileNotFoundError before namespace creation; create frozen list and use bounded real-file retest"
+    }
+  ],
+  "not_retained_in_git": [
+    "The one oversized JSON original",
+    "Binary tapes/journals and 508 non-text Phase2 raw/reproduction files",
+    "Downloaded sources, builds, environments, model weights, private configuration",
+    "Untraversed external benchmark directories"
+  ],
+  "limits": "Recognizable credential checks are not comprehensive. Original content and source byte hashes verified; no new research or semantic-equivalence claim. Final indexed publication audit follows separately."
+}

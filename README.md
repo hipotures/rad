@@ -36,7 +36,10 @@ Normal Q4 / K24 / PCIe 0.28 / pool 100 us serving remains unchanged.
 Reports, scripts, patches, contracts, compact JSON/CSV results, small numeric
 model exports and research plots belong in Git. Build trees, model weights,
 source clones, virtual environments, large datasets, tapes, telemetry and large
-row-level result dumps stay local. Git ignores them; it does not delete them.
+row-level result dumps stay local in their original form. Complete gzip copies of
+JSON, JSONL, log and text evidence are publishable when each is strictly below
+10 MiB compressed. See [text evidence and the historical backfill](docs/text-evidence.md).
+Git ignores original execution payloads; it does not delete them.
 See [storage and reproduction](docs/storage.md) and the
 [local artifact catalog](docs/local-artifacts.json).
 
@@ -46,6 +49,13 @@ material goes in `research/<topic>/`: authored `code/`, small `fixtures/`,
 downloaded repositories, environments and compiled output belong in a task-owned
 directory under `/srv/ai/work/rad/`. Create/check `.gitignore` before execution.
 
+Before the final commit, package completed text evidence into a fresh namespace:
+
+```bash
+python3 tools/archive_workspace.py pack-text --source <completed-evidence-directory> --destination <topic>/evidence/<fresh-run-id>
+```
+
+Review the compressed manifest and stage those copies with the task artifacts.
 At completion, stage the actual task-owned paths explicitly, inspect the diff
 and run the publication check:
 
@@ -62,7 +72,9 @@ git push origin <actual-branch>
 
 Replace placeholders with reviewed paths and the appropriate upstream branch.
 Verify the remote contains the commit. The default limits are 1 MiB per file,
-4 MiB per patch and 20 MiB of staged content per commit.
+4 MiB per patch, strictly below 10 MiB per permitted gzip text copy, and 20 MiB
+of staged content per commit. Larger aggregate imports require a documented
+policy decision; the historical text backfill has its own scoped exception.
 
 `tools/archive_workspace.py plan` and `stage` are bulk-import tools for the
 managed workspace, rather than the completion workflow for an individual task.

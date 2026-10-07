@@ -229,6 +229,8 @@ For important external or large artifacts that should not be committed, record w
 
 Do not commit model weights, large datasets, large binaries, caches, virtual environments, build artifacts, downloaded source trees or large temporary outputs. A JSON/CSV extension does not make a multi-gigabyte dump suitable for Git. Do not split a payload across small files or commits to evade the storage policy.
 
+Completed `.json`, `.jsonl`, `.log` and `.txt` evidence has an explicit gzip publication path: before the final commit, run `python3 tools/archive_workspace.py pack-text --source <completed-evidence-directory> --destination <topic>/evidence/<fresh-run-id>` and review its manifest. Keep original files unchanged. Each complete gzip copy must be strictly smaller than 10 MiB (10,485,760 bytes); never split a source to meet this limit. Root ignore rules permit these copies, including raw request and row-level evidence. The validator checks decompressed UTF-8, framing/CRC and recognizable credentials. Downloaded sources, environments, weights, binaries and private configuration remain excluded. Preserve readable authored source, configs and compact reports. Historical process records may be archived as evidence; an archived PID record is never authority to control a live process. See [text evidence publication](docs/text-evidence.md).
+
 Default publication limits are 1 MiB per durable file, 4 MiB per source patch and 20 MiB of staged file content per commit. These are project guardrails, not GitHub service limits. Existing imported history is retained. Essential larger durable changes need an explicit, documented policy decision; large execution payloads still belong in local/external storage.
 
 Never commit secrets, credentials, API keys, tokens, private keys, or private configuration.
@@ -281,7 +283,7 @@ Before completing a goal:
 2. Complete relevant checks and the recovery minimum above. Leave execution payloads in ignored/external storage.
 3. Update the topic README/report, manifests and repository index when relevant.
 4. Stage only explicit task-owned paths, then inspect the staged diff, file sizes and total content. Do not use `git add -A`, `git add .` or `git add -f .` as a substitute for scope review.
-5. Run `python3 tools/archive_workspace.py audit --staged-only` and resolve findings. It inspects the staged bytes, enforces size/role limits and checks recognizable credential formats; it does not replace content/recovery review.
+5. Run `python3 tools/archive_workspace.py audit --staged-only` and resolve findings. An explicitly documented bulk evidence import may pass an indexed, scoped JSON decision with `--budget-policy <path>`; ordinary content retains its 20 MiB limit. The 2026-10-07 full text backfill has a one-time 512 MiB aggregate budget in `docs/text-evidence-backfill-policy.json`. This is not the ongoing default. It inspects the staged bytes, enforces size/role limits and checks recognizable credential formats; it does not replace content/recovery review.
 6. Commit the relevant changes with a descriptive English message.
 7. Push to this repository's appropriate upstream branch and verify that the remote contains the commit.
 
