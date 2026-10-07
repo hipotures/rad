@@ -8,6 +8,14 @@ Agents working here are research executors. They are given a concrete goal and a
 
 The surrounding ChatGPT project is used for discussion, synthesis, interpretation, and deciding the next research direction. This repository is where those directions are executed and made durable.
 
+## Language
+
+Communication with the user may be in Polish or another language, but all repository artifacts created or modified by agents must be written in English unless the current goal explicitly requires a different language.
+
+This applies to documentation, README files, reports, research notes, source code, comments, identifiers where practical, scripts, configuration descriptions, data schemas and field names, reproduction instructions, and commit messages.
+
+Quoted source material, external data, logs, and tool output may remain in their original language when preserving them verbatim is useful. Any agent-written explanation or annotation around them must be in English.
+
 ## Goal Execution
 
 Treat the user's current goal as the primary objective.
