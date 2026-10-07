@@ -269,6 +269,8 @@ For external sources, preserve enough citation information to identify the sourc
 
 ## Git Discipline
 
+**Commit and push are mandatory for every task with durable changes.** Before reporting completion, commit the task-owned artifacts, push them to the appropriate branch of `hipotures/rad`, and verify that the remote contains the commit. A local-only commit is unfinished work; do not stop after committing or leave publication for a separate goal.
+
 Use Git as the shared research record.
 
 During long investigations, make meaningful milestone commits when they preserve substantial progress or important evidence.
