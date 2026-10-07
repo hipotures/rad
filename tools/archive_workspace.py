@@ -115,6 +115,9 @@ def reason(path, data=None):
     if "sources" in parts and "open-jev" in parts:
         return "third-party-source-snapshot"
     blocked = set(parts[:-1]) & LOCAL_DIRS
+    if parts[:2] == (STUDY, "reviews") and parts[-3:] == ("site", "data", "catalog.json"):
+        # A bounded static review catalog is authored metadata, not an execution dump.
+        blocked.discard("data")
     if parts[0] in {"research", "launchers"} and "logs" in parts[:-1]:
         blocked.add("logs")
     if parts[0] == "benchmarks":
@@ -148,6 +151,10 @@ def reason(path, data=None):
         # A campaign may preserve exact external source patches with local attributes.
         names = names | {".gitattributes"}
     extensions = LEGACY_EXTENSIONS if parts[0] == STUDY else EXTENSIONS
+    # Static retrospective review applications are durable authored research.
+    # Payload, size, credential and gzip rules below still apply unchanged.
+    if parts[:2] == (STUDY, "reviews"):
+        extensions = extensions | {".js", ".html", ".css"}
     if parts[0] == "benchmarks":
         extensions = extensions | {".tsv", ".stdout", ".stderr", ".sha256"}
     if path.name not in names and path.suffix not in extensions:

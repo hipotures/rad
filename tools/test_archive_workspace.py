@@ -104,6 +104,17 @@ class PublicationTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, relative)
             self.assertEqual(ARCHIVE.reason(path), "non-durable-format")
 
+    def test_static_review_formats_keep_payload_and_size_guards(self):
+        for name in ['index.html', 'app.js', 'styles.css', 'data/catalog.json']:
+            path = self.write(ARCHIVE.STUDY + '/reviews/atlas/site/' + name, '{}\n')
+            self.assertIsNone(ARCHIVE.reason(path))
+        payload = self.write(ARCHIVE.STUDY + '/reviews/atlas/site/data/dump.json', '{}\n')
+        self.assertEqual(ARCHIVE.reason(payload), 'local-payload-directory')
+        oversized = self.write(ARCHIVE.STUDY + '/reviews/atlas/site/app.js', b'x' * (ARCHIVE.MAX_BYTES + 1))
+        self.assertEqual(ARCHIVE.reason(oversized), 'large-artifact')
+        binary = self.write(ARCHIVE.STUDY + '/reviews/atlas/site/index.html', b'html\x00payload')
+        self.assertEqual(ARCHIVE.reason(binary), 'binary-content')
+
     def test_benchmark_source_and_user_launchers_are_durable(self):
         for relative in ["benchmarks/qwen-hardware-characterization/src/hwbench.cu",
                          "benchmarks/qwen-hardware-characterization/run-example/code-final/src/operations.cu",

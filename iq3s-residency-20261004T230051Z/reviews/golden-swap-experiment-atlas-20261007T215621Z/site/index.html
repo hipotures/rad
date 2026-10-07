@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Golden Swap Experiment Atlas</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%237bd5c6'/%3E%3Ctext x='4' y='23' font-size='20'%3EGS%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="vendor/plotly.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+<header><div><span class="eyebrow">RaD / retrospective evidence instrument</span><h1>Golden Swap Experiment Atlas</h1></div>
+  <div class="header-actions"><button id="theme">Light theme</button><a href="/review/report.md" target="_blank">Findings ↗</a><a href="/review/README.md" target="_blank">Guide ↗</a></div>
+</header>
+<div class="shell">
+<aside>
+  <div class="filters">
+    <label>Experiment <select id="campaign"><option value="">All experiments</option></select></label>
+    <label>Task <select id="task"><option value="">All tasks</option></select></label>
+    <label>Policy <select id="policy"><option value="">All policies</option></select></label>
+    <label>Context profile <select id="context"><option value="">All profiles</option></select></label>
+    <label>Source group <select id="source"><option value="">All sources</option></select></label>
+    <label>Run A <select id="runA"></select></label>
+    <label>Run B <select id="runB"><option value="">No comparison</option></select></label>
+    <button id="match">Choose matching current / oracle</button>
+    <label>GPU <select id="gpu"><option value="">Both GPUs</option><option value="0">GPU0</option><option value="1">GPU1</option></select></label>
+    <label>Layer <select id="layer"></select></label>
+    <label>Physical byte class <select id="byteClass"><option value="">All classes</option></select></label>
+    <label>Global map <select id="globalMetric"><option value="admissions">Admissions</option><option value="evictions">Evictions</option><option value="nonlocal">CPU + mapped + unknown nonlocal</option><option value="copy_bytes">Published copy bytes</option><option value="local">Local routed entries</option></select></label>
+    <label>Expert <input id="expert" type="number" min="0" max="511" placeholder="All experts (0…511)"></label>
+    <label>Expert subset (optional) <input id="expertSubset" placeholder="3, 17, 100-120"></label>
+    <label>Logical time <select id="time"><option value="window">Verifier window</option><option value="event">Routed-layer invocation</option><option value="percent">Percent of request</option></select></label>
+    <label>Comparison <select id="comparison"><option value="absolute">Absolute A and B</option><option value="difference">Difference A − B</option></select></label>
+    <label>Rolling / demand bin (windows) <input id="smooth" type="number" min="1" max="256" value="8"></label>
+    <label>Counts <select id="normalize"><option value="raw">Raw counts / bytes</option><option value="perWindow">Average per window</option><option value="share">Service shares (%)</option></select></label>
+    <label><input id="linked" type="checkbox" checked> Link time zoom / hover</label>
+    <button id="reset">Reset all zoom</button>
+  </div>
+  <div class="sidebar-note">No new GPU runs. Global series use GPU/class filters across all matching layers. Layer/expert filters select detail panels. Repetitions without a selected journal remain in the overview. Null means unmeasured.</div>
+</aside>
+<main>
+  <nav id="tabs">
+    <button data-page="overview" class="active">Experiments</button><button data-page="residency">Residency</button>
+    <button data-page="churn">Swaps & churn</button><button data-page="startup">Startup</button><button data-page="expert">Expert lifecycle</button>
+    <button data-page="oracle">Current ↔ future</button><button data-page="demand">Demand</button><button data-page="classes">Size classes</button>
+    <button data-page="predictor">AUC → outcomes</button><button data-page="lease">Lease evidence</button>
+  </nav>
+  <div id="filterSummary" role="status"></div>
+  <div id="loading" role="status">Loading retained experiment catalog…</div>
+  <div id="notice"></div>
+  <section id="content"></section>
+  <details id="provenance"><summary>Evidence and field provenance</summary><div id="provenanceContent"></div></details>
+</main>
+</div>
+<footer>Logical event = verifier window × 48 + layer. Initial placement at process fill differs from the measured decode boundary. Fixed replay identity is not a natural-quality or production-speed claim.</footer>
+</body></html>

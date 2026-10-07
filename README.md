@@ -37,6 +37,13 @@ publication overlap is retained, but quantitative completion-path attribution
 remains blocked. The Phase 3 post-hoc chronology correction leaves its headline
 performance conclusion and timed measurements unchanged.
 
+The [Golden Swap Experiment Atlas](iq3s-residency-20261004T230051Z/reviews/golden-swap-experiment-atlas-20261007T215621Z/README.md)
+provides a portable interactive retrospective dashboard: startup expert sets,
+residency generations, churn, current/future-informed comparisons, predictor
+decision funnels and lease/reuse evidence from 12 completed experiment namespaces.
+Its Python server needs no GPU service or external CDN; see the review for access
+and regeneration instructions.
+
 Reports, scripts, patches, contracts, compact JSON/CSV results, small numeric
 model exports and research plots belong in Git. Build trees, model weights,
 source clones, virtual environments, large datasets, tapes, telemetry and large

@@ -1,0 +1,27 @@
+# Atlas decisions and investigation ledger
+
+This is a retrospective review, not Golden Swap Phase 5. The starting canonical commit is recorded in `provenance/starting-state.json`; original campaign results remain unchanged.
+
+| Decision / attempt | Evidence and disposition |
+|---|---|
+| Existing-evidence scope | Inspect original IQ3_S E004 corrected v6, Q4 multi-GPU/pool/residency/live-oracle/decomposition/conditional-admission and Golden Swap 0–4. The source catalog records 12 included namespaces and excluded newer/unrelated engine paths. No GPU replay is needed. |
+| Detail selection before outcomes | First retained identity per task/policy, all corpus recordings and all Phase 4 versions/attempts: 102 detailed trajectories within 335 indexed records. Slower/failed historical observations remain present; identity selection is not a performance ranking. |
+| Initial state authority | Use attested decode snapshots, explicitly represent startup generation 0, reconstruct process-fill profile separately. Preserve file-order/K24/capacity source logic and unknown profile-training provenance. |
+| Native versus oracle withdrawal | Native issue removes outgoing ownership before incoming publication. Oracle ordinary publication replaces a same-layer victim; spare donors use the wider compatible device/class pool. Parse paths separately and validate actual service ownership. |
+| Chronology lesson | Array/generation number is identity, not time. Use actual publication event and retained host milestones. Preserve the Phase 3 erratum and Phase 4 failed perturbation gate; do not reattribute latency from a vector position or acknowledgment sum. |
+| Original full derivation | 102/102 reconciled; 3,615,449 generations and 156,180,000 required lane entries. No reconstruction failures were promoted to detailed runs. |
+| Browser representation | Original normalized rows occupy more than 3 GiB. Share exact demand by content hash and retain complete service exceptions. All 4,896 layer encodings round-trip; 912 shared demand assets. This changes representation, not evidence or policy. |
+| Publication budget | A documented 256 MiB scoped gzip-evidence import preserves the requested full interactive detail. Ordinary 20 MiB content, complete-file 10 MiB gzip, CRC/UTF-8/credential rules remain active. No source was split to evade a limit. |
+| First browser pass | 38 interaction checks passed; a missing favicon produced a resource-console error. Preserve `browser-validation-v1.json`; add an inline icon and revalidate. The initial receipt is not described as console-clean. |
+| Second browser pass | 39 checks, including PNG export, passed. Preserve `browser-validation-v2.json` before the final check of added whole-model comparison and throughput panels. |
+| Final browser pass | 40 checks through the actual LAN HTTP URL, all ten pages and the added whole-model future-reference panel; no page exceptions or console errors. No inference service was used. |
+| Reference-comparison repair | Initial reference-name priority omitted three Q4 live-oracle pairs. Inspect actual mode names, add `REPLAY_ORACLE_FULL`, regenerate the review-only comparison: 44 exact-source pairs. Original campaign results are unchanged. |
+| Unknown publication | The native 256K trace retains 96 unresolved copies / 301,772,800 bytes. Preserve completion-unknown status rather than assigning them to zero-cost cancellations. |
+| Predictor funnel | Empirical saved predictions reproduce 48 weighted AUC values; 96 original metric rows retained. Candidate scan units, transaction counts, byte partitions and routed lanes stay distinct. Do not invent same-state live scorer disagreements or exclusive saved latency. |
+| Lease interpretation | Expose first-use, idle, return and censored lifetimes with exploratory thresholds. No TTL implementation, clustering claim, optimal pinning or new victim predictor. The prior rejected uniform soft retention remains negative evidence. |
+| Server lifecycle | Use a finite task-owned static server on 0.0.0.0:8765. One initial server was replaced after exact live identity validation to add source-link/MIME routing. Preserve both historical launch receipts. Leave the final server running as requested. |
+| Concurrent unrelated work | Another research task committed integer-multiplication work while the Atlas was being built. Preserve its files, commits and staging. Publish only explicit Atlas paths and the narrow archive-format/index changes. |
+| Pre-publication formatting check | Git's whitespace check flagged the generated CSV's default CRLF endings. Preserve the diagnostic and the original derived CSV externally; write LF in the review generator and normalize only this derived export. All 103 rows and values remain unchanged. No original campaign data is edited. |
+| First archive audit | File/gzip/byte/credential checks passed, but three readable JSON documents contained row-level arrays over the repository's limit. Preserve the FAIL receipt, archive all three complete originals in `evidence/analysis-detail-v1`, retain compact readable summaries and make the site/parser load the verified complete archives. Keep the row-level guard unchanged. |
+
+Final checks, server identity and publication state are recorded in `completion-audit.json`. Recommended next research is an offline selective-retention opportunity-cost investigation, not automatic Phase 5 or deployment.
