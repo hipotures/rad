@@ -25,12 +25,13 @@ manifests and existing reproduction commands retain their original addressing.
 The repository root on this host is `/srv/ai/research`.
 
 Start with the [research index](docs/research-index.md). The latest completed
-study is [Golden Swap Phase 1](iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/report.md):
-36/36 valid reserved replay requests, with the primary conclusion
-`MECHANISM_IMPROVED_NO_CONFIRMED_LATENCY_GAIN`. It learned return-risk signal
-and reduced nonlocal demand, but did not establish a consistent latency gain.
-Normal serving was left unchanged. This repository organization does not change
-those measurements or enable an experimental scheduler.
+study is [Golden Swap Phase 2](iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase2-20261007T093357Z/report.md):
+48/48 valid main and 8/8 independent-source replay requests. Bounded first-use
+control removed pre-target unused re-eviction and produced conditional timing
+gains on the inventory and Chinook tapes. Archive and WebSocket did not meet
+the frozen gain criterion; there is no confirmed cheap-history versus frozen
+logistic scorer difference. This is oracle-incoming research, not deployment.
+Normal Q4 / K24 / PCIe 0.28 / pool 100 us serving remains unchanged.
 
 Reports, scripts, patches, contracts, compact JSON/CSV results, small numeric
 model exports and research plots belong in Git. Build trees, model weights,

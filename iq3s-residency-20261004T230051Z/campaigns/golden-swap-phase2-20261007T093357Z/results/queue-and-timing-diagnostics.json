@@ -1,0 +1,3095 @@
+[
+  {
+    "label": "code-archive-block1-ORACLE_FULL",
+    "task": "code-archive",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 19872,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.6930785036119427,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 44,
+      "1": 19828
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 19828,
+    "late_target_transactions": 44,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00493,
+      "median": 0.01074,
+      "p95": 0.02991295000000002,
+      "max": 1.180486
+    },
+    "staging_ms": {
+      "min": 0.07847,
+      "median": 0.221965,
+      "p95": 1.2734089499999999,
+      "max": 3.617757
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235151,
+      "median": 0.244059,
+      "p95": 0.37373200000000023,
+      "max": 1.564535
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02332,
+      "median": 0.2800745,
+      "p95": 1.516722950000003,
+      "max": 6.141928
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block1-ORACLE_IN_HISTORY_TC",
+    "task": "code-archive",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 9682,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 4,
+    "mean_inflight_issue_to_completion": 0.30897441459702013,
+    "expired_then_later_used_transactions": 11,
+    "expired_without_observed_use_transactions": 1,
+    "status_counts": {
+      "3": 20,
+      "1": 9662
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9662,
+    "late_target_transactions": 20,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.003211,
+      "median": 0.010551,
+      "p95": 0.0212,
+      "max": 4.069295
+    },
+    "staging_ms": {
+      "min": 0.079999,
+      "median": 0.22132,
+      "p95": 0.8005964999999974,
+      "max": 5.010703
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235219,
+      "median": 0.245949,
+      "p95": 0.4140525499999986,
+      "max": 1.586704
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02236,
+      "median": 0.2606085,
+      "p95": 0.9398714999999996,
+      "max": 7.123466
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block1-ORACLE_IN_LOGISTIC_TC",
+    "task": "code-archive",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 9266,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3469550186953067,
+    "expired_then_later_used_transactions": 10,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 22,
+      "1": 9244
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9244,
+    "late_target_transactions": 22,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.003111,
+      "median": 0.01131,
+      "p95": 0.025335,
+      "max": 3.983557
+    },
+    "staging_ms": {
+      "min": 0.0795,
+      "median": 0.2278985,
+      "p95": 1.826469,
+      "max": 5.903139
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.234919,
+      "median": 0.246759,
+      "p95": 0.42512500000000003,
+      "max": 3.507688
+    },
+    "completion_to_publication_ms": {
+      "min": 0.022429,
+      "median": 0.2782685,
+      "p95": 1.3832630000000001,
+      "max": 6.626857
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block1-REPLAY_CURRENT",
+    "task": "code-archive",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block2-ORACLE_FULL",
+    "task": "code-archive",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 19845,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.6893346990731474,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 42,
+      "1": 19803
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 19803,
+    "late_target_transactions": 42,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00486,
+      "median": 0.01192,
+      "p95": 0.03172,
+      "max": 0.998016
+    },
+    "staging_ms": {
+      "min": 0.063209,
+      "median": 0.18963,
+      "p95": 1.4233436,
+      "max": 3.587567
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235239,
+      "median": 0.245199,
+      "p95": 0.35858879999999993,
+      "max": 2.200601
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02539,
+      "median": 0.290989,
+      "p95": 1.4081919999999863,
+      "max": 4.999022
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block2-ORACLE_IN_HISTORY_TC",
+    "task": "code-archive",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 9667,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 4,
+    "mean_inflight_issue_to_completion": 0.3219746467503033,
+    "expired_then_later_used_transactions": 9,
+    "expired_without_observed_use_transactions": 1,
+    "status_counts": {
+      "3": 19,
+      "1": 9648
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9648,
+    "late_target_transactions": 19,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00569,
+      "median": 0.0133,
+      "p95": 0.0307,
+      "max": 2.403962
+    },
+    "staging_ms": {
+      "min": 0.08022,
+      "median": 0.243639,
+      "p95": 0.9164947,
+      "max": 6.401107
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235559,
+      "median": 0.249259,
+      "p95": 0.40977369999999963,
+      "max": 1.738264
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02996,
+      "median": 0.282699,
+      "p95": 1.0580289999999999,
+      "max": 6.854915
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block2-ORACLE_IN_LOGISTIC_TC",
+    "task": "code-archive",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 9294,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3377385485309899,
+    "expired_then_later_used_transactions": 16,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 25,
+      "1": 9269
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9269,
+    "late_target_transactions": 25,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00504,
+      "median": 0.0168,
+      "p95": 0.03498050000000001,
+      "max": 1.452224
+    },
+    "staging_ms": {
+      "min": 0.08862,
+      "median": 0.285114,
+      "p95": 1.5112631500000018,
+      "max": 5.861479
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.236879,
+      "median": 0.25258899999999995,
+      "p95": 0.4528450000000002,
+      "max": 1.920233
+    },
+    "completion_to_publication_ms": {
+      "min": 0.03062,
+      "median": 0.3114445,
+      "p95": 1.3022561500000003,
+      "max": 5.74508
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block2-REPLAY_CURRENT",
+    "task": "code-archive",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block3-ORACLE_FULL",
+    "task": "code-archive",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 20036,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.5730143585610686,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 19,
+      "1": 20017
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 20017,
+    "late_target_transactions": 19,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00508,
+      "median": 0.01022,
+      "p95": 0.030877500000000002,
+      "max": 1.976964
+    },
+    "staging_ms": {
+      "min": 0.0742,
+      "median": 0.13058950000000003,
+      "p95": 0.7194155,
+      "max": 5.406544
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23531,
+      "median": 0.24396,
+      "p95": 0.41585625,
+      "max": 1.209787
+    },
+    "completion_to_publication_ms": {
+      "min": 0.0209,
+      "median": 0.272089,
+      "p95": 1.03072375,
+      "max": 6.210763
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block3-ORACLE_IN_HISTORY_TC",
+    "task": "code-archive",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 9676,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 4,
+    "mean_inflight_issue_to_completion": 0.3144399749637839,
+    "expired_then_later_used_transactions": 5,
+    "expired_without_observed_use_transactions": 1,
+    "status_counts": {
+      "3": 12,
+      "1": 9664
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9664,
+    "late_target_transactions": 12,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00686,
+      "median": 0.01478,
+      "p95": 0.03178475,
+      "max": 3.269111
+    },
+    "staging_ms": {
+      "min": 0.08147,
+      "median": 0.267969,
+      "p95": 0.77641025,
+      "max": 3.796939
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235779,
+      "median": 0.250559,
+      "p95": 0.41744125,
+      "max": 1.898565
+    },
+    "completion_to_publication_ms": {
+      "min": 0.0205,
+      "median": 0.2930735,
+      "p95": 1.0461695,
+      "max": 9.115194
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block3-ORACLE_IN_LOGISTIC_TC",
+    "task": "code-archive",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 9276,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3552341277822195,
+    "expired_then_later_used_transactions": 17,
+    "expired_without_observed_use_transactions": 1,
+    "status_counts": {
+      "3": 32,
+      "1": 9244
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9244,
+    "late_target_transactions": 32,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.005949,
+      "median": 0.015215,
+      "p95": 0.0334725,
+      "max": 2.283413
+    },
+    "staging_ms": {
+      "min": 0.0841,
+      "median": 0.30833350000000004,
+      "p95": 1.58172275,
+      "max": 6.057893
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.236019,
+      "median": 0.2511495,
+      "p95": 0.46198375,
+      "max": 2.499833
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02723,
+      "median": 0.3012245,
+      "p95": 1.420768,
+      "max": 11.559067
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "code-archive-block3-REPLAY_CURRENT",
+    "task": "code-archive",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "dev-math-rational-OFF1",
+    "task": "math-rational",
+    "arm": "LOGISTIC_OFF",
+    "kind": "development",
+    "ordinary_transactions": 21945,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.6505265269464735,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "1": 21922,
+      "3": 23
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 21922,
+    "late_target_transactions": 23,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00431,
+      "median": 0.01181,
+      "p95": 0.02700719999999999,
+      "max": 1.392705
+    },
+    "staging_ms": {
+      "min": 0.04474,
+      "median": 0.194589,
+      "p95": 0.6712689999999997,
+      "max": 4.500314
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.234679,
+      "median": 0.248359,
+      "p95": 0.518538,
+      "max": 6.248816
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02405,
+      "median": 0.298748,
+      "p95": 1.2277349999999994,
+      "max": 5.72117
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "dev-math-rational-OFF2",
+    "task": "math-rational",
+    "arm": "LOGISTIC_OFF",
+    "kind": "development",
+    "ordinary_transactions": 21010,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.7062079789308019,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "1": 20916,
+      "3": 94
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 20916,
+    "late_target_transactions": 94,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00326,
+      "median": 0.01369,
+      "p95": 0.030270099999999998,
+      "max": 1.910202
+    },
+    "staging_ms": {
+      "min": 0.046099,
+      "median": 0.2376995,
+      "p95": 1.0492515,
+      "max": 5.636909
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.234928,
+      "median": 0.2500635,
+      "p95": 0.5156924999999999,
+      "max": 2.71989
+    },
+    "completion_to_publication_ms": {
+      "min": 0.023011,
+      "median": 0.3278335,
+      "p95": 1.460963899999995,
+      "max": 7.015116
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "dev-math-rational-ON2",
+    "task": "math-rational",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "development",
+    "ordinary_transactions": 11628,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.446651171692426,
+    "expired_then_later_used_transactions": 22,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 47,
+      "1": 11581
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 11581,
+    "late_target_transactions": 47,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00334,
+      "median": 0.01311,
+      "p95": 0.028349,
+      "max": 2.208802
+    },
+    "staging_ms": {
+      "min": 0.07616,
+      "median": 0.2621135,
+      "p95": 1.32674535,
+      "max": 5.515349
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23547,
+      "median": 0.2486085,
+      "p95": 0.4633137,
+      "max": 2.173193
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02669,
+      "median": 0.309264,
+      "p95": 1.0731474999999997,
+      "max": 8.030479
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "dev-math-rational-ON3",
+    "task": "math-rational",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "development",
+    "ordinary_transactions": 11654,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.43053802611207387,
+    "expired_then_later_used_transactions": 9,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "1": 11635,
+      "3": 19
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 11635,
+    "late_target_transactions": 19,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00479,
+      "median": 0.01473,
+      "p95": 0.032103150000000004,
+      "max": 1.527154
+    },
+    "staging_ms": {
+      "min": 0.085269,
+      "median": 0.2830495,
+      "p95": 0.9681166500000005,
+      "max": 6.542216
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235779,
+      "median": 0.250289,
+      "p95": 0.45471950000000017,
+      "max": 2.74419
+    },
+    "completion_to_publication_ms": {
+      "min": 0.027771,
+      "median": 0.3166935,
+      "p95": 1.0452460000000001,
+      "max": 5.47166
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block1-ORACLE_FULL",
+    "task": "math-inventory",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 19991,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.6933255756330923,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 42,
+      "1": 19949
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 19949,
+    "late_target_transactions": 42,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.003071,
+      "median": 0.01305,
+      "p95": 0.035681000000000004,
+      "max": 1.418727
+    },
+    "staging_ms": {
+      "min": 0.078549,
+      "median": 0.202419,
+      "p95": 1.2423065,
+      "max": 4.292679
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.2351,
+      "median": 0.246089,
+      "p95": 0.33903550000000005,
+      "max": 1.713866
+    },
+    "completion_to_publication_ms": {
+      "min": 0.025771,
+      "median": 0.291059,
+      "p95": 1.4492005,
+      "max": 4.65777
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block1-ORACLE_IN_HISTORY_TC",
+    "task": "math-inventory",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 10649,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.37731119276573616,
+    "expired_then_later_used_transactions": 16,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 23,
+      "1": 10626
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 10626,
+    "late_target_transactions": 23,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00697,
+      "median": 0.01676,
+      "p95": 0.03509800000000001,
+      "max": 1.742965
+    },
+    "staging_ms": {
+      "min": 0.08587,
+      "median": 0.296091,
+      "p95": 0.9866436000000004,
+      "max": 4.756648
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23576,
+      "median": 0.25061,
+      "p95": 0.4517334000000002,
+      "max": 3.168172
+    },
+    "completion_to_publication_ms": {
+      "min": 0.03103,
+      "median": 0.29377,
+      "p95": 1.1120436,
+      "max": 7.484422
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block1-ORACLE_IN_LOGISTIC_TC",
+    "task": "math-inventory",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 10258,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3440409792132095,
+    "expired_then_later_used_transactions": 14,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 26,
+      "1": 10232
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 10232,
+    "late_target_transactions": 26,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00665,
+      "median": 0.01446,
+      "p95": 0.031492349999999995,
+      "max": 2.795153
+    },
+    "staging_ms": {
+      "min": 0.08457,
+      "median": 0.2475945,
+      "p95": 0.8435374999999998,
+      "max": 4.48004
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235309,
+      "median": 0.2489045,
+      "p95": 0.4149988499999996,
+      "max": 2.189406
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02459,
+      "median": 0.2836395,
+      "p95": 0.9512204999999999,
+      "max": 9.875677
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block1-REPLAY_CURRENT",
+    "task": "math-inventory",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block2-ORACLE_FULL",
+    "task": "math-inventory",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 20300,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.509118594714455,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 8,
+      "1": 20292
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 20292,
+    "late_target_transactions": 8,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.004589,
+      "median": 0.009115499999999999,
+      "p95": 0.028679049999999998,
+      "max": 2.47166
+    },
+    "staging_ms": {
+      "min": 0.06865,
+      "median": 0.11536450000000001,
+      "p95": 0.28038299999999994,
+      "max": 1.892784
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235219,
+      "median": 0.2429,
+      "p95": 0.3503860499999997,
+      "max": 0.944937
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02513,
+      "median": 0.265594,
+      "p95": 0.7197599499999999,
+      "max": 4.519394
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block2-ORACLE_IN_HISTORY_TC",
+    "task": "math-inventory",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 10646,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3449115548448616,
+    "expired_then_later_used_transactions": 5,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 8,
+      "1": 10638
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 10638,
+    "late_target_transactions": 8,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00437,
+      "median": 0.01309,
+      "p95": 0.0316525,
+      "max": 2.499132
+    },
+    "staging_ms": {
+      "min": 0.08233,
+      "median": 0.245344,
+      "p95": 0.7166705,
+      "max": 4.240955
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235679,
+      "median": 0.2488085,
+      "p95": 0.40995800000000004,
+      "max": 1.807844
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02404,
+      "median": 0.274624,
+      "p95": 0.95629175,
+      "max": 4.965053
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block2-ORACLE_IN_LOGISTIC_TC",
+    "task": "math-inventory",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 10274,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 4,
+    "mean_inflight_issue_to_completion": 0.2887326135594505,
+    "expired_then_later_used_transactions": 3,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 6,
+      "1": 10268
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 10268,
+    "late_target_transactions": 6,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.004989,
+      "median": 0.01068,
+      "p95": 0.020334150000000002,
+      "max": 1.117027
+    },
+    "staging_ms": {
+      "min": 0.08026,
+      "median": 0.18333500000000003,
+      "p95": 0.463888,
+      "max": 3.320847
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23579,
+      "median": 0.245208,
+      "p95": 0.3696163,
+      "max": 1.395934
+    },
+    "completion_to_publication_ms": {
+      "min": 0.023679,
+      "median": 0.2601785,
+      "p95": 0.7959058500000002,
+      "max": 6.699865
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block2-REPLAY_CURRENT",
+    "task": "math-inventory",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block3-ORACLE_FULL",
+    "task": "math-inventory",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 20239,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.5408851210190957,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 8,
+      "1": 20231
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 20231,
+    "late_target_transactions": 8,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00461,
+      "median": 0.01005,
+      "p95": 0.030682899999999957,
+      "max": 0.966207
+    },
+    "staging_ms": {
+      "min": 0.070491,
+      "median": 0.125109,
+      "p95": 0.3751190999999998,
+      "max": 3.24936
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.234691,
+      "median": 0.243519,
+      "p95": 0.34258879999999897,
+      "max": 1.223297
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02314,
+      "median": 0.272869,
+      "p95": 0.8745800999999962,
+      "max": 4.606968
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block3-ORACLE_IN_HISTORY_TC",
+    "task": "math-inventory",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 10645,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3202850264692478,
+    "expired_then_later_used_transactions": 12,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 18,
+      "1": 10627
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 10627,
+    "late_target_transactions": 18,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00525,
+      "median": 0.010771,
+      "p95": 0.021637199999999992,
+      "max": 0.930907
+    },
+    "staging_ms": {
+      "min": 0.080689,
+      "median": 0.19634,
+      "p95": 0.563549,
+      "max": 3.275422
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235749,
+      "median": 0.245759,
+      "p95": 0.39342279999999996,
+      "max": 1.189717
+    },
+    "completion_to_publication_ms": {
+      "min": 0.0262,
+      "median": 0.260269,
+      "p95": 0.8014151999999993,
+      "max": 5.060976
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block3-ORACLE_IN_LOGISTIC_TC",
+    "task": "math-inventory",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 10265,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.337787785989215,
+    "expired_then_later_used_transactions": 15,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 26,
+      "1": 10239
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 10239,
+    "late_target_transactions": 26,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.0058,
+      "median": 0.01368,
+      "p95": 0.031107999999999993,
+      "max": 1.447456
+    },
+    "staging_ms": {
+      "min": 0.08098,
+      "median": 0.233529,
+      "p95": 0.8520219999999994,
+      "max": 5.672895
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235749,
+      "median": 0.248511,
+      "p95": 0.4131177999999999,
+      "max": 2.118604
+    },
+    "completion_to_publication_ms": {
+      "min": 0.023839,
+      "median": 0.28067,
+      "p95": 1.0507069999999998,
+      "max": 5.278725
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "math-inventory-block3-REPLAY_CURRENT",
+    "task": "math-inventory",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block1-ORACLE_FULL",
+    "task": "mixed-chinook",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 28385,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 1.0787412395401754,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 178,
+      "1": 28207
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 28207,
+    "late_target_transactions": 178,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00458,
+      "median": 0.013129,
+      "p95": 0.031117199999999994,
+      "max": 1.668404
+    },
+    "staging_ms": {
+      "min": 0.08184,
+      "median": 0.2271,
+      "p95": 1.2520579999999994,
+      "max": 5.243113
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235009,
+      "median": 0.245839,
+      "p95": 0.38075719999999985,
+      "max": 3.240028
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02563,
+      "median": 0.359969,
+      "p95": 1.0932849999999996,
+      "max": 5.250281
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block1-ORACLE_IN_HISTORY_TC",
+    "task": "mixed-chinook",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 12182,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.5321836846869265,
+    "expired_then_later_used_transactions": 34,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 50,
+      "1": 12132
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 12132,
+    "late_target_transactions": 50,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00306,
+      "median": 0.014109,
+      "p95": 0.03044,
+      "max": 2.88757
+    },
+    "staging_ms": {
+      "min": 0.081129,
+      "median": 0.2913835,
+      "p95": 1.5316629499999983,
+      "max": 5.281932
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235659,
+      "median": 0.24859,
+      "p95": 0.47550555,
+      "max": 2.346892
+    },
+    "completion_to_publication_ms": {
+      "min": 0.025931,
+      "median": 0.338859,
+      "p95": 1.0821794999999987,
+      "max": 10.206453
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block1-ORACLE_IN_LOGISTIC_TC",
+    "task": "mixed-chinook",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 11794,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.42767061543108814,
+    "expired_then_later_used_transactions": 7,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 15,
+      "1": 11779
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 11779,
+    "late_target_transactions": 15,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00318,
+      "median": 0.0103,
+      "p95": 0.018923500000000003,
+      "max": 2.136643
+    },
+    "staging_ms": {
+      "min": 0.080139,
+      "median": 0.23333900000000002,
+      "p95": 0.5753273500000002,
+      "max": 4.483663
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235859,
+      "median": 0.24595050000000002,
+      "p95": 0.44540520000000017,
+      "max": 6.669807
+    },
+    "completion_to_publication_ms": {
+      "min": 0.022631,
+      "median": 0.2788335,
+      "p95": 0.8226835000000002,
+      "max": 6.808255
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block1-REPLAY_CURRENT",
+    "task": "mixed-chinook",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block2-ORACLE_FULL",
+    "task": "mixed-chinook",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 29806,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 1.0029602644100974,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 65,
+      "1": 29741
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 29741,
+    "late_target_transactions": 65,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00328,
+      "median": 0.0100045,
+      "p95": 0.02697,
+      "max": 1.477826
+    },
+    "staging_ms": {
+      "min": 0.07818,
+      "median": 0.1962555,
+      "p95": 0.63692875,
+      "max": 4.823706
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235119,
+      "median": 0.243619,
+      "p95": 0.376004,
+      "max": 1.554196
+    },
+    "completion_to_publication_ms": {
+      "min": 0.020719,
+      "median": 0.306389,
+      "p95": 0.87263475,
+      "max": 5.507605
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block2-ORACLE_IN_HISTORY_TC",
+    "task": "mixed-chinook",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 12239,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.4621684898588792,
+    "expired_then_later_used_transactions": 7,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 14,
+      "1": 12225
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 12225,
+    "late_target_transactions": 14,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00306,
+      "median": 0.01062,
+      "p95": 0.0247809,
+      "max": 3.259158
+    },
+    "staging_ms": {
+      "min": 0.082139,
+      "median": 0.248951,
+      "p95": 0.7315151000000002,
+      "max": 4.739052
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235569,
+      "median": 0.246139,
+      "p95": 0.4576880000000001,
+      "max": 1.578085
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02203,
+      "median": 0.292429,
+      "p95": 0.8359412000000004,
+      "max": 31.845386
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block2-ORACLE_IN_LOGISTIC_TC",
+    "task": "mixed-chinook",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 11773,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.45965743391071145,
+    "expired_then_later_used_transactions": 2,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 8,
+      "1": 11765
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 11765,
+    "late_target_transactions": 8,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00285,
+      "median": 0.01158,
+      "p95": 0.026753999999999997,
+      "max": 1.539605
+    },
+    "staging_ms": {
+      "min": 0.07883,
+      "median": 0.289149,
+      "p95": 0.7427149999999999,
+      "max": 3.775175
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235768,
+      "median": 0.247579,
+      "p95": 0.47456159999999986,
+      "max": 1.960413
+    },
+    "completion_to_publication_ms": {
+      "min": 0.023769,
+      "median": 0.299689,
+      "p95": 0.8847287999999993,
+      "max": 7.353004
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block2-REPLAY_CURRENT",
+    "task": "mixed-chinook",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block3-ORACLE_FULL",
+    "task": "mixed-chinook",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 29970,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 1.0175424445544539,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 85,
+      "1": 29885
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 29885,
+    "late_target_transactions": 85,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00338,
+      "median": 0.0101595,
+      "p95": 0.026309549999999998,
+      "max": 2.78694
+    },
+    "staging_ms": {
+      "min": 0.07781,
+      "median": 0.166635,
+      "p95": 0.7423469999999998,
+      "max": 5.548671
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235249,
+      "median": 0.24347950000000002,
+      "p95": 0.3734539999999998,
+      "max": 1.748894
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02228,
+      "median": 0.296614,
+      "p95": 0.8401959499999997,
+      "max": 5.402651
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block3-ORACLE_IN_HISTORY_TC",
+    "task": "mixed-chinook",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 12221,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.5022881630769161,
+    "expired_then_later_used_transactions": 24,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 41,
+      "1": 12180
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 12180,
+    "late_target_transactions": 41,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00296,
+      "median": 0.01426,
+      "p95": 0.030991,
+      "max": 1.717175
+    },
+    "staging_ms": {
+      "min": 0.08192,
+      "median": 0.295259,
+      "p95": 1.077286,
+      "max": 6.665248
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23603,
+      "median": 0.249449,
+      "p95": 0.477978,
+      "max": 2.410382
+    },
+    "completion_to_publication_ms": {
+      "min": 0.022449,
+      "median": 0.32991,
+      "p95": 1.007828,
+      "max": 5.156282
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block3-ORACLE_IN_LOGISTIC_TC",
+    "task": "mixed-chinook",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 11773,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.43646847201040256,
+    "expired_then_later_used_transactions": 10,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 20,
+      "1": 11753
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 11753,
+    "late_target_transactions": 20,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00303,
+      "median": 0.010591,
+      "p95": 0.023373999999999995,
+      "max": 1.767163
+    },
+    "staging_ms": {
+      "min": 0.08008,
+      "median": 0.2412,
+      "p95": 0.6511275999999999,
+      "max": 4.778253
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23529,
+      "median": 0.246459,
+      "p95": 0.45819659999999984,
+      "max": 1.651025
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02312,
+      "median": 0.294928,
+      "p95": 0.8616009999999996,
+      "max": 7.530204
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "mixed-chinook-block3-REPLAY_CURRENT",
+    "task": "mixed-chinook",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "smoke-math-rational-LOGISTIC_TC",
+    "task": "math-rational",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": null,
+    "ordinary_transactions": 11625,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.4594082650625147,
+    "expired_then_later_used_transactions": 19,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 45,
+      "1": 11580
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 11580,
+    "late_target_transactions": 45,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00506,
+      "median": 0.01506,
+      "p95": 0.0321,
+      "max": 2.143733
+    },
+    "staging_ms": {
+      "min": 0.07949,
+      "median": 0.287009,
+      "p95": 1.5787901999999987,
+      "max": 7.496312
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23558,
+      "median": 0.249539,
+      "p95": 0.4542641999999996,
+      "max": 4.473252
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02786,
+      "median": 0.326059,
+      "p95": 1.1798637999999986,
+      "max": 13.422988
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-json-rfc8259-block1-ORACLE_FULL",
+    "task": "text-json-rfc8259",
+    "arm": "ORACLE_FULL",
+    "kind": "independent",
+    "ordinary_transactions": 25679,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.526971187583949,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 6,
+      "1": 25673
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 25673,
+    "late_target_transactions": 6,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00331,
+      "median": 0.01047,
+      "p95": 0.0332101,
+      "max": 1.048657
+    },
+    "staging_ms": {
+      "min": 0.07032,
+      "median": 0.125889,
+      "p95": 0.3822191,
+      "max": 2.897911
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235149,
+      "median": 0.243799,
+      "p95": 0.33750009999999997,
+      "max": 1.610125
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02095,
+      "median": 0.28601,
+      "p95": 0.8117728999999985,
+      "max": 4.776894
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-json-rfc8259-block1-ORACLE_IN_HISTORY_TC",
+    "task": "text-json-rfc8259",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "independent",
+    "ordinary_transactions": 11415,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3229261859775234,
+    "expired_then_later_used_transactions": 11,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 15,
+      "1": 11400
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 11400,
+    "late_target_transactions": 15,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00363,
+      "median": 0.01672,
+      "p95": 0.035565999999999987,
+      "max": 1.950463
+    },
+    "staging_ms": {
+      "min": 0.084229,
+      "median": 0.304249,
+      "p95": 1.0352529999999989,
+      "max": 4.643315
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.236249,
+      "median": 0.25147,
+      "p95": 0.4145762999999995,
+      "max": 2.776059
+    },
+    "completion_to_publication_ms": {
+      "min": 0.03207,
+      "median": 0.310468,
+      "p95": 1.0981976999999992,
+      "max": 6.05242
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-json-rfc8259-block1-ORACLE_IN_LOGISTIC_TC",
+    "task": "text-json-rfc8259",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "independent",
+    "ordinary_transactions": 10956,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 4,
+    "mean_inflight_issue_to_completion": 0.24606440276195707,
+    "expired_then_later_used_transactions": 1,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 1,
+      "1": 10955
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 10955,
+    "late_target_transactions": 1,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00497,
+      "median": 0.01032,
+      "p95": 0.01792,
+      "max": 1.536914
+    },
+    "staging_ms": {
+      "min": 0.07837,
+      "median": 0.177729,
+      "p95": 0.509329,
+      "max": 2.549741
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23548,
+      "median": 0.244889,
+      "p95": 0.3444385,
+      "max": 1.337036
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02476,
+      "median": 0.26721,
+      "p95": 0.77124475,
+      "max": 4.779985
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-json-rfc8259-block1-REPLAY_CURRENT",
+    "task": "text-json-rfc8259",
+    "arm": "REPLAY_CURRENT",
+    "kind": "independent",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-json-rfc8259-block2-ORACLE_FULL",
+    "task": "text-json-rfc8259",
+    "arm": "ORACLE_FULL",
+    "kind": "independent",
+    "ordinary_transactions": 25356,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.6869235411801641,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 21,
+      "1": 25335
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 25335,
+    "late_target_transactions": 21,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00462,
+      "median": 0.01213,
+      "p95": 0.03375325,
+      "max": 0.979677
+    },
+    "staging_ms": {
+      "min": 0.07608,
+      "median": 0.2440745,
+      "p95": 0.91604275,
+      "max": 4.147678
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235049,
+      "median": 0.24400850000000002,
+      "p95": 0.335917,
+      "max": 0.926757
+    },
+    "completion_to_publication_ms": {
+      "min": 0.0269,
+      "median": 0.28469449999999996,
+      "p95": 1.15991725,
+      "max": 7.888556
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-json-rfc8259-block2-ORACLE_IN_HISTORY_TC",
+    "task": "text-json-rfc8259",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "independent",
+    "ordinary_transactions": 11411,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3333312646633292,
+    "expired_then_later_used_transactions": 9,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 18,
+      "1": 11393
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 11393,
+    "late_target_transactions": 18,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.0033,
+      "median": 0.01376,
+      "p95": 0.03147,
+      "max": 1.070917
+    },
+    "staging_ms": {
+      "min": 0.07851,
+      "median": 0.330668,
+      "p95": 1.043552,
+      "max": 6.020992
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23491,
+      "median": 0.24939,
+      "p95": 0.40008900000000003,
+      "max": 2.128854
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02853,
+      "median": 0.287528,
+      "p95": 1.1250520000000002,
+      "max": 8.951852
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-json-rfc8259-block2-ORACLE_IN_LOGISTIC_TC",
+    "task": "text-json-rfc8259",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "independent",
+    "ordinary_transactions": 10912,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3114155460623205,
+    "expired_then_later_used_transactions": 16,
+    "expired_without_observed_use_transactions": 1,
+    "status_counts": {
+      "3": 28,
+      "1": 10884
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 10884,
+    "late_target_transactions": 28,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00579,
+      "median": 0.01707,
+      "p95": 0.03574654999999993,
+      "max": 2.184883
+    },
+    "staging_ms": {
+      "min": 0.090651,
+      "median": 0.298394,
+      "p95": 1.3470514999999976,
+      "max": 5.842481
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.236539,
+      "median": 0.252219,
+      "p95": 0.41812149999999976,
+      "max": 1.544086
+    },
+    "completion_to_publication_ms": {
+      "min": 0.036831,
+      "median": 0.31685399999999997,
+      "p95": 1.1609089999999986,
+      "max": 9.517422
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-json-rfc8259-block2-REPLAY_CURRENT",
+    "task": "text-json-rfc8259",
+    "arm": "REPLAY_CURRENT",
+    "kind": "independent",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block1-ORACLE_FULL",
+    "task": "text-websocket",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 18376,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.790289706196944,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 76,
+      "1": 18300
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 18300,
+    "late_target_transactions": 76,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.005,
+      "median": 0.01205,
+      "p95": 0.032802250000000005,
+      "max": 1.074067
+    },
+    "staging_ms": {
+      "min": 0.074139,
+      "median": 0.196199,
+      "p95": 1.668629,
+      "max": 4.302976
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.234968,
+      "median": 0.2447085,
+      "p95": 0.34342300000000003,
+      "max": 1.555654
+    },
+    "completion_to_publication_ms": {
+      "min": 0.023169,
+      "median": 0.303959,
+      "p95": 1.34629975,
+      "max": 6.058278
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block1-ORACLE_IN_HISTORY_TC",
+    "task": "text-websocket",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 9611,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.47088190109739386,
+    "expired_then_later_used_transactions": 25,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 48,
+      "1": 9563
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9563,
+    "late_target_transactions": 48,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.005011,
+      "median": 0.0164,
+      "p95": 0.034635,
+      "max": 3.019709
+    },
+    "staging_ms": {
+      "min": 0.0853,
+      "median": 0.298999,
+      "p95": 2.2854915,
+      "max": 6.768986
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.236959,
+      "median": 0.252248,
+      "p95": 0.4361035,
+      "max": 2.867639
+    },
+    "completion_to_publication_ms": {
+      "min": 0.03669,
+      "median": 0.324139,
+      "p95": 1.3052305,
+      "max": 8.849688
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block1-ORACLE_IN_LOGISTIC_TC",
+    "task": "text-websocket",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 9382,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.388091354636167,
+    "expired_then_later_used_transactions": 15,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 25,
+      "1": 9357
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9357,
+    "late_target_transactions": 25,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00643,
+      "median": 0.01648,
+      "p95": 0.034478449999999966,
+      "max": 1.416258
+    },
+    "staging_ms": {
+      "min": 0.08398,
+      "median": 0.2980745,
+      "p95": 1.3493990999999976,
+      "max": 6.936393
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23546,
+      "median": 0.249839,
+      "p95": 0.4211464999999999,
+      "max": 1.664505
+    },
+    "completion_to_publication_ms": {
+      "min": 0.030251,
+      "median": 0.3243595,
+      "p95": 1.1495749999999993,
+      "max": 6.134986
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block1-REPLAY_CURRENT",
+    "task": "text-websocket",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block2-ORACLE_FULL",
+    "task": "text-websocket",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 18483,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.7558917409601443,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 59,
+      "1": 18424
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 18424,
+    "late_target_transactions": 59,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00473,
+      "median": 0.01197,
+      "p95": 0.033898899999999975,
+      "max": 0.964366
+    },
+    "staging_ms": {
+      "min": 0.07522,
+      "median": 0.202239,
+      "p95": 1.4541329999999968,
+      "max": 4.772813
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23559,
+      "median": 0.245239,
+      "p95": 0.33166709999999955,
+      "max": 1.756434
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02096,
+      "median": 0.29927,
+      "p95": 1.1454839999999895,
+      "max": 5.081322
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block2-ORACLE_IN_HISTORY_TC",
+    "task": "text-websocket",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 9642,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.3609153307008649,
+    "expired_then_later_used_transactions": 11,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "1": 9617,
+      "3": 25
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9617,
+    "late_target_transactions": 25,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.005111,
+      "median": 0.010409,
+      "p95": 0.02158854999999999,
+      "max": 0.986237
+    },
+    "staging_ms": {
+      "min": 0.08072,
+      "median": 0.198459,
+      "p95": 1.2300474999999993,
+      "max": 3.964066
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235848,
+      "median": 0.24579499999999999,
+      "p95": 0.3857430999999999,
+      "max": 1.362234
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02458,
+      "median": 0.279429,
+      "p95": 0.8698239999999985,
+      "max": 5.328151
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block2-ORACLE_IN_LOGISTIC_TC",
+    "task": "text-websocket",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 9388,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 4,
+    "mean_inflight_issue_to_completion": 0.34675400419537866,
+    "expired_then_later_used_transactions": 7,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 12,
+      "1": 9376
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9376,
+    "late_target_transactions": 12,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00627,
+      "median": 0.015,
+      "p95": 0.03178585,
+      "max": 2.035073
+    },
+    "staging_ms": {
+      "min": 0.08347,
+      "median": 0.234009,
+      "p95": 0.8163228499999997,
+      "max": 3.731326
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.236019,
+      "median": 0.249519,
+      "p95": 0.39909884999999923,
+      "max": 2.151572
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02868,
+      "median": 0.3003035,
+      "p95": 0.9603589999999995,
+      "max": 5.745259
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block2-REPLAY_CURRENT",
+    "task": "text-websocket",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block3-ORACLE_FULL",
+    "task": "text-websocket",
+    "arm": "ORACLE_FULL",
+    "kind": "main",
+    "ordinary_transactions": 18568,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.6683023295397057,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 26,
+      "1": 18542
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 18542,
+    "late_target_transactions": 26,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00462,
+      "median": 0.012011,
+      "p95": 0.03235299999999996,
+      "max": 1.221885
+    },
+    "staging_ms": {
+      "min": 0.07935,
+      "median": 0.186499,
+      "p95": 0.9865333499999992,
+      "max": 4.896283
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235409,
+      "median": 0.24497950000000002,
+      "p95": 0.3391384999999999,
+      "max": 1.192767
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02432,
+      "median": 0.29915349999999996,
+      "p95": 0.949167999999997,
+      "max": 5.514801
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block3-ORACLE_IN_HISTORY_TC",
+    "task": "text-websocket",
+    "arm": "ORACLE_IN_HISTORY_TC",
+    "kind": "main",
+    "ordinary_transactions": 9639,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 5,
+    "mean_inflight_issue_to_completion": 0.39930481960653347,
+    "expired_then_later_used_transactions": 14,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "3": 26,
+      "1": 9613
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9613,
+    "late_target_transactions": 26,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.00544,
+      "median": 0.01425,
+      "p95": 0.030892900000000004,
+      "max": 1.533236
+    },
+    "staging_ms": {
+      "min": 0.08304,
+      "median": 0.25649,
+      "p95": 1.457892900000001,
+      "max": 4.236078
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.235779,
+      "median": 0.249439,
+      "p95": 0.4037351,
+      "max": 1.783155
+    },
+    "completion_to_publication_ms": {
+      "min": 0.02692,
+      "median": 0.306988,
+      "p95": 1.0732192,
+      "max": 5.124066
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block3-ORACLE_IN_LOGISTIC_TC",
+    "task": "text-websocket",
+    "arm": "ORACLE_IN_LOGISTIC_TC",
+    "kind": "main",
+    "ordinary_transactions": 9409,
+    "sampled_D2H_readback_bytes_derived": 34611200,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 4,
+    "mean_inflight_issue_to_completion": 0.3008875317804425,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {
+      "1": 9409
+    },
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 9409,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": {
+      "min": 0.003409,
+      "median": 0.01062,
+      "p95": 0.0229302,
+      "max": 0.613558
+    },
+    "staging_ms": {
+      "min": 0.07768,
+      "median": 0.190759,
+      "p95": 0.49709360000000014,
+      "max": 2.699161
+    },
+    "copy_with_host_wait_ms": {
+      "min": 0.23565,
+      "median": 0.245629,
+      "p95": 0.35913700000000004,
+      "max": 1.298146
+    },
+    "completion_to_publication_ms": {
+      "min": 0.022949,
+      "median": 0.27785,
+      "p95": 0.806194,
+      "max": 4.725333
+    },
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  },
+  {
+    "label": "text-websocket-block3-REPLAY_CURRENT",
+    "task": "text-websocket",
+    "arm": "REPLAY_CURRENT",
+    "kind": "main",
+    "ordinary_transactions": 0,
+    "sampled_D2H_readback_bytes_derived": 0,
+    "readback_derivation": "First two completed ordinary copies per active worker/class, same fresh server; native warmup is untracked. Separate from ordinary H2D/restoration bytes.",
+    "ordinary_pending_after_drain": 0,
+    "ordinary_peak_copy_inflight": 0,
+    "mean_inflight_issue_to_completion": 0,
+    "expired_then_later_used_transactions": 0,
+    "expired_without_observed_use_transactions": 0,
+    "status_counts": {},
+    "status_meanings": {
+      "0": "issued incomplete",
+      "1": "published by target",
+      "2": "redundant retired",
+      "3": "published late",
+      "4": "completed final drain without publication, not pending",
+      "5": "risk recheck retired",
+      "8": "late intent safely retired",
+      "9": "protection capacity retirement"
+    },
+    "ready_by_target_transactions": 0,
+    "late_target_transactions": 0,
+    "unpublished_completed_bytes": 0,
+    "issue_to_stage_ms": null,
+    "staging_ms": null,
+    "copy_with_host_wait_ms": null,
+    "completion_to_publication_ms": null,
+    "scope": "Ordinary oracle proposals only. Issue-to-completion queue includes staging and host waits; no DMA-only or exclusive stall claim. Native unpublished completion has no independent marker."
+  }
+]

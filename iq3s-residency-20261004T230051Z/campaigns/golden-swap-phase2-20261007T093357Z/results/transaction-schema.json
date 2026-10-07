@@ -1,0 +1,61 @@
+{
+  "identity": [
+    "request namespace",
+    "device",
+    "layer",
+    "expert",
+    "admission generation",
+    "physical slot/class"
+  ],
+  "schema_endianness": "little endian",
+  "ordinary_admission_record_bytes": 112,
+  "lifecycle_record_bytes": 32,
+  "lifecycle_fields": {
+    "generation": "signed int32",
+    "first_use": "signed int32",
+    "last_use": "signed int32",
+    "distinct_uses": "signed int32",
+    "evicted_at": "signed int32",
+    "released_at": "signed int32",
+    "expiry": "signed int32",
+    "reason": "signed int32"
+  },
+  "negative_event": "not observed/not released",
+  "event_unit": "one main routed-layer invocation; 48 per verifier window",
+  "service_unit": "token-expert lane entries; distinct uses count one layer invocation even with multiple lanes",
+  "terminal_partition": [
+    "completed_unpublished",
+    "published_used_before_eviction",
+    "published_evicted_without_use",
+    "published_no_use_resident_at_end"
+  ],
+  "partition_scope": "Only completed ordinary promotions, per run. Incomplete, mandatory restoration and sampled D2H readback are separate. Used-before-eviction includes used survivors. Native completion is certified by publication; unpublished native completion is unknown.",
+  "counter_authority": "Service journal actual slot/path, chronological publication and withdrawal, then compare frozen runtime use counter and lifecycle observations. Never match only expert ID.",
+  "lease_definition": "Actual first local plan service, including opportunistic pre-target use, releases at a later verifier milestone after ordered reader completion. Host event crossing target alone does not satisfy use. Target+48 expires bounded intent.",
+  "protection_bound": "16 per device/class inside ordinary capacity; five existing charged spare slots. NO_SWAP retains required CPU/mapped computation.",
+  "source": "include/strata/research/q4_oracle.hpp at c12a0b11f02ae7b635dc3c6a15ff14f37319ce22",
+  "native_unknowns": [
+    "intended target",
+    "staging bytes/time",
+    "independent unpublished completion marker",
+    "exclusive full native adaptation planner time"
+  ],
+  "oracle_unknowns": [
+    "DMA-only interval",
+    "exclusive CPU gain per entry",
+    "exact preventable admission counterfactual",
+    "MTP residency subdivisions"
+  ],
+  "tail_censoring": "Generation-specific prefix-surviving unused residents followed through the observed continuous tail; no infinite-future claim.",
+  "cheap_history_mapping": "Frozen Phase1 native proxy: rate=max(0, causally updated native heat)*0.089168735; p_H=1-exp(-rate*H), H in {1,4,16,64} main windows. No fresh calibration on regression/new-source outcomes.",
+  "victim_preference": "Maximize -(p1+0.5*p4+0.25*p16+0.125*p64), after current-window/ownership/lifecycle exclusions.",
+  "guard_units": {
+    "incoming_frontier": "E64 routed-layer invocations, fixed candidate order",
+    "incoming_utility_window": "768 routed-layer invocations supplied by existing incoming oracle",
+    "copy_entry_equivalent": "(unique expert bytes/25e9 + unique expert bytes/13.2e9)/160e-6; assumed benefit per lane entry",
+    "victim_cost": "p16*max(1,16*causal_rate), counted once",
+    "near_target_risk": "p1 for <=1 window, otherwise interpolate toward p4 over the next3 windows",
+    "calibration_matching": "Both use declared return-risk mapping and preserved native/logistic checkpoint calibration. Identical numeric thresholds alone are not claimed to guarantee identical calibration."
+  },
+  "selection_linkage_limit": "Issued proposals retain trigger/target and exact spare ownership. Rejected pre-issue proposals have aggregate reason counters, not full per-proposal records. Initial suggested victim before publication re-selection is not individually journaled; actual publication victim is authoritative."
+}

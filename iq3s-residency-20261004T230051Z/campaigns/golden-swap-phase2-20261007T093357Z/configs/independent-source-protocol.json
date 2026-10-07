@@ -1,0 +1,28 @@
+{
+  "frozen_utc": "2026-10-07T09:44:42.951388+00:00",
+  "task_id": "text-json-rfc8259",
+  "source_group": "RFC8259-JSON-format",
+  "source_url": "https://www.rfc-editor.org/rfc/rfc8259.txt",
+  "source_title": "The JavaScript Object Notation (JSON) Data Interchange Format",
+  "source_date": "December 2017",
+  "role": "Previously unconsumed independent-source validation; no fit or tuning",
+  "source_selection": "RFC8259 sections2-9 (format, values, strings, numbers, objects, arrays, encoding); preserve full acquired RFC with license notice",
+  "instruction": "Write a detailed implementation audit and conformance-test plan for a JSON parser and serializer using the supplied standard. Cover each grammar rule and interoperability requirement, Unicode and numeric edge cases, duplicate names, ordering, resource limits, and security. Give concrete valid and invalid JSON examples and expected behavior, distinguish required behavior from implementation choices, and organize at least 30 substantive test cases with explanations. Ground the analysis in the source; no tools or external answer material are available.",
+  "main_output_target": 2048,
+  "continuous_total_output_cap": 2816,
+  "requested_guard_tail": 768,
+  "context_limit": 32768,
+  "max_request_wall_s": 240,
+  "capture": "One natural greedy native-policy request, no boundary instruction or concatenation. Natural EOS accepted; actual observed tail declared.",
+  "main_boundary": "Last complete verifier window with emitted output <=2048; report actual boundary and any final verifier-state suffix",
+  "replay": "All selected modes execute full continuous tape; report main prefix observation-span timer separately from whole tape native decode and completion-inclusive request wall. Drain/restoration/flush charged to whole wall.",
+  "modes": [
+    "REPLAY_CURRENT",
+    "ORACLE_FULL",
+    "ORACLE_IN_HISTORY_TC",
+    "ORACLE_IN_LOGISTIC_TC"
+  ],
+  "blocks": 1,
+  "optional_second_block": "Only if reporting reserve secure; no retune based on first result",
+  "prefix_timer": "CPU monotonic span from first tape observation begin through last main window observation end; includes interwindow main/MTP/coordination but excludes prefill and final tail/drain. Not identical to native timer boundary."
+}

@@ -1,0 +1,96 @@
+{
+  "upstream_strata": "https://github.com/Niko1221/Strata",
+  "obtainable_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+  "experimental_source": {
+    "source": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/repos/runtime",
+    "build": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/runtime",
+    "exe": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/runtime/strata",
+    "source_sha": "c12a0b11f02ae7b635dc3c6a15ff14f37319ce22",
+    "binary_sha256": "46b53020499a8d9b859a59bcf723ab32b65f42b32ff5c6c4639dabf5be6d6aff",
+    "phase1_source": "20e1e10f6848f11ec5580fc5ec7f97ea5d4e520b",
+    "base_configs_sha256": "2dd93120d9d1c8202304e88c4c6586a8f94692210c1def5bad71fda7a9ffc5f6",
+    "checkpoint_sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e"
+  },
+  "cumulative_patch": "patches/cumulative-from-original.diff",
+  "source_recovery_test": "tests/source-recovery.json",
+  "ggml": {
+    "state": "PASS",
+    "upstream": "https://github.com/ggml-org/llama.cpp",
+    "base_sha": "3cf03257f219afbe7334045ff7c6a06ac68c627d",
+    "archive_sha256": "fbd160d892ea5aab531dff303c2f281fbcd496ba61ed858004fa913e546a9cb4",
+    "archive_bytes": 37500947,
+    "local_source": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325",
+    "downloadable": true,
+    "source_files": 3608,
+    "changed_paths": [],
+    "dependency_patch": "None required: every acquired source file matches the official pinned archive.",
+    "tested": "Fetched immutable commit archive with gh and compared every file SHA256 against compiled dependency snapshot, after all replay timing.",
+    "archive_path": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/inputs/ggml-base.tar.gz"
+  },
+  "exact_build_commands": [
+    [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "-S",
+      "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/repos/runtime",
+      "-B",
+      "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/runtime",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DSTRATA_ENABLE_CUDA=ON",
+      "-DCMAKE_CUDA_ARCHITECTURES=89",
+      "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325",
+      "-DSTRATA_BUILD_TESTS=ON"
+    ],
+    [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "--build",
+      "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/runtime",
+      "-j",
+      "8"
+    ]
+  ],
+  "toolchain": {
+    "python": "3.14.4",
+    "gcc": "15.2.0 Ubuntu15.2.0-16ubuntu1",
+    "CUDA": "13.4 V13.4.92",
+    "cmake": "4.3.0",
+    "ninja": "1.13.0.git.kitware.jobserver-pipe-1",
+    "CUDA_architecture": "89"
+  },
+  "Python_packages": {
+    "numpy": "2.5.3",
+    "psutil": "7.2.2",
+    "cmake": "4.3.0",
+    "ninja": "1.13.0"
+  },
+  "tape_checksum_helper": {
+    "source": "code/fnv64.c",
+    "command": [
+      "gcc",
+      "-O3",
+      "-shared",
+      "-fPIC",
+      "code/fnv64.c",
+      "-o",
+      "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/libfnv64.so"
+    ],
+    "parity": "tests/tape-validator-parity.json"
+  },
+  "offline_compile": [
+    "g++",
+    "-O3",
+    "-std=c++20",
+    "-pthread",
+    "-I/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/repos/runtime/include",
+    "-I/usr/local/cuda/include",
+    "code/offline.cpp",
+    "-L/usr/local/cuda/lib64",
+    "-Wl,-rpath,/usr/local/cuda/lib64",
+    "-lcudart",
+    "-o",
+    "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/offline"
+  ],
+  "host_profile": "Two RTX4090; same frozen Q4/K24/PCIe0.28/pool100us. CUDA driver/compiler version and native source remain fixed; rebuilt executables require a new identity/safety check."
+}

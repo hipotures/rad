@@ -1,0 +1,34 @@
+{
+  "key": [
+    "request",
+    "device",
+    "layer",
+    "expert",
+    "admission_generation"
+  ],
+  "device": "layer//24; source-attested K24",
+  "slot_identity": "physical slot within device and exact byte class",
+  "ordinary_event_dtype_bytes": 112,
+  "lifecycle_dtype_bytes": 32,
+  "generation": "ordinary-event index; repeated experts receive distinct indices",
+  "time_units": {
+    "logical": "main_window*48+layer",
+    "physical": "CPU monotonic nanoseconds including CUDA completion wait; not GPU DMA-only"
+  },
+  "terminal_partition": [
+    "completed_unpublished",
+    "published_used_before_eviction",
+    "published_evicted_without_use",
+    "published_no_use_resident_at_end"
+  ],
+  "separate": [
+    "incomplete copies",
+    "mandatory restoration",
+    "initial donor withdrawal",
+    "sampled D2H readback",
+    "lane entries versus distinct layer-batch uses"
+  ],
+  "first_use_release": "Actual local service observed from generation+slot plan, then later verifier milestone; opportunistic use may satisfy first-use lease; target+48 expires",
+  "timers": "feature/model nested in selection; selection/enumeration/publication nested in oracle planner; enumeration contains scoring; history update outside oracle planner; host plan interval overlaps planner and other native bookkeeping; native adaptation selection remains unassigned",
+  "no_use": "No observed routed service in this generation; finite-end survivor is censored, not proof of waste"
+}
