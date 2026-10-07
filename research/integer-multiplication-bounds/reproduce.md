@@ -51,6 +51,8 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 "$MATH_PY" research/integer-multiplicat
 python3 -B research/integer-multiplication-bounds/code/downstream_gaussian.py --upstream "$REF" --output "$OUT"
 python3 -B research/integer-multiplication-bounds/code/downstream_blocked_gaussian.py --output "$OUT"
 python3 -B research/integer-multiplication-bounds/code/downstream_parameter_optimum.py --upstream "$REF" --roles 509194 494250 487650 --output "$OUT"
+python3 -B research/integer-multiplication-bounds/code/downstream_banded_inverse.py --upstream "$REF" --output "$OUT"
+python3 -B research/integer-multiplication-bounds/code/downstream_lu_assembly.py --upstream "$REF" --roles 509194 494250 487650 486200 --output "$OUT"
 ```
 
 The controller certificate exercises the complete h50 scalar/frame graph and
@@ -60,6 +62,31 @@ The blocked checker has true Gaussian interval fixtures; its complexity proof
 uses the unconditional 2021 integer multiplier, rather than timing Python's
 integer implementation. Independent review commands are in the linked reports.
 The strongest witness remains conditional on retained upstream interfaces.
+
+For the accepted unequal tensor factors, choose fresh scan/composition
+locations (the scan generates full exact circuit/frame checks):
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 "$MATH_PY" research/integer-multiplication-bounds/code/asymmetric_ground_scan.py --reference "$REF" --h 40 42 44 46 48 52 54 56 58 60 --workers 8 --seconds 1800 --run-dir "$RAD_WORK_ROOT/derived/fresh-ground-scan"
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 "$MATH_PY" research/integer-multiplication-bounds/code/asymmetric_motif.py --upstream "$REF" --ground-results "$RAD_WORK_ROOT/derived/fresh-ground-scan/summary.json" --output "$OUT"
+python3 -B research/integer-multiplication-bounds/code/review_asymmetric_motif.py --certificate "$OUT" --output "$RAD_WORK_ROOT/derived/fresh-asymmetric-review.json"
+```
+
+The scan is bounded by this campaign's immutable deadline. A later
+independent reproduction must explicitly adapt that deadline in a separate
+recorded source revision; it must not silently resume this campaign with a
+fresh ten-hour budget. The composition exercises unequal 6/8 and 8/6
+dirty-scratch exchanges and exact scoring of all 121 declared pairs.
+The independent command's complete arguments are recorded in its protocol.
+The `h50,R486200` uniform reference requires the separately retained full
+envelope certificate and review.
+
+Thread variables cap each process, while `--workers 8` runs eight independent
+single-thread circuit instances. Exact Python fractions, graph traversal and
+max flow do not become sixteen-core computations through a BLAS setting.
+The campaign computational ceiling was raised from twelve to fourteen CPUs
+after measurements and user steering; remaining cores provide operating
+headroom. Matrix workloads can use a separately declared allocation.
 
 ## Optional GPU discovery
 
@@ -77,6 +104,17 @@ campaign deadline. For future independent runs beyond this campaign, create a
 new run/clock in a separate recorded adaptation. Numerical convergence does
 not replace exact reconstruction or finite-network/frame/rank transfer.
 The h24 discovery probes did not converge; they imply no nonexistence bound.
+
+The new pair-feature branch has an independently checked affine projection
+and a perturbed known rank-eight fixture. Its bounded search is reproduced
+with fresh directories, for example:
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 "$RAD_WORK_ROOT/envs/gpu/bin/python" research/integer-multiplication-bounds/code/pair_feature_search.py --h 9 --rank 8 --device 0 --seed 109 --noise .05 --iterations 2000 --seconds 180 --output-dir "$RAD_WORK_ROOT/derived/fresh-pair-control"
+```
+
+The h9 fixture calibrates numerical recovery only; its degenerate ambient
+form is unsuitable for the retained finite motif transfer.
 
 ## Evidence recovery and resume
 

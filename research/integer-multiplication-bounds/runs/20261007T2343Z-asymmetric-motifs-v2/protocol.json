@@ -1,0 +1,25 @@
+{
+  "campaign_id": "20261007T222521Z",
+  "start_utc": "2026-10-07T23:35:59.490329+00:00",
+  "question": "Metadata correction replay of the same predeclared asymmetric experiment",
+  "upstream_revision": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "python": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/math/bin/python",
+  "source_sha256": {
+    "asymmetric_motif.py": "db251976f9b53406223a5ca4719bd66d3c6e1ee40e096f22284f1f5300ad6cf2",
+    "review_asymmetric_motif.py": "15d6511b92ac6a3a3c1873106e3fc165db0590330898690db880e6b91e016552"
+  },
+  "output": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/20261007T2343Z-asymmetric-motifs-v2/certificate.json",
+  "small_seeds": [
+    1,
+    109
+  ],
+  "resource_policy": "One CPU process; BLAS and OMP each one thread; 14 CPU / 96 GiB campaign ceiling",
+  "status": "PASS; same best counts and kappa; fresh compatible independent arithmetic audit passes",
+  "completed_utc": "2026-10-07T23:48:36.616649+00:00",
+  "result_sha256": "eaf2e4d8cd45295d2d207106470513f73a0f48e3701cec3f29108cfcdc97e7ae",
+  "review": "reports/review-asymmetric-motifs.md",
+  "recorded_utc": "2026-10-07T23:48:36.616649+00:00",
+  "previous_run": "20261007T2337Z-asymmetric-motifs",
+  "change": "Rename joined invocation banks, preserving actual physical W/L/D/s counts; compatible reviewer retains original field fallback",
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 <math-python> -B code/asymmetric_motif.py --upstream <pinned-reference> --ground-results <original-ground-summary> --output <fresh-output>"
+}

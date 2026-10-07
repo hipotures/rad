@@ -14,10 +14,11 @@ The ten-hour campaign `20261007T222521Z` began at
 passes all 85 tests and regenerates its certificates and patches unchanged.
 
 The current strongest verified composition supports the strict conditional
-saving `4775622313539/10^30`, more than `2.752958831579 * 2^-59`.
-It combines aligned pairing, increasing-frame retained controllers (487,650
-side roles), weighted Gaussian powers, and blocked local convolution. Exact
-parameter tuning follows those substantive changes. The complete upstream
+saving `6412736146231/10^30`, more than `3.696690703179 * 2^-59`.
+It combines positive support envelopes and retained controllers, unequal
+52/48/52 bit tensor factors, and a reused banded Gaussian inverse with
+reviewed precision, guard and prime-interval proofs. Exact parameter
+tuning follows those substantive changes. The complete upstream
 theorem remains assumed, and the enormous eventual cutoff is an asymptotic
 limitation. Research continues through the immutable deadline.
 
@@ -29,7 +30,12 @@ limitation. Research continues through the immutable deadline.
 - [Controller compiler and independent review](reports/frame-reuse.md)
 - [Weighted Gaussian estimate](reports/downstream-weighted-gaussian.md)
 - [Blocked convolution and review](reports/downstream-blocked-gaussian.md)
-- [Strongest strict parameters and scoped ceiling](reports/downstream-parameter-optimum.md)
+- [Blocked Gaussian parameters and scoped ceiling](reports/downstream-parameter-optimum.md)
+- [Current composed result and unequal-factor proof](reports/asymmetric-motifs.md)
+- [Reusable Gaussian inverse and independent review](reports/downstream-reusable-banded-inverse.md)
+- [Rational support-envelope review](reports/review-rational-envelopes.md)
+- [Scoped negative frame searches](reports/finite-target-frames.md)
+- [Calibrated pair-feature discovery](reports/pair-feature-discovery.md)
 - [Reproduction and recovery](reproduce.md)
 
 Durable authored code, compact evidence and reports live here. Downloaded

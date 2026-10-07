@@ -1,0 +1,27 @@
+{
+  "campaign_id": "20261007T222521Z",
+  "campaign_start": "2026-10-07T22:25:21Z",
+  "campaign_end": "2026-10-08T08:25:21Z",
+  "recorded_at_utc": "2026-10-07T23:44:02.540730+00:00",
+  "question": "Independently audit unequal p,q,p scalar indexing, complete auxiliary joining, counts and selected LU parameters",
+  "upstream_commit": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "input_certificate": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/20261007T2337Z-asymmetric-motifs/certificate.json",
+  "input_certificate_sha256": "eaf2e4d8cd45295d2d207106470513f73a0f48e3701cec3f29108cfcdc97e7ae",
+  "source_sha256": {
+    "review_asymmetric_motif.py": "e2e1a07f4662ed345f1be7e14e1be12c727b45a37e28d6fe644faafe68a213ce",
+    "review_parameter_audit.py": "dca1a3e97c26209e59eceec3d5a86a8f5205ff90c9d46f1d40d7bab499ac6bd8"
+  },
+  "python_executable": "/usr/bin/python3",
+  "python_version": "3.14.4",
+  "version_provenance": "Current verified executable; this executable ran the successful checker immediately before writing this protocol",
+  "resources": "One CPU process; standard library only; below 16 GiB review allocation",
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/integer-multiplication-bounds/code/review_asymmetric_motif.py --certificate /srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/20261007T2337Z-asymmetric-motifs/certificate.json --output research/integer-multiplication-bounds/runs/20261007T234400Z-review-asymmetric-motifs/results/asymmetric-independent.json"
+  ],
+  "previous_attempt": {
+    "output": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/review/asymmetric-independent-v1.json",
+    "status": "PASS; compact output did not recover small-pair physical bank role counts. Final version reads them from complete local basis counts. Arithmetic unchanged."
+  },
+  "result": "PASS: selected exact witness; 121 independent primitive-saving enclosures; 30 strict constraints; 11 uniform regressions; three small index partitions each at both unequal pairs",
+  "limitations": "Large h48/h52 finite graph realization is separate parent evidence; small whole-exchange payload checks are not global dense basis checks. Analytic LU/guard/prime proofs separately reviewed."
+}

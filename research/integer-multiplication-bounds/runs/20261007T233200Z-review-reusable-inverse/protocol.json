@@ -1,0 +1,101 @@
+{
+  "campaign_id": "20261007T222521Z",
+  "cases": 4,
+  "code": [
+    {
+      "bytes": 8310,
+      "path": "/srv/ai/research/research/integer-multiplication-bounds/code/review_banded_inverse.py",
+      "sha256": "3e91715a1f185efcc5428798779064e0bf2ef892b57e7998afabed1820cd7dca"
+    },
+    {
+      "bytes": 5678,
+      "path": "/srv/ai/research/research/integer-multiplication-bounds/code/review_lu_assembly.py",
+      "sha256": "2e30f354bd52f1156e4d786d6197750b1f73b4bc178ccd203f1f9e9e975f6b9f"
+    },
+    {
+      "bytes": 6202,
+      "path": "/srv/ai/research/research/integer-multiplication-bounds/code/review_parameter_audit.py",
+      "sha256": "dca1a3e97c26209e59eceec3d5a86a8f5205ff90c9d46f1d40d7bab499ac6bd8"
+    },
+    {
+      "bytes": 16936,
+      "path": "/srv/ai/research/research/integer-multiplication-bounds/code/downstream_banded_inverse.py",
+      "sha256": "024770e7ba33a3739f9d5aa474687109a35e1488c3ad6486656615911ab4cbb0"
+    },
+    {
+      "bytes": 13659,
+      "path": "/srv/ai/research/research/integer-multiplication-bounds/code/downstream_blocked_gaussian.py",
+      "sha256": "2ca6a460a7a9718eaf50f96c1602a1f21c65e2254acb58d3a1693c7e38f1ef95"
+    },
+    {
+      "bytes": 12665,
+      "path": "/srv/ai/research/research/integer-multiplication-bounds/code/downstream_gaussian.py",
+      "sha256": "c666f8ccced2e25db53fc5c0332b86a544b7b84313d0b588588dd19541f1a32a"
+    },
+    {
+      "bytes": 7039,
+      "path": "/srv/ai/research/research/integer-multiplication-bounds/code/downstream_lu_assembly.py",
+      "sha256": "2d36449ebad31d247cf93f8e435d54f769efecc567e0dcadfe773cccbf4ad7a5"
+    }
+  ],
+  "dimension": 24,
+  "exact_worst_conditioned_cases": 3,
+  "external_primary_inputs": [
+    {
+      "identity": "Baker-Harman-Pintz2001-Theorem1",
+      "input": {
+        "bytes": 268726,
+        "path": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/inputs/review/baker-harman-pintz-prime-gaps-2001.pdf",
+        "sha256": "d3b6011255c49e52b002e08faebb7d252ca1027e545b72fa097176e6285443a2"
+      },
+      "published": "2001",
+      "received": "2000-05-03",
+      "revised": "2000-11-15",
+      "url": "https://www.cs.umd.edu/~gasarch/BLOGPAPERS/BakerHarmanPintz.pdf"
+    },
+    {
+      "identity": "Harvey-van-der-Hoeven2021-author45page",
+      "input": {
+        "bytes": 585383,
+        "path": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/inputs/review/harvey-vanderhoeven-nlogn-2021.pdf",
+        "sha256": "7acbf5bea9dd45a2fca79d8b4673df6b8329ba8ad039831a40b44ae70944f813"
+      },
+      "published": "2021",
+      "url": "https://www.texmacs.org/joris/nlogn/nlogn.pdf"
+    }
+  ],
+  "immutable_deadline_utc": "2026-10-08T08:25:21Z",
+  "immutable_start_utc": "2026-10-07T22:25:21Z",
+  "input_certificate": {
+    "bytes": 124891,
+    "path": "/srv/ai/research/research/integer-multiplication-bounds/runs/20261007T232412Z-downstream-lu-assembly/results/certificate.json",
+    "sha256": "2938fc0c8bdb203e5a41a8fc1120a88913a3139ee1c145b2ba1467da701b45ec"
+  },
+  "maximum_cpu_workers": 1,
+  "minimum_row_gap": "1/1048576",
+  "originals_edited": false,
+  "publication_owner": "parent campaign",
+  "python_version": "3.14.4",
+  "python_version_verification": "python3 --version, same system interpreter used",
+  "random_seed": 109,
+  "recorded_utc": "2026-10-07T23:34:30.824144+00:00",
+  "reproduce": [
+    "python3 -B research/integer-multiplication-bounds/code/review_banded_inverse.py --output <fresh-output>",
+    "python3 -B research/integer-multiplication-bounds/code/review_lu_assembly.py --certificate research/integer-multiplication-bounds/runs/20261007T232412Z-downstream-lu-assembly/results/certificate.json --output <fresh-output>"
+  ],
+  "results": [
+    {
+      "bytes": 4943,
+      "path": "/srv/ai/research/research/integer-multiplication-bounds/runs/20261007T233200Z-review-reusable-inverse/results/banded-inverse-independent-v2.json",
+      "sha256": "b02fede599a16a0e5a56935860302e2eb52379de776d9d322d776da6e268279f"
+    },
+    {
+      "bytes": 1916,
+      "path": "/srv/ai/research/research/integer-multiplication-bounds/runs/20261007T233200Z-review-reusable-inverse/results/lu-assembly-independent.json",
+      "sha256": "faf92fd70f4b63842c142d11a7b3120cbdf9bb299b9abce1f47ec8743aebb8a7"
+    }
+  ],
+  "scope": "Independent exact finite conditioning/factorization/rounding and revised assembly arithmetic plus separate all-size proof audit; no complete tape simulation or unconditional main theorem",
+  "upstream_commit": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "work_fractional_bits": 96
+}

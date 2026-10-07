@@ -1,0 +1,1 @@
+Exact positive-ambient spectral control passed. See [derivation and hypotheses](../../reports/review-projective-label-bound.md). Rank-two planes need ambient dimension at least 37 at h24 and 75 at h50. This bound does not apply to indefinite ambient forms. The h8 rank14 seven-color control attains the lower bound.

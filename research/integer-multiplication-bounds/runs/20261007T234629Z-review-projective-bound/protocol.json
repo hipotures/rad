@@ -1,0 +1,39 @@
+{
+  "campaign_id": "20261007T222521Z",
+  "campaign_start": "2026-10-07T22:25:21Z",
+  "campaign_end": "2026-10-08T08:25:21Z",
+  "execution_observed_at_utc": "2026-10-07T23:46:29Z",
+  "recorded_at_utc": "2026-10-07T23:46:47.610561+00:00",
+  "question": "Derive an exact positive-definite ambient lower bound for rank-r orthogonal triple planes and calibrate h8",
+  "code_sha256": "524121608f0ac564834dc795131f98d0b916017ec41b81a73284a1579837de47",
+  "python_executable": "/usr/bin/python3",
+  "python_version": "3.14.4",
+  "version_provenance": "Verified current executable used in immediately preceding run",
+  "resources": "One CPU process; standard library; less than 16 GiB allocated review memory",
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/integer-multiplication-bounds/code/review_projective_bound.py --output research/integer-multiplication-bounds/runs/20261007T234629Z-review-projective-bound/results/projective-bound.json"
+  ],
+  "original_run_label": "20261007T234700Z-review-projective-bound; renamed immediately to actual observed execution time before publication",
+  "primary_inputs": [
+    {
+      "name": "bukh-cox-1802.00476v2.pdf",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/inputs/review/bukh-cox-1802.00476v2.pdf",
+      "url": "https://arxiv.org/pdf/1802.00476v2",
+      "revision_date": "2018-12-13T01:31:26Z",
+      "bytes": 221386,
+      "sha256": "791c6edea53dc5ee22682d3155eaa2a250aa494706c9766d77a0f782a0c1f454",
+      "recovery": "Download the pinned arXiv revision; originals immutable after acquisition"
+    },
+    {
+      "name": "hogben-palmowski-roberson-severini-1502.00016v2.pdf",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/inputs/review/hogben-palmowski-roberson-severini-1502.00016v2.pdf",
+      "url": "https://arxiv.org/pdf/1502.00016v2",
+      "revision_date": "2015-09-02T16:34:09Z",
+      "bytes": 232923,
+      "sha256": "383b52f2cbd37f460e644d2fcc564ebb6b7a0bb72b1bc8f14f2d74a5df9714ae",
+      "recovery": "Download the pinned arXiv revision; originals immutable after acquisition"
+    }
+  ],
+  "status": "PASS: exact integer spectra and 840 h8 control edges; symbolic all-size proof in linked report",
+  "scope": "Positive-definite Euclidean/Hermitian ambient only; does not constrain indefinite labels, even if each plane is positive. No theorem improvement depends on this control."
+}

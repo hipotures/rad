@@ -16,8 +16,9 @@ per-file identities and explicit omissions.
 [Integer multiplication bounds](../research/integer-multiplication-bounds/README.md)
 is an active ten-hour mathematical research campaign, started 2026-10-07
 22:25:21 UTC with an immutable deadline ten hours later. The pinned conditional
-2^-59 baseline passed all supplied checks. The first aligned-pairing circuit
-milestone supports a strict conditional saving about 1.0650 times that bound;
+2^-59 baseline passed all supplied checks. Reviewed support envelopes,
+unequal tensor factors and a reusable Gaussian inverse now support a strict
+conditional saving more than 3.696690703179 times that bound;
 the upstream theorem remains assumed. See its [evolving report](../research/integer-multiplication-bounds/reports/campaign-20261007T222521Z.md)
 for current status and verification limits.
 
