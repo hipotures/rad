@@ -1,0 +1,144 @@
+{
+  "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/analysis/trace-diversity.json",
+  "rows": [
+    {
+      "task_id": "code-archive",
+      "actual_input_tokens": 6983,
+      "output_tokens": 2048,
+      "windows": 769,
+      "main_entries": 1214400,
+      "gap_windows": {
+        "count": 820004,
+        "min": 1.0,
+        "median": 2.0,
+        "mean": 12.018284057150941,
+        "max": 761.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 820004,
+        "min": 0.0,
+        "median": 28.0,
+        "mean": 60.245469534294955,
+        "max": 499.0
+      },
+      "burstiness": {
+        "count": 17056,
+        "min": -1.0,
+        "median": 0.1624687374871212,
+        "mean": 0.14557195926507238,
+        "max": 0.6895849879305787
+      },
+      "local_pct": 94.1677371541502,
+      "cpu_pct": 5.242341897233201,
+      "mapped_pct": 0.5899209486166008
+    },
+    {
+      "task_id": "math-inventory",
+      "actual_input_tokens": 165,
+      "output_tokens": 2048,
+      "windows": 766,
+      "main_entries": 1238400,
+      "gap_windows": {
+        "count": 815718,
+        "min": 1.0,
+        "median": 2.0,
+        "mean": 11.908438945812156,
+        "max": 733.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 815718,
+        "min": 0.0,
+        "median": 24.0,
+        "mean": 57.77779453193383,
+        "max": 482.0
+      },
+      "burstiness": {
+        "count": 16574,
+        "min": -1.0,
+        "median": 0.1586279409999123,
+        "mean": 0.14231050547886073,
+        "max": 0.7022537162505524
+      },
+      "local_pct": 93.703165374677,
+      "cpu_pct": 5.648094315245478,
+      "mapped_pct": 0.6487403100775194
+    },
+    {
+      "task_id": "text-websocket",
+      "actual_input_tokens": 30383,
+      "output_tokens": 1773,
+      "windows": 636,
+      "main_entries": 1053600,
+      "gap_windows": {
+        "count": 730964,
+        "min": 1.0,
+        "median": 3.0,
+        "mean": 11.02479328667349,
+        "max": 635.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 730964,
+        "min": 0.0,
+        "median": 32.0,
+        "mean": 63.34949053578562,
+        "max": 477.0
+      },
+      "burstiness": {
+        "count": 16960,
+        "min": -1.0,
+        "median": 0.13350974831897486,
+        "mean": 0.11680584181748627,
+        "max": 0.7132123007732452
+      },
+      "local_pct": 93.65973804100227,
+      "cpu_pct": 5.716305998481397,
+      "mapped_pct": 0.623955960516325
+    },
+    {
+      "task_id": "mixed-chinook",
+      "actual_input_tokens": 1899,
+      "output_tokens": 2048,
+      "windows": 548,
+      "main_entries": 1028160,
+      "gap_windows": {
+        "count": 799757,
+        "min": 1.0,
+        "median": 3.0,
+        "mean": 9.854945939829223,
+        "max": 532.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 799757,
+        "min": 0.0,
+        "median": 54.0,
+        "mean": 79.60560645296009,
+        "max": 466.0
+      },
+      "burstiness": {
+        "count": 18089,
+        "min": -1.0,
+        "median": 0.03611501340415113,
+        "mean": 0.018705254950364816,
+        "max": 0.5856474470286145
+      },
+      "local_pct": 89.2494358854653,
+      "cpu_pct": 9.09644413320884,
+      "mapped_pct": 1.6541199813258636
+    }
+  ],
+  "definitions": {
+    "cosine": "Cosine of flattened48x512 main token-expert-entry count histograms; layer-aware; includes rejected verifier lanes",
+    "JS": "Jensen-Shannon divergence,base2,between normalized main48x512 entry distributions;0same,1disjoint",
+    "inter_use_gap": "Difference in logical main verifier-window index between observed batched uses of one(layer,expert); within-batch order unspecified",
+    "distinct_reuse_distance": "Number of distinct experts routed in the same layer in intervening windows,excluding both endpoint batches; all lanes simultaneous",
+    "burstiness": "Per expert with at least2observed gaps,B=(sd(gaps)-mean(gaps))/(sd+mean); descriptive,finite/censored windows",
+    "denominator": "Normal main local+CPU+mapped entries; MTP entries retained separately",
+    "semantic_independence": "Declared from source provenance; no routing threshold used"
+  },
+  "caveats": [
+    "No candidate replacement policy tested; no family speedup claim",
+    "Finite traces are right-censored; each request stands alone",
+    "Native issue timestamp precedes immediate host victim removal; main window already consumed",
+    "Prefix-derived last-use counts are causal; next-use is labels only; dynamic heat/protection unknown"
+  ]
+}

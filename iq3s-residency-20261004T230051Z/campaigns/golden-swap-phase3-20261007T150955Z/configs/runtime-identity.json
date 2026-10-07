@@ -1,0 +1,45 @@
+{
+  "source": "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/repos/runtime",
+  "build": "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/builds/runtime",
+  "exe": "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/builds/runtime/strata",
+  "source_sha": "f3b4f19157b39ae017e2fd91814c8f5728e3b1cc",
+  "binary_sha256": "1bf524e32fd3233aeb3149231a4f48da1e52401b9f4686bd6669b1690033ae82",
+  "base_configs_sha256": "2dd93120d9d1c8202304e88c4c6586a8f94692210c1def5bad71fda7a9ffc5f6",
+  "checkpoint_sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
+  "phase2": {
+    "source": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/repos/runtime",
+    "build": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/runtime",
+    "exe": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/runtime/strata",
+    "source_sha": "c12a0b11f02ae7b635dc3c6a15ff14f37319ce22",
+    "binary_sha256": "46b53020499a8d9b859a59bcf723ab32b65f42b32ff5c6c4639dabf5be6d6aff",
+    "phase1_source": "20e1e10f6848f11ec5580fc5ec7f97ea5d4e520b",
+    "base_configs_sha256": "2dd93120d9d1c8202304e88c4c6586a8f94692210c1def5bad71fda7a9ffc5f6",
+    "checkpoint_sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
+    "binary_bytes": 40223352
+  },
+  "commands": [
+    [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "-S",
+      "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/repos/runtime",
+      "-B",
+      "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/builds/runtime",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DSTRATA_ENABLE_CUDA=ON",
+      "-DCMAKE_CUDA_ARCHITECTURES=89",
+      "-DSTRATA_BUILD_TESTS=ON",
+      "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325"
+    ],
+    [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "--build",
+      "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/builds/runtime",
+      "-j",
+      "8"
+    ]
+  ],
+  "ggml": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325"
+}

@@ -1,0 +1,43 @@
+{
+  "task": "math-rational",
+  "order": [
+    [
+      "PLANNER_OPT",
+      1,
+      false,
+      "smoke-opt-profile1-attempt2"
+    ],
+    [
+      "PLANNER_BASELINE",
+      0,
+      false,
+      "guard-profile0-a"
+    ],
+    [
+      "PLANNER_BASELINE",
+      1,
+      false,
+      "guard-profile1-a"
+    ],
+    [
+      "PLANNER_BASELINE",
+      1,
+      false,
+      "guard-profile1-b"
+    ],
+    [
+      "PLANNER_BASELINE",
+      0,
+      false,
+      "guard-profile0-b"
+    ],
+    [
+      "PLANNER_BASELINE",
+      0,
+      true,
+      "frozen-phase2-history"
+    ]
+  ],
+  "purpose": "First compiled integration smoke, two opposite-order instrumentation pairs, then bounded actual frozen binary regression",
+  "predeclared_instrumentation_guard": "If both profile pairs regress decode >3%, gate headline wait profiling and retain separate diagnostics instead."
+}
