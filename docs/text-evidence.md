@@ -82,7 +82,8 @@ python3 tools/archive_workspace.py audit --staged-only --budget-policy docs/text
 
 ## Backfill and omissions
 
-The [validation receipt](text-evidence-validation.json) records exact counts,
+The [indexed publication audit](text-evidence-publication-audit.json) passed
+for the complete import commit. The [validation receipt](text-evidence-validation.json) records exact counts,
 bytes, verification scope and repairs. Each namespace has a compressed JSONL
 manifest containing the source root, every selected path, original and gzip
 SHA256, byte sizes, status and skip reason.
