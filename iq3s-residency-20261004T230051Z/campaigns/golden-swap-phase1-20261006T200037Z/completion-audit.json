@@ -1,0 +1,384 @@
+{
+  "state": "COMPLETE_WITH_DOCUMENTED_PROTOCOL_DEVIATION",
+  "checks": [
+    {
+      "requirement": "Required artifacts",
+      "pass": true,
+      "evidence": {
+        "required": [
+          "GOAL.md",
+          "STATUS.md",
+          "DECISIONS.md",
+          "progress.json",
+          "progress.jsonl",
+          "attempt-ledger.jsonl",
+          "source-group-splits.json",
+          "data/schema.json",
+          "data/dataset-manifest.json",
+          "models/selection.json",
+          "models/logistic.txt",
+          "models/tree.txt",
+          "results/offline-competition.json",
+          "results/offline-reserved.json",
+          "results/development-calibration-prediction-metrics.json",
+          "results/reserved-prediction-metrics.json",
+          "results/family-prediction-metrics.json",
+          "results/sampled-victim-ranking.json",
+          "results/learning-curves.json",
+          "results/feature-diagnostics.json",
+          "builds/runtime-identity.json",
+          "patches/causal-victim.diff",
+          "tests/scorer-parity.json",
+          "tests/safety-summary.json",
+          "run-order.json",
+          "results/live-attempts.json",
+          "results/live-attempts.csv",
+          "results/paired-blocks.json",
+          "results/main-summary.json",
+          "results/conclusion.json",
+          "report.md",
+          "reproduce.md",
+          "tests/reproduction-checks.json"
+        ],
+        "missing": []
+      },
+      "limitation": null
+    },
+    {
+      "requirement": "Twelve source groups and exact roles; no random within-episode split",
+      "pass": true,
+      "evidence": "source-group-splits.json; data/dataset-manifest.json",
+      "limitation": null
+    },
+    {
+      "requirement": "Native ownership reconstruction and candidate sampling",
+      "pass": true,
+      "evidence": {
+        "checked_entries": 13836480,
+        "sampling": "Uniform min(8,N)/N native residents; 1/k decision weight; retained residents included"
+      },
+      "limitation": "Native resident population selection bias persists; policy-dependent ages/counters omitted."
+    },
+    {
+      "requirement": "Causal horizon labels and finite-tail censoring",
+      "pass": true,
+      "evidence": "data/schema.json; scripts/dataset.py; scripts/features.py; tests/scorer-parity.json",
+      "limitation": null
+    },
+    {
+      "requirement": "At most two learned candidates, frozen before reserved policy evaluation",
+      "pass": true,
+      "evidence": {
+        "frozen_utc": "2026-10-06T20:38:15.217799+00:00",
+        "policy": "logistic",
+        "threshold": 0.5,
+        "checkpoint": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
+        "reserved_policy_points": 16
+      },
+      "limitation": "Cheap native/history rule had a slightly stronger calibration proxy; live comparison excludes cheap rules."
+    },
+    {
+      "requirement": "Bounded guard diagnosis retained",
+      "pass": true,
+      "evidence": [
+        "versions/risk-only-v1",
+        "versions/cost-guard-v2",
+        "results/guard-diagnosis-v1.json"
+      ],
+      "limitation": "Risk-only excessive churn, 40us cost guard under-admission; final160us assumption frozen before reserved results."
+    },
+    {
+      "requirement": "Same replay substrate and isolated exact experimental source/binary",
+      "pass": true,
+      "evidence": {
+        "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime",
+        "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/builds/runtime",
+        "exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/builds/runtime/strata",
+        "source_sha": "20e1e10f6848f11ec5580fc5ec7f97ea5d4e520b",
+        "binary_sha256": "ccea78b7e67cd0d634880160f8d9d571ef65263d41622232ef149c6bb76038e3",
+        "capture_substrate": "117bc89b3bacbf263379c336557e6c8aa07aff5e",
+        "decomposition_substrate": "bbfea2955ec238f7e6406b11c74e577c996c4a8d",
+        "original_source": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "settings": "Q4/K24/PCIe.28/100us/15workers/MTP4minp.5/INT8KV/kvresident32768/prefillauto/suffixreuseOFF",
+        "base_configs_sha256": "2dd93120d9d1c8202304e88c4c6586a8f94692210c1def5bad71fda7a9ffc5f6",
+        "frozen_selection_sha256": "c7ebf4eafa0bd319f0b85e059b17b87aaf76c6531d1f95568fb97d29f1cc9093"
+      },
+      "limitation": null
+    },
+    {
+      "requirement": "Original binary and normal launcher/config/index preservation",
+      "pass": true,
+      "evidence": {
+        "changed": [],
+        "small_files_checked": 277,
+        "snapshot_utc": "2026-10-06T20:39:25.684059+00:00",
+        "original_binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata"
+      },
+      "limitation": "Launcher snapshot captured during CPU evaluation; no normal launcher was authored by this campaign."
+    },
+    {
+      "requirement": "Frozen model revision and backing weights unchanged",
+      "pass": true,
+      "evidence": {
+        "revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+        "changed": [],
+        "verification": "Prior full hashes plus unchanged size/mtime/inode; no heavyweight weights rehash during timing."
+      },
+      "limitation": null
+    },
+    {
+      "requirement": "Scorer/causal/safety fixtures and real bytes",
+      "pass": true,
+      "evidence": [
+        "tests/scorer-parity.json",
+        "tests/validation-index.json",
+        "logs/policy-fixture-attempt3.log",
+        "logs/full-reference-regression-attempt3.log",
+        "tests/cost-guard-fixture-attempt2.log",
+        "tests/real-copy-full-attempt2.log",
+        "tests/real-copy-learned-attempt2.log"
+      ],
+      "limitation": "Initial learned fixture failure preserved; fixture event advancement repaired with runtime/checkpoint unchanged."
+    },
+    {
+      "requirement": "Relevant existing native tests",
+      "pass": true,
+      "evidence": {
+        "real_copy_fixtures": "PASS",
+        "cost_guard_fixture": "PASS",
+        "native_test_exit_code": 0,
+        "native_log": "tests/targeted-native.log",
+        "full_suite": "Not newly rerun; prior environmental failures remain historical",
+        "model_checkpoint": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e"
+      },
+      "limitation": "No new full-suite run; historical environment failures remain historical. Any targeted failures must be interpreted explicitly in report."
+    },
+    {
+      "requirement": "Frozen counterbalanced order, all attempts retained, maximum three unchanged attempts",
+      "pass": true,
+      "evidence": {
+        "counts": {
+          "('code-archive', 'REPLAY_CURRENT')": 3,
+          "('code-archive', 'ORACLE_FULL')": 3,
+          "('code-archive', 'ORACLE_IN_LEARNED_VICTIM')": 3,
+          "('math-inventory', 'ORACLE_FULL')": 3,
+          "('math-inventory', 'ORACLE_IN_LEARNED_VICTIM')": 3,
+          "('math-inventory', 'REPLAY_CURRENT')": 3,
+          "('text-websocket', 'ORACLE_IN_LEARNED_VICTIM')": 3,
+          "('text-websocket', 'REPLAY_CURRENT')": 3,
+          "('text-websocket', 'ORACLE_FULL')": 3,
+          "('mixed-chinook', 'REPLAY_CURRENT')": 3,
+          "('mixed-chinook', 'ORACLE_FULL')": 3,
+          "('mixed-chinook', 'ORACLE_IN_LEARNED_VICTIM')": 3
+        },
+        "order": "run-order.json; results/live-attempts.json; raw/*/episode.json"
+      },
+      "limitation": null
+    },
+    {
+      "requirement": "Target live coverage",
+      "pass": true,
+      "evidence": {
+        "valid": 36,
+        "attempted": 36,
+        "complete_blocks": 12,
+        "target": 36
+      },
+      "limitation": "A partial/invalid matrix is never presented as completed coverage."
+    },
+    {
+      "requirement": "Full work, EOS, short-input QSA and initial-state fidelity",
+      "pass": true,
+      "evidence": "raw/*/fidelity.json; development/short-input preflights retained separately",
+      "limitation": "Enforced work identity does not establish natural-generation correctness."
+    },
+    {
+      "requirement": "Learned scorer has no victim future queries or invalid live predictions",
+      "pass": true,
+      "evidence": "raw/*/run-engine.log Q4_INFORMATION_END/Q4_VICTIM_END",
+      "limitation": "Incoming oracle and common full-current-window protection remain privileged."
+    },
+    {
+      "requirement": "Main/MTP accounting, copies, churn, cost and telemetry retained",
+      "pass": true,
+      "evidence": "results/live-attempts.json; analysis/*; raw/*/telemetry",
+      "limitation": "MTP dispatch subdivisions and exclusive latency cost remain unknown. Nested timers not summed."
+    },
+    {
+      "requirement": "Paired retention and descriptive statistics",
+      "pass": true,
+      "evidence": "results/paired-blocks.json; results/main-summary.json; report.md",
+      "limitation": "No clamping, fourth run, favorable filtering or post-hoc steal correction."
+    },
+    {
+      "requirement": "Script syntax and exact reproduction commands",
+      "pass": true,
+      "evidence": {
+        "syntax_errors": [],
+        "reproduction": "tests/reproduction-checks.json; reproduce.md; references/reproduction-artifacts.json"
+      },
+      "limitation": "Audit distinguishes executed commands from prepare-only checks."
+    },
+    {
+      "requirement": "Attempt cap includes matching preflights and reproductions",
+      "pass": true,
+      "evidence": {
+        "combined_counts": {
+          "('code-archive', 'REPLAY_CURRENT')": 3,
+          "('code-archive', 'ORACLE_FULL')": 3,
+          "('code-archive', 'ORACLE_IN_LEARNED_VICTIM')": 3,
+          "('math-inventory', 'ORACLE_FULL')": 3,
+          "('math-inventory', 'ORACLE_IN_LEARNED_VICTIM')": 3,
+          "('math-inventory', 'REPLAY_CURRENT')": 3,
+          "('text-websocket', 'ORACLE_IN_LEARNED_VICTIM')": 3,
+          "('text-websocket', 'REPLAY_CURRENT')": 3,
+          "('text-websocket', 'ORACLE_FULL')": 3,
+          "('mixed-chinook', 'REPLAY_CURRENT')": 3,
+          "('mixed-chinook', 'ORACLE_FULL')": 3,
+          "('mixed-chinook', 'ORACLE_IN_LEARNED_VICTIM')": 3,
+          "('math-rational', 'REPLAY_CURRENT')": 2,
+          "('math-rational', 'ORACLE_FULL')": 2,
+          "('math-rational', 'ORACLE_IN_LEARNED_VICTIM')": 2,
+          "('math-sensor', 'REPLAY_CURRENT')": 1
+        },
+        "main_requests": 36,
+        "preflights": 4,
+        "development_reproduction_requests": 3
+      },
+      "limitation": null
+    },
+    {
+      "requirement": "External isolated reproduction evidence preserved",
+      "pass": true,
+      "evidence": {
+        "manifest": "references/reproduction-artifacts.json",
+        "changed": []
+      },
+      "limitation": null
+    },
+    {
+      "requirement": "Every main request has the same frozen measurement identity",
+      "pass": true,
+      "evidence": {
+        "errors": [],
+        "base_configs_sha256": "2dd93120d9d1c8202304e88c4c6586a8f94692210c1def5bad71fda7a9ffc5f6",
+        "frozen_selection_sha256": "c7ebf4eafa0bd319f0b85e059b17b87aaf76c6531d1f95568fb97d29f1cc9093"
+      },
+      "limitation": null
+    },
+    {
+      "requirement": "Finite completion and charged host/spares",
+      "pass": true,
+      "evidence": "results/live-attempts.json; results/final-diagnostics.json",
+      "limitation": "Prefix-history update time has no separate counter; charged in decode/wall. No GPU scorer buffers."
+    },
+    {
+      "requirement": "Report tables align and primary interpretation is preserved",
+      "pass": true,
+      "evidence": {
+        "table_errors": [],
+        "report": "report.md"
+      },
+      "limitation": null
+    },
+    {
+      "requirement": "Prior Phase0 datasets/results/source artifacts preserved",
+      "pass": true,
+      "evidence": {
+        "checked_files": 738,
+        "changed": [],
+        "authority": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/artifact-manifest.json"
+      },
+      "limitation": null
+    },
+    {
+      "requirement": "Owned server/trainer/copier/profiler cleanup and no GPU work",
+      "pass": true,
+      "evidence": "cleanup-proof.json",
+      "limitation": null
+    },
+    {
+      "requirement": "Unchanged four-hour deadline",
+      "pass": true,
+      "evidence": {
+        "elapsed_s": 8714.48789506749,
+        "start": "2026-10-06T20:00:37+00:00",
+        "deadline": "2026-10-07T00:00:37+00:00"
+      },
+      "limitation": null
+    }
+  ],
+  "failed_requirements": [],
+  "requirement_sections": {
+    "1": {
+      "state": "complete",
+      "evidence": "GOAL.md; report.md; results/conclusion.json"
+    },
+    "2": {
+      "state": "complete",
+      "evidence": "clock.json; progress.jsonl; STATUS.md; unchanged original clock"
+    },
+    "3": {
+      "state": "complete",
+      "evidence": "references/*; runtime identity; prior artifact and launcher preservation checks"
+    },
+    "4": {
+      "state": "complete",
+      "evidence": "source-group-splits.json; dataset manifests"
+    },
+    "5": {
+      "state": "complete",
+      "evidence": "data/schema.json; native ownership checks; sampling probabilities; scorer parity"
+    },
+    "6": {
+      "state": "complete_with_documented_ordering_deviation",
+      "evidence": "censoring masks; schema; data/math-rational-smoke-manifest.json; compiled smoke after bounded fit; report.md"
+    },
+    "7": {
+      "state": "complete",
+      "evidence": "two retained models; fixed seed/dependencies; learning curves and feature diagnostics"
+    },
+    "8": {
+      "state": "complete",
+      "evidence": "source patch; matched guards/controls; real NO_SWAP and zero victim future queries"
+    },
+    "9": {
+      "state": "complete",
+      "evidence": "offline results; frozen selection; negative v1/v2 diagnosis preserved"
+    },
+    "10": {
+      "state": "complete",
+      "evidence": "same binary/source; five charged spares; host bytes; safety fixtures"
+    },
+    "11": {
+      "state": "complete",
+      "evidence": "all fidelity JSON; scorer/copy/ownership/cancellation tests; nine native tests"
+    },
+    "12": {
+      "state": "complete",
+      "evidence": "36 valid requests; four reserved tasks; three adjacent blocks each; optional TLS unmeasured"
+    },
+    "13": {
+      "state": "complete",
+      "evidence": "combined attempt-cap audit; serial run ledger; finite owned-process cleanup"
+    },
+    "14": {
+      "state": "complete_with_explicit_unknowns",
+      "evidence": "per-arm raw logs, timings/copies/telemetry; final diagnostics; missing exclusive costs and MTP subdivisions explicitly unknown"
+    },
+    "15": {
+      "state": "complete",
+      "evidence": "negative/inconsistent latency result retained; limitations and strongest next experiment in report"
+    },
+    "16": {
+      "state": "complete",
+      "evidence": "artifact manifest; exact tested reproducers; report; cleanup proof"
+    }
+  },
+  "protocol_deviations": [
+    "Dataset/state smoke preceded fit, but first compiled scorer/policy end-to-end smoke followed the larger bounded fit. Ordering cannot be retroactively repaired and is disclosed."
+  ],
+  "elapsed_s": 8714.48789506749,
+  "UTC": "2026-10-06T22:25:51.488622+00:00",
+  "primary_conclusion": "MECHANISM_IMPROVED_NO_CONFIRMED_LATENCY_GAIN"
+}

@@ -1,0 +1,29 @@
+{
+  "label": "capture-128k-v3",
+  "host_quant_group_compute_completion_span": {
+    "CPU_positive": {
+      "count": 58919,
+      "sum_ms": 20002.550784,
+      "median_us": 275.25,
+      "p95_us": 786.9291,
+      "max_us": 4583.024
+    },
+    "all_no_CPU": {
+      "count": 14665,
+      "sum_ms": 14.801985,
+      "median_us": 0.229,
+      "p95_us": 5.47,
+      "max_us": 66.799
+    },
+    "mapped_positive": {
+      "count": 25169,
+      "sum_ms": 12789.685591,
+      "median_us": 451.439,
+      "p95_us": 956.5929999999998,
+      "max_us": 3918.026
+    }
+  },
+  "scope_caveat": "CPU span includes activation quantization/job construction/native CPU completion. It is not an isolated wait, and overlaps GPU work. No CPU/mapped/GPU timers are summed.",
+  "future_lead": {},
+  "copy_lifetimes": {}
+}

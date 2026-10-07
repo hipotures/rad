@@ -1,0 +1,1 @@
+A metadata inspection used system python3 without NumPy and failed before checkpoint reading. Repeated only the metadata read using the existing isolated control venv. No inference/data request repeated.

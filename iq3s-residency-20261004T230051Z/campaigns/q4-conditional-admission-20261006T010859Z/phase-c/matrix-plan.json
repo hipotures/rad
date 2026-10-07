@@ -1,0 +1,22 @@
+{
+  "declared_utc": "2026-10-06T02:06:54.298272+00:00",
+  "variants": [
+    "control",
+    "conditional"
+  ],
+  "contexts": [
+    "32k",
+    "128k",
+    "256k"
+  ],
+  "replicates": 3,
+  "measured_requests_maximum": 18,
+  "warmup": "fixed4096input/64output",
+  "output": 4096,
+  "server": "fresh per measuredrequest, no concurrency",
+  "zero_reuse": true,
+  "suffix": 0,
+  "counterbalanced_order": "For eachrep/contextalternatearmfirst; rotatecontextorderbyrep",
+  "screen_separate": "Oneexploratoryrequest per arm beforematrix; notheadline",
+  "invalid": "Preserve failure/EOS; nofavorable retry; diagnose/version realprotocolerroronly"
+}

@@ -1,0 +1,120 @@
+{
+  "splits": {
+    "development": [
+      "code-heg",
+      "math-rational",
+      "text-http",
+      "mixed-build"
+    ],
+    "calibration": [
+      "code-queue",
+      "math-sensor",
+      "text-tls",
+      "mixed-fields"
+    ],
+    "reserved_evaluation": [
+      "code-archive",
+      "math-inventory",
+      "text-websocket",
+      "mixed-chinook"
+    ]
+  },
+  "groups": [
+    {
+      "task_id": "code-heg",
+      "source_group": "heg-storage",
+      "split": "development",
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "math-rational",
+      "source_group": "E026-numerical",
+      "split": "development",
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "text-http",
+      "source_group": "E026-HTTP-standards",
+      "split": "development",
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "mixed-build",
+      "source_group": "strata-release-build-log",
+      "split": "development",
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "code-queue",
+      "source_group": "cpython-asyncio-queues",
+      "split": "calibration",
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "math-sensor",
+      "source_group": "authored-sensor-problem",
+      "split": "calibration",
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "text-tls",
+      "source_group": "rfc8446-TLS",
+      "split": "calibration",
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "mixed-fields",
+      "source_group": "rfc8941-structured-fields",
+      "split": "calibration",
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "code-archive",
+      "source_group": "cpython-zipfile",
+      "split": "reserved_evaluation",
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "math-inventory",
+      "source_group": "authored-warehouse-problem",
+      "split": "reserved_evaluation",
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "tool_execution": false
+    },
+    {
+      "task_id": "text-websocket",
+      "source_group": "rfc6455-WebSocket",
+      "split": "reserved_evaluation",
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": true,
+      "tool_execution": false
+    },
+    {
+      "task_id": "mixed-chinook",
+      "source_group": "chinook-SQLite-DDL",
+      "split": "reserved_evaluation",
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": true,
+      "tool_execution": false
+    }
+  ]
+}

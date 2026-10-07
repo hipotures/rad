@@ -1,0 +1,12 @@
+"""Predeclare same-binary OFF only if the new copy variant shows a meaningful apparent gain."""
+from lab import ROOT,save
+base=ROOT/'experiments/E025-direct-parts-off-guard/v1';assert not base.exists()
+save(base/'protocol.json',{
+ 'question':'Can an apparent direct-row gain be attributed to the changed execution rather than a new binary or later batch?',
+ 'trigger':'Run only if E023 completed median TG is at least5% above E002 at either profile. E022 already demonstrates a false128k gain in another binary; do not repeat that attribution error.',
+ 'change':'Exactly E023 clean sourcef4c321/binary508bfa, STRATA_LAB_DIRECT_PARTS OFF. Same cache/host scheduling/routing/math/KV/MTP/inputs and exact expert capacities. No new build.',
+ 'prerequisites':'E023 native/defaultOFF suite63pass2skip4knownenvironmentfail,Python268pass7skip,realIQ parity and repaired diagnostic full actual output/router/head parity. Also ten short OFF greedy cases and numeric/schema checks.',
+ 'batch':'Freshserver/profile, same4096input64outputwarmup, three saved4096requests.32kthen128k. No new ON runs; a new OFF binary/config point, not renamed control repetitions.',
+ 'budget':'No new GPU buffer; retained old hit_out means same expert capacities. Driver/kernel module layout same as ON. Log all resources and unknowns.',
+ 'completion':'Allsixattempts preserved, paired hashes/MTP/counts/wall/TG and same-binaryOFFvsON. Deadline/consolidation guard remains binding; no universal small-gain claim.'})
+save(base/'overrides.json',{'env':{},'same_binary_reference':'direct-parts-v1','direct_output_rows':'OFF; original copy/zero/add path'})

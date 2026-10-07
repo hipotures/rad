@@ -1,0 +1,20 @@
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/kernels/qsa.hpp
+
+/// (`rope_scaling_set`, once at startup, before the table is built and any graph captured), and this
+/// constant is what that config's `freq_base` defaults to and what CLI `--rope-freq-base` overrides.
+inline double qsa_freq_base() { return 1e7; }
+
+/// The selection width: `min(n_kv, idx_top_k + idx_block - 1)`.
+///
+/// The `r - 1 = 3` is not slack, it is the incomplete tail: the budget is whole blocks PLUS whatever cells do
+/// not fill one.  So the plan's "selection skipped when context <= 2,048" is conservative by two - the source's
+/// own bound is 2,051, and `ref/qsa.py` L292-294 records the disagreement.  Below the bound the selection is
+/// the IDENTITY, which `topk_512` is required to reproduce exactly rather than approximately.
+inline int64_t qsa_selection_width(int64_t n_kv, const QsaShapes& s) {
+    const int64_t w = s.idx_top_k + s.idx_block - 1;
+    return n_kv < w ? n_kv : w;
+}
+
+/// THE PER-TOKEN VALUES EVERY QSA KERNEL NEEDS, IN DEVICE MEMORY.
+
+Validator repair: check only min(position+lane+1,2051) active IDs per lane; preserve full capacity tail, which native kernels do not read. Active IDs must be in range, ascending and unique. No model/source/trace changes or repeated model request.

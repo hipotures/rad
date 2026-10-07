@@ -1,0 +1,154 @@
+{
+  "state": "COMPLETE_V2_REPLAY",
+  "rows": [
+    {
+      "scope": "development",
+      "name": "dev-code",
+      "rate": 1.8,
+      "nonlocals": 664,
+      "current_nonlocals": 604,
+      "wait": 0.002870265555555862,
+      "current_wait": 0.05890209077777972,
+      "GB": 0.036352,
+      "useful": 9,
+      "total": 18
+    },
+    {
+      "scope": "development",
+      "name": "dev-code",
+      "rate": 12.6,
+      "nonlocals": 664,
+      "current_nonlocals": 604,
+      "wait": 0.0,
+      "current_wait": 0.0024469184126985066,
+      "GB": 0.036352,
+      "useful": 9,
+      "total": 18
+    },
+    {
+      "scope": "development",
+      "name": "dev-math",
+      "rate": 1.8,
+      "nonlocals": 1724,
+      "current_nonlocals": 1101,
+      "wait": 0.06294371644444477,
+      "current_wait": 0.20306398177777807,
+      "GB": 0.1900544,
+      "useful": 82,
+      "total": 96
+    },
+    {
+      "scope": "development",
+      "name": "dev-math",
+      "rate": 12.6,
+      "nonlocals": 1724,
+      "current_nonlocals": 1101,
+      "wait": 0.0,
+      "current_wait": 0.005308198746030585,
+      "GB": 0.1900544,
+      "useful": 82,
+      "total": 96
+    },
+    {
+      "scope": "development",
+      "name": "cal-prose",
+      "rate": 1.8,
+      "nonlocals": 2602,
+      "current_nonlocals": 1750,
+      "wait": 0.10633234744444506,
+      "current_wait": 0.3037888140000023,
+      "GB": 0.3006976,
+      "useful": 123,
+      "total": 149
+    },
+    {
+      "scope": "development",
+      "name": "cal-prose",
+      "rate": 12.6,
+      "nonlocals": 2602,
+      "current_nonlocals": 1750,
+      "wait": 0.00016176826984132253,
+      "current_wait": 0.013084621174603572,
+      "GB": 0.3006976,
+      "useful": 123,
+      "total": 149
+    },
+    {
+      "scope": "full",
+      "name": "32k",
+      "rate": 1.8,
+      "nonlocals": 73593,
+      "current_nonlocals": 36776,
+      "wait": 1.4984669539995452,
+      "current_wait": 5.1245410206658875,
+      "GB": 3.8845952,
+      "useful": 1905,
+      "total": 1935,
+      "victim_entries": 9563
+    },
+    {
+      "scope": "full",
+      "name": "32k",
+      "rate": 12.6,
+      "nonlocals": 73593,
+      "current_nonlocals": 36776,
+      "wait": 0.023139144095094544,
+      "current_wait": 0.26828800196750235,
+      "GB": 3.8845952,
+      "useful": 1905,
+      "total": 1935,
+      "victim_entries": 9563
+    },
+    {
+      "scope": "full",
+      "name": "128k",
+      "rate": 1.8,
+      "nonlocals": 79077,
+      "current_nonlocals": 45276,
+      "wait": 1.8930421784442113,
+      "current_wait": 7.033112633665576,
+      "GB": 4.7154176,
+      "useful": 2322,
+      "total": 2361,
+      "victim_entries": 13422
+    },
+    {
+      "scope": "full",
+      "name": "128k",
+      "rate": 12.6,
+      "nonlocals": 79077,
+      "current_nonlocals": 45276,
+      "wait": 0.051589021809396285,
+      "current_wait": 0.4211966768562749,
+      "GB": 4.7154176,
+      "useful": 2322,
+      "total": 2361,
+      "victim_entries": 13422
+    }
+  ],
+  "policy": {
+    "state": "PREDECLARED_BEFORE_V2_REPLAY",
+    "reason": "v1 copies verylittle but leaves3.6–4.7xmore nonlocals. Repeateduse ofalmosteveryadmission supports a longerpersistentutilityhorizon;16windows/16MiB budget underrates lifetimeutility. Testexactlyonecoarsearchitecturalrepair, not thresholdtuning.",
+    "change": {
+      "forecast_windows": 64,
+      "bytes_per_device": 67108864
+    },
+    "unchanged": {
+      "miss_entry_us": 80,
+      "forecast_windows": 16,
+      "copy_cost_GB_s": 1.8,
+      "launch_us": 4.2,
+      "margin": 1.5,
+      "bytes_per_device": 16777216,
+      "minimum_age": 8,
+      "protect_recent": 2,
+      "candidate_recent": 8,
+      "adapt_every": 4,
+      "decay": 0.7
+    },
+    "alpha": 1.0,
+    "development": "Same3first64windowepisodes; comparev1/current. Fulltraceevaluation afterfixeddevelopment. Nochoosefrommanyvariants.",
+    "funnel": "Reject replay ifmiss/chargedwait combinationclearlyworse; otherwisecorrectness thenlive. Preservev1livetradeoffnegativeifscreenconfirms."
+  },
+  "NoTGclaim": true
+}

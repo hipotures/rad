@@ -1,0 +1,90 @@
+loading the model (the first start takes a minute or two) ...
+[strata] layer split across GPUs [0, 1] (25)
+[strata] starting the engine: reading the model's weights ...
+[strata] loading the experts into RAM (about 55 GB) and locking part of them for the GPU.
+         YOUR PC CAN BE SLOW OR STOP RESPONDING FOR 1-3 MINUTES NOW - this is normal.
+         Please wait and don't close this window; the browser opens when it is ready.
+[strata] still starting (34 s) - please wait ...
+[strata] experts loaded: 46.84 GiB at 2.06 GiB/s (46 s so far)
+[strata] filling the GPU's expert cache (10183 experts, 18.36 GiB of VRAM) ...
+[strata] almost ready ...
+ready: http://127.0.0.1:18132/v1  (OpenAI: /v1/chat/completions, Anthropic: /v1/messages, context 131072 tokens)
+       open http://127.0.0.1:18132/ in a browser to chat; close this window to stop the model
+[strata] reading the prompt: 4,095 of 4,096 tokens, 3 s so far
+[strata] done: 64 tokens in 3 s (94.4 tok/s) (length, cancel=False), expert cache 98.3% hit (+0.1% of the routed experts over PCIe)
+[strata] reading the prompt: 8,192 of 126,715 tokens, 3 s so far
+[strata] reading the prompt: 16,384 of 126,715 tokens, 4 s so far
+[strata] reading the prompt: 24,576 of 126,715 tokens, 7 s so far
+[strata] reading the prompt: 32,768 of 126,715 tokens, 9 s so far
+[strata] reading the prompt: 40,960 of 126,715 tokens, 11 s so far
+[strata] reading the prompt: 49,152 of 126,715 tokens, 14 s so far
+[strata] reading the prompt: 57,344 of 126,715 tokens, 16 s so far
+[strata] reading the prompt: 65,536 of 126,715 tokens, 18 s so far
+[strata] reading the prompt: 73,728 of 126,715 tokens, 19 s so far
+[strata] reading the prompt: 81,920 of 126,715 tokens, 21 s so far
+[strata] reading the prompt: 90,112 of 126,715 tokens, 23 s so far
+[strata] reading the prompt: 98,304 of 126,715 tokens, 25 s so far
+[strata] reading the prompt: 106,496 of 126,715 tokens, 27 s so far
+[strata] reading the prompt: 114,688 of 126,715 tokens, 28 s so far
+[strata] reading the prompt: 122,880 of 126,715 tokens, 30 s so far
+[strata] reading the prompt: 126,714 of 126,715 tokens, 31 s so far
+[strata] answering: 49 of max 4096 tokens, 86.6 tok/s, 32 s
+[strata] answering: 148 of max 4096 tokens, 94.0 tok/s, 33 s
+[strata] answering: 234 of max 4096 tokens, 90.1 tok/s, 34 s
+[strata] answering: 335 of max 4096 tokens, 93.1 tok/s, 35 s
+[strata] answering: 435 of max 4096 tokens, 94.4 tok/s, 36 s
+[strata] answering: 524 of max 4096 tokens, 93.4 tok/s, 37 s
+[strata] answering: 609 of max 4096 tokens, 92.1 tok/s, 38 s
+[strata] answering: 737 of max 4096 tokens, 96.6 tok/s, 39 s
+[strata] answering: 882 of max 4096 tokens, 102.1 tok/s, 40 s
+[strata] answering: 1045 of max 4096 tokens, 108.3 tok/s, 41 s
+[strata] answering: 1194 of max 4096 tokens, 112.0 tok/s, 42 s
+[strata] answering: 1356 of max 4096 tokens, 116.1 tok/s, 43 s
+[strata] answering: 1507 of max 4096 tokens, 118.7 tok/s, 44 s
+[strata] answering: 1650 of max 4096 tokens, 120.4 tok/s, 45 s
+[strata] answering: 1805 of max 4096 tokens, 122.7 tok/s, 46 s
+[strata] answering: 1934 of max 4096 tokens, 123.0 tok/s, 47 s
+[strata] answering: 2090 of max 4096 tokens, 124.9 tok/s, 48 s
+[strata] answering: 2232 of max 4096 tokens, 125.8 tok/s, 49 s
+[strata] answering: 2352 of max 4096 tokens, 125.3 tok/s, 50 s
+[strata] answering: 2484 of max 4096 tokens, 125.5 tok/s, 51 s
+[strata] answering: 2588 of max 4096 tokens, 124.4 tok/s, 52 s
+[strata] answering: 2748 of max 4096 tokens, 126.0 tok/s, 53 s
+[strata] answering: 2931 of max 4096 tokens, 128.4 tok/s, 54 s
+[strata] answering: 3075 of max 4096 tokens, 129.0 tok/s, 55 s
+[strata] answering: 3240 of max 4096 tokens, 130.4 tok/s, 56 s
+[strata] answering: 3398 of max 4096 tokens, 131.5 tok/s, 57 s
+[strata] answering: 3538 of max 4096 tokens, 131.7 tok/s, 59 s
+[strata] answering: 3689 of max 4096 tokens, 132.4 tok/s, 60 s
+[strata] answering: 3824 of max 4096 tokens, 132.5 tok/s, 61 s
+[strata] answering: 3976 of max 4096 tokens, 133.0 tok/s, 62 s
+[strata] done: 4096 tokens in 62 s (133.6 tok/s) (length, cancel=False), expert cache 98.1% hit (+0.1% of the routed experts over PCIe)
+
+[strata] stopping (Ctrl+C again to end the engine at once) ...
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-router-fresh-v1/serve/server.py", line 4129, in main
+    time.sleep(1)                               # Windows never delivers Ctrl+C to an untimed Event.wait()
+    ~~~~~~~~~~^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-router-fresh-v1/serve/server.py", line 4122, in on_sigterm
+    raise KeyboardInterrupt
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-router-fresh-v1/serve/server.py", line 4145, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-router-fresh-v1/serve/server.py", line 4136, in main
+    close()
+    ~~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-router-fresh-v1/serve/server.py", line 1253, in close
+    self.proc.stdin.close()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+BrokenPipeError: [Errno 32] Broken pipe

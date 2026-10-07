@@ -1,0 +1,20 @@
+{
+  "baseline": "CURRENT Q4 K24/.28 100us workers15 spec4/.5 INT8 prefill auto suffix/cache0",
+  "fresh_start": "Fresh server for every final measured request; identical4096-input/64-output warmup",
+  "primary_output": 4096,
+  "max_attempts_per_unchanged_point": 3,
+  "contexts": [
+    32768,
+    131072,
+    262144
+  ],
+  "materiality_percent": 3,
+  "controls": "Reuse latest pool controls at32/128 where compatible; collect only missing256 profile and candidate paired controls if chronology/protocol requires",
+  "phases": [
+    "E030 Q4 ground truth and replay",
+    "E031 Q4 causal and Expert-Jev policy competition",
+    "E032 Q4 live candidates/correctness/confirmation"
+  ],
+  "no_extra_gpu_memory": true,
+  "auxiliary_live_predictors_CPU_only": true
+}

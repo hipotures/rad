@@ -1,0 +1,39 @@
+# Phase 0 progress
+
+{
+  "step": 5,
+  "activity": "PHASE0_READY:12 defined,12 calibrated,12 validated; artifacts and cleanup verified",
+  "state": "DONE",
+  "updated_utc": "2026-10-06T19:44:04.691271+00:00",
+  "last_heartbeat_monotonic": 463765.558528662,
+  "elapsed_s": 3254.6932612980017,
+  "remaining_s": 345.30673870199826,
+  "owned_pid": null,
+  "request_state": "NONE",
+  "blocker_notes": [
+    {
+      "type": "RECOVERED",
+      "episode": "math-sensor",
+      "reason": "Source-backed QSA active-width validation correction; original tape preserved",
+      "model_reruns": 0
+    },
+    {
+      "type": "RECOVERED",
+      "episode": "text-websocket",
+      "reason": "Source-backed final EOS emission boundary validation correction; original tape preserved",
+      "model_reruns": 0
+    }
+  ],
+  "completed": 12,
+  "remaining_work": 0,
+  "next_action": "Stop after Phase0; no training or further campaign",
+  "live": null,
+  "swap_bytes": 0,
+  "defined_tasks": 12,
+  "calibrated_tasks": 12,
+  "trace_ready_tasks": 12,
+  "deferred": [],
+  "completion_audit": "PASS",
+  "artifact_verification": "PASS",
+  "verified_artifacts": 738
+}

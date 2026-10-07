@@ -1,0 +1,34 @@
+{
+  "features": [
+    "layer_fraction",
+    "device",
+    "class_3584",
+    "class_3993",
+    "seen_in_prefix",
+    "log_recency_windows",
+    "log_ema4_entries",
+    "log_ema64_entries",
+    "log_prefix_entries",
+    "log_last_gap_windows",
+    "log_mean_gap_windows",
+    "gap_cv",
+    "log_observed_windows"
+  ],
+  "horizons_windows": [
+    1,
+    4,
+    16,
+    64
+  ],
+  "one_window_routed_invocations": 48,
+  "labels": "Next batch use strictly after current event, <=H*48 positive; no return negative only with observation to endpoint; otherwise mask=0",
+  "features_unavailable_omitted": [
+    "native complete dynamic heat",
+    "queue state",
+    "MTP subdivisions",
+    "policy resident age and eviction counters (not needed by prefix-only feature set)"
+  ],
+  "simultaneous_batch": "count multiplicity for frequencies; one gap per unique expert, no lane order",
+  "seed": 20261006,
+  "sampling": "Every fourth window, each layer, uniform 8 eligible native residents excluding declared current-window safety protection"
+}

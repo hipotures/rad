@@ -1,0 +1,46 @@
+register 0 diagnostic-direct-parts-v1 67ba09fa153bd6affa2ab7f893616a2010f99836
+
+targeted-native 0 Test project /srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-direct-parts-v1
+      Start  2: gguf_split_test
+ 1/14 Test  #2: gguf_split_test .....................   Passed    0.01 sec
+      Start 47: conv_cache_test
+ 2/14 Test #47: conv_cache_test .....................   Passed    0.00 sec
+      Start 54: native_expert_parity_q4_K_q5_1
+ 3/14 Test #54: native_expert_parity_q4_K_q5_1 ......   Passed    0.96 sec
+      Start 55: native_expert_parity_q4_K_q8_0
+ 4/14 Test #55: native_expert_parity_q4_K_q8_0 ......   Passed    0.90 sec
+      Start 56: native_expert_parity_q5_K_q8_0
+ 5/14 Test #56: native_expert_parity_q5_K_q8_0 ......   Passed    0.83 sec
+      Start 57: native_expert_parity_q8_0_q8_0
+ 6/14 Test #57: native_expert_parity_q8_0_q8_0 ......   Passed    0.61 sec
+      Start 58: native_expert_parity_q4_K_q5_0
+ 7/14 Test #58: native_expert_parity_q4_K_q5_0 ......   Passed    0.88 sec
+      Start 59: native_expert_parity_q5_0_q8_0
+ 8/14 Test #59: native_expert_parity_q5_0_q8_0 ......   Passed    0.60 sec
+      Start 60: native_expert_parity_q5_1_min
+ 9/14 Test #60: native_expert_parity_q5_1_min .......   Passed    0.41 sec
+      Start 61: native_expert_parity_bf16_embd
+10/14 Test #61: native_expert_parity_bf16_embd ......   Passed    0.42 sec
+      Start 62: native_expert_parity_refuses_q6_K
+11/14 Test #62: native_expert_parity_refuses_q6_K ...   Passed    0.43 sec
+      Start 64: expert_multi_test
+12/14 Test #64: expert_multi_test ...................   Passed    0.06 sec
+      Start 68: direct_file_async_test
+13/14 Test #68: direct_file_async_test ..............   Passed    0.00 sec
+      Start 69: lab_direct_parts_test
+14/14 Test #69: lab_direct_parts_test ...............   Passed    0.62 sec
+
+100% tests passed, 0 tests failed out of 14
+
+Total Test time (real) =   6.78 sec
+
+profiles 0 models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf", "--ple-gguf", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf", "--expert-profile", "/srv/ai/strata/data/expert-profile.bin", "--prefill", "auto", "--spec", "4", "--spec-min-p", "0.5", "--mtp", "/srv/ai/models/strata/mtp/rt", "--kv", "int8", "--kv-resident", "32768", "--expert-cache", "auto", "--max-context", "131072", "--suffix-draft", "0", "--prompt-cache", "0", "--pool-workers", "15", "--pcie-frac", "0.28"], "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-direct-parts-v1", "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v1/128k/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1", "STRATA_LAB_DIRECT_PARTS": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "67ba09fa153bd6affa2ab7f893616a2010f99836", "build_variant": "diagnostic-direct-parts-v1", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "8012ddf62a2baa905090f329532ebab0ab8a8b8223fb2af4f93bfc65123c3f52", "headline_instrumentation": "DIAGNOSTIC_ONLY", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 131072, "source_sha": "67ba09fa153bd6affa2ab7f893616a2010f99836", "source_status": "", "variant_overrides": {"env": {"STRATA_LAB_DIRECT_PARTS": "1"}, "expert_policy": "Original CURRENT EMA/host planning; no E019 combination", "extra_explicit_GPU_bytes": 0}, "diagnostic_env": {"STRATA_LAB_TRACE": "{attempt}/traces/runtime"}}
+READY diagnostic-direct-parts-v1 128k 56.08
+warmup VALID input 4096 output 64 PP 1493.3 TG 104.8
+trace-run1 VALID input 126715 output 4096 PP 3982.4 TG 124.5
+
+strict-parity-32k 1 Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/check_trace_parity.py", line 25, in <module>
+    y = np.fromfile(t.prefix + '-first-logits.bin', '<f4')
+FileNotFoundError: [Errno 2] No such file or directory: '/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v1/32k/traces/runtime-request2-first-logits.bin'
+

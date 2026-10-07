@@ -1,0 +1,22 @@
+# Q4 CPU-pool comparison
+
+```json
+{
+  "state": "COMPLETE",
+  "completed": [
+    "24valid requests",
+    "24identical warmup-counts",
+    "paired input/output/counters audit",
+    "policy selection",
+    "report/summary",
+    "separate launchers checked",
+    "previous artifacts unchanged",
+    "owned processes stopped; bothGPUsidle"
+  ],
+  "pending": [],
+  "current": null,
+  "updated_utc": "2026-10-05T19:59:14.359992+00:00",
+  "next_exact_action": "user review; no automatic residency campaign",
+  "valid_measured_requests": 24
+}
+```

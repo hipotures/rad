@@ -1,0 +1,523 @@
+[1/270] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o
+[2/270] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o
+[3/270] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o
+[4/270] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-opt.cpp.o
+[5/270] Building CXX object CMakeFiles/strata_core.dir/src/platform/memory.cpp.o
+[6/270] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o
+[7/270] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml.c.o
+[8/270] Building CUDA object CMakeFiles/strata_core.dir/src/core/device.cu.o
+[9/270] Building CXX object CMakeFiles/strata_core.dir/src/core/layout.cpp.o
+[10/270] Building CXX object CMakeFiles/strata_core.dir/src/core/graph.cpp.o
+[11/270] Building CXX object CMakeFiles/strata_core.dir/src/core/weights.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp: In member function ‘bool strata::core::WeightTable::load(const std::string&, void*, uint64_t, std::string&, const std::set<std::__cxx11::basic_string<char> >*)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp:167:51: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 6 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                ~~~^
+      |                                                   |
+      |                                                   long long unsigned int*
+      |                                                %lu
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+      |                                                         ~~~~~~~~~~
+      |                                                         |
+      |                                                         uint64_t* {aka long unsigned int*}
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp:167:56: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 7 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                     ~~~^
+      |                                                        |
+      |                                                        long long unsigned int*
+      |                                                     %lu
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+      |                                                                     ~~~~~~~~~~~~
+      |                                                                     |
+      |                                                                     uint64_t* {aka long unsigned int*}
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp:167:61: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 8 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                          ~~~^
+      |                                                             |
+      |                                                             long long unsigned int*
+      |                                                          %lu
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+      |                                                                                   ~~~~~~~~~~
+      |                                                                                   |
+      |                                                                                   uint64_t* {aka long unsigned int*}
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp:167:66: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 9 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                               ~~~^
+      |                                                                  |
+      |                                                                  long long unsigned int*
+      |                                                               %lu
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+      |                                                                                               ~~~~~~~~~~~~
+      |                                                                                               |
+      |                                                                                               uint64_t* {aka long unsigned int*}
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp:167:71: warning: format ‘%lld’ expects argument of type ‘long long int*’, but argument 10 has type ‘int64_t*’ {aka ‘long int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                    ~~~^
+      |                                                                       |
+      |                                                                       long long int*
+      |                                                                    %ld
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+  169 |                                   &r.ne0, &r.ne1, &r.code_bits, &r.code_bias, &r.group_elems, &r.codebook,
+      |                                   ~~~~~~                               
+      |                                   |
+      |                                   int64_t* {aka long int*}
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp:167:76: warning: format ‘%lld’ expects argument of type ‘long long int*’, but argument 11 has type ‘int64_t*’ {aka ‘long int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                         ~~~^
+      |                                                                            |
+      |                                                                            long long int*
+      |                                                                         %ld
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+  169 |                                   &r.ne0, &r.ne1, &r.code_bits, &r.code_bias, &r.group_elems, &r.codebook,
+      |                                           ~~~~~~                            
+      |                                           |
+      |                                           int64_t* {aka long int*}
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp:167:96: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 17 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                                             ~~~^
+      |                                                                                                |
+      |                                                                                                long long unsigned int*
+      |                                                                                             %lu
+......
+  170 |                                   &r.has_offset, &r.codes_bytes, &r.scales_bytes, &r.offset_bytes,
+      |                                                  ~~~~~~~~~~~~~~                                 
+      |                                                  |
+      |                                                  uint64_t* {aka long unsigned int*}
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp:167:101: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 18 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                                                  ~~~^
+      |                                                                                                     |
+      |                                                                                                     long long unsigned int*
+      |                                                                                                  %lu
+......
+  170 |                                   &r.has_offset, &r.codes_bytes, &r.scales_bytes, &r.offset_bytes,
+      |                                                                  ~~~~~~~~~~~~~~~                     
+      |                                                                  |
+      |                                                                  uint64_t* {aka long unsigned int*}
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/weights.cpp:167:106: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 19 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                                                       ~~~^
+      |                                                                                                          |
+      |                                                                                                          long long unsigned int*
+      |                                                                                                       %lu
+......
+  170 |                                   &r.has_offset, &r.codes_bytes, &r.scales_bytes, &r.offset_bytes,
+      |                                                                                   ~~~~~~~~~~~~~~~         
+      |                                                                                   |
+      |                                                                                   uint64_t* {aka long unsigned int*}
+[12/270] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o
+[13/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/hbm.cpp.o
+[14/270] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o
+[15/270] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend-meta.cpp.o
+[16/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.cpp.o
+[17/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/traits.cpp.o
+[18/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/iqp.cpp.o
+[19/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/amx.cpp.o
+[20/270] Building CUDA object CMakeFiles/strata_core.dir/src/core/pinned.cu.o
+[21/270] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/quants.c.o
+[22/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/mmq.cpp.o
+[23/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/vec.cpp.o
+[24/270] Linking CXX static library libstrata_core.a
+[25/270] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/quants.c.o
+[26/270] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o
+[27/270] Linking CXX static library ggml/src/libggml-base.a
+[28/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/dequant_s2.cu.o
+[29/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/binary-ops.cpp.o
+[30/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_gemv.cu.o
+[31/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/unary-ops.cpp.o
+[32/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_gemv_quads.cu.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/cuda/s2_gemv_quads.cu(31): warning #177-D: variable "strata::kernels::<unnamed>::CODES_PER_BYTE_S2" was declared but never referenced
+  constexpr int CODES_PER_BYTE_S2 = 4;
+                ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[33/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_gemv_fast.cu.o
+[34/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/router_top10.cu.o
+[35/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s_gemv.cu.o
+[36/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/quantize_act.cu.o
+[37/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/rope.cu.o
+[38/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/repack.cpp.o
+[39/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_gemv_q8.cu.o
+[40/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/repack.cpp.o
+[41/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/gdn.cu.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/cuda/gdn.cu(35): warning #177-D: function "strata::kernels::<unnamed>::softplus_f" was declared but never referenced
+                            float softplus_f(float x) { return x > 20.0f ? x : log1pf(expf(x)); }
+                                  ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[42/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/gr.cu.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/cuda/gr.cu(112): warning #177-D: function "strata::kernels::<unnamed>::block_sum" was declared but never referenced
+            double block_sum(double v, double* scratch) {
+                   ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[43/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_expert_grouped.cu.o
+[44/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/shared_expert.cu.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/cuda/shared_expert.cu(72): warning #177-D: function "strata::kernels::<unnamed>::to_f16_kernel" was declared but never referenced
+            void to_f16_kernel(const float* __restrict__ in, uint16_t* __restrict__ out, int n) {
+                 ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/cuda/shared_expert.cu(139): warning #177-D: function "strata::kernels::<unnamed>::native_scalar_sigmoid_multi_kernel" was declared but never referenced
+            void native_scalar_sigmoid_multi_kernel(float* gate) {
+                 ^
+
+[45/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/elementwise.cu.o
+[46/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/qsa.cu.o
+[47/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/sampler.cu.o
+[48/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/bf16_gemv.cu.o
+[49/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_gr_norm.cu.o
+[50/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_moe.cu.o
+[51/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_gdn.cu.o
+[52/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_gr_postops.cu.o
+[53/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_router.cu.o
+[54/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_bf16.cu.o
+[55/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_gdn_preprocess.cu.o
+[56/270] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o
+[57/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_qsa.cu.o
+[58/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_rope.cu.o
+[59/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_ple_postops.cu.o
+[60/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/kv_q8.cu.o
+[61/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_flash_attn.cu.o
+[62/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_qsa_score.cu.o
+[63/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/kv_stream.cu.o
+[64/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_qsa_indexer.cu.o
+[65/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/ple.cu.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/cuda/ple.cu(372): warning #177-D: variable "hc" was declared but never referenced
+      const int n_embd = NG_N_EMBD, hc = NG_HC, hc_dim = NG_HC_DIM;
+                                    ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[66/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/kv_q4.cu.o
+[67/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/fused_gdn.cu.o
+[68/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/cvec.cu.o
+[69/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/qsa_decode_attn.cu.o
+[70/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/qsa_prompt_attn.cu.o
+[71/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/dequant_bf16.cu.o
+[72/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/verify_kernels.cu.o
+[73/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/qsa_select.cu.o
+[74/270] Building CXX object CMakeFiles/strata_kernels.dir/src/kernels/ngram.cpp.o
+[75/270] Building CXX object CMakeFiles/strata_kernels.dir/src/platform/direct_file.cpp.o
+[76/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/q2_avx2.cpp.o
+[77/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/expert_layout.cpp.o
+[78/270] Building CXX object CMakeFiles/strata_kernels.dir/src/ngram/ple_reader.cpp.o
+[79/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/native_expert.cpp.o
+[80/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/pool.cpp.o
+[81/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/expert.cpp.o
+[82/270] Linking CXX static library ggml/src/libggml-cpu.a
+[83/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/kq_avx2.cpp.o
+[84/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/kq_avx1.cpp.o
+[85/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/fused_gr.cu.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/cuda/fused_gr.cu(321): warning #177-D: variable "strata::kernels::<unnamed>::TQ3" was declared but never referenced
+  constexpr int TQ3 = N / 8 / 32;
+                ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[86/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/layer.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp: In function ‘bool strata::core::moe_layer(const WeightTable&, const ModelGeometry&, int64_t, int64_t, const MoEBuffers&, const float*, const float*, float*, void*, std::string&, const Doorbell*)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:500:1: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  500 | if (!moe_route(tables, g, layer, k, b, x, stream, err, db)) return false;    return moe_finish(tables, g, layer, k, b, x, parts, out, stream, err);}
+      | ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:500:78: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  500 | if (!moe_route(tables, g, layer, k, b, x, stream, err, db)) return false;    return moe_finish(tables, g, layer, k, b, x, parts, out, stream, err);}
+      |                                                                              ^~~~~~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp: In function ‘bool strata::core::qsa_layer(const WeightTable&, const ModelGeometry&, int64_t, int64_t, int32_t, const QsaState&, const QsaBuffers&, const float*, float*, void*, std::string&, float*)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:924:1: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  924 | if (!gemv_quantized(*w_attnk, p_k, f_k, b.x_q8_0, b.x_q8k, b.kcur, g.n_embd, g.n_head_kv * g.head_dim,                        v.name("attn_k.weight"), stream, err, x)) return false;    if (!gemv_quantized(*w_attnv, p_v, f_v, b.x_q8_0, b.x_q8k, b.vcur, g.n_embd, g.n_head_kv * g.head_dim,                        v.name("attn_v.weight"), stream, err, x, w_attnk->native_data && w_attnv->native_data)) return false;    dump_slot(dump, g, layer, b.vcur,                            (uint64_t) 2 * g.n_embd + 2 * g.hc + (uint64_t) g.n_head * g.head_dim,                            (uint64_t) g.n_head_kv * g.head_dim, stream);    if (!normalize_rotate(b.kcur, w_kn, (int) g.n_head_kv, (int) g.head_dim)) return false;
+      | ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:924:186: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  924 | if (!gemv_quantized(*w_attnk, p_k, f_k, b.x_q8_0, b.x_q8k, b.kcur, g.n_embd, g.n_head_kv * g.head_dim,                        v.name("attn_k.weight"), stream, err, x)) return false;    if (!gemv_quantized(*w_attnv, p_v, f_v, b.x_q8_0, b.x_q8k, b.vcur, g.n_embd, g.n_head_kv * g.head_dim,                        v.name("attn_v.weight"), stream, err, x, w_attnk->native_data && w_attnv->native_data)) return false;    dump_slot(dump, g, layer, b.vcur,                            (uint64_t) 2 * g.n_embd + 2 * g.hc + (uint64_t) g.n_head * g.head_dim,                            (uint64_t) g.n_head_kv * g.head_dim, stream);    if (!normalize_rotate(b.kcur, w_kn, (int) g.n_head_kv, (int) g.head_dim)) return false;
+      |                                                                                                                                                                                          ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:989:5: warning: this ‘else’ clause does not guard... [-Wmisleading-indentation]
+  989 |     else if (st.kv_int8) kv_gather_q8_step(st.k_q, st.v_q, st.k_scale, st.v_scale, st.page_table, b.ids, st.step, cap, s,                                 b.k_scratch, b.v_scratch, stream);    else kv_gather_step(st.k_pool, st.v_pool, st.page_table, b.ids, st.step, cap, s, b.k_scratch, b.v_scratch,                   stream);    if (native_flash_attn_short) {
+      |     ^~~~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:989:330: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘else’
+  989 |     else if (st.kv_int8) kv_gather_q8_step(st.k_q, st.v_q, st.k_scale, st.v_scale, st.page_table, b.ids, st.step, cap, s,                                 b.k_scratch, b.v_scratch, stream);    else kv_gather_step(st.k_pool, st.v_pool, st.page_table, b.ids, st.step, cap, s, b.k_scratch, b.v_scratch,                   stream);    if (native_flash_attn_short) {
+      |                                                                                                                                                                                                                                                                                                                                          ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:1013:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 1013 |     if (!w_attno->native_data) quantize_q8_K(b.attn32, b.attn_q8k, g.n_head * g.head_dim, stream);    if (w_attno->native_data) {
+      |     ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:1013:103: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 1013 |     if (!w_attno->native_data) quantize_q8_K(b.attn32, b.attn_q8k, g.n_head * g.head_dim, stream);    if (w_attno->native_data) {
+      |                                                                                                       ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:876:774: warning: unused variable ‘n_bid’ [-Wunused-variable]
+  876 | bool qsa_layer(const WeightTable& tables, const ModelGeometry& g, int64_t layer, int64_t pos, int32_t pos_base,               const QsaState& st, const QsaBuffers& b, const float* x, float* out, void* stream,               std::string& err, float* dump) {    using namespace strata::kernels;    const QsaShapes s = qsa_shapes(g);    const LayerView v(tables, layer);    const int64_t n_kv = pos + 1;    /* P7 audit: RoPE reads cos/sin row pos_base + pos, and the table holds max_cells rows. */    if ((int64_t) pos_base + pos >= st.max_cells || pos_base < 0) {        err = "qsa_layer: position " + std::to_string((long long) pos_base + pos) + " is outside the RoPE table (" + std::to_string((long long) st.max_cells) + " rows)";        return false;    }    const int64_t n_bid = n_kv / s.idx_block;    const int64_t width = qsa_selection_width(n_kv, s);    const int64_t cap = qsa_selection_width(kTopkMaxCells, s);
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^~~~~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:876:819: warning: unused variable ‘width’ [-Wunused-variable]
+  876 | bool qsa_layer(const WeightTable& tables, const ModelGeometry& g, int64_t layer, int64_t pos, int32_t pos_base,               const QsaState& st, const QsaBuffers& b, const float* x, float* out, void* stream,               std::string& err, float* dump) {    using namespace strata::kernels;    const QsaShapes s = qsa_shapes(g);    const LayerView v(tables, layer);    const int64_t n_kv = pos + 1;    /* P7 audit: RoPE reads cos/sin row pos_base + pos, and the table holds max_cells rows. */    if ((int64_t) pos_base + pos >= st.max_cells || pos_base < 0) {        err = "qsa_layer: position " + std::to_string((long long) pos_base + pos) + " is outside the RoPE table (" + std::to_string((long long) st.max_cells) + " rows)";        return false;    }    const int64_t n_bid = n_kv / s.idx_block;    const int64_t width = qsa_selection_width(n_kv, s);    const int64_t cap = qsa_selection_width(kTopkMaxCells, s);
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^~~~~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp: In function ‘bool strata::core::block_layer_pre(const WeightTable&, const ModelGeometry&, int64_t, int64_t, int32_t, const GdnBuffers&, const QsaState&, const QsaBuffers&, const MoEBuffers&, int64_t, const BlockBuffers&, void*, std::string&, const Doorbell*, const PleRun*, int, int)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:1198:23: warning: unused variable ‘hcd’ [-Wunused-variable]
+ 1198 |         const int64_t hcd = strata::kernels::NG_HC_DIM;
+      |                       ^~~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp: In function ‘bool strata::core::block_layer(const WeightTable&, const ModelGeometry&, int64_t, int64_t, int32_t, const GdnBuffers&, const QsaState&, const QsaBuffers&, const MoEBuffers&, int64_t, const BlockBuffers&, const float*, void*, std::string&, const Doorbell*, const PleRun*)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:1348:1: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 1348 | if (!block_layer_pre(tables, g, layer, pos, pos_base, gb, qst, qb, mb, k, bb, stream, err, db, ple))        return false;    return block_layer_post(tables, g, layer, k, mb, bb, parts, stream, err);}}
+      | ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/layer.cpp:1348:126: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 1348 | if (!block_layer_pre(tables, g, layer, pos, pos_base, gb, qst, qb, mb, k, bb, stream, err, db, ple))        return false;    return block_layer_post(tables, g, layer, k, mb, bb, parts, stream, err);}}
+      |                                                                                                                              ^~~~~~
+[87/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/iq_avx512.cpp.o
+[88/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/session.cpp.o
+[89/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/iq_avx2.cpp.o
+[90/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/remote_experts.cpp.o
+[91/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/expert_cache.cpp.o
+[92/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/native_head.cpp.o
+[93/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/iq_kernels.cu.o
+[94/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/native_dense.cpp.o
+[95/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/conversation_memory.cpp.o
+[96/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/conversation_snapshot.cpp.o
+[97/270] Linking CXX static library libstrata_kernels_cpu.a
+[98/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/expert_source.cpp.o
+In file included from /srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/expert_source.cpp:1:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/research/q4_oracle.hpp: In member function ‘void strata::research::Q4Oracle::begin()’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/research/q4_oracle.hpp:57:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   57 |   if(!active)return;uint64_t t=ns();for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int pick=-1;double value=-1e100;for(int l=d*24;l<(d+1)*24;++l)if(cls(l)==c)for(int e=0;e<512;++e){if(res[l*512+e]<0)continue;const auto& first=q4_tape.windows.front();bool protected_first=false;for(int j=0;j<first.T*10;++j)protected_first|=first.routes.ids[l][j]==e;if(protected_first)continue;double val=victim_value(l,e,0);if(val>value){value=val;pick=l*512+e;}}require(pick>=0,"no same-class reserve");donor_layer[d][c]=pick/512;donor_expert[d][c]=pick%512;spare[d][c]=res[pick];res[pick]=-1;int old;ck(cudaGetDevice(&old));ck(cudaSetDevice(d));ck(cudaMemcpy(dres[d]+pick,res+pick,4,cudaMemcpyHostToDevice));ck(cudaSetDevice(old));std::fprintf(stderr,"Q4_ORACLE_RESERVE device=%d class=%d bytes=%llu slot=%d layer=%d expert=%d active_minus1\n",d,c,(unsigned long long)sizes[c],spare[d][c],pick/512,pick%512);}planner_ns+=ns()-t;
+      |   ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/research/q4_oracle.hpp:57:21: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   57 |   if(!active)return;uint64_t t=ns();for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int pick=-1;double value=-1e100;for(int l=d*24;l<(d+1)*24;++l)if(cls(l)==c)for(int e=0;e<512;++e){if(res[l*512+e]<0)continue;const auto& first=q4_tape.windows.front();bool protected_first=false;for(int j=0;j<first.T*10;++j)protected_first|=first.routes.ids[l][j]==e;if(protected_first)continue;double val=victim_value(l,e,0);if(val>value){value=val;pick=l*512+e;}}require(pick>=0,"no same-class reserve");donor_layer[d][c]=pick/512;donor_expert[d][c]=pick%512;spare[d][c]=res[pick];res[pick]=-1;int old;ck(cudaGetDevice(&old));ck(cudaSetDevice(d));ck(cudaMemcpy(dres[d]+pick,res+pick,4,cudaMemcpyHostToDevice));ck(cudaSetDevice(old));std::fprintf(stderr,"Q4_ORACLE_RESERVE device=%d class=%d bytes=%llu slot=%d layer=%d expert=%d active_minus1\n",d,c,(unsigned long long)sizes[c],spare[d][c],pick/512,pick%512);}planner_ns+=ns()-t;
+      |                     ^~~~~~~~
+[99/270] Building CUDA object CMakeFiles/strata_engine.dir/src/core/remote_expert_opt.cu.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/core/expert_source.hpp(414): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/core/expert_source.hpp(653): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/core/expert_source.hpp(414): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/core/expert_source.hpp(653): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+[100/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/conversation_state.cpp.o
+[101/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/mtp.cpp.o
+[102/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_mmvq.cu.o
+[103/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/peer_experts.cpp.o
+[104/270] Linking CXX static library libstrata_kernels.a
+[105/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/verify.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/verify.cpp: In static member function ‘static void strata::core::Verifier::raise_flag(uint32_t*, uint32_t)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/core/verify.cpp:1607:20: warning: unused variable ‘f’ [-Wunused-variable]
+ 1607 |     volatile long* f = (volatile long*) flag;
+      |                    ^
+[106/270] Building CUDA object CMakeFiles/strata_mmq.dir/src/prefill/moe_fused.cu.o
+[107/270] Building CUDA object CMakeFiles/strata_mmq.dir/src/prefill/ggml_cuda_host.cu.o
+[108/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/quantize.cu.o
+[109/270] Building CUDA object CMakeFiles/strata_mmq.dir/src/prefill/moe_fused_iq.cu.o
+[110/270] Building CUDA object CMakeFiles/strata_mmq.dir/src/prefill/moe_mmq.cu.o
+[111/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/template-instances/mmq-instance-q2_0.cu.o
+[112/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/template-instances/mmq-instance-iq2_xxs.cu.o
+[113/270] Linking CXX static library libstrata_engine.a
+[114/270] Building CUDA object CMakeFiles/strata_prefill.dir/src/prefill/gemm.cu.o
+[115/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/template-instances/mmq-instance-iq3_xxs.cu.o
+[116/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/template-instances/mmq-instance-iq2_xs.cu.o
+[117/270] Building CXX object CMakeFiles/strata_spec.dir/src/spec/suffix_drafter.cpp.o
+[118/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/template-instances/mmq-instance-iq4_nl.cu.o
+[119/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/template-instances/mmq-instance-iq2_s.cu.o
+[120/270] Building CXX object CMakeFiles/strata_spec.dir/src/spec/controller.cpp.o
+[121/270] Building CXX object CMakeFiles/strata_spec.dir/src/spec/draft_policy.cpp.o
+[122/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/template-instances/mmq-instance-iq3_s.cu.o
+[123/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/template-instances/mmq-instance-iq4_xs.cu.o
+[124/270] Building CUDA object CMakeFiles/strata_prefill.dir/src/prefill/kernels.cu.o
+[125/270] Building CXX object CMakeFiles/strata-gguf.dir/src/artifact/gguf_reader.cpp.o
+[126/270] Building CXX object CMakeFiles/strata-plan.dir/src/plan/plan_main.cpp.o
+[127/270] Building CXX object CMakeFiles/gguf_reader_test.dir/src/artifact/gguf_reader_test.cpp.o
+[128/270] Building CXX object CMakeFiles/strata-dequant.dir/src/artifact/dequant.cpp.o
+[129/270] Building CXX object CMakeFiles/strata-load.dir/src/core/load_main.cpp.o
+[130/270] Building CXX object CMakeFiles/strata-device.dir/src/core/device_main.cpp.o
+[131/270] Building CXX object CMakeFiles/qsa_topk_active_parity.dir/src/kernels/qsa_topk_active_parity.cpp.o
+[132/270] Building CXX object CMakeFiles/strata-overlap.dir/src/core/overlap_main.cpp.o
+[133/270] Building CXX object CMakeFiles/strata-concurrent.dir/src/core/concurrent_main.cpp.o
+[134/270] Building CXX object CMakeFiles/qsa_prompt_attn_parity.dir/src/kernels/qsa_prompt_attn_parity.cpp.o
+[135/270] Building CXX object CMakeFiles/expert_profile_save_test.dir/tests/core/expert_profile_save_test.cpp.o
+[136/270] Building CXX object CMakeFiles/dequant_s2_parity.dir/src/kernels/dequant_s2_parity.cpp.o
+[137/270] Building CXX object CMakeFiles/s2_gemv_parity.dir/src/kernels/s2_gemv_parity.cpp.o
+[138/270] Building CXX object CMakeFiles/iq_parity.dir/src/kernels/iq_parity.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/iq_parity.cpp: In function ‘int main(int, char**)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/iq_parity.cpp:47:19: warning: ignoring return value of ‘size_t fread(void*, size_t, size_t, FILE*)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   47 |         std::fread(hdr, 4, 3, f);
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/iq_parity.cpp:52:19: warning: ignoring return value of ‘size_t fread(void*, size_t, size_t, FILE*)’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   52 |         std::fread(ref.data(), 4, ref.size(), g);
+      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[139/270] Building CXX object CMakeFiles/file_expert_source_test.dir/tests/core/file_expert_source_test.cpp.o
+[140/270] Building CXX object CMakeFiles/mmvq_multi_parity.dir/src/kernels/mmvq_multi_parity.cpp.o
+[141/270] Building CXX object CMakeFiles/gguf_split_test.dir/tests/core/gguf_split_test.cpp.o
+[142/270] Building CXX object CMakeFiles/shared_expert_parity.dir/src/kernels/shared_expert_parity.cpp.o
+[143/270] Building CXX object CMakeFiles/native_grouped_parity.dir/src/kernels/native_grouped_parity.cpp.o
+[144/270] Building CXX object CMakeFiles/iq_multi_parity.dir/src/kernels/iq_multi_parity.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/iq_multi_parity.cpp: In function ‘void {anonymous}::check_q8_1_finite(cudaStream_t, std::mt19937&)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/iq_multi_parity.cpp:381:104: warning: comparison is always true due to limited range of data type [-Wtype-limits]
+  381 |                 for (int i = 0; i < 32; ++i) ok = ok && (int8_t) g[4 + i] >= -127 && (int8_t) g[4 + i] <= 127;
+      |                                                                                      ~~~~~~~~~~~~~~~~~~^~~~~~
+[145/270] Building CXX object CMakeFiles/fused_gr_bench.dir/src/kernels/fused_gr_bench.cpp.o
+[146/270] Building CXX object CMakeFiles/strata_prefill.dir/src/prefill/prefill.cpp.o
+[147/270] Building CXX object CMakeFiles/gdn_parity.dir/src/kernels/gdn_parity.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/gdn_parity.cpp: In function ‘int main(int, char**)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/gdn_parity.cpp:244:14: warning: variable ‘to_ref_layout’ set but not used [-Wunused-but-set-variable]
+  244 |         auto to_ref_layout = [&](const std::vector<float>& d) {
+      |              ^~~~~~~~~~~~~
+[148/270] Building CXX object CMakeFiles/s2_gemv_q8_parity.dir/src/kernels/s2_gemv_q8_parity.cpp.o
+[149/270] Building CXX object CMakeFiles/gr_parity.dir/src/kernels/gr_parity.cpp.o
+[150/270] Building CUDA object CMakeFiles/gdn_rec_parity.dir/src/prefill/gdn_rec_parity.cu.o
+[151/270] Building CXX object CMakeFiles/rope_parity.dir/src/kernels/rope_parity.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/rope_parity.cpp: In function ‘int main(int, char**)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/rope_parity.cpp:168:13: warning: variable ‘moved’ set but not used [-Wunused-but-set-variable]
+  168 |         int moved[4] = {0, 0, 0, 0};       // dims 0, 1, half, half+1
+      |             ^~~~~
+[152/270] Building CXX object CMakeFiles/decode_cluster_parity.dir/src/kernels/decode_cluster_parity.cpp.o
+[153/270] Building CXX object CMakeFiles/route_window_parity.dir/src/kernels/route_window_parity.cpp.o
+[154/270] Building CXX object CMakeFiles/quantize_act_parity.dir/src/kernels/quantize_act_parity.cpp.o
+[155/270] Building CXX object CMakeFiles/router_top10_parity.dir/src/kernels/router_top10_parity.cpp.o
+[156/270] Building CXX object CMakeFiles/bf16_gemv_parity.dir/src/kernels/bf16_gemv_parity.cpp.o
+[157/270] Building CUDA object CMakeFiles/gemm_bf16_parity.dir/src/prefill/gemm_bf16_parity.cu.o
+[158/270] Building CXX object CMakeFiles/elementwise_parity.dir/src/kernels/elementwise_parity.cpp.o
+[159/270] Building CXX object CMakeFiles/s_gemv_q8k_parity.dir/src/kernels/s_gemv_q8k_parity.cpp.o
+[160/270] Building CXX object CMakeFiles/sampler_parity.dir/src/kernels/sampler_parity.cpp.o
+[161/270] Building CXX object CMakeFiles/qsa_topk_parity.dir/src/kernels/qsa_topk_parity.cpp.o
+[162/270] Building CXX object CMakeFiles/s_gemv_parity.dir/src/kernels/s_gemv_parity.cpp.o
+[163/270] Building CXX object CMakeFiles/kv_q8_parity.dir/src/kernels/kv_q8_parity.cpp.o
+[164/270] Building CXX object CMakeFiles/kv_stream_parity.dir/src/kernels/kv_stream_parity.cpp.o
+[165/270] Building CXX object CMakeFiles/cvec_parity.dir/src/kernels/cvec_parity.cpp.o
+[166/270] Building CXX object CMakeFiles/kv_q4_parity.dir/src/kernels/kv_q4_parity.cpp.o
+[167/270] Building CXX object CMakeFiles/kv_hybrid_parity.dir/src/kernels/kv_hybrid_parity.cpp.o
+[168/270] Building CXX object CMakeFiles/platform_memory_test.dir/src/platform/memory_test.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/platform/memory_test.cpp: In function ‘int main()’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/platform/memory_test.cpp:61:16: warning: suggest parentheses around operand of ‘!’ or change ‘|’ to ‘||’ or ‘!’ to ‘~’ [-Wparentheses]
+   61 |     int fail = !(r.ok && r.locked_bytes == bytes) | fail_keeps;
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[169/270] Linking CXX static library libstrata_spec.a
+[170/270] Building CXX object CMakeFiles/pinned_shared_test.dir/src/core/pinned_shared_test.cpp.o
+[171/270] Building CXX object CMakeFiles/ple_parity.dir/src/kernels/ple_parity.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/kernels/ple_parity.cpp:117:22: warning: ‘std::vector<unsigned char> {anonymous}::read_path(const char*)’ defined but not used [-Wunused-function]
+  117 | std::vector<uint8_t> read_path(const char* path) {
+      |                      ^~~~~~~~~
+[172/270] Building CXX object CMakeFiles/draft_policy_test.dir/src/spec/draft_policy_test.cpp.o
+[173/270] Building CXX object CMakeFiles/controller_test.dir/src/spec/controller_test.cpp.o
+[174/270] Building CXX object CMakeFiles/conv_cache_test.dir/src/program/conv_cache_test.cpp.o
+[175/270] Building CXX object CMakeFiles/bf16_bits_test.dir/src/kernels/bf16_bits_test.cpp.o
+[176/270] Building CXX object CMakeFiles/suffix_drafter_test.dir/src/spec/suffix_drafter_test.cpp.o
+[177/270] Building CXX object CMakeFiles/coupled_draft_test.dir/src/core/coupled_draft_test.cpp.o
+[178/270] Building CXX object CMakeFiles/router_dot_parity.dir/src/kernels/cpu/router_dot_parity.cpp.o
+[179/270] Building CXX object CMakeFiles/ple_reader_test.dir/src/ngram/ple_reader_test.cpp.o
+[180/270] Building CXX object CMakeFiles/s2_expert_grouped_parity.dir/src/kernels/s2_expert_grouped_parity.cpp.o
+[181/270] Building CXX object CMakeFiles/prefill_fused_moe_test.dir/tests/cuda/prefill_fused_moe_test.cpp.o
+[182/270] Building CXX object CMakeFiles/prefill_fused_iq_test.dir/tests/cuda/prefill_fused_iq_test.cpp.o
+[183/270] Building CXX object CMakeFiles/ple_q5_parity.dir/src/kernels/ple_q5_parity.cpp.o
+[184/270] Building CXX object CMakeFiles/q5_projection_parity.dir/src/kernels/q5_projection_parity.cpp.o
+[185/270] Building CXX object CMakeFiles/native_expert_bench.dir/src/kernels/native_expert_bench.cpp.o
+[186/270] Building CXX object CMakeFiles/ple_fp8_parity.dir/src/kernels/ple_fp8_parity.cpp.o
+[187/270] Building CXX object CMakeFiles/expert_parity.dir/src/kernels/cpu/expert_parity.cpp.o
+[188/270] Building CXX object CMakeFiles/pool_affinity_test.dir/src/kernels/cpu/pool_affinity_linux_test.cpp.o
+[189/270] Building CXX object CMakeFiles/expert_multi_test.dir/src/kernels/cpu/expert_multi_test.cpp.o
+[190/270] Building CXX object CMakeFiles/native_expert_parity.dir/src/kernels/native_expert_parity.cpp.o
+[191/270] Building CUDA object CMakeFiles/strata_mmq.dir/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/ggml-cuda/template-instances/mmq-instance-q8_0.cu.o
+[192/270] Building CXX object CMakeFiles/direct_file_async_test.dir/tests/platform/direct_file_async.cpp.o
+[193/270] Linking CXX executable strata-gguf
+[194/270] Linking CXX executable strata-dequant
+[195/270] Linking CXX executable gguf_reader_test
+[196/270] Linking CXX executable gguf_split_test
+[197/270] Building CXX object CMakeFiles/dequant_bf16_test.dir/src/kernels/dequant_bf16_test.cpp.o
+[198/270] Linking CXX executable strata-plan
+[199/270] Building CXX object CMakeFiles/pool_test.dir/src/kernels/cpu/pool_test.cpp.o
+[200/270] Linking CXX executable strata-device
+[201/270] Linking CXX executable strata-load
+[202/270] Building CXX object CMakeFiles/pool_stress.dir/src/kernels/cpu/pool_stress.cpp.o
+[203/270] Building CXX object CMakeFiles/qsa_parity.dir/src/kernels/qsa_parity.cpp.o
+[204/270] Linking CXX executable strata-concurrent
+[205/270] Linking CXX executable strata-overlap
+[206/270] Linking CXX executable qsa_topk_active_parity
+[207/270] Linking CXX executable qsa_prompt_attn_parity
+[208/270] Linking CXX executable expert_profile_save_test
+[209/270] Linking CXX executable dequant_s2_parity
+[210/270] Linking CXX executable s2_gemv_parity
+[211/270] Linking CXX static library libstrata_mmq.a
+[212/270] Linking CUDA executable gdn_rec_parity
+[213/270] Linking CXX static library libstrata_prefill.a
+[214/270] Linking CXX executable iq_parity
+[215/270] Linking CXX executable mmvq_multi_parity
+[216/270] Building CXX object CMakeFiles/direct_file_async_test.dir/src/platform/direct_file.cpp.o
+[217/270] Linking CXX executable iq_multi_parity
+[218/270] Linking CXX executable file_expert_source_test
+[219/270] Linking CXX executable native_grouped_parity
+[220/270] Linking CXX executable fused_gr_bench
+[221/270] Linking CXX executable gemm_bf16_parity
+[222/270] Linking CXX executable gdn_parity
+[223/270] Linking CXX executable gr_parity
+[224/270] Linking CXX executable s2_gemv_q8_parity
+[225/270] Linking CXX executable sampler_parity
+[226/270] Linking CXX executable shared_expert_parity
+[227/270] Linking CXX executable decode_cluster_parity
+[228/270] Linking CXX executable quantize_act_parity
+[229/270] Linking CXX executable rope_parity
+[230/270] Linking CXX executable router_top10_parity
+[231/270] Linking CXX executable route_window_parity
+[232/270] Linking CXX executable s_gemv_parity
+[233/270] Linking CXX executable bf16_gemv_parity
+[234/270] Linking CXX executable elementwise_parity
+[235/270] Linking CXX executable s_gemv_q8k_parity
+[236/270] Linking CXX executable qsa_parity
+[237/270] Linking CXX executable qsa_topk_parity
+[238/270] Linking CXX executable kv_q8_parity
+[239/270] Linking CXX executable kv_stream_parity
+[240/270] Linking CXX executable kv_q4_parity
+[241/270] Linking CXX executable kv_hybrid_parity
+[242/270] Linking CXX executable cvec_parity
+[243/270] Linking CXX executable s2_expert_grouped_parity
+[244/270] Linking CXX executable platform_memory_test
+[245/270] Linking CXX executable pinned_shared_test
+[246/270] Linking CXX executable controller_test
+[247/270] Linking CXX executable draft_policy_test
+[248/270] Linking CXX executable suffix_drafter_test
+[249/270] Linking CXX executable ple_reader_test
+[250/270] Linking CXX executable ple_parity
+[251/270] Linking CXX executable bf16_bits_test
+[252/270] Linking CXX executable conv_cache_test
+[253/270] Linking CXX executable coupled_draft_test
+[254/270] Linking CXX executable ple_q5_parity
+[255/270] Linking CXX executable router_dot_parity
+[256/270] Linking CXX executable q5_projection_parity
+[257/270] Linking CXX executable ple_fp8_parity
+[258/270] Linking CXX executable native_expert_parity
+[259/270] Linking CXX executable native_expert_bench
+[260/270] Linking CXX executable dequant_bf16_test
+[261/270] Linking CXX executable expert_multi_test
+[262/270] Linking CXX executable expert_parity
+[263/270] Linking CXX executable pool_affinity_test
+[264/270] Linking CXX executable direct_file_async_test
+[265/270] Linking CXX executable prefill_fused_moe_test
+[266/270] Linking CXX executable prefill_fused_iq_test
+[267/270] Linking CXX executable pool_test
+[268/270] Linking CXX executable pool_stress
+[269/270] Building CXX object CMakeFiles/strata.dir/src/program/generate.cpp.o
+In file included from /srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/program/generate.cpp:2:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/research/q4_oracle.hpp: In member function ‘void strata::research::Q4Oracle::begin()’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/research/q4_oracle.hpp:57:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   57 |   if(!active)return;uint64_t t=ns();for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int pick=-1;double value=-1e100;for(int l=d*24;l<(d+1)*24;++l)if(cls(l)==c)for(int e=0;e<512;++e){if(res[l*512+e]<0)continue;const auto& first=q4_tape.windows.front();bool protected_first=false;for(int j=0;j<first.T*10;++j)protected_first|=first.routes.ids[l][j]==e;if(protected_first)continue;double val=victim_value(l,e,0);if(val>value){value=val;pick=l*512+e;}}require(pick>=0,"no same-class reserve");donor_layer[d][c]=pick/512;donor_expert[d][c]=pick%512;spare[d][c]=res[pick];res[pick]=-1;int old;ck(cudaGetDevice(&old));ck(cudaSetDevice(d));ck(cudaMemcpy(dres[d]+pick,res+pick,4,cudaMemcpyHostToDevice));ck(cudaSetDevice(old));std::fprintf(stderr,"Q4_ORACLE_RESERVE device=%d class=%d bytes=%llu slot=%d layer=%d expert=%d active_minus1\n",d,c,(unsigned long long)sizes[c],spare[d][c],pick/512,pick%512);}planner_ns+=ns()-t;
+      |   ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/include/strata/research/q4_oracle.hpp:57:21: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   57 |   if(!active)return;uint64_t t=ns();for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int pick=-1;double value=-1e100;for(int l=d*24;l<(d+1)*24;++l)if(cls(l)==c)for(int e=0;e<512;++e){if(res[l*512+e]<0)continue;const auto& first=q4_tape.windows.front();bool protected_first=false;for(int j=0;j<first.T*10;++j)protected_first|=first.routes.ids[l][j]==e;if(protected_first)continue;double val=victim_value(l,e,0);if(val>value){value=val;pick=l*512+e;}}require(pick>=0,"no same-class reserve");donor_layer[d][c]=pick/512;donor_expert[d][c]=pick%512;spare[d][c]=res[pick];res[pick]=-1;int old;ck(cudaGetDevice(&old));ck(cudaSetDevice(d));ck(cudaMemcpy(dres[d]+pick,res+pick,4,cudaMemcpyHostToDevice));ck(cudaSetDevice(old));std::fprintf(stderr,"Q4_ORACLE_RESERVE device=%d class=%d bytes=%llu slot=%d layer=%d expert=%d active_minus1\n",d,c,(unsigned long long)sizes[c],spare[d][c],pick/512,pick%512);}planner_ns+=ns()-t;
+      |                     ^~~~~~~~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/program/generate.cpp: In lambda function:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/program/generate.cpp:6180:30: warning: unused variable ‘w’ [-Wunused-variable]
+ 6180 |                 const double w = (double) bt_windows, wall = std::chrono::duration<double, std::milli>(Clock::now() - bt_start).count();
+      |                              ^
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/program/generate.cpp: At global scope:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/source/runtime/src/program/generate.cpp:1022:5: warning: ‘int {anonymous}::argmax(const std::vector<float>&)’ defined but not used [-Wunused-function]
+ 1022 | int argmax(const std::vector<float>& v) {
+      |     ^~~~~~
+[270/270] Linking CXX executable strata

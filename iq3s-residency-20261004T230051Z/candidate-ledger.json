@@ -1,0 +1,87 @@
+{
+  "families": [
+    {
+      "id": "F01",
+      "name": "existing/static/recency/frequency/EMA",
+      "state": "COMPLETE_NEGATIVE",
+      "next": "Frequency reduces fixed-trace nonlocals but live confirmation has lower TG at both profiles; static/recency/EMA bounded comparisons complete. Existing current policy remains the measured reference."
+    },
+    {
+      "id": "F02",
+      "name": "Least-Stale",
+      "state": "COMPLETE_NEGATIVE",
+      "next": "Stale-first/FIFO same-layer adaptation increases misses and transfers; original global paper scheduler not deployed."
+    },
+    {
+      "id": "F03",
+      "name": "Markov/transition/co-occurrence",
+      "state": "COMPLETE_NEGATIVE",
+      "next": "Causal Markov indexing and heat-unit normalization repaired and evaluated both profiles; normalized result still loses. This does not exhaust all transition/co-occurrence representations."
+    },
+    {
+      "id": "F04",
+      "name": "Expert-Jev linear and small MLP",
+      "state": "COMPLETE_NEGATIVE",
+      "next": "Linear and small MLP trained/calibrated on separated episodes and replayed both profiles. No runtime benefit justified by these scorers."
+    },
+    {
+      "id": "F04T",
+      "name": "Expert-Jev temporal",
+      "state": "COMPLETE_NEGATIVE",
+      "next": "Temporal MLP ablation complete; worse than EMA and linear on held tasks and finite-copy replay."
+    },
+    {
+      "id": "F05",
+      "name": "Fate/router/MTP lookahead",
+      "state": "COMPLETE_BOUNDED_FEASIBILITY",
+      "next": "Fresh CPU, low-rank CPU, native GPU and 4/8-layer GPU signals evaluated. Development-frozen horizon8 improves lead but charged temporary swaps have low benchmark tail coverage and substantial false-copy/restoration cost. No live router policy justified; persistent placement remains open."
+    },
+    {
+      "id": "F06",
+      "name": "cheap-history/learned/router hybrids",
+      "state": "COMPLETE_NEGATIVE_BOUNDED",
+      "next": "Causal heat/Markov and learned hybrids evaluated. E018/E020 router plus EMA guard avoids churn but captures little ready tail. This closes these bounded variants, not all hybrid representations."
+    },
+    {
+      "id": "F07",
+      "name": "budget-aware placement/asynchronous promotion/cross-GPU",
+      "state": "COMPLETE_MIXED_ATTRIBUTION_NOT_ESTABLISHED",
+      "next": "Same-device compatible placement has modest simulated tail gains, but full confirmations and exact-choice/same-binary guards do not establish a portable benefit. Safe GPU planning and direct rows completed with numeric parity. Direct rows regress32K vsOFF and retain uncertain128K advantage. Persistent admission and cross-device scheduling remain NOT_ATTEMPTED under the time budget."
+    },
+    {
+      "id": "F08",
+      "name": "execution coordination and idle worker scheduling",
+      "state": "COMPLETE_MIXED_SCOPED_POSITIVE",
+      "next": "Coordination and row-copy changes are mixed or unisolated. Existing100us pool threshold preserves the control binary/output/MTP/capacity, improves scoped TG/latency, and sharply reduces spinning CPU; measured CPU-positive wakeup wait rises. Independent-workload paired validation is the strongest next experiment."
+    }
+  ],
+  "followup_phases": {
+    "P0": {
+      "experiment": "E026-pool-generalization",
+      "report": "experiments/E026-pool-generalization/report.md",
+      "state": "COMPLETE_SCOPED_VALIDATION"
+    },
+    "P1": {
+      "experiment": "E027-pool-baseline",
+      "report": "experiments/E027-pool-baseline/report.md",
+      "state": "COMPLETE_FROZEN_BASELINE"
+    },
+    "P2": {
+      "experiment": "E029-persistent-runtime",
+      "report": "experiments/E029-persistent-runtime/report.md",
+      "state": "COMPLETE_BOUNDED_PERSISTENT_RESIDENCY"
+    },
+    "Q4_CONDITIONAL_ADMISSION_V3": {
+      "experiments": [
+        "E033",
+        "E034",
+        "E035"
+      ],
+      "report": "campaigns/q4-conditional-admission-20261006T010859Z/report.md",
+      "state": "COMPLETE_MECHANISM_ONLY",
+      "recommendation": "PROMISING_CONDITIONAL_ADMISSION",
+      "production_baseline": "KEEP_Q4_100US_BASELINE",
+      "next": "Same-binary OFF/ON timing attribution is a proposed future experiment, not started."
+    }
+  }
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "name": "python-dependency-repair",
+    "command": [
+      "uv",
+      "pip",
+      "install",
+      "--python",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "regex==2026.9.10",
+      "pyyaml==6.0.3"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z",
+    "returncode": 0,
+    "wall_s": 0.26508402824401855,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/logs/python-dependency-repair.log"
+  },
+  {
+    "name": "native-tests",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ctest",
+      "--test-dir",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control",
+      "--output-on-failure",
+      "--timeout",
+      "60",
+      "-j",
+      "1"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z",
+    "returncode": 8,
+    "wall_s": 104.9618501663208,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/logs/native-tests.log"
+  },
+  {
+    "name": "python-tests",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "serve",
+      "-p",
+      "test_*.py"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control",
+    "returncode": 0,
+    "wall_s": 110.52726340293884,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/logs/python-tests.log"
+  },
+  {
+    "name": "dependencies",
+    "command": [
+      "uv",
+      "pip",
+      "freeze",
+      "--python",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z",
+    "returncode": 0,
+    "wall_s": 0.015901565551757812,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/logs/dependencies.log"
+  }
+]

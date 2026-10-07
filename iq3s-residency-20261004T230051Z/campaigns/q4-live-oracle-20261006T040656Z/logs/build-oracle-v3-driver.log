@@ -1,0 +1,61 @@
+BUILD_STEP add 0
+BUILD_STEP commit 0
+BUILD_STEP configure 0
+BUILD_PROGRESS oracle-v3 build 15
+BUILD_PROGRESS oracle-v3 build 30
+BUILD_STEP build -15
+e))        return false;    return block_layer_post(tables, g, layer, k, mb, bb, parts, stream, err);}}
+      |                                                                                                                              ^~~~~~
+[87/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/iq_avx512.cpp.o
+[88/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/session.cpp.o
+[89/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/remote_experts.cpp.o
+[90/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/iq_avx2.cpp.o
+[91/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/expert_cache.cpp.o
+[92/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/iq_kernels.cu.o
+[93/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/native_head.cpp.o
+[94/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/native_dense.cpp.o
+[95/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/conversation_memory.cpp.o
+[96/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/expert_source.cpp.o
+In file included from /srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/src/core/expert_source.cpp:1:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/research/q4_oracle.hpp: In member function ‘void strata::research::Q4Oracle::begin()’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/research/q4_oracle.hpp:38:3: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   38 |   if(!active)return;uint64_t t=ns();for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int pick=-1;double value=-1e100;for(int l=d*24;l<(d+1)*24;++l)if(cls(l)==c)for(int e=0;e<512;++e){if(res[l*512+e]<0)continue;const auto& first=q4_tape.windows.front();bool protected_first=false;for(int j=0;j<first.T*10;++j)protected_first|=first.routes.ids[l][j]==e;if(protected_first)continue;int nx=next(l,e,0);double val=!horizon?(nx<0?1e12:nx):(nx<0?double(horizon+1)-std::log1p(std::max(0.f,heat[l*512+e])):nx);if(val>value){value=val;pick=l*512+e;}}require(pick>=0,"no same-class reserve");donor_layer[d][c]=pick/512;donor_expert[d][c]=pick%512;spare[d][c]=res[pick];res[pick]=-1;int old;ck(cudaGetDevice(&old));ck(cudaSetDevice(d));ck(cudaMemcpy(dres[d]+pick,res+pick,4,cudaMemcpyHostToDevice));ck(cudaSetDevice(old));std::fprintf(stderr,"Q4_ORACLE_RESERVE device=%d class=%d bytes=%llu slot=%d layer=%d expert=%d active_minus1\n",d,c,(unsigned long long)sizes[c],spare[d][c],pick/512,pick%512);}planner_ns+=ns()-t;
+      |   ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/research/q4_oracle.hpp:38:21: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   38 |   if(!active)return;uint64_t t=ns();for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int pick=-1;double value=-1e100;for(int l=d*24;l<(d+1)*24;++l)if(cls(l)==c)for(int e=0;e<512;++e){if(res[l*512+e]<0)continue;const auto& first=q4_tape.windows.front();bool protected_first=false;for(int j=0;j<first.T*10;++j)protected_first|=first.routes.ids[l][j]==e;if(protected_first)continue;int nx=next(l,e,0);double val=!horizon?(nx<0?1e12:nx):(nx<0?double(horizon+1)-std::log1p(std::max(0.f,heat[l*512+e])):nx);if(val>value){value=val;pick=l*512+e;}}require(pick>=0,"no same-class reserve");donor_layer[d][c]=pick/512;donor_expert[d][c]=pick%512;spare[d][c]=res[pick];res[pick]=-1;int old;ck(cudaGetDevice(&old));ck(cudaSetDevice(d));ck(cudaMemcpy(dres[d]+pick,res+pick,4,cudaMemcpyHostToDevice));ck(cudaSetDevice(old));std::fprintf(stderr,"Q4_ORACLE_RESERVE device=%d class=%d bytes=%llu slot=%d layer=%d expert=%d active_minus1\n",d,c,(unsigned long long)sizes[c],spare[d][c],pick/512,pick%512);}planner_ns+=ns()-t;
+      |                     ^~~~~~~~
+[97/270] Linking CXX static library libstrata_kernels_cpu.a
+[98/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/conversation_snapshot.cpp.o
+[99/270] Building CUDA object CMakeFiles/strata_engine.dir/src/core/remote_expert_opt.cu.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/core/expert_source.hpp(414): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/core/expert_source.hpp(653): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/core/expert_source.hpp(414): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/core/expert_source.hpp(653): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+[100/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/mtp.cpp.o
+[101/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/conversation_state.cpp.o
+[102/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/peer_experts.cpp.o
+[103/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_mmvq.cu.o
+[104/270] Linking CXX static library libstrata_kernels.a
+[105/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/verify.cpp.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/src/core/verify.cpp: In static member function ‘static void strata::core::Verifier::raise_flag(uint32_t*, uint32_t)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/src/core/verify.cpp:1607:20: warning: unused variable ‘f’ [-Wunused-variable]
+ 1607 |     volatile long* f = (volatile long*) flag;
+      |                    ^
+[106/270] Building CUDA object CMakeFiles/strata_mmq.dir/src/prefill/moe_fused.cu.o
+

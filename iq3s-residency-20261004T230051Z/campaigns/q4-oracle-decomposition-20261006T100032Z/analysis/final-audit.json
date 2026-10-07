@@ -1,0 +1,256 @@
+{
+  "state": "PASS",
+  "checks": [
+    {
+      "requirement": "Required English campaign artifacts",
+      "state": "PASS",
+      "evidence": [
+        "GOAL.md",
+        "STATUS.json",
+        "DECISIONS.md",
+        "ledger.jsonl",
+        "report.md",
+        "summary.csv",
+        "summary.json",
+        "phase-a/information-channel-map.md",
+        "phase-a/feature-query-audit.md",
+        "phase-a/protocol.json",
+        "phase-a/report.md",
+        "phase-b/report.md",
+        "phase-b/offline-summary.csv",
+        "phase-b/offline-summary.json",
+        "phase-c/report.md",
+        "phase-c/transfer-protocol.json",
+        "phase-c/independent-protocol.json",
+        "analysis/predictor-specification.md",
+        "git/oracle-decomposition-v2-identity.json",
+        "patches/information-v2.diff"
+      ]
+    },
+    {
+      "requirement": "Main decomposition and selected context transfer complete",
+      "state": "PASS",
+      "evidence": {
+        "('32k', 'current')": 3,
+        "('32k', 'FF')": 3,
+        "('32k', '64F')": 3,
+        "('32k', 'F64')": 3,
+        "('32k', '6464')": 3,
+        "('128k', 'F256')": 3,
+        "('128k', 'current')": 3,
+        "('128k', 'FF')": 3,
+        "('256k', 'FF')": 3,
+        "('256k', 'current')": 3,
+        "('256k', 'F256')": 3
+      }
+    },
+    {
+      "requirement": "No more than three unchanged measured attempts",
+      "state": "PASS",
+      "evidence": {
+        "('128k', 'F256')": 3,
+        "('128k', 'FF')": 3,
+        "('128k', 'current')": 3,
+        "('256k', 'F256')": 3,
+        "('256k', 'FF')": 3,
+        "('256k', 'current')": 3,
+        "('32k', '6464')": 3,
+        "('32k', '64F')": 3,
+        "('32k', 'F64')": 3,
+        "('32k', 'FF')": 3,
+        "('32k', 'current')": 3
+      }
+    },
+    {
+      "requirement": "All headline requests valid with4096output and exact work/state/ownership",
+      "state": "PASS",
+      "evidence": [
+        "v2-128k-F256-attempt1",
+        "v2-128k-F256-attempt2",
+        "v2-128k-F256-attempt3",
+        "v2-128k-FF-attempt1",
+        "v2-128k-FF-attempt2",
+        "v2-128k-FF-attempt3",
+        "v2-128k-current-attempt1",
+        "v2-128k-current-attempt2",
+        "v2-128k-current-attempt3",
+        "v2-256k-F256-attempt1",
+        "v2-256k-F256-attempt2",
+        "v2-256k-F256-attempt3",
+        "v2-256k-FF-attempt1",
+        "v2-256k-FF-attempt2",
+        "v2-256k-FF-attempt3",
+        "v2-256k-current-attempt1",
+        "v2-256k-current-attempt2",
+        "v2-256k-current-attempt3",
+        "v2-32k-6464-attempt1",
+        "v2-32k-6464-attempt2",
+        "v2-32k-6464-attempt3",
+        "v2-32k-64F-attempt1",
+        "v2-32k-64F-attempt2",
+        "v2-32k-64F-attempt3",
+        "v2-32k-F64-attempt1",
+        "v2-32k-F64-attempt2",
+        "v2-32k-F64-attempt3",
+        "v2-32k-FF-attempt1",
+        "v2-32k-FF-attempt2",
+        "v2-32k-FF-attempt3",
+        "v2-32k-current-attempt1",
+        "v2-32k-current-attempt2",
+        "v2-32k-current-attempt3"
+      ]
+    },
+    {
+      "requirement": "Independent role query budgets enforced",
+      "state": "PASS",
+      "evidence": "Per-request Q4_INFORMATION_END; inclusive endpoint tests"
+    },
+    {
+      "requirement": "Test information-final-run",
+      "state": "PASS",
+      "evidence": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/tests/information-final-run/result.json"
+    },
+    {
+      "requirement": "Test safety-v2-run",
+      "state": "PASS",
+      "evidence": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/tests/safety-v2-run/result.json"
+    },
+    {
+      "requirement": "Test targeted-native",
+      "state": "PASS",
+      "evidence": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/tests/targeted-native/result.json"
+    },
+    {
+      "requirement": "No unknowns replaced by fabricated counter zero",
+      "state": "PASS",
+      "evidence": "Unavailable selection reasons and secondary KV counters explicitly unknown; all-routed conservation in ownership audits"
+    },
+    {
+      "requirement": "Frozen binary source and clean worktree",
+      "state": "PASS",
+      "evidence": {
+        "source_sha": "bbfea2955ec238f7e6406b11c74e577c996c4a8d",
+        "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "replay_substrate": "117bc89b3bacbf263379c336557e6c8aa07aff5e",
+        "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/src/decomposition-v2",
+        "exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/builds/decomposition-v2/strata",
+        "binary_sha256": "9068a7205c14884f6436274627a3c6d78ab707894a21eeb9847a488367cbcfef",
+        "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/builds/decomposition-v2"
+      }
+    },
+    {
+      "requirement": "Previous evidence anchor hashes/mtimes unchanged",
+      "state": "PASS",
+      "evidence": [
+        {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/report.md",
+          "bytes": 29875,
+          "mtime_ns": 1791272574108976479,
+          "sha256": "3a533520eba9a9a7e6d35b42f446b06be8ac592765b61e24033ef01731b7640f"
+        },
+        {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/summary.csv",
+          "bytes": 12461,
+          "mtime_ns": 1791270967439842017,
+          "sha256": "99c844ae162e73264253ad87cf6606abae216698ab50d1ee9a07cb096121bde5"
+        },
+        {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/summary.json",
+          "bytes": 59095,
+          "mtime_ns": 1791270967438917800,
+          "sha256": "9c45f7abe65cd3ad0511da82b2e07df0c96da0991401f9dfa461f2fb4951a9b4"
+        },
+        {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/STATUS.json",
+          "bytes": 2068,
+          "mtime_ns": 1791273483015015999,
+          "sha256": "95a23faac4ac4d50e9e06d2cf5b0a252a5c764efc2be1f292be62d4e22a90cbe"
+        },
+        {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/DECISIONS.md",
+          "bytes": 4147,
+          "mtime_ns": 1791271436105482760,
+          "sha256": "9940e73cb4920d32885aef832d08e1df4005cb4aa57b55ba913dc24b1efb8e71"
+        },
+        {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/phase-a/KV-service-fidelity.md",
+          "bytes": 1476,
+          "mtime_ns": 1791266661627999495,
+          "sha256": "5ac25bdf54eb417fa52fa0c29cedc2d9fe910aa752d9db3639e7522a8cb67848"
+        },
+        {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/phase-b/strict-offline-provenance.json",
+          "bytes": 326,
+          "mtime_ns": 1791264734729554722,
+          "sha256": "c5ec93d73df4b34f7ed5c18fdca60863c9128bc4e1c249788fafa44e499dfd96"
+        },
+        {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/research/q4_oracle.hpp",
+          "bytes": 16702,
+          "mtime_ns": 1791263349913259823,
+          "sha256": "b4c35a8f671199f445767d735555574c46676ed2f109182c89ffe02978eeeda8"
+        },
+        {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3/include/strata/research/q4_tape.hpp",
+          "bytes": 9663,
+          "mtime_ns": 1791263349913859461,
+          "sha256": "0dda012376d0b48653cdadff23aa9372a05513e83db1e5ade0f5fee3ae59915d"
+        }
+      ]
+    },
+    {
+      "requirement": "Retained replay launchers verified",
+      "state": "PASS",
+      "evidence": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/tests/launcher-checks.json"
+    },
+    {
+      "requirement": "Independent previously-observed substantive task transfer retained",
+      "state": "PASS",
+      "evidence": "Previously observed independent Python zipfile/archive task, 6991 input and 1024 recorded output tokens, total context 32768. This is task transfer, not a new untouched holdout. Every arm enables the same sampled copied-weight readback setting; readbacks occur only where oracle copies are actually issued. Their cost remains in request/decode timing. Fixed forced output does not evaluate task quality."
+    },
+    {
+      "requirement": "No owned research server/training/copier/profiler remains",
+      "state": "PASS",
+      "evidence": []
+    },
+    {
+      "requirement": "Both GPUs free of compute jobs",
+      "state": "PASS",
+      "evidence": {
+        "compute": "",
+        "GPU": "0, 0, 1\n1, 0, 1\n"
+      }
+    },
+    {
+      "requirement": "Absolute deadline respected",
+      "state": "PASS",
+      "evidence": {
+        "deadline": {
+          "start_epoch": 1791280620.0,
+          "start_utc": "2026-10-06T09:57:00+00:00",
+          "deadline_epoch": 1791302220.0,
+          "deadline_utc": "2026-10-06T15:57:00+00:00",
+          "cutoff_epoch": 1791299520.0,
+          "cutoff_utc": "2026-10-06T15:12:00+00:00",
+          "start_monotonic": 428540.86748859263,
+          "deadline_monotonic": 450140.86748859263,
+          "cutoff_monotonic": 447440.86748859263,
+          "boot_id": "f0f64758-b607-4f47-b300-9585efa577c6",
+          "never_reset": true,
+          "experiment_cutoff_monotonic": 447440.86748859263,
+          "experiment_cutoff_epoch": 1791299520.0
+        },
+        "observed_UTC": "2026-10-06T13:00:55.365123+00:00",
+        "elapsed_s": 11035.365154633357
+      }
+    }
+  ],
+  "not_claimed": [
+    "Universal hardware-only benefit",
+    "Untouched holdout diversity from single tape replicas",
+    "Complete secondary-device KV DMA identity",
+    "Optimal scheduler/information-theoretic lower bound",
+    "All possible replay wrapper combinations live-benchmarked"
+  ],
+  "observed": "2026-10-06T13:00:55.365159+00:00"
+}

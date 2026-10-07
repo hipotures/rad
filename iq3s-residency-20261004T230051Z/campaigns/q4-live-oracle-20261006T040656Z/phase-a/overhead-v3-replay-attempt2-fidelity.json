@@ -1,0 +1,97 @@
+{
+  "native_main_head_agreement": {
+    "positions": 310,
+    "agreements": 310,
+    "fraction": 1.0,
+    "scope": "Native argmax computed before forced output; includes rejected verifier lanes. This is numerical trajectory diagnostics, not quality evaluation."
+  },
+  "selected_activation_check": {
+    "sampled_values": 37688,
+    "excluded_unexecuted_MTP_zero_values": 256,
+    "bitwise_equal": true,
+    "max_abs_error": 0.0,
+    "relative_L2": 0.0,
+    "first_divergence_window_role_component": null,
+    "scope": "Eight actual activation components only at executed main/MTP routed invocations, excluding padded inactive MTP rows; exact uint32 bit comparison plus numerical error. Not all hidden tensors. Oracle placement can legitimately change CPU/GPU numerical intermediates."
+  },
+  "graph_readiness": {
+    "captured_shapes_before_measured_request": [
+      1,
+      1,
+      2,
+      2,
+      4,
+      4,
+      3,
+      3
+    ],
+    "all_T_1_to_4_ready": true,
+    "scope": "Native verifier graph capture messages; main split devices represented by paired messages. MTP remains computed normally."
+  },
+  "physical_KV_summary": null,
+  "initial_state": {
+    "match": true,
+    "components": 140,
+    "bytes_checked": 623320868,
+    "setup_ms": 532.341,
+    "SHA256": "71a8574f288fb8df2c326f7b857d385b48df170f306120445251ac359e28d53e",
+    "scope": "Meaningful initial GDN, PLE, HC_R, QSA indexer/mapping/canonical host prefix and resident KV/MTP pools; streamed GPU payload redundant with checked host prefix/maps."
+  },
+  "state": "PASS",
+  "errors": [],
+  "label": "overhead-v3-replay-attempt2",
+  "tape": {
+    "state": "PASS",
+    "errors": [],
+    "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/tapes/development-capture-v3.bin",
+    "schema": 2,
+    "initial_rounds": 25,
+    "sparse_attention_frozen": true,
+    "native_FNV_work_verified": true,
+    "tape_sha256": "d628ab136eb9a81c22640fa79e2669a2393fbbac19872056ba20bda421ede5c3",
+    "work_sha256": "f53ed7c95333b82b88410637120af0beb33a10c5e63f0446571da1b1a64bcac6",
+    "native_FNV64": "028e7091cdc6b8ba",
+    "prompt_count": 4096,
+    "prompt_ids_sha256_binary": "036ff8171e1bba329bf54bae44b54dfe6ea50d608a4387615e3045b9cb8345e0",
+    "committed_emitted_output": 256,
+    "committed_in_state_prefix": 259,
+    "output_ids_sha256_binary": "ff98e68eba55037bb07875ddf6266f03dcdc7785086d72a67d778a1bf67f699a",
+    "windows": 93,
+    "main_routed_events": 4464,
+    "MTP_full_routed_events": 247,
+    "MTP_KV_only_catchup_invocations": 92,
+    "MTP_KV_only_catchup_rows": 306,
+    "MTP_full_routed_shape": "one row per actual draft step; catchup is native T-row KV-only prefix with no router/expert kernel",
+    "main_routed_entries": 148800,
+    "MTP_routed_entries": 2470,
+    "verifier_T_sum": 310,
+    "MTP_proposed_to_verifier": 217,
+    "MTP_accepted_to_commit": 166,
+    "RAM_tape_MB": 38.293952,
+    "initial_residents": 11541,
+    "initial_resident_sha256": "9cef70ae1b6476ceb9b3df8e60323cacc80a52e807bc63a7754251d562da13bb",
+    "initial_heat_sha256": "b6c75639f6896376204f01ca7fa2a96fdbdd6c9d62cba057510b30e51388534a",
+    "scope": "all48main decode layers plus real MTP routed steps; normal prefill from exactIDs, not route-overridden"
+  },
+  "observed_windows": 93,
+  "seen_events": 4711,
+  "native_router_id_or_coefficient_disagreements": 0,
+  "native_QSA_selection_disagreements": 0,
+  "native_head_first_divergence": -1,
+  "lookup_ms": 10.038,
+  "native_main_routing_stats": {
+    "all_routed_entries": 148800,
+    "local_vram_entries": 140671,
+    "cpu_fallback_entries": 7345,
+    "offloaded_entries": 784
+  },
+  "time": {
+    "pp_s": 3.9612,
+    "decode_s": 2.2613000000000003,
+    "TG": 113.2,
+    "wall_s": 6.79518191103125,
+    "TTFT_s": 4.520078789035324
+  },
+  "clock": "Window CPU monotonic timestamps; not GPU copy deadlines.",
+  "correctness_scope": "Tape structure/counts/coefficients and actual forced emission; selected finite activation components. No claim forced output equality proves model math."
+}

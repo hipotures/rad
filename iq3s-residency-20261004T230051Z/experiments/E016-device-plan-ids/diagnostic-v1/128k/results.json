@@ -1,0 +1,223 @@
+{
+  "runs": [
+    {
+      "variant": "diagnostic-device-plan-ids-v1",
+      "profile": "128k",
+      "kind": "diagnostic",
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/128k-run1.json",
+        "payload_sha256": "d4c8a6dc0e3da3056203c00844d339503a216009d45147933a1d189ba7de3036",
+        "messages_sha256": "1b9859fede0e0a9d17dcd4f5a72a215ef79ab0448ef4272dd1bbfbe2cac6dbcf",
+        "input_ids_sha256": "798f2529bb9cc57a5074bd5e61319f7015e2a61000083f1e991463eab11d2d88",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/798f2529bb9cc57a5074bd5e61319f7015e2a61000083f1e991463eab11d2d88.json",
+        "actual_input_tokens": 126715,
+        "profile": "128k",
+        "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/128K-long-run1.json",
+        "source_payload_file_sha256": "b0d5c54c1350d62c0805f466ddb674eeb41b2ef04bfc6e82027ff160d2c8d4f3",
+        "retained_source_characters": 428857,
+        "removed_source_characters": 1160,
+        "trim_boundary": "complete source line",
+        "total_requested_tokens": 130811,
+        "admission_verified_offline": true
+      },
+      "source_sha": "5fe14e9321e779345041162b462036a3a83036ab",
+      "binary_sha256": "92dcaab562034e221b7594c599134b1d3c32b2c182dd2765c0a9141086f46417",
+      "full_config": {
+        "exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-device-plan-ids-v1/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768",
+          "--expert-cache",
+          "auto",
+          "--max-context",
+          "131072",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--pool-workers",
+          "15",
+          "--pcie-frac",
+          "0.28"
+        ],
+        "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-device-plan-ids-v1",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/logs/CURRENT-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18132,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "25",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "env": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_VERIFY_DEVICE_PLAN": "1",
+          "STRATA_LAB_PLAN_IDS": "1"
+        },
+        "host": "127.0.0.1",
+        "parallel": 1,
+        "Strata_HEAD": "5fe14e9321e779345041162b462036a3a83036ab",
+        "build_variant": "diagnostic-device-plan-ids-v1",
+        "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "92dcaab562034e221b7594c599134b1d3c32b2c182dd2765c0a9141086f46417",
+        "headline_instrumentation": "DIAGNOSTIC_ONLY",
+        "Strata_version": "0.1.39",
+        "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "max_total_context": 131072,
+        "source_sha": "5fe14e9321e779345041162b462036a3a83036ab",
+        "source_status": "",
+        "variant_overrides": {
+          "env": {
+            "STRATA_VERIFY_DEVICE_PLAN": "1",
+            "STRATA_LAB_PLAN_IDS": "1"
+          },
+          "policy": "original EMA; device-planned all-local groups with stable per-layer IDs",
+          "scope": "frozen serial two-stage one-group IQ3_S only"
+        },
+        "diagnostic_env": {
+          "STRATA_LAB_TRACE": "{attempt}/traces/runtime"
+        }
+      },
+      "full_engine_commands": [
+        [
+          "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-device-plan-ids-v1/strata",
+          "--serve",
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768",
+          "--expert-cache",
+          "auto",
+          "--max-context",
+          "131072",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--pool-workers",
+          "15",
+          "--pcie-frac",
+          "0.28",
+          "--layer-split",
+          "25"
+        ]
+      ],
+      "started_epoch": 1791171488.9965045,
+      "requested_output": 4096,
+      "actual_input_tokens": 126715,
+      "actual_output_tokens": 4096,
+      "PP": 4018.5,
+      "TG": 136.3,
+      "TTFT_s": 32.08209966402501,
+      "wall_s": 62.14150813699234,
+      "pp_s": 31.533,
+      "decode_s": 30.048299999999998,
+      "reuse": 0,
+      "finish_reason": "length",
+      "mtp_proposed": 3497,
+      "mtp_accepted": 2579,
+      "verify_windows": 1517,
+      "hit_rate_pct": 98.6,
+      "local_vram_entries": 2371327,
+      "cpu_fallback_entries": 34241,
+      "offloaded_entries": 1152,
+      "text": "# Strata Engine Repository Maintenance Plan\n\n## 1. GGUF Reader: Bounds-Checked Cursor Hardening\n\n**Component:** `include/strata/artifact/gguf_reader.hpp` — the `Cursor` class and `GgufFile::parse()`.\n\n**Responsibilities:** The `Cursor` provides bounds-checked reads over the mmapped GGUF header. `GgufFile::parse()` uses it to read magic, version, tensor count, KV metadata, and the tensor directory. A truncated or corrupt file must produce a precise error rather than a segfault.\n\n**Problem:** The `Cursor::str()` method reads a `uint64_t` length then calls `need(n)`, but `need` checks `pos_ + n > size_` using `size_t` arithmetic. On a 32-bit `size_t` platform (unlikely but possible in embedded builds), a length near `UINT64_MAX` could overflow `pos_ + n` before the comparison. Additionally, `read_value` for `MetaType::ARRAY` reserves up to 64 items but the loop still iterates `v.count` times (potentially 16M) even though only 64 are kept — a DoS vector on a malicious file.\n\n**Proposed change:**\n\n```diff\n--- a/include/strata/artifact/gguf_reader.hpp\n+++ b/include/strata/artifact/gguf_reader.hpp\n@@ -1,6 +1,7 @@\n #pragma once\n // src/artifact/gguf_reader.cpp - P1.S2: GGUF v3 reader, mmap, no ggml dependency.\n+// Cursor bounds checks use unsigned overflow-safe comparison; array reads cap iteration.\n \n #include <cstdint>\n #include <cstdio>\n@@ -12,6 +13,7 @@\n #include <stdexcept>\n #include <algorithm>\n+#include <limits>\n \n #include \"strata/artifact/gguf_split.hpp\"\n \n@@ -120,7 +122,10 @@ class Cursor {\n public:\n     Cursor(const uint8_t* base, size_t size) : base_(base), size_(size) {}\n     void need(size_t n) const {\n-        if (pos_ + n > size_) throw std::runtime_error(\"GGUF: unexpected end of file in header\");\n+        // Overflow-safe: if pos_ + n wraps, the sum is less than pos_, which is <= size_.\n+        if (n > size_ - pos_)\n+            throw std::runtime_error(\"GGUF: unexpected end of file in header\");\n     }\n     template <class T> T read() {\n         need(sizeof(T));\n@@ -130,7 +135,7 @@ class Cursor {\n     std::string str() {\n         const uint64_t n = read<uint64_t>();\n-        need((size_t)n);\n+        if (n > (uint64_t)(size_ - pos_))\n+            throw std::runtime_error(\"GGUF: string length exceeds remaining header\");\n         std::string s(reinterpret_cast<const char*>(base_ + pos_), (size_t)n);\n         pos_ += (size_t)n;\n         return s;\n     }\n@@ -210,10 +215,12 @@ inline MetaValue read_value(Cursor& c, MetaType t, int depth = 0) {\n     case MetaType::ARRAY: {\n         v.elem = (MetaType)c.read<uint32_t>();\n         v.count = c.read<uint64_t>();\n-        if (v.count > (1u << 24)) throw std::runtime_error(\"GGUF: implausible array length\");\n-        v.items.reserve((size_t)std::min<uint64_t>(v.count, 64));\n-        for (uint64_t i = 0; i < v.count; ++i) {\n-            MetaValue e = read_value(c, v.elem, depth + 1);\n-            if (i < 64) v.items.push_back(std::move(e));\n+        if (v.count > (1u << 24)) throw std::runtime_error(\"GGUF: implausible array length\");\n+        v.items.reserve((size_t)std::min<uint64_t>(v.count, 64));\n+        const uint64_t iter = std::min<uint64_t>(v.count, 64);\n+        for (uint64_t i = 0; i < iter; ++i) {\n+            MetaValue e = read_value(c, v.elem, depth + 1);\n+            v.items.push_back(std::move(e));\n         }\n+        // Skip remaining elements without constructing them: advance cursor by element size.\n+        // For fixed-size elements this is a simple skip; for strings/arrays we must still parse.\n+        if (v.count > 64) {\n+            // We cannot skip variable-length elements without parsing; cap total parse to 64+1\n+            // and error if the file claims more than we can safely handle in a header.\n+            if (v.count > 1024)\n+                throw std::runtime_error(\"GGUF: array of \" + std::to_string(v.count) + \" elements exceeds safe header limit\");\n+            for (uint64_t i = 64; i < v.count; ++i)\n+                read_value(c, v.elem, depth + 1); // discard\n         }\n         break;\n     }\n```\n\n**Verification cases:**\n1. **Truncated header:** Create a GGUF file whose header declares 1000 KV pairs but the file ends after 500. The reader must throw `\"GGUF: unexpected end of file in header\"` rather than segfault. Test: `gguf_reader_test` with a synthetic file truncated at byte 4096.\n2. **Oversized array:** A GGUF with a metadata key whose array count is `1u << 25`. The reader must throw `\"GGUF: implausible array length\"` before allocating. Test: `gguf_reader_test` with a synthetic KV entry of type ARRAY, elem=U32, count=33554432.\n\n---\n\n## 2. GGUF Split: Shard Validation Error Messages\n\n**Component:** `include/strata/artifact/gguf_split.hpp` — `gguf_split_paths()`.\n\n**Responsibilities:** Resolves the shard filenames of a split GGUF model from any shard path. Throws when a shard is missing.\n\n**Problem:** The function checks `any.size() != at + 4 + 5 + 5` which assumes the extension is exactly `.gguf` (5 chars). A file named `model-00001-of-00002.GGUF` (uppercase) or with a trailing space would silently return `{any}` (treated as single-shard), then the caller would open only one shard and miss tensors. The `std::ifstream` existence check is correct but the filename pattern is too strict.\n\n**Proposed change:**\n\n```diff\n--- a/include/strata/artifact/gguf_split.hpp\n+++ b/include/strata/artifact/gguf_split.hpp\n@@ -18,12 +18,16 @@ inline std::vector<std::string> gguf_split_paths(const std::string& any) {\n     static const char tag[] = \"-of-\";\n     const size_t at = any.rfind(tag);\n-    // \"...-NNNNN-of-MMMMM.gguf\": five digits before the tag, five after it, then the extension\n-    if (at == std::string::npos || at < 6 || any[at - 6] != '-' || any.size() != at + 4 + 5 + 5 ||\n-        any.compare(at + 9, 5, \".gguf\") != 0)\n+    // \"...-NNNNN-of-MMMMM.gguf\" (case-insensitive extension): five digits before the tag,\n+    // five after it, then \".gguf\" or \".GGUF\".\n+    if (at == std::string::npos || at < 6 || any[at - 6] != '-')\n         return {any};\n+    const size_t ext_start = at + 4 + 5;\n+    if (any.size() < ext_start + 5)\n+        return {any};\n+    const std::string ext = any.substr(ext_start, 5);\n+    if (ext != \".gguf\" && ext != \".GGUF\" && ext != \".Gguf\" && ext != \".gGuf\")\n+        return {any};\n     int no = 0, n = 0;\n     for (size_t i = 0; i < 5; ++i) {\n         const char a = any[at - 5 + i], b = any[at + 4 + i];\n```\n\n**Verification cases:**\n1. **Uppercase extension:** `model-00001-of-00002.GGUF` with all shards present. `gguf_split_paths` must return 2 paths, not `{any}`. Test: create a temp directory with two files named with `.GGUF`, call the function, assert `out.size() == 2`.\n2. **Missing shard with correct name:** `model-00001-of-00003.gguf` exists but `model-00002-of-00003.gguf` does not. The function must throw with the message naming the missing shard. Test: `gguf_split_test` with a directory containing only shards 1 and 3 of 3.\n\n---\n\n## 3. Dequantizer: Q2_0 Structural Invariant Check\n\n**Component:** `include/strata/artifact/dequant.hpp` — `dequantize_q2_0()`.\n\n**Responsibilities:** Scalar reference dequantizer for Q2_0 blocks (64 elements, 18 bytes). Used as the ground truth against which GPU kernels are parity-tested.\n\n**Problem:** The function is correct but has no self-check. The `--check` mode in `dequant.cpp` validates the structural invariant externally, but the header itself provides no way for a caller to verify a block in-place without the CLI. A unit test that feeds known blocks and checks the invariant would catch transcription errors at compile time.\n\n**Proposed change:**\n\n```diff\n--- a/include/strata/artifact/dequant.hpp\n+++ b/include/strata/artifact/dequant.hpp\n@@ -45,6 +45,22 @@ inline void dequantize_q2_0(const uint8_t* block, float* out) {\n     }\n }\n \n+// Self-check: verify that every output value is one of {-d, 0, +d, +2d} for the block's own scale.\n+// Returns the index of the first violation, or -1 if all 64 values are valid.\n+inline int check_q2_0_block(const uint8_t* block) {\n+    const float d = fp16_to_fp32(read_u16(block));\n+    const float allowed[4] = {-d, 0.0f, d, 2.0f * d};\n+    const uint8_t* qs = block + 2;\n+    for (int j = 0; j < 64; ++j) {\n+        const int byte_index = j / 4;\n+        const int bit_offset = (j % 4) * 2;\n+        const int code = (qs[byte_index] >> bit_offset) & 0x03;\n+        const float v = (float)(code - 1) * d;\n+        // Exact comparison: the dequantizer produces exactly (code-1)*d, so v must equal allowed[code].\n+        if (v != allowed[code]) return j;\n+    }\n+    return -1;\n+}\n+\n // ---- Q8_0: 32 elements from a 34-byte block.\n inline void dequantize_q8_0(const uint8_t* block, float* out) {\n```\n\n**Verification cases:**\n1. **All-zero block:** A block with `d=1.0` and all `qs` bytes zero. Every code is 0, so every value is `-1.0`. `check_q2_0_block` must return -1. Test: construct the 18-byte block, call the check, assert return == -1.\n2. **Corrupted byte:** A block with `d=1.0`, all `qs` zero except byte 3 set to `0xFF` (codes 3,3,3,3 → values 2.0). `check_q2_0_block` must return -1 (still valid). Then corrupt the scale to NaN: `d = NaN`. The check must return 0 because `NaN != NaN`. Test: set bytes 0-1 to `0x7FC0` (fp16 NaN), assert return == 0.\n\n---\n\n## 4. Conversation Buffer: Segment Capacity Growth Policy\n\n**Component:** `include/strata/core/conversation_buffer.hpp` — `ConversationBuffer::segment_capacity()`.\n\n**Responsibilities:** Manages segmented host storage for conversation snapshots. Appending never relocates existing payloads. The `segment_capacity` function determines how much to reserve for a new segment.\n\n**Problem:** The growth formula `std::max(count, std::min(segment_bytes, std::max<size_t>(65536, std::min(previous, segment_bytes/2)*2)))` has an edge case: when `previous == 0` (first segment after a resize-to-zero), `std::min(previous, segment_bytes/2)*2 == 0`, so `std::max<size_t>(65536, 0) == 65536`. But `count` could be 1 byte, so the segment reserves 65536 bytes for 1 byte of data. For a conversation that grows by 1 token at a time, this wastes 65535 bytes per segment. More critically, when `growing == false` (fresh capture), the function returns `count` exactly, which is correct, but the `growing` flag is set by `size_ != 0` in `resize()`, which is wrong after a shrink-then-grow: `size_` is nonzero but the last segment was popped.\n\n**Proposed change:**\n\n```diff\n--- a/include/strata/core/conversation_buffer.hpp\n+++ b/include/strata/core/conversation_buffer.hpp\n@@ -85,10 +85,12 @@ class ConversationBuffer {\n     void resize(size_t n, uint8_t value = 0) {\n         if (n > size_) {\n-            const bool growing = size_ != 0;\n+            // \"growing\" means we are appending to an existing buffer, not starting fresh.\n+            // After a shrink that popped all segments, size_ == 0 and we are fresh.\n+            const bool growing = !segments_.empty();\n             const size_t spare = segments_.empty() ? 0 : segments_.back().capacity() - segments_.back().size();\n             const size_t extend = std::min(n - size_, spare);\n             const size_t extra = n - size_ - extend;\n@@ -100,7 +102,7 @@ class ConversationBuffer {\n                 const size_t count = std::min(segment_bytes, n - size_);\n                 const size_t previous = segments_.empty() ? 0 : segments_.back().capacity();\n                 Segment segment;\n-                segment.reserve(segment_capacity(count, previous, growing));\n+                segment.reserve(segment_capacity(count, previous, growing));\n                 segment.resize(count, value);\n                 segments_.push_back(std::move(segment));\n                 size_ += count;\n```\n\n**Verification cases:**\n1. **Shrink to zero then grow:** Create a buffer with 100 bytes, resize to 0 (all segments popped), then resize to 50. The new segment must have capacity exactly 50 (fresh capture, `growing == false`). Test: `conv_cache_test` with `buf.resize(100); buf.resize(0); buf.resize(50); assert(buf.bytes() == 50)`.\n2. **Append after partial shrink:** Buffer with 3 segments of 16 MiB each (48 MiB total). Resize to 33 MiB (last segment partially shrunk). Then resize to 34 MiB. The new data must extend the last segment (spare = 16 MiB - 1 MiB = 15 MiB), not create a new one. Test: `conv_cache_test` with `buf.resize(48*1024*1024); buf.resize(33*1024*1024); buf.resize(34*1024*1024); assert(buf.segments_count() == 3)`.\n\n---\n\n## 5. Conversation Cache: Eviction Under Memory Pressure\n\n**Component:** `include/strata/core/conversation_cache.hpp` — `ConversationCache::make_room()`.\n\n**Responsibilities:** Evicts the oldest parked conversations to make room for an incoming snapshot. The `held` parameter accounts for an incoming image that has been `take()`-n but is still alive during the exchange.\n\n**Problem:** `make_room` evicts from the front of the deque (least recently active). But `bytes()` includes `reuse_.bytes()`, and `make_room` clears `reuse_` only when `bytes() > budget_ - held - incoming`. If `reuse_` is large and the entries fit, `reuse_` is kept, but the caller's `can_fit` check uses `bytes()` which includes `reuse_`. This means `can_fit` can return false even though `make_room` would succeed by clearing `reuse_`. The two functions disagree on whether reuse counts against the budget.\n\n**Proposed change:**\n\n```diff\n--- a/include/strata/core/conversation_cache.hpp\n+++ b/include/strata/core/conversation_cache.hpp\n@@ -95,10 +95,12 @@ class ConversationCache {\n     bool can_fit(size_t incoming, size_t held = 0) const {\n-        return enabled() && held <= budget_ && incoming <= budget_ - held &&\n-              ",
+      "reasoning": "",
+      "usage": {
+        "prompt_tokens": 126715,
+        "completion_tokens": 4096,
+        "total_tokens": 130811,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 126715,
+        "prompt_ms": 31533.0,
+        "prompt_per_token_ms": 0.249,
+        "prompt_per_second": 4018.5,
+        "predicted_n": 4096,
+        "predicted_ms": 30048.3,
+        "predicted_per_token_ms": 7.336,
+        "predicted_per_second": 136.3,
+        "draft_n": 3497,
+        "draft_n_accepted": 2579,
+        "at": 1791171551
+      },
+      "telemetry": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/128k/telemetry/trace-run1.jsonl",
+        "samples": 63,
+        "system_cpu_mean_pct": 55.82222222222222,
+        "system_cpu_peak_pct": 100.0,
+        "peak_rss_gib": 52.740352630615234,
+        "peak_ram_used_gib": 57.1951904296875,
+        "min_available_gib": 103.93742752075195,
+        "gpus": {
+          "0": {
+            "mean_util_pct": 49.15873015873016,
+            "peak_vram_mib": 23832.0
+          },
+          "1": {
+            "mean_util_pct": 53.65079365079365,
+            "peak_vram_mib": 23952.0
+          }
+        },
+        "abort": null
+      },
+      "output_text_sha256": "efa3e2b5521031b19130a36e9336e3284555fb413d138665d49bd29b9b5e9f72",
+      "output_ids": "UNAVAILABLE: frontend strips internal special markers; text/reasoning and raw chunks hashed instead",
+      "application_status": "NONEMPTY_ANSWER_LENGTH_LIMIT",
+      "mtp_acceptance_pct": 73.74892765227338,
+      "mtp_accepted_per_window": 1.7000659195781147,
+      "state": "VALID",
+      "invalid_reasons": []
+    }
+  ],
+  "headline": false,
+  "question": "dispatch/timing/accounting diagnosis; free-generation overhead comparison limited by trajectory"
+}

@@ -1,0 +1,31 @@
+# Golden Swap Phase 1
+
+math-rational ORACLE_FULL END
+
+```json
+{
+  "start_utc": "2026-10-06T22:15:30.752296+00:00",
+  "deadline_utc": "2026-10-06T22:35:30.752296+00:00",
+  "measurement_cutoff_utc": "2026-10-06T22:30:30.752296+00:00",
+  "start_monotonic": 472851.619807206,
+  "campaign": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-reproduction-20261006T221530.708585Z",
+  "step": 3,
+  "status": "REPRODUCTION",
+  "original_campaign": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z",
+  "original_deadline_preserved": "2026-10-07T00:00:37+00:00",
+  "message": "math-rational ORACLE_FULL END",
+  "next_action": "validate same-runtime replay and safety",
+  "utc": "2026-10-06T22:17:33.772914+00:00",
+  "elapsed_seconds": 123.02016811701469,
+  "budget_seconds": 1200.0,
+  "remaining_seconds": 1076.9798318829853,
+  "task": "math-rational",
+  "arm": "ORACLE_FULL",
+  "phase": "idle",
+  "eta": "unknown",
+  "model": null,
+  "valid": true,
+  "owned_pid": null,
+  "operating_s": 122.31618212600006
+}
+```

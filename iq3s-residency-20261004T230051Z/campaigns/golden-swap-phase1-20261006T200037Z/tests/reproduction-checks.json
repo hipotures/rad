@@ -1,0 +1,80 @@
+{
+  "state": "PASS",
+  "checks": [
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/reproduce.py",
+        "--task",
+        "math-rational",
+        "--arm",
+        "REPLAY_CURRENT"
+      ],
+      "task": "math-rational",
+      "arm": "REPLAY_CURRENT",
+      "state": "PASS",
+      "directory": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-reproduction-20261006T221318.355672Z",
+      "episode": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-reproduction-20261006T221318.355672Z/raw/reproduction-math-rational-REPLAY_CURRENT/episode.json",
+      "outer_wall_s": 132.27144673699513,
+      "root_campaign_elapsed_s": 8093.557564564515,
+      "checkpoint_sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
+      "binary_sha256": "ccea78b7e67cd0d634880160f8d9d571ef65263d41622232ef149c6bb76038e3",
+      "matching_point_attempts_in_this_study": 2,
+      "classification": "Development reproduction check, not a headline reserved request; parent study clock remains unchanged."
+    },
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/reproduce.py",
+        "--task",
+        "math-rational",
+        "--arm",
+        "ORACLE_FULL"
+      ],
+      "task": "math-rational",
+      "arm": "ORACLE_FULL",
+      "state": "PASS",
+      "directory": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-reproduction-20261006T221530.708585Z",
+      "episode": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-reproduction-20261006T221530.708585Z/raw/reproduction-math-rational-ORACLE_FULL/episode.json",
+      "outer_wall_s": 123.39992350398097,
+      "root_campaign_elapsed_s": 8216.993292184488,
+      "checkpoint_sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
+      "binary_sha256": "ccea78b7e67cd0d634880160f8d9d571ef65263d41622232ef149c6bb76038e3",
+      "matching_point_attempts_in_this_study": 2,
+      "classification": "Development reproduction check, not a headline reserved request; parent study clock remains unchanged."
+    },
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/reproduce.py",
+        "--task",
+        "math-rational",
+        "--arm",
+        "ORACLE_IN_LEARNED_VICTIM"
+      ],
+      "task": "math-rational",
+      "arm": "ORACLE_IN_LEARNED_VICTIM",
+      "state": "PASS",
+      "directory": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-reproduction-20261006T221734.141763Z",
+      "episode": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-reproduction-20261006T221734.141763Z/raw/reproduction-math-rational-ORACLE_IN_LEARNED_VICTIM/episode.json",
+      "outer_wall_s": 119.47021984000457,
+      "root_campaign_elapsed_s": 8336.4998870095,
+      "checkpoint_sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
+      "binary_sha256": "ccea78b7e67cd0d634880160f8d9d571ef65263d41622232ef149c6bb76038e3",
+      "matching_point_attempts_in_this_study": 2,
+      "classification": "Development reproduction check, not a headline reserved request; parent study clock remains unchanged."
+    },
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/reproduce.py",
+        "--prepare-only"
+      ],
+      "state": "PASS",
+      "classification": "Prepare-only wrapper smoke, no model request"
+    }
+  ],
+  "dataset_generation": "Original smoke and all12 regeneration commands executed; scripts/dataset.py and data/*-manifest.json",
+  "model_fit_evaluation": "Original two-model development fit, export and dev/cal/reserved evaluation executed; logs/train*.log, model identities and prediction metrics",
+  "supported_replay_arms": "All three wrapper commands above actually replayed a development tape, and all36 reserved mode points validated. No unsupported point is represented as a successful benchmark."
+}

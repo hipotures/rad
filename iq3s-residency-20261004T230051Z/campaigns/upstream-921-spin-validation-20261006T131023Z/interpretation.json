@@ -1,0 +1,74 @@
+{
+  "decision_label": "SUPPORTS_LOWER_DEFAULT",
+  "lead": "On this single dual-4090 / 16-vCPU Ryzen 9 7950X3D KVM platform, 100 µs increased median paired decode throughput in all four cells: IQ3_S +10.98% at 32K and +10.03% at 128K; UD-Q4_K_XL +7.12% and +7.04%. There were 12 valid interleaved pairs per cell, 47/48 TG wins for 100 µs, and 48/48 bit-identical output trajectories with identical MTP and normal routing counts. Mean guest decode CPU fell by median paired 67–82%. One valid Q4 128K math pair regressed by 6.29%; it remains included. This supports lowering an unnecessarily long spin on this platform, while leaving universal default safety unestablished.",
+  "cpu_demand_analysis": "Q4 provides a genuine CPU-positive comparison: median CPU fallback entries rise from IQ3_S 23,681 to Q4 92,999 at 32K (3.93×), and from 22,681 to 122,879 at 128K (5.42×). Median CPU experts per layer-window are 0.28/0.28 for IQ3_S versus 1.00/1.385 for Q4 at 32K/128K; CPU entries per layer-window are 0.31/0.30 versus 1.16/1.625. Q4 physical capacity is 46.68–46.94% of 24,576 experts, whereas its routed local share remains 94.53–96.05%; IQ3_S physical capacity is 75.75–76.13% and routed local share approximately 99%. These are distinct denominators. Descriptive CPU-demand quartiles have median experts/layer-window 0.27, 0.415, 1.00 and 1.555, with paired TG gains +11.10%, +9.32%, +3.52% and +9.51%. Benefit persists at the highest observed genuine CPU demand, but is not a monotone function of demand. Model, context, K and workload covary; these bins do not estimate a causal slope. No regression model was fitted.\n\nThe five setup-level questions: (1) IQ3_S remains clearly beneficial at +10–11%, though the pooled median does not reproduce 15%. (2) Q4 does not regress in either pooled cell; one valid math request regresses. (3) Aggregate CPU-section timing increases in all cells (+55–62% paired in IQ3_S, +19–21% in Q4), so a coordination/execution cost is visible, but isolated wake-up cost is not identified. No family has a negative median. (4) This does not establish that one global 100 µs default is unsafe; neither does it establish universal safety. The individual regression is retained as a limitation. (5) The positive pooled TG/wall medians and large CPU savings support the view that 20 ms is unnecessarily long for these workloads on this hardware.",
+  "trajectory_analysis": "All 48 valid pairs have identical actual input and output IDs. MTP proposals, accepted proposals, verify windows, local VRAM entries, CPU fallback entries, mapped/nonlocal entries and total routed counts each match in 48/48 pairs; expert capacities and native manifests match except for the spin variable. The 24 existing same-variant A–A/B–B comparisons are also bit-identical, without extra reruns. Thus observed timing differences cannot be explained by different generated tokens or the captured MTP/routing workload. This is a fixed observed trajectory within each pair, while trajectories differ across models, contexts and saved variants. Timing itself varies across repeated identical workloads; for example IQ3_S 32K code default TG changes from 135.9 to 119.7 tok/s between its two existing variant-1 repetitions, while B changes from 157.2 to 156.1. We do not turn repeated tokens or telemetry samples into independent observations.",
+  "drift_analysis": "Decode steal ranges across valid requests from 1.426% to 10.905%. Cell median A/B steal is IQ3_S 32K 4.67/4.51%, IQ3_S 128K 3.91/3.78%, Q4 32K 3.56/5.72%, and Q4 128K 2.77/6.89%. The sole TG regression is Q4 128K math pair 2, AB: 120.8→113.2 tok/s, TG −6.29%, wall +7.07%, with steal 1.68→8.84%. Its aggregate native CPU section increases 5.80→8.72 ms/window. Both CPU scheduling/wake coordination and VM/host interference are plausible; these measurements cannot isolate their contributions. Steal is not assumed exogenous: the spin policy could itself affect VM scheduling. No steal adjustment, timing exclusion or rerun was used. Both AB and BA subsets have positive cell medians. Request-mean GPU clocks stay approximately 2775–2790 MHz on GPU0 and 2804–2805 MHz on GPU1; temperatures span approximately 44–51 °C. Guest used RAM spans 55.2–82.8 GiB, native RSS 50.8–77.9 GiB, and measured swap is zero. This bounds observed drift without proving a controlled host environment.",
+  "answers": [
+    {
+      "question": "Did IQ3_S reproduce the original approximately 15% class of gain?",
+      "answer": "It reproduced a clear throughput benefit, with smaller pooled central estimates: +10.98% at 32K and +10.03% at 128K. The original 15% point should not be presented as the new median. Code-family medians are +20.39% and +13.71%; paired bootstrap intervals include gains near 15% for 32K, but do not guarantee the historical result."
+    },
+    {
+      "question": "What is the new median paired gain with 10+ interleaved pairs?",
+      "answer": "At 12 pairs per cell: IQ3_S 32K +10.98%, IQ3_S 128K +10.03%, Q4 32K +7.12%, Q4 128K +7.04%. These are medians of individual B/A TG ratios, not ratios of arm medians."
+    },
+    {
+      "question": "How stable is the sign of improvement?",
+      "answer": "100 µs wins TG in 12/12, 12/12, 12/12 and 11/12 pairs for IQ3_S 32K/128K and Q4 32K/128K respectively: 47/48 overall. IQ3_S 32K spans +0.46% to +30.41%, IQ3_S 128K +1.55% to +21.70%, Q4 32K +1.53% to +20.92%, and Q4 128K −6.29% to +13.21%. Magnitude varies substantially; both order subsets favor B in median."
+    },
+    {
+      "question": "How much CPU does 100 µs save?",
+      "answer": "Median paired guest decode CPU reductions are 81.25%/82.28% for IQ3_S 32K/128K and 69.58%/67.24% for Q4. Raw request medians move 93.14→16.92%, 94.28→16.21%, 96.15→29.30%, and 96.94→31.40% of guest CPU. These are guest active CPU percentages excluding steal, not isolated spin counters. Native process CPU estimates independently fall from roughly 98–99% to 17–35% of the 16-vCPU capacity."
+    },
+    {
+      "question": "Does Q4 still benefit with much more real CPU expert work?",
+      "answer": "Yes in both pooled cells: +7.12% and +7.04% TG, with −4.09% and −2.83% paired request wall changes. Normal CPU fallback demand is roughly 3.9×/5.4× IQ3_S at 32K/128K. CPU utilization savings are therefore observed while doing genuine expert work, rather than inferred from utilization alone."
+    },
+    {
+      "question": "Is Q4 neutral, positive or negative?",
+      "answer": "Positive in the pooled medians at both contexts, with all family medians also positive. Individual near-neutral outcomes and the one −6.29% regression remain visible. This does not establish uniformly better latency on every request."
+    },
+    {
+      "question": "Does 128K behave materially differently from 32K?",
+      "answer": "Median TG gains are similar within each model: IQ3_S differs by 0.95 percentage points and Q4 by 0.08 points. End-to-end wall savings are smaller at 128K because long prefill dominates more of the request: IQ3_S −6.30%→−4.83%, Q4 −4.09%→−2.83%. Q4 128K has greater real CPU demand and the only observed TG regression. These context comparisons also change the saved input corpus length and output trajectory; they are not an isolated context-only experiment."
+    },
+    {
+      "question": "Does any code/math/prose family show a repeatable regression?",
+      "answer": "No family has a median regression in TG or request wall time. The twelve family TG medians range from +3.52% to +20.39%, each based on four pairs. Q4 128K math has one negative pair and three positive pairs; its median is +7.61%. Four fixed-workload pairs are descriptive and cannot exclude rare or workload-specific regressions."
+    },
+    {
+      "question": "How often are outputs and token IDs identical?",
+      "answer": "48/48 valid paired outputs are bit-identical in the actual token ID arrays; all paired inputs match. The 24 preplanned same-variant A–A/B–B repeat comparisons also match. No extra reruns were performed to achieve identity."
+    },
+    {
+      "question": "Can timing differences be attributed to MTP or routing trajectory?",
+      "answer": "The captured trajectories do not explain the differences: proposals, acceptance counts, verify windows and every normal routing counter match exactly within all 48 pairs. Aggregate timing still includes GPU/CPU coordination, host scheduling and other execution costs that were not isolated."
+    },
+    {
+      "question": "How much CPU steal and system drift remains?",
+      "answer": "Guest decode steal spans 1.426–10.905%, with materially higher B medians in Q4. GPU clocks are stable within the observed request-mean ranges, temperatures stay approximately 44–51 °C and swap remains zero. Exact repeat workloads exhibit timing variation. Counterbalancing reduces order bias but cannot remove VM scheduling, cache or thermal effects; no post hoc drift correction or exclusions were made."
+    },
+    {
+      "question": "What evidence supports keeping 20 ms?",
+      "answer": "One valid CPU-positive Q4 128K math request favors default TG by 6.29%, and B's aggregate native CPU dispatch/completion sections are generally longer. Wake coordination and VM scheduling costs are not isolated. These are reasons to preserve caution for latency-sensitive or untested CPU-demand regimes; the pooled results do not show a performance advantage for 20 ms on this platform."
+    },
+    {
+      "question": "What evidence supports lowering the default?",
+      "answer": "All four primary medians favor 100 µs, 47/48 TG signs favor it, both order subsets and all family medians favor it, and guest decode CPU drops by 67–82% while exact MTP/routing work remains unchanged. This is substantial evidence that 20 ms is unnecessarily long for these tested workload regimes on this hardware."
+    },
+    {
+      "question": "Does the data support a per-phase or adaptive policy instead?",
+      "answer": "It motivates investigating such a policy, but does not establish its superiority. Native CPU dispatch/completion sections increase while total TG improves, and PP/TTFT medians are nearly neutral. No phase-specific or adaptive spin arm was tested, so these results cannot select an adaptive algorithm or its thresholds over a global 100 µs setting."
+    },
+    {
+      "question": "What claims are unsupported because this is one VM?",
+      "answer": "Cross-machine validation, universal default safety, behavior on CPU-constrained or CPU-only machines, other GPU/NUMA/topology combinations, concurrent serving, other worker counts, task granularities, models or spin values, and a causal wake-up mechanism are not established. Fixed repeated corpora and possible temporal dependence also limit inferential generality beyond these paired requests."
+    }
+  ],
+  "decision_reason": "The requested 12-pair, counterbalanced medians favor 100 µs in both a highly GPU-resident CPU-light regime and a substantially more CPU-positive regime at both contexts, with large CPU savings and exact observed work parity. The conclusion supports a lower default for the measured platform and workloads; it is not a recommendation for universal safety or an upstream merge. The preserved individual regression and VM scheduling variation remain material limitations.",
+  "github_results": "The earlier approximately 15% IQ3_S point becomes a smaller but consistent +10–11% pooled paired median. Q4 is positive at approximately +7% at both contexts despite 3.9×/5.4× the median CPU fallback entries of IQ3_S. All code/math/prose TG medians are positive (four pairs each; descriptive). B wins 47/48 TG comparisons. The exception is Q4 128K math pair 2: TG −6.29% and wall +7.07%; it remains included. Its steal changes 1.68→8.84%, so a pure wake-up explanation is not established. PP paired medians are nearly neutral (−0.20% to +0.75%), and 128K's longer prefill dilutes the wall-time benefit.",
+  "github_correctness": "All 48 pairs have bit-identical actual output IDs and matching inputs. MTP proposals/accepted counts, verify windows, local/CPU/mapped routing counters and capacities match in every pair. The 24 same-variant A–A/B–B repeat checks also match, without extra reruns. Thus different generated or recorded MTP/routing trajectories do not explain the timing changes.",
+  "github_drift": "Residual guest steal is 1.43–10.90%; Q4 128K median A/B steal is 2.77/6.89%. Steal may itself depend on the spin policy's effect on VM scheduling, so I did not assume it was an external nuisance or adjust results for it. Both AB and BA subsets favor B in median. Clocks were steady in observed decode samples and swap stayed zero, but host scheduling and cache/thermal effects are not fully controlled.",
+  "github_conclusion": "For the 0.1.41 discussion, these paired medians support the view that 20 ms is unnecessarily long on this platform, including the tested CPU-positive Q4 regime. They do not prove a universally safe 100 µs default. Aggregate CPU timing gets longer in B despite better overall TG; that motivates examining coordination costs, but does not establish that an adaptive/per-phase policy would outperform 100 µs. Replication on other machines and more CPU-constrained regimes remains a separate question."
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "command": [
+      "c++",
+      "-std=c++20",
+      "-O3",
+      "-I/srv/ai/research/iq3s-residency-20261004T230051Z/src/compatible-fast-v2/include",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_compatible.cpp",
+      "-o",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/selector-tests/unit"
+    ],
+    "returncode": 0
+  },
+  {
+    "command": [
+      "c++",
+      "-std=c++20",
+      "-O3",
+      "-I/srv/ai/research/iq3s-residency-20261004T230051Z/src/compatible-fast-v2/include",
+      "-shared",
+      "-fPIC",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/compatible_bridge.cpp",
+      "-o",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/selector-tests/bridge.so"
+    ],
+    "returncode": 0
+  }
+]

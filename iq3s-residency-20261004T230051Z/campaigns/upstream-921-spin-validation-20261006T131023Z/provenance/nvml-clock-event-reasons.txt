@@ -1,0 +1,104 @@
+#define nvmlClocksEventReasonSwPowerCap                0x0000000000000004LL //!< Software power cap activated.
+
+/** HW Slowdown (reducing the core clocks by a factor of 2 or more) is engaged
+ *
+ * This is an indicator of:
+ *   - temperature being too high
+ *   - External Power Brake Assertion is triggered (e.g. by the system power supply)
+ *   - Power draw is too high and Fast Trigger protection is reducing the clocks
+ *   - May be also reported during PState or clock change
+ *      - This behavior may be removed in a later release.
+ *
+ * @see nvmlDeviceGetTemperature
+ * @see nvmlDeviceGetTemperatureThreshold
+ * @see nvmlDeviceGetPowerUsage
+ */
+#define nvmlClocksThrottleReasonHwSlowdown                0x0000000000000008LL //!< Hardware slowdown activated.
+
+/** Sync Boost
+ *
+ * This GPU has been added to a Sync boost group with nvidia-smi or DCGM in
+ * order to maximize performance per watt. All GPUs in the sync boost group
+ * will boost to the minimum possible clocks across the entire group. Look at
+ * the throttle reasons for other GPUs in the system to see why those GPUs are
+ * holding this one at lower clocks.
+ *
+ */
+#define nvmlClocksEventReasonSyncBoost                 0x0000000000000010LL //!< Sync boost activated.
+
+/** SW Thermal Slowdown
+ *
+ * The current clocks have been optimized to ensure the the following is true:
+ *  - Current GPU temperature does not exceed GPU Max Operating Temperature
+ *  - Current memory temperature does not exceeed Memory Max Operating Temperature
+ *
+ */
+#define nvmlClocksEventReasonSwThermalSlowdown         0x0000000000000020LL //!< Software thermal slowdown activated.
+
+/** HW Thermal Slowdown (reducing the core clocks by a factor of 2 or more) is engaged
+ *
+ * This is an indicator of:
+ *   - temperature being too high
+ *
+ * @see nvmlDeviceGetTemperature
+ * @see nvmlDeviceGetTemperatureThreshold
+ * @see nvmlDeviceGetPowerUsage
+ */
+#define nvmlClocksThrottleReasonHwThermalSlowdown         0x0000000000000040LL //!< Hardware thermal slowdown activated.
+
+/** HW Power Brake Slowdown (reducing the core clocks by a factor of 2 or more) is engaged
+ *
+ * This is an indicator of:
+ *   - External Power Brake Assertion being triggered (e.g. by the system power supply)
+ *
+ * @see nvmlDeviceGetTemperature
+ * @see nvmlDeviceGetTemperatureThreshold
+ * @see nvmlDeviceGetPowerUsage
+ */
+#define nvmlClocksThrottleReasonHwPowerBrakeSlowdown      0x0000000000000080LL //!< Hardware power brake slowdown activated.
+
+/** GPU clocks are limited by current setting of Display clocks
+ *
+ * @see bug 1997531
+ */
+#define nvmlClocksEventReasonDisplayClockSetting       0x0000000000000100LL //!< Display clock setting limited.
+
+/** Board limit
+ *
+ * The board limit (operating) policy is currently limiting the GPU clocks.
+ *
+ */
+#define nvmlClocksEventReasonBoardLimit                0x0000000000000200LL //!< Board limit policy is limiting clocks.
+
+/** Reliability
+ *
+ * The reliability policy is currently limiting the GPU clocks.
+ *
+ */
+#define nvmlClocksEventReasonReliability              0x0000000000000400LL //!< Reliability policy is limiting clocks.
+
+/** Bit mask representing no clocks throttling
+ *
+ * Clocks are as high as possible.
+ * */
+#define nvmlClocksEventReasonNone                      0x0000000000000000LL //!< No clock throttling.
+
+/** Bit mask representing all supported clocks throttling reasons
+ * New reasons might be added to this list in the future
+ */
+#define nvmlClocksEventReasonAll (nvmlClocksThrottleReasonNone \
+      | nvmlClocksEventReasonGpuIdle                           \
+      | nvmlClocksEventReasonApplicationsClocksSetting         \
+      | nvmlClocksEventReasonSwPowerCap                        \
+      | nvmlClocksThrottleReasonHwSlowdown                     \
+      | nvmlClocksEventReasonSyncBoost                         \
+      | nvmlClocksEventReasonSwThermalSlowdown                 \
+      | nvmlClocksThrottleReasonHwThermalSlowdown              \
+      | nvmlClocksThrottleReasonHwPowerBrakeSlowdown           \
+      | nvmlClocksEventReasonDisplayClockSetting               \
+      | nvmlClocksEventReasonBoardLimit                        \
+      | nvmlClocksEventReasonReliability                       \
+) //!< Bitmask of all clock event reasons.
+
+/**
+ * @deprecated Use \ref nvmlClocksEventReasonGpuIdle instead

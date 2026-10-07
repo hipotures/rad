@@ -1,0 +1,517 @@
+diff --git a/include/strata/research/lab_signals.hpp b/include/strata/research/lab_signals.hpp
+new file mode 100644
+index 0000000..f338e7e
+--- /dev/null
++++ b/include/strata/research/lab_signals.hpp
+@@ -0,0 +1,124 @@
++// Bounded default-off signal and actual handoff diagnostics; never a residency policy.
++#pragma once
++#include "strata/research/lab_trace.hpp"
++#include "strata/core/weights.hpp"
++#include "strata/core/layout.hpp"
++#include <cuda_runtime.h>
++#include <algorithm>
++#include <array>
++#include <cstring>
++#include <limits>
++#include <stdexcept>
++
++namespace strata::research {
++struct ActivationRecord {
++    uint64_t window, available_ns, offset;
++    int32_t layer, token_base, tokens, width;
++};
++static_assert(sizeof(ActivationRecord)==40);
++struct BoundaryRecord {
++    uint64_t window, begin_ns, end_ns, bytes;
++    int32_t device, stage_begin, stage_end, kind;
++    float gpu_ms;
++    int32_t reserved;
++};
++static_assert(sizeof(BoundaryRecord)==56);
++struct Signals {
++    bool enabled=false;
++    std::string prefix;
++    int64_t width=0, experts=0, hc=0;
++    std::array<bool,2> configured{};
++    std::array<std::array<cudaEvent_t,4>,2> events{};
++    std::vector<ActivationRecord> activations;
++    std::vector<float> values;
++    std::vector<BoundaryRecord> boundaries;
++    static constexpr std::array<int32_t,6> current_layers{5,20,24,25,40,46};
++    Signals() {
++        const char* p=std::getenv("STRATA_LAB_SIGNAL");
++        const char* t=std::getenv("STRATA_LAB_TRACE");
++        enabled=p && p[0]=='1' && t && t[0];
++        if(enabled) prefix=t;
++    }
++    bool selected(int32_t layer) const {
++        return std::find(current_layers.begin(),current_layers.end(),layer)!=current_layers.end();
++    }
++    bool configure(const strata::core::WeightTable& wt,const strata::core::ModelGeometry& g,
++                   int32_t device,int32_t first,int32_t last,std::string& err) {
++        if(!enabled) return true;
++        if(device<0 || device>1) {err="lab signals: only the frozen two-device experiment is supported";return false;}
++        if(configured[(size_t)device]) return true;
++        width=g.n_embd;experts=g.n_expert;hc=g.hc;
++        std::filesystem::create_directories(std::filesystem::path(prefix).parent_path());
++        for(cudaEvent_t& event:events[(size_t)device]) {
++            if(cudaEventCreate(&event)!=cudaSuccess) {err="lab signals: cannot allocate timing event";return false;}
++        }
++        for(int32_t current:current_layers) {
++            const int32_t target=current+1;
++            if(target<first || target>=last) continue;
++            const auto* w=wt.find("blk."+std::to_string(target)+".ffn_gate_inp.weight");
++            const uint64_t expected=(uint64_t)width*(uint64_t)experts*2;
++            if(!w || w->kind!=strata::core::WeightKind::Bf16InF32 || w->bytes!=expected) {
++                err="lab signals: next-router is not the expected native BF16 gate, layer "+std::to_string(target);
++                return false;
++            }
++            std::vector<uint16_t> host((size_t)width*(size_t)experts);
++            if(cudaMemcpy(host.data(),w->data,(size_t)expected,cudaMemcpyDeviceToHost)!=cudaSuccess) {
++                err="lab signals: cannot snapshot original BF16 gate";return false;
++            }
++            const std::string path=prefix+"-gate-layer"+std::to_string(target)+".bin";
++            if(std::filesystem::exists(path)) {err="lab signals: refuse gate snapshot overwrite";return false;}
++            trace.file(path,host);
++        }
++        configured[(size_t)device]=true;
++        const std::string meta=prefix+"-geometry-device"+std::to_string(device)+".json";
++        FILE* file=std::fopen(meta.c_str(),"w");
++        if(!file) {err="lab signals: cannot write geometry";return false;}
++        std::fprintf(file,"{\"device\":%d,\"width\":%lld,\"experts\":%lld,\"hc\":%lld,\"first\":%d,\"last\":%d,\"capture_windows\":64,\"timing_events\":4}\n",
++                     device,(long long)width,(long long)experts,(long long)hc,first,last);
++        std::fclose(file);return true;
++    }
++    void begin() {
++        if(!enabled) return;
++        activations.clear();values.clear();boundaries.clear();
++        activations.reserve(1024);values.reserve((size_t)64*6*4*(size_t)width);boundaries.reserve(20000);
++    }
++    void activation(int32_t layer,int32_t tokens,const float* x) {
++        if(!enabled || !trace.active || trace.windows.size()>64 || !selected(layer)) return;
++        const uint64_t available=ns(),offset=values.size();
++        values.insert(values.end(),x,x+(size_t)tokens*(size_t)width);
++        activations.push_back({trace.window,available,offset,layer,trace.token_base,tokens,(int32_t)width});
++    }
++    void mark_gpu(int32_t device,bool incoming,bool start,cudaStream_t stream) {
++        if(!enabled || device<0 || device>1 || !configured[(size_t)device]) return;
++        const int index=(incoming ? 0 : 2)+(start ? 0 : 1);
++        // Default capture records a dependency rather than an observable event
++        // node. External nodes retain elapsed-time observability after replay.
++        if(cudaEventRecordWithFlags(events[(size_t)device][(size_t)index],stream,cudaEventRecordExternal)!=cudaSuccess)
++            throw std::runtime_error("lab signals: event record failed");
++    }
++    void cpu(int32_t device,int32_t first,int32_t last,int32_t kind,uint64_t begin,uint64_t end,uint64_t bytes=0) {
++        if(!enabled || !trace.active) return;
++        boundaries.push_back({trace.window,begin,end,bytes,device,first,last,kind,std::numeric_limits<float>::quiet_NaN(),0});
++    }
++    void completed(int32_t device,int32_t first,int32_t last,int32_t T,int64_t layers) {
++        if(!enabled || !trace.active || trace.windows.size()>64) return;
++        const uint64_t bytes=(uint64_t)T*(uint64_t)(hc*width+width+hc)*4;
++        const uint64_t observed=ns();
++        for(int incoming=0;incoming<2;++incoming) {
++            if((incoming && first==0) || (!incoming && last==layers)) continue;
++            const int index=incoming ? 0 : 2;float elapsed=0;
++            const cudaError_t result=cudaEventElapsedTime(&elapsed,events[(size_t)device][(size_t)index],events[(size_t)device][(size_t)index+1]);
++            if(result!=cudaSuccess) throw std::runtime_error("lab signals: completed graph timing unavailable");
++            // CPU time is completion observation, not a GPU-clock timestamp.
++            boundaries.push_back({trace.window,observed,observed,bytes,device,first,last,incoming ? 10 : 11,elapsed,0});
++        }
++    }
++    void flush() {
++        if(!enabled) return;
++        const std::string path=prefix+"-request"+std::to_string(trace.request);
++        trace.file(path+"-activations.bin",activations);trace.file(path+"-activation-values.bin",values);trace.file(path+"-boundaries.bin",boundaries);
++        std::fprintf(stderr,"strata lab signals: %zu activation records, %zu bytes of activation values, %zu boundary records; only first64 windows capture numeric signals\n",activations.size(),values.size()*4,boundaries.size());
++    }
++};
++inline Signals signals;
++}
+diff --git a/include/strata/research/lab_trace.hpp b/include/strata/research/lab_trace.hpp
+new file mode 100644
+index 0000000..81a4467
+--- /dev/null
++++ b/include/strata/research/lab_trace.hpp
+@@ -0,0 +1,99 @@
++// Buffered host-clock diagnostics. No routing/cache algorithm changes and no per-event CUDA synchronization.
++#pragma once
++#include <chrono>
++#include <cstdint>
++#include <cstdio>
++#include <cstdlib>
++#include <filesystem>
++#include <string>
++#include <vector>
++
++namespace strata::research {
++inline uint64_t ns() { return (uint64_t) std::chrono::duration_cast<std::chrono::nanoseconds>(
++    std::chrono::steady_clock::now().time_since_epoch()).count(); }
++struct Entry { int16_t expert; int8_t token; int8_t path; int32_t slot; };
++static_assert(sizeof(Entry)==8);
++struct Layer { uint64_t window, t0, t1, t2, t3, t4, offset; uint32_t layer; uint16_t tokens, k; };
++static_assert(sizeof(Layer)==64);
++struct Window { uint64_t number, position, begin, verify_end, end, pending_begin, pending_end; uint32_t T, accepted, produced, reserved; int32_t tokens[8]; };
++static_assert(sizeof(Window)==104);
++struct Promotion { uint64_t window, issue, observed_ready, bytes; int32_t layer, incoming, outgoing, slot; };
++static_assert(sizeof(Promotion)==48);
++struct Reach { uint64_t window, begin, reached, released; int32_t layer, reserved; };
++static_assert(sizeof(Reach)==40);
++struct Trace {
++    bool enabled=false, active=false;
++    std::string prefix;
++    uint64_t request=0, window=0;
++    int32_t experts=0;
++    int32_t token_base=0;
++    std::vector<int32_t> initial, final;
++    std::vector<float> initial_usage, final_usage;
++    std::vector<uint64_t> blob_bytes;
++    std::vector<uint64_t> slot_bytes0, slot_bytes1;
++    std::vector<Entry> entries;
++    std::vector<Layer> layers;
++    std::vector<Window> windows;
++    std::vector<Promotion> promotions;
++    std::vector<Reach> reach;
++    std::vector<int32_t> output_ids;
++    Trace() {
++        const char* p=std::getenv("STRATA_LAB_TRACE");
++        if (p && *p) { enabled=true; prefix=p; }
++    }
++    void begin(const std::vector<int32_t>& resident, int32_t ne, const std::vector<uint64_t>& bytes, const std::vector<float>& usage) {
++        if (!enabled) return;
++        ++request; window=0; experts=ne; initial=resident; blob_bytes=bytes; initial_usage=usage;
++        entries.clear(); layers.clear(); windows.clear(); promotions.clear(); reach.clear(); output_ids.clear();
++        entries.reserve(3000000); layers.reserve(100000); windows.reserve(4096); promotions.reserve(100000); reach.reserve(100000);
++        active=true;
++    }
++    void begin_window(uint64_t number,uint64_t position,uint32_t T,const int32_t* ids) {
++        if (!active) return;
++        window=number; token_base=0; Window w{};w.number=number;w.position=position;w.T=T;w.begin=ns();
++        for (uint32_t i=0;i<T && i<8;++i) w.tokens[i]=(int32_t)ids[i];
++        windows.push_back(w);
++    }
++    void decision(uint32_t layer,uint16_t nt,uint16_t k,const int32_t* ids,const int32_t* kind,
++                  const int32_t* resident,uint64_t t0,uint64_t t1,uint64_t t2,uint64_t t3,uint64_t t4) {
++        if (!active) return;
++        Layer l{window,t0,t1,t2,t3,t4,(uint64_t)entries.size(),layer,nt,k};layers.push_back(l);
++        for (int i=0;i<nt*k;++i) entries.push_back({(int16_t)ids[i],(int8_t)(i/k+token_base),(int8_t)kind[i],
++            resident ? resident[(size_t)layer*(size_t)experts+(size_t)ids[i]] : -1});
++    }
++    void accept(uint32_t a) { if(active && !windows.empty()) {windows.back().accepted=a;windows.back().verify_end=ns();} }
++    void finish_window(uint32_t produced) { if(active && !windows.empty()) {windows.back().produced=produced;windows.back().end=ns();} }
++    void pending(bool start) { if(active && !windows.empty()) {(start ? windows.back().pending_begin : windows.back().pending_end)=ns();} }
++    void promotion(int32_t l,int32_t in,int32_t out,int32_t slot,uint64_t bytes) {
++        if(active) promotions.push_back({window,ns(),0,bytes,l,in,out,slot});
++    }
++    void ready(int32_t index,int32_t slot) {
++        if(!active) return;
++        for(auto it=promotions.rbegin();it!=promotions.rend();++it)
++            if(it->observed_ready==0 && it->layer*experts+it->incoming==index && it->slot==slot) {it->observed_ready=ns();break;}
++    }
++    void reached(int32_t layer,uint64_t begin,uint64_t reached,uint64_t released) {
++        if(active) reach.push_back({window,begin,reached,released,layer,0});
++    }
++    template<class T> void file(const std::string& p,const std::vector<T>& data) {
++        FILE* f=std::fopen(p.c_str(),"wb");
++        if(!f) { std::fprintf(stderr,"strata lab trace: cannot write %s\n",p.c_str());return; }
++        std::fwrite(data.data(),sizeof(T),data.size(),f);std::fclose(f);
++    }
++    void flush(const std::vector<int32_t>& resident, const std::vector<float>& usage) {
++        if(!active) return;
++        active=false;final=resident;final_usage=usage;
++        const std::string p=prefix+"-request"+std::to_string(request);
++        std::filesystem::create_directories(std::filesystem::path(p).parent_path());
++        file(p+"-initial.bin",initial);file(p+"-final.bin",final);file(p+"-blob-bytes.bin",blob_bytes);
++        file(p+"-slot-bytes-gpu0.bin",slot_bytes0);file(p+"-slot-bytes-gpu1.bin",slot_bytes1);
++        file(p+"-initial-usage.bin",initial_usage);file(p+"-final-usage.bin",final_usage);
++        file(p+"-entries.bin",entries);file(p+"-layers.bin",layers);file(p+"-windows.bin",windows);
++        file(p+"-promotions.bin",promotions);file(p+"-reach.bin",reach);
++        file(p+"-output-ids.bin",output_ids);
++        std::fprintf(stderr,"strata lab trace: request %llu, %zu windows, %zu layers, %zu entries, %zu promotions, %zu reach records; host steady_clock nanoseconds\n",
++          (unsigned long long)request,windows.size(),layers.size(),entries.size(),promotions.size(),reach.size());
++    }
++};
++inline Trace trace;
++}
+diff --git a/src/core/expert_source.cpp b/src/core/expert_source.cpp
+index 98e1952..d477d99 100644
+--- a/src/core/expert_source.cpp
++++ b/src/core/expert_source.cpp
+@@ -1,5 +1,7 @@
+ // src/core/expert_source.cpp - the adapter.  See the header for the three clauses of the contract.
+ #include "strata/core/expert_source.hpp"
++#include "strata/research/lab_trace.hpp"
++#include "strata/research/lab_signals.hpp"
+ #include "strata/core/remote_experts.hpp"
+ #include "strata/core/peer_experts.hpp"
+ #include "strata/kernels/cpu/expert_layout.hpp"
+@@ -2135,6 +2137,7 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+     bool any_cpu = false;
+     for (int64_t i = 0; i < n; ++i)
+         if (kind[i] < 0) { any_cpu = true; break; }
++    strata::research::signals.activation((int32_t)d.layers, (int32_t)n_tok, x_f);
+     const auto c1 = std::chrono::steady_clock::now();
+     if (any_cpu) {
+         // #578 --remote-expert-opt: a token whose experts all run on a GPU (CUDA0 or a helper) needs no CPU activation
+@@ -2241,6 +2244,8 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+         const int64_t e = ids[i];
+         if (e >= 0 && e < d.n_expert) d.job_of[(size_t) e] = -1;
+     }
++    auto ns_of = [](auto t) { return (uint64_t) std::chrono::duration_cast<std::chrono::nanoseconds>(t.time_since_epoch()).count(); };
++    strata::research::trace.decision((uint32_t)d.layers, (uint16_t)n_tok, (uint16_t)k, ids, kind, d.host_res, ns_of(c0), ns_of(c1), ns_of(c2), ns_of(c3), ns_of(c4));
+     d.multi_misses += njobs;
+     ++d.layers;
+     d.experts += n_tok * k;
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index dd5362b..5a7774c 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -1,5 +1,7 @@
+ // src/core/verify.cpp - see include/strata/core/verify.hpp.
+ #include "strata/core/verify.hpp"
++#include "strata/research/lab_trace.hpp"
++#include "strata/research/lab_signals.hpp"
+ #include "strata/core/remote_expert_opt.hpp"
+ #if defined(_WIN32)
+ #include <intrin.h>
+@@ -344,6 +346,7 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
+         err = "verify: the stage's layer range or its hand-off buffers are wrong";
+         return false;
+     }
++    if (!strata::research::signals.configure(wt, g, device_, (int32_t)lb_, (int32_t)le_, err)) return false;
+     const WeightRef* wo = wt.find("output.weight");
+     if (wo == nullptr) { err = "verify: output.weight is missing"; return false; }
+     n_vocab_ = wo->ne1;
+@@ -583,10 +586,12 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+     // residual, pending write and inject (see set_stage)
+     const int64_t HB = Verifier::handoff_floats(g);
+     if (lb_ > 0) {
++        strata::research::signals.mark_gpu(device_, true, true, cs);
+         const float* hin = hand_in_ + (size_t) hrow0 * HB;   // the group's rows: [R][bo][inj] contiguous
+         copy_from_mapped(R_, hin, (int64_t) T * HC * N, cs);
+         copy_from_mapped(bo_, hin + (size_t) T * HC * N, (int64_t) T * N, cs);
+         copy_from_mapped(inj2_, hin + (size_t) T * (HC + 1) * N, (int64_t) T * HC, cs);
++        strata::research::signals.mark_gpu(device_, true, false, cs);
+     } else if (const NativeEmbed* ne = native_embed()) {       // plan v0.3 P6: the GGUF-form table
+         ne->gather_dev(tok_, T, emb_, cs);
+         broadcast_streams(emb_, R_, N, (int) HC, T, cs);
+@@ -955,6 +960,9 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                                  m_ids_ + tb * K, m_w_ + tb * K, m_seq_, cs);
+             else {
+                 const int32_t* layer_res = hits_.d_res != nullptr ? (hits_.d_res + l * g.n_expert) : nullptr;
++                // Diagnostic only: the normal all-VRAM doorbell deliberately omits x.
++                // A fresh activation is required to evaluate a future router signal.
++                if (strata::research::signals.enabled && strata::research::signals.selected((int32_t)l)) layer_res = nullptr;
+                 doorbell_publish_res(xm, ids_ + tb * K, layer_res, (int) g.n_expert, (int64_t) n * N, (int64_t) n * K,
+                                      m_x_ + tb * N, m_ids_ + tb * K, m_seq_, cs);
+             }
+@@ -1110,10 +1118,12 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             if (l + 1 < le_ && !pre(l + 1, grp)) return false;
+         }
+     if (le_ < g.n_layers) {   // a layer split's earlier stage: hand the residual on, no head
++        strata::research::signals.mark_gpu(device_, false, true, cs);
+         float* hout = hand_out_ + (size_t) hrow0 * HB;
+         copy_from_mapped(hout, R_, (int64_t) T * HC * N, cs);
+         copy_from_mapped(hout + (size_t) T * HC * N, bo_, (int64_t) T * N, cs);
+         copy_from_mapped(hout + (size_t) T * (HC + 1) * N, inj2_, (int64_t) T * HC, cs);
++        strata::research::signals.mark_gpu(device_, false, false, cs);
+         return true;
+     }
+ 
+@@ -1390,6 +1400,8 @@ void Verifier::collect_profile() {
+ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool, void* user, int32_t* out,
+                    std::string& err) {
+     using namespace strata::kernels;
++    const uint64_t lab_entry = strata::research::signals.enabled ? strata::research::ns() : 0;
++    strata::research::signals.cpu(device_, (int32_t)lb_, (int32_t)le_, 4, lab_entry, lab_entry);
+     const OnDevice on_device(device_);
+     last_batch_ = false;
+     if (T < 1 || T > max_t_) { err = "verify: window size out of range"; return false; }
+@@ -1397,11 +1409,15 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
+     const ModelGeometry& g = *g_;
+     SessionState& ss = *ss_;
+     if (pos0 + T > ss.qsa_states[ss.qsa_primary()].max_cells) { err = "verify: the window runs past the context"; return false; }
++    const uint64_t lab_capture = strata::research::signals.enabled ? strata::research::ns() : 0;
+     if (!capture(T, err) || !capture_commit(err)) return false;
++    strata::research::signals.cpu(device_, (int32_t)lb_, (int32_t)le_, 5, lab_capture, strata::research::signals.enabled ? strata::research::ns() : 0);
+     VDBG("captured; staging\n");
+     const Clock::time_point t0 = Clock::now();
++    const uint64_t lab_stage = strata::research::signals.enabled ? strata::research::ns() : 0;
+     if (!staged_) stage_inputs(T, tokens, pos0);
+     staged_ = false;
++    strata::research::signals.cpu(device_, (int32_t)lb_, (int32_t)le_, 0, lab_stage, strata::research::signals.enabled ? strata::research::ns() : 0);
+     const bool do_ple = ss.ple.ready() && ple_stage();
+     uint32_t ple_rows[kVerifyMaxT * PLE_N_HEADS];
+     if (do_ple) {
+@@ -1418,7 +1434,9 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
+     trace_ev("WINDOW", -1, -1, pos0 * 16 + T);
+     ms_host += ms_since(t0);
+     VDBG("staged; launching\n");
++    const uint64_t lab_launch = strata::research::signals.enabled ? strata::research::ns() : 0;
+     const cudaError_t le = cudaGraphLaunch(exec_[T], cs_);
++    strata::research::signals.cpu(device_, (int32_t)lb_, (int32_t)le_, 1, lab_launch, strata::research::signals.enabled ? strata::research::ns() : 0);
+     trace_ev("LAUNCHED", -1, -1, (int64_t) le);
+     if (le != cudaSuccess) { err = std::string("verify: launch: ") + cudaGetErrorString(le); return false; }
+     (void) cudaStreamQuery(cs_);
+@@ -1486,9 +1504,11 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
+         const int tb = gtb[grp], n = gte[grp] - gtb[grp];
+         progress_at("verify window: the CPU experts of layer", l);
+         if (remote_opt_) remote_opt_->begin(h_w_ + (size_t) tb * ss.k, tb, n);
+-        if (pool != nullptr)
++        if (pool != nullptr) {
++            strata::research::trace.token_base = (int32_t)tb;
+             pool(user, h_x_ + (size_t) tb * g.n_embd, h_ids_ + (size_t) tb * ss.k, n, ss.k,
+                  h_ymiss_ + (size_t) tb * ss.k * g.n_embd, l);
++        }
+         if (remote_opt_) remote_opt_->end();
+         VDBG("layer %lld served\n", (long long) l);
+         if (g_trace) trace_ev(*(volatile uint32_t*) h_flagA_ == want ? "SERVED" : "SERVED-NO-PLAN-YET", k, l,
+@@ -1518,6 +1538,9 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
+             ms_host += ms_since(tp);
+         }
+         if (!(test_stall && k + 1 == steps)) *flag = want;
++        strata::research::trace.reached((int32_t)l,
++            (uint64_t)std::chrono::duration_cast<std::chrono::nanoseconds>(a.time_since_epoch()).count(),
++            (uint64_t)std::chrono::duration_cast<std::chrono::nanoseconds>(b.time_since_epoch()).count(), strata::research::ns());
+         ms_wait += std::chrono::duration<double, std::milli>(b - a).count();
+         ms_pool += ms_since(b);
+     }
+@@ -1529,7 +1552,10 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
+     // itself stays a blocking sync: a cudaStreamQuery poll here cost IQ3_S ~3% decode (a core calling the driver
+     // beside the expert workers).
+     trace_ev("SYNC", -1, -1, 0);
++    const uint64_t lab_sync = strata::research::signals.enabled ? strata::research::ns() : 0;
+     const cudaError_t se = cudaStreamSynchronize(cs_);
++    strata::research::signals.cpu(device_, (int32_t)lb_, (int32_t)le_, 2, lab_sync, strata::research::signals.enabled ? strata::research::ns() : 0);
++    if (se == cudaSuccess) strata::research::signals.completed(device_, (int32_t)lb_, (int32_t)le_, T, g.n_layers);
+     trace_ev("SYNCED", -1, -1, (int64_t) se);
+     if (se != cudaSuccess) { err = std::string("verify: ") + cudaGetErrorString(se); return false; }
+     commit_pending_ = false;
+@@ -2011,6 +2037,9 @@ bool Verifier::run_slot_rows(const int* rows, int S, const int32_t* tokens, cons
+             raise_flag(h_flagB_, want);
+         }
+         *flag = want;
++        strata::research::trace.reached((int32_t)l,
++            (uint64_t)std::chrono::duration_cast<std::chrono::nanoseconds>(a.time_since_epoch()).count(),
++            (uint64_t)std::chrono::duration_cast<std::chrono::nanoseconds>(b.time_since_epoch()).count(), strata::research::ns());
+         ms_wait += std::chrono::duration<double, std::milli>(b - a).count();
+         ms_pool += ms_since(b);
+     }
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 085c3d8..eaf6fef 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -21,6 +21,8 @@
+ #include "strata/core/conversation_memory.hpp"
+ #include "strata/core/coupled_draft.hpp"
+ #include "strata/core/expert_source.hpp"
++#include "strata/research/lab_trace.hpp"
++#include "strata/research/lab_signals.hpp"
+ #include "strata/core/pinned.hpp"
+ #include "strata/core/remote_experts.hpp"
+ #include "strata/core/on_device.hpp"
+@@ -5481,6 +5483,7 @@ int main(int argc, char** argv) {
+             unpin_blobs(pin_live);
+             src.commit_exchanges();   // the resident RAM mode: the evicted experts take their places in RAM
+             for (const auto& [i, slot] : pending) {
++                strata::research::trace.ready(i, slot);
+                 host_res[(size_t) i] = slot;
+                 srcp->release((int64_t) i / g.n_expert, (int64_t) i % g.n_expert);   // in VRAM now: RAM not needed
+             }
+@@ -5542,6 +5545,7 @@ int main(int argc, char** argv) {
+                 }
+                 if (gs) gs->adapt_live = true;
+                 else main_live = true;
++                strata::research::trace.promotion((int32_t)s.layer, (int32_t)s.in, (int32_t)s.out, slot, strata::kernels::cpu::expert_layout().blob_bytes(s.layer));
+                 host_res[out] = strata::core::kNotResident;   // evicted now: the CPU computes it meanwhile
+                 srcp->prefetch(s.layer, s.out);   // a file-backed arena released its pages: read them back ahead
+                 pending.emplace_back((int32_t) in, slot);      // resident once the copy has landed
+@@ -7077,6 +7081,15 @@ int main(int argc, char** argv) {
+             const DecSnap ds0 = dec_snap();
+             double dt_run = 0, dt_commit = 0, dt_draft = 0;
+             int64_t dec_windows = 0, dec_T = 0;
++            if (strata::research::trace.enabled) {
++                std::vector<uint64_t> bytes;
++                for (int64_t l=0;l<g.n_layers;++l) bytes.push_back(strata::kernels::cpu::expert_layout().blob_bytes(l));
++                strata::research::trace.begin(host_res, (int32_t)g.n_expert, bytes, drive.d.usage);
++                strata::research::signals.begin();
++                auto& trc=strata::research::trace; trc.slot_bytes0.clear(); trc.slot_bytes1.clear();
++                for (int64_t q=0;q<xcache.slots();++q) trc.slot_bytes0.push_back((uint64_t)(xcache.bytes_of(q+1)-xcache.bytes_of(q)));
++                if (!stages.empty()) for (int64_t q=0;q<stages[0]->cache.slots();++q) trc.slot_bytes1.push_back((uint64_t)(stages[0]->cache.bytes_of(q+1)-stages[0]->cache.bytes_of(q)));
++            }
+             const int64_t decode_hits0 = drive.d.cache_hits;
+             // CS-T: the RAM and file tiers of this request (the mmap source; 0 with the arena)
+             const int64_t ram0 = src.ram_reads(), files0 = src.file_reads();
+@@ -7108,13 +7121,16 @@ int main(int argc, char** argv) {
+                 if (p + T > o.max_context) break;
+                 window[0] = x;
+                 for (int i = 1; i < T; ++i) window[(size_t) i] = from_sfx ? sbuf[(size_t) i - 1] : drafts[(size_t) i - 1];
++                strata::research::trace.begin_window((uint64_t)rounds, (uint64_t)p, (uint32_t)T, window.data());
+                 drive.d.layers = 0;
+                 drive.d.experts = 0;
+                 drive.d.failed = false;
+                 // #463: the previous adapt round's copies land first - with a non-blocking query, whether a swapped-in
+                 // expert ran on the GPU or the CPU (they round differently) depended on the copy's timing
+                 // (STRATA_ADAPT_NOWAIT=1: 0.1.37's non-blocking query, the A/B)
++                strata::research::trace.pending(true);
+                 apply_pending(!adapt_nowait());
++                strata::research::trace.pending(false);
+                 if (hist_n > 0) {
+                     // the tails the penalties count over, ONE PER ROW: the tokens the state has consumed, the
+                     // fed-back head `x` (it joins `consumed` only after this window commits), then the drafts
+@@ -7132,8 +7148,14 @@ int main(int argc, char** argv) {
+                     std::printf("ERR %s\n", drive.d.failed && drive.d.fail ? drive.d.fail : err.c_str());
+                     return 1;
+                 }
++                if (first_window && strata::research::signals.enabled) {
++                    std::vector<float> lab_logits((size_t)ver.vocab());
++                    if (!ver.copy_logits(0, lab_logits.data())) { std::printf("ERR lab first logits copy failed\n"); return 1; }
++                    strata::research::trace.file(strata::research::trace.prefix + "-request" + std::to_string(strata::research::trace.request) + "-first-logits.bin", lab_logits);
++                }
+                 int a = 0;
+                 while (a < T - 1 && window[(size_t) a + 1] == outv[(size_t) a]) ++a;
++                strata::research::trace.accept((uint32_t)a);
+                 if (from_sfx) { ++sfx_windows; sfx_drafts += T - 1; sfx_ok += a; }
+                 const Clock::time_point tw1 = Clock::now();
+                 std::thread adapt_thr;   // the adaptive tier beside the commit and the draft (as in generate)
+@@ -7152,6 +7174,7 @@ int main(int argc, char** argv) {
+                 first_window = false;
+                 bool eos = false;
+                 for (int i = 0; i <= a && produced_n < max_new && !eos; ++i) {
++                    if (strata::research::trace.active) strata::research::trace.output_ids.push_back((int32_t)outv[(size_t)i]);
+                     std::printf("T %d\n", (int) outv[(size_t) i]);
+                     strata::core::progress_beat();
+                     ++produced_n;
+@@ -7182,6 +7205,7 @@ int main(int argc, char** argv) {
+                     std::printf("ERR %s\n", err.c_str());
+                     return 1;
+                 }
++                strata::research::trace.finish_window((uint32_t)produced_n);
+                 if (timed_round && !eos)
+                     policy.observe(from_sfx, T, a, sfx_match,
+                                    std::chrono::duration<double, std::milli>(Clock::now() - round0).count());
+@@ -7191,6 +7215,8 @@ int main(int argc, char** argv) {
+                 p += a + 1;
+             }
+             const double decode_ms = std::chrono::duration<double, std::milli>(Clock::now() - d0).count();
++            strata::research::trace.flush(host_res, drive.d.usage);
++            strata::research::signals.flush();
+             // the last commit (set_commit_async): the session is complete before anything reads or copies it
+             if (!ver.wait_commit(err)) {
+                 std::printf("ERR %s\n", err.c_str());
+@@ -7885,6 +7911,7 @@ int main(int argc, char** argv) {
+             unpin_blobs(pin_live);
+             src.commit_exchanges();   // the resident RAM mode: the evicted experts take their places in RAM
+             for (const auto& [i, slot] : pending) {
++                strata::research::trace.ready(i, slot);
+                 host_res[(size_t) i] = slot;
+                 srcp->release((int64_t) i / g.n_expert, (int64_t) i % g.n_expert);   // in VRAM now: RAM not needed
+             }
+@@ -7956,6 +7983,7 @@ int main(int argc, char** argv) {
+                     std::fprintf(stderr, "strata generate: an adaptive refill failed\n");
+                     return false;
+                 }
++                strata::research::trace.promotion((int32_t)s.layer, (int32_t)s.in, (int32_t)s.out, slot, strata::kernels::cpu::expert_layout().blob_bytes(s.layer));
+                 host_res[out] = strata::core::kNotResident;   // evicted now: the CPU computes it meanwhile
+                 srcp->prefetch(s.layer, s.out);   // a file-backed arena released its pages: read them back ahead
+                 pending.emplace_back((int32_t) in, slot);      // resident once the copy has landed

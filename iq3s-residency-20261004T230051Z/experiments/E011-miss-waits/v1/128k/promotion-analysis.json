@@ -1,0 +1,78 @@
+{
+  "state": "PASS",
+  "profile": "128k",
+  "schema": {
+    "version": 1,
+    "promotion_record_bytes": 48
+  },
+  "trace_validation": {
+    "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E011-miss-waits/v1/128k/traces/runtime-request2",
+    "state": "PASS",
+    "errors": [],
+    "windows": 1449,
+    "layers": 69552,
+    "output_tokens": 4096,
+    "output_ids_sha256": "4fa68e27ac1dcd2264bda6dd1e408eef728ab745ab58c8d87ccb574cbffa45ae",
+    "demand_entries": 2351040,
+    "path_counts": {
+      "-1": 43557,
+      "0": 2305764,
+      "1": 1719,
+      "2": 0
+    },
+    "all_demand_local_hit_pct": 98.07421396488363,
+    "reported_hit_pct_denominator": 98.14597494339854,
+    "promotions": 7069,
+    "promotion_bytes": 14373222400,
+    "unpublished_promotions_at_request_end": 0,
+    "gpu_budgets": [
+      {
+        "slots": 10183,
+        "bytes": 19712998400,
+        "size_classes": {
+          "1510400": 1655,
+          "1715200": 814,
+          "1868800": 426,
+          "1971200": 4391,
+          "2176000": 2496,
+          "2329600": 401
+        }
+      },
+      {
+        "slots": 8437,
+        "bytes": 18220492800,
+        "size_classes": {
+          "1510400": 380,
+          "1715200": 401,
+          "1971200": 1457,
+          "2176000": 2947,
+          "2329600": 2957,
+          "2662400": 295
+        }
+      }
+    ]
+  },
+  "promotion_count": 7069,
+  "promotion_bytes": 14373222400,
+  "published_useful_bytes": 13029580800,
+  "published_unused_bytes": 1343641600,
+  "unpublished_bytes": 0,
+  "cross_layer_promotion_count": 0,
+  "victim_nonlocal_entries": 21323,
+  "native_group_proxy": {
+    "all_unique_expert_groups": 1706133,
+    "local_unique_expert_groups": 1664981,
+    "CPU_unique_expert_groups": 39464,
+    "mapped_unique_expert_groups": 1688,
+    "local_unique_blob_bytes_sum": 3405469132800,
+    "local_unique_groups_per_verify_window": 1149.055210489993,
+    "local_unique_groups_per_output_token": 406.489501953125,
+    "semantics": "Distinct expert IDs within each actual layer/group. Blob-byte sum is a logical group work proxy, not measured DRAM or PCIe bytes; GPU caching and kernel reuse differ."
+  },
+  "limits": [
+    "Observed-ready timestamps include delayed host observation; they are conservative residency intervals, not exact DMA completion.",
+    "Victim nonlocal demand is observed during absence, not a causal count of extra misses vs an alternative policy.",
+    "Useful bytes label at least one observed local use before the next withdrawal; not latency saved.",
+    "Whole trajectories differ under CPU/GPU rounding; input/window-common-prefix comparison is required."
+  ]
+}

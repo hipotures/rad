@@ -1,0 +1,145 @@
+RESOLVED_CONFIG {"exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/device-plan-ids-v1/strata", "args": ["--pack", "/srv/ai/models/strata/packs/iq3_s", "--native", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf", "--ple-gguf", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf", "--expert-profile", "/srv/ai/strata/data/expert-profile.bin", "--prefill", "auto", "--spec", "4", "--spec-min-p", "0.5", "--mtp", "/srv/ai/models/strata/mtp/rt", "--kv", "int8", "--kv-resident", "32768", "--expert-cache", "auto", "--max-context", "32768", "--suffix-draft", "0", "--prompt-cache", "0", "--pool-workers", "15", "--pcie-frac", "0.28"], "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/device-plan-ids-v1", "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/correctness/device-plan-ids-v1/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1", "STRATA_VERIFY_DEVICE_PLAN": "1", "STRATA_LAB_PLAN_IDS": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "aa3a9d0652bf52985e2359433354135e3f22c160", "build_variant": "device-plan-ids-v1", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "29ae85fa24b75ca737615696ac044c1ca35913a9078d65d5dfc4b365c7cdbf1e", "headline_instrumentation": "OFF", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 32768, "source_sha": "aa3a9d0652bf52985e2359433354135e3f22c160", "source_status": "", "variant_overrides": {"env": {"STRATA_VERIFY_DEVICE_PLAN": "1", "STRATA_LAB_PLAN_IDS": "1"}, "policy": "original EMA; device-planned all-local groups with stable per-layer IDs", "scope": "frozen serial two-stage one-group IQ3_S only"}, "diagnostic_env": {"STRATA_DBG_NAN": "1"}}
+READY device-plan-ids-v1 32k 58.09
+warmup VALID input 4096 output 64 PP 110.7 TG 117.4
+case1 VALID input 49 output 141 PP 188.7 TG 93.4
+case2 VALID input 49 output 191 PP 182.5 TG 111.8
+case3 VALID input 55 output 245 PP 157.4 TG 141.0
+case4 VALID input 70 output 187 PP 193.4 TG 155.2
+case5 VALID input 61 output 462 PP 236.6 TG 157.0
+case6 VALID input 58 output 421 PP 190.3 TG 137.9
+case7 VALID input 43 output 131 PP 206.9 TG 84.2
+case8 VALID input 48 output 100 PP 172.6 TG 119.9
+case9 VALID input 57 output 18 PP 217.3 TG 136.7
+case10 VALID input 61 output 27 PP 196.4 TG 142.3
+[
+  {
+    "case": 1,
+    "state": "VALID",
+    "generated": 141,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "cf54d9ea1a8a5dd73c720a6772a0e59bd069b06ca3705859ec36ce966b4da763",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 2,
+    "state": "VALID",
+    "generated": 191,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "63fbcfbc6c36a7160e4969f8c6f27c4223d518f0198b9fae9ac9589f462525b4",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 379
+  },
+  {
+    "case": 3,
+    "state": "VALID",
+    "generated": 245,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "4717e9ce6d16c55d1187c04df48eb1b8a11b894f214db4006de94d7731c08b67",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 45
+  },
+  {
+    "case": 4,
+    "state": "VALID",
+    "generated": 187,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "347face1d0f380ed485365abe9328be86345ef943ec881188a1d4976599bc482",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 80
+  },
+  {
+    "case": 5,
+    "state": "VALID",
+    "generated": 462,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "75822689cf6a5865fddde780c8f7aaad0b2b186600ba1d0b85db02ffcd7d0303",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 16
+  },
+  {
+    "case": 6,
+    "state": "VALID",
+    "generated": 421,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "ee4730ed9878126bdb75f3126f322e79a4c5daeb278e40f6637129f56bb73f60",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 87
+  },
+  {
+    "case": 7,
+    "state": "VALID",
+    "generated": 131,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "d11cb50725f33ffcfc4fb86d3424148d98f5303c7f2e71065f6ec7360dfea03d",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 144
+  },
+  {
+    "case": 8,
+    "state": "VALID",
+    "generated": 100,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "3bec0e10955b290dbc49e15d15a52c25ce8978e348ddff28d9c45af72eacf6f5",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 42
+  },
+  {
+    "case": 9,
+    "state": "VALID",
+    "generated": 18,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "8448cd5842a2428ec4addb0e30e56b89c828fa2724ca2f198873992d22f21a67",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 10,
+    "state": "VALID",
+    "generated": 27,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "a2d8fad7f44ee3ebaf08cd48c6804b450e77e6f156c978c1afbeefbc5ba539a7",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  }
+]

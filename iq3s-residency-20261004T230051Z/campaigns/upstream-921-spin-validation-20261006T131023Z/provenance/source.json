@@ -1,0 +1,20 @@
+{
+  "tag": "v0.1.40.1",
+  "sha": "82f46a8c8f475f001ad76d92f58f4a4f8ffb0253",
+  "v0.1.40_sha": "1cbcacbcae2953f3be9edc46369f0c875bc6ab8b",
+  "engine_diff_empty": true,
+  "llama_ggml_pin": "3cf03257f219afbe7334045ff7c6a06ac68c627d",
+  "dependency_tarball_sha256": "fbd160d892ea5aab531dff303c2f281fbcd496ba61ed858004fa913e546a9cb4",
+  "diff": " serve/fixtures/rcall_specimens.json | 375 ++++++++++++++++++++++++++++++++++++\n serve/frontend.py                   | 124 ++++++++++--\n serve/server.py                     |  96 ++++++---\n serve/test_parallel.py              |  31 ++-\n serve/test_reasoning_rescue.py      | 287 +++++++++++++++++++++++++++\n serve/test_reasoning_tools.py       |  18 +-\n serve/test_restart_waiters.py       | 194 +++++++++++++++++++\n setup.py                            |   2 +-\n tools/test_setup_hotfix_tag.py      |  47 +++++\n 9 files changed, 1121 insertions(+), 53 deletions(-)\n",
+  "spin_default_evidence": {
+    "file": "include/strata/kernels/cpu/pool.hpp",
+    "line": 214,
+    "text": "static constexpr std::chrono::milliseconds kSpinBeforeSleep{20};"
+  },
+  "spin_override_evidence": {
+    "file": "src/kernels/cpu/pool.cpp",
+    "line": 437,
+    "text": "STRATA_POOL_SPIN_US -> chrono::microseconds(max(0, atoi(e)))"
+  },
+  "PR949_status": "closed, unmerged at start; no pool-tasks in released native source"
+}

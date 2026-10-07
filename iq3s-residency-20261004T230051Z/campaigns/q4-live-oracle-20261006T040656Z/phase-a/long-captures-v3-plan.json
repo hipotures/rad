@@ -1,0 +1,37 @@
+{
+  "purpose": "v3 initial-state sidecars for long profiles; recording excluded from headline",
+  "jobs": [
+    {
+      "label": "capture-128k-v3",
+      "args": [
+        "record",
+        "--label",
+        "capture-128k-v3",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "128k",
+        "--payload",
+        "128k-run1"
+      ],
+      "tape": "tapes/capture-128k-v3.bin",
+      "timeout_s": 1200
+    },
+    {
+      "label": "capture-256k-v3",
+      "args": [
+        "record",
+        "--label",
+        "capture-256k-v3",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "256k",
+        "--payload",
+        "256k-run1"
+      ],
+      "tape": "tapes/capture-256k-v3.bin",
+      "timeout_s": 1200
+    }
+  ]
+}

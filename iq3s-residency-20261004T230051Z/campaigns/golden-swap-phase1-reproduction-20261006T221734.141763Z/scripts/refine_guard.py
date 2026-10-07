@@ -1,0 +1,24 @@
+"""Final bounded development repair: reduce over-conservative veto and cache repeated compatible scans."""
+from common import *
+import shutil,hashlib,subprocess
+no_gpu();assert not (C/'results/offline-reserved.json').exists();v2=C/'versions/cost-guard-v2';v2.mkdir(parents=True,exist_ok=False)
+for f in ['scripts/offline.cpp','scripts/offline_campaign.py','scripts/prepare_offline.py','source/runtime/include/strata/research/q4_oracle.hpp','source/runtime/include/strata/research/q4_victim_model.hpp','results/offline-competition.json','results/offline-smoke.json']:
+ if (C/f).exists():d=v2/f;d.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(C/f,d)
+(C/'results/offline').rename(v2/'offline-results');(C/'results/offline').mkdir()
+for p in (v2/'offline-results').iterdir():
+ if not (p/'result.json').exists():save(p/'incomplete-attempt.json',{'status':'INTERRUPTED_FOR_SOURCE_REPAIR','reason':'Owned CPU evaluator stopped before reserved evaluation: excessive per-candidate scanning and development under-admission. Incomplete output never accepted as a result.'})
+ledger('Final bounded pre-reserved development repair: v2 smoke recency/logistic have134315/135795 nonlocal vs94380 current, 11.2/11.9GB copies vs36.2GB; seven million rejects and24.5s selection. Lower proxy copy floor using160us assumed net entry benefit rather than40us (roughly2.2 rather than8.9 entries in smallest class). This is an assumed operating point, not measured exclusiveCPU cost. Cache same-layer eligible victim within the same logical event/ownership generation, and skip provably under-floor incoming candidates before victim scoring. Same guard/cache in both cheap controls and learned policies. No additional tuning after this version; all negative and interrupted results retained.',version='cost-guard-v3')
+p=C/'source/runtime/include/strata/research/q4_oracle.hpp';s=p.read_text();s=s.replace(' mutable VictimScorer scorer;', ' mutable std::array<int,48> victim_cache_at{},victim_cache_owner{},victim_cache_history{},victim_cache_best{},victim_cache_slot{};std::array<int,48> ownership_generation{};\n mutable VictimScorer scorer;')
+s=s.replace(' Q4Oracle(){scorer.reset();', ' Q4Oracle(){victim_cache_at.fill(-1);scorer.reset();')
+s=s.replace(' void begin(){if(!configured||!q4_tape.active)return;scorer.reset();', ' void begin(){if(!configured||!q4_tape.active)return;victim_cache_at.fill(-1);ownership_generation.fill(0);scorer.reset();')
+s=s.replace('int victim(int l,int incoming,int at)const{uint64_t start=VictimScorer::now();int best=-1;', 'int victim(int l,int incoming,int at)const{uint64_t start=VictimScorer::now();if(causal_policy&&res[l*512+incoming]<0&&victim_cache_at[l]==at&&victim_cache_owner[l]==ownership_generation[l]&&victim_cache_history[l]==scorer.versions[l]){int b=victim_cache_best[l];if(b<0||(res[l*512+b]==victim_cache_slot[l]&&!protected_now(l,b))){scorer.selection_ns+=VictimScorer::now()-start;return b;}}int best=-1;')
+s=s.replace('if(causal_policy)scorer.selection_ns+=VictimScorer::now()-start;return best;}', 'if(causal_policy){victim_cache_at[l]=at;victim_cache_owner[l]=ownership_generation[l];victim_cache_history[l]=scorer.versions[l];victim_cache_best[l]=best;victim_cache_slot[l]=best<0?-1:res[l*512+best];scorer.selection_ns+=VictimScorer::now()-start;}return best;}')
+s=s.replace('res[w.layer*512+w.expert]=w.destination;spare', 'res[w.layer*512+w.expert]=w.destination;++ownership_generation[w.layer];spare')
+old='int target=next(l,expert,current+1);if(target<0)continue;int v=victim(l,expert,current);'
+new='int target=next(l,expert,current+1);if(target<0)continue;int utility_end=std::min((int)q4_tape.windows.size()*48-1,current+768);int uses=causal_policy?count(l,expert,current+1,utility_end):0;double copy_entries=(double(blobs[l])/25e9+double(blobs[l])/13.2e9)/160e-6;if(causal_policy&&double(uses)<copy_entries){++scorer.rejections;continue;}int v=victim(l,expert,current);'
+assert old in s;s=s.replace(old,new)
+s=s.replace('int utility_end=std::min((int)q4_tape.windows.size()*48-1,current+768);int uses=count(l,expert,current+1,utility_end),damage=', 'if(!causal_policy)uses=count(l,expert,current+1,utility_end);int damage=')
+s=s.replace('double copy_entries=(double(blobs[l])/25e9+double(blobs[l])/13.2e9)/40e-6;', '')
+p.write_text(s)
+p=C/'scripts/prepare_offline.py';s=p.read_text().replace("s=s.replace('(25+wi+1)%4'", "s=s.replace('r[w.layer*512+w.expert]=q4_oracle.spare[w.dev][w.cls];','r[w.layer*512+w.expert]=q4_oracle.spare[w.dev][w.cls];++q4_oracle.ownership_generation[w.layer];')\ns=s.replace('(25+wi+1)%4'");p.write_text(s)
+p=C/'scripts/offline_campaign.py';s=p.read_text().replace('cost-guard-v2','cost-guard-v3').replace('Cost-guard-v2','Cost-guard-v3').replace('at40us/entry','at160us/entry').replace("'assumed_net_entry_gain_us':40", "'assumed_net_entry_gain_us':160");p.write_text(s)

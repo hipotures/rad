@@ -1,0 +1,14 @@
+BUILD history-v2 clone 0
+BUILD history-v2 checkout 0
+BUILD history-v2 patch 1
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/build.py", line 34, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/build.py", line 22, in main
+    run('patch',[str(R/'src/control/.venv/bin/python'),str(C/'scripts'/args.patch),str(source)],timeout=90)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/build.py", line 16, in run
+    if r.returncode:raise RuntimeError((name,(logs/f'{name}.log').read_text()[-5000:]))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: ('patch', 'Traceback (most recent call last):\n  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/patch_history.py", line 19, in <module>\n    edit(\'src/program/generate.cpp\',\'            if (!resident_stage_swaps(src, xcache, host_res, g.n_expert, swaps, adapt_stream)) return false;\', \'\'\'            if(strata::research::q4_history.enabled&&strata::research::q4_history.active)\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                    strata::research::q4_history.select(drive.d.usage,host_res,swaps,o.adapt_swaps);\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                if (!resident_stage_swaps(src, xcache, host_res, g.n_expert, swaps, adapt_stream)) return false;\'\'\',expected=2)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/patch_history.py", line 6, in edit\n    p=S/path;t=p.read_text();assert t.count(old)==(count if expected is None else expected),(path,old[:90],t.count(old));p.write_text(t.replace(old,new,count))\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: (\'src/program/generate.cpp\', \'            if (!resident_stage_swaps(src, xcache, host_res, g.n_expert, swaps, adapt_stre\', 1)\n')

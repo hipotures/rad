@@ -1,0 +1,18 @@
+"""Persist the finite selected-layer diagnostic protocol before build or execution."""
+from lab import ROOT,save
+out=ROOT/'experiments/E011-miss-waits/v1'
+if (out/'protocol.json').exists():raise RuntimeError('Protocol already frozen')
+save(out/'protocol.json',{
+    'question':'How much selected-layer GPU time is exposed plan publication, local expert compute, mapped share and CPU-completion wait?',
+    'mechanism':'E008 measured actual boundary copies around20us each; full-window host reach wait is not a transfer or miss timer. Direct GPU phase spans distinguish the remaining execution/coordination tail.',
+    'changed_variables':'Default-off external CUDA timing nodes at layers2,24,40 only. True routing, native math, policy, cache capacities, buffers and existing synchronizations unchanged. Buffered host records after existing stage sync.',
+    'phases':{'0':'GPU plan flagA wait + mapped plan copy','1':'resident grouped expert launch/compute','2':'flagB wait + optional staging/fetch + mapped grouped expert launch/compute','3':'CPU-completion flagM wait only, before returned-row copy'},
+    'budget':'48 internal CUDA timing event objects, no explicit new GPU buffers. Actual allocator slots/classes must remain identical. Internal event resource usage is not claimed zero. Buffered CPU records48B each; expected <=30000records for4096output.',
+    'prerequisites':'Compile; real two-device captured-event fixture for T1/T4 and repeated graph launch; targeted native expert/cache/verify tests and realIQparity.',
+    'batch':'Diagnostic only: one fresh server/profile, frozen4096input64output warmup, one frozen run1 with4096output;32k then128k. No headline replacement or additional unchanged clean repetitions.',
+    'validation':'NoNaN/crash/OOM, same input IDs/output length/reuse0/cachecapacities. Trace accounting and exact output/window/router trajectory vs priorv5/v7. First verify row logits saved for same-input numerical comparison.',
+    'analysis':'Join GPU spans to observed CPU/local/mapped entries by(window,layer,group token range). Stratify zero/nonzero CPU and mapped work, actualT/group/layer. Event/empty launch floor remains measured, never subtraction into negative wait. Separate clock domains. No overlap sum interpreted as wall-time prediction.',
+    'limitations':'Only3selectedlayers, not complete48layer costs. Timing nodes perturb graph; diagnostic-only, effect compared with prior same-workload diagnostics, never declared zero from onepair. Miss wait includes synchronization/doorbell floors and contention, not an isolated CPU expert cost.',
+    'completion':'Bothprofile valid diagnostic data and phase association analysis, or boundedrepair with retainedinvalid evidence. Strengthen execution mechanism diagnosis before choosing residency candidate.'})
+save(out/'overrides.json',{'env':{'STRATA_LAB_MISS_WAITS':'1'},'diagnostic_only':True,'question':'Selected-layer GPU plan/local/mapped/CPU completion phase spans; no routing or cache policy change.'})
+print(out)

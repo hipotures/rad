@@ -1,0 +1,103 @@
+{
+  "steps": [
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay.py",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "--output",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v1/32k-rate12p6",
+        "--policies",
+        "markov-scaled",
+        "token-bigram-hybrid",
+        "--rate",
+        "12.6"
+      ],
+      "logpath": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v1/32k/logs/replay"
+    },
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay.py",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "--output",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v1/128k-rate12p6",
+        "--policies",
+        "markov-scaled",
+        "token-bigram-hybrid",
+        "--rate",
+        "12.6"
+      ],
+      "logpath": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v1/128k/logs/replay"
+    },
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay.py",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "--output",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v4-sensitivity/32k-rate1p8",
+        "--policies",
+        "current",
+        "frequency",
+        "future-nextuse",
+        "--rate",
+        "1.8"
+      ],
+      "logpath": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v4-sensitivity/32k-rate1p8/logs/replay"
+    },
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay.py",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "--output",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v4-sensitivity/128k-rate1p8",
+        "--policies",
+        "current",
+        "frequency",
+        "future-nextuse",
+        "--rate",
+        "1.8"
+      ],
+      "logpath": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v4-sensitivity/128k-rate1p8/logs/replay"
+    },
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay.py",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "--output",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v4-sensitivity/32k-rate0p5",
+        "--policies",
+        "current",
+        "frequency",
+        "future-nextuse",
+        "--rate",
+        "0.5"
+      ],
+      "logpath": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v4-sensitivity/32k-rate0p5/logs/replay"
+    },
+    {
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay.py",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "--output",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v4-sensitivity/128k-rate0p5",
+        "--policies",
+        "current",
+        "frequency",
+        "future-nextuse",
+        "--rate",
+        "0.5"
+      ],
+      "logpath": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v4-sensitivity/128k-rate0p5/logs/replay"
+    }
+  ],
+  "source_sha256": {
+    "replay.py": "1e7cab84123323b5828ec7d3990f093d8d3b3c30082eb63d82d9cd99399b3cf2",
+    "token_history.py": "d607b356f8ede9373c0c72175406729d48d6dd170c81fcf52e2b686cd79b7509"
+  },
+  "timing_scope": "Offline CPU diagnostics only; must finish before clean headline speed measurements. One execution per deterministic point."
+}

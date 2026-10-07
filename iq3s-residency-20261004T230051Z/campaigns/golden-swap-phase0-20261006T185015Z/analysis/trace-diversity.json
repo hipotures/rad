@@ -1,0 +1,1611 @@
+{
+  "tasks": [
+    {
+      "task_id": "code-heg",
+      "family": "code/agent",
+      "subtask": "repository review",
+      "source_group": "heg-storage",
+      "split": "development",
+      "prior_exposure": true,
+      "context_limit": 131072,
+      "actual_input_tokens": 22883,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 126.10131505603204,
+      "warmup_s": 7.595713973976672,
+      "prefill_s": 13.6663,
+      "decode_s": 20.9393,
+      "request_wall_s": 36.147863337013405,
+      "trace_drain_s": 0.006964809028431773,
+      "shutdown_s": 5.628940072958358,
+      "total_operating_s": 175.68563943501795,
+      "PP": 1674.4,
+      "TG": 97.8,
+      "TTFT_s": 14.298988027032465,
+      "windows": 681,
+      "main_entries": 1135200,
+      "MTP_entries": 18490,
+      "all_main_and_MTP_entries": 1153690,
+      "unique_layer_experts": 21714,
+      "unique_MTP_experts": 434,
+      "local_pct": 90.3672480620155,
+      "cpu_pct": 8.273431994362227,
+      "mapped_pct": 1.3593199436222692,
+      "native_admissions": 12836,
+      "native_payload_bytes_issued": 40291328000,
+      "native_publications": 12836,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 842306,
+        "min": 1.0,
+        "median": 3.0,
+        "mean": 11.852649749615935,
+        "max": 674.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 842306,
+        "min": 0.0,
+        "median": 39.0,
+        "mean": 73.09532521435203,
+        "max": 490.0
+      },
+      "burstiness": {
+        "count": 19552,
+        "min": -1.0,
+        "median": 0.1770322535272211,
+        "mean": 0.1567348488289719,
+        "max": 0.7454756167304858
+      },
+      "right_censored_expert_tails": 21714,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 279138636,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 1,
+      "inspected_output_tail": "y succeeded before dropping\n        old_count = connection.execute(\"SELECT COUNT(*) FROM director_action_batches\").fetchone()[0]\n        new_count = connection.execute(\"SELECT COUNT(*) FROM director_action_batches_v17\").fetchone()[0]\n        if old_count != new_count:\n            raise RuntimeError(",
+      "system": {
+        "decode_samples": 22,
+        "CPU_pct": 45.44090909090909,
+        "steal_pct": 7.309090909090909,
+        "RAM_GiB": 82.90110379999334,
+        "RSS_GiB": 78.13762682134455,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 49.5,
+            "power_w": 151.9190909090909,
+            "vram_mib": 23838.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 47.22727272727273
+          },
+          "1": {
+            "util_pct": 48.63636363636363,
+            "power_w": 163.59136363636364,
+            "vram_mib": 24028.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 42.36363636363637
+          }
+        }
+      },
+      "core": true,
+      "screening": true
+    },
+    {
+      "task_id": "math-rational",
+      "family": "math/research",
+      "subtask": "exact arithmetic",
+      "source_group": "E026-numerical",
+      "split": "development",
+      "prior_exposure": true,
+      "context_limit": 32768,
+      "actual_input_tokens": 10943,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 64.07378388999496,
+      "warmup_s": 7.629068816022482,
+      "prefill_s": 12.407399999999999,
+      "decode_s": 17.9561,
+      "request_wall_s": 31.274496369005647,
+      "trace_drain_s": 0.003518768004141748,
+      "shutdown_s": 3.939272725954652,
+      "total_operating_s": 107.08037572097965,
+      "PP": 882.0,
+      "TG": 114.1,
+      "TTFT_s": 12.994153492967598,
+      "windows": 653,
+      "main_entries": 1146240,
+      "MTP_entries": 18480,
+      "all_main_and_MTP_entries": 1164720,
+      "unique_layer_experts": 20431,
+      "unique_MTP_experts": 437,
+      "local_pct": 91.76612227805695,
+      "cpu_pct": 7.188546901172529,
+      "mapped_pct": 1.0453308207705192,
+      "native_admissions": 11502,
+      "native_payload_bytes_issued": 36194611200,
+      "native_publications": 11502,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 770773,
+        "min": 1.0,
+        "median": 2.0,
+        "mean": 11.07401141451504,
+        "max": 604.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 770773,
+        "min": 0.0,
+        "median": 28.0,
+        "mean": 57.67494580116325,
+        "max": 490.0
+      },
+      "burstiness": {
+        "count": 17761,
+        "min": -1.0,
+        "median": 0.19729153543554742,
+        "mean": 0.17113254785542958,
+        "max": 0.738858249801734
+      },
+      "right_censored_expert_tails": 20431,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 267625660,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 1,
+      "inspected_output_tail": "[i][j] = numerator / denominator\n            \n    # The Newton form is:\n    # P(x) = dd[0][0] + dd[0][1](x-x0) + dd[0][2](x-x0)(x-x1) + ...\n    # We need to expand this into standard power basis coefficients.\n    \n    # Start with the constant term dd[0][0]\n    result = [dd[0][0]]\n    \n    # Current",
+      "system": {
+        "decode_samples": 19,
+        "CPU_pct": 41.49473684210526,
+        "steal_pct": 2.0421052631578944,
+        "RAM_GiB": 81.12556778757195,
+        "RSS_GiB": 76.36580898887233,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 49.0,
+            "power_w": 155.76526315789474,
+            "vram_mib": 23836.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 43.31578947368421
+          },
+          "1": {
+            "util_pct": 50.05263157894737,
+            "power_w": 170.24052631578945,
+            "vram_mib": 24028.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 41.63157894736842
+          }
+        }
+      },
+      "core": true,
+      "screening": true
+    },
+    {
+      "task_id": "text-http",
+      "family": "text/translation",
+      "subtask": "document summarization",
+      "source_group": "E026-HTTP-standards",
+      "split": "development",
+      "prior_exposure": true,
+      "context_limit": 32768,
+      "actual_input_tokens": 20938,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 58.8773057119688,
+      "warmup_s": 7.614100105012767,
+      "prefill_s": 16.815900000000003,
+      "decode_s": 20.2785,
+      "request_wall_s": 38.709957251965534,
+      "trace_drain_s": 0.006889437034260482,
+      "shutdown_s": 4.887595275999047,
+      "total_operating_s": 110.28082654200261,
+      "PP": 1245.1,
+      "TG": 101.0,
+      "TTFT_s": 17.78736463194946,
+      "windows": 712,
+      "main_entries": 1194720,
+      "MTP_entries": 19520,
+      "all_main_and_MTP_entries": 1214240,
+      "unique_layer_experts": 19535,
+      "unique_MTP_experts": 433,
+      "local_pct": 93.2273670818267,
+      "cpu_pct": 6.0353053435114505,
+      "mapped_pct": 0.7373275746618455,
+      "native_admissions": 11274,
+      "native_payload_bytes_issued": 35487744000,
+      "native_publications": 11274,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 827340,
+        "min": 1.0,
+        "median": 3.0,
+        "mean": 11.898333212464042,
+        "max": 683.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 827340,
+        "min": 0.0,
+        "median": 34.0,
+        "mean": 68.52449053593445,
+        "max": 477.0
+      },
+      "burstiness": {
+        "count": 17128,
+        "min": -1.0,
+        "median": 0.10999427077418983,
+        "mean": 0.09900908465331634,
+        "max": 0.6600241820959288
+      },
+      "right_censored_expert_tails": 19535,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 291824488,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 0,
+      "inspected_output_tail": "son\n...\n```\n**Proxy Action (Shared Cache):** The proxy **MUST NOT** store this response because it contains an `Authorization` header and no `public`, `s-maxage`, or `must-revalidate` directive.\n\n**Origin Response (Explicitly Cacheable):**\n```http\nHTTP/1.1 200 OK\nCache-Control: public, max-age=3600\n",
+      "system": {
+        "decode_samples": 21,
+        "CPU_pct": 43.21428571428572,
+        "steal_pct": 13.080952380952382,
+        "RAM_GiB": 81.11813554309663,
+        "RSS_GiB": 76.39629382178897,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 52.19047619047619,
+            "power_w": 154.64380952380952,
+            "vram_mib": 23836.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 42.61904761904762
+          },
+          "1": {
+            "util_pct": 48.857142857142854,
+            "power_w": 167.7442857142857,
+            "vram_mib": 24028.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 41.42857142857143
+          }
+        }
+      },
+      "core": true,
+      "screening": true
+    },
+    {
+      "task_id": "mixed-build",
+      "family": "structured/mixed",
+      "subtask": "real build log analysis",
+      "source_group": "strata-release-build-log",
+      "split": "development",
+      "prior_exposure": false,
+      "context_limit": 32768,
+      "actual_input_tokens": 10934,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 62.068766625015996,
+      "warmup_s": 7.671949746960308,
+      "prefill_s": 8.211200000000002,
+      "decode_s": 17.8654,
+      "request_wall_s": 27.474162374972366,
+      "trace_drain_s": 0.005102813011035323,
+      "shutdown_s": 5.76027690898627,
+      "total_operating_s": 103.16640579601517,
+      "PP": 1331.6,
+      "TG": 114.6,
+      "TTFT_s": 9.09065104398178,
+      "windows": 592,
+      "main_entries": 1061760,
+      "MTP_entries": 16930,
+      "all_main_and_MTP_entries": 1078690,
+      "unique_layer_experts": 21007,
+      "unique_MTP_experts": 429,
+      "local_pct": 92.24768309222424,
+      "cpu_pct": 6.795886075949367,
+      "mapped_pct": 0.9564308318264014,
+      "native_admissions": 9992,
+      "native_payload_bytes_issued": 31310028800,
+      "native_publications": 9992,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 749978,
+        "min": 1.0,
+        "median": 3.0,
+        "mean": 10.860669246297892,
+        "max": 571.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 749978,
+        "min": 0.0,
+        "median": 40.0,
+        "mean": 73.66551018829885,
+        "max": 487.0
+      },
+      "burstiness": {
+        "count": 18555,
+        "min": -1.0,
+        "median": 0.11497250505186185,
+        "mean": 0.10224371745012296,
+        "max": 0.7252035311599736
+      },
+      "right_censored_expert_tails": 21007,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 242647832,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 0,
+      "inspected_output_tail": "\\\"strata::core::ArenaExpertSource\\\"\"\n        }\n      ]\n    },\n    {\n      \"file\": \"src/program/generate.cpp\",\n      \"warnings\": [\n        {\n          \"line\": 7722,\n          \"code\": \"-Wunused-variable\",\n          \"message\": \"unused variable \u2018w\u2019\"\n        }\n      ]\n    }\n  ],\n  \"observed_facts\": [\n   ",
+      "system": {
+        "decode_samples": 18,
+        "CPU_pct": 47.55,
+        "steal_pct": 13.033333333333335,
+        "RAM_GiB": 81.15764787462022,
+        "RSS_GiB": 76.35467614067926,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 50.0,
+            "power_w": 154.84777777777776,
+            "vram_mib": 23836.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 42.111111111111114
+          },
+          "1": {
+            "util_pct": 51.94444444444444,
+            "power_w": 167.81888888888886,
+            "vram_mib": 24028.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 41.0
+          }
+        }
+      },
+      "core": true,
+      "screening": true
+    },
+    {
+      "task_id": "code-queue",
+      "family": "code/agent",
+      "subtask": "implementation reasoning",
+      "source_group": "cpython-asyncio-queues",
+      "split": "calibration",
+      "prior_exposure": true,
+      "context_limit": 32768,
+      "actual_input_tokens": 2498,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 74.40404977300204,
+      "warmup_s": 7.692530559026636,
+      "prefill_s": 5.2602,
+      "decode_s": 18.565099999999997,
+      "request_wall_s": 25.117153130006045,
+      "trace_drain_s": 0.0035668789641931653,
+      "shutdown_s": 4.848916799994186,
+      "total_operating_s": 112.23581429297337,
+      "PP": 474.9,
+      "TG": 110.3,
+      "TTFT_s": 5.977052663976792,
+      "windows": 682,
+      "main_entries": 1153920,
+      "MTP_entries": 18740,
+      "all_main_and_MTP_entries": 1172660,
+      "unique_layer_experts": 20457,
+      "unique_MTP_experts": 430,
+      "local_pct": 92.85739046034386,
+      "cpu_pct": 6.338481003882418,
+      "mapped_pct": 0.8041285357737105,
+      "native_admissions": 11555,
+      "native_payload_bytes_issued": 36327321600,
+      "native_publications": 11555,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 775203,
+        "min": 1.0,
+        "median": 3.0,
+        "mean": 12.004694254279201,
+        "max": 680.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 775203,
+        "min": 0.0,
+        "median": 33.0,
+        "mean": 66.43631539093631,
+        "max": 498.0
+      },
+      "burstiness": {
+        "count": 17913,
+        "min": -1.0,
+        "median": 0.14284942433617095,
+        "mean": 0.1232127822175313,
+        "max": 0.6927101656858207
+      },
+      "right_censored_expert_tails": 20457,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 279466568,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 0,
+      "inspected_output_tail": "f._queue.qsize()\n\n    def empty(self) -> bool:\n        \"\"\"Return True if the queue is empty.\"\"\"\n        return self._queue.empty()\n\n    def full(self) -> bool:\n        \"\"\"Return True if the queue is full.\"\"\"\n        return self._queue.full()\n```\n\n---\n\n## Explanation of Key Concerns\n\n### Cancellation",
+      "system": {
+        "decode_samples": 20,
+        "CPU_pct": 41.644999999999996,
+        "steal_pct": 7.805,
+        "RAM_GiB": 81.07316055297852,
+        "RSS_GiB": 76.36119747161865,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 47.65,
+            "power_w": 154.147,
+            "vram_mib": 23836.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 42.3
+          },
+          "1": {
+            "util_pct": 49.05,
+            "power_w": 169.1235,
+            "vram_mib": 24026.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 40.8
+          }
+        }
+      },
+      "core": true,
+      "screening": false
+    },
+    {
+      "task_id": "math-sensor",
+      "family": "math/research",
+      "subtask": "numerical parameter fitting",
+      "source_group": "authored-sensor-problem",
+      "split": "calibration",
+      "prior_exposure": true,
+      "context_limit": 131072,
+      "actual_input_tokens": 179,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 86.89126549998764,
+      "warmup_s": 7.665659316990059,
+      "prefill_s": 1.2631,
+      "decode_s": 18.9813,
+      "request_wall_s": 21.284587336005643,
+      "trace_drain_s": 0.005088273959700018,
+      "shutdown_s": 6.263932096015196,
+      "total_operating_s": 122.30134048301261,
+      "PP": 141.7,
+      "TG": 107.9,
+      "TTFT_s": 1.7420369680039585,
+      "windows": 668,
+      "main_entries": 1159680,
+      "MTP_entries": 18750,
+      "all_main_and_MTP_entries": 1178430,
+      "unique_layer_experts": 19567,
+      "unique_MTP_experts": 425,
+      "local_pct": 93.3173806567329,
+      "cpu_pct": 5.955349751655629,
+      "mapped_pct": 0.7272695916114791,
+      "native_admissions": 10652,
+      "native_payload_bytes_issued": 33507328000,
+      "native_publications": 10652,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 771686,
+        "min": 1.0,
+        "median": 2.0,
+        "mean": 10.798779555415026,
+        "max": 660.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 771686,
+        "min": 0.0,
+        "median": 28.0,
+        "mean": 56.22822883919107,
+        "max": 483.0
+      },
+      "burstiness": {
+        "count": 16912,
+        "min": -1.0,
+        "median": 0.1626879366617397,
+        "mean": 0.1460428195185187,
+        "max": 0.7263456141909677
+      },
+      "right_censored_expert_tails": 19567,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 273724684,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 0,
+      "inspected_output_tail": "a = -e^{-bt}$, $J_b = a t e^{-bt}$, $J_c = -1$.\n\n*   $t=0$: $e^0=1$. $J_{0} = [-1, 0, -1]$\n*   $t=1$: $e^{-0.2}=0.8187$. $J_{1} = [-0.8187, 1.0(1)(0.8187), -1] = [-0.8187, 0.8187, -1]$\n*   $t=2$: $e^{-0.4}=0.6703$. $J_{2} = [-0.6703, 1.0(2)(0.6703), -1] = [-0.6703, 1.3406, -1]$\n*   $t=4$: $e^{-0.8}=",
+      "system": {
+        "decode_samples": 20,
+        "CPU_pct": 43.57000000000001,
+        "steal_pct": 11.330000000000002,
+        "RAM_GiB": 82.92759628295899,
+        "RSS_GiB": 78.09045677185058,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 51.05,
+            "power_w": 153.4975,
+            "vram_mib": 23838.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 42.1
+          },
+          "1": {
+            "util_pct": 50.7,
+            "power_w": 167.2625,
+            "vram_mib": 24026.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 40.45
+          }
+        }
+      },
+      "core": true,
+      "screening": false
+    },
+    {
+      "task_id": "text-tls",
+      "family": "text/translation",
+      "subtask": "English to Polish technical translation",
+      "source_group": "rfc8446-TLS",
+      "split": "calibration",
+      "prior_exposure": false,
+      "context_limit": 131072,
+      "actual_input_tokens": 81722,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 100.7321629920043,
+      "warmup_s": 7.5917188609601,
+      "prefill_s": 44.3004,
+      "decode_s": 24.5318,
+      "request_wall_s": 71.87533408304444,
+      "trace_drain_s": 0.0056702319998294115,
+      "shutdown_s": 5.402877827989869,
+      "total_operating_s": 185.9399315190385,
+      "PP": 1844.7,
+      "TG": 83.5,
+      "TTFT_s": 46.49722420301987,
+      "windows": 965,
+      "main_entries": 1315680,
+      "MTP_entries": 23100,
+      "all_main_and_MTP_entries": 1338780,
+      "unique_layer_experts": 19386,
+      "unique_MTP_experts": 455,
+      "local_pct": 94.5474583485346,
+      "cpu_pct": 5.003572297215128,
+      "mapped_pct": 0.4489693542502736,
+      "native_admissions": 10733,
+      "native_payload_bytes_issued": 33639116800,
+      "native_publications": 10733,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 908187,
+        "min": 1.0,
+        "median": 2.0,
+        "mean": 14.52775474654449,
+        "max": 947.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 908187,
+        "min": 0.0,
+        "median": 22.0,
+        "mean": 57.53778241705728,
+        "max": 476.0
+      },
+      "burstiness": {
+        "count": 16852,
+        "min": -1.0,
+        "median": 0.1372520323559358,
+        "mean": 0.12760378336130346,
+        "max": 0.7329118071786014
+      },
+      "right_censored_expert_tails": 19386,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 395664040,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 0,
+      "inspected_output_tail": "ification vs. Assumptions)\n\n**Co precyzuje dokument (RFC 8446):**\n*   Dok\u0142adn\u0105 struktur\u0119 wiadomo\u015bci (`ClientHello`, `ServerHello`, itp.) i ich pola.\n*   Obowi\u0105zkowe do zaimplementowania zestawy szyfr\u00f3w (np. `TLS_AES_128_GCM_SHA256`) i rozszerzenia (np. `supported_versions`, `key_share`).\n*   Algoryt",
+      "system": {
+        "decode_samples": 25,
+        "CPU_pct": 38.756,
+        "steal_pct": 9.372,
+        "RAM_GiB": 82.97242233276367,
+        "RSS_GiB": 78.18879043579102,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 52.28,
+            "power_w": 155.2556,
+            "vram_mib": 23838.0,
+            "sm_mhz": 2788.2,
+            "temperature_c": 44.24
+          },
+          "1": {
+            "util_pct": 51.28,
+            "power_w": 171.5532,
+            "vram_mib": 24028.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 42.4
+          }
+        }
+      },
+      "core": true,
+      "screening": false
+    },
+    {
+      "task_id": "mixed-fields",
+      "family": "structured/mixed",
+      "subtask": "grammar and schema extraction",
+      "source_group": "rfc8941-structured-fields",
+      "split": "calibration",
+      "prior_exposure": false,
+      "context_limit": 131072,
+      "actual_input_tokens": 16346,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 63.06316623900784,
+      "warmup_s": 7.508005791984033,
+      "prefill_s": 13.5175,
+      "decode_s": 16.7649,
+      "request_wall_s": 31.28248120303033,
+      "trace_drain_s": 0.0029686909983865917,
+      "shutdown_s": 4.053022266016342,
+      "total_operating_s": 106.15237814403372,
+      "PP": 1209.2,
+      "TG": 122.2,
+      "TTFT_s": 14.05230586003745,
+      "windows": 646,
+      "main_entries": 1134720,
+      "MTP_entries": 18270,
+      "all_main_and_MTP_entries": 1152990,
+      "unique_layer_experts": 19612,
+      "unique_MTP_experts": 437,
+      "local_pct": 93.31138959390863,
+      "cpu_pct": 5.976099830795262,
+      "mapped_pct": 0.7125105752961083,
+      "native_admissions": 10221,
+      "native_payload_bytes_issued": 32107622400,
+      "native_publications": 10221,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 771981,
+        "min": 1.0,
+        "median": 2.0,
+        "mean": 10.560643331895474,
+        "max": 637.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 771981,
+        "min": 0.0,
+        "median": 33.0,
+        "mean": 60.917771292298646,
+        "max": 496.0
+      },
+      "burstiness": {
+        "count": 17261,
+        "min": -1.0,
+        "median": 0.16192960858553646,
+        "mean": 0.14711832496611485,
+        "max": 0.7539955829016627
+      },
+      "right_censored_expert_tails": 19612,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 264780968,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 0,
+      "inspected_output_tail": "    if not (is_lcalpha(first_char) or first_char == '*'):\n        raise ParseError(\"Invalid key start\")\n        \n    output = \"\"\n    while input_string != \"\":\n        char = input_string[0]\n        if not (is_lcalpha(char) or is_digit(char) or char in ['_', '-', '.', '*']):\n            break\n       ",
+      "system": {
+        "decode_samples": 17,
+        "CPU_pct": 40.92941176470588,
+        "steal_pct": 0.9294117647058823,
+        "RAM_GiB": 82.9095443276798,
+        "RSS_GiB": 78.12826021979836,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 52.8235294117647,
+            "power_w": 162.78882352941176,
+            "vram_mib": 23838.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 43.35294117647059
+          },
+          "1": {
+            "util_pct": 51.529411764705884,
+            "power_w": 180.09470588235294,
+            "vram_mib": 24028.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 42.0
+          }
+        }
+      },
+      "core": true,
+      "screening": false
+    },
+    {
+      "task_id": "code-archive",
+      "family": "code/agent",
+      "subtask": "safe archive import",
+      "source_group": "cpython-zipfile",
+      "split": "reserved_evaluation",
+      "prior_exposure": true,
+      "context_limit": 32768,
+      "actual_input_tokens": 6983,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 55.081835384014994,
+      "warmup_s": 7.6297188269672915,
+      "prefill_s": 9.2625,
+      "decode_s": 20.0506,
+      "request_wall_s": 30.602174058032688,
+      "trace_drain_s": 0.003981206973548979,
+      "shutdown_s": 4.608904024004005,
+      "total_operating_s": 98.09763177699642,
+      "PP": 753.9,
+      "TG": 102.1,
+      "TTFT_s": 10.12669706903398,
+      "windows": 769,
+      "main_entries": 1214400,
+      "MTP_entries": 20210,
+      "all_main_and_MTP_entries": 1234610,
+      "unique_layer_experts": 19687,
+      "unique_MTP_experts": 442,
+      "local_pct": 94.1677371541502,
+      "cpu_pct": 5.242341897233201,
+      "mapped_pct": 0.5899209486166008,
+      "native_admissions": 10822,
+      "native_payload_bytes_issued": 34127564800,
+      "native_publications": 10822,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 820004,
+        "min": 1.0,
+        "median": 2.0,
+        "mean": 12.018284057150941,
+        "max": 761.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 820004,
+        "min": 0.0,
+        "median": 28.0,
+        "mean": 60.245469534294955,
+        "max": 499.0
+      },
+      "burstiness": {
+        "count": 17056,
+        "min": -1.0,
+        "median": 0.1624687374871212,
+        "mean": 0.14557195926507238,
+        "max": 0.6895849879305787
+      },
+      "right_censored_expert_tails": 19687,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 315108572,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 0,
+      "inspected_output_tail": "_parent = dest_dir.parent\n        temp_parent.mkdir(parents=True, exist_ok=True)\n        \n        temp_dir = temp_parent / f\".tmp_import_{uuid.uuid4().hex}\"\n        \n        try:\n            with zipfile.ZipFile(archive_path, 'r') as zf:\n                # Validate total uncompressed size if possible",
+      "system": {
+        "decode_samples": 20,
+        "CPU_pct": 40.81,
+        "steal_pct": 8.39,
+        "RAM_GiB": 81.15203628540038,
+        "RSS_GiB": 76.39639663696289,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 52.6,
+            "power_w": 157.807,
+            "vram_mib": 23836.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 42.5
+          },
+          "1": {
+            "util_pct": 49.8,
+            "power_w": 172.02750000000003,
+            "vram_mib": 24028.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 41.4
+          }
+        }
+      },
+      "core": true,
+      "screening": false
+    },
+    {
+      "task_id": "math-inventory",
+      "family": "math/research",
+      "subtask": "stochastic inventory",
+      "source_group": "authored-warehouse-problem",
+      "split": "reserved_evaluation",
+      "prior_exposure": true,
+      "context_limit": 32768,
+      "actual_input_tokens": 165,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 91.39373208698817,
+      "warmup_s": 7.464892823016271,
+      "prefill_s": 1.1185,
+      "decode_s": 18.7252,
+      "request_wall_s": 20.83764355495805,
+      "trace_drain_s": 0.002791531034745276,
+      "shutdown_s": 4.336662187008187,
+      "total_operating_s": 124.22598385199672,
+      "PP": 147.5,
+      "TG": 109.4,
+      "TTFT_s": 1.6470904090092517,
+      "windows": 766,
+      "main_entries": 1238400,
+      "MTP_entries": 20470,
+      "all_main_and_MTP_entries": 1258870,
+      "unique_layer_experts": 19150,
+      "unique_MTP_experts": 432,
+      "local_pct": 93.703165374677,
+      "cpu_pct": 5.648094315245478,
+      "mapped_pct": 0.6487403100775194,
+      "native_admissions": 11536,
+      "native_payload_bytes_issued": 36373504000,
+      "native_publications": 11536,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 815718,
+        "min": 1.0,
+        "median": 2.0,
+        "mean": 11.908438945812156,
+        "max": 733.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 815718,
+        "min": 0.0,
+        "median": 24.0,
+        "mean": 57.77779453193383,
+        "max": 482.0
+      },
+      "burstiness": {
+        "count": 16574,
+        "min": -1.0,
+        "median": 0.1586279409999123,
+        "mean": 0.14231050547886073,
+        "max": 0.7022537162505524
+      },
+      "right_censored_expert_tails": 19150,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 313852884,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 0,
+      "inspected_output_tail": "orrect identity is:\n$$ E[n(S)] = \\mu_T P(D_T = S) - S P(D_T > S) \\quad \\text{No.} $$\nLet's derive it properly:\n$$ E[n(S)] = \\sum_{k=S+1}^{\\infty} (k-S) P(k) = \\sum_{k=S+1}^{\\infty} k P(k) - S \\sum_{k=S+1}^{\\infty} P(k) $$\nWe know $\\sum_{k=S+1}^{\\infty} k P(k) = \\mu_T \\sum_{k=S+1}^{\\infty} P_{Poisson",
+      "system": {
+        "decode_samples": 19,
+        "CPU_pct": 38.72631578947368,
+        "steal_pct": 1.9368421052631575,
+        "RAM_GiB": 81.20630244204872,
+        "RSS_GiB": 76.36075953433388,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 51.73684210526316,
+            "power_w": 159.7621052631579,
+            "vram_mib": 23836.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 42.578947368421055
+          },
+          "1": {
+            "util_pct": 52.89473684210526,
+            "power_w": 175.8215789473684,
+            "vram_mib": 24026.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 41.63157894736842
+          }
+        }
+      },
+      "core": true,
+      "screening": false
+    },
+    {
+      "task_id": "text-websocket",
+      "family": "text/translation",
+      "subtask": "technical explanation",
+      "source_group": "rfc6455-WebSocket",
+      "split": "reserved_evaluation",
+      "prior_exposure": false,
+      "context_limit": 32768,
+      "actual_input_tokens": 30383,
+      "output_tokens": 1773,
+      "stop_reason": "NATURAL_EOS",
+      "startup_s": 57.05884715204593,
+      "warmup_s": 7.754312773991842,
+      "prefill_s": 20.306900000000002,
+      "decode_s": 18.514400000000002,
+      "request_wall_s": 40.36473674100125,
+      "trace_drain_s": 0.0055987819796428084,
+      "shutdown_s": 5.858726484992076,
+      "total_operating_s": 111.26136664196383,
+      "PP": 1496.2,
+      "TG": 95.8,
+      "TTFT_s": 21.31846968701575,
+      "windows": 636,
+      "main_entries": 1053600,
+      "MTP_entries": 17230,
+      "all_main_and_MTP_entries": 1070830,
+      "unique_layer_experts": 19598,
+      "unique_MTP_experts": 435,
+      "local_pct": 93.65973804100227,
+      "cpu_pct": 5.716305998481397,
+      "mapped_pct": 0.623955960516325,
+      "native_admissions": 10381,
+      "native_payload_bytes_issued": 32618598400,
+      "native_publications": 10381,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 730964,
+        "min": 1.0,
+        "median": 3.0,
+        "mean": 11.02479328667349,
+        "max": 635.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 730964,
+        "min": 0.0,
+        "median": 32.0,
+        "mean": 63.34949053578562,
+        "max": 477.0
+      },
+      "burstiness": {
+        "count": 16960,
+        "min": -1.0,
+        "median": 0.13350974831897486,
+        "mean": 0.11680584181748627,
+        "max": 0.7132123007732452
+      },
+      "right_censored_expert_tails": 19598,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 260742396,
+      "output_limit_incomplete_slice": false,
+      "short_output": false,
+      "repeated_long_output_lines": 0,
+      "inspected_output_tail": "of any specific extensions (e.g., permessage-deflate), as the text only mentions the negotiation mechanism.\n*   The exact IANA registration procedures for new opcodes or status codes beyond the general registry mentions.\n*   Performance benchmarks or comparative latency data against other protocols.",
+      "system": {
+        "decode_samples": 19,
+        "CPU_pct": 43.67368421052632,
+        "steal_pct": 11.689473684210526,
+        "RAM_GiB": 81.113963880037,
+        "RSS_GiB": 76.37138045461555,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 53.0,
+            "power_w": 152.92894736842103,
+            "vram_mib": 23836.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 42.26315789473684
+          },
+          "1": {
+            "util_pct": 51.10526315789474,
+            "power_w": 168.35684210526315,
+            "vram_mib": 24028.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 41.421052631578945
+          }
+        }
+      },
+      "core": true,
+      "screening": false
+    },
+    {
+      "task_id": "mixed-chinook",
+      "family": "structured/mixed",
+      "subtask": "real SQL schema extraction",
+      "source_group": "chinook-SQLite-DDL",
+      "split": "reserved_evaluation",
+      "prior_exposure": false,
+      "context_limit": 32768,
+      "actual_input_tokens": 1899,
+      "output_tokens": 2048,
+      "stop_reason": "OUTPUT_CAP",
+      "startup_s": 116.20127572497586,
+      "warmup_s": 7.461106533999555,
+      "prefill_s": 4.2738000000000005,
+      "decode_s": 18.5758,
+      "request_wall_s": 23.946956839004997,
+      "trace_drain_s": 0.006198189978022128,
+      "shutdown_s": 5.773480843985453,
+      "total_operating_s": 153.63244031497743,
+      "PP": 444.3,
+      "TG": 110.3,
+      "TTFT_s": 4.8290846580057405,
+      "windows": 548,
+      "main_entries": 1028160,
+      "MTP_entries": 16150,
+      "all_main_and_MTP_entries": 1044310,
+      "unique_layer_experts": 20796,
+      "unique_MTP_experts": 300,
+      "local_pct": 89.2494358854653,
+      "cpu_pct": 9.09644413320884,
+      "mapped_pct": 1.6541199813258636,
+      "native_admissions": 11421,
+      "native_payload_bytes_issued": 35649945600,
+      "native_publications": 11421,
+      "copies_pending_at_record_end": 0,
+      "gap_windows": {
+        "count": 799757,
+        "min": 1.0,
+        "median": 3.0,
+        "mean": 9.854945939829223,
+        "max": 532.0
+      },
+      "batch_distinct_expert_reuse_distance": {
+        "count": 799757,
+        "min": 0.0,
+        "median": 54.0,
+        "mean": 79.60560645296009,
+        "max": 466.0
+      },
+      "burstiness": {
+        "count": 18089,
+        "min": -1.0,
+        "median": 0.03611501340415113,
+        "mean": 0.018705254950364816,
+        "max": 0.5856474470286145
+      },
+      "right_censored_expert_tails": 20796,
+      "source_groups": 1,
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_validation": "PASS",
+      "trace_ready": true,
+      "stored_tape_bytes": 224594924,
+      "output_limit_incomplete_slice": true,
+      "short_output": false,
+      "repeated_long_output_lines": 6,
+      "inspected_output_tail": "Id\", \"type\": \"INTEGER\", \"nullable\": false}\n      ],\n      \"primary_key\": [\"PlaylistId\", \"TrackId\"],\n      \"foreign_keys\": [\n        {\n          \"column\": \"PlaylistId\",\n          \"references_table\": \"Playlist\",\n          \"references_column\": \"PlaylistId\",\n          \"on_delete\": \"NO ACTION\",\n         ",
+      "system": {
+        "decode_samples": 19,
+        "CPU_pct": 49.98421052631579,
+        "steal_pct": 9.26315789473684,
+        "RAM_GiB": 81.47828071995785,
+        "RSS_GiB": 76.32548643413342,
+        "swap_bytes": 0,
+        "swap_evidence": "Guest has no swap device; heartbeat samples preserved",
+        "GPUs": {
+          "0": {
+            "util_pct": 50.68421052631579,
+            "power_w": 149.58157894736843,
+            "vram_mib": 23836.0,
+            "sm_mhz": 2790.0,
+            "temperature_c": 45.63157894736842
+          },
+          "1": {
+            "util_pct": 46.68421052631579,
+            "power_w": 159.66263157894736,
+            "vram_mib": 24026.0,
+            "sm_mhz": 2805.0,
+            "temperature_c": 41.68421052631579
+          }
+        }
+      },
+      "core": true,
+      "screening": false
+    }
+  ],
+  "similarity": [
+    {
+      "task_A": "code-heg",
+      "task_B": "math-rational",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.3361461004007938,
+      "JS_divergence_bits": 0.35735442886532104
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "text-http",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.43792549136818176,
+      "JS_divergence_bits": 0.31552047315619236
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "mixed-build",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.5981814161052764,
+      "JS_divergence_bits": 0.23719472498055075
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "code-queue",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.5519052348828988,
+      "JS_divergence_bits": 0.23810539235800515
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "math-sensor",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.24149537061566473,
+      "JS_divergence_bits": 0.461065871577069
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "text-tls",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.24945788666639993,
+      "JS_divergence_bits": 0.40452948519814574
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "mixed-fields",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.48873672853592853,
+      "JS_divergence_bits": 0.24941724888084577
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "code-archive",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.4972574158978503,
+      "JS_divergence_bits": 0.2668861875065952
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "math-inventory",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.19791046559593653,
+      "JS_divergence_bits": 0.47702783521509745
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "text-websocket",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.3866792898241619,
+      "JS_divergence_bits": 0.33476045505430674
+    },
+    {
+      "task_A": "code-heg",
+      "task_B": "mixed-chinook",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.6828073981857127,
+      "JS_divergence_bits": 0.2533237732571073
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "text-http",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.19800710603507324,
+      "JS_divergence_bits": 0.48142950406638396
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "mixed-build",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2936349971642174,
+      "JS_divergence_bits": 0.4297476282037921
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "code-queue",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.3542759024789197,
+      "JS_divergence_bits": 0.34562183917709843
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "math-sensor",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.6892221724395492,
+      "JS_divergence_bits": 0.19034989123510215
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "text-tls",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.13386349120826566,
+      "JS_divergence_bits": 0.5420700376055057
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "mixed-fields",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.425010345211756,
+      "JS_divergence_bits": 0.2985979384233105
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "code-archive",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.32182044244451524,
+      "JS_divergence_bits": 0.3740639603324778
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "math-inventory",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.5364472431619997,
+      "JS_divergence_bits": 0.2644189594677054
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "text-websocket",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.21788028405322682,
+      "JS_divergence_bits": 0.46548045660909965
+    },
+    {
+      "task_A": "math-rational",
+      "task_B": "mixed-chinook",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2919754216384772,
+      "JS_divergence_bits": 0.45833535035200523
+    },
+    {
+      "task_A": "text-http",
+      "task_B": "mixed-build",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.35181215584126974,
+      "JS_divergence_bits": 0.36738873553049317
+    },
+    {
+      "task_A": "text-http",
+      "task_B": "code-queue",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.4516994921482954,
+      "JS_divergence_bits": 0.31958285971079464
+    },
+    {
+      "task_A": "text-http",
+      "task_B": "math-sensor",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.16873856081764754,
+      "JS_divergence_bits": 0.5125800110773266
+    },
+    {
+      "task_A": "text-http",
+      "task_B": "text-tls",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.5127492350780306,
+      "JS_divergence_bits": 0.2546161603752587
+    },
+    {
+      "task_A": "text-http",
+      "task_B": "mixed-fields",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.4895855234621994,
+      "JS_divergence_bits": 0.28677857805865414
+    },
+    {
+      "task_A": "text-http",
+      "task_B": "code-archive",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.54569143519164,
+      "JS_divergence_bits": 0.2548381953156338
+    },
+    {
+      "task_A": "text-http",
+      "task_B": "math-inventory",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2147607468915304,
+      "JS_divergence_bits": 0.4364286738415981
+    },
+    {
+      "task_A": "text-http",
+      "task_B": "text-websocket",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.8177196306198437,
+      "JS_divergence_bits": 0.11339573500531948
+    },
+    {
+      "task_A": "text-http",
+      "task_B": "mixed-chinook",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.29860775916425486,
+      "JS_divergence_bits": 0.4511574208202203
+    },
+    {
+      "task_A": "mixed-build",
+      "task_B": "code-queue",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.36573274304079867,
+      "JS_divergence_bits": 0.3817540433695023
+    },
+    {
+      "task_A": "mixed-build",
+      "task_B": "math-sensor",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2671055197022219,
+      "JS_divergence_bits": 0.4613306301905098
+    },
+    {
+      "task_A": "mixed-build",
+      "task_B": "text-tls",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2251297436022744,
+      "JS_divergence_bits": 0.4275208900976095
+    },
+    {
+      "task_A": "mixed-build",
+      "task_B": "mixed-fields",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.42818427150966615,
+      "JS_divergence_bits": 0.3298485420071176
+    },
+    {
+      "task_A": "mixed-build",
+      "task_B": "code-archive",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.3270225059692636,
+      "JS_divergence_bits": 0.40592889482993105
+    },
+    {
+      "task_A": "mixed-build",
+      "task_B": "math-inventory",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.1822997835306384,
+      "JS_divergence_bits": 0.5095171002341471
+    },
+    {
+      "task_A": "mixed-build",
+      "task_B": "text-websocket",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.36365617039209264,
+      "JS_divergence_bits": 0.35941049129436836
+    },
+    {
+      "task_A": "mixed-build",
+      "task_B": "mixed-chinook",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.615047760688066,
+      "JS_divergence_bits": 0.27615209440173794
+    },
+    {
+      "task_A": "code-queue",
+      "task_B": "math-sensor",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.18302696840839916,
+      "JS_divergence_bits": 0.49477382670426473
+    },
+    {
+      "task_A": "code-queue",
+      "task_B": "text-tls",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.22818133553872355,
+      "JS_divergence_bits": 0.4444299414716221
+    },
+    {
+      "task_A": "code-queue",
+      "task_B": "mixed-fields",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.5579763897229552,
+      "JS_divergence_bits": 0.21215393887751613
+    },
+    {
+      "task_A": "code-queue",
+      "task_B": "code-archive",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.6615089193961123,
+      "JS_divergence_bits": 0.15491114655365343
+    },
+    {
+      "task_A": "code-queue",
+      "task_B": "math-inventory",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.21600453464920188,
+      "JS_divergence_bits": 0.452637663302627
+    },
+    {
+      "task_A": "code-queue",
+      "task_B": "text-websocket",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.4339201407580907,
+      "JS_divergence_bits": 0.3334762781939854
+    },
+    {
+      "task_A": "code-queue",
+      "task_B": "mixed-chinook",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2957271010106685,
+      "JS_divergence_bits": 0.45127640674883995
+    },
+    {
+      "task_A": "math-sensor",
+      "task_B": "text-tls",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.1100612915688363,
+      "JS_divergence_bits": 0.5726571827161829
+    },
+    {
+      "task_A": "math-sensor",
+      "task_B": "mixed-fields",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2187529906355208,
+      "JS_divergence_bits": 0.46018816395978823
+    },
+    {
+      "task_A": "math-sensor",
+      "task_B": "code-archive",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.14552983657879132,
+      "JS_divergence_bits": 0.5371151067407853
+    },
+    {
+      "task_A": "math-sensor",
+      "task_B": "math-inventory",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.7026568306397473,
+      "JS_divergence_bits": 0.17328122953896463
+    },
+    {
+      "task_A": "math-sensor",
+      "task_B": "text-websocket",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.167006610977369,
+      "JS_divergence_bits": 0.516034314554642
+    },
+    {
+      "task_A": "math-sensor",
+      "task_B": "mixed-chinook",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2725938953241812,
+      "JS_divergence_bits": 0.48512081976206434
+    },
+    {
+      "task_A": "text-tls",
+      "task_B": "mixed-fields",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.30906978753160236,
+      "JS_divergence_bits": 0.3778492586741484
+    },
+    {
+      "task_A": "text-tls",
+      "task_B": "code-archive",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.30771579721532716,
+      "JS_divergence_bits": 0.3942671690021006
+    },
+    {
+      "task_A": "text-tls",
+      "task_B": "math-inventory",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.13729493032225912,
+      "JS_divergence_bits": 0.5151216676667287
+    },
+    {
+      "task_A": "text-tls",
+      "task_B": "text-websocket",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.6253033837038551,
+      "JS_divergence_bits": 0.18755943978788858
+    },
+    {
+      "task_A": "text-tls",
+      "task_B": "mixed-chinook",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.183665916475681,
+      "JS_divergence_bits": 0.5001463621711107
+    },
+    {
+      "task_A": "mixed-fields",
+      "task_B": "code-archive",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.5974620537383583,
+      "JS_divergence_bits": 0.20765538831413693
+    },
+    {
+      "task_A": "mixed-fields",
+      "task_B": "math-inventory",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2181464165181337,
+      "JS_divergence_bits": 0.4457727182970915
+    },
+    {
+      "task_A": "mixed-fields",
+      "task_B": "text-websocket",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.5572531711191075,
+      "JS_divergence_bits": 0.2531908395473029
+    },
+    {
+      "task_A": "mixed-fields",
+      "task_B": "mixed-chinook",
+      "same_family": true,
+      "cosine_main_layer_expert_entry_histogram": 0.361407085366054,
+      "JS_divergence_bits": 0.40143096091963226
+    },
+    {
+      "task_A": "code-archive",
+      "task_B": "math-inventory",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.17597599834539868,
+      "JS_divergence_bits": 0.4749059073492995
+    },
+    {
+      "task_A": "code-archive",
+      "task_B": "text-websocket",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.5367641448053915,
+      "JS_divergence_bits": 0.2662990180824525
+    },
+    {
+      "task_A": "code-archive",
+      "task_B": "mixed-chinook",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.26148568144125706,
+      "JS_divergence_bits": 0.486626792639832
+    },
+    {
+      "task_A": "math-inventory",
+      "task_B": "text-websocket",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.2135976631478763,
+      "JS_divergence_bits": 0.43743245975353584
+    },
+    {
+      "task_A": "math-inventory",
+      "task_B": "mixed-chinook",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.189779999532755,
+      "JS_divergence_bits": 0.5357664338770135
+    },
+    {
+      "task_A": "text-websocket",
+      "task_B": "mixed-chinook",
+      "same_family": false,
+      "cosine_main_layer_expert_entry_histogram": 0.27025180848405944,
+      "JS_divergence_bits": 0.46310006263187253
+    }
+  ],
+  "definitions": {
+    "cosine": "Cosine of flattened48x512 main token-expert-entry count histograms; layer-aware; includes rejected verifier lanes",
+    "JS": "Jensen-Shannon divergence,base2,between normalized main48x512 entry distributions;0same,1disjoint",
+    "inter_use_gap": "Difference in logical main verifier-window index between observed batched uses of one(layer,expert); within-batch order unspecified",
+    "distinct_reuse_distance": "Number of distinct experts routed in the same layer in intervening windows,excluding both endpoint batches; all lanes simultaneous",
+    "burstiness": "Per expert with at least2observed gaps,B=(sd(gaps)-mean(gaps))/(sd+mean); descriptive,finite/censored windows",
+    "denominator": "Normal main local+CPU+mapped entries; MTP entries retained separately",
+    "semantic_independence": "Declared from source provenance; no routing threshold used"
+  },
+  "caveats": [
+    "No candidate replacement policy tested; no family speedup claim",
+    "Finite traces are right-censored; each request stands alone",
+    "Native issue timestamp precedes immediate host victim removal; main window already consumed",
+    "Prefix-derived last-use counts are causal; next-use is labels only; dynamic heat/protection unknown"
+  ]
+}

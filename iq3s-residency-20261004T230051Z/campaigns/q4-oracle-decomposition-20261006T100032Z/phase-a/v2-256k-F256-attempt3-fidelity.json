@@ -1,0 +1,107 @@
+{
+  "native_main_head_agreement": {
+    "positions": 5190,
+    "agreements": 5158,
+    "fraction": 0.9938342967244701,
+    "scope": "Native argmax computed before forced output; includes rejected verifier lanes. This is numerical trajectory diagnostics, not quality evaluation."
+  },
+  "selected_activation_check": {
+    "sampled_values": 658744,
+    "excluded_unexecuted_MTP_zero_values": 5480,
+    "bitwise_equal": false,
+    "max_abs_error": 1.1050569415092468,
+    "relative_L2": 0.03647628943631829,
+    "first_divergence_window_role_component": [
+      0,
+      5,
+      0
+    ],
+    "scope": "Eight actual activation components only at executed main/MTP routed invocations, excluding padded inactive MTP rows; exact uint32 bit comparison plus numerical error. Not all hidden tensors. Oracle placement can legitimately change CPU/GPU numerical intermediates."
+  },
+  "graph_readiness": {
+    "captured_shapes_before_measured_request": [
+      1,
+      1,
+      2,
+      2,
+      4,
+      4,
+      3,
+      3
+    ],
+    "all_T_1_to_4_ready": true,
+    "scope": "Native verifier graph capture messages; main split devices represented by paired messages. MTP remains computed normally."
+  },
+  "physical_KV_summary": {
+    "primary_device_only": true,
+    "cumulative_block_lookups": 15990450,
+    "display_hit_pct": 90.57,
+    "RAM_refill_MiB_rounded": 6075.8,
+    "counter_scope": "Native process-cumulative primary-device owned QSA states. Secondary-device summary unavailable. Initialcontrolbytes checked identically; service placement/atomicCLOCK ordering may vary."
+  },
+  "initial_state": {
+    "match": true,
+    "components": 188,
+    "bytes_checked": 3827046948,
+    "setup_ms": 3543.393,
+    "SHA256": "772a4e6e604f0f67c12fe3698a1eba808f0053db3397f8876b8f21261889efa2",
+    "scope": "Meaningful initial GDN, PLE, HC_R, QSA indexer/mapping/canonical host prefix and resident KV/MTP pools; streamed GPU payload redundant with checked host prefix/maps."
+  },
+  "state": "PASS",
+  "errors": [],
+  "label": "v2-256k-F256-attempt3",
+  "tape": {
+    "state": "PASS",
+    "errors": [],
+    "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/tapes/capture-256k-v3.bin",
+    "schema": 2,
+    "initial_rounds": 24,
+    "sparse_attention_frozen": true,
+    "native_FNV_work_verified": true,
+    "tape_sha256": "1da7576cfecf9ede433dfdce6ca7715135e46f86cf0c93f6228c0d21521ff196",
+    "work_sha256": "4046f4345f2cf4344bc6c6d2fc066c8cb646e55821de72607161c1cacab666ab",
+    "native_FNV64": "79672b904d416c09",
+    "prompt_count": 257781,
+    "prompt_ids_sha256_binary": "849426b0ade48d9f7d469db128db00caf2782149cb2cb76b5e68a8c20985d98c",
+    "committed_emitted_output": 4096,
+    "committed_in_state_prefix": 4097,
+    "output_ids_sha256_binary": "be883fcf2d4edacd3960abd8c51a837aab3dbde40e0f03cedac5f634b3014a80",
+    "windows": 1628,
+    "main_routed_events": 78144,
+    "MTP_full_routed_events": 4199,
+    "MTP_KV_only_catchup_invocations": 1627,
+    "MTP_KV_only_catchup_rows": 5186,
+    "MTP_full_routed_shape": "one row per actual draft step; catchup is native T-row KV-only prefix with no router/expert kernel",
+    "main_routed_entries": 2491200,
+    "MTP_routed_entries": 41990,
+    "verifier_T_sum": 5190,
+    "MTP_proposed_to_verifier": 3562,
+    "MTP_accepted_to_commit": 2469,
+    "RAM_tape_MB": 667.848212,
+    "initial_residents": 11386,
+    "initial_resident_sha256": "78e11548d31c593255e55323252cdfba0c93746049a9cae2a060ab0dd80c6b45",
+    "initial_heat_sha256": "1e046b7461ab36daa42665819c1e978ace29cfce1efd38151201a47843cab3e8",
+    "scope": "all48main decode layers plus real MTP routed steps; normal prefill from exactIDs, not route-overridden"
+  },
+  "observed_windows": 1628,
+  "seen_events": 82343,
+  "native_router_id_or_coefficient_disagreements": 2481235,
+  "native_QSA_selection_disagreements": 76348480,
+  "native_head_first_divergence": 91,
+  "lookup_ms": 537.263,
+  "native_main_routing_stats": {
+    "all_routed_entries": 2491200,
+    "local_vram_entries": 2392531,
+    "cpu_fallback_entries": 83742,
+    "offloaded_entries": 14927
+  },
+  "time": {
+    "pp_s": 125.26310000000001,
+    "decode_s": 57.7674,
+    "TG": 70.9,
+    "wall_s": 187.41953103500418,
+    "TTFT_s": 129.5926573240431
+  },
+  "clock": "Window CPU monotonic timestamps; not GPU copy deadlines.",
+  "correctness_scope": "Tape structure/counts/coefficients and actual forced emission; selected finite activation components. No claim forced output equality proves model math."
+}

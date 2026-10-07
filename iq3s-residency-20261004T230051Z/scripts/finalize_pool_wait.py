@@ -1,0 +1,80 @@
+"""Close the one-value pool scheduling experiment from preserved evidence."""
+import csv
+import statistics
+from lab import ROOT, load, save
+
+base = ROOT / 'experiments/E024-pool-wait'
+prerequisite = load(base / 'v1/prerequisites.json')
+diagnostic = load(base / 'diagnostic-v1/summary.json')
+assert prerequisite['state'] == diagnostic['state'] == 'PASS'
+rows = []
+for profile in ['32k', '128k']:
+    for role, folder in [('default', ROOT / 'experiments/E002-controls/v1' / profile),
+                         ('sleep100us', base / 'v1' / profile)]:
+        for n in [1, 2, 3]:
+            path = folder / 'raw' / f'run{n}.json'
+            if not path.exists():
+                continue
+            r = load(path)
+            if r['state'] != 'VALID':
+                continue
+            start, end = r['started_epoch'] + r['TTFT_s'], r['started_epoch'] + r['wall_s']
+            samples = [load_line for line in open(r['telemetry']['path'])
+                       if (load_line := __import__('json').loads(line)) and start <= load_line['wall_time'] < end]
+            cpu = [x['system_cpu_pct'] for x in samples]
+            rows.append({'profile': profile, 'role': role, 'run': n, 'raw': str(path),
+                         'TG': r['TG'], 'PP': r['PP'], 'wall_s': r['wall_s'], 'TTFT_s': r['TTFT_s'],
+                         'decode_CPU_mean_pct': statistics.mean(cpu) if cpu else None,
+                         'same_binary_control': r['binary_sha256'] == load(ROOT / 'variants/control/32k.json')['binary_sha256']})
+
+wait_rows = []
+for profile in ['32k', '128k']:
+    tables = {}
+    for role, folder in [('default', ROOT / 'experiments/E021-device-plan-waits/v1/off' / profile),
+                         ('sleep100us', base / 'diagnostic-v1' / profile)]:
+        with (folder / 'analysis-rows.csv').open() as f:
+            tables[role] = {(int(r['window']), int(r['layer']), int(r['group']), int(r['phase'])): r for r in csv.DictReader(f)}
+    assert tables['default'].keys() == tables['sleep100us'].keys()
+    for layer in [2, 24, 40]:
+        for category in ['all-local', 'CPU-positive']:
+            values = {'default': [], 'sleep100us': []}
+            for key, r in tables['default'].items():
+                if key[1] != layer or key[3] != 3:
+                    continue
+                cpu, mapped, remote = map(int, [r['CPU'], r['mapped'], r['remote']])
+                if not (cpu > 0 if category == 'CPU-positive' else cpu + mapped + remote == 0):
+                    continue
+                q = tables['sleep100us'][key]
+                assert [r[x] for x in ['CPU', 'mapped', 'local', 'remote', 'T', 'tokens']] == [q[x] for x in ['CPU', 'mapped', 'local', 'remote', 'T', 'tokens']]
+                for role, v in [('default', r), ('sleep100us', q)]:
+                    values[role].append(float(v['gpu_us']))
+            if values['default']:
+                wait_rows.append({'profile': profile, 'layer': layer, 'category': category,
+                                  'n': len(values['default']),
+                                  'default_median_us': statistics.median(values['default']),
+                                  'sleep100us_median_us': statistics.median(values['sleep100us'])})
+complete = all(sum(r['profile'] == p and r['role'] == 'sleep100us' for r in rows) == 3 for p in ['32k', '128k'])
+state = 'COMPLETE_SCOPED_CONFIRMATION' if complete else 'INCOMPLETE_DEADLINE'
+save(base / 'mechanism.json', {'state': state, 'same_clean_binary': True, 'rows': rows,
+    'CPU_completion_wait_diagnostic': wait_rows,
+    'limits': ['Only one coarse 100us setting; no sweep or extra default repetition.',
+               'Clean batches are serial three with adaptive history at different wall times.',
+               'Diagnostic phase3 includes event/doorbell floors; no sum or extrapolation over all 48 layers.',
+               'Lower spinning CPU is not automatically lower request latency or greater expert capacity.']})
+text = '# E024: existing pool sleep threshold\n\n'
+text += f'Status: {state}. Default 20,000us versus 100us uses the exact same clean control binary and frozen capacities. Native wakeup stress, real IQ parity, ten identical short outputs and full diagnostic output/router/MTP/cache/head parity passed.\n\n'
+text += '| Profile | Role | N | TG median | PP median | Wall median s | Decode system CPU mean median % |\n|---|---|---:|---:|---:|---:|---:|\n'
+for profile in ['32k', '128k']:
+    for role in ['default', 'sleep100us']:
+        selected = [r for r in rows if r['profile'] == profile and r['role'] == role]
+        if selected:
+            text += f'| {profile} | {role} | {len(selected)} | {statistics.median(r["TG"] for r in selected):.1f} | {statistics.median(r["PP"] for r in selected):.1f} | {statistics.median(r["wall_s"] for r in selected):.3f} | {statistics.median(r["decode_CPU_mean_pct"] for r in selected):.1f} |\n'
+text += '\nThe full clean comparison, if both profiles completed, is in summary.json/summary.csv generated by compare_confirmation.py. mechanism.json links each request and matched selected-layer CPU-completion wait. Original source, weights, worker count, MTP and memory budgets are unchanged. There is no claim that all measured CPU utilization was useful computation. A scheduler-setting improvement is distinct from successful residency prediction.\n'
+if (base / 'report.md').exists():
+    original = (base / 'report.md').read_text()
+    marker = '# E024-pool-wait: controlled confirmation'
+    if marker in original:
+        original = marker + original.split(marker, 1)[1]
+    text += '\n## Retained clean comparison\n\n' + original
+(base / 'report.md').write_text(text)
+print(state, [(r['profile'], r['role'], r['TG'], r['decode_CPU_mean_pct']) for r in rows])

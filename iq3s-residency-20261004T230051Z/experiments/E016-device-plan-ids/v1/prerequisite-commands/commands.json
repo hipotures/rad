@@ -1,0 +1,93 @@
+[
+  {
+    "name": "register",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "device-plan-ids-v1",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/device-plan-ids-v1",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/device-plan-ids-v1/strata",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/overrides.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.21468830108642578,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/prerequisite-commands/register.log"
+  },
+  {
+    "name": "compile-ID-fixture",
+    "command": [
+      "c++",
+      "-std=c++20",
+      "-O2",
+      "-I/usr/local/cuda/include",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/device_plan_ids_test.cpp",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/device-plan-ids-v1/libstrata_kernels.a",
+      "-L/usr/local/cuda/lib64",
+      "-Wl,-rpath,/usr/local/cuda/lib64",
+      "-lcudart",
+      "-lcublas",
+      "-lcublasLt",
+      "-o",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/prerequisite-commands/ID-fixture"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.16466474533081055,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/prerequisite-commands/compile-ID-fixture.log"
+  },
+  {
+    "name": "ID-overwrite-and-repair",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/prerequisite-commands/ID-fixture"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.5651712417602539,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/prerequisite-commands/ID-overwrite-and-repair.log"
+  },
+  {
+    "name": "native-Python-realIQ",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/test_variant.py",
+      "device-plan-ids-v1",
+      "--experiment",
+      "E016-device-plan-ids",
+      "--attempt",
+      "v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 223.5829164981842,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/prerequisite-commands/native-Python-realIQ.log"
+  },
+  {
+    "name": "battery",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/correctness_battery.py",
+      "--variant",
+      "device-plan-ids-v1",
+      "--experiment",
+      "E016-device-plan-ids",
+      "--attempt",
+      "v1",
+      "--reference",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control"
+    ],
+    "returncode": 0,
+    "elapsed_s": 138.65046787261963,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/prerequisite-commands/battery.log"
+  },
+  {
+    "name": "ground-truth",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/validate_correctness_answers.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/correctness/device-plan-ids-v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.11460113525390625,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/prerequisite-commands/ground-truth.log"
+  }
+]

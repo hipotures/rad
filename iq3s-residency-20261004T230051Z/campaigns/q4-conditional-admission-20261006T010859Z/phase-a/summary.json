@@ -1,0 +1,136 @@
+{
+  "historical": {
+    "issued": 5917,
+    "counts": {
+      "wrong-or-superseded": 4996,
+      "target-ready-persistent": 917,
+      "late-for-original-target": 4
+    },
+    "ambiguous_wrong_count": 4996,
+    "ambiguous_wrong_GB": 15.347712,
+    "cannot_infer_historical_reasons_without_matching_trace": true
+  },
+  "new_diagnostic": {
+    "events": 6002,
+    "windows": 1363,
+    "reason_counts": [
+      {
+        "reason": "prediction-wrong",
+        "count": 4959,
+        "bytes": 15234048000,
+        "GB": 15.234048,
+        "percent_issued": 82.62245918027324
+      },
+      {
+        "reason": "target-ready-persistent",
+        "count": 1043,
+        "bytes": 3204096000,
+        "GB": 3.204096,
+        "percent_issued": 17.377540819726757
+      }
+    ],
+    "copied_GB": 18.438144,
+    "published": 1043,
+    "unpublished_GB": 15.234048,
+    "censored_action_count": 19,
+    "demand": {
+      "local": 2043944,
+      "CPU": 185488,
+      "mapped": 28008,
+      "nonlocal": 213496,
+      "all": 2257440
+    },
+    "native_state_changes": 55178,
+    "schema": {
+      "demand_bytes": 336,
+      "change_bytes": 20,
+      "feature_count": 48
+    }
+  },
+  "parity": {
+    "same_input": true,
+    "same_output": false,
+    "same_actions": false,
+    "counter_parity": {
+      "mtp_proposed": false,
+      "mtp_accepted": false,
+      "verify_windows": false,
+      "local_vram_entries": false,
+      "cpu_fallback_entries": false,
+      "nonlocal_gpu_entries": false
+    }
+  },
+  "historical_action_key_match_descriptive": {
+    "prediction-wrong": 1634,
+    "target-ready-persistent": 8
+  },
+  "unmatched_historical_wrong": 3354,
+  "causal_code_audit": {
+    "superseded_by_new_prediction": "Impossible once issued: one immutable Worker target/incoming until retirement/publication; newer predictions see busy and do not displace it.",
+    "duplicate_or_inflight": "Worker state check prevents an issued duplicate; busy proposals counted separately.",
+    "victim_became_protected": "No victim reserved at enqueue in v2; victim chosen at actual target while current routed IDs excluded. No-safe-victim is explicit. Future victim demand can still cause damage.",
+    "state_generation_mismatch": "No generation-mismatch branch in this scheduler; planner owns host residency, publication guarded before target plan.",
+    "became_resident": "Explicit target host_res check; native adaptive jobs are applied between windows, not competing host cache loads between an H4 origin and target.",
+    "deadline_missed": "Worker state != ready at intended target; separate late reason.",
+    "prediction_wrong": "Complete ready copy, but incoming absent among all actual target routed branch IDs.",
+    "right_censored": "Intended-target unobserved or last4windows future reuse censored; do not relabel all unpublished near end as established waste."
+  },
+  "limitations": [
+    "Matching action keys are descriptive if output trajectory/actions differ; never transfer new labels into historical4996 as exact truth.",
+    "Diagnostic buffered feature/demand work may alter copy timing; excluded from speed claims."
+  ],
+  "explicit_target_outcome_categories": [
+    {
+      "reason": "prediction-wrong",
+      "count": 4959,
+      "bytes": 15234048000,
+      "GB": 15.234048,
+      "percent_issued": 82.62245918027324,
+      "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+    },
+    {
+      "reason": "became-resident-before-publication",
+      "count": 0,
+      "bytes": 0,
+      "GB": 0.0,
+      "percent_issued": 0.0,
+      "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+    },
+    {
+      "reason": "late-for-original-target",
+      "count": 0,
+      "bytes": 0,
+      "GB": 0.0,
+      "percent_issued": 0.0,
+      "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+    },
+    {
+      "reason": "request-ended-before-target",
+      "count": 0,
+      "bytes": 0,
+      "GB": 0.0,
+      "percent_issued": 0.0,
+      "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+    },
+    {
+      "reason": "no-safe-victim",
+      "count": 0,
+      "bytes": 0,
+      "GB": 0.0,
+      "percent_issued": 0.0,
+      "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+    },
+    {
+      "reason": "target-ready-persistent",
+      "count": 1043,
+      "bytes": 3204096000,
+      "GB": 3.2040960000000003,
+      "percent_issued": 17.377540819726757,
+      "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+    }
+  ],
+  "separate_future_reuse_censoring": {
+    "count": 19,
+    "caveat": "Known target outcome is retained; later-use labels in final four windows censored. This is not another mutually exclusive failed-target category."
+  }
+}

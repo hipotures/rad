@@ -1,0 +1,64 @@
+[
+  {
+    "name": "add",
+    "command": [
+      "git",
+      "add",
+      "."
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v1",
+    "exit_code": 0,
+    "wall_s": 1.0012632709695026
+  },
+  {
+    "name": "commit",
+    "command": [
+      "git",
+      "-c",
+      "user.name=Local Research",
+      "-c",
+      "user.email=research@localhost",
+      "commit",
+      "--allow-empty",
+      "-m",
+      "Fixed-work Q4 tape oracle-v1"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v1",
+    "exit_code": 0,
+    "wall_s": 1.0015060399891809
+  },
+  {
+    "name": "configure",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "-S",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v1",
+      "-B",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/builds/oracle-v1",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DSTRATA_ENABLE_CUDA=ON",
+      "-DCMAKE_CUDA_ARCHITECTURES=89",
+      "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325",
+      "-DSTRATA_BUILD_TESTS=ON"
+    ],
+    "cwd": "None",
+    "exit_code": 0,
+    "wall_s": 5.022059371985961
+  },
+  {
+    "name": "build",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "--build",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/builds/oracle-v1",
+      "-j",
+      "8"
+    ],
+    "cwd": "None",
+    "exit_code": 1,
+    "wall_s": 25.0040321679553
+  }
+]

@@ -1,0 +1,246 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0121bb0..aa2ed21 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1252,3 +1252,10 @@ if(STRATA_HIP_GFX906)
+   endif()
+   set_source_files_properties(${_strata_cu} PROPERTIES LANGUAGE HIP)
+ endif()
++
++# Local opt-in row-ownership regression; no changes to upstream test targets.
++if(STRATA_BUILD_TESTS AND STRATA_ENABLE_CUDA)
++  add_executable(lab_direct_parts_test tests/cuda/direct_parts_test.cpp)
++  target_link_libraries(lab_direct_parts_test PRIVATE strata_kernels CUDA::cudart)
++  add_test(NAME lab_direct_parts_test COMMAND lab_direct_parts_test)
++endif()
+diff --git a/include/strata/core/verify.hpp b/include/strata/core/verify.hpp
+index e68f7b3..0a8d0d8 100644
+--- a/include/strata/core/verify.hpp
++++ b/include/strata/core/verify.hpp
+@@ -256,6 +256,7 @@ private:
+     int device_ = -1;                    ///< the device `init` ran on: run/commit switch to it (layer split)
+     std::atomic<bool> released_{false};  ///< #267: release_gpu_waits ran (maybe on the watchdog thread): no more windows
+     bool all_resident_ = false;           ///< 100% of experts in [lb_, le_) resident in VRAM: zero-doorbell graph
++    bool lab_direct_parts_ = false;
+     bool device_plan_ = false;            ///< E-6: resident-only layers planned on the device (STRATA_VERIFY_DEVICE_PLAN)
+     uint32_t* skip_ = nullptr;            ///< E-6: per group, the ring whose plan the device built (0: the host's)
+     unsigned long long* slot_off_d_ = nullptr;   ///< E-6: the slot offsets on the device
+diff --git a/include/strata/kernels/elementwise.hpp b/include/strata/kernels/elementwise.hpp
+index ae0973c..3301207 100644
+--- a/include/strata/kernels/elementwise.hpp
++++ b/include/strata/kernels/elementwise.hpp
+@@ -101,6 +101,9 @@ void doorbell_wait(const uint32_t* d_flag, const uint32_t* d_seq, void* stream);
+ /// Plan v0.3 P3 token graph: copy `n` floats from MAPPED pinned host memory (`src` is its device pointer) into
+ /// device memory with a kernel, so the handoff stays on the compute queue (a memcpy node is a copy-engine
+ /// operation, which WDDM submits separately and which measured 67 flushes per token).
++/// Local experiment: preserve rows owned by the native GPU plan; copy only its CPU complement.
++void copy_cpu_rows_preserving_gpu(float* dst,const float* src,int64_t rows,int64_t width,
++                                  const int32_t* hit_rows,const int32_t* count,void* stream);
+ void copy_from_mapped(float* dst, const float* src, int64_t n, void* stream);
+ /// `rows` rows of `width` floats from mapped memory, except the rows listed in hit_rows[0, *count) (device),
+ /// which are written +0.0 instead (a verify window's GPU-computed entries: the pool leaves zeros there).
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index dd5362b..68fdf42 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -507,6 +507,13 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
+             all_resident_ = all_ok;
+         }
+     }
++    const char* lab_parts=std::getenv("STRATA_LAB_DIRECT_PARTS");
++    lab_direct_parts_=lab_parts&&lab_parts[0]=='1';
++    if(lab_direct_parts_ && (all_resident_ || remote_opt_ || g.n_layers!=48 || g.n_embd!=2560 ||
++        g.n_expert!=512 || ss.k!=10 || !strata::kernels::cpu::expert_layout().native ||
++        !((lb_==0&&le_==25&&device_==0)||(lb_==25&&le_==48&&device_==1)))) {
++        err="lab direct parts: only frozen native IQ3_S serial K25 dual split is validated";return false;
++    }
+     // E-6: a layer whose routed experts are all resident is planned on the device (STRATA_VERIFY_DEVICE_PLAN=1: on;
+     // exact, but neutral on RIBPC 1-2 GPUs: off by default)
+     {
+@@ -559,6 +566,9 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+     const bool ple_on = ss.ple.ready() && ple_stage();
+     auto Rt = [&](int t) { return R_ + (size_t) t * HC * N; };
+     const int G = (split_ && T >= 2 && !batch_rec_) ? 2 : 1;   // a batch window is one group
++    if(lab_direct_parts_ && (G<1 || G>2 || batch_rec_)) {
++        err="lab direct parts: concurrent slots unsupported";return false;
++    }
+     static const bool dec_batch = [] { const char* v = std::getenv("STRATA_DEC_BATCH"); return v == nullptr || std::atoi(v) != 0; }();
+     auto stamp = [&](int64_t l, int i, int grp) {
+         if (prof_on_ && grp == 0) gpu_stamp(prof_, (int) (l * kProfPer + i), cs);
+@@ -1043,7 +1053,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                 copy_i32_from_mapped(pl, m_plan_ + (size_t) grp * (size_t) plan_i32_, plan_i32_, cs);
+             }
+             stamp(l, 19, grp);
+-            grouped(p_ptr, p_start, p_counts, 0, hit_out);
++            grouped(p_ptr, p_start, p_counts, 0, lab_direct_parts_ ? parts_out : hit_out);
+             stamp(l, 20, grp);
+             if (device_plan_) wait_flag_ge_or(m_flagB_, ring, skip_ + grp, cs);
+             else wait_flag_ge(m_flagB_, ring, cs);                 // the PCIe share is in staging (DMA) or mapped
+@@ -1056,16 +1066,21 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             stamp(l, 21, grp);
+             // the PCIe share is pcie_frac of the misses: a few groups when the cache is cold, usually none (always none at
+             // pcie_frac 0), so its launch is kPcieGroupRows block rows striding over the groups, not cap of them
+-            grouped(p_ptr2, p_start2, p_counts + 2, kPcieGroupRows, hit_out);
++            grouped(p_ptr2, p_start2, p_counts + 2, kPcieGroupRows, lab_direct_parts_ ? parts_out : hit_out);
+             stamp(l, 22, grp);
+             if (device_plan_) {   // no CPU share when the device planned the group: its rows are zeros
+                 wait_flag_ge_or(m_flag_, ring, skip_ + grp, cs);
+-                copy_or_zero_from_mapped(parts_out, m_ymiss_ + (size_t) tb * K * N, (long long) n * K * N,
+-                                         skip_ + grp, ring, cs);
++                if(lab_direct_parts_)
++                    copy_cpu_rows_preserving_gpu(parts_out,m_ymiss_+(size_t)tb*K*N,(int64_t)n*K,N,p_dst,p_counts+1,cs);
++                else
++                    copy_or_zero_from_mapped(parts_out, m_ymiss_ + (size_t) tb * K * N, (long long) n * K * N,
++                                             skip_ + grp, ring, cs);
+             } else {
+                 wait_flag_ge(m_flag_, ring, cs);               // the CPU's share is in the mapped rows
+                 stamp(l, 23, grp);
+-                if (remote_opt_)   // #578: the helper's rows come back reduced; skip them as well
++                if(lab_direct_parts_)
++                    copy_cpu_rows_preserving_gpu(parts_out,m_ymiss_+(size_t)tb*K*N,(int64_t)n*K,N,p_dst,p_counts+1,cs);
++                else if (remote_opt_)   // #578: the helper's rows come back reduced; skip them as well
+                     remote_opt_->copy_rows(parts_out, m_ymiss_ + (size_t) tb * K * N, tb, n, p_dst, p_counts + 1, cs);
+                 else if (dec_batch)   // only the CPU rows cross PCIe (p_dst[0, counts[1]) = the GPU's own rows)
+                     copy_rows_from_mapped(parts_out, m_ymiss_ + (size_t) tb * K * N, (int64_t) n * K, N,
+@@ -1073,7 +1088,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                 else
+                     copy_from_mapped(parts_out, m_ymiss_ + (size_t) tb * K * N, (int64_t) n * K * N, cs);
+             }
+-            moe_hit_add(parts_out, hit_out, p_dst, p_counts + 1, cap, N, cs);
++            if(!lab_direct_parts_) moe_hit_add(parts_out, hit_out, p_dst, p_counts + 1, cap, N, cs);
+         }
+         if (!prof_on_ && sh_cs_ != nullptr && ev_fork_ != nullptr && ev_join_ != nullptr) {
+             cudaStreamWaitEvent(cs, ev_join_, 0);
+diff --git a/src/kernels/cuda/elementwise.cu b/src/kernels/cuda/elementwise.cu
+index 4817763..14fd696 100644
+--- a/src/kernels/cuda/elementwise.cu
++++ b/src/kernels/cuda/elementwise.cu
+@@ -251,6 +251,24 @@ __global__ void copy_rows_from_mapped_kernel(float4* __restrict__ dst, const vol
+         for (int64_t i = threadIdx.x; i < row4; i += blockDim.x) d[i] = const_cast<const float4*>(sr)[i];
+     }
+ }
++__global__ void copy_cpu_rows_preserving_gpu_kernel(float4* __restrict__ dst, const volatile float4* src, int64_t row4,
++                                             const int32_t* __restrict__ hit_rows, const int32_t* __restrict__ count) {
++    const int row = blockIdx.x;
++    __shared__ int hit;
++    if (threadIdx.x == 0) {
++        int h = 0;
++        const int c = *count;
++        for (int i = 0; i < c; ++i) h |= hit_rows[i] == row;
++        hit = h;
++    }
++    __syncthreads();
++    float4* d = dst + (int64_t) row * row4;
++    if (hit) return;   // Existing GPU result must remain untouched.
++    {
++        const volatile float4* sr = src + (int64_t) row * row4;
++        for (int64_t i = threadIdx.x; i < row4; i += blockDim.x) d[i] = const_cast<const float4*>(sr)[i];
++    }
++}
+ namespace {
+ __global__ void scatter_rows_kernel(const float4* __restrict__ src, float4* dst, const int32_t* __restrict__ rows,
+                                     int64_t w4) {
+@@ -278,6 +296,15 @@ void copy_rows_from_mapped(float* dst, const float* src, int64_t rows, int64_t w
+     copy_rows_from_mapped_kernel<<<(unsigned) rows, 128, 0, (cudaStream_t) stream>>>((float4*) dst, (const volatile float4*) src,
+                                                                                   width / 4, hit_rows, count);
+ }
++void copy_cpu_rows_preserving_gpu(float* dst,const float* src,int64_t rows,int64_t width,
++                                  const int32_t* hit_rows,const int32_t* count,void* stream) {
++    if(rows<=0)return;
++    if((width&3)!=0 || ((uintptr_t)dst&15)!=0 || ((uintptr_t)src&15)!=0) {
++        std::fprintf(stderr,"copy_cpu_rows_preserving_gpu: alignment/width error\n");std::exit(1);
++    }
++    copy_cpu_rows_preserving_gpu_kernel<<<(unsigned)rows,128,0,(cudaStream_t)stream>>>(
++        (float4*)dst,(const volatile float4*)src,width/4,hit_rows,count);
++}
+ void copy_from_mapped(float* dst, const float* src, int64_t n, void* stream) {
+     if (n <= 0) return;
+     if ((n & 3) != 0 || ((uintptr_t) dst & 15) != 0 || ((uintptr_t) src & 15) != 0) {
+diff --git a/tests/cuda/direct_parts_test.cpp b/tests/cuda/direct_parts_test.cpp
+new file mode 100644
+index 0000000..818bd70
+--- /dev/null
++++ b/tests/cuda/direct_parts_test.cpp
+@@ -0,0 +1,82 @@
++// Exercise GPU-owned and CPU-owned rows in the actual captured preserving-copy kernel.
++#include <strata/kernels/elementwise.hpp>
++#include <cuda_runtime.h>
++#include <algorithm>
++#include <cstdio>
++#include <cstdlib>
++#include <cstring>
++#include <vector>
++static void check(cudaError_t x) {
++    if(x!=cudaSuccess) {std::fprintf(stderr,"CUDA: %s\n",cudaGetErrorString(x));std::exit(1);}
++}
++int main() {
++    int devices=0;check(cudaGetDeviceCount(&devices));if(devices<2)return 1;
++    int cases=0;
++    constexpr int width=2560, k=10;
++    for(int device=0;device<2;++device) {
++        check(cudaSetDevice(device));cudaStream_t stream;check(cudaStreamCreate(&stream));
++        for(int tokens: {1,4}) for(int groups: {1,2}) {
++            if(groups>tokens)continue;
++            int rows=tokens*k;size_t bytes=size_t(rows)*width*sizeof(float);
++            float *src=nullptr,*dst=nullptr;
++            int32_t *ids=nullptr,*counts=nullptr;
++            check(cudaHostAlloc(&src,bytes,cudaHostAllocMapped|cudaHostAllocPortable));
++            check(cudaMalloc(&dst,bytes));check(cudaMalloc(&ids,rows*sizeof(int32_t)));
++            check(cudaMalloc(&counts,groups*sizeof(int32_t)));
++            for(int mode=0;mode<3;++mode) {
++                std::vector<int32_t> hit_rows(rows,-1),hit_count(groups,0);
++                std::vector<float> initial(rows*width),expected(rows*width),actual(rows*width);
++                for(int group=0;group<groups;++group) {
++                    int first=group==0?0:(tokens+1)/2;
++                    int last=groups==1?tokens:(group==0?(tokens+1)/2:tokens);
++                    int base=first*k,n=(last-first)*k;
++                    for(int row=0;row<n;++row) {
++                        bool gpu=mode==0 || (mode==2 && row%3!=1);
++                        if(gpu)hit_rows[base+hit_count[group]++]=row;
++                        for(int c=0;c<width;++c)initial[size_t(base+row)*width+c]=float(1+base+row+c%11);
++                    }
++                }
++                check(cudaMemcpyAsync(ids,hit_rows.data(),rows*sizeof(int32_t),cudaMemcpyHostToDevice,stream));
++                check(cudaMemcpyAsync(counts,hit_count.data(),groups*sizeof(int32_t),cudaMemcpyHostToDevice,stream));
++                check(cudaStreamSynchronize(stream));
++                check(cudaStreamBeginCapture(stream,cudaStreamCaptureModeThreadLocal));
++                for(int group=0;group<groups;++group) {
++                    int first=group==0?0:(tokens+1)/2;
++                    int last=groups==1?tokens:(group==0?(tokens+1)/2:tokens);
++                    int base=first*k,n=(last-first)*k;
++                    strata::kernels::copy_cpu_rows_preserving_gpu(dst+size_t(base)*width,
++                        src+size_t(base)*width,n,width,ids+base,counts+group,stream);
++                }
++                cudaGraph_t graph;check(cudaStreamEndCapture(stream,&graph));
++                cudaGraphExec_t exec;check(cudaGraphInstantiate(&exec,graph,nullptr,nullptr,0));
++                for(int replay=0;replay<2;++replay) {
++                    for(int row=0;row<rows;++row) for(int c=0;c<width;++c)
++                        src[size_t(row)*width+c]=-float(1+row+c%7+replay);
++                    expected=initial;
++                    for(int group=0;group<groups;++group) {
++                        int first=group==0?0:(tokens+1)/2;
++                        int last=groups==1?tokens:(group==0?(tokens+1)/2:tokens);
++                        int base=first*k,n=(last-first)*k;
++                        for(int row=0;row<n;++row) {
++                            bool gpu=std::find(hit_rows.begin()+base,hit_rows.begin()+base+hit_count[group],row)
++                                      !=hit_rows.begin()+base+hit_count[group];
++                            if(!gpu)std::copy_n(src+size_t(base+row)*width,width,expected.begin()+size_t(base+row)*width);
++                        }
++                    }
++                    check(cudaMemcpyAsync(dst,initial.data(),bytes,cudaMemcpyHostToDevice,stream));
++                    check(cudaGraphLaunch(exec,stream));check(cudaStreamSynchronize(stream));
++                    check(cudaMemcpy(actual.data(),dst,bytes,cudaMemcpyDeviceToHost));
++                    if(std::memcmp(actual.data(),expected.data(),bytes)) {
++                        std::fprintf(stderr,"Ownership failed device%d T%d G%d mode%d replay%d\n",device,tokens,groups,mode,replay);return 1;
++                    }
++                    ++cases;
++                }
++                check(cudaGraphExecDestroy(exec));check(cudaGraphDestroy(graph));
++            }
++            check(cudaFreeHost(src));check(cudaFree(dst));check(cudaFree(ids));check(cudaFree(counts));
++        }
++        check(cudaStreamDestroy(stream));
++    }
++    std::printf("PASS: %d exact row-ownership captured replays, both GPUs, T1/T4, G1/G2\n",cases);
++    return 0;
++}

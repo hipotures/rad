@@ -1,0 +1,13 @@
+{
+  "question": "Does full next-gate projection on the owning GPU avoid the measured CPU cost and expose an earlier usable prediction?",
+  "reason": "E015 fresh CPU full projection has about70% top10 precision but typically arrives too late; rank32 lowers cost while losing useful-tail recall. Existing target BF16 gates already reside on the relevant GPU.",
+  "changed_variables": "Default-off diagnostic extra projection/top10 using unchanged native kernels after the real current router. Reuse no-longer-needed current gate logits scratch; private predictedIDs/weights and mapped ID publication. The real current IDs/weights are retained and are the only inputs to expert execution. No cache policy/movement change.",
+  "scope": "Five same-device pairs5->6,20->21,25->26,40->41,46->47. Boundary24->25 excluded because its gate belongs to the other GPU; no P2P/duplicate gate/free transfer assumption. Frozen serial one-group windows only.",
+  "budget": "Per GPU explicit private device IDs/weights320bytes. Per GPU mapped CPU IDs800bytes +64sequencebytes; ten total external timing events. Existing MoE logits scratch reused after current top10; no duplicate gate weights. CUDA allocation/event internal overhead separately unknown; measure VRAM and validate slot-class envelope.",
+  "capture": "Buffered prediction IDs/host availability and GPU elapsed projection+top10+mapped-publication cost for first64windows. No synchronous per-token print/global sync; read events after the existing stage-tail sync.",
+  "correctness": "Relevant native tests and realIQparity, first-head comparison and all4096output/router/MTP/demand/usage checks against prior unchanged control diagnostics. If corruption/incompatible scratch lifetime occurs, preserve and repair a new attempt before conclusions.",
+  "finite_batch": "Fresh server/profile, same4096-input/64-output warmup, one saved4096-output diagnostic run at32k and128k. Six frozen independent episodes may be collected once for bounded causal prediction holdout. No headline TG attribution; no extra unchanged main-matrix repetitions.",
+  "analysis": "Prediction accuracy/nonlocal precision/recall and native-GPU vs fresh-CPU agreement; cost distribution, current-to-target host lead, optimistic one-blob readiness12.6 and1.8GB/s. Evaluate queue/victim feasibility before proposing runtime admissions.",
+  "completion": "Report actual GPU cost/availability or a specific retained blocker; router family not dismissed from CPU-only data. No production deployment.",
+  "repair": "Retained v1 compile failure: native BF16 GEMV signature had duplicated width argument. v2 removes only that argument."
+}

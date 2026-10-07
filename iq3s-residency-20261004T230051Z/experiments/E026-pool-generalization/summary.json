@@ -1,0 +1,2811 @@
+{
+  "state": "COMPLETE_SCOPED_VALIDATION",
+  "cells": [
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "code",
+      "profile": "32k",
+      "role": "default",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/32k/default/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/32k/default/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/32k/default/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 2457.1,
+          "median": 2458.1,
+          "max": 2459.7
+        },
+        "TG": {
+          "min": 113.4,
+          "median": 114.8,
+          "max": 121.3
+        },
+        "TTFT_s": {
+          "min": 11.688828768965323,
+          "median": 11.70234471099684,
+          "max": 11.723452399950475
+        },
+        "wall_s": {
+          "min": 45.43773130798945,
+          "median": 47.402512405999005,
+          "max": 47.81028856098419
+        },
+        "actual_input_tokens": {
+          "min": 28400,
+          "median": 28400,
+          "max": 28400
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3382,
+          "median": 3456,
+          "max": 3546
+        },
+        "mtp_accepted": {
+          "min": 2400,
+          "median": 2469,
+          "max": 2493
+        },
+        "mtp_acceptance_pct": {
+          "min": 67.68189509306261,
+          "median": 72.13541666666667,
+          "max": 73.00413956238911
+        },
+        "verify_windows": {
+          "min": 1604,
+          "median": 1627,
+          "max": 1696
+        },
+        "hit_rate_pct": {
+          "min": 99.0,
+          "median": 99.1,
+          "max": 99.2
+        },
+        "local_vram_entries": {
+          "min": 2383403,
+          "median": 2403442,
+          "max": 2495145
+        },
+        "cpu_fallback_entries": {
+          "min": 20477,
+          "median": 20578,
+          "max": 24751
+        },
+        "offloaded_entries": {
+          "min": 437,
+          "median": 440,
+          "max": 607
+        },
+        "CPU_VM_mean_pct": {
+          "min": 93.79166666666667,
+          "median": 94.1138888888889,
+          "max": 95.09117647058824
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 1487.6944444444443,
+          "median": 1492.7972222222222,
+          "max": 1507.8323529411764
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 45.43773130798945,
+          "median": 47.402512405999005,
+          "max": 47.81028856098419
+        },
+        "TTFT_s": {
+          "min": 11.688828768965323,
+          "median": 11.70234471099684,
+          "max": 11.723452399950475
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 113.4,
+          "median": 114.8,
+          "max": 121.3
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 34,
+          "CPU_VM_mean_pct": 95.09117647058824,
+          "CPU_process_mean_one_core_100": 1507.8323529411764,
+          "GPU_mean_pct": {
+            "0": 47.26470588235294,
+            "1": 49.44117647058823
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 36,
+          "CPU_VM_mean_pct": 93.79166666666667,
+          "CPU_process_mean_one_core_100": 1487.6944444444443,
+          "GPU_mean_pct": {
+            "0": 49.02777777777778,
+            "1": 47.166666666666664
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 36,
+          "CPU_VM_mean_pct": 94.1138888888889,
+          "CPU_process_mean_one_core_100": 1492.7972222222222,
+          "GPU_mean_pct": {
+            "0": 48.888888888888886,
+            "1": 48.30555555555556
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "code",
+      "profile": "32k",
+      "role": "sleep100us",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/32k/sleep100us/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/32k/sleep100us/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/32k/sleep100us/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 2456.8,
+          "median": 2459.2,
+          "max": 2471.6
+        },
+        "TG": {
+          "min": 147.0,
+          "median": 152.3,
+          "max": 153.4
+        },
+        "TTFT_s": {
+          "min": 11.621536806982476,
+          "median": 11.695582724001724,
+          "max": 11.702531927963719
+        },
+        "wall_s": {
+          "min": 38.3913755340036,
+          "median": 38.58759563899366,
+          "max": 39.482142909953836
+        },
+        "actual_input_tokens": {
+          "min": 28400,
+          "median": 28400,
+          "max": 28400
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3382,
+          "median": 3456,
+          "max": 3546
+        },
+        "mtp_accepted": {
+          "min": 2400,
+          "median": 2469,
+          "max": 2493
+        },
+        "mtp_acceptance_pct": {
+          "min": 67.68189509306261,
+          "median": 72.13541666666667,
+          "max": 73.00413956238911
+        },
+        "verify_windows": {
+          "min": 1604,
+          "median": 1627,
+          "max": 1696
+        },
+        "hit_rate_pct": {
+          "min": 99.0,
+          "median": 99.1,
+          "max": 99.2
+        },
+        "local_vram_entries": {
+          "min": 2383403,
+          "median": 2403442,
+          "max": 2495145
+        },
+        "cpu_fallback_entries": {
+          "min": 20477,
+          "median": 20578,
+          "max": 24751
+        },
+        "offloaded_entries": {
+          "min": 437,
+          "median": 440,
+          "max": 607
+        },
+        "CPU_VM_mean_pct": {
+          "min": 20.667857142857144,
+          "median": 21.037037037037038,
+          "max": 22.511111111111113
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 267.32142857142856,
+          "median": 269.7888888888889,
+          "max": 293.5814814814815
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 38.3913755340036,
+          "median": 38.58759563899366,
+          "max": 39.482142909953836
+        },
+        "TTFT_s": {
+          "min": 11.621536806982476,
+          "median": 11.695582724001724,
+          "max": 11.702531927963719
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 147.0,
+          "median": 152.3,
+          "max": 153.4
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 27,
+          "CPU_VM_mean_pct": 22.511111111111113,
+          "CPU_process_mean_one_core_100": 293.5814814814815,
+          "GPU_mean_pct": {
+            "0": 46.51851851851852,
+            "1": 54.148148148148145
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 27,
+          "CPU_VM_mean_pct": 21.037037037037038,
+          "CPU_process_mean_one_core_100": 269.7888888888889,
+          "GPU_mean_pct": {
+            "0": 46.03703703703704,
+            "1": 55.407407407407405
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 28,
+          "CPU_VM_mean_pct": 20.667857142857144,
+          "CPU_process_mean_one_core_100": 267.32142857142856,
+          "GPU_mean_pct": {
+            "0": 45.67857142857143,
+            "1": 53.57142857142857
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "code",
+      "profile": "128k",
+      "role": "default",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/128k/default/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/128k/default/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/128k/default/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 3537.6,
+          "median": 3539.8,
+          "max": 3546.5
+        },
+        "TG": {
+          "min": 117.5,
+          "median": 128.2,
+          "max": 134.8
+        },
+        "TTFT_s": {
+          "min": 36.401275421027094,
+          "median": 36.40399745898321,
+          "max": 36.404103701992426
+        },
+        "wall_s": {
+          "min": 66.77923437702702,
+          "median": 68.33637072698912,
+          "max": 71.25206907797838
+        },
+        "actual_input_tokens": {
+          "min": 126716,
+          "median": 126716,
+          "max": 126716
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3471,
+          "median": 3506,
+          "max": 3536
+        },
+        "mtp_accepted": {
+          "min": 2305,
+          "median": 2411,
+          "max": 2440
+        },
+        "mtp_acceptance_pct": {
+          "min": 65.1866515837104,
+          "median": 68.76782658300057,
+          "max": 70.29674445404783
+        },
+        "verify_windows": {
+          "min": 1659,
+          "median": 1688,
+          "max": 1793
+        },
+        "hit_rate_pct": {
+          "min": 99.0,
+          "median": 99.0,
+          "max": 99.2
+        },
+        "local_vram_entries": {
+          "min": 2435931,
+          "median": 2468540,
+          "max": 2537404
+        },
+        "cpu_fallback_entries": {
+          "min": 19890,
+          "median": 23790,
+          "max": 25425
+        },
+        "offloaded_entries": {
+          "min": 626,
+          "median": 790,
+          "max": 1044
+        },
+        "CPU_VM_mean_pct": {
+          "min": 93.5875,
+          "median": 94.40571428571428,
+          "max": 95.27333333333334
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 1487.35625,
+          "median": 1496.8771428571429,
+          "max": 1514.2966666666666
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 66.77923437702702,
+          "median": 68.33637072698912,
+          "max": 71.25206907797838
+        },
+        "TTFT_s": {
+          "min": 36.401275421027094,
+          "median": 36.40399745898321,
+          "max": 36.404103701992426
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 117.5,
+          "median": 128.2,
+          "max": 134.8
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 30,
+          "CPU_VM_mean_pct": 95.27333333333334,
+          "CPU_process_mean_one_core_100": 1514.2966666666666,
+          "GPU_mean_pct": {
+            "0": 47.3,
+            "1": 51.0
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 35,
+          "CPU_VM_mean_pct": 94.40571428571428,
+          "CPU_process_mean_one_core_100": 1496.8771428571429,
+          "GPU_mean_pct": {
+            "0": 47.8,
+            "1": 48.74285714285714
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 32,
+          "CPU_VM_mean_pct": 93.5875,
+          "CPU_process_mean_one_core_100": 1487.35625,
+          "GPU_mean_pct": {
+            "0": 47.0625,
+            "1": 51.78125
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "code",
+      "profile": "128k",
+      "role": "sleep100us",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/128k/sleep100us/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/128k/sleep100us/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/128k/sleep100us/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 3540.5,
+          "median": 3548.4,
+          "max": 3551.8
+        },
+        "TG": {
+          "min": 139.0,
+          "median": 144.2,
+          "max": 146.5
+        },
+        "TTFT_s": {
+          "min": 36.19765515200561,
+          "median": 36.385531959007494,
+          "max": 36.3857227890403
+        },
+        "wall_s": {
+          "min": 64.3445621500141,
+          "median": 64.78778076899471,
+          "max": 65.64920843701111
+        },
+        "actual_input_tokens": {
+          "min": 126716,
+          "median": 126716,
+          "max": 126716
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3471,
+          "median": 3506,
+          "max": 3536
+        },
+        "mtp_accepted": {
+          "min": 2305,
+          "median": 2411,
+          "max": 2440
+        },
+        "mtp_acceptance_pct": {
+          "min": 65.1866515837104,
+          "median": 68.76782658300057,
+          "max": 70.29674445404783
+        },
+        "verify_windows": {
+          "min": 1659,
+          "median": 1688,
+          "max": 1793
+        },
+        "hit_rate_pct": {
+          "min": 99.0,
+          "median": 99.0,
+          "max": 99.2
+        },
+        "local_vram_entries": {
+          "min": 2435931,
+          "median": 2468540,
+          "max": 2537404
+        },
+        "cpu_fallback_entries": {
+          "min": 19890,
+          "median": 23790,
+          "max": 25425
+        },
+        "offloaded_entries": {
+          "min": 626,
+          "median": 790,
+          "max": 1044
+        },
+        "CPU_VM_mean_pct": {
+          "min": 15.16551724137931,
+          "median": 17.464285714285715,
+          "max": 17.65714285714286
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 218.9241379310345,
+          "median": 245.62142857142857,
+          "max": 249.35
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 64.3445621500141,
+          "median": 64.78778076899471,
+          "max": 65.64920843701111
+        },
+        "TTFT_s": {
+          "min": 36.19765515200561,
+          "median": 36.385531959007494,
+          "max": 36.3857227890403
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 139.0,
+          "median": 144.2,
+          "max": 146.5
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 28,
+          "CPU_VM_mean_pct": 17.65714285714286,
+          "CPU_process_mean_one_core_100": 245.62142857142857,
+          "GPU_mean_pct": {
+            "0": 45.964285714285715,
+            "1": 54.642857142857146
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 28,
+          "CPU_VM_mean_pct": 17.464285714285715,
+          "CPU_process_mean_one_core_100": 249.35,
+          "GPU_mean_pct": {
+            "0": 45.857142857142854,
+            "1": 54.785714285714285
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 29,
+          "CPU_VM_mean_pct": 15.16551724137931,
+          "CPU_process_mean_one_core_100": 218.9241379310345,
+          "GPU_mean_pct": {
+            "0": 45.93103448275862,
+            "1": 54.62068965517241
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "math",
+      "profile": "32k",
+      "role": "default",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/32k/default/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/32k/default/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/32k/default/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 2231.4,
+          "median": 2238.7,
+          "max": 2253.1
+        },
+        "TG": {
+          "min": 140.1,
+          "median": 150.8,
+          "max": 153.6
+        },
+        "TTFT_s": {
+          "min": 12.739512437023222,
+          "median": 12.81795517296996,
+          "max": 12.874415892001707
+        },
+        "wall_s": {
+          "min": 39.397095407999586,
+          "median": 39.96988048101775,
+          "max": 42.11079245398287
+        },
+        "actual_input_tokens": {
+          "min": 28411,
+          "median": 28411,
+          "max": 28411
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3400,
+          "median": 3466,
+          "max": 3525
+        },
+        "mtp_accepted": {
+          "min": 2680,
+          "median": 2796,
+          "max": 2811
+        },
+        "mtp_acceptance_pct": {
+          "min": 76.02836879432624,
+          "median": 80.66935949221003,
+          "max": 82.67647058823529
+        },
+        "verify_windows": {
+          "min": 1288,
+          "median": 1301,
+          "max": 1417
+        },
+        "hit_rate_pct": {
+          "min": 98.5,
+          "median": 98.7,
+          "max": 98.9
+        },
+        "local_vram_entries": {
+          "min": 2215435,
+          "median": 2256469,
+          "max": 2345280
+        },
+        "cpu_fallback_entries": {
+          "min": 26142,
+          "median": 30719,
+          "max": 33838
+        },
+        "offloaded_entries": {
+          "min": 738,
+          "median": 967,
+          "max": 972
+        },
+        "CPU_VM_mean_pct": {
+          "min": 94.61,
+          "median": 96.38518518518518,
+          "max": 96.94814814814815
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 1500.5266666666666,
+          "median": 1529.237037037037,
+          "max": 1538.5111111111112
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 39.397095407999586,
+          "median": 39.96988048101775,
+          "max": 42.11079245398287
+        },
+        "TTFT_s": {
+          "min": 12.739512437023222,
+          "median": 12.81795517296996,
+          "max": 12.874415892001707
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 140.1,
+          "median": 150.8,
+          "max": 153.6
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 27,
+          "CPU_VM_mean_pct": 96.94814814814815,
+          "CPU_process_mean_one_core_100": 1538.5111111111112,
+          "GPU_mean_pct": {
+            "0": 46.370370370370374,
+            "1": 51.22222222222222
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 27,
+          "CPU_VM_mean_pct": 96.38518518518518,
+          "CPU_process_mean_one_core_100": 1529.237037037037,
+          "GPU_mean_pct": {
+            "0": 47.629629629629626,
+            "1": 50.333333333333336
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 30,
+          "CPU_VM_mean_pct": 94.61,
+          "CPU_process_mean_one_core_100": 1500.5266666666666,
+          "GPU_mean_pct": {
+            "0": 47.8,
+            "1": 47.96666666666667
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "math",
+      "profile": "32k",
+      "role": "sleep100us",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/32k/sleep100us/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/32k/sleep100us/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/32k/sleep100us/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 2239.9,
+          "median": 2258.3,
+          "max": 2265.4
+        },
+        "TG": {
+          "min": 166.5,
+          "median": 172.8,
+          "max": 173.8
+        },
+        "TTFT_s": {
+          "min": 12.674992458021734,
+          "median": 12.724601355032064,
+          "max": 12.808145618997514
+        },
+        "wall_s": {
+          "min": 36.282010664988775,
+          "median": 36.3746642540209,
+          "max": 37.40233212604653
+        },
+        "actual_input_tokens": {
+          "min": 28411,
+          "median": 28411,
+          "max": 28411
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3400,
+          "median": 3466,
+          "max": 3525
+        },
+        "mtp_accepted": {
+          "min": 2680,
+          "median": 2796,
+          "max": 2811
+        },
+        "mtp_acceptance_pct": {
+          "min": 76.02836879432624,
+          "median": 80.66935949221003,
+          "max": 82.67647058823529
+        },
+        "verify_windows": {
+          "min": 1288,
+          "median": 1301,
+          "max": 1417
+        },
+        "hit_rate_pct": {
+          "min": 98.5,
+          "median": 98.7,
+          "max": 98.9
+        },
+        "local_vram_entries": {
+          "min": 2215435,
+          "median": 2256469,
+          "max": 2345280
+        },
+        "cpu_fallback_entries": {
+          "min": 26142,
+          "median": 30719,
+          "max": 33838
+        },
+        "offloaded_entries": {
+          "min": 738,
+          "median": 967,
+          "max": 972
+        },
+        "CPU_VM_mean_pct": {
+          "min": 23.584,
+          "median": 27.583333333333332,
+          "max": 29.1
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 314.016,
+          "median": 361.4291666666667,
+          "max": 385.4166666666667
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 36.282010664988775,
+          "median": 36.3746642540209,
+          "max": 37.40233212604653
+        },
+        "TTFT_s": {
+          "min": 12.674992458021734,
+          "median": 12.724601355032064,
+          "max": 12.808145618997514
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 166.5,
+          "median": 172.8,
+          "max": 173.8
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 24,
+          "CPU_VM_mean_pct": 29.1,
+          "CPU_process_mean_one_core_100": 385.4166666666667,
+          "GPU_mean_pct": {
+            "0": 45.583333333333336,
+            "1": 57.291666666666664
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 24,
+          "CPU_VM_mean_pct": 27.583333333333332,
+          "CPU_process_mean_one_core_100": 361.4291666666667,
+          "GPU_mean_pct": {
+            "0": 45.958333333333336,
+            "1": 56.291666666666664
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 25,
+          "CPU_VM_mean_pct": 23.584,
+          "CPU_process_mean_one_core_100": 314.016,
+          "GPU_mean_pct": {
+            "0": 45.12,
+            "1": 55.88
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "math",
+      "profile": "128k",
+      "role": "default",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/128k/default/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/128k/default/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/128k/default/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 3378.2,
+          "median": 3390.9,
+          "max": 3396.8
+        },
+        "TG": {
+          "min": 145.8,
+          "median": 167.0,
+          "max": 167.1
+        },
+        "TTFT_s": {
+          "min": 37.85267655499047,
+          "median": 37.93889620702248,
+          "max": 38.095014222024474
+        },
+        "wall_s": {
+          "min": 62.3739586470183,
+          "median": 62.46477571100695,
+          "max": 66.19698892399902
+        },
+        "actual_input_tokens": {
+          "min": 126717,
+          "median": 126717,
+          "max": 126717
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3354,
+          "median": 3390,
+          "max": 3422
+        },
+        "mtp_accepted": {
+          "min": 2755,
+          "median": 2772,
+          "max": 2805
+        },
+        "mtp_acceptance_pct": {
+          "min": 80.50847457627118,
+          "median": 81.76991150442478,
+          "max": 83.6314847942755
+        },
+        "verify_windows": {
+          "min": 1291,
+          "median": 1325,
+          "max": 1341
+        },
+        "hit_rate_pct": {
+          "min": 98.6,
+          "median": 98.6,
+          "max": 98.6
+        },
+        "local_vram_entries": {
+          "min": 2197060,
+          "median": 2230079,
+          "max": 2253737
+        },
+        "cpu_fallback_entries": {
+          "min": 31485,
+          "median": 31486,
+          "max": 31989
+        },
+        "offloaded_entries": {
+          "min": 1018,
+          "median": 1054,
+          "max": 1132
+        },
+        "CPU_VM_mean_pct": {
+          "min": 95.976,
+          "median": 96.104,
+          "max": 99.10000000000001
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 1526.088,
+          "median": 1527.924,
+          "max": 1573.2071428571428
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 62.3739586470183,
+          "median": 62.46477571100695,
+          "max": 66.19698892399902
+        },
+        "TTFT_s": {
+          "min": 37.85267655499047,
+          "median": 37.93889620702248,
+          "max": 38.095014222024474
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 145.8,
+          "median": 167.0,
+          "max": 167.1
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 28,
+          "CPU_VM_mean_pct": 99.10000000000001,
+          "CPU_process_mean_one_core_100": 1573.2071428571428,
+          "GPU_mean_pct": {
+            "0": 45.67857142857143,
+            "1": 51.92857142857143
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 25,
+          "CPU_VM_mean_pct": 96.104,
+          "CPU_process_mean_one_core_100": 1527.924,
+          "GPU_mean_pct": {
+            "0": 43.92,
+            "1": 51.92
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 25,
+          "CPU_VM_mean_pct": 95.976,
+          "CPU_process_mean_one_core_100": 1526.088,
+          "GPU_mean_pct": {
+            "0": 47.04,
+            "1": 52.6
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "math",
+      "profile": "128k",
+      "role": "sleep100us",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/128k/sleep100us/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/128k/sleep100us/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/math/128k/sleep100us/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 3376.4,
+          "median": 3380.2,
+          "max": 3381.3
+        },
+        "TG": {
+          "min": 161.5,
+          "median": 165.1,
+          "max": 173.5
+        },
+        "TTFT_s": {
+          "min": 37.98611712199636,
+          "median": 37.99041299597593,
+          "max": 38.08082478703
+        },
+        "wall_s": {
+          "min": 61.58608206099598,
+          "median": 62.880396224034484,
+          "max": 63.349373498000205
+        },
+        "actual_input_tokens": {
+          "min": 126717,
+          "median": 126717,
+          "max": 126717
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3354,
+          "median": 3390,
+          "max": 3422
+        },
+        "mtp_accepted": {
+          "min": 2755,
+          "median": 2772,
+          "max": 2805
+        },
+        "mtp_acceptance_pct": {
+          "min": 80.50847457627118,
+          "median": 81.76991150442478,
+          "max": 83.6314847942755
+        },
+        "verify_windows": {
+          "min": 1291,
+          "median": 1325,
+          "max": 1341
+        },
+        "hit_rate_pct": {
+          "min": 98.6,
+          "median": 98.6,
+          "max": 98.6
+        },
+        "local_vram_entries": {
+          "min": 2197060,
+          "median": 2230079,
+          "max": 2253737
+        },
+        "cpu_fallback_entries": {
+          "min": 31485,
+          "median": 31486,
+          "max": 31989
+        },
+        "offloaded_entries": {
+          "min": 1018,
+          "median": 1054,
+          "max": 1132
+        },
+        "CPU_VM_mean_pct": {
+          "min": 21.254166666666666,
+          "median": 27.130769230769232,
+          "max": 27.425
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 312.6125,
+          "median": 352.61538461538464,
+          "max": 362.12916666666666
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 61.58608206099598,
+          "median": 62.880396224034484,
+          "max": 63.349373498000205
+        },
+        "TTFT_s": {
+          "min": 37.98611712199636,
+          "median": 37.99041299597593,
+          "max": 38.08082478703
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 161.5,
+          "median": 165.1,
+          "max": 173.5
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 24,
+          "CPU_VM_mean_pct": 27.425,
+          "CPU_process_mean_one_core_100": 362.12916666666666,
+          "GPU_mean_pct": {
+            "0": 47.083333333333336,
+            "1": 53.916666666666664
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 26,
+          "CPU_VM_mean_pct": 27.130769230769232,
+          "CPU_process_mean_one_core_100": 352.61538461538464,
+          "GPU_mean_pct": {
+            "0": 44.80769230769231,
+            "1": 51.92307692307692
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 24,
+          "CPU_VM_mean_pct": 21.254166666666666,
+          "CPU_process_mean_one_core_100": 312.6125,
+          "GPU_mean_pct": {
+            "0": 48.208333333333336,
+            "1": 57.125
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "prose",
+      "profile": "32k",
+      "role": "default",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/32k/default/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/32k/default/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/32k/default/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 1931.3,
+          "median": 1943.0,
+          "max": 1947.4
+        },
+        "TG": {
+          "min": 117.7,
+          "median": 118.4,
+          "max": 126.8
+        },
+        "TTFT_s": {
+          "min": 14.73552001803182,
+          "median": 14.792574265040457,
+          "max": 14.878377283981536
+        },
+        "wall_s": {
+          "min": 47.10651765402872,
+          "median": 49.47067171597155,
+          "max": 49.537702965026256
+        },
+        "actual_input_tokens": {
+          "min": 28408,
+          "median": 28408,
+          "max": 28408
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3402,
+          "median": 3451,
+          "max": 3477
+        },
+        "mtp_accepted": {
+          "min": 2546,
+          "median": 2624,
+          "max": 2631
+        },
+        "mtp_acceptance_pct": {
+          "min": 73.7757171834251,
+          "median": 75.46735691688237,
+          "max": 77.336860670194
+        },
+        "verify_windows": {
+          "min": 1467,
+          "median": 1475,
+          "max": 1552
+        },
+        "hit_rate_pct": {
+          "min": 99.0,
+          "median": 99.0,
+          "max": 99.1
+        },
+        "local_vram_entries": {
+          "min": 2312738,
+          "median": 2352983,
+          "max": 2380425
+        },
+        "cpu_fallback_entries": {
+          "min": 20671,
+          "median": 23484,
+          "max": 23867
+        },
+        "offloaded_entries": {
+          "min": 344,
+          "median": 493,
+          "max": 515
+        },
+        "CPU_VM_mean_pct": {
+          "min": 94.31212121212121,
+          "median": 95.30857142857143,
+          "max": 95.95428571428572
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 1495.3333333333333,
+          "median": 1512.44,
+          "max": 1523.2371428571428
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 47.10651765402872,
+          "median": 49.47067171597155,
+          "max": 49.537702965026256
+        },
+        "TTFT_s": {
+          "min": 14.73552001803182,
+          "median": 14.792574265040457,
+          "max": 14.878377283981536
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 117.7,
+          "median": 118.4,
+          "max": 126.8
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 35,
+          "CPU_VM_mean_pct": 95.95428571428572,
+          "CPU_process_mean_one_core_100": 1523.2371428571428,
+          "GPU_mean_pct": {
+            "0": 47.17142857142857,
+            "1": 50.51428571428571
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 33,
+          "CPU_VM_mean_pct": 94.31212121212121,
+          "CPU_process_mean_one_core_100": 1495.3333333333333,
+          "GPU_mean_pct": {
+            "0": 48.57575757575758,
+            "1": 49.484848484848484
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 35,
+          "CPU_VM_mean_pct": 95.30857142857143,
+          "CPU_process_mean_one_core_100": 1512.44,
+          "GPU_mean_pct": {
+            "0": 47.65714285714286,
+            "1": 47.65714285714286
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "prose",
+      "profile": "32k",
+      "role": "sleep100us",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/32k/sleep100us/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/32k/sleep100us/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/32k/sleep100us/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 1929.6,
+          "median": 1958.6,
+          "max": 1972.6
+        },
+        "TG": {
+          "min": 158.5,
+          "median": 166.1,
+          "max": 166.5
+        },
+        "TTFT_s": {
+          "min": 14.55079344700789,
+          "median": 14.666381405957509,
+          "max": 14.882497448998038
+        },
+        "wall_s": {
+          "min": 39.19718301098328,
+          "median": 39.48041297803866,
+          "max": 40.49530190497171
+        },
+        "actual_input_tokens": {
+          "min": 28408,
+          "median": 28408,
+          "max": 28408
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3402,
+          "median": 3451,
+          "max": 3477
+        },
+        "mtp_accepted": {
+          "min": 2546,
+          "median": 2624,
+          "max": 2631
+        },
+        "mtp_acceptance_pct": {
+          "min": 73.7757171834251,
+          "median": 75.46735691688237,
+          "max": 77.336860670194
+        },
+        "verify_windows": {
+          "min": 1467,
+          "median": 1475,
+          "max": 1552
+        },
+        "hit_rate_pct": {
+          "min": 99.0,
+          "median": 99.0,
+          "max": 99.1
+        },
+        "local_vram_entries": {
+          "min": 2312738,
+          "median": 2352983,
+          "max": 2380425
+        },
+        "cpu_fallback_entries": {
+          "min": 20671,
+          "median": 23484,
+          "max": 23867
+        },
+        "offloaded_entries": {
+          "min": 344,
+          "median": 493,
+          "max": 515
+        },
+        "CPU_VM_mean_pct": {
+          "min": 21.56153846153846,
+          "median": 21.624,
+          "max": 22.032
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 278.1576923076923,
+          "median": 293.31600000000003,
+          "max": 301.26
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 39.19718301098328,
+          "median": 39.48041297803866,
+          "max": 40.49530190497171
+        },
+        "TTFT_s": {
+          "min": 14.55079344700789,
+          "median": 14.666381405957509,
+          "max": 14.882497448998038
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 158.5,
+          "median": 166.1,
+          "max": 166.5
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 25,
+          "CPU_VM_mean_pct": 21.624,
+          "CPU_process_mean_one_core_100": 293.31600000000003,
+          "GPU_mean_pct": {
+            "0": 45.28,
+            "1": 54.64
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 26,
+          "CPU_VM_mean_pct": 21.56153846153846,
+          "CPU_process_mean_one_core_100": 278.1576923076923,
+          "GPU_mean_pct": {
+            "0": 45.73076923076923,
+            "1": 53.84615384615385
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 25,
+          "CPU_VM_mean_pct": 22.032,
+          "CPU_process_mean_one_core_100": 301.26,
+          "GPU_mean_pct": {
+            "0": 44.76,
+            "1": 53.2
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "prose",
+      "profile": "128k",
+      "role": "default",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/128k/default/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/128k/default/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/128k/default/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 3194.5,
+          "median": 3212.0,
+          "max": 3213.0
+        },
+        "TG": {
+          "min": 148.2,
+          "median": 152.2,
+          "max": 152.3
+        },
+        "TTFT_s": {
+          "min": 39.76164229999995,
+          "median": 40.08028626802843,
+          "max": 40.262157106015366
+        },
+        "wall_s": {
+          "min": 66.65515291702468,
+          "median": 67.17026071000146,
+          "max": 67.70438350300537
+        },
+        "actual_input_tokens": {
+          "min": 126717,
+          "median": 126717,
+          "max": 126717
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3377,
+          "median": 3426,
+          "max": 3471
+        },
+        "mtp_accepted": {
+          "min": 2547,
+          "median": 2590,
+          "max": 2590
+        },
+        "mtp_acceptance_pct": {
+          "min": 73.37942955920484,
+          "median": 75.59836544074723,
+          "max": 76.69529167900504
+        },
+        "verify_windows": {
+          "min": 1506,
+          "median": 1506,
+          "max": 1550
+        },
+        "hit_rate_pct": {
+          "min": 99.0,
+          "median": 99.0,
+          "max": 99.1
+        },
+        "local_vram_entries": {
+          "min": 2320303,
+          "median": 2343512,
+          "max": 2387357
+        },
+        "cpu_fallback_entries": {
+          "min": 22294,
+          "median": 23011,
+          "max": 23346
+        },
+        "offloaded_entries": {
+          "min": 429,
+          "median": 502,
+          "max": 526
+        },
+        "CPU_VM_mean_pct": {
+          "min": 96.06296296296296,
+          "median": 97.79629629629629,
+          "max": 98.11481481481482
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 1526.4259259259259,
+          "median": 1554.7518518518518,
+          "max": 1559.2259259259258
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 66.65515291702468,
+          "median": 67.17026071000146,
+          "max": 67.70438350300537
+        },
+        "TTFT_s": {
+          "min": 39.76164229999995,
+          "median": 40.08028626802843,
+          "max": 40.262157106015366
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 148.2,
+          "median": 152.2,
+          "max": 152.3
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 27,
+          "CPU_VM_mean_pct": 98.11481481481482,
+          "CPU_process_mean_one_core_100": 1559.2259259259258,
+          "GPU_mean_pct": {
+            "0": 48.22222222222222,
+            "1": 52.77777777777778
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 27,
+          "CPU_VM_mean_pct": 97.79629629629629,
+          "CPU_process_mean_one_core_100": 1554.7518518518518,
+          "GPU_mean_pct": {
+            "0": 46.074074074074076,
+            "1": 53.333333333333336
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 27,
+          "CPU_VM_mean_pct": 96.06296296296296,
+          "CPU_process_mean_one_core_100": 1526.4259259259259,
+          "GPU_mean_pct": {
+            "0": 46.2962962962963,
+            "1": 55.22222222222222
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    },
+    {
+      "experiment": "E026-pool-generalization",
+      "phase": "P0",
+      "family": "prose",
+      "profile": "128k",
+      "role": "sleep100us",
+      "attempts": 3,
+      "valid_fixed_length": 3,
+      "raw_paths": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/128k/sleep100us/rep1/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/128k/sleep100us/rep2/raw/run.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/prose/128k/sleep100us/rep3/raw/run.json"
+      ],
+      "invalid": [],
+      "metrics": {
+        "PP": {
+          "min": 3087.9,
+          "median": 3314.2,
+          "max": 3330.9
+        },
+        "TG": {
+          "min": 156.0,
+          "median": 160.5,
+          "max": 161.1
+        },
+        "TTFT_s": {
+          "min": 38.371070664026774,
+          "median": 38.551437748013996,
+          "max": 41.631713382026646
+        },
+        "wall_s": {
+          "min": 63.883456106996164,
+          "median": 63.968711523048114,
+          "max": 67.87474928499432
+        },
+        "actual_input_tokens": {
+          "min": 126717,
+          "median": 126717,
+          "max": 126717
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "mtp_proposed": {
+          "min": 3377,
+          "median": 3426,
+          "max": 3471
+        },
+        "mtp_accepted": {
+          "min": 2547,
+          "median": 2590,
+          "max": 2590
+        },
+        "mtp_acceptance_pct": {
+          "min": 73.37942955920484,
+          "median": 75.59836544074723,
+          "max": 76.69529167900504
+        },
+        "verify_windows": {
+          "min": 1506,
+          "median": 1506,
+          "max": 1550
+        },
+        "hit_rate_pct": {
+          "min": 99.0,
+          "median": 99.0,
+          "max": 99.1
+        },
+        "local_vram_entries": {
+          "min": 2320303,
+          "median": 2343512,
+          "max": 2387357
+        },
+        "cpu_fallback_entries": {
+          "min": 22294,
+          "median": 23011,
+          "max": 23346
+        },
+        "offloaded_entries": {
+          "min": 429,
+          "median": 502,
+          "max": 526
+        },
+        "CPU_VM_mean_pct": {
+          "min": 17.473076923076924,
+          "median": 18.464,
+          "max": 18.768
+        },
+        "CPU_process_mean_one_core_100": {
+          "min": 253.51153846153846,
+          "median": 261.352,
+          "max": 264.492
+        }
+      },
+      "application_metrics": {
+        "wall_s": {
+          "min": 63.883456106996164,
+          "median": 63.968711523048114,
+          "max": 67.87474928499432
+        },
+        "TTFT_s": {
+          "min": 38.371070664026774,
+          "median": 38.551437748013996,
+          "max": 41.631713382026646
+        },
+        "actual_output_tokens": {
+          "min": 4096,
+          "median": 4096,
+          "max": 4096
+        },
+        "TG": {
+          "min": 156.0,
+          "median": 160.5,
+          "max": 161.1
+        }
+      },
+      "decode_telemetry": [
+        {
+          "samples": 26,
+          "CPU_VM_mean_pct": 17.473076923076924,
+          "CPU_process_mean_one_core_100": 253.51153846153846,
+          "GPU_mean_pct": {
+            "0": 45.53846153846154,
+            "1": 54.92307692307692
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 25,
+          "CPU_VM_mean_pct": 18.464,
+          "CPU_process_mean_one_core_100": 261.352,
+          "GPU_mean_pct": {
+            "0": 44.12,
+            "1": 54.84
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        },
+        {
+          "samples": 25,
+          "CPU_VM_mean_pct": 18.768,
+          "CPU_process_mean_one_core_100": 264.492,
+          "GPU_mean_pct": {
+            "0": 45.04,
+            "1": 55.36
+          },
+          "CPU_positive_completion_wait_us": "UNAVAILABLE_HEADLINE; separate selected-layer diagnostics required",
+          "all_local_wait_us": "UNAVAILABLE_HEADLINE",
+          "physical_read_bytes_delta": 0
+        }
+      ]
+    }
+  ],
+  "paired": [
+    {
+      "family": "code",
+      "profile": "32k",
+      "replicate": 1,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 25.556471558120375,
+      "wall_delta_pct": -15.075875207245016,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 24751,
+      "baseline_output": 4096
+    },
+    {
+      "family": "code",
+      "profile": "32k",
+      "replicate": 2,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 35.273368606701936,
+      "wall_delta_pct": -19.70059857506683,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 20477,
+      "baseline_output": 4096
+    },
+    {
+      "family": "code",
+      "profile": "32k",
+      "replicate": 3,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 28.04878048780488,
+      "wall_delta_pct": -16.708754650402902,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 20578,
+      "baseline_output": 4096
+    },
+    {
+      "family": "code",
+      "profile": "128k",
+      "replicate": 1,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 6.973293768545985,
+      "wall_delta_pct": -2.9821450135064764,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 23790,
+      "baseline_output": 4096
+    },
+    {
+      "family": "code",
+      "profile": "128k",
+      "replicate": 2,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 24.680851063829778,
+      "wall_delta_pct": -9.69446504129542,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 25425,
+      "baseline_output": 4096
+    },
+    {
+      "family": "code",
+      "profile": "128k",
+      "replicate": 3,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 8.424336973478951,
+      "wall_delta_pct": -3.932257831943542,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 19890,
+      "baseline_output": 4096
+    },
+    {
+      "family": "math",
+      "profile": "32k",
+      "replicate": 1,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 13.151041666666675,
+      "wall_delta_pct": -7.90688935504188,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 33838,
+      "baseline_output": 4096
+    },
+    {
+      "family": "math",
+      "profile": "32k",
+      "replicate": 2,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 14.588859416445633,
+      "wall_delta_pct": -8.994813553931625,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 30719,
+      "baseline_output": 4096
+    },
+    {
+      "family": "math",
+      "profile": "32k",
+      "replicate": 3,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 18.843683083511785,
+      "wall_delta_pct": -11.181124964773748,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 26142,
+      "baseline_output": 4096
+    },
+    {
+      "family": "math",
+      "profile": "128k",
+      "replicate": 1,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 13.237311385459517,
+      "wall_delta_pct": -5.010186647269288,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 31486,
+      "baseline_output": 4096
+    },
+    {
+      "family": "math",
+      "profile": "128k",
+      "replicate": 2,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": -3.3512866546977826,
+      "wall_delta_pct": 1.5638174522510262,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 31989,
+      "baseline_output": 4096
+    },
+    {
+      "family": "math",
+      "profile": "128k",
+      "replicate": 3,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 3.8922155688622784,
+      "wall_delta_pct": -1.4067026416235695,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 31485,
+      "baseline_output": 4096
+    },
+    {
+      "family": "prose",
+      "profile": "32k",
+      "replicate": 1,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 41.121495327102785,
+      "wall_delta_pct": -20.87404004449582,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 23484,
+      "baseline_output": 4096
+    },
+    {
+      "family": "prose",
+      "profile": "32k",
+      "replicate": 2,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 25.0,
+      "wall_delta_pct": -14.034609388052688,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 20671,
+      "baseline_output": 4096
+    },
+    {
+      "family": "prose",
+      "profile": "32k",
+      "replicate": 3,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 40.625,
+      "wall_delta_pct": -20.194305820811298,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 23867,
+      "baseline_output": 4096
+    },
+    {
+      "family": "prose",
+      "profile": "128k",
+      "replicate": 1,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 5.2631578947368585,
+      "wall_delta_pct": 0.2516318341210244,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 22294,
+      "baseline_output": 4096
+    },
+    {
+      "family": "prose",
+      "profile": "128k",
+      "replicate": 2,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 5.847568988173468,
+      "wall_delta_pct": -4.766319429331379,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 23011,
+      "baseline_output": 4096
+    },
+    {
+      "family": "prose",
+      "profile": "128k",
+      "replicate": 3,
+      "same_binary": true,
+      "same_input_IDs": true,
+      "same_actual_output_IDs": true,
+      "common_output_prefix_tokens": 4096,
+      "same_MTP": true,
+      "same_normal_routing": true,
+      "same_capacity": true,
+      "TG_delta_pct": 5.384110308601442,
+      "wall_delta_pct": -4.158263373094117,
+      "both_fixed_length_valid": true,
+      "baseline_CPU_entries": 23346,
+      "baseline_output": 4096
+    }
+  ],
+  "paired_deltas": [
+    {
+      "family": "code",
+      "profile": "32k",
+      "n": 3,
+      "TG_delta_pct": {
+        "min": 25.556471558120375,
+        "median": 28.04878048780488,
+        "max": 35.273368606701936
+      },
+      "wall_delta_pct": {
+        "min": -19.70059857506683,
+        "median": -16.708754650402902,
+        "max": -15.075875207245016
+      },
+      "CPU_entries": {
+        "min": 20477,
+        "median": 20578,
+        "max": 24751
+      }
+    },
+    {
+      "family": "code",
+      "profile": "128k",
+      "n": 3,
+      "TG_delta_pct": {
+        "min": 6.973293768545985,
+        "median": 8.424336973478951,
+        "max": 24.680851063829778
+      },
+      "wall_delta_pct": {
+        "min": -9.69446504129542,
+        "median": -3.932257831943542,
+        "max": -2.9821450135064764
+      },
+      "CPU_entries": {
+        "min": 19890,
+        "median": 23790,
+        "max": 25425
+      }
+    },
+    {
+      "family": "math",
+      "profile": "32k",
+      "n": 3,
+      "TG_delta_pct": {
+        "min": 13.151041666666675,
+        "median": 14.588859416445633,
+        "max": 18.843683083511785
+      },
+      "wall_delta_pct": {
+        "min": -11.181124964773748,
+        "median": -8.994813553931625,
+        "max": -7.90688935504188
+      },
+      "CPU_entries": {
+        "min": 26142,
+        "median": 30719,
+        "max": 33838
+      }
+    },
+    {
+      "family": "math",
+      "profile": "128k",
+      "n": 3,
+      "TG_delta_pct": {
+        "min": -3.3512866546977826,
+        "median": 3.8922155688622784,
+        "max": 13.237311385459517
+      },
+      "wall_delta_pct": {
+        "min": -5.010186647269288,
+        "median": -1.4067026416235695,
+        "max": 1.5638174522510262
+      },
+      "CPU_entries": {
+        "min": 31485,
+        "median": 31486,
+        "max": 31989
+      }
+    },
+    {
+      "family": "prose",
+      "profile": "32k",
+      "n": 3,
+      "TG_delta_pct": {
+        "min": 25.0,
+        "median": 40.625,
+        "max": 41.121495327102785
+      },
+      "wall_delta_pct": {
+        "min": -20.87404004449582,
+        "median": -20.194305820811298,
+        "max": -14.034609388052688
+      },
+      "CPU_entries": {
+        "min": 20671,
+        "median": 23484,
+        "max": 23867
+      }
+    },
+    {
+      "family": "prose",
+      "profile": "128k",
+      "n": 3,
+      "TG_delta_pct": {
+        "min": 5.2631578947368585,
+        "median": 5.384110308601442,
+        "max": 5.847568988173468
+      },
+      "wall_delta_pct": {
+        "min": -4.766319429331379,
+        "median": -4.158263373094117,
+        "max": 0.2516318341210244
+      },
+      "CPU_entries": {
+        "min": 22294,
+        "median": 23011,
+        "max": 23346
+      }
+    }
+  ],
+  "decision": "P0-A",
+  "limits": [
+    "Fresh-server paired3replicates; no extras or favorable retries.",
+    "Different documents/tasks and application latency matter; all natural EOS kept.",
+    "One-Hz phase boundaries use clientTTFT, not exactGPUkernel timing.",
+    "Actual engine outputIDs captured by common Python wrapper, enginebinary unchanged.",
+    "Wait timings unavailable in headline; diagnostic event binary separate.",
+    "No logical expert file-read counter inferred from physical processreadbytes."
+  ],
+  "rationale": "Scoped robust win: all three independent 32K workloads improve paired request latency by median 9–20%; code/prose128K improve approximately4%, math128K is neutral with one preserved+1.56% wall counterexample. There is no serious consistent miss-heavy regression across these workloads. All18 pairs preserve actual output IDs, MTP and routing. Fixed100us has a real CPU-positive wakeup cost (selected-layer median61–71us at32K,13–20us at128K versus4–6us default), but much less VMCPU contention and better overall latency in five of six cells. Freeze100us for P1, while making no universal claim for extreme CPU-positive workloads.",
+  "diagnostic": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/diagnostic-v1/summary.json",
+  "parity": {
+    "same_actual_output_IDs": 0,
+    "same_MTP": 0,
+    "same_normal_routing": 0,
+    "same_capacity": 0
+  },
+  "diagnostic_selection": {
+    "32k": "math",
+    "128k": "math"
+  },
+  "diagnostic_waits": [
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "default",
+      "layer": 2,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 762,
+        "median": 5.119999870657921,
+        "p95": 8.191999979317188,
+        "max": 9.216000325977802
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "default",
+      "layer": 2,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 526,
+        "median": 6.144000217318535,
+        "p95": 97.5360032171011,
+        "max": 1660.9280109405518
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "default",
+      "layer": 24,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 863,
+        "median": 4.095999989658594,
+        "p95": 5.119999870657921,
+        "max": 5.119999870657921
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "default",
+      "layer": 24,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 425,
+        "median": 5.119999870657921,
+        "p95": 134.96319949626917,
+        "max": 3234.816074371338
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "default",
+      "layer": 40,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 961,
+        "median": 4.095999989658594,
+        "p95": 5.119999870657921,
+        "max": 5.119999870657921
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "default",
+      "layer": 40,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 327,
+        "median": 5.119999870657921,
+        "p95": 160.25600433349592,
+        "max": 362.4959886074066
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 2,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 762,
+        "median": 5.119999870657921,
+        "p95": 7.168000098317862,
+        "max": 9.216000325977802
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 2,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 526,
+        "median": 61.43999844789505,
+        "p95": 293.12000423669815,
+        "max": 677.8879761695862
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 24,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 863,
+        "median": 4.095999989658594,
+        "p95": 4.095999989658594,
+        "max": 8.191999979317188
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 24,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 425,
+        "median": 66.56000018119812,
+        "p95": 364.33920264244074,
+        "max": 2715.6479358673096
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 40,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 961,
+        "median": 4.095999989658594,
+        "p95": 4.095999989658594,
+        "max": 5.119999870657921
+      }
+    },
+    {
+      "profile": "32k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 40,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 327,
+        "median": 70.65600156784058,
+        "p95": 387.17439472675306,
+        "max": 886.784017086029
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "default",
+      "layer": 2,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 776,
+        "median": 5.119999870657921,
+        "p95": 8.191999979317188,
+        "max": 8.191999979317188
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "default",
+      "layer": 2,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 515,
+        "median": 6.144000217318535,
+        "p95": 70.96320167183872,
+        "max": 268.2879865169525
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "default",
+      "layer": 24,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 927,
+        "median": 4.095999989658594,
+        "p95": 4.095999989658594,
+        "max": 5.119999870657921
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "default",
+      "layer": 24,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 364,
+        "median": 4.095999989658594,
+        "p95": 72.0896020531653,
+        "max": 237.56800591945648
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "default",
+      "layer": 40,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 1020,
+        "median": 4.095999989658594,
+        "p95": 4.095999989658594,
+        "max": 5.119999870657921
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "default",
+      "layer": 40,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 271,
+        "median": 4.095999989658594,
+        "p95": 80.38399741053581,
+        "max": 1311.743974685669
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 2,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 776,
+        "median": 5.119999870657921,
+        "p95": 7.168000098317862,
+        "max": 9.216000325977802
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 2,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 515,
+        "median": 18.432000651955605,
+        "p95": 110.89920029044147,
+        "max": 342.0160114765167
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 24,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 927,
+        "median": 4.095999989658594,
+        "p95": 5.119999870657921,
+        "max": 5.119999870657921
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 24,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 364,
+        "median": 12.80000014230609,
+        "p95": 125.43999888002837,
+        "max": 1087.488055229187
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 40,
+      "category": "all-local",
+      "completion_wait_us": {
+        "n": 1020,
+        "median": 4.095999989658594,
+        "p95": 5.119999870657921,
+        "max": 5.119999870657921
+      }
+    },
+    {
+      "profile": "128k",
+      "family": "math",
+      "role": "sleep100us",
+      "layer": 40,
+      "category": "CPU-positive",
+      "completion_wait_us": {
+        "n": 271,
+        "median": 20.479999482631683,
+        "p95": 126.46399810910225,
+        "max": 890.8799886703491
+      }
+    }
+  ],
+  "diagnostic_parity": [
+    {
+      "profile": "32k",
+      "same_output_IDs": true,
+      "same_router_IDs": true,
+      "same_paths": true,
+      "same_MTP": true
+    },
+    {
+      "profile": "128k",
+      "same_output_IDs": true,
+      "same_router_IDs": true,
+      "same_paths": true,
+      "same_MTP": true
+    }
+  ],
+  "strict_diagnostic_parity": {
+    "32k": {
+      "state": "PASS",
+      "candidate": "experiments/E026-pool-generalization/diagnostic-v1/32k/sleep100us/traces/runtime-request2",
+      "reference": "experiments/E026-pool-generalization/diagnostic-v1/32k/default/traces/runtime-request2",
+      "parity": {
+        "output_IDs": true,
+        "window_inputs": true,
+        "window_T": true,
+        "accepted": true,
+        "router_IDs": true,
+        "paths": true,
+        "initial_residency": true,
+        "final_residency": true,
+        "initial_heat": true,
+        "final_heat": true,
+        "blob_sizes": true,
+        "GPU0_slot_sizes": true,
+        "GPU1_slot_sizes": true,
+        "first_head_bits": true
+      },
+      "validation": {
+        "prefix": "experiments/E026-pool-generalization/diagnostic-v1/32k/sleep100us/traces/runtime-request2",
+        "state": "PASS",
+        "errors": [],
+        "windows": 1288,
+        "layers": 61824,
+        "output_tokens": 4096,
+        "output_ids_sha256": "611b66a449a9b330acf4e51da302ca14879d64da5f816a6a03fe7bd0552c7aee",
+        "demand_entries": 2250240,
+        "path_counts": {
+          "-1": 33838,
+          "0": 2215435,
+          "1": 967,
+          "2": 0
+        },
+        "all_demand_local_hit_pct": 98.45327609499431,
+        "reported_hit_pct_denominator": 98.49560280143851,
+        "promotions": 5136,
+        "promotion_bytes": 10453043200,
+        "unpublished_promotions_at_request_end": 8,
+        "gpu_budgets": [
+          {
+            "slots": 10240,
+            "bytes": 19824128000,
+            "size_classes": {
+              "1510400": 1663,
+              "1715200": 820,
+              "1868800": 427,
+              "1971200": 4416,
+              "2176000": 2509,
+              "2329600": 405
+            }
+          },
+          {
+            "slots": 8477,
+            "bytes": 18323200000,
+            "size_classes": {
+              "1510400": 380,
+              "1715200": 402,
+              "1971200": 1459,
+              "2176000": 2950,
+              "2329600": 2957,
+              "2662400": 329
+            }
+          }
+        ]
+      },
+      "limit": "Recorded workload only; first head is not every position."
+    },
+    "128k": {
+      "state": "PASS",
+      "candidate": "experiments/E026-pool-generalization/diagnostic-v1/128k/sleep100us/traces/runtime-request2",
+      "reference": "experiments/E026-pool-generalization/diagnostic-v1/128k/default/traces/runtime-request2",
+      "parity": {
+        "output_IDs": true,
+        "window_inputs": true,
+        "window_T": true,
+        "accepted": true,
+        "router_IDs": true,
+        "paths": true,
+        "initial_residency": true,
+        "final_residency": true,
+        "initial_heat": true,
+        "final_heat": true,
+        "blob_sizes": true,
+        "GPU0_slot_sizes": true,
+        "GPU1_slot_sizes": true,
+        "first_head_bits": true
+      },
+      "validation": {
+        "prefix": "experiments/E026-pool-generalization/diagnostic-v1/128k/sleep100us/traces/runtime-request2",
+        "state": "PASS",
+        "errors": [],
+        "windows": 1291,
+        "layers": 61968,
+        "output_tokens": 4096,
+        "output_ids_sha256": "bc843e516b6595652164f09c802c251cf269a1e181b0f0bb5bc8e484526d518a",
+        "demand_entries": 2229600,
+        "path_counts": {
+          "-1": 31486,
+          "0": 2197060,
+          "1": 1054,
+          "2": 0
+        },
+        "all_demand_local_hit_pct": 98.5405453893075,
+        "reported_hit_pct_denominator": 98.58715054569213,
+        "promotions": 4815,
+        "promotion_bytes": 9823001600,
+        "unpublished_promotions_at_request_end": 0,
+        "gpu_budgets": [
+          {
+            "slots": 10183,
+            "bytes": 19712998400,
+            "size_classes": {
+              "1510400": 1655,
+              "1715200": 814,
+              "1868800": 426,
+              "1971200": 4391,
+              "2176000": 2496,
+              "2329600": 401
+            }
+          },
+          {
+            "slots": 8437,
+            "bytes": 18220492800,
+            "size_classes": {
+              "1510400": 380,
+              "1715200": 401,
+              "1971200": 1457,
+              "2176000": 2947,
+              "2329600": 2957,
+              "2662400": 295
+            }
+          }
+        ]
+      },
+      "limit": "Recorded workload only; first head is not every position."
+    }
+  },
+  "mechanism_analysis": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/mechanism.md"
+}

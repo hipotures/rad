@@ -1,0 +1,5 @@
+# Activation availability audit
+
+Frozen base6f32ec0: src/core/verify.cpp953-960 passes per-layer device residency to doorbell_publish_res. src/kernels/cuda/elementwise.cu308-326 publishes expert IDs always, but copies the activation rows only if __syncthreads_or(any_miss) is true. Consequently h_x is not a current-layer numeric signal for all-local groups, although IDs and the inference result remain correct. E008 patch sampled h_x unconditionally before any_cpu check. Its router-quality/readiness aggregates mixed fresh and potentially stale groups; they must not be treated as a reliable full-CPU-gate deployment verdict.
+
+Repair changes only a diagnostic doorbell argument for the six selected current layers while STRATA_LAB_SIGNAL is enabled. A null residency pointer forces the existing activation copy, without changing actual expert placement, routing or the host classifier. Quantization/expert computations stay original. Raw old outputs and real boundary CUDA events remain valid. Extra copies and CPU snapshot costs perturb timings; no headline TG claim or production CPU availability guarantee.

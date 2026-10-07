@@ -1,0 +1,12 @@
+RESIDUAL_MISS_AUDIT v3-oracle-32k-attempt1 13213 {'no_observed_admission_before_demand': 3176, 'victim_absent': 10036, 'copy_pending_at_demand': 1}
+RESIDUAL_MISS_AUDIT v3-oracle-128k-attempt1 29639 {'no_observed_admission_before_demand': 6242, 'copy_pending_at_demand': 145, 'victim_absent': 23252}
+RESIDUAL_MISS_AUDIT v3-oracle-256k-attempt1 33375 {'no_observed_admission_before_demand': 10992, 'copy_pending_at_demand': 311, 'victim_absent': 22072}
+RESIDUAL_MISS_AUDIT short64-v3-32k-attempt1 101587 {'no_observed_admission_before_demand': 16175, 'victim_absent': 85392, 'copy_pending_at_demand': 20}
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/scripts/residual_misses.py", line 29, in <module>
+    for label in v.labels:analyze(label)
+                          ~~~~~~~^^^^^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/scripts/residual_misses.py", line 7, in analyze
+    p=C/'raw'/label;layers=np.fromfile(p/'raw/oracle-layers.bin',L);copies=np.fromfile(p/'raw/oracle-admissions.bin',E);log=(p/'raw/run-engine.log').read_text()
+                           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/raw/independent-oracle-v3-32k-attempt1/raw/oracle-layers.bin'

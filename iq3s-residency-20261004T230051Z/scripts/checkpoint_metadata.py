@@ -1,0 +1,15 @@
+"""Persist the current finite research dispositions before the next clean batch."""
+from lab import ROOT,load,save
+ledger=load(ROOT/'candidate-ledger.json')
+for f in ledger['families']:
+    if f['id']=='F05':f.update(state='COMPLETE_NEGATIVE',next='Bounded token-bigram and fullCPU next-gate studies complete. Token-history rare-tail recall low; fullCPUgate mostly too late even for oneblob. GPU/lowrank/earlier-layer prediction remains untested, not declared exhausted.')
+    if f['id']=='F06':f.update(state='COMPLETE_NEGATIVE',next='Declared EMA+bounded bigram hybrid modestly reduces nonlocals but increases transfers; fullCPUrouter variant too late. No runtime deployment justified by these versions.')
+    if f['id']=='F07':f.update(state='RUNNING',next='E009 compatible-slot placement positive in replay; E010 native runtime correctness passes and both-profile headline batch is next. Actual handoff times measured, but exposed CPU/mapped waits remain to strengthen in targeted diagnostics.')
+save(ROOT/'candidate-ledger.json',ledger)
+status=load(ROOT/'STATUS.json')
+status['excluded']=[{'path':str(ROOT/'experiments/E008-router-boundary/v1/32k/raw/warmup.json'),'reason':'INVALID_PROTOCOL: engine diagnostic exception, captured event timing unavailable; zero valid headline measurements.'},{'path':str(ROOT/'experiments/E008-router-boundary/v2/32k/analysis.json'),'reason':'CPU predictor timing excluded because first analyses ran concurrently; quality/device timings retained. Serial analysis-r2 authoritative.'},{'path':str(ROOT/'experiments/E008-router-boundary/v2/128k/analysis.json'),'reason':'CPU predictor timing excluded because first analyses ran concurrently; quality/device timings retained. Serial analysis-r2 authoritative.'},{'path':str(ROOT/'experiments/E004-replay/v4-sensitivity'),'reason':'Numerical pending-queue repair supersedes partial/failed sensitivity data; authoritative v5-sensitivity and v6-corrected-peak preserved.'}]
+status['current_winners']={'reference':'CURRENT clean rebuilt control; candidate selection pending','32k':{'TG_median':155.9,'PP_median':4739.5,'path':str(ROOT/'experiments/E002-controls/v1/32k')},'128k':{'TG_median':133.2,'PP_median':5985.2,'path':str(ROOT/'experiments/E002-controls/v1/128k')}}
+save(ROOT/'STATUS.json',status)
+with (ROOT/'DECISIONS.md').open('a') as stream:
+    stream.write('\n## E008/E009/E010 checkpoint\n\nActual split activation-copy durations are around20us each, far below complete verify/window time; do not label all GPU wait as boundary transfer. FullCPU next-router scoring is commonly too late, and many predicted nonresidents are false positives. E009 compatible same-owner slot shares modestly improve finite-copy miss/byte accounting and justify E010 actual confirmation. Native selector costs about0.786ms/call; no guaranteed speed benefit. Correctness uses same frozen10inputs, basic numeric/JSON checks, preserved textual differences and original kernel parity. Complete both-profile3attempt batches; never retry a slow valid point.\n')
+print('Checkpoint metadata updated')

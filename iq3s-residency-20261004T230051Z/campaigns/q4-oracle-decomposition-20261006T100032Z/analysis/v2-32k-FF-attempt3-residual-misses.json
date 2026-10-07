@@ -1,0 +1,189 @@
+{
+  "label": "v2-32k-FF-attempt3",
+  "nonlocal_entries": 15011,
+  "reasons": {
+    "no_observed_admission_before_demand": 2483,
+    "copy_pending_at_demand": 2,
+    "victim_absent": 12526
+  },
+  "execution_paths": {
+    "no_observed_admission_before_demand": {
+      "CPU": 2150,
+      "mapped": 333
+    },
+    "copy_pending_at_demand": {
+      "CPU": 2
+    },
+    "victim_absent": {
+      "CPU": 11038,
+      "mapped": 1488
+    }
+  },
+  "by_layer": {
+    "0": {
+      "no_observed_admission_before_demand": 2
+    },
+    "1": {
+      "no_observed_admission_before_demand": 1,
+      "victim_absent": 24
+    },
+    "2": {
+      "no_observed_admission_before_demand": 2
+    },
+    "5": {
+      "no_observed_admission_before_demand": 2,
+      "victim_absent": 73
+    },
+    "7": {
+      "no_observed_admission_before_demand": 23,
+      "victim_absent": 281
+    },
+    "8": {
+      "no_observed_admission_before_demand": 42,
+      "victim_absent": 325
+    },
+    "10": {
+      "no_observed_admission_before_demand": 47,
+      "victim_absent": 416
+    },
+    "12": {
+      "no_observed_admission_before_demand": 124,
+      "victim_absent": 605
+    },
+    "15": {
+      "no_observed_admission_before_demand": 64,
+      "victim_absent": 299
+    },
+    "16": {
+      "no_observed_admission_before_demand": 58,
+      "victim_absent": 430
+    },
+    "18": {
+      "no_observed_admission_before_demand": 123,
+      "victim_absent": 1046
+    },
+    "19": {
+      "no_observed_admission_before_demand": 129,
+      "victim_absent": 761
+    },
+    "23": {
+      "no_observed_admission_before_demand": 139,
+      "victim_absent": 625
+    },
+    "41": {
+      "no_observed_admission_before_demand": 75,
+      "victim_absent": 196
+    },
+    "43": {
+      "no_observed_admission_before_demand": 117,
+      "victim_absent": 386
+    },
+    "44": {
+      "no_observed_admission_before_demand": 115,
+      "victim_absent": 236
+    },
+    "45": {
+      "no_observed_admission_before_demand": 129,
+      "victim_absent": 177
+    },
+    "42": {
+      "no_observed_admission_before_demand": 135,
+      "victim_absent": 354
+    },
+    "21": {
+      "no_observed_admission_before_demand": 176,
+      "victim_absent": 1211
+    },
+    "22": {
+      "no_observed_admission_before_demand": 224,
+      "victim_absent": 1802
+    },
+    "36": {
+      "no_observed_admission_before_demand": 17,
+      "victim_absent": 16
+    },
+    "37": {
+      "no_observed_admission_before_demand": 68,
+      "victim_absent": 163
+    },
+    "38": {
+      "no_observed_admission_before_demand": 82,
+      "victim_absent": 204
+    },
+    "39": {
+      "no_observed_admission_before_demand": 67,
+      "victim_absent": 73
+    },
+    "40": {
+      "no_observed_admission_before_demand": 47,
+      "victim_absent": 141
+    },
+    "9": {
+      "no_observed_admission_before_demand": 29,
+      "victim_absent": 134,
+      "copy_pending_at_demand": 1
+    },
+    "11": {
+      "no_observed_admission_before_demand": 54,
+      "victim_absent": 256
+    },
+    "13": {
+      "no_observed_admission_before_demand": 54,
+      "copy_pending_at_demand": 1,
+      "victim_absent": 324
+    },
+    "14": {
+      "no_observed_admission_before_demand": 70,
+      "victim_absent": 461
+    },
+    "17": {
+      "no_observed_admission_before_demand": 38,
+      "victim_absent": 356
+    },
+    "20": {
+      "no_observed_admission_before_demand": 145,
+      "victim_absent": 765
+    },
+    "28": {
+      "no_observed_admission_before_demand": 2,
+      "victim_absent": 10
+    },
+    "29": {
+      "no_observed_admission_before_demand": 8,
+      "victim_absent": 4
+    },
+    "32": {
+      "no_observed_admission_before_demand": 4,
+      "victim_absent": 11
+    },
+    "33": {
+      "no_observed_admission_before_demand": 11,
+      "victim_absent": 17
+    },
+    "34": {
+      "no_observed_admission_before_demand": 20,
+      "victim_absent": 48
+    },
+    "35": {
+      "no_observed_admission_before_demand": 35,
+      "victim_absent": 52
+    },
+    "6": {
+      "no_observed_admission_before_demand": 3,
+      "victim_absent": 211
+    },
+    "31": {
+      "no_observed_admission_before_demand": 2,
+      "victim_absent": 5
+    },
+    "3": {
+      "victim_absent": 18
+    },
+    "27": {
+      "victim_absent": 10
+    }
+  },
+  "definition": "Mutually exclusive observed ownership/copy-state categories at actual logical demand. Victim category takes precedence; timestamps are host monotonic, not GPU DMA-only time.",
+  "unknown_selection_reason": "No-observed-admission does not distinguish worker busy, issue frontier/slack, victim safety or utility. Rejection counters were not exported; no fabricated causal reason.",
+  "not_expert_bytes": "Entry count is not physical read traffic; duplicates/grouping/caching matter."
+}

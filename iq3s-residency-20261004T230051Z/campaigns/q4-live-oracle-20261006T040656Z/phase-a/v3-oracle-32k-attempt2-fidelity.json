@@ -1,0 +1,101 @@
+{
+  "native_main_head_agreement": {
+    "positions": 4584,
+    "agreements": 4570,
+    "fraction": 0.9969458987783595,
+    "scope": "Native argmax computed before forced output; includes rejected verifier lanes. This is numerical trajectory diagnostics, not quality evaluation."
+  },
+  "selected_activation_check": {
+    "sampled_values": 523480,
+    "excluded_unexecuted_MTP_zero_values": 2432,
+    "bitwise_equal": false,
+    "max_abs_error": 1.1312385350465775,
+    "relative_L2": 0.03332538143426329,
+    "first_divergence_window_role_component": [
+      0,
+      5,
+      0
+    ],
+    "scope": "Eight actual activation components only at executed main/MTP routed invocations, excluding padded inactive MTP rows; exact uint32 bit comparison plus numerical error. Not all hidden tensors. Oracle placement can legitimately change CPU/GPU numerical intermediates."
+  },
+  "graph_readiness": {
+    "captured_shapes_before_measured_request": [
+      1,
+      1,
+      2,
+      2,
+      4,
+      4,
+      3,
+      3
+    ],
+    "all_T_1_to_4_ready": true,
+    "scope": "Native verifier graph capture messages; main split devices represented by paired messages. MTP remains computed normally."
+  },
+  "physical_KV_summary": null,
+  "initial_state": {
+    "match": true,
+    "components": 140,
+    "bytes_checked": 623320868,
+    "setup_ms": 511.127,
+    "SHA256": "5630ee4b13a2d264388dd9a1e49e1fae8a7bf5d3bd476fd54809b40cf073150b",
+    "scope": "Meaningful initial GDN, PLE, HC_R, QSA indexer/mapping/canonical host prefix and resident KV/MTP pools; streamed GPU payload redundant with checked host prefix/maps."
+  },
+  "state": "PASS",
+  "errors": [],
+  "label": "v3-oracle-32k-attempt2",
+  "tape": {
+    "state": "PASS",
+    "errors": [],
+    "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/tapes/capture-32k-v3.bin",
+    "schema": 2,
+    "initial_rounds": 25,
+    "sparse_attention_frozen": true,
+    "native_FNV_work_verified": true,
+    "tape_sha256": "4a6068ab18fabc24dd3f916ba81b319b56ff190d1af6400c4d7e761bfdf6ea11",
+    "work_sha256": "237ee8e7d981129238afaa1a754453d3ecee8087af0c9c1a3f2fc950f9b36fd9",
+    "native_FNV64": "6a3a2d96fec9ff46",
+    "prompt_count": 28378,
+    "prompt_ids_sha256_binary": "7fa55e62577eb2b565bbff8ab4c6c8f8df0d4b5f05eb22ac9893118daf0628d0",
+    "committed_emitted_output": 4096,
+    "committed_in_state_prefix": 4098,
+    "output_ids_sha256_binary": "b3bcf15000d3a06e5d939693b4cb9c0276d5456eb2e18aaf271de549944b8dac",
+    "windows": 1289,
+    "main_routed_events": 61872,
+    "MTP_full_routed_events": 3563,
+    "MTP_KV_only_catchup_invocations": 1288,
+    "MTP_KV_only_catchup_rows": 4580,
+    "MTP_full_routed_shape": "one row per actual draft step; catchup is native T-row KV-only prefix with no router/expert kernel",
+    "main_routed_entries": 2200320,
+    "MTP_routed_entries": 35630,
+    "verifier_T_sum": 4584,
+    "MTP_proposed_to_verifier": 3295,
+    "MTP_accepted_to_commit": 2809,
+    "RAM_tape_MB": 528.119592,
+    "initial_residents": 11541,
+    "initial_resident_sha256": "9cef70ae1b6476ceb9b3df8e60323cacc80a52e807bc63a7754251d562da13bb",
+    "initial_heat_sha256": "b6c75639f6896376204f01ca7fa2a96fdbdd6c9d62cba057510b30e51388534a",
+    "scope": "all48main decode layers plus real MTP routed steps; normal prefill from exactIDs, not route-overridden"
+  },
+  "observed_windows": 1289,
+  "seen_events": 65435,
+  "native_router_id_or_coefficient_disagreements": 2190055,
+  "native_QSA_selection_disagreements": 59047895,
+  "native_head_first_divergence": 15,
+  "lookup_ms": 106.148,
+  "native_main_routing_stats": {
+    "all_routed_entries": 2200320,
+    "local_vram_entries": 2186880,
+    "cpu_fallback_entries": 11814,
+    "offloaded_entries": 1626
+  },
+  "time": {
+    "pp_s": 17.8257,
+    "decode_s": 33.755300000000005,
+    "TG": 121.3,
+    "wall_s": 52.18695816001855,
+    "TTFT_s": 18.424479486013297
+  },
+  "clock": "Window CPU monotonic timestamps; not GPU copy deadlines.",
+  "correctness_scope": "Tape structure/counts/coefficients and actual forced emission; selected finite activation components. No claim forced output equality proves model math."
+}

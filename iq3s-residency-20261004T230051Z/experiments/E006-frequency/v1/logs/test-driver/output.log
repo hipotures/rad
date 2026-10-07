@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_variant.py", line 6, in <module>
+    a=ap.parse_args();cfg=json.loads((ROOT/'variants'/a.variant/'32k.json').read_text())
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 788, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 772, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/srv/ai/research/iq3s-residency-20261004T230051Z/variants/frequency-v1-ready/32k.json'

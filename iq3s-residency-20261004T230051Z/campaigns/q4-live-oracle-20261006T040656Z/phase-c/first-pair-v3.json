@@ -1,0 +1,45 @@
+{
+  "purpose": "Strict initial-state fidelity gate before longer-context matrix",
+  "jobs": [
+    {
+      "label": "v3-current-32k-attempt1",
+      "args": [
+        "replay",
+        "--label",
+        "v3-current-32k-attempt1",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "32k",
+        "--payload",
+        "32k-run1",
+        "--tape",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/tapes/capture-32k-v3.bin",
+        "--oracle",
+        "off"
+      ],
+      "tape": "tapes/capture-32k-v3.bin",
+      "timeout_s": 1200
+    },
+    {
+      "label": "v3-oracle-32k-attempt1",
+      "args": [
+        "replay",
+        "--label",
+        "v3-oracle-32k-attempt1",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "32k",
+        "--payload",
+        "32k-run1",
+        "--tape",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/tapes/capture-32k-v3.bin",
+        "--oracle",
+        "full"
+      ],
+      "tape": "tapes/capture-32k-v3.bin",
+      "timeout_s": 1200
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "scope": "Scalar/header export from local originals. Lists over32 items, long strings and depth/node excess are explicitly omitted; this is not the original schema and is not a replacement input for research scripts.",
+  "records": [
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E009-placement/v1/128k/replay.json",
+      "source_bytes": 3081816,
+      "source_sha256": "3eb0b62439144531ed65355101cc058226aae4201397ec39e5255a6c7fbe25f1",
+      "compact_evidence": {
+        "policy": "global-compatible-ema",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "demand_entries": 2351040,
+        "nonlocal_entries": 43284,
+        "all_demand_local_hit_pct": 98.1589424254798,
+        "nonlocal_distinct_group_jobs": 39493,
+        "nonlocal_weight_bytes_per_group": 81765913600,
+        "promotion_count": 6724,
+        "promotion_bytes": 13807692800,
+        "useful_promotion_bytes": 12588236800,
+        "unused_promotion_bytes": 1219456000,
+        "victim_demand_while_absent": 19331,
+        "modeled_pending_wait_s": 0.339740790332123,
+        "observed_window_wall_s": 30.868415985,
+        "observed_pending_wait_removed_s": 0.16604712300000005,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 31.042109652332122,
+        "offline_Python_selector_wall_s": 2.6236788336536847,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19712998400,
+          18220492800
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1449
+        },
+        "promotions": {
+          "omitted_list_items": 6724
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound",
+          "Per-layer capacities can change inside the original per-GPU physical slot classes. The policy is causal EMA global-compatible admission, not a future oracle. Heap matcher is a bounded heuristic, not optimal variable-byte packing."
+        ],
+        "final_per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "cross_layer_promotions": 5161,
+        "physical_slot_wasted_bytes_per_promotion_sum": 102092800,
+        "placement_constraints": "Original physical variable-size slots; same GPU layer ownership. No additional memory or cross-GPU experts. Victim may be in another layer only when incoming blob fits."
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E009-placement/v1/32k/replay.json",
+      "source_bytes": 2274916,
+      "source_sha256": "bbc0ebf36bc4080ab34ae460bb9d83019dfcbb3147d384ae669c03c289dc9efa",
+      "compact_evidence": {
+        "policy": "global-compatible-ema",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "demand_entries": 2117280,
+        "nonlocal_entries": 34838,
+        "all_demand_local_hit_pct": 98.35458701730522,
+        "nonlocal_distinct_group_jobs": 32417,
+        "nonlocal_weight_bytes_per_group": 66865689600,
+        "promotion_count": 4890,
+        "promotion_bytes": 10008294400,
+        "useful_promotion_bytes": 9337574400,
+        "unused_promotion_bytes": 670720000,
+        "victim_demand_while_absent": 12521,
+        "modeled_pending_wait_s": 0.20751625145956176,
+        "observed_window_wall_s": 25.510303695,
+        "observed_pending_wait_removed_s": 0.12157517000000015,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 25.596244776459564,
+        "offline_Python_selector_wall_s": 2.2315610120422207,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19824128000,
+          18323200000
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1241
+        },
+        "promotions": {
+          "omitted_list_items": 4890
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound",
+          "Per-layer capacities can change inside the original per-GPU physical slot classes. The policy is causal EMA global-compatible admission, not a future oracle. Heap matcher is a bounded heuristic, not optimal variable-byte packing."
+        ],
+        "final_per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "cross_layer_promotions": 3767,
+        "physical_slot_wasted_bytes_per_promotion_sum": 31846400,
+        "placement_constraints": "Original physical variable-size slots; same GPU layer ownership. No additional memory or cross-GPU experts. Victim may be in another layer only when incoming blob fits."
+      }
+    }
+  ]
+}

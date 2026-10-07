@@ -1,0 +1,45 @@
+{
+  "recommendation": "USE_P1_BASELINE",
+  "variant": "p1-baseline",
+  "source": "6f32ec070f23ced9f50e704d854d775da52591ab",
+  "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+  "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+  "env": {
+    "CUDA_VISIBLE_DEVICES": "0,1",
+    "STRATA_SPLIT_TIMING": "1",
+    "STRATA_DECODE_TIMING": "1",
+    "STRATA_POOL_SPIN_US": "100"
+  },
+  "configs": [
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/32k.json",
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/128k.json"
+  ],
+  "launchers": [
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/start-32k.sh",
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/start-128k.sh",
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/stop.sh",
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/reproduce.sh"
+  ],
+  "phases": {
+    "P0": "COMPLETE_SCOPED_VALIDATION",
+    "P1": "COMPLETE_FROZEN_BASELINE",
+    "P2": "COMPLETE_BOUNDED_PERSISTENT_RESIDENCY"
+  },
+  "P2comparisons": [
+    {
+      "profile": "32k",
+      "TG_delta_medians_pct": -4.236276849642007,
+      "wall_delta_medians_pct": 3.357394770315092,
+      "paired_delta_TG_median_pct": -6.742243436754169,
+      "paired_delta_wall_median_pct": 5.776118063567104
+    },
+    {
+      "profile": "128k",
+      "TG_delta_medians_pct": -4.8898071625344315,
+      "wall_delta_medians_pct": -0.503774125139711,
+      "paired_delta_TG_median_pct": -5.392156862745113,
+      "paired_delta_wall_median_pct": 1.7827736607751277
+    }
+  ],
+  "endstate": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/pool-persistent-20261005T094800Z/end-state.json"
+}

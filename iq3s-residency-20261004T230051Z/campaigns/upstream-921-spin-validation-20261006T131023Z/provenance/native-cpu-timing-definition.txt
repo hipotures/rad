@@ -1,0 +1,36 @@
+2647:             ++jb.nt;
+2648:             ++d.multi_entries;
+2649:         }
+2650:     const auto c3 = std::chrono::steady_clock::now();
+2651:     pt("run", njobs);
+2652:     if (njobs > 0) {
+2653:         if (native) d.pool->run_split_multi_native(lay.fmt[(size_t) d.layers], d.jobs_multi.data(), njobs);
+2654:         else d.pool->run_split_multi(d.jobs_multi.data(), njobs);
+2655:     }
+2656:     if (d.remote_count > 0) {
+2657:         static thread_local std::string remote_error;
+2658:         for (int r = 0; r < d.remote_count; ++r)
+2659:             if (!d.remote[r]->finish(out, remote_error)) {
+2660:                 d.failed = true; d.fail = remote_error.c_str(); d.fail_layer = d.layers; return;
+2661:             }
+2662:     }
+2663:     if (d.peer != nullptr) {                 // multi-GPU: the second GPU's rows, into the same mapped rows
+2664:         std::string perr;
+2665:         if (!d.peer->finish(out, perr)) {
+2666:             std::fprintf(stderr, "strata: %s (layer %lld)\n", perr.c_str(), (long long) d.layers);
+2667:             d.failed = true;
+2668:             d.fail = "the peer GPU's experts failed";
+2669:             d.fail_layer = d.layers;
+2670:             return;
+2671:         }
+2672:     }
+2673:     const auto c4 = std::chrono::steady_clock::now();
+2674:     pt("ran");
+2675:     auto ms = [](auto a, auto b) { return std::chrono::duration<double, std::milli>(b - a).count(); };
+2676:     d.ms_plan += ms(c0, c1);
+2677:     d.ms_actq += ms(c1, c2);
+2678:     d.ms_jobs += ms(c2, c3);
+2679:     d.ms_run += ms(c3, c4);
+2680:     for (int64_t i = 0; i < n_tok * k; ++i) {
+2681:         const int64_t e = ids[i];
+2682:         if (e >= 0 && e < d.n_expert) d.job_of[(size_t) e] = -1;

@@ -1,0 +1,26 @@
+# Q4 Residency v2
+
+```json
+{
+  "state": "COMPLETE_MIXED",
+  "phase": "C",
+  "completed": [
+    "Frozen provenance and9 exact traces",
+    "Measured costs/queue validation/headroom",
+    "All required causal families includinglinear/MLP/temporal",
+    "27 primary attempts plusOFF/heldout/diagnostic/cancel",
+    "All9 advertised launcher paths smoked",
+    "Reports/reproducibility audit/ownedGPU cleanup"
+  ],
+  "running": null,
+  "pending": [],
+  "next_exact_action": "Stop research; review report before authorizing next experiment",
+  "updated_utc": "2026-10-06T00:05:24.309668+00:00",
+  "phases": {
+    "A": "COMPLETE_MIXED",
+    "B": "COMPLETE_MIXED",
+    "C": "COMPLETE_MIXED"
+  },
+  "recommendation": "KEEP_Q4_100US_BASELINE"
+}
+```

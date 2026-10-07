@@ -1,0 +1,14 @@
+{
+  "question": "Are actual layer-split handoff waits or predictor readiness a stronger limit than expert nonlocal entries, and is cross-layer gate prediction useful early enough?",
+  "source": "New isolated frozen-base diagnostic build with the validated buffered trace hooks plus bounded signals and boundary brackets. No router, scheduler, weights, routing top-k or kernels altered.",
+  "profiles": ["32k", "128k"],
+  "workload": "Same fixed warmup 4096 input/64 output, then one diagnostic saved run1 per profile. Additional independent holdout episodes at 32k only if useful for gate generalization; no headline repetition.",
+  "gate_signal": "Existing host-staged normalized MoE activation for layers 5,20,24,25,40,46, observed before current-layer pool execution. Next-layer BF16 router read-only snapshot from the official packed model. Predict next top10 offline, validate against next-layer true routed IDs.",
+  "capture_bound": "First 64 verify windows per request, six layer pairs, all computed draft rows. Preserve global row index and one host steady clock. Report capture bytes and diagnostic overhead.",
+  "boundary": "CPU timestamps around existing stage input staging, graph launch, final existing stream synchronization and stage call. GPU events around actual mapped handoff input/output copies, read after existing stream completion; no new global synchronization. Do not equate the entire stage-tail synchronization with transfer time.",
+  "predictor_cost": "Time CPU numeric BF16 gate prediction at single-thread bounded batches. Compare signal availability plus measured predictor/copy costs to actual next-layer demand timestamp. Evaluate rare nonlocal coverage, not only top10 precision.",
+  "correctness": "Existing relevant tests and validated trace accounting must still pass. Optional diagnostics default off. No benchmark TG claim from instrumentation binaries.",
+  "timing_limits": "CPU and GPU clocks remain separate; event elapsed times are same-device durations. No 1 Hz burst attribution or cross-GPU timestamp subtraction.",
+  "decision": "If predictions are too late or weak, document negative evidence. If useful, integrate only with safe slot publication/in-flight-reader handling after source audit. Do not promote into a live slot during verify without proving safety.",
+  "execution_order": "Build and collect only after E006 headline measurements are terminal. Never overlap heavy replay/training/build with headline speed."
+}

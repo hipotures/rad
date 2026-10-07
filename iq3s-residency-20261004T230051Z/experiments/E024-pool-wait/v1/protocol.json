@@ -1,0 +1,10 @@
+{
+  "question": "Does the existing expert-pool sleep path reduce idle spinning/host contention without increasing exposed miss latency?",
+  "evidence": "Decode system CPU is98–99% across control/host-plan OFF/ON, while source says worker epoch wait is mostly idle pause. Default sleep threshold20ms is longer than common inter-layer work intervals. Existing seq_cst epoch/sleepers protocol prevents lost wakeups.",
+  "change": "Only existing STRATA_POOL_SPIN_US=100. Same frozen control source/binary,15workers,K25,PCIe0.28,spec4/minp0.5,KV,cache capacities,inputs/output and suffix/reuse settings. No source patch or new buffers.",
+  "coarse_choice": "100us is meaningfully below default20000us and comparable to measured GPU/CPU group work. One value only; no adjacent scan. This is a scheduling/CPU-cost experiment, not cache prediction.",
+  "funnel": "Run native pool_stress for8s at100us and real-IQ parity; same10prompt greedy battery and exact numeric/schema checks. Separate diagnostic full traces to verify actual4096output/router/MTP/path/cache/heat/first-head parity before clean requests.",
+  "finite_confirmation": "If prerequisites pass, one fresh server/profile, common4096input64outputwarmup,3fixed4096requests/profile; reuse E002 same-binary baseline. No additional default repetitions.",
+  "budget": "Zero extra predictor/cache memory; existing condition-variable path. Same24GiB per-device capacities/byte classes. Wakeup cost and delayed CPU misses charged by live measurement, not assumed free.",
+  "completion": "Both profiles latency/TG,CPU/power and diagnostic exposed waits if available. Any missed-job/deadlock/correctness error prohibits speed. Finish before consolidation gate; otherwise preserve INCOMPLETE_DEADLINE."
+}

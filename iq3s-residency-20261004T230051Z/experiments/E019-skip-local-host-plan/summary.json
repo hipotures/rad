@@ -1,0 +1,1155 @@
+{
+  "state": "COMPLETE_MIXED_PROVISIONAL_ATTRIBUTION",
+  "experiment": "E019-skip-local-host-plan",
+  "reference": "E002-controls",
+  "protocol": {
+    "question": "After safeGPUall-localplanning, does redundantCPUplan construction/outputzeroing remain exposed or expensive?",
+    "evidence": "Originalexpert_pool_dispatch_multi still builds groups/pointers/publishesplan and zeroesmappedCPUrows evenwhenallentrieslocal; correcteddeviceplan independentlyplansGPUgroups andzeroesparts, so thosehostwritesare unused. E011measuredemptyplan spans8–9us, notwhollyexposed.",
+    "change": "Same frozenbase, E016stableID+PLEfence prerequisites. Opt-in hostearlyreturn forverifiedalllocal groups, preservingbegin_layer/actualusage andalltruecounters. NoGPUexpertmath,cachepolicy,routing,KV,MTP,workers,slotsorquantization change.",
+    "correctness": "Requirecorrecteddeviceplanmode/serialG1, rejectremote/helper/peer/batchpaths. Actuald_res andhost_res synchronizedbeforewindow; no withinwindowadapt. MixedCPU/mapped groups retainoriginaldispatch. Headercounts/layers/expertentries exactlysame meaning; CPUmulti_entries remainszero forlocalgroups.",
+    "funnel": "E016v2mustpassnumericaldemand/head checks andfiniteconfirmationfirst. Builddefaultoff, native/Python/realIQ, shortbattery andisolatedboth-profiletrue-ID/output/heat/counterdiagnostic. Sourceofffastguard thenconditional3x2cleanrequests.",
+    "budget": "No newexplicitGPUbuffers/expertslots; existingcorrecteddeviceplanCPU/GPUstatecharged. DefaultoffflagSTRATA_LAB_SKIP_LOCAL_PLAN, startupguardrequiresSTRATA_LAB_PLAN_IDS andSTRATA_VERIFY_DEVICE_PLAN.",
+    "batch": "Onefreshserver/profile, commonsaved4096input/64outputwarmup, 3saved4096outputs/profile. ReferenceE016v2plusE002; no repeatedunchangedcontrols. No build/training/heavyanalysisduringheadlines.",
+    "completion": "MeasureactualTG/wall/CPU andsameoutput/miss/heat parity. Preserveunfavorableprofile. No universalclaimfromminor3-run differences; no userlauncher switch."
+  },
+  "cells": [
+    {
+      "profile": "32k",
+      "role": "reference",
+      "valid": 3,
+      "attempts": 3,
+      "resource": {
+        "primary_slots": 10240,
+        "helper_or_stage1_slots": 8477,
+        "cache_gib_rounded": [
+          18.46,
+          17.06
+        ],
+        "exact_byte_classes": [
+          {
+            "slots": 10240,
+            "bytes": 19824128000,
+            "size_classes": {
+              "1510400": 1663,
+              "1715200": 820,
+              "1868800": 427,
+              "1971200": 4416,
+              "2176000": 2509,
+              "2329600": 405
+            }
+          },
+          {
+            "slots": 8477,
+            "bytes": 18323200000,
+            "size_classes": {
+              "1510400": 380,
+              "1715200": 402,
+              "1971200": 1459,
+              "2176000": 2950,
+              "2329600": 2957,
+              "2662400": 329
+            }
+          }
+        ],
+        "auto_sizing_frozen_by_invariant": true,
+        "max_total_context": 32768,
+        "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k/logs/engine.log",
+        "rule": "CPU-only predictor state cannot increase VRAM; candidates must match per-profile physical capacities and byte classes, or charge any loss explicitly",
+        "diagnostic_provenance": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "effective_KV_resident": 0,
+        "KV_note": "32k reports0(full32768resident);128k reports32768resident with streaming. CLI unchanged32768 on both.",
+        "stage1_slots": 8477,
+        "resource_evidence": "/srv/ai/research/iq3s-residency-20261004T230051Z/analysis/control-budgets-v2.json"
+      },
+      "warmup": {
+        "state": "VALID",
+        "actual_input_tokens": 4096,
+        "actual_output_tokens": 64
+      },
+      "statistics": {
+        "PP": {
+          "min": 3567.2,
+          "median": 4739.5,
+          "max": 4779.1
+        },
+        "TG": {
+          "min": 153.3,
+          "median": 155.9,
+          "max": 157.8
+        },
+        "TTFT_s": {
+          "min": 6.086332252016291,
+          "median": 6.128677561995573,
+          "max": 8.079982090042904
+        },
+        "wall_s": {
+          "min": 32.3931571750436,
+          "median": 32.775394209020305,
+          "max": 34.06896583503112
+        },
+        "mtp_acceptance_pct": {
+          "min": 85.76250383553237,
+          "median": 86.12132352941177,
+          "max": 90.15772870662461
+        },
+        "mtp_accepted_per_window": {
+          "min": 2.1466973886328726,
+          "median": 2.184149184149184,
+          "max": 2.3029814665592263
+        },
+        "hit_rate_pct": {
+          "min": 98.3,
+          "median": 98.8,
+          "max": 98.8
+        },
+        "cpu_fallback_entries": {
+          "min": 26184,
+          "median": 27006,
+          "max": 35552
+        },
+        "offloaded_entries": {
+          "min": 489,
+          "median": 539,
+          "max": 1224
+        }
+      }
+    },
+    {
+      "profile": "32k",
+      "role": "candidate",
+      "valid": 3,
+      "attempts": 3,
+      "resource": {
+        "state": "PASS",
+        "primary_slots": 10240,
+        "stage1_slots": 8477,
+        "expert_cache_primary_mib": 18905,
+        "expert_cache_total_mib": 36379,
+        "KV_resident_effective": 0,
+        "baseline": {
+          "primary_slots": 10240,
+          "helper_or_stage1_slots": 8477,
+          "cache_gib_rounded": [
+            18.46,
+            17.06
+          ],
+          "exact_byte_classes": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ],
+          "auto_sizing_frozen_by_invariant": true,
+          "max_total_context": 32768,
+          "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k/logs/engine.log",
+          "rule": "CPU-only predictor state cannot increase VRAM; candidates must match per-profile physical capacities and byte classes, or charge any loss explicitly",
+          "diagnostic_provenance": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+          "effective_KV_resident": 0,
+          "KV_note": "32k reports0(full32768resident);128k reports32768resident with streaming. CLI unchanged32768 on both."
+        },
+        "byte_class_basis": "same frozen allocator/profile/native formats and exact startup capacities; control classes independently captured in diagnostics; no extra GPU predictor allocation"
+      },
+      "warmup": {
+        "state": "VALID",
+        "actual_input_tokens": 4096,
+        "actual_output_tokens": 64
+      },
+      "statistics": {
+        "PP": {
+          "min": 3589.8,
+          "median": 4758.3,
+          "max": 4764.2
+        },
+        "TG": {
+          "min": 156.4,
+          "median": 175.4,
+          "max": 179.3
+        },
+        "TTFT_s": {
+          "min": 6.089675462979358,
+          "median": 6.107563755998854,
+          "max": 8.038139250013046
+        },
+        "wall_s": {
+          "min": 29.427713524957653,
+          "median": 30.86391390999779,
+          "max": 32.280161529022735
+        },
+        "mtp_acceptance_pct": {
+          "min": 85.76250383553237,
+          "median": 86.12132352941177,
+          "max": 90.15772870662461
+        },
+        "mtp_accepted_per_window": {
+          "min": 2.1466973886328726,
+          "median": 2.184149184149184,
+          "max": 2.3029814665592263
+        },
+        "hit_rate_pct": {
+          "min": 98.3,
+          "median": 98.8,
+          "max": 98.8
+        },
+        "cpu_fallback_entries": {
+          "min": 26184,
+          "median": 27006,
+          "max": 35552
+        },
+        "offloaded_entries": {
+          "min": 489,
+          "median": 539,
+          "max": 1224
+        }
+      }
+    },
+    {
+      "profile": "128k",
+      "role": "reference",
+      "valid": 3,
+      "attempts": 3,
+      "resource": {
+        "primary_slots": 10183,
+        "helper_or_stage1_slots": 8437,
+        "cache_gib_rounded": [
+          18.36,
+          16.97
+        ],
+        "exact_byte_classes": [
+          {
+            "slots": 10183,
+            "bytes": 19712998400,
+            "size_classes": {
+              "1510400": 1655,
+              "1715200": 814,
+              "1868800": 426,
+              "1971200": 4391,
+              "2176000": 2496,
+              "2329600": 401
+            }
+          },
+          {
+            "slots": 8437,
+            "bytes": 18220492800,
+            "size_classes": {
+              "1510400": 380,
+              "1715200": 401,
+              "1971200": 1457,
+              "2176000": 2947,
+              "2329600": 2957,
+              "2662400": 295
+            }
+          }
+        ],
+        "auto_sizing_frozen_by_invariant": true,
+        "max_total_context": 131072,
+        "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/logs/engine.log",
+        "rule": "CPU-only predictor state cannot increase VRAM; candidates must match per-profile physical capacities and byte classes, or charge any loss explicitly",
+        "diagnostic_provenance": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "effective_KV_resident": 32768,
+        "KV_note": "32k reports0(full32768resident);128k reports32768resident with streaming. CLI unchanged32768 on both.",
+        "stage1_slots": 8437,
+        "resource_evidence": "/srv/ai/research/iq3s-residency-20261004T230051Z/analysis/control-budgets-v2.json"
+      },
+      "warmup": {
+        "state": "VALID",
+        "actual_input_tokens": 4096,
+        "actual_output_tokens": 64
+      },
+      "statistics": {
+        "PP": {
+          "min": 3979.8,
+          "median": 5985.2,
+          "max": 6012.7
+        },
+        "TG": {
+          "min": 124.2,
+          "median": 133.2,
+          "max": 153.1
+        },
+        "TTFT_s": {
+          "min": 21.581710316997487,
+          "median": 21.68817100598244,
+          "max": 32.31644972303184
+        },
+        "wall_s": {
+          "min": 48.30807200400159,
+          "median": 54.640024421038106,
+          "max": 63.0864540800103
+        },
+        "mtp_acceptance_pct": {
+          "min": 76.77587706581618,
+          "median": 77.85507246376811,
+          "max": 79.54016298020954
+        },
+        "mtp_accepted_per_window": {
+          "min": 1.8274672187715666,
+          "median": 1.9049645390070922,
+          "max": 2.005135730007337
+        },
+        "hit_rate_pct": {
+          "min": 98.1,
+          "median": 98.1,
+          "max": 98.6
+        },
+        "cpu_fallback_entries": {
+          "min": 32207,
+          "median": 42738,
+          "max": 43557
+        },
+        "offloaded_entries": {
+          "min": 786,
+          "median": 1335,
+          "max": 1719
+        }
+      }
+    },
+    {
+      "profile": "128k",
+      "role": "candidate",
+      "valid": 3,
+      "attempts": 3,
+      "resource": {
+        "state": "PASS",
+        "primary_slots": 10183,
+        "stage1_slots": 8437,
+        "expert_cache_primary_mib": 18799,
+        "expert_cache_total_mib": 36175,
+        "KV_resident_effective": 32768,
+        "baseline": {
+          "primary_slots": 10183,
+          "helper_or_stage1_slots": 8437,
+          "cache_gib_rounded": [
+            18.36,
+            16.97
+          ],
+          "exact_byte_classes": [
+            {
+              "slots": 10183,
+              "bytes": 19712998400,
+              "size_classes": {
+                "1510400": 1655,
+                "1715200": 814,
+                "1868800": 426,
+                "1971200": 4391,
+                "2176000": 2496,
+                "2329600": 401
+              }
+            },
+            {
+              "slots": 8437,
+              "bytes": 18220492800,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 401,
+                "1971200": 1457,
+                "2176000": 2947,
+                "2329600": 2957,
+                "2662400": 295
+              }
+            }
+          ],
+          "auto_sizing_frozen_by_invariant": true,
+          "max_total_context": 131072,
+          "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/logs/engine.log",
+          "rule": "CPU-only predictor state cannot increase VRAM; candidates must match per-profile physical capacities and byte classes, or charge any loss explicitly",
+          "diagnostic_provenance": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+          "effective_KV_resident": 32768,
+          "KV_note": "32k reports0(full32768resident);128k reports32768resident with streaming. CLI unchanged32768 on both."
+        },
+        "byte_class_basis": "same frozen allocator/profile/native formats and exact startup capacities; control classes independently captured in diagnostics; no extra GPU predictor allocation"
+      },
+      "warmup": {
+        "state": "VALID",
+        "actual_input_tokens": 4096,
+        "actual_output_tokens": 64
+      },
+      "statistics": {
+        "PP": {
+          "min": 4013.1,
+          "median": 6014.4,
+          "max": 6024.9
+        },
+        "TG": {
+          "min": 138.7,
+          "median": 158.7,
+          "max": 159.3
+        },
+        "TTFT_s": {
+          "min": 21.3239934379817,
+          "median": 21.529970269999467,
+          "max": 32.082086042966694
+        },
+        "wall_s": {
+          "min": 47.112761937023606,
+          "median": 47.23438537301263,
+          "max": 61.594544027990196
+        },
+        "mtp_acceptance_pct": {
+          "min": 76.77587706581618,
+          "median": 77.85507246376811,
+          "max": 79.54016298020954
+        },
+        "mtp_accepted_per_window": {
+          "min": 1.8274672187715666,
+          "median": 1.9049645390070922,
+          "max": 2.005135730007337
+        },
+        "hit_rate_pct": {
+          "min": 98.1,
+          "median": 98.1,
+          "max": 98.6
+        },
+        "cpu_fallback_entries": {
+          "min": 32207,
+          "median": 42738,
+          "max": 43557
+        },
+        "offloaded_entries": {
+          "min": 786,
+          "median": 1335,
+          "max": 1719
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "profile": "32k",
+      "median_delta_pct": {
+        "PP": 0.39666631501213967,
+        "TG": 12.50801796023091,
+        "TTFT_s": -0.34450835083327247,
+        "wall_s": -5.832058912342375
+      },
+      "capacity_identical": true,
+      "paired": [
+        {
+          "run": 1,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 157.8,
+          "candidate_TG": 179.3,
+          "TG_delta_pct": 13.624841571609636,
+          "MTP_acceptance_delta_pp": 0.0
+        },
+        {
+          "run": 2,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 153.3,
+          "candidate_TG": 156.4,
+          "TG_delta_pct": 2.022178734507496,
+          "MTP_acceptance_delta_pp": 0.0
+        },
+        {
+          "run": 3,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 155.9,
+          "candidate_TG": 175.4,
+          "TG_delta_pct": 12.50801796023091,
+          "MTP_acceptance_delta_pp": 0.0
+        }
+      ]
+    },
+    {
+      "profile": "128k",
+      "median_delta_pct": {
+        "PP": 0.48787007952950656,
+        "TG": 19.144144144144136,
+        "TTFT_s": -0.7294332746608068,
+        "wall_s": -13.553506109294633
+      },
+      "capacity_identical": true,
+      "paired": [
+        {
+          "run": 1,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 133.2,
+          "candidate_TG": 138.7,
+          "TG_delta_pct": 4.129129129129128,
+          "MTP_acceptance_delta_pp": 0.0
+        },
+        {
+          "run": 2,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 124.2,
+          "candidate_TG": 159.3,
+          "TG_delta_pct": 28.260869565217405,
+          "MTP_acceptance_delta_pp": 0.0
+        },
+        {
+          "run": 3,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 153.1,
+          "candidate_TG": 158.7,
+          "TG_delta_pct": 3.6577400391900605,
+          "MTP_acceptance_delta_pp": 0.0
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "PP": 3567.2,
+      "TG": 157.8,
+      "TTFT_s": 8.079982090042904,
+      "wall_s": 34.06896583503112,
+      "mtp_acceptance_pct": 90.15772870662461,
+      "mtp_accepted_per_window": 2.3029814665592263,
+      "hit_rate_pct": 98.3,
+      "cpu_fallback_entries": 35552,
+      "offloaded_entries": 1224,
+      "state": "VALID",
+      "actual_input_tokens": 28378,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+      "application_status": null,
+      "verify_windows": 1241,
+      "mtp_proposed": 3170,
+      "mtp_accepted": 2858,
+      "profile": "32k",
+      "role": "reference",
+      "run": 1,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k/raw/run1.json",
+      "output_sha256": "2f3bdb1b8cefa902ec05147d5a5bad0cec4b828797cc9daaff84f593e2b5cd6e",
+      "input_sha256": "f584d9ba57c4a536f5c83b212f40baa87723c811ad532c33df09550a21209583",
+      "system": {
+        "samples": 26,
+        "mean_process_cpu_pct_one_core": 1576.0807692307692,
+        "mean_process_cpu_pct_16vcpu": 98.50504807692307,
+        "mean_system_cpu_pct": 99.24615384615385,
+        "peak_sum_rss_gib": 50.9630126953125,
+        "GPU": {
+          "0": {
+            "util_pct": 46.73076923076923,
+            "power_w": 173.28346153846155,
+            "peak_vram_mib": 23832.0
+          },
+          "1": {
+            "util_pct": 52.84615384615385,
+            "power_w": 193.99346153846153,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 4779.1,
+      "TG": 153.3,
+      "TTFT_s": 6.086332252016291,
+      "wall_s": 32.775394209020305,
+      "mtp_acceptance_pct": 86.12132352941177,
+      "mtp_accepted_per_window": 2.184149184149184,
+      "hit_rate_pct": 98.8,
+      "cpu_fallback_entries": 27006,
+      "offloaded_entries": 539,
+      "state": "VALID",
+      "actual_input_tokens": 28379,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+      "application_status": null,
+      "verify_windows": 1287,
+      "mtp_proposed": 3264,
+      "mtp_accepted": 2811,
+      "profile": "32k",
+      "role": "reference",
+      "run": 2,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k/raw/run2.json",
+      "output_sha256": "c9235aa8547736616a956cf4e75def1730d9af87438b5e956626ea845657659f",
+      "input_sha256": "17bd58abd7aa19dd596e190e6f13522407f32362d3dc696b66bc82fffb4a90ff",
+      "system": {
+        "samples": 26,
+        "mean_process_cpu_pct_one_core": 1577.2076923076922,
+        "mean_process_cpu_pct_16vcpu": 98.57548076923077,
+        "mean_system_cpu_pct": 99.36153846153846,
+        "peak_sum_rss_gib": 50.976192474365234,
+        "GPU": {
+          "0": {
+            "util_pct": 45.84615384615385,
+            "power_w": 174.415,
+            "peak_vram_mib": 23832.0
+          },
+          "1": {
+            "util_pct": 51.88461538461539,
+            "power_w": 196.92384615384614,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 4739.5,
+      "TG": 155.9,
+      "TTFT_s": 6.128677561995573,
+      "wall_s": 32.3931571750436,
+      "mtp_acceptance_pct": 85.76250383553237,
+      "mtp_accepted_per_window": 2.1466973886328726,
+      "hit_rate_pct": 98.8,
+      "cpu_fallback_entries": 26184,
+      "offloaded_entries": 489,
+      "state": "VALID",
+      "actual_input_tokens": 28381,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+      "application_status": null,
+      "verify_windows": 1302,
+      "mtp_proposed": 3259,
+      "mtp_accepted": 2795,
+      "profile": "32k",
+      "role": "reference",
+      "run": 3,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k/raw/run3.json",
+      "output_sha256": "fc2db03ed98ce6c4ee5bcf5e456e7bc7ff2fbd5cb6fe6e5d98efeeb8d74d1cd4",
+      "input_sha256": "fea2205c65046a1efd55c9b3793ab89b77b2e75ae943823ffdda88322d388bb7",
+      "system": {
+        "samples": 26,
+        "mean_process_cpu_pct_one_core": 1571.3076923076924,
+        "mean_process_cpu_pct_16vcpu": 98.20673076923077,
+        "mean_system_cpu_pct": 98.97307692307692,
+        "peak_sum_rss_gib": 50.98640823364258,
+        "GPU": {
+          "0": {
+            "util_pct": 44.84615384615385,
+            "power_w": 175.81807692307692,
+            "peak_vram_mib": 23832.0
+          },
+          "1": {
+            "util_pct": 52.92307692307692,
+            "power_w": 198.91615384615386,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 3589.8,
+      "TG": 179.3,
+      "TTFT_s": 8.038139250013046,
+      "wall_s": 30.86391390999779,
+      "mtp_acceptance_pct": 90.15772870662461,
+      "mtp_accepted_per_window": 2.3029814665592263,
+      "hit_rate_pct": 98.3,
+      "cpu_fallback_entries": 35552,
+      "offloaded_entries": 1224,
+      "state": "VALID",
+      "actual_input_tokens": 28378,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+      "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+      "application_status": "NONEMPTY_ANSWER_LENGTH_LIMIT",
+      "verify_windows": 1241,
+      "mtp_proposed": 3170,
+      "mtp_accepted": 2858,
+      "profile": "32k",
+      "role": "candidate",
+      "run": 1,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/32k/raw/run1.json",
+      "output_sha256": "2f3bdb1b8cefa902ec05147d5a5bad0cec4b828797cc9daaff84f593e2b5cd6e",
+      "input_sha256": "f584d9ba57c4a536f5c83b212f40baa87723c811ad532c33df09550a21209583",
+      "system": {
+        "samples": 22,
+        "mean_process_cpu_pct_one_core": 1581.959090909091,
+        "mean_process_cpu_pct_16vcpu": 98.87244318181818,
+        "mean_system_cpu_pct": 99.60454545454546,
+        "peak_sum_rss_gib": 50.9667854309082,
+        "GPU": {
+          "0": {
+            "util_pct": 45.77272727272727,
+            "power_w": 182.78681818181818,
+            "peak_vram_mib": 23834.0
+          },
+          "1": {
+            "util_pct": 53.31818181818182,
+            "power_w": 209.62181818181818,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 4758.3,
+      "TG": 156.4,
+      "TTFT_s": 6.107563755998854,
+      "wall_s": 32.280161529022735,
+      "mtp_acceptance_pct": 86.12132352941177,
+      "mtp_accepted_per_window": 2.184149184149184,
+      "hit_rate_pct": 98.8,
+      "cpu_fallback_entries": 27006,
+      "offloaded_entries": 539,
+      "state": "VALID",
+      "actual_input_tokens": 28379,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+      "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+      "application_status": "NONEMPTY_ANSWER_LENGTH_LIMIT",
+      "verify_windows": 1287,
+      "mtp_proposed": 3264,
+      "mtp_accepted": 2811,
+      "profile": "32k",
+      "role": "candidate",
+      "run": 2,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/32k/raw/run2.json",
+      "output_sha256": "c9235aa8547736616a956cf4e75def1730d9af87438b5e956626ea845657659f",
+      "input_sha256": "17bd58abd7aa19dd596e190e6f13522407f32362d3dc696b66bc82fffb4a90ff",
+      "system": {
+        "samples": 26,
+        "mean_process_cpu_pct_one_core": 1576.6692307692308,
+        "mean_process_cpu_pct_16vcpu": 98.54182692307693,
+        "mean_system_cpu_pct": 99.38846153846154,
+        "peak_sum_rss_gib": 50.977603912353516,
+        "GPU": {
+          "0": {
+            "util_pct": 44.80769230769231,
+            "power_w": 174.50884615384615,
+            "peak_vram_mib": 23834.0
+          },
+          "1": {
+            "util_pct": 50.57692307692308,
+            "power_w": 197.43807692307692,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 4764.2,
+      "TG": 175.4,
+      "TTFT_s": 6.089675462979358,
+      "wall_s": 29.427713524957653,
+      "mtp_acceptance_pct": 85.76250383553237,
+      "mtp_accepted_per_window": 2.1466973886328726,
+      "hit_rate_pct": 98.8,
+      "cpu_fallback_entries": 26184,
+      "offloaded_entries": 489,
+      "state": "VALID",
+      "actual_input_tokens": 28381,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+      "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+      "application_status": "NONEMPTY_ANSWER_LENGTH_LIMIT",
+      "verify_windows": 1302,
+      "mtp_proposed": 3259,
+      "mtp_accepted": 2795,
+      "profile": "32k",
+      "role": "candidate",
+      "run": 3,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/32k/raw/run3.json",
+      "output_sha256": "fc2db03ed98ce6c4ee5bcf5e456e7bc7ff2fbd5cb6fe6e5d98efeeb8d74d1cd4",
+      "input_sha256": "fea2205c65046a1efd55c9b3793ab89b77b2e75ae943823ffdda88322d388bb7",
+      "system": {
+        "samples": 23,
+        "mean_process_cpu_pct_one_core": 1579.7826086956522,
+        "mean_process_cpu_pct_16vcpu": 98.73641304347827,
+        "mean_system_cpu_pct": 99.4304347826087,
+        "peak_sum_rss_gib": 50.987220764160156,
+        "GPU": {
+          "0": {
+            "util_pct": 44.73913043478261,
+            "power_w": 184.80739130434782,
+            "peak_vram_mib": 23834.0
+          },
+          "1": {
+            "util_pct": 52.56521739130435,
+            "power_w": 211.8504347826087,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 3979.8,
+      "TG": 133.2,
+      "TTFT_s": 32.31644972303184,
+      "wall_s": 63.0864540800103,
+      "mtp_acceptance_pct": 76.77587706581618,
+      "mtp_accepted_per_window": 1.8274672187715666,
+      "hit_rate_pct": 98.1,
+      "cpu_fallback_entries": 43557,
+      "offloaded_entries": 1719,
+      "state": "VALID",
+      "actual_input_tokens": 126715,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+      "application_status": null,
+      "verify_windows": 1449,
+      "mtp_proposed": 3449,
+      "mtp_accepted": 2648,
+      "profile": "128k",
+      "role": "reference",
+      "run": 1,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/raw/run1.json",
+      "output_sha256": "ca66dfb72916e663fbc39da2507ccbb1e2616884b06cb23a21d835d233a2aa2f",
+      "input_sha256": "798f2529bb9cc57a5074bd5e61319f7015e2a61000083f1e991463eab11d2d88",
+      "system": {
+        "samples": 31,
+        "mean_process_cpu_pct_one_core": 1567.651612903226,
+        "mean_process_cpu_pct_16vcpu": 97.97822580645162,
+        "mean_system_cpu_pct": 98.69354838709678,
+        "peak_sum_rss_gib": 52.71015167236328,
+        "GPU": {
+          "0": {
+            "util_pct": 48.41935483870968,
+            "power_w": 170.33870967741936,
+            "peak_vram_mib": 23828.0
+          },
+          "1": {
+            "util_pct": 51.87096774193548,
+            "power_w": 192.17225806451614,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 5985.2,
+      "TG": 124.2,
+      "TTFT_s": 21.68817100598244,
+      "wall_s": 54.640024421038106,
+      "mtp_acceptance_pct": 77.85507246376811,
+      "mtp_accepted_per_window": 1.9049645390070922,
+      "hit_rate_pct": 98.6,
+      "cpu_fallback_entries": 32207,
+      "offloaded_entries": 786,
+      "state": "VALID",
+      "actual_input_tokens": 126716,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+      "application_status": null,
+      "verify_windows": 1410,
+      "mtp_proposed": 3450,
+      "mtp_accepted": 2686,
+      "profile": "128k",
+      "role": "reference",
+      "run": 2,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/raw/run2.json",
+      "output_sha256": "ee9961bac856784d602b170c0b126fd8642146def184026d521c3a84a61fa7e7",
+      "input_sha256": "4cf8f922a8d35084c987d5df81d6136c7402df844ed3f9f4787e5fa1ee315b83",
+      "system": {
+        "samples": 33,
+        "mean_process_cpu_pct_one_core": 1546.3969696969698,
+        "mean_process_cpu_pct_16vcpu": 96.64981060606061,
+        "mean_system_cpu_pct": 97.44848484848485,
+        "peak_sum_rss_gib": 52.74907684326172,
+        "GPU": {
+          "0": {
+            "util_pct": 47.27272727272727,
+            "power_w": 165.24575757575758,
+            "peak_vram_mib": 23828.0
+          },
+          "1": {
+            "util_pct": 53.121212121212125,
+            "power_w": 186.0909090909091,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 6012.7,
+      "TG": 153.1,
+      "TTFT_s": 21.581710316997487,
+      "wall_s": 48.30807200400159,
+      "mtp_acceptance_pct": 79.54016298020954,
+      "mtp_accepted_per_window": 2.005135730007337,
+      "hit_rate_pct": 98.1,
+      "cpu_fallback_entries": 42738,
+      "offloaded_entries": 1335,
+      "state": "VALID",
+      "actual_input_tokens": 126719,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+      "application_status": null,
+      "verify_windows": 1363,
+      "mtp_proposed": 3436,
+      "mtp_accepted": 2733,
+      "profile": "128k",
+      "role": "reference",
+      "run": 3,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/raw/run3.json",
+      "output_sha256": "95b960dbb5e8868f5dca0ba783c5731342e0301268d16c8e35b428985c7e5ad3",
+      "input_sha256": "15133b0faef9c3da0b82f2db022743557e949969840f42ea911f07c5f7dd1833",
+      "system": {
+        "samples": 27,
+        "mean_process_cpu_pct_one_core": 1553.5555555555557,
+        "mean_process_cpu_pct_16vcpu": 97.09722222222223,
+        "mean_system_cpu_pct": 97.85555555555555,
+        "peak_sum_rss_gib": 52.759578704833984,
+        "GPU": {
+          "0": {
+            "util_pct": 47.592592592592595,
+            "power_w": 178.49333333333334,
+            "peak_vram_mib": 23828.0
+          },
+          "1": {
+            "util_pct": 53.111111111111114,
+            "power_w": 205.00666666666666,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 4013.1,
+      "TG": 138.7,
+      "TTFT_s": 32.082086042966694,
+      "wall_s": 61.594544027990196,
+      "mtp_acceptance_pct": 76.77587706581618,
+      "mtp_accepted_per_window": 1.8274672187715666,
+      "hit_rate_pct": 98.1,
+      "cpu_fallback_entries": 43557,
+      "offloaded_entries": 1719,
+      "state": "VALID",
+      "actual_input_tokens": 126715,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+      "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+      "application_status": "NONEMPTY_ANSWER_LENGTH_LIMIT",
+      "verify_windows": 1449,
+      "mtp_proposed": 3449,
+      "mtp_accepted": 2648,
+      "profile": "128k",
+      "role": "candidate",
+      "run": 1,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/128k/raw/run1.json",
+      "output_sha256": "ca66dfb72916e663fbc39da2507ccbb1e2616884b06cb23a21d835d233a2aa2f",
+      "input_sha256": "798f2529bb9cc57a5074bd5e61319f7015e2a61000083f1e991463eab11d2d88",
+      "system": {
+        "samples": 29,
+        "mean_process_cpu_pct_one_core": 1577.1586206896552,
+        "mean_process_cpu_pct_16vcpu": 98.57241379310345,
+        "mean_system_cpu_pct": 99.43448275862069,
+        "peak_sum_rss_gib": 52.71741485595703,
+        "GPU": {
+          "0": {
+            "util_pct": 47.3448275862069,
+            "power_w": 173.93137931034482,
+            "peak_vram_mib": 23830.0
+          },
+          "1": {
+            "util_pct": 51.0,
+            "power_w": 197.00896551724136,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 6024.9,
+      "TG": 159.3,
+      "TTFT_s": 21.529970269999467,
+      "wall_s": 47.23438537301263,
+      "mtp_acceptance_pct": 77.85507246376811,
+      "mtp_accepted_per_window": 1.9049645390070922,
+      "hit_rate_pct": 98.6,
+      "cpu_fallback_entries": 32207,
+      "offloaded_entries": 786,
+      "state": "VALID",
+      "actual_input_tokens": 126716,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+      "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+      "application_status": "NONEMPTY_ANSWER_LENGTH_LIMIT",
+      "verify_windows": 1410,
+      "mtp_proposed": 3450,
+      "mtp_accepted": 2686,
+      "profile": "128k",
+      "role": "candidate",
+      "run": 2,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/128k/raw/run2.json",
+      "output_sha256": "ee9961bac856784d602b170c0b126fd8642146def184026d521c3a84a61fa7e7",
+      "input_sha256": "4cf8f922a8d35084c987d5df81d6136c7402df844ed3f9f4787e5fa1ee315b83",
+      "system": {
+        "samples": 26,
+        "mean_process_cpu_pct_one_core": 1556.9692307692308,
+        "mean_process_cpu_pct_16vcpu": 97.31057692307692,
+        "mean_system_cpu_pct": 97.9423076923077,
+        "peak_sum_rss_gib": 52.75452423095703,
+        "GPU": {
+          "0": {
+            "util_pct": 45.53846153846154,
+            "power_w": 182.57961538461538,
+            "peak_vram_mib": 23830.0
+          },
+          "1": {
+            "util_pct": 52.88461538461539,
+            "power_w": 211.50576923076923,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    },
+    {
+      "PP": 6014.4,
+      "TG": 158.7,
+      "TTFT_s": 21.3239934379817,
+      "wall_s": 47.112761937023606,
+      "mtp_acceptance_pct": 79.54016298020954,
+      "mtp_accepted_per_window": 2.005135730007337,
+      "hit_rate_pct": 98.1,
+      "cpu_fallback_entries": 42738,
+      "offloaded_entries": 1335,
+      "state": "VALID",
+      "actual_input_tokens": 126719,
+      "actual_output_tokens": 4096,
+      "finish_reason": "length",
+      "reuse": 0,
+      "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+      "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+      "application_status": "NONEMPTY_ANSWER_LENGTH_LIMIT",
+      "verify_windows": 1363,
+      "mtp_proposed": 3436,
+      "mtp_accepted": 2733,
+      "profile": "128k",
+      "role": "candidate",
+      "run": 3,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/128k/raw/run3.json",
+      "output_sha256": "95b960dbb5e8868f5dca0ba783c5731342e0301268d16c8e35b428985c7e5ad3",
+      "input_sha256": "15133b0faef9c3da0b82f2db022743557e949969840f42ea911f07c5f7dd1833",
+      "system": {
+        "samples": 26,
+        "mean_process_cpu_pct_one_core": 1568.9307692307693,
+        "mean_process_cpu_pct_16vcpu": 98.05817307692308,
+        "mean_system_cpu_pct": 98.70769230769231,
+        "peak_sum_rss_gib": 52.755714416503906,
+        "GPU": {
+          "0": {
+            "util_pct": 46.92307692307692,
+            "power_w": 182.51692307692306,
+            "peak_vram_mib": 23830.0
+          },
+          "1": {
+            "util_pct": 52.88461538461539,
+            "power_w": 210.1253846153846,
+            "peak_vram_mib": 23952.0
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Three serial requests per fresh server/profile, not independent fresh-server replicates.",
+    "Batches occurred at different wall times; CPU scheduling and numerical trajectories can affect TG.",
+    "Output hashes compare visible answer plus reasoning, not unavailable clean output token IDs.",
+    "No diagnostic timings are headline measurements. Unavailable expert-specific I/O is not zero."
+  ],
+  "correctness": {
+    "full_actual_output_router_heat_parity": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/diagnostic-v1/summary.json",
+    "native_Python_realIQ": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/tests/failure-audit.json",
+    "10_identical_answers": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/correctness/skip-local-host-plan-v1/ground-truth-checks.json"
+  },
+  "additional_explicit_GPU_bytes_relative_E016v2": 0,
+  "policy_change": "None. True routing, EMA admissions and all mixed expert paths unchanged.",
+  "reference_E016v2": [
+    {
+      "profile": "32k",
+      "rows": [
+        {
+          "run": 1,
+          "reference_TG": 151.5,
+          "candidate_TG": 179.3,
+          "TG_delta_pct": 18.349834983498358,
+          "same_logical_counts": true
+        },
+        {
+          "run": 2,
+          "reference_TG": 157.1,
+          "candidate_TG": 156.4,
+          "TG_delta_pct": -0.4455760661998709,
+          "same_logical_counts": true
+        },
+        {
+          "run": 3,
+          "reference_TG": 152.3,
+          "candidate_TG": 175.4,
+          "TG_delta_pct": 15.16743269862113,
+          "same_logical_counts": true
+        }
+      ]
+    },
+    {
+      "profile": "128k",
+      "rows": [
+        {
+          "run": 1,
+          "reference_TG": 136.4,
+          "candidate_TG": 138.7,
+          "TG_delta_pct": 1.6862170087976525,
+          "same_logical_counts": true
+        },
+        {
+          "run": 2,
+          "reference_TG": 123.3,
+          "candidate_TG": 159.3,
+          "TG_delta_pct": 29.197080291970813,
+          "same_logical_counts": true
+        },
+        {
+          "run": 3,
+          "reference_TG": 133.3,
+          "candidate_TG": 158.7,
+          "TG_delta_pct": 19.054763690922716,
+          "same_logical_counts": true
+        }
+      ]
+    }
+  ],
+  "decision": "Do not select solely from this batch. Complete new same-binary OFF guard and source-grounded GPU phase diagnosis; no extra unchanged ON requests."
+}

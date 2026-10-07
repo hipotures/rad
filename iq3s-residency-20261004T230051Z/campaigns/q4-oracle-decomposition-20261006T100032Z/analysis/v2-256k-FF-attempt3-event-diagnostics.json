@@ -1,0 +1,81 @@
+{
+  "label": "v2-256k-FF-attempt3",
+  "host_quant_group_compute_completion_span": {
+    "CPU_positive": {
+      "count": 5628,
+      "sum_ms": 2131.16757,
+      "median_us": 326.48,
+      "p95_us": 789.1509999999998,
+      "max_us": 4375.798
+    },
+    "all_no_CPU": {
+      "count": 72516,
+      "sum_ms": 82.268131,
+      "median_us": 0.209,
+      "p95_us": 6.03025,
+      "max_us": 644.717
+    },
+    "mapped_positive": {
+      "count": 2194,
+      "sum_ms": 1199.057289,
+      "median_us": 497.2185,
+      "p95_us": 965.735,
+      "max_us": 2211.454
+    }
+  },
+  "scope_caveat": "CPU span includes activation quantization/job construction/native CPU completion. It is not an isolated wait, and overlaps GPU work. No CPU/mapped/GPU timers are summed.",
+  "future_lead": {
+    "logical_invocations": {
+      "min": 2,
+      "median": 41.0,
+      "p95": 64.0,
+      "max": 64
+    },
+    "issue_to_actual_target": {
+      "count": 64937,
+      "sum_ms": 1538683.386681,
+      "median_us": 24979.077,
+      "p95_us": 44579.89619999999,
+      "max_us": 76823.773
+    },
+    "queue_before_staging": {
+      "count": 64937,
+      "sum_ms": 909.421632,
+      "median_us": 11.249,
+      "p95_us": 28.84,
+      "max_us": 2473.784
+    }
+  },
+  "copy_lifetimes": {
+    "published": 64937,
+    "ready_publications": 64728,
+    "late_publications": 209,
+    "never_used": 51,
+    "one_use": 15987,
+    "multiple_uses": 48899,
+    "max_uses": 1739,
+    "total_uses": 1200354,
+    "victim_absent": 17639,
+    "per_class": {
+      "3072000": {
+        "issued": 55149,
+        "bytes": 169417728000,
+        "uses": 1046837,
+        "victim_absent": 17639
+      },
+      "3584000": {
+        "issued": 7649,
+        "bytes": 27414016000,
+        "uses": 120084,
+        "victim_absent": 0
+      },
+      "3993600": {
+        "issued": 2139,
+        "bytes": 8542310400,
+        "uses": 33433,
+        "victim_absent": 0
+      }
+    },
+    "tail_censoring": "No recorded guard tail. Future victim-use after tape end is unknown in reality but full oracle uses known finite ending; no global upper bound."
+  }
+}

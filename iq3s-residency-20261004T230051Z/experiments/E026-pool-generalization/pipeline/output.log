@@ -1,0 +1,58 @@
+COMPLETE_MEASUREMENTS 18 pairs 36 requests
+{'family': 'code', 'profile': '32k', 'n': 3, 'TG_delta_pct': {'min': 25.556471558120375, 'median': 28.04878048780488, 'max': 35.273368606701936}, 'wall_delta_pct': {'min': -19.70059857506683, 'median': -16.708754650402902, 'max': -15.075875207245016}, 'CPU_entries': {'min': 20477, 'median': 20578, 'max': 24751}}
+{'family': 'code', 'profile': '128k', 'n': 3, 'TG_delta_pct': {'min': 6.973293768545985, 'median': 8.424336973478951, 'max': 24.680851063829778}, 'wall_delta_pct': {'min': -9.69446504129542, 'median': -3.932257831943542, 'max': -2.9821450135064764}, 'CPU_entries': {'min': 19890, 'median': 23790, 'max': 25425}}
+{'family': 'math', 'profile': '32k', 'n': 3, 'TG_delta_pct': {'min': 13.151041666666675, 'median': 14.588859416445633, 'max': 18.843683083511785}, 'wall_delta_pct': {'min': -11.181124964773748, 'median': -8.994813553931625, 'max': -7.90688935504188}, 'CPU_entries': {'min': 26142, 'median': 30719, 'max': 33838}}
+{'family': 'math', 'profile': '128k', 'n': 3, 'TG_delta_pct': {'min': -3.3512866546977826, 'median': 3.8922155688622784, 'max': 13.237311385459517}, 'wall_delta_pct': {'min': -5.010186647269288, 'median': -1.4067026416235695, 'max': 1.5638174522510262}, 'CPU_entries': {'min': 31485, 'median': 31486, 'max': 31989}}
+{'family': 'prose', 'profile': '32k', 'n': 3, 'TG_delta_pct': {'min': 25.0, 'median': 40.625, 'max': 41.121495327102785}, 'wall_delta_pct': {'min': -20.87404004449582, 'median': -20.194305820811298, 'max': -14.034609388052688}, 'CPU_entries': {'min': 20671, 'median': 23484, 'max': 23867}}
+{'family': 'prose', 'profile': '128k', 'n': 3, 'TG_delta_pct': {'min': 5.2631578947368585, 'median': 5.384110308601442, 'max': 5.847568988173468}, 'wall_delta_pct': {'min': -4.766319429331379, 'median': -4.158263373094117, 'max': 0.2516318341210244}, 'CPU_entries': {'min': 22294, 'median': 23011, 'max': 23346}}
+{
+  "command": [
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+    "scripts/run_pool_p0_diagnostics.py"
+  ],
+  "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z",
+  "timeout_s": 1800,
+  "started_epoch": 1791198252.7285044,
+  "consolidation_reserve_s": 2700,
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "OMP_NUM_THREADS": null,
+    "MKL_NUM_THREADS": null
+  },
+  "pid": 1563167,
+  "create_time": 1791198252.59,
+  "returncode": 0,
+  "elapsed_s": 427.38489389419556
+}
+db7435f3415a2f52875f94282998879f", "headline_instrumentation": "DIAGNOSTIC_ONLY", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 131072, "source_sha": "883693dcd82ff9c61139555967047953e1416ae8", "source_status": "", "variant_overrides": {"env": {"STRATA_POOL_SPIN_US": "100", "STRATA_LAB_MISS_WAITS": "1"}, "extra_explicit_GPU_bytes": 0, "scheduling_only": "Existing native pool sleep knob; no code or cache-policy change", "diagnostic_only": true}, "diagnostic_env": {"STRATA_LAB_TRACE": "{attempt}/traces/runtime"}, "server_entrypoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/serve_capture.py"}
+READY pool-p0-diag-sleep100us 128k 55.08
+warmup VALID input 4096 output 64 PP 1514.6 TG 117.7
+trace-run1 VALID input 126717 output 4096 PP 3381.5 TG 177.7
+DIAGNOSTIC sleep100us 128k math
+{'profile': '32k', 'family': 'math', 'role': 'default', 'layer': 2, 'category': 'all-local', 'completion_wait_us': {'n': 762, 'median': 5.119999870657921, 'p95': 8.191999979317188, 'max': 9.216000325977802}}
+{'profile': '32k', 'family': 'math', 'role': 'default', 'layer': 2, 'category': 'CPU-positive', 'completion_wait_us': {'n': 526, 'median': 6.144000217318535, 'p95': 97.5360032171011, 'max': 1660.9280109405518}}
+{'profile': '32k', 'family': 'math', 'role': 'default', 'layer': 24, 'category': 'all-local', 'completion_wait_us': {'n': 863, 'median': 4.095999989658594, 'p95': 5.119999870657921, 'max': 5.119999870657921}}
+{'profile': '32k', 'family': 'math', 'role': 'default', 'layer': 24, 'category': 'CPU-positive', 'completion_wait_us': {'n': 425, 'median': 5.119999870657921, 'p95': 134.96319949626917, 'max': 3234.816074371338}}
+{'profile': '32k', 'family': 'math', 'role': 'default', 'layer': 40, 'category': 'all-local', 'completion_wait_us': {'n': 961, 'median': 4.095999989658594, 'p95': 5.119999870657921, 'max': 5.119999870657921}}
+{'profile': '32k', 'family': 'math', 'role': 'default', 'layer': 40, 'category': 'CPU-positive', 'completion_wait_us': {'n': 327, 'median': 5.119999870657921, 'p95': 160.25600433349592, 'max': 362.4959886074066}}
+{'profile': '32k', 'family': 'math', 'role': 'sleep100us', 'layer': 2, 'category': 'all-local', 'completion_wait_us': {'n': 762, 'median': 5.119999870657921, 'p95': 7.168000098317862, 'max': 9.216000325977802}}
+{'profile': '32k', 'family': 'math', 'role': 'sleep100us', 'layer': 2, 'category': 'CPU-positive', 'completion_wait_us': {'n': 526, 'median': 61.43999844789505, 'p95': 293.12000423669815, 'max': 677.8879761695862}}
+{'profile': '32k', 'family': 'math', 'role': 'sleep100us', 'layer': 24, 'category': 'all-local', 'completion_wait_us': {'n': 863, 'median': 4.095999989658594, 'p95': 4.095999989658594, 'max': 8.191999979317188}}
+{'profile': '32k', 'family': 'math', 'role': 'sleep100us', 'layer': 24, 'category': 'CPU-positive', 'completion_wait_us': {'n': 425, 'median': 66.56000018119812, 'p95': 364.33920264244074, 'max': 2715.6479358673096}}
+{'profile': '32k', 'family': 'math', 'role': 'sleep100us', 'layer': 40, 'category': 'all-local', 'completion_wait_us': {'n': 961, 'median': 4.095999989658594, 'p95': 4.095999989658594, 'max': 5.119999870657921}}
+{'profile': '32k', 'family': 'math', 'role': 'sleep100us', 'layer': 40, 'category': 'CPU-positive', 'completion_wait_us': {'n': 327, 'median': 70.65600156784058, 'p95': 387.17439472675306, 'max': 886.784017086029}}
+{'profile': '128k', 'family': 'math', 'role': 'default', 'layer': 2, 'category': 'all-local', 'completion_wait_us': {'n': 776, 'median': 5.119999870657921, 'p95': 8.191999979317188, 'max': 8.191999979317188}}
+{'profile': '128k', 'family': 'math', 'role': 'default', 'layer': 2, 'category': 'CPU-positive', 'completion_wait_us': {'n': 515, 'median': 6.144000217318535, 'p95': 70.96320167183872, 'max': 268.2879865169525}}
+{'profile': '128k', 'family': 'math', 'role': 'default', 'layer': 24, 'category': 'all-local', 'completion_wait_us': {'n': 927, 'median': 4.095999989658594, 'p95': 4.095999989658594, 'max': 5.119999870657921}}
+{'profile': '128k', 'family': 'math', 'role': 'default', 'layer': 24, 'category': 'CPU-positive', 'completion_wait_us': {'n': 364, 'median': 4.095999989658594, 'p95': 72.0896020531653, 'max': 237.56800591945648}}
+{'profile': '128k', 'family': 'math', 'role': 'default', 'layer': 40, 'category': 'all-local', 'completion_wait_us': {'n': 1020, 'median': 4.095999989658594, 'p95': 4.095999989658594, 'max': 5.119999870657921}}
+{'profile': '128k', 'family': 'math', 'role': 'default', 'layer': 40, 'category': 'CPU-positive', 'completion_wait_us': {'n': 271, 'median': 4.095999989658594, 'p95': 80.38399741053581, 'max': 1311.743974685669}}
+{'profile': '128k', 'family': 'math', 'role': 'sleep100us', 'layer': 2, 'category': 'all-local', 'completion_wait_us': {'n': 776, 'median': 5.119999870657921, 'p95': 7.168000098317862, 'max': 9.216000325977802}}
+{'profile': '128k', 'family': 'math', 'role': 'sleep100us', 'layer': 2, 'category': 'CPU-positive', 'completion_wait_us': {'n': 515, 'median': 18.432000651955605, 'p95': 110.89920029044147, 'max': 342.0160114765167}}
+{'profile': '128k', 'family': 'math', 'role': 'sleep100us', 'layer': 24, 'category': 'all-local', 'completion_wait_us': {'n': 927, 'median': 4.095999989658594, 'p95': 5.119999870657921, 'max': 5.119999870657921}}
+{'profile': '128k', 'family': 'math', 'role': 'sleep100us', 'layer': 24, 'category': 'CPU-positive', 'completion_wait_us': {'n': 364, 'median': 12.80000014230609, 'p95': 125.43999888002837, 'max': 1087.488055229187}}
+{'profile': '128k', 'family': 'math', 'role': 'sleep100us', 'layer': 40, 'category': 'all-local', 'completion_wait_us': {'n': 1020, 'median': 4.095999989658594, 'p95': 5.119999870657921, 'max': 5.119999870657921}}
+{'profile': '128k', 'family': 'math', 'role': 'sleep100us', 'layer': 40, 'category': 'CPU-positive', 'completion_wait_us': {'n': 271, 'median': 20.479999482631683, 'p95': 126.46399810910225, 'max': 890.8799886703491}}
+
+P0_READY_FOR_DECISION

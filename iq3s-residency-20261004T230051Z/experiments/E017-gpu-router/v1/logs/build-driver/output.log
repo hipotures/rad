@@ -1,0 +1,64 @@
+clone 0
+checkout 0
+patch 0
+patch-diff 0
+add 0
+commit 0
+configure 0
+build 1
+’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/src/core/layer.cpp:1348:1: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 1348 | if (!block_layer_pre(tables, g, layer, pos, pos_base, gb, qst, qb, mb, k, bb, stream, err, db, ple))        return false;    return block_layer_post(tables, g, layer, k, mb, bb, parts, stream, err);}}
+      | ^~
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/src/core/layer.cpp:1348:126: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 1348 | if (!block_layer_pre(tables, g, layer, pos, pos_base, gb, qst, qb, mb, k, bb, stream, err, db, ple))        return false;    return block_layer_post(tables, g, layer, k, mb, bb, parts, stream, err);}}
+      |                                                                                                                              ^~~~~~
+[87/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/iq_avx512.cpp.o
+[88/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/expert_source.cpp.o
+FAILED: [code=1] CMakeFiles/strata_engine.dir/src/core/expert_source.cpp.o 
+/usr/bin/c++ -DSTRATA_NATIVE_EXPERTS=1 -DSTRATA_VERSION=\"0.1.39\" -I/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include -I/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/src/../include -isystem /usr/local/cuda/targets/x86_64-linux/include -isystem /usr/local/cuda/targets/x86_64-linux/include/cccl -O3 -DNDEBUG -std=c++20 -Wall -Wextra -MD -MT CMakeFiles/strata_engine.dir/src/core/expert_source.cpp.o -MF CMakeFiles/strata_engine.dir/src/core/expert_source.cpp.o.d -o CMakeFiles/strata_engine.dir/src/core/expert_source.cpp.o -c /srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/src/core/expert_source.cpp
+In file included from /srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/src/core/expert_source.cpp:4:
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include/strata/research/lab_gpu_router.hpp: In member function ‘void strata::research::GpuRouter::score(int, int, const float*, float*, cudaStream_t)’:
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include/strata/research/lab_gpu_router.hpp:109:45: error: invalid conversion from ‘int’ to ‘void*’ [-fpermissive]
+  109 |             experts, width, width, experts, tokens, stream);
+      |                                             ^~~~~~
+      |                                             |
+      |                                             int
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include/strata/research/lab_gpu_router.hpp:108:51: error: too many arguments to function ‘void strata::kernels::bf16_gemv_fp32_mmvf_multi(const float*, int64_t, const uint16_t*, float*, int64_t, int64_t, int64_t, int, void*)’
+  108 |         strata::kernels::bf16_gemv_fp32_mmvf_multi(activation, width, pair.gate, temporary_logits,
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  109 |             experts, width, width, experts, tokens, stream);
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include/strata/research/lab_gpu_router.hpp:6:
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include/strata/kernels/bf16_gemv.hpp:53:6: note: declared here
+   53 | void bf16_gemv_fp32_mmvf_multi(const float* x, int64_t ldx, const uint16_t* w, float* y, int64_t ldy,
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~
+[89/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/session.cpp.o
+[90/270] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/iq_avx2.cpp.o
+[91/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/remote_experts.cpp.o
+[92/270] Building CXX object CMakeFiles/strata_engine.dir/src/core/expert_cache.cpp.o
+[93/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/iq_kernels.cu.o
+[94/270] Building CUDA object CMakeFiles/strata_engine.dir/src/core/remote_expert_opt.cu.o
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include/strata/core/expert_source.hpp(414): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include/strata/core/expert_source.hpp(653): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include/strata/core/expert_source.hpp(414): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v1/include/strata/core/expert_source.hpp(653): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+[95/270] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_mmvq.cu.o
+ninja: build stopped: subcommand failed.
+

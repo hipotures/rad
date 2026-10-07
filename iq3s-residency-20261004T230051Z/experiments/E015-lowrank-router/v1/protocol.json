@@ -1,0 +1,16 @@
+{
+  "question": "With actually fresh current-layer activations, can rank32/rank128 next-gate CPU projections arrive early enough and recall useful nonresidents?",
+  "source_problem": "Frozen verify.cpp uses doorbell_publish_res; elementwise.cu308-326 copies x_out only when any expert in the group is nonresident. E008signals.activation unconditionally sampled h_x, so all-local groups may contain stale prior activations. Previous timing/outputs remain valid; prediction quality/readiness requires freshness separation.",
+  "repair": "Diagnostic-only selected6currentlayer activation snapshots force x publication by passing null to the doorbell residency-check pointer. Does not change actualGPUexpertcache/routerIDs/weights, CPUclassification or math. Extra selected-layer mapped activation traffic explicitly charged; not a headline binary.",
+  "ranks": [
+    32,
+    128
+  ],
+  "predictor": "Truncated SVD/left eigenspace of the existing next-layer BF16gate converted exactly to float32; auxiliary CPU projection matrices. Original model weights untouched and actual router always chooses true experts. No releasedJevbackbone or extra downloadedmodel.",
+  "splits": "Same6savedindependenttasks:2dev,1calibration,3holdout; first64windows/6layerpairs. Decomposition uses existing gateweights only, rank selection based on dev/calibration, heldout not tuned. Complete bothprofile frozenrun1diagnostics if useful for lead comparisons; no64k/256k.",
+  "budget": "Rank32 perlayer(2560+512)*32*4=393216CPUbytes;rank128=1572864CPUbytes. Capture max64windows,6pairs,<=4rows each. No explicit newGPUbuffers; old4CUDAevents/device for actual handoff only.",
+  "batch": "After E013/E014clean speed has finished, build/testfreshdiagnostic then one bounded6episodecollection. Keep same64warmup. No concurrent timing/training/build with headline runs.",
+  "measure": "Top10precision, true-nonlocal recall, false-positive currentnonresident proposals, causal availability/hostlead. Single-thread numeric score+top10 time, memory, oneblob readiness optimistic12.6GB/s and measured contended1.8GB/s. No cost-freeTGprojection.",
+  "caveats": "Fresh activation copying extends measured lead; productionCPUhas no fresh x for all-local groups without paying this transfer. GPUlookahead avoids this copy but is a separate unimplemented path. CPU scoring delays currentCPUexpertwork if done on its calling thread. Missing those costs is not a ready runtime policy.",
+  "completion": "Bounded decomposition/timing/independentholdoutevaluation, bothranks preserved and explicit decision whetherruntime integration is justified. Oldstaleinputresults retained/labeled, no rewrites of original raw data."
+}

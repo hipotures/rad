@@ -1,0 +1,174 @@
+Test project /srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/builds/cost-router-v1
+      Start  1: gguf_reader_test
+ 1/68 Test  #1: gguf_reader_test ....................   Passed    0.00 sec
+      Start  2: gguf_split_test
+ 2/68 Test  #2: gguf_split_test .....................   Passed    0.01 sec
+      Start  3: qsa_topk_active_parity
+ 3/68 Test  #3: qsa_topk_active_parity ..............   Passed    1.62 sec
+      Start  4: file_expert_source_test
+ 4/68 Test  #4: file_expert_source_test .............   Passed    0.02 sec
+      Start  5: expert_profile_save_test
+ 5/68 Test  #5: expert_profile_save_test ............   Passed    0.00 sec
+      Start  6: dequant_s2_parity
+ 6/68 Test  #6: dequant_s2_parity ...................   Passed    0.54 sec
+      Start  7: s2_gemv_parity
+ 7/68 Test  #7: s2_gemv_parity ......................   Passed    0.46 sec
+      Start  8: iq_parity_fixtures
+ 8/68 Test  #8: iq_parity_fixtures ..................***Skipped   0.22 sec
+      Start  9: iq_parity
+ 9/68 Test  #9: iq_parity ...........................***Skipped   0.40 sec
+      Start 10: mmvq_multi_parity
+10/68 Test #10: mmvq_multi_parity ...................   Passed    0.84 sec
+      Start 11: iq_multi_parity
+11/68 Test #11: iq_multi_parity .....................   Passed    1.91 sec
+      Start 12: gdn_rec_parity
+12/68 Test #12: gdn_rec_parity ......................   Passed    0.43 sec
+      Start 13: gemm_bf16_parity
+13/68 Test #13: gemm_bf16_parity ....................   Passed    2.90 sec
+      Start 14: native_grouped_parity
+14/68 Test #14: native_grouped_parity ...............   Passed    1.37 sec
+      Start 15: shared_expert_parity
+15/68 Test #15: shared_expert_parity ................   Passed    0.41 sec
+      Start 16: gr_parity
+16/68 Test #16: gr_parity ...........................   Passed    0.58 sec
+      Start 17: gdn_parity
+17/68 Test #17: gdn_parity ..........................   Passed    0.60 sec
+      Start 18: s2_gemv_q8_parity
+18/68 Test #18: s2_gemv_q8_parity ...................   Passed    0.40 sec
+      Start 19: sampler_parity
+19/68 Test #19: sampler_parity ......................   Passed    1.51 sec
+      Start 20: sampler_parity_one_block
+20/68 Test #20: sampler_parity_one_block ............   Passed    1.76 sec
+      Start 21: sampler_parity_old
+21/68 Test #21: sampler_parity_old ..................   Passed    3.65 sec
+      Start 22: decode_cluster_parity
+22/68 Test #22: decode_cluster_parity ...............   Passed    0.39 sec
+      Start 23: rope_parity
+23/68 Test #23: rope_parity .........................   Passed    0.41 sec
+      Start 24: quantize_act_parity
+24/68 Test #24: quantize_act_parity .................   Passed    0.46 sec
+      Start 25: route_window_parity
+25/68 Test #25: route_window_parity .................   Passed    0.43 sec
+      Start 26: router_top10_parity
+26/68 Test #26: router_top10_parity .................   Passed    0.41 sec
+      Start 27: s_gemv_parity
+27/68 Test #27: s_gemv_parity .......................   Passed    0.43 sec
+      Start 28: elementwise_parity
+28/68 Test #28: elementwise_parity ..................   Passed    0.46 sec
+      Start 29: bf16_gemv_parity
+29/68 Test #29: bf16_gemv_parity ....................   Passed    0.56 sec
+      Start 30: s_gemv_q8k_parity
+30/68 Test #30: s_gemv_q8k_parity ...................   Passed    0.42 sec
+      Start 31: qsa_parity
+31/68 Test #31: qsa_parity ..........................   Passed    0.98 sec
+      Start 32: qsa_topk_parity
+32/68 Test #32: qsa_topk_parity .....................   Passed    1.41 sec
+      Start 33: ple_parity
+33/68 Test #33: ple_parity ..........................***Failed    0.01 sec
+ple_parity: required PLE table is missing or incompatible: ../../Q2_0/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf (cannot open ../../Q2_0/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf)
+
+      Start 34: kv_q8_parity
+34/68 Test #34: kv_q8_parity ........................   Passed    0.44 sec
+      Start 35: kv_stream_parity
+35/68 Test #35: kv_stream_parity ....................   Passed    6.16 sec
+      Start 36: kv_hybrid_parity
+36/68 Test #36: kv_hybrid_parity ....................   Passed    0.60 sec
+      Start 37: kv_q4_parity
+37/68 Test #37: kv_q4_parity ........................   Passed    0.43 sec
+      Start 38: cvec_parity
+38/68 Test #38: cvec_parity .........................   Passed    0.52 sec
+      Start 39: s2_expert_grouped_parity
+39/68 Test #39: s2_expert_grouped_parity ............   Passed    0.64 sec
+      Start 40: platform_memory_test
+40/68 Test #40: platform_memory_test ................***Failed    0.21 sec
+file_cache_keeps 96 GB, 0.1.38's inputs (budget 72, all shards)             -> unbuffered
+file_cache_keeps 96 GB, budget 72, before the copy (arena = all experts)    -> buffered
+file_cache_keeps 96 GB, budget 72, copy built (48.94 resident)              -> buffered
+file_cache_keeps 96 GB, budget 40, before the copy                          -> buffered
+file_cache_keeps 96 GB, budget 40, copy built                               -> buffered
+file_cache_keeps 64 GB, budget 40, before the copy                          -> unbuffered
+file_cache_keeps 64 GB, budget 40, copy built                               -> unbuffered
+file_cache_keeps 32 GB, budget 16, before the copy                          -> unbuffered
+file_cache_keeps 32 GB, budget 16, copy built                               -> unbuffered
+file_cache_keeps 32 GB, Q2_0 pack (34 GiB experts), budget 8                -> unbuffered
+file_cache_keeps nothing available                                          -> unbuffered
+file_cache_keeps arena larger than the RAM                                  -> buffered
+lock_resident: ok=0 locked=0 MiB (mlock failed (raise ulimit -l))
+platform_memory_test: FAILED
+
+      Start 41: pinned_shared_test
+41/68 Test #41: pinned_shared_test ..................   Passed    0.39 sec
+      Start 42: ple_reader_selftest
+42/68 Test #42: ple_reader_selftest .................   Passed    8.36 sec
+      Start 43: cuda_device_selftest
+43/68 Test #43: cuda_device_selftest ................   Passed    0.46 sec
+      Start 44: suffix_drafter_test
+44/68 Test #44: suffix_drafter_test .................   Passed    0.14 sec
+      Start 45: controller_test
+45/68 Test #45: controller_test .....................   Passed    0.01 sec
+      Start 46: draft_policy_test
+46/68 Test #46: draft_policy_test ...................   Passed    0.00 sec
+      Start 47: conv_cache_test
+47/68 Test #47: conv_cache_test .....................   Passed    0.00 sec
+      Start 48: coupled_draft_test
+48/68 Test #48: coupled_draft_test ..................   Passed    0.00 sec
+      Start 49: bf16_bits_test
+49/68 Test #49: bf16_bits_test ......................   Passed    1.21 sec
+      Start 50: router_dot_parity
+50/68 Test #50: router_dot_parity ...................   Passed    0.06 sec
+      Start 51: router_dot_parity_avx
+51/68 Test #51: router_dot_parity_avx ...............   Passed    0.06 sec
+      Start 52: prefill_fused_moe_test
+52/68 Test #52: prefill_fused_moe_test ..............   Passed    3.04 sec
+      Start 53: prefill_fused_iq_test
+53/68 Test #53: prefill_fused_iq_test ...............   Passed   55.54 sec
+      Start 54: native_expert_parity_q4_K_q5_1
+54/68 Test #54: native_expert_parity_q4_K_q5_1 ......   Passed    0.75 sec
+      Start 55: native_expert_parity_q4_K_q8_0
+55/68 Test #55: native_expert_parity_q4_K_q8_0 ......   Passed    0.71 sec
+      Start 56: native_expert_parity_q5_K_q8_0
+56/68 Test #56: native_expert_parity_q5_K_q8_0 ......   Passed    0.66 sec
+      Start 57: native_expert_parity_q8_0_q8_0
+57/68 Test #57: native_expert_parity_q8_0_q8_0 ......   Passed    0.52 sec
+      Start 58: native_expert_parity_q4_K_q5_0
+58/68 Test #58: native_expert_parity_q4_K_q5_0 ......   Passed    0.70 sec
+      Start 59: native_expert_parity_q5_0_q8_0
+59/68 Test #59: native_expert_parity_q5_0_q8_0 ......   Passed    0.50 sec
+      Start 60: native_expert_parity_q5_1_min
+60/68 Test #60: native_expert_parity_q5_1_min .......   Passed    0.37 sec
+      Start 61: native_expert_parity_bf16_embd
+61/68 Test #61: native_expert_parity_bf16_embd ......   Passed    0.37 sec
+      Start 62: native_expert_parity_refuses_q6_K
+62/68 Test #62: native_expert_parity_refuses_q6_K ...   Passed    0.36 sec
+      Start 63: pool_affinity_test
+63/68 Test #63: pool_affinity_test ..................   Passed    0.01 sec
+      Start 64: expert_multi_test
+64/68 Test #64: expert_multi_test ...................   Passed    0.04 sec
+      Start 65: expert_parity
+65/68 Test #65: expert_parity .......................***Failed    0.00 sec
+cannot read expert 0 (layer 0) from pack/full/experts.bin
+  AVX512 F/BW/VL/VNNI/VBMI                     all present
+
+      Start 66: pool_test
+66/68 Test #66: pool_test ...........................***Failed    0.00 sec
+cannot read expert 0 of layer 0 from pack/full/experts.bin
+
+      Start 67: pool_stress
+67/68 Test #67: pool_stress .........................   Passed   20.04 sec
+      Start 68: direct_file_async_test
+68/68 Test #68: direct_file_async_test ..............   Passed    0.01 sec
+
+94% tests passed, 4 tests failed out of 68
+
+Total Test time (real) = 129.47 sec
+
+The following tests did not run:
+	  8 - iq_parity_fixtures (Skipped)
+	  9 - iq_parity (Skipped)
+
+The following tests FAILED:
+	 33 - ple_parity (Failed)
+	 40 - platform_memory_test (Failed)
+	 65 - expert_parity (Failed)
+	 66 - pool_test (Failed)
+Errors while running CTest

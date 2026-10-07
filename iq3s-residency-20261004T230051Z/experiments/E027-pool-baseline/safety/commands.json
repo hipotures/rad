@@ -1,0 +1,93 @@
+[
+  {
+    "name": "compile",
+    "command": [
+      "/usr/bin/g++",
+      "-std=c++20",
+      "-O3",
+      "-DNDEBUG",
+      "-DSTRATA_NATIVE_EXPERTS=1",
+      "-I/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/include",
+      "-I/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325/ggml/include",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/pool_transition_stress.cpp",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/libstrata_kernels_cpu.a",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/ggml/src/libggml-cpu.a",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/ggml/src/libggml-base.a",
+      "-lm",
+      "-pthread",
+      "-o",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/safety/pool-transition-stress"
+    ],
+    "environment": {},
+    "returncode": 0,
+    "elapsed_s": 0.8658287525177002,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/safety/compile.log"
+  },
+  {
+    "name": "targeted-default",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/safety/pool-transition-stress"
+    ],
+    "environment": {
+      "STRATA_POOL_SPIN_US": null
+    },
+    "returncode": 0,
+    "elapsed_s": 3.423840045928955,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/safety/targeted-default.log"
+  },
+  {
+    "name": "random-default",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/pool_stress",
+      "20"
+    ],
+    "environment": {
+      "STRATA_POOL_SPIN_US": null
+    },
+    "returncode": 0,
+    "elapsed_s": 20.254560947418213,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/safety/random-default.log"
+  },
+  {
+    "name": "targeted-100us",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/safety/pool-transition-stress"
+    ],
+    "environment": {
+      "STRATA_POOL_SPIN_US": "100"
+    },
+    "returncode": 0,
+    "elapsed_s": 3.5209810733795166,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/safety/targeted-100us.log"
+  },
+  {
+    "name": "random-100us",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/pool_stress",
+      "20"
+    ],
+    "environment": {
+      "STRATA_POOL_SPIN_US": "100"
+    },
+    "returncode": 0,
+    "elapsed_s": 20.273375988006592,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/safety/random-100us.log"
+  },
+  {
+    "name": "real-native-IQ",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/native_expert_parity",
+      "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+      "0",
+      "1",
+      "2",
+      "12"
+    ],
+    "environment": {
+      "STRATA_POOL_SPIN_US": "100"
+    },
+    "returncode": 0,
+    "elapsed_s": 5.276022434234619,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/safety/real-native-IQ.log"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "question": "Does a per-GPU pool of compatible physical slots improve causal selection over fixed per-layer slot shares?",
+  "hypothesis": "Cold experts in one layer may occupy bytes that can safely fit repeatedly missed experts in another layer owned by the same GPU. This changes distribution, not total capacity.",
+  "finite_candidate": "global-compatible-EMA, one deterministic replay at each frozen context profile; no cross-GPU ownership changes or K sweep",
+  "constraints": "K25 ownership, actual per-GPU byte/slot-size classes, incoming blob must fit victim physical slot, unique live ownership, same admission cadence/mincount/gain/max96, finite copy queues and completion before publication. No assumption of one 48 GiB pool.",
+  "cost": "Track promotion bytes, useful/unused promotions, victim demand while absent, per-layer capacity redistribution and queue waits. CPU/mapped/resident compute held fixed; no simulated TG claim.",
+  "runtime_audit": "Upstream ExpertCache explicitly documents same-layer sized slots. Audit host_res/d_res lookup, cache metadata, variable-format decode, prefill borrowed-slot restoration and resident_stage_swaps before implementing cross-layer victims. Full anonymous immutable arena only; no resident CPU exchange mode.",
+  "correctness": "Wrong residency predictions still execute the true router-selected experts through existing fallback. Reuse safe between-window copying; no in-flight slot overwrite. Reject any incompatible size or cross-device victim.",
+  "decision": "Run live only after positive compatible-slot replay plus concrete source safety evidence. Retain a documented architectural blocker if safe implementation is larger than the bounded research scope.",
+  "order": "After E006 headline confirmation and E008 timing/signal work, using completed diagnostic traces. No heavy analysis concurrent with headline speed."
+}

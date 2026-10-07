@@ -1,0 +1,101 @@
+[
+  {
+    "name": "register",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "diagnostic-pool-wait-v1",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-coordination-v1",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-coordination-v1/strata",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/overrides.json",
+      "--diagnostic"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.21442127227783203,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/commands/register.log",
+    "pool_spin_us": null
+  },
+  {
+    "name": "profiles",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/diagnose-profiles.sh"
+    ],
+    "returncode": 0,
+    "elapsed_s": 211.35365533828735,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/commands/profiles.log",
+    "pool_spin_us": null
+  },
+  {
+    "name": "strict-parity-32k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_trace_parity.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/32k/traces/runtime-request2",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/32k/traces/runtime-request2",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/32k/parity.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 1.6717932224273682,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/commands/strict-parity-32k.log",
+    "pool_spin_us": null
+  },
+  {
+    "name": "wait-analysis-32k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_coordination_waits.py",
+      "32k",
+      "--experiment",
+      "E024-pool-wait",
+      "--attempt",
+      "diagnostic-v1",
+      "--reference-experiment",
+      "E021-device-plan-waits",
+      "--reference-attempt",
+      "v1/off"
+    ],
+    "returncode": 0,
+    "elapsed_s": 2.1194162368774414,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/commands/wait-analysis-32k.log",
+    "pool_spin_us": null
+  },
+  {
+    "name": "strict-parity-128k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_trace_parity.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/128k/traces/runtime-request2",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/128k/traces/runtime-request2",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/128k/parity.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 1.9196183681488037,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/commands/strict-parity-128k.log",
+    "pool_spin_us": null
+  },
+  {
+    "name": "wait-analysis-128k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_coordination_waits.py",
+      "128k",
+      "--experiment",
+      "E024-pool-wait",
+      "--attempt",
+      "diagnostic-v1",
+      "--reference-experiment",
+      "E021-device-plan-waits",
+      "--reference-attempt",
+      "v1/off"
+    ],
+    "returncode": 0,
+    "elapsed_s": 2.520442247390747,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/commands/wait-analysis-128k.log",
+    "pool_spin_us": null
+  }
+]

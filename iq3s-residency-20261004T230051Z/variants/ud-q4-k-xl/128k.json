@@ -1,0 +1,91 @@
+{
+  "exe": "/srv/ai/strata-v0.1.32/build-default/strata",
+  "args": [
+    "--pack",
+    "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+    "--native",
+    "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+    "--expert-profile",
+    "/srv/ai/strata-v0.1.32/data/expert-profile.bin",
+    "--expert-cache",
+    "auto",
+    "--mtp",
+    "/srv/ai/models/strata-v0132/mtp/rt",
+    "--prefill",
+    "16384",
+    "--pool-workers",
+    "12",
+    "--pcie-frac",
+    "0.28",
+    "--spec-min-p",
+    "0.3",
+    "--spec",
+    "3",
+    "--kv",
+    "k8v4",
+    "--max-context",
+    "131072"
+  ],
+  "cwd": "/srv/ai/strata-v0.1.32",
+  "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer",
+  "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+  "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/ud-q4-k-xl/manual/SESSION/logs/engine.log",
+  "host": "0.0.0.0",
+  "port": 8080,
+  "lib_dirs": [
+    "/usr/local/cuda/bin",
+    "/usr/local/cuda/lib64"
+  ],
+  "gpu": [
+    0,
+    1
+  ],
+  "layer_split": "24",
+  "environment_overrides": {},
+  "benchmark_prompt_policy": "offline-no-tools-system-v2",
+  "env": {
+    "STRATA_SPLIT_TIMING": "1",
+    "STRATA_DECODE_TIMING": "1",
+    "CUDA_VISIBLE_DEVICES": "0,1"
+  },
+  "python": "/srv/ai/strata-v0.1.32/.venv/bin/python",
+  "source_sha": "c499bd102e7a4135c0de389dcfe38c399759ccc8",
+  "binary_sha256": "8b30fd340b6d91c923abbcf91c25580c679b8c61ad18f88e51b7278478fb4071",
+  "Strata_version": "0.1.32",
+  "build_variant": "preserved-q4-default-128k",
+  "model_revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+  "model_family": "unsloth/Qwen3.8-Flash-Next-GGUF",
+  "max_total_context": 131072,
+  "provenance": {
+    "original_config": "/srv/ai/benchmarks/strata-qwen38/q4-v0132/configs/production-Q4.json",
+    "original_config_sha256": "828af3e5b3c6dd3c6952993047c5d365a1f998cda2fb6deae02a655743c8dfc9",
+    "inference_changes": [
+      "--max-context 262144 -> 131072"
+    ],
+    "engine_changes": "NONE",
+    "pool_policy": "preserved Q4 default; IQ3_S P1 100us knob not applied"
+  },
+  "model_manifest": "/srv/ai/benchmarks/strata-qwen38/results/raw/q4-sha256.json",
+  "model_shards": [
+    {
+      "path": "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+      "bytes": 10946624,
+      "previous_verified_sha256": "4448186216b3af4cc558bbce2c3213f01608f8f8b2e5267a9767971dd3ec8082"
+    },
+    {
+      "path": "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00002-of-00004.gguf",
+      "bytes": 49859583136,
+      "previous_verified_sha256": "3f342f1c1580473f1ee94ddd5b28206e8c07a70fa1a366f59d1d6c922919a6c9"
+    },
+    {
+      "path": "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00003-of-00004.gguf",
+      "bytes": 49376141504,
+      "previous_verified_sha256": "56758f40269cad5cd9b0d3d6fbae0f40f6d5be6de49e4ab392dbe83157d9cbd3"
+    },
+    {
+      "path": "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00004-of-00004.gguf",
+      "bytes": 12087983520,
+      "previous_verified_sha256": "753bda48b98ba4f1636134a90a967de1b2d3908a236c026e464777342e53510a"
+    }
+  ]
+}

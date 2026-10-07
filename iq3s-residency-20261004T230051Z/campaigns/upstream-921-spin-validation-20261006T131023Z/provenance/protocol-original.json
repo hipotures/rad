@@ -1,0 +1,64 @@
+{
+  "frozen_utc": "2026-10-06T13:20:29.080793+00:00",
+  "seed": 92110020261006,
+  "cells": [
+    "IQ3_S-32k",
+    "Q4-32k",
+    "IQ3_S-128k",
+    "Q4-128k"
+  ],
+  "target_valid_pairs": 12,
+  "minimum_valid_pairs": 10,
+  "maximum_valid_pairs": 12,
+  "replacement_slots_per_cell": 2,
+  "fallback_family_allocation": {
+    "code": 4,
+    "math": 3,
+    "prose": 3
+  },
+  "target_family_allocation": {
+    "code": 4,
+    "math": 4,
+    "prose": 4
+  },
+  "measurement_schedule": "Round-robin cells at each pair number. First10 in all cells before final2. Adjacent arms, one fresh server per arm.",
+  "A": "STRATA_POOL_SPIN_US genuinely absent",
+  "B": "STRATA_POOL_SPIN_US=100",
+  "environment_policy": "Freeze parent environment once; remove all STRATA_ inherited variables then add only common DECODE_TIMING=1, SPLIT_TIMING=1 and CUDA_VISIBLE_DEVICES=0,1. Capture paths derived from config argv, never environment. Full native environment hashed per key and diffed; sole allowed difference spin.",
+  "timeouts_s": {
+    "startup": 600,
+    "request": 900,
+    "arm_total": 1800,
+    "owned_shutdown": 25
+  },
+  "objective_invalidations": [
+    "binary/source/model identity mismatch",
+    "input IDs mismatch",
+    "wrong resolved settings",
+    "warmup not64 or measured output not4096/length",
+    "missing required output capture, routing/MTP/timing evidence",
+    "server crash/error/restart",
+    "GPU conflict",
+    "capacity drift within pair",
+    "unexpected environment/command/affinity drift",
+    "timeout/system resource abort"
+  ],
+  "not_invalidation": [
+    "poor performance",
+    "output trajectory difference",
+    "CPU steal",
+    "temperature variation"
+  ],
+  "statistics": {
+    "unit": "A/B pair",
+    "primary": "median paired ratios B/A",
+    "permutation": "two-sided exact sign-flip of log TG ratios, statistic abs(mean log ratio); descriptive and exchangeability conditional on workload/order assumptions",
+    "bootstrap": "20000 paired resamples median ratio, seed921100, percentile95%; small sample and repeated fixed corpus limitations",
+    "families": "descriptive only; four pairs each",
+    "drift": "compare AB and BA, chronological and family results; no outcome-based exclusions"
+  },
+  "hardware_scope": "One physical dual4090/7950X3D16vCPU KVM machine; no cross-machine inference.",
+  "CPU_policy": "System busy excluding idle/iowait reported with separately measured steal. Native processCPU normalized to16vCPU plus unnormalized cores%. Decode boundaries first actual token through native DONE. GPU prefill/decode means use only1Hz samples wholly inside each phase. Telemetry samples never independent statistical N.",
+  "trajectory_policy": "Keep all protocol-valid divergences; first-divergence indices; repeated variant1 allows baseline repeat check without extra reruns.",
+  "no_tuning": true
+}

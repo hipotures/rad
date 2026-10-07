@@ -1,0 +1,12 @@
+from pathlib import Path
+C=Path(__file__).resolve().parents[1];p=C/'scripts/tape.py';t=p.read_text()
+t=t.replace('class Tape:\n','HEADER2=np.dtype(HEADER.descr+[("initial_rounds","<i8")])\nROUTES2=np.dtype(ROUTES.descr+[("qsa","<i4",(12,8204))])\nWINDOW2=np.dtype([("position","<i8"),("T","<i4"),("accepted","<i4"),("draft_count","<i4"),("emitted_before","<i4"),("inputs","<i4",(4,)),("outputs","<i4",(4,)),("routes",ROUTES2)])\nOBS2=np.dtype([("begin_ns","<u8"),("end_ns","<u8"),("seen","<i4",(51,)),("disagreements","<i4",(51,)),("native_outputs","<i4",(4,)),("qsa_seen","<i4",(12,)),("qsa_disagreements","<i4",(12,)),("activation","<f4",(51,8))])\nclass Tape:\n')
+t=t.replace("assert self.h['magic']==0x3150455441343451 and self.h['version']==1 and self.h['window_bytes']==WINDOW.itemsize", "assert self.h['magic']==0x3150455441343451 and self.h['version'] in [1,2];self.version=int(self.h['version']);self.header_dtype=HEADER2 if self.version==2 else HEADER;self.window_dtype=WINDOW2 if self.version==2 else WINDOW;self.obs_dtype=OBS2 if self.version==2 else OBS;self.h=np.frombuffer(self.data,self.header_dtype,1)[0];assert self.h['window_bytes']==self.window_dtype.itemsize")
+t=t.replace('off=HEADER.itemsize','off=self.header_dtype.itemsize').replace('np.frombuffer(self.data,WINDOW,','np.frombuffer(self.data,self.window_dtype,')
+t=t.replace("'schema':1,","'schema':self.version,'initial_rounds':int(self.h['initial_rounds']) if self.version==2 else None,'sparse_attention_frozen':self.version==2,")
+t=t.replace("   if nd and wi+1<len(self.ws):", "   if self.version==2:\n    q=r['qsa'].reshape(12,4,2051)[:,:T]\n    if np.any(q<0) or np.any(q>p+T-1):errors.append('QSA selection IDs')\n    if np.any(np.diff(q,axis=2)<0):errors.append('QSA selection ordering')\n   if nd and wi+1<len(self.ws):")
+p.write_text(t)
+p=C/'scripts/fidelity.py';t=p.read_text().replace("o=np.fromfile(p/'raw/observations.bin',OBS)","o=np.fromfile(p/'raw/observations.bin',t.obs_dtype)")
+t=t.replace("  if not np.isfinite(o['activation']).all():", "  if t.version==2 and not np.all(o['qsa_seen']==1):errors.append('QSA invocation count')\n  if not np.isfinite(o['activation']).all():")
+t=t.replace("'native_head_first_divergence':", "'native_QSA_selection_disagreements':int(o['qsa_disagreements'].sum()) if t.version==2 else None,'native_head_first_divergence':")
+p.write_text(t)

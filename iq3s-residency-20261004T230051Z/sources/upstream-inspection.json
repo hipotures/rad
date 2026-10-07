@@ -1,0 +1,70 @@
+{
+  "main": {
+    "sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "date": "2026-10-04T12:16:36Z",
+    "message": "setup: a tip (not a change) for images on a 12 GB card: --vram-reserve-mib 1000 if a request stalls\n\nWith the image encoder on the GPU, the 700 MiB reserve can leave ~200 MiB free on a 12 GB card (UD-IQ4_XS\nend-to-end check on an RTX 5070). Setup prints a one-line recommendation; the written config is unchanged.\n\nCo-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01QJJwUv9g3cD2ztX6KWS8rk",
+    "url": "https://github.com/Niko1221/Strata/commit/6f32ec070f23ced9f50e704d854d775da52591ab"
+  },
+  "recent": [
+    {
+      "sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "message": "setup: a tip (not a change) for images on a 12 GB card: --vram-reserve-mib 1000 if a request stalls\n\nWith the image encoder on the GPU, the 700 MiB reserve can leave ~200 MiB free on a 12 GB card (UD-IQ4_XS\nend-to-end check on an RTX 5070). Setup prints a one-line recommendation; the written config is unchanged.\n\nCo-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01QJJwUv9g3cD2ztX6KWS8rk",
+      "url": "https://github.com/Niko1221/Strata/commit/6f32ec070f23ced9f50e704d854d775da52591ab"
+    },
+    {
+      "sha": "c2d1f19a437448b30e20608d901190921c2fd410",
+      "message": "setup: Unsloth's UD-IQ4_XS is a regular choice (no longer experimental); UD-Q4_K_XL stays experimental\n\n- \"experimental\" is per model now: MODELS[\"UD-Q4_K_XL\"] keeps it, the unsloth family and UD-IQ4_XS drop it. The\n  first menu lists the family without [experimental], with a one-line about (UD-IQ4_XS: a 94 GB download; under\n  ~80 GB of RAM part of its experts are read from the SSD). Its size menu lists UD-IQ4_XS first (the default) and\n  UD-Q4_K_XL second; an experimental size always sorts last. --model names are unchanged.\n- UD-IQ4_XS: no EXPERIMENTAL warning, --check verdict without it. Images are asked (off by default), per model: the\n  engine's image path has no restriction for this pack, which uses the original model's image encoder; not yet run\n  with images. UD-Q4_K_XL keeps images off.\n- MCP: the fallback tables mirror setup's (per-model experimental/vision), sizes in setup's order, per-size\n  \"experimental\" and \"images\", the vision check per model.\n- Docs: README and its six translations, MODELS, UNSLOTH_Q4, AI_SETUP, MCP_SERVER.\n- Tests: the menus, the default, --model by name, images, --check, the pack/tokenizer paths; the golden configs\n  are unchanged.\n\nCo-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01QJJwUv9g3cD2ztX6KWS8rk",
+      "url": "https://github.com/Niko1221/Strata/commit/c2d1f19a437448b30e20608d901190921c2fd410"
+    },
+    {
+      "sha": "8b36fa041fe33187b86aadf07fd83d4d73126bfb",
+      "message": "docs: README refined + six translations",
+      "url": "https://github.com/Niko1221/Strata/commit/8b36fa041fe33187b86aadf07fd83d4d73126bfb"
+    },
+    {
+      "sha": "118921883103687d963fd5bfd1a2a3780b4be864",
+      "message": "Merge branch 'f-139b-par' into f-139-rel\n\n# Conflicts:\n#\tsrc/core/verify.cpp\n#\tsrc/program/generate.cpp",
+      "url": "https://github.com/Niko1221/Strata/commit/118921883103687d963fd5bfd1a2a3780b4be864"
+    },
+    {
+      "sha": "cb97e6c8bb5444bf227e45136c272d7a24fad3c2",
+      "message": "Merge branch 'f-139b-spd' into f-139-rel\n\n# Conflicts:\n#\tsrc/core/expert_source.cpp\n#\tsrc/kernels/cuda/iq_kernels.cu",
+      "url": "https://github.com/Niko1221/Strata/commit/cb97e6c8bb5444bf227e45136c272d7a24fad3c2"
+    },
+    {
+      "sha": "8e0855052870977817f9368c9738784489dbc5dc",
+      "message": "Merge branch 'f-139b-arc' into f-139-rel",
+      "url": "https://github.com/Niko1221/Strata/commit/8e0855052870977817f9368c9738784489dbc5dc"
+    },
+    {
+      "sha": "baed88949f74528895bb88b7e3506544e86e8fe3",
+      "message": "Merge branch 'f-139b-old' into f-139-rel\n\n# Conflicts:\n#\tsetup.py",
+      "url": "https://github.com/Niko1221/Strata/commit/baed88949f74528895bb88b7e3506544e86e8fe3"
+    },
+    {
+      "sha": "c6275a7cfbfe13c993ce2daa5c4003e7e04aafff",
+      "message": "Merge branch 'f-139b-cpu' into f-139-rel",
+      "url": "https://github.com/Niko1221/Strata/commit/c6275a7cfbfe13c993ce2daa5c4003e7e04aafff"
+    },
+    {
+      "sha": "5f199116d9eeed3bfeba94e8ee0db50930be51f9",
+      "message": "#583: the byte-budget ring only where it gains; short prompts keep 0.1.39's ring\n\n- a prompt that fits 0.1.39's auto chunk keeps 0.1.39's ring (Prefill::set_ring_budget's small_max): 4K prompts\n  were 1-17% slower with the smaller ring (Coder -15%, IQ3_S -5%, IQ3_XXS -2%; 5 interleaved pairs each);\n- ring slots are given up for a bigger chunk only where 0.1.39's rule held the chunk under 6144 (ring_cap_for);\n  from 6144 on the ring keeps its 0.1.39 size (the Coder 6144/384 -> 7936/199 was -12% at 32K);\n- the unpinned arm's cap stays 96 (the byte budget made it ~49 on IQ3_S);\n- the scan sets its own ring budget instead of set_ring_override, so a layer split's 96-slot override (#340) is no\n  longer clobbered by the scan.\nRTX 5070 vs STRATA_RING_BYTES=0: 4K -0.7..+1.1% (bit-identical); 32K IQ3_XXS +18.5% (cache 1500) / +9.4%, Coder\n+3.1%, IQ3_S +0.2%.\n\nCo-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01QJJwUv9g3cD2ztX6KWS8rk",
+      "url": "https://github.com/Niko1221/Strata/commit/5f199116d9eeed3bfeba94e8ee0db50930be51f9"
+    },
+    {
+      "sha": "bc0fc49ab254c3571fcfe23bbc9a62d7f97f66f0",
+      "message": "setup: the CUDA 12 engine's driver floor per OS (Windows 527.41 -> 528, Linux 525); the wheel pins match the 12.9.1 toolkit\n\nCo-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>",
+      "url": "https://github.com/Niko1221/Strata/commit/bc0fc49ab254c3571fcfe23bbc9a62d7f97f66f0"
+    },
+    {
+      "sha": "5423a695eca21a9f0c33f1347fb60a085d68a99d",
+      "message": "#583 default on (owner): STRATA_RING_BYTES=0 opts out; DETAILS.md with the measured quality\n\nChanges default output on long prompts of native packs against 0.1.39 (expected; gate notes in the S40 report).\n\nCo-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>",
+      "url": "https://github.com/Niko1221/Strata/commit/5423a695eca21a9f0c33f1347fb60a085d68a99d"
+    },
+    {
+      "sha": "63d8f90c2ff23b5ca2409994910fe95732f557b0",
+      "message": "setup: --remote-expert-opt recommended for 2+ GPU configs (#578)\n\nAdded where a config goes to several GPUs (setup --gpus / a multi-GPU install, start --gpus, \"use both\" at\nstart). Single-GPU configs are not touched. Opt-out: setup --no-remote-expert-opt, or \"remote_expert_opt\": false\nin the config (a user key, kept on re-runs). The engine uses it only with a helper cache (--expert-cache-device1..3),\nso a layer split runs as before. tools/test_setup_remote_opt.py; the 2x16 GB golden configs gain the flag.\n\nCo-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>",
+      "url": "https://github.com/Niko1221/Strata/commit/63d8f90c2ff23b5ca2409994910fe95732f557b0"
+    }
+  ]
+}

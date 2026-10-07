@@ -1,0 +1,456 @@
+{
+  "training": {
+    "linear": {
+      "kind": "linear",
+      "feature_names": [
+        "heat",
+        "fast_heat",
+        "slow_heat",
+        "recent4",
+        "frequency",
+        "age",
+        "ever_seen",
+        "initial_resident",
+        "initial_heat",
+        "expert_id_fraction",
+        "layer_fraction",
+        "stage1",
+        "blob_fraction"
+      ],
+      "training_wall_s": 0.04250238399254158,
+      "steps": 1,
+      "history": [],
+      "parameter_bytes": 216,
+      "objective": "weighted squared log1p next4window count, no softmax/probability interpretation",
+      "calibration": {
+        "calibration_rows": 2777088,
+        "cal_slope": 1.394119158516469,
+        "cal_intercept": -0.0014186068091981432,
+        "semantics": "affine expected-count least squares fitted only on calibration episode; clamped nonnegative; not probability calibration"
+      },
+      "checkpoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E005-expert-jev/v1/checkpoints/linear.npz",
+      "sha256": "b4f84d60ce7d9f09ef64fbb108ca00320b2666de9765c0b7d37efb61ca562664",
+      "total_checkpoint_bytes": 2212
+    },
+    "mlp": {
+      "kind": "mlp",
+      "feature_names": [
+        "heat",
+        "fast_heat",
+        "slow_heat",
+        "recent4",
+        "frequency",
+        "age",
+        "ever_seen",
+        "initial_resident",
+        "initial_heat",
+        "expert_id_fraction",
+        "layer_fraction",
+        "stage1",
+        "blob_fraction"
+      ],
+      "training_wall_s": 0.649845142965205,
+      "steps": 600,
+      "history": [
+        {
+          "step": 50,
+          "batch_weighted_logcount_MSE": 0.09618034958839417,
+          "wall_s": 0.05580698198173195
+        },
+        {
+          "step": 100,
+          "batch_weighted_logcount_MSE": 0.09076947718858719,
+          "wall_s": 0.10870473500108346
+        },
+        {
+          "step": 150,
+          "batch_weighted_logcount_MSE": 0.08769873529672623,
+          "wall_s": 0.160100675013382
+        },
+        {
+          "step": 200,
+          "batch_weighted_logcount_MSE": 0.08158433437347412,
+          "wall_s": 0.21143467398360372
+        },
+        {
+          "step": 250,
+          "batch_weighted_logcount_MSE": 0.08586733788251877,
+          "wall_s": 0.262021915987134
+        },
+        {
+          "step": 300,
+          "batch_weighted_logcount_MSE": 0.08735262602567673,
+          "wall_s": 0.3196380519657396
+        },
+        {
+          "step": 350,
+          "batch_weighted_logcount_MSE": 0.08426812291145325,
+          "wall_s": 0.3755769539857283
+        },
+        {
+          "step": 400,
+          "batch_weighted_logcount_MSE": 0.08435285091400146,
+          "wall_s": 0.4317438239813782
+        },
+        {
+          "step": 450,
+          "batch_weighted_logcount_MSE": 0.08172407001256943,
+          "wall_s": 0.49194473901297897
+        },
+        {
+          "step": 500,
+          "batch_weighted_logcount_MSE": 0.08102668821811676,
+          "wall_s": 0.5453641499625519
+        },
+        {
+          "step": 550,
+          "batch_weighted_logcount_MSE": 0.08635406196117401,
+          "wall_s": 0.5975410369574092
+        },
+        {
+          "step": 600,
+          "batch_weighted_logcount_MSE": 0.08575604110956192,
+          "wall_s": 0.6498412030050531
+        }
+      ],
+      "parameter_bytes": 1128,
+      "objective": "weighted squared log1p next4window count, no softmax/probability interpretation",
+      "calibration": {
+        "calibration_rows": 2777088,
+        "cal_slope": 1.2383270756772644,
+        "cal_intercept": 0.013460879882021097,
+        "semantics": "affine expected-count least squares fitted only on calibration episode; clamped nonnegative; not probability calibration"
+      },
+      "checkpoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E005-expert-jev/v1/checkpoints/mlp.npz",
+      "sha256": "b5dc7f64e22927bc88a5398066c03385c0c66285a6ae783be07dfc083646bd8c",
+      "total_checkpoint_bytes": 3574
+    },
+    "temporal-mlp": {
+      "kind": "mlp",
+      "feature_names": [
+        "heat",
+        "fast_heat",
+        "slow_heat",
+        "last_window",
+        "recent4",
+        "previous4",
+        "recent8",
+        "frequency",
+        "age",
+        "ever_seen",
+        "initial_resident",
+        "initial_heat",
+        "expert_id_fraction",
+        "layer_fraction",
+        "stage1",
+        "blob_fraction",
+        "momentum"
+      ],
+      "training_wall_s": 0.6924228760180995,
+      "steps": 600,
+      "history": [
+        {
+          "step": 50,
+          "batch_weighted_logcount_MSE": 0.09176075458526611,
+          "wall_s": 0.06086876103654504
+        },
+        {
+          "step": 100,
+          "batch_weighted_logcount_MSE": 0.0904741957783699,
+          "wall_s": 0.1192754739895463
+        },
+        {
+          "step": 150,
+          "batch_weighted_logcount_MSE": 0.0858650803565979,
+          "wall_s": 0.17721683700801805
+        },
+        {
+          "step": 200,
+          "batch_weighted_logcount_MSE": 0.08175817131996155,
+          "wall_s": 0.23538194899447262
+        },
+        {
+          "step": 250,
+          "batch_weighted_logcount_MSE": 0.08486738055944443,
+          "wall_s": 0.2922649679821916
+        },
+        {
+          "step": 300,
+          "batch_weighted_logcount_MSE": 0.0871022492647171,
+          "wall_s": 0.34890076698502526
+        },
+        {
+          "step": 350,
+          "batch_weighted_logcount_MSE": 0.0828578919172287,
+          "wall_s": 0.4050593480351381
+        },
+        {
+          "step": 400,
+          "batch_weighted_logcount_MSE": 0.08481467515230179,
+          "wall_s": 0.4611180489882827
+        },
+        {
+          "step": 450,
+          "batch_weighted_logcount_MSE": 0.0806066244840622,
+          "wall_s": 0.517369449022226
+        },
+        {
+          "step": 500,
+          "batch_weighted_logcount_MSE": 0.07801008969545364,
+          "wall_s": 0.5735400400008075
+        },
+        {
+          "step": 550,
+          "batch_weighted_logcount_MSE": 0.08622433990240097,
+          "wall_s": 0.6352677490212955
+        },
+        {
+          "step": 600,
+          "batch_weighted_logcount_MSE": 0.08523967117071152,
+          "wall_s": 0.6924199360073544
+        }
+      ],
+      "parameter_bytes": 1432,
+      "objective": "weighted squared log1p next4window count, no softmax/probability interpretation",
+      "calibration": {
+        "calibration_rows": 2777088,
+        "cal_slope": 1.2479694958281486,
+        "cal_intercept": 0.020061349969333207,
+        "semantics": "affine expected-count least squares fitted only on calibration episode; clamped nonnegative; not probability calibration"
+      },
+      "checkpoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E005-expert-jev/v1/checkpoints/temporal-mlp.npz",
+      "sha256": "c4dffa12831c8282c06d8ff39a00573d8aeccea91d32dab015fbb0021dfe3625",
+      "total_checkpoint_bytes": 3878
+    }
+  },
+  "episodes": [
+    {
+      "episode": "dev-code",
+      "role": "development",
+      "frame_count": 89,
+      "label_horizon": 4,
+      "capacity_ranking_only": "cost-free resident-set selection proxy; finite-transfer replay required before runtime claim",
+      "cheap_baselines": {
+        "static": 0.9090489975848122,
+        "EMA": 0.9883882836498707,
+        "recency": 0.9847145858004355,
+        "recent4": 0.9037764469067137,
+        "frequency": 0.9847234345320722
+      },
+      "models": {
+        "linear": {
+          "population_count_MSE": 0.6072272215745288,
+          "population_count_MAE": 0.28870925340697867,
+          "mean_future_demand_coverage_at_layer_capacity": 0.991175985862608,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.28602431431475484,
+          "rows": 2187264
+        },
+        "mlp": {
+          "population_count_MSE": 0.6118135067611725,
+          "population_count_MAE": 0.29319762947103395,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9881421850426416,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.6376213689721869,
+          "rows": 2187264
+        },
+        "temporal-mlp": {
+          "population_count_MSE": 0.6077375684862835,
+          "population_count_MAE": 0.29722616854563894,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9869717236571169,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.7530034034450152,
+          "rows": 2187264
+        }
+      }
+    },
+    {
+      "episode": "dev-math",
+      "role": "development",
+      "frame_count": 78,
+      "label_horizon": 4,
+      "capacity_ranking_only": "cost-free resident-set selection proxy; finite-transfer replay required before runtime claim",
+      "cheap_baselines": {
+        "static": 0.9167804633489731,
+        "EMA": 0.9930264766913405,
+        "recency": 0.9849297634493951,
+        "recent4": 0.9158688778650717,
+        "frequency": 0.9849345317624565
+      },
+      "models": {
+        "linear": {
+          "population_count_MSE": 0.6640494248440256,
+          "population_count_MAE": 0.2905312258531932,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9919496326397368,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.2906296532063817,
+          "rows": 1916928
+        },
+        "mlp": {
+          "population_count_MSE": 0.666354032968307,
+          "population_count_MAE": 0.2971989352790977,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9885996717847682,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.6410330153392771,
+          "rows": 1916928
+        },
+        "temporal-mlp": {
+          "population_count_MSE": 0.6663494899699134,
+          "population_count_MAE": 0.3017459116159044,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9875253030000624,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.7411106280648173,
+          "rows": 1916928
+        }
+      }
+    },
+    {
+      "episode": "cal-prose",
+      "role": "calibration",
+      "frame_count": 113,
+      "label_horizon": 4,
+      "capacity_ranking_only": "cost-free resident-set selection proxy; finite-transfer replay required before runtime claim",
+      "cheap_baselines": {
+        "static": 0.8004950687832326,
+        "EMA": 0.9898338791452729,
+        "recency": 0.984885174155777,
+        "recent4": 0.9003467998324195,
+        "frequency": 0.9848920008979466
+      },
+      "models": {
+        "linear": {
+          "population_count_MSE": 0.5049357806800533,
+          "population_count_MAE": 0.2649199129278516,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9894968508118399,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.2982414418221575,
+          "rows": 2777088
+        },
+        "mlp": {
+          "population_count_MSE": 0.5056757298036554,
+          "population_count_MAE": 0.2724621788968436,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9869985937581348,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.6437692945757139,
+          "rows": 2777088
+        },
+        "temporal-mlp": {
+          "population_count_MSE": 0.5084880912908075,
+          "population_count_MAE": 0.27390304396707466,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9856116817773344,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.7448841352015734,
+          "rows": 2777088
+        }
+      }
+    },
+    {
+      "episode": "hold-code",
+      "role": "holdout",
+      "frame_count": 87,
+      "label_horizon": 4,
+      "capacity_ranking_only": "cost-free resident-set selection proxy; finite-transfer replay required before runtime claim",
+      "cheap_baselines": {
+        "static": 0.8351561930513081,
+        "EMA": 0.9876721568262518,
+        "recency": 0.9793123567045984,
+        "recent4": 0.9019641207491422,
+        "frequency": 0.9793354434518228
+      },
+      "models": {
+        "linear": {
+          "population_count_MSE": 0.6452626047672533,
+          "population_count_MAE": 0.29847531503623603,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9877467867913273,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.28481105430822434,
+          "rows": 2138112
+        },
+        "mlp": {
+          "population_count_MSE": 0.648993223522205,
+          "population_count_MAE": 0.3030769720637289,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9845463398417779,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.6432233220394487,
+          "rows": 2138112
+        },
+        "temporal-mlp": {
+          "population_count_MSE": 0.6457812919267303,
+          "population_count_MAE": 0.30720745884629025,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9833145381717581,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.7370600955903359,
+          "rows": 2138112
+        }
+      }
+    },
+    {
+      "episode": "hold-structured",
+      "role": "holdout",
+      "frame_count": 68,
+      "label_horizon": 4,
+      "capacity_ranking_only": "cost-free resident-set selection proxy; finite-transfer replay required before runtime claim",
+      "cheap_baselines": {
+        "static": 0.9232502800253259,
+        "EMA": 0.99057152023834,
+        "recency": 0.9840402469262763,
+        "recent4": 0.8991035174996573,
+        "frequency": 0.9840195667792175
+      },
+      "models": {
+        "linear": {
+          "population_count_MSE": 0.6278630833135209,
+          "population_count_MAE": 0.31426589378233094,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9905156247194391,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.2867881883182289,
+          "rows": 1671168
+        },
+        "mlp": {
+          "population_count_MSE": 0.6275530523426336,
+          "population_count_MAE": 0.32151780562699017,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9871964427525088,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.6625396473442807,
+          "rows": 1671168
+        },
+        "temporal-mlp": {
+          "population_count_MSE": 0.6340608548712107,
+          "population_count_MAE": 0.32613639001875766,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9863725750352591,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.7437930745415061,
+          "rows": 1671168
+        }
+      }
+    },
+    {
+      "episode": "hold-math",
+      "role": "holdout",
+      "frame_count": 91,
+      "label_horizon": 4,
+      "capacity_ranking_only": "cost-free resident-set selection proxy; finite-transfer replay required before runtime claim",
+      "cheap_baselines": {
+        "static": 0.8852729676776723,
+        "EMA": 0.9906209198310848,
+        "recency": 0.9831499757238082,
+        "recent4": 0.9110440194471788,
+        "frequency": 0.9831199347622769
+      },
+      "models": {
+        "linear": {
+          "population_count_MSE": 0.6429721778211522,
+          "population_count_MAE": 0.29743958229821993,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9904950362264925,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.2887911005917896,
+          "rows": 2236416
+        },
+        "mlp": {
+          "population_count_MSE": 0.640779463887745,
+          "population_count_MAE": 0.30340520727669723,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9882717518732286,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.643265407384056,
+          "rows": 2236416
+        },
+        "temporal-mlp": {
+          "population_count_MSE": 0.63922319247187,
+          "population_count_MAE": 0.3038975175943329,
+          "mean_future_demand_coverage_at_layer_capacity": 0.9873772577773267,
+          "numeric_inference_ms_per_full24576candidate_frame": 0.745672780564976,
+          "rows": 2236416
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "only two development tasks, one calibration, three holdouts; no universal generalization claim",
+    "ranking capacity proxy ignores transfers/admission/readiness; not TG",
+    "numeric scorer time excludes feature extraction/update/selection/CPU contention, which require runtime measurement",
+    "initial cache/history continues across independent tasks; all carried state is causal"
+  ]
+}

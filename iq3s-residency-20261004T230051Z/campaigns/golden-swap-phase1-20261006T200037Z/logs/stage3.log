@@ -1,0 +1,22 @@
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for reserved CPU evaluation before build | elapsed 41.1min | remaining 198.9min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for reserved CPU evaluation before build | elapsed 41.5min | remaining 198.5min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for reserved CPU evaluation before build | elapsed 41.9min | remaining 198.1min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for reserved CPU evaluation before build | elapsed 42.3min | remaining 197.7min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for reserved CPU evaluation before build | elapsed 42.8min | remaining 197.2min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for reserved CPU evaluation before build | elapsed 43.2min | remaining 196.8min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for reserved CPU evaluation before build | elapsed 43.6min | remaining 196.4min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for reserved CPU evaluation before build | elapsed 44.0min | remaining 196.0min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for reserved CPU evaluation before build | elapsed 44.4min | remaining 195.6min
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/summarize_prediction.py", line 15, in <module>
+    if r['message'].startswith('Prediction evaluation '):ranking.append({k:r[k] for k in ['task','model','sampled_selected_return_le4','uniform_return_le4','utc']})
+       ~^^^^^^^^^^^
+KeyError: 'message'
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/stage3.py", line 17, in <module>
+    subprocess.run([python,str(C/'scripts/summarize_prediction.py')],check=True,timeout=60)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python', '/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/summarize_prediction.py']' returned non-zero exit status 1.

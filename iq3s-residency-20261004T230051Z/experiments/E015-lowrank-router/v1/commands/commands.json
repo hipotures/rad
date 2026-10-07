@@ -1,0 +1,210 @@
+[
+  {
+    "name": "register",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "diagnostic-router-fresh-v1",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-router-fresh-v1",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-router-fresh-v1/strata",
+      "--diagnostic",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/overrides.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.5159692764282227,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/register.log"
+  },
+  {
+    "name": "tests",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/test_fresh_router.py"
+    ],
+    "returncode": 0,
+    "elapsed_s": 14.594107151031494,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/tests.log"
+  },
+  {
+    "name": "episodes",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/diagnose-episodes.sh"
+    ],
+    "returncode": 0,
+    "elapsed_s": 116.86615037918091,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/episodes.log"
+  },
+  {
+    "name": "profiles",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/diagnose-profiles.sh"
+    ],
+    "returncode": 0,
+    "elapsed_s": 219.47816133499146,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/profiles.log"
+  },
+  {
+    "name": "analysis-dev-code",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_lowrank_router.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request2",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/dev-code.json",
+      "--factors",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors",
+      "--episode",
+      "dev-code",
+      "--split",
+      "development"
+    ],
+    "returncode": 0,
+    "elapsed_s": 2.8212342262268066,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/analysis-dev-code.log"
+  },
+  {
+    "name": "analysis-dev-math",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_lowrank_router.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request3",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/dev-math.json",
+      "--factors",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors",
+      "--episode",
+      "dev-math",
+      "--split",
+      "development"
+    ],
+    "returncode": 0,
+    "elapsed_s": 1.96907377243042,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/analysis-dev-math.log"
+  },
+  {
+    "name": "analysis-cal-prose",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_lowrank_router.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request4",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/cal-prose.json",
+      "--factors",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors",
+      "--episode",
+      "cal-prose",
+      "--split",
+      "calibration"
+    ],
+    "returncode": 0,
+    "elapsed_s": 2.0198638439178467,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/analysis-cal-prose.log"
+  },
+  {
+    "name": "frozen-rank-choice",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/select_lowrank_router.py"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.21519732475280762,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/frozen-rank-choice.log"
+  },
+  {
+    "name": "analysis-hold-code",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_lowrank_router.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request5",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/hold-code.json",
+      "--factors",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors",
+      "--episode",
+      "hold-code",
+      "--split",
+      "holdout"
+    ],
+    "returncode": 0,
+    "elapsed_s": 1.9185571670532227,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/analysis-hold-code.log"
+  },
+  {
+    "name": "analysis-hold-structured",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_lowrank_router.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request6",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/hold-structured.json",
+      "--factors",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors",
+      "--episode",
+      "hold-structured",
+      "--split",
+      "holdout"
+    ],
+    "returncode": 0,
+    "elapsed_s": 1.9186971187591553,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/analysis-hold-structured.log"
+  },
+  {
+    "name": "analysis-hold-math",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_lowrank_router.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request7",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/hold-math.json",
+      "--factors",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors",
+      "--episode",
+      "hold-math",
+      "--split",
+      "holdout"
+    ],
+    "returncode": 0,
+    "elapsed_s": 2.1705851554870605,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/analysis-hold-math.log"
+  },
+  {
+    "name": "analysis-32k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_lowrank_router.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/32k/traces/runtime-request2",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/32k.json",
+      "--factors",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors",
+      "--episode",
+      "32k",
+      "--split",
+      "benchmark"
+    ],
+    "returncode": 0,
+    "elapsed_s": 3.974483013153076,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/analysis-32k.log"
+  },
+  {
+    "name": "analysis-128k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_lowrank_router.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/128k/traces/runtime-request2",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/128k.json",
+      "--factors",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors",
+      "--episode",
+      "128k",
+      "--split",
+      "benchmark"
+    ],
+    "returncode": 0,
+    "elapsed_s": 4.37601900100708,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/commands/analysis-128k.log"
+  }
+]

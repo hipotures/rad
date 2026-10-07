@@ -1,0 +1,17 @@
+"""Predeclare one exact-matching selector-cost repair, not a new parameter grid."""
+from lab import ROOT,save
+out=ROOT/'experiments/E013-compatible-fast/v1'
+if (out/'protocol.json').exists():raise RuntimeError('Protocol already exists')
+save(out/'protocol.json',{
+    'question':'Can exact compatible-v1 placement choices be computed materially more cheaply with a min-heap per immutable physical-size class?',
+    'evidence':'E010 actual compatible policy mixed:32k slower3.66%,128k faster18.47%. Offline native selector0.786ms/call vs original same-layer roughly0.09ms; this is a charged policy cost. E011 direct miss waits show mostly overlap plus rare expensive tails.',
+    'changed_variables':'Replace sorted cold buckets and map lookups with vector classes and min-heaps. Hot ordering, tie keys, matching feasibility/min2/gain1.5, globalgain order/max96, cadence/decay and safe async runtime backend unchanged.',
+    'proof_obligation':'Every heap front must equal the next sorted cold victim under(heat,layer,expert,slot); class choice still minimizes(heat,physicalbytes). Consuming a front preserves the remaining sorted sequence. Exact originalPython choices and full finite-copy outcomes must match all672retained causal calls.',
+    'budget':'SameGPUslots/classes/no new GPU allocation. Report native temporaryCPU storage; no caching additionalGPUstate. Scorer cost measured single-thread offline with bridge copies, distinct from real contention.',
+    'funnel':'Native synthetic/causal equivalence and cost first. Live confirmation only if exact choices pass and selector median cost decreases at least25% at bothprofiles. If not, preserve repair as completed negative without pointless speed runs.',
+    'prerequisites_if_live':'Relevant native tests/realIQparity and saved10greedybattery before any headline run.',
+    'live_if_justified':'Onefreshserver/profile, same64warmup, saved3serial4096outputrequests,32kthen128k, <=3attempts/point. Reuse E002control and E010compatible-v1(algorithm-identical) evidence; no extra unchanged repetitions.',
+    'interpretation':'Selector cost alone implies no fixed TG forecast. Exact matching may preserve numerical trajectories, which must be checked from output hashes/MTP. Small gains remain uncertain with3runs; no production deployment.',
+    'completion':'Cost/equivalence outcome at bothprofiles, then conditional finite live confirmation if threshold and safety pass. All original/repair binaries/configs preserved.'})
+save(out/'overrides.json',{'env':{'STRATA_LAB_COMPATIBLE':'1'},'policy':'exact compatible-v1 matching using per-size min-heaps','extra_gpu_bytes':0,'selector_target':'Identical heat/order/fit/min2/gain1.5/cadence4/max96/decay0.7; lower selector cost only.'})
+print(out)

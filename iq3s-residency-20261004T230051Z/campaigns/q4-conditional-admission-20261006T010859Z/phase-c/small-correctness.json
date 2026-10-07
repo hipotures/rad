@@ -1,0 +1,48 @@
+{
+  "PASS": true,
+  "pairs": [
+    {
+      "variant": "conditional-off",
+      "pairs": [
+        {
+          "task": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/inputs/safety-code-1.json",
+          "same_input": true,
+          "same_output": true,
+          "first_diverging_token": null,
+          "MTP_same": true,
+          "routing_same": true
+        },
+        {
+          "task": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/inputs/safety-math-1.json",
+          "same_input": true,
+          "same_output": true,
+          "first_diverging_token": null,
+          "MTP_same": true,
+          "routing_same": true
+        }
+      ]
+    },
+    {
+      "variant": "conditional",
+      "pairs": [
+        {
+          "task": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/inputs/safety-code-1.json",
+          "same_input": true,
+          "same_output": false,
+          "first_diverging_token": 33,
+          "MTP_same": false,
+          "routing_same": false
+        },
+        {
+          "task": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/inputs/safety-math-1.json",
+          "same_input": true,
+          "same_output": true,
+          "first_diverging_token": null,
+          "MTP_same": false,
+          "routing_same": false
+        }
+      ]
+    }
+  ],
+  "limitations": "ON residency may change FP rounding/output trajectories; sampledfullcopiedbytes andnativekernelparity supportmath, notuniversalqualityequivalence"
+}

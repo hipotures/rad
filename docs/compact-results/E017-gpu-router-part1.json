@@ -1,0 +1,2021 @@
+{
+  "scope": "Scalar/header export from local originals. Lists over32 items, long strings and depth/node excess are explicitly omitted; this is not the original schema and is not a replacement input for research scripts.",
+  "records": [
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/analysis/128k.json",
+      "source_bytes": 869690,
+      "source_sha256": "39a606736210eb5419c441197f7ba721637af249490f12edea885c4dbd79145c",
+      "compact_evidence": {
+        "state": "PASS",
+        "episode": "128k",
+        "prefix": "experiments/E017-gpu-router/v2/128k/traces/runtime-request2",
+        "trace_validation": {
+          "prefix": "experiments/E017-gpu-router/v2/128k/traces/runtime-request2",
+          "state": "PASS",
+          "errors": [],
+          "windows": 1449,
+          "layers": 69552,
+          "output_tokens": 4096,
+          "output_ids_sha256": "4fa68e27ac1dcd2264bda6dd1e408eef728ab745ab58c8d87ccb574cbffa45ae",
+          "demand_entries": 2351040,
+          "path_counts": {
+            "-1": 43557,
+            "0": 2305764,
+            "1": 1719,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.07421396488363,
+          "reported_hit_pct_denominator": 98.14597494339854,
+          "promotions": 7069,
+          "promotion_bytes": 14373222400,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10183,
+              "bytes": 19712998400,
+              "size_classes": {
+                "1510400": 1655,
+                "1715200": 814,
+                "1868800": 426,
+                "1971200": 4391,
+                "2176000": 2496,
+                "2329600": 401
+              }
+            },
+            {
+              "slots": 8437,
+              "bytes": 18220492800,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 401,
+                "1971200": 1457,
+                "2176000": 2947,
+                "2329600": 2957,
+                "2662400": 295
+              }
+            }
+          ]
+        },
+        "unchanged_math_parity": {
+          "output_ids": true,
+          "window_T": true,
+          "window_inputs": true,
+          "acceptance": true,
+          "true_router_IDs": true,
+          "execution_paths": true,
+          "initial_residency": true,
+          "initial_heat": true,
+          "final_heat": true,
+          "final_residency": true
+        },
+        "first_head": {
+          "bit_identical": true,
+          "max_abs_diff": 0.0,
+          "top1": [
+            2,
+            2
+          ],
+          "KL_old_to_new": 0.0
+        },
+        "summary": {
+          "rows": 950,
+          "top10_precision_pct": 68.70526315789473,
+          "true_nonlocal_entries": 145,
+          "nonlocal_recall_pct": 42.06896551724138,
+          "nonresident_proposals": 420,
+          "false_nonresident_proposals": 359,
+          "warm_ready_nonlocal_recall_pct": {
+            "12.6": 42.361111111111114,
+            "1.8": 1.3888888888888888
+          },
+          "native_GPU_score_publish_us": {
+            "n": 950,
+            "min": 15.359999611973763,
+            "median": 19.45599913597107,
+            "p95": 24.57600086927414,
+            "max": 27.648000046610832
+          },
+          "warm_host_lead_us": {
+            "n": 935,
+            "min": 162.13,
+            "median": 246.93,
+            "p95": 1061.237,
+            "max": 4249.595
+          },
+          "CPU_fullgate_top10_agreement_pct": 100.0
+        },
+        "by_layer": {
+          "5": {
+            "rows": 190,
+            "top10_precision_pct": 72.47368421052632,
+            "true_nonlocal_entries": 30,
+            "nonlocal_recall_pct": 73.33333333333333,
+            "nonresident_proposals": 36,
+            "false_nonresident_proposals": 14,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 75.86206896551724,
+              "1.8": 3.4482758620689653
+            },
+            "native_GPU_score_publish_us": {
+              "n": 190,
+              "min": 15.359999611973763,
+              "median": 20.479999482631683,
+              "p95": 27.648000046610832,
+              "max": 27.648000046610832
+            },
+            "warm_host_lead_us": {
+              "n": 187,
+              "min": 171.919,
+              "median": 248.888,
+              "p95": 1422.1865999999918,
+              "max": 3229.177
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "20": {
+            "rows": 190,
+            "top10_precision_pct": 62.73684210526316,
+            "true_nonlocal_entries": 22,
+            "nonlocal_recall_pct": 27.272727272727273,
+            "nonresident_proposals": 44,
+            "false_nonresident_proposals": 38,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 27.272727272727273,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 190,
+              "min": 16.383999958634377,
+              "median": 17.40800030529499,
+              "p95": 20.479999482631683,
+              "max": 20.479999482631683
+            },
+            "warm_host_lead_us": {
+              "n": 187,
+              "min": 165.549,
+              "median": 231.709,
+              "p95": 295.379,
+              "max": 4249.595
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "25": {
+            "rows": 190,
+            "top10_precision_pct": 62.1578947368421,
+            "true_nonlocal_entries": 31,
+            "nonlocal_recall_pct": 22.580645161290324,
+            "nonresident_proposals": 28,
+            "false_nonresident_proposals": 21,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 22.580645161290324,
+              "1.8": 3.225806451612903
+            },
+            "native_GPU_score_publish_us": {
+              "n": 190,
+              "min": 16.383999958634377,
+              "median": 18.432000651955605,
+              "p95": 19.45599913597107,
+              "max": 23.552000522613525
+            },
+            "warm_host_lead_us": {
+              "n": 187,
+              "min": 168.349,
+              "median": 248.95,
+              "p95": 508.438,
+              "max": 2071.803
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "40": {
+            "rows": 190,
+            "top10_precision_pct": 74.94736842105263,
+            "true_nonlocal_entries": 17,
+            "nonlocal_recall_pct": 58.8235294117647,
+            "nonresident_proposals": 27,
+            "false_nonresident_proposals": 17,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 58.8235294117647,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 190,
+              "min": 15.359999611973763,
+              "median": 19.45599913597107,
+              "p95": 20.479999482631683,
+              "max": 20.479999482631683
+            },
+            "warm_host_lead_us": {
+              "n": 187,
+              "min": 162.13,
+              "median": 225.319,
+              "p95": 479.009,
+              "max": 2982.579
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "46": {
+            "rows": 190,
+            "top10_precision_pct": 71.21052631578948,
+            "true_nonlocal_entries": 45,
+            "nonlocal_recall_pct": 35.55555555555556,
+            "nonresident_proposals": 285,
+            "false_nonresident_proposals": 269,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 35.55555555555556,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 190,
+              "min": 16.383999958634377,
+              "median": 18.432000651955605,
+              "p95": 21.503999829292297,
+              "max": 22.52800017595291
+            },
+            "warm_host_lead_us": {
+              "n": 187,
+              "min": 317.529,
+              "median": 451.269,
+              "p95": 2541.951,
+              "max": 4024.085
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          }
+        },
+        "records": {
+          "omitted_list_items": 950
+        },
+        "limitations": [
+          "GPU event cost includes nativeprojection+top10+predictionIDpublish, measured afterexistingtailSync; hostlead isbetweenCPUobservations,notGPUdeadline.",
+          "Five same-device pairs only; no cross-GPUboundary prediction.",
+          "PredictioncostalreadyspentwhenhostreadsIDs; do notchargeitagainintoreadiness.",
+          "One-blobready optimistic: excludesqueues/fullslots/victims/readerhazards. No livepromotion/TGgain demonstrated.",
+          "Extra diagnosticGPUwork/PCIetraffic excludedfromheadline speed. No overheadcertificate."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/analysis/32k.json",
+      "source_bytes": 851570,
+      "source_sha256": "cd97203a9a3fe9f8b75ea275860b276cd65ab36e0efccb133bec6dbd9d380b15",
+      "compact_evidence": {
+        "state": "PASS",
+        "episode": "32k",
+        "prefix": "experiments/E017-gpu-router/v2/32k/traces/runtime-request2",
+        "trace_validation": {
+          "prefix": "experiments/E017-gpu-router/v2/32k/traces/runtime-request2",
+          "state": "PASS",
+          "errors": [],
+          "windows": 1241,
+          "layers": 59568,
+          "output_tokens": 4096,
+          "output_ids_sha256": "538005d87211bbfe7a8e98a5325bc76798a6d025a48cfabe6d81e505ba872807",
+          "demand_entries": 2117280,
+          "path_counts": {
+            "-1": 35552,
+            "0": 2080504,
+            "1": 1224,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.26305448499963,
+          "reported_hit_pct_denominator": 98.3198932353397,
+          "promotions": 5226,
+          "promotion_bytes": 10697139200,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "unchanged_math_parity": {
+          "output_ids": true,
+          "window_T": true,
+          "window_inputs": true,
+          "acceptance": true,
+          "true_router_IDs": true,
+          "execution_paths": true,
+          "initial_residency": true,
+          "initial_heat": true,
+          "final_heat": true,
+          "final_residency": true
+        },
+        "first_head": {
+          "bit_identical": true,
+          "max_abs_diff": 0.0,
+          "top1": [
+            2,
+            2
+          ],
+          "KL_old_to_new": 0.0
+        },
+        "summary": {
+          "rows": 930,
+          "top10_precision_pct": 71.2258064516129,
+          "true_nonlocal_entries": 85,
+          "nonlocal_recall_pct": 64.70588235294117,
+          "nonresident_proposals": 321,
+          "false_nonresident_proposals": 266,
+          "warm_ready_nonlocal_recall_pct": {
+            "12.6": 64.28571428571429,
+            "1.8": 7.142857142857143
+          },
+          "native_GPU_score_publish_us": {
+            "n": 930,
+            "min": 13.311999849975109,
+            "median": 16.383999958634377,
+            "p95": 20.479999482631683,
+            "max": 563.1999969482422
+          },
+          "warm_host_lead_us": {
+            "n": 915,
+            "min": 161.56,
+            "median": 243.509,
+            "p95": 1027.1099999999974,
+            "max": 3585.377
+          },
+          "CPU_fullgate_top10_agreement_pct": 100.0
+        },
+        "by_layer": {
+          "5": {
+            "rows": 186,
+            "top10_precision_pct": 73.70967741935483,
+            "true_nonlocal_entries": 16,
+            "nonlocal_recall_pct": 100.0,
+            "nonresident_proposals": 27,
+            "false_nonresident_proposals": 11,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 100.0,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 186,
+              "min": 14.336000196635723,
+              "median": 19.45599913597107,
+              "p95": 24.57600086927414,
+              "max": 26.623999699950218
+            },
+            "warm_host_lead_us": {
+              "n": 183,
+              "min": 171.008,
+              "median": 243.119,
+              "p95": 354.56,
+              "max": 2535.351
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "20": {
+            "rows": 186,
+            "top10_precision_pct": 63.225806451612904,
+            "true_nonlocal_entries": 15,
+            "nonlocal_recall_pct": 66.66666666666667,
+            "nonresident_proposals": 25,
+            "false_nonresident_proposals": 15,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 66.66666666666667,
+              "1.8": 6.666666666666667
+            },
+            "native_GPU_score_publish_us": {
+              "n": 186,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 16.383999958634377,
+              "max": 24.57600086927414
+            },
+            "warm_host_lead_us": {
+              "n": 183,
+              "min": 165.839,
+              "median": 235.169,
+              "p95": 2971.649,
+              "max": 3154.918
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "25": {
+            "rows": 186,
+            "top10_precision_pct": 65.48387096774194,
+            "true_nonlocal_entries": 28,
+            "nonlocal_recall_pct": 46.42857142857143,
+            "nonresident_proposals": 28,
+            "false_nonresident_proposals": 15,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 46.42857142857143,
+              "1.8": 17.857142857142858
+            },
+            "native_GPU_score_publish_us": {
+              "n": 186,
+              "min": 14.336000196635723,
+              "median": 18.432000651955605,
+              "p95": 20.479999482631683,
+              "max": 563.1999969482422
+            },
+            "warm_host_lead_us": {
+              "n": 183,
+              "min": 168.96,
+              "median": 243.959,
+              "p95": 2053.362,
+              "max": 3268.359
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "40": {
+            "rows": 186,
+            "top10_precision_pct": 80.96774193548387,
+            "true_nonlocal_entries": 11,
+            "nonlocal_recall_pct": 81.81818181818181,
+            "nonresident_proposals": 16,
+            "false_nonresident_proposals": 7,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 81.81818181818181,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 186,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 17.152000218629837,
+              "max": 20.479999482631683
+            },
+            "warm_host_lead_us": {
+              "n": 183,
+              "min": 161.56,
+              "median": 223.669,
+              "p95": 279.11,
+              "max": 330.728
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "46": {
+            "rows": 186,
+            "top10_precision_pct": 72.74193548387096,
+            "true_nonlocal_entries": 15,
+            "nonlocal_recall_pct": 46.666666666666664,
+            "nonresident_proposals": 225,
+            "false_nonresident_proposals": 218,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 42.857142857142854,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 186,
+              "min": 13.311999849975109,
+              "median": 16.383999958634377,
+              "p95": 17.40800030529499,
+              "max": 17.40800030529499
+            },
+            "warm_host_lead_us": {
+              "n": 183,
+              "min": 238.019,
+              "median": 331.719,
+              "p95": 2288.7854000000084,
+              "max": 3585.377
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          }
+        },
+        "records": {
+          "omitted_list_items": 930
+        },
+        "limitations": [
+          "GPU event cost includes nativeprojection+top10+predictionIDpublish, measured afterexistingtailSync; hostlead isbetweenCPUobservations,notGPUdeadline.",
+          "Five same-device pairs only; no cross-GPUboundary prediction.",
+          "PredictioncostalreadyspentwhenhostreadsIDs; do notchargeitagainintoreadiness.",
+          "One-blobready optimistic: excludesqueues/fullslots/victims/readerhazards. No livepromotion/TGgain demonstrated.",
+          "Extra diagnosticGPUwork/PCIetraffic excludedfromheadline speed. No overheadcertificate."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/analysis/cal-prose.json",
+      "source_bytes": 848151,
+      "source_sha256": "555bb261f0e3a9b4e18e1dedf2c618c91f44b497fc58cbad86fc61baf9d51f35",
+      "compact_evidence": {
+        "state": "PASS",
+        "episode": "cal-prose",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request4",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request4",
+          "state": "PASS",
+          "errors": [],
+          "windows": 458,
+          "layers": 21984,
+          "output_tokens": 1024,
+          "output_ids_sha256": "fd5b86f1dad26c6a712a5f51c3893dfb546eea5370981ed2667dc36d4820670a",
+          "demand_entries": 644640,
+          "path_counts": {
+            "-1": 13081,
+            "0": 631083,
+            "1": 476,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 97.89696574832465,
+          "reported_hit_pct_denominator": 97.96930595314237,
+          "promotions": 2509,
+          "promotion_bytes": 5127936000,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "unchanged_math_parity": {
+          "output_ids": true,
+          "window_T": true,
+          "window_inputs": true,
+          "acceptance": true,
+          "true_router_IDs": true,
+          "execution_paths": true,
+          "initial_residency": true,
+          "initial_heat": true,
+          "final_heat": true,
+          "final_residency": true
+        },
+        "first_head": {
+          "bit_identical": true,
+          "max_abs_diff": 0.0,
+          "top1": [
+            2,
+            2
+          ],
+          "KL_old_to_new": 0.0
+        },
+        "summary": {
+          "rows": 925,
+          "top10_precision_pct": 70.43243243243244,
+          "true_nonlocal_entries": 529,
+          "nonlocal_recall_pct": 66.5406427221172,
+          "nonresident_proposals": 945,
+          "false_nonresident_proposals": 593,
+          "warm_ready_nonlocal_recall_pct": {
+            "12.6": 66.351606805293,
+            "1.8": 2.0793950850661624
+          },
+          "native_GPU_score_publish_us": {
+            "n": 925,
+            "min": 13.311999849975109,
+            "median": 18.432000651955605,
+            "p95": 23.552000522613525,
+            "max": 26.623999699950218
+          },
+          "warm_host_lead_us": {
+            "n": 925,
+            "min": 162.98,
+            "median": 252.479,
+            "p95": 509.318,
+            "max": 3899.885
+          },
+          "CPU_fullgate_top10_agreement_pct": 100.0
+        },
+        "by_layer": {
+          "5": {
+            "rows": 185,
+            "top10_precision_pct": 72.43243243243244,
+            "true_nonlocal_entries": 76,
+            "nonlocal_recall_pct": 72.36842105263158,
+            "nonresident_proposals": 97,
+            "false_nonresident_proposals": 42,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 72.36842105263158,
+              "1.8": 5.2631578947368425
+            },
+            "native_GPU_score_publish_us": {
+              "n": 185,
+              "min": 17.40800030529499,
+              "median": 21.503999829292297,
+              "p95": 23.552000522613525,
+              "max": 26.623999699950218
+            },
+            "warm_host_lead_us": {
+              "n": 185,
+              "min": 171.168,
+              "median": 245.759,
+              "p95": 470.118,
+              "max": 2499.361
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "20": {
+            "rows": 185,
+            "top10_precision_pct": 64.16216216216216,
+            "true_nonlocal_entries": 87,
+            "nonlocal_recall_pct": 75.86206896551724,
+            "nonresident_proposals": 154,
+            "false_nonresident_proposals": 88,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 75.86206896551724,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 185,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 21.503999829292297,
+              "max": 23.552000522613525
+            },
+            "warm_host_lead_us": {
+              "n": 185,
+              "min": 166.23,
+              "median": 243.669,
+              "p95": 384.589,
+              "max": 473.108
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "25": {
+            "rows": 185,
+            "top10_precision_pct": 65.02702702702703,
+            "true_nonlocal_entries": 170,
+            "nonlocal_recall_pct": 71.17647058823529,
+            "nonresident_proposals": 273,
+            "false_nonresident_proposals": 152,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 71.17647058823529,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 185,
+              "min": 15.359999611973763,
+              "median": 18.432000651955605,
+              "p95": 20.479999482631683,
+              "max": 24.57600086927414
+            },
+            "warm_host_lead_us": {
+              "n": 185,
+              "min": 169.74,
+              "median": 255.908,
+              "p95": 610.008,
+              "max": 830.526
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "40": {
+            "rows": 185,
+            "top10_precision_pct": 82.97297297297297,
+            "true_nonlocal_entries": 106,
+            "nonlocal_recall_pct": 72.64150943396227,
+            "nonresident_proposals": 104,
+            "false_nonresident_proposals": 27,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 71.69811320754717,
+              "1.8": 6.60377358490566
+            },
+            "native_GPU_score_publish_us": {
+              "n": 185,
+              "min": 15.359999611973763,
+              "median": 19.45599913597107,
+              "p95": 23.552000522613525,
+              "max": 26.623999699950218
+            },
+            "warm_host_lead_us": {
+              "n": 185,
+              "min": 162.98,
+              "median": 226.539,
+              "p95": 308.688,
+              "max": 3899.885
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "46": {
+            "rows": 185,
+            "top10_precision_pct": 67.56756756756756,
+            "true_nonlocal_entries": 90,
+            "nonlocal_recall_pct": 36.666666666666664,
+            "nonresident_proposals": 317,
+            "false_nonresident_proposals": 284,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 36.666666666666664,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 185,
+              "min": 13.311999849975109,
+              "median": 16.383999958634377,
+              "p95": 17.40800030529499,
+              "max": 21.503999829292297
+            },
+            "warm_host_lead_us": {
+              "n": 185,
+              "min": 213.85,
+              "median": 314.709,
+              "p95": 468.827,
+              "max": 2224.921
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          }
+        },
+        "records": {
+          "omitted_list_items": 925
+        },
+        "limitations": [
+          "GPU event cost includes nativeprojection+top10+predictionIDpublish, measured afterexistingtailSync; hostlead isbetweenCPUobservations,notGPUdeadline.",
+          "Five same-device pairs only; no cross-GPUboundary prediction.",
+          "PredictioncostalreadyspentwhenhostreadsIDs; do notchargeitagainintoreadiness.",
+          "One-blobready optimistic: excludesqueues/fullslots/victims/readerhazards. No livepromotion/TGgain demonstrated.",
+          "Extra diagnosticGPUwork/PCIetraffic excludedfromheadline speed. No overheadcertificate."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/analysis/dev-code.json",
+      "source_bytes": 969758,
+      "source_sha256": "1b5e4bfe200974dcbe5d4285fc464059370dc0bcf3d14b13d001ff9864f88c0d",
+      "compact_evidence": {
+        "state": "PASS",
+        "episode": "dev-code",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request2",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request2",
+          "state": "PASS",
+          "errors": [],
+          "windows": 360,
+          "layers": 17280,
+          "output_tokens": 1024,
+          "output_ids_sha256": "85f1ecca20615bb5b78957e8594fffdbbb44f30f93471dbfc9e50364aff6be50",
+          "demand_entries": 608160,
+          "path_counts": {
+            "-1": 9808,
+            "0": 597970,
+            "1": 382,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.32445409102867,
+          "reported_hit_pct_denominator": 98.38625287522747,
+          "promotions": 1779,
+          "promotion_bytes": 3614643200,
+          "unpublished_promotions_at_request_end": 7,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "unchanged_math_parity": {
+          "output_ids": true,
+          "window_T": true,
+          "window_inputs": true,
+          "acceptance": true,
+          "true_router_IDs": true,
+          "execution_paths": true,
+          "initial_residency": true,
+          "initial_heat": true,
+          "final_heat": true,
+          "final_residency": true
+        },
+        "first_head": {
+          "bit_identical": true,
+          "max_abs_diff": 0.0,
+          "top1": [
+            40,
+            40
+          ],
+          "KL_old_to_new": 0.0
+        },
+        "summary": {
+          "rows": 1060,
+          "top10_precision_pct": 69.26415094339623,
+          "true_nonlocal_entries": 120,
+          "nonlocal_recall_pct": 55.833333333333336,
+          "nonresident_proposals": 530,
+          "false_nonresident_proposals": 463,
+          "warm_ready_nonlocal_recall_pct": {
+            "12.6": 55.833333333333336,
+            "1.8": 3.3333333333333335
+          },
+          "native_GPU_score_publish_us": {
+            "n": 1060,
+            "min": 13.311999849975109,
+            "median": 16.383999958634377,
+            "p95": 22.52800017595291,
+            "max": 26.623999699950218
+          },
+          "warm_host_lead_us": {
+            "n": 1045,
+            "min": 162.059,
+            "median": 237.828,
+            "p95": 298.479,
+            "max": 2745.069
+          },
+          "CPU_fullgate_top10_agreement_pct": 100.0
+        },
+        "by_layer": {
+          "5": {
+            "rows": 212,
+            "top10_precision_pct": 71.32075471698113,
+            "true_nonlocal_entries": 12,
+            "nonlocal_recall_pct": 83.33333333333333,
+            "nonresident_proposals": 33,
+            "false_nonresident_proposals": 23,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 83.33333333333333,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 212,
+              "min": 16.383999958634377,
+              "median": 20.479999482631683,
+              "p95": 26.623999699950218,
+              "max": 26.623999699950218
+            },
+            "warm_host_lead_us": {
+              "n": 209,
+              "min": 171.26,
+              "median": 250.069,
+              "p95": 285.818,
+              "max": 448.889
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "20": {
+            "rows": 212,
+            "top10_precision_pct": 60.943396226415096,
+            "true_nonlocal_entries": 18,
+            "nonlocal_recall_pct": 55.55555555555556,
+            "nonresident_proposals": 43,
+            "false_nonresident_proposals": 33,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 55.55555555555556,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 212,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 16.383999958634377,
+              "max": 16.383999958634377
+            },
+            "warm_host_lead_us": {
+              "n": 209,
+              "min": 166.14,
+              "median": 230.53,
+              "p95": 284.259,
+              "max": 405.369
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "25": {
+            "rows": 212,
+            "top10_precision_pct": 64.81132075471699,
+            "true_nonlocal_entries": 39,
+            "nonlocal_recall_pct": 56.41025641025641,
+            "nonresident_proposals": 51,
+            "false_nonresident_proposals": 29,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 56.41025641025641,
+              "1.8": 10.256410256410257
+            },
+            "native_GPU_score_publish_us": {
+              "n": 212,
+              "min": 15.359999611973763,
+              "median": 19.45599913597107,
+              "p95": 20.479999482631683,
+              "max": 23.552000522613525
+            },
+            "warm_host_lead_us": {
+              "n": 209,
+              "min": 168.669,
+              "median": 232.099,
+              "p95": 333.79139999999967,
+              "max": 2745.069
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "40": {
+            "rows": 212,
+            "top10_precision_pct": 81.32075471698113,
+            "true_nonlocal_entries": 24,
+            "nonlocal_recall_pct": 58.333333333333336,
+            "nonresident_proposals": 17,
+            "false_nonresident_proposals": 3,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 58.333333333333336,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 212,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 17.40800030529499,
+              "max": 19.45599913597107
+            },
+            "warm_host_lead_us": {
+              "n": 209,
+              "min": 162.059,
+              "median": 219.63,
+              "p95": 244.228,
+              "max": 260.699
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "46": {
+            "rows": 212,
+            "top10_precision_pct": 67.9245283018868,
+            "true_nonlocal_entries": 27,
+            "nonlocal_recall_pct": 40.74074074074074,
+            "nonresident_proposals": 386,
+            "false_nonresident_proposals": 375,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 40.74074074074074,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 212,
+              "min": 13.311999849975109,
+              "median": 16.383999958634377,
+              "p95": 17.40800030529499,
+              "max": 17.40800030529499
+            },
+            "warm_host_lead_us": {
+              "n": 209,
+              "min": 213.549,
+              "median": 284.84,
+              "p95": 332.979,
+              "max": 1370.045
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          }
+        },
+        "records": {
+          "omitted_list_items": 1060
+        },
+        "limitations": [
+          "GPU event cost includes nativeprojection+top10+predictionIDpublish, measured afterexistingtailSync; hostlead isbetweenCPUobservations,notGPUdeadline.",
+          "Five same-device pairs only; no cross-GPUboundary prediction.",
+          "PredictioncostalreadyspentwhenhostreadsIDs; do notchargeitagainintoreadiness.",
+          "One-blobready optimistic: excludesqueues/fullslots/victims/readerhazards. No livepromotion/TGgain demonstrated.",
+          "Extra diagnosticGPUwork/PCIetraffic excludedfromheadline speed. No overheadcertificate."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/analysis/dev-math.json",
+      "source_bytes": 1070630,
+      "source_sha256": "50419e53d4e97c5c3d166f3676f9a9bbc8fa9b2c153e6d50acead476582b838c",
+      "compact_evidence": {
+        "state": "PASS",
+        "episode": "dev-math",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request3",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request3",
+          "state": "PASS",
+          "errors": [],
+          "windows": 317,
+          "layers": 15216,
+          "output_tokens": 1024,
+          "output_ids_sha256": "aaa57f102afa5f3d75c9a0ad65d57a696c4a43fcbbe65e78ccfd6e2c55b59463",
+          "demand_entries": 562080,
+          "path_counts": {
+            "-1": 8250,
+            "0": 553607,
+            "1": 223,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.4925633361799,
+          "reported_hit_pct_denominator": 98.53165485167935,
+          "promotions": 1336,
+          "promotion_bytes": 2744064000,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "unchanged_math_parity": {
+          "output_ids": true,
+          "window_T": true,
+          "window_inputs": true,
+          "acceptance": true,
+          "true_router_IDs": true,
+          "execution_paths": true,
+          "initial_residency": true,
+          "initial_heat": true,
+          "final_heat": true,
+          "final_residency": true
+        },
+        "first_head": {
+          "bit_identical": true,
+          "max_abs_diff": 0.0,
+          "top1": [
+            2,
+            2
+          ],
+          "KL_old_to_new": 0.0
+        },
+        "summary": {
+          "rows": 1170,
+          "top10_precision_pct": 72.16239316239316,
+          "true_nonlocal_entries": 189,
+          "nonlocal_recall_pct": 47.08994708994709,
+          "nonresident_proposals": 470,
+          "false_nonresident_proposals": 381,
+          "warm_ready_nonlocal_recall_pct": {
+            "12.6": 47.08994708994709,
+            "1.8": 0.0
+          },
+          "native_GPU_score_publish_us": {
+            "n": 1170,
+            "min": 13.311999849975109,
+            "median": 16.383999958634377,
+            "p95": 23.552000522613525,
+            "max": 26.623999699950218
+          },
+          "warm_host_lead_us": {
+            "n": 1170,
+            "min": 162.59,
+            "median": 241.099,
+            "p95": 345.268,
+            "max": 3886.755
+          },
+          "CPU_fullgate_top10_agreement_pct": 100.0
+        },
+        "by_layer": {
+          "5": {
+            "rows": 234,
+            "top10_precision_pct": 72.3076923076923,
+            "true_nonlocal_entries": 23,
+            "nonlocal_recall_pct": 82.6086956521739,
+            "nonresident_proposals": 37,
+            "false_nonresident_proposals": 18,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 82.6086956521739,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 16.383999958634377,
+              "median": 20.479999482631683,
+              "p95": 25.599999353289604,
+              "max": 26.623999699950218
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 170.939,
+              "median": 239.489,
+              "p95": 268.4748499999999,
+              "max": 516.949
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "20": {
+            "rows": 234,
+            "top10_precision_pct": 67.3076923076923,
+            "true_nonlocal_entries": 17,
+            "nonlocal_recall_pct": 41.1764705882353,
+            "nonresident_proposals": 21,
+            "false_nonresident_proposals": 14,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 41.1764705882353,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 14.336000196635723,
+              "median": 15.359999611973763,
+              "p95": 16.383999958634377,
+              "max": 19.45599913597107
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 165.119,
+              "median": 223.839,
+              "p95": 254.57649999999995,
+              "max": 285.209
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "25": {
+            "rows": 234,
+            "top10_precision_pct": 70.47008547008546,
+            "true_nonlocal_entries": 48,
+            "nonlocal_recall_pct": 45.833333333333336,
+            "nonresident_proposals": 64,
+            "false_nonresident_proposals": 42,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 45.833333333333336,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 15.359999611973763,
+              "median": 19.45599913597107,
+              "p95": 20.479999482631683,
+              "max": 21.503999829292297
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 169.409,
+              "median": 248.579,
+              "p95": 348.898,
+              "max": 3503.156
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "40": {
+            "rows": 234,
+            "top10_precision_pct": 81.23931623931624,
+            "true_nonlocal_entries": 29,
+            "nonlocal_recall_pct": 44.827586206896555,
+            "nonresident_proposals": 22,
+            "false_nonresident_proposals": 9,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 44.827586206896555,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 18.432000651955605,
+              "max": 23.552000522613525
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 162.59,
+              "median": 221.139,
+              "p95": 330.3969999999996,
+              "max": 928.066
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "46": {
+            "rows": 234,
+            "top10_precision_pct": 69.48717948717949,
+            "true_nonlocal_entries": 72,
+            "nonlocal_recall_pct": 38.888888888888886,
+            "nonresident_proposals": 326,
+            "false_nonresident_proposals": 298,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 38.888888888888886,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 13.311999849975109,
+              "median": 16.383999958634377,
+              "p95": 17.40800030529499,
+              "max": 17.40800030529499
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 213.169,
+              "median": 295.8845,
+              "p95": 386.75,
+              "max": 3886.755
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          }
+        },
+        "records": {
+          "omitted_list_items": 1170
+        },
+        "limitations": [
+          "GPU event cost includes nativeprojection+top10+predictionIDpublish, measured afterexistingtailSync; hostlead isbetweenCPUobservations,notGPUdeadline.",
+          "Five same-device pairs only; no cross-GPUboundary prediction.",
+          "PredictioncostalreadyspentwhenhostreadsIDs; do notchargeitagainintoreadiness.",
+          "One-blobready optimistic: excludesqueues/fullslots/victims/readerhazards. No livepromotion/TGgain demonstrated.",
+          "Extra diagnosticGPUwork/PCIetraffic excludedfromheadline speed. No overheadcertificate."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/analysis/hold-code.json",
+      "source_bytes": 889521,
+      "source_sha256": "c151497c15f4f66ffca20cde12d1e977d9be0dcde93dbd65fda3b47da491dcdf",
+      "compact_evidence": {
+        "state": "PASS",
+        "episode": "hold-code",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request5",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request5",
+          "state": "PASS",
+          "errors": [],
+          "windows": 349,
+          "layers": 16752,
+          "output_tokens": 1024,
+          "output_ids_sha256": "6bcff7f9c331cb0d550319d364cd123cb1e9511494f14b218a3319eda299c299",
+          "demand_entries": 586080,
+          "path_counts": {
+            "-1": 11536,
+            "0": 574144,
+            "1": 400,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 97.96341796341797,
+          "reported_hit_pct_denominator": 98.0303237262669,
+          "promotions": 2208,
+          "promotion_bytes": 4500966400,
+          "unpublished_promotions_at_request_end": 8,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "unchanged_math_parity": {
+          "output_ids": true,
+          "window_T": true,
+          "window_inputs": true,
+          "acceptance": true,
+          "true_router_IDs": true,
+          "execution_paths": true,
+          "initial_residency": true,
+          "initial_heat": true,
+          "final_heat": true,
+          "final_residency": true
+        },
+        "first_head": {
+          "bit_identical": true,
+          "max_abs_diff": 0.0,
+          "top1": [
+            1919,
+            1919
+          ],
+          "KL_old_to_new": 0.0
+        },
+        "summary": {
+          "rows": 970,
+          "top10_precision_pct": 70.62886597938144,
+          "true_nonlocal_entries": 202,
+          "nonlocal_recall_pct": 55.445544554455445,
+          "nonresident_proposals": 523,
+          "false_nonresident_proposals": 411,
+          "warm_ready_nonlocal_recall_pct": {
+            "12.6": 54.95049504950495,
+            "1.8": 1.4851485148514851
+          },
+          "native_GPU_score_publish_us": {
+            "n": 970,
+            "min": 14.336000196635723,
+            "median": 16.383999958634377,
+            "p95": 23.552000522613525,
+            "max": 27.648000046610832
+          },
+          "warm_host_lead_us": {
+            "n": 970,
+            "min": 162.459,
+            "median": 239.72899999999998,
+            "p95": 456.438,
+            "max": 4261.815
+          },
+          "CPU_fullgate_top10_agreement_pct": 100.0
+        },
+        "by_layer": {
+          "5": {
+            "rows": 194,
+            "top10_precision_pct": 72.52577319587628,
+            "true_nonlocal_entries": 37,
+            "nonlocal_recall_pct": 54.054054054054056,
+            "nonresident_proposals": 32,
+            "false_nonresident_proposals": 12,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 54.054054054054056,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 194,
+              "min": 15.359999611973763,
+              "median": 22.52800017595291,
+              "p95": 25.599999353289604,
+              "max": 27.648000046610832
+            },
+            "warm_host_lead_us": {
+              "n": 194,
+              "min": 171.029,
+              "median": 239.739,
+              "p95": 361.29,
+              "max": 1455.465
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "20": {
+            "rows": 194,
+            "top10_precision_pct": 62.16494845360825,
+            "true_nonlocal_entries": 22,
+            "nonlocal_recall_pct": 63.63636363636363,
+            "nonresident_proposals": 71,
+            "false_nonresident_proposals": 57,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 63.63636363636363,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 194,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 19.45599913597107,
+              "max": 22.52800017595291
+            },
+            "warm_host_lead_us": {
+              "n": 194,
+              "min": 165.719,
+              "median": 231.829,
+              "p95": 504.099,
+              "max": 2880.589
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "25": {
+            "rows": 194,
+            "top10_precision_pct": 66.80412371134021,
+            "true_nonlocal_entries": 54,
+            "nonlocal_recall_pct": 53.7037037037037,
+            "nonresident_proposals": 77,
+            "false_nonresident_proposals": 48,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 53.7037037037037,
+              "1.8": 5.555555555555555
+            },
+            "native_GPU_score_publish_us": {
+              "n": 194,
+              "min": 15.359999611973763,
+              "median": 19.45599913597107,
+              "p95": 20.479999482631683,
+              "max": 24.57600086927414
+            },
+            "warm_host_lead_us": {
+              "n": 194,
+              "min": 168.09,
+              "median": 238.67,
+              "p95": 765.706,
+              "max": 3243.258
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "40": {
+            "rows": 194,
+            "top10_precision_pct": 82.68041237113403,
+            "true_nonlocal_entries": 40,
+            "nonlocal_recall_pct": 65.0,
+            "nonresident_proposals": 33,
+            "false_nonresident_proposals": 7,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 62.5,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 194,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 20.479999482631683,
+              "max": 21.503999829292297
+            },
+            "warm_host_lead_us": {
+              "n": 194,
+              "min": 162.459,
+              "median": 222.619,
+              "p95": 456.438,
+              "max": 3270.098
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "46": {
+            "rows": 194,
+            "top10_precision_pct": 68.96907216494846,
+            "true_nonlocal_entries": 49,
+            "nonlocal_recall_pct": 46.93877551020408,
+            "nonresident_proposals": 310,
+            "false_nonresident_proposals": 287,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 46.93877551020408,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 194,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 20.479999482631683,
+              "max": 20.479999482631683
+            },
+            "warm_host_lead_us": {
+              "n": 194,
+              "min": 213.068,
+              "median": 287.548,
+              "p95": 453.968,
+              "max": 4261.815
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          }
+        },
+        "records": {
+          "omitted_list_items": 970
+        },
+        "limitations": [
+          "GPU event cost includes nativeprojection+top10+predictionIDpublish, measured afterexistingtailSync; hostlead isbetweenCPUobservations,notGPUdeadline.",
+          "Five same-device pairs only; no cross-GPUboundary prediction.",
+          "PredictioncostalreadyspentwhenhostreadsIDs; do notchargeitagainintoreadiness.",
+          "One-blobready optimistic: excludesqueues/fullslots/victims/readerhazards. No livepromotion/TGgain demonstrated.",
+          "Extra diagnosticGPUwork/PCIetraffic excludedfromheadline speed. No overheadcertificate."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/analysis/hold-math.json",
+      "source_bytes": 1072177,
+      "source_sha256": "395aa253a82dc8d56c9ec9837ece6e2cffb11aab0b93d159164e3da6d2267043",
+      "compact_evidence": {
+        "state": "PASS",
+        "episode": "hold-math",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request7",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request7",
+          "state": "PASS",
+          "errors": [],
+          "windows": 365,
+          "layers": 17520,
+          "output_tokens": 1024,
+          "output_ids_sha256": "53a848a1439ca1b9428ca9716926870382e31ac1337e51d88ab0616c79c910ba",
+          "demand_entries": 608160,
+          "path_counts": {
+            "-1": 7827,
+            "0": 600200,
+            "1": 133,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.6911339121284,
+          "reported_hit_pct_denominator": 98.71272163900616,
+          "promotions": 1534,
+          "promotion_bytes": 3106636800,
+          "unpublished_promotions_at_request_end": 13,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "unchanged_math_parity": {
+          "output_ids": true,
+          "window_T": true,
+          "window_inputs": true,
+          "acceptance": true,
+          "true_router_IDs": true,
+          "execution_paths": true,
+          "initial_residency": true,
+          "initial_heat": true,
+          "final_heat": true,
+          "final_residency": true
+        },
+        "first_head": {
+          "bit_identical": true,
+          "max_abs_diff": 0.0,
+          "top1": [
+            2,
+            2
+          ],
+          "KL_old_to_new": 0.0
+        },
+        "summary": {
+          "rows": 1170,
+          "top10_precision_pct": 70.2051282051282,
+          "true_nonlocal_entries": 346,
+          "nonlocal_recall_pct": 53.75722543352601,
+          "nonresident_proposals": 675,
+          "false_nonresident_proposals": 489,
+          "warm_ready_nonlocal_recall_pct": {
+            "12.6": 53.75722543352601,
+            "1.8": 2.023121387283237
+          },
+          "native_GPU_score_publish_us": {
+            "n": 1170,
+            "min": 14.336000196635723,
+            "median": 16.383999958634377,
+            "p95": 23.552000522613525,
+            "max": 27.648000046610832
+          },
+          "warm_host_lead_us": {
+            "n": 1170,
+            "min": 163.47,
+            "median": 243.334,
+            "p95": 383.679,
+            "max": 1729.103
+          },
+          "CPU_fullgate_top10_agreement_pct": 100.0
+        },
+        "by_layer": {
+          "5": {
+            "rows": 234,
+            "top10_precision_pct": 75.12820512820512,
+            "true_nonlocal_entries": 51,
+            "nonlocal_recall_pct": 70.58823529411765,
+            "nonresident_proposals": 62,
+            "false_nonresident_proposals": 26,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 70.58823529411765,
+              "1.8": 5.882352941176471
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 15.359999611973763,
+              "median": 20.479999482631683,
+              "p95": 24.934400338679545,
+              "max": 27.648000046610832
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 172.601,
+              "median": 242.849,
+              "p95": 286.1364999999999,
+              "max": 1729.103
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "20": {
+            "rows": 234,
+            "top10_precision_pct": 61.452991452991455,
+            "true_nonlocal_entries": 37,
+            "nonlocal_recall_pct": 72.97297297297297,
+            "nonresident_proposals": 67,
+            "false_nonresident_proposals": 40,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 72.97297297297297,
+              "1.8": 2.7027027027027026
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 19.45599913597107,
+              "max": 20.479999482631683
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 166.279,
+              "median": 230.168,
+              "p95": 253.139,
+              "max": 1212.026
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "25": {
+            "rows": 234,
+            "top10_precision_pct": 69.65811965811966,
+            "true_nonlocal_entries": 84,
+            "nonlocal_recall_pct": 55.95238095238095,
+            "nonresident_proposals": 98,
+            "false_nonresident_proposals": 51,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 55.95238095238095,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 15.359999611973763,
+              "median": 19.45599913597107,
+              "p95": 20.479999482631683,
+              "max": 22.52800017595291
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 169.45,
+              "median": 255.58499999999998,
+              "p95": 435.31119999999976,
+              "max": 1643.044
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "40": {
+            "rows": 234,
+            "top10_precision_pct": 80.98290598290598,
+            "true_nonlocal_entries": 59,
+            "nonlocal_recall_pct": 55.932203389830505,
+            "nonresident_proposals": 51,
+            "false_nonresident_proposals": 18,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 55.932203389830505,
+              "1.8": 5.084745762711864
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 15.359999611973763,
+              "median": 16.383999958634377,
+              "p95": 20.479999482631683,
+              "max": 26.623999699950218
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 163.47,
+              "median": 229.591,
+              "p95": 338.84564999999986,
+              "max": 1609.744
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "46": {
+            "rows": 234,
+            "top10_precision_pct": 63.8034188034188,
+            "true_nonlocal_entries": 115,
+            "nonlocal_recall_pct": 37.391304347826086,
+            "nonresident_proposals": 397,
+            "false_nonresident_proposals": 354,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 37.391304347826086,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 17.40800030529499,
+              "max": 19.45599913597107
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 212.33,
+              "median": 297.259,
+              "p95": 430.01649999999967,
+              "max": 708.037
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          }
+        },
+        "records": {
+          "omitted_list_items": 1170
+        },
+        "limitations": [
+          "GPU event cost includes nativeprojection+top10+predictionIDpublish, measured afterexistingtailSync; hostlead isbetweenCPUobservations,notGPUdeadline.",
+          "Five same-device pairs only; no cross-GPUboundary prediction.",
+          "PredictioncostalreadyspentwhenhostreadsIDs; do notchargeitagainintoreadiness.",
+          "One-blobready optimistic: excludesqueues/fullslots/victims/readerhazards. No livepromotion/TGgain demonstrated.",
+          "Extra diagnosticGPUwork/PCIetraffic excludedfromheadline speed. No overheadcertificate."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/analysis/hold-structured.json",
+      "source_bytes": 1072085,
+      "source_sha256": "42b4a96dc35dbc7dabbd3d4be87cf1b4ba64d62894166b75e0bc1f45adfe5e2f",
+      "compact_evidence": {
+        "state": "PASS",
+        "episode": "hold-structured",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request6",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/traces/runtime-request6",
+          "state": "PASS",
+          "errors": [],
+          "windows": 279,
+          "layers": 13392,
+          "output_tokens": 1024,
+          "output_ids_sha256": "db7a11e2630f9d9bf9da6847105dbe10dfacee74617c6a08f576d6852ee88dae",
+          "demand_entries": 516960,
+          "path_counts": {
+            "-1": 8997,
+            "0": 507741,
+            "1": 222,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.21668987929434,
+          "reported_hit_pct_denominator": 98.25888554741475,
+          "promotions": 1300,
+          "promotion_bytes": 2635545600,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "unchanged_math_parity": {
+          "output_ids": true,
+          "window_T": true,
+          "window_inputs": true,
+          "acceptance": true,
+          "true_router_IDs": true,
+          "execution_paths": true,
+          "initial_residency": true,
+          "initial_heat": true,
+          "final_heat": true,
+          "final_residency": true
+        },
+        "first_head": {
+          "bit_identical": true,
+          "max_abs_diff": 0.0,
+          "top1": [
+            71093,
+            71093
+          ],
+          "KL_old_to_new": 0.0
+        },
+        "summary": {
+          "rows": 1170,
+          "top10_precision_pct": 65.99145299145299,
+          "true_nonlocal_entries": 205,
+          "nonlocal_recall_pct": 46.829268292682926,
+          "nonresident_proposals": 501,
+          "false_nonresident_proposals": 405,
+          "warm_ready_nonlocal_recall_pct": {
+            "12.6": 46.829268292682926,
+            "1.8": 0.975609756097561
+          },
+          "native_GPU_score_publish_us": {
+            "n": 1170,
+            "min": 14.336000196635723,
+            "median": 16.383999958634377,
+            "p95": 23.552000522613525,
+            "max": 27.648000046610832
+          },
+          "warm_host_lead_us": {
+            "n": 1170,
+            "min": 161.95,
+            "median": 248.199,
+            "p95": 348.269,
+            "max": 2185.324
+          },
+          "CPU_fullgate_top10_agreement_pct": 100.0
+        },
+        "by_layer": {
+          "5": {
+            "rows": 234,
+            "top10_precision_pct": 71.7948717948718,
+            "true_nonlocal_entries": 19,
+            "nonlocal_recall_pct": 52.63157894736842,
+            "nonresident_proposals": 33,
+            "false_nonresident_proposals": 23,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 52.63157894736842,
+              "1.8": 5.2631578947368425
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 16.383999958634377,
+              "median": 20.479999482631683,
+              "p95": 26.623999699950218,
+              "max": 27.648000046610832
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 171.329,
+              "median": 243.828,
+              "p95": 283.89185,
+              "max": 1126.517
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "20": {
+            "rows": 234,
+            "top10_precision_pct": 59.18803418803419,
+            "true_nonlocal_entries": 32,
+            "nonlocal_recall_pct": 43.75,
+            "nonresident_proposals": 44,
+            "false_nonresident_proposals": 30,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 43.75,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 20.17279937863349,
+              "max": 22.52800017595291
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 165.939,
+              "median": 238.559,
+              "p95": 326.75165,
+              "max": 1195.755
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "25": {
+            "rows": 234,
+            "top10_precision_pct": 59.78632478632478,
+            "true_nonlocal_entries": 51,
+            "nonlocal_recall_pct": 39.21568627450981,
+            "nonresident_proposals": 58,
+            "false_nonresident_proposals": 38,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 39.21568627450981,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 15.359999611973763,
+              "median": 19.45599913597107,
+              "p95": 20.479999482631683,
+              "max": 20.479999482631683
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 168.899,
+              "median": 250.39,
+              "p95": 400.9575,
+              "max": 540.248
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "40": {
+            "rows": 234,
+            "top10_precision_pct": 76.23931623931624,
+            "true_nonlocal_entries": 50,
+            "nonlocal_recall_pct": 76.0,
+            "nonresident_proposals": 54,
+            "false_nonresident_proposals": 16,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 76.0,
+              "1.8": 0.0
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 15.359999611973763,
+              "median": 16.383999958634377,
+              "p95": 19.45599913597107,
+              "max": 19.45599913597107
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 161.95,
+              "median": 240.049,
+              "p95": 292.159,
+              "max": 2126.302
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          },
+          "46": {
+            "rows": 234,
+            "top10_precision_pct": 62.94871794871795,
+            "true_nonlocal_entries": 53,
+            "nonlocal_recall_pct": 26.41509433962264,
+            "nonresident_proposals": 312,
+            "false_nonresident_proposals": 298,
+            "warm_ready_nonlocal_recall_pct": {
+              "12.6": 26.41509433962264,
+              "1.8": 1.8867924528301887
+            },
+            "native_GPU_score_publish_us": {
+              "n": 234,
+              "min": 14.336000196635723,
+              "median": 16.383999958634377,
+              "p95": 17.40800030529499,
+              "max": 17.40800030529499
+            },
+            "warm_host_lead_us": {
+              "n": 234,
+              "min": 212.779,
+              "median": 296.969,
+              "p95": 806.535099999994,
+              "max": 2185.324
+            },
+            "CPU_fullgate_top10_agreement_pct": 100.0
+          }
+        },
+        "records": {
+          "omitted_list_items": 1170
+        },
+        "limitations": [
+          "GPU event cost includes nativeprojection+top10+predictionIDpublish, measured afterexistingtailSync; hostlead isbetweenCPUobservations,notGPUdeadline.",
+          "Five same-device pairs only; no cross-GPUboundary prediction.",
+          "PredictioncostalreadyspentwhenhostreadsIDs; do notchargeitagainintoreadiness.",
+          "One-blobready optimistic: excludesqueues/fullslots/victims/readerhazards. No livepromotion/TGgain demonstrated.",
+          "Extra diagnosticGPUwork/PCIetraffic excludedfromheadline speed. No overheadcertificate."
+        ]
+      }
+    }
+  ]
+}

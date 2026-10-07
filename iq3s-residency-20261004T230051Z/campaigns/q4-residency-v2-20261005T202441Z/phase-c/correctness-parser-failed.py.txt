@@ -1,0 +1,58 @@
+"""Identical short code/math/prose/JSON requests; clean OFF guards and adverse early diagnostics."""
+from campaign import C,R,V2Session,load,save,status,guard
+import time,psutil,json,hashlib,datetime
+from pathlib import Path
+
+def prepare():
+ manifest=load(C/'inputs/manifest.json')
+ for source in ['hold-code','hold-math','cal-prose','hold-structured']:
+  name='quality-'+source
+  p=load(C/'inputs'/f'{source}.json');p['max_tokens']=256;dest=C/'inputs'/f'{name}.json'
+  if dest.exists():assert load(dest)==p
+  else:save(dest,p)
+  old=manifest['payloads'][source];manifest['payloads'][name]=dict(old,path=str(dest),payload_sha256=__import__('lab').hashjson(p),output=256,source_payload=str(C/'inputs'/f'{source}.json'),provenance='Same saved independent messages/IDs; common256 output correctness budget, not4096 throughput')
+ save(C/'inputs/manifest.json',manifest)
+
+def summarize():
+ baseline=load(C/'correctness/control/results.json');out=[]
+ for p in sorted((C/'correctness').glob('*/results.json')):
+  results=load(p);rows=[]
+  for ref,r in zip(baseline['runs'],results['runs']):
+   a=load(ref['actual_output_ids_path']);b=load(r['actual_output_ids_path']);first=next((i for i,(x,y) in enumerate(zip(a,b)) if x!=y),None)
+   if first is None and len(a)!=len(b):first=min(len(a),len(b))
+   row={'payload':r['payload'],'identical_input':r['actual_engine_input']==ref['actual_engine_input'],'output_ids_identical':a==b,'first_diverging_token':first,
+        'generated':r['actual_output_tokens'],'finish_reason':r['finish_reason'],'MTP_equal':all(r[k]==ref[k] for k in ['mtp_proposed','mtp_accepted','verify_windows']),
+        'routing_equal':all(r[k]==ref[k] for k in ['local_vram_entries','cpu_fallback_entries','nonlocal_gpu_entries','all_routed_entries']),
+        'state':r['state'],'NaN_Inf_evidence':'head debug enabled; inspect engine log','log':str(p.parent/'logs/engine.log')}
+   rows.append(row)
+  text=(p.parent/'logs/engine.log').read_text();bad='non-finite' in text or 'Q4_EARLY_FATAL' in text or 'Q4_EARLY_WORKER_FAIL' in text
+  result={'variant':p.parent.name,'pairs':rows,'head_nonfinite_or_worker_failure':bad,'limits':['No logits/KL/top1 harness used; output IDs and first divergence available', 'ON changes CPU/GPU residency math ordering; divergence requires localized numeric/kernel/readback evidence, not automatic harmlessness']}
+  if p.parent.name.endswith('off'):assert all(x['output_ids_identical'] and x['MTP_equal'] and x['routing_equal'] and x['identical_input'] for x in rows),result
+  assert not bad,result
+  out.append(result)
+ save(C/'phase-c/short-correctness.json',out)
+
+def main():
+ guard();prepare();until=time.time()+900
+ while not (C/'phase-c/existing-tests.json').exists():
+  assert time.time()<until,'Existing tests completion timeout';time.sleep(3)
+ assert all(not r['new_failures'] for r in load(C/'phase-c/existing-tests.json'))
+ variants=['control','history-off','early-off','history-v2','early-diagnostic','early-wrong','early-delayed']
+ for variant in variants:
+  path=C/'correctness'/variant
+  if (path/'results.json').exists():continue
+  assert not path.exists(),'Preserve partial; diagnose/version rather than overwrite'
+  cfg=load(C/'configs'/f'{variant}-32k.json');cfg['env']['STRATA_DBG_NAN']='1'
+  if variant.startswith('early-') and variant not in ['early-off']:
+   cfg['env']['STRATA_Q4_EARLY_LOG']=str(path/'early-events')
+  status('C_CORRECTNESS',phase='C',running=variant,next_exact_action='Fixed64 warmup then same4 short prompts; no headline throughput')
+  with V2Session(C,cfg,path,'32k',port=18136) as s:
+   warm=s.request('warmup','warmup','warmup');assert warm['actual_output_tokens']==64 and warm['state']=='VALID'
+   rows=[]
+   for name in ['hold-code','hold-math','cal-prose','hold-structured']:
+    r=s.request('quality-'+name,name,'correctness');rows.append(r);save(path/'partial-results.json',rows)
+    assert r['actual_engine_input_verified'] and r['reuse']==0
+   save(path/'results.json',{'warmup':warm,'runs':rows,'headline':False})
+  print('CORRECTNESS_FINISHED',variant,flush=True)
+ summarize();status('C_CORRECTNESS_COMPLETE',phase='C',running=None,next_exact_action='Analyze early readback and first divergence; OFF guard at32K; bounded headline screening')
+if __name__=='__main__':main()

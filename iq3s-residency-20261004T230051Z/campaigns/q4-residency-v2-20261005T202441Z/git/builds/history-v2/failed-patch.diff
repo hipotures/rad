@@ -1,0 +1,54 @@
+diff --git a/src/core/expert_source.cpp b/src/core/expert_source.cpp
+index 98e1952..fd71e24 100644
+--- a/src/core/expert_source.cpp
++++ b/src/core/expert_source.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_history_policy.hpp"
+ // src/core/expert_source.cpp - the adapter.  See the header for the three clauses of the contract.
+ #include "strata/core/expert_source.hpp"
+ #include "strata/core/remote_experts.hpp"
+@@ -2008,6 +2009,7 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+     };
+     const auto c0 = std::chrono::steady_clock::now();
+     pt("begin");
++    strata::research::q4_history.observe(d.host_res,(int)d.layers,ids,(int)(n_tok*k));
+     d.src->begin_layer(d.layers, ids, n_tok * k);
+     pt("begun");
+     if (!d.usage.empty())
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 085c3d8..493d61b 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_history_policy.hpp"
+ // src/program/generate.cpp - P2.S6: `strata generate`.
+ //
+ // THE DRIVER, and the first program in this project that answers a question.  Everything below it is a
+@@ -5447,6 +5448,11 @@ int main(int argc, char** argv) {
+             else
+                 heat.assign(drive.d.usage.size(), 0.0);
+         }
++        if(strata::research::q4_history.enabled){
++            if(!multi_gpu||stage_of(23)!=0||stage_of(24)!=1||o.pcie_frac!=.28)throw std::runtime_error("Q4 history requires frozen K24/PCIe0.28");
++            std::vector<uint64_t> blobs;for(int l=0;l<g.n_layers;++l)blobs.push_back(strata::kernels::cpu::expert_layout().blob_bytes(l));
++            strata::research::q4_history.configure(host_res.data(),(int)g.n_layers,(int)g.n_expert,blobs);
++        }
+         Clock::time_point profile_saved_at = Clock::now();
+         cudaStream_t adapt_stream = nullptr;
+         if (cudaStreamCreateWithFlags(&adapt_stream, cudaStreamNonBlocking) != cudaSuccess) {
+@@ -5494,6 +5500,7 @@ int main(int argc, char** argv) {
+             struct Swap { float gain; int32_t layer, in, out; };
+             std::vector<Swap> swaps;
+             std::vector<std::pair<float, int32_t>> cand, vict;
++            if(!(strata::research::q4_history.enabled&&strata::research::q4_history.active)){
+             for (int64_t l = 0; l < g.n_layers; ++l) {
+                 cand.clear();
+                 vict.clear();
+@@ -5515,6 +5522,7 @@ int main(int argc, char** argv) {
+             }
+             std::sort(swaps.begin(), swaps.end(), [](const Swap& a, const Swap& b) { return a.gain > b.gain; });
+             if ((int) swaps.size() > o.adapt_swaps) swaps.resize((size_t) o.adapt_swaps);
++            }
+             if (!resident_stage_swaps(src, xcache, host_res, g.n_expert, swaps, adapt_stream)) return false;
+             if (pin_blobs_on()) {   // lock the batch's source pages (a file-backed arena on AMD; see pin_blobs)
+                 std::vector<std::pair<uintptr_t, uintptr_t>> spans;

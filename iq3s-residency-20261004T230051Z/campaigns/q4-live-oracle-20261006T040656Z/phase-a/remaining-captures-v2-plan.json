@@ -1,0 +1,37 @@
+{
+  "purpose": "Record full-work schema2 tapes for exact saved128K/256K inputs; capture overhead excluded from headline",
+  "jobs": [
+    {
+      "label": "capture-128k-v2",
+      "args": [
+        "record",
+        "--label",
+        "capture-128k-v2",
+        "--variant",
+        "oracle-v2",
+        "--profile",
+        "128k",
+        "--payload",
+        "128k-run1"
+      ],
+      "tape": "tapes/capture-128k-v2.bin",
+      "timeout_s": 1200
+    },
+    {
+      "label": "capture-256k-v2",
+      "args": [
+        "record",
+        "--label",
+        "capture-256k-v2",
+        "--variant",
+        "oracle-v2",
+        "--profile",
+        "256k",
+        "--payload",
+        "256k-run1"
+      ],
+      "tape": "tapes/capture-256k-v2.bin",
+      "timeout_s": 1200
+    }
+  ]
+}

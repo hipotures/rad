@@ -1,0 +1,76 @@
+[
+  {
+    "name": "register",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "device-plan-ids-v2",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/device-plan-ids-v2",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/device-plan-ids-v2/strata",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/overrides.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.3654048442840576,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/prerequisite-commands/register.log"
+  },
+  {
+    "name": "native-Python-realIQ",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/test_variant.py",
+      "device-plan-ids-v2",
+      "--experiment",
+      "E016-device-plan-ids",
+      "--attempt",
+      "v2"
+    ],
+    "returncode": 0,
+    "elapsed_s": 259.43341040611267,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/prerequisite-commands/native-Python-realIQ.log"
+  },
+  {
+    "name": "native-failure-audit",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_test_failures.py",
+      "E016-device-plan-ids",
+      "--attempt",
+      "v2"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.06440138816833496,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/prerequisite-commands/native-failure-audit.log"
+  },
+  {
+    "name": "battery",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/correctness_battery.py",
+      "--variant",
+      "device-plan-ids-v2",
+      "--experiment",
+      "E016-device-plan-ids",
+      "--attempt",
+      "v2",
+      "--reference",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control"
+    ],
+    "returncode": 0,
+    "elapsed_s": 137.67208981513977,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/prerequisite-commands/battery.log"
+  },
+  {
+    "name": "ground-truth",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_battery.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/correctness/device-plan-ids-v2"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.11493635177612305,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/prerequisite-commands/ground-truth.log"
+  }
+]

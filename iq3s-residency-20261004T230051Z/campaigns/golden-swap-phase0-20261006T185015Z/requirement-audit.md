@@ -1,0 +1,25 @@
+# Requirement audit
+
+- PASS: Required artifacts exist — ['GOAL.md', 'STATUS.md', 'DECISIONS.md', 'progress.json', 'progress.jsonl', 'attempt-ledger.jsonl', 'workload-audit.md', 'workload-inventory.json', 'prompt-catalog.md', 'public-sources.md', 'benchmark-manifest.json', 'trace-summary.csv', 'runtime-budget.md', 'runtime-budget.json', 'report.md', 'reproduce.md', 'output-review.md', 'provenance/compatible-existing-tapes.json']
+- PASS: Twelve groups; three per family — Counter({'code/agent': 3, 'math/research': 3, 'text/translation': 3, 'structured/mixed': 3})
+- PASS: Frozen roles and exclusion — [('code-heg', 'development'), ('math-rational', 'development'), ('text-http', 'development'), ('mixed-build', 'development'), ('code-queue', 'calibration'), ('math-sensor', 'calibration'), ('text-tls', 'calibration'), ('mixed-fields', 'calibration'), ('code-archive', 'reserved_evaluation'), ('math-inventory', 'reserved_evaluation'), ('text-websocket', 'reserved_evaluation'), ('mixed-chinook', 'reserved_evaluation')]
+- PASS: Profiles 8x32K +4x128K; actual occupancy fits — [('code-heg', 131072, 22883), ('math-rational', 32768, 10943), ('text-http', 32768, 20938), ('mixed-build', 32768, 10934), ('code-queue', 32768, 2498), ('math-sensor', 131072, 179), ('text-tls', 131072, 81722), ('mixed-fields', 131072, 16346), ('code-archive', 32768, 6983), ('math-inventory', 32768, 165), ('text-websocket', 32768, 30383), ('mixed-chinook', 32768, 1899)]
+- PASS: One original model attempt per task; no exclusions — ['code-heg', 'math-rational', 'text-http', 'mixed-build', 'code-queue', 'math-sensor', 'text-tls', 'mixed-fields', 'code-archive', 'math-inventory', 'text-websocket', 'mixed-chinook']
+- PASS: All twelve validated complete tapes — raw/*/validation.json; active QSA widths and final EOS boundary; exact IDs/FNV/counts
+- PASS: Frozen source/excerpt/payload hashes — benchmark-manifest.json and corpus files
+- PASS: Fresh fixed warmup and zero prompt reuse — episode warmup and measured reused_tokens
+- PASS: Native capture identities and oracle disabled — raw/*/raw/native-process.json; run.py check verifies source/binary/model/config
+- PASS: Per-request and startup limits — 180s startup+warmup;240s request;60s decode soft target;2048output
+- PASS: Model operation <=600s per family — {'code/agent': 386.01908550498774, 'math/research': 353.60770005598897, 'text/translation': 407.48212470300496, 'structured/mixed': 362.9512242550263}
+- PASS: Launches before unchanged T+50 — request begin monotonic compared to original timing.json
+- PASS: No owned live processes; cleanup verified — []
+- PASS: No GPU compute jobs — 
+- PASS: No tool-execution or new256K — benchmark manifest
+- PASS: Preserved two original validator failures — repair-ledger; no model reruns
+- PASS: Runtime total reconciles — runtime-budget.json
+- PASS: Causal labels separated and censoring retained — analysis/victim-return-labels.json
+- PASS: Four source-grounded development screening tasks — predeclared screening flags
+- PASS: Storage below12GiB — {'bytes': 5813800311}
+- PASS: Scripts syntax valid; reproducer instructions present — stdlib AST parse; identity/help/inspect smoke logs
+- PASS: Report and CSV cover every measured task — trace-summary.csv and report.md
+- PASS: Completion audit before original60-minute deadline — {'elapsed_s': 3221.918419439986, 'remaining_s': 378.0815805600141}

@@ -1,0 +1,82 @@
+[
+  {
+    "name": "compile-event-fixture",
+    "command": [
+      "c++",
+      "-std=c++20",
+      "-O2",
+      "-I/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-coordination-v1/include",
+      "-I/usr/local/cuda/include",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/coordination_waits_test.cpp",
+      "-L/usr/local/cuda/lib64",
+      "-Wl,-rpath,/usr/local/cuda/lib64",
+      "-lcudart",
+      "-o",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/tests/event-fixture"
+    ],
+    "environment_overrides": null,
+    "returncode": 0,
+    "elapsed_s": 0.816131591796875,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/tests/compile-event-fixture.log"
+  },
+  {
+    "name": "fixture-default-off",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/tests/event-fixture"
+    ],
+    "environment_overrides": {
+      "STRATA_LAB_MISS_WAITS": null,
+      "STRATA_LAB_TRACE": null
+    },
+    "returncode": 0,
+    "elapsed_s": 0.003800630569458008,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/tests/fixture-default-off.log"
+  },
+  {
+    "name": "fixture-two-GPUs",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/tests/event-fixture"
+    ],
+    "environment_overrides": {
+      "STRATA_LAB_MISS_WAITS": "1",
+      "STRATA_LAB_TRACE": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/tests/fixture"
+    },
+    "returncode": 0,
+    "elapsed_s": 0.565244197845459,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/tests/fixture-two-GPUs.log"
+  },
+  {
+    "name": "targeted-native",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ctest",
+      "--test-dir",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-coordination-v1",
+      "--output-on-failure",
+      "--timeout",
+      "60",
+      "-R",
+      "(cache|adapt|async|verify|split|expert_multi|native_expert_parity)",
+      "-j",
+      "1"
+    ],
+    "environment_overrides": null,
+    "returncode": 0,
+    "elapsed_s": 4.378723382949829,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/tests/targeted-native.log"
+  },
+  {
+    "name": "realIQparity",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-coordination-v1/native_expert_parity",
+      "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+      "0",
+      "1",
+      "2",
+      "12"
+    ],
+    "environment_overrides": null,
+    "returncode": 0,
+    "elapsed_s": 5.174007177352905,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/tests/realIQparity.log"
+  }
+]

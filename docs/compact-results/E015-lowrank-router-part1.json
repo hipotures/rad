@@ -1,0 +1,2031 @@
+{
+  "scope": "Scalar/header export from local originals. Lists over32 items, long strings and depth/node excess are explicitly omitted; this is not the original schema and is not a replacement input for research scripts.",
+  "records": [
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/128k.json",
+      "source_bytes": 2835601,
+      "source_sha256": "366f398e7d34219224f4e23c88c8f4c27069fb33d22a75a8e9fa05a0477007bc",
+      "compact_evidence": {
+        "state": "PASS",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/128k/traces/runtime-request2",
+        "episode": "128k",
+        "split": "benchmark",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/128k/traces/runtime-request2",
+          "state": "PASS",
+          "errors": [],
+          "windows": 1449,
+          "layers": 69552,
+          "output_tokens": 4096,
+          "output_ids_sha256": "4fa68e27ac1dcd2264bda6dd1e408eef728ab745ab58c8d87ccb574cbffa45ae",
+          "demand_entries": 2351040,
+          "path_counts": {
+            "-1": 43557,
+            "0": 2305764,
+            "1": 1719,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.07421396488363,
+          "reported_hit_pct_denominator": 98.14597494339854,
+          "promotions": 7069,
+          "promotion_bytes": 14373222400,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10183,
+              "bytes": 19712998400,
+              "size_classes": {
+                "1510400": 1655,
+                "1715200": 814,
+                "1868800": 426,
+                "1971200": 4391,
+                "2176000": 2496,
+                "2329600": 401
+              }
+            },
+            {
+              "slots": 8437,
+              "bytes": 18220492800,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 401,
+                "1971200": 1457,
+                "2176000": 2947,
+                "2329600": 2957,
+                "2662400": 295
+              }
+            }
+          ]
+        },
+        "construction": {
+          "6": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer6.npz",
+            "gate_sha256": "7de6e13d2b6f680fad0fe76018bb9c1b04b66f8d304079b52eb5a38336854e6f",
+            "energy_fraction": {
+              "32": 0.6157653331756592,
+              "128": 0.8106964230537415
+            }
+          },
+          "21": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer21.npz",
+            "gate_sha256": "c6d2a815a4845abf5471d767432496a30fd1c9a2cfb91effb2b42ca17bf3c9f9",
+            "energy_fraction": {
+              "32": 0.6556690335273743,
+              "128": 0.8474469184875488
+            }
+          },
+          "25": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer25.npz",
+            "gate_sha256": "4580b6ef10fc5d128eceae2ba14934c9c5465e10120ef825c5ad67e9bfb72534",
+            "energy_fraction": {
+              "32": 0.6586239337921143,
+              "128": 0.8532139658927917
+            }
+          },
+          "26": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer26.npz",
+            "gate_sha256": "f1546d4f3a72b76a9cb8822f43ef056d532633c7f14b00ea0fd94256f7538286",
+            "energy_fraction": {
+              "32": 0.6512424349784851,
+              "128": 0.8441224694252014
+            }
+          },
+          "41": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer41.npz",
+            "gate_sha256": "0bdacc8e5cca10c4643d75bfa40289d24118b29a6c5048346809d77269973826",
+            "energy_fraction": {
+              "32": 0.6654210090637207,
+              "128": 0.844423770904541
+            }
+          },
+          "47": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer47.npz",
+            "gate_sha256": "a074847671d9ef0699a5a542bbd4c5a76046543e76fdb499d62bd7be1fd08c50",
+            "energy_fraction": {
+              "32": 0.6273225545883179,
+              "128": 0.825015127658844
+            }
+          }
+        },
+        "summary": {
+          "0": {
+            "rows": 1140,
+            "top10_precision_pct": 68.5,
+            "true_nonlocal_entries": 190,
+            "nonlocal_recall_pct": 44.73684210526316,
+            "predicted_nonresident_entries": 463,
+            "false_positive_nonresident_entries": 378,
+            "nonresident_proposal_precision_pct": 18.3585313174946,
+            "warm_ready_fraction": {
+              "12.6": 0.058823529411764705,
+              "1.8": 0.04723707664884135
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 5.319148936170213,
+              "1.8": 4.25531914893617
+            },
+            "warm_lead_us": {
+              "n": 1122,
+              "min": 160.42,
+              "median": 253.569,
+              "p95": 1050.9154500000059,
+              "max": 3465.197,
+              "sum": 477521.072
+            },
+            "batch_score_us": {
+              "n": 1140,
+              "min": 68.52,
+              "median": 667.658,
+              "p95": 934.066,
+              "max": 1356.745,
+              "sum": 767122.9749999999
+            },
+            "batch_top10_us": {
+              "n": 1140,
+              "min": 5.46,
+              "median": 25.611,
+              "p95": 39.47,
+              "max": 110.099,
+              "sum": 29950.648999999998
+            },
+            "CPU_factor_bytes": 31457280
+          },
+          "32": {
+            "rows": 1140,
+            "top10_precision_pct": 46.23684210526316,
+            "true_nonlocal_entries": 190,
+            "nonlocal_recall_pct": 18.94736842105263,
+            "predicted_nonresident_entries": 610,
+            "false_positive_nonresident_entries": 574,
+            "nonresident_proposal_precision_pct": 5.901639344262295,
+            "warm_ready_fraction": {
+              "12.6": 0.6506238859180036,
+              "1.8": 0.04723707664884135
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 14.893617021276595,
+              "1.8": 1.0638297872340425
+            },
+            "warm_lead_us": {
+              "n": 1122,
+              "min": 160.42,
+              "median": 253.569,
+              "p95": 1050.9154500000059,
+              "max": 3465.197,
+              "sum": 477521.072
+            },
+            "batch_score_us": {
+              "n": 1140,
+              "min": 10.509,
+              "median": 49.411,
+              "p95": 84.479,
+              "max": 192.779,
+              "sum": 58193.661
+            },
+            "batch_top10_us": {
+              "n": 1140,
+              "min": 5.07,
+              "median": 22.305,
+              "p95": 37.111,
+              "max": 377.248,
+              "sum": 27164.729999999996
+            },
+            "CPU_factor_bytes": 2359296
+          },
+          "128": {
+            "rows": 1140,
+            "top10_precision_pct": 61.85964912280702,
+            "true_nonlocal_entries": 190,
+            "nonlocal_recall_pct": 27.894736842105264,
+            "predicted_nonresident_entries": 486,
+            "false_positive_nonresident_entries": 433,
+            "nonresident_proposal_precision_pct": 10.905349794238683,
+            "warm_ready_fraction": {
+              "12.6": 0.21212121212121213,
+              "1.8": 0.04723707664884135
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 13.297872340425531,
+              "1.8": 3.723404255319149
+            },
+            "warm_lead_us": {
+              "n": 1122,
+              "min": 160.42,
+              "median": 253.569,
+              "p95": 1050.9154500000059,
+              "max": 3465.197,
+              "sum": 477521.072
+            },
+            "batch_score_us": {
+              "n": 1140,
+              "min": 32.639,
+              "median": 200.899,
+              "p95": 296.299,
+              "max": 703.547,
+              "sum": 220623.626
+            },
+            "batch_top10_us": {
+              "n": 1140,
+              "min": 5.24,
+              "median": 22.87,
+              "p95": 38.80944999999998,
+              "max": 55.62,
+              "sum": 27269.292
+            },
+            "CPU_factor_bytes": 9437184
+          }
+        },
+        "records": {
+          "omitted_list_items": 3420
+        },
+        "limitations": [
+          "Fresh diagnostic copies change timing and add activation traffic; no headline TG measurement.",
+          "CPU scoring cost is single-thread offline including numeric allocations/top10, excluding capture, scheduling and CPU-expert contention.",
+          "One-blob readiness is optimistic: ignores full slots, competing proposals, eviction victims and in-flight reader hazards.",
+          "Original gate weights define the factors; no labels were used to fit SVD. Rank decisions must use development/calibration only.",
+          "Current MoE activation predicts the next router; true future router IDs are labels only.",
+          "Lead is between host observations, includes altered doorbell traffic, and is not a GPU clock duration."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/32k.json",
+      "source_bytes": 2772983,
+      "source_sha256": "0aa393a5e18cf2a4b89f489e12d8e190711695a89b9ee7d81653f02709a03a46",
+      "compact_evidence": {
+        "state": "PASS",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/32k/traces/runtime-request2",
+        "episode": "32k",
+        "split": "benchmark",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/32k/traces/runtime-request2",
+          "state": "PASS",
+          "errors": [],
+          "windows": 1241,
+          "layers": 59568,
+          "output_tokens": 4096,
+          "output_ids_sha256": "538005d87211bbfe7a8e98a5325bc76798a6d025a48cfabe6d81e505ba872807",
+          "demand_entries": 2117280,
+          "path_counts": {
+            "-1": 35552,
+            "0": 2080504,
+            "1": 1224,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.26305448499963,
+          "reported_hit_pct_denominator": 98.3198932353397,
+          "promotions": 5226,
+          "promotion_bytes": 10697139200,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "construction": {
+          "6": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer6.npz",
+            "gate_sha256": "7de6e13d2b6f680fad0fe76018bb9c1b04b66f8d304079b52eb5a38336854e6f",
+            "energy_fraction": {
+              "32": 0.6157653331756592,
+              "128": 0.8106964230537415
+            }
+          },
+          "21": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer21.npz",
+            "gate_sha256": "c6d2a815a4845abf5471d767432496a30fd1c9a2cfb91effb2b42ca17bf3c9f9",
+            "energy_fraction": {
+              "32": 0.6556690335273743,
+              "128": 0.8474469184875488
+            }
+          },
+          "25": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer25.npz",
+            "gate_sha256": "4580b6ef10fc5d128eceae2ba14934c9c5465e10120ef825c5ad67e9bfb72534",
+            "energy_fraction": {
+              "32": 0.6586239337921143,
+              "128": 0.8532139658927917
+            }
+          },
+          "26": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer26.npz",
+            "gate_sha256": "f1546d4f3a72b76a9cb8822f43ef056d532633c7f14b00ea0fd94256f7538286",
+            "energy_fraction": {
+              "32": 0.6512424349784851,
+              "128": 0.8441224694252014
+            }
+          },
+          "41": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer41.npz",
+            "gate_sha256": "0bdacc8e5cca10c4643d75bfa40289d24118b29a6c5048346809d77269973826",
+            "energy_fraction": {
+              "32": 0.6654210090637207,
+              "128": 0.844423770904541
+            }
+          },
+          "47": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer47.npz",
+            "gate_sha256": "a074847671d9ef0699a5a542bbd4c5a76046543e76fdb499d62bd7be1fd08c50",
+            "energy_fraction": {
+              "32": 0.6273225545883179,
+              "128": 0.825015127658844
+            }
+          }
+        },
+        "summary": {
+          "0": {
+            "rows": 1116,
+            "top10_precision_pct": 70.81541218637993,
+            "true_nonlocal_entries": 112,
+            "nonlocal_recall_pct": 58.035714285714285,
+            "predicted_nonresident_entries": 334,
+            "false_positive_nonresident_entries": 269,
+            "nonresident_proposal_precision_pct": 19.461077844311376,
+            "warm_ready_fraction": {
+              "12.6": 0.01092896174863388,
+              "1.8": 0.007285974499089253
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 0.9009009009009009,
+              "1.8": 0.0
+            },
+            "warm_lead_us": {
+              "n": 1098,
+              "min": 160.479,
+              "median": 244.149,
+              "p95": 364.539,
+              "max": 4912.101,
+              "sum": 313404.074
+            },
+            "batch_score_us": {
+              "n": 1116,
+              "min": 64.951,
+              "median": 668.627,
+              "p95": 937.097,
+              "max": 1117.755,
+              "sum": 745487.021
+            },
+            "batch_top10_us": {
+              "n": 1116,
+              "min": 5.849,
+              "median": 24.09,
+              "p95": 39.23,
+              "max": 52.919,
+              "sum": 27165.555
+            },
+            "CPU_factor_bytes": 31457280
+          },
+          "32": {
+            "rows": 1116,
+            "top10_precision_pct": 47.5,
+            "true_nonlocal_entries": 112,
+            "nonlocal_recall_pct": 22.321428571428573,
+            "predicted_nonresident_entries": 432,
+            "false_positive_nonresident_entries": 407,
+            "nonresident_proposal_precision_pct": 5.787037037037037,
+            "warm_ready_fraction": {
+              "12.6": 0.5719489981785064,
+              "1.8": 0.007285974499089253
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 15.315315315315315,
+              "1.8": 0.0
+            },
+            "warm_lead_us": {
+              "n": 1098,
+              "min": 160.479,
+              "median": 244.149,
+              "p95": 364.539,
+              "max": 4912.101,
+              "sum": 313404.074
+            },
+            "batch_score_us": {
+              "n": 1116,
+              "min": 8.59,
+              "median": 49.209,
+              "p95": 80.33425,
+              "max": 104.349,
+              "sum": 55806.245
+            },
+            "batch_top10_us": {
+              "n": 1116,
+              "min": 4.85,
+              "median": 21.049999999999997,
+              "p95": 39.229,
+              "max": 539.098,
+              "sum": 25285.89
+            },
+            "CPU_factor_bytes": 2359296
+          },
+          "128": {
+            "rows": 1116,
+            "top10_precision_pct": 64.47132616487455,
+            "true_nonlocal_entries": 112,
+            "nonlocal_recall_pct": 41.07142857142857,
+            "predicted_nonresident_entries": 407,
+            "false_positive_nonresident_entries": 361,
+            "nonresident_proposal_precision_pct": 11.302211302211303,
+            "warm_ready_fraction": {
+              "12.6": 0.04189435336976321,
+              "1.8": 0.007285974499089253
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 0.0,
+              "1.8": 0.0
+            },
+            "warm_lead_us": {
+              "n": 1098,
+              "min": 160.479,
+              "median": 244.149,
+              "p95": 364.539,
+              "max": 4912.101,
+              "sum": 313404.074
+            },
+            "batch_score_us": {
+              "n": 1116,
+              "min": 21.31,
+              "median": 201.499,
+              "p95": 289.4015,
+              "max": 855.748,
+              "sum": 211834.43
+            },
+            "batch_top10_us": {
+              "n": 1116,
+              "min": 4.85,
+              "median": 21.7205,
+              "p95": 37.18,
+              "max": 56.809,
+              "sum": 24637.893000000004
+            },
+            "CPU_factor_bytes": 9437184
+          }
+        },
+        "records": {
+          "omitted_list_items": 3348
+        },
+        "limitations": [
+          "Fresh diagnostic copies change timing and add activation traffic; no headline TG measurement.",
+          "CPU scoring cost is single-thread offline including numeric allocations/top10, excluding capture, scheduling and CPU-expert contention.",
+          "One-blob readiness is optimistic: ignores full slots, competing proposals, eviction victims and in-flight reader hazards.",
+          "Original gate weights define the factors; no labels were used to fit SVD. Rank decisions must use development/calibration only.",
+          "Current MoE activation predicts the next router; true future router IDs are labels only.",
+          "Lead is between host observations, includes altered doorbell traffic, and is not a GPU clock duration."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/cal-prose.json",
+      "source_bytes": 2786737,
+      "source_sha256": "2f7e694079221294f15d35eadd5e0cd547ead44addf2b0a0ceaf0358909be7ba",
+      "compact_evidence": {
+        "state": "PASS",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request4",
+        "episode": "cal-prose",
+        "split": "calibration",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request4",
+          "state": "PASS",
+          "errors": [],
+          "windows": 458,
+          "layers": 21984,
+          "output_tokens": 1024,
+          "output_ids_sha256": "fd5b86f1dad26c6a712a5f51c3893dfb546eea5370981ed2667dc36d4820670a",
+          "demand_entries": 644640,
+          "path_counts": {
+            "-1": 13081,
+            "0": 631083,
+            "1": 476,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 97.89696574832465,
+          "reported_hit_pct_denominator": 97.96930595314237,
+          "promotions": 2509,
+          "promotion_bytes": 5127936000,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "construction": {
+          "6": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer6.npz",
+            "gate_sha256": "7de6e13d2b6f680fad0fe76018bb9c1b04b66f8d304079b52eb5a38336854e6f",
+            "energy_fraction": {
+              "32": 0.6157653331756592,
+              "128": 0.8106964230537415
+            }
+          },
+          "21": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer21.npz",
+            "gate_sha256": "c6d2a815a4845abf5471d767432496a30fd1c9a2cfb91effb2b42ca17bf3c9f9",
+            "energy_fraction": {
+              "32": 0.6556690335273743,
+              "128": 0.8474469184875488
+            }
+          },
+          "25": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer25.npz",
+            "gate_sha256": "4580b6ef10fc5d128eceae2ba14934c9c5465e10120ef825c5ad67e9bfb72534",
+            "energy_fraction": {
+              "32": 0.6586239337921143,
+              "128": 0.8532139658927917
+            }
+          },
+          "26": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer26.npz",
+            "gate_sha256": "f1546d4f3a72b76a9cb8822f43ef056d532633c7f14b00ea0fd94256f7538286",
+            "energy_fraction": {
+              "32": 0.6512424349784851,
+              "128": 0.8441224694252014
+            }
+          },
+          "41": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer41.npz",
+            "gate_sha256": "0bdacc8e5cca10c4643d75bfa40289d24118b29a6c5048346809d77269973826",
+            "energy_fraction": {
+              "32": 0.6654210090637207,
+              "128": 0.844423770904541
+            }
+          },
+          "47": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer47.npz",
+            "gate_sha256": "a074847671d9ef0699a5a542bbd4c5a76046543e76fdb499d62bd7be1fd08c50",
+            "energy_fraction": {
+              "32": 0.6273225545883179,
+              "128": 0.825015127658844
+            }
+          }
+        },
+        "summary": {
+          "0": {
+            "rows": 1110,
+            "top10_precision_pct": 70.77477477477477,
+            "true_nonlocal_entries": 700,
+            "nonlocal_recall_pct": 64.57142857142857,
+            "predicted_nonresident_entries": 1066,
+            "false_positive_nonresident_entries": 614,
+            "nonresident_proposal_precision_pct": 42.4015009380863,
+            "warm_ready_fraction": {
+              "12.6": 0.07657657657657657,
+              "1.8": 0.044144144144144144
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 7.428571428571429,
+              "1.8": 3.142857142857143
+            },
+            "warm_lead_us": {
+              "n": 1110,
+              "min": 162.42,
+              "median": 272.848,
+              "p95": 1649.922,
+              "max": 4141.554,
+              "sum": 502173.997
+            },
+            "batch_score_us": {
+              "n": 1110,
+              "min": 94.22,
+              "median": 642.347,
+              "p95": 912.257,
+              "max": 1218.175,
+              "sum": 711268.804
+            },
+            "batch_top10_us": {
+              "n": 1110,
+              "min": 5.96,
+              "median": 24.229,
+              "p95": 40.341,
+              "max": 411.627,
+              "sum": 27227.794
+            },
+            "CPU_factor_bytes": 31457280
+          },
+          "32": {
+            "rows": 1110,
+            "top10_precision_pct": 46.108108108108105,
+            "true_nonlocal_entries": 700,
+            "nonlocal_recall_pct": 41.0,
+            "predicted_nonresident_entries": 1558,
+            "false_positive_nonresident_entries": 1271,
+            "nonresident_proposal_precision_pct": 18.42105263157895,
+            "warm_ready_fraction": {
+              "12.6": 0.6567567567567567,
+              "1.8": 0.06846846846846846
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 34.714285714285715,
+              "1.8": 3.5714285714285716
+            },
+            "warm_lead_us": {
+              "n": 1110,
+              "min": 162.42,
+              "median": 272.848,
+              "p95": 1649.922,
+              "max": 4141.554,
+              "sum": 502173.997
+            },
+            "batch_score_us": {
+              "n": 1110,
+              "min": 13.051,
+              "median": 46.949,
+              "p95": 81.08254999999994,
+              "max": 429.728,
+              "sum": 54300.056
+            },
+            "batch_top10_us": {
+              "n": 1110,
+              "min": 4.55,
+              "median": 21.32,
+              "p95": 37.32994999999999,
+              "max": 52.989,
+              "sum": 23610.407
+            },
+            "CPU_factor_bytes": 2359296
+          },
+          "128": {
+            "rows": 1110,
+            "top10_precision_pct": 63.67567567567568,
+            "true_nonlocal_entries": 700,
+            "nonlocal_recall_pct": 55.57142857142857,
+            "predicted_nonresident_entries": 1214,
+            "false_positive_nonresident_entries": 825,
+            "nonresident_proposal_precision_pct": 32.042833607907745,
+            "warm_ready_fraction": {
+              "12.6": 0.22162162162162163,
+              "1.8": 0.05855855855855856
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 26.285714285714285,
+              "1.8": 3.2857142857142856
+            },
+            "warm_lead_us": {
+              "n": 1110,
+              "min": 162.42,
+              "median": 272.848,
+              "p95": 1649.922,
+              "max": 4141.554,
+              "sum": 502173.997
+            },
+            "batch_score_us": {
+              "n": 1110,
+              "min": 20.98,
+              "median": 200.449,
+              "p95": 301.7879999999999,
+              "max": 1095.376,
+              "sum": 215433.603
+            },
+            "batch_top10_us": {
+              "n": 1110,
+              "min": 5.0,
+              "median": 21.74,
+              "p95": 36.91844999999999,
+              "max": 182.569,
+              "sum": 25117.085
+            },
+            "CPU_factor_bytes": 9437184
+          }
+        },
+        "records": {
+          "omitted_list_items": 3330
+        },
+        "limitations": [
+          "Fresh diagnostic copies change timing and add activation traffic; no headline TG measurement.",
+          "CPU scoring cost is single-thread offline including numeric allocations/top10, excluding capture, scheduling and CPU-expert contention.",
+          "One-blob readiness is optimistic: ignores full slots, competing proposals, eviction victims and in-flight reader hazards.",
+          "Original gate weights define the factors; no labels were used to fit SVD. Rank decisions must use development/calibration only.",
+          "Current MoE activation predicts the next router; true future router IDs are labels only.",
+          "Lead is between host observations, includes altered doorbell traffic, and is not a GPU clock duration."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/dev-code.json",
+      "source_bytes": 3187087,
+      "source_sha256": "28d35ebf2c836df04d58ee2a10b64d417a2fa34ad657afe6c632feca1160856c",
+      "compact_evidence": {
+        "state": "PASS",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request2",
+        "episode": "dev-code",
+        "split": "development",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request2",
+          "state": "PASS",
+          "errors": [],
+          "windows": 360,
+          "layers": 17280,
+          "output_tokens": 1024,
+          "output_ids_sha256": "85f1ecca20615bb5b78957e8594fffdbbb44f30f93471dbfc9e50364aff6be50",
+          "demand_entries": 608160,
+          "path_counts": {
+            "-1": 9808,
+            "0": 597970,
+            "1": 382,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.32445409102867,
+          "reported_hit_pct_denominator": 98.38625287522747,
+          "promotions": 1779,
+          "promotion_bytes": 3614643200,
+          "unpublished_promotions_at_request_end": 7,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "construction": {
+          "6": {
+            "elapsed_s": 0.15218540199566633,
+            "gate_sha256": "7de6e13d2b6f680fad0fe76018bb9c1b04b66f8d304079b52eb5a38336854e6f",
+            "factor_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer6.npz",
+            "energy_fraction": {
+              "32": 0.6157653331756592,
+              "128": 0.8106964230537415
+            }
+          },
+          "21": {
+            "elapsed_s": 0.13965019898023456,
+            "gate_sha256": "c6d2a815a4845abf5471d767432496a30fd1c9a2cfb91effb2b42ca17bf3c9f9",
+            "factor_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer21.npz",
+            "energy_fraction": {
+              "32": 0.6556690335273743,
+              "128": 0.8474469184875488
+            }
+          },
+          "25": {
+            "elapsed_s": 0.13132684997981414,
+            "gate_sha256": "4580b6ef10fc5d128eceae2ba14934c9c5465e10120ef825c5ad67e9bfb72534",
+            "factor_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer25.npz",
+            "energy_fraction": {
+              "32": 0.6586239337921143,
+              "128": 0.8532139658927917
+            }
+          },
+          "26": {
+            "elapsed_s": 0.1413247529999353,
+            "gate_sha256": "f1546d4f3a72b76a9cb8822f43ef056d532633c7f14b00ea0fd94256f7538286",
+            "factor_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer26.npz",
+            "energy_fraction": {
+              "32": 0.6512424349784851,
+              "128": 0.8441224694252014
+            }
+          },
+          "41": {
+            "elapsed_s": 0.14185910095693544,
+            "gate_sha256": "0bdacc8e5cca10c4643d75bfa40289d24118b29a6c5048346809d77269973826",
+            "factor_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer41.npz",
+            "energy_fraction": {
+              "32": 0.6654210090637207,
+              "128": 0.844423770904541
+            }
+          },
+          "47": {
+            "elapsed_s": 0.14224481099518016,
+            "gate_sha256": "a074847671d9ef0699a5a542bbd4c5a76046543e76fdb499d62bd7be1fd08c50",
+            "factor_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer47.npz",
+            "energy_fraction": {
+              "32": 0.6273225545883179,
+              "128": 0.825015127658844
+            }
+          }
+        },
+        "summary": {
+          "0": {
+            "rows": 1272,
+            "top10_precision_pct": 69.82704402515724,
+            "true_nonlocal_entries": 137,
+            "nonlocal_recall_pct": 59.85401459854015,
+            "predicted_nonresident_entries": 567,
+            "false_positive_nonresident_entries": 485,
+            "nonresident_proposal_precision_pct": 14.462081128747796,
+            "warm_ready_fraction": {
+              "12.6": 0.04146730462519936,
+              "1.8": 0.023923444976076555
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 5.882352941176471,
+              "1.8": 3.676470588235294
+            },
+            "warm_lead_us": {
+              "n": 1254,
+              "min": 161.119,
+              "median": 246.968,
+              "p95": 737.8351499999962,
+              "max": 4109.395,
+              "sum": 452716.031
+            },
+            "batch_score_us": {
+              "n": 1272,
+              "min": 95.79,
+              "median": 687.708,
+              "p95": 1003.4104000000002,
+              "max": 1898.413,
+              "sum": 895884.845
+            },
+            "batch_top10_us": {
+              "n": 1272,
+              "min": 5.831,
+              "median": 24.55,
+              "p95": 37.33,
+              "max": 93.17,
+              "sum": 31493.746
+            },
+            "CPU_factor_bytes": 31457280
+          },
+          "32": {
+            "rows": 1272,
+            "top10_precision_pct": 47.90880503144654,
+            "true_nonlocal_entries": 137,
+            "nonlocal_recall_pct": 19.708029197080293,
+            "predicted_nonresident_entries": 573,
+            "false_positive_nonresident_entries": 546,
+            "nonresident_proposal_precision_pct": 4.712041884816754,
+            "warm_ready_fraction": {
+              "12.6": 0.5287081339712919,
+              "1.8": 0.037480063795853266
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 16.176470588235293,
+              "1.8": 0.7352941176470589
+            },
+            "warm_lead_us": {
+              "n": 1254,
+              "min": 161.119,
+              "median": 246.968,
+              "p95": 737.8351499999962,
+              "max": 4109.395,
+              "sum": 452716.031
+            },
+            "batch_score_us": {
+              "n": 1272,
+              "min": 17.131,
+              "median": 52.8005,
+              "p95": 82.33,
+              "max": 100.199,
+              "sum": 67292.903
+            },
+            "batch_top10_us": {
+              "n": 1272,
+              "min": 4.67,
+              "median": 21.459,
+              "p95": 37.289,
+              "max": 6563.845,
+              "sum": 48271.662
+            },
+            "CPU_factor_bytes": 2359296
+          },
+          "128": {
+            "rows": 1272,
+            "top10_precision_pct": 63.278301886792455,
+            "true_nonlocal_entries": 137,
+            "nonlocal_recall_pct": 39.416058394160586,
+            "predicted_nonresident_entries": 579,
+            "false_positive_nonresident_entries": 525,
+            "nonresident_proposal_precision_pct": 9.32642487046632,
+            "warm_ready_fraction": {
+              "12.6": 0.07416267942583732,
+              "1.8": 0.0342902711323764
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 7.352941176470588,
+              "1.8": 3.676470588235294
+            },
+            "warm_lead_us": {
+              "n": 1254,
+              "min": 161.119,
+              "median": 246.968,
+              "p95": 737.8351499999962,
+              "max": 4109.395,
+              "sum": 452716.031
+            },
+            "batch_score_us": {
+              "n": 1272,
+              "min": 23.27,
+              "median": 240.69,
+              "p95": 344.859,
+              "max": 552.757,
+              "sum": 293782.446
+            },
+            "batch_top10_us": {
+              "n": 1272,
+              "min": 5.04,
+              "median": 22.389,
+              "p95": 38.45,
+              "max": 60.119,
+              "sum": 29773.432
+            },
+            "CPU_factor_bytes": 9437184
+          }
+        },
+        "records": {
+          "omitted_list_items": 3816
+        },
+        "limitations": [
+          "Fresh diagnostic copies change timing and add activation traffic; no headline TG measurement.",
+          "CPU scoring cost is single-thread offline including numeric allocations/top10, excluding capture, scheduling and CPU-expert contention.",
+          "One-blob readiness is optimistic: ignores full slots, competing proposals, eviction victims and in-flight reader hazards.",
+          "Original gate weights define the factors; no labels were used to fit SVD. Rank decisions must use development/calibration only.",
+          "Current MoE activation predicts the next router; true future router IDs are labels only.",
+          "Lead is between host observations, includes altered doorbell traffic, and is not a GPU clock duration."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/dev-math.json",
+      "source_bytes": 3520174,
+      "source_sha256": "0479de099b49e80b870ccc78b5193717015ad982e83567e6e917caef355d5e73",
+      "compact_evidence": {
+        "state": "PASS",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request3",
+        "episode": "dev-math",
+        "split": "development",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request3",
+          "state": "PASS",
+          "errors": [],
+          "windows": 317,
+          "layers": 15216,
+          "output_tokens": 1024,
+          "output_ids_sha256": "aaa57f102afa5f3d75c9a0ad65d57a696c4a43fcbbe65e78ccfd6e2c55b59463",
+          "demand_entries": 562080,
+          "path_counts": {
+            "-1": 8250,
+            "0": 553607,
+            "1": 223,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.4925633361799,
+          "reported_hit_pct_denominator": 98.53165485167935,
+          "promotions": 1336,
+          "promotion_bytes": 2744064000,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "construction": {
+          "6": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer6.npz",
+            "gate_sha256": "7de6e13d2b6f680fad0fe76018bb9c1b04b66f8d304079b52eb5a38336854e6f",
+            "energy_fraction": {
+              "32": 0.6157653331756592,
+              "128": 0.8106964230537415
+            }
+          },
+          "21": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer21.npz",
+            "gate_sha256": "c6d2a815a4845abf5471d767432496a30fd1c9a2cfb91effb2b42ca17bf3c9f9",
+            "energy_fraction": {
+              "32": 0.6556690335273743,
+              "128": 0.8474469184875488
+            }
+          },
+          "25": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer25.npz",
+            "gate_sha256": "4580b6ef10fc5d128eceae2ba14934c9c5465e10120ef825c5ad67e9bfb72534",
+            "energy_fraction": {
+              "32": 0.6586239337921143,
+              "128": 0.8532139658927917
+            }
+          },
+          "26": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer26.npz",
+            "gate_sha256": "f1546d4f3a72b76a9cb8822f43ef056d532633c7f14b00ea0fd94256f7538286",
+            "energy_fraction": {
+              "32": 0.6512424349784851,
+              "128": 0.8441224694252014
+            }
+          },
+          "41": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer41.npz",
+            "gate_sha256": "0bdacc8e5cca10c4643d75bfa40289d24118b29a6c5048346809d77269973826",
+            "energy_fraction": {
+              "32": 0.6654210090637207,
+              "128": 0.844423770904541
+            }
+          },
+          "47": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer47.npz",
+            "gate_sha256": "a074847671d9ef0699a5a542bbd4c5a76046543e76fdb499d62bd7be1fd08c50",
+            "energy_fraction": {
+              "32": 0.6273225545883179,
+              "128": 0.825015127658844
+            }
+          }
+        },
+        "summary": {
+          "0": {
+            "rows": 1404,
+            "top10_precision_pct": 71.98005698005699,
+            "true_nonlocal_entries": 250,
+            "nonlocal_recall_pct": 45.2,
+            "predicted_nonresident_entries": 529,
+            "false_positive_nonresident_entries": 416,
+            "nonresident_proposal_precision_pct": 21.361058601134214,
+            "warm_ready_fraction": {
+              "12.6": 0.05555555555555555,
+              "1.8": 0.03418803418803419
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 4.4,
+              "1.8": 4.4
+            },
+            "warm_lead_us": {
+              "n": 1404,
+              "min": 159.99,
+              "median": 247.789,
+              "p95": 946.067,
+              "max": 21614.937,
+              "sum": 601852.921
+            },
+            "batch_score_us": {
+              "n": 1404,
+              "min": 63.469,
+              "median": 638.727,
+              "p95": 888.817,
+              "max": 1312.755,
+              "sum": 901639.8869999999
+            },
+            "batch_top10_us": {
+              "n": 1404,
+              "min": 6.311,
+              "median": 23.66,
+              "p95": 39.5,
+              "max": 355.319,
+              "sum": 36003.272
+            },
+            "CPU_factor_bytes": 31457280
+          },
+          "32": {
+            "rows": 1404,
+            "top10_precision_pct": 47.02991452991453,
+            "true_nonlocal_entries": 250,
+            "nonlocal_recall_pct": 20.4,
+            "predicted_nonresident_entries": 1132,
+            "false_positive_nonresident_entries": 1081,
+            "nonresident_proposal_precision_pct": 4.5053003533568905,
+            "warm_ready_fraction": {
+              "12.6": 0.5669515669515669,
+              "1.8": 0.03774928774928775
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 14.8,
+              "1.8": 1.6
+            },
+            "warm_lead_us": {
+              "n": 1404,
+              "min": 159.99,
+              "median": 247.789,
+              "p95": 946.067,
+              "max": 21614.937,
+              "sum": 601852.921
+            },
+            "batch_score_us": {
+              "n": 1404,
+              "min": 12.949,
+              "median": 52.94,
+              "p95": 85.2935,
+              "max": 736.428,
+              "sum": 77824.53099999999
+            },
+            "batch_top10_us": {
+              "n": 1404,
+              "min": 4.669,
+              "median": 20.74,
+              "p95": 37.351,
+              "max": 512.799,
+              "sum": 31435.743000000002
+            },
+            "CPU_factor_bytes": 2359296
+          },
+          "128": {
+            "rows": 1404,
+            "top10_precision_pct": 64.70797720797721,
+            "true_nonlocal_entries": 250,
+            "nonlocal_recall_pct": 34.4,
+            "predicted_nonresident_entries": 640,
+            "false_positive_nonresident_entries": 554,
+            "nonresident_proposal_precision_pct": 13.4375,
+            "warm_ready_fraction": {
+              "12.6": 0.08048433048433049,
+              "1.8": 0.03774928774928775
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 4.0,
+              "1.8": 1.6
+            },
+            "warm_lead_us": {
+              "n": 1404,
+              "min": 159.99,
+              "median": 247.789,
+              "p95": 946.067,
+              "max": 21614.937,
+              "sum": 601852.921
+            },
+            "batch_score_us": {
+              "n": 1404,
+              "min": 24.18,
+              "median": 234.419,
+              "p95": 328.66335,
+              "max": 420.969,
+              "sum": 327013.018
+            },
+            "batch_top10_us": {
+              "n": 1404,
+              "min": 5.93,
+              "median": 22.734499999999997,
+              "p95": 38.169,
+              "max": 211.588,
+              "sum": 33006.068
+            },
+            "CPU_factor_bytes": 9437184
+          }
+        },
+        "records": {
+          "omitted_list_items": 4212
+        },
+        "limitations": [
+          "Fresh diagnostic copies change timing and add activation traffic; no headline TG measurement.",
+          "CPU scoring cost is single-thread offline including numeric allocations/top10, excluding capture, scheduling and CPU-expert contention.",
+          "One-blob readiness is optimistic: ignores full slots, competing proposals, eviction victims and in-flight reader hazards.",
+          "Original gate weights define the factors; no labels were used to fit SVD. Rank decisions must use development/calibration only.",
+          "Current MoE activation predicts the next router; true future router IDs are labels only.",
+          "Lead is between host observations, includes altered doorbell traffic, and is not a GPU clock duration."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/hold-code.json",
+      "source_bytes": 2912707,
+      "source_sha256": "a74de34ce413b0a07521e517c6d003f453d86394dd7b74b814fd30943d31ef75",
+      "compact_evidence": {
+        "state": "PASS",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request5",
+        "episode": "hold-code",
+        "split": "holdout",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request5",
+          "state": "PASS",
+          "errors": [],
+          "windows": 349,
+          "layers": 16752,
+          "output_tokens": 1024,
+          "output_ids_sha256": "6bcff7f9c331cb0d550319d364cd123cb1e9511494f14b218a3319eda299c299",
+          "demand_entries": 586080,
+          "path_counts": {
+            "-1": 11536,
+            "0": 574144,
+            "1": 400,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 97.96341796341797,
+          "reported_hit_pct_denominator": 98.0303237262669,
+          "promotions": 2208,
+          "promotion_bytes": 4500966400,
+          "unpublished_promotions_at_request_end": 8,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "construction": {
+          "6": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer6.npz",
+            "gate_sha256": "7de6e13d2b6f680fad0fe76018bb9c1b04b66f8d304079b52eb5a38336854e6f",
+            "energy_fraction": {
+              "32": 0.6157653331756592,
+              "128": 0.8106964230537415
+            }
+          },
+          "21": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer21.npz",
+            "gate_sha256": "c6d2a815a4845abf5471d767432496a30fd1c9a2cfb91effb2b42ca17bf3c9f9",
+            "energy_fraction": {
+              "32": 0.6556690335273743,
+              "128": 0.8474469184875488
+            }
+          },
+          "25": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer25.npz",
+            "gate_sha256": "4580b6ef10fc5d128eceae2ba14934c9c5465e10120ef825c5ad67e9bfb72534",
+            "energy_fraction": {
+              "32": 0.6586239337921143,
+              "128": 0.8532139658927917
+            }
+          },
+          "26": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer26.npz",
+            "gate_sha256": "f1546d4f3a72b76a9cb8822f43ef056d532633c7f14b00ea0fd94256f7538286",
+            "energy_fraction": {
+              "32": 0.6512424349784851,
+              "128": 0.8441224694252014
+            }
+          },
+          "41": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer41.npz",
+            "gate_sha256": "0bdacc8e5cca10c4643d75bfa40289d24118b29a6c5048346809d77269973826",
+            "energy_fraction": {
+              "32": 0.6654210090637207,
+              "128": 0.844423770904541
+            }
+          },
+          "47": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer47.npz",
+            "gate_sha256": "a074847671d9ef0699a5a542bbd4c5a76046543e76fdb499d62bd7be1fd08c50",
+            "energy_fraction": {
+              "32": 0.6273225545883179,
+              "128": 0.825015127658844
+            }
+          }
+        },
+        "summary": {
+          "0": {
+            "rows": 1164,
+            "top10_precision_pct": 70.80756013745705,
+            "true_nonlocal_entries": 254,
+            "nonlocal_recall_pct": 57.08661417322835,
+            "predicted_nonresident_entries": 563,
+            "false_positive_nonresident_entries": 418,
+            "nonresident_proposal_precision_pct": 25.75488454706927,
+            "warm_ready_fraction": {
+              "12.6": 0.08505154639175258,
+              "1.8": 0.054982817869415807
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 5.118110236220472,
+              "1.8": 2.3622047244094486
+            },
+            "warm_lead_us": {
+              "n": 1164,
+              "min": 160.869,
+              "median": 248.81,
+              "p95": 2112.1046499999943,
+              "max": 4003.294,
+              "sum": 511177.21200000006
+            },
+            "batch_score_us": {
+              "n": 1164,
+              "min": 70.349,
+              "median": 653.5875,
+              "p95": 963.647,
+              "max": 1824.453,
+              "sum": 777471.994
+            },
+            "batch_top10_us": {
+              "n": 1164,
+              "min": 4.95,
+              "median": 23.67,
+              "p95": 39.13,
+              "max": 54.77,
+              "sum": 28090.646
+            },
+            "CPU_factor_bytes": 31457280
+          },
+          "32": {
+            "rows": 1164,
+            "top10_precision_pct": 46.75257731958763,
+            "true_nonlocal_entries": 254,
+            "nonlocal_recall_pct": 22.04724409448819,
+            "predicted_nonresident_entries": 743,
+            "false_positive_nonresident_entries": 687,
+            "nonresident_proposal_precision_pct": 7.537012113055182,
+            "warm_ready_fraction": {
+              "12.6": 0.5249140893470791,
+              "1.8": 0.070446735395189
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 17.716535433070867,
+              "1.8": 1.968503937007874
+            },
+            "warm_lead_us": {
+              "n": 1164,
+              "min": 160.869,
+              "median": 248.81,
+              "p95": 2112.1046499999943,
+              "max": 4003.294,
+              "sum": 511177.21200000006
+            },
+            "batch_score_us": {
+              "n": 1164,
+              "min": 10.63,
+              "median": 52.2,
+              "p95": 86.551,
+              "max": 108.549,
+              "sum": 63037.450000000004
+            },
+            "batch_top10_us": {
+              "n": 1164,
+              "min": 4.71,
+              "median": 20.71,
+              "p95": 37.131,
+              "max": 101.07,
+              "sum": 24681.279000000002
+            },
+            "CPU_factor_bytes": 2359296
+          },
+          "128": {
+            "rows": 1164,
+            "top10_precision_pct": 64.0721649484536,
+            "true_nonlocal_entries": 254,
+            "nonlocal_recall_pct": 43.7007874015748,
+            "predicted_nonresident_entries": 636,
+            "false_positive_nonresident_entries": 525,
+            "nonresident_proposal_precision_pct": 17.452830188679247,
+            "warm_ready_fraction": {
+              "12.6": 0.12285223367697594,
+              "1.8": 0.06529209621993128
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 9.84251968503937,
+              "1.8": 4.724409448818897
+            },
+            "warm_lead_us": {
+              "n": 1164,
+              "min": 160.869,
+              "median": 248.81,
+              "p95": 2112.1046499999943,
+              "max": 4003.294,
+              "sum": 511177.21200000006
+            },
+            "batch_score_us": {
+              "n": 1164,
+              "min": 23.93,
+              "median": 211.289,
+              "p95": 316.848,
+              "max": 398.138,
+              "sum": 238967.065
+            },
+            "batch_top10_us": {
+              "n": 1164,
+              "min": 4.88,
+              "median": 22.251,
+              "p95": 39.86,
+              "max": 403.989,
+              "sum": 28211.564
+            },
+            "CPU_factor_bytes": 9437184
+          }
+        },
+        "records": {
+          "omitted_list_items": 3492
+        },
+        "limitations": [
+          "Fresh diagnostic copies change timing and add activation traffic; no headline TG measurement.",
+          "CPU scoring cost is single-thread offline including numeric allocations/top10, excluding capture, scheduling and CPU-expert contention.",
+          "One-blob readiness is optimistic: ignores full slots, competing proposals, eviction victims and in-flight reader hazards.",
+          "Original gate weights define the factors; no labels were used to fit SVD. Rank decisions must use development/calibration only.",
+          "Current MoE activation predicts the next router; true future router IDs are labels only.",
+          "Lead is between host observations, includes altered doorbell traffic, and is not a GPU clock duration."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/hold-math.json",
+      "source_bytes": 3511517,
+      "source_sha256": "1c3498d549342c479f2099e9bcabcf15791c71e320794592a946c3a3ff438165",
+      "compact_evidence": {
+        "state": "PASS",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request7",
+        "episode": "hold-math",
+        "split": "holdout",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request7",
+          "state": "PASS",
+          "errors": [],
+          "windows": 365,
+          "layers": 17520,
+          "output_tokens": 1024,
+          "output_ids_sha256": "53a848a1439ca1b9428ca9716926870382e31ac1337e51d88ab0616c79c910ba",
+          "demand_entries": 608160,
+          "path_counts": {
+            "-1": 7827,
+            "0": 600200,
+            "1": 133,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.6911339121284,
+          "reported_hit_pct_denominator": 98.71272163900616,
+          "promotions": 1534,
+          "promotion_bytes": 3106636800,
+          "unpublished_promotions_at_request_end": 13,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "construction": {
+          "6": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer6.npz",
+            "gate_sha256": "7de6e13d2b6f680fad0fe76018bb9c1b04b66f8d304079b52eb5a38336854e6f",
+            "energy_fraction": {
+              "32": 0.6157653331756592,
+              "128": 0.8106964230537415
+            }
+          },
+          "21": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer21.npz",
+            "gate_sha256": "c6d2a815a4845abf5471d767432496a30fd1c9a2cfb91effb2b42ca17bf3c9f9",
+            "energy_fraction": {
+              "32": 0.6556690335273743,
+              "128": 0.8474469184875488
+            }
+          },
+          "25": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer25.npz",
+            "gate_sha256": "4580b6ef10fc5d128eceae2ba14934c9c5465e10120ef825c5ad67e9bfb72534",
+            "energy_fraction": {
+              "32": 0.6586239337921143,
+              "128": 0.8532139658927917
+            }
+          },
+          "26": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer26.npz",
+            "gate_sha256": "f1546d4f3a72b76a9cb8822f43ef056d532633c7f14b00ea0fd94256f7538286",
+            "energy_fraction": {
+              "32": 0.6512424349784851,
+              "128": 0.8441224694252014
+            }
+          },
+          "41": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer41.npz",
+            "gate_sha256": "0bdacc8e5cca10c4643d75bfa40289d24118b29a6c5048346809d77269973826",
+            "energy_fraction": {
+              "32": 0.6654210090637207,
+              "128": 0.844423770904541
+            }
+          },
+          "47": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer47.npz",
+            "gate_sha256": "a074847671d9ef0699a5a542bbd4c5a76046543e76fdb499d62bd7be1fd08c50",
+            "energy_fraction": {
+              "32": 0.6273225545883179,
+              "128": 0.825015127658844
+            }
+          }
+        },
+        "summary": {
+          "0": {
+            "rows": 1404,
+            "top10_precision_pct": 69.97863247863248,
+            "true_nonlocal_entries": 446,
+            "nonlocal_recall_pct": 52.690582959641254,
+            "predicted_nonresident_entries": 760,
+            "false_positive_nonresident_entries": 525,
+            "nonresident_proposal_precision_pct": 30.92105263157895,
+            "warm_ready_fraction": {
+              "12.6": 0.06267806267806268,
+              "1.8": 0.042735042735042736
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 2.4663677130044843,
+              "1.8": 1.1210762331838564
+            },
+            "warm_lead_us": {
+              "n": 1404,
+              "min": 160.639,
+              "median": 260.744,
+              "p95": 1254.315,
+              "max": 4111.934,
+              "sum": 603105.669
+            },
+            "batch_score_us": {
+              "n": 1404,
+              "min": 70.749,
+              "median": 629.217,
+              "p95": 851.746,
+              "max": 1033.035,
+              "sum": 884942.2209999999
+            },
+            "batch_top10_us": {
+              "n": 1404,
+              "min": 8.68,
+              "median": 26.085,
+              "p95": 43.59,
+              "max": 521.248,
+              "sum": 39668.598000000005
+            },
+            "CPU_factor_bytes": 31457280
+          },
+          "32": {
+            "rows": 1404,
+            "top10_precision_pct": 46.88034188034188,
+            "true_nonlocal_entries": 446,
+            "nonlocal_recall_pct": 31.614349775784753,
+            "predicted_nonresident_entries": 1334,
+            "false_positive_nonresident_entries": 1193,
+            "nonresident_proposal_precision_pct": 10.569715142428786,
+            "warm_ready_fraction": {
+              "12.6": 0.6004273504273504,
+              "1.8": 0.04843304843304843
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 22.6457399103139,
+              "1.8": 0.2242152466367713
+            },
+            "warm_lead_us": {
+              "n": 1404,
+              "min": 160.639,
+              "median": 260.744,
+              "p95": 1254.315,
+              "max": 4111.934,
+              "sum": 603105.669
+            },
+            "batch_score_us": {
+              "n": 1404,
+              "min": 11.171,
+              "median": 55.91,
+              "p95": 92.28499999999998,
+              "max": 808.527,
+              "sum": 81257.59900000002
+            },
+            "batch_top10_us": {
+              "n": 1404,
+              "min": 5.911,
+              "median": 22.689,
+              "p95": 38.639,
+              "max": 579.548,
+              "sum": 34948.106
+            },
+            "CPU_factor_bytes": 2359296
+          },
+          "128": {
+            "rows": 1404,
+            "top10_precision_pct": 63.11965811965812,
+            "true_nonlocal_entries": 446,
+            "nonlocal_recall_pct": 39.01345291479821,
+            "predicted_nonresident_entries": 846,
+            "false_positive_nonresident_entries": 672,
+            "nonresident_proposal_precision_pct": 20.56737588652482,
+            "warm_ready_fraction": {
+              "12.6": 0.10897435897435898,
+              "1.8": 0.04843304843304843
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 6.726457399103139,
+              "1.8": 0.8968609865470852
+            },
+            "warm_lead_us": {
+              "n": 1404,
+              "min": 160.639,
+              "median": 260.744,
+              "p95": 1254.315,
+              "max": 4111.934,
+              "sum": 603105.669
+            },
+            "batch_score_us": {
+              "n": 1404,
+              "min": 23.94,
+              "median": 223.769,
+              "p95": 344.128,
+              "max": 486.138,
+              "sum": 321609.581
+            },
+            "batch_top10_us": {
+              "n": 1404,
+              "min": 6.02,
+              "median": 24.04,
+              "p95": 41.228999999999964,
+              "max": 68.719,
+              "sum": 36363.646
+            },
+            "CPU_factor_bytes": 9437184
+          }
+        },
+        "records": {
+          "omitted_list_items": 4212
+        },
+        "limitations": [
+          "Fresh diagnostic copies change timing and add activation traffic; no headline TG measurement.",
+          "CPU scoring cost is single-thread offline including numeric allocations/top10, excluding capture, scheduling and CPU-expert contention.",
+          "One-blob readiness is optimistic: ignores full slots, competing proposals, eviction victims and in-flight reader hazards.",
+          "Original gate weights define the factors; no labels were used to fit SVD. Rank decisions must use development/calibration only.",
+          "Current MoE activation predicts the next router; true future router IDs are labels only.",
+          "Lead is between host observations, includes altered doorbell traffic, and is not a GPU clock duration."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/analysis/hold-structured.json",
+      "source_bytes": 3536589,
+      "source_sha256": "dcb8299cf8d869308a41733425ecea9cf026756feea7a395666f85e04ad1a47d",
+      "compact_evidence": {
+        "state": "PASS",
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request6",
+        "episode": "hold-structured",
+        "split": "holdout",
+        "trace_validation": {
+          "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/traces/runtime-request6",
+          "state": "PASS",
+          "errors": [],
+          "windows": 279,
+          "layers": 13392,
+          "output_tokens": 1024,
+          "output_ids_sha256": "db7a11e2630f9d9bf9da6847105dbe10dfacee74617c6a08f576d6852ee88dae",
+          "demand_entries": 516960,
+          "path_counts": {
+            "-1": 8997,
+            "0": 507741,
+            "1": 222,
+            "2": 0
+          },
+          "all_demand_local_hit_pct": 98.21668987929434,
+          "reported_hit_pct_denominator": 98.25888554741475,
+          "promotions": 1300,
+          "promotion_bytes": 2635545600,
+          "unpublished_promotions_at_request_end": 0,
+          "gpu_budgets": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ]
+        },
+        "construction": {
+          "6": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer6.npz",
+            "gate_sha256": "7de6e13d2b6f680fad0fe76018bb9c1b04b66f8d304079b52eb5a38336854e6f",
+            "energy_fraction": {
+              "32": 0.6157653331756592,
+              "128": 0.8106964230537415
+            }
+          },
+          "21": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer21.npz",
+            "gate_sha256": "c6d2a815a4845abf5471d767432496a30fd1c9a2cfb91effb2b42ca17bf3c9f9",
+            "energy_fraction": {
+              "32": 0.6556690335273743,
+              "128": 0.8474469184875488
+            }
+          },
+          "25": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer25.npz",
+            "gate_sha256": "4580b6ef10fc5d128eceae2ba14934c9c5465e10120ef825c5ad67e9bfb72534",
+            "energy_fraction": {
+              "32": 0.6586239337921143,
+              "128": 0.8532139658927917
+            }
+          },
+          "26": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer26.npz",
+            "gate_sha256": "f1546d4f3a72b76a9cb8822f43ef056d532633c7f14b00ea0fd94256f7538286",
+            "energy_fraction": {
+              "32": 0.6512424349784851,
+              "128": 0.8441224694252014
+            }
+          },
+          "41": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer41.npz",
+            "gate_sha256": "0bdacc8e5cca10c4643d75bfa40289d24118b29a6c5048346809d77269973826",
+            "energy_fraction": {
+              "32": 0.6654210090637207,
+              "128": 0.844423770904541
+            }
+          },
+          "47": {
+            "loaded": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/checkpoints/gate-factors/layer47.npz",
+            "gate_sha256": "a074847671d9ef0699a5a542bbd4c5a76046543e76fdb499d62bd7be1fd08c50",
+            "energy_fraction": {
+              "32": 0.6273225545883179,
+              "128": 0.825015127658844
+            }
+          }
+        },
+        "summary": {
+          "0": {
+            "rows": 1404,
+            "top10_precision_pct": 66.84472934472934,
+            "true_nonlocal_entries": 265,
+            "nonlocal_recall_pct": 50.18867924528302,
+            "predicted_nonresident_entries": 563,
+            "false_positive_nonresident_entries": 430,
+            "nonresident_proposal_precision_pct": 23.623445825932503,
+            "warm_ready_fraction": {
+              "12.6": 0.054843304843304845,
+              "1.8": 0.04843304843304843
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 2.2641509433962264,
+              "1.8": 2.2641509433962264
+            },
+            "warm_lead_us": {
+              "n": 1404,
+              "min": 161.07,
+              "median": 263.309,
+              "p95": 1927.1246499999875,
+              "max": 6038.986,
+              "sum": 587915.7779999999
+            },
+            "batch_score_us": {
+              "n": 1404,
+              "min": 55.82,
+              "median": 640.0325,
+              "p95": 955.645,
+              "max": 3954.924,
+              "sum": 929174.0349999999
+            },
+            "batch_top10_us": {
+              "n": 1404,
+              "min": 6.08,
+              "median": 25.829,
+              "p95": 41.609,
+              "max": 448.148,
+              "sum": 38989.578
+            },
+            "CPU_factor_bytes": 31457280
+          },
+          "32": {
+            "rows": 1404,
+            "top10_precision_pct": 38.47578347578347,
+            "true_nonlocal_entries": 265,
+            "nonlocal_recall_pct": 14.339622641509434,
+            "predicted_nonresident_entries": 981,
+            "false_positive_nonresident_entries": 943,
+            "nonresident_proposal_precision_pct": 3.873598369011213,
+            "warm_ready_fraction": {
+              "12.6": 0.5883190883190883,
+              "1.8": 0.05413105413105413
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 10.18867924528302,
+              "1.8": 0.7547169811320755
+            },
+            "warm_lead_us": {
+              "n": 1404,
+              "min": 161.07,
+              "median": 263.309,
+              "p95": 1927.1246499999875,
+              "max": 6038.986,
+              "sum": 587915.7779999999
+            },
+            "batch_score_us": {
+              "n": 1404,
+              "min": 9.291,
+              "median": 58.545500000000004,
+              "p95": 93.949,
+              "max": 508.628,
+              "sum": 83752.261
+            },
+            "batch_top10_us": {
+              "n": 1404,
+              "min": 4.86,
+              "median": 22.93,
+              "p95": 38.519,
+              "max": 186.969,
+              "sum": 33776.136
+            },
+            "CPU_factor_bytes": 2359296
+          },
+          "128": {
+            "rows": 1404,
+            "top10_precision_pct": 59.25925925925926,
+            "true_nonlocal_entries": 265,
+            "nonlocal_recall_pct": 31.32075471698113,
+            "predicted_nonresident_entries": 672,
+            "false_positive_nonresident_entries": 589,
+            "nonresident_proposal_precision_pct": 12.351190476190476,
+            "warm_ready_fraction": {
+              "12.6": 0.07621082621082621,
+              "1.8": 0.05128205128205128
+            },
+            "warm_ready_true_nonlocal_recall_pct": {
+              "12.6": 4.150943396226415,
+              "1.8": 1.509433962264151
+            },
+            "warm_lead_us": {
+              "n": 1404,
+              "min": 161.07,
+              "median": 263.309,
+              "p95": 1927.1246499999875,
+              "max": 6038.986,
+              "sum": 587915.7779999999
+            },
+            "batch_score_us": {
+              "n": 1404,
+              "min": 21.41,
+              "median": 246.419,
+              "p95": 368.168,
+              "max": 433.218,
+              "sum": 345720.24199999997
+            },
+            "batch_top10_us": {
+              "n": 1404,
+              "min": 5.82,
+              "median": 23.89,
+              "p95": 42.409,
+              "max": 206.5,
+              "sum": 37109.061
+            },
+            "CPU_factor_bytes": 9437184
+          }
+        },
+        "records": {
+          "omitted_list_items": 4212
+        },
+        "limitations": [
+          "Fresh diagnostic copies change timing and add activation traffic; no headline TG measurement.",
+          "CPU scoring cost is single-thread offline including numeric allocations/top10, excluding capture, scheduling and CPU-expert contention.",
+          "One-blob readiness is optimistic: ignores full slots, competing proposals, eviction victims and in-flight reader hazards.",
+          "Original gate weights define the factors; no labels were used to fit SVD. Rank decisions must use development/calibration only.",
+          "Current MoE activation predicts the next router; true future router IDs are labels only.",
+          "Lead is between host observations, includes altered doorbell traffic, and is not a GPU clock duration."
+        ]
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/old-fresh-filter/128k.json",
+      "source_bytes": 229854,
+      "source_sha256": "3f48acafbca8e4bfe635358315b54f4d2bd8f86755b68e6a3bab4a4412650351",
+      "compact_evidence": {
+        "original_analysis": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/analysis-r2/128k/analysis.json",
+        "original_rows": 1140,
+        "fresh_rows": 304,
+        "unavailable_or_stale_rows": 836,
+        "fresh_top10_precision_pct": 62.96052631578947,
+        "fresh_nonlocal_entries": 112,
+        "fresh_nonlocal_recall_pct": 43.75,
+        "fresh_warm_optimistic_ready_fraction": 0.15614617940199335,
+        "selection_bias": "Fresh groups have a current-layer nonlocal; they are not representative of all-local groups. Do not extrapolate.",
+        "kept_records": {
+          "omitted_list_items": 304
+        },
+        "excluded_record_keys": {
+          "omitted_list_items": 836
+        }
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/old-fresh-filter/32k.json",
+      "source_bytes": 201979,
+      "source_sha256": "9631f4b09ff809143e0f67d3406743374926d1728a70aef48059436904139b5f",
+      "compact_evidence": {
+        "original_analysis": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/analysis-r2/32k/analysis.json",
+        "original_rows": 1116,
+        "fresh_rows": 249,
+        "unavailable_or_stale_rows": 867,
+        "fresh_top10_precision_pct": 66.8273092369478,
+        "fresh_nonlocal_entries": 37,
+        "fresh_nonlocal_recall_pct": 70.27027027027027,
+        "fresh_warm_optimistic_ready_fraction": 0.06584362139917696,
+        "selection_bias": "Fresh groups have a current-layer nonlocal; they are not representative of all-local groups. Do not extrapolate.",
+        "kept_records": {
+          "omitted_list_items": 249
+        },
+        "excluded_record_keys": {
+          "omitted_list_items": 867
+        }
+      }
+    }
+  ]
+}

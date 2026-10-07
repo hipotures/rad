@@ -1,0 +1,53 @@
+{
+  "version": "information-v2-common-context-transfer",
+  "freeze_utc": "2026-10-06T11:07:09.343153+00:00",
+  "source": "bbfea2955ec238f7e6406b11c74e577c996c4a8d",
+  "binary_sha256": "9068a7205c14884f6436274627a3c6d78ab707894a21eeb9847a488367cbcfef",
+  "selected_restriction": "F256",
+  "E": 64,
+  "I": "full",
+  "V": 256,
+  "endpoint": "n+H inclusive; n+H+1 unknown",
+  "P": "common complete current verifier window protection; forward lookahead <=47",
+  "unknown_fallback": "legacy",
+  "rationale": "The complete fifteen-request32K decomposition shows all three F/64 attempts slower than contemporary current, with higher victim-absent demand and copy churn than F/F. Incoming64/F deterministic selection is unchanged but timing is noisy; no performance equivalence claimed. Sparse offline V256 reduces nonlocal and victim work versus V64, without recovering F/F. One additional victim horizon is the informative transfer test, not a new parameter sweep.",
+  "no_repair_tuning": "The negative offline ema-tail intervention remains separate; same physical/math scheduler and fallback in every live arm.",
+  "same_tape": "One preserved4096-output tape per profile; timing repeatability, not three task samples.",
+  "max_attempts_per_point": 3,
+  "blocks": {
+    "128k": [
+      [
+        "current",
+        "FF",
+        "F256"
+      ],
+      [
+        "F256",
+        "current",
+        "FF"
+      ],
+      [
+        "FF",
+        "F256",
+        "current"
+      ]
+    ],
+    "256k": [
+      [
+        "FF",
+        "F256",
+        "current"
+      ],
+      [
+        "current",
+        "FF",
+        "F256"
+      ],
+      [
+        "F256",
+        "current",
+        "FF"
+      ]
+    ]
+  }
+}

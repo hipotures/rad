@@ -1,0 +1,152 @@
+diff --git a/include/strata/research/q4_early_policy.hpp b/include/strata/research/q4_early_policy.hpp
+index 9b94dc4..e390752 100644
+--- a/include/strata/research/q4_early_policy.hpp
++++ b/include/strata/research/q4_early_policy.hpp
+@@ -7,6 +7,7 @@
+ #include "strata/kernels/native_router.hpp"
+ #include "strata/kernels/elementwise.hpp"
+ #include "strata/research/q4_linear_constants.hpp"
++#include "strata/research/q4_conditional_constants.hpp"
+ #include <cuda_runtime.h>
+ #include <array>
+ #include <algorithm>
+@@ -28,8 +29,22 @@ struct Q4EarlyPolicy {
+     static constexpr std::array<int,5> origins{5,12,25,32,38};
+     static constexpr std::array<int,5> targets{9,16,29,36,42};
+     static constexpr int ne=512,nl=48,maxT=4,k=10;
+-    bool enabled=false,active=false,reactive=false,diagnostic=false;int forced_expert=-1,request_index=0;
+-    struct Event{int window,layer,incoming,victim=-1,slot=-1;uint64_t issue=0,copy_begin=0,copy_end=0,published=0,uses=0,victim_entries=0;const char* status="pending";};
++    bool enabled=false,active=false,reactive=false,diagnostic=false,conditional=false,force_reject=false;int forced_expert=-1,request_index=0;
++    struct Event{int window,layer,incoming,victim=-1,slot=-1;uint64_t issue=0,copy_begin=0,copy_end=0,published=0,uses=0,victim_entries=0;const char* status="pending";int proposed_victim=-1,needed=-1,resident_at_target=-1,target_reached=0;std::array<float,48> features{};};
++    struct Demand {int32_t window,layer,n,reserved;std::array<int32_t,40> ids,slots;};
++    struct Change {int32_t window,layer,expert,old_slot,new_slot;};
++    std::vector<Demand> demands;std::vector<Change> changes;
++    std::vector<int32_t> last_state;
++    std::array<std::vector<float>,64> history64;
++    std::vector<float> cpu_history,mapped_history,promotion_history,eviction_history;
++    std::vector<int32_t> resident_since;
++    std::array<float,48> candidate_features{};int candidate_victim=-1;
++    uint64_t diagnostic_features_ns=0,gate_ns=0,rejected_before_copy=0,proposals=0;
++    std::array<std::vector<uint8_t>,16> previous_wrong,previous_published;
++    std::vector<uint8_t> window_wrong,window_published;
++    std::array<int,5> proposed_experts{-1,-1,-1,-1,-1};
++    bool tracking()const{return diagnostic||conditional;}
++    int target_index(int l)const{auto i=std::find(targets.begin(),targets.end(),l);return i==targets.end()?-1:int(i-targets.begin());}
+     std::vector<Event> events;std::vector<int> by_in,by_victim;std::vector<int> readbacks;uint64_t readback_checks=0;
+     int32_t* host_res=nullptr;const float* native_heat=nullptr;
+     std::array<const uint16_t*,5> gates{};
+@@ -62,7 +77,7 @@ struct Q4EarlyPolicy {
+     static uint64_t ns(){return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
+     static void check(cudaError_t e){if(e!=cudaSuccess)throw std::runtime_error(cudaGetErrorString(e));}
+     static void fatal(const char* message){std::fprintf(stderr,"Q4_EARLY_FATAL %s\n",message);std::fflush(stderr);std::_Exit(1);}
+-    Q4EarlyPolicy(){const char* p=std::getenv("STRATA_Q4_EARLY");enabled=p&&p[0]=='1';p=std::getenv("STRATA_Q4_EARLY_REACTIVE");reactive=p&&p[0]=='1';p=std::getenv("STRATA_Q4_EARLY_DIAGNOSTIC");diagnostic=p&&p[0]=='1';p=std::getenv("STRATA_Q4_EARLY_FORCE_EXPERT");if(p)forced_expert=std::atoi(p);}
++    Q4EarlyPolicy(){const char* p=std::getenv("STRATA_Q4_EARLY");enabled=p&&p[0]=='1';p=std::getenv("STRATA_Q4_EARLY_REACTIVE");reactive=p&&p[0]=='1';p=std::getenv("STRATA_Q4_EARLY_DIAGNOSTIC");diagnostic=p&&p[0]=='1';p=std::getenv("STRATA_Q4_EARLY_FORCE_EXPERT");if(p)forced_expert=std::atoi(p);p=std::getenv("STRATA_Q4_CONDITIONAL");conditional=p&&p[0]=='1';p=std::getenv("STRATA_Q4_CONDITIONAL_REJECT_ALL");force_reject=p&&p[0]=='1';if(conditional&&reactive)throw std::runtime_error("ConditionalH4 andreactive modes are separate matched ablations");}
+     int origin_index(int l)const {auto i=std::find(origins.begin(),origins.end(),l);return i==origins.end()?-1:int(i-origins.begin());}
+     bool target_layer(int l)const{return std::find(targets.begin(),targets.end(),l)!=targets.end();}
+     bool configure_gate(const strata::core::WeightTable& wt,const strata::core::ModelGeometry& g,int dev,int first,int end,std::string& err){
+@@ -116,41 +131,73 @@ struct Q4EarlyPolicy {
+         if(!enabled)return;if(!host_res||!configured[0]||!configured[1])throw std::runtime_error("Q4 early runtime not configured");active=true;window_index=0;issued=ready_admits=late=wrong=busy=traffic=target_entries=0;features_ns=publish_wait_ns=copy_ns=staging_ns=drain_ns=0;
+         std::copy(native_heat,native_heat+48*512,heat.begin());initial_heat=heat;std::copy(host_res,host_res+48*512,initial.begin());
+         for(auto* x:{&fast,&slow,&freq,&last_counts})std::fill(x->begin(),x->end(),0);std::fill(last.begin(),last.end(),-10000);for(auto& x:recent)std::fill(x.begin(),x.end(),0);for(size_t j=0;j<score.size();++j)score[j]=heat[j]*.3f;
+-        if(diagnostic){events.clear();readbacks.clear();by_in.assign(48*512,-1);by_victim.assign(48*512,-1);readback_checks=0;}++request_index;
++        if(tracking()){events.clear();readbacks.clear();demands.clear();changes.clear();by_in.assign(48*512,-1);by_victim.assign(48*512,-1);readback_checks=0;diagnostic_features_ns=0;gate_ns=0;rejected_before_copy=proposals=0;proposed_experts.fill(-1);for(auto& x:previous_wrong)x.assign(48*512,0);for(auto& x:previous_published)x.assign(48*512,0);window_wrong.assign(48*512,0);window_published.assign(48*512,0);
++            for(auto& h:history64)h.assign(48*512,0);cpu_history.assign(48*512,0);mapped_history=cpu_history;promotion_history=cpu_history;eviction_history=cpu_history;resident_since.assign(48*512,0);
++        }++request_index;
+         for(auto& w:workers)w.staging_cost_ns=0;
+         for(int dev=0;dev<2;++dev){int best=-1;float cold=INFINITY;for(int l=dev*24;l<(dev+1)*24;++l)if(bytes[l]==3072000)for(int e=0;e<512;++e){int j=l*512+e;if(host_res[j]>=0&&heat[j]<cold){cold=heat[j];best=j;}}
+             if(best<0)throw std::runtime_error("Q4 early no correctly sized reserve");spare[dev]=host_res[best];reserve_layer[dev]=best/512;reserve_expert[dev]=best%512;host_res[best]=-1;
+-            std::fprintf(stderr,"Q4_EARLY_RESERVE device%d slot%d layer%d expert%d bytes3072000 active_capacity_minus1\n",dev,spare[dev],best/512,best%512);}
++            std::fprintf(stderr,"Q4_EARLY_RESERVE device%d slot%d layer%d expert%d bytes3072000 active_capacity_minus1\n",dev,spare[dev],best/512,best%512);} if(tracking())last_state.assign(host_res,host_res+48*512);
++    }
++    void begin_window(){if(enabled&&active){std::fill(last_counts.begin(),last_counts.end(),0);if(conditional){std::fill(window_wrong.begin(),window_wrong.end(),0);std::fill(window_published.begin(),window_published.end(),0);proposed_experts.fill(-1);}
++        if(tracking())for(int j=0;j<48*512;++j)if(last_state[j]!=host_res[j]){if(diagnostic)changes.push_back({window_index,j/512,j%512,last_state[j],host_res[j]});if(host_res[j]>=0)resident_since[j]=window_index;else{resident_since[j]=-1;++eviction_history[j];}last_state[j]=host_res[j];}
++    }}
++    float count_past(int j,int horizon)const {float sum=0;for(int q=1;q<=horizon&&q<=window_index;++q)sum+=history64[(window_index-q)%64][j];return sum;}
++    void candidate_snapshot(int target,int incoming,int n,const std::array<float,512>& confidence){
++        uint64_t t=ns();candidate_features.fill(0);int j=target*512+incoming,dev=target>=24;int victim=-1;float cold=INFINITY;
++        for(int e=0;e<512;++e)if(host_res[target*512+e]>=0&&score[target*512+e]<cold){cold=score[target*512+e];victim=e;}
++        candidate_victim=victim;auto& f=candidate_features;float total=0,other=0;int rank=0,unique=0;
++        for(int e=0;e<512;++e){total+=confidence[e];if(confidence[e]>0)++unique;if(e!=incoming&&host_res[target*512+e]<0){other=std::max(other,confidence[e]);rank+=confidence[e]>confidence[incoming];}}
++        f[0]=confidence[incoming];f[1]=confidence[incoming]/std::max(total,1e-9f);f[2]=other;f[3]=confidence[incoming]-other;f[4]=rank;f[5]=n/10.f;f[6]=unique;
++        for(int i=0;i<4;++i)f[7+i]=std::log1p(count_past(j,std::array<int,4>{1,4,16,64}[i]));
++        f[11]=std::log1p(heat[j]);f[12]=std::log1p(fast[j]);f[13]=std::log1p(slow[j]);f[14]=std::log1p(freq[j]);f[15]=std::log1p(float(std::min(10000,window_index-last[j])));f[16]=last[j]>=0;
++        f[17]=std::log1p(cpu_history[j]);f[18]=std::log1p(mapped_history[j]);f[19]=initial[j]>=0;f[20]=host_res[j]>=0;f[21]=workers[dev].state.load();f[22]=spare[dev]>=0;
++        f[23]=target/47.f;f[24]=dev;f[25]=bytes[target]/3072000.f;f[26]=std::log1p(score[j]);f[27]=std::log1p(promotion_history[j]);f[28]=std::log1p(eviction_history[j]);
++        if(victim>=0){int v=target*512+victim;f[29]=std::log1p(heat[v]);f[30]=std::log1p(score[v]);f[31]=std::log1p(count_past(v,1));f[32]=std::log1p(count_past(v,4));f[33]=std::log1p(count_past(v,16));f[34]=std::log1p(count_past(v,64));f[35]=std::log1p(float(std::min(10000,window_index-last[v])));f[36]=std::max(0,window_index-resident_since[v]);f[37]=std::log1p(eviction_history[v]);f[38]=count_past(v,1)>0;f[39]=1;f[40]=f[26]-f[30];}
++        f[41]=window_index;f[42]=bytes[target]/13.2e6f;f[43]=0.293449f;f[44]=4;f[45]=0;f[46]=0;f[47]=0;
++        if(conditional){int bad=0,good=0;for(int q=1;q<=16&&q<=window_index;++q){bad+=previous_wrong[(window_index-q)%16][j];good+=previous_published[(window_index-q)%16][j];}f[45]=std::log1p(float(bad));f[46]=std::log1p(float(good));f[47]=window_index>0&&previous_wrong[(window_index-1)%16][j];}
++        diagnostic_features_ns+=ns()-t;
+     }
+-    void begin_window(){if(enabled&&active)std::fill(last_counts.begin(),last_counts.end(),0);}
+     void enqueue(int dev,int target,int e){auto& w=workers[dev];if(w.state.load(std::memory_order_acquire)!=0){++busy;return;}const uint8_t* ptr=blob(target,e);if(!ptr)fatal("canonical Q4 blob unavailable");
+-        {std::lock_guard<std::mutex> lock(w.mutex);w.target=target;w.incoming=e;w.destination=spare[dev];w.source=ptr;w.n=bytes[target];w.issue_ns=ns();if(diagnostic){w.event_index=(int)events.size();events.push_back({window_index,target,e,-1,w.destination,w.issue_ns});}w.state.store(1,std::memory_order_release);}++issued;traffic+=w.n;w.cv.notify_all();}
++        {std::lock_guard<std::mutex> lock(w.mutex);w.target=target;w.incoming=e;w.destination=spare[dev];w.source=ptr;w.n=bytes[target];w.issue_ns=ns();if(tracking()){w.event_index=(int)events.size();events.push_back({window_index,target,e,-1,w.destination,w.issue_ns});events.back().features=candidate_features;events.back().proposed_victim=candidate_victim;}w.state.store(1,std::memory_order_release);}++issued;traffic+=w.n;w.cv.notify_all();}
+     void retire(int dev){auto& w=workers[dev];uint64_t begin=ns();std::unique_lock<std::mutex> lock(w.mutex);if(!w.cv.wait_for(lock,std::chrono::seconds(5),[&]{return w.state.load()==0||w.state.load()==3||w.state.load()==7;}))fatal("copy retirement timeout");if(w.state.load()==7)fatal("copy worker failure");if(w.state.load()==3){if(diagnostic&&w.event_index>=0){auto& e=events[w.event_index];e.copy_begin=w.copy_begin_ns;e.copy_end=w.copy_end_ns;if(e.status==std::string("pending"))e.status="pending-retired";}copy_ns+=w.copy_end_ns-w.copy_begin_ns;w.state.store(6,std::memory_order_release);w.cv.notify_all();if(!w.cv.wait_for(lock,std::chrono::seconds(5),[&]{return w.state.load()==0||w.state.load()==7;}))fatal("retire acknowledgement timeout");}drain_ns+=ns()-begin;}
+     void host(int32_t* r,int l,const int32_t* ids,int n){
+         if(!enabled||!active||r!=host_res||n<1||n>40)return;int dev=l>=24;auto& w=workers[dev];int state=w.state.load(std::memory_order_acquire);
+         if(state==7)fatal("worker failed before plan");
+-        if(w.target==l&&state!=0){
+-            if(state!=3){++late;if(diagnostic)events[w.event_index].status="late-for-original-target";}
++        if(w.target==l&&state!=0){if(tracking()){events[w.event_index].target_reached=1;events[w.event_index].resident_at_target=host_res[l*512+w.incoming]>=0;}
++            if(state!=3){++late;if(tracking())events[w.event_index].status="late-for-original-target";}
+             else{
+                 bool needed=false;int occurrences=0;for(int i=0;i<n;++i)if(ids[i]==w.incoming){needed=true;++occurrences;}
+-                if(!needed||host_res[l*512+w.incoming]>=0){++wrong;if(diagnostic)events[w.event_index].status="wrong-or-superseded";retire(dev);}
++                if(tracking())events[w.event_index].needed=needed;
++                if(!needed||host_res[l*512+w.incoming]>=0){++wrong;if(tracking())events[w.event_index].status=needed?"became-resident-before-publication":"prediction-wrong";retire(dev);}
+                 else{int victim=-1;float cold=INFINITY;for(int e=0;e<512;++e){if(host_res[l*512+e]<0)continue;bool routed=false;for(int i=0;i<n;++i)routed|=ids[i]==e;if(!routed&&score[l*512+e]<cold){cold=score[l*512+e];victim=e;}}
+-                    if(victim<0){++wrong;if(diagnostic)events[w.event_index].status="no-safe-victim";retire(dev);}else{
++                    if(victim<0){++wrong;if(tracking())events[w.event_index].status="no-safe-victim";retire(dev);}else{
+                         int oldslot=host_res[l*512+victim];uint64_t begin=ns();{std::unique_lock<std::mutex> lock(w.mutex);w.victim=victim;w.new_spare=oldslot;w.state.store(4,std::memory_order_release);w.cv.notify_all();if(!w.cv.wait_for(lock,std::chrono::seconds(5),[&]{return w.state.load()==5||w.state.load()==7;}))fatal("metadata publication timeout");if(w.state.load()==7)fatal("metadata publication failure");}
+                         publish_wait_ns+=ns()-begin;host_res[l*512+victim]=-1;host_res[l*512+w.incoming]=w.destination;spare[dev]=oldslot;++ready_admits;target_entries+=occurrences;copy_ns+=w.copy_end_ns-w.copy_begin_ns;
+-                        if(diagnostic){auto& e=events[w.event_index];e.status="target-ready-persistent";e.victim=victim;e.published=ns();e.copy_begin=w.copy_begin_ns;e.copy_end=w.copy_end_ns;by_in[l*512+w.incoming]=w.event_index;by_victim[l*512+victim]=w.event_index;if(readback_checks+readbacks.size()<16)readbacks.push_back(w.event_index);}
++                        if(tracking()){auto& e=events[w.event_index];e.status="target-ready-persistent";if(conditional)window_published[l*512+w.incoming]=1;++promotion_history[l*512+w.incoming];++eviction_history[l*512+victim];resident_since[l*512+w.incoming]=window_index;e.victim=victim;e.published=ns();e.copy_begin=w.copy_begin_ns;e.copy_end=w.copy_end_ns;by_in[l*512+w.incoming]=w.event_index;by_victim[l*512+victim]=w.event_index;if(diagnostic&&readback_checks+readbacks.size()<16)readbacks.push_back(w.event_index);}
+                         w.state.store(0,std::memory_order_release);
+                     }
+                 }
+             }
+         }
+-        for(int i=0;i<n;++i)if(ids[i]>=0&&ids[i]<512){int j=l*512+ids[i];last_counts[j]+=1;if(diagnostic){if(by_in[j]>=0){if(host_res[j]>=0)++events[by_in[j]].uses;else by_in[j]=-1;}if(by_victim[j]>=0){if(host_res[j]<0)++events[by_victim[j]].victim_entries;else by_victim[j]=-1;}}}
+-        if(reactive){if(target_layer(l)&&w.state.load()==0){int inc=-1;float best=-1;for(int i=0;i<n;++i){int e=ids[i];if(host_res[l*512+e]<0&&score[l*512+e]>best){best=score[l*512+e];inc=e;}}if(inc>=0)enqueue(dev,l,inc);}return;}
++        if(conditional&&target_layer(l)&&!diagnostic){std::vector<int> miss;for(int i=0;i<n;++i)if(host_res[l*512+ids[i]]<0&&std::find(miss.begin(),miss.end(),ids[i])==miss.end())miss.push_back(ids[i]);int nm=(int)miss.size()*72/256;for(int i=0;i<n;++i)if(host_res[l*512+ids[i]]<0){int e=ids[i];bool mapped=nm&&std::find(miss.end()-nm,miss.end(),e)!=miss.end();(mapped?mapped_history:cpu_history)[l*512+e]+=1;}}
++        if(diagnostic){Demand d{window_index,l,n,0,{},{}};d.ids.fill(-1);d.slots.fill(-1);std::vector<int> miss;
++            for(int i=0;i<n;++i){d.ids[i]=ids[i];d.slots[i]=host_res[l*512+ids[i]];if(d.slots[i]<0&&std::find(miss.begin(),miss.end(),ids[i])==miss.end())miss.push_back(ids[i]);}
++            int nm=(int)miss.size()*72/256;for(int i=0;i<n;++i)if(d.slots[i]<0){int e=ids[i];bool mapped=nm&&std::find(miss.end()-nm,miss.end(),e)!=miss.end();(mapped?mapped_history:cpu_history)[l*512+e]+=1;}demands.push_back(d);
++        }
++        if(conditional){int ti=target_index(l);if(ti>=0&&proposed_experts[ti]>=0){int e=proposed_experts[ti];bool used=false;for(int i=0;i<n;++i)used|=ids[i]==e;window_wrong[l*512+e]=!used;proposed_experts[ti]=-1;}}
++        for(int i=0;i<n;++i)if(ids[i]>=0&&ids[i]<512){int j=l*512+ids[i];last_counts[j]+=1;if(tracking()&&target_layer(l)){if(by_in[j]>=0){if(host_res[j]>=0)++events[by_in[j]].uses;else by_in[j]=-1;}if(by_victim[j]>=0){if(host_res[j]<0)++events[by_victim[j]].victim_entries;else by_victim[j]=-1;}}}
++        if(reactive){if(target_layer(l)&&w.state.load()==0){int inc=-1;float best=-1;for(int i=0;i<n;++i){int e=ids[i];if(host_res[l*512+e]<0&&score[l*512+e]>best){best=score[l*512+e];inc=e;}}if(inc>=0){if(tracking()){std::array<float,512> conf{};conf[inc]=1;candidate_snapshot(l,inc,n,conf);}enqueue(dev,l,inc);}}return;}
+         int oi=origin_index(l);if(oi<0)return;int target=targets[oi],pd=target>=24;auto& worker=workers[pd];if(worker.state.load()!=0){++busy;return;}
+         std::array<float,512> confidence{};for(int i=0;i<n;++i){int e=pred_ids[dev][oi*40+i];if(e>=0&&e<512)confidence[e]+=pred_weights[dev][oi*40+i];}
+         int inc=-1;float best=0;for(int e=0;e<512;++e)if(host_res[target*512+e]<0){float rank=confidence[e]*(1+.1f*score[target*512+e]);if(rank>best){best=rank;inc=e;}}
+         if(forced_expert>=0&&forced_expert<512&&host_res[target*512+forced_expert]<0)inc=forced_expert;
+-        if(inc>=0)enqueue(pd,target,inc);
++        if(inc>=0){if(tracking())candidate_snapshot(target,inc,n,confidence);
++            if(conditional){++proposals;proposed_experts[oi]=inc;uint64_t begin=ns();double probability=q4_conditional::probability(candidate_features.data());
++                bool accept=!force_reject&&probability>=0.12&&candidate_features[32]<=candidate_features[8]+std::log(3.f)&&candidate_features[39]>0&&candidate_features[21]==0&&candidate_features[22]>0;
++                gate_ns+=ns()-begin;if(!accept){++rejected_before_copy;return;}}
++            enqueue(pd,target,inc);
++        }
+     }
+     void end_window(bool decay){
+         if(!enabled||!active)return;for(int dev=0;dev<2;++dev)if(!reactive)retire(dev);
+@@ -158,11 +205,17 @@ struct Q4EarlyPolicy {
+         uint64_t begin=ns();for(int l:targets)for(int e=0;e<512;++e){int j=l*512+e;float c=last_counts[j];heat[j]+=c;fast[j]=.5f*fast[j]+c;slow[j]=.95f*slow[j]+c;freq[j]+=c;if(c>0)last[j]=window_index;recent[window_index%4][j]=c;
+             float total=0;for(auto& x:recent)total+=x[j];float x[16]={std::log1p(heat[j]),std::log1p(fast[j]*2),std::log1p(slow[j]*.2f),std::log1p(c),std::log1p(total),0,0,std::log1p(freq[j]*4/(window_index+1)),std::log1p(float(std::min(10000,window_index-last[j]))),float(last[j]>=0),float(initial[j]>=0),std::log1p(initial_heat[j]),l/47.f,float(l>=24),bytes[l]/3072000.f,0};
+             float z=q4_linear::intercept;for(int k=0;k<13;++k)z+=(x[q4_linear::indices[k]]-q4_linear::mean[k])/q4_linear::std[k]*q4_linear::coef[k];score[j]=std::max(0.f,std::expm1(std::clamp(z,0.f,std::log(33.f)))*q4_linear::cal_slope+q4_linear::cal_intercept);if(decay)heat[j]*=.7f;
+-        }features_ns+=ns()-begin;++window_index;
++        }features_ns+=ns()-begin;if(tracking()){for(int l:targets)for(int e=0;e<512;++e)history64[window_index%64][l*512+e]=last_counts[l*512+e];last_state.assign(host_res,host_res+48*512);}if(conditional){previous_wrong[window_index%16]=window_wrong;previous_published[window_index%16]=window_published;}++window_index;
+     }
+     void finish(){
+         if(!enabled||!active)return;for(int dev=0;dev<2;++dev){retire(dev);int l=reserve_layer[dev],e=reserve_expert[dev];if(host_res[l*512+e]>=0){float best=-1;e=-1;for(int x=0;x<512;++x)if(host_res[l*512+x]<0&&native_heat[l*512+x]>best){best=native_heat[l*512+x];e=x;}}if(e<0)fatal("reserve restoration unavailable");int olddev;check(cudaGetDevice(&olddev));check(cudaSetDevice(dev));check(cudaMemcpy(device_slot(dev,spare[dev]),blob(l,e),bytes[l],cudaMemcpyHostToDevice));host_res[l*512+e]=spare[dev];check(cudaSetDevice(olddev));}
+-        if(diagnostic){const char* prefix=std::getenv("STRATA_Q4_EARLY_LOG");if(prefix){std::string path=std::string(prefix)+"-request"+std::to_string(request_index)+".jsonl";FILE* file=std::fopen(path.c_str(),"wx");if(!file)fatal("cannot preserve unique diagnostic event log");for(const auto& e:events)std::fprintf(file,"{\"window\":%d,\"layer\":%d,\"incoming\":%d,\"victim\":%d,\"slot\":%d,\"issue_ns\":%llu,\"copy_begin_ns\":%llu,\"copy_end_ns\":%llu,\"published_ns\":%llu,\"uses\":%llu,\"victim_entries\":%llu,\"classification\":\"%s\"}\n",e.window,e.layer,e.incoming,e.victim,e.slot,(unsigned long long)e.issue,(unsigned long long)e.copy_begin,(unsigned long long)e.copy_end,(unsigned long long)e.published,(unsigned long long)e.uses,(unsigned long long)e.victim_entries,e.status);std::fclose(file);}std::fprintf(stderr,"Q4_EARLY_READBACK PASS checks=%llu\n",(unsigned long long)readback_checks);}
++        if(diagnostic){const char* prefix=std::getenv("STRATA_Q4_EARLY_LOG");if(prefix){std::string path=std::string(prefix)+"-request"+std::to_string(request_index)+".jsonl";FILE* file=std::fopen(path.c_str(),"wx");if(!file)fatal("cannot preserve unique diagnostic event log");for(const auto& e:events){std::fprintf(file,"{\"window\":%d,\"layer\":%d,\"incoming\":%d,\"victim\":%d,\"slot\":%d,\"issue_ns\":%llu,\"copy_begin_ns\":%llu,\"copy_end_ns\":%llu,\"published_ns\":%llu,\"uses\":%llu,\"victim_entries\":%llu,\"classification\":\"%s\",\"proposed_victim\":%d,\"needed\":%d,\"resident_at_target\":%d,\"target_reached\":%d,\"right_censored\":%s,\"features\":[",e.window,e.layer,e.incoming,e.victim,e.slot,(unsigned long long)e.issue,(unsigned long long)e.copy_begin,(unsigned long long)e.copy_end,(unsigned long long)e.published,(unsigned long long)e.uses,(unsigned long long)e.victim_entries,e.status,e.proposed_victim,e.needed,e.resident_at_target,e.target_reached,e.window>=window_index-4?"true":"false");for(int j=0;j<48;++j)std::fprintf(file,"%s%.9g",j?",":"",e.features[j]);std::fprintf(file,"]}\n");}
++            auto binary=[&](const char* suffix,const void* ptr,size_t size){std::string name=std::string(prefix)+"-request"+std::to_string(request_index)+suffix;FILE* f=std::fopen(name.c_str(),"wx");if(!f)fatal("diagnostic binary exists");if(size&&std::fwrite(ptr,1,size,f)!=size)fatal("diagnostic binary write failed");std::fclose(f);};
++            binary("-demand.bin",demands.data(),demands.size()*sizeof(Demand));binary("-native-changes.bin",changes.data(),changes.size()*sizeof(Change));binary("-initial.bin",initial.data(),initial.size()*sizeof(int32_t));
++            std::fprintf(stderr,"Q4_CONDITIONAL_DIAGNOSTIC records=%zu changes=%zu feature_ms=%.3f\n",demands.size(),changes.size(),diagnostic_features_ns/1e6);
++            std::fclose(file);}std::fprintf(stderr,"Q4_EARLY_READBACK PASS checks=%llu\n",(unsigned long long)readback_checks);}
++        if(conditional){uint64_t published=0,useful=0,victim_damage=0,unpublished=0,censored=0;for(const auto& e:events){if(e.published){++published;useful+=e.uses;victim_damage+=e.victim_entries;}else ++unpublished;censored+=e.window>=window_index-4;}
++            std::fprintf(stderr,"Q4_CONDITIONAL proposals=%llu rejected_before_copy=%llu issued=%llu published=%llu unpublished_bytes=%llu useful_local_entries=%llu victim_absent_entries=%llu right_censored=%llu feature_ms=%.6f score_selection_ms=%.6f threshold=0.12 checkpoint40f43308\n",(unsigned long long)proposals,(unsigned long long)rejected_before_copy,(unsigned long long)issued,(unsigned long long)published,(unsigned long long)(unpublished*3072000),(unsigned long long)useful,(unsigned long long)victim_damage,(unsigned long long)censored,diagnostic_features_ns/1e6,gate_ns/1e6);}
+         staging_ns=workers[0].staging_cost_ns+workers[1].staging_cost_ns;active=false;std::fprintf(stderr,"Q4_EARLY windows=%d issued=%llu ready=%llu late=%llu wrong=%llu busy=%llu bytes=%llu target_entries=%llu scoring_ms=%.3f publish_wait_ms=%.3f staged_ms=%.3f copy_ms=%.3f drain_ms=%.3f\n",window_index,(unsigned long long)issued,(unsigned long long)ready_admits,(unsigned long long)late,(unsigned long long)wrong,(unsigned long long)busy,(unsigned long long)traffic,(unsigned long long)target_entries,features_ns/1e6,publish_wait_ns/1e6,staging_ns/1e6,copy_ns/1e6,drain_ns/1e6);
+     }
+     ~Q4EarlyPolicy(){for(int dev=0;dev<2;++dev){auto& w=workers[dev];if(w.thread.joinable()){{std::lock_guard<std::mutex> lock(w.mutex);w.quit=true;w.cv.notify_all();}w.thread.join();}if(configured[dev]){cudaSetDevice(dev);cudaEventDestroy(w.done);cudaStreamDestroy(w.stream);cudaFreeHost(w.staging);cudaFreeHost(w.metadata);cudaFreeHost(pred_ids[dev]);cudaFreeHost(pred_weights[dev]);cudaFreeHost(seq[dev]);}}}

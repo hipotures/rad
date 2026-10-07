@@ -1,0 +1,263 @@
+{
+  "state": "PASS",
+  "profiles": {
+    "32k": {
+      "state": "PASS",
+      "trace_validation": {
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/32k/traces/runtime-request2",
+        "state": "PASS",
+        "errors": [],
+        "windows": 1454,
+        "layers": 69792,
+        "output_tokens": 4096,
+        "output_ids_sha256": "555b94689d5acb82b06596362a6a788eb8e78fd1602e9d09e6086b48eb1e945d",
+        "demand_entries": 2309760,
+        "path_counts": {
+          "-1": 26229,
+          "0": 2282704,
+          "1": 827,
+          "2": 0
+        },
+        "all_demand_local_hit_pct": 98.82862288722637,
+        "reported_hit_pct_denominator": 98.86402074031598,
+        "promotions": 3695,
+        "promotion_bytes": 7517644800,
+        "unpublished_promotions_at_request_end": 0,
+        "gpu_budgets": [
+          {
+            "slots": 10240,
+            "bytes": 19824128000,
+            "size_classes": {
+              "1510400": 1663,
+              "1715200": 820,
+              "1868800": 427,
+              "1971200": 4416,
+              "2176000": 2509,
+              "2329600": 405
+            }
+          },
+          {
+            "slots": 8477,
+            "bytes": 18323200000,
+            "size_classes": {
+              "1510400": 380,
+              "1715200": 402,
+              "1971200": 1459,
+              "2176000": 2950,
+              "2329600": 2957,
+              "2662400": 329
+            }
+          }
+        ]
+      },
+      "footer_agreement": true,
+      "first_head_top1": [
+        2,
+        2
+      ],
+      "first_head_KL_old_to_new": 0.0,
+      "first_head_max_abs_difference": 0.0,
+      "first_head_bit_identical": true,
+      "common_output_prefix_tokens": 4,
+      "all_output_ids_identical": false,
+      "initial_usage_identical": false,
+      "final_usage_identical": false,
+      "extra_explicit_device_bytes": [
+        81984,
+        67880
+      ],
+      "mapped_CPU_ID_bytes": [
+        4000,
+        3680
+      ],
+      "resource_check": {
+        "state": "PASS",
+        "primary_slots": 10240,
+        "stage1_slots": 8477,
+        "expert_cache_primary_mib": 18905,
+        "expert_cache_total_mib": 36379,
+        "KV_resident_effective": 0,
+        "baseline": {
+          "primary_slots": 10240,
+          "helper_or_stage1_slots": 8477,
+          "cache_gib_rounded": [
+            18.46,
+            17.06
+          ],
+          "exact_byte_classes": [
+            {
+              "slots": 10240,
+              "bytes": 19824128000,
+              "size_classes": {
+                "1510400": 1663,
+                "1715200": 820,
+                "1868800": 427,
+                "1971200": 4416,
+                "2176000": 2509,
+                "2329600": 405
+              }
+            },
+            {
+              "slots": 8477,
+              "bytes": 18323200000,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 402,
+                "1971200": 1459,
+                "2176000": 2950,
+                "2329600": 2957,
+                "2662400": 329
+              }
+            }
+          ],
+          "auto_sizing_frozen_by_invariant": true,
+          "max_total_context": 32768,
+          "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k/logs/engine.log",
+          "rule": "CPU-only predictor state cannot increase VRAM; candidates must match per-profile physical capacities and byte classes, or charge any loss explicitly",
+          "diagnostic_provenance": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+          "effective_KV_resident": 0,
+          "KV_note": "32k reports0(full32768resident);128k reports32768resident with streaming. CLI unchanged32768 on both."
+        },
+        "byte_class_basis": "same frozen allocator/profile/native formats and exact startup capacities; control classes independently captured in diagnostics; no extra GPU predictor allocation"
+      },
+      "limitations": "Buffers preserve actual routed IDs after GPU advances; native plans can change FP execution details/free trajectories. Diagnostics are not headline TG. CUDA allocation rounding/internal page/event costs are not represented by explicit byte count."
+    },
+    "128k": {
+      "state": "PASS",
+      "trace_validation": {
+        "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/128k/traces/runtime-request2",
+        "state": "PASS",
+        "errors": [],
+        "windows": 1517,
+        "layers": 72816,
+        "output_tokens": 4096,
+        "output_ids_sha256": "d45a862c69d02af096e02fa3fe952c345eb165a23eed30b0216578e31fb241dc",
+        "demand_entries": 2406720,
+        "path_counts": {
+          "-1": 34241,
+          "0": 2371327,
+          "1": 1152,
+          "2": 0
+        },
+        "all_demand_local_hit_pct": 98.52940932056907,
+        "reported_hit_pct_denominator": 98.57659396865938,
+        "promotions": 5166,
+        "promotion_bytes": 10411904000,
+        "unpublished_promotions_at_request_end": 0,
+        "gpu_budgets": [
+          {
+            "slots": 10183,
+            "bytes": 19712998400,
+            "size_classes": {
+              "1510400": 1655,
+              "1715200": 814,
+              "1868800": 426,
+              "1971200": 4391,
+              "2176000": 2496,
+              "2329600": 401
+            }
+          },
+          {
+            "slots": 8437,
+            "bytes": 18220492800,
+            "size_classes": {
+              "1510400": 380,
+              "1715200": 401,
+              "1971200": 1457,
+              "2176000": 2947,
+              "2329600": 2957,
+              "2662400": 295
+            }
+          }
+        ]
+      },
+      "footer_agreement": true,
+      "first_head_top1": [
+        2,
+        2
+      ],
+      "first_head_KL_old_to_new": 0.0,
+      "first_head_max_abs_difference": 0.0,
+      "first_head_bit_identical": true,
+      "common_output_prefix_tokens": 4,
+      "all_output_ids_identical": false,
+      "initial_usage_identical": false,
+      "final_usage_identical": false,
+      "extra_explicit_device_bytes": [
+        81528,
+        67560
+      ],
+      "mapped_CPU_ID_bytes": [
+        4000,
+        3680
+      ],
+      "resource_check": {
+        "state": "PASS",
+        "primary_slots": 10183,
+        "stage1_slots": 8437,
+        "expert_cache_primary_mib": 18799,
+        "expert_cache_total_mib": 36175,
+        "KV_resident_effective": 32768,
+        "baseline": {
+          "primary_slots": 10183,
+          "helper_or_stage1_slots": 8437,
+          "cache_gib_rounded": [
+            18.36,
+            16.97
+          ],
+          "exact_byte_classes": [
+            {
+              "slots": 10183,
+              "bytes": 19712998400,
+              "size_classes": {
+                "1510400": 1655,
+                "1715200": 814,
+                "1868800": 426,
+                "1971200": 4391,
+                "2176000": 2496,
+                "2329600": 401
+              }
+            },
+            {
+              "slots": 8437,
+              "bytes": 18220492800,
+              "size_classes": {
+                "1510400": 380,
+                "1715200": 401,
+                "1971200": 1457,
+                "2176000": 2947,
+                "2329600": 2957,
+                "2662400": 295
+              }
+            }
+          ],
+          "auto_sizing_frozen_by_invariant": true,
+          "max_total_context": 131072,
+          "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/logs/engine.log",
+          "rule": "CPU-only predictor state cannot increase VRAM; candidates must match per-profile physical capacities and byte classes, or charge any loss explicitly",
+          "diagnostic_provenance": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+          "effective_KV_resident": 32768,
+          "KV_note": "32k reports0(full32768resident);128k reports32768resident with streaming. CLI unchanged32768 on both."
+        },
+        "byte_class_basis": "same frozen allocator/profile/native formats and exact startup capacities; control classes independently captured in diagnostics; no extra GPU predictor allocation"
+      },
+      "limitations": "Buffers preserve actual routed IDs after GPU advances; native plans can change FP execution details/free trajectories. Diagnostics are not headline TG. CUDA allocation rounding/internal page/event costs are not represented by explicit byte count."
+    }
+  },
+  "correctness": {
+    "state": "PASS",
+    "checks": {
+      "10cases_retained": true,
+      "all_same_input_ids": true,
+      "no_reported_nonfinite": true,
+      "all_answers_nonempty": true,
+      "product1776": true,
+      "equationx8": true,
+      "strict_JSON9": true,
+      "strict_JSON10": true
+    },
+    "identical_visible_answers": 3,
+    "limitations": "Ground-truth checks are narrow. All text differences remain for source/numerical diagnosis; noLLMjudge, quality ranking or universal parity claim."
+  },
+  "changed_algorithm": "Original EMA and true router; GPU resident plan + stable layer-ID buffers. Same physical expert slots; charged auxiliary bytes use existing per-device non-expert slack, never extra expert capacity."
+}

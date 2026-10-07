@@ -1,0 +1,16 @@
+{
+  "question": "Does cumulative frequency reduce useful request latency after the positive fixed-trace nonlocal reduction?",
+  "mechanism": "Use existing --adapt-decay1 to retain measured routed frequency, including rejected drafts. Same native cache/scheduler/eviction backend and mathematical router.",
+  "changed_variable": "adapt-decay0.7 ->1.0 only",
+  "evidence": "Replay nonlocal36776->31573 at32k and45276->42179 at128k. Promotion bytes10.697->12.042GB and14.373->13.233GB. This is not a TG claim.",
+  "source": "exact frozen6f32ec070f23ced9f50e704d854d775da52591ab in new source/build; no algorithm patch required for supported option",
+  "resource": "same K25/PCIe0.28, native IQ3_S, per-profile auto-sized expert cache frozen by startup capacity checks; no predictor GPU memory",
+  "warmup": "same saved4096input/64output, fresh server per profile",
+  "order": ["correctness and existing tests", "32k run1/run2/run3", "128k run1/run2/run3"],
+  "measured_attempts": "three maximum per profile; preserve early termination, no retry of inconvenient valid results",
+  "output": 4096,
+  "common": "greedy MTP4/minp0.5 INT8 KV, kv-resident32768, workers15, prefillauto, suffix0/reuse0, same frozen effective payload IDs",
+  "validation": "Relevant existing tests, native IQ3_S parity evidence, short code/math/prose/JSON battery; no runtime safety/corruption failure waived",
+  "headline_safety": "No builds/training/heavy replay during speed; RAMavailable12GiB guard; owned cleanup; absolute deadline unchanged",
+  "completion": "Finish both bounded cells, analyze trajectories/MTP/CPU/cache and wall latency even if slower, preserve runnable variant and exact command/binary hashes."
+}

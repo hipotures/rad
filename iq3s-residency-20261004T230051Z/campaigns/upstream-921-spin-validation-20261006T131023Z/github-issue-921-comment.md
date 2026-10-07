@@ -1,0 +1,32 @@
+Thanks, Niko, for specifying the interleaved 10+ pair/median protocol. I ran the requested default-spin comparison on the released 0.1.40-generation engine, keeping `STRATA_POOL_SPIN_US` genuinely absent for A and setting exactly `100` for B.
+
+**Source:** Strata **v0.1.40.1**, `82f46a8c8f475f001ad76d92f58f4a4f8ffb0253`. It was the latest release at campaign start; its native engine/build tree is byte-identical to v0.1.40. I built one clean Linux CUDA Release binary (sm_89, GGML pin `3cf03257f219afbe7334045ff7c6a06ac68c627d`) and used it for both arms. Binary SHA256: `09f70d953f6d0009bdd555d06b72363aa9442fdb6f8f1a25250c6bf6a578dd94`. Source confirms the 20 ms default and the existing microsecond override. No residency research patches, `--pool-tasks`, PR #949 combination, or other spin values.
+
+**Hardware:** one dual RTX 4090 24 GiB / Ryzen 9 7950X3D KVM machine, 16 guest vCPUs, approximately 161 GiB RAM, no swap; driver 615.71.09, CUDA 13.4. PHB topology, CUDA peer access unavailable. Clocks, power limits, affinity, governor and VM/host settings were unchanged.
+
+**Regimes:** IQ3_S K25 is highly resident by routed demand and CPU-light; UD-Q4_K_XL K24 has roughly 47% physical expert capacity and materially more real CPU fallback work. These are two workload regimes on the same GPU-heavy machine, not two independent machines. Both keep PCIe fraction 0.28, 15 pool workers, MTP spec=4/min-p=0.5, INT8 KV, KV-resident=32768 where applicable, prefill=auto, suffix lookup/reuse off, greedy serial execution.
+
+**Design:** 48 valid adjacent A/B pairs across the four cells below. Each 12-pair cell has six AB/six BA, balanced 2/2 within code/math/prose, with fixed saved order and seed. Each arm uses a fresh server, the same 4096-input/64-output warmup, then exactly one 4096-output request. Actual native environments, command lines, hashes, capacities and input IDs were checked; only the spin environment key differs within each pair. Saved independent repository/numerical/RFC workloads were reused, with four pairs per family. The fourth repeats a saved variant. No timing-based prompt selection.
+
+| Regime | Context | Valid pairs | A default TG median | B 100us TG median | Median paired TG Δ | Median paired wall Δ | CPU A | CPU B | Median paired CPU Δ | B wins / pairs |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| IQ3_S | 32768 | 12 | 155.25 | 172.60 | +10.98% | -6.30% | 93.14% | 16.92% | -81.25% | 12/12 |
+| Q4 | 32768 | 12 | 105.60 | 114.60 | +7.12% | -4.09% | 96.15% | 29.30% | -69.58% | 12/12 |
+| IQ3_S | 131072 | 12 | 143.60 | 160.40 | +10.03% | -4.83% | 94.28% | 16.21% | -82.28% | 12/12 |
+| Q4 | 131072 | 12 | 101.85 | 107.00 | +7.04% | -2.83% | 96.94% | 31.40% | -67.24% | 11/12 |
+
+TG and wall changes are **medians of within-pair B/A ratios**, not ratios of arm medians. CPU is mean guest active CPU during decode, excluding steal, then paired in the same way. Exact pair rows, raw-arm ranges/IQRs, paired ranges, AB/BA splits, seeded paired-median bootstrap intervals and exact sign-flip tests on log TG ratios are retained. The pair is the unit; tokens and 1 Hz telemetry are not independent N.
+
+The earlier approximately 15% IQ3_S point becomes a smaller but consistent +10–11% pooled paired median. Q4 is positive at approximately +7% at both contexts despite 3.9×/5.4× the median CPU fallback entries of IQ3_S. All code/math/prose TG medians are positive (four pairs each; descriptive). B wins 47/48 TG comparisons. The exception is Q4 128K math pair 2: TG −6.29% and wall +7.07%; it remains included. Its steal changes 1.68→8.84%, so a pure wake-up explanation is not established. PP paired medians are nearly neutral (−0.20% to +0.75%), and 128K's longer prefill dilutes the wall-time benefit.
+
+All 48 pairs have bit-identical actual output IDs and matching inputs. MTP proposals/accepted counts, verify windows, local/CPU/mapped routing counters and capacities match in every pair. The 24 same-variant A–A/B–B repeat checks also match, without extra reruns. Thus different generated or recorded MTP/routing trajectories do not explain the timing changes.
+
+One eligibility failure was preserved: the original Q4 code 32K request naturally stopped at 3788 tokens, before its B arm. I froze the same stronger book-length instruction across all Q4 families/contexts/variants before any valid Q4 pair, retained the source text, and used the predeclared replacement slot. IQ3 inputs are unchanged. This is a declared output-length exclusion, not a performance exclusion. All original and replacement attempts remain in the ledger/raw artifacts.
+
+Residual guest steal is 1.43–10.90%; Q4 128K median A/B steal is 2.77/6.89%. Steal may itself depend on the spin policy's effect on VM scheduling, so I did not assume it was an external nuisance or adjust results for it. Both AB and BA subsets favor B in median. Clocks were steady in observed decode samples and swap stayed zero, but host scheduling and cache/thermal effects are not fully controlled.
+
+The CPU demand comparison uses normal fallback entries and CPU experts/entries per layer-window, not utilization alone. Exact worker spin/sleep counters and isolated wake-up latency are unavailable on the released headline binary. Aggregate CPU completion timing cannot establish the wake-up mechanism by itself; I did not add heavy profiling or a spin sweep.
+
+For the 0.1.41 discussion, these paired medians support the view that 20 ms is unnecessarily long on this platform, including the tested CPU-positive Q4 regime. They do not prove a universally safe 100 µs default. Aggregate CPU timing gets longer in B despite better overall TG; that motivates examining coordination costs, but does not establish that an adaptive/per-phase policy would outperform 100 µs. Replication on other machines and more CPU-constrained regimes remains a separate question.
+
+Limitations: 12 pairs per cell on one physical dual-4090 / 7950X3D VM, fixed repeated corpora, model/context-specific greedy free generation, and residual host scheduling/thermal drift. Family results have only four pairs each. This does not establish cross-machine generality, safety on CPU-heavy hardware, or a universal 100 µs default. It provides the requested paired medians for these two expert-pool demand regimes. The full report, reproducibility commands, hashes, logs, token arrays and telemetry are preserved locally; this comment has not been posted.

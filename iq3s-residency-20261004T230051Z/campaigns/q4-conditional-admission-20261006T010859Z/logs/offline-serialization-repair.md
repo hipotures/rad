@@ -1,0 +1,1 @@
+Offline assertions passed, then JSON preservation failed on NumPy int64. Save helper now converts numeric scalars to native values. Original failure log retained. Only offline test rerun, no inference/protocol/policy/threshold change.

@@ -1,0 +1,790 @@
+{
+  "state": "COMPLETE_NEGATIVE",
+  "scope": "Bounded causal policies at the frozen capacities; not a universal rejection of prediction.",
+  "profiles": {
+    "32k": {
+      "reference_nonlocal": 36776,
+      "replay": {
+        "markov-scaled": {
+          "policy": "markov-scaled",
+          "aggregate_transfer_budget_GB_s": 12.6,
+          "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+          "demand_entries": 2117280,
+          "nonlocal_entries": 52624,
+          "all_demand_local_hit_pct": 97.51454696591854,
+          "nonlocal_distinct_group_jobs": 48693,
+          "nonlocal_weight_bytes_per_group": 100442035200,
+          "promotion_count": 2779,
+          "promotion_bytes": 5654912000,
+          "useful_promotion_bytes": 5529651200,
+          "unused_promotion_bytes": 125260800,
+          "victim_demand_while_absent": 13406,
+          "modeled_pending_wait_s": 0.08790416420605934,
+          "observed_window_wall_s": 25.510303695,
+          "observed_pending_wait_removed_s": 0.12157517000000015,
+          "fixed_nonpromotion_work_plus_modeled_wait_s": 25.47663268920606,
+          "offline_Python_selector_wall_s": 0.8430109116015956,
+          "selector_time_charged_to_timeline": false,
+          "resource_bytes_per_GPU": [
+            19824128000,
+            18323200000
+          ],
+          "future_information_used": false,
+          "limitations": [
+            "fixed observed demand/MTP/numerical trajectory",
+            "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+            "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+            "same-layer capacities and original physical slot classes; no extra VRAM",
+            "copy queues serialize on a conservative aggregate link and two per-device resources",
+            "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+          ],
+          "transition_state_bytes": 50429952,
+          "transition_state_update_wall_s": 2.3579479561303742,
+          "raw_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v2/32k-rate12p6/markov-scaled.json"
+        },
+        "token-bigram-hybrid": {
+          "policy": "token-bigram-hybrid",
+          "aggregate_transfer_budget_GB_s": 12.6,
+          "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+          "demand_entries": 2117280,
+          "nonlocal_entries": 35703,
+          "all_demand_local_hit_pct": 98.31373271367036,
+          "nonlocal_distinct_group_jobs": 33014,
+          "nonlocal_weight_bytes_per_group": 68167731200,
+          "promotion_count": 5788,
+          "promotion_bytes": 11885824000,
+          "useful_promotion_bytes": 10863308800,
+          "unused_promotion_bytes": 1022515200,
+          "victim_demand_while_absent": 15013,
+          "modeled_pending_wait_s": 0.27238951061806727,
+          "observed_window_wall_s": 25.510303695,
+          "observed_pending_wait_removed_s": 0.12157517000000015,
+          "fixed_nonpromotion_work_plus_modeled_wait_s": 25.661118035618067,
+          "offline_Python_selector_wall_s": 0.27775817998917773,
+          "selector_time_charged_to_timeline": false,
+          "resource_bytes_per_GPU": [
+            19824128000,
+            18323200000
+          ],
+          "future_information_used": false,
+          "limitations": [
+            "fixed observed demand/MTP/numerical trajectory",
+            "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+            "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+            "same-layer capacities and original physical slot classes; no extra VRAM",
+            "copy queues serialize on a conservative aggregate link and two per-device resources",
+            "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+          ],
+          "causal_prediction": {
+            "available_signal": "Known outv[a] after verify plus last committed input token; historical committed rows only. No future router IDs or rejected rows are used as features.",
+            "capacity_bigrams": 256,
+            "dictionary_queries": 1240,
+            "dictionary_hits": 569,
+            "dictionary_payload_peak_bytes": 245760,
+            "update_wall_s": 0.8782067458960228,
+            "memory_limits": "Payload bytes exclude Python container overhead. C++ deployment memory and cost not yet measured; no GPU state.",
+            "score": "Causal heat + predicted next-row count / 0.3; bounded same-layer admission, no routing changes."
+          },
+          "raw_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v2/32k-rate12p6/token-bigram-hybrid.json"
+        }
+      },
+      "dictionary_quality": {
+        "predicted_entries": 273120,
+        "correct_predicted_entries": 123647,
+        "precision_when_dictionary_hit_pct": 45.27204159343878,
+        "all_true_next_first_row_entries": 595200,
+        "unconditional_next_row_recall_pct": 20.774025537634408,
+        "true_nonlocal_next_row_entries": 9781,
+        "predicted_true_nonlocal_entries": 598,
+        "unconditional_nonlocal_recall_pct": 6.113894284837951,
+        "hit_queries": 569,
+        "total_queries": 1240,
+        "per_layer": {
+          "0": {
+            "predicted": 5690,
+            "matched": 5306,
+            "nonlocal": 72,
+            "nonlocal_matched": 16
+          },
+          "1": {
+            "predicted": 5690,
+            "matched": 4646,
+            "nonlocal": 136,
+            "nonlocal_matched": 28
+          },
+          "2": {
+            "predicted": 5690,
+            "matched": 4409,
+            "nonlocal": 195,
+            "nonlocal_matched": 30
+          },
+          "3": {
+            "predicted": 5690,
+            "matched": 4148,
+            "nonlocal": 267,
+            "nonlocal_matched": 50
+          },
+          "4": {
+            "predicted": 5690,
+            "matched": 4052,
+            "nonlocal": 268,
+            "nonlocal_matched": 30
+          },
+          "5": {
+            "predicted": 5690,
+            "matched": 3951,
+            "nonlocal": 252,
+            "nonlocal_matched": 33
+          },
+          "6": {
+            "predicted": 5690,
+            "matched": 3898,
+            "nonlocal": 121,
+            "nonlocal_matched": 23
+          },
+          "7": {
+            "predicted": 5690,
+            "matched": 3814,
+            "nonlocal": 176,
+            "nonlocal_matched": 18
+          },
+          "8": {
+            "predicted": 5690,
+            "matched": 3443,
+            "nonlocal": 188,
+            "nonlocal_matched": 19
+          },
+          "9": {
+            "predicted": 5690,
+            "matched": 3171,
+            "nonlocal": 148,
+            "nonlocal_matched": 15
+          },
+          "10": {
+            "predicted": 5690,
+            "matched": 3100,
+            "nonlocal": 198,
+            "nonlocal_matched": 18
+          },
+          "11": {
+            "predicted": 5690,
+            "matched": 3114,
+            "nonlocal": 181,
+            "nonlocal_matched": 11
+          },
+          "12": {
+            "predicted": 5690,
+            "matched": 3288,
+            "nonlocal": 223,
+            "nonlocal_matched": 19
+          },
+          "13": {
+            "predicted": 5690,
+            "matched": 2627,
+            "nonlocal": 223,
+            "nonlocal_matched": 14
+          },
+          "14": {
+            "predicted": 5690,
+            "matched": 2458,
+            "nonlocal": 169,
+            "nonlocal_matched": 9
+          },
+          "15": {
+            "predicted": 5690,
+            "matched": 2301,
+            "nonlocal": 189,
+            "nonlocal_matched": 10
+          },
+          "16": {
+            "predicted": 5690,
+            "matched": 2187,
+            "nonlocal": 261,
+            "nonlocal_matched": 20
+          },
+          "17": {
+            "predicted": 5690,
+            "matched": 2144,
+            "nonlocal": 204,
+            "nonlocal_matched": 9
+          },
+          "18": {
+            "predicted": 5690,
+            "matched": 2581,
+            "nonlocal": 293,
+            "nonlocal_matched": 22
+          },
+          "19": {
+            "predicted": 5690,
+            "matched": 2018,
+            "nonlocal": 246,
+            "nonlocal_matched": 5
+          },
+          "20": {
+            "predicted": 5690,
+            "matched": 1860,
+            "nonlocal": 165,
+            "nonlocal_matched": 4
+          },
+          "21": {
+            "predicted": 5690,
+            "matched": 2304,
+            "nonlocal": 213,
+            "nonlocal_matched": 12
+          },
+          "22": {
+            "predicted": 5690,
+            "matched": 2827,
+            "nonlocal": 170,
+            "nonlocal_matched": 5
+          },
+          "23": {
+            "predicted": 5690,
+            "matched": 1650,
+            "nonlocal": 153,
+            "nonlocal_matched": 12
+          },
+          "24": {
+            "predicted": 5690,
+            "matched": 1993,
+            "nonlocal": 213,
+            "nonlocal_matched": 12
+          },
+          "25": {
+            "predicted": 5690,
+            "matched": 1901,
+            "nonlocal": 235,
+            "nonlocal_matched": 6
+          },
+          "26": {
+            "predicted": 5690,
+            "matched": 1806,
+            "nonlocal": 343,
+            "nonlocal_matched": 12
+          },
+          "27": {
+            "predicted": 5690,
+            "matched": 1727,
+            "nonlocal": 280,
+            "nonlocal_matched": 7
+          },
+          "28": {
+            "predicted": 5690,
+            "matched": 2066,
+            "nonlocal": 374,
+            "nonlocal_matched": 22
+          },
+          "29": {
+            "predicted": 5690,
+            "matched": 1575,
+            "nonlocal": 218,
+            "nonlocal_matched": 3
+          },
+          "30": {
+            "predicted": 5690,
+            "matched": 1595,
+            "nonlocal": 136,
+            "nonlocal_matched": 1
+          },
+          "31": {
+            "predicted": 5690,
+            "matched": 1693,
+            "nonlocal": 141,
+            "nonlocal_matched": 3
+          },
+          "32": {
+            "predicted": 5690,
+            "matched": 1685,
+            "nonlocal": 137,
+            "nonlocal_matched": 4
+          },
+          "33": {
+            "predicted": 5690,
+            "matched": 1449,
+            "nonlocal": 216,
+            "nonlocal_matched": 6
+          },
+          "34": {
+            "predicted": 5690,
+            "matched": 1889,
+            "nonlocal": 353,
+            "nonlocal_matched": 8
+          },
+          "35": {
+            "predicted": 5690,
+            "matched": 1735,
+            "nonlocal": 182,
+            "nonlocal_matched": 6
+          },
+          "36": {
+            "predicted": 5690,
+            "matched": 2019,
+            "nonlocal": 119,
+            "nonlocal_matched": 2
+          },
+          "37": {
+            "predicted": 5690,
+            "matched": 2050,
+            "nonlocal": 219,
+            "nonlocal_matched": 9
+          },
+          "38": {
+            "predicted": 5690,
+            "matched": 2324,
+            "nonlocal": 274,
+            "nonlocal_matched": 17
+          },
+          "39": {
+            "predicted": 5690,
+            "matched": 1752,
+            "nonlocal": 172,
+            "nonlocal_matched": 3
+          },
+          "40": {
+            "predicted": 5690,
+            "matched": 1860,
+            "nonlocal": 164,
+            "nonlocal_matched": 3
+          },
+          "41": {
+            "predicted": 5690,
+            "matched": 1938,
+            "nonlocal": 157,
+            "nonlocal_matched": 5
+          },
+          "42": {
+            "predicted": 5690,
+            "matched": 1902,
+            "nonlocal": 188,
+            "nonlocal_matched": 4
+          },
+          "43": {
+            "predicted": 5690,
+            "matched": 1942,
+            "nonlocal": 228,
+            "nonlocal_matched": 8
+          },
+          "44": {
+            "predicted": 5690,
+            "matched": 2400,
+            "nonlocal": 174,
+            "nonlocal_matched": 3
+          },
+          "45": {
+            "predicted": 5690,
+            "matched": 2753,
+            "nonlocal": 152,
+            "nonlocal_matched": 8
+          },
+          "46": {
+            "predicted": 5690,
+            "matched": 3025,
+            "nonlocal": 188,
+            "nonlocal_matched": 4
+          },
+          "47": {
+            "predicted": 5690,
+            "matched": 3271,
+            "nonlocal": 207,
+            "nonlocal_matched": 10
+          }
+        },
+        "timing": "Inputs are known output IDs after previous verify. Targets are next actual routed row only for evaluation; no future target is used by the dictionary."
+      }
+    },
+    "128k": {
+      "reference_nonlocal": 45276,
+      "replay": {
+        "markov-scaled": {
+          "policy": "markov-scaled",
+          "aggregate_transfer_budget_GB_s": 12.6,
+          "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+          "demand_entries": 2351040,
+          "nonlocal_entries": 60116,
+          "all_demand_local_hit_pct": 97.44300394718934,
+          "nonlocal_distinct_group_jobs": 54448,
+          "nonlocal_weight_bytes_per_group": 111780403200,
+          "promotion_count": 3379,
+          "promotion_bytes": 6828057600,
+          "useful_promotion_bytes": 6636339200,
+          "unused_promotion_bytes": 191718400,
+          "victim_demand_while_absent": 16941,
+          "modeled_pending_wait_s": 0.11752911652345513,
+          "observed_window_wall_s": 30.868415985,
+          "observed_pending_wait_removed_s": 0.16604712300000005,
+          "fixed_nonpromotion_work_plus_modeled_wait_s": 30.819897978523457,
+          "offline_Python_selector_wall_s": 0.9930832866812125,
+          "selector_time_charged_to_timeline": false,
+          "resource_bytes_per_GPU": [
+            19712998400,
+            18220492800
+          ],
+          "future_information_used": false,
+          "limitations": [
+            "fixed observed demand/MTP/numerical trajectory",
+            "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+            "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+            "same-layer capacities and original physical slot classes; no extra VRAM",
+            "copy queues serialize on a conservative aggregate link and two per-device resources",
+            "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+          ],
+          "transition_state_bytes": 50429952,
+          "transition_state_update_wall_s": 2.6011099728639238,
+          "raw_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v2/128k-rate12p6/markov-scaled.json"
+        },
+        "token-bigram-hybrid": {
+          "policy": "token-bigram-hybrid",
+          "aggregate_transfer_budget_GB_s": 12.6,
+          "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+          "demand_entries": 2351040,
+          "nonlocal_entries": 44699,
+          "all_demand_local_hit_pct": 98.09875629508643,
+          "nonlocal_distinct_group_jobs": 40526,
+          "nonlocal_weight_bytes_per_group": 83314099200,
+          "promotion_count": 7629,
+          "promotion_bytes": 15511936000,
+          "useful_promotion_bytes": 13910528000,
+          "unused_promotion_bytes": 1601408000,
+          "victim_demand_while_absent": 22197,
+          "modeled_pending_wait_s": 0.41594968404631927,
+          "observed_window_wall_s": 30.868415985,
+          "observed_pending_wait_removed_s": 0.16604712300000005,
+          "fixed_nonpromotion_work_plus_modeled_wait_s": 31.118318546046318,
+          "offline_Python_selector_wall_s": 0.3270691336947493,
+          "selector_time_charged_to_timeline": false,
+          "resource_bytes_per_GPU": [
+            19712998400,
+            18220492800
+          ],
+          "future_information_used": false,
+          "limitations": [
+            "fixed observed demand/MTP/numerical trajectory",
+            "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+            "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+            "same-layer capacities and original physical slot classes; no extra VRAM",
+            "copy queues serialize on a conservative aggregate link and two per-device resources",
+            "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+          ],
+          "causal_prediction": {
+            "available_signal": "Known outv[a] after verify plus last committed input token; historical committed rows only. No future router IDs or rejected rows are used as features.",
+            "capacity_bigrams": 256,
+            "dictionary_queries": 1448,
+            "dictionary_hits": 338,
+            "dictionary_payload_peak_bytes": 245760,
+            "update_wall_s": 0.9608443145407364,
+            "memory_limits": "Payload bytes exclude Python container overhead. C++ deployment memory and cost not yet measured; no GPU state.",
+            "score": "Causal heat + predicted next-row count / 0.3; bounded same-layer admission, no routing changes."
+          },
+          "raw_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v2/128k-rate12p6/token-bigram-hybrid.json"
+        }
+      },
+      "dictionary_quality": {
+        "predicted_entries": 162240,
+        "correct_predicted_entries": 71884,
+        "precision_when_dictionary_hit_pct": 44.307199211045365,
+        "all_true_next_first_row_entries": 695040,
+        "unconditional_next_row_recall_pct": 10.342426335174954,
+        "true_nonlocal_next_row_entries": 13468,
+        "predicted_true_nonlocal_entries": 498,
+        "unconditional_nonlocal_recall_pct": 3.697653697653698,
+        "hit_queries": 338,
+        "total_queries": 1448,
+        "per_layer": {
+          "0": {
+            "predicted": 3380,
+            "matched": 2913,
+            "nonlocal": 111,
+            "nonlocal_matched": 21
+          },
+          "1": {
+            "predicted": 3380,
+            "matched": 2321,
+            "nonlocal": 206,
+            "nonlocal_matched": 34
+          },
+          "2": {
+            "predicted": 3380,
+            "matched": 2240,
+            "nonlocal": 324,
+            "nonlocal_matched": 34
+          },
+          "3": {
+            "predicted": 3380,
+            "matched": 2035,
+            "nonlocal": 504,
+            "nonlocal_matched": 38
+          },
+          "4": {
+            "predicted": 3380,
+            "matched": 2119,
+            "nonlocal": 437,
+            "nonlocal_matched": 31
+          },
+          "5": {
+            "predicted": 3380,
+            "matched": 2054,
+            "nonlocal": 324,
+            "nonlocal_matched": 32
+          },
+          "6": {
+            "predicted": 3380,
+            "matched": 2080,
+            "nonlocal": 177,
+            "nonlocal_matched": 11
+          },
+          "7": {
+            "predicted": 3380,
+            "matched": 2064,
+            "nonlocal": 224,
+            "nonlocal_matched": 24
+          },
+          "8": {
+            "predicted": 3380,
+            "matched": 1752,
+            "nonlocal": 275,
+            "nonlocal_matched": 22
+          },
+          "9": {
+            "predicted": 3380,
+            "matched": 1661,
+            "nonlocal": 231,
+            "nonlocal_matched": 9
+          },
+          "10": {
+            "predicted": 3380,
+            "matched": 1494,
+            "nonlocal": 366,
+            "nonlocal_matched": 17
+          },
+          "11": {
+            "predicted": 3380,
+            "matched": 1548,
+            "nonlocal": 240,
+            "nonlocal_matched": 10
+          },
+          "12": {
+            "predicted": 3380,
+            "matched": 1788,
+            "nonlocal": 317,
+            "nonlocal_matched": 8
+          },
+          "13": {
+            "predicted": 3380,
+            "matched": 1256,
+            "nonlocal": 360,
+            "nonlocal_matched": 14
+          },
+          "14": {
+            "predicted": 3380,
+            "matched": 1271,
+            "nonlocal": 204,
+            "nonlocal_matched": 6
+          },
+          "15": {
+            "predicted": 3380,
+            "matched": 1433,
+            "nonlocal": 243,
+            "nonlocal_matched": 8
+          },
+          "16": {
+            "predicted": 3380,
+            "matched": 1379,
+            "nonlocal": 350,
+            "nonlocal_matched": 9
+          },
+          "17": {
+            "predicted": 3380,
+            "matched": 1226,
+            "nonlocal": 224,
+            "nonlocal_matched": 9
+          },
+          "18": {
+            "predicted": 3380,
+            "matched": 1612,
+            "nonlocal": 353,
+            "nonlocal_matched": 12
+          },
+          "19": {
+            "predicted": 3380,
+            "matched": 1215,
+            "nonlocal": 347,
+            "nonlocal_matched": 12
+          },
+          "20": {
+            "predicted": 3380,
+            "matched": 1330,
+            "nonlocal": 230,
+            "nonlocal_matched": 10
+          },
+          "21": {
+            "predicted": 3380,
+            "matched": 1472,
+            "nonlocal": 256,
+            "nonlocal_matched": 4
+          },
+          "22": {
+            "predicted": 3380,
+            "matched": 1756,
+            "nonlocal": 290,
+            "nonlocal_matched": 12
+          },
+          "23": {
+            "predicted": 3380,
+            "matched": 1029,
+            "nonlocal": 251,
+            "nonlocal_matched": 7
+          },
+          "24": {
+            "predicted": 3380,
+            "matched": 1284,
+            "nonlocal": 276,
+            "nonlocal_matched": 5
+          },
+          "25": {
+            "predicted": 3380,
+            "matched": 1219,
+            "nonlocal": 342,
+            "nonlocal_matched": 7
+          },
+          "26": {
+            "predicted": 3380,
+            "matched": 1086,
+            "nonlocal": 416,
+            "nonlocal_matched": 3
+          },
+          "27": {
+            "predicted": 3380,
+            "matched": 1114,
+            "nonlocal": 337,
+            "nonlocal_matched": 1
+          },
+          "28": {
+            "predicted": 3380,
+            "matched": 1361,
+            "nonlocal": 376,
+            "nonlocal_matched": 4
+          },
+          "29": {
+            "predicted": 3380,
+            "matched": 978,
+            "nonlocal": 272,
+            "nonlocal_matched": 8
+          },
+          "30": {
+            "predicted": 3380,
+            "matched": 1089,
+            "nonlocal": 163,
+            "nonlocal_matched": 3
+          },
+          "31": {
+            "predicted": 3380,
+            "matched": 1236,
+            "nonlocal": 211,
+            "nonlocal_matched": 1
+          },
+          "32": {
+            "predicted": 3380,
+            "matched": 1171,
+            "nonlocal": 226,
+            "nonlocal_matched": 2
+          },
+          "33": {
+            "predicted": 3380,
+            "matched": 1056,
+            "nonlocal": 213,
+            "nonlocal_matched": 3
+          },
+          "34": {
+            "predicted": 3380,
+            "matched": 1330,
+            "nonlocal": 369,
+            "nonlocal_matched": 4
+          },
+          "35": {
+            "predicted": 3380,
+            "matched": 1134,
+            "nonlocal": 271,
+            "nonlocal_matched": 4
+          },
+          "36": {
+            "predicted": 3380,
+            "matched": 1258,
+            "nonlocal": 135,
+            "nonlocal_matched": 1
+          },
+          "37": {
+            "predicted": 3380,
+            "matched": 1434,
+            "nonlocal": 216,
+            "nonlocal_matched": 6
+          },
+          "38": {
+            "predicted": 3380,
+            "matched": 1604,
+            "nonlocal": 265,
+            "nonlocal_matched": 4
+          },
+          "39": {
+            "predicted": 3380,
+            "matched": 1037,
+            "nonlocal": 299,
+            "nonlocal_matched": 4
+          },
+          "40": {
+            "predicted": 3380,
+            "matched": 1153,
+            "nonlocal": 228,
+            "nonlocal_matched": 3
+          },
+          "41": {
+            "predicted": 3380,
+            "matched": 1165,
+            "nonlocal": 188,
+            "nonlocal_matched": 1
+          },
+          "42": {
+            "predicted": 3380,
+            "matched": 1319,
+            "nonlocal": 210,
+            "nonlocal_matched": 2
+          },
+          "43": {
+            "predicted": 3380,
+            "matched": 1183,
+            "nonlocal": 291,
+            "nonlocal_matched": 2
+          },
+          "44": {
+            "predicted": 3380,
+            "matched": 1442,
+            "nonlocal": 267,
+            "nonlocal_matched": 5
+          },
+          "45": {
+            "predicted": 3380,
+            "matched": 1568,
+            "nonlocal": 195,
+            "nonlocal_matched": 4
+          },
+          "46": {
+            "predicted": 3380,
+            "matched": 1740,
+            "nonlocal": 290,
+            "nonlocal_matched": 8
+          },
+          "47": {
+            "predicted": 3380,
+            "matched": 1875,
+            "nonlocal": 568,
+            "nonlocal_matched": 19
+          }
+        },
+        "timing": "Inputs are known output IDs after previous verify. Targets are next actual routed row only for evaluation; no future target is used by the dictionary."
+      }
+    }
+  },
+  "repairs": [
+    "v1 sensitivity driver stopped on floating cancellation in pending publication; v2 uses exact completion endpoint and has a regression test. Failed and partial v1 records retained."
+  ],
+  "runtime_disposition": "Neither candidate is promoted to live execution: normalized Markov increases nonlocals; bigram improvement is small, has more transfer bytes and Python state/update costs. E008 separately measures legitimate router availability."
+}

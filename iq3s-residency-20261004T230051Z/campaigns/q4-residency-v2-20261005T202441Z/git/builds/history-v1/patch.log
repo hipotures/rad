@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/patch_history.py", line 17, in <module>
+    edit('src/program/generate.cpp','            std::vector<std::pair<float, int32_t>> cand, vict;\n            for (int64_t l = 0; l < g.n_layers; ++l) {','            std::vector<std::pair<float, int32_t>> cand, vict;\n            if(!(strata::research::q4_history.enabled&&strata::research::q4_history.active)){\n            for (int64_t l = 0; l < g.n_layers; ++l) {')
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/patch_history.py", line 6, in edit
+    p=S/path;t=p.read_text();assert t.count(old)==count,(path,old[:90],t.count(old));p.write_text(t.replace(old,new,count))
+                                    ^^^^^^^^^^^^^^^^^^^
+AssertionError: ('src/program/generate.cpp', '            std::vector<std::pair<float, int32_t>> cand, vict;\n            for (int64_t l ', 2)

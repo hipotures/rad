@@ -1,0 +1,40 @@
+{
+  "question": "Corrected exact completion publication eliminates cancellation at slow rates and one-entry floating discrepancies. Produce authoritative corrected peak results rather than overwrite legacy tables.",
+  "source_sha256": "6ddae8b0d3f23de85b3fd6a1020d4f77d8f3b6baf6cbf8c30209e35202dcf04a",
+  "repetitions": 1,
+  "plan": [
+    {
+      "profile": "32k",
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay.py",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "--output",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v6-corrected-peak/32k-rate12p6",
+        "--rate",
+        "12.6",
+        "--policies",
+        "current",
+        "frequency",
+        "future-nextuse"
+      ]
+    },
+    {
+      "profile": "128k",
+      "command": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay.py",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "--output",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v6-corrected-peak/128k-rate12p6",
+        "--rate",
+        "12.6",
+        "--policies",
+        "current",
+        "frequency",
+        "future-nextuse"
+      ]
+    }
+  ],
+  "scope": "Deterministic repair, not an extra unchanged live benchmark repetition."
+}

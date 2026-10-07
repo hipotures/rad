@@ -1,0 +1,26 @@
+[PHASE 1 | STEP 2/5] compile-offline START | elapsed 31.9min | remaining 208.1min
+[PHASE 1 | STEP 2/5] compile-offline COMPLETE | elapsed 32.0min | remaining 208.0min
+[PHASE 1 | STEP 2/5] scorer-parity START | elapsed 32.0min | remaining 208.0min
+[PHASE 1 | STEP 2/5] scorer-parity COMPLETE | elapsed 32.1min | remaining 207.9min
+[PHASE 1 | STEP 2/5] policy-fixture START | elapsed 32.1min | remaining 207.9min
+[PHASE 1 | STEP 2/5] policy-fixture COMPLETE | elapsed 32.1min | remaining 207.9min
+[PHASE 1 | STEP 2/5] full-reference-regression START | elapsed 32.1min | remaining 207.9min
+[PHASE 1 | STEP 2/5] full-reference-regression COMPLETE | elapsed 32.1min | remaining 207.9min
+[PHASE 1 | STEP 2/5] offline-smoke START | elapsed 32.1min | remaining 207.9min
+[PHASE 1 | STEP 2/5] offline-smoke COMPLETE | elapsed 32.1min | remaining 207.9min
+[PHASE 1 | STEP 2/5] offline-competition START | elapsed 32.1min | remaining 207.9min
+[PHASE 1 | STEP 2/5] HEARTBEAT offline-competition | elapsed 32.5min | remaining 207.5min
+[PHASE 1 | STEP 2/5] HEARTBEAT offline-competition | elapsed 33.0min | remaining 207.0min
+[PHASE 1 | STEP 2/5] HEARTBEAT offline-competition | elapsed 33.4min | remaining 206.6min
+[PHASE 1 | STEP 2/5] HEARTBEAT offline-competition | elapsed 33.8min | remaining 206.2min
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/pipeline2.py", line 35, in <module>
+    run('offline-competition',[python,str(C/'scripts/offline_campaign.py'),'competition'],2400)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/pipeline2.py", line 27, in run
+    with logpath.open('x') as log:subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT,env=e,check=True,timeout=timeout)
+                                  ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/.venv/bin/python', '/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/offline_campaign.py', 'competition']' returned non-zero exit status 1.

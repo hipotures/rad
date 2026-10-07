@@ -1,0 +1,28 @@
+{
+  "declared_utc": "2026-10-05T22:10:55.680099+00:00",
+  "independent": {
+    "payload": "hold-code",
+    "actual_input": 72,
+    "output": 1024,
+    "context_limit": 32768,
+    "variants": [
+      "control",
+      "history-v2",
+      "early-v1"
+    ],
+    "replicates": 3,
+    "protocol": "Fresh server each attempt; identical4096-input/64-output warmup; rotate variant order per replicate. Entire task excluded from fit/calibration. Short-input application latency, not a128K-document confirmation."
+  },
+  "ablations": {
+    "profile": "32k",
+    "payload": "32k-run1",
+    "output": 4096,
+    "variants": [
+      "early-diagnostic",
+      "early-reactive-diagnostic"
+    ],
+    "attempts_per_point": 1,
+    "purpose": "Same two-spare scheduler and CPU linear victim model; native prediction ON/OFF. Detailed ready/use/late/victim outcomes outside headline speed. No extra parameter tuning."
+  },
+  "rules": "Never exceed3 attempts at an unchanged point. Retain EOS/failures. No reset after unfavorable results."
+}

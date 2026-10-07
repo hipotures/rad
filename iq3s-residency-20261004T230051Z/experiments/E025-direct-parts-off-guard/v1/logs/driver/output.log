@@ -1,0 +1,146 @@
+register 0 direct-parts-off-v1 f4c32199971adbd983a7d81260dbd8d591219c46
+
+battery 0 995bd72639d55fce51",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 7,
+    "state": "VALID",
+    "generated": 132,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "0a33f09e8c11aa4b28eab20a0f54bde2def33eecc80be2fb88d540348256e76f",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 8,
+    "state": "VALID",
+    "generated": 98,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "7ec9c22f9464545772e975489e016e3b630f5b1abac33f546bae15f6a096ec25",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 9,
+    "state": "VALID",
+    "generated": 18,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "8448cd5842a2428ec4addb0e30e56b89c828fa2724ca2f198873992d22f21a67",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 10,
+    "state": "VALID",
+    "generated": 27,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "a2d8fad7f44ee3ebaf08cd48c6804b450e77e6f156c978c1afbeefbc5ba539a7",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  }
+]
+
+ground-truth 0 {
+  "state": "PASS",
+  "checks": {
+    "10cases_retained": true,
+    "all_same_input_ids": true,
+    "no_reported_nonfinite": true,
+    "all_answers_nonempty": true,
+    "product1776": true,
+    "equationx8": true,
+    "strict_JSON9": true,
+    "strict_JSON10": true
+  },
+  "identical_visible_answers": 10,
+  "limitations": "Ground-truth checks are narrow. All text differences remain for source/numerical diagnosis; noLLMjudge, quality ranking or universal parity claim."
+}
+
+confirmation 0 t", "131072", "--suffix-draft", "0", "--prompt-cache", "0", "--pool-workers", "15", "--pcie-frac", "0.28"], "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/direct-parts-v1", "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/128k/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "f4c32199971adbd983a7d81260dbd8d591219c46", "build_variant": "direct-parts-off-v1", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2", "headline_instrumentation": "OFF", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 131072, "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46", "source_status": "", "variant_overrides": {"env": {}, "same_binary_reference": "direct-parts-v1", "direct_output_rows": "OFF; original copy/zero/add path"}}
+READY direct-parts-off-v1 128k 56.09
+warmup VALID input 4096 output 64 PP 1502.2 TG 88.1
+run1 VALID input 126715 output 4096 PP 4006.3 TG 144.4
+run2 VALID input 126716 output 4096 PP 5951.5 TG 131.4
+run3 VALID input 126719 output 4096 PP 6000.7 TG 153.2
+
+analysis 0 9,
+          "candidate_TG": 172.4,
+          "TG_delta_pct": 10.583707504810768,
+          "MTP_acceptance_delta_pp": 0.0
+        },
+        {
+          "run": 3,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 158.1,
+          "candidate_TG": 169.5,
+          "TG_delta_pct": 7.210626185958269,
+          "MTP_acceptance_delta_pp": 0.0
+        }
+      ]
+    },
+    {
+      "profile": "128k",
+      "median_delta_pct": {
+        "PP": -0.7024159103043326,
+        "TG": -10.087173100871727,
+        "TTFT_s": 0.6873332731661019,
+        "wall_s": 12.356839029073274
+      },
+      "capacity_identical": true,
+      "paired": [
+        {
+          "run": 1,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 133.1,
+          "candidate_TG": 144.4,
+          "TG_delta_pct": 8.489857250187827,
+          "MTP_acceptance_delta_pp": 0.0
+        },
+        {
+          "run": 2,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 160.6,
+          "candidate_TG": 131.4,
+          "TG_delta_pct": -18.181818181818176,
+          "MTP_acceptance_delta_pp": 0.0
+        },
+        {
+          "run": 3,
+          "same_input_ids": true,
+          "same_output_hash": true,
+          "first_diverging_visible_character": null,
+          "reference_TG": 163.0,
+          "candidate_TG": 153.2,
+          "TG_delta_pct": -6.0122699386503164,
+          "MTP_acceptance_delta_pp": 0.0
+        }
+      ]
+    }
+  ]
+}
+

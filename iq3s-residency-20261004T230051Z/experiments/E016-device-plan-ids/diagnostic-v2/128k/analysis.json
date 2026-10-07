@@ -1,0 +1,136 @@
+{
+  "state": "PASS",
+  "parity": {
+    "actual_output_IDs": true,
+    "window_inputs": true,
+    "window_T": true,
+    "acceptance": true,
+    "router_IDs": true,
+    "paths": true,
+    "initial_residency": true,
+    "final_residency": true,
+    "initial_heat": true,
+    "final_heat": true,
+    "first_head_bit_identical": true
+  },
+  "head": {
+    "top1": [
+      2,
+      2
+    ],
+    "KL_old_to_new": 0.0,
+    "max_abs_difference": 0.0
+  },
+  "footer": {
+    "local": true,
+    "CPU": true,
+    "mapped": true,
+    "windows": true,
+    "accepted": true
+  },
+  "trace_validation": {
+    "prefix": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v2/128k/traces/runtime-request2",
+    "state": "PASS",
+    "errors": [],
+    "windows": 1449,
+    "layers": 69552,
+    "output_tokens": 4096,
+    "output_ids_sha256": "4fa68e27ac1dcd2264bda6dd1e408eef728ab745ab58c8d87ccb574cbffa45ae",
+    "demand_entries": 2351040,
+    "path_counts": {
+      "-1": 43557,
+      "0": 2305764,
+      "1": 1719,
+      "2": 0
+    },
+    "all_demand_local_hit_pct": 98.07421396488363,
+    "reported_hit_pct_denominator": 98.14597494339854,
+    "promotions": 7069,
+    "promotion_bytes": 14373222400,
+    "unpublished_promotions_at_request_end": 0,
+    "gpu_budgets": [
+      {
+        "slots": 10183,
+        "bytes": 19712998400,
+        "size_classes": {
+          "1510400": 1655,
+          "1715200": 814,
+          "1868800": 426,
+          "1971200": 4391,
+          "2176000": 2496,
+          "2329600": 401
+        }
+      },
+      {
+        "slots": 8437,
+        "bytes": 18220492800,
+        "size_classes": {
+          "1510400": 380,
+          "1715200": 401,
+          "1971200": 1457,
+          "2176000": 2947,
+          "2329600": 2957,
+          "2662400": 295
+        }
+      }
+    ]
+  },
+  "extra_explicit_device_bytes": [
+    81528,
+    67560
+  ],
+  "mapped_CPU_ID_bytes": [
+    4000,
+    3680
+  ],
+  "resource_check": {
+    "state": "PASS",
+    "primary_slots": 10183,
+    "stage1_slots": 8437,
+    "expert_cache_primary_mib": 18799,
+    "expert_cache_total_mib": 36175,
+    "KV_resident_effective": 32768,
+    "baseline": {
+      "primary_slots": 10183,
+      "helper_or_stage1_slots": 8437,
+      "cache_gib_rounded": [
+        18.36,
+        16.97
+      ],
+      "exact_byte_classes": [
+        {
+          "slots": 10183,
+          "bytes": 19712998400,
+          "size_classes": {
+            "1510400": 1655,
+            "1715200": 814,
+            "1868800": 426,
+            "1971200": 4391,
+            "2176000": 2496,
+            "2329600": 401
+          }
+        },
+        {
+          "slots": 8437,
+          "bytes": 18220492800,
+          "size_classes": {
+            "1510400": 380,
+            "1715200": 401,
+            "1971200": 1457,
+            "2176000": 2947,
+            "2329600": 2957,
+            "2662400": 295
+          }
+        }
+      ],
+      "auto_sizing_frozen_by_invariant": true,
+      "max_total_context": 131072,
+      "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/logs/engine.log",
+      "rule": "CPU-only predictor state cannot increase VRAM; candidates must match per-profile physical capacities and byte classes, or charge any loss explicitly",
+      "diagnostic_provenance": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+      "effective_KV_resident": 32768,
+      "KV_note": "32k reports0(full32768resident);128k reports32768resident with streaming. CLI unchanged32768 on both."
+    },
+    "byte_class_basis": "same frozen allocator/profile/native formats and exact startup capacities; control classes independently captured in diagnostics; no extra GPU predictor allocation"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "state": "FAILED_HARNESS_BEFORE_START",
+  "request_started": false,
+  "error": "OSError errno98 Address already in use at pre-start socket.bind",
+  "diagnosis": "Previous own server had exited. Bare bind rejected recently closed sockets. Subsequent authoritative checks show no listener, engine or compute process.",
+  "repair": "SO_REUSEADDR on the external port probe; actual listeners still reject bind. Add explicit profile, attempt and port selection to collector.",
+  "replacement_attempt": "v5-portfix/128k",
+  "inference_configuration_changed": false,
+  "old_results_overwritten": false
+}

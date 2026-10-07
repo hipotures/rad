@@ -1,0 +1,14 @@
+{
+  "question": "How much useful residency headroom survives per-GPU byte/slot and transfer constraints?",
+  "mechanism": "Change causal admission/eviction scores while preserving router demand; compare against two explicitly relaxed or feasible future-informed references.",
+  "trace_gate": "Recorded routing/publication replay must match all entries/final residency; exact existing selector must reproduce promotions and float32 usage before projections.",
+  "finite_workload": ["one frozen32k repository episode", "one frozen128k repository episode", "bounded independent development/calibration/holdout episodes"],
+  "repetitions": "one deterministic replay per trace/policy, no redundant repetitions",
+  "budgets": "actual per-profile per-GPU slot bytes/classes from diagnostic trace; K25 ownership; no extra buffers/cache",
+  "policies": ["existing exact decayed heat", "static", "recency", "frequency", "EMA", "cycle-aware Least-Stale adaptation", "Markov/co-occurrence", "learned linear/MLP when available"],
+  "references": ["optimistic same-layer capacity reference with immediate free promotion", "feasible future-informed same-layer heuristic with transfer queues, publication and fixed bytes"],
+  "transfer_sensitivity_GB_s": [0.5, 1.8, 12.6],
+  "cost_origin": "Measured hardware envelope: combined approximately0.495GB/s, GEMM concurrent approximately1.78GB/s, pinned peak approximately12.6GB/s. These are sensitivity conditions, not a universal inference-safe budget.",
+  "validity": "Do not call fixed-trajectory nonhit reduction a measured TG gain. Replay output depends on observed branch trajectory. Unknown causal exposed miss costs remain unavailable.",
+  "completion": "Validate baseline, finish bounded policy/reference runs, report bytes/readiness/eviction damage and assumptions before selecting runtime screening."
+}

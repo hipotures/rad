@@ -1,0 +1,4 @@
+scripts/offline.cpp: In function ‘int main(int, char**)’:
+scripts/offline.cpp:9:31: error: ‘require’ was not declared in this scope
+    9 | int main(int argc,char**argv){require(argc>=2,"offline mode missing");std::string mode=argv[1];std::vector<int32_t> r=initial;std::vector<float> heat=initial_heat;auto bytes=blob_sizes();q4_oracle.blobs=bytes;uint64_t local=0,cpu=0,mapped=0,copybytes=0,proms=0,victims=0;int W=(int)q4_tape.windows.size();std::vector<int> slot_class[2];for(int d=0;d<2;++d){int mx=-1;for(int l=d*24;l<(d+1)*24;++l)for(int e=0;e<512;++e)mx=std::max(mx,r[l*512+e]);slot_class[d].assign(mx+1,-1);for(int l=d*24;l<(d+1)*24;++l)for(int e=0;e<512;++e)if(r[l*512+e]>=0)slot_class[d][r[l*512+e]]=q4_oracle.cls(l);}
+      |                               ^~~~~~~

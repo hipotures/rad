@@ -1,0 +1,16 @@
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for confirmed live CPU evaluator | elapsed 19.1min | remaining 220.9min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for confirmed live CPU evaluator | elapsed 19.5min | remaining 220.5min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for confirmed live CPU evaluator | elapsed 19.9min | remaining 220.1min
+[PHASE 1 | STEP 2/5] HEARTBEAT waiting for confirmed live CPU evaluator | elapsed 20.3min | remaining 219.7min
+[PHASE 1 | STEP 2/5] compile-offline START | elapsed 20.8min | remaining 219.2min
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/pipeline2.py", line 22, in <module>
+    run('compile-offline',[python,str(C/'scripts/compile_offline.py')],600)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/pipeline2.py", line 20, in run
+    with (C/'logs'/(label+'.log')).open('x') as log:subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT,env=e,check=True,timeout=timeout)
+                                                    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/.venv/bin/python', '/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/compile_offline.py']' returned non-zero exit status 1.

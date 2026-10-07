@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-10-06T01:55:21.647494+00:00",
+  "kernel": {
+    "command": [
+      "uname",
+      "-a"
+    ],
+    "returncode": 0,
+    "stdout": "Linux gpu 7.0.0-34-generic #34-Ubuntu SMP PREEMPT_DYNAMIC Wed Sep  2 14:29:37 UTC 2026 x86_64 GNU/Linux\n",
+    "stderr": ""
+  },
+  "cpu": {
+    "command": [
+      "lscpu"
+    ],
+    "returncode": 0,
+    "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  16\nOn-line CPU(s) list:                     0-15\nVendor ID:                               AuthenticAMD\nModel name:                              AMD Ryzen 9 7950X3D 16-Core Processor\nCPU family:                              25\nModel:                                   97\nThread(s) per core:                      1\nCore(s) per socket:                      16\nSocket(s):                               1\nStepping:                                2\nBogoMIPS:                                8400.03\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl xtopology cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw perfctr_core ssbd perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves user_shstk avx512_bf16 clzero xsaveerptr wbnoinvd arat npt lbrv nrip_save tsc_scale vmcb_clean flushbyasid pausefilter pfthreshold vgif vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid overflow_recov succor fsrm flush_l1d\nVirtualization:                          AMD-V\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               1 MiB (16 instances)\nL1i cache:                               1 MiB (16 instances)\nL2 cache:                                8 MiB (16 instances)\nL3 cache:                                256 MiB (16 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-15\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; Safe RET\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP disabled; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Mitigation; Clear CPU buffers\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+    "stderr": ""
+  },
+  "ram": {
+    "command": [
+      "free",
+      "-b"
+    ],
+    "returncode": 0,
+    "stdout": "               total        used        free      shared  buff/cache   available\nMem:     173014831104 88149798912 20670758912  2197422080 67844091904 84865032192\nSwap:              0           0           0\n",
+    "stderr": ""
+  },
+  "gpu": {
+    "command": [
+      "nvidia-smi",
+      "--query-gpu=index,name,uuid,driver_version,memory.total",
+      "--format=csv"
+    ],
+    "returncode": 0,
+    "stdout": "index, name, uuid, driver_version, memory.total [MiB]\n0, NVIDIA GeForce RTX 4090, GPU-6c849b47-7111-9265-9d42-ff8eddc05a2d, 615.71.09, 24564 MiB\n1, NVIDIA GeForce RTX 4090, GPU-81ac6e96-0bfe-390d-beb1-241466569d6b, 615.71.09, 24564 MiB\n",
+    "stderr": ""
+  },
+  "topology": {
+    "command": [
+      "nvidia-smi",
+      "topo",
+      "-m"
+    ],
+    "returncode": 0,
+    "stdout": "\t\u001b[4mGPU0\tGPU1\tCPU Affinity\tNUMA Affinity\tGPU NUMA ID\u001b[0m\nGPU0\t X \tPHB\t0-15\t0\t\tN/A\nGPU1\tPHB\t X \t0-15\t0\t\tN/A\n\nLegend:\n\n  X    = Self\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\n  PIX  = Connection traversing at most a single PCIe bridge\n  NV#  = Connection traversing a bonded set of # NVLinks\n",
+    "stderr": ""
+  },
+  "cuda": {
+    "command": [
+      "/usr/local/cuda/bin/nvcc",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2026 NVIDIA Corporation\nBuilt on Tue_Sep_01_08:45:21_PDT_2026\nCuda compilation tools, release 13.4, V13.4.92\nBuild cuda_13.4.r13.4/compiler.38855100_0\n",
+    "stderr": ""
+  },
+  "pci": {
+    "command": [
+      "lspci",
+      "-tv"
+    ],
+    "returncode": 0,
+    "stdout": "-[0000:00]-+-00.0  Intel Corporation 82G33/G31/P35/P31 Express DRAM Controller\n           +-01.0  Device 1234:1111\n           +-02.0  Red Hat, Inc. Virtio 1.0 file system\n           +-1a.0  Intel Corporation 82801I (ICH9 Family) USB UHCI Controller #4\n           +-1a.1  Intel Corporation 82801I (ICH9 Family) USB UHCI Controller #5\n           +-1a.2  Intel Corporation 82801I (ICH9 Family) USB UHCI Controller #6\n           +-1a.7  Intel Corporation 82801I (ICH9 Family) USB2 EHCI Controller #2\n           +-1b.0  Intel Corporation 82801I (ICH9 Family) HD Audio Controller\n           +-1c.0-[01]--+-00.0  NVIDIA Corporation AD102 [GeForce RTX 4090]\n           |            \\-00.1  NVIDIA Corporation AD102 High Definition Audio Controller\n           +-1c.1-[02]--+-00.0  NVIDIA Corporation AD102 [GeForce RTX 4090]\n           |            \\-00.1  NVIDIA Corporation AD102 High Definition Audio Controller\n           +-1c.2-[03]--\n           +-1c.3-[04]--\n           +-1d.0  Intel Corporation 82801I (ICH9 Family) USB UHCI Controller #1\n           +-1d.1  Intel Corporation 82801I (ICH9 Family) USB UHCI Controller #2\n           +-1d.2  Intel Corporation 82801I (ICH9 Family) USB UHCI Controller #3\n           +-1d.7  Intel Corporation 82801I (ICH9 Family) USB2 EHCI Controller #1\n           +-1e.0-[05-09]--+-01.0-[06]--+-03.0  Red Hat, Inc. Virtio memory balloon\n           |               |            +-08.0  Red Hat, Inc. Virtio console\n           |               |            \\-12.0  Red Hat, Inc. Virtio network device\n           |               +-02.0-[07]--\n           |               +-03.0-[08]--\n           |               \\-04.0-[09]--+-01.0  Red Hat, Inc. Virtio SCSI\n           |                            \\-02.0  Red Hat, Inc. Virtio SCSI\n           +-1f.0  Intel Corporation 82801IB (ICH9) LPC Interface Controller\n           +-1f.2  Intel Corporation 82801IR/IO/IH (ICH9R/DO/DH) 6 port SATA Controller [AHCI mode]\n           \\-1f.3  Intel Corporation 82801I (ICH9 Family) SMBus Controller\n",
+    "stderr": ""
+  },
+  "compiler": {
+    "command": [
+      "g++",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "stderr": ""
+  }
+}

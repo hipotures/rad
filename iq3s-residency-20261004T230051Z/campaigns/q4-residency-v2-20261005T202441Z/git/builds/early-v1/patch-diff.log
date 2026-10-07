@@ -1,0 +1,111 @@
+diff --git a/src/core/expert_source.cpp b/src/core/expert_source.cpp
+index 98e1952..02b1186 100644
+--- a/src/core/expert_source.cpp
++++ b/src/core/expert_source.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_early_policy.hpp"
+ // src/core/expert_source.cpp - the adapter.  See the header for the three clauses of the contract.
+ #include "strata/core/expert_source.hpp"
+ #include "strata/core/remote_experts.hpp"
+@@ -2008,6 +2009,7 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+     };
+     const auto c0 = std::chrono::steady_clock::now();
+     pt("begin");
++    strata::research::q4_early.host(const_cast<int32_t*>(d.host_res),(int)d.layers,ids,(int)(n_tok*k));
+     d.src->begin_layer(d.layers, ids, n_tok * k);
+     pt("begun");
+     if (!d.usage.empty())
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index dd5362b..818269f 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_early_policy.hpp"
+ // src/core/verify.cpp - see include/strata/core/verify.hpp.
+ #include "strata/core/verify.hpp"
+ #include "strata/core/remote_expert_opt.hpp"
+@@ -344,6 +345,7 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
+         err = "verify: the stage's layer range or its hand-off buffers are wrong";
+         return false;
+     }
++    if(!strata::research::q4_early.configure_gate(wt,g,device_,(int)lb_,(int)le_,err))return false;
+     const WeightRef* wo = wt.find("output.weight");
+     if (wo == nullptr) { err = "verify: output.weight is missing"; return false; }
+     n_vocab_ = wo->ne1;
+@@ -912,6 +914,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         }
+         // the window's rows routed in 2 launches (one router GEMV reading the weight once, one
+         // top-10) instead of 2 per token; every row's arithmetic is the single-token call's (STRATA_DEC_BATCH=0: old)
++        strata::research::q4_early.gpu_score((int)l,n,xm,logits_+tb*NE,ids_+tb*K,w_+tb*K,cs);
+         const WeightRef* w_router = v.get("ffn_gate_inp.weight");
+         if (dec_batch && n > 1 && w_router != nullptr && native_router_enabled() && NE == 512 && K == 10) {
+             try {
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 085c3d8..82d9eeb 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_early_policy.hpp"
+ // src/program/generate.cpp - P2.S6: `strata generate`.
+ //
+ // THE DRIVER, and the first program in this project that answers a question.  Everything below it is a
+@@ -3201,6 +3202,7 @@ int main(int argc, char** argv) {
+     mem_mark("the weights, the session and the drafter");
+     strata::core::ExpertCache xcache;
+     // THE HEAD BEFORE THE CACHE: the native head and the logits are allocated above, before the expert arena (#620)
++    if(!strata::research::q4_early.configure_gate(wt,g,0,0,24,err)){std::fprintf(stderr,"Q4 early startup: %s\n",err.c_str());return 1;}
+     const bool auto_cache = o.expert_cache < 0;
+     bool reserve_adapted = false;   // #496: the auto sizing lowered the reserve so a small card's cache fits
+     if (o.expert_cache < 0) {
+@@ -3500,6 +3502,7 @@ int main(int argc, char** argv) {
+         const auto& lay = strata::kernels::cpu::expert_layout();
+         // the drafter and the head are already allocated by now (they load above, before this), so what is left
+         // to hold back is the windows - and `free_b` has already lost the drafter.
++        {const strata::core::OnDevice on_early(st.dev);if(!strata::research::q4_early.configure_gate(st.wt,g,st.dev,(int)st.lb,(int)st.le,err)){std::fprintf(stderr,"Q4 early startup: %s\n",err.c_str());return 1;}}
+         const int64_t room = stage_room(st.dev, true, false);
+         const strata::core::OnDevice on(st.dev);
+         {
+@@ -5447,6 +5450,12 @@ int main(int argc, char** argv) {
+             else
+                 heat.assign(drive.d.usage.size(), 0.0);
+         }
++        if(strata::research::q4_early.enabled){
++            if(!multi_gpu||stages.size()!=1||stage_of(23)!=0||stage_of(24)!=1||o.pcie_frac!=.28||o.batch>0||o.resident_budget>0||dynamic_cast<strata::core::ArenaExpertSource*>(srcp)==nullptr)throw std::runtime_error("Q4 early requires frozen full-arena serial K24/PCIe0.28");
++            std::vector<uint64_t> blobs;for(int l=0;l<g.n_layers;++l)blobs.push_back(strata::kernels::cpu::expert_layout().blob_bytes(l));
++            strata::research::q4_early.runtime(host_res.data(),drive.d.usage.data(),std::move(blobs),{d_res,stages[0]->d_res},
++                [&](int l,int e){return srcp->blob(l,e);},[&](int dev,int slot)->void*{return dev?stages[0]->cache.device_slot(slot):xcache.device_slot(slot);});
++        }
+         Clock::time_point profile_saved_at = Clock::now();
+         cudaStream_t adapt_stream = nullptr;
+         if (cudaStreamCreateWithFlags(&adapt_stream, cudaStreamNonBlocking) != cudaSuccess) {
+@@ -7056,6 +7065,7 @@ int main(int argc, char** argv) {
+             }
+             bool first_window = true;
+             int64_t produced_n = 0, sfx_windows = 0, sfx_drafts = 0, sfx_ok = 0;
++            if(strata::research::q4_early.enabled){strata::research::q4_early.begin_request();res_upload();}
+             int64_t draft_offered = 0, draft_accepted = 0;
+             // what the session holds once this request is done: the prompt read so far, then every committed token
+             std::vector<int32_t> consumed;
+@@ -7126,12 +7136,14 @@ int main(int argc, char** argv) {
+                     cudaMemcpy(d_hist, hist_stage.data(), (size_t) T * (size_t) hist_n * sizeof(int32_t),
+                                cudaMemcpyHostToDevice);
+                 }
++                strata::research::q4_early.begin_window();
+                 tr("window", p, T);
+                 const Clock::time_point tw0 = Clock::now();
+                 if (!ver.run(T, window.data(), p, win_pool_fn, win_pool_user, outv.data(), err) || drive.d.failed) {
+                     std::printf("ERR %s\n", drive.d.failed && drive.d.fail ? drive.d.fail : err.c_str());
+                     return 1;
+                 }
++                strata::research::q4_early.end_window(((rounds+1)%o.adapt_every)==0);
+                 int a = 0;
+                 while (a < T - 1 && window[(size_t) a + 1] == outv[(size_t) a]) ++a;
+                 if (from_sfx) { ++sfx_windows; sfx_drafts += T - 1; sfx_ok += a; }
+@@ -7218,6 +7230,7 @@ int main(int argc, char** argv) {
+                 live_imgs = imgs_below(req_imgs, (int64_t) live.size());
+                 live_ok = o.prompt_cache > 0;
+             }
++            if(strata::research::q4_early.enabled){apply_pending(true);strata::research::q4_early.finish();res_upload();}
+             static const bool state_hash = std::getenv("STRATA_STATE_HASH") != nullptr;
+             if (state_hash && live_ok) {
+                 // DEBUG: a fingerprint of every part of the session over the positions it holds ([0, L)), and

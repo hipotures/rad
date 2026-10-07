@@ -1,0 +1,1661 @@
+[
+  {
+    "variant": "compatible-fast-v2",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "4440118f1fa098e6ff8abcfc67b591a9037b14c7",
+    "binary_sha256": "6464d947cc1b20089c59bb03f680073eed653a6cfde92d35c3f6969f7887ae6e",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/compatible-fast-v2/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/compatible-fast-v2",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-fast-v2/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-fast-v2/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_COMPATIBLE": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-fast-v2/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-fast-v2/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-fast-v2/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-fast-v2/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-fast-v2/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-fast-v2/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "4440118f1fa098e6ff8abcfc67b591a9037b14c7",
+        "binary_sha256": "6464d947cc1b20089c59bb03f680073eed653a6cfde92d35c3f6969f7887ae6e",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "4440118f1fa098e6ff8abcfc67b591a9037b14c7",
+        "binary_sha256": "6464d947cc1b20089c59bb03f680073eed653a6cfde92d35c3f6969f7887ae6e",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/correctness/compatible-fast-v2/process.json",
+        "profile": 32768,
+        "source_sha": "4440118f1fa098e6ff8abcfc67b591a9037b14c7",
+        "binary_sha256": "6464d947cc1b20089c59bb03f680073eed653a6cfde92d35c3f6969f7887ae6e",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/correctness/compatible-fast-v2/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/correctness/compatible-fast-v2/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E013"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "compatible-policy-off",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "291deaecbd1ba46cf434559b33f7018c3973feb2",
+    "binary_sha256": "7468f2e116a1c4ad75e37ec5c1c60636ad4cbc5533f3e29a7923c4e8ec26d3f3",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/compatible-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/compatible-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-policy-off/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-policy-off/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-policy-off/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-policy-off/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-policy-off/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-policy-off/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-policy-off/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-policy-off/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "291deaecbd1ba46cf434559b33f7018c3973feb2",
+        "binary_sha256": "7468f2e116a1c4ad75e37ec5c1c60636ad4cbc5533f3e29a7923c4e8ec26d3f3",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "291deaecbd1ba46cf434559b33f7018c3973feb2",
+        "binary_sha256": "7468f2e116a1c4ad75e37ec5c1c60636ad4cbc5533f3e29a7923c4e8ec26d3f3",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/correctness/compatible-policy-off/process.json",
+        "profile": 32768,
+        "source_sha": "291deaecbd1ba46cf434559b33f7018c3973feb2",
+        "binary_sha256": "7468f2e116a1c4ad75e37ec5c1c60636ad4cbc5533f3e29a7923c4e8ec26d3f3",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/correctness/compatible-policy-off/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/correctness/compatible-policy-off/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E014"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "compatible-v1",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "291deaecbd1ba46cf434559b33f7018c3973feb2",
+    "binary_sha256": "7468f2e116a1c4ad75e37ec5c1c60636ad4cbc5533f3e29a7923c4e8ec26d3f3",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/compatible-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/compatible-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_COMPATIBLE": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/compatible-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "291deaecbd1ba46cf434559b33f7018c3973feb2",
+        "binary_sha256": "7468f2e116a1c4ad75e37ec5c1c60636ad4cbc5533f3e29a7923c4e8ec26d3f3",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "291deaecbd1ba46cf434559b33f7018c3973feb2",
+        "binary_sha256": "7468f2e116a1c4ad75e37ec5c1c60636ad4cbc5533f3e29a7923c4e8ec26d3f3",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/correctness/compatible-v1/process.json",
+        "profile": 32768,
+        "source_sha": "291deaecbd1ba46cf434559b33f7018c3973feb2",
+        "binary_sha256": "7468f2e116a1c4ad75e37ec5c1c60636ad4cbc5533f3e29a7923c4e8ec26d3f3",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/correctness/compatible-v1/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/correctness/compatible-v1/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E010"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "control",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/control/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/control/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/control/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/control/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/control/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/control/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/control/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/control/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/v1/correctness/control/process.json",
+        "profile": 32768,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/v1/correctness/control/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/v1/correctness/control/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control/process.json",
+        "profile": 32768,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E002",
+      "E006"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "device-plan-ids-v1",
+    "state": "UNSAFE_PLE_DEPENDENCY_REPRODUCER_ONLY",
+    "source_sha": "aa3a9d0652bf52985e2359433354135e3f22c160",
+    "binary_sha256": "29ae85fa24b75ca737615696ac044c1ca35913a9078d65d5dfc4b365c7cdbf1e",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/device-plan-ids-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/device-plan-ids-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_VERIFY_DEVICE_PLAN": "1",
+      "STRATA_LAB_PLAN_IDS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/correctness/device-plan-ids-v1/process.json",
+        "profile": 32768,
+        "source_sha": "aa3a9d0652bf52985e2359433354135e3f22c160",
+        "binary_sha256": "29ae85fa24b75ca737615696ac044c1ca35913a9078d65d5dfc4b365c7cdbf1e",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/correctness/device-plan-ids-v1/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/correctness/device-plan-ids-v1/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E016"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "device-plan-ids-v2",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "ad38d9ecfece5a29a369548073570f3112014291",
+    "binary_sha256": "9f229d855cee874e9ecd0cba94083272e5a6c7f8e0158d3de514ebf713c83c8c",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/device-plan-ids-v2/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/device-plan-ids-v2",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v2/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v2/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_VERIFY_DEVICE_PLAN": "1",
+      "STRATA_LAB_PLAN_IDS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v2/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v2/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v2/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v2/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v2/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/device-plan-ids-v2/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/128k/process.json",
+        "profile": 131072,
+        "source_sha": "ad38d9ecfece5a29a369548073570f3112014291",
+        "binary_sha256": "9f229d855cee874e9ecd0cba94083272e5a6c7f8e0158d3de514ebf713c83c8c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/32k/process.json",
+        "profile": 32768,
+        "source_sha": "ad38d9ecfece5a29a369548073570f3112014291",
+        "binary_sha256": "9f229d855cee874e9ecd0cba94083272e5a6c7f8e0158d3de514ebf713c83c8c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/correctness/device-plan-ids-v2/process.json",
+        "profile": 32768,
+        "source_sha": "ad38d9ecfece5a29a369548073570f3112014291",
+        "binary_sha256": "9f229d855cee874e9ecd0cba94083272e5a6c7f8e0158d3de514ebf713c83c8c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/correctness/device-plan-ids-v2/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v2/correctness/device-plan-ids-v2/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E016"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-compatible-v1",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "24554d59da61489cd6e58d029c9767edc62f2ea0",
+    "binary_sha256": "059fc6934b76848def36bee4508c1ccac0cea96e36ad4328526d6a8a969eccb6",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-compatible-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-compatible-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-compatible-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-compatible-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_MISS_WAITS": "1",
+      "STRATA_LAB_COMPATIBLE": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-compatible-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-compatible-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-compatible-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-compatible-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-compatible-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-compatible-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E012-compatible-diagnostic/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "24554d59da61489cd6e58d029c9767edc62f2ea0",
+        "binary_sha256": "059fc6934b76848def36bee4508c1ccac0cea96e36ad4328526d6a8a969eccb6",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E012-compatible-diagnostic/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E012-compatible-diagnostic/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E012-compatible-diagnostic/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "24554d59da61489cd6e58d029c9767edc62f2ea0",
+        "binary_sha256": "059fc6934b76848def36bee4508c1ccac0cea96e36ad4328526d6a8a969eccb6",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E012-compatible-diagnostic/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E012-compatible-diagnostic/v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E012"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-compatible-v1/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-coordination-off-v1",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "883693dcd82ff9c61139555967047953e1416ae8",
+    "binary_sha256": "675c3465a3f04ea2c642e20fc1ddadcfdb7435f3415a2f52875f94282998879f",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-coordination-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-coordination-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_MISS_WAITS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/128k/process.json",
+        "profile": 131072,
+        "source_sha": "883693dcd82ff9c61139555967047953e1416ae8",
+        "binary_sha256": "675c3465a3f04ea2c642e20fc1ddadcfdb7435f3415a2f52875f94282998879f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/32k/process.json",
+        "profile": 32768,
+        "source_sha": "883693dcd82ff9c61139555967047953e1416ae8",
+        "binary_sha256": "675c3465a3f04ea2c642e20fc1ddadcfdb7435f3415a2f52875f94282998879f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E021"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-coordination-on-v1",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "883693dcd82ff9c61139555967047953e1416ae8",
+    "binary_sha256": "675c3465a3f04ea2c642e20fc1ddadcfdb7435f3415a2f52875f94282998879f",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-coordination-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-coordination-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_VERIFY_DEVICE_PLAN": "1",
+      "STRATA_LAB_PLAN_IDS": "1",
+      "STRATA_LAB_SKIP_LOCAL_PLAN": "1",
+      "STRATA_LAB_MISS_WAITS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/128k/process.json",
+        "profile": 131072,
+        "source_sha": "883693dcd82ff9c61139555967047953e1416ae8",
+        "binary_sha256": "675c3465a3f04ea2c642e20fc1ddadcfdb7435f3415a2f52875f94282998879f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/32k/process.json",
+        "profile": 32768,
+        "source_sha": "883693dcd82ff9c61139555967047953e1416ae8",
+        "binary_sha256": "675c3465a3f04ea2c642e20fc1ddadcfdb7435f3415a2f52875f94282998879f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E021"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-device-plan-ids-v1",
+    "state": "UNSAFE_PLE_DEPENDENCY_REPRODUCER_ONLY",
+    "source_sha": "5fe14e9321e779345041162b462036a3a83036ab",
+    "binary_sha256": "92dcaab562034e221b7594c599134b1d3c32b2c182dd2765c0a9141086f46417",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-device-plan-ids-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-device-plan-ids-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_VERIFY_DEVICE_PLAN": "1",
+      "STRATA_LAB_PLAN_IDS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "5fe14e9321e779345041162b462036a3a83036ab",
+        "binary_sha256": "92dcaab562034e221b7594c599134b1d3c32b2c182dd2765c0a9141086f46417",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "5fe14e9321e779345041162b462036a3a83036ab",
+        "binary_sha256": "92dcaab562034e221b7594c599134b1d3c32b2c182dd2765c0a9141086f46417",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E016"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-device-plan-ids-v2",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "053c4a6ea73ddc9a02c8bb7631d747f03cea954a",
+    "binary_sha256": "a157b12597ae34e078294c517cb96d52b95ff44a8faa67a4ea6ae1db97246ff8",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-device-plan-ids-v2/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-device-plan-ids-v2",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v2/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v2/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_VERIFY_DEVICE_PLAN": "1",
+      "STRATA_LAB_PLAN_IDS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v2/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v2/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v2/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v2/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v2/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v2/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v2/128k/process.json",
+        "profile": 131072,
+        "source_sha": "053c4a6ea73ddc9a02c8bb7631d747f03cea954a",
+        "binary_sha256": "a157b12597ae34e078294c517cb96d52b95ff44a8faa67a4ea6ae1db97246ff8",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v2/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v2/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v2/32k/process.json",
+        "profile": 32768,
+        "source_sha": "053c4a6ea73ddc9a02c8bb7631d747f03cea954a",
+        "binary_sha256": "a157b12597ae34e078294c517cb96d52b95ff44a8faa67a4ea6ae1db97246ff8",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v2/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v2/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E016"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v2/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-direct-parts-v1",
+    "state": "INVALID_FIRST_HEAD_CAPTURE_REPRODUCER_ONLY",
+    "source_sha": "67ba09fa153bd6affa2ab7f893616a2010f99836",
+    "binary_sha256": "8012ddf62a2baa905090f329532ebab0ab8a8b8223fb2af4f93bfc65123c3f52",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-direct-parts-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-direct-parts-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_DIRECT_PARTS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "67ba09fa153bd6affa2ab7f893616a2010f99836",
+        "binary_sha256": "8012ddf62a2baa905090f329532ebab0ab8a8b8223fb2af4f93bfc65123c3f52",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "67ba09fa153bd6affa2ab7f893616a2010f99836",
+        "binary_sha256": "8012ddf62a2baa905090f329532ebab0ab8a8b8223fb2af4f93bfc65123c3f52",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E023"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v1/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-direct-parts-v2",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "ef11b7298df4a7f17f0f79e962521433c679e75e",
+    "binary_sha256": "0ca910ea9ef55af37033694fbeeec9ef351fedd587bb00d98a52509075a8ef9e",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-direct-parts-v2/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-direct-parts-v2",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v2/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v2/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_DIRECT_PARTS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v2/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v2/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v2/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v2/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v2/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v2/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v2/128k/process.json",
+        "profile": 131072,
+        "source_sha": "ef11b7298df4a7f17f0f79e962521433c679e75e",
+        "binary_sha256": "0ca910ea9ef55af37033694fbeeec9ef351fedd587bb00d98a52509075a8ef9e",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v2/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v2/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v2/32k/process.json",
+        "profile": 32768,
+        "source_sha": "ef11b7298df4a7f17f0f79e962521433c679e75e",
+        "binary_sha256": "0ca910ea9ef55af37033694fbeeec9ef351fedd587bb00d98a52509075a8ef9e",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v2/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v2/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E023"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-direct-parts-v2/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-frequency-v5",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "7175b1dcf94907b8ccbb45c3a4ebbb580866f26d",
+    "binary_sha256": "dfee7b655df1d8c37a8ebf2e0fe95405970e84ccbd1db1099c064e87761bfe59",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-v5/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-v5",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-frequency-v5/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-frequency-v5/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-frequency-v5/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-frequency-v5/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-frequency-v5/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-frequency-v5/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-frequency-v5/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-frequency-v5/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/diagnostic-v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "7175b1dcf94907b8ccbb45c3a4ebbb580866f26d",
+        "binary_sha256": "dfee7b655df1d8c37a8ebf2e0fe95405970e84ccbd1db1099c064e87761bfe59",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/diagnostic-v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/diagnostic-v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/diagnostic-v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "7175b1dcf94907b8ccbb45c3a4ebbb580866f26d",
+        "binary_sha256": "dfee7b655df1d8c37a8ebf2e0fe95405970e84ccbd1db1099c064e87761bfe59",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/diagnostic-v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/diagnostic-v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E006"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-frequency-v5/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-gpu-router-v2",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "1c6c5f88fbb2c0bb136503e6f672f223c0197b01",
+    "binary_sha256": "147359591d6b56c1dabbf87ed1097aba348c8526283cbfc2b719ab825e25d929",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-gpu-router-v2/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-gpu-router-v2",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_GPU_ROUTER": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/process.json",
+        "profile": 32768,
+        "source_sha": "1c6c5f88fbb2c0bb136503e6f672f223c0197b01",
+        "binary_sha256": "147359591d6b56c1dabbf87ed1097aba348c8526283cbfc2b719ab825e25d929",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/episodes/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/128k/process.json",
+        "profile": 131072,
+        "source_sha": "1c6c5f88fbb2c0bb136503e6f672f223c0197b01",
+        "binary_sha256": "147359591d6b56c1dabbf87ed1097aba348c8526283cbfc2b719ab825e25d929",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/32k/process.json",
+        "profile": 32768,
+        "source_sha": "1c6c5f88fbb2c0bb136503e6f672f223c0197b01",
+        "binary_sha256": "147359591d6b56c1dabbf87ed1097aba348c8526283cbfc2b719ab825e25d929",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E017"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/diagnose-episodes.sh",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-gpu-router-v2/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-plan-compare-v1",
+    "state": "UNSAFE_AND_FENCED_ARITHMETIC_REPRODUCER_ONLY",
+    "source_sha": "ba9138b4c72cd4e641c86ec46e73cea4e27ea35d",
+    "binary_sha256": "ef05ec6584f0a15a0b9ffcd70777081da5e6a0aa1b60177511a72e75e2095f0f",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-plan-compare-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-plan-compare-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-plan-compare-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-plan-compare-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-plan-compare-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-plan-compare-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-plan-compare-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-plan-compare-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-plan-compare-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-plan-compare-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-r2/on-ple-fence/process.json",
+        "profile": 32768,
+        "source_sha": "ba9138b4c72cd4e641c86ec46e73cea4e27ea35d",
+        "binary_sha256": "ef05ec6584f0a15a0b9ffcd70777081da5e6a0aa1b60177511a72e75e2095f0f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-r2/on-ple-fence/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-r2/on-ple-fence/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-r2/off/process.json",
+        "profile": 32768,
+        "source_sha": "ba9138b4c72cd4e641c86ec46e73cea4e27ea35d",
+        "binary_sha256": "ef05ec6584f0a15a0b9ffcd70777081da5e6a0aa1b60177511a72e75e2095f0f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-r2/off/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-r2/off/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-r2/on/process.json",
+        "profile": 32768,
+        "source_sha": "ba9138b4c72cd4e641c86ec46e73cea4e27ea35d",
+        "binary_sha256": "ef05ec6584f0a15a0b9ffcd70777081da5e6a0aa1b60177511a72e75e2095f0f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-r2/on/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-r2/on/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1/on-ple-fence/process.json",
+        "profile": 32768,
+        "source_sha": "ba9138b4c72cd4e641c86ec46e73cea4e27ea35d",
+        "binary_sha256": "ef05ec6584f0a15a0b9ffcd70777081da5e6a0aa1b60177511a72e75e2095f0f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1/on-ple-fence/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1/on-ple-fence/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1/off/process.json",
+        "profile": 32768,
+        "source_sha": "ba9138b4c72cd4e641c86ec46e73cea4e27ea35d",
+        "binary_sha256": "ef05ec6584f0a15a0b9ffcd70777081da5e6a0aa1b60177511a72e75e2095f0f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1/off/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1/off/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1/on/process.json",
+        "profile": 32768,
+        "source_sha": "ba9138b4c72cd4e641c86ec46e73cea4e27ea35d",
+        "binary_sha256": "ef05ec6584f0a15a0b9ffcd70777081da5e6a0aa1b60177511a72e75e2095f0f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1/on/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1/on/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E016"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-plan-compare-v1/diagnose-plan-comparison.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-pool-wait-v1",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "883693dcd82ff9c61139555967047953e1416ae8",
+    "binary_sha256": "675c3465a3f04ea2c642e20fc1ddadcfdb7435f3415a2f52875f94282998879f",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-coordination-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-coordination-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_POOL_SPIN_US": "100",
+      "STRATA_LAB_MISS_WAITS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "883693dcd82ff9c61139555967047953e1416ae8",
+        "binary_sha256": "675c3465a3f04ea2c642e20fc1ddadcfdb7435f3415a2f52875f94282998879f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "883693dcd82ff9c61139555967047953e1416ae8",
+        "binary_sha256": "675c3465a3f04ea2c642e20fc1ddadcfdb7435f3415a2f52875f94282998879f",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/diagnostic-v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E024"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-pool-wait-v1/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-router-fresh-v1",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "bc505f4636c6d3e37c4c85eef74ea60aaccb0181",
+    "binary_sha256": "bb12e367bdabca726934a0b1972279b671668bfb2df5d7176ed2dbd097488e39",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-router-fresh-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-router-fresh-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_SIGNAL": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/process.json",
+        "profile": 32768,
+        "source_sha": "bc505f4636c6d3e37c4c85eef74ea60aaccb0181",
+        "binary_sha256": "bb12e367bdabca726934a0b1972279b671668bfb2df5d7176ed2dbd097488e39",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "bc505f4636c6d3e37c4c85eef74ea60aaccb0181",
+        "binary_sha256": "bb12e367bdabca726934a0b1972279b671668bfb2df5d7176ed2dbd097488e39",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "bc505f4636c6d3e37c4c85eef74ea60aaccb0181",
+        "binary_sha256": "bb12e367bdabca726934a0b1972279b671668bfb2df5d7176ed2dbd097488e39",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E015"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/diagnose-episodes.sh",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-router-fresh-v1/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-skip-local-host-plan-v1",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "609187e82d017d1d2eb893dca118ecdf2b58b332",
+    "binary_sha256": "7f26551fd84a4bf381375c52dfaf83810e3a9c9cdcbb46dd222989c9390e2fda",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-skip-local-host-plan-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-skip-local-host-plan-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-skip-local-host-plan-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-skip-local-host-plan-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_VERIFY_DEVICE_PLAN": "1",
+      "STRATA_LAB_PLAN_IDS": "1",
+      "STRATA_LAB_SKIP_LOCAL_PLAN": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-skip-local-host-plan-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-skip-local-host-plan-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-skip-local-host-plan-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-skip-local-host-plan-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-skip-local-host-plan-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-skip-local-host-plan-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/diagnostic-v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "609187e82d017d1d2eb893dca118ecdf2b58b332",
+        "binary_sha256": "7f26551fd84a4bf381375c52dfaf83810e3a9c9cdcbb46dd222989c9390e2fda",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/diagnostic-v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/diagnostic-v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/diagnostic-v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "609187e82d017d1d2eb893dca118ecdf2b58b332",
+        "binary_sha256": "7f26551fd84a4bf381375c52dfaf83810e3a9c9cdcbb46dd222989c9390e2fda",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/diagnostic-v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/diagnostic-v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E019"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-skip-local-host-plan-v1/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-v5",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "7175b1dcf94907b8ccbb45c3a4ebbb580866f26d",
+    "binary_sha256": "dfee7b655df1d8c37a8ebf2e0fe95405970e84ccbd1db1099c064e87761bfe59",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-v5/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-v5",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v5/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v5/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v5/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v5/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v5/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v5/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v5/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v5/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/episodes/process.json",
+        "profile": 32768,
+        "source_sha": "7175b1dcf94907b8ccbb45c3a4ebbb580866f26d",
+        "binary_sha256": "dfee7b655df1d8c37a8ebf2e0fe95405970e84ccbd1db1099c064e87761bfe59",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/episodes/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/episodes/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/process.json",
+        "profile": 131072,
+        "source_sha": "7175b1dcf94907b8ccbb45c3a4ebbb580866f26d",
+        "binary_sha256": "dfee7b655df1d8c37a8ebf2e0fe95405970e84ccbd1db1099c064e87761bfe59",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/process.json",
+        "profile": 32768,
+        "source_sha": "7175b1dcf94907b8ccbb45c3a4ebbb580866f26d",
+        "binary_sha256": "dfee7b655df1d8c37a8ebf2e0fe95405970e84ccbd1db1099c064e87761bfe59",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E003"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v5/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-v6",
+    "state": "INVALID_EVENT_CAPTURE_REPRODUCER_ONLY",
+    "source_sha": "0c54f64bbd3f960b5352ca1cf7e6f60f4bfaa9f3",
+    "binary_sha256": "403a0c08fbe329f1d0145f8f81d129158963fb5a2a784b426493101a430f2dd4",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-v6/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-v6",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v6/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v6/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_SIGNAL": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v6/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v6/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v6/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v6/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v6/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v6/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "0c54f64bbd3f960b5352ca1cf7e6f60f4bfaa9f3",
+        "binary_sha256": "403a0c08fbe329f1d0145f8f81d129158963fb5a2a784b426493101a430f2dd4",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E008"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v6/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-v7",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "ca01a4f166f69f865f40e36ceba4bdbd8e8167f8",
+    "binary_sha256": "af49a970178082ca51498caad0896a8890f5ea192543936ed7143e2be9381739",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-v7/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-v7",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v7/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v7/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_SIGNAL": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v7/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v7/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v7/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v7/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v7/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v7/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v2/128k/process.json",
+        "profile": 131072,
+        "source_sha": "ca01a4f166f69f865f40e36ceba4bdbd8e8167f8",
+        "binary_sha256": "af49a970178082ca51498caad0896a8890f5ea192543936ed7143e2be9381739",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v2/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v2/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v2/32k/process.json",
+        "profile": 32768,
+        "source_sha": "ca01a4f166f69f865f40e36ceba4bdbd8e8167f8",
+        "binary_sha256": "af49a970178082ca51498caad0896a8890f5ea192543936ed7143e2be9381739",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v2/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v2/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E008"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v7/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-v8",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "021d22d41d7ad1c7d2b392273723c151c7d247dc",
+    "binary_sha256": "e863267b6fb605d3fbec6570e84cb78314cf2335a2a1e18a163cdd9d0ffe2f1c",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-v8/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-v8",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v8/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v8/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_MISS_WAITS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v8/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v8/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v8/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v8/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v8/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v8/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E011-miss-waits/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "021d22d41d7ad1c7d2b392273723c151c7d247dc",
+        "binary_sha256": "e863267b6fb605d3fbec6570e84cb78314cf2335a2a1e18a163cdd9d0ffe2f1c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E011-miss-waits/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E011-miss-waits/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E011-miss-waits/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "021d22d41d7ad1c7d2b392273723c151c7d247dc",
+        "binary_sha256": "e863267b6fb605d3fbec6570e84cb78314cf2335a2a1e18a163cdd9d0ffe2f1c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E011-miss-waits/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E011-miss-waits/v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E011"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-v8/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "diagnostic-wide-gate-v1",
+    "state": "DIAGNOSTIC_ONLY",
+    "source_sha": "8e26c77cd0c5a2ed31af70edae10196dc5de5cdf",
+    "binary_sha256": "460b08df2df96c4b1a034d7856bba46284d5d02c37defdf57008de82743549bb",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-wide-gate-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-wide-gate-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_GPU_ROUTER": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E020-wide-gate-lookahead/v1/episodes/process.json",
+        "profile": 32768,
+        "source_sha": "8e26c77cd0c5a2ed31af70edae10196dc5de5cdf",
+        "binary_sha256": "460b08df2df96c4b1a034d7856bba46284d5d02c37defdf57008de82743549bb",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E020-wide-gate-lookahead/v1/episodes/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E020-wide-gate-lookahead/v1/episodes/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E020-wide-gate-lookahead/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "8e26c77cd0c5a2ed31af70edae10196dc5de5cdf",
+        "binary_sha256": "460b08df2df96c4b1a034d7856bba46284d5d02c37defdf57008de82743549bb",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E020-wide-gate-lookahead/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E020-wide-gate-lookahead/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E020-wide-gate-lookahead/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "8e26c77cd0c5a2ed31af70edae10196dc5de5cdf",
+        "binary_sha256": "460b08df2df96c4b1a034d7856bba46284d5d02c37defdf57008de82743549bb",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E020-wide-gate-lookahead/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E020-wide-gate-lookahead/v1/32k/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E020"
+    ],
+    "diagnostic_reproducers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/diagnose-episodes.sh",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-wide-gate-v1/diagnose-profiles.sh"
+    ],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "direct-parts-off-v1",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46",
+    "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/direct-parts-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/direct-parts-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-off-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-off-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-off-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-off-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-off-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-off-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-off-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-off-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46",
+        "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46",
+        "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/correctness/direct-parts-off-v1/process.json",
+        "profile": 32768,
+        "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46",
+        "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/correctness/direct-parts-off-v1/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/correctness/direct-parts-off-v1/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E025"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "direct-parts-v1",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46",
+    "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/direct-parts-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/direct-parts-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_LAB_DIRECT_PARTS": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46",
+        "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46",
+        "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/v1/correctness/direct-parts-v1/process.json",
+        "profile": 32768,
+        "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46",
+        "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/v1/correctness/direct-parts-v1/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/v1/correctness/direct-parts-v1/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E023"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "frequency-v1-ready",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "binary_sha256": "81be146d9e2bf47334ca39d5dace8269aede9a7caea24c5125c48639f4f76d07",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/frequency-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/frequency-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/frequency-v1-ready/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/frequency-v1-ready/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/frequency-v1-ready/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/frequency-v1-ready/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/frequency-v1-ready/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/frequency-v1-ready/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/frequency-v1-ready/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/frequency-v1-ready/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "81be146d9e2bf47334ca39d5dace8269aede9a7caea24c5125c48639f4f76d07",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "81be146d9e2bf47334ca39d5dace8269aede9a7caea24c5125c48639f4f76d07",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/frequency-v1-ready/process.json",
+        "profile": 32768,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "81be146d9e2bf47334ca39d5dace8269aede9a7caea24c5125c48639f4f76d07",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/frequency-v1-ready/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/frequency-v1-ready/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E006"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "host-plan-off-v1",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+    "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/skip-local-host-plan-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/skip-local-host-plan-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/host-plan-off-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/host-plan-off-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/host-plan-off-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/host-plan-off-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/host-plan-off-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/host-plan-off-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/host-plan-off-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/host-plan-off-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+        "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+        "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/correctness/host-plan-off-v1/process.json",
+        "profile": 32768,
+        "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+        "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/correctness/host-plan-off-v1/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/correctness/host-plan-off-v1/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E022"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "pool-wait-v1",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/pool-wait-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/pool-wait-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_POOL_SPIN_US": "100"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/pool-wait-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/pool-wait-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/pool-wait-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/pool-wait-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/pool-wait-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/pool-wait-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/correctness/pool-wait-v1/process.json",
+        "profile": 32768,
+        "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/correctness/pool-wait-v1/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/correctness/pool-wait-v1/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E024"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  },
+  {
+    "variant": "skip-local-host-plan-v1",
+    "state": "CLEAN_EXPERIMENTAL_OR_CONTROL",
+    "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+    "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/skip-local-host-plan-v1/strata",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/skip-local-host-plan-v1",
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/skip-local-host-plan-v1/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/skip-local-host-plan-v1/128k.json"
+    ],
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_VERIFY_DEVICE_PLAN": "1",
+      "STRATA_LAB_PLAN_IDS": "1",
+      "STRATA_LAB_SKIP_LOCAL_PLAN": "1"
+    },
+    "launch_commands": {
+      "start-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/skip-local-host-plan-v1/start-32k.sh",
+      "start-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/skip-local-host-plan-v1/start-128k.sh",
+      "benchmark-32k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/skip-local-host-plan-v1/benchmark-32k.sh",
+      "benchmark-128k": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/skip-local-host-plan-v1/benchmark-128k.sh",
+      "reproduce": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/skip-local-host-plan-v1/reproduce.sh",
+      "stop": "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/skip-local-host-plan-v1/stop.sh"
+    },
+    "exercised_sessions": [
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/128k/process.json",
+        "profile": 131072,
+        "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+        "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/128k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/128k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/32k/process.json",
+        "profile": 32768,
+        "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+        "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/32k/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/32k/raw/warmup.json"
+      },
+      {
+        "process_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/correctness/skip-local-host-plan-v1/process.json",
+        "profile": 32768,
+        "source_sha": "039ea29916d3155514688fb6d5a5de6129d69675",
+        "binary_sha256": "58aab77cd65222e9396d68b428591b44118172c1353a6e8e01f67b94ccfb649c",
+        "startup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/correctness/skip-local-host-plan-v1/raw/startup.json",
+        "warmup_record": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E019-skip-local-host-plan/v1/correctness/skip-local-host-plan-v1/raw/warmup.json"
+      }
+    ],
+    "experiment_ids": [
+      "E019"
+    ],
+    "diagnostic_reproducers": [],
+    "launcher_validation": "Shared Session launch backend exercised in linked smoke/benchmark/diagnostic flows. This does not assert every thin shell alias was separately invoked."
+  }
+]

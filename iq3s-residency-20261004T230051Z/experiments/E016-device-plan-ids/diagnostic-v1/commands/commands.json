@@ -1,0 +1,58 @@
+[
+  {
+    "name": "clean-native-failure-audit",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_test_failures.py",
+      "E016-device-plan-ids"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.11439633369445801,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/commands/clean-native-failure-audit.log"
+  },
+  {
+    "name": "register",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "diagnostic-device-plan-ids-v1",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-device-plan-ids-v1",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-device-plan-ids-v1/strata",
+      "--diagnostic",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1/overrides.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.36504054069519043,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/commands/register.log"
+  },
+  {
+    "name": "targeted-native",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ctest",
+      "--test-dir",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-device-plan-ids-v1",
+      "--output-on-failure",
+      "--timeout",
+      "60",
+      "-R",
+      "(cache|adapt|async|verify|split|expert_multi|native_expert_parity)",
+      "-j",
+      "1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 5.830728769302368,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/commands/targeted-native.log"
+  },
+  {
+    "name": "profiles",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-device-plan-ids-v1/diagnose-profiles.sh"
+    ],
+    "returncode": 0,
+    "elapsed_s": 237.58949327468872,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/commands/profiles.log"
+  }
+]

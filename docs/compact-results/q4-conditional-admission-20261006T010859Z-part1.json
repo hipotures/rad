@@ -1,0 +1,1124 @@
+{
+  "scope": "Scalar/header export from local originals. Lists over32 items, long strings and depth/node excess are explicitly omitted; this is not the original schema and is not a replacement input for research scripts.",
+  "records": [
+    {
+      "source": "iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/summary.json",
+      "source_bytes": 348452,
+      "source_sha256": "147e895267c7c9ad067de3e88fbeba91f43f39712eed658c5cb56047801f6dce",
+      "compact_evidence": {
+        "phase_A": {
+          "historical": {
+            "issued": 5917,
+            "counts": {
+              "wrong-or-superseded": 4996,
+              "target-ready-persistent": 917,
+              "late-for-original-target": 4
+            },
+            "ambiguous_wrong_count": 4996,
+            "ambiguous_wrong_GB": 15.347712,
+            "cannot_infer_historical_reasons_without_matching_trace": true
+          },
+          "new_diagnostic": {
+            "events": 6002,
+            "windows": 1363,
+            "reason_counts": [
+              {
+                "reason": "prediction-wrong",
+                "count": 4959,
+                "bytes": 15234048000,
+                "GB": 15.234048,
+                "percent_issued": 82.62245918027324
+              },
+              {
+                "reason": "target-ready-persistent",
+                "count": 1043,
+                "bytes": 3204096000,
+                "GB": 3.204096,
+                "percent_issued": 17.377540819726757
+              }
+            ],
+            "copied_GB": 18.438144,
+            "published": 1043,
+            "unpublished_GB": 15.234048,
+            "censored_action_count": 19,
+            "demand": {
+              "local": 2043944,
+              "CPU": 185488,
+              "mapped": 28008,
+              "nonlocal": 213496,
+              "all": 2257440
+            },
+            "native_state_changes": 55178,
+            "schema": {
+              "demand_bytes": 336,
+              "change_bytes": 20,
+              "feature_count": 48
+            }
+          },
+          "parity": {
+            "same_input": true,
+            "same_output": false,
+            "same_actions": false,
+            "counter_parity": {
+              "mtp_proposed": false,
+              "mtp_accepted": false,
+              "verify_windows": false,
+              "local_vram_entries": false,
+              "cpu_fallback_entries": false,
+              "nonlocal_gpu_entries": false
+            }
+          },
+          "historical_action_key_match_descriptive": {
+            "prediction-wrong": 1634,
+            "target-ready-persistent": 8
+          },
+          "unmatched_historical_wrong": 3354,
+          "causal_code_audit": {
+            "superseded_by_new_prediction": "Impossible once issued: one immutable Worker target/incoming until retirement/publication; newer predictions see busy and do not displace it.",
+            "duplicate_or_inflight": "Worker state check prevents an issued duplicate; busy proposals counted separately.",
+            "victim_became_protected": "No victim reserved at enqueue in v2; victim chosen at actual target while current routed IDs excluded. No-safe-victim is explicit. Future victim demand can still cause damage.",
+            "state_generation_mismatch": "No generation-mismatch branch in this scheduler; planner owns host residency, publication guarded before target plan.",
+            "became_resident": "Explicit target host_res check; native adaptive jobs are applied between windows, not competing host cache loads between an H4 origin and target.",
+            "deadline_missed": "Worker state != ready at intended target; separate late reason.",
+            "prediction_wrong": "Complete ready copy, but incoming absent among all actual target routed branch IDs.",
+            "right_censored": "Intended-target unobserved or last4windows future reuse censored; do not relabel all unpublished near end as established waste."
+          },
+          "limitations": [
+            "Matching action keys are descriptive if output trajectory/actions differ; never transfer new labels into historical4996 as exact truth.",
+            "Diagnostic buffered feature/demand work may alter copy timing; excluded from speed claims."
+          ],
+          "explicit_target_outcome_categories": [
+            {
+              "reason": "prediction-wrong",
+              "count": 4959,
+              "bytes": 15234048000,
+              "GB": 15.234048,
+              "percent_issued": 82.62245918027324,
+              "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+            },
+            {
+              "reason": "became-resident-before-publication",
+              "count": 0,
+              "bytes": 0,
+              "GB": 0.0,
+              "percent_issued": 0.0,
+              "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+            },
+            {
+              "reason": "late-for-original-target",
+              "count": 0,
+              "bytes": 0,
+              "GB": 0.0,
+              "percent_issued": 0.0,
+              "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+            },
+            {
+              "reason": "request-ended-before-target",
+              "count": 0,
+              "bytes": 0,
+              "GB": 0.0,
+              "percent_issued": 0.0,
+              "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+            },
+            {
+              "reason": "no-safe-victim",
+              "count": 0,
+              "bytes": 0,
+              "GB": 0.0,
+              "percent_issued": 0.0,
+              "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+            },
+            {
+              "reason": "target-ready-persistent",
+              "count": 1043,
+              "bytes": 3204096000,
+              "GB": 3.2040960000000003,
+              "percent_issued": 17.377540819726757,
+              "evidence": "Explicit diagnostic event reason; zero means not observed in this trace."
+            }
+          ],
+          "separate_future_reuse_censoring": {
+            "count": 19,
+            "caveat": "Known target outcome is retained; later-use labels in final four windows censored. This is not another mutually exclusive failed-target category."
+          }
+        },
+        "phase_B": {
+          "evaluated_utc": "2026-10-06T01:37:00.168369+00:00",
+          "frozen_policy": "linear-balanced",
+          "pooled_transactional_gate": true,
+          "calibration_gate": true,
+          "qualifies_live": false,
+          "selected": {
+            "issued_copies": 3450,
+            "staged_GB": 10.5984,
+            "target_ready_publications": 1211,
+            "unpublished_GB": 6.878208000000001,
+            "useful_next4_benefit_retained": 3375,
+            "victim_absent_entries_retained": 1523,
+            "baseline_victim_absent_entries": 1795,
+            "original_nonlocal_entries": 250000,
+            "nonlocal_entries_attributed": 253356,
+            "original_CPU_entries": 224423,
+            "CPU_entries_attributed": 227534,
+            "original_mapped_entries": 25577,
+            "mapped_entries_attributed": 25822,
+            "useful_later_observed_uses_retained": 49647,
+            "conservative_lost_observed_use_upper": 5420,
+            "baseline_unpublished_GB": 26.210304,
+            "baseline_next4_benefit": 3953,
+            "baseline_observed_uses": 55067,
+            "episode_count": 6,
+            "policy": "linear-balanced",
+            "unpublished_reduction": 0.7375761837787154,
+            "benefit_recall": 0.8537819377687832,
+            "observed_use_recall": 0.9015744456752683,
+            "nonlocal_ratio": 1.013424,
+            "victim_ratio": 0.8484679665738162
+          },
+          "family": [
+            {
+              "issued_copies": 516,
+              "staged_GB": 1.5851520000000001,
+              "target_ready_publications": 176,
+              "unpublished_GB": 1.04448,
+              "useful_next4_benefit_retained": 510,
+              "victim_absent_entries_retained": 229,
+              "baseline_victim_absent_entries": 348,
+              "original_nonlocal_entries": 37729,
+              "nonlocal_entries_attributed": 38559,
+              "original_CPU_entries": 33664,
+              "CPU_entries_attributed": 34445,
+              "original_mapped_entries": 4065,
+              "mapped_entries_attributed": 4114,
+              "useful_later_observed_uses_retained": 4724,
+              "conservative_lost_observed_use_upper": 1815,
+              "baseline_unpublished_GB": 3.560448,
+              "baseline_next4_benefit": 665,
+              "baseline_observed_uses": 6539,
+              "episode_count": 1,
+              "family": "code",
+              "benefit_recall": 0.7669172932330827,
+              "observed_use_recall": 0.7224346230310446,
+              "nonlocal_ratio": 1.0219989928171964,
+              "unpublished_reduction": 0.7066436583261433
+            },
+            {
+              "issued_copies": 595,
+              "staged_GB": 1.8278400000000001,
+              "target_ready_publications": 170,
+              "unpublished_GB": 1.3056,
+              "useful_next4_benefit_retained": 440,
+              "victim_absent_entries_retained": 197,
+              "baseline_victim_absent_entries": 223,
+              "original_nonlocal_entries": 47441,
+              "nonlocal_entries_attributed": 48114,
+              "original_CPU_entries": 41661,
+              "CPU_entries_attributed": 42273,
+              "original_mapped_entries": 5780,
+              "mapped_entries_attributed": 5841,
+              "useful_later_observed_uses_retained": 9148,
+              "conservative_lost_observed_use_upper": 720,
+              "baseline_unpublished_GB": 4.340736,
+              "baseline_next4_benefit": 507,
+              "baseline_observed_uses": 9868,
+              "episode_count": 1,
+              "family": "math",
+              "benefit_recall": 0.8678500986193294,
+              "observed_use_recall": 0.9270368869071747,
+              "nonlocal_ratio": 1.0141860416095783,
+              "unpublished_reduction": 0.6992215145081386
+            },
+            {
+              "issued_copies": 2339,
+              "staged_GB": 7.185408,
+              "target_ready_publications": 865,
+              "unpublished_GB": 4.528128000000001,
+              "useful_next4_benefit_retained": 2425,
+              "victim_absent_entries_retained": 1097,
+              "baseline_victim_absent_entries": 1224,
+              "original_nonlocal_entries": 164830,
+              "nonlocal_entries_attributed": 166683,
+              "original_CPU_entries": 149098,
+              "CPU_entries_attributed": 150816,
+              "original_mapped_entries": 15732,
+              "mapped_entries_attributed": 15867,
+              "useful_later_observed_uses_retained": 35775,
+              "conservative_lost_observed_use_upper": 2885,
+              "baseline_unpublished_GB": 18.30912,
+              "baseline_next4_benefit": 2781,
+              "baseline_observed_uses": 38660,
+              "episode_count": 4,
+              "family": "structured",
+              "benefit_recall": 0.8719884933477167,
+              "observed_use_recall": 0.9253750646663218,
+              "nonlocal_ratio": 1.0112418855790815,
+              "unpublished_reduction": 0.7526845637583892
+            }
+          ],
+          "episodes": [
+            {
+              "task": "code-4",
+              "selected": {
+                "evaluation_windows": 392,
+                "excluded_near_end_actions": 20,
+                "baseline_unpublished_GB": 3.560448,
+                "baseline_next4_benefit": 665,
+                "baseline_observed_uses": 6539,
+                "issued_copies": 516,
+                "rejected_before_copy": 891,
+                "staged_GB": 1.5851520000000001,
+                "target_ready_publications": 176,
+                "useful_publication_count_recall": 0.7096774193548387,
+                "useful_next4_benefit_retained": 510,
+                "useful_next4_benefit_recall": 0.7669172932330827,
+                "unpublished_GB": 1.04448,
+                "wrong_or_superseded": 308,
+                "late": 32,
+                "right_censored": 0,
+                "useful_later_observed_uses_retained": 4724,
+                "victim_absent_entries_retained": 229,
+                "baseline_victim_absent_entries": 348,
+                "original_nonlocal_entries": 37729,
+                "nonlocal_entries_attributed": 38559,
+                "original_CPU_entries": 33664,
+                "CPU_entries_attributed": 34445,
+                "original_mapped_entries": 4065,
+                "mapped_entries_attributed": 4114,
+                "local_entries_attributed": 558561,
+                "lost_local_entries_attributed": 939,
+                "saved_victim_entries_attributed": 109,
+                "native_interaction_attribution_ends": 48,
+                "conservative_lost_observed_use_upper": 1815,
+                "modeled_copy_queue_ms": 283.18028400000003,
+                "modeled_net_gain_vs_unfiltered_ms": 293.729909,
+                "modeled_saved_exposed_ms": -478.43028400000003,
+                "cost_parameters": {
+                  "CPU_entry_ms_proxy": 0.25,
+                  "Q4_staging_queue_ms_median": 0.293449,
+                  "Q4_H2D_ms_median": 0.25535,
+                  "publication_wait_ms_median": 1.160335
+                },
+                "capacity": "Each attributed intervention exchanges one same-layer/same3.072MBexpert, within same-device fixed capacity. Initial two-spare withdrawals common and included in original paths.",
+                "limitations": [
+                  "Observed output/native transactions fixed; future adaptation and MTP trajectories not counterfactually replayed.",
+                  "Attribution ends on next native/early touch to either member, rather than inventing an alternate cache schedule.",
+                  "CPU/mapped planning recomputed from distinct routed order with frozen72/256; allocation/cost is not measured hypothetical latency.",
+                  ".25ms per-entry is an approximate prior utility proxy, not exclusive exposed latency; overlapping CPU work is not additive request time.",
+                  "Conservative lost-use bound can overcount unobserved native eviction/readmission in original event uses.",
+                  "Predictor timing measured separately; no simulated TG. Exact aggregate disk/PCIe attribution unavailable."
+                ],
+                "policy": "linear-balanced",
+                "unpublished_reduction": 0.7066436583261433,
+                "nonlocal_ratio": 1.0219989928171964,
+                "CPU_ratio": 1.0231998574144487,
+                "victim_ratio": 0.6580459770114943,
+                "confusion_matrix": {
+                  "TP": 176,
+                  "FP": 340,
+                  "FN": 72,
+                  "TN": 819
+                },
+                "precision": 0.34108527131782945,
+                "recall": 0.7096774193548387,
+                "observed_use_recall": 0.7224346230310446,
+                "episode_practical_gate": false
+              }
+            },
+            {
+              "task": "math-4",
+              "selected": {
+                "evaluation_windows": 350,
+                "excluded_near_end_actions": 20,
+                "baseline_unpublished_GB": 4.340736,
+                "baseline_next4_benefit": 507,
+                "baseline_observed_uses": 9868,
+                "issued_copies": 595,
+                "rejected_before_copy": 1021,
+                "staged_GB": 1.8278400000000001,
+                "target_ready_publications": 170,
+                "useful_publication_count_recall": 0.8374384236453202,
+                "useful_next4_benefit_retained": 440,
+                "useful_next4_benefit_recall": 0.8678500986193294,
+                "unpublished_GB": 1.3056,
+                "wrong_or_superseded": 401,
+                "late": 24,
+                "right_censored": 0,
+                "useful_later_observed_uses_retained": 9148,
+                "victim_absent_entries_retained": 197,
+                "baseline_victim_absent_entries": 223,
+                "original_nonlocal_entries": 47441,
+                "nonlocal_entries_attributed": 48114,
+                "original_CPU_entries": 41661,
+                "CPU_entries_attributed": 42273,
+                "original_mapped_entries": 5780,
+                "mapped_entries_attributed": 5841,
+                "local_entries_attributed": 532686,
+                "lost_local_entries_attributed": 697,
+                "saved_victim_entries_attributed": 24,
+                "native_interaction_attribution_ends": 7,
+                "conservative_lost_observed_use_upper": 720,
+                "modeled_copy_queue_ms": 326.535405,
+                "modeled_net_gain_vs_unfiltered_ms": 407.32377900000006,
+                "modeled_saved_exposed_ms": -479.535405,
+                "cost_parameters": {
+                  "CPU_entry_ms_proxy": 0.25,
+                  "Q4_staging_queue_ms_median": 0.293449,
+                  "Q4_H2D_ms_median": 0.25535,
+                  "publication_wait_ms_median": 1.160335
+                },
+                "capacity": "Each attributed intervention exchanges one same-layer/same3.072MBexpert, within same-device fixed capacity. Initial two-spare withdrawals common and included in original paths.",
+                "limitations": [
+                  "Observed output/native transactions fixed; future adaptation and MTP trajectories not counterfactually replayed.",
+                  "Attribution ends on next native/early touch to either member, rather than inventing an alternate cache schedule.",
+                  "CPU/mapped planning recomputed from distinct routed order with frozen72/256; allocation/cost is not measured hypothetical latency.",
+                  ".25ms per-entry is an approximate prior utility proxy, not exclusive exposed latency; overlapping CPU work is not additive request time.",
+                  "Conservative lost-use bound can overcount unobserved native eviction/readmission in original event uses.",
+                  "Predictor timing measured separately; no simulated TG. Exact aggregate disk/PCIe attribution unavailable."
+                ],
+                "policy": "linear-balanced",
+                "unpublished_reduction": 0.6992215145081386,
+                "nonlocal_ratio": 1.0141860416095783,
+                "CPU_ratio": 1.0146899978397061,
+                "victim_ratio": 0.8834080717488789,
+                "confusion_matrix": {
+                  "TP": 170,
+                  "FP": 425,
+                  "FN": 33,
+                  "TN": 988
+                },
+                "precision": 0.2857142857142857,
+                "recall": 0.8374384236453202,
+                "observed_use_recall": 0.9270368869071747,
+                "episode_practical_gate": true
+              }
+            },
+            {
+              "task": "structured-1",
+              "selected": {
+                "evaluation_windows": 451,
+                "excluded_near_end_actions": 18,
+                "baseline_unpublished_GB": 4.528128,
+                "baseline_next4_benefit": 929,
+                "baseline_observed_uses": 9319,
+                "issued_copies": 676,
+                "rejected_before_copy": 1130,
+                "staged_GB": 2.076672,
+                "target_ready_publications": 284,
+                "useful_publication_count_recall": 0.8554216867469879,
+                "useful_next4_benefit_retained": 832,
+                "useful_next4_benefit_recall": 0.8955866523143164,
+                "unpublished_GB": 1.204224,
+                "wrong_or_superseded": 390,
+                "late": 2,
+                "right_censored": 0,
+                "useful_later_observed_uses_retained": 8744,
+                "victim_absent_entries_retained": 393,
+                "baseline_victim_absent_entries": 444,
+                "original_nonlocal_entries": 47701,
+                "nonlocal_entries_attributed": 48097,
+                "original_CPU_entries": 43000,
+                "CPU_entries_attributed": 43369,
+                "original_mapped_entries": 4701,
+                "mapped_entries_attributed": 4728,
+                "local_entries_attributed": 580703,
+                "lost_local_entries_attributed": 438,
+                "saved_victim_entries_attributed": 42,
+                "native_interaction_attribution_ends": 37,
+                "conservative_lost_observed_use_upper": 575,
+                "modeled_copy_queue_ms": 370.988124,
+                "modeled_net_gain_vs_unfiltered_ms": 527.89287,
+                "modeled_saved_exposed_ms": -463.238124,
+                "cost_parameters": {
+                  "CPU_entry_ms_proxy": 0.25,
+                  "Q4_staging_queue_ms_median": 0.293449,
+                  "Q4_H2D_ms_median": 0.25535,
+                  "publication_wait_ms_median": 1.160335
+                },
+                "capacity": "Each attributed intervention exchanges one same-layer/same3.072MBexpert, within same-device fixed capacity. Initial two-spare withdrawals common and included in original paths.",
+                "limitations": [
+                  "Observed output/native transactions fixed; future adaptation and MTP trajectories not counterfactually replayed.",
+                  "Attribution ends on next native/early touch to either member, rather than inventing an alternate cache schedule.",
+                  "CPU/mapped planning recomputed from distinct routed order with frozen72/256; allocation/cost is not measured hypothetical latency.",
+                  ".25ms per-entry is an approximate prior utility proxy, not exclusive exposed latency; overlapping CPU work is not additive request time.",
+                  "Conservative lost-use bound can overcount unobserved native eviction/readmission in original event uses.",
+                  "Predictor timing measured separately; no simulated TG. Exact aggregate disk/PCIe attribution unavailable."
+                ],
+                "policy": "linear-balanced",
+                "unpublished_reduction": 0.7340569877883311,
+                "nonlocal_ratio": 1.0083017127523533,
+                "CPU_ratio": 1.0085813953488372,
+                "victim_ratio": 0.8851351351351351,
+                "confusion_matrix": {
+                  "TP": 284,
+                  "FP": 392,
+                  "FN": 48,
+                  "TN": 1082
+                },
+                "precision": 0.42011834319526625,
+                "recall": 0.8554216867469879,
+                "observed_use_recall": 0.9382981006545766,
+                "episode_practical_gate": true
+              }
+            },
+            {
+              "task": "structured-2",
+              "selected": {
+                "evaluation_windows": 409,
+                "excluded_near_end_actions": 16,
+                "baseline_unpublished_GB": 4.497408,
+                "baseline_next4_benefit": 692,
+                "baseline_observed_uses": 8757,
+                "issued_copies": 622,
+                "rejected_before_copy": 1100,
+                "staged_GB": 1.910784,
+                "target_ready_publications": 214,
+                "useful_publication_count_recall": 0.8294573643410853,
+                "useful_next4_benefit_retained": 605,
+                "useful_next4_benefit_recall": 0.8742774566473989,
+                "unpublished_GB": 1.253376,
+                "wrong_or_superseded": 370,
+                "late": 38,
+                "right_censored": 0,
+                "useful_later_observed_uses_retained": 8063,
+                "victim_absent_entries_retained": 242,
+                "baseline_victim_absent_entries": 258,
+                "original_nonlocal_entries": 43890,
+                "nonlocal_entries_attributed": 44367,
+                "original_CPU_entries": 39538,
+                "CPU_entries_attributed": 39973,
+                "original_mapped_entries": 4352,
+                "mapped_entries_attributed": 4394,
+                "local_entries_attributed": 559473,
+                "lost_local_entries_attributed": 491,
+                "saved_victim_entries_attributed": 14,
+                "native_interaction_attribution_ends": 18,
+                "conservative_lost_observed_use_upper": 694,
+                "modeled_copy_queue_ms": 341.352978,
+                "modeled_net_gain_vs_unfiltered_ms": 494.9289,
+                "modeled_saved_exposed_ms": -450.102978,
+                "cost_parameters": {
+                  "CPU_entry_ms_proxy": 0.25,
+                  "Q4_staging_queue_ms_median": 0.293449,
+                  "Q4_H2D_ms_median": 0.25535,
+                  "publication_wait_ms_median": 1.160335
+                },
+                "capacity": "Each attributed intervention exchanges one same-layer/same3.072MBexpert, within same-device fixed capacity. Initial two-spare withdrawals common and included in original paths.",
+                "limitations": [
+                  "Observed output/native transactions fixed; future adaptation and MTP trajectories not counterfactually replayed.",
+                  "Attribution ends on next native/early touch to either member, rather than inventing an alternate cache schedule.",
+                  "CPU/mapped planning recomputed from distinct routed order with frozen72/256; allocation/cost is not measured hypothetical latency.",
+                  ".25ms per-entry is an approximate prior utility proxy, not exclusive exposed latency; overlapping CPU work is not additive request time.",
+                  "Conservative lost-use bound can overcount unobserved native eviction/readmission in original event uses.",
+                  "Predictor timing measured separately; no simulated TG. Exact aggregate disk/PCIe attribution unavailable."
+                ],
+                "policy": "linear-balanced",
+                "unpublished_reduction": 0.721311475409836,
+                "nonlocal_ratio": 1.010868079289132,
+                "CPU_ratio": 1.0110020739541707,
+                "victim_ratio": 0.937984496124031,
+                "confusion_matrix": {
+                  "TP": 214,
+                  "FP": 408,
+                  "FN": 44,
+                  "TN": 1056
+                },
+                "precision": 0.3440514469453376,
+                "recall": 0.8294573643410853,
+                "observed_use_recall": 0.9207491149937194,
+                "episode_practical_gate": true
+              }
+            },
+            {
+              "task": "structured-3",
+              "selected": {
+                "evaluation_windows": 389,
+                "excluded_near_end_actions": 19,
+                "baseline_unpublished_GB": 4.389888,
+                "baseline_next4_benefit": 455,
+                "baseline_observed_uses": 6448,
+                "issued_copies": 514,
+                "rejected_before_copy": 1125,
+                "staged_GB": 1.579008,
+                "target_ready_publications": 159,
+                "useful_publication_count_recall": 0.7571428571428571,
+                "useful_next4_benefit_retained": 375,
+                "useful_next4_benefit_recall": 0.8241758241758241,
+                "unpublished_GB": 1.09056,
+                "wrong_or_superseded": 354,
+                "late": 1,
+                "right_censored": 0,
+                "useful_later_observed_uses_retained": 5968,
+                "victim_absent_entries_retained": 188,
+                "baseline_victim_absent_entries": 226,
+                "original_nonlocal_entries": 34822,
+                "nonlocal_entries_attributed": 35223,
+                "original_CPU_entries": 31586,
+                "CPU_entries_attributed": 31952,
+                "original_mapped_entries": 3236,
+                "mapped_entries_attributed": 3271,
+                "local_entries_attributed": 568137,
+                "lost_local_entries_attributed": 428,
+                "saved_victim_entries_attributed": 27,
+                "native_interaction_attribution_ends": 25,
+                "conservative_lost_observed_use_upper": 480,
+                "modeled_copy_queue_ms": 282.082686,
+                "modeled_net_gain_vs_unfiltered_ms": 525.8988750000001,
+                "modeled_saved_exposed_ms": -373.582686,
+                "cost_parameters": {
+                  "CPU_entry_ms_proxy": 0.25,
+                  "Q4_staging_queue_ms_median": 0.293449,
+                  "Q4_H2D_ms_median": 0.25535,
+                  "publication_wait_ms_median": 1.160335
+                },
+                "capacity": "Each attributed intervention exchanges one same-layer/same3.072MBexpert, within same-device fixed capacity. Initial two-spare withdrawals common and included in original paths.",
+                "limitations": [
+                  "Observed output/native transactions fixed; future adaptation and MTP trajectories not counterfactually replayed.",
+                  "Attribution ends on next native/early touch to either member, rather than inventing an alternate cache schedule.",
+                  "CPU/mapped planning recomputed from distinct routed order with frozen72/256; allocation/cost is not measured hypothetical latency.",
+                  ".25ms per-entry is an approximate prior utility proxy, not exclusive exposed latency; overlapping CPU work is not additive request time.",
+                  "Conservative lost-use bound can overcount unobserved native eviction/readmission in original event uses.",
+                  "Predictor timing measured separately; no simulated TG. Exact aggregate disk/PCIe attribution unavailable."
+                ],
+                "policy": "linear-balanced",
+                "unpublished_reduction": 0.7515745276417075,
+                "nonlocal_ratio": 1.011515708460169,
+                "CPU_ratio": 1.0115874121446211,
+                "victim_ratio": 0.831858407079646,
+                "confusion_matrix": {
+                  "TP": 159,
+                  "FP": 355,
+                  "FN": 51,
+                  "TN": 1074
+                },
+                "precision": 0.3093385214007782,
+                "recall": 0.7571428571428571,
+                "observed_use_recall": 0.9255583126550868,
+                "episode_practical_gate": true
+              }
+            },
+            {
+              "task": "structured-4",
+              "selected": {
+                "evaluation_windows": 455,
+                "excluded_near_end_actions": 14,
+                "baseline_unpublished_GB": 4.893696,
+                "baseline_next4_benefit": 705,
+                "baseline_observed_uses": 14136,
+                "issued_copies": 527,
+                "rejected_before_copy": 1316,
+                "staged_GB": 1.618944,
+                "target_ready_publications": 208,
+                "useful_publication_count_recall": 0.832,
+                "useful_next4_benefit_retained": 613,
+                "useful_next4_benefit_recall": 0.8695035460992908,
+                "unpublished_GB": 0.9799680000000001,
+                "wrong_or_superseded": 316,
+                "late": 3,
+                "right_censored": 0,
+                "useful_later_observed_uses_retained": 13000,
+                "victim_absent_entries_retained": 274,
+                "baseline_victim_absent_entries": 296,
+                "original_nonlocal_entries": 38417,
+                "nonlocal_entries_attributed": 38996,
+                "original_CPU_entries": 34974,
+                "CPU_entries_attributed": 35522,
+                "original_mapped_entries": 3443,
+                "mapped_entries_attributed": 3474,
+                "local_entries_attributed": 609484,
+                "lost_local_entries_attributed": 599,
+                "saved_victim_entries_attributed": 20,
+                "native_interaction_attribution_ends": 19,
+                "conservative_lost_observed_use_upper": 1136,
+                "modeled_copy_queue_ms": 289.217073,
+                "modeled_net_gain_vs_unfiltered_ms": 585.2194840000001,
+                "modeled_saved_exposed_ms": -426.217073,
+                "cost_parameters": {
+                  "CPU_entry_ms_proxy": 0.25,
+                  "Q4_staging_queue_ms_median": 0.293449,
+                  "Q4_H2D_ms_median": 0.25535,
+                  "publication_wait_ms_median": 1.160335
+                },
+                "capacity": "Each attributed intervention exchanges one same-layer/same3.072MBexpert, within same-device fixed capacity. Initial two-spare withdrawals common and included in original paths.",
+                "limitations": [
+                  "Observed output/native transactions fixed; future adaptation and MTP trajectories not counterfactually replayed.",
+                  "Attribution ends on next native/early touch to either member, rather than inventing an alternate cache schedule.",
+                  "CPU/mapped planning recomputed from distinct routed order with frozen72/256; allocation/cost is not measured hypothetical latency.",
+                  ".25ms per-entry is an approximate prior utility proxy, not exclusive exposed latency; overlapping CPU work is not additive request time.",
+                  "Conservative lost-use bound can overcount unobserved native eviction/readmission in original event uses.",
+                  "Predictor timing measured separately; no simulated TG. Exact aggregate disk/PCIe attribution unavailable."
+                ],
+                "policy": "linear-balanced",
+                "unpublished_reduction": 0.7997489014438167,
+                "nonlocal_ratio": 1.0150714527422755,
+                "CPU_ratio": 1.0156687825241608,
+                "victim_ratio": 0.9256756756756757,
+                "confusion_matrix": {
+                  "TP": 208,
+                  "FP": 319,
+                  "FN": 42,
+                  "TN": 1274
+                },
+                "precision": 0.3946869070208729,
+                "recall": 0.832,
+                "observed_use_recall": 0.9196378041878891,
+                "episode_practical_gate": true
+              }
+            }
+          ],
+          "frozen_precision_traffic_curve": [
+            {
+              "issued_copies": 8405,
+              "staged_GB": 25.82016,
+              "target_ready_publications": 1444,
+              "unpublished_GB": 21.384192000000002,
+              "useful_next4_benefit_retained": 3847,
+              "victim_absent_entries_retained": 1735,
+              "baseline_victim_absent_entries": 1795,
+              "original_nonlocal_entries": 250000,
+              "nonlocal_entries_attributed": 250730,
+              "original_CPU_entries": 224423,
+              "CPU_entries_attributed": 225101,
+              "original_mapped_entries": 25577,
+              "mapped_entries_attributed": 25629,
+              "useful_later_observed_uses_retained": 53830,
+              "conservative_lost_observed_use_upper": 1237,
+              "baseline_unpublished_GB": 26.210304,
+              "baseline_next4_benefit": 3953,
+              "baseline_observed_uses": 55067,
+              "episode_count": 6,
+              "policy": "rule-permissive",
+              "unpublished_reduction": 0.18413033286450997,
+              "benefit_recall": 0.9731849228434101,
+              "observed_use_recall": 0.9775364555904625,
+              "nonlocal_ratio": 1.00292,
+              "victim_ratio": 0.9665738161559888
+            },
+            {
+              "issued_copies": 5990,
+              "staged_GB": 18.40128,
+              "target_ready_publications": 1079,
+              "unpublished_GB": 15.086592,
+              "useful_next4_benefit_retained": 3077,
+              "victim_absent_entries_retained": 1350,
+              "baseline_victim_absent_entries": 1795,
+              "original_nonlocal_entries": 250000,
+              "nonlocal_entries_attributed": 258338,
+              "original_CPU_entries": 224423,
+              "CPU_entries_attributed": 232088,
+              "original_mapped_entries": 25577,
+              "mapped_entries_attributed": 26250,
+              "useful_later_observed_uses_retained": 43651,
+              "conservative_lost_observed_use_upper": 11416,
+              "baseline_unpublished_GB": 26.210304,
+              "baseline_next4_benefit": 3953,
+              "baseline_observed_uses": 55067,
+              "episode_count": 6,
+              "policy": "rule-balanced",
+              "unpublished_reduction": 0.4244022503516175,
+              "benefit_recall": 0.7783961548191247,
+              "observed_use_recall": 0.7926889062414877,
+              "nonlocal_ratio": 1.033352,
+              "victim_ratio": 0.7520891364902507
+            },
+            {
+              "issued_copies": 3001,
+              "staged_GB": 9.219072,
+              "target_ready_publications": 507,
+              "unpublished_GB": 7.661568000000001,
+              "useful_next4_benefit_retained": 1650,
+              "victim_absent_entries_retained": 613,
+              "baseline_victim_absent_entries": 1795,
+              "original_nonlocal_entries": 250000,
+              "nonlocal_entries_attributed": 271730,
+              "original_CPU_entries": 224423,
+              "CPU_entries_attributed": 243808,
+              "original_mapped_entries": 25577,
+              "mapped_entries_attributed": 27922,
+              "useful_later_observed_uses_retained": 23354,
+              "conservative_lost_observed_use_upper": 31713,
+              "baseline_unpublished_GB": 26.210304,
+              "baseline_next4_benefit": 3953,
+              "baseline_observed_uses": 55067,
+              "episode_count": 6,
+              "policy": "rule-conservative",
+              "unpublished_reduction": 0.7076887013595874,
+              "benefit_recall": 0.4174045029091829,
+              "observed_use_recall": 0.42410154902210034,
+              "nonlocal_ratio": 1.08692,
+              "victim_ratio": 0.3415041782729805
+            },
+            {
+              "issued_copies": 5629,
+              "staged_GB": 17.292288,
+              "target_ready_publications": 1403,
+              "unpublished_GB": 12.982272000000002,
+              "useful_next4_benefit_retained": 3781,
+              "victim_absent_entries_retained": 1711,
+              "baseline_victim_absent_entries": 1795,
+              "original_nonlocal_entries": 250000,
+              "nonlocal_entries_attributed": 250943,
+              "original_CPU_entries": 224423,
+              "CPU_entries_attributed": 225309,
+              "original_mapped_entries": 25577,
+              "mapped_entries_attributed": 25634,
+              "useful_later_observed_uses_retained": 53797,
+              "conservative_lost_observed_use_upper": 1270,
+              "baseline_unpublished_GB": 26.210304,
+              "baseline_next4_benefit": 3953,
+              "baseline_observed_uses": 55067,
+              "episode_count": 6,
+              "policy": "linear-permissive",
+              "unpublished_reduction": 0.5046882325363338,
+              "benefit_recall": 0.9564887427270428,
+              "observed_use_recall": 0.9769371856102566,
+              "nonlocal_ratio": 1.003772,
+              "victim_ratio": 0.9532033426183844
+            },
+            {
+              "issued_copies": 3450,
+              "staged_GB": 10.5984,
+              "target_ready_publications": 1211,
+              "unpublished_GB": 6.878208000000001,
+              "useful_next4_benefit_retained": 3375,
+              "victim_absent_entries_retained": 1523,
+              "baseline_victim_absent_entries": 1795,
+              "original_nonlocal_entries": 250000,
+              "nonlocal_entries_attributed": 253356,
+              "original_CPU_entries": 224423,
+              "CPU_entries_attributed": 227534,
+              "original_mapped_entries": 25577,
+              "mapped_entries_attributed": 25822,
+              "useful_later_observed_uses_retained": 49647,
+              "conservative_lost_observed_use_upper": 5420,
+              "baseline_unpublished_GB": 26.210304,
+              "baseline_next4_benefit": 3953,
+              "baseline_observed_uses": 55067,
+              "episode_count": 6,
+              "policy": "linear-balanced",
+              "unpublished_reduction": 0.7375761837787154,
+              "benefit_recall": 0.8537819377687832,
+              "observed_use_recall": 0.9015744456752683,
+              "nonlocal_ratio": 1.013424,
+              "victim_ratio": 0.8484679665738162
+            },
+            {
+              "issued_copies": 1741,
+              "staged_GB": 5.348352,
+              "target_ready_publications": 864,
+              "unpublished_GB": 2.6941440000000005,
+              "useful_next4_benefit_retained": 2613,
+              "victim_absent_entries_retained": 1166,
+              "baseline_victim_absent_entries": 1795,
+              "original_nonlocal_entries": 250000,
+              "nonlocal_entries_attributed": 260719,
+              "original_CPU_entries": 224423,
+              "CPU_entries_attributed": 234241,
+              "original_mapped_entries": 25577,
+              "mapped_entries_attributed": 26478,
+              "useful_later_observed_uses_retained": 39019,
+              "conservative_lost_observed_use_upper": 16048,
+              "baseline_unpublished_GB": 26.210304,
+              "baseline_next4_benefit": 3953,
+              "baseline_observed_uses": 55067,
+              "episode_count": 6,
+              "policy": "linear-conservative",
+              "unpublished_reduction": 0.8972105016408813,
+              "benefit_recall": 0.6610169491525424,
+              "observed_use_recall": 0.7085731926562188,
+              "nonlocal_ratio": 1.042876,
+              "victim_ratio": 0.6495821727019498
+            }
+          ],
+          "classification": {
+            "n": 10033,
+            "positives": 1501,
+            "positive_fraction": 0.14960629921259844,
+            "PR_AUC_average_precision": 0.5742996289685726,
+            "Brier": 0.09105088595302052,
+            "calibration_bins": [
+              {
+                "lo": 0.0,
+                "hi": 0.1,
+                "n": 6121,
+                "predicted": 0.03210092910903776,
+                "observed": 0.03708544355497468
+              },
+              {
+                "lo": 0.1,
+                "hi": 0.2,
+                "n": 1707,
+                "predicted": 0.14211686758051256,
+                "observed": 0.17223198594024605
+              },
+              {
+                "lo": 0.2,
+                "hi": 0.30000000000000004,
+                "n": 835,
+                "predicted": 0.24576654903613665,
+                "observed": 0.25748502994011974
+              },
+              {
+                "lo": 0.30000000000000004,
+                "hi": 0.4,
+                "n": 456,
+                "predicted": 0.3418987659149153,
+                "observed": 0.37280701754385964
+              },
+              {
+                "lo": 0.4,
+                "hi": 0.5,
+                "n": 254,
+                "predicted": 0.44384124683731546,
+                "observed": 0.5039370078740157
+              },
+              {
+                "lo": 0.5,
+                "hi": 0.6000000000000001,
+                "n": 172,
+                "predicted": {
+                  "omitted": "bounded compact export; consult original source"
+                },
+                "observed": {
+                  "omitted": "bounded compact export; consult original source"
+                }
+              },
+              {
+                "omitted": "bounded compact export; consult original source"
+              },
+              {
+                "omitted": "bounded compact export; consult original source"
+              },
+              {
+                "omitted": "bounded compact export; consult original source"
+              },
+              {
+                "omitted": "bounded compact export; consult original source"
+              }
+            ],
+            "precision_recall_curve": {
+              "omitted": "bounded compact export; consult original source"
+            }
+          },
+          "history_only_ablation": {
+            "omitted": "bounded compact export; consult original source"
+          },
+          "victim_hazard": {
+            "omitted": "bounded compact export; consult original source"
+          },
+          "rules": {
+            "omitted": "bounded compact export; consult original source"
+          }
+        },
+        "live": {
+          "omitted": "bounded compact export; consult original source"
+        },
+        "recommendation": {
+          "omitted": "bounded compact export; consult original source"
+        },
+        "warning": {
+          "omitted": "bounded compact export; consult original source"
+        },
+        "decision": {
+          "omitted": "bounded compact export; consult original source"
+        },
+        "artifacts": {
+          "omitted": "bounded compact export; consult original source"
+        }
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/analysis/diagnostic-ablations.json",
+      "source_bytes": 1480482,
+      "source_sha256": "3d1369e6d84e192d6a698fb5ebf49538fb9baec440f1403333bd6405310e3218",
+      "compact_evidence": {
+        "H4-unfiltered": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/traces/reason-v1/32k/32k-run1",
+          "actual_demand": {
+            "local": 2043944,
+            "CPU": 185488,
+            "mapped": 28008,
+            "nonlocal": 213496,
+            "all": 2257440
+          },
+          "funnel": {
+            "H4_or_reactive_eligible_candidates": null,
+            "passes_gate": 6002,
+            "rejected_before_copy": null,
+            "copy_issued": 6002,
+            "copy_completed": 6002,
+            "published": 1043,
+            "used_at_target": 1043,
+            "reused_in_later_window_contiguous": 764,
+            "target_local_entries": 1437,
+            "later_local_entries_contiguous": 25875,
+            "victim_absent_contiguous": 3353,
+            "prospective_victim_changed_at_target": 21,
+            "staged_GB": 18.438144,
+            "published_GB": 3.2040960000000003,
+            "unpublished_GB": 15.234048,
+            "wrong_reason_counts": {
+              "prediction-wrong": 4959,
+              "target-ready-persistent": 1043
+            },
+            "aggregate_counters": {
+              "Q4_EARLY": {
+                "windows": 1363,
+                "issued": 6002,
+                "ready": 1043,
+                "late": 0,
+                "wrong": 4959,
+                "busy": 0,
+                "bytes": 18438144000,
+                "target_entries": 1437,
+                "scoring_ms": 162.704,
+                "publish_wait_ms": 45.02,
+                "staged_ms": 1779.411,
+                "copy_ms": 1745.504,
+                "drain_ms": 106.422
+              }
+            }
+          },
+          "publications": {
+            "omitted_list_items": 1043
+          },
+          "caveats": [
+            "Native-change samples are joined window boundaries; source audit forbids competing native host-residency updates between origin/target.",
+            "Contiguous counted demand stops at the first native touch or another early publication touching that expert; subsequent readmission is not credited as exclusive original reuse.",
+            "Victim-absent observations do not prove additional nonlocal work versus an alternate adaptive schedule.",
+            "No hypothetical TG; diagnostic readbacks/full trace excluded from speed."
+          ]
+        },
+        "reactive-only": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/diagnostics/reactive-only/32k",
+          "actual_demand": {
+            "local": 2040441,
+            "CPU": 172777,
+            "mapped": 24542,
+            "nonlocal": 197319,
+            "all": 2237760
+          },
+          "funnel": {
+            "H4_or_reactive_eligible_candidates": null,
+            "passes_gate": 2293,
+            "rejected_before_copy": null,
+            "copy_issued": 2293,
+            "copy_completed": 2293,
+            "published": 387,
+            "used_at_target": 387,
+            "reused_in_later_window_contiguous": 345,
+            "target_local_entries": 514,
+            "later_local_entries_contiguous": 13408,
+            "victim_absent_contiguous": 1583,
+            "prospective_victim_changed_at_target": 23,
+            "staged_GB": 7.044096000000001,
+            "published_GB": 1.188864,
+            "unpublished_GB": 5.855232,
+            "wrong_reason_counts": {
+              "prediction-wrong": 1835,
+              "target-ready-persistent": 387,
+              "became-resident-before-publication": 70,
+              "pending-retired": 1
+            },
+            "aggregate_counters": {
+              "Q4_EARLY": {
+                "windows": 1388,
+                "issued": 2293,
+                "ready": 387,
+                "late": 0,
+                "wrong": 1905,
+                "busy": 0,
+                "bytes": 7044096000,
+                "target_entries": 514,
+                "scoring_ms": 185.534,
+                "publish_wait_ms": 27.814,
+                "staged_ms": 796.063,
+                "copy_ms": 704.259,
+                "drain_ms": 59.618
+              }
+            }
+          },
+          "publications": {
+            "omitted_list_items": 387
+          },
+          "caveats": [
+            "Native-change samples are joined window boundaries; source audit forbids competing native host-residency updates between origin/target.",
+            "Contiguous counted demand stops at the first native touch or another early publication touching that expert; subsequent readmission is not credited as exclusive original reuse.",
+            "Victim-absent observations do not prove additional nonlocal work versus an alternate adaptive schedule.",
+            "No hypothetical TG; diagnostic readbacks/full trace excluded from speed."
+          ]
+        },
+        "conditional": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/diagnostics/conditional/32k",
+          "actual_demand": {
+            "local": 1956133,
+            "CPU": 201638,
+            "mapped": 32469,
+            "nonlocal": 234107,
+            "all": 2190240
+          },
+          "funnel": {
+            "H4_or_reactive_eligible_candidates": 6007,
+            "passes_gate": 2241,
+            "rejected_before_copy": 3766,
+            "copy_issued": 2241,
+            "copy_completed": 2241,
+            "published": 758,
+            "used_at_target": 758,
+            "reused_in_later_window_contiguous": 630,
+            "target_local_entries": 1124,
+            "later_local_entries_contiguous": 28034,
+            "victim_absent_contiguous": 3286,
+            "prospective_victim_changed_at_target": 14,
+            "staged_GB": 6.884352,
+            "published_GB": 2.328576,
+            "unpublished_GB": 4.555776,
+            "wrong_reason_counts": {
+              "prediction-wrong": 1442,
+              "target-ready-persistent": 758,
+              "late-for-original-target": 41
+            },
+            "aggregate_counters": {
+              "Q4_EARLY": {
+                "windows": 1269,
+                "issued": 2241,
+                "ready": 758,
+                "late": 41,
+                "wrong": 1442,
+                "busy": 41,
+                "bytes": 6884352000,
+                "target_entries": 1124,
+                "scoring_ms": 222.424,
+                "publish_wait_ms": 67.362,
+                "staged_ms": 1074.201,
+                "copy_ms": 737.786,
+                "drain_ms": 77.313
+              },
+              "Q4_CONDITIONAL": {
+                "proposals": 6007,
+                "rejected_before_copy": 3766,
+                "issued": 2241,
+                "published": 758,
+                "unpublished_bytes": 4555776000,
+                "useful_local_entries": 29158,
+                "victim_absent_entries": 3323,
+                "right_censored": 0,
+                "feature_ms": 58.669677,
+                "score_selection_ms": 3.062244,
+                "threshold": 0.12
+              }
+            }
+          },
+          "publications": {
+            "omitted_list_items": 758
+          },
+          "caveats": [
+            "Native-change samples are joined window boundaries; source audit forbids competing native host-residency updates between origin/target.",
+            "Contiguous counted demand stops at the first native touch or another early publication touching that expert; subsequent readmission is not credited as exclusive original reuse.",
+            "Victim-absent observations do not prove additional nonlocal work versus an alternate adaptive schedule.",
+            "No hypothetical TG; diagnostic readbacks/full trace excluded from speed."
+          ]
+        }
+      }
+    }
+  ]
+}

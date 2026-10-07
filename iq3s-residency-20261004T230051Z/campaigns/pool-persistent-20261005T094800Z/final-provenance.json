@@ -1,0 +1,1446 @@
+{
+  "created_utc": "2026-10-05T13:17:44.743141+00:00",
+  "campaign": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/pool-persistent-20261005T094800Z",
+  "environment_reference": "/srv/ai/research/iq3s-residency-20261004T230051Z/git/environment.json",
+  "control_build_reference": "/srv/ai/research/iq3s-residency-20261004T230051Z/git/final-provenance.json",
+  "selected": {
+    "recommendation": "USE_P1_BASELINE",
+    "variant": "p1-baseline",
+    "source": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+    "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+    "env": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_POOL_SPIN_US": "100"
+    },
+    "configs": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/32k.json",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/128k.json"
+    ],
+    "launchers": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/start-32k.sh",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/start-128k.sh",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/stop.sh",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/reproduce.sh"
+    ],
+    "phases": {
+      "P0": "COMPLETE_SCOPED_VALIDATION",
+      "P1": "COMPLETE_FROZEN_BASELINE",
+      "P2": "COMPLETE_BOUNDED_PERSISTENT_RESIDENCY"
+    },
+    "P2comparisons": [
+      {
+        "profile": "32k",
+        "TG_delta_medians_pct": -4.236276849642007,
+        "wall_delta_medians_pct": 3.357394770315092,
+        "paired_delta_TG_median_pct": -6.742243436754169,
+        "paired_delta_wall_median_pct": 5.776118063567104
+      },
+      {
+        "profile": "128k",
+        "TG_delta_medians_pct": -4.8898071625344315,
+        "wall_delta_medians_pct": -0.503774125139711,
+        "paired_delta_TG_median_pct": -5.392156862745113,
+        "paired_delta_wall_median_pct": 1.7827736607751277
+      }
+    ],
+    "endstate": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/pool-persistent-20261005T094800Z/end-state.json"
+  },
+  "variant_identities": [
+    {
+      "variant": "p1-baseline",
+      "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control",
+      "source_SHA": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "git_status": "",
+      "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+      "binary_SHA256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+      "shell_syntax": "PASS",
+      "configs": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/32k.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/128k.json"
+      ]
+    },
+    {
+      "variant": "p1-pool-default",
+      "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control",
+      "source_SHA": "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "git_status": "",
+      "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+      "binary_SHA256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+      "shell_syntax": "PASS",
+      "configs": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/32k.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/128k.json"
+      ]
+    },
+    {
+      "variant": "persistent-signal-v1",
+      "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/persistent-signal-v1",
+      "source_SHA": "802fcba34b663b816c4429eb02eeec9c36a5be75",
+      "git_status": "",
+      "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/persistent-signal-v1/strata",
+      "binary_SHA256": "8031e7349075edbc15c693900d264659b46689f072cbdd4c26c94ada144b9a41",
+      "shell_syntax": "PASS",
+      "configs": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/32k.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/128k.json"
+      ]
+    },
+    {
+      "variant": "persistent-v1-fixed-off",
+      "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/persistent-runtime-v1-fixed",
+      "source_SHA": "23e58175d0a3e3f5f60b70ea8bb76ee1bd96a3a0",
+      "git_status": "",
+      "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/persistent-runtime-v1-fixed/strata",
+      "binary_SHA256": "eb9f28e957faa4b2c09912281debb7165ff7d4cd618fb80d7a47a01a2b3a1109",
+      "shell_syntax": "PASS",
+      "configs": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/32k.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/128k.json"
+      ]
+    },
+    {
+      "variant": "persistent-v1-fixed-on",
+      "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/persistent-runtime-v1-fixed",
+      "source_SHA": "23e58175d0a3e3f5f60b70ea8bb76ee1bd96a3a0",
+      "git_status": "",
+      "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/persistent-runtime-v1-fixed/strata",
+      "binary_SHA256": "eb9f28e957faa4b2c09912281debb7165ff7d4cd618fb80d7a47a01a2b3a1109",
+      "shell_syntax": "PASS",
+      "configs": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/32k.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/128k.json"
+      ]
+    },
+    {
+      "variant": "persistent-v2-off",
+      "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/persistent-runtime-v2-fixed",
+      "source_SHA": "93e31983c5735453e1f8be5fe143cb4a3f0538b9",
+      "git_status": "",
+      "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/persistent-runtime-v2-fixed/strata",
+      "binary_SHA256": "bbcb31426701349e900ef621e187556ffdf9e1fc7d3d701beff080f60a923b19",
+      "shell_syntax": "PASS",
+      "configs": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/32k.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/128k.json"
+      ]
+    },
+    {
+      "variant": "persistent-v2-on",
+      "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/persistent-runtime-v2-fixed",
+      "source_SHA": "93e31983c5735453e1f8be5fe143cb4a3f0538b9",
+      "git_status": "",
+      "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/persistent-runtime-v2-fixed/strata",
+      "binary_SHA256": "bbcb31426701349e900ef621e187556ffdf9e1fc7d3d701beff080f60a923b19",
+      "shell_syntax": "PASS",
+      "configs": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/32k.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/128k.json"
+      ]
+    },
+    {
+      "variant": "persistent-v2-diagnostic",
+      "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/persistent-runtime-v2-diagnostic-fixed",
+      "source_SHA": "9f01f074633bb631590fb112acdcd1a98c00d18b",
+      "git_status": "",
+      "binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/persistent-runtime-v2-diagnostic-fixed/strata",
+      "binary_SHA256": "bbd0af7496874f84a5e6ba916cdd680021a54b599bd705ffd123b2e9a21471ef",
+      "shell_syntax": "PASS",
+      "configs": [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/32k.json",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/128k.json"
+      ]
+    }
+  ],
+  "model_metadata": [
+    {
+      "path": "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+      "size": 54817524224,
+      "mtime_ns": 1790868072636267345,
+      "check": "Recorded size/mtime; saved original manifest, no large-weight rehash.",
+      "size_mtime_unchanged": true
+    },
+    {
+      "path": "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+      "size": 28800138432,
+      "mtime_ns": 1790868582548410647,
+      "check": "Recorded size/mtime; saved original manifest, no large-weight rehash.",
+      "size_mtime_unchanged": true
+    },
+    {
+      "path": "/srv/ai/strata/data/expert-profile.bin",
+      "size": 196632,
+      "mtime_ns": 1790866928045945617,
+      "check": "SHA256 checked.",
+      "size_mtime_unchanged": true,
+      "current_SHA256": "8f59b4aa8873209dff11c11e37bcda9529a1335b724a1afeea37bf6388975baf"
+    },
+    {
+      "path": "/srv/ai/models/strata/packs/iq3_s/conversions.json",
+      "size": 306,
+      "mtime_ns": 1790868587087745499,
+      "check": "SHA256 checked.",
+      "size_mtime_unchanged": true,
+      "current_SHA256": "51df3cd6ffd0d38c2da8e2d3a95a604b4a96c20b06fc639a9bf477282a42b86a"
+    }
+  ],
+  "model_SHA256_manifest": "/srv/ai/research/iq3s-residency-20261004T230051Z/references/threeway/git/IQ3_S-SHA256SUMS",
+  "headline_artifact_audit": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/pool-persistent-20261005T094800Z/reproducibility-audit.json",
+  "end_state": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/pool-persistent-20261005T094800Z/end-state.json",
+  "files": {
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/report.md": {
+      "size": 14707,
+      "sha256": "fb518312f854bb3065178f44ce3df11b2edf394c2c0290419d2560f17068eafe"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/summary.csv": {
+      "size": 15515,
+      "sha256": "1e04127326eff3202973e5eb2cdf7c7dcd18197d1edae4d3b3f56ad27533db3d"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/summary.json": {
+      "size": 188607,
+      "sha256": "032b1def37982fa38e8662ed84922ccdd064c3f805deccefd4786bf7cb248ee3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/launch-index.md": {
+      "size": 26704,
+      "sha256": "6c87f410e9eff580889a7774fb359824d12f32fa90e4d1c04ea51a0b2a10f9e0"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/launch-index.json": {
+      "size": 127050,
+      "sha256": "599b259d99fb30e169429d44587d9432f364b0a55ef986c2be85c04fc31a6503"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/STATUS.md": {
+      "size": 1147,
+      "sha256": "61094150712e4543e2594413566b9689fd4f6f6b0259a90868a976c9ad3e1e9b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/STATUS.json": {
+      "size": 1210,
+      "sha256": "7a14fd02c595261547ed9d39ce3833acf91441777377a10851267c6ff8af1561"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/git/environment.json": {
+      "size": 9150,
+      "sha256": "a3a671ed4e40d6cd3d20e655e74704a58266ff264ea236d88711d9e062de3a1f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/git/final-provenance.json": {
+      "size": 21971,
+      "sha256": "094c44c40fbc72b028d5f76fc0fd92b55a8deab6d81766d799dd3e82d31d578c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/pool-persistent-20261005T094800Z/GOAL.md": {
+      "size": 2364,
+      "sha256": "0b96c814c3e524dd386ac7c3ad055cd71de5adaec8e845604af49d79d94fa403"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/pool-persistent-20261005T094800Z/deadline.json": {
+      "size": 522,
+      "sha256": "51d876320a52e6b156ef1bf633ccbaee8f1c45597976f0e86d1311e934087ef1"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_coordination_followup.py": {
+      "size": 1802,
+      "sha256": "0c9f55289e3948986c33909aa1eb3ecd3c6a525a5014e074e1cccf299cc53003"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/consolidate_placement.py": {
+      "size": 4359,
+      "sha256": "58bb5dc20520e4b047a067a029296f815d94465aad3791cf3176df55e3853642"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_gpu_router_v2.py": {
+      "size": 644,
+      "sha256": "46d242ca49d166a27763e5b9a2c1bc6760845d272b2b622175d255e43d827f73"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/audit_pool_persistent_artifacts.py": {
+      "size": 4722,
+      "sha256": "78944d0e215f88586df55ca2686469a1baf7059b84ee7ae8ba5eff9beb901144"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_miss_waits.py": {
+      "size": 2521,
+      "sha256": "0b47f80772e067ee023795798dd5a312b0295a86c948b56369d69fe724477045"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/checkpoint_router_availability.py": {
+      "size": 1292,
+      "sha256": "cb73422752a156ff19a789a9a322c926a31b1c8ab102b00240347252a96e8725"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_persistent_v2_audit.py": {
+      "size": 1439,
+      "sha256": "0fe97fdd3d6f624d661b085704c3f3906ff52713af0bcc93365de578d3e60707"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/placement_replay.py": {
+      "size": 4442,
+      "sha256": "ee005f77ae0d93332c5ad1903157cc668212a22d65dcedb799ed20f4c2c9c43a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_corrected_peak.py": {
+      "size": 1353,
+      "sha256": "f63e9b29541afcec215beaa0d65204742f067a050802e18b989fd1f6f0bafce9"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/compare_confirmation.py": {
+      "size": 8435,
+      "sha256": "2e1b8c9ade190f482c8c534431a2b22ebaa834340694d34c24065bb95c6d0afd"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finish_pool_p0.py": {
+      "size": 1170,
+      "sha256": "d7287fa0eb736d870d0df8aef470b56e30b209a732327e3ce2962084f6dfcff0"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/persistent_replay.py": {
+      "size": 8417,
+      "sha256": "15f82e8a0e9be7026f4ee93231dce46973b1447989cbf881b326faab768b8c03"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/register_variant.py": {
+      "size": 3963,
+      "sha256": "2f5f747a0f29ffa884b2dbdcfbf2a917a4ca6edf4fc55ecf00f9d6229cd12df4"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/followup_end_state.py": {
+      "size": 4516,
+      "sha256": "f48ba3a4035867e6232ced9278e5279dda7104427f2c73115c926bb8aa64a6ba"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_direct_parts_guard.py": {
+      "size": 2358,
+      "sha256": "0bbef4f4edc05ba0cb58925fa246dd5a7d90272096f2dc157d36238abd583442"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/validate_compatible.py": {
+      "size": 4210,
+      "sha256": "a65c7204e5c284cc5906cc85caa901d603463a2bd766348609cb94579624201c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_persistent_v1_screen.py": {
+      "size": 1149,
+      "sha256": "aa69779cf4913ccae2800515fbe52f7ebf217a1fc871197ab8768853a03874a7"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_direct_parts_guard.py": {
+      "size": 2341,
+      "sha256": "b8d6f6708ca9b4009a2a83074c024e7f3b7ddacd7cdd3b6d72b7dab7f9666efc"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_gpu_router.py": {
+      "size": 2983,
+      "sha256": "a42d658ebd94009bedda3a261af756fd6973474eb2fd646a3bf2a95ab54c2568"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_wide_gate.py": {
+      "size": 2547,
+      "sha256": "935b637365443f5bc2a6b8e23ecaacd7c1490db806ba2c4a869c7f1bda8a5915"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_miss_waits.py": {
+      "size": 6109,
+      "sha256": "58e3480c573399753cbd157fc5d1e3b83448c1157db4c0d9b6e8cad140718f04"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/filter_stale_router.py": {
+      "size": 3299,
+      "sha256": "60f69192984d9d533866f4b8315bdae1985f48b1da79f97799ad2888a766d1a7"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/consolidate_miss_waits.py": {
+      "size": 4714,
+      "sha256": "c335b43cd6eee28100c77b3ffa26de78ccdb1fe6ed9420e0834153247b64cec1"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/freeze_wide_choice.py": {
+      "size": 1741,
+      "sha256": "5fba31e5b1694906e7750d70f12034cef390101010327603807806fd900185fd"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/evidence_audit.py": {
+      "size": 5436,
+      "sha256": "7bbf3e5357780b6ad1df2c946f15792866729525d7c12d70c53dab7fcbcd1019"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_gpu_router.py": {
+      "size": 2205,
+      "sha256": "ed195aca7224b818edf5b8644cdc447fe9b1df8b46127f13078b6d379f709e14"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/inspect_upstream.py": {
+      "size": 771,
+      "sha256": "46c9cf72c36f369f9355b9a627972f5f80db75572eeaca9785901aa0d3db1d5c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_skip_local_plan.py": {
+      "size": 2311,
+      "sha256": "a316a7562e958eb84ac1fe1c106bfbc2a5e5f476c219a861e940e3cde90d17eb"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_research_state.py": {
+      "size": 5613,
+      "sha256": "239584da2851368773c08e87dacd9020675bf9e9ed8d8969f7e39463a728255a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_router_transactions.py": {
+      "size": 2340,
+      "sha256": "65fd46a9361bf65c040f40a864b7fcf1bb520ac02de5903f5e867101353de985"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_persistent_runtime_v2_fixed.py": {
+      "size": 4167,
+      "sha256": "4fe3b59a828a9862089ab23cb4bb9230e0f4a91065f91e7961b03eecea43fb59"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/freeze_budgets.py": {
+      "size": 1181,
+      "sha256": "c7f373ec71eb3c4519849c58809cb7b73c01c5d51499298792cf087691b95162"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/followup_state.py": {
+      "size": 1921,
+      "sha256": "dbcde653f941634339408ee42831290c13ccabafb8a6657581a7d822ea8ca645"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_device_plan_prerequisites.py": {
+      "size": 2547,
+      "sha256": "8715bff48807e51fea3b800a61654b635a3e6ffcec02de04bb3cd80ee54b4f2d"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/consolidate_fresh_router.py": {
+      "size": 7819,
+      "sha256": "0b3c7f673670d59c6f7fbc180bd14fc08e40bffe41449b6ec5b05595af135532"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_device_plan_ids.py": {
+      "size": 3376,
+      "sha256": "7610457257113116d7c6ea54a29d1310400d290883a679ac120ff10feb403501"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_diagnostic_direct_parts_v2.py": {
+      "size": 1066,
+      "sha256": "40a05700ea530f608d6e11eef020948380795a2e1ac2262ae0b753028c7a6244"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_pool_independent.py": {
+      "size": 3031,
+      "sha256": "b01cce094ef4fdf0c8efe12e74b765b612244c9b6e25dcea341cb265a03ff9f5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_workloads.py": {
+      "size": 5461,
+      "sha256": "23c3e956348f008b17f4900386c3908136f3355dc395e49f416aea5aacc3a7e3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_wide_gate.py": {
+      "size": 2926,
+      "sha256": "86cb1b4c154d120b47457cc533c51b731ee5a1013a853e3fc565cae14c28a660"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_direct_parts.py": {
+      "size": 5419,
+      "sha256": "ef8d97fb87f33e64a87d813d4ca6cc1627f87c0c1bcac6a83b7d16624f38f052"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_persistent_diagnostic.py": {
+      "size": 3480,
+      "sha256": "3e1c01f2307d2b51f57b482acf43b8a54bce788727ded0ff4919523967cb525f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_compatible_diagnostic.py": {
+      "size": 2537,
+      "sha256": "fbac4b89ff3f4f748a7dbd53ed28b5ccc87be480bc77eb7a71f7dc2d3e85ae0a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_plan_compare.py": {
+      "size": 3599,
+      "sha256": "54fa763c0fa9f36cc6a6d79e2dcb076c57ac8adecada2cf8b7e070dadb209a09"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_persistent_v2_correctness.py": {
+      "size": 2105,
+      "sha256": "c9c586d1018e256e47ce4227e232a59257468e5dc6c46a9d45b9c19bcd4c5265"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_live_promotions.py": {
+      "size": 4943,
+      "sha256": "1b06e4079971afd592221a2d9a5b8e667965990a42a46678c9431cce944d695a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_persistent_v2_pipeline.py": {
+      "size": 721,
+      "sha256": "43251dd0ac36746e1aad51b655d9df521f2b17af9a14e6b652de9c2754e66c3e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/preflight.py": {
+      "size": 1263,
+      "sha256": "6aa036c8683b1add513bbed6c398be5f65bba3e939f1b580b9ac2eae1232f952"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_nonfinite_parser.py": {
+      "size": 639,
+      "sha256": "ec6a9092b512bcaae40ea75e3f303ae27d0ba6f5266b17a0d1a9a1b7006a5354"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_persistent_runtime_v2.py": {
+      "size": 1940,
+      "sha256": "cc110c433a9226b7d16255ecb52d4703cebf804b1f012faff9897e0c48c7e7c5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/setup_control.py": {
+      "size": 2685,
+      "sha256": "31e93439375aaff8060b0480aed2c801c6a851732f63ad9e84c4c842fd39fb12"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_router_fresh.py": {
+      "size": 1098,
+      "sha256": "c07aa1a08e2e02ca19cabcb104dc0f952365fd2677653f9d620f18f61eca4e12"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/audit_pool_warmups.py": {
+      "size": 1624,
+      "sha256": "bc1ffc3a9e54b29e07840a525550dbf1397f7b2f482647589a99e7ec367f3214"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_persistent_signal.py": {
+      "size": 1483,
+      "sha256": "1d266080d7604e200d9c53d94d39b739611aac7cbfdc86c3b6dfd61c4436e9ee"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/final_audit.py": {
+      "size": 8136,
+      "sha256": "fd516131b14f2fe5f37edcbeddd578ceb642f2ad2b606ba13d37d6e7ff643ade"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_signals.py": {
+      "size": 6374,
+      "sha256": "a39d868b770b85ac20c3f9b4cb7119f02fd56265c2f6a540db2102c510923660"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/repair_frequency_registration.py": {
+      "size": 908,
+      "sha256": "0137f28cf519933e9f4867a8000d40d14ff91778ff7c171d1ca9eb6975fa2267"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/collect_persistent_signals.py": {
+      "size": 1631,
+      "sha256": "3baf97fc74948991d3e3059a467ad51a9ac3c424314df967c955ffb762dcf54f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_device_plan.py": {
+      "size": 3908,
+      "sha256": "4b919d7d15c451009e8d66160054a5c4362eecb1b481736d1f23119676be6680"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_next_batteries.py": {
+      "size": 1315,
+      "sha256": "47f163d2373a939db60834d2e6bdfee491b0069d2ee683f8a0cfb1afe8b24966"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_repaired_signals.py": {
+      "size": 1419,
+      "sha256": "ff0c0f8566c715278c6e9201c73470b69c13b4a374a2cdb4e9fcaa9ae773837e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/consolidate_compatible_diagnosis.py": {
+      "size": 6417,
+      "sha256": "c2c64dbe991de3d083ca1368d61b0d65e7b5b5e70d961fb15174aa6bcb4974f3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_pool_p1.py": {
+      "size": 4375,
+      "sha256": "1da996bba7a7c471288d4d04a9b38ef4b47816c71a1a8648a8cfa20a7cc591dd"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_wide_gate.py": {
+      "size": 9552,
+      "sha256": "3f92395be13a833e72098d047c45c4eb7e4593caa8f1b107798c47ecde621793"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_direct_parts_guard.py": {
+      "size": 1622,
+      "sha256": "6b74a0008220c83a03be37540aace096a0b9cee5dde672a3580f23446a4fce7d"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/check_battery.py": {
+      "size": 1396,
+      "sha256": "6b81e33762059a990276986f029a81dd7987b3b6ef7d06639bdfcc1ae762b2d9"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_signals.py": {
+      "size": 1139,
+      "sha256": "c5af38601874620f1d25a14c31062ad1f8effb4ff275d601cc123dc8d111e50b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/refine_direct_parts_protocol.py": {
+      "size": 908,
+      "sha256": "44d34a031df4c190c4755b7aad04c55e4af54da56e638858f3ba7bcbd5eb63e3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_device_plan_diagnostics.py": {
+      "size": 2091,
+      "sha256": "3da5d7fe6e116afc8e49d595c49a1e06328ad166bc10904667b5fc98aff36e37"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/render_launch_index.py": {
+      "size": 8851,
+      "sha256": "3bb10919a8e6e0a52a58008b48eb1577d2fb10923b25bc225c6c73b93d84b689"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_policy_off_guard.py": {
+      "size": 2220,
+      "sha256": "f6ed5b02285551ef17a264851b0b29b80f3b44491506f3bd2b2ca5fdf70d205a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_persistent_replay.py": {
+      "size": 3262,
+      "sha256": "66edb6bc3f84ef846559f38694fefe4d0fe367e130d577ebaae8d72165459c63"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/consolidate_numeric_stages.py": {
+      "size": 9875,
+      "sha256": "262488fd4db68620f17cc3f7fdba0189756162e3f58c6fd60ca63f10a71954ea"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_persistent_diagnostic.py": {
+      "size": 4970,
+      "sha256": "bd604809085dea1ce1b3acbdaeeca3ae449b639abf5a9c74dd7abbdc2fdc9215"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_persistent_v1_correctness.py": {
+      "size": 2752,
+      "sha256": "529f00223ec6200a7f8b714306ff3a515681db745513117a6bb51a939b11c9d9"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_coordination_waits.py": {
+      "size": 1868,
+      "sha256": "7ecb9f38de1b7d4f5e9818b29dd2b4a4018b5eb4c9ae7d2454e5dc02479ff851"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_pool_p0_diagnostics.py": {
+      "size": 5145,
+      "sha256": "57833c9588423fa84f54e364116d493874c4b99822fcfcfd2d392c71b66834fc"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/freeze_correctness.py": {
+      "size": 2251,
+      "sha256": "d58ca906b2fb9db3947781f423fcaeaecc492e668a30815b30f9e6a8c5f4507c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_pool_p0.py": {
+      "size": 4035,
+      "sha256": "a43e8acfb2d9db06f05860586bc2f413332b07c48b2dd7fc9327e487f1769f36"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_coordination_waits.py": {
+      "size": 3232,
+      "sha256": "e0e009d0951163e555bbeb866f56d9f48200bd46e4b620eb231309c6daf61cf5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_persistent_phase.py": {
+      "size": 6828,
+      "sha256": "b6ddbd9dc05adba624abb3ddc565102eba070749788ca1a35a32c6bcfadca080"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/timeout_fixture_child.py": {
+      "size": 376,
+      "sha256": "ed0fa13bad95c7ab218a2b9d647016a5dca8b340cf5ce86fa0f41e0345875d71"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/reproduce_plan_comparison.py": {
+      "size": 1703,
+      "sha256": "fd0d94b268c4192001d2b8cee866089f0433220445d6dd1c663a456ca9fcf794"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/update_followup_launch_index.py": {
+      "size": 3569,
+      "sha256": "7c3496ef8c304b9004b9be1df8211e996b9325351da197e29ade29ffeba1d187"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_wide_transactions.py": {
+      "size": 2108,
+      "sha256": "9d7c3e128f664b2027e2a7c981dbc7ab25b7a2a7c1e6e9e80e0ccd3084cf015b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/correctness_battery.py": {
+      "size": 3195,
+      "sha256": "08fdc8aeafbcd5d1f89af0f2d51a5cb792c552eef05533c011661a62f53f6058"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/consolidate_router_boundary.py": {
+      "size": 5852,
+      "sha256": "b890838c240a7e493099b61c5ce59e7580363d0517b926da6bef6a578d72f7ec"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_diagnostic_direct_parts.py": {
+      "size": 340,
+      "sha256": "4a576a0ac5c7e1232f615d41b1b11b63635269ef4bc9f874589f79ac3277a475"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_persistent_runtime.py": {
+      "size": 7002,
+      "sha256": "72016a0ac9d3104daa3ae7b0daf3b9cc07ec1ac7acfdef616d725c42ccb71971"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_device_plan_v2.py": {
+      "size": 755,
+      "sha256": "9f49bdc055881c8f424f477a6b32f9e849979617557416fc33086b87aa04e543"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_device_plan_diagnostics_v2.py": {
+      "size": 634,
+      "sha256": "11949e86e4fe0820034b6a613d5e5c482b5806860f0e269285eb4989904905c3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_wide_analysis.py": {
+      "size": 1934,
+      "sha256": "1271a1984affbe577fcaaa6f4549d113d6eaf8a193a1626822fbb29a853cb9d2"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_variant.py": {
+      "size": 2156,
+      "sha256": "24703ddb323000befa04356505b9b1dbe0c81738db4e9cef0f572cda1ea5b31a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_diagnostics.py": {
+      "size": 6528,
+      "sha256": "1dcc3969b7c50512d749fba9e0a643101985f2326d8a8c65c9af4e697957fa29"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/train_predictors.py": {
+      "size": 7669,
+      "sha256": "0c513689fcfcc91bd1002ce16f8e8feb6702176a38c7f856a9ffebdbdfbb06d5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/diagnostic_logs.py": {
+      "size": 480,
+      "sha256": "8062b2da30bb784f7d7ba494c5d1e542164acd54cc85600479c666741028d0c3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/check_persistent_v1_screen.py": {
+      "size": 1367,
+      "sha256": "5504161cf1ca7224a7654004b22a2809d8166e673bacf2ef8aad5562631b6d33"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_logged.py": {
+      "size": 3033,
+      "sha256": "9a9d9f89d0ad78af98a78ff2a5376c7b0cda05ca39833451370ced73c2c9fe11"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_device_plan_v2_prerequisites.py": {
+      "size": 1757,
+      "sha256": "4bc9db4c635a4a85c70ce847fd5a3db50b52b9a08a0bb80ab9b826dc773713b3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/check_test_failures.py": {
+      "size": 1452,
+      "sha256": "b326187b6f7f2de071ec1b3156fab5e51d3bd0ea43426b0c6bb7ba3cb3d73275"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/diagnose_traces.py": {
+      "size": 4657,
+      "sha256": "417becef460785c47fbeac6e096a88e806c0248b7844e66724088860fdb9db2e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_host_plan_guard.py": {
+      "size": 2151,
+      "sha256": "4c95298d1fa0c9e0d74795345878cf88e9e6715b188da5150909ce5df713afa4"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_persistent_development.py": {
+      "size": 2344,
+      "sha256": "b9d28fb8da9304bb8b2114a661ebe003cafa1ff9832ecb95f631eac34c615010"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_skip_local_funnel.py": {
+      "size": 3297,
+      "sha256": "bf4851c272e2761cac525fd8d11278b7be5906a8cf0cf1414ade93b505f30e36"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_miss_waits.py": {
+      "size": 3017,
+      "sha256": "f9b185b375cbc59795a5666d3210cafcec062b355d114696413984835b8dd5a4"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_skip_local_diagnostics.py": {
+      "size": 1820,
+      "sha256": "971ae67f7c0977a22ff267b6745b64000d0b8dff8d7890674415c7c6393185fb"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_miss_waits.py": {
+      "size": 4470,
+      "sha256": "cdddc133091b07f96f4344ac85ba4a27c323fff27d178ea8aeb239003977f904"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_lowrank_router.py": {
+      "size": 4314,
+      "sha256": "ee33b32ee35ba75e70fa03ed276bb8f1db5a5d1cdba0881d5a11bd14660de731"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/predeclare_persistent_v2.py": {
+      "size": 983,
+      "sha256": "f8074c2c809642ee3b523ad4e90c14f744c42c689ca1b0a56dcc9de3a976b2d2"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_plan_compare.py": {
+      "size": 2075,
+      "sha256": "4883f96a368b2e2f1f9aeefe19ff9b8f79175eb404755811fe7b26d1c2d635a4"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_device_plan_v2.py": {
+      "size": 3418,
+      "sha256": "51a13c8713b9a9f52c458c558211d02bf41aaab60f309389dbeb28c0858591a4"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_pool_p1.py": {
+      "size": 3694,
+      "sha256": "a91ab49f05b228e4f20e9b75d99db993bdc9f90edbf9b757c60973dbabbe8b46"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_skip_local_plan.py": {
+      "size": 1838,
+      "sha256": "6dc7e015c220b891da25da42a51dbc3b82c6ee9163bf37d72df65c5e9e57138a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/collect_traces.py": {
+      "size": 2664,
+      "sha256": "cfabd247be0190daf86a5ca0dd3980d3b81d24b39edd8ed2f1a44b4a8a8e3692"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_pool_independent.py": {
+      "size": 6767,
+      "sha256": "4965a216b01b3c2ac0b150ceeaa7bf0ced8a6553b37db9f1efc03a044a5407e7"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/token_history.py": {
+      "size": 3105,
+      "sha256": "d607b356f8ede9373c0c72175406729d48d6dd170c81fcf52e2b686cd79b7509"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/collect_sources.py": {
+      "size": 3629,
+      "sha256": "694b5ec408fdf12016a34eea25d03909369ed6eea6e9f57f00fec0fad52d887c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_router_boundary.py": {
+      "size": 8631,
+      "sha256": "ceffc82d597324a919dd08546193a43304d420b671cec12d778ddb4f324d6634"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/cleanup_research.py": {
+      "size": 2539,
+      "sha256": "4fa6558efa61b1283c9fb27c8e335029283d217a9c8165db3e394d32325a7bdf"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/checkpoint_live_findings.py": {
+      "size": 2912,
+      "sha256": "8fb5f21db9e7028ff4d393983af0b4de7c48fa6bbfe22df26c3cfd0125917b76"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_diagnostics.py": {
+      "size": 1380,
+      "sha256": "3eb3eb3183bd0eb6b8b5aad787f6662ce03c8b8574691e6d427860284cef520e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_pool_p1.py": {
+      "size": 3003,
+      "sha256": "1fecce009d01a0912cf66eba90acfc44c993ed49db37bc31f71a74edc19c8698"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_plan_compare.py": {
+      "size": 2876,
+      "sha256": "87a9a5660d994af23209bdd505133d08b964721e7bff9b88f2fbce8f390fca3b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_persistent_selector.py": {
+      "size": 2525,
+      "sha256": "6a1bf7ece9823feb9a7ea9422c329ad775bc2f5dc9f19a71d9493633533c6fd9"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_persistent_v2_final.py": {
+      "size": 1570,
+      "sha256": "16329ea827aa865b76ebb8b49c235b528b5b83275ec6355f67108d6a5a45ce00"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_pool_wait.py": {
+      "size": 5746,
+      "sha256": "2eba8351ffef847680af7dd4a16af7c8bc262bd012d7ebdfa94bdce6031865d5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_skip_local_stage.py": {
+      "size": 3348,
+      "sha256": "b80ccceb587cc0e2a5f689d40adc7caf35fa9b141f16b5f3f2fcf1dd0fc03d40"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/consolidate_router_transactions.py": {
+      "size": 2923,
+      "sha256": "638489fa979379e17735d198837576bf1673115d311e1016137b610bd2801d31"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_compatible_diagnostics.py": {
+      "size": 2318,
+      "sha256": "2c60a18150b232783486de14e8124d30cf47568e28e5db5d0b884d1d23e55ffb"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_wide_gate.py": {
+      "size": 2570,
+      "sha256": "7e13420629c18a48d895c04fffdba4187d2ee2f8bb940d36ced76347cf6f230a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_persistent_p2.py": {
+      "size": 3326,
+      "sha256": "3388358db882f672d0066e7b5262451ed25a2b3aa17d5bb05099905957cf08f5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_placement_replay.py": {
+      "size": 1049,
+      "sha256": "b28c80384d76ad87d9f654cd3cbc7c229362119820f335235a125645da8640dc"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_gpu_router.py": {
+      "size": 8607,
+      "sha256": "220b333c18599f4f5348edd9d5ed8df9d6813f9590887e0aad56b2a163a126ea"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/audit_persistent_replay_capacity.py": {
+      "size": 1988,
+      "sha256": "c35a76113a99fdae4693ca19434c1b3dc3168f364e391496fe59d8990b04fb5b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_coordination.py": {
+      "size": 4771,
+      "sha256": "216e09e9627d3dd7bf245aa7d3de6c4910c7b5a14851f2050a99f2dc68390345"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/checkpoint_coordination.py": {
+      "size": 3129,
+      "sha256": "4130915689bf1308b75e6f5ff98a22e30aba5fca4fdc5fee806037603de69773"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_pool_independent.py": {
+      "size": 7576,
+      "sha256": "08ba96a8deb5cd5c3337b595483cf05876063eb58ce1f0c4dc191413149109d9"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_device_plan_v2_diagnostics.py": {
+      "size": 2028,
+      "sha256": "6fbe18985ec27b657fec8804ec9012156ce5cd5add07efa82d593eb930c8b22f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_pool_p1.py": {
+      "size": 6734,
+      "sha256": "cbb666cea15d3c9f8e2d8a446eba7705b39ca056ea8f484db0ac25dc9be1d2b3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_compatible_diagnosis.py": {
+      "size": 1279,
+      "sha256": "7f8057c9070ed17672573533a983e0c58b0e7080eb9cf7581263a4c5aa2fb74c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_persistent_v2_replay.py": {
+      "size": 2501,
+      "sha256": "f53cdaa9dc53b517dc176c1d71ee0a3472dca499272204344d7a41862138e3db"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_fresh_router.py": {
+      "size": 2628,
+      "sha256": "6ce48c546e97a8cdaadb3fa06cd8c92bca00587f7558c2fc2261a770c5741f25"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_wide_analysis.py": {
+      "size": 2613,
+      "sha256": "98cea95f5aba579fdc1ea56185f1c711a11f9dadeccb7c5ef4b4f678c525cf71"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_persistent_predictions.py": {
+      "size": 2209,
+      "sha256": "17499f7b78b332f56ad38616f9f711d40da5ba6a7cc7b3342c67aec42a01b29a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_coordination_analysis.py": {
+      "size": 851,
+      "sha256": "4b763204ba408842e03e0a03219cde86c50f30e4589e7b6852e1d2a710a27626"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_replay_followups.py": {
+      "size": 2252,
+      "sha256": "e41652a8c8b2bc4fb3ad153aa6cb04a57fe45203bba05ec755acddb4f66e3de9"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_coordination_waits.py": {
+      "size": 2549,
+      "sha256": "b8dc63c1888f4199ad2f8d7f4cd41763bc4b4f7c834230375578b4d8de1db93f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/checkpoint_metadata.py": {
+      "size": 3067,
+      "sha256": "12559ad7a01235b131151318041d79fca962ebb397878dbfe0a704142072c8e3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_persistent_runtime_fixed.py": {
+      "size": 463,
+      "sha256": "188f680435dee452d47ca426604349b7389aa3e7b98f4448bd2d6082352ab773"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_system_phases.py": {
+      "size": 2844,
+      "sha256": "05c3dec0ce4f1f01b57e61becc0420f626614ba0ea831bcd1bbcb2f611ae95aa"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_host_plan_guard.py": {
+      "size": 1751,
+      "sha256": "5730c5518b124772072e04da053bd92cd36f57d646ce852d9cb49afdf2702c84"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/router_transactions.py": {
+      "size": 7888,
+      "sha256": "a887f8d21fb199042f2ca2ca9adcb363190ed44522d8b67f600dfab97c6f0a64"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/render_persistent_phase_report.py": {
+      "size": 7653,
+      "sha256": "1f69efb7e96845af289f272cdb223da926018058f58f426876ee8cee0232efd2"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/validate_traces.py": {
+      "size": 1552,
+      "sha256": "8eed3d1bacb191b15682b80adafbc338fcb54b0a35a818db8d42897cc30cd35b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/close_replay_report.py": {
+      "size": 2485,
+      "sha256": "7b765f6ec8f6abd41a60f2863f6df81dd43abda5f396e4c7ed2def4bd8d5eff7"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/check_trace_parity.py": {
+      "size": 1842,
+      "sha256": "12e71a951390aa92e50a5ff7923d732bf79f43697a25f24f05309ad2694c8078"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finalize_device_plan_stage.py": {
+      "size": 3308,
+      "sha256": "b3019959e18ef89f780f665dd98ca20091c8ba50a3c8e3dae297cc8838157765"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/repair_device_plan_checks.py": {
+      "size": 1311,
+      "sha256": "e783143e43997ae85b5c622feb47fea02166eefbcc2bfffa769847c1f9973783"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_router_transactions.py": {
+      "size": 903,
+      "sha256": "e7824c1edaa1f04b6d4c98413c184e22314932e7654cc6a7705bccc33f88382c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_direct_parts.py": {
+      "size": 2742,
+      "sha256": "57d9310f0f3c7aaa00dd909acac9e1030beded29243c5ba752e8b2efe8e9ca0f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/diagnose_device_plan_divergence.py": {
+      "size": 2480,
+      "sha256": "e49faeb613f5876a504596575b7e0e6e5cc70fcaaeb90b38d63c507f642c4306"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/continue_persistent_v2_build.py": {
+      "size": 666,
+      "sha256": "213858ccf5a1a7e55fbb5942418a62020a17a073e33993e8290017e9f0b24d93"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_compatible_fast.py": {
+      "size": 2753,
+      "sha256": "068696179015160847983b155410eb4070b4e101e34cdb3b41f5ba8fcb21298a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/consolidate_confirmations.py": {
+      "size": 4841,
+      "sha256": "c5416f0eece855a691346d5bffbfe8e1893fe99766b0dcda8b1f04729e029082"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_device_plan_diagnostics.py": {
+      "size": 1258,
+      "sha256": "4d84dbee350e6c4d5c11be18890cd3f19c0852f3ec5df8d00a3677f608f7df47"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_persistent_live.py": {
+      "size": 4923,
+      "sha256": "ce11558e0a63b977d84d07679093b870ddf7c4c5dc37a4d487f5e98adf86b58b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_fresh_router.py": {
+      "size": 3661,
+      "sha256": "a55c78b53a6420d5e39c30d605c2569338f485e55d99594950c87c4ca7988f53"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/render_root.py": {
+      "size": 3242,
+      "sha256": "eb2892b7305a02d9dff8bc02e8862d30d49e772f448cfc5e91ae75a59436cbd9"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_direct_parts.py": {
+      "size": 4200,
+      "sha256": "693070144f3fd6b2efae96af20f80dfad05b291c8efe98361fda6ee301047658"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_causal_signals.py": {
+      "size": 4863,
+      "sha256": "3b660a0c61c9b88cdf88670d65202b54d70508ffcd090d5f54fe071c175cc964"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_coordination_waits.py": {
+      "size": 6361,
+      "sha256": "e6644b4cbb1402f89ddb7f4329188f517aff8369e3979b89b308663bc471f239"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/validate_current_selector.py": {
+      "size": 3287,
+      "sha256": "a5f344ae3f627be0b4928c7e1bb4c1e3cf35fd90fda8592591c19e7f889cce40"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_signals_gpu.py": {
+      "size": 1094,
+      "sha256": "9fe701225f269ded9586de56fe72dc5988446c670cc0672ee3095e3e058b20bf"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_timeout_cleanup.py": {
+      "size": 1780,
+      "sha256": "2df7745f8623af5583df238125c5bd8bd6fdc8779b87603ac763cc3a08671398"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_persistent_full_replay.py": {
+      "size": 1528,
+      "sha256": "89a0b2620a652f3fcf771991ba9cad8bdec3621ae7f227e4aec72fcef5e8c3e0"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/consolidate_gpu_router.py": {
+      "size": 4529,
+      "sha256": "7b681ca6cb9e68ccf5443ee6966f5697d832d07612781d1ee2b6ed53284575a6"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/update_late_ledger.py": {
+      "size": 2369,
+      "sha256": "512049ea3a8075d160ac476cb6fb47c7d73ec6f8746a2981cd1ab0982264a413"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/render_research.py": {
+      "size": 13256,
+      "sha256": "70b773a53e176641747429aa30d33de0835a3ed7dd98db6bcc07b9ab4c33902f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay.py": {
+      "size": 14562,
+      "sha256": "6ddae8b0d3f23de85b3fd6a1020d4f77d8f3b6baf6cbf8c30209e35202dcf04a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/serve_capture.py": {
+      "size": 1492,
+      "sha256": "d7f264127ae8101c4f0c92b65fea2ee8a2b3221b841def5c3b17273dc8e2833e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/select_lowrank_router.py": {
+      "size": 1380,
+      "sha256": "150497a56712ffb23f895fec52cded85c2cf4445d69a5f77395f28a05a4fca15"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_plan_compare_delay.py": {
+      "size": 906,
+      "sha256": "5a5674186e49f105d2b51234a3b322578cea6698cdb020abdf2c868ed7126124"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/compare_frequency.py": {
+      "size": 11249,
+      "sha256": "abb8908e2cbe12016beb933e7ad8d24266e81d926e28d5b2b798790cc86410f6"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_skip_local.py": {
+      "size": 3137,
+      "sha256": "acc6f5d80b2fd5b7e67f90ba056747c20ae5d7082bcf4c8623a0e3cfb953ea95"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/render_pool_followup.py": {
+      "size": 2581,
+      "sha256": "17ac521cac867c7d6f1ca1f0785dae47622f38842bcc3906a35936e01889f0cd"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/register_persistent_runtime_fixed.py": {
+      "size": 931,
+      "sha256": "e88c39b859785a692be632b0588934ba37e3a842c4eb31545a4d5f1ed28046f2"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/register_persistent_runtime_v2.py": {
+      "size": 1081,
+      "sha256": "2d7f9725534e31ecf8121b68e67a899e124ba9c8c802cc140388e6500c1ad511"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/check_persistent_final_fairness.py": {
+      "size": 3046,
+      "sha256": "fedab745139ec6fdcca1ab4dcd9615875c457ced799160c2f06a1d93460aca06"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_progression.py": {
+      "size": 3796,
+      "sha256": "5cf404d8b9d96b0e9b14ffd4cd4ca5e831c7da53d4e3139683ed09163e5d3278"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_crosslayer_trace.py": {
+      "size": 2908,
+      "sha256": "16122c01efa6fed3fe2415ada86318b7fc3b8fd4d0f6b7e3ffac731c92ee928d"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_lowrank_router.py": {
+      "size": 10873,
+      "sha256": "3e0140c2e37715198525ae8e415a2f97c64c32ec0edb214cc48def782a485414"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/replay_persistent_warm_chain.py": {
+      "size": 2495,
+      "sha256": "c5218138ed56ae27022a106fe202505980dd82e542a441914e5c19e28e20db45"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/register_persistent_runtime.py": {
+      "size": 969,
+      "sha256": "20fd7caf3bae8f0586c44bc6a6f8d762d5b55514de0f35a6460367ae7dc155f5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/update_status.py": {
+      "size": 1564,
+      "sha256": "ddaee9ff7969a9aaf98cc1942f273f621b2cd2fe64d6cae83a977cf223aa2073"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/lab.py": {
+      "size": 18566,
+      "sha256": "d8289f1431d5376ddcb2e7665b6f4cca5bad4292b231d797186b5dc8ccd4972e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_compatible_fast.py": {
+      "size": 541,
+      "sha256": "784647790c7d0899abae5edd611450c3c6de310bfa49aa51249bf2046b083db5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/refine_coordination_protocol.py": {
+      "size": 1623,
+      "sha256": "0f9c6453c644cb36ac3b511c0d150f03b627b7042ab50b1471abaddac378088e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_router_analysis.py": {
+      "size": 1235,
+      "sha256": "3043862c1ca1102e4121a8c25d1a33d66253421158238786c7ef6745bb84012f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_device_plan_ids.py": {
+      "size": 4529,
+      "sha256": "d23b6c27dc9fce60666cf9c237ec5f995331fa2fe0a569a9a2829c4cdd9e62a7"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/build_variant.py": {
+      "size": 3415,
+      "sha256": "376a01cee3df26328d3719cbd0325e061efdf4371ee5f8e7f89f59c08feae412"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_pool_wait.py": {
+      "size": 2119,
+      "sha256": "e8ead5cdfb11e0b45c2135475070ee6ba2311f88e324cf4c5f03e2064ffb981e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_gpu_router.py": {
+      "size": 3730,
+      "sha256": "aa2e10b91122e183280a46c1399a832f4ec3223df71aecf001136554fe2d778a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/smoke_pool_p1_launcher.py": {
+      "size": 2853,
+      "sha256": "4f10e28afeaee1578123ff48782793cdd5633fe6af15252e2a482a53bec85469"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/final_pool_persistent_report.py": {
+      "size": 16127,
+      "sha256": "300cf200177a32ed75e79ed6923da8932117aad814025db29128351865bee6c4"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/compare_diagnostic_trajectories.py": {
+      "size": 2019,
+      "sha256": "58377cd7a0ebefdc6ea22e587d79e62a5c3c5014b20d8ce2ff6fe7d0171c325d"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/trace_reader.py": {
+      "size": 6819,
+      "sha256": "254ef70fecec4f85d7cb7dd8943a4d9fbd292dbffa4690886bdd4a4b5f7a67fb"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/extend_wide_protocol.py": {
+      "size": 773,
+      "sha256": "1833e375ae0659bb18f2299c6a9148c470210a5c6e64b9ac041e06f7f251424d"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/test_replay_publication.py": {
+      "size": 909,
+      "sha256": "d926b6a6ed7ee49bbc949e49b28646342b496bfaba710febf4c3a5aeb22ff029"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/predictor_features.py": {
+      "size": 2050,
+      "sha256": "2ebf3fafb1a14285ce5918a48d3a92275b6bf49a3a6c3787a450805aca8ec7ae"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/complete_pool_persistent_campaign.py": {
+      "size": 3309,
+      "sha256": "ee4cd0b1f6306e81f66e18697563deb7c49573778c7a5525d4f1e8d72c47af16"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/checkpoint_router_and_ple.py": {
+      "size": 4031,
+      "sha256": "014094e7788172df7695d5f374a3d3bba22fb2ff85697c9725ec11caa809681f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/finish_pool_p1.py": {
+      "size": 614,
+      "sha256": "bf8d59b06913c0578cd3694b1ed0f35960feab09cb19d9efe14eb94706fb48ac"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_compatible.py": {
+      "size": 4754,
+      "sha256": "043fffd29ab912bea1e04df107757de871f296a8deb1d0ccf5628db6c1a1a8e1"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/postmatrix_persistent_diagnostic.py": {
+      "size": 1987,
+      "sha256": "9e734a98019741b8f61d08f1e998c4711005d58cf2b22221ca510cf44abdbdd2"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/prepare_host_plan_guard.py": {
+      "size": 1913,
+      "sha256": "82586907a3150234963eb2ffee7ef863b33279a053569fa23059802b55a76936"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_wide_gate.py": {
+      "size": 4447,
+      "sha256": "2f8c70b1e8445ce4a31f8a626b69383ccf98cb560ed40b592a65ddc374fb99d5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_pool_mechanism.py": {
+      "size": 2187,
+      "sha256": "3f90e87f159d8cdd0784a54b8c4dd1a4a5e7190a659f33681266e6b8169e0907"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_pool_p1_safety.py": {
+      "size": 2134,
+      "sha256": "fb800f09dacd959a22e6292bde05b9e53b275e4f2068f6f473ad2f8c0782967e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/compare_compatible_live.py": {
+      "size": 2540,
+      "sha256": "96a766a099e2a5270ffc9ea68da0746b6c3c7f5cb1c6af54364db55be280ab54"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/analyze_gpu_router_episodes.py": {
+      "size": 970,
+      "sha256": "ed6501e11ae116d5bc6d8bc82e419f563149b11b308fa452478eda7bf00cc30d"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/init_pool_persistent.py": {
+      "size": 4997,
+      "sha256": "407d95d96e8ec684f65915e9e33384b48700e9f5eaf3c902917ec9c827c382ed"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/validate_correctness_answers.py": {
+      "size": 1174,
+      "sha256": "8c4a0eff1b9bfa1da46eac707fcf68f035c487ac0fb2caba8b521e7e6aa9e0d6"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/make_predictor_data.py": {
+      "size": 2850,
+      "sha256": "4cbba90e10a6b3de7ad0ed4aa26a7d2c1f0e04a7002c5d46309efe945812471e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/run_pool_wait.py": {
+      "size": 4812,
+      "sha256": "4153245ce993e09b70ac200b63f0eb99dae78be8661f786a63840319fc68d16b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/templates/persistent_runtime.hpp": {
+      "size": 8579,
+      "sha256": "db8a8b93685e1b2a47354b616181b09884984402fd07f3939299e47bf62fdafe"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/templates/persistent_policy.hpp": {
+      "size": 4189,
+      "sha256": "f7aad4a375f237fe25f5bb3da8be7f288141d3f0cfd1f1f8ad963a5fc88dcdb2"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/owned-process.json": {
+      "size": 563,
+      "sha256": "45387df5040205dc99a15dd7cc44caa64f751a5fa7191fd059ca6263ecb3f6fa"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/32k.json": {
+      "size": 2500,
+      "sha256": "54395274b84680b8a6c6aa72ce44e3eadde02ca62e61fdee78670bf4efd56b5a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/128k.json": {
+      "size": 2502,
+      "sha256": "1e959615df7bcfd3b84e2fdab5f15c8e534b86b2e6d2916349101305d8f2bede"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/owned-process.json": {
+      "size": 597,
+      "sha256": "0c235551f5e49c5e775855eb9ada368e7bc0321852aaf61ad4351729ee63de32"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/32k.json": {
+      "size": 2430,
+      "sha256": "9c0eb5bb71faa4d691ea0eeb4dd48c0540c95e9965da5126ca5ce13a156ce9b4"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/128k.json": {
+      "size": 2432,
+      "sha256": "0a818ff952347d3e6e2a93d7ff1b5e6cc6669e7261869d16559cb08a92d3bc49"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/owned-process.json": {
+      "size": 575,
+      "sha256": "91d4c3ec622c1a70c13c504c0d7ff1891f6b41bf9f98ec4a0e85e997101a0873"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/32k.json": {
+      "size": 2725,
+      "sha256": "3795f21c1d72d379411d0df6cd3c431a368d467367bc5aa97cde621f7a813e38"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/128k.json": {
+      "size": 2727,
+      "sha256": "46a8872749f10aa8b1914e7af35ce725128129c122511c53353983e7c449349a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/owned-process.json": {
+      "size": 605,
+      "sha256": "4c50aa636edd7fa2530f514b07b013fcb34f20223a77c4a2a4675c7bb17fedcb"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/32k.json": {
+      "size": 2522,
+      "sha256": "164b3de6be36b7d8f4c0d4a08d9fafc4979e817c8d0b7849d83778cecfef8ff5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/128k.json": {
+      "size": 2524,
+      "sha256": "0fc3607ae0d232145e2e79d3a3fc39c0f721062ce82ff4b53f191cc1410dc91c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/owned-process.json": {
+      "size": 603,
+      "sha256": "8ddd3031776718502deb3f12f39c4c1eccd15a7206bf7f5f69618391cfc9db1e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/32k.json": {
+      "size": 2592,
+      "sha256": "2b07eda3fd30884525ef4948976ab0185566c1b999b58da9b007132b38f90003"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/128k.json": {
+      "size": 2594,
+      "sha256": "cf3d1aae984752420d8f615491a6edee9ea285de7f18c2237c22c6c25826aa9f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/owned-process.json": {
+      "size": 605,
+      "sha256": "ae7f7de3e855b8f1382b468b8a4743bd7a61ffe358ca60feead18bb7179f54c8"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/32k.json": {
+      "size": 2703,
+      "sha256": "04b283d02b07c510e7d009142533b4d1e2b50da4d6c6da6e98f8d8209307a5a1"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/128k.json": {
+      "size": 2705,
+      "sha256": "671460cb7550733cb43d2c514ea88d0358ca9c81167710ef516ad75099e48948"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/owned-process.json": {
+      "size": 603,
+      "sha256": "8536d3dd0d1f833dac86cda2f497f702c156e87495380ada4f94941ce871423e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/32k.json": {
+      "size": 2776,
+      "sha256": "bd1a9b2b933ad7d0372ab8bb1c1c25ebfef2ae2ed15f3756a36de95a551a8ac7"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/128k.json": {
+      "size": 2778,
+      "sha256": "f09148c40c7dd8c9d502621cfa05416857a1322ab44219867b988188d3ac2532"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/owned-process.json": {
+      "size": 585,
+      "sha256": "a9178560c0fcef1b0a49e79f38c627b0edfe14619c232dda1ea585a0a13bb02e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/32k.json": {
+      "size": 2678,
+      "sha256": "9561124cd523d741da1e6f710946821b60924ca2db7dc9cfb8b3015a9af5cd84"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/128k.json": {
+      "size": 2680,
+      "sha256": "0ac80e86af72a59baafa7e29888e011da2dddb0f49ac1e9ec8dec8824ada9c39"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/stop.sh": {
+      "size": 223,
+      "sha256": "9aa1d1abed7f6c7973f64bec2391236d2bec8207f8c7725c1a927129f24b08c3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/reproduce.sh": {
+      "size": 227,
+      "sha256": "57bdc6108272a773d2af87287cd73e8b6e72b48597a0c00170b32a43f156ebed"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/benchmark-128k.sh": {
+      "size": 245,
+      "sha256": "e4f39e2802986ae17d4a036b3688ac4fb28bf683b922b359f33f3afb1499164e"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/start-128k.sh": {
+      "size": 241,
+      "sha256": "0c8259b53cffd508a8c704ed5c15ebc55ec2ced02dbd54f7c73bd6a56e5fa6b0"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/start-32k.sh": {
+      "size": 240,
+      "sha256": "7242a8576a8b52278c564423ab08ed196b392b6068142545ded789bf61624fc3"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-baseline/benchmark-32k.sh": {
+      "size": 244,
+      "sha256": "de99f681dc65deac927680d70af1305214ae3d6bb816e49a5c4eaa8766d4447a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/stop.sh": {
+      "size": 227,
+      "sha256": "a9993bab4b4763f0a2a31fc2a7735cd56c48d8e57959c0896e42735a0b001971"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/reproduce.sh": {
+      "size": 235,
+      "sha256": "540b4b52997932f8248cda32c051287c2500080ed7ac3f7b58ce8237cc66127f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/benchmark-128k.sh": {
+      "size": 249,
+      "sha256": "5806638622b76bb83bbbe559eaf41d46d30ddd5965f56147dfafc9e81f79ec38"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/start-128k.sh": {
+      "size": 245,
+      "sha256": "b5c25967ab4e9ff4e639b61d969b04f6b59937b38e3af76fcf98bec06bb9c2f0"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/start-32k.sh": {
+      "size": 244,
+      "sha256": "a09f64963959c1a8a367d4e90bed49e70dbb4f8b0649f8bbbb0a3cd8df51ec5a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/p1-pool-default/benchmark-32k.sh": {
+      "size": 248,
+      "sha256": "63f5b77865b2211ecfe9cf21cfdbed59931f313417e6e257799f9690dd004a14"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/stop.sh": {
+      "size": 232,
+      "sha256": "6ccca6e7ca0a1aaac17d68f6f9dfd3e48ea0dd06e3a51294736a3370aae8c713"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/reproduce.sh": {
+      "size": 245,
+      "sha256": "4762e9d7d2f40e205cb76c133a7d3147888ab6cf979db1812f7d536dabd7e505"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/benchmark-128k.sh": {
+      "size": 254,
+      "sha256": "478d7d0a816e1429dadd0a8340f39e9eaf4c45e3f35259c3bb9badafe7b4d090"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/start-128k.sh": {
+      "size": 250,
+      "sha256": "680a50bfe4d6382e0d65fbd83c402d470ac096e2a176c557f4ae03b87ff85f20"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/start-32k.sh": {
+      "size": 249,
+      "sha256": "52b87f5cc009613b666443c8a43ea440e09f5e39aa0dcf4e2d7f63e6ac488e0c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-signal-v1/benchmark-32k.sh": {
+      "size": 253,
+      "sha256": "0c86604e918683d28db7a71159d437f3d08420983c2be6a7d674bcc2679c1a37"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/stop.sh": {
+      "size": 235,
+      "sha256": "8f5f34fb7a7d0bf66d2d704a8ce8ec4044f3762bd2e5408bbf0dea328d038628"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/reproduce.sh": {
+      "size": 251,
+      "sha256": "2909ba8c57650aa332e0ede5065356547e0a0813987db86225a38e99bd18352b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/benchmark-128k.sh": {
+      "size": 257,
+      "sha256": "0cfa92ccc1b6cd457d8d41232221aef3b88758a2d6087b8b036dc02f71ca45fa"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/start-128k.sh": {
+      "size": 253,
+      "sha256": "05e2859bb4aa56595454cb3b1213e255637dcbb99f385290f1d2239f5e7c4a35"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/start-32k.sh": {
+      "size": 252,
+      "sha256": "58e67611c7e782383dcd89ac9f134664a19b0e1fe519f05e776e7301e6c2cfb0"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-off/benchmark-32k.sh": {
+      "size": 256,
+      "sha256": "cbefa6f8d2c03cb6ef3a52362529c7aad402e3b3aadc47c22d89d396cadaa8d0"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/stop.sh": {
+      "size": 234,
+      "sha256": "1f5f8d9c8177cb40bcd0c54a6842c28676227a58c10c4540ed7011f180cc9ae9"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/reproduce.sh": {
+      "size": 249,
+      "sha256": "e2cdeef93752acbb9caa08373218dbed6dce704cbaf9849c32f4f35b592ee54b"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/benchmark-128k.sh": {
+      "size": 256,
+      "sha256": "dffb415f0874e0eeb2464cab356d2505db80555920882434a19090c011f3e97d"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/start-128k.sh": {
+      "size": 252,
+      "sha256": "e1e7b9f5f5393af9a01a53dc1a07aa57e096639570a109a7d1047c908fe2f77f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/start-32k.sh": {
+      "size": 251,
+      "sha256": "166ed03033b4412330e81c09d332015fc4abeac836c18b54b24440399b113f9f"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v1-fixed-on/benchmark-32k.sh": {
+      "size": 255,
+      "sha256": "e1c9673dd00aabff68c97b81e60c484f9b95a94f6ca0d73b80749c89bf373fcd"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/stop.sh": {
+      "size": 229,
+      "sha256": "f6494fff2a806f644cc6841cd40a88091e3967926290244d2e42d086939c0c9c"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/reproduce.sh": {
+      "size": 239,
+      "sha256": "477644eeaf788b27dfb5e183911bb2a2eb49311b7ec5459a75e6760d0d91f530"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/benchmark-128k.sh": {
+      "size": 251,
+      "sha256": "de627267814233aac726a8d6938aad75a7803a36d15515fadcc04178d7d7c0da"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/start-128k.sh": {
+      "size": 247,
+      "sha256": "0edaf22a38108e145fe08b92f186739c7015fe9b21b43ece896d89be9b8caaf2"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/start-32k.sh": {
+      "size": 246,
+      "sha256": "2ffc52a0526d5aa9ddc866d9f31d517a686da21f5c6c8b1e497f8b3926924798"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-off/benchmark-32k.sh": {
+      "size": 250,
+      "sha256": "085cf8d1ac1db7679306e1f837230944515e071b3960bf32d68ecda2aad525c0"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/stop.sh": {
+      "size": 228,
+      "sha256": "0e2f6936f042da38fe263b3f21aef69b8080d692a4b7e71a861e707c93787b19"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/reproduce.sh": {
+      "size": 237,
+      "sha256": "d61f22a6c3f3e6b051fdbdcb76c03e45b8955851a431e2c25d77d633005dc9f4"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/benchmark-128k.sh": {
+      "size": 250,
+      "sha256": "b39607d916a6246ea2c87a823a2481d9882621fecd2ac732354bb951f2b08cc6"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/start-128k.sh": {
+      "size": 246,
+      "sha256": "d453cca87d6bc4072a60649afb8f9b5fc3f8d032fce69af5b0cc3c5ecc7278f7"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/start-32k.sh": {
+      "size": 245,
+      "sha256": "6b7930b5c7b14341fe23adaf166b38b1600b3451b71e72c5a3448551f0c22026"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-on/benchmark-32k.sh": {
+      "size": 249,
+      "sha256": "e3aee7007a126c36daba9ea3378601fb7bc7023b0e38bd6bcf1b6b6bcb2472be"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/stop.sh": {
+      "size": 236,
+      "sha256": "789490f56b6a265116461b695aaf3be48f7f1967f65ea29ea46cefdf10d99447"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/reproduce.sh": {
+      "size": 253,
+      "sha256": "d5f76d063b04797ebd5a796fdbfaeaa855049303023dfead533146e0f909bdf5"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/benchmark-128k.sh": {
+      "size": 258,
+      "sha256": "632c1211105cd572c5a7c0750b85d9a4b70d48e0b5a62935b1d863ab19389067"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/start-128k.sh": {
+      "size": 254,
+      "sha256": "5f886718cb1cf1ca59bc756728ea832ae67902305a51f0aa6df543df25358309"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/start-32k.sh": {
+      "size": 253,
+      "sha256": "05bb0a7786c26cab18cbf6aa824129d58cbc194603d49651f68a1dad008f7e57"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/persistent-v2-diagnostic/benchmark-32k.sh": {
+      "size": 257,
+      "sha256": "b40c942070a009dec86a5e2dc9d298d0c749e926da0198a3ba560475a455460a"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/report.md": {
+      "size": 6011,
+      "sha256": "cdab6b777d740c8c3857a02a86351bf1e928034730d99ed9d0415e35e41c1a84"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E027-pool-baseline/report.md": {
+      "size": 4453,
+      "sha256": "c54f155a18102e146aa67a72e933f15bc4688df74642f7a307bab33ff38e2998"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E028-persistent-replay/report.md": {
+      "size": 4416,
+      "sha256": "181575dbc38e8739ebac12c675950bc887c56f098ed0f55177d79e22f4e713da"
+    },
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E029-persistent-runtime/report.md": {
+      "size": 6589,
+      "sha256": "641bdc905309ccca49494a40a69c7027f6a612ae95d938bb7d6ff746388b2748"
+    }
+  }
+}

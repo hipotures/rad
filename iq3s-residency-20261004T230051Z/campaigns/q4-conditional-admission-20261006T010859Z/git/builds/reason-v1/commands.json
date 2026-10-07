@@ -1,0 +1,124 @@
+[
+  {
+    "name": "clone",
+    "command": [
+      "git",
+      "clone",
+      "--no-hardlinks",
+      "--no-checkout",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/early-v1",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/reason-v1"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 0.21457338333129883
+  },
+  {
+    "name": "checkout",
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "78a6559ec8ef6cc0db57ecd0ff4091a945ec8a7f"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/reason-v1",
+    "exit_code": 0,
+    "wall_s": 0.4150509834289551
+  },
+  {
+    "name": "patch",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/scripts/patch_diagnostic.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/reason-v1"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 0.03198719024658203
+  },
+  {
+    "name": "patch-diff",
+    "command": [
+      "git",
+      "diff",
+      "--binary"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/reason-v1",
+    "exit_code": 0,
+    "wall_s": 0.015820741653442383
+  },
+  {
+    "name": "add",
+    "command": [
+      "git",
+      "add",
+      "."
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/reason-v1",
+    "exit_code": 0,
+    "wall_s": 0.03188920021057129
+  },
+  {
+    "name": "commit",
+    "command": [
+      "git",
+      "-c",
+      "user.name=Local Research",
+      "-c",
+      "user.email=research@localhost",
+      "commit",
+      "-m",
+      "Local Q4 residency v2 reason-v1"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/reason-v1",
+    "exit_code": 0,
+    "wall_s": 0.03192710876464844
+  },
+  {
+    "name": "configure",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "-S",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/reason-v1",
+      "-B",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/builds/reason-v1",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DSTRATA_ENABLE_CUDA=ON",
+      "-DCMAKE_CUDA_ARCHITECTURES=89",
+      "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325",
+      "-DSTRATA_BUILD_TESTS=ON"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 4.4226624965667725
+  },
+  {
+    "name": "build",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "--build",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/builds/reason-v1",
+      "-j",
+      "8"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 61.02843642234802
+  },
+  {
+    "name": "full-patch",
+    "command": [
+      "git",
+      "diff",
+      "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "b8a00171cb275c9b344378ba9c4837d64afedb0f",
+      "--binary"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/reason-v1",
+    "exit_code": 0,
+    "wall_s": 0.015913963317871094
+  }
+]

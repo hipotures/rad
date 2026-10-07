@@ -1,0 +1,45 @@
+{
+  "state": "COMPLETE_NEGATIVE_ATTRIBUTION",
+  "comparisons": [
+    {
+      "profile": "32k",
+      "ON_TG": {
+        "min": 156.4,
+        "median": 175.4,
+        "max": 179.3
+      },
+      "OFF_TG": {
+        "min": 152.6,
+        "median": 163.6,
+        "max": 180.3
+      },
+      "ON_vs_OFF_TG_delta_pct": 7.212713936430326,
+      "ON_vs_OFF_wall_delta_pct": -0.8027955535091391,
+      "same_binary": true,
+      "same_capacity": true,
+      "all_paired_outputs_same": true
+    },
+    {
+      "profile": "128k",
+      "ON_TG": {
+        "min": 138.7,
+        "median": 158.7,
+        "max": 159.3
+      },
+      "OFF_TG": {
+        "min": 127.2,
+        "median": 159.0,
+        "max": 161.3
+      },
+      "ON_vs_OFF_TG_delta_pct": -0.18867924528302993,
+      "ON_vs_OFF_wall_delta_pct": 0.3780461900599885,
+      "same_binary": true,
+      "same_capacity": true,
+      "all_paired_outputs_same": true
+    }
+  ],
+  "decision": "The apparent128k+19% versus an earlier control is not an isolated host-plan effect: same-binaryOFF reaches159.0 versus158.7ON.32kON175.4 versusOFF163.6 has strongly overlapping per-run ranges and inconsistent paired effects. No portable gain or deployment recommendation.",
+  "limits": "Serial batches at different wall times; three valid runs each. Same output/MTP/accounting rules out those trajectory explanations for these paired differences, not scheduling/binary-layout/VM effects. No more repetitions.",
+  "next": "Same-binary diagnostic GPU/host phase timing, then source-supported direct output-row candidate if justified.",
+  "raw_comparison": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/summary.json"
+}

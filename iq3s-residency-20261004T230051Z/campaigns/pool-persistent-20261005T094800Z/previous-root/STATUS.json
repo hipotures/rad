@@ -1,0 +1,134 @@
+{
+  "state": "COMPLETE",
+  "completed": [
+    "E002",
+    "E001",
+    "E003",
+    "E005",
+    "E004",
+    "E006",
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011",
+    "E012",
+    "E013",
+    "E014",
+    "E015",
+    "E017",
+    "E018",
+    "E016",
+    "E019",
+    "E022",
+    "E020",
+    "E021",
+    "E023",
+    "E025",
+    "E024"
+  ],
+  "running": null,
+  "pending": [],
+  "next_exact_action": "STOP: review report.md and preserved artifacts; no deployment or further experiment authorized by this completed campaign.",
+  "deadline_utc": "2026-10-05T09:00:51+00:00",
+  "excluded": [
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v1/32k/raw/warmup.json",
+      "reason": "INVALID_PROTOCOL: engine diagnostic exception, captured event timing unavailable; zero valid headline measurements."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v2/32k/analysis.json",
+      "reason": "CPU predictor timing excluded because first analyses ran concurrently; quality/device timings retained. Serial analysis-r2 authoritative."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/v2/128k/analysis.json",
+      "reason": "CPU predictor timing excluded because first analyses ran concurrently; quality/device timings retained. Serial analysis-r2 authoritative."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E004-replay/v4-sensitivity",
+      "reason": "Numerical pending-queue repair supersedes partial/failed sensitivity data; authoritative v5-sensitivity and v6-corrected-peak preserved."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E011-miss-waits/v1",
+      "reason": "Diagnostic GPU-event build, all timing rates excluded from headline ranking. Same-output comparison differs +21.5%32k/-9.45%128k; no<=1%overhead certificate."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E012-compatible-diagnostic/v1",
+      "reason": "Diagnostic-only policy mechanism/numerical traces; not clean headline speed."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/analysis-r2",
+      "reason": "Routerquality/readiness aggregates mix fresh and stale h_x when currentgroup all-local; doorbell_publish_res skips x in that case. Preserve boundary/event and output-accounting evidence. E015 repairs diagnostic availability; original fullCPU-negative verdict restricted pending fresh-only analysis."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v1",
+      "reason": "Retained build failure: duplicated input-width argument in native GEMV invocation. Repaired separatev2; no inference results in failedv1."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1",
+      "reason": "UNSAFE_PLE_PRODUCER_DEPENDENCY: first-head initially matches but same-input divergence occurs at window3/layer1. Root cause reproduced on both GPUs and repaired in v2; unsafe v1 remains excluded, with no headline requests."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/v1",
+      "reason": "UNSAFE_PLE_PRODUCER_DEPENDENCY: upstreamdeviceplan can bypasslayer0waitM, so pre(layer1) readsPLEbeforeCPUgathers. Real2GPUdelayedproducerfixture reproduces stalevsfresh. StableIDs alone insufficient. No headlinev1runsperformed."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/compare-v1",
+      "reason": "INVALID_SNAPSHOT_CAPTURE: early per-layer/headfile writes failedbecauseparenttracesdir created onlybyendflush. Derivedv1PASS_REPAIR snapshotclaim withdrawn byanalysis-audit.json. Output/heatparity andnativefixture retained. Samebinarycompare-r2precreatesdirectory; strictmissingfileguard."
+    },
+    {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E023-direct-parts/diagnostic-v1",
+      "reason": "INVALID_DIAGNOSTIC_CAPTURE: first-head hook absent. Actual outputs/demand retained but numeric prerequisite incomplete. Separate diagnostic-v2 repairs only capture; clean binary unchanged and six clean requests subsequently completed."
+    }
+  ],
+  "current_winners": {
+    "reference": "Unchanged rebuilt CURRENT layer split K25/PCIe0.28. Keep normal user launcher unchanged.",
+    "32k": {
+      "TG_median": 155.9,
+      "PP_median": 4739.5,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/32k"
+    },
+    "128k": {
+      "TG_median": 133.2,
+      "PP_median": 5985.2,
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E002-controls/v1/128k"
+    },
+    "scoped_followup": {
+      "variant": "pool-wait-v1",
+      "TG32": 178.5,
+      "TG128": 154.0,
+      "decode_system_CPU32_pct": 28.043478260869566,
+      "decode_system_CPU128_pct": 25.848148148148148,
+      "same_binary": true,
+      "state": "PROMISING_NEEDS_MORE_WORK",
+      "scope": "Same saved workload, outputs, MTP and capacity. Do not interpret separate serial batches as independent fresh paired trials."
+    }
+  },
+  "updated_utc": "2026-10-05T08:46:44.311187+00:00",
+  "last_stage": {
+    "id": "E023",
+    "state": "COMPLETE_MIXED",
+    "updated_utc": "2026-10-05T08:33:26.698850+00:00",
+    "note": "E025 same-binary OFF guard completed. Direct rows regress32K and retain a scoped128K median advantage with overlapping ranges/mixed paired effects. Original invalid capture retained; repaired diagnostic proves actual parity."
+  },
+  "recommendation": "PROMISING_NEEDS_MORE_WORK",
+  "future_work": [
+    {
+      "state": "NOT_ATTEMPTED",
+      "topic": "Independent-workload paired fresh-start validation of the 100us pool setting",
+      "reason": "Strong CPU reduction and positive scoped latency comparison, but serial-batch variation and increased CPU wakeup tails prevent a portable performance claim."
+    },
+    {
+      "state": "NOT_ATTEMPTED",
+      "topic": "Persistent byte-aware same-device GPU-lookahead admissions",
+      "reason": "One-layer and development-selected eight-layer signals measured; temporary reservation/restoration schedules completed. Persistent reader/publication safety and exposed interference are not implemented within the time budget."
+    },
+    {
+      "state": "NOT_ATTEMPTED",
+      "topic": "Cross-device expert execution/scheduling with staged transfers",
+      "reason": "No direct P2P and no freely interchangeable GPU capacities. Existing measured copy/activation costs and complementary placement constraints need a new charged protocol."
+    }
+  ],
+  "elapsed_s": 35153.31125879288,
+  "completed_utc": "2026-10-05T08:46:44.311187+00:00"
+}

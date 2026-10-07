@@ -1,0 +1,77 @@
+[
+  {
+    "name": "register",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "pool-wait-v1",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/overrides.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.21455001831054688,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/commands/register.log",
+    "pool_spin_us": null
+  },
+  {
+    "name": "sleep-wakeup-stress",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/pool_stress",
+      "8"
+    ],
+    "returncode": 0,
+    "elapsed_s": 8.035459995269775,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/commands/sleep-wakeup-stress.log",
+    "pool_spin_us": "100"
+  },
+  {
+    "name": "real-IQ",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/native_expert_parity",
+      "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+      "0",
+      "1",
+      "2",
+      "12"
+    ],
+    "returncode": 0,
+    "elapsed_s": 8.836073875427246,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/commands/real-IQ.log",
+    "pool_spin_us": "100"
+  },
+  {
+    "name": "battery",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/correctness_battery.py",
+      "--variant",
+      "pool-wait-v1",
+      "--experiment",
+      "E024-pool-wait",
+      "--attempt",
+      "v1",
+      "--reference",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control"
+    ],
+    "returncode": 0,
+    "elapsed_s": 122.52747511863708,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/commands/battery.log",
+    "pool_spin_us": null
+  },
+  {
+    "name": "ground-truth",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_battery.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/correctness/pool-wait-v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.1151282787322998,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E024-pool-wait/v1/commands/ground-truth.log",
+    "pool_spin_us": null
+  }
+]

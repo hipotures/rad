@@ -1,0 +1,94 @@
+{
+  "recommendation": "USE_LAYER_SPLIT",
+  "winners": {
+    "32k": {
+      "decode": "layer-split",
+      "prefill": "layer-split",
+      "request_wall": "layer-split"
+    },
+    "128k": {
+      "decode": "layer-split",
+      "prefill": "layer-split",
+      "request_wall": "layer-split"
+    },
+    "256k": {
+      "decode": "layer-split",
+      "prefill": "layer-split",
+      "request_wall": "layer-split"
+    }
+  },
+  "cells": [
+    {
+      "method": "layer-split",
+      "profile": "32k",
+      "PP": 2574.6,
+      "TG": 96.2,
+      "wall_s": 55.57206210499862,
+      "CPU_system_decode_pct": 50.13488372093023
+    },
+    {
+      "method": "layer-split",
+      "profile": "128k",
+      "PP": 3248.9,
+      "TG": 93.0,
+      "wall_s": 83.27284436899936,
+      "CPU_system_decode_pct": 44.74090909090909
+    },
+    {
+      "method": "layer-split",
+      "profile": "256k",
+      "PP": 3294.7,
+      "TG": 87.8,
+      "wall_s": 125.39009388000704,
+      "CPU_system_decode_pct": 43.35
+    },
+    {
+      "method": "original-helper",
+      "profile": "32k",
+      "PP": 1404.3,
+      "TG": 58.0,
+      "wall_s": 91.7172312400071,
+      "CPU_system_decode_pct": 48.6231884057971
+    },
+    {
+      "method": "original-helper",
+      "profile": "128k",
+      "PP": 1467.8,
+      "TG": 53.6,
+      "wall_s": 163.09976965305395,
+      "CPU_system_decode_pct": 44.93157894736842
+    },
+    {
+      "method": "original-helper",
+      "profile": "256k",
+      "PP": 1445.8,
+      "TG": 48.8,
+      "wall_s": 262.6855155809899,
+      "CPU_system_decode_pct": 43.791666666666664
+    },
+    {
+      "method": "optimized-helper",
+      "profile": "32k",
+      "PP": 1404.2,
+      "TG": 48.6,
+      "wall_s": 105.09435655898415,
+      "CPU_system_decode_pct": 25.409411764705883
+    },
+    {
+      "method": "optimized-helper",
+      "profile": "128k",
+      "PP": 1468.2,
+      "TG": 45.0,
+      "wall_s": 179.78356296598213,
+      "CPU_system_decode_pct": 20.8561797752809
+    },
+    {
+      "method": "optimized-helper",
+      "profile": "256k",
+      "PP": 1446.1,
+      "TG": 44.8,
+      "wall_s": 273.7590916689951,
+      "CPU_system_decode_pct": 19.481318681318683
+    }
+  ]
+}

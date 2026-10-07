@@ -1,0 +1,101 @@
+{
+  "state": "FROZEN_ONE_REPAIR_NO_GRID",
+  "rows": [
+    {
+      "scope": "development",
+      "name": "dev-code",
+      "rate": 1.8,
+      "nonlocals": 664,
+      "current_nonlocals": 604,
+      "wait": 0.002870265555555862,
+      "current_wait": 0.05890209077777972,
+      "GB": 0.036352,
+      "useful": 9,
+      "total": 18
+    },
+    {
+      "scope": "development",
+      "name": "dev-code",
+      "rate": 12.6,
+      "nonlocals": 664,
+      "current_nonlocals": 604,
+      "wait": 0.0,
+      "current_wait": 0.0024469184126985066,
+      "GB": 0.036352,
+      "useful": 9,
+      "total": 18
+    },
+    {
+      "scope": "development",
+      "name": "dev-math",
+      "rate": 1.8,
+      "nonlocals": 1724,
+      "current_nonlocals": 1101,
+      "wait": 0.06294371644444477,
+      "current_wait": 0.20306398177777807,
+      "GB": 0.1900544,
+      "useful": 82,
+      "total": 96
+    },
+    {
+      "scope": "development",
+      "name": "dev-math",
+      "rate": 12.6,
+      "nonlocals": 1724,
+      "current_nonlocals": 1101,
+      "wait": 0.0,
+      "current_wait": 0.005308198746030585,
+      "GB": 0.1900544,
+      "useful": 82,
+      "total": 96
+    },
+    {
+      "scope": "development",
+      "name": "cal-prose",
+      "rate": 1.8,
+      "nonlocals": 2602,
+      "current_nonlocals": 1750,
+      "wait": 0.10633234744444506,
+      "current_wait": 0.3037888140000023,
+      "GB": 0.3006976,
+      "useful": 123,
+      "total": 149
+    },
+    {
+      "scope": "development",
+      "name": "cal-prose",
+      "rate": 12.6,
+      "nonlocals": 2602,
+      "current_nonlocals": 1750,
+      "wait": 0.00016176826984132253,
+      "current_wait": 0.013084621174603572,
+      "GB": 0.3006976,
+      "useful": 123,
+      "total": 149
+    }
+  ],
+  "parameters": {
+    "state": "PREDECLARED_BEFORE_V2_REPLAY",
+    "reason": "v1 copies verylittle but leaves3.6–4.7xmore nonlocals. Repeateduse ofalmosteveryadmission supports a longerpersistentutilityhorizon;16windows/16MiB budget underrates lifetimeutility. Testexactlyonecoarsearchitecturalrepair, not thresholdtuning.",
+    "change": {
+      "forecast_windows": 64,
+      "bytes_per_device": 67108864
+    },
+    "unchanged": {
+      "miss_entry_us": 80,
+      "forecast_windows": 16,
+      "copy_cost_GB_s": 1.8,
+      "launch_us": 4.2,
+      "margin": 1.5,
+      "bytes_per_device": 16777216,
+      "minimum_age": 8,
+      "protect_recent": 2,
+      "candidate_recent": 8,
+      "adapt_every": 4,
+      "decay": 0.7
+    },
+    "alpha": 1.0,
+    "development": "Same3first64windowepisodes; comparev1/current. Fulltraceevaluation afterfixeddevelopment. Nochoosefrommanyvariants.",
+    "funnel": "Reject replay ifmiss/chargedwait combinationclearlyworse; otherwisecorrectness thenlive. Preservev1livetradeoffnegativeifscreenconfirms."
+  }
+}

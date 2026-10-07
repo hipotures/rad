@@ -1,0 +1,76 @@
+register 0 diagnostic-router-fresh-v1 bc505f4636c6d3e37c4c85eef74ea60aaccb0181
+
+tests 0 _expert_parity_bf16_embd ......   Passed    0.38 sec
+      Start 62: native_expert_parity_refuses_q6_K
+11/13 Test #62: native_expert_parity_refuses_q6_K ...   Passed    0.35 sec
+      Start 64: expert_multi_test
+12/13 Test #64: expert_multi_test ...................   Passed    0.04 sec
+      Start 68: direct_file_async_test
+13/13 Test #68: direct_file_async_test ..............   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 13
+
+Total Test time (real) =   5.61 sec
+
+realIQparity 0 ayer 1   iq2_s   /q2_0    blob  1510400  cpu rel 1.31e-02  gpu rel 1.15e-02  cpu-gpu 1.51e-02  ok
+          iq2_s avx512 gate rows vs ggml vec_dot: rel 1.00e-07
+          gate+up one token one thread: avx512 201 us (5.21 GB/s), ggml 161 us (6.52 GB/s)
+          gate+up 3 tokens one thread: avx512 247 us vs ggml 3 x 161 us
+          iq2_s avx2 gate rows vs ggml vec_dot: rel 3.33e-08
+          gate+up one token one thread: avx2 215 us (4.87 GB/s), ggml 161 us (6.52 GB/s)
+          gate+up 3 tokens one thread: avx2 276 us vs ggml 3 x 161 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          iq4_nl AVX-2 multi-token down vs ggml down: rel 1.03e-07
+          down 3 tokens one thread: avx2 122 us (7.56 GB/s) vs ggml 185 us (4.99 GB/s)
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 2   iq2_s   /iq4_nl  blob  1971200  cpu rel 1.31e-02  gpu rel 1.20e-02  cpu-gpu 1.52e-02  ok
+          iq3_xxs avx512 gate rows vs ggml vec_dot: rel 9.55e-08
+          gate+up one token one thread: avx512 259 us (4.84 GB/s), ggml 206 us (6.08 GB/s)
+          gate+up 3 tokens one thread: avx512 340 us vs ggml 3 x 206 us
+          iq3_xxs avx2 gate rows vs ggml vec_dot: rel 3.00e-08
+          gate+up one token one thread: avx2 193 us (6.49 GB/s), ggml 206 us (6.08 GB/s)
+          gate+up 3 tokens one thread: avx2 257 us vs ggml 3 x 206 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          q2_0 AVX-512 down vs ggml down: rel 1.82e-04
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 12  iq3_xxs /q2_0    blob  1715200  cpu rel 1.33e-02  gpu rel 1.19e-02  cpu-gpu 1.54e-02  ok
+native_expert_parity: 0 failures
+
+
+episodes 0 srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf", "--ple-gguf", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf", "--expert-profile", "/srv/ai/strata/data/expert-profile.bin", "--prefill", "auto", "--spec", "4", "--spec-min-p", "0.5", "--mtp", "/srv/ai/models/strata/mtp/rt", "--kv", "int8", "--kv-resident", "32768", "--expert-cache", "auto", "--max-context", "32768", "--suffix-draft", "0", "--prompt-cache", "0", "--pool-workers", "15", "--pcie-frac", "0.28"], "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-router-fresh-v1", "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/episodes/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1", "STRATA_LAB_SIGNAL": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "bc505f4636c6d3e37c4c85eef74ea60aaccb0181", "build_variant": "diagnostic-router-fresh-v1", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "bb12e367bdabca726934a0b1972279b671668bfb2df5d7176ed2dbd097488e39", "headline_instrumentation": "DIAGNOSTIC_ONLY", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 32768, "source_sha": "bc505f4636c6d3e37c4c85eef74ea60aaccb0181", "source_status": "", "variant_overrides": {"env": {"STRATA_LAB_SIGNAL": "1"}, "diagnostic_only": true, "question": "Fresh selected-layer activation gate prediction; correct the observed stale-host-input instrumentation flaw."}, "diagnostic_env": {"STRATA_LAB_TRACE": "{attempt}/traces/runtime"}}
+READY diagnostic-router-fresh-v1 32k 54.07
+warmup VALID input 4096 output 64 PP 1527.0 TG 98.8
+dev-code VALID input 67 output 1024 PP 297.9 TG 113.7
+dev-math VALID input 66 output 1024 PP 272.1 TG 126.3
+cal-prose VALID input 64 output 1024 PP 127.0 TG 92.9
+hold-code VALID input 72 output 1024 PP 298.9 TG 113.9
+hold-structured VALID input 69 output 1024 PP 286.8 TG 155.0
+hold-math VALID input 59 output 1024 PP 154.0 TG 114.8
+
+profiles 0 tput 64 PP 1512.8 TG 93.2
+trace-run1 VALID input 28378 output 4096 PP 3597.0 TG 179.1
+RESOLVED_CONFIG {"exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-router-fresh-v1/strata", "args": ["--pack", "/srv/ai/models/strata/packs/iq3_s", "--native", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf", "--ple-gguf", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf", "--expert-profile", "/srv/ai/strata/data/expert-profile.bin", "--prefill", "auto", "--spec", "4", "--spec-min-p", "0.5", "--mtp", "/srv/ai/models/strata/mtp/rt", "--kv", "int8", "--kv-resident", "32768", "--expert-cache", "auto", "--max-context", "131072", "--suffix-draft", "0", "--prompt-cache", "0", "--pool-workers", "15", "--pcie-frac", "0.28"], "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-router-fresh-v1", "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/128k/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1", "STRATA_LAB_SIGNAL": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "bc505f4636c6d3e37c4c85eef74ea60aaccb0181", "build_variant": "diagnostic-router-fresh-v1", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "bb12e367bdabca726934a0b1972279b671668bfb2df5d7176ed2dbd097488e39", "headline_instrumentation": "DIAGNOSTIC_ONLY", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 131072, "source_sha": "bc505f4636c6d3e37c4c85eef74ea60aaccb0181", "source_status": "", "variant_overrides": {"env": {"STRATA_LAB_SIGNAL": "1"}, "diagnostic_only": true, "question": "Fresh selected-layer activation gate prediction; correct the observed stale-host-input instrumentation flaw."}, "diagnostic_env": {"STRATA_LAB_TRACE": "{attempt}/traces/runtime"}}
+READY diagnostic-router-fresh-v1 128k 54.08
+warmup VALID input 4096 output 64 PP 1483.0 TG 90.3
+trace-run1 VALID input 126715 output 4096 PP 4009.5 TG 133.7
+
+analysis-dev-code 0 dev-code development {'0': {'top10_precision_pct': 69.82704402515724, 'nonlocal_recall_pct': 59.85401459854015, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 5.882352941176471, '1.8': 3.676470588235294}, 'CPU_factor_bytes': 31457280}, '32': {'top10_precision_pct': 47.90880503144654, 'nonlocal_recall_pct': 19.708029197080293, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 16.176470588235293, '1.8': 0.7352941176470589}, 'CPU_factor_bytes': 2359296}, '128': {'top10_precision_pct': 63.278301886792455, 'nonlocal_recall_pct': 39.416058394160586, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 7.352941176470588, '1.8': 3.676470588235294}, 'CPU_factor_bytes': 9437184}}
+
+analysis-dev-math 0 dev-math development {'0': {'top10_precision_pct': 71.98005698005699, 'nonlocal_recall_pct': 45.2, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 4.4, '1.8': 4.4}, 'CPU_factor_bytes': 31457280}, '32': {'top10_precision_pct': 47.02991452991453, 'nonlocal_recall_pct': 20.4, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 14.8, '1.8': 1.6}, 'CPU_factor_bytes': 2359296}, '128': {'top10_precision_pct': 64.70797720797721, 'nonlocal_recall_pct': 34.4, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 4.0, '1.8': 1.6}, 'CPU_factor_bytes': 9437184}}
+
+analysis-cal-prose 0 cal-prose calibration {'0': {'top10_precision_pct': 70.77477477477477, 'nonlocal_recall_pct': 64.57142857142857, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 7.428571428571429, '1.8': 3.142857142857143}, 'CPU_factor_bytes': 31457280}, '32': {'top10_precision_pct': 46.108108108108105, 'nonlocal_recall_pct': 41.0, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 34.714285714285715, '1.8': 3.5714285714285716}, 'CPU_factor_bytes': 2359296}, '128': {'top10_precision_pct': 63.67567567567568, 'nonlocal_recall_pct': 55.57142857142857, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 26.285714285714285, '1.8': 3.2857142857142856}, 'CPU_factor_bytes': 9437184}}
+
+frozen-rank-choice 0 128 {32: 0.027624309392265192, 128: 0.029465930018416207}
+
+analysis-hold-code 0 hold-code holdout {'0': {'top10_precision_pct': 70.80756013745705, 'nonlocal_recall_pct': 57.08661417322835, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 5.118110236220472, '1.8': 2.3622047244094486}, 'CPU_factor_bytes': 31457280}, '32': {'top10_precision_pct': 46.75257731958763, 'nonlocal_recall_pct': 22.04724409448819, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 17.716535433070867, '1.8': 1.968503937007874}, 'CPU_factor_bytes': 2359296}, '128': {'top10_precision_pct': 64.0721649484536, 'nonlocal_recall_pct': 43.7007874015748, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 9.84251968503937, '1.8': 4.724409448818897}, 'CPU_factor_bytes': 9437184}}
+
+analysis-hold-structured 0 hold-structured holdout {'0': {'top10_precision_pct': 66.84472934472934, 'nonlocal_recall_pct': 50.18867924528302, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 2.2641509433962264, '1.8': 2.2641509433962264}, 'CPU_factor_bytes': 31457280}, '32': {'top10_precision_pct': 38.47578347578347, 'nonlocal_recall_pct': 14.339622641509434, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 10.18867924528302, '1.8': 0.7547169811320755}, 'CPU_factor_bytes': 2359296}, '128': {'top10_precision_pct': 59.25925925925926, 'nonlocal_recall_pct': 31.32075471698113, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 4.150943396226415, '1.8': 1.509433962264151}, 'CPU_factor_bytes': 9437184}}
+
+analysis-hold-math 0 hold-math holdout {'0': {'top10_precision_pct': 69.97863247863248, 'nonlocal_recall_pct': 52.690582959641254, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 2.4663677130044843, '1.8': 1.1210762331838564}, 'CPU_factor_bytes': 31457280}, '32': {'top10_precision_pct': 46.88034188034188, 'nonlocal_recall_pct': 31.614349775784753, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 22.6457399103139, '1.8': 0.2242152466367713}, 'CPU_factor_bytes': 2359296}, '128': {'top10_precision_pct': 63.11965811965812, 'nonlocal_recall_pct': 39.01345291479821, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 6.726457399103139, '1.8': 0.8968609865470852}, 'CPU_factor_bytes': 9437184}}
+
+analysis-32k 0 32k benchmark {'0': {'top10_precision_pct': 70.81541218637993, 'nonlocal_recall_pct': 58.035714285714285, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 0.9009009009009009, '1.8': 0.0}, 'CPU_factor_bytes': 31457280}, '32': {'top10_precision_pct': 47.5, 'nonlocal_recall_pct': 22.321428571428573, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 15.315315315315315, '1.8': 0.0}, 'CPU_factor_bytes': 2359296}, '128': {'top10_precision_pct': 64.47132616487455, 'nonlocal_recall_pct': 41.07142857142857, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 0.0, '1.8': 0.0}, 'CPU_factor_bytes': 9437184}}
+
+analysis-128k 0 128k benchmark {'0': {'top10_precision_pct': 68.5, 'nonlocal_recall_pct': 44.73684210526316, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 5.319148936170213, '1.8': 4.25531914893617}, 'CPU_factor_bytes': 31457280}, '32': {'top10_precision_pct': 46.23684210526316, 'nonlocal_recall_pct': 18.94736842105263, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 14.893617021276595, '1.8': 1.0638297872340425}, 'CPU_factor_bytes': 2359296}, '128': {'top10_precision_pct': 61.85964912280702, 'nonlocal_recall_pct': 27.894736842105264, 'warm_ready_true_nonlocal_recall_pct': {'12.6': 13.297872340425531, '1.8': 3.723404255319149}, 'CPU_factor_bytes': 9437184}}
+

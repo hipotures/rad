@@ -1,0 +1,5 @@
+# Isolated reproduction
+
+- 2026-10-06T22:13:18.786181+00:00: Live attempt START {"task": "math-rational", "arm": "REPLAY_CURRENT", "label": "reproduction-math-rational-REPLAY_CURRENT", "binary": "ccea78b7e67cd0d634880160f8d9d571ef65263d41622232ef149c6bb76038e3", "checkpoint": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e"}
+
+- 2026-10-06T22:15:30.296230+00:00: Live attempt END {"label": "reproduction-math-rational-REPLAY_CURRENT", "valid": true, "operating_s": 131.4612841809867, "error": null}

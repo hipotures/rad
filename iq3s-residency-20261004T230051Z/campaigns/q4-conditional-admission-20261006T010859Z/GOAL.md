@@ -1,0 +1,11 @@
+# Q4 Residency v3: conditional admission before copy
+
+User-authorized narrow continuation of immutable v2. Start01:08:59 UTC, cutoff08:28:59, absolute deadline09:08:59 on2026-10-06.
+
+Question: reject bad H4 promotions before RAM staging/PCIe while retaining useful target-ready persistent admissions and protecting victims. Frozen control0.1.39/6f32ec0/eca9d0d, Q4 revision38bb39e, K24/.28/100us/15workers/spec4/.5/INT8/kv32768/prefillauto/lookup0/reuse0. No pool/helper/K/PCIe/predictor-family search.
+
+A: inspect actual v2 code/events/provenance, decompose4996 wrong/superseded reasons with count/bytes; buffered-only diagnostics if needed.
+B:12 independent tasks (~4code,4math,4prose/structured),1024–2048 output, task-level development/calibration/untouched holdout frozen before fitting. Entire heldout family where feasible. Causal candidate-specific H4/history/state/victim features. Censored ends excluded as negatives. Mandatory cheap rule + CPU logistic model; nonlinear only justified. Three coarse operating points on calibration; freeze before holdout. Gate:~50% less unpublished bytes,~80% useful publication benefit retained, no meaningful victim/nonlocal increase. Transactional fixed-trace costs and explicit limitations, not classifier accuracy alone.
+C ONLY IF gate qualifies: decision before staging, same safe early-v1 two3.072MBspares/five targets/same devices, defaultOFF. OFF/reactive/unfiltered/conditional matched modes. Safety tests bytes/duplicates/native-resident/protectedvictim/late/delay/cancel/reuse/restore/shutdown. Screening then onlycontrol/candidate32/128/256 threefresh valid4096runs each(max18); interleaved, identical input IDs/warmup/MTP. Independent validation if positive. No new Qwen gate/extraexpertVRAM/remote/substitution.
+
+Report admission funnel/failure reasons/heldout/live/negatives/exactlaunchcommands; classification calibration/PR/precision-recall plus useful/victim/nonlocal/CPU/mapped/bytes/cost. Every number raw-reproducible. Retain unchangedcontrol launchers. Local research commits only, no push/PR/weights/global changes. Every long process owned/timebounded/progress/cleanup. End bothGPUsidle/noownedserver/trainer/profiler. RecommendationoneofUSE_CONDITIONAL_ADMISSION,KEEP_Q4_100US_BASELINE,PROMISING_CONDITIONAL_ADMISSION,INCONCLUSIVE.

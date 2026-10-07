@@ -1,0 +1,18 @@
+{
+  "recommendation": "USE_100US",
+  "policies": {
+    "32k": "100us",
+    "128k": "100us"
+  },
+  "nominal_TG_winners": {
+    "32k": "500us",
+    "128k": "500us"
+  },
+  "effective_performance_tie": [
+    "100us",
+    "500us"
+  ],
+  "predeclared_material_margin_pct": 3,
+  "selection_basis": "pairedTG/wall differences below3%; substantially lowerCPU; no materialcontextreversal",
+  "analysis_text": "1. **32K:** 500us has the highest nominal median TG (99.4 versus 97.0 at 100us), but its median paired gain is only **1.90%** and paired wall improvement **1.21%**. The paired TG direction reverses on one payload; ranges overlap. Under the predeclared 3% margin this is a performance tie. Select 100us for its lower CPU cost.\n2. **128K:** 500us has the highest nominal median TG (81.6 versus 80.2), but median paired TG gain is **1.75%** and wall improvement **0.78%**. This is also a tie at the predeclared margin. Select 100us; no material context reversal supports separate policies.\n3. **Does Q4 need a longer spin than IQ3_S?** Not for this preserved workload: a longer spin is not required for a defensible Q4 baseline. This does not prove 100us optimal for every real-prompt domain; the historical IQ3_S campaign is motivation, not this experiment's control.\n4. **CPU cost:** decode VM medians at 32K are 48.8/70.9/83.2/99.0% for 100/500/2000/default. At 128K they are 48.4/70.5/83.8/99.0%. Relative to 100us,500us consumes approximately45\u201347% more CPU for less than2% paired TG gain; default roughly doubles CPU. PP differences are small and do not justify a separate prefill policy.\n5. **Useful work versus spin:** the exact CPU fallback medians are 195,875 entries at 32K and 221,528 at 128K; mapped GPU entries are 30,119/35,296. Routing is identical between paired policies. The substantial CPU load at 100us is compatible with real expert computation. The additional load at longer spins with unchanged work is consistent with idle spinning/scheduling overhead, but exclusive compute/spin fractions were not measured. All logical expert-file reads during decode are zero; this is resident-RAM work, not expert SSD streaming.\n6. **Wakeup cost:** aggregate CPU completion means are 13.50/14.45ms at 100us versus 12.03/12.80 at 500us for 32K/128K. That is consistent with some parking/wakeup cost, but the timer also includes computation and overlap; conditional CPU-positive waits and all-local floors are unavailable. It does not translate into a material whole-request penalty here. Default has lower CPU-completion means yet worse overall TG, demonstrating why that component cannot rank policies alone.\n7. **Q4 residency-v2 baseline:** freeze **STRATA_POOL_SPIN_US=100** at both contexts, with the same frozen 0.1.39 executable, K=24 / PCIe=0.28, workers 15, spec=4 / min-p=0.5, INT8 and all other unchanged settings. No residency implementation or extra policy test was started."
+}

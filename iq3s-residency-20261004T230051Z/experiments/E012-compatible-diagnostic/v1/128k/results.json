@@ -1,0 +1,223 @@
+{
+  "runs": [
+    {
+      "variant": "diagnostic-compatible-v1",
+      "profile": "128k",
+      "kind": "diagnostic",
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/128k-run1.json",
+        "payload_sha256": "d4c8a6dc0e3da3056203c00844d339503a216009d45147933a1d189ba7de3036",
+        "messages_sha256": "1b9859fede0e0a9d17dcd4f5a72a215ef79ab0448ef4272dd1bbfbe2cac6dbcf",
+        "input_ids_sha256": "798f2529bb9cc57a5074bd5e61319f7015e2a61000083f1e991463eab11d2d88",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/798f2529bb9cc57a5074bd5e61319f7015e2a61000083f1e991463eab11d2d88.json",
+        "actual_input_tokens": 126715,
+        "profile": "128k",
+        "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/128K-long-run1.json",
+        "source_payload_file_sha256": "b0d5c54c1350d62c0805f466ddb674eeb41b2ef04bfc6e82027ff160d2c8d4f3",
+        "retained_source_characters": 428857,
+        "removed_source_characters": 1160,
+        "trim_boundary": "complete source line",
+        "total_requested_tokens": 130811,
+        "admission_verified_offline": true
+      },
+      "source_sha": "24554d59da61489cd6e58d029c9767edc62f2ea0",
+      "binary_sha256": "059fc6934b76848def36bee4508c1ccac0cea96e36ad4328526d6a8a969eccb6",
+      "full_config": {
+        "exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-compatible-v1/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768",
+          "--expert-cache",
+          "auto",
+          "--max-context",
+          "131072",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--pool-workers",
+          "15",
+          "--pcie-frac",
+          "0.28"
+        ],
+        "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-compatible-v1",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/logs/CURRENT-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18132,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "25",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "env": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_LAB_MISS_WAITS": "1",
+          "STRATA_LAB_COMPATIBLE": "1"
+        },
+        "host": "127.0.0.1",
+        "parallel": 1,
+        "Strata_HEAD": "24554d59da61489cd6e58d029c9767edc62f2ea0",
+        "build_variant": "diagnostic-compatible-v1",
+        "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "059fc6934b76848def36bee4508c1ccac0cea96e36ad4328526d6a8a969eccb6",
+        "headline_instrumentation": "DIAGNOSTIC_ONLY",
+        "Strata_version": "0.1.39",
+        "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "max_total_context": 131072,
+        "source_sha": "24554d59da61489cd6e58d029c9767edc62f2ea0",
+        "source_status": "",
+        "variant_overrides": {
+          "env": {
+            "STRATA_LAB_MISS_WAITS": "1",
+            "STRATA_LAB_COMPATIBLE": "1"
+          },
+          "diagnostic_only": true,
+          "question": "Unchanged E010 policy plus E011scopedGPUspans/schema2crosslayervictims; mechanism and numerical diagnosis."
+        },
+        "diagnostic_env": {
+          "STRATA_LAB_TRACE": "{attempt}/traces/runtime"
+        }
+      },
+      "full_engine_commands": [
+        [
+          "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-compatible-v1/strata",
+          "--serve",
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768",
+          "--expert-cache",
+          "auto",
+          "--max-context",
+          "131072",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--pool-workers",
+          "15",
+          "--pcie-frac",
+          "0.28",
+          "--layer-split",
+          "25"
+        ]
+      ],
+      "started_epoch": 1791167427.198066,
+      "requested_output": 4096,
+      "actual_input_tokens": 126715,
+      "actual_output_tokens": 4096,
+      "PP": 4012.5,
+      "TG": 139.0,
+      "TTFT_s": 32.06235375802498,
+      "wall_s": 61.539264908002224,
+      "pp_s": 31.579900000000002,
+      "decode_s": 29.469,
+      "reuse": 0,
+      "finish_reason": "length",
+      "mtp_proposed": 3421,
+      "mtp_accepted": 2709,
+      "verify_windows": 1387,
+      "hit_rate_pct": 98.2,
+      "local_vram_entries": 2265118,
+      "cpu_fallback_entries": 41085,
+      "offloaded_entries": 1637,
+      "text": "# Strata Engine — Repository Maintenance Plan (40 Sections)\n\n---\n\n## 1. `CMakeLists.txt` — Top-Level Build Configuration\n\n**Responsibilities:** Defines all build targets (`strata_artifact`, `strata_plan`, `strata_core`, `strata_kernels`, `strata_engine`, `strata_prefill`, `strata_spec`, `strata_kernels_cpu`, `strata_mmq`), CUDA/HIP backend selection, warning flags, test registration, and FetchContent for ggml.\n\n**Proposed change:** Add a `STRATA_BUILD_BENCH` option to gate benchmark micro-targets separately from tests, and add a `STRATA_SANITIZER` option for AddressSanitizer/UBSan builds during development.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -58,6 +58,10 @@\n option(STRATA_BUILD_TESTS \"Build the test suite\" ${_strata_tests_default})\n option(STRATA_BUILD_CONVERSATION_TESTS \"Build standalone conversation cache tests\" OFF)\n option(STRATA_WERROR \"Treat compiler warnings as errors\" OFF)\n+option(STRATA_BUILD_BENCH \"Build micro-benchmark targets\" OFF)\n+option(STRATA_SANITIZER \"Enable AddressSanitizer + UBSan (Debug only)\" OFF)\n+if(STRATA_SANITIZER AND NOT CMAKE_BUILD_TYPE STREQUAL \"Debug\")\n+  message(WARNING \"STRATA_SANITIZER is only meaningful in Debug builds\")\n+endif()\n \n if(STRATA_BUILD_CONVERSATION_TESTS)\n   enable_testing()\n@@ -120,6 +124,14 @@\n   $<$<COMPILE_LANGUAGE:HIP>:-Wextra>)\n if(STRATA_WERROR)\n   target_compile_options(strata_warnings INTERFACE\n     $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/WX>\n     $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<NOT:$<CXX_COMPILER_ID:MSVC>>>:-Werror>\n     $<$<COMPILE_LANGUAGE:HIP>:-Werror>)\n endif()\n+if(STRATA_SANITIZER)\n+  target_compile_options(strata_warnings INTERFACE\n+    $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<NOT:$<CXX_COMPILER_ID:MSVC>>>:-fsanitize=address,undefined;-fno-omit-frame-pointer>\n+    $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<NOT:$<CXX_COMPILER_ID:MSVC>>>:-g>)\n+  target_link_options(strata_warnings INTERFACE\n+    $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fsanitize=address,undefined>)\n+endif()\n```\n\n**Verification cases:**\n1. Configure with `-DSTRATA_SANITIZER=ON -DCMAKE_BUILD_TYPE=Debug` on Linux/GCC; confirm `-fsanitize=address,undefined` appears in the compile commands for `strata_artifact` targets and that linking succeeds.\n2. Configure with `-DSTRATA_BUILD_BENCH=ON` and confirm that `bench/micro/` targets (e.g. `native_mmvq_multi`, `graph_registry_test`) are registered as executables; with `OFF` they are absent from the build graph.\n\n---\n\n## 2. `include/strata/artifact/gguf_reader.hpp` — GGUF File Reader\n\n**Responsibilities:** Parses GGUF v3 files via mmap, reads metadata KV pairs, tensor directory, validates architecture (`qwen4exp`), provides `GgufFile` and `GgufModel` (multi-shard) classes, and the `check_architecture` guard.\n\n**Proposed change:** Add a `tensor_offset_end()` method to `TensorInfo` that computes the end of a tensor's payload (offset + payload bytes), and add a `validate_tensor_bounds()` method to `GgufFile` that checks every tensor's payload lies within the file's data section. This catches truncated or corrupt files at open time rather than at first read.\n\n```diff\n--- a/include/strata/artifact/gguf_reader.hpp\n+++ b/include/strata/artifact/gguf_reader.hpp\n@@ -180,6 +180,10 @@\n     uint64_t elements() const {\n         uint64_t n = 1;\n         for (auto d : shape) n *= d;\n         return n;\n     }\n+    uint64_t payload_bytes() const { return tensor_payload_bytes(*this); }\n+    uint64_t offset_end() const { return offset + payload_bytes(); }\n     const char* type_name() const { return ggml_type_name(type); }\n };\n \n@@ -310,6 +314,22 @@\n     uint64_t alignment() const { return alignment_; }\n     const std::string& path() const { return path_; }\n \n+    /// Validates that every tensor's payload lies within the file's data section.\n+    /// Returns the first out-of-bounds tensor name, or empty string if all are valid.\n+    std::string validate_tensor_bounds() const {\n+        const uint64_t payload = size_ - data_start_;\n+        for (const auto& t : tensors_) {\n+            const uint64_t bytes = tensor_payload_bytes(t);\n+            if (bytes == 0)\n+                return \"unknown type or non-whole-block shape for tensor '\" + t.name + \"'\";\n+            if (t.offset > payload || bytes > payload - t.offset)\n+                return \"tensor '\" + t.name + \"' payload [\" + std::to_string(t.offset) + \", \" +\n+                       std::to_string(t.offset + bytes) + \") exceeds data section of \" +\n+                       std::to_string(payload) + \" bytes\";\n+        }\n+        return {};\n+    }\n+\n     const TensorInfo* find(const std::string& name) const {\n         for (const auto& t : tensors_)\n             if (t.name == name) return &t;\n```\n\n**Verification cases:**\n1. Create a synthetic GGUF with a tensor whose `offset + payload_bytes` exceeds the file size; call `validate_tensor_bounds()` and confirm it returns the tensor name and the overflow message.\n2. Open a valid real GGUF shard; confirm `validate_tensor_bounds()` returns an empty string and that `tensor_offset_end()` equals `offset + tensor_payload_bytes()` for every tensor.\n\n---\n\n## 3. `include/strata/artifact/dequant.hpp` — Scalar Reference Dequantizers\n\n**Responsibilities:** Provides scalar (CPU) dequantization for Q2_0, Q8_0, Q4_0, Q5_0, IQ4_NL, Q6_K, Q4_K, Q5_K, Q3_K, IQ4_XS, F32, F16, BF16. Used as the validated reference against which GPU kernels are parity-tested.\n\n**Proposed change:** Add a `dequantize_q2_K` function (256 elements, 84-byte block) to complete the K-quant family, and add a `dequantize_q8_K` function (256 elements, 210-byte block) needed by the Q8_K activation path. Both transcribed from ggml-quants.c at the pinned commit.\n\n```diff\n--- a/include/strata/artifact/dequant.hpp\n+++ b/include/strata/artifact/dequant.hpp\n@@ -230,6 +230,50 @@\n inline void dequantize_iq4_xs(const uint8_t* block, float* out) {\n     // ... existing code ...\n }\n \n+// ---- Q2_K: 256 elements from an 84-byte super-block. Transcribed from dequantize_row_q2_K\n+// (ggml-quants.c at 3cf03257). Layout: scales[16] (4-bit scale + 4-bit min packed), qs[64], fp16 d LAST.\n+inline void dequantize_q2_K(const uint8_t* block, float* out) {\n+    const uint8_t* sc = block;       // 16 bytes: 4-bit scale + 4-bit min per 16-element group\n+    const uint8_t* q  = block + 16;  // 64 bytes: 2-bit codes, 4 per byte\n+    const float d = fp16_to_fp32(read_u16(block + 82));\n+    float* y = out;\n+    for (int j = 0; j < 256; j += 16) {\n+        const uint8_t s = sc[j / 16];\n+        const float ds = d * (float)(s & 0x0F);\n+        const float m  = d * (float)(s >> 4);\n+        for (int l = 0; l < 4; ++l) {\n+            const uint8_t byte = q[l];\n+            *y++ = ds * (float)(byte & 0x03) - m;\n+            *y++ = ds * (float)((byte >> 2) & 0x03) - m;\n+            *y++ = ds * (float)((byte >> 4) & 0x03) - m;\n+            *y++ = ds * (float)((byte >> 6) & 0x03) - m;\n+        }\n+    }\n+}\n+\n+// ---- Q8_K: 256 elements from a 210-byte super-block. fp16 d, int8 qs[256], int16 scales[16].\n+// Transcribed from dequantize_row_q8_K (ggml-quants.c at 3cf03257).\n+inline void dequantize_q8_K(const uint8_t* block, float* out) {\n+    const float d = fp16_to_fp32(read_u16(block));\n+    const int8_t* qs = (const int8_t*)(block + 2);\n+    const int16_t* sc = (const int16_t*)(block + 2 + 256);\n+    float* y = out;\n+    for (int j = 0; j < 16; ++j) {\n+        const float dl = d * (float)sc[j];\n+        for (int l = 0; l < 16; ++l)\n+            *y++ = dl * (float)qs[j * 16 + l];\n+    }\n+}\n+\n // ---- element types\n inline void dequantize_f32(const uint8_t* p, float* out, int n) {\n```\n\n**Verification cases:**\n1. Generate a synthetic Q2_K block with known scale/min/code values; dequantize and assert every output equals `d * scale * code - d * min` for the correct group.\n2. Generate a synthetic Q8_K block with known d, scales, and int8 values; dequantize and assert `out[i] == d * scales[i/16] * qs[i]` for all 256 elements.\n\n---\n\n## 4. `include/strata/artifact/gguf_split.hpp` — Split Model Shard Resolution\n\n**Responsibilities:** Resolves the shard paths of a split GGUF model from any shard's filename, validates that all shards exist, and returns them in split order.\n\n**Proposed change:** Add a `gguf_split_count()` function that extracts the shard count from a filename without opening files, and add a `gguf_split_no()` that extracts the shard number. These allow callers to validate shard completeness before attempting to open all files.\n\n```diff\n--- a/include/strata/artifact/gguf_split.hpp\n+++ b/include/strata/artifact/gguf_split.hpp\n@@ -18,6 +18,30 @@\n namespace strata {\n \n+/// Extracts (shard_no, total_count) from a split filename, or (0,0) if not a split name.\n+inline std::pair<int,int> gguf_split_parse(const std::string& path) {\n+    static const char tag[] = \"-of-\";\n+    const size_t at = path.rfind(tag);\n+    if (at == std::string::npos || at < 6 || path[at - 6] != '-' || path.size() != at + 4 + 5 + 5 ||\n+        path.compare(at + 9, 5, \".gguf\") != 0)\n+        return {0, 0};\n+    int no = 0, n = 0;\n+    for (size_t i = 0; i < 5; ++i) {\n+        const char a = path[at - 5 + i], b = path[at + 4 + i];\n+        if (a < '0' || a > '9' || b < '0' || b > '9') return {0, 0};\n+        no = no * 10 + (a - '0');\n+        n = n * 10 + (b - '0');\n+    }\n+    if (n < 1 || no < 1 || no > n) return {0, 0};\n+    return {no, n};\n+}\n+\n+inline int gguf_split_count(const std::string& path) { return gguf_split_parse(path).second; }\n+inline int gguf_split_no(const std::string& path) { return gguf_split_parse(path).first; }\n+\n // Split models: `<name>-00001-of-0000N.gguf` ... `<name>-0000N-of-0000N.gguf`, as llama.cpp's gguf-split names\n```\n\n**Verification cases:**\n1. Call `gguf_split_count(\"model-00002-of-00004.gguf\")` and assert it returns 4; call `gguf_split_no` and assert it returns 2.\n2. Call `gguf_split_count(\"model.gguf\")` and assert it returns 0 (not a split name); call `gguf_split_parse(\"model-00005-of-00004.gguf\")` and assert it returns `{0,0}` (no > n).\n\n---\n\n## 5. `include/strata/core/conversation_buffer.hpp` — Snapshot-Owned Host Storage\n\n**Responsibilities:** Provides a segmented byte buffer (`ConversationBuffer`) that never relocates existing payloads on append, supports `visit()` for zero-copy transfer, geometric segment growth, and equality comparison.\n\n**Proposed change:** Add a `shrink_to_fit()` method that releases excess segment capacity (e.g. after a rewind that removed trailing segments), and add a `capacity()` method that returns the total allocated bytes across all segments. This lets the conversation cache reclaim memory after a conversation is shortened.\n\n```diff\n--- a/include/strata/core/conversation_buffer.hpp\n+++ b/include/strata/core/conversation_buffer.hpp\n@@ -55,6 +55,14 @@\n     size_t bytes() const {\n         size_t n = segments_.capacity() * sizeof(Segment);\n         for (const auto& segment : segments_) n += segment.capacity();\n         return n;\n     }\n+    /// Total allocated bytes across all segments (may exceed size()).\n+    size_t capacity() const {\n+        size_t n = 0;\n+        for (const auto& seg : segments_) n += seg.capacity();\n+        return n;\n+    }\n+    /// Releases excess capacity in the last segment after a shrink.\n+    void shrink_to_fit() {\n+        if (!segments_.empty()) segments_.back().shrink_to_fit();\n+    }\n     // Includes the old directory while reserve allocates its replacement.\n```\n\n**Verification cases:**\n1. Create a `ConversationBuffer`, resize to 10 MiB, then resize to 1 MiB. Call `capacity()` and confirm it is >= 1 MiB but the last segment's capacity was reduced by `shrink_to_fit()`.\n2. After `shrink_to_fit()`, append 1 byte and confirm the buffer still works correctly (the segment reallocates as needed).\n\n---\n\n## 6. `include/strata/core/conversation_cache.hpp` — Parked Conversation Policy\n\n**Responsibilities:** Manages a bounded LRU cache of parked conversations (`SavedConversation` entries) with byte budget, slot limit, prefix matching, eviction, and K/V reuse retention.\n\n**Proposed change:** Add a `stats()` method returning a struct with `hits`, `misses`, `evictions`, `bytes_held`, `slots_used`, and `retained_bytes` for the server's `/metrics` endpoint. Also add a `clear()` method that drops all parked entries and resets counters.\n\n```diff\n--- a/include/strata/core/conversation_cache.hpp\n+++ b/include/strata/core/conversation_cache.hpp\n@@ -95,6 +95,20 @@\n     size_t evictions() const { return evictions_; }\n \n+    struct Stats {\n+        size_t hits = 0, misses = 0, evictions = 0;\n+        size_t bytes_held = 0, slots_used = 0, retained_bytes = 0;\n+    };\n+    Stats stats() const {\n+        Stats s;\n+        s.evictions = evictions_;\n+        s.bytes_held = bytes_;\n+        s.slots_used = entries_.size();\n+        s.retained_bytes = reuse_.bytes();\n+        return s;\n+    }\n+    void clear() {\n+        entries_.clear();\n+        bytes_ = 0;\n+        reuse_ = {};\n+    }\n+\n     // Retain only the restored K/V buffers, not duplicate running checkpoints.\n```\n\n**Verification cases:**\n1. Put 3 conversations into a cache with budget 100 MiB and 2 slots; confirm `stats().evictions == 1` and `stats().slots_used == 2`.\n2. Call `clear()`; confirm `stats().bytes_held == 0`, `stats().slots_used",
+      "reasoning": "",
+      "usage": {
+        "prompt_tokens": 126715,
+        "completion_tokens": 4096,
+        "total_tokens": 130811,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 126715,
+        "prompt_ms": 31579.9,
+        "prompt_per_token_ms": 0.249,
+        "prompt_per_second": 4012.5,
+        "predicted_n": 4096,
+        "predicted_ms": 29469.0,
+        "predicted_per_token_ms": 7.195,
+        "predicted_per_second": 139.0,
+        "draft_n": 3421,
+        "draft_n_accepted": 2709,
+        "at": 1791167488
+      },
+      "telemetry": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E012-compatible-diagnostic/v1/128k/telemetry/trace-run1.jsonl",
+        "samples": 62,
+        "system_cpu_mean_pct": 55.688709677419354,
+        "system_cpu_peak_pct": 100.0,
+        "peak_rss_gib": 52.73801803588867,
+        "peak_ram_used_gib": 57.428462982177734,
+        "min_available_gib": 103.70415496826172,
+        "gpus": {
+          "0": {
+            "mean_util_pct": 53.483870967741936,
+            "peak_vram_mib": 23828.0
+          },
+          "1": {
+            "mean_util_pct": 55.66129032258065,
+            "peak_vram_mib": 23952.0
+          }
+        },
+        "abort": null
+      },
+      "output_text_sha256": "76447ea1f31df9537c82e33ac38bd223b29cb2a5fdb517f02ad68c1e6e8523cc",
+      "output_ids": "UNAVAILABLE: frontend strips internal special markers; text/reasoning and raw chunks hashed instead",
+      "application_status": "NONEMPTY_ANSWER_LENGTH_LIMIT",
+      "mtp_acceptance_pct": 79.18737211341713,
+      "mtp_accepted_per_window": 1.9531362653208364,
+      "state": "VALID",
+      "invalid_reasons": []
+    }
+  ],
+  "headline": false,
+  "question": "dispatch/timing/accounting diagnosis; free-generation overhead comparison limited by trajectory"
+}

@@ -1,0 +1,29 @@
+{
+  "label": "capture-32k-v3",
+  "host_quant_group_compute_completion_span": {
+    "CPU_positive": {
+      "count": 52198,
+      "sum_ms": 16393.008747,
+      "median_us": 263.2285,
+      "p95_us": 673.8968499999996,
+      "max_us": 3780.547
+    },
+    "all_no_CPU": {
+      "count": 9674,
+      "sum_ms": 9.496566,
+      "median_us": 0.211,
+      "p95_us": 5.352850000000004,
+      "max_us": 179.11
+    },
+    "mapped_positive": {
+      "count": 23362,
+      "sum_ms": 10472.486827,
+      "median_us": 410.5485,
+      "p95_us": 793.0655,
+      "max_us": 3554.108
+    }
+  },
+  "scope_caveat": "CPU span includes activation quantization/job construction/native CPU completion. It is not an isolated wait, and overlaps GPU work. No CPU/mapped/GPU timers are summed.",
+  "future_lead": {},
+  "copy_lifetimes": {}
+}

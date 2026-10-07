@@ -1,0 +1,25 @@
+{
+  "phase": "P0",
+  "same_binary": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+  "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+  "families": [
+    "code",
+    "math",
+    "prose"
+  ],
+  "profiles": [
+    "32k",
+    "128k"
+  ],
+  "policy_values": {
+    "default": 20000,
+    "sleep100us": 100
+  },
+  "repetitions": 3,
+  "fresh_start": "Each policy/replicate gets a fresh server and identical saved4096input64output warmup; no inherited adaptation from another measured replicate.",
+  "pair_order": "For each family/profile pair, replicas1/3 default then100; replica2 100 thendefault. Alternate first member for next cell. No other compute concurrent.",
+  "output": 4096,
+  "EOS": "Preserve early termination. No prompt rewrite/retry. Fixed-length-invalid runs contribute only explicitly labeled application/common-prefix analysis.",
+  "settings": "Frozen CURRENT K25/PCIe0.28/15workers/spec4/minp0.5/int8/kvresident32768wherevalid/prefillauto/suffix0/reuse0/greedy",
+  "capture": "Both policies same lightweight frontend append-only actual token ID capture; no engine patch/hot-path instrumentation. CPU wait diagnostics separate from headline binary."
+}

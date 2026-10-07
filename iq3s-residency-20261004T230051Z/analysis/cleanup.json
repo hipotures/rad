@@ -1,0 +1,39 @@
+{
+  "utc": "2026-10-05T08:46:44.222586+00:00",
+  "stopped_owned": [],
+  "stale_PID_records_not_touched": [],
+  "owned_active_inference_or_training": [],
+  "private_port18132_open": false,
+  "commands": {
+    "GPU_compute": {
+      "command": [
+        "nvidia-smi",
+        "--query-compute-apps=pid,process_name,used_gpu_memory",
+        "--format=csv,noheader"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "GPU_state": {
+      "command": [
+        "nvidia-smi",
+        "--query-gpu=index,name,utilization.gpu,memory.used,power.draw",
+        "--format=csv"
+      ],
+      "returncode": 0,
+      "stdout": "index, name, utilization.gpu [%], memory.used [MiB], power.draw [W]\n0, NVIDIA GeForce RTX 4090, 0 %, 1 MiB, 39.33 W\n1, NVIDIA GeForce RTX 4090, 0 %, 1 MiB, 31.84 W\n",
+      "stderr": ""
+    },
+    "RAM": {
+      "command": [
+        "cat",
+        "/proc/meminfo"
+      ],
+      "returncode": 0,
+      "stdout": "MemTotal:       168959796 kB\nMemFree:        83809900 kB\nMemAvailable:   165086476 kB\nBuffers:          378632 kB\nCached:         81051468 kB\nSwapCached:            0 kB\nActive:          4410596 kB\nInactive:       77694100 kB\nActive(anon):     828568 kB\nInactive(anon):    76884 kB\nActive(file):    3582028 kB\nInactive(file): 77617216 kB\nUnevictable:        4000 kB\nMlocked:               0 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:               344 kB\nWriteback:             0 kB\nAnonPages:        678424 kB\nMapped:           464020 kB\nShmem:            230944 kB\nKReclaimable:    1574912 kB\nSlab:            1616452 kB\nSReclaimable:    1325312 kB\nSUnreclaim:       291140 kB\nKernelStack:        7008 kB\nPageTables:        15664 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    84479896 kB\nCommitted_AS:    2157196 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       71868 kB\nVmallocChunk:          0 kB\nPercpu:             8704 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:  17373184 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:        11421112 kB\nUnaccepted:            0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     2748236 kB\nDirectMap2M:    153489408 kB\nDirectMap1G:    17825792 kB\n",
+      "stderr": ""
+    }
+  },
+  "unrelated_processes": "Never killed."
+}

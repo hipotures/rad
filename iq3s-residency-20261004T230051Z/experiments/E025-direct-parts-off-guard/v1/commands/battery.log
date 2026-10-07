@@ -1,0 +1,145 @@
+RESOLVED_CONFIG {"exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/direct-parts-v1/strata", "args": ["--pack", "/srv/ai/models/strata/packs/iq3_s", "--native", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf", "--ple-gguf", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf", "--expert-profile", "/srv/ai/strata/data/expert-profile.bin", "--prefill", "auto", "--spec", "4", "--spec-min-p", "0.5", "--mtp", "/srv/ai/models/strata/mtp/rt", "--kv", "int8", "--kv-resident", "32768", "--expert-cache", "auto", "--max-context", "32768", "--suffix-draft", "0", "--prompt-cache", "0", "--pool-workers", "15", "--pcie-frac", "0.28"], "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/direct-parts-v1", "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/correctness/direct-parts-off-v1/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "f4c32199971adbd983a7d81260dbd8d591219c46", "build_variant": "direct-parts-off-v1", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "508bfa56a7ac6cf0f03bfc391a26ec047c0db576dd7ff29ac22313ec87a2a0b2", "headline_instrumentation": "OFF", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 32768, "source_sha": "f4c32199971adbd983a7d81260dbd8d591219c46", "source_status": "", "variant_overrides": {"env": {}, "same_binary_reference": "direct-parts-v1", "direct_output_rows": "OFF; original copy/zero/add path"}, "diagnostic_env": {"STRATA_DBG_NAN": "1"}}
+READY direct-parts-off-v1 32k 48.09
+warmup VALID input 4096 output 64 PP 117.3 TG 103.1
+case1 VALID input 49 output 141 PP 149.8 TG 88.4
+case2 VALID input 49 output 189 PP 195.3 TG 160.1
+case3 VALID input 55 output 252 PP 163.9 TG 119.1
+case4 VALID input 70 output 195 PP 194.3 TG 116.2
+case5 VALID input 61 output 442 PP 174.0 TG 116.4
+case6 VALID input 58 output 336 PP 159.6 TG 189.1
+case7 VALID input 43 output 132 PP 197.2 TG 82.6
+case8 VALID input 48 output 98 PP 179.7 TG 125.9
+case9 VALID input 57 output 18 PP 176.7 TG 90.5
+case10 VALID input 61 output 27 PP 227.8 TG 103.4
+[
+  {
+    "case": 1,
+    "state": "VALID",
+    "generated": 141,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "cf54d9ea1a8a5dd73c720a6772a0e59bd069b06ca3705859ec36ce966b4da763",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 2,
+    "state": "VALID",
+    "generated": 189,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "07f502ccffca9f96deeddc444bee09b0555b1e4d7d1b7dafe8d1ae6cace7c5bc",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 3,
+    "state": "VALID",
+    "generated": 252,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "740c2746cf51c43b80d3cf92d82326ef44c370ea5446c2fc2ab9fff2a22d1f21",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 4,
+    "state": "VALID",
+    "generated": 195,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "00031218ec45fad4c408c32fb2408abb9da31279624e22182a75a21097c41232",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 5,
+    "state": "VALID",
+    "generated": 442,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "f031b3f50d59f06dfc650cf26df79af24e4636a67605fa1a046edc94b6858cbb",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 6,
+    "state": "VALID",
+    "generated": 336,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "052c66565304d04d75b7e1fdec3c3357c473355068f998995bd72639d55fce51",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 7,
+    "state": "VALID",
+    "generated": 132,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "0a33f09e8c11aa4b28eab20a0f54bde2def33eecc80be2fb88d540348256e76f",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 8,
+    "state": "VALID",
+    "generated": 98,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "7ec9c22f9464545772e975489e016e3b630f5b1abac33f546bae15f6a096ec25",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 9,
+    "state": "VALID",
+    "generated": 18,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "8448cd5842a2428ec4addb0e30e56b89c828fa2724ca2f198873992d22f21a67",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 10,
+    "state": "VALID",
+    "generated": 27,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "a2d8fad7f44ee3ebaf08cd48c6804b450e77e6f156c978c1afbeefbc5ba539a7",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  }
+]

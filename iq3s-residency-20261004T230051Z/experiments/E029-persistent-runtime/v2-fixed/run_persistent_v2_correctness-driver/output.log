@@ -1,0 +1,291 @@
+RESOLVED_CONFIG {"exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/persistent-runtime-v2-fixed/strata", "args": ["--pack", "/srv/ai/models/strata/packs/iq3_s", "--native", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf", "--ple-gguf", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf", "--expert-profile", "/srv/ai/strata/data/expert-profile.bin", "--prefill", "auto", "--spec", "4", "--spec-min-p", "0.5", "--mtp", "/srv/ai/models/strata/mtp/rt", "--kv", "int8", "--kv-resident", "32768", "--expert-cache", "auto", "--max-context", "32768", "--suffix-draft", "0", "--prompt-cache", "0", "--pool-workers", "15", "--pcie-frac", "0.28"], "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/persistent-runtime-v2-fixed", "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E029-persistent-runtime/v2-fixed/correctness/persistent-v2-off/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1", "STRATA_POOL_SPIN_US": "100"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "93e31983c5735453e1f8be5fe143cb4a3f0538b9", "build_variant": "persistent-v2-off", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "bbcb31426701349e900ef621e187556ffdf9e1fc7d3d701beff080f60a923b19", "headline_instrumentation": "OFF", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 32768, "source_sha": "93e31983c5735453e1f8be5fe143cb4a3f0538b9", "source_status": "", "variant_overrides": {"env": {"STRATA_POOL_SPIN_US": "100"}, "experimental": false, "safe_serve_only": true, "policy_version": "P2v2 predeclaredhorizon64/budget64MiB", "extra_explicit_GPU_bytes_per_device": 0, "mapped_CPU_bytes_per_device": 0, "math": "True experts, immutable original weights; alteredCPU/GPUpathcanrounddifferently.", "posttiming_byteaudit_default": "OFF"}, "server_entrypoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/serve_capture.py", "diagnostic_env": {"STRATA_DBG_NAN": "1"}}
+READY persistent-v2-off 32k 67.09
+warmup VALID input 4096 output 64 PP 112.0 TG 126.8
+case1 VALID input 49 output 141 PP 198.6 TG 118.0
+case2 VALID input 49 output 189 PP 232.7 TG 138.3
+case3 VALID input 55 output 252 PP 206.8 TG 178.4
+case4 VALID input 70 output 195 PP 203.7 TG 158.4
+case5 VALID input 61 output 442 PP 231.5 TG 163.0
+case6 VALID input 58 output 336 PP 225.5 TG 180.7
+case7 VALID input 43 output 132 PP 207.7 TG 102.3
+case8 VALID input 48 output 98 PP 187.1 TG 117.3
+case9 VALID input 57 output 18 PP 217.1 TG 139.3
+case10 VALID input 61 output 27 PP 239.8 TG 137.3
+[
+  {
+    "case": 1,
+    "state": "VALID",
+    "generated": 141,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "cf54d9ea1a8a5dd73c720a6772a0e59bd069b06ca3705859ec36ce966b4da763",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  },
+  {
+    "case": 2,
+    "state": "VALID",
+    "generated": 189,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "07f502ccffca9f96deeddc444bee09b0555b1e4d7d1b7dafe8d1ae6cace7c5bc",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  },
+  {
+    "case": 3,
+    "state": "VALID",
+    "generated": 252,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "740c2746cf51c43b80d3cf92d82326ef44c370ea5446c2fc2ab9fff2a22d1f21",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  },
+  {
+    "case": 4,
+    "state": "VALID",
+    "generated": 195,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "00031218ec45fad4c408c32fb2408abb9da31279624e22182a75a21097c41232",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  },
+  {
+    "case": 5,
+    "state": "VALID",
+    "generated": 442,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "f031b3f50d59f06dfc650cf26df79af24e4636a67605fa1a046edc94b6858cbb",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  },
+  {
+    "case": 6,
+    "state": "VALID",
+    "generated": 336,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "052c66565304d04d75b7e1fdec3c3357c473355068f998995bd72639d55fce51",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  },
+  {
+    "case": 7,
+    "state": "VALID",
+    "generated": 132,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "0a33f09e8c11aa4b28eab20a0f54bde2def33eecc80be2fb88d540348256e76f",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  },
+  {
+    "case": 8,
+    "state": "VALID",
+    "generated": 98,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "7ec9c22f9464545772e975489e016e3b630f5b1abac33f546bae15f6a096ec25",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  },
+  {
+    "case": 9,
+    "state": "VALID",
+    "generated": 18,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "8448cd5842a2428ec4addb0e30e56b89c828fa2724ca2f198873992d22f21a67",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  },
+  {
+    "case": 10,
+    "state": "VALID",
+    "generated": 27,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "a2d8fad7f44ee3ebaf08cd48c6804b450e77e6f156c978c1afbeefbc5ba539a7",
+    "same_input_ids": null,
+    "same_visible_output": null,
+    "first_diverging_character": null
+  }
+]
+RESOLVED_CONFIG {"exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/persistent-runtime-v2-fixed/strata", "args": ["--pack", "/srv/ai/models/strata/packs/iq3_s", "--native", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf", "--ple-gguf", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf", "--expert-profile", "/srv/ai/strata/data/expert-profile.bin", "--prefill", "auto", "--spec", "4", "--spec-min-p", "0.5", "--mtp", "/srv/ai/models/strata/mtp/rt", "--kv", "int8", "--kv-resident", "32768", "--expert-cache", "auto", "--max-context", "32768", "--suffix-draft", "0", "--prompt-cache", "0", "--pool-workers", "15", "--pcie-frac", "0.28"], "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/persistent-runtime-v2-fixed", "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E029-persistent-runtime/v2-fixed/correctness/persistent-v2-on/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1", "STRATA_POOL_SPIN_US": "100", "STRATA_LAB_PERSISTENT": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "93e31983c5735453e1f8be5fe143cb4a3f0538b9", "build_variant": "persistent-v2-on", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "bbcb31426701349e900ef621e187556ffdf9e1fc7d3d701beff080f60a923b19", "headline_instrumentation": "OFF", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 32768, "source_sha": "93e31983c5735453e1f8be5fe143cb4a3f0538b9", "source_status": "", "variant_overrides": {"env": {"STRATA_POOL_SPIN_US": "100", "STRATA_LAB_PERSISTENT": "1"}, "experimental": true, "safe_serve_only": true, "policy_version": "P2v2 predeclaredhorizon64/budget64MiB", "extra_explicit_GPU_bytes_per_device": 320, "mapped_CPU_bytes_per_device": 1664, "math": "True experts, immutable original weights; alteredCPU/GPUpathcanrounddifferently.", "posttiming_byteaudit_default": "OFF"}, "server_entrypoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/serve_capture.py", "diagnostic_env": {"STRATA_DBG_NAN": "1"}}
+READY persistent-v2-on 32k 60.09
+warmup VALID input 4096 output 64 PP 115.0 TG 120.1
+case1 VALID input 49 output 190 PP 176.1 TG 104.7
+case2 VALID input 49 output 189 PP 212.4 TG 145.9
+case3 VALID input 55 output 252 PP 201.1 TG 155.4
+case4 VALID input 70 output 187 PP 197.5 TG 143.8
+case5 VALID input 61 output 397 PP 225.1 TG 171.3
+case6 VALID input 58 output 373 PP 229.3 TG 156.6
+case7 VALID input 43 output 133 PP 157.9 TG 91.8
+case8 VALID input 48 output 98 PP 183.6 TG 119.6
+case9 VALID input 57 output 18 PP 189.1 TG 111.2
+case10 VALID input 61 output 27 PP 227.8 TG 131.5
+[
+  {
+    "case": 1,
+    "state": "VALID",
+    "generated": 190,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "9915a3aa99dd60472914f71dc81d63e4625fc2c27f7cade279a4e54bc30086ce",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 80
+  },
+  {
+    "case": 2,
+    "state": "VALID",
+    "generated": 189,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "07f502ccffca9f96deeddc444bee09b0555b1e4d7d1b7dafe8d1ae6cace7c5bc",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 3,
+    "state": "VALID",
+    "generated": 252,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "740c2746cf51c43b80d3cf92d82326ef44c370ea5446c2fc2ab9fff2a22d1f21",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 4,
+    "state": "VALID",
+    "generated": 187,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "2287e3b53997a003298a66080499e5a3b51e0de5f4e449f79693926a8fc8b82c",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 440
+  },
+  {
+    "case": 5,
+    "state": "VALID",
+    "generated": 397,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "91fe0e2a899d45c13842b36d56322aa023730a3a879eb3e16e5f175d4a3a0223",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 463
+  },
+  {
+    "case": 6,
+    "state": "VALID",
+    "generated": 373,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "7d968bbab9a6f7efe3e86082ade36bd7f73c7519ec7bf4f293d8c851e803fb21",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 87
+  },
+  {
+    "case": 7,
+    "state": "VALID",
+    "generated": 133,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "012e7097998f5c1e15fd041023327ad12ca2f984f97468734d90aa9fdfe075be",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 144
+  },
+  {
+    "case": 8,
+    "state": "VALID",
+    "generated": 98,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "7ec9c22f9464545772e975489e016e3b630f5b1abac33f546bae15f6a096ec25",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 9,
+    "state": "VALID",
+    "generated": 18,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "8448cd5842a2428ec4addb0e30e56b89c828fa2724ca2f198873992d22f21a67",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 10,
+    "state": "VALID",
+    "generated": 27,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "a2d8fad7f44ee3ebaf08cd48c6804b450e77e6f156c978c1afbeefbc5ba539a7",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  }
+]
+[{'case': 1, 'same_input_IDs': True, 'same_output_IDs': False, 'first_diverging_token': 21, 'same_MTP': False, 'finish_off': 'stop', 'finish_on': 'stop'}, {'case': 2, 'same_input_IDs': True, 'same_output_IDs': True, 'first_diverging_token': None, 'same_MTP': False, 'finish_off': 'stop', 'finish_on': 'stop'}, {'case': 3, 'same_input_IDs': True, 'same_output_IDs': True, 'first_diverging_token': None, 'same_MTP': False, 'finish_off': 'stop', 'finish_on': 'stop'}, {'case': 4, 'same_input_IDs': True, 'same_output_IDs': False, 'first_diverging_token': 139, 'same_MTP': False, 'finish_off': 'stop', 'finish_on': 'stop'}, {'case': 5, 'same_input_IDs': True, 'same_output_IDs': False, 'first_diverging_token': 154, 'same_MTP': False, 'finish_off': 'stop', 'finish_on': 'stop'}, {'case': 6, 'same_input_IDs': True, 'same_output_IDs': False, 'first_diverging_token': 22, 'same_MTP': False, 'finish_off': 'stop', 'finish_on': 'stop'}, {'case': 7, 'same_input_IDs': True, 'same_output_IDs': False, 'first_diverging_token': 30, 'same_MTP': False, 'finish_off': 'stop', 'finish_on': 'stop'}, {'case': 8, 'same_input_IDs': True, 'same_output_IDs': True, 'first_diverging_token': None, 'same_MTP': False, 'finish_off': 'stop', 'finish_on': 'stop'}, {'case': 9, 'same_input_IDs': True, 'same_output_IDs': True, 'first_diverging_token': None, 'same_MTP': True, 'finish_off': 'stop', 'finish_on': 'stop'}, {'case': 10, 'same_input_IDs': True, 'same_output_IDs': True, 'first_diverging_token': None, 'same_MTP': False, 'finish_off': 'stop', 'finish_on': 'stop'}]

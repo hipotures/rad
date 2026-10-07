@@ -1,0 +1,75 @@
+[
+  {
+    "name": "register",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "direct-parts-off-v1",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/direct-parts-v1",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/direct-parts-v1/strata",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/overrides.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.2145678997039795,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/commands/register.log"
+  },
+  {
+    "name": "battery",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/correctness_battery.py",
+      "--variant",
+      "direct-parts-off-v1",
+      "--experiment",
+      "E025-direct-parts-off-guard",
+      "--attempt",
+      "v1",
+      "--reference",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control"
+    ],
+    "returncode": 0,
+    "elapsed_s": 127.34468173980713,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/commands/battery.log"
+  },
+  {
+    "name": "ground-truth",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_battery.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/correctness/direct-parts-off-v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.11493110656738281,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/commands/ground-truth.log"
+  },
+  {
+    "name": "confirmation",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/direct-parts-off-v1/reproduce.sh",
+      "--experiment",
+      "E025-direct-parts-off-guard",
+      "--attempt",
+      "v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 383.5360052585602,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/commands/confirmation.log"
+  },
+  {
+    "name": "analysis",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/compare_confirmation.py",
+      "--experiment",
+      "E025-direct-parts-off-guard",
+      "--reference",
+      "E023-direct-parts"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.1146705150604248,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E025-direct-parts-off-guard/v1/commands/analysis.log"
+  }
+]

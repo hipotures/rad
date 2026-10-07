@@ -1,0 +1,14 @@
+{
+  "question": "Can a small numeric candidate scorer predict useful future routed-expert demand better than cheap causal history, at an affordable runtime cost?",
+  "inspiration": "Pinned Zefan-Cai/Open-Jev scalar independent candidate decision head; no language backbone or published Jev accuracy reused.",
+  "target": "log1p total routed entries over next4verify windows, including rejected MTP branches; ranking/count regression, not softmax or independent calibrated probabilities",
+  "availability": "Features use only observed routing through current window and initial state. Prediction runs after completed verify at every4runtime rounds.",
+  "split": {"development": ["dev-code", "dev-math"], "calibration": ["cal-prose"], "holdout": ["hold-code", "hold-structured", "hold-math"]},
+  "separation": "Entire independent task episodes; saved short task texts, not nonce variants of benchmark. No holdout labels used in preprocessing/training/calibration.",
+  "models": ["weighted ridge linear scorer", "small16hidden ReLU MLP", "16hidden temporal MLP with explicit lag/momentum features"],
+  "calibration": "Affine expected-count calibration on separate calibration episode; no probability claim",
+  "finite_budget": "One seed per model, maximum600Adam minibatches per MLP, bounded CPU numeric training; no grid. Full causal heldout ranking and finite-transfer replay afterward.",
+  "baselines": ["initial static profile", "existing decayed heat", "recency", "recent4window counts", "causal frequency"],
+  "validity": "Preprocessing from development only; whole-task labels frozen. Report memory/scoring/feature costs and sampling. Predictor accuracy or offline coverage is not measured TG.",
+  "completion": "Save datasets/manifests/checkpoints, bounded training/evaluation, temporal disposition and replay against same capacities/transfer constraints. Integrate only justified candidates or document evidenced blocker."
+}

@@ -1,0 +1,25 @@
+[
+  [
+    "cmake",
+    "-S",
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/source",
+    "-B",
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/build",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DSTRATA_ENABLE_CUDA=ON",
+    "-DCMAKE_CUDA_ARCHITECTURES=89",
+    "-DSTRATA_BUILD_TESTS=OFF",
+    "-DSTRATA_PREFILL_MMQ=OFF",
+    "-DSTRATA_GGML_DIR=/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/dependency/ggml-org-llama.cpp-3cf0325",
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+  ],
+  [
+    "cmake",
+    "--build",
+    "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/build",
+    "--target",
+    "strata",
+    "-j",
+    "12"
+  ]
+]

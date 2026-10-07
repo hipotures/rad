@@ -1,0 +1,437 @@
+{
+  "scope": "Scalar/header export from local originals. Lists over32 items, long strings and depth/node excess are explicitly omitted; this is not the original schema and is not a replacement input for research scripts.",
+  "records": [
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v1/128k-rate12p6/markov-scaled.json",
+      "source_bytes": 1456370,
+      "source_sha256": "00ee535515467f5ce99799ef144c7464adbc580b136f12bbc8ba70a162e134c6",
+      "compact_evidence": {
+        "policy": "markov-scaled",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "demand_entries": 2351040,
+        "nonlocal_entries": 60116,
+        "all_demand_local_hit_pct": 97.44300394718934,
+        "nonlocal_distinct_group_jobs": 54448,
+        "nonlocal_weight_bytes_per_group": 111780403200,
+        "promotion_count": 3379,
+        "promotion_bytes": 6828057600,
+        "useful_promotion_bytes": 6636339200,
+        "unused_promotion_bytes": 191718400,
+        "victim_demand_while_absent": 16941,
+        "modeled_pending_wait_s": 0.11752911652345513,
+        "observed_window_wall_s": 30.868415985,
+        "observed_pending_wait_removed_s": 0.16604712300000005,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 30.819897978523457,
+        "offline_Python_selector_wall_s": 0.6258356686448678,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19712998400,
+          18220492800
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1449
+        },
+        "promotions": {
+          "omitted_list_items": 3379
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "same-layer capacities and original physical slot classes; no extra VRAM",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+        ],
+        "transition_state_bytes": 50429952,
+        "transition_state_update_wall_s": 1.454608733591158
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v1/128k-rate12p6/token-bigram-hybrid.json",
+      "source_bytes": 2959696,
+      "source_sha256": "0a6aad915d666fb24f9e02df79cb1dc558e47fdc45c258e91556a3f9e8528cf4",
+      "compact_evidence": {
+        "policy": "token-bigram-hybrid",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "demand_entries": 2351040,
+        "nonlocal_entries": 44699,
+        "all_demand_local_hit_pct": 98.09875629508643,
+        "nonlocal_distinct_group_jobs": 40526,
+        "nonlocal_weight_bytes_per_group": 83314099200,
+        "promotion_count": 7629,
+        "promotion_bytes": 15511936000,
+        "useful_promotion_bytes": 13910528000,
+        "unused_promotion_bytes": 1601408000,
+        "victim_demand_while_absent": 22197,
+        "modeled_pending_wait_s": 0.41594968404631927,
+        "observed_window_wall_s": 30.868415985,
+        "observed_pending_wait_removed_s": 0.16604712300000005,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 31.118318546046318,
+        "offline_Python_selector_wall_s": 0.16881357081001624,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19712998400,
+          18220492800
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1449
+        },
+        "promotions": {
+          "omitted_list_items": 7629
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "same-layer capacities and original physical slot classes; no extra VRAM",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+        ],
+        "causal_prediction": {
+          "available_signal": "Known outv[a] after verify plus last committed input token; historical committed rows only. No future router IDs or rejected rows are used as features.",
+          "capacity_bigrams": 256,
+          "dictionary_queries": 1448,
+          "dictionary_hits": 338,
+          "dictionary_payload_peak_bytes": 245760,
+          "update_wall_s": 0.4508377426536754,
+          "memory_limits": "Payload bytes exclude Python container overhead. C++ deployment memory and cost not yet measured; no GPU state.",
+          "score": "Causal heat + predicted next-row count / 0.3; bounded same-layer admission, no routing changes."
+        }
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v1/32k-rate12p6/markov-scaled.json",
+      "source_bytes": 1206676,
+      "source_sha256": "21bf3fd812511bb46fad8f5ee4789079bd8ae685193fc4050c8183af82cfe8c5",
+      "compact_evidence": {
+        "policy": "markov-scaled",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "demand_entries": 2117280,
+        "nonlocal_entries": 52624,
+        "all_demand_local_hit_pct": 97.51454696591854,
+        "nonlocal_distinct_group_jobs": 48693,
+        "nonlocal_weight_bytes_per_group": 100442035200,
+        "promotion_count": 2779,
+        "promotion_bytes": 5654912000,
+        "useful_promotion_bytes": 5529651200,
+        "unused_promotion_bytes": 125260800,
+        "victim_demand_while_absent": 13406,
+        "modeled_pending_wait_s": 0.08790416420605934,
+        "observed_window_wall_s": 25.510303695,
+        "observed_pending_wait_removed_s": 0.12157517000000015,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 25.47663268920606,
+        "offline_Python_selector_wall_s": 0.8519851625314914,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19824128000,
+          18323200000
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1241
+        },
+        "promotions": {
+          "omitted_list_items": 2779
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "same-layer capacities and original physical slot classes; no extra VRAM",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+        ],
+        "transition_state_bytes": 50429952,
+        "transition_state_update_wall_s": 2.3058644548873417
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v1/32k-rate12p6/token-bigram-hybrid.json",
+      "source_bytes": 2271082,
+      "source_sha256": "bba017ffbf0f900f342b502320c0e0e71157ec4f82d04845d59074d4bec2f05a",
+      "compact_evidence": {
+        "policy": "token-bigram-hybrid",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "demand_entries": 2117280,
+        "nonlocal_entries": 35703,
+        "all_demand_local_hit_pct": 98.31373271367036,
+        "nonlocal_distinct_group_jobs": 33014,
+        "nonlocal_weight_bytes_per_group": 68167731200,
+        "promotion_count": 5788,
+        "promotion_bytes": 11885824000,
+        "useful_promotion_bytes": 10863308800,
+        "unused_promotion_bytes": 1022515200,
+        "victim_demand_while_absent": 15013,
+        "modeled_pending_wait_s": 0.27238951061806727,
+        "observed_window_wall_s": 25.510303695,
+        "observed_pending_wait_removed_s": 0.12157517000000015,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 25.661118035618067,
+        "offline_Python_selector_wall_s": 0.16543521836865693,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19824128000,
+          18323200000
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1241
+        },
+        "promotions": {
+          "omitted_list_items": 5788
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "same-layer capacities and original physical slot classes; no extra VRAM",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+        ],
+        "causal_prediction": {
+          "available_signal": "Known outv[a] after verify plus last committed input token; historical committed rows only. No future router IDs or rejected rows are used as features.",
+          "capacity_bigrams": 256,
+          "dictionary_queries": 1240,
+          "dictionary_hits": 569,
+          "dictionary_payload_peak_bytes": 245760,
+          "update_wall_s": 0.4825561222387478,
+          "memory_limits": "Payload bytes exclude Python container overhead. C++ deployment memory and cost not yet measured; no GPU state.",
+          "score": "Causal heat + predicted next-row count / 0.3; bounded same-layer admission, no routing changes."
+        }
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v2/128k-rate12p6/markov-scaled.json",
+      "source_bytes": 1456371,
+      "source_sha256": "2ae7950e26d4910847dccbbb557a0555c4f98c6e77de0812524cb0f86ae2dacc",
+      "compact_evidence": {
+        "policy": "markov-scaled",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "demand_entries": 2351040,
+        "nonlocal_entries": 60116,
+        "all_demand_local_hit_pct": 97.44300394718934,
+        "nonlocal_distinct_group_jobs": 54448,
+        "nonlocal_weight_bytes_per_group": 111780403200,
+        "promotion_count": 3379,
+        "promotion_bytes": 6828057600,
+        "useful_promotion_bytes": 6636339200,
+        "unused_promotion_bytes": 191718400,
+        "victim_demand_while_absent": 16941,
+        "modeled_pending_wait_s": 0.11752911652345513,
+        "observed_window_wall_s": 30.868415985,
+        "observed_pending_wait_removed_s": 0.16604712300000005,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 30.819897978523457,
+        "offline_Python_selector_wall_s": 0.9930832866812125,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19712998400,
+          18220492800
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1449
+        },
+        "promotions": {
+          "omitted_list_items": 3379
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "same-layer capacities and original physical slot classes; no extra VRAM",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+        ],
+        "transition_state_bytes": 50429952,
+        "transition_state_update_wall_s": 2.6011099728639238
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v2/128k-rate12p6/token-bigram-hybrid.json",
+      "source_bytes": 2959695,
+      "source_sha256": "5f6cf2228e765a0e4f84fdf7fb109794a404e0a61fbca9d92c147382372711a8",
+      "compact_evidence": {
+        "policy": "token-bigram-hybrid",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5-portfix/128k/traces/runtime-request2",
+        "demand_entries": 2351040,
+        "nonlocal_entries": 44699,
+        "all_demand_local_hit_pct": 98.09875629508643,
+        "nonlocal_distinct_group_jobs": 40526,
+        "nonlocal_weight_bytes_per_group": 83314099200,
+        "promotion_count": 7629,
+        "promotion_bytes": 15511936000,
+        "useful_promotion_bytes": 13910528000,
+        "unused_promotion_bytes": 1601408000,
+        "victim_demand_while_absent": 22197,
+        "modeled_pending_wait_s": 0.41594968404631927,
+        "observed_window_wall_s": 30.868415985,
+        "observed_pending_wait_removed_s": 0.16604712300000005,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 31.118318546046318,
+        "offline_Python_selector_wall_s": 0.3270691336947493,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19712998400,
+          18220492800
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1449
+        },
+        "promotions": {
+          "omitted_list_items": 7629
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "same-layer capacities and original physical slot classes; no extra VRAM",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+        ],
+        "causal_prediction": {
+          "available_signal": "Known outv[a] after verify plus last committed input token; historical committed rows only. No future router IDs or rejected rows are used as features.",
+          "capacity_bigrams": 256,
+          "dictionary_queries": 1448,
+          "dictionary_hits": 338,
+          "dictionary_payload_peak_bytes": 245760,
+          "update_wall_s": 0.9608443145407364,
+          "memory_limits": "Payload bytes exclude Python container overhead. C++ deployment memory and cost not yet measured; no GPU state.",
+          "score": "Causal heat + predicted next-row count / 0.3; bounded same-layer admission, no routing changes."
+        }
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v2/32k-rate12p6/markov-scaled.json",
+      "source_bytes": 1206676,
+      "source_sha256": "4c6688993a9d71350958ece0d172082c451b7a79b17c65074010cd211bf3c698",
+      "compact_evidence": {
+        "policy": "markov-scaled",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "demand_entries": 2117280,
+        "nonlocal_entries": 52624,
+        "all_demand_local_hit_pct": 97.51454696591854,
+        "nonlocal_distinct_group_jobs": 48693,
+        "nonlocal_weight_bytes_per_group": 100442035200,
+        "promotion_count": 2779,
+        "promotion_bytes": 5654912000,
+        "useful_promotion_bytes": 5529651200,
+        "unused_promotion_bytes": 125260800,
+        "victim_demand_while_absent": 13406,
+        "modeled_pending_wait_s": 0.08790416420605934,
+        "observed_window_wall_s": 25.510303695,
+        "observed_pending_wait_removed_s": 0.12157517000000015,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 25.47663268920606,
+        "offline_Python_selector_wall_s": 0.8430109116015956,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19824128000,
+          18323200000
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1241
+        },
+        "promotions": {
+          "omitted_list_items": 2779
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "same-layer capacities and original physical slot classes; no extra VRAM",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+        ],
+        "transition_state_bytes": 50429952,
+        "transition_state_update_wall_s": 2.3579479561303742
+      }
+    },
+    {
+      "source": "iq3s-residency-20261004T230051Z/experiments/E007-causal-signals/v2/32k-rate12p6/token-bigram-hybrid.json",
+      "source_bytes": 2271082,
+      "source_sha256": "4b05bb2e44b9e084ca2fbd0ee0df41c5cd05e30e29359488ca65934b7d4257e4",
+      "compact_evidence": {
+        "policy": "token-bigram-hybrid",
+        "aggregate_transfer_budget_GB_s": 12.6,
+        "trace": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E003-diagnostics/v5/32k/traces/runtime-request2",
+        "demand_entries": 2117280,
+        "nonlocal_entries": 35703,
+        "all_demand_local_hit_pct": 98.31373271367036,
+        "nonlocal_distinct_group_jobs": 33014,
+        "nonlocal_weight_bytes_per_group": 68167731200,
+        "promotion_count": 5788,
+        "promotion_bytes": 11885824000,
+        "useful_promotion_bytes": 10863308800,
+        "unused_promotion_bytes": 1022515200,
+        "victim_demand_while_absent": 15013,
+        "modeled_pending_wait_s": 0.27238951061806727,
+        "observed_window_wall_s": 25.510303695,
+        "observed_pending_wait_removed_s": 0.12157517000000015,
+        "fixed_nonpromotion_work_plus_modeled_wait_s": 25.661118035618067,
+        "offline_Python_selector_wall_s": 0.27775817998917773,
+        "selector_time_charged_to_timeline": false,
+        "resource_bytes_per_GPU": [
+          19824128000,
+          18323200000
+        ],
+        "per_layer_capacity": {
+          "omitted_list_items": 48
+        },
+        "future_information_used": false,
+        "frames": {
+          "omitted_list_items": 1241
+        },
+        "promotions": {
+          "omitted_list_items": 5788
+        },
+        "limitations": [
+          "fixed observed demand/MTP/numerical trajectory",
+          "queue waits are modeled; CPU/mapped/resident execution cost remains fixed",
+          "selector measured in external Python/NumPy replay; not deployable runtime cost and not hidden in claimed TG",
+          "same-layer capacities and original physical slot classes; no extra VRAM",
+          "copy queues serialize on a conservative aggregate link and two per-device resources",
+          "free-transfer reference is intentionally optimistic; future-feasible and future-nextuse are heuristics under assumed measured-range costs, not optimum or proven upper bound"
+        ],
+        "causal_prediction": {
+          "available_signal": "Known outv[a] after verify plus last committed input token; historical committed rows only. No future router IDs or rejected rows are used as features.",
+          "capacity_bigrams": 256,
+          "dictionary_queries": 1240,
+          "dictionary_hits": 569,
+          "dictionary_payload_peak_bytes": 245760,
+          "update_wall_s": 0.8782067458960228,
+          "memory_limits": "Payload bytes exclude Python container overhead. C++ deployment memory and cost not yet measured; no GPU state.",
+          "score": "Causal heat + predicted next-row count / 0.3; bounded same-layer admission, no routing changes."
+        }
+      }
+    }
+  ]
+}

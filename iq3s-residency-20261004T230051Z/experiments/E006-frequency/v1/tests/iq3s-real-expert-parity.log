@@ -1,0 +1,47 @@
+          iq3_xxs avx512 gate rows vs ggml vec_dot: rel 9.90e-08
+          gate+up one token one thread: avx512 266 us (4.72 GB/s), ggml 207 us (6.05 GB/s)
+          gate+up 3 tokens one thread: avx512 348 us vs ggml 3 x 207 us
+          iq3_xxs avx2 gate rows vs ggml vec_dot: rel 3.26e-08
+          gate+up one token one thread: avx2 196 us (6.41 GB/s), ggml 207 us (6.05 GB/s)
+          gate+up 3 tokens one thread: avx2 260 us vs ggml 3 x 207 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          iq4_nl AVX-2 multi-token down vs ggml down: rel 1.01e-07
+          down 3 tokens one thread: avx2 121 us (7.61 GB/s) vs ggml 166 us (5.54 GB/s)
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 0   iq3_xxs /iq4_nl  blob  2176000  cpu rel 1.30e-02  gpu rel 1.14e-02  cpu-gpu 1.39e-02  ok
+          iq2_s avx512 gate rows vs ggml vec_dot: rel 9.84e-08
+          gate+up one token one thread: avx512 196 us (5.37 GB/s), ggml 159 us (6.60 GB/s)
+          gate+up 3 tokens one thread: avx512 237 us vs ggml 3 x 159 us
+          iq2_s avx2 gate rows vs ggml vec_dot: rel 2.94e-08
+          gate+up one token one thread: avx2 203 us (5.18 GB/s), ggml 159 us (6.60 GB/s)
+          gate+up 3 tokens one thread: avx2 255 us vs ggml 3 x 159 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          q2_0 AVX-512 down vs ggml down: rel 2.25e-04
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 1   iq2_s   /q2_0    blob  1510400  cpu rel 1.31e-02  gpu rel 1.15e-02  cpu-gpu 1.51e-02  ok
+          iq2_s avx512 gate rows vs ggml vec_dot: rel 1.00e-07
+          gate+up one token one thread: avx512 195 us (5.38 GB/s), ggml 159 us (6.61 GB/s)
+          gate+up 3 tokens one thread: avx512 238 us vs ggml 3 x 159 us
+          iq2_s avx2 gate rows vs ggml vec_dot: rel 3.33e-08
+          gate+up one token one thread: avx2 202 us (5.18 GB/s), ggml 159 us (6.61 GB/s)
+          gate+up 3 tokens one thread: avx2 256 us vs ggml 3 x 159 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          iq4_nl AVX-2 multi-token down vs ggml down: rel 1.03e-07
+          down 3 tokens one thread: avx2 120 us (7.69 GB/s) vs ggml 163 us (5.66 GB/s)
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 2   iq2_s   /iq4_nl  blob  1971200  cpu rel 1.31e-02  gpu rel 1.20e-02  cpu-gpu 1.52e-02  ok
+          iq3_xxs avx512 gate rows vs ggml vec_dot: rel 9.55e-08
+          gate+up one token one thread: avx512 273 us (4.59 GB/s), ggml 215 us (5.85 GB/s)
+          gate+up 3 tokens one thread: avx512 364 us vs ggml 3 x 215 us
+          iq3_xxs avx2 gate rows vs ggml vec_dot: rel 3.00e-08
+          gate+up one token one thread: avx2 205 us (6.12 GB/s), ggml 215 us (5.85 GB/s)
+          gate+up 3 tokens one thread: avx2 271 us vs ggml 3 x 215 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          q2_0 AVX-512 down vs ggml down: rel 1.82e-04
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 12  iq3_xxs /q2_0    blob  1715200  cpu rel 1.33e-02  gpu rel 1.19e-02  cpu-gpu 1.54e-02  ok
+native_expert_parity: 0 failures

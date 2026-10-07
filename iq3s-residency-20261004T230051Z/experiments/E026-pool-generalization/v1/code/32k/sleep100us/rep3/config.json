@@ -1,0 +1,81 @@
+{
+  "exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+  "args": [
+    "--pack",
+    "/srv/ai/models/strata/packs/iq3_s",
+    "--native",
+    "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+    "--ple-gguf",
+    "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+    "--expert-profile",
+    "/srv/ai/strata/data/expert-profile.bin",
+    "--prefill",
+    "auto",
+    "--spec",
+    "4",
+    "--spec-min-p",
+    "0.5",
+    "--mtp",
+    "/srv/ai/models/strata/mtp/rt",
+    "--kv",
+    "int8",
+    "--kv-resident",
+    "32768",
+    "--expert-cache",
+    "auto",
+    "--max-context",
+    "32768",
+    "--suffix-draft",
+    "0",
+    "--prompt-cache",
+    "0",
+    "--pool-workers",
+    "15",
+    "--pcie-frac",
+    "0.28"
+  ],
+  "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control",
+  "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+  "model_name": "qwen3.8-flash-next-iq3_s",
+  "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E026-pool-generalization/v1/code/32k/sleep100us/rep3/logs/engine.log",
+  "lib_dirs": [
+    "/usr/local/cuda/bin",
+    "/usr/local/cuda/lib64"
+  ],
+  "port": 18132,
+  "gpu": [
+    0,
+    1
+  ],
+  "gpus_asked": true,
+  "layer_split": "25",
+  "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+  "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+  "env": {
+    "CUDA_VISIBLE_DEVICES": "0,1",
+    "STRATA_SPLIT_TIMING": "1",
+    "STRATA_DECODE_TIMING": "1",
+    "STRATA_POOL_SPIN_US": "100"
+  },
+  "host": "127.0.0.1",
+  "parallel": 1,
+  "Strata_HEAD": "6f32ec070f23ced9f50e704d854d775da52591ab",
+  "build_variant": "pool-p0-100",
+  "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+  "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+  "headline_instrumentation": "OFF",
+  "Strata_version": "0.1.39",
+  "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+  "max_total_context": 32768,
+  "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+  "source_status": "",
+  "variant_overrides": {
+    "env": {
+      "STRATA_POOL_SPIN_US": "100"
+    },
+    "extra_explicit_GPU_bytes": 0,
+    "scheduling_only": "Independent P0 same-binary pool comparison"
+  },
+  "server_entrypoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/serve_capture.py",
+  "frontend_capture": "Append actual output IDs only; common paired wrapper; no binary/source changes"
+}

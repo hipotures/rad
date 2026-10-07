@@ -1,0 +1,285 @@
+{
+  "state": "FAIL",
+  "checks": [
+    {
+      "requirement": "Required artifacts exist",
+      "pass": true,
+      "evidence": [
+        "GOAL.md",
+        "STATUS.md",
+        "DECISIONS.md",
+        "progress.json",
+        "progress.jsonl",
+        "attempt-ledger.jsonl",
+        "workload-audit.md",
+        "workload-inventory.json",
+        "prompt-catalog.md",
+        "public-sources.md",
+        "benchmark-manifest.json",
+        "trace-summary.csv",
+        "runtime-budget.md",
+        "runtime-budget.json",
+        "report.md",
+        "reproduce.md",
+        "output-review.md",
+        "provenance/compatible-existing-tapes.json"
+      ]
+    },
+    {
+      "requirement": "Twelve groups; three per family",
+      "pass": true,
+      "evidence": {
+        "code/agent": 3,
+        "math/research": 3,
+        "text/translation": 3,
+        "structured/mixed": 3
+      }
+    },
+    {
+      "requirement": "Frozen roles and exclusion",
+      "pass": true,
+      "evidence": [
+        [
+          "code-heg",
+          "development"
+        ],
+        [
+          "math-rational",
+          "development"
+        ],
+        [
+          "text-http",
+          "development"
+        ],
+        [
+          "mixed-build",
+          "development"
+        ],
+        [
+          "code-queue",
+          "calibration"
+        ],
+        [
+          "math-sensor",
+          "calibration"
+        ],
+        [
+          "text-tls",
+          "calibration"
+        ],
+        [
+          "mixed-fields",
+          "calibration"
+        ],
+        [
+          "code-archive",
+          "reserved_evaluation"
+        ],
+        [
+          "math-inventory",
+          "reserved_evaluation"
+        ],
+        [
+          "text-websocket",
+          "reserved_evaluation"
+        ],
+        [
+          "mixed-chinook",
+          "reserved_evaluation"
+        ]
+      ]
+    },
+    {
+      "requirement": "Profiles 8x32K +4x128K; actual occupancy fits",
+      "pass": true,
+      "evidence": [
+        [
+          "code-heg",
+          131072,
+          22883
+        ],
+        [
+          "math-rational",
+          32768,
+          10943
+        ],
+        [
+          "text-http",
+          32768,
+          20938
+        ],
+        [
+          "mixed-build",
+          32768,
+          10934
+        ],
+        [
+          "code-queue",
+          32768,
+          2498
+        ],
+        [
+          "math-sensor",
+          131072,
+          179
+        ],
+        [
+          "text-tls",
+          131072,
+          81722
+        ],
+        [
+          "mixed-fields",
+          131072,
+          16346
+        ],
+        [
+          "code-archive",
+          32768,
+          6983
+        ],
+        [
+          "math-inventory",
+          32768,
+          165
+        ],
+        [
+          "text-websocket",
+          32768,
+          30383
+        ],
+        [
+          "mixed-chinook",
+          32768,
+          1899
+        ]
+      ]
+    },
+    {
+      "requirement": "One original model attempt per task; no exclusions",
+      "pass": true,
+      "evidence": [
+        "code-heg",
+        "math-rational",
+        "text-http",
+        "mixed-build",
+        "code-queue",
+        "math-sensor",
+        "text-tls",
+        "mixed-fields",
+        "code-archive",
+        "math-inventory",
+        "text-websocket",
+        "mixed-chinook"
+      ]
+    },
+    {
+      "requirement": "All twelve validated complete tapes",
+      "pass": true,
+      "evidence": "raw/*/validation.json; active QSA widths and final EOS boundary; exact IDs/FNV/counts"
+    },
+    {
+      "requirement": "Frozen source/excerpt/payload hashes",
+      "pass": false,
+      "evidence": "benchmark-manifest.json and corpus files"
+    },
+    {
+      "requirement": "Fresh fixed warmup and zero prompt reuse",
+      "pass": true,
+      "evidence": "episode warmup and measured reused_tokens"
+    },
+    {
+      "requirement": "Native capture identities and oracle disabled",
+      "pass": true,
+      "evidence": "raw/*/raw/native-process.json; run.py check verifies source/binary/model/config"
+    },
+    {
+      "requirement": "Per-request and startup limits",
+      "pass": true,
+      "evidence": "180s startup+warmup;240s request;60s decode soft target;2048output"
+    },
+    {
+      "requirement": "Model operation <=600s per family",
+      "pass": true,
+      "evidence": {
+        "code/agent": 386.01908550498774,
+        "math/research": 353.60770005598897,
+        "text/translation": 407.48212470300496,
+        "structured/mixed": 362.9512242550263
+      }
+    },
+    {
+      "requirement": "Launches before unchanged T+50",
+      "pass": true,
+      "evidence": "request begin monotonic compared to original timing.json"
+    },
+    {
+      "requirement": "No owned live processes; cleanup verified",
+      "pass": true,
+      "evidence": []
+    },
+    {
+      "requirement": "No GPU compute jobs",
+      "pass": true,
+      "evidence": ""
+    },
+    {
+      "requirement": "No tool-execution or new256K",
+      "pass": true,
+      "evidence": "benchmark manifest"
+    },
+    {
+      "requirement": "Preserved two original validator failures",
+      "pass": true,
+      "evidence": "repair-ledger; no model reruns"
+    },
+    {
+      "requirement": "Runtime total reconciles",
+      "pass": true,
+      "evidence": "runtime-budget.json"
+    },
+    {
+      "requirement": "Causal labels separated and censoring retained",
+      "pass": true,
+      "evidence": "analysis/victim-return-labels.json"
+    },
+    {
+      "requirement": "Four source-grounded development screening tasks",
+      "pass": true,
+      "evidence": "predeclared screening flags"
+    },
+    {
+      "requirement": "Storage below12GiB",
+      "pass": true,
+      "evidence": {
+        "bytes": 5813652767
+      }
+    },
+    {
+      "requirement": "Scripts syntax valid; reproducer instructions present",
+      "pass": true,
+      "evidence": "stdlib AST parse; identity/help/inspect smoke logs"
+    },
+    {
+      "requirement": "Report and CSV cover every measured task",
+      "pass": true,
+      "evidence": "trace-summary.csv and report.md"
+    },
+    {
+      "requirement": "Completion audit before original60-minute deadline",
+      "pass": true,
+      "evidence": {
+        "elapsed_s": 2970.4170687939622,
+        "remaining_s": 629.5829312060378
+      }
+    }
+  ],
+  "elapsed_s": 2970.4170687939622,
+  "UTC": "2026-10-06T19:39:20.414869+00:00",
+  "defined": 12,
+  "calibrated": 12,
+  "trace_ready": 12,
+  "owned_live_processes": [],
+  "GPU_compute_jobs": "",
+  "policy_training_or_comparison_performed": false
+}

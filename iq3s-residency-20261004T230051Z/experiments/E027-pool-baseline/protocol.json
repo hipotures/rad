@@ -1,0 +1,12 @@
+{
+  "phase": "P1",
+  "selected_policy": "STRATA_POOL_SPIN_US=100, unchanged CURRENT executable",
+  "reason": "Independent P0 latency improvements, math128K neutral; no serious consistent miss-heavy regression. Avoid an unjustified new synchronization subsystem.",
+  "stress": "Existing random wake stress plus separately compiled targeted test linked to unchanged CURRENT CPU library: many short bursts, long all-local/no-job intervals, alternating bursts, repeated destructor/wakeup.",
+  "confirmation": "Standard saved workload, paired fresh server each policy/replicate; fixed saved4096input64output warmup then4096output.3valid maximum each/profile/policy. This differs from old E024 serial cache-history protocol and common frontend captures actual IDs.",
+  "independent_confirmation_reused": "E026 all3families/bothprofiles/3replicas. Do not repeat any unchanged independent point.",
+  "frozen_architecture": "K25/pcie0.28/workers15/spec4/minp0.5/INT8/prefillauto/suffix0/reuse0; max32768 or131072",
+  "off_control": "Same control source and binary; only100us env differs",
+  "invalid": "Retain early stop/crash/protocol failure; no favorable retries",
+  "new_experiment_scope": "Paired fresh-server standard workload confirmation and targeted wakeup safety; not a threshold sweep."
+}

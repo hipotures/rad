@@ -1,0 +1,41 @@
+{
+  "purpose": "Full-contract32K fidelity/feasibility pair1; matching screen counts toward final3 attempts",
+  "jobs": [
+    {
+      "label": "v2-current-32k-attempt1",
+      "args": [
+        "replay",
+        "--label",
+        "v2-current-32k-attempt1",
+        "--variant",
+        "oracle-v2",
+        "--payload",
+        "32k-run1",
+        "--tape",
+        "tapes/capture-32k-v2.bin"
+      ],
+      "tape": "tapes/capture-32k-v2.bin",
+      "timeout_s": 900
+    },
+    {
+      "label": "v2-oracle-32k-attempt1",
+      "args": [
+        "replay",
+        "--label",
+        "v2-oracle-32k-attempt1",
+        "--variant",
+        "oracle-v2",
+        "--payload",
+        "32k-run1",
+        "--tape",
+        "tapes/capture-32k-v2.bin",
+        "--oracle",
+        "full",
+        "--strategy",
+        "deadline"
+      ],
+      "tape": "tapes/capture-32k-v2.bin",
+      "timeout_s": 900
+    }
+  ]
+}

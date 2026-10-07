@@ -1,0 +1,75 @@
+[
+  {
+    "name": "register",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "host-plan-off-v1",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/skip-local-host-plan-v1",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/skip-local-host-plan-v1/strata",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/overrides.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.21457314491271973,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/commands/register.log"
+  },
+  {
+    "name": "battery",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/correctness_battery.py",
+      "--variant",
+      "host-plan-off-v1",
+      "--experiment",
+      "E022-host-plan-off-guard",
+      "--attempt",
+      "v1",
+      "--reference",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control"
+    ],
+    "returncode": 0,
+    "elapsed_s": 143.06487226486206,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/commands/battery.log"
+  },
+  {
+    "name": "ground-truth",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_battery.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/correctness/host-plan-off-v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.11512088775634766,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/commands/ground-truth.log"
+  },
+  {
+    "name": "confirmation",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/host-plan-off-v1/reproduce.sh",
+      "--experiment",
+      "E022-host-plan-off-guard",
+      "--attempt",
+      "v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 382.8523871898651,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/commands/confirmation.log"
+  },
+  {
+    "name": "analysis",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/compare_confirmation.py",
+      "--experiment",
+      "E022-host-plan-off-guard",
+      "--reference",
+      "E019-skip-local-host-plan"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.11555910110473633,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E022-host-plan-off-guard/v1/commands/analysis.log"
+  }
+]

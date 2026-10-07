@@ -1,0 +1,26 @@
+9786:                 return 1;
+9787:             }
+9788:             if (dec_timing && dec_windows > 0) {
+9789:                 const DecSnap d1 = dec_snap();
+9790:                 const double w = (double) dec_windows, L = (double) g.n_layers;
+9791:                 std::fprintf(stderr, "strata decode timing: %lld windows, avg T %.2f, %.2f tokens/window, %.2f ms/window = "
+9792:                                      "verify %.2f (GPU-reach wait %.2f + per-layer host %.2f [plan %.2f actq %.2f jobs %.2f "
+9793:                                      "CPU %.2f] + stage %.2f) + commit/emit %.2f + draft %.2f; per layer-window: CPU experts "
+9794:                                      "%.2f (%.2f entries), VRAM hits %.2f, PCIe %.2f\n",
+9795:                              (long long) dec_windows, dec_T / w, produced_n / w, decode_ms / w, dt_run / w,
+9796:                              (d1.wait - ds0.wait) / w, (d1.pool - ds0.pool) / w, (d1.plan - ds0.plan) / w,
+9797:                              (d1.actq - ds0.actq) / w, (d1.jobs - ds0.jobs) / w, (d1.run - ds0.run) / w,
+9798:                              (d1.host - ds0.host) / w, dt_commit / w, dt_draft / w, (d1.misses - ds0.misses) / (w * L),
+9799:                              (d1.entries - ds0.entries) / (w * L), (d1.hits - ds0.hits) / (w * L), (d1.pcie - ds0.pcie) / (w * L));
+9800:                 for (int st = 0; st < n_stages; ++st) {   // every stage's GPU profile, not only the first card's
+9801:                     const std::string pr = stage_ver(st).profile_report();
+9802:                     if (pr.empty()) continue;
+9803:                     if (st == 0) std::fprintf(stderr, "strata decode GPU stages (ms/window):%s\n", pr.c_str());   // text as before
+9804:                     else std::fprintf(stderr, "strata decode GPU stages, stage %d (ms/window):%s\n", st, pr.c_str());
+9805:                 }
+9806:             }
+9807:             if (!cancelled) {
+9808:                 // a prompt stopped halfway leaves the session somewhere between two chunks: nothing to continue from
+9809:                 // (the checkpoints taken while reading it are still good)
+9810:                 live.swap(consumed);
+9811:                 live_imgs = imgs_below(req_imgs, (int64_t) live.size());

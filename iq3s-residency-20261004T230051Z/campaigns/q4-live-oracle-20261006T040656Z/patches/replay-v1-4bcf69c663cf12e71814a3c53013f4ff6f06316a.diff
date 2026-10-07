@@ -1,0 +1,208 @@
+diff --git a/include/strata/research/q4_tape.hpp b/include/strata/research/q4_tape.hpp
+new file mode 100644
+index 0000000..9595eed
+--- /dev/null
++++ b/include/strata/research/q4_tape.hpp
+@@ -0,0 +1,52 @@
++// Fixed-work Q4 research tape. OFF unless explicitly enabled; not a serving model.
++#pragma once
++#include "strata/research/q4_tape_gpu.hpp"
++#include <cuda_runtime.h>
++#include <array>
++#include <algorithm>
++#include <chrono>
++#include <cstdio>
++#include <cstdlib>
++#include <cstring>
++#include <string>
++#include <stdexcept>
++#include <vector>
++namespace strata::research {
++struct TapeWindow {
++ int64_t position; int32_t T,accepted,draft_count,emitted_before;
++ int32_t inputs[4],outputs[4]; TapeRoutes routes;
++};
++struct TapeObservation {
++ uint64_t begin_ns,end_ns; int32_t seen[51],disagreements[51],native_outputs[4]; float activation[51][8];
++};
++struct TapeHeader { uint64_t magic=0x3150455441343451ull; uint32_t version=1,window_bytes=sizeof(TapeWindow); uint64_t windows=0,prompt_count=0,output_budget=0,output_count=0,work_hash=0; };
++struct Q4Tape {
++ bool enabled=false,replaying=false,active=false; int request=0,selected=2; size_t index=0;
++ std::string path; TapeHeader header; std::vector<int32_t> prompt,initial_res; std::vector<float> initial_heat;
++ std::vector<TapeWindow> windows; std::vector<TapeObservation> observations; TapeWindow current{}; TapeObservation obs{};
++ std::array<TapePage*,2> host{},mapped{}; uint64_t lookup_ns=0,main_events=0,mtp_events=0; int output_divergence=-1;
++ static uint64_t ns(){return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
++ static void require(bool ok,const char* why){if(!ok)throw std::runtime_error(std::string("Q4_TAPE_CONTRACT ")+why);}
++ Q4Tape(){const char* p=std::getenv("STRATA_Q4_TAPE");if(!p)return;enabled=true;path=p;const char* m=std::getenv("STRATA_Q4_TAPE_MODE");require(m,"mode missing");require(std::string(m)=="record"||std::string(m)=="replay","invalid mode");replaying=std::string(m)=="replay";p=std::getenv("STRATA_Q4_TAPE_REQUEST");if(p)selected=std::atoi(p);if(replaying)load();}
++ template<class T> static void io(FILE* f,T* p,size_t n,bool write){require((write?std::fwrite(p,sizeof(T),n,f):std::fread(p,sizeof(T),n,f))==n,"truncated tape IO");}
++ void load(){FILE* f=std::fopen(path.c_str(),"rb");require(f,"cannot open replay tape");io(f,&header,1,false);require(header.magic==0x3150455441343451ull&&header.version==1&&header.window_bytes==sizeof(TapeWindow)&&header.windows<100000&&header.prompt_count<300000,"unsupported tape schema");prompt.resize(header.prompt_count);initial_res.resize(48*512);initial_heat.resize(48*512);windows.resize(header.windows);io(f,prompt.data(),prompt.size(),false);io(f,initial_res.data(),initial_res.size(),false);io(f,initial_heat.data(),initial_heat.size(),false);io(f,windows.data(),windows.size(),false);require(std::fgetc(f)==EOF,"trailing tape bytes");std::fclose(f);require(hash()==header.work_hash,"corrupt work hash");}
++ void configure(){if(!enabled)return;int old;cudaGetDevice(&old);for(int d=0;d<2;++d){require(cudaSetDevice(d)==cudaSuccess,"device setup");require(cudaHostAlloc(&host[d],sizeof(TapePage),cudaHostAllocMapped)==cudaSuccess,"mapped tape allocation");require(cudaHostGetDevicePointer(&mapped[d],host[d],0)==cudaSuccess,"mapped tape pointer");std::memset(host[d],0,sizeof(TapePage));}cudaSetDevice(old);}
++ void graph_main(int d,int l,int off,int n,int32_t* ids,float* weights,const float* x,void* stream){if(enabled)tape_route(mapped[d],l,off,n,ids,weights,x,stream);}
++ void graph_mtp(int d,int step,int32_t* ids,float* weights,const float* x,void* stream){if(enabled)tape_route(mapped[d],48+step,0,10,ids,weights,x,stream);}
++ void graph_mtp_head(int d,int step,int32_t* out,float* prob,void* stream){if(enabled)tape_mtp_head(mapped[d],step,out,prob,stream);}
++ void begin(const std::vector<int64_t>& ids,int64_t budget,const int32_t* res,const float* heat){if(!enabled)return;++request;if(request!=selected)return;require(host[0]&&host[1],"configure missing");active=true;index=0;lookup_ns=main_events=mtp_events=0;observations.clear();observations.reserve((size_t)budget);output_divergence=-1;
++  if(replaying){require(ids.size()==prompt.size()&&budget==(int64_t)header.output_budget,"request shape differs");for(size_t i=0;i<ids.size();++i)require(ids[i]==prompt[i],"input token differs");if(std::memcmp(res,initial_res.data(),48*512*sizeof(int32_t))){int n=0;for(int j=0;j<48*512;++j)n+=res[j]!=initial_res[j];std::fprintf(stderr,"Q4_TAPE_INITIAL_RES_MISMATCH count=%d\n",n);require(false,"initial resident sets/slots differ");}require(!std::memcmp(heat,initial_heat.data(),48*512*sizeof(float)),"initial native usage differs");}
++  else{header.output_budget=budget;header.prompt_count=ids.size();prompt.assign(ids.begin(),ids.end());initial_res.assign(res,res+48*512);initial_heat.assign(heat,heat+48*512);windows.clear();windows.reserve((size_t)budget);}
++  std::fprintf(stderr,"Q4_TAPE_BEGIN mode=%s input=%zu budget=%lld initial_residents=%zu ram_tape_bytes=%zu\n",replaying?"replay":"record",ids.size(),(long long)budget,(size_t)std::count_if(initial_res.begin(),initial_res.end(),[](int x){return x>=0;}),windows.size()*sizeof(TapeWindow));}
++ void pre(int& T,int64_t p,int32_t* inputs,int emitted){if(!active)return;uint64_t t=ns();std::memset(&current,0,sizeof(current));std::memset(&obs,0,sizeof(obs));if(replaying){require(index<windows.size(),"extra window");current=windows[index];require(current.position==p&&current.T==T&&current.emitted_before==emitted,"window schedule differs");require(!std::memcmp(current.inputs,inputs,T*sizeof(int32_t)),"window input differs");}else{current.position=p;current.T=T;current.emitted_before=emitted;std::memcpy(current.inputs,inputs,T*sizeof(int32_t));}
++  for(int d=0;d<2;++d){std::memset(host[d],0,sizeof(TapePage));if(replaying)host[d]->routes=current.routes;host[d]->mode=replaying?2:1;}lookup_ns+=ns()-t;obs.begin_ns=ns();}
++ void head(int T,int32_t* outputs){if(!active)return;std::memcpy(obs.native_outputs,outputs,T*sizeof(int32_t));if(replaying){if(output_divergence<0&&std::memcmp(current.outputs,outputs,T*sizeof(int32_t)))output_divergence=(int)index;std::memcpy(outputs,current.outputs,T*sizeof(int32_t));}else std::memcpy(current.outputs,outputs,T*sizeof(int32_t));}
++ void accepted(int a){if(!active)return;if(replaying)require(current.accepted==a,"commit prefix differs");else current.accepted=a;}
++ void drafted(int n){if(!active)return;if(replaying)require(current.draft_count==n,"draft invocation count differs");else current.draft_count=n;}
++ void post(){if(!active)return;uint64_t t=ns();int nonfinite=0;for(int l=0;l<51;++l){int d=l<24?0:1;auto* p=host[d];obs.seen[l]=p->seen[l];obs.disagreements[l]=p->disagreements[l];std::memcpy(obs.activation[l],p->activation[l],sizeof(obs.activation[l]));require(p->seen[l]==(l<48?1:(l-48<current.draft_count?1:0)),"route call count differs");if(l<48){if(!replaying){std::memcpy(current.routes.ids[l],p->routes.ids[l],40*4);std::memcpy(current.routes.weights[l],p->routes.weights[l],40*4);}++main_events;}else{int j=l-48;if(!replaying){std::memcpy(current.routes.mtp_ids[j],p->routes.mtp_ids[j],10*4);std::memcpy(current.routes.mtp_weights[j],p->routes.mtp_weights[j],10*4);current.routes.drafts[j]=p->routes.drafts[j];current.routes.probs[j]=p->routes.probs[j];}mtp_events+=p->seen[l];}nonfinite|=p->nonfinite;}require(!nonfinite,"nonfinite route/activation");obs.end_ns=ns();observations.push_back(obs);if(!replaying)windows.push_back(current);++index;lookup_ns+=ns()-t;for(auto* p:host)p->mode=0;}
++ uint64_t hash()const{uint64_t x=1469598103934665603ull;auto add=[&](const void* p,size_t n){auto* b=(const uint8_t*)p;for(size_t i=0;i<n;++i){x^=b[i];x*=1099511628211ull;}};add(prompt.data(),prompt.size()*4);add(&header.output_budget,8);for(const auto& w:windows)add(&w,sizeof(w));return x;}
++ void finish(int64_t output_count,bool cancelled){if(!active)return;require(!cancelled,"cancelled tape is invalid");if(replaying)require(index==windows.size()&&output_count==(int64_t)header.output_count,"incomplete replay");else{header.windows=windows.size();header.output_count=output_count;header.work_hash=hash();FILE* f=std::fopen(path.c_str(),"wbx");require(f,"record tape path already exists");io(f,&header,1,true);io(f,prompt.data(),prompt.size(),true);io(f,initial_res.data(),initial_res.size(),true);io(f,initial_heat.data(),initial_heat.size(),true);io(f,windows.data(),windows.size(),true);std::fclose(f);}
++  const char* p=std::getenv("STRATA_Q4_TAPE_OBSERVATIONS");if(p){FILE* f=std::fopen(p,"wbx");require(f,"observation path already exists");io(f,observations.data(),observations.size(),true);std::fclose(f);}std::fprintf(stderr,"Q4_TAPE_END mode=%s windows=%zu main_events=%llu mtp_events=%llu output=%lld work_hash=%016llx lookup_ms=%.3f native_head_first_divergence=%d\n",replaying?"replay":"record",index,(unsigned long long)main_events,(unsigned long long)mtp_events,(long long)output_count,(unsigned long long)header.work_hash,lookup_ns/1e6,output_divergence);active=false;}
++ ~Q4Tape(){for(auto* p:host)if(p)cudaFreeHost(p);}
++};inline Q4Tape q4_tape;
++}
+diff --git a/include/strata/research/q4_tape_gpu.hpp b/include/strata/research/q4_tape_gpu.hpp
+new file mode 100644
+index 0000000..61c9af2
+--- /dev/null
++++ b/include/strata/research/q4_tape_gpu.hpp
+@@ -0,0 +1,9 @@
++#pragma once
++#include <cstdint>
++namespace strata::research {
++constexpr int TapeLayers=48,TapeK=10,TapeT=4,TapeDrafts=3;
++struct TapeRoutes { int32_t ids[48][40]; float weights[48][40]; int32_t mtp_ids[3][10]; float mtp_weights[3][10]; int32_t drafts[3]; float probs[3]; };
++struct TapePage { int32_t mode; int32_t seen[51]; int32_t disagreements[51]; int32_t nonfinite; TapeRoutes routes; float activation[51][8]; };
++void tape_route(TapePage* page,int layer,int row_offset,int n,int32_t* ids,float* weights,const float* activation,void* stream);
++void tape_mtp_head(TapePage* page,int step,int32_t* out,float* prob,void* stream);
++}
+diff --git a/src/core/mtp.cpp b/src/core/mtp.cpp
+index e9953e3..76115e9 100644
+--- a/src/core/mtp.cpp
++++ b/src/core/mtp.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_tape.hpp"
+ // src/core/mtp.cpp - see include/strata/core/mtp.hpp.
+ #include "strata/core/mtp.hpp"
+ #include "strata/core/coupled_draft.hpp"
+@@ -576,6 +577,7 @@ bool MtpDrafter::record_forward(int T, int step_row0, cudaStream_t cs, std::stri
+             if (native_router_enabled()) native_router_top10(logits_ + t * g.n_expert, ids_ + t * K, w_ + t * K, cs);
+             else router_top10(logits_ + t * g.n_expert, 1, (int) g.n_expert, (int) K, ids_ + t * K, w_ + t * K, cs);
+         }
++        strata::research::q4_tape.graph_mtp(device_,coupled_j_,ids_,w_,mixed_,cs);
+         moe_group_resident(ids_, (int) (T * K), (int) K, experts_, (int64_t) strata::kernels::cpu::BLOB, grp_ptr_,
+                            grp_start_, grp_counts_, hit_dst_, hit_slot_, cs);
+         quantize_q8_0_scaled(mixed_, hit_xq_, hit_xs_, (int64_t) T * N, cs);
+@@ -642,6 +644,7 @@ bool MtpDrafter::record_forward(int T, int step_row0, cudaStream_t cs, std::stri
+         sample_tokens(head_logits_, T, (int) nv, nullptr, 0, sp, out_ids_, cs);
+         row_top_prob(head_logits_, T, (int) nv, out_ids_, probs_, cs);
+         if (sub) map_ids(out_ids_, dvocab_, T, cs);
++        strata::research::q4_tape.graph_mtp_head(device_,coupled_j_,out_ids_,probs_,cs);
+     } catch (const std::exception& e) {
+         err = std::string("mtp: ") + e.what();
+         return false;
+@@ -969,6 +972,7 @@ bool MtpDrafter::draft(int T, const int32_t* tokens, int64_t p, int a, int32_t*
+         }
+     }
+     for (int j = n; j < max_t_ - 1; ++j) { drafts[j] = 0; if (probs) probs[j] = 0.0f; }
++    strata::research::q4_tape.drafted(n);
+     if (n_drafts) *n_drafts = n;
+     ms_draft += ms_since(t0);
+     ++rounds;
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index dd5362b..236a073 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_tape.hpp"
+ // src/core/verify.cpp - see include/strata/core/verify.hpp.
+ #include "strata/core/verify.hpp"
+ #include "strata/core/remote_expert_opt.hpp"
+@@ -934,6 +935,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             mb.logits = logits_ + t * NE; mb.ids = ids_ + t * K; mb.weights = w_ + t * K;
+             if (!moe_route(wt, g, l, K, mb, mixed_ + t * N, cs, err, nullptr)) return false;
+         }
++        strata::research::q4_tape.graph_main(device_,(int)l,tb*K,n*K,ids_+tb*K,w_+tb*K,xm,cs);
+         if (all_resident_) {
+             resident_plan(ids_ + tb * K, n * (int) K, (int) K, hits_.d_res + l * g.n_expert, (int) g.n_expert,
+                           hits_.cache_base, slot_off_d_, (long long) hits_.blob,
+diff --git a/src/kernels/cuda/elementwise.cu b/src/kernels/cuda/elementwise.cu
+index 4817763..0e57e85 100644
+--- a/src/kernels/cuda/elementwise.cu
++++ b/src/kernels/cuda/elementwise.cu
+@@ -395,3 +395,20 @@ void rms_norm_weighted(float* x, const float* w, int64_t rows, int64_t cols, flo
+ }
+ 
+ }  // namespace strata::kernels
++
++#include "strata/research/q4_tape_gpu.hpp"
++namespace strata::research {
++__global__ void tape_route_kernel(TapePage* p,int layer,int off,int n,int32_t* ids,float* weights,const float* x){
++ int mode=((volatile int32_t*)&p->mode)[0];if(!mode)return;int i=threadIdx.x;
++ if(i==0)atomicAdd(p->seen+layer,1);
++ if(i<8){p->activation[layer][i]=x[i];if(!isfinite(x[i]))atomicOr(&p->nonfinite,1);}
++ if(i<n){int32_t* pi=layer<48?p->routes.ids[layer]+off:p->routes.mtp_ids[layer-48];float* pw=layer<48?p->routes.weights[layer]+off:p->routes.mtp_weights[layer-48];
++  if(!isfinite(weights[i])||ids[i]<0||ids[i]>=512)atomicOr(&p->nonfinite,1);
++  if(mode==1){pi[i]=ids[i];pw[i]=weights[i];}else{if(ids[i]!=pi[i]||__float_as_uint(weights[i])!=__float_as_uint(pw[i]))atomicAdd(p->disagreements+layer,1);ids[i]=pi[i];weights[i]=pw[i];}
++ }
++ __threadfence_system();
++}
++__global__ void tape_head_kernel(TapePage* p,int j,int32_t* out,float* prob){int mode=((volatile int32_t*)&p->mode)[0];if(!mode)return;if(mode==1){p->routes.drafts[j]=out[0];p->routes.probs[j]=prob[0];}else{out[0]=p->routes.drafts[j];prob[0]=p->routes.probs[j];}__threadfence_system();}
++void tape_route(TapePage* p,int l,int off,int n,int32_t* ids,float* w,const float* x,void* s){tape_route_kernel<<<1,64,0,(cudaStream_t)s>>>(p,l,off,n,ids,w,x);}
++void tape_mtp_head(TapePage* p,int j,int32_t* out,float* prob,void* s){tape_head_kernel<<<1,1,0,(cudaStream_t)s>>>(p,j,out,prob);}
++}
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 085c3d8..70eb6c3 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_tape.hpp"
+ // src/program/generate.cpp - P2.S6: `strata generate`.
+ //
+ // THE DRIVER, and the first program in this project that answers a question.  Everything below it is a
+@@ -3199,6 +3200,7 @@ int main(int argc, char** argv) {
+     // sees the memory this process actually has left rather than the card's idle figure - and refuses with both
+     // numbers if the slots do not fit, instead of handing back a cache smaller than it was asked for.
+     mem_mark("the weights, the session and the drafter");
++    strata::research::q4_tape.configure();
+     strata::core::ExpertCache xcache;
+     // THE HEAD BEFORE THE CACHE: the native head and the logits are allocated above, before the expert arena (#620)
+     const bool auto_cache = o.expert_cache < 0;
+@@ -7062,6 +7064,7 @@ int main(int argc, char** argv) {
+             consumed.reserve((size_t) (n + max_new + S));
+             for (int64_t i = 0; i < n - 1; ++i) consumed.push_back((int32_t) ids[(size_t) i]);
+             const char* finish = "length";
++            if(strata::research::q4_tape.enabled){apply_pending(true);strata::research::q4_tape.begin(ids,max_new,host_res.data(),drive.d.usage.data());}
+             const Clock::time_point d0 = Clock::now();
+             // STRATA_DECODE_TIMING=1: where a request's decode time goes (one line per request)
+             static const bool dec_timing = std::getenv("STRATA_DECODE_TIMING") != nullptr;
+@@ -7108,6 +7111,7 @@ int main(int argc, char** argv) {
+                 if (p + T > o.max_context) break;
+                 window[0] = x;
+                 for (int i = 1; i < T; ++i) window[(size_t) i] = from_sfx ? sbuf[(size_t) i - 1] : drafts[(size_t) i - 1];
++                strata::research::q4_tape.pre(T,p,window.data(),(int)produced_n);
+                 drive.d.layers = 0;
+                 drive.d.experts = 0;
+                 drive.d.failed = false;
+@@ -7132,8 +7136,10 @@ int main(int argc, char** argv) {
+                     std::printf("ERR %s\n", drive.d.failed && drive.d.fail ? drive.d.fail : err.c_str());
+                     return 1;
+                 }
++                strata::research::q4_tape.head(T,outv.data());
+                 int a = 0;
+                 while (a < T - 1 && window[(size_t) a + 1] == outv[(size_t) a]) ++a;
++                strata::research::q4_tape.accepted(a);
+                 if (from_sfx) { ++sfx_windows; sfx_drafts += T - 1; sfx_ok += a; }
+                 const Clock::time_point tw1 = Clock::now();
+                 std::thread adapt_thr;   // the adaptive tier beside the commit and the draft (as in generate)
+@@ -7182,6 +7188,7 @@ int main(int argc, char** argv) {
+                     std::printf("ERR %s\n", err.c_str());
+                     return 1;
+                 }
++                strata::research::q4_tape.post();
+                 if (timed_round && !eos)
+                     policy.observe(from_sfx, T, a, sfx_match,
+                                    std::chrono::duration<double, std::milli>(Clock::now() - round0).count());
+@@ -7196,6 +7203,7 @@ int main(int argc, char** argv) {
+                 std::printf("ERR %s\n", err.c_str());
+                 return 1;
+             }
++            strata::research::q4_tape.finish(produced_n,cancelled);
+             if (dec_timing && dec_windows > 0) {
+                 const DecSnap d1 = dec_snap();
+                 const double w = (double) dec_windows, L = (double) g.n_layers;

@@ -1,0 +1,228 @@
+{
+  "frozen_utc": "2026-10-06T03:57:52.625810+00:00",
+  "recommendation": "PROMISING_CONDITIONAL_ADMISSION",
+  "production_baseline": "KEEP_Q4_100US_BASELINE",
+  "deployment_switch": false,
+  "mechanism_success": true,
+  "conclusion": "Conditional admission rejects bad copies before staging and meets the pooled offline efficiency gate: unpublished bytes fall 73.76%, while 85.38% of next-four-window demand potential and 90.16% of observed contiguous local entries are retained. The latter attribution ends at the first native/early touch and is not a counterfactual exclusive-latency estimate. This is a mechanism result, not a deployment win. The 18-request matrix shows an apparent 32K application gain, a 128K tie and no 256K gain; independent code improves only 3.77% TG and structured text regresses 3.56%. All ON comparisons change output/MTP trajectories. Crucially, the new binary with the algorithm OFF already reaches 106.7 TG versus earlier control 93.9 with identical output/MTP/routing/capacity. That single later-time guard exposes build/environment confounding and prevents crediting the apparent 32K gain to the gate. Retain the unchanged Q4 100us baseline for real use; preserve conditional launchers as experimental.",
+  "remaining_bottleneck": "Action validity remains the dominant copy problem: roughly two thirds of issued conditional copies are still unpublished. Victim utility is weakly predictable, and attributed nonlocal demand does not reliably fall versus control. Wrong predictions dominate; clean late counts increase at 256K (median 63), so publication timing also remains imperfect. Copy readiness is mostly adequate in clean runs; diagnostic late counts are instrumented and not headline estimates. Only five layers are affected. Output/MTP changes and demonstrated environment/build timing confounding prevent a causal throughput claim.",
+  "single_best_next_experiment": "Before another predictor or victim policy, run one predeclared, counterbalanced same-candidate-binary OFF-versus-conditional comparison at 32K, ideally with a preserved fixed token/spec-window replay and same routing/accounting. This removes the exposed build difference and separates gating cost from free-generation/MTP and scheduling noise. Do not add it to this completed campaign or repeat controls to seek a win.",
+  "primary_paired_results": [
+    {
+      "context": "32k",
+      "TG_ratio": {
+        "min": 1.1022364217252396,
+        "median": 1.125254582484725,
+        "max": 1.1618435155412647
+      },
+      "wall_ratio": {
+        "min": 0.8933076515727649,
+        "median": 0.9155967727863882,
+        "max": 0.9268893845287917
+      },
+      "PP_ratio": {
+        "min": 1.0198215423836838,
+        "median": 1.020034235719267,
+        "max": 1.023586695333249
+      },
+      "CPU_entries_ratio": {
+        "min": 0.9781799617102744,
+        "median": 1.0195986348122867,
+        "max": 1.088297026878324
+      },
+      "nonlocal_entries_ratio": {
+        "min": 0.9804065594661805,
+        "median": 1.0202661052471858,
+        "max": 1.0919943542323471
+      },
+      "all_same_input": true,
+      "same_outputs": 0,
+      "pairs": 3
+    },
+    {
+      "context": "128k",
+      "TG_ratio": {
+        "min": 0.9814612868047983,
+        "median": 1.005611672278339,
+        "max": 1.0154355016538037
+      },
+      "wall_ratio": {
+        "min": 0.9946258837639745,
+        "median": 0.9968162439453342,
+        "max": 1.0033036759341116
+      },
+      "PP_ratio": {
+        "min": 0.9961847051562588,
+        "median": 1.0022392655209091,
+        "max": 1.0024042493709813
+      },
+      "CPU_entries_ratio": {
+        "min": 0.9177581243353995,
+        "median": 1.0581657742951032,
+        "max": 1.0607056444332092
+      },
+      "nonlocal_entries_ratio": {
+        "min": 0.9170283513522591,
+        "median": 1.0627708548297483,
+        "max": 1.0665553063576614
+      },
+      "all_same_input": true,
+      "same_outputs": 0,
+      "pairs": 3
+    },
+    {
+      "context": "256k",
+      "TG_ratio": {
+        "min": 0.948237885462555,
+        "median": 0.9851258581235697,
+        "max": 1.0456182472989195
+      },
+      "wall_ratio": {
+        "min": 0.9978379776499283,
+        "median": 1.018877330146399,
+        "max": 1.037486200382539
+      },
+      "PP_ratio": {
+        "min": 0.9747416762342135,
+        "median": 0.9846921797004993,
+        "max": 0.986254133207369
+      },
+      "CPU_entries_ratio": {
+        "min": 0.8477009789380006,
+        "median": 0.95594715796736,
+        "max": 0.9797029517880844
+      },
+      "nonlocal_entries_ratio": {
+        "min": 0.8428371794130748,
+        "median": 0.9548538169890991,
+        "max": 0.9821098762231871
+      },
+      "all_same_input": true,
+      "same_outputs": 0,
+      "pairs": 3
+    }
+  ],
+  "independent_results": [
+    {
+      "task": "code-4",
+      "median_paired_TG_ratio": 1.037661050545094,
+      "median_paired_wall_ratio": 0.9738794290441174
+    },
+    {
+      "task": "structured-4",
+      "median_paired_TG_ratio": 0.9644268774703556,
+      "median_paired_wall_ratio": 1.0336616442621225
+    }
+  ],
+  "OFF_guard": {
+    "raw_result": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/diagnostics/conditional-off-clean/32k/results.json",
+    "parity": {
+      "actual_input_tokens": true,
+      "actual_output_ids_sha256": true,
+      "mtp_proposed": true,
+      "mtp_accepted": true,
+      "verify_windows": true,
+      "local_vram_entries": true,
+      "cpu_fallback_entries": true,
+      "nonlocal_gpu_entries": true,
+      "actual_engine_input": true,
+      "capacities": true
+    },
+    "PASS_parity": true,
+    "control_reference_TG": 93.9,
+    "candidate_OFF_TG": 106.7,
+    "candidate_OFF_PP": 1590.8,
+    "TG_ratio_vs_earlier_primary_rep1": 1.1363152289669862,
+    "wall_ratio_vs_earlier_primary_rep1": 0.9111149363729507,
+    "timing_caveat": "Single later-time guard, not contemporaneous replicated A/B. Cannot attribute a timing difference solely to source/compiler or solely to gating. No baseline repetition or parameter change."
+  },
+  "contiguous_holdout_reporting_audit": {
+    "episodes": [
+      {
+        "task": "code-4",
+        "target_ready_publications": 248,
+        "kept_publications": 176,
+        "recorded_contiguous_local_entries": 6539,
+        "kept_contiguous_local_entries": 4724,
+        "contiguous_entry_recall": 0.7224346230310446,
+        "victim_absent_contiguous": 348,
+        "kept_victim_absent_contiguous": 229
+      },
+      {
+        "task": "math-4",
+        "target_ready_publications": 203,
+        "kept_publications": 170,
+        "recorded_contiguous_local_entries": 9868,
+        "kept_contiguous_local_entries": 9148,
+        "contiguous_entry_recall": 0.9270368869071747,
+        "victim_absent_contiguous": 219,
+        "kept_victim_absent_contiguous": 193
+      },
+      {
+        "task": "structured-1",
+        "target_ready_publications": 332,
+        "kept_publications": 284,
+        "recorded_contiguous_local_entries": 9319,
+        "kept_contiguous_local_entries": 8744,
+        "contiguous_entry_recall": 0.9382981006545766,
+        "victim_absent_contiguous": 444,
+        "kept_victim_absent_contiguous": 393
+      },
+      {
+        "task": "structured-2",
+        "target_ready_publications": 258,
+        "kept_publications": 214,
+        "recorded_contiguous_local_entries": 8757,
+        "kept_contiguous_local_entries": 8063,
+        "contiguous_entry_recall": 0.9207491149937194,
+        "victim_absent_contiguous": 258,
+        "kept_victim_absent_contiguous": 242
+      },
+      {
+        "task": "structured-3",
+        "target_ready_publications": 210,
+        "kept_publications": 159,
+        "recorded_contiguous_local_entries": 6448,
+        "kept_contiguous_local_entries": 5968,
+        "contiguous_entry_recall": 0.9255583126550868,
+        "victim_absent_contiguous": 225,
+        "kept_victim_absent_contiguous": 187
+      },
+      {
+        "task": "structured-4",
+        "target_ready_publications": 250,
+        "kept_publications": 208,
+        "recorded_contiguous_local_entries": 14136,
+        "kept_contiguous_local_entries": 13000,
+        "contiguous_entry_recall": 0.9196378041878891,
+        "victim_absent_contiguous": 296,
+        "kept_victim_absent_contiguous": 274
+      }
+    ],
+    "aggregate": {
+      "target_ready_publications": 1501,
+      "kept_publications": 1211,
+      "recorded_contiguous_local_entries": 55067,
+      "kept_contiguous_local_entries": 49647,
+      "victim_absent_contiguous": 1790,
+      "kept_victim_absent_contiguous": 1518,
+      "contiguous_entry_recall": 0.9015744456752683
+    },
+    "no_retuning_or_new_holdout_selection": true,
+    "limits": [
+      "Post-hoc reporting audit with the SAME frozen model/threshold; original selection documents remain immutable.",
+      "Actual observed local entries end at first native or other early touch; does not prove exclusive savings against a counterfactual policy.",
+      "Original90.16% aggregate event-use retention can include native readmission; this audit is a stricter attribution measure.",
+      "Next-four-window benefit is future demand potential, not guaranteed resident/exclusive latency benefit."
+    ]
+  },
+  "no_further_policy_or_performance_repetitions": true,
+  "unfinished_due_to_deadline": [],
+  "limits": [
+    "Six held-out routing episodes are modest, not universal generalization.",
+    "Training episodes have short actual inputs, 32K maximum context and 1024 output; primary long-context/4096 runs extrapolate these conditions.",
+    "Fixed-native-schedule offline attribution is not a counterfactual cache oracle or exact exposed-latency model.",
+    "The stricter code-family holdout guard failed and is explicitly preserved; no threshold was retuned.",
+    "Predictor-only CPU percentage and exact exclusive miss/publication cost are unavailable."
+  ]
+}

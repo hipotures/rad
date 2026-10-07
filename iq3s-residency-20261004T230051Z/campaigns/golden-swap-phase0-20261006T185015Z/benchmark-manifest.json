@@ -1,0 +1,3861 @@
+{
+  "schema": 1,
+  "frozen_utc": "2026-10-06T18:57:06.271584+00:00",
+  "tasks": [
+    {
+      "task_id": "code-heg",
+      "family": "code/agent",
+      "subtask": "repository review",
+      "languages": [
+        "English"
+      ],
+      "source_group": "heg-storage",
+      "split": "development",
+      "exclude_from_fitting_by_default": false,
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "source_revision": "Local HEG snapshot; current repository HEAD recorded separately",
+      "license": "CC0-1.0",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-heg-source.txt",
+      "source_sha256": "0d6af70fade21a606f4304608e32bdf4627f00f87a39355108eebdd87271234e",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-heg-excerpt.txt",
+      "excerpt_sha256": "0d6af70fade21a606f4304608e32bdf4627f00f87a39355108eebdd87271234e",
+      "instruction": "Review the supplied storage design and implementation. Identify transactional invariants, cancellation/retry and crash risks. Prioritize concrete corrections with small code examples and tests. Ground each finding in the supplied files and distinguish hypotheses.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 94340,
+      "retained_source_characters": 94340,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "128k",
+      "context_limit": 131072,
+      "actual_input_tokens": 22883,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-heg.json",
+        "payload_sha256": "07b3322369eb0bc9a517c0b2f38179941fb88cb1833d928616b78b8fad4091cd",
+        "messages_sha256": "8ac0b4ee828d32ffe1e4315b786b299a300bc3205d8100612f511704de43dad8",
+        "input_ids_sha256": "8a3faf64eb488e8de3076d2569e8c14c06ae8df328deb9227cc954e1507ac97f",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-heg-ids.json",
+        "actual_input_tokens": 22883
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": true,
+      "core": true,
+      "source_urls": [],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 126.10131505603204,
+        "warmup_s": 7.595713973976672,
+        "shutdown_s": 5.628940072958358,
+        "total_operating_s": 175.68563943501795
+      },
+      "measured_request": {
+        "task": "code-heg",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-heg.json",
+          "payload_sha256": "07b3322369eb0bc9a517c0b2f38179941fb88cb1833d928616b78b8fad4091cd",
+          "messages_sha256": "8ac0b4ee828d32ffe1e4315b786b299a300bc3205d8100612f511704de43dad8",
+          "input_ids_sha256": "8a3faf64eb488e8de3076d2569e8c14c06ae8df328deb9227cc954e1507ac97f",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-heg-ids.json",
+          "actual_input_tokens": 22883
+        },
+        "request_wall_s": 36.147863337013405,
+        "TTFT_s": 14.298988027032465,
+        "prefill_s": 13.6663,
+        "decode_s": 20.9393,
+        "PP": 1674.4,
+        "TG": 97.8,
+        "actual_input_tokens": 22883,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/raw/output-ids-request2.json",
+        "output_ids_sha256": "f7e696465c6507b5df036eeb02bc8f735ae0f4dd830c0ecf479ac62fd8f6dc7e",
+        "actual_engine_input": {
+          "count": 22883,
+          "sha256": "8a3faf64eb488e8de3076d2569e8c14c06ae8df328deb9227cc954e1507ac97f",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 681,
+        "local_entries": 1025849,
+        "cpu_entries": 93920,
+        "mapped_entries": 15431,
+        "all_entries": 1135200,
+        "MTP_proposed": 1684,
+        "MTP_accepted": 1367,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 22883,
+          "prompt_ms": 13666.3,
+          "prompt_per_token_ms": 0.597,
+          "prompt_per_second": 1674.4,
+          "predicted_n": 2048,
+          "predicted_ms": 20939.3,
+          "predicted_per_token_ms": 10.224,
+          "predicted_per_second": 97.8,
+          "draft_n": 1684,
+          "draft_n_accepted": 1367,
+          "at": 1791313616
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/telemetry/run.jsonl",
+          "samples": 37,
+          "system_cpu_mean_pct": 31.127027027027026,
+          "system_cpu_peak_pct": 58.1,
+          "peak_rss_gib": 78.26317977905273,
+          "peak_ram_used_gib": 83.02691650390625,
+          "min_available_gib": 78.1057014465332,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 47.351351351351354,
+              "peak_vram_mib": 23838.0
+            },
+            "1": {
+              "mean_util_pct": 54.5945945945946,
+              "peak_vram_mib": 24028.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 461500.83163001,
+        "first_monotonic": 461515.130618037,
+        "end_monotonic": 461536.979493347,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/raw/run-response.txt",
+        "trace_drain_s": 0.006964809028431773,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/tape.bin": "4ff762bebf317cfc010fca4d67e5f58de44dda87f24b605f276db593266388eb",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/raw/observations.bin": "2b02db9b3a74e7928f6c4c258e40ec1dcda7fc547a2876d70f74fd29209da991",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/raw/native-layers.bin": "b91554a99faa55cb039c88f08f02f6dd00896299669370745ccf47a73b41aa8e",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/raw/native-native.bin": "6de2a9819c6d11c62d0b833dfa6a7597c17bd39f6a18601ecf91f558a34714ee",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/tape.bin.initial-state.bin": "123ff184847ec92628b2c6fc09b162e6de260592792c23b6ba25a29e7556a294"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-heg/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 175.68563943501795,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "math-rational",
+      "family": "math/research",
+      "subtask": "exact arithmetic",
+      "languages": [
+        "English"
+      ],
+      "source_group": "E026-numerical",
+      "split": "development",
+      "exclude_from_fitting_by_default": false,
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "source_revision": "Local CPython 3.14 installed source snapshot SHA256",
+      "license": "PSF-2.0",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-rational-source.txt",
+      "source_sha256": "7a95f1c506c9ac4b2277df5f2bdd9d61cc67b520c45021a5a961939770221ef6",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-rational-excerpt.txt",
+      "excerpt_sha256": "7a95f1c506c9ac4b2277df5f2bdd9d61cc67b520c45021a5a961939770221ef6",
+      "instruction": "Using the supplied exact rational implementation, derive and implement polynomial interpolation for points (0,1),(1,3),(2,7),(3,13). Verify exact coefficients in two independent formulations. Explain repeated-node failures, conditioning and property tests.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 41448,
+      "retained_source_characters": 41448,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "32k",
+      "context_limit": 32768,
+      "actual_input_tokens": 10943,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-rational.json",
+        "payload_sha256": "1890c32854fbc0edd29bd08195acf26829f8cb4e52e8d951b47ffac125e486c1",
+        "messages_sha256": "022b7d4a7dc8b95fba0abaf40e2c74cf1236cd9e3b355a884379c73177b79ad0",
+        "input_ids_sha256": "ff3789f6c20f5d0dde778baef784d1deb994e13c6a9e7d10bb5c581e0d186018",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-rational-ids.json",
+        "actual_input_tokens": 10943
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": true,
+      "core": true,
+      "source_urls": [
+        "https://github.com/python/cpython"
+      ],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 64.07378388999496,
+        "warmup_s": 7.629068816022482,
+        "shutdown_s": 3.939272725954652,
+        "total_operating_s": 107.08037572097965
+      },
+      "measured_request": {
+        "task": "math-rational",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-rational.json",
+          "payload_sha256": "1890c32854fbc0edd29bd08195acf26829f8cb4e52e8d951b47ffac125e486c1",
+          "messages_sha256": "022b7d4a7dc8b95fba0abaf40e2c74cf1236cd9e3b355a884379c73177b79ad0",
+          "input_ids_sha256": "ff3789f6c20f5d0dde778baef784d1deb994e13c6a9e7d10bb5c581e0d186018",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-rational-ids.json",
+          "actual_input_tokens": 10943
+        },
+        "request_wall_s": 31.274496369005647,
+        "TTFT_s": 12.994153492967598,
+        "prefill_s": 12.407399999999999,
+        "decode_s": 17.9561,
+        "PP": 882.0,
+        "TG": 114.1,
+        "actual_input_tokens": 10943,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/raw/output-ids-request2.json",
+        "output_ids_sha256": "091910f487b002804c09692dc3b804a7509a363e7305d55a4da3e6e1c84012fa",
+        "actual_engine_input": {
+          "count": 10943,
+          "sha256": "ff3789f6c20f5d0dde778baef784d1deb994e13c6a9e7d10bb5c581e0d186018",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 653,
+        "local_entries": 1051860,
+        "cpu_entries": 82398,
+        "mapped_entries": 11982,
+        "all_entries": 1146240,
+        "MTP_proposed": 1735,
+        "MTP_accepted": 1395,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 10943,
+          "prompt_ms": 12407.4,
+          "prompt_per_token_ms": 1.134,
+          "prompt_per_second": 882.0,
+          "predicted_n": 2048,
+          "predicted_ms": 17956.1,
+          "predicted_per_token_ms": 8.768,
+          "predicted_per_second": 114.1,
+          "draft_n": 1735,
+          "draft_n_accepted": 1395,
+          "at": 1791313726
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/telemetry/run.jsonl",
+          "samples": 32,
+          "system_cpu_mean_pct": 29.190625,
+          "system_cpu_peak_pct": 55.9,
+          "peak_rss_gib": 76.50741195678711,
+          "peak_ram_used_gib": 81.27901840209961,
+          "min_available_gib": 79.85359954833984,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 40.09375,
+              "peak_vram_mib": 23836.0
+            },
+            "1": {
+              "mean_util_pct": 43.84375,
+              "peak_vram_mib": 24028.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 461616.290161369,
+        "first_monotonic": 461629.284314862,
+        "end_monotonic": 461647.564657738,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/raw/run-response.txt",
+        "trace_drain_s": 0.003518768004141748,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/tape.bin": "7aaf9c90db0394577b96a7ef8a09e75d07d590ac30623f3f75f41774dae899a5",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/raw/observations.bin": "a6652b29d9e0333c865851f661295027366e037a2b325f2727b0c3825a47aefd",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/raw/native-layers.bin": "4365f6150d406207444a6e00159fe66d911627feaed216a5e815219689d13c4b",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/raw/native-native.bin": "337ce8d270ca3bac850617712295fb6c638fdb1dc1aa0e068f3b3ae35cbb4d8d",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/tape.bin.initial-state.bin": "bef7b3ed1546b7e8898c6584327d16f4e394efb5f457a67973d40fcd2b8bce4d"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 107.08037572097965,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "text-http",
+      "family": "text/translation",
+      "subtask": "document summarization",
+      "languages": [
+        "English"
+      ],
+      "source_group": "E026-HTTP-standards",
+      "split": "development",
+      "exclude_from_fitting_by_default": false,
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "source_revision": "RFC 9111, June 2022",
+      "license": "IETF Trust Legal Provisions",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-http-source.txt",
+      "source_sha256": "aeb52adb3279d5f23dae34f68af11bd5cef0a0aff7ffcd014c9ca93c5302cf3e",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-http-excerpt.txt",
+      "excerpt_sha256": "aeb52adb3279d5f23dae34f68af11bd5cef0a0aff7ffcd014c9ca93c5302cf3e",
+      "instruction": "Summarize this HTTP caching standard for an engineer designing a caching proxy. Explain freshness, validation, invalidation and authenticated requests, and distinguish normative requirements from implementation advice. Use concrete message examples.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 84474,
+      "retained_source_characters": 84474,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "32k",
+      "context_limit": 32768,
+      "actual_input_tokens": 20938,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-http.json",
+        "payload_sha256": "5a0ecf5ba44fbd335a2903d79c15da3092c70c3df0f62b11329962a53ff564a0",
+        "messages_sha256": "e8b875e9682ecb25eccc2a0ea5681ede68a2d1b06510400b6ef8657a0fe91f91",
+        "input_ids_sha256": "84b82c1a648824f7145ac768eb6c8126a4aafc7cdf2bb15e8f9b16e268c2262c",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-http-ids.json",
+        "actual_input_tokens": 20938
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": true,
+      "core": true,
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc9111.txt"
+      ],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 58.8773057119688,
+        "warmup_s": 7.614100105012767,
+        "shutdown_s": 4.887595275999047,
+        "total_operating_s": 110.28082654200261
+      },
+      "measured_request": {
+        "task": "text-http",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-http.json",
+          "payload_sha256": "5a0ecf5ba44fbd335a2903d79c15da3092c70c3df0f62b11329962a53ff564a0",
+          "messages_sha256": "e8b875e9682ecb25eccc2a0ea5681ede68a2d1b06510400b6ef8657a0fe91f91",
+          "input_ids_sha256": "84b82c1a648824f7145ac768eb6c8126a4aafc7cdf2bb15e8f9b16e268c2262c",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-http-ids.json",
+          "actual_input_tokens": 20938
+        },
+        "request_wall_s": 38.709957251965534,
+        "TTFT_s": 17.78736463194946,
+        "prefill_s": 16.815900000000003,
+        "decode_s": 20.2785,
+        "PP": 1245.1,
+        "TG": 101.0,
+        "actual_input_tokens": 20938,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/raw/output-ids-request2.json",
+        "output_ids_sha256": "c33f3ffb51281ac95b53e8f7826718bb62d5059bec045b32bd4b20f6ac9132cf",
+        "actual_engine_input": {
+          "count": 20938,
+          "sha256": "84b82c1a648824f7145ac768eb6c8126a4aafc7cdf2bb15e8f9b16e268c2262c",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 712,
+        "local_entries": 1113806,
+        "cpu_entries": 72105,
+        "mapped_entries": 8809,
+        "all_entries": 1194720,
+        "MTP_proposed": 1777,
+        "MTP_accepted": 1336,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 20938,
+          "prompt_ms": 16815.9,
+          "prompt_per_token_ms": 0.803,
+          "prompt_per_second": 1245.1,
+          "predicted_n": 2048,
+          "predicted_ms": 20278.5,
+          "predicted_per_token_ms": 9.902,
+          "predicted_per_second": 101.0,
+          "draft_n": 1777,
+          "draft_n_accepted": 1336,
+          "at": 1791313837
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/telemetry/run.jsonl",
+          "samples": 39,
+          "system_cpu_mean_pct": 28.92820512820513,
+          "system_cpu_peak_pct": 54.7,
+          "peak_rss_gib": 76.54076766967773,
+          "peak_ram_used_gib": 81.2498779296875,
+          "min_available_gib": 79.88274002075195,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 44.92307692307692,
+              "peak_vram_mib": 23836.0
+            },
+            "1": {
+              "mean_util_pct": 44.15384615384615,
+              "peak_vram_mib": 24028.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 461719.825495603,
+        "first_monotonic": 461737.612860235,
+        "end_monotonic": 461758.535452855,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/raw/run-response.txt",
+        "trace_drain_s": 0.006889437034260482,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/tape.bin": "311805bb8d23f1492ec44d8b263a9b3b91740e84472d3e867fe6f9665c9a5438",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/raw/observations.bin": "e3b282ade5534da2cc0c3e5d8771800c6e819b2cba08f13835ba37ced9dc8afe",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/raw/native-layers.bin": "75d14b89b639d328de4c0c689002ab17edae93b1cebbcb2dfc8a85adb63ebe08",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/raw/native-native.bin": "e3d9fb1ecb1dabeb829fae4bb2fdfac0495fa23243dbe1b2a92e67c6544c506b",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/tape.bin.initial-state.bin": "ae111951c087d1f25eca79425c076d7986da088d8d839dfb515e90e14657adac"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-http/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 110.28082654200261,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "mixed-build",
+      "family": "structured/mixed",
+      "subtask": "real build log analysis",
+      "languages": [
+        "English"
+      ],
+      "source_group": "strata-release-build-log",
+      "split": "development",
+      "exclude_from_fitting_by_default": false,
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": false,
+      "source_revision": "Actual upstream921 build captured 2026-10-06",
+      "license": "Local research log; Strata source MIT",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-build-source.txt",
+      "source_sha256": "3ef339d8b7ab0fb45b1c2146292f328511451dd7f09a91e998f69472e951b19d",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-build-excerpt.txt",
+      "excerpt_sha256": "3ef339d8b7ab0fb45b1c2146292f328511451dd7f09a91e998f69472e951b19d",
+      "instruction": "Analyze this actual CUDA/C++ build log. Produce a concise diagnosis, then a JSON inventory of targets, warnings, compilation units and completion evidence. Separate observed facts from unverified causes. Do not invent failed commands.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 31983,
+      "retained_source_characters": 31983,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "32k",
+      "context_limit": 32768,
+      "actual_input_tokens": 10934,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-build.json",
+        "payload_sha256": "9def2a2e4c62c019742bfa348182ba8a4992dd34175dc3e20d9a2752197c7999",
+        "messages_sha256": "4b7deead9c19af66c20be2f16773cb5676935487b1f88e0a8c0a33730c22266a",
+        "input_ids_sha256": "73dcd2f4c9b0afa078541c81a15362b353f36e35ade447f6659d8106863484ae",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-build-ids.json",
+        "actual_input_tokens": 10934
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": true,
+      "core": true,
+      "source_urls": [],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 62.068766625015996,
+        "warmup_s": 7.671949746960308,
+        "shutdown_s": 5.76027690898627,
+        "total_operating_s": 103.16640579601517
+      },
+      "measured_request": {
+        "task": "mixed-build",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-build.json",
+          "payload_sha256": "9def2a2e4c62c019742bfa348182ba8a4992dd34175dc3e20d9a2752197c7999",
+          "messages_sha256": "4b7deead9c19af66c20be2f16773cb5676935487b1f88e0a8c0a33730c22266a",
+          "input_ids_sha256": "73dcd2f4c9b0afa078541c81a15362b353f36e35ade447f6659d8106863484ae",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-build-ids.json",
+          "actual_input_tokens": 10934
+        },
+        "request_wall_s": 27.474162374972366,
+        "TTFT_s": 9.09065104398178,
+        "prefill_s": 8.211200000000002,
+        "decode_s": 17.8654,
+        "PP": 1331.6,
+        "TG": 114.6,
+        "actual_input_tokens": 10934,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/raw/output-ids-request2.json",
+        "output_ids_sha256": "55b8ac3f96da4741554f25ede3bcc837429a52de4b57e8b9d0f557782480029a",
+        "actual_engine_input": {
+          "count": 10934,
+          "sha256": "73dcd2f4c9b0afa078541c81a15362b353f36e35ade447f6659d8106863484ae",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 592,
+        "local_entries": 979449,
+        "cpu_entries": 72156,
+        "mapped_entries": 10155,
+        "all_entries": 1061760,
+        "MTP_proposed": 1620,
+        "MTP_accepted": 1457,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 10934,
+          "prompt_ms": 8211.2,
+          "prompt_per_token_ms": 0.751,
+          "prompt_per_second": 1331.6,
+          "predicted_n": 2048,
+          "predicted_ms": 17865.4,
+          "predicted_per_token_ms": 8.723,
+          "predicted_per_second": 114.6,
+          "draft_n": 1620,
+          "draft_n_accepted": 1457,
+          "at": 1791313941
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/telemetry/run.jsonl",
+          "samples": 28,
+          "system_cpu_mean_pct": 34.57857142857143,
+          "system_cpu_peak_pct": 55.4,
+          "peak_rss_gib": 76.47044372558594,
+          "peak_ram_used_gib": 81.25255584716797,
+          "min_available_gib": 79.88006210327148,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 51.857142857142854,
+              "peak_vram_mib": 23836.0
+            },
+            "1": {
+              "mean_util_pct": 53.25,
+              "peak_vram_mib": 24028.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 461835.288680321,
+        "first_monotonic": 461844.379331365,
+        "end_monotonic": 461862.762842696,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/raw/run-response.txt",
+        "trace_drain_s": 0.005102813011035323,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/tape.bin": "d183a656640c6c088849014b5a8c7e00b0e25145d88b4a96d57e586e4205da0d",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/raw/observations.bin": "5da14a1a0439b074b8c9d40772df257a1ae4af10918dd335f112101de1efcf76",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/raw/native-layers.bin": "89342f0265dd0ab4d3e6d6e708b1c80fa8a8f8e866de1e250f99671660a3b627",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/raw/native-native.bin": "d78787cd7f72adb7540f38824b7ab506d8872384647c4dae74aa6322904c1b3b",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/tape.bin.initial-state.bin": "445ea6ff72f4149913e2fd05002a9a39192c5dc1fbc9c8c9ee7da11d0bdd2dbe"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-build/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 103.16640579601517,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "code-queue",
+      "family": "code/agent",
+      "subtask": "implementation reasoning",
+      "languages": [
+        "English"
+      ],
+      "source_group": "cpython-asyncio-queues",
+      "split": "calibration",
+      "exclude_from_fitting_by_default": false,
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "source_revision": "Local CPython 3.14 source; reused prior snapshot",
+      "license": "PSF-2.0",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-queue-source.txt",
+      "source_sha256": "6c724955a874653b4174c65ba70529cfe6db6cf4610a5881c5a4f54044e183d9",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-queue-excerpt.txt",
+      "excerpt_sha256": "6c724955a874653b4174c65ba70529cfe6db6cf4610a5881c5a4f54044e183d9",
+      "instruction": "Design a bounded asynchronous log ingestion service around this queue implementation. Explain cancellation, backpressure, shutdown, retries, and ordering; provide a concrete Python implementation and adversarial tests.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 10137,
+      "retained_source_characters": 10137,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "32k",
+      "context_limit": 32768,
+      "actual_input_tokens": 2498,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-queue.json",
+        "payload_sha256": "b05549d4566851b42ebfe5a7e35e5d4ac0093075ed48564cb08e2f984fc0f86f",
+        "messages_sha256": "10b3e0166f7d4678dafdc50da746054f5309e40504502247a632ab3b2698d698",
+        "input_ids_sha256": "59b18c5b82adfd8d35be48a617919dd98a4b33ce8334eff450c91ab63d38e0a2",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-queue-ids.json",
+        "actual_input_tokens": 2498
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": false,
+      "core": true,
+      "source_urls": [
+        "https://github.com/python/cpython"
+      ],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 74.40404977300204,
+        "warmup_s": 7.692530559026636,
+        "shutdown_s": 4.848916799994186,
+        "total_operating_s": 112.23581429297337
+      },
+      "measured_request": {
+        "task": "code-queue",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-queue.json",
+          "payload_sha256": "b05549d4566851b42ebfe5a7e35e5d4ac0093075ed48564cb08e2f984fc0f86f",
+          "messages_sha256": "10b3e0166f7d4678dafdc50da746054f5309e40504502247a632ab3b2698d698",
+          "input_ids_sha256": "59b18c5b82adfd8d35be48a617919dd98a4b33ce8334eff450c91ab63d38e0a2",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-queue-ids.json",
+          "actual_input_tokens": 2498
+        },
+        "request_wall_s": 25.117153130006045,
+        "TTFT_s": 5.977052663976792,
+        "prefill_s": 5.2602,
+        "decode_s": 18.565099999999997,
+        "PP": 474.9,
+        "TG": 110.3,
+        "actual_input_tokens": 2498,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/raw/output-ids-request2.json",
+        "output_ids_sha256": "576e539b2d84ffdbe2a724c141a13d1328348b6bff89be02e0d0c1e78e42e26e",
+        "actual_engine_input": {
+          "count": 2498,
+          "sha256": "59b18c5b82adfd8d35be48a617919dd98a4b33ce8334eff450c91ab63d38e0a2",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 682,
+        "local_entries": 1071500,
+        "cpu_entries": 73141,
+        "mapped_entries": 9279,
+        "all_entries": 1153920,
+        "MTP_proposed": 1722,
+        "MTP_accepted": 1369,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2498,
+          "prompt_ms": 5260.2,
+          "prompt_per_token_ms": 2.106,
+          "prompt_per_second": 474.9,
+          "predicted_n": 2048,
+          "predicted_ms": 18565.1,
+          "predicted_per_token_ms": 9.065,
+          "predicted_per_second": 110.3,
+          "draft_n": 1722,
+          "draft_n_accepted": 1369,
+          "at": 1791314056
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/telemetry/run.jsonl",
+          "samples": 26,
+          "system_cpu_mean_pct": 35.276923076923076,
+          "system_cpu_peak_pct": 53.1,
+          "peak_rss_gib": 76.49455642700195,
+          "peak_ram_used_gib": 81.196533203125,
+          "min_available_gib": 79.93608474731445,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 46.42307692307692,
+              "peak_vram_mib": 23836.0
+            },
+            "1": {
+              "mean_util_pct": 47.23076923076923,
+              "peak_vram_mib": 24026.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 461952.439703755,
+        "first_monotonic": 461958.416756419,
+        "end_monotonic": 461977.556856885,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/raw/run-response.txt",
+        "trace_drain_s": 0.0035668789641931653,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/tape.bin": "b3527a4657417f5dca56c46be6eebabe8a4a6c0f271a0290dd473b437ff01c05",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/raw/observations.bin": "9e1e718625f7a091ef569b52028327f09dd500e2e298838de07b115d67f3cc90",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/raw/native-layers.bin": "6b91f7829da415b50d565f70309f6ef7df9d52f0853fcb7029a08b74c1a27563",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/raw/native-native.bin": "c1cd40eaa45c68c8a1350e3add25ac91c78721683b0571535538d8ff8dccbe70",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/tape.bin.initial-state.bin": "fc9424d20c2c46e68c00e2cd8209ad848250a9d9d67572e999de3348bdd3921c"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-queue/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 112.23581429297337,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "math-sensor",
+      "family": "math/research",
+      "subtask": "numerical parameter fitting",
+      "languages": [
+        "English"
+      ],
+      "source_group": "authored-sensor-problem",
+      "split": "calibration",
+      "exclude_from_fitting_by_default": false,
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "source_revision": "Prior conditional-admission task math-3",
+      "license": "Locally authored research task; no third-party text",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-sensor-source.txt",
+      "source_sha256": "884c14847960534da9ee51f425114d9690276a7fd8eea80516fefeaee1116a79",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-sensor-excerpt.txt",
+      "excerpt_sha256": "884c14847960534da9ee51f425114d9690276a7fd8eea80516fefeaee1116a79",
+      "instruction": "Solve this complete applied problem with derivations, implementation detail and verification.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 475,
+      "retained_source_characters": 475,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "128k",
+      "context_limit": 131072,
+      "actual_input_tokens": 179,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-sensor.json",
+        "payload_sha256": "3d3ca8911b94c85fb385b84cd1829a1d66482fe5f3c1ff3aa4aada64fcd1f1c8",
+        "messages_sha256": "a2fe36a9fb7d8a72f45b0eb853ddbbecdb11900f5bcc773e1f85a60e59f1d240",
+        "input_ids_sha256": "81ee2a17975ce35013be39c9e9e2d3f5c13332d49f7f9ba03be1283c7fdc2011",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-sensor-ids.json",
+        "actual_input_tokens": 179
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": false,
+      "core": true,
+      "source_urls": [],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 86.89126549998764,
+        "warmup_s": 7.665659316990059,
+        "shutdown_s": 6.263932096015196,
+        "total_operating_s": 122.30134048301261
+      },
+      "measured_request": {
+        "task": "math-sensor",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-sensor.json",
+          "payload_sha256": "3d3ca8911b94c85fb385b84cd1829a1d66482fe5f3c1ff3aa4aada64fcd1f1c8",
+          "messages_sha256": "a2fe36a9fb7d8a72f45b0eb853ddbbecdb11900f5bcc773e1f85a60e59f1d240",
+          "input_ids_sha256": "81ee2a17975ce35013be39c9e9e2d3f5c13332d49f7f9ba03be1283c7fdc2011",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-sensor-ids.json",
+          "actual_input_tokens": 179
+        },
+        "request_wall_s": 21.284587336005643,
+        "TTFT_s": 1.7420369680039585,
+        "prefill_s": 1.2631,
+        "decode_s": 18.9813,
+        "PP": 141.7,
+        "TG": 107.9,
+        "actual_input_tokens": 179,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/raw/output-ids-request2.json",
+        "output_ids_sha256": "043e136e052311941330e1aaaf4ddafc162cc17c8d842a147691ac1f691824fe",
+        "actual_engine_input": {
+          "count": 179,
+          "sha256": "81ee2a17975ce35013be39c9e9e2d3f5c13332d49f7f9ba03be1283c7fdc2011",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 668,
+        "local_entries": 1082183,
+        "cpu_entries": 69063,
+        "mapped_entries": 8434,
+        "all_entries": 1159680,
+        "MTP_proposed": 1748,
+        "MTP_accepted": 1380,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 179,
+          "prompt_ms": 1263.1,
+          "prompt_per_token_ms": 7.056,
+          "prompt_per_second": 141.7,
+          "predicted_n": 2048,
+          "predicted_ms": 18981.3,
+          "predicted_per_token_ms": 9.268,
+          "predicted_per_second": 107.9,
+          "draft_n": 1748,
+          "draft_n_accepted": 1380,
+          "at": 1791314179
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/telemetry/run.jsonl",
+          "samples": 22,
+          "system_cpu_mean_pct": 41.695454545454545,
+          "system_cpu_peak_pct": 56.4,
+          "peak_rss_gib": 78.22761917114258,
+          "peak_ram_used_gib": 83.06180953979492,
+          "min_available_gib": 78.07080841064453,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 49.27272727272727,
+              "peak_vram_mib": 23838.0
+            },
+            "1": {
+              "mean_util_pct": 48.77272727272727,
+              "peak_vram_mib": 24026.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 462078.947459253,
+        "first_monotonic": 462080.689496221,
+        "end_monotonic": 462100.232046589,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/raw/run-response.txt",
+        "trace_drain_s": 0.005088273959700018,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/tape.bin": "f92f3d74ecf4b8a6aae5b503e5e99d44117a39cfdf55c4927d04a14f83aadf04",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/raw/observations.bin": "fab61fd89ad21bea200cdedece07c3f8ddb28f8376e0148a9e9ac43d3139fd49",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/raw/native-layers.bin": "c90bc5742be8fc72ccef05989f7930bbcc2a1f3b8434a899e3e319a628d3f1f9",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/raw/native-native.bin": "1c57d8497d1dca27adc38fc8f72c69fad9ba3f260c5352d10e7506ab83ff6591",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/tape.bin.initial-state.bin": "37a131a4aaa431811d466218ab25eb20ad31cfc276eedd79189a7bca062062d3"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-sensor/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 122.30134048301261,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "text-tls",
+      "family": "text/translation",
+      "subtask": "English to Polish technical translation",
+      "languages": [
+        "English",
+        "Polish"
+      ],
+      "source_group": "rfc8446-TLS",
+      "split": "calibration",
+      "exclude_from_fitting_by_default": false,
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": false,
+      "source_revision": "RFC 8446, August 2018",
+      "license": "IETF Trust Legal Provisions",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-tls-source.txt",
+      "source_sha256": "47871bc8820a2c3b6ea89f061055577058862cf543686b82d10131239702b3bd",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-tls-excerpt.txt",
+      "excerpt_sha256": "47871bc8820a2c3b6ea89f061055577058862cf543686b82d10131239702b3bd",
+      "instruction": "Explain the TLS 1.3 handshake and its security boundaries using this standard. Translate the principal explanation into Polish while keeping protocol names and field names in English. Use a short glossary and distinguish what the excerpt specifies from assumptions.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 337736,
+      "retained_source_characters": 337736,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "128k",
+      "context_limit": 131072,
+      "actual_input_tokens": 81722,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-tls.json",
+        "payload_sha256": "d8f8d38a5349ef8509c0bbc1f0c86edcffeb030f6710bb728d6c47969d7e7137",
+        "messages_sha256": "867dc20b2cb2df972f55629e485df35ba54cbc1b1e97cb1ea2b30ca43bf07fd1",
+        "input_ids_sha256": "92b2c86d324f25e3c118202973285779bb5296f8d8594f0cfe483a6952e0c158",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-tls-ids.json",
+        "actual_input_tokens": 81722
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": false,
+      "core": true,
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc8446.txt"
+      ],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 100.7321629920043,
+        "warmup_s": 7.5917188609601,
+        "shutdown_s": 5.402877827989869,
+        "total_operating_s": 185.9399315190385
+      },
+      "measured_request": {
+        "task": "text-tls",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-tls.json",
+          "payload_sha256": "d8f8d38a5349ef8509c0bbc1f0c86edcffeb030f6710bb728d6c47969d7e7137",
+          "messages_sha256": "867dc20b2cb2df972f55629e485df35ba54cbc1b1e97cb1ea2b30ca43bf07fd1",
+          "input_ids_sha256": "92b2c86d324f25e3c118202973285779bb5296f8d8594f0cfe483a6952e0c158",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-tls-ids.json",
+          "actual_input_tokens": 81722
+        },
+        "request_wall_s": 71.87533408304444,
+        "TTFT_s": 46.49722420301987,
+        "prefill_s": 44.3004,
+        "decode_s": 24.5318,
+        "PP": 1844.7,
+        "TG": 83.5,
+        "actual_input_tokens": 81722,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/raw/output-ids-request2.json",
+        "output_ids_sha256": "7b0849c7d4ed313bceba10fd4006eff6e223036008b17bc2d1df9cddc73d6d86",
+        "actual_engine_input": {
+          "count": 81722,
+          "sha256": "92b2c86d324f25e3c118202973285779bb5296f8d8594f0cfe483a6952e0c158",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 965,
+        "local_entries": 1243942,
+        "cpu_entries": 65831,
+        "mapped_entries": 5907,
+        "all_entries": 1315680,
+        "MTP_proposed": 1776,
+        "MTP_accepted": 1085,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 81722,
+          "prompt_ms": 44300.4,
+          "prompt_per_token_ms": 0.542,
+          "prompt_per_second": 1844.7,
+          "predicted_n": 2048,
+          "predicted_ms": 24531.8,
+          "predicted_per_token_ms": 11.978,
+          "predicted_per_second": 83.5,
+          "draft_n": 1776,
+          "draft_n_accepted": 1085,
+          "at": 1791314628
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/telemetry/run.jsonl",
+          "samples": 72,
+          "system_cpu_mean_pct": 21.051388888888887,
+          "system_cpu_peak_pct": 50.2,
+          "peak_rss_gib": 78.38416290283203,
+          "peak_ram_used_gib": 83.41230392456055,
+          "min_available_gib": 77.7203140258789,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 47.986111111111114,
+              "peak_vram_mib": 23838.0
+            },
+            "1": {
+              "mean_util_pct": 52.90277777777778,
+              "peak_vram_mib": 24028.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 462477.099645954,
+        "first_monotonic": 462523.596870157,
+        "end_monotonic": 462548.974980037,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/raw/run-response.txt",
+        "trace_drain_s": 0.0056702319998294115,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/tape.bin": "3dd63caa4d669531efddaa09712e231e6faa62488ab2f109004611a365b2f772",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/raw/observations.bin": "68101a15584996af547462c9dee2228b089516a5985f9bee01b7cc0bfcf4838d",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/raw/native-layers.bin": "0ea26138b93e914ccf4963bd027e5976ba014a77115985ed3c7988e243baf797",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/raw/native-native.bin": "804bee97f2b331f940977a8d9e63d70eef2350b9b90d5db512c26a7140b742c2",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/tape.bin.initial-state.bin": "7c99fd979099d5e68977e4c5fdf6c077907a176c069ec80eea937c5a9efa13d0"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-tls/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 185.9399315190385,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "mixed-fields",
+      "family": "structured/mixed",
+      "subtask": "grammar and schema extraction",
+      "languages": [
+        "English"
+      ],
+      "source_group": "rfc8941-structured-fields",
+      "split": "calibration",
+      "exclude_from_fitting_by_default": false,
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": false,
+      "source_revision": "RFC 8941, February 2021",
+      "license": "IETF Trust Legal Provisions",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-fields-source.txt",
+      "source_sha256": "92e07becbe27974319d79de6195e72e25062b4193f68623e90ea4f7deaf33bb9",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-fields-excerpt.txt",
+      "excerpt_sha256": "92e07becbe27974319d79de6195e72e25062b4193f68623e90ea4f7deaf33bb9",
+      "instruction": "Extract the structured-field data model and parser constraints from this standard. Provide a typed schema, parsing pseudocode and a compact JSON test catalog for dictionaries, lists, items and parameters, with examples drawn from the document. Distinguish illustrative tests from complete conformance coverage.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 60852,
+      "retained_source_characters": 60852,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "128k",
+      "context_limit": 131072,
+      "actual_input_tokens": 16346,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-fields.json",
+        "payload_sha256": "c556841348beadb1e0fd6d314e36d9e01811cbc2d407e20683404f92cac1546c",
+        "messages_sha256": "24424c76ea105432e5d73feccb9b311d961e233240860cadc4581642f034af5f",
+        "input_ids_sha256": "a319a077545f76f32a377d4f881ed0453440daf1404a68241c734faed518b59c",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-fields-ids.json",
+        "actual_input_tokens": 16346
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": false,
+      "core": true,
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc8941.txt"
+      ],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 63.06316623900784,
+        "warmup_s": 7.508005791984033,
+        "shutdown_s": 4.053022266016342,
+        "total_operating_s": 106.15237814403372
+      },
+      "measured_request": {
+        "task": "mixed-fields",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-fields.json",
+          "payload_sha256": "c556841348beadb1e0fd6d314e36d9e01811cbc2d407e20683404f92cac1546c",
+          "messages_sha256": "24424c76ea105432e5d73feccb9b311d961e233240860cadc4581642f034af5f",
+          "input_ids_sha256": "a319a077545f76f32a377d4f881ed0453440daf1404a68241c734faed518b59c",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-fields-ids.json",
+          "actual_input_tokens": 16346
+        },
+        "request_wall_s": 31.28248120303033,
+        "TTFT_s": 14.05230586003745,
+        "prefill_s": 13.5175,
+        "decode_s": 16.7649,
+        "PP": 1209.2,
+        "TG": 122.2,
+        "actual_input_tokens": 16346,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/raw/output-ids-request2.json",
+        "output_ids_sha256": "04d0f9149f29b519f12d9cd8f1a08695d010f0b149652997f5c543d8173c3d07",
+        "actual_engine_input": {
+          "count": 16346,
+          "sha256": "a319a077545f76f32a377d4f881ed0453440daf1404a68241c734faed518b59c",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 646,
+        "local_entries": 1058823,
+        "cpu_entries": 67812,
+        "mapped_entries": 8085,
+        "all_entries": 1134720,
+        "MTP_proposed": 1718,
+        "MTP_accepted": 1404,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 16346,
+          "prompt_ms": 13517.5,
+          "prompt_per_token_ms": 0.827,
+          "prompt_per_second": 1209.2,
+          "predicted_n": 2048,
+          "predicted_ms": 16764.9,
+          "predicted_per_token_ms": 8.186,
+          "predicted_per_second": 122.2,
+          "draft_n": 1718,
+          "draft_n_accepted": 1404,
+          "at": 1791314740
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/telemetry/run.jsonl",
+          "samples": 32,
+          "system_cpu_mean_pct": 26.80625,
+          "system_cpu_peak_pct": 53.0,
+          "peak_rss_gib": 78.25553512573242,
+          "peak_ram_used_gib": 83.03569412231445,
+          "min_available_gib": 78.096923828125,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 41.78125,
+              "peak_vram_mib": 23838.0
+            },
+            "1": {
+              "mean_util_pct": 44.59375,
+              "peak_vram_mib": 24028.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 462629.762580317,
+        "first_monotonic": 462643.814886177,
+        "end_monotonic": 462661.04506152,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/raw/run-response.txt",
+        "trace_drain_s": 0.0029686909983865917,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/tape.bin": "4399499de907641cd840413b6f70aacea5be69ee8ff233431de73bf103d16dd8",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/raw/observations.bin": "68889e96da80b35285a151b6cfe4f0ffcabddc5c9ffec6a0bcd1f3c8405d3b4a",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/raw/native-layers.bin": "0e99d3c7953ee927b3afa9aac3dac8dbf70dc7eeb0f240fd0ef616278261f7f7",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/raw/native-native.bin": "38027808deda4d6b331d9ab9e9417e4292e724a2f6441fe6e68928e6485ab1d9",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/tape.bin.initial-state.bin": "b9ce6579c533e7b6022eb1837625cc08af7a55d8494f382c0fe7eb35c8f07241"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-fields/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 106.15237814403372,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "code-archive",
+      "family": "code/agent",
+      "subtask": "safe archive import",
+      "languages": [
+        "English"
+      ],
+      "source_group": "cpython-zipfile",
+      "split": "reserved_evaluation",
+      "exclude_from_fitting_by_default": true,
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "source_revision": "Local CPython 3.14 source; reused prior exposed holdout",
+      "license": "PSF-2.0",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-archive-source.txt",
+      "source_sha256": "b4dd5fe50e2de8cc56aa5003942706679285d99d43e4e8df395fdee91ff5f77a",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-archive-excerpt.txt",
+      "excerpt_sha256": "3a7e7b55da56dc336242e4241959d5b822afc704277e9dff182ba4f9af7a8f11",
+      "instruction": "Implement a safe offline archive importer using this implementation as reference. Discuss path normalization, links, size limits, streaming, atomic publication and interrupted extraction. Include Python code and tests.",
+      "length_method": "Coherent complete-paragraph prefix of historical zipfile excerpt; original26000-character source ends mid-comment and remains preserved",
+      "full_source_characters": 26000,
+      "retained_source_characters": 25977,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "32k",
+      "context_limit": 32768,
+      "actual_input_tokens": 6983,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-archive.json",
+        "payload_sha256": "47169bd6e7e6533172b5754206284e9c524489329a02782ecdf65f0fd53698d1",
+        "messages_sha256": "a91c5977b20b48eedaafc3a8214e1cc5aaf11c1a770876ad67542a4c2f7c7e75",
+        "input_ids_sha256": "3be596fbbddf4be4d759dd084573b70277c2be78d988b5cfef8d2f8909f61c60",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-archive-ids.json",
+        "actual_input_tokens": 6983
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": false,
+      "core": true,
+      "source_urls": [
+        "https://github.com/python/cpython"
+      ],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 55.081835384014994,
+        "warmup_s": 7.6297188269672915,
+        "shutdown_s": 4.608904024004005,
+        "total_operating_s": 98.09763177699642
+      },
+      "measured_request": {
+        "task": "code-archive",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-archive.json",
+          "payload_sha256": "47169bd6e7e6533172b5754206284e9c524489329a02782ecdf65f0fd53698d1",
+          "messages_sha256": "a91c5977b20b48eedaafc3a8214e1cc5aaf11c1a770876ad67542a4c2f7c7e75",
+          "input_ids_sha256": "3be596fbbddf4be4d759dd084573b70277c2be78d988b5cfef8d2f8909f61c60",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/code-archive-ids.json",
+          "actual_input_tokens": 6983
+        },
+        "request_wall_s": 30.602174058032688,
+        "TTFT_s": 10.12669706903398,
+        "prefill_s": 9.2625,
+        "decode_s": 20.0506,
+        "PP": 753.9,
+        "TG": 102.1,
+        "actual_input_tokens": 6983,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/raw/output-ids-request2.json",
+        "output_ids_sha256": "2b1374578074f70c104b69a4011bd7fdc2abbefc3f581af627d302c9a8156181",
+        "actual_engine_input": {
+          "count": 6983,
+          "sha256": "3be596fbbddf4be4d759dd084573b70277c2be78d988b5cfef8d2f8909f61c60",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 769,
+        "local_entries": 1143573,
+        "cpu_entries": 63663,
+        "mapped_entries": 7164,
+        "all_entries": 1214400,
+        "MTP_proposed": 1761,
+        "MTP_accepted": 1282,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 6983,
+          "prompt_ms": 9262.5,
+          "prompt_per_token_ms": 1.326,
+          "prompt_per_second": 753.9,
+          "predicted_n": 2048,
+          "predicted_ms": 20050.6,
+          "predicted_per_token_ms": 9.79,
+          "predicted_per_second": 102.1,
+          "draft_n": 1761,
+          "draft_n_accepted": 1282,
+          "at": 1791314839
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/telemetry/run.jsonl",
+          "samples": 31,
+          "system_cpu_mean_pct": 31.18709677419355,
+          "system_cpu_peak_pct": 50.0,
+          "peak_rss_gib": 76.5448989868164,
+          "peak_ram_used_gib": 81.3110237121582,
+          "min_available_gib": 79.82159423828125,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 42.12903225806452,
+              "peak_vram_mib": 23836.0
+            },
+            "1": {
+              "mean_util_pct": 43.58064516129032,
+              "peak_vram_mib": 24028.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 462729.756687194,
+        "first_monotonic": 462739.883384263,
+        "end_monotonic": 462760.358861252,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/raw/run-response.txt",
+        "trace_drain_s": 0.003981206973548979,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/tape.bin": "1e6a4e9846731d17fa160cb1512d310d9d50b31c67d2eb30f81b0038bbe921a0",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/raw/observations.bin": "454ae3c61d19c452961da62634e6a64ef18892466eb3a1e836a7e114b4fa4537",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/raw/native-layers.bin": "b79ea45bf432983c98f240df470b5caee979c881553633e2adc6e9cda40744db",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/raw/native-native.bin": "379e43f9373f6e2f292acd0f25577cc16683565ff9ef576183192de93e4d2013",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/tape.bin.initial-state.bin": "21532fc7dc8b83f1de1f90f3cd96d0e8887ef5be15098659c18c8c586ee6d6e2"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/code-archive/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 98.09763177699642,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "math-inventory",
+      "family": "math/research",
+      "subtask": "stochastic inventory",
+      "languages": [
+        "English"
+      ],
+      "source_group": "authored-warehouse-problem",
+      "split": "reserved_evaluation",
+      "exclude_from_fitting_by_default": true,
+      "prior_evaluation_exposure": true,
+      "pristine_holdout": false,
+      "source_revision": "Prior conditional-admission task math-2; already development-exposed",
+      "license": "Locally authored research task; no third-party text",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-inventory-source.txt",
+      "source_sha256": "5f8f9347514d781a4fd8e0b4f60c461617519dc522e79c9834af883fa70d0226",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-inventory-excerpt.txt",
+      "excerpt_sha256": "5f8f9347514d781a4fd8e0b4f60c461617519dc522e79c9834af883fa70d0226",
+      "instruction": "Solve this complete applied problem with derivations, implementation detail and verification.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 518,
+      "retained_source_characters": 518,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "32k",
+      "context_limit": 32768,
+      "actual_input_tokens": 165,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-inventory.json",
+        "payload_sha256": "1743255622432ef34109bbd1ab0e9e54d804580470673f98685ac38803a14287",
+        "messages_sha256": "6837dc4e0de31497d7aab784be3a5f3bea0359affc5b3395f783e350c2346cde",
+        "input_ids_sha256": "922830932358054552740909e0cc62c8aeb0376f4353c16a47002cfba205f36a",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-inventory-ids.json",
+        "actual_input_tokens": 165
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": false,
+      "core": true,
+      "source_urls": [],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 91.39373208698817,
+        "warmup_s": 7.464892823016271,
+        "shutdown_s": 4.336662187008187,
+        "total_operating_s": 124.22598385199672
+      },
+      "measured_request": {
+        "task": "math-inventory",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-inventory.json",
+          "payload_sha256": "1743255622432ef34109bbd1ab0e9e54d804580470673f98685ac38803a14287",
+          "messages_sha256": "6837dc4e0de31497d7aab784be3a5f3bea0359affc5b3395f783e350c2346cde",
+          "input_ids_sha256": "922830932358054552740909e0cc62c8aeb0376f4353c16a47002cfba205f36a",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/math-inventory-ids.json",
+          "actual_input_tokens": 165
+        },
+        "request_wall_s": 20.83764355495805,
+        "TTFT_s": 1.6470904090092517,
+        "prefill_s": 1.1185,
+        "decode_s": 18.7252,
+        "PP": 147.5,
+        "TG": 109.4,
+        "actual_input_tokens": 165,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/raw/output-ids-request2.json",
+        "output_ids_sha256": "7d06ee74366a3fe28bb2ae66da28b3c2d772b1ebc12e43cdf96f3109cc66848b",
+        "actual_engine_input": {
+          "count": 165,
+          "sha256": "922830932358054552740909e0cc62c8aeb0376f4353c16a47002cfba205f36a",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 766,
+        "local_entries": 1160420,
+        "cpu_entries": 69946,
+        "mapped_entries": 8034,
+        "all_entries": 1238400,
+        "MTP_proposed": 1814,
+        "MTP_accepted": 1283,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 165,
+          "prompt_ms": 1118.5,
+          "prompt_per_token_ms": 6.779,
+          "prompt_per_second": 147.5,
+          "predicted_n": 2048,
+          "predicted_ms": 18725.2,
+          "predicted_per_token_ms": 9.143,
+          "predicted_per_second": 109.4,
+          "draft_n": 1814,
+          "draft_n_accepted": 1283,
+          "at": 1791314966
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/telemetry/run.jsonl",
+          "samples": 21,
+          "system_cpu_mean_pct": 37.29047619047619,
+          "system_cpu_peak_pct": 54.6,
+          "peak_rss_gib": 76.5187873840332,
+          "peak_ram_used_gib": 81.28314208984375,
+          "min_available_gib": 79.8494758605957,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 52.142857142857146,
+              "peak_vram_mib": 23836.0
+            },
+            "1": {
+              "mean_util_pct": 54.857142857142854,
+              "peak_vram_mib": 24026.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 462866.133407653,
+        "first_monotonic": 462867.780498062,
+        "end_monotonic": 462886.971051208,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/raw/run-response.txt",
+        "trace_drain_s": 0.002791531034745276,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/tape.bin": "8f6e6216fb1d1b6670e9ecd03ec76d2a3469cbca0db4f6ab4fa77650f57ee922",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/raw/observations.bin": "5c582cf64b7bcd1e3cc1b4d0a9fde30b15fc014592884c89bc27e1d90440ea2a",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/raw/native-layers.bin": "dc8fe6385f325b3997498f4aff09c0102e2a5480397e7d3cc3c8a638865ffb74",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/raw/native-native.bin": "0a5253832ec2d2ac12a3fbb63dfd700fe06f3217af1cf366a7d711e6041d9d59",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/tape.bin.initial-state.bin": "1028cacd5e2419edc6738000fdde3d7ef94d8915622cbe5c55b5409dd5151bcc"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-inventory/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 124.22598385199672,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "text-websocket",
+      "family": "text/translation",
+      "subtask": "technical explanation",
+      "languages": [
+        "English"
+      ],
+      "source_group": "rfc6455-WebSocket",
+      "split": "reserved_evaluation",
+      "exclude_from_fitting_by_default": true,
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": true,
+      "source_revision": "RFC 6455, December 2011",
+      "license": "IETF Trust Legal Provisions",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-websocket-source.txt",
+      "source_sha256": "765775326aee0ecca9b04bde3fd1f52932d498e33e34e428bd61b8a24da0fa3b",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-websocket-excerpt.txt",
+      "excerpt_sha256": "945b99b1a98fcc46982ad4ac732af6f66851732f3b3181ff0357ab092435e2d4",
+      "instruction": "Explain the WebSocket upgrade and framing protocol from the supplied coherent excerpt. Contrast HTTP request semantics with persistent full-duplex messaging; discuss validation, masking and failure handling. State when a detail is outside the supplied excerpt.",
+      "length_method": "Coherent complete-paragraph prefix for admission; full original source preserved; no padding/repetition",
+      "full_source_characters": 162067,
+      "retained_source_characters": 120556,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "32k",
+      "context_limit": 32768,
+      "actual_input_tokens": 30383,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-websocket.json",
+        "payload_sha256": "54a1a1395506616f8a2e5038f51d581932c6deef506020f6094bb0835852db98",
+        "messages_sha256": "950eb27d4ac2ebece935227853802d8310cb6d2d5644745636583fcdb38be5c0",
+        "input_ids_sha256": "0cca00c9fda4dedb468a36fe13c821220a718f714b24e531f684cbe812801493",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-websocket-ids.json",
+        "actual_input_tokens": 30383
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": false,
+      "core": true,
+      "source_urls": [
+        "https://www.rfc-editor.org/rfc/rfc6455.txt"
+      ],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 57.05884715204593,
+        "warmup_s": 7.754312773991842,
+        "shutdown_s": 5.858726484992076,
+        "total_operating_s": 111.26136664196383
+      },
+      "measured_request": {
+        "task": "text-websocket",
+        "state": "COMPLETED",
+        "stop_reason": "NATURAL_EOS",
+        "engine_finish_reason": "stop",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-websocket.json",
+          "payload_sha256": "54a1a1395506616f8a2e5038f51d581932c6deef506020f6094bb0835852db98",
+          "messages_sha256": "950eb27d4ac2ebece935227853802d8310cb6d2d5644745636583fcdb38be5c0",
+          "input_ids_sha256": "0cca00c9fda4dedb468a36fe13c821220a718f714b24e531f684cbe812801493",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/text-websocket-ids.json",
+          "actual_input_tokens": 30383
+        },
+        "request_wall_s": 40.36473674100125,
+        "TTFT_s": 21.31846968701575,
+        "prefill_s": 20.306900000000002,
+        "decode_s": 18.514400000000002,
+        "PP": 1496.2,
+        "TG": 95.8,
+        "actual_input_tokens": 30383,
+        "output_tokens": 1773,
+        "captured_output_ID_count": 1773,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/raw/output-ids-request2.json",
+        "output_ids_sha256": "fd5d439a311cfda421a699e02103bce452d166ca4b4ee41af1bca3405d0b0fc5",
+        "actual_engine_input": {
+          "count": 30383,
+          "sha256": "0cca00c9fda4dedb468a36fe13c821220a718f714b24e531f684cbe812801493",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 636,
+        "local_entries": 986799,
+        "cpu_entries": 60227,
+        "mapped_entries": 6574,
+        "all_entries": 1053600,
+        "MTP_proposed": 1559,
+        "MTP_accepted": 1139,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 30383,
+          "prompt_ms": 20306.9,
+          "prompt_per_token_ms": 0.668,
+          "prompt_per_second": 1496.2,
+          "predicted_n": 1773,
+          "predicted_ms": 18514.4,
+          "predicted_per_token_ms": 10.442,
+          "predicted_per_second": 95.8,
+          "draft_n": 1559,
+          "draft_n_accepted": 1139,
+          "at": 1791315077
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/telemetry/run.jsonl",
+          "samples": 41,
+          "system_cpu_mean_pct": 26.473170731707317,
+          "system_cpu_peak_pct": 51.6,
+          "peak_rss_gib": 76.4976921081543,
+          "peak_ram_used_gib": 81.27636337280273,
+          "min_available_gib": 79.85625457763672,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 45.51219512195122,
+              "peak_vram_mib": 23836.0
+            },
+            "1": {
+              "mean_util_pct": 46.951219512195124,
+              "peak_vram_mib": 24028.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 462958.311833605,
+        "first_monotonic": 462979.630303292,
+        "end_monotonic": 462998.676570346,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/raw/run-response.txt",
+        "trace_drain_s": 0.0055987819796428084,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/tape.bin": "e0504d2cecbdcd9bfc4a2c77d0555eff421b8a697e7f93a16c79afb2145fae67",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/raw/observations.bin": "99636b76a23d6f732749607ed4dba5814943f5331f996eec184b2fcda3d298ad",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/raw/native-layers.bin": "eb44e8682bb0275309902132c1225c5ab565346f246b4c7d931c871c6bf479c4",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/raw/native-native.bin": "9316b27f224115c554199f179bac3cbfa21fdb3c05d1d6563a3a6e95b8ebf6bb",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/tape.bin.initial-state.bin": "da1e50d2b43cae6a0b00d5e2d4b6424ac9643c6539dee404ab4821cc24815782"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/text-websocket/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 111.26136664196383,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    },
+    {
+      "task_id": "mixed-chinook",
+      "family": "structured/mixed",
+      "subtask": "real SQL schema extraction",
+      "languages": [
+        "English"
+      ],
+      "source_group": "chinook-SQLite-DDL",
+      "split": "reserved_evaluation",
+      "exclude_from_fitting_by_default": true,
+      "prior_evaluation_exposure": false,
+      "pristine_holdout": true,
+      "source_revision": "7f67772503d71ba90f19283c38e93923addb43fa",
+      "license": "Chinook custom permission/license; full text corpus/chinook-LICENSE.txt",
+      "source_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-chinook-source.txt",
+      "source_sha256": "0cee6b8e1fc2828bb2ba2f4e7378b9bdedc502cec8d485c6e3732eaaf686ea57",
+      "excerpt_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-chinook-excerpt.txt",
+      "excerpt_sha256": "0cee6b8e1fc2828bb2ba2f4e7378b9bdedc502cec8d485c6e3732eaaf686ea57",
+      "instruction": "Extract an entity-relationship model from this real SQLite schema. Return a JSON catalog of tables, primary/foreign keys and constraints, then explain invoice and playlist joins, deletion risks and integrity checks. Do not assume facts from absent sample rows.",
+      "length_method": "Natural full selected document/source set; no padding or repetition",
+      "full_source_characters": 7134,
+      "retained_source_characters": 7134,
+      "secret_scan": "PASS for fixed credential/private-key patterns; source inspected as code/doc/log",
+      "tool_execution": false,
+      "form": "single offline request; source snapshot, not interactive agent execution",
+      "profile": "32k",
+      "context_limit": 32768,
+      "actual_input_tokens": 1899,
+      "output_cap": 2048,
+      "engine_reserve": 8,
+      "soft_decode_target_s": 60,
+      "request_hard_cap_s": 240,
+      "startup_plus_warmup_hard_cap_s": 180,
+      "warmup": "same frozen 4096-input/64-output request",
+      "start_state": "fresh server per episode; native adaptive cache after fixed warmup",
+      "stop_rules": [
+        "natural EOS",
+        "2048 output cap",
+        "60s soft decode boundary at safe request cancellation; cancelled legacy tape not replay-ready",
+        "240s hard request wall deadline"
+      ],
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-chinook.json",
+        "payload_sha256": "dae3d5a36d0185fb34435af2c7218e4a52e4392b919f5dcaec62b3194caccb79",
+        "messages_sha256": "40e50bd93d5b5a15ae921aebbd7b2d481051fff37008b7be7c823786c6e79e5b",
+        "input_ids_sha256": "b7bc37202c016ac1257001b742d4ec875129b5864c4a1c455d49cfc91b7c521d",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-chinook-ids.json",
+        "actual_input_tokens": 1899
+      },
+      "measurement_status": "MEASURED",
+      "trace_type": "FULL_REPLAY_TAPE",
+      "trace_ready": true,
+      "screening": false,
+      "core": true,
+      "source_urls": [
+        "https://github.com/lerocha/chinook-database/tree/7f67772503d71ba90f19283c38e93923addb43fa"
+      ],
+      "wrapper_duplicate_task_text": false,
+      "measured_phase_times": {
+        "startup_s": 116.20127572497586,
+        "warmup_s": 7.461106533999555,
+        "shutdown_s": 5.773480843985453,
+        "total_operating_s": 153.63244031497743
+      },
+      "measured_request": {
+        "task": "mixed-chinook",
+        "state": "COMPLETED",
+        "stop_reason": "OUTPUT_CAP",
+        "engine_finish_reason": "length",
+        "payload": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-chinook.json",
+          "payload_sha256": "dae3d5a36d0185fb34435af2c7218e4a52e4392b919f5dcaec62b3194caccb79",
+          "messages_sha256": "40e50bd93d5b5a15ae921aebbd7b2d481051fff37008b7be7c823786c6e79e5b",
+          "input_ids_sha256": "b7bc37202c016ac1257001b742d4ec875129b5864c4a1c455d49cfc91b7c521d",
+          "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/corpus/mixed-chinook-ids.json",
+          "actual_input_tokens": 1899
+        },
+        "request_wall_s": 23.946956839004997,
+        "TTFT_s": 4.8290846580057405,
+        "prefill_s": 4.2738000000000005,
+        "decode_s": 18.5758,
+        "PP": 444.3,
+        "TG": 110.3,
+        "actual_input_tokens": 1899,
+        "output_tokens": 2048,
+        "captured_output_ID_count": 2048,
+        "output_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/raw/output-ids-request2.json",
+        "output_ids_sha256": "6ac27b7b2cdf5fba8125ea7c94cc3053a9259dea59600ccf06b176493ca053a9",
+        "actual_engine_input": {
+          "count": 1899,
+          "sha256": "b7bc37202c016ac1257001b742d4ec875129b5864c4a1c455d49cfc91b7c521d",
+          "encoding": "JSON integer array, compact separators, service-rendered actual engine IDs"
+        },
+        "verify_windows": 548,
+        "local_entries": 917627,
+        "cpu_entries": 93526,
+        "mapped_entries": 17007,
+        "all_entries": 1028160,
+        "MTP_proposed": 1594,
+        "MTP_accepted": 1502,
+        "reused_tokens": 0,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 1899,
+          "prompt_ms": 4273.8,
+          "prompt_per_token_ms": 2.251,
+          "prompt_per_second": 444.3,
+          "predicted_n": 2048,
+          "predicted_ms": 18575.8,
+          "predicted_per_token_ms": 9.07,
+          "predicted_per_second": 110.3,
+          "draft_n": 1594,
+          "draft_n_accepted": 1502,
+          "at": 1791315469
+        },
+        "telemetry": {
+          "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/telemetry/run.jsonl",
+          "samples": 24,
+          "system_cpu_mean_pct": 42.42916666666667,
+          "system_cpu_peak_pct": 59.3,
+          "peak_rss_gib": 76.43712997436523,
+          "peak_ram_used_gib": 81.58015060424805,
+          "min_available_gib": 79.5524673461914,
+          "gpus": {
+            "0": {
+              "mean_util_pct": 48.708333333333336,
+              "peak_vram_mib": 23836.0
+            },
+            "1": {
+              "mean_util_pct": 47.541666666666664,
+              "peak_vram_mib": 24026.0
+            }
+          },
+          "abort": null
+        },
+        "begin_monotonic": 463366.532019192,
+        "first_monotonic": 463371.36110385,
+        "end_monotonic": 463390.478976031,
+        "instrumented": true,
+        "text_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/raw/run-response.txt",
+        "trace_drain_s": 0.006198189978022128,
+        "logical_stop_boundary": "Complete verifier windows in tape if validated; cancellation tape may be invalid",
+        "short_output": false
+      },
+      "trace_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/tape.bin",
+      "trace_hashes": {
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/tape.bin": "233dd08965d6dba9bc8c172e3c0ee2d9aa8227ecd1eb6b9f4e7570f7806cc7d2",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/raw/observations.bin": "d82ccdec625f8d5fc1e7e58506f4451c0c76f516b95490184d6c8086a5c6315d",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/raw/native-layers.bin": "82ad51468effecc32bd391d47e81f48e3d915f5762f58252cf74d0d3e8759367",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/raw/native-native.bin": "f8a5d217e1cc4d0a80065f83b6ca2696d156cf6b642606e643d0ff0f85f6974c",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/tape.bin.initial-state.bin": "eb95bc7d01f126a903cbdd6cf5d533929d0e970585afb39e4a26dc43d1d1ada1"
+      },
+      "validation_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/mixed-chinook/validation.json",
+      "validation_status": "PASS",
+      "eligibility_reason": [],
+      "expert_size_evidence": {
+        "main_native_admission_payload_bytes_by_layer": {
+          "0": [
+            3072000
+          ],
+          "1": [
+            3072000
+          ],
+          "2": [
+            3993600
+          ],
+          "3": [
+            3072000
+          ],
+          "4": [
+            3584000
+          ],
+          "5": [
+            3072000
+          ],
+          "6": [
+            3072000
+          ],
+          "7": [
+            3072000
+          ],
+          "8": [
+            3072000
+          ],
+          "9": [
+            3072000
+          ],
+          "10": [
+            3072000
+          ],
+          "11": [
+            3072000
+          ],
+          "12": [
+            3072000
+          ],
+          "13": [
+            3072000
+          ],
+          "14": [
+            3072000
+          ],
+          "15": [
+            3072000
+          ],
+          "16": [
+            3072000
+          ],
+          "17": [
+            3072000
+          ],
+          "18": [
+            3072000
+          ],
+          "19": [
+            3072000
+          ],
+          "20": [
+            3072000
+          ],
+          "21": [
+            3072000
+          ],
+          "22": [
+            3072000
+          ],
+          "23": [
+            3072000
+          ],
+          "24": [
+            3072000
+          ],
+          "25": [
+            3072000
+          ],
+          "26": [
+            3072000
+          ],
+          "27": [
+            3072000
+          ],
+          "28": [
+            3072000
+          ],
+          "29": [
+            3072000
+          ],
+          "30": [
+            3584000
+          ],
+          "31": [
+            3072000
+          ],
+          "32": [
+            3072000
+          ],
+          "33": [
+            3072000
+          ],
+          "34": [
+            3072000
+          ],
+          "35": [
+            3072000
+          ],
+          "36": [
+            3072000
+          ],
+          "37": [
+            3072000
+          ],
+          "38": [
+            3072000
+          ],
+          "39": [
+            3072000
+          ],
+          "40": [
+            3072000
+          ],
+          "41": [
+            3072000
+          ],
+          "42": [
+            3072000
+          ],
+          "43": [
+            3072000
+          ],
+          "44": [
+            3072000
+          ],
+          "45": [
+            3072000
+          ],
+          "46": [
+            3584000
+          ],
+          "47": [
+            3584000
+          ]
+        },
+        "unobserved_expert_size": null,
+        "MTP_payload_size": null,
+        "device_classes": "main VRAM/CPU/mapped paths in native-layers.bin; per-layer/bin physical residency in tape initial state; MTP dispatch unknown",
+        "note": "Actual issued expert payload sizes,not PCIe bus throughput; no inferred size for experts with no observed admission"
+      },
+      "repeated_arm_cost_estimate": {
+        "observed_component_projection_s": 153.63244031497743,
+        "instrumented": true,
+        "sample_count": 1,
+        "robust_p95": null,
+        "note": "One original sample; future clean timing and policy overhead unknown"
+      },
+      "hash_encoding": {
+        "payload_sha256": "SHA256 of canonical JSON sorted keys,compact separators,default ensure_ascii=True",
+        "source_and_excerpt_sha256": "Raw file bytes",
+        "input_ids_sha256": "Raw compact JSON integer array file; binary int32 digest retained in validation"
+      }
+    }
+  ],
+  "queue": [
+    "code-heg",
+    "math-rational",
+    "text-http",
+    "mixed-build",
+    "code-queue",
+    "math-sensor",
+    "text-tls",
+    "mixed-fields",
+    "code-archive",
+    "math-inventory",
+    "text-websocket",
+    "mixed-chinook"
+  ],
+  "split_unit": "Whole substantive source group; nonce/context excerpts never independent",
+  "sampling": "One record per task/profile, no gain-based selection; round-robin families",
+  "limits": {
+    "repair_slots_total": 2,
+    "trace_storage_bytes": 12884901888,
+    "family_operations_s": 600
+  },
+  "status": "CALIBRATED"
+}

@@ -1,0 +1,7 @@
+# KV service versus frozen logical attention
+
+Source audit: native streamed-KV resolver runs a fixed1block/1024thread resolve kernel followed by a fixed96block/128thread copy kernel. QSA query positions, causal masks, ordered selectedtokenIDs and logical shapes are frozen. Its CLOCKmiss-list uses atomic claims; physical page-to-slot order and tiny subsequent refill-count variation can differ with runtime scheduling. This is ancillary physical service, not omitted attention math or a changed KV policy.
+
+Existing native end summaries report only primaryGPU QSA counters. First128Kpair has exactly15,491,286cumulativeblocklookups and3198.8MiB RAMrefills in both arms. First256Kpair has15,990,450lookups in both,6075.9 vs6075.7MiB; secondpair6076.0MiB in both. Initial map/controlstates match byte-for-byte. No overflow. This observedprimary refill variation is below0.01%, not evidence of a large dropped KV workload. SecondaryGPU cumulative refills are unavailable in the existing summary and remain unknown.
+
+No new hot-path instrument or KValgorithm change is introduced. Full logical work identity does not claim bitwise physicalmemory-transaction identity; expert service/grouping is intentionally changed, and minor native CLOCK nondeterminism remains a systems limitation. The32Kfullyresident profile has no streamed-KV path and supplies the cleanest decodefeasibility evidence. Longer-profile conclusions retain this explicitly stated ancillary-service limitation.

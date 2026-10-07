@@ -1,0 +1,145 @@
+{
+  "purpose": "Same final binary natural vs replay-current short workload, plus original frozen-binary mathematical parity reference; not main4096speed",
+  "warmup": "exact4096input/64output",
+  "short_output": 256,
+  "attempts_max_per_arm": 3,
+  "order": "NR/RN/NR paired fresh starts; no favorable replacements",
+  "jobs": [
+    {
+      "label": "development-capture-v3",
+      "args": [
+        "record",
+        "--label",
+        "development-capture-v3",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "32k",
+        "--payload",
+        "development"
+      ],
+      "timeout_s": 1200,
+      "tape": "tapes/development-capture-v3.bin"
+    },
+    {
+      "label": "original-natural-development-v3",
+      "args": [
+        "natural",
+        "--label",
+        "original-natural-development-v3",
+        "--variant",
+        "control",
+        "--profile",
+        "32k",
+        "--payload",
+        "development"
+      ],
+      "timeout_s": 1200
+    },
+    {
+      "label": "overhead-v3-natural-attempt1",
+      "args": [
+        "natural",
+        "--label",
+        "overhead-v3-natural-attempt1",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "32k",
+        "--payload",
+        "development"
+      ],
+      "timeout_s": 1200
+    },
+    {
+      "label": "overhead-v3-replay-attempt1",
+      "args": [
+        "replay",
+        "--label",
+        "overhead-v3-replay-attempt1",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "32k",
+        "--payload",
+        "development",
+        "--tape",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/tapes/development-capture-v3.bin",
+        "--oracle",
+        "off"
+      ],
+      "timeout_s": 1200,
+      "tape": "tapes/development-capture-v3.bin"
+    },
+    {
+      "label": "overhead-v3-replay-attempt2",
+      "args": [
+        "replay",
+        "--label",
+        "overhead-v3-replay-attempt2",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "32k",
+        "--payload",
+        "development",
+        "--tape",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/tapes/development-capture-v3.bin",
+        "--oracle",
+        "off"
+      ],
+      "timeout_s": 1200,
+      "tape": "tapes/development-capture-v3.bin"
+    },
+    {
+      "label": "overhead-v3-natural-attempt2",
+      "args": [
+        "natural",
+        "--label",
+        "overhead-v3-natural-attempt2",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "32k",
+        "--payload",
+        "development"
+      ],
+      "timeout_s": 1200
+    },
+    {
+      "label": "overhead-v3-natural-attempt3",
+      "args": [
+        "natural",
+        "--label",
+        "overhead-v3-natural-attempt3",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "32k",
+        "--payload",
+        "development"
+      ],
+      "timeout_s": 1200
+    },
+    {
+      "label": "overhead-v3-replay-attempt3",
+      "args": [
+        "replay",
+        "--label",
+        "overhead-v3-replay-attempt3",
+        "--variant",
+        "oracle-v3",
+        "--profile",
+        "32k",
+        "--payload",
+        "development",
+        "--tape",
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/tapes/development-capture-v3.bin",
+        "--oracle",
+        "off"
+      ],
+      "timeout_s": 1200,
+      "tape": "tapes/development-capture-v3.bin"
+    }
+  ]
+}

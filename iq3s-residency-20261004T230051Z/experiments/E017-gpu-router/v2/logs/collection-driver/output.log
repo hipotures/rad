@@ -1,0 +1,66 @@
+register 0 diagnostic-gpu-router-v2 1c6c5f88fbb2c0bb136503e6f672f223c0197b01
+
+native-targeted 0 47: conv_cache_test
+ 2/13 Test #47: conv_cache_test .....................   Passed    0.00 sec
+      Start 54: native_expert_parity_q4_K_q5_1
+ 3/13 Test #54: native_expert_parity_q4_K_q5_1 ......   Passed    0.61 sec
+      Start 55: native_expert_parity_q4_K_q8_0
+ 4/13 Test #55: native_expert_parity_q4_K_q8_0 ......   Passed    0.59 sec
+      Start 56: native_expert_parity_q5_K_q8_0
+ 5/13 Test #56: native_expert_parity_q5_K_q8_0 ......   Passed    0.54 sec
+      Start 57: native_expert_parity_q8_0_q8_0
+ 6/13 Test #57: native_expert_parity_q8_0_q8_0 ......   Passed    0.45 sec
+      Start 58: native_expert_parity_q4_K_q5_0
+ 7/13 Test #58: native_expert_parity_q4_K_q5_0 ......   Passed    0.58 sec
+      Start 59: native_expert_parity_q5_0_q8_0
+ 8/13 Test #59: native_expert_parity_q5_0_q8_0 ......   Passed    0.44 sec
+      Start 60: native_expert_parity_q5_1_min
+ 9/13 Test #60: native_expert_parity_q5_1_min .......   Passed    0.36 sec
+      Start 61: native_expert_parity_bf16_embd
+10/13 Test #61: native_expert_parity_bf16_embd ......   Passed    0.33 sec
+      Start 62: native_expert_parity_refuses_q6_K
+11/13 Test #62: native_expert_parity_refuses_q6_K ...   Passed    0.32 sec
+      Start 64: expert_multi_test
+12/13 Test #64: expert_multi_test ...................   Passed    0.04 sec
+      Start 68: direct_file_async_test
+13/13 Test #68: direct_file_async_test ..............   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 13
+
+Total Test time (real) =   4.30 sec
+
+real-IQ 0  one thread: avx2 258 us vs ggml 3 x 161 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          iq4_nl AVX-2 multi-token down vs ggml down: rel 1.03e-07
+          down 3 tokens one thread: avx2 120 us (7.67 GB/s) vs ggml 164 us (5.60 GB/s)
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 2   iq2_s   /iq4_nl  blob  1971200  cpu rel 1.31e-02  gpu rel 1.20e-02  cpu-gpu 1.52e-02  ok
+          iq3_xxs avx512 gate rows vs ggml vec_dot: rel 9.55e-08
+          gate+up one token one thread: avx512 260 us (4.83 GB/s), ggml 207 us (6.07 GB/s)
+          gate+up 3 tokens one thread: avx512 341 us vs ggml 3 x 207 us
+          iq3_xxs avx2 gate rows vs ggml vec_dot: rel 3.00e-08
+          gate+up one token one thread: avx2 194 us (6.48 GB/s), ggml 207 us (6.07 GB/s)
+          gate+up 3 tokens one thread: avx2 260 us vs ggml 3 x 207 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          q2_0 AVX-512 down vs ggml down: rel 1.82e-04
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 12  iq3_xxs /q2_0    blob  1715200  cpu rel 1.33e-02  gpu rel 1.19e-02  cpu-gpu 1.54e-02  ok
+native_expert_parity: 0 failures
+
+profiles 0 /tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E017-gpu-router/v2/128k/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1", "STRATA_LAB_GPU_ROUTER": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "1c6c5f88fbb2c0bb136503e6f672f223c0197b01", "build_variant": "diagnostic-gpu-router-v2", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "147359591d6b56c1dabbf87ed1097aba348c8526283cbfc2b719ab825e25d929", "headline_instrumentation": "DIAGNOSTIC_ONLY", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 131072, "source_sha": "1c6c5f88fbb2c0bb136503e6f672f223c0197b01", "source_status": "", "variant_overrides": {"env": {"STRATA_LAB_GPU_ROUTER": "1"}, "diagnostic_only": true, "extra_explicit_GPU_bytes_per_device": 320, "no_duplicate_gate_weights": true}, "diagnostic_env": {"STRATA_LAB_TRACE": "{attempt}/traces/runtime"}}
+READY diagnostic-gpu-router-v2 128k 56.07
+warmup VALID input 4096 output 64 PP 1501.9 TG 91.5
+trace-run1 VALID input 126715 output 4096 PP 3992.4 TG 130.1
+
+episodes 0  true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1", "STRATA_LAB_GPU_ROUTER": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "1c6c5f88fbb2c0bb136503e6f672f223c0197b01", "build_variant": "diagnostic-gpu-router-v2", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "147359591d6b56c1dabbf87ed1097aba348c8526283cbfc2b719ab825e25d929", "headline_instrumentation": "DIAGNOSTIC_ONLY", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 32768, "source_sha": "1c6c5f88fbb2c0bb136503e6f672f223c0197b01", "source_status": "", "variant_overrides": {"env": {"STRATA_LAB_GPU_ROUTER": "1"}, "diagnostic_only": true, "extra_explicit_GPU_bytes_per_device": 320, "no_duplicate_gate_weights": true}, "diagnostic_env": {"STRATA_LAB_TRACE": "{attempt}/traces/runtime"}}
+READY diagnostic-gpu-router-v2 32k 52.08
+warmup VALID input 4096 output 64 PP 1502.5 TG 94.9
+dev-code VALID input 67 output 1024 PP 296.9 TG 151.9
+dev-math VALID input 66 output 1024 PP 271.3 TG 171.7
+cal-prose VALID input 64 output 1024 PP 171.9 TG 113.1
+hold-code VALID input 72 output 1024 PP 298.8 TG 159.0
+hold-structured VALID input 69 output 1024 PP 289.2 TG 210.2
+hold-math VALID input 59 output 1024 PP 174.7 TG 131.1
+

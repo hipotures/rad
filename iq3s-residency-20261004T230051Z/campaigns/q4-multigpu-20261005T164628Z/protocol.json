@@ -1,0 +1,24 @@
+{
+  "strategies": [
+    "layer-split",
+    "original-helper",
+    "optimized-helper"
+  ],
+  "contexts": [
+    32768,
+    131072,
+    262144
+  ],
+  "final_valid_per_cell": 3,
+  "final_requests": 27,
+  "warmup": "one identical saved 64-output request per fresh server/cell",
+  "restart": "one fresh server per cell, then 3 serial unique saved payloads; cache adaptation retained within cell",
+  "output": 4096,
+  "no_concurrency": true,
+  "no_lookup_or_reuse": true,
+  "screening": "Layer auto at32K/.28, then autoK-2,autoK+2/.28 and autoK/.37; one warmup + one exploratory4096 per point. Freeze K/pcie before final matrix. No Cartesian sweep.",
+  "helper_fairness": "Both helpers auto-size with same unmodified allocator/profile/model/KV; require identical initial capacities for original vs optimized per profile; preserve mismatch and fix explicit sizing if necessary.",
+  "invalids": "Preserve all failures/early stops. No favorable-result retries. Correct deterministic workload only if systematic failure before final freeze. Never more than3valid final per unchanged point.",
+  "ranking": "No winner until all27 valid final requests complete; PP/TG/wall separately.",
+  "timing": "Same existing lightweight frontend token-ID capture and1Hz sampler/dmon, noPSS, noenginepatch."
+}

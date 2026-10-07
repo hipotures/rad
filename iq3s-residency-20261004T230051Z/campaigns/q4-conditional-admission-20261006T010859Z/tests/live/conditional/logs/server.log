@@ -1,0 +1,55 @@
+loading the model (the first start takes a minute or two) ...
+[strata] layer split across GPUs [0, 1] (24)
+[strata] starting the engine: reading the model's weights ...
+[strata] loading the experts into RAM (tens of GB) and locking part of them for the GPU.
+         YOUR PC CAN BE SLOW OR STOP RESPONDING FOR 1-3 MINUTES NOW - this is normal.
+         Please wait and don't close this window; the browser opens when it is ready.
+[strata] still starting (36 s) - please wait ...
+[strata] still starting (56 s) - please wait ...
+[strata] experts loaded: 71.73 GiB at 2.45 GiB/s (74 s so far)
+[strata] filling the GPU's expert cache (6031 experts, 17.62 GiB of VRAM) ...
+[strata] almost ready ...
+ready: http://127.0.0.1:18144/v1  (OpenAI: /v1/chat/completions, Anthropic: /v1/messages, context 32768 tokens)
+       open http://127.0.0.1:18144/ in a browser to chat; close this window to stop the model
+[strata] reading the prompt: 4,096 tokens, 10 s so far
+[strata] reading the prompt: 4,096 tokens, 20 s so far
+[strata] reading the prompt: 4,096 tokens, 30 s so far
+[strata] reading the prompt: 4,095 of 4,096 tokens, 33 s so far
+[strata] answering: 60 of max 64 tokens, 85.6 tok/s, 34 s
+[strata] done: 64 tokens in 34 s (85.6 tok/s) (length, cancel=False), expert cache 94.1% hit (+0.5% of the routed experts over PCIe)
+[strata] reading the prompt: 2,499 tokens, 10 s so far
+[strata] reading the prompt: 2,498 of 2,499 tokens, 17 s so far
+[strata] answering: 73 of max 256 tokens, 92.3 tok/s, 18 s
+[strata] answering: 184 of max 256 tokens, 101.7 tok/s, 19 s
+[strata] done: 256 tokens in 19 s (99.7 tok/s) (length, cancel=False), expert cache 94.9% hit (+0.4% of the routed experts over PCIe)
+[strata] reading the prompt: 161 of 162 tokens, 1 s so far
+[strata] answering: 82 of max 256 tokens, 82.8 tok/s, 2 s
+[strata] answering: 190 of max 256 tokens, 95.3 tok/s, 3 s
+[strata] done: 256 tokens in 4 s (95.6 tok/s) (length, cancel=False), expert cache 91.7% hit (+1.2% of the routed experts over PCIe)
+
+[strata] stopping (Ctrl+C again to end the engine at once) ...
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/conditional-v1/serve/server.py", line 4129, in main
+    time.sleep(1)                               # Windows never delivers Ctrl+C to an untimed Event.wait()
+    ~~~~~~~~~~^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/conditional-v1/serve/server.py", line 4122, in on_sigterm
+    raise KeyboardInterrupt
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/scripts/serve_capture.py", line 32, in <module>
+    if __name__=='__main__':server.main()
+                            ~~~~~~~~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/conditional-v1/serve/server.py", line 4136, in main
+    close()
+    ~~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/src/conditional-v1/serve/server.py", line 1253, in close
+    self.proc.stdin.close()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+BrokenPipeError: [Errno 32] Broken pipe

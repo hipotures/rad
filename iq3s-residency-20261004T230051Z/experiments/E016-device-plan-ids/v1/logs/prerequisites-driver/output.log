@@ -1,0 +1,153 @@
+register 0 device-plan-ids-v1 aa3a9d0652bf52985e2359433354135e3f22c160
+
+compile-ID-fixture 0 
+ID-overwrite-and-repair 0 PASS: real shared-ID overwrite reproduced; stable layer snapshots preserve both layers on two GPUs
+
+native-Python-realIQ 0 M: 700 MiB free, expert cache 5300 of 6000 MiB (3300 experts)
+.[strata] loading the model again (it was unloaded) ...
+[strata] the engine is running again
+.ss
+----------------------------------------------------------------------
+Ran 268 tests in 112.126s
+
+OK (skipped=7)
+
+iq3s-real-expert-parity 0 gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 1   iq2_s   /q2_0    blob  1510400  cpu rel 1.31e-02  gpu rel 1.15e-02  cpu-gpu 1.51e-02  ok
+          iq2_s avx512 gate rows vs ggml vec_dot: rel 1.00e-07
+          gate+up one token one thread: avx512 198 us (5.30 GB/s), ggml 160 us (6.57 GB/s)
+          gate+up 3 tokens one thread: avx512 240 us vs ggml 3 x 160 us
+          iq2_s avx2 gate rows vs ggml vec_dot: rel 3.33e-08
+          gate+up one token one thread: avx2 205 us (5.11 GB/s), ggml 160 us (6.57 GB/s)
+          gate+up 3 tokens one thread: avx2 258 us vs ggml 3 x 160 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          iq4_nl AVX-2 multi-token down vs ggml down: rel 1.03e-07
+          down 3 tokens one thread: avx2 120 us (7.68 GB/s) vs ggml 163 us (5.65 GB/s)
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 2   iq2_s   /iq4_nl  blob  1971200  cpu rel 1.31e-02  gpu rel 1.20e-02  cpu-gpu 1.52e-02  ok
+          iq3_xxs avx512 gate rows vs ggml vec_dot: rel 9.55e-08
+          gate+up one token one thread: avx512 261 us (4.81 GB/s), ggml 207 us (6.06 GB/s)
+          gate+up 3 tokens one thread: avx512 342 us vs ggml 3 x 207 us
+          iq3_xxs avx2 gate rows vs ggml vec_dot: rel 3.00e-08
+          gate+up one token one thread: avx2 203 us (6.17 GB/s), ggml 207 us (6.06 GB/s)
+          gate+up 3 tokens one thread: avx2 277 us vs ggml 3 x 207 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          q2_0 AVX-512 down vs ggml down: rel 1.82e-04
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 12  iq3_xxs /q2_0    blob  1715200  cpu rel 1.33e-02  gpu rel 1.19e-02  cpu-gpu 1.54e-02  ok
+native_expert_parity: 0 failures
+
+
+battery 0 86345ef943ec881188a1d4976599bc482",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 80
+  },
+  {
+    "case": 5,
+    "state": "VALID",
+    "generated": 462,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "75822689cf6a5865fddde780c8f7aaad0b2b186600ba1d0b85db02ffcd7d0303",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 16
+  },
+  {
+    "case": 6,
+    "state": "VALID",
+    "generated": 421,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "ee4730ed9878126bdb75f3126f322e79a4c5daeb278e40f6637129f56bb73f60",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 87
+  },
+  {
+    "case": 7,
+    "state": "VALID",
+    "generated": 131,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "d11cb50725f33ffcfc4fb86d3424148d98f5303c7f2e71065f6ec7360dfea03d",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 144
+  },
+  {
+    "case": 8,
+    "state": "VALID",
+    "generated": 100,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "3bec0e10955b290dbc49e15d15a52c25ce8978e348ddff28d9c45af72eacf6f5",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 42
+  },
+  {
+    "case": 9,
+    "state": "VALID",
+    "generated": 18,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "8448cd5842a2428ec4addb0e30e56b89c828fa2724ca2f198873992d22f21a67",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 10,
+    "state": "VALID",
+    "generated": 27,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "a2d8fad7f44ee3ebaf08cd48c6804b450e77e6f156c978c1afbeefbc5ba539a7",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  }
+]
+
+ground-truth 0 {
+  "control": {
+    "checks": {
+      "math_product_answer_contains1776": true,
+      "linear_equation_answer_contains_x8": true,
+      "strict_JSON_case9": true,
+      "strict_JSON_case10": true,
+      "all_answers_nonempty": true
+    },
+    "state": "PASS",
+    "scope": "Limited exact-output/schema/numeric checks. Code/prose differences inspected and retained; no general semantic proof or quality ranking."
+  },
+  "frequency-v1-ready": {
+    "checks": {
+      "math_product_answer_contains1776": true,
+      "linear_equation_answer_contains_x8": true,
+      "strict_JSON_case9": true,
+      "strict_JSON_case10": true,
+      "all_answers_nonempty": true
+    },
+    "state": "PASS",
+    "scope": "Limited exact-output/schema/numeric checks. Code/prose differences inspected and retained; no general semantic proof or quality ranking."
+  }
+}
+

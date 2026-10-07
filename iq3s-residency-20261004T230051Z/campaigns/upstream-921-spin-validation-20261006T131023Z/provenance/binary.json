@@ -1,0 +1,47 @@
+{
+  "binary_sha256": "09f70d953f6d0009bdd555d06b72363aa9442fdb6f8f1a25250c6bf6a578dd94",
+  "binary_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/build/strata",
+  "source_sha": "82f46a8c8f475f001ad76d92f58f4a4f8ffb0253",
+  "tag": "v0.1.40.1",
+  "compiled_utc": "2026-10-06T13:21:12.127680+00:00",
+  "build_commands": [
+    [
+      "cmake",
+      "-S",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/source",
+      "-B",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/build",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DSTRATA_ENABLE_CUDA=ON",
+      "-DCMAKE_CUDA_ARCHITECTURES=89",
+      "-DSTRATA_BUILD_TESTS=OFF",
+      "-DSTRATA_PREFILL_MMQ=OFF",
+      "-DSTRATA_GGML_DIR=/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/dependency/ggml-org-llama.cpp-3cf0325",
+      "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+    ],
+    [
+      "cmake",
+      "--build",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/build",
+      "--target",
+      "strata",
+      "-j",
+      "12"
+    ]
+  ],
+  "cmake_cache_sha256": "eab2001ebfd98a9b18938caeb566a993de2fac4582eb01faa34f85b1311d1991",
+  "ldd": "\tlinux-vdso.so.1 (0x00007dc3249e0000)\n\tlibcudart.so.13 => /usr/local/cuda-13.4/targets/x86_64-linux/lib/libcudart.so.13 (0x00007dc321600000)\n\tlibcublas.so.13 => /usr/local/cuda-13.4/targets/x86_64-linux/lib/libcublas.so.13 (0x00007dc31dc00000)\n\tlibstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007dc31d800000)\n\tlibm.so.6 => /usr/lib/x86_64-linux-gnu/libm.so.6 (0x00007dc3218da000)\n\tlibgcc_s.so.1 => /usr/lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007dc3215d2000)\n\tlibc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x00007dc31d400000)\n\tlibdl.so.2 => /usr/lib/x86_64-linux-gnu/libdl.so.2 (0x00007dc3249c5000)\n\tlibpthread.so.0 => /usr/lib/x86_64-linux-gnu/libpthread.so.0 (0x00007dc3249c0000)\n\tlibrt.so.1 => /usr/lib/x86_64-linux-gnu/librt.so.1 (0x00007dc3249bb000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007dc3249e2000)\n\tlibcublasLt.so.13 => /usr/local/cuda-13.4/targets/x86_64-linux/lib/libcublasLt.so.13 (0x00007dc2f5c00000)\n",
+  "compiler_flags": "Full build/CMakeCache.txt and build/compile_commands.json preserved; Release, CUDA ON, sm89, native CPU, GGML OpenMP OFF, tests OFF, optional HIP MMQ OFF.",
+  "cuda_runtime_result": 0,
+  "cuda_runtime_version": 13040,
+  "P2P_runtime": {
+    "0->1": {
+      "returncode": 0,
+      "capable": false
+    },
+    "1->0": {
+      "returncode": 0,
+      "capable": false
+    }
+  }
+}

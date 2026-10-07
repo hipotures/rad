@@ -1,0 +1,14 @@
+"""Preserve the bounded queue/restoration result; do not turn it into live TG."""
+import csv,json
+from lab import ROOT,load,save
+out=ROOT/'experiments/E018-router-transactions';rows=[]
+for name in ['32k','128k','dev-code','dev-math','cal-prose','hold-code','hold-structured','hold-math']:
+ a=load(out/'v1/analysis'/f'{name}.json')
+ for r in a['results']:rows.append({'episode':name,**{k:v for k,v in r.items() if k!='choices'}})
+save(out/'summary.json',{'state':'COMPLETE_NEGATIVE_CONTENDED_TEMPORARY_SCHEME','rows':rows,'verdict':'This specific temporaryswap schedule does notjustifylive implementation atcontended1.8GB/s. No ready usefultail inmostcases, repeatedcopy/restoration canaddsubstantialqueuewait. GPU signal itself remainscheap. Persistent/higherhorizon placement notclosed; no hardware saturationclaim or liveTGprediction.'})
+with (out/'summary.csv').open('w') as f:w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+text='# E018: bounded temporary placement feasibility\n\nThis fixed-trajectory model charges the full target promotion and restoration of the displaced expert, actual physical slot classes, a shared transfer queue, and baseline promotion traffic. Victims belong to completed earlier layers on the same GPU; at most one admission per recorded prediction point. The baseline resident set is restored before the next window. No model router or expert weights change.\n\nTwo predeclared admission rules: first predicted nonresident expert, and the same rule with causal EMA>=2 and gain>=1.5. Five same-device prediction points, first64windows, two benchmark requests and six independent tasks. This is a specific ephemeral placement schedule, not the optimum or a test of every persistent policy.\n\n| Episode | Policy | CopyGB/s | Admissions | Ready-tail% | H2DMB | RestoreMB | Modeled restorewaits |\n|---|---|---:|---:|---:|---:|---:|---:|\n'
+for r in rows:text+=f"| {r['episode']} | {r['policy']} | {r['rate_GB_s']} | {r['admissions']} | {r['warm_tail_coverage_pct']:.2f} | {r['promotion_bytes']/1e6:.2f} | {r['restore_bytes']/1e6:.2f} | {r['modeled_restore_wait_s']:.3f} |\n"
+text+='\nThe12.6GB/s case is an isolated optimistic sensitivity;1.8GB/s is a conservative contended scenario. Observed CPU target-dispatch timestamps are optimistic readiness deadlines. The original trajectory and baseline promotion times remain fixed: model delays are not fed back into future execution. Restore waits cannot be added to unrelated timer totals or presented as a measured request slowdown.\n\nDecision: no live implementation of this temporary scheme. It does not demonstrate that persistent or longer-horizon gate prediction is impossible. The cheap signal is useful evidence; queue deadlines and full-slot management remain the blocker. Scripts/protocol/choices/raw references retained in v1.\n'
+(out/'report.md').write_text(text)
+print(json.dumps(rows[:4],indent=2))

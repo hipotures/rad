@@ -1,0 +1,124 @@
+[
+  {
+    "name": "clone",
+    "command": [
+      "git",
+      "clone",
+      "--no-hardlinks",
+      "--no-checkout",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/persistent-signal-v1",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/cost-router-v1"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 0.26518726348876953
+  },
+  {
+    "name": "checkout",
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "802fcba34b663b816c4429eb02eeec9c36a5be75"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/cost-router-v1",
+    "exit_code": 0,
+    "wall_s": 0.5656192302703857
+  },
+  {
+    "name": "patch",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/patch_cost_router.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/cost-router-v1"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 0.06455397605895996
+  },
+  {
+    "name": "patch-diff",
+    "command": [
+      "git",
+      "diff",
+      "--binary"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/cost-router-v1",
+    "exit_code": 0,
+    "wall_s": 0.21529459953308105
+  },
+  {
+    "name": "add",
+    "command": [
+      "git",
+      "add",
+      "."
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/cost-router-v1",
+    "exit_code": 0,
+    "wall_s": 0.26512813568115234
+  },
+  {
+    "name": "commit",
+    "command": [
+      "git",
+      "-c",
+      "user.name=Local Research",
+      "-c",
+      "user.email=research@localhost",
+      "commit",
+      "-m",
+      "Local Q4 residency v2 cost-router-v1"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/cost-router-v1",
+    "exit_code": 0,
+    "wall_s": 0.06449413299560547
+  },
+  {
+    "name": "configure",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "-S",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/cost-router-v1",
+      "-B",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/builds/cost-router-v1",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DSTRATA_ENABLE_CUDA=ON",
+      "-DCMAKE_CUDA_ARCHITECTURES=89",
+      "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325",
+      "-DSTRATA_BUILD_TESTS=ON"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 51.66049242019653
+  },
+  {
+    "name": "build",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "--build",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/builds/cost-router-v1",
+      "-j",
+      "8"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 126.77425265312195
+  },
+  {
+    "name": "full-patch",
+    "command": [
+      "git",
+      "diff",
+      "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "8d542977631b6f015115ed1f09acc1c336070ab8",
+      "--binary"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/cost-router-v1",
+    "exit_code": 0,
+    "wall_s": 0.1682136058807373
+  }
+]

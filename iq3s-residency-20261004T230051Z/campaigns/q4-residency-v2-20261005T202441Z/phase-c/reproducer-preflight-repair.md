@@ -1,0 +1,3 @@
+# Reproducer protocol correction
+
+Static review found that the prepared reproduce action used one server for all three requests. No reproduction request had been run. Before handoff, move the three-attempt loop outside the server context so every attempt receives its own fresh process and fixed warmup, as in the declared primary protocol. Start/smoke behavior, frozen binary, algorithm, configs, inputs and prior data are unchanged. No extra headline requests were run to check this code path. Actual nine advertised start paths validate the shared startup/request/cleanup mechanism; full three-request reproduction is reserved for explicit later use after campaign completion.

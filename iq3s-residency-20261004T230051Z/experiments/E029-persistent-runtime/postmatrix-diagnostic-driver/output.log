@@ -1,0 +1,19 @@
+clone 0
+checkout 0
+patch 1
+Default-off same-device compatible-slot policy applied; tests and source safety audit required
+Persistent runtime: same owner/bytes, original async backend, defaultOFF, frozen alpha1, h8signal
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/patch_persistent_diagnostic.py", line 27, in <module>
+    anchor='                if (adapt_thr.joinable()) adapt_thr.join();';assert s.count(anchor)==2
+                                                                                ^^^^^^^^^^^^^^^^^^
+AssertionError
+
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/scripts/postmatrix_persistent_diagnostic.py", line 7, in <module>
+    subprocess.run([py,'scripts/build_variant.py','persistent-runtime-v2-diagnostic','--patch-script','patch_persistent_diagnostic.py','--experiment','E029-persistent-runtime','--attempt','v2-diagnostic'],cwd=ROOT,check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python', 'scripts/build_variant.py', 'persistent-runtime-v2-diagnostic', '--patch-script', 'patch_persistent_diagnostic.py', '--experiment', 'E029-persistent-runtime', '--attempt', 'v2-diagnostic']' returned non-zero exit status 1.

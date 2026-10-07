@@ -1,0 +1,123 @@
+register 0 skip-local-host-plan-v1 039ea29916d3155514688fb6d5a5de6129d69675
+
+all-tests 0 pu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 1   iq2_s   /q2_0    blob  1510400  cpu rel 1.31e-02  gpu rel 1.15e-02  cpu-gpu 1.51e-02  ok
+          iq2_s avx512 gate rows vs ggml vec_dot: rel 1.00e-07
+          gate+up one token one thread: avx512 215 us (4.89 GB/s), ggml 171 us (6.15 GB/s)
+          gate+up 3 tokens one thread: avx512 261 us vs ggml 3 x 171 us
+          iq2_s avx2 gate rows vs ggml vec_dot: rel 3.33e-08
+          gate+up one token one thread: avx2 222 us (4.73 GB/s), ggml 171 us (6.15 GB/s)
+          gate+up 3 tokens one thread: avx2 277 us vs ggml 3 x 171 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          iq4_nl AVX-2 multi-token down vs ggml down: rel 1.03e-07
+          down 3 tokens one thread: avx2 128 us (7.18 GB/s) vs ggml 176 us (5.25 GB/s)
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 2   iq2_s   /iq4_nl  blob  1971200  cpu rel 1.31e-02  gpu rel 1.20e-02  cpu-gpu 1.52e-02  ok
+          iq3_xxs avx512 gate rows vs ggml vec_dot: rel 9.55e-08
+          gate+up one token one thread: avx512 278 us (4.51 GB/s), ggml 219 us (5.72 GB/s)
+          gate+up 3 tokens one thread: avx512 366 us vs ggml 3 x 219 us
+          iq3_xxs avx2 gate rows vs ggml vec_dot: rel 3.00e-08
+          gate+up one token one thread: avx2 206 us (6.08 GB/s), ggml 219 us (5.72 GB/s)
+          gate+up 3 tokens one thread: avx2 274 us vs ggml 3 x 219 us
+          width invariance (1 vs 3 tokens): gate/up 0, down 0 rows differ
+          q2_0 AVX-512 down vs ggml down: rel 1.82e-04
+          gpu decode-once vs per-entry kernels: bitwise equal
+          GPU dequant vs ggml to_float: rel 0.00e+00, 0 of 4915200 values differ in any bit; fp16 of it: 0 differ; embedding rows: 0 of 640 differ
+layer 12  iq3_xxs /q2_0    blob  1715200  cpu rel 1.33e-02  gpu rel 1.19e-02  cpu-gpu 1.54e-02  ok
+native_expert_parity: 0 failures
+
+
+test-failure-audit 0 {'only_known_environment_failures': True, 'no_undocumented_native_failures': True, 'Python_passed': True, 'real_native_experts_passed': True} ['ple_parity', 'platform_memory_test', 'expert_parity', 'pool_test']
+
+battery 0 d": false,
+    "empty_answer": false,
+    "output_sha256": "f031b3f50d59f06dfc650cf26df79af24e4636a67605fa1a046edc94b6858cbb",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 6,
+    "state": "VALID",
+    "generated": 336,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "052c66565304d04d75b7e1fdec3c3357c473355068f998995bd72639d55fce51",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 7,
+    "state": "VALID",
+    "generated": 132,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "0a33f09e8c11aa4b28eab20a0f54bde2def33eecc80be2fb88d540348256e76f",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 8,
+    "state": "VALID",
+    "generated": 98,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "7ec9c22f9464545772e975489e016e3b630f5b1abac33f546bae15f6a096ec25",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 9,
+    "state": "VALID",
+    "generated": 18,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "8448cd5842a2428ec4addb0e30e56b89c828fa2724ca2f198873992d22f21a67",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 10,
+    "state": "VALID",
+    "generated": 27,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "a2d8fad7f44ee3ebaf08cd48c6804b450e77e6f156c978c1afbeefbc5ba539a7",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  }
+]
+
+ground-truth 0 {
+  "state": "PASS",
+  "checks": {
+    "10cases_retained": true,
+    "all_same_input_ids": true,
+    "no_reported_nonfinite": true,
+    "all_answers_nonempty": true,
+    "product1776": true,
+    "equationx8": true,
+    "strict_JSON9": true,
+    "strict_JSON10": true
+  },
+  "identical_visible_answers": 10,
+  "limitations": "Ground-truth checks are narrow. All text differences remain for source/numerical diagnosis; noLLMjudge, quality ranking or universal parity claim."
+}
+

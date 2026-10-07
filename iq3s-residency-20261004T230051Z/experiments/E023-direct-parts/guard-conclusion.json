@@ -1,0 +1,46 @@
+{
+  "state": "COMPLETE_MIXED",
+  "rows": [
+    {
+      "profile": "32k",
+      "ON_TG": {
+        "min": 155.9,
+        "median": 158.1,
+        "max": 166.0
+      },
+      "OFF_TG": {
+        "min": 157.3,
+        "median": 169.5,
+        "max": 172.4
+      },
+      "ON_vs_OFF_TG_delta_pct": -6.725663716814168,
+      "ON_vs_OFF_wall_delta_pct": 7.069752555639286,
+      "same_binary": true,
+      "same_capacity": true,
+      "all_paired_outputs_same": true
+    },
+    {
+      "profile": "128k",
+      "ON_TG": {
+        "min": 133.1,
+        "median": 160.6,
+        "max": 163.0
+      },
+      "OFF_TG": {
+        "min": 131.4,
+        "median": 144.4,
+        "max": 153.2
+      },
+      "ON_vs_OFF_TG_delta_pct": 11.218836565096947,
+      "ON_vs_OFF_wall_delta_pct": -10.997852143095487,
+      "same_binary": true,
+      "same_capacity": true,
+      "all_paired_outputs_same": true
+    }
+  ],
+  "decision": "Direct rows regress32k versus same-binaryOFF and retain an apparent128k median advantage. Paired effects are mixed and ranges overlap. This is a workload/batch-dependent observation, not a portable20.57% win versus an earlier binary. No production switch or extra unchanged repetition.",
+  "correctness": "Captured two-device row ownership,63nativepass/2skip/4knownenvironmentfail,Python268pass/7skip,realIQ0fail,10sameanswers,and repaired fullactual4096ID/router/path/MTP/cache/heat/head parity at both profiles.",
+  "resource": "Zero additional explicit GPU buffers; old hit_out retained for equal capacity. Driver graph allocations may differ and are not assumed free; normal telemetry retains peaks.",
+  "repair": "diagnostic-v1 omitted first-head capture; retained INVALID_DIAGNOSTIC_CAPTURE. Newdiagnostic-v2 repairs only diagnostics, unchanged clean binary.",
+  "next": "Keep candidate for independent-workload followup. Do not select a universal baseline from three serial repetitions."
+}

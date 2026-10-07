@@ -1,0 +1,208 @@
+{
+  "linear": {
+    "kind": "linear",
+    "feature_names": [
+      "heat",
+      "fast",
+      "slow",
+      "last_count",
+      "recent4",
+      "frequency",
+      "age",
+      "seen",
+      "initial_resident",
+      "initial_heat",
+      "layer",
+      "stage",
+      "blob"
+    ],
+    "learning_curve": [
+      {
+        "step": 1,
+        "population_logcount_MSE": 0.08251435309648514
+      }
+    ],
+    "training_wall_s": 0.032085439015645534,
+    "objective": "natural-population squared log1p count; affine calibrated count output",
+    "width": 0,
+    "CPU_only": true,
+    "target_horizon": 4,
+    "target_normalization": "future count multiplied by4/horizon; same four-window units",
+    "calibration": {
+      "slope": 1.471926549711701,
+      "intercept": 0.0041594144540838904,
+      "rows": 2826240
+    },
+    "checkpoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/checkpoints/linear.npz",
+    "sha256": "3c89b37a3b0a525c99eb5d57b8675aba6e92bbb0207b7da39e590b5d93dc5877"
+  },
+  "mlp": {
+    "kind": "mlp",
+    "feature_names": [
+      "heat",
+      "fast",
+      "slow",
+      "last_count",
+      "recent4",
+      "frequency",
+      "age",
+      "seen",
+      "initial_resident",
+      "initial_heat",
+      "layer",
+      "stage",
+      "blob"
+    ],
+    "learning_curve": [
+      {
+        "step": 100,
+        "batch_logcount_MSE": 0.0879039317369461,
+        "wall_s": 0.2619630639674142
+      },
+      {
+        "step": 200,
+        "batch_logcount_MSE": 0.08049453794956207,
+        "wall_s": 0.522840040968731
+      },
+      {
+        "step": 300,
+        "batch_logcount_MSE": 0.0832500010728836,
+        "wall_s": 0.7542170119704679
+      },
+      {
+        "step": 400,
+        "batch_logcount_MSE": 0.0839611142873764,
+        "wall_s": 0.9777708390029147
+      },
+      {
+        "step": 500,
+        "batch_logcount_MSE": 0.07793059945106506,
+        "wall_s": 1.1968310640077107
+      },
+      {
+        "step": 600,
+        "batch_logcount_MSE": 0.08176419138908386,
+        "wall_s": 1.4127113979775459
+      },
+      {
+        "step": 700,
+        "batch_logcount_MSE": 0.07962284982204437,
+        "wall_s": 1.6407603999832645
+      },
+      {
+        "step": 800,
+        "batch_logcount_MSE": 0.07737644016742706,
+        "wall_s": 1.868850102997385
+      },
+      {
+        "step": 900,
+        "batch_logcount_MSE": 0.07786601036787033,
+        "wall_s": 2.108433563960716
+      },
+      {
+        "step": 1000,
+        "batch_logcount_MSE": 0.07893672585487366,
+        "wall_s": 2.3698281899560243
+      }
+    ],
+    "training_wall_s": 2.369833969976753,
+    "objective": "natural-population squared log1p count; affine calibrated count output",
+    "width": 32,
+    "CPU_only": true,
+    "target_horizon": 4,
+    "target_normalization": "future count multiplied by4/horizon; same four-window units",
+    "calibration": {
+      "slope": 1.4375506863490675,
+      "intercept": 0.016124092493032465,
+      "rows": 2826240
+    },
+    "checkpoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/checkpoints/mlp.npz",
+    "sha256": "fef2bb27fa12e9b0cbb5559c3b6b09564a69a142d0e90b30ab5152a5fb92b7df"
+  },
+  "temporal-mlp": {
+    "kind": "mlp",
+    "feature_names": [
+      "heat",
+      "fast",
+      "slow",
+      "last_count",
+      "recent4",
+      "previous4",
+      "recent8",
+      "frequency",
+      "age",
+      "seen",
+      "initial_resident",
+      "initial_heat",
+      "layer",
+      "stage",
+      "blob",
+      "trend"
+    ],
+    "learning_curve": [
+      {
+        "step": 100,
+        "batch_logcount_MSE": 0.05112589810038651,
+        "wall_s": 0.3090405589900911
+      },
+      {
+        "step": 200,
+        "batch_logcount_MSE": 0.05350001187225954,
+        "wall_s": 0.8404006399796344
+      },
+      {
+        "step": 300,
+        "batch_logcount_MSE": 0.045700226531235344,
+        "wall_s": 1.3552950189914554
+      },
+      {
+        "step": 400,
+        "batch_logcount_MSE": 0.051624500601756884,
+        "wall_s": 1.8890897710225545
+      },
+      {
+        "step": 500,
+        "batch_logcount_MSE": 0.048490939850151876,
+        "wall_s": 2.4301948780193925
+      },
+      {
+        "step": 600,
+        "batch_logcount_MSE": 0.04539971917580629,
+        "wall_s": 2.9489244439755566
+      },
+      {
+        "step": 700,
+        "batch_logcount_MSE": 0.04879732917364624,
+        "wall_s": 3.521986757987179
+      },
+      {
+        "step": 800,
+        "batch_logcount_MSE": 0.04679979867821188,
+        "wall_s": 4.078207143000327
+      },
+      {
+        "step": 900,
+        "batch_logcount_MSE": 0.048023768681629095,
+        "wall_s": 4.6456669779727235
+      },
+      {
+        "step": 1000,
+        "batch_logcount_MSE": 0.04487138153040838,
+        "wall_s": 5.1816862120176665
+      }
+    ],
+    "training_wall_s": 5.181689411983825,
+    "objective": "natural-population squared log1p count; affine calibrated count output",
+    "width": 32,
+    "CPU_only": true,
+    "target_horizon": 16,
+    "target_normalization": "future count multiplied by4/horizon; same four-window units",
+    "calibration": {
+      "slope": 1.3117264524727046,
+      "intercept": -0.002336411823852152,
+      "rows": 2752512
+    },
+    "checkpoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/checkpoints/temporal-mlp.npz",
+    "sha256": "bb586379d0be6da42e8b056bbc9bc22756f9bb6c37d8fdd70b39423022ff2332"
+  }
+}

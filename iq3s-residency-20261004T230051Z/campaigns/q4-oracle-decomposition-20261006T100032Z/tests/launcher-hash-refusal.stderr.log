@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/tests/hash-refusal/scripts/reproduce.py", line 32, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-oracle-decomposition-20261006T100032Z/tests/hash-refusal/scripts/reproduce.py", line 7, in main
+    identity=json.loads((C/'git/oracle-decomposition-v2-identity.json').read_text());assert hashlib.sha256(Path(identity['exe']).read_bytes()).hexdigest()==identity['binary_sha256'];assert subprocess.check_output(['git','rev-parse','HEAD'],cwd=identity['source'],text=True,timeout=10).strip()==identity['source_sha'];assert not subprocess.check_output(['git','status','--porcelain'],cwd=identity['source'],text=True,timeout=10).strip()
+                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

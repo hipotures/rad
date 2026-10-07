@@ -1,0 +1,29 @@
+{
+  "state": "PASS",
+  "profiles": {
+    "32k": {
+      "original_analysis": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/analysis-r2/32k/analysis.json",
+      "original_rows": 1116,
+      "fresh_rows": 249,
+      "unavailable_or_stale_rows": 867,
+      "fresh_top10_precision_pct": 66.8273092369478,
+      "fresh_nonlocal_entries": 37,
+      "fresh_nonlocal_recall_pct": 70.27027027027027,
+      "fresh_warm_optimistic_ready_fraction": 0.06584362139917696,
+      "selection_bias": "Fresh groups have a current-layer nonlocal; they are not representative of all-local groups. Do not extrapolate."
+    },
+    "128k": {
+      "original_analysis": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E008-router-boundary/analysis-r2/128k/analysis.json",
+      "original_rows": 1140,
+      "fresh_rows": 304,
+      "unavailable_or_stale_rows": 836,
+      "fresh_top10_precision_pct": 62.96052631578947,
+      "fresh_nonlocal_entries": 112,
+      "fresh_nonlocal_recall_pct": 43.75,
+      "fresh_warm_optimistic_ready_fraction": 0.15614617940199335,
+      "selection_bias": "Fresh groups have a current-layer nonlocal; they are not representative of all-local groups. Do not extrapolate."
+    }
+  },
+  "source_rule": "doorbell_publish_res copies all activation rows iff any entry of this group is nonresident.",
+  "old_data": "No old raw or derived file overwritten. Old full aggregate verdict withdrawn."
+}

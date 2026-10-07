@@ -1,0 +1,14 @@
+{
+  "question": "Find earliest arithmetic divergence in same-binary native GPU plan vs original CPU plan before any headline speed.",
+  "scope": "Saved4096input/64output warmup only; two fresh servers at32k, same source/binary, explicit opt-in DP on/off. No tuning or 4096speed repetition.",
+  "capture": "Allstage layer currentactivation/output/nativeplans and first8window fullheadrows, buffered mappedCPUmemory writes afterGPUcombine. No newexplicitGPUbuffer; diagnosticPCIetraffic/~2MBperwindow excludedfromTG.",
+  "validity": "Same startupcapacity/residency, input IDs; diagnose first arithmetic differences and output/heat divergence.",
+  "repair": "Preserve all prior battery/demand/head evidence; sourcefix only if actual math/syncfailure found.",
+  "suspected_cause": "pre(layer1) waitsPLE flag onlywhenall_resident_, omittingdevice_plan_. CPUgathersPLE afterlayer0 pool, whose waitsdevice_plan skips. Sameinputroutefirstdiffatlayer1 supports race.",
+  "modes": [
+    "DPoff",
+    "DPon unsafe",
+    "DPon plus independent PLE producer fence"
+  ],
+  "native_fixture": "Realbuiltwait_flag_ge_or andcopy_from_mapped with40msdelayedhostPLEproducer, 2GPUs. Reproduceold17 versusfresh99 andrepairguard."
+}

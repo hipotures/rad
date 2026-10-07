@@ -1,0 +1,23 @@
+# Source and query audit
+
+The control engine stays 6f32ec070f23ced9f50e704d854d775da52591ab / eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d. All live decomposition arms use common bbfea2955ec238f7e6406b11c74e577c996c4a8d / 9068a7205c14884f6436274627a3c6d78ab707894a21eeb9847a488367cbcfef. The patch over replay v3 changes only q4_oracle.hpp and adds q4_future_view.hpp. Tape/replay, model math, GPU kernels, native adaptation arbitration, queue concurrency, async worker/publication, class allocator, cancellation and spare restoration are unchanged.
+
+Typed IncomingFutureView and VictimFutureView return Known, UnknownBeyondHorizon, or FiniteTapeEnd. The raw future index is built by runtime prepare; policy queries are restricted to the typed views. Candidate enumeration is the one direct tape-route read and explicitly stops at n+min(E,I). The safety protection set is the other direct route read, the separately declared common P channel. Initial donor selection uses V and P, not I. Publication reselects a resident victim using V at current logical time. No scores are cached across incoming-to-resident role transitions.
+
+The future-dependent deadline guard compares candidate's incoming first-demand (I) with victim's next-demand (V). An unknown victim does not produce a fabricated known deadline. It uses observed causal heat in victim ranking. Residency, worker state, duplicate suppression, publication completion and cancellation are actual observed state. Restoration chooses an absent donor or highest causal observed heat; no extra future knowledge. Loop/expert-ID tie order stays fixed.
+
+The default scheduler assigns a utility scalar and then breaks at the first feasible action. Incoming repeated-use and victim repeated-use counts are therefore **computed but decision-inactive** in the selected deadline strategy. Only first visible incoming target, feasibility/deadline and victim ranking matter. Incoming64 keeps E64 unchanged, so candidate actions match F/F deterministically. It still executes fewer count-loop iterations, an online planner-cost difference that must not be confused with better residency.
+
+Diagnostic Q4_INFORMATION_END counters report role next/count calls, unknown queries and maximum visible-ahead event, plus E/I/V, P, eligibility coupling and fallback mode. Horizon checks require bounded role maxima <=H. No synchronous per-query log is added; counters are buffered/printed after request. Online query cost is charged in all arms. Full and bounded oracle arms share five physical charged spares. REPLAY_CURRENT preserves native adaptation and does not reserve them.
+
+## One bounded censoring repair
+
+Legacy unknown score is H+1-log1p(heat). For sufficiently hot unknown residents it can rank below a known use at the far end of H. One opt-in repair uses H+640/(1+heat): conditional residual life from native decay .7 per four windows and 48 layers/window, approximately 48*4/.3 =640 invocations per unit accumulated heat. It never treats unknown as infinity. No coefficient sweep. The entire offline32K exchange/demand/copy result remains identical: this is a preserved negative intervention, not silently adopted baseline or evidence that the branch did not execute. A targeted artificial state must demonstrate that the alternative can make a different decision before interpreting that null result.
+
+## Replay fidelity and limitations retained
+
+Every request must pass tape work fingerprint, full token/MTP branch/commit/catchup schedule, routing IDs/float32 coefficients, shapes/dependencies/QSA lists, completed invocation count, sampled finite numerical checks and exact meaningful initial-state sidecar. Natural routing/head agreement remains a diagnostic, not a forced-output correctness proof. Native CPU/GPU activation quantization differs; no hidden-state substitution. Physical streamed KV service is not fully frozen despite identical logical selections and initial maps; primary counters are observed and secondary DMA detail unavailable. The 32K resident-KV case is the cleanest systems comparison.
+
+## Causal history boundary
+
+Source expert_source.cpp updates drive usage from the actual forced routed IDs after the oracle host milestone (lines2012-2017); graph_main overrides router outputs before host planning. History is therefore demand history from the frozen tape, not a hidden read of natural divergent router IDs. Current-layer demand is protected by P before usage increment. Offline increments demand before plan, but those just-used IDs are in P and cannot be chosen as victims; this ordering difference is disclosed rather than claiming exact live timing prediction.

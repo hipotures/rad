@@ -1,0 +1,42 @@
+MODEL HASH IQ3_S /srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf 54817524224
+MODEL HASH IQ3_S /srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf 28800138432
+MODEL HASH IQ3_S /srv/ai/models/strata/mtp/rt/dense.bin 116099072
+MODEL HASH IQ3_S /srv/ai/models/strata/mtp/rt/dense.txt 1851
+MODEL HASH IQ3_S /srv/ai/models/strata/mtp/rt/draft_vocab.bin 425196
+MODEL HASH IQ3_S /srv/ai/models/strata/mtp/rt/experts.bin 707788800
+MODEL HASH IQ3_S /srv/ai/models/strata/packs/iq3_s/conversions.json 306
+MODEL HASH IQ3_S /srv/ai/models/strata/packs/iq3_s/dense.bin 1538035200
+MODEL HASH IQ3_S /srv/ai/models/strata/packs/iq3_s/index.txt 93685
+MODEL HASH IQ3_S /srv/ai/models/strata/packs/iq3_s/native_experts.txt 3304
+MODEL HASH IQ3_S /srv/ai/models/strata/packs/iq3_s/tokenizer/chat_template.jinja 9993
+MODEL HASH IQ3_S /srv/ai/models/strata/packs/iq3_s/tokenizer/merges.txt 3353258
+MODEL HASH IQ3_S /srv/ai/models/strata/packs/iq3_s/tokenizer/token_type.json 744960
+MODEL HASH IQ3_S /srv/ai/models/strata/packs/iq3_s/tokenizer/tokenizer.json 541
+MODEL HASH IQ3_S /srv/ai/models/strata/packs/iq3_s/tokenizer/vocab.json 5737005
+MODEL HASH IQ3_S /srv/ai/strata/data/expert-profile.bin 196632
+MODEL HASH Q4 /srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf 10946624
+MODEL HASH Q4 /srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00002-of-00004.gguf 49859583136
+MODEL HASH Q4 /srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00003-of-00004.gguf 49376141504
+MODEL HASH Q4 /srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00004-of-00004.gguf 12087983520
+MODEL HASH Q4 /srv/ai/models/strata/mtp/rt/dense.bin 116099072
+MODEL HASH Q4 /srv/ai/models/strata/mtp/rt/dense.txt 1851
+MODEL HASH Q4 /srv/ai/models/strata/mtp/rt/draft_vocab.bin 425196
+MODEL HASH Q4 /srv/ai/models/strata/mtp/rt/experts.bin 707788800
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/compat-bf16.json 21069
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/conversions.json 167871
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/dense.bin 1485688320
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/index.txt 93560
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/native_experts.txt 5795
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer/chat_template.jinja 9993
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer/merges.txt 3353258
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer/token_type.json 744960
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer/tokenizer.json 541
+MODEL HASH Q4 /srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer/vocab.json 5737005
+MODEL HASH Q4 /srv/ai/strata/data/expert-profile.bin 196632
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/scripts/prepare.py", line 78, in <module>
+    ids=svc.encode_prompt(p['messages'],None,{'enable_thinking':False})
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/source/serve/server.py", line 2701, in encode_prompt
+    marked, marked_tools, changed = mark_think_literals(messages, tools, self.literals)
+                                                                         ^^^^^^^^^^^^^
+AttributeError: 'Service' object has no attribute 'literals'

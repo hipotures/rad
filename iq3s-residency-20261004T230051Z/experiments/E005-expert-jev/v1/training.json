@@ -1,0 +1,224 @@
+{
+  "linear": {
+    "kind": "linear",
+    "feature_names": [
+      "heat",
+      "fast_heat",
+      "slow_heat",
+      "recent4",
+      "frequency",
+      "age",
+      "ever_seen",
+      "initial_resident",
+      "initial_heat",
+      "expert_id_fraction",
+      "layer_fraction",
+      "stage1",
+      "blob_fraction"
+    ],
+    "training_wall_s": 0.04250238399254158,
+    "steps": 1,
+    "history": [],
+    "parameter_bytes": 216,
+    "objective": "weighted squared log1p next4window count, no softmax/probability interpretation",
+    "calibration": {
+      "calibration_rows": 2777088,
+      "cal_slope": 1.394119158516469,
+      "cal_intercept": -0.0014186068091981432,
+      "semantics": "affine expected-count least squares fitted only on calibration episode; clamped nonnegative; not probability calibration"
+    },
+    "checkpoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E005-expert-jev/v1/checkpoints/linear.npz",
+    "sha256": "b4f84d60ce7d9f09ef64fbb108ca00320b2666de9765c0b7d37efb61ca562664",
+    "total_checkpoint_bytes": 2212
+  },
+  "mlp": {
+    "kind": "mlp",
+    "feature_names": [
+      "heat",
+      "fast_heat",
+      "slow_heat",
+      "recent4",
+      "frequency",
+      "age",
+      "ever_seen",
+      "initial_resident",
+      "initial_heat",
+      "expert_id_fraction",
+      "layer_fraction",
+      "stage1",
+      "blob_fraction"
+    ],
+    "training_wall_s": 0.649845142965205,
+    "steps": 600,
+    "history": [
+      {
+        "step": 50,
+        "batch_weighted_logcount_MSE": 0.09618034958839417,
+        "wall_s": 0.05580698198173195
+      },
+      {
+        "step": 100,
+        "batch_weighted_logcount_MSE": 0.09076947718858719,
+        "wall_s": 0.10870473500108346
+      },
+      {
+        "step": 150,
+        "batch_weighted_logcount_MSE": 0.08769873529672623,
+        "wall_s": 0.160100675013382
+      },
+      {
+        "step": 200,
+        "batch_weighted_logcount_MSE": 0.08158433437347412,
+        "wall_s": 0.21143467398360372
+      },
+      {
+        "step": 250,
+        "batch_weighted_logcount_MSE": 0.08586733788251877,
+        "wall_s": 0.262021915987134
+      },
+      {
+        "step": 300,
+        "batch_weighted_logcount_MSE": 0.08735262602567673,
+        "wall_s": 0.3196380519657396
+      },
+      {
+        "step": 350,
+        "batch_weighted_logcount_MSE": 0.08426812291145325,
+        "wall_s": 0.3755769539857283
+      },
+      {
+        "step": 400,
+        "batch_weighted_logcount_MSE": 0.08435285091400146,
+        "wall_s": 0.4317438239813782
+      },
+      {
+        "step": 450,
+        "batch_weighted_logcount_MSE": 0.08172407001256943,
+        "wall_s": 0.49194473901297897
+      },
+      {
+        "step": 500,
+        "batch_weighted_logcount_MSE": 0.08102668821811676,
+        "wall_s": 0.5453641499625519
+      },
+      {
+        "step": 550,
+        "batch_weighted_logcount_MSE": 0.08635406196117401,
+        "wall_s": 0.5975410369574092
+      },
+      {
+        "step": 600,
+        "batch_weighted_logcount_MSE": 0.08575604110956192,
+        "wall_s": 0.6498412030050531
+      }
+    ],
+    "parameter_bytes": 1128,
+    "objective": "weighted squared log1p next4window count, no softmax/probability interpretation",
+    "calibration": {
+      "calibration_rows": 2777088,
+      "cal_slope": 1.2383270756772644,
+      "cal_intercept": 0.013460879882021097,
+      "semantics": "affine expected-count least squares fitted only on calibration episode; clamped nonnegative; not probability calibration"
+    },
+    "checkpoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E005-expert-jev/v1/checkpoints/mlp.npz",
+    "sha256": "b5dc7f64e22927bc88a5398066c03385c0c66285a6ae783be07dfc083646bd8c",
+    "total_checkpoint_bytes": 3574
+  },
+  "temporal-mlp": {
+    "kind": "mlp",
+    "feature_names": [
+      "heat",
+      "fast_heat",
+      "slow_heat",
+      "last_window",
+      "recent4",
+      "previous4",
+      "recent8",
+      "frequency",
+      "age",
+      "ever_seen",
+      "initial_resident",
+      "initial_heat",
+      "expert_id_fraction",
+      "layer_fraction",
+      "stage1",
+      "blob_fraction",
+      "momentum"
+    ],
+    "training_wall_s": 0.6924228760180995,
+    "steps": 600,
+    "history": [
+      {
+        "step": 50,
+        "batch_weighted_logcount_MSE": 0.09176075458526611,
+        "wall_s": 0.06086876103654504
+      },
+      {
+        "step": 100,
+        "batch_weighted_logcount_MSE": 0.0904741957783699,
+        "wall_s": 0.1192754739895463
+      },
+      {
+        "step": 150,
+        "batch_weighted_logcount_MSE": 0.0858650803565979,
+        "wall_s": 0.17721683700801805
+      },
+      {
+        "step": 200,
+        "batch_weighted_logcount_MSE": 0.08175817131996155,
+        "wall_s": 0.23538194899447262
+      },
+      {
+        "step": 250,
+        "batch_weighted_logcount_MSE": 0.08486738055944443,
+        "wall_s": 0.2922649679821916
+      },
+      {
+        "step": 300,
+        "batch_weighted_logcount_MSE": 0.0871022492647171,
+        "wall_s": 0.34890076698502526
+      },
+      {
+        "step": 350,
+        "batch_weighted_logcount_MSE": 0.0828578919172287,
+        "wall_s": 0.4050593480351381
+      },
+      {
+        "step": 400,
+        "batch_weighted_logcount_MSE": 0.08481467515230179,
+        "wall_s": 0.4611180489882827
+      },
+      {
+        "step": 450,
+        "batch_weighted_logcount_MSE": 0.0806066244840622,
+        "wall_s": 0.517369449022226
+      },
+      {
+        "step": 500,
+        "batch_weighted_logcount_MSE": 0.07801008969545364,
+        "wall_s": 0.5735400400008075
+      },
+      {
+        "step": 550,
+        "batch_weighted_logcount_MSE": 0.08622433990240097,
+        "wall_s": 0.6352677490212955
+      },
+      {
+        "step": 600,
+        "batch_weighted_logcount_MSE": 0.08523967117071152,
+        "wall_s": 0.6924199360073544
+      }
+    ],
+    "parameter_bytes": 1432,
+    "objective": "weighted squared log1p next4window count, no softmax/probability interpretation",
+    "calibration": {
+      "calibration_rows": 2777088,
+      "cal_slope": 1.2479694958281486,
+      "cal_intercept": 0.020061349969333207,
+      "semantics": "affine expected-count least squares fitted only on calibration episode; clamped nonnegative; not probability calibration"
+    },
+    "checkpoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E005-expert-jev/v1/checkpoints/temporal-mlp.npz",
+    "sha256": "c4dffa12831c8282c06d8ff39a00573d8aeccea91d32dab015fbb0021dfe3625",
+    "total_checkpoint_bytes": 3878
+  }
+}

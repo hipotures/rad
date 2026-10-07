@@ -1,0 +1,10 @@
+[PHASE 1 | STEP 3/5] Safety PASS cost-guard-fixture | elapsed 46.7min | remaining 193.3min
+[PHASE 1 | STEP 3/5] Safety PASS real-copy-full | elapsed 46.7min | remaining 193.3min
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/scripts/safety.py", line 11, in <module>
+    with (C/'tests'/(name+'.log')).open('x') as f:subprocess.run(cmd,env=e,stdout=f,stderr=subprocess.STDOUT,check=True,timeout=120)
+                                                  ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase1-20261006T200037Z/builds/oracle-fixture']' died with <Signals.SIGABRT: 6>.

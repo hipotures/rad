@@ -1,0 +1,245 @@
+{
+  "original": {
+    "exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/control/strata",
+    "args": [
+      "--pack",
+      "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132",
+      "--native",
+      "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf",
+      "--ple-gguf",
+      "/srv/ai/models/strata/models/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00002-of-00004.gguf",
+      "--expert-profile",
+      "/srv/ai/strata/data/expert-profile.bin",
+      "--mtp",
+      "/srv/ai/models/strata/mtp/rt",
+      "--expert-cache",
+      "auto",
+      "--prefill",
+      "auto",
+      "--pool-workers",
+      "15",
+      "--pcie-frac",
+      ".28",
+      "--spec",
+      "4",
+      "--spec-min-p",
+      "0.5",
+      "--kv",
+      "int8",
+      "--kv-resident",
+      "32768",
+      "--suffix-draft",
+      "0",
+      "--prompt-cache",
+      "0",
+      "--max-context",
+      "32768"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control",
+    "tokenizer": "/srv/ai/models/strata/packs/ud-q4_k_xl-v0132/tokenizer",
+    "model_name": "qwen3.8-flash-next-ud-q4_k_xl",
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/logs/unlaunched.log",
+    "lib_dirs": [
+      "/usr/local/cuda/bin",
+      "/usr/local/cuda/lib64"
+    ],
+    "port": 18136,
+    "gpu": [
+      0,
+      1
+    ],
+    "gpus_asked": true,
+    "layer_split": "24",
+    "model_revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+    "model_family": "unsloth/Qwen3.8-Flash-Next-GGUF",
+    "env": {
+      "CUDA_VISIBLE_DEVICES": "0,1",
+      "STRATA_SPLIT_TIMING": "1",
+      "STRATA_DECODE_TIMING": "1",
+      "STRATA_POOL_SPIN_US": "100"
+    },
+    "host": "127.0.0.1",
+    "parallel": 1,
+    "Strata_HEAD": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "build_variant": "natural-control",
+    "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "binary_sha256": "eca9d0d271340a114955d5af8038dbffa139ad096ef0d470bcfea9009d4f8d0d",
+    "headline_instrumentation": "OFF",
+    "Strata_version": "0.1.39",
+    "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+    "max_total_context": 32768,
+    "source_sha": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "source_status": "",
+    "variant_overrides": {
+      "env": {
+        "STRATA_POOL_SPIN_US": "100"
+      },
+      "scheduling_only": "sole intended runtime variable: pool spin-before-sleep; default arm genuinely unset"
+    },
+    "server_entrypoint": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/scripts/serve_capture.py",
+    "frontend_capture": "Common actual-ID wrapper; no binary changes",
+    "model_manifest": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-conditional-admission-20261006T010859Z/git/model.json",
+    "inference_provenance": "CURRENT P1 common settings, Q4 model only; architecture selection separate exploratory phase",
+    "method": "layer-split",
+    "spin_policy": "100us"
+  },
+  "capture": {
+    "source_sha": "117bc89b3bacbf263379c336557e6c8aa07aff5e",
+    "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "source": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/src/oracle-v3",
+    "build": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/builds/oracle-v3",
+    "exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/builds/oracle-v3/strata",
+    "binary_sha256": "30a31432b5aff51bcd4340900c13cad0c8487a832bfdb22d05f9157b88d5bdb3",
+    "commands": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-live-oracle-20261006T040656Z/git/builds/oracle-v3/20261006T051013Z/commands.json"
+  },
+  "capture_mode": "record; natural generation, native cache policy; oracle mode off, no replay overrides",
+  "model_stat_verification": "All files unchanged since prior full SHA256 audit in upstream921 campaign; reused content hashes; no heavy model hashing during Phase0",
+  "prior_full_audit": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/reproducibility-audit.json",
+  "instrumentation_overhead_reference": {
+    "natural": [
+      {
+        "label": "overhead-v3-natural-attempt1",
+        "valid": true,
+        "input": 4096,
+        "output": 256,
+        "PP": 1034.3,
+        "decode_s": 2.2049000000000003,
+        "equivalent_tok_s": 116.10503877726879,
+        "TTFT_s": 3.9877919529681094,
+        "wall_s": 6.178732520958874,
+        "MTP_proposed": 217,
+        "MTP_accepted": 166
+      },
+      {
+        "label": "overhead-v3-natural-attempt2",
+        "valid": true,
+        "input": 4096,
+        "output": 256,
+        "PP": 1034.1,
+        "decode_s": 2.3434,
+        "equivalent_tok_s": 109.2429802850559,
+        "TTFT_s": 3.98902444698615,
+        "wall_s": 6.320594749005977,
+        "MTP_proposed": 217,
+        "MTP_accepted": 166
+      },
+      {
+        "label": "overhead-v3-natural-attempt3",
+        "valid": true,
+        "input": 4096,
+        "output": 256,
+        "PP": 1034.2,
+        "decode_s": 2.157,
+        "equivalent_tok_s": 118.6833565136764,
+        "TTFT_s": 3.9870005960110575,
+        "wall_s": 6.131467477011029,
+        "MTP_proposed": 217,
+        "MTP_accepted": 166
+      }
+    ],
+    "replay": [
+      {
+        "label": "overhead-v3-replay-attempt1",
+        "valid": true,
+        "input": 4096,
+        "output": 256,
+        "PP": 1034.1,
+        "decode_s": 2.2607,
+        "equivalent_tok_s": 113.23926217543239,
+        "TTFT_s": 4.511493601021357,
+        "wall_s": 6.779710988048464,
+        "MTP_proposed": 217,
+        "MTP_accepted": 166
+      },
+      {
+        "label": "overhead-v3-replay-attempt2",
+        "valid": true,
+        "input": 4096,
+        "output": 256,
+        "PP": 1034.0,
+        "decode_s": 2.2613000000000003,
+        "equivalent_tok_s": 113.20921593773491,
+        "TTFT_s": 4.520078789035324,
+        "wall_s": 6.79518191103125,
+        "MTP_proposed": 217,
+        "MTP_accepted": 166
+      },
+      {
+        "label": "overhead-v3-replay-attempt3",
+        "valid": true,
+        "input": 4096,
+        "output": 256,
+        "PP": 1034.2,
+        "decode_s": 2.2096,
+        "equivalent_tok_s": 115.85807385952208,
+        "TTFT_s": 4.508737970958464,
+        "wall_s": 6.722463673970196,
+        "MTP_proposed": 217,
+        "MTP_accepted": 166
+      }
+    ],
+    "paired": [
+      {
+        "natural": "overhead-v3-natural-attempt1",
+        "replay": "overhead-v3-replay-attempt1",
+        "same_output_ids": true,
+        "same_MTP": true,
+        "decode_replay_over_natural": 1.0253072701709827,
+        "wall_replay_over_natural": 1.0972656552215216,
+        "attestation_s": 0.522925,
+        "lookup_ms": 8.231
+      },
+      {
+        "natural": "overhead-v3-natural-attempt2",
+        "replay": "overhead-v3-replay-attempt2",
+        "same_output_ids": true,
+        "same_MTP": true,
+        "decode_replay_over_natural": 0.9649654348382694,
+        "wall_replay_over_natural": 1.0750858393666054,
+        "attestation_s": 0.532341,
+        "lookup_ms": 10.038
+      },
+      {
+        "natural": "overhead-v3-natural-attempt3",
+        "replay": "overhead-v3-replay-attempt3",
+        "same_output_ids": true,
+        "same_MTP": true,
+        "decode_replay_over_natural": 1.0243857209086695,
+        "wall_replay_over_natural": 1.0963873981514238,
+        "attestation_s": 0.52075,
+        "lookup_ms": 7.912
+      }
+    ],
+    "median_paired_decode_time_ratio": 1.0243857209086695,
+    "median_paired_wall_ratio": 1.0963873981514238,
+    "original_binary_output_matches_all_natural": true,
+    "capture_output_matches_all_natural": true,
+    "original_binary_reference": {
+      "label": "original-natural-development-v3",
+      "valid": true,
+      "input": 4096,
+      "output": 256,
+      "PP": 1033.9,
+      "decode_s": 2.1953,
+      "equivalent_tok_s": 116.61276363139434,
+      "TTFT_s": 3.9894252920057625,
+      "wall_s": 6.172037593030836,
+      "MTP_proposed": 217,
+      "MTP_accepted": 166
+    },
+    "recording": {
+      "label": "development-capture-v3",
+      "valid": true,
+      "input": 4096,
+      "output": 256,
+      "PP": 1034.4,
+      "decode_s": 2.3986,
+      "equivalent_tok_s": 106.72892520637038,
+      "TTFT_s": 4.662196097022388,
+      "wall_s": 7.11968203401193,
+      "MTP_proposed": 217,
+      "MTP_accepted": 166
+    },
+    "caveat": "Short 256-output development workload only. Recording overhead separate; not primary 4096-tape decode."
+  }
+}

@@ -1,0 +1,145 @@
+RESOLVED_CONFIG {"exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/compatible-v1/strata", "args": ["--pack", "/srv/ai/models/strata/packs/iq3_s", "--native", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf", "--ple-gguf", "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf", "--expert-profile", "/srv/ai/strata/data/expert-profile.bin", "--prefill", "auto", "--spec", "4", "--spec-min-p", "0.5", "--mtp", "/srv/ai/models/strata/mtp/rt", "--kv", "int8", "--kv-resident", "32768", "--expert-cache", "auto", "--max-context", "32768", "--suffix-draft", "0", "--prompt-cache", "0", "--pool-workers", "15", "--pcie-frac", "0.28"], "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/compatible-v1", "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer", "model_name": "qwen3.8-flash-next-iq3_s", "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/correctness/compatible-v1/logs/engine.log", "lib_dirs": ["/usr/local/cuda/bin", "/usr/local/cuda/lib64"], "port": 18132, "gpu": [0, 1], "gpus_asked": true, "layer_split": "25", "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09", "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF", "env": {"CUDA_VISIBLE_DEVICES": "0,1", "STRATA_SPLIT_TIMING": "1", "STRATA_DECODE_TIMING": "1", "STRATA_LAB_COMPATIBLE": "1"}, "host": "127.0.0.1", "parallel": 1, "Strata_HEAD": "291deaecbd1ba46cf434559b33f7018c3973feb2", "build_variant": "compatible-v1", "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab", "binary_sha256": "7468f2e116a1c4ad75e37ec5c1c60636ad4cbc5533f3e29a7923c4e8ec26d3f3", "headline_instrumentation": "OFF", "Strata_version": "0.1.39", "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python", "max_total_context": 32768, "source_sha": "291deaecbd1ba46cf434559b33f7018c3973feb2", "source_status": "", "variant_overrides": {"env": {"STRATA_LAB_COMPATIBLE": "1"}, "policy": "causal same-device compatible-slot EMA", "extra_gpu_bytes": 0, "selector_target": "Original heat counts/min2/gain1.5/cadence4/max96; redistribute inside fixed per-device physical classes."}, "diagnostic_env": {"STRATA_DBG_NAN": "1"}}
+READY compatible-v1 32k 49.07
+warmup VALID input 4096 output 64 PP 118.8 TG 81.7
+case1 VALID input 49 output 143 PP 133.1 TG 85.2
+case2 VALID input 49 output 189 PP 149.1 TG 114.6
+case3 VALID input 55 output 252 PP 164.6 TG 149.1
+case4 VALID input 70 output 195 PP 195.3 TG 108.4
+case5 VALID input 61 output 440 PP 144.2 TG 149.8
+case6 VALID input 58 output 337 PP 242.6 TG 179.2
+case7 VALID input 43 output 131 PP 186.4 TG 74.2
+case8 VALID input 48 output 100 PP 160.5 TG 85.1
+case9 VALID input 57 output 18 PP 172.2 TG 89.1
+case10 VALID input 61 output 27 PP 175.9 TG 131.6
+[
+  {
+    "case": 1,
+    "state": "VALID",
+    "generated": 143,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "0f88a8d9190befb61f91c0952c3a67bd0c14052194c56c6b14bfedf60517b1e6",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 321
+  },
+  {
+    "case": 2,
+    "state": "VALID",
+    "generated": 189,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "07f502ccffca9f96deeddc444bee09b0555b1e4d7d1b7dafe8d1ae6cace7c5bc",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 3,
+    "state": "VALID",
+    "generated": 252,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "740c2746cf51c43b80d3cf92d82326ef44c370ea5446c2fc2ab9fff2a22d1f21",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 4,
+    "state": "VALID",
+    "generated": 195,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "00031218ec45fad4c408c32fb2408abb9da31279624e22182a75a21097c41232",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 5,
+    "state": "VALID",
+    "generated": 440,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "d311ea12c9c63e6f98d9d12ad0df159eb43d59a7cf1427fa99a21d4ae1ab3019",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 463
+  },
+  {
+    "case": 6,
+    "state": "VALID",
+    "generated": 337,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "70b6b3fa067a01ff9d48286c770614546454cb2c86f6cfaa757f7a8a11d83b7d",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 157
+  },
+  {
+    "case": 7,
+    "state": "VALID",
+    "generated": 131,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "d11cb50725f33ffcfc4fb86d3424148d98f5303c7f2e71065f6ec7360dfea03d",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 144
+  },
+  {
+    "case": 8,
+    "state": "VALID",
+    "generated": 100,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "3bec0e10955b290dbc49e15d15a52c25ce8978e348ddff28d9c45af72eacf6f5",
+    "same_input_ids": true,
+    "same_visible_output": false,
+    "first_diverging_character": 42
+  },
+  {
+    "case": 9,
+    "state": "VALID",
+    "generated": 18,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "8448cd5842a2428ec4addb0e30e56b89c828fa2724ca2f198873992d22f21a67",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  },
+  {
+    "case": 10,
+    "state": "VALID",
+    "generated": 27,
+    "finish_reason": "stop",
+    "application_status": "STOPPED_WITH_ANSWER",
+    "nonfinite_reported": false,
+    "empty_answer": false,
+    "output_sha256": "a2d8fad7f44ee3ebaf08cd48c6804b450e77e6f156c978c1afbeefbc5ba539a7",
+    "same_input_ids": true,
+    "same_visible_output": true,
+    "first_diverging_character": null
+  }
+]

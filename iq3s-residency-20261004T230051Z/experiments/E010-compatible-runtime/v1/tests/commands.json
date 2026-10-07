@@ -1,0 +1,51 @@
+[
+  {
+    "name": "native-tests",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ctest",
+      "--test-dir",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/compatible-v1",
+      "--output-on-failure",
+      "--timeout",
+      "60",
+      "-j",
+      "1"
+    ],
+    "cwd": null,
+    "returncode": 8,
+    "elapsed_s": 105.04226517677307,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/tests/native-tests.log"
+  },
+  {
+    "name": "python-tests",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "serve",
+      "-p",
+      "test_*.py"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/compatible-v1",
+    "returncode": 0,
+    "elapsed_s": 110.41991639137268,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/tests/python-tests.log"
+  },
+  {
+    "name": "iq3s-real-expert-parity",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/compatible-v1/native_expert_parity",
+      "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+      "0",
+      "1",
+      "2",
+      "12"
+    ],
+    "cwd": null,
+    "returncode": 0,
+    "elapsed_s": 5.076345443725586,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E010-compatible-runtime/v1/tests/iq3s-real-expert-parity.log"
+  }
+]

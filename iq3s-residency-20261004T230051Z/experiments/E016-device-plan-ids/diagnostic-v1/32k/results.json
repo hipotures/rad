@@ -1,0 +1,223 @@
+{
+  "runs": [
+    {
+      "variant": "diagnostic-device-plan-ids-v1",
+      "profile": "32k",
+      "kind": "diagnostic",
+      "payload": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/32k-run1.json",
+        "payload_sha256": "4a37f403b112a06d3a3ae13ffca8d8b6b4578676183c17d22dfe7d699da110af",
+        "messages_sha256": "25f02fe1cf19ec7f34d3ba08fd9021a053bdeec37c6fd3a1af17b57a2451e829",
+        "input_ids_sha256": "f584d9ba57c4a536f5c83b212f40baa87723c811ad532c33df09550a21209583",
+        "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/f584d9ba57c4a536f5c83b212f40baa87723c811ad532c33df09550a21209583.json",
+        "actual_input_tokens": 28378,
+        "profile": "32k",
+        "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/32K-long-run1.json",
+        "source_payload_file_sha256": "738c7383b8ccf0317ac1abf581e60b6428ad02d71c5c89c41a4a2d8832712056",
+        "retained_source_characters": 98996,
+        "removed_source_characters": 10061,
+        "trim_boundary": "complete source line",
+        "total_requested_tokens": 32474,
+        "admission_verified_offline": true
+      },
+      "source_sha": "5fe14e9321e779345041162b462036a3a83036ab",
+      "binary_sha256": "92dcaab562034e221b7594c599134b1d3c32b2c182dd2765c0a9141086f46417",
+      "full_config": {
+        "exe": "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-device-plan-ids-v1/strata",
+        "args": [
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768",
+          "--expert-cache",
+          "auto",
+          "--max-context",
+          "32768",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--pool-workers",
+          "15",
+          "--pcie-frac",
+          "0.28"
+        ],
+        "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-device-plan-ids-v1",
+        "tokenizer": "/srv/ai/models/strata/packs/iq3_s/tokenizer",
+        "model_name": "qwen3.8-flash-next-iq3_s",
+        "log": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/logs/CURRENT-engine.log",
+        "lib_dirs": [
+          "/usr/local/cuda/bin",
+          "/usr/local/cuda/lib64"
+        ],
+        "port": 18132,
+        "gpu": [
+          0,
+          1
+        ],
+        "gpus_asked": true,
+        "layer_split": "25",
+        "model_revision": "ed59f92082b1e93c0e96d60a8b11aab089b52f09",
+        "model_family": "ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF",
+        "env": {
+          "CUDA_VISIBLE_DEVICES": "0,1",
+          "STRATA_SPLIT_TIMING": "1",
+          "STRATA_DECODE_TIMING": "1",
+          "STRATA_VERIFY_DEVICE_PLAN": "1",
+          "STRATA_LAB_PLAN_IDS": "1"
+        },
+        "host": "127.0.0.1",
+        "parallel": 1,
+        "Strata_HEAD": "5fe14e9321e779345041162b462036a3a83036ab",
+        "build_variant": "diagnostic-device-plan-ids-v1",
+        "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+        "binary_sha256": "92dcaab562034e221b7594c599134b1d3c32b2c182dd2765c0a9141086f46417",
+        "headline_instrumentation": "DIAGNOSTIC_ONLY",
+        "Strata_version": "0.1.39",
+        "python": "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+        "max_total_context": 32768,
+        "source_sha": "5fe14e9321e779345041162b462036a3a83036ab",
+        "source_status": "",
+        "variant_overrides": {
+          "env": {
+            "STRATA_VERIFY_DEVICE_PLAN": "1",
+            "STRATA_LAB_PLAN_IDS": "1"
+          },
+          "policy": "original EMA; device-planned all-local groups with stable per-layer IDs",
+          "scope": "frozen serial two-stage one-group IQ3_S only"
+        },
+        "diagnostic_env": {
+          "STRATA_LAB_TRACE": "{attempt}/traces/runtime"
+        }
+      },
+      "full_engine_commands": [
+        [
+          "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-device-plan-ids-v1/strata",
+          "--serve",
+          "--pack",
+          "/srv/ai/models/strata/packs/iq3_s",
+          "--native",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+          "--ple-gguf",
+          "/srv/ai/models/strata/models/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+          "--expert-profile",
+          "/srv/ai/strata/data/expert-profile.bin",
+          "--prefill",
+          "auto",
+          "--spec",
+          "4",
+          "--spec-min-p",
+          "0.5",
+          "--mtp",
+          "/srv/ai/models/strata/mtp/rt",
+          "--kv",
+          "int8",
+          "--kv-resident",
+          "32768",
+          "--expert-cache",
+          "auto",
+          "--max-context",
+          "32768",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--pool-workers",
+          "15",
+          "--pcie-frac",
+          "0.28",
+          "--layer-split",
+          "25"
+        ]
+      ],
+      "started_epoch": 1791171387.030205,
+      "requested_output": 4096,
+      "actual_input_tokens": 28378,
+      "actual_output_tokens": 4096,
+      "PP": 3564.9,
+      "TG": 152.5,
+      "TTFT_s": 8.121842818974983,
+      "wall_s": 34.988231064984575,
+      "pp_s": 7.9604,
+      "decode_s": 26.8633,
+      "reuse": 0,
+      "finish_reason": "length",
+      "mtp_proposed": 3358,
+      "mtp_accepted": 2642,
+      "verify_windows": 1454,
+      "hit_rate_pct": 98.9,
+      "local_vram_entries": 2282704,
+      "cpu_fallback_entries": 26229,
+      "offloaded_entries": 827,
+      "text": "# Repository Maintenance Plan — 40 Sections\n\n---\n\n## 1. CMakeLists.txt: CUDA Architecture Guard for Pre-sm_75 Without Experimental Flag\n\n**Component:** The `foreach(_a IN LISTS CMAKE_CUDA_ARCHITECTURES)` loop in the CUDA enablement block of `CMakeLists.txt`.\n\n**Responsibilities:** This loop validates each requested CUDA architecture, rejecting anything below compute capability 7.5 unless `STRATA_EXPERIMENTAL_SM60` is set, and below 6.0 unconditionally. It also warns about CUDA 12.8 + sm_120 crashes.\n\n**Proposed change:** The current code uses `_base LESS 75` and `_base LESS 60` as numeric comparisons on a string extracted via regex. If `CMAKE_CUDA_ARCHITECTURES` contains a non-numeric token (e.g., a typo like `\"native\"` is handled, but `\"75-real\"` is not fully stripped because the regex only strips after `-`), the comparison silently passes or fails in undefined ways. Add an explicit numeric validation step and a clearer error message that names the offending token.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n+    # Validate that _base is purely numeric before arithmetic comparison\n+    if(NOT _base MATCHES \"^[0-9]+$\")\n+      message(FATAL_ERROR\n+        \"CMAKE_CUDA_ARCHITECTURES entry '${_a}' does not resolve to a numeric compute capability \"\n+        \"(extracted '${_base}').  Use a plain number (e.g. 75, 86, 89, 120) or 'native'/'all'.\")\n+    endif()\n     if(_base LESS 75 AND NOT STRATA_EXPERIMENTAL_SM60)\n```\n\n**Verification cases:**\n1. Configure with `-DCMAKE_CUDA_ARCHITECTURES=\"75-real\"` — the regex strips `-real` leaving `75`, which is numeric, so the build proceeds normally.\n2. Configure with `-DCMAKE_CUDA_ARCHITECTURES=\"75x\"` — the regex leaves `75x`, which fails the `^[0-9]+$` check, producing the new FATAL_ERROR naming the offending token.\n\n---\n\n## 2. CMakeLists.txt: strata_kernels Source List — Missing `native_qsa_select.cu`\n\n**Component:** The `add_library(strata_kernels STATIC ...)` source list.\n\n**Responsibilities:** This list enumerates every `.cu` and `.cpp` file compiled into the GPU kernel library. A missing entry means the symbol is never linked, producing a link-time error only when a consumer references it.\n\n**Proposed change:** The file `src/kernels/cuda/qsa_select.cu` is present in the list, but a companion `native_qsa_select.cu` (the native-path counterpart used by `native_qsa.cu`) is absent. Add it and verify the symbol is exported.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n-                          src/kernels/cuda/native_qsa_score.cu\n+                          src/kernels/cuda/native_qsa_score.cu\n+                          src/kernels/cuda/native_qsa_select.cu\n```\n\n**Verification cases:**\n1. Build with `-DSTRATA_ENABLE_CUDA=ON` and confirm `nm build/libstrata_kernels.a | grep native_qsa_select` finds the symbol.\n2. Run `ctest -R qsa_parity` — the QSA parity test exercises the select path and must pass.\n\n---\n\n## 3. CMakeLists.txt: strata_engine Source List — Missing `conversation_memory.cpp` Duplicate\n\n**Component:** The `add_library(strata_engine STATIC ...)` source list.\n\n**Responsibilities:** This library composes the per-layer pipeline. `conversation_memory.cpp` appears in both `strata_engine` and the standalone `conversation_memory_test` target. If the test links `strata_engine` AND also compiles `conversation_memory.cpp` directly, the symbol is defined twice.\n\n**Proposed change:** Remove `src/core/conversation_memory.cpp` from the `conversation_memory_test` target's sources since it already links `strata_engine`.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n-  add_executable(conversation_memory_test src/core/conversation_memory_test.cpp src/core/conversation_memory.cpp)\n+  add_executable(conversation_memory_test src/core/conversation_memory_test.cpp)\n```\n\n**Verification cases:**\n1. Configure with `-DSTRATA_BUILD_CONVERSATION_TESTS=ON` and build; confirm no duplicate-symbol linker error.\n2. Run `ctest -R conversation_memory_test` and confirm it passes.\n\n---\n\n## 4. CMakeLists.txt: HIP `strata_mmq` — Missing `target_compile_options` for HIP Fast-Math\n\n**Component:** The `elseif(STRATA_PREFILL_MMQ)` block that builds `strata_mmq` for HIP.\n\n**Responsibilities:** The CUDA path sets `--extended-lambda -use_fast_math` on `strata_mmq`. The HIP path omits equivalent flags, so the MMQ kernels run without fast-math on AMD, producing different rounding and potentially different results from the CUDA path.\n\n**Proposed change:** Add HIP-appropriate compile options.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n     target_compile_definitions(strata_mmq PRIVATE GGML_USE_HIP=1)\n+    target_compile_options(strata_mmq PRIVATE $<$<COMPILE_LANGUAGE:HIP>:--ffast-math -ffp-contract=off>)\n     target_link_libraries(strata_mmq PUBLIC ggml-base hip::host roc::hipblas)\n```\n\n**Verification cases:**\n1. Build with `-DSTRATA_ENABLE_HIP=ON -DSTRATA_PREFILL_MMQ=ON` and confirm the compile command for `moe_mmq.cu` includes `--ffast-math`.\n2. Run `ctest -R hip_prefill_mmq_parity` and confirm it passes (the parity test compares against a reference that assumes fast-math rounding).\n\n---\n\n## 5. CMakeLists.txt: `strata_warnings` — Missing `-Wno-cuda-compat` for HIP\n\n**Component:** The `strata_warnings` INTERFACE target.\n\n**Responsibilities:** This target applies compiler warnings to all Strata code. HIP compiles `.cu` files as HIP, and the `-include cuda_runtime.h` shim in `hip_backend.cmake` can trigger warnings from CUDA headers that are not Strata's to fix.\n\n**Proposed change:** Suppress warnings originating from the HIP compat shim headers.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n   $<$<COMPILE_LANGUAGE:HIP>:-Wall>\n   $<$<COMPILE_LANGUAGE:HIP>:-Wextra>\n+  $<$<COMPILE_LANGUAGE:HIP>:-Wno-error>\n+  $<$<COMPILE_LANGUAGE:HIP>:-Wno-unused-parameter>\n```\n\nWait — that's too broad. A more targeted approach:\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n   $<$<COMPILE_LANGUAGE:HIP>:-Wall>\n   $<$<COMPILE_LANGUAGE:HIP>:-Wextra>\n+  $<$<COMPILE_LANGUAGE:HIP>:-Wno-unused-parameter>\n+  $<$<COMPILE_LANGUAGE:HIP>:-Wno-sign-compare>\n```\n\n**Verification cases:**\n1. Build with `-DSTRATA_ENABLE_HIP=ON -DSTRATA_WERROR=ON` and confirm no warnings from `cuda_runtime.h` shim headers.\n2. Introduce a deliberate unused-parameter warning in a Strata `.cu` file and confirm it is still caught (the suppression is header-scoped via the include path, not global).\n\n---\n\n## 6. CMakeLists.txt: `STRATA_BUILD_TESTS` Default — `bench/micro` Existence Check Is Too Weak\n\n**Component:** The `_strata_tests_default` logic.\n\n**Responsibilities:** Tests are enabled by default only when both `tests/CMakeLists.txt` and `bench/micro` exist. A directory can exist but be empty (e.g., after a partial checkout), making the check pass while no test sources are present.\n\n**Proposed change:** Check for a specific sentinel file inside `bench/micro`.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/bench/micro)\n+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/bench/micro/native_mmvq_multi.cpp)\n```\n\n**Verification cases:**\n1. Create an empty `bench/micro/` directory and configure; confirm `STRATA_BUILD_TESTS` defaults to OFF.\n2. With the full source tree, configure and confirm `STRATA_BUILD_TESTS` defaults to ON.\n\n---\n\n## 7. CMakeLists.txt: `strata_prefill` — Missing `strata_kernels_cpu` Link for CPU Fallback\n\n**Component:** The `add_library(strata_prefill STATIC ...)` target.\n\n**Responsibilities:** `strata_prefill` links `strata_engine` and the GPU BLAS. If a prefill path falls back to CPU (e.g., a small batch that doesn't benefit from GPU), it needs `strata_kernels_cpu`. Currently it does not link it, so any CPU fallback in prefill would fail at link time.\n\n**Proposed change:** Add the CPU kernel library as a PUBLIC dependency.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n-  target_link_libraries(strata_prefill PUBLIC strata_engine ${_strata_gpu_blas_target} ${_strata_gpu_runtime_target})\n+  target_link_libraries(strata_prefill PUBLIC strata_engine strata_kernels_cpu ${_strata_gpu_blas_target} ${_strata_gpu_runtime_target})\n```\n\n**Verification cases:**\n1. Build with `-DSTRATA_ENABLE_CUDA=ON` and confirm `strata_prefill` links without undefined symbols.\n2. Run `ctest -R prefill` (if a prefill test exists) and confirm it passes.\n\n---\n\n## 8. CMakeLists.txt: `strata` Executable — Missing `strata_kernels_cpu` Link\n\n**Component:** The `add_executable(strata src/program/generate.cpp)` target.\n\n**Responsibilities:** The main `strata` binary links `strata_engine`, `strata_prefill`, and `strata_spec`. If the engine's expert dispatch falls back to CPU experts (native IQ path), the CPU kernel symbols must be available. `strata_engine` links `strata_kernels_cpu` PUBLIC, so it should propagate — but verify.\n\n**Proposed change:** Add an explicit link to make the dependency visible and guard against future refactors that break the transitive chain.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n-  target_link_libraries(strata PRIVATE strata_engine strata_prefill strata_spec ${_strata_gpu_runtime_target})\n+  target_link_libraries(strata PRIVATE strata_engine strata_prefill strata_spec strata_kernels_cpu ${_strata_gpu_runtime_target})\n```\n\n**Verification cases:**\n1. Build `strata` with `-DSTRATA_NATIVE_EXPERTS=ON` and confirm no undefined symbols.\n2. Run `strata --help` and confirm it starts without crashing.\n\n---\n\n## 9. CMakeLists.txt: `strata_kernels_cpu` — `q2_avx2.cpp` Missing from Initial Source List\n\n**Component:** The `add_library(strata_kernels_cpu STATIC ...)` initial source list.\n\n**Responsibilities:** `q2_avx2.cpp` is added via `set_source_files_properties` for AVX2 flags but is also listed in the initial `add_library` call. Verify it is present.\n\n**Proposed change:** Confirm `q2_avx2.cpp` is in the initial list (it is). No change needed, but add a comment clarifying why it is in the initial list rather than added later.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n add_library(strata_kernels_cpu STATIC src/kernels/cpu/expert.cpp src/kernels/cpu/pool.cpp\n-            src/kernels/cpu/expert_layout.cpp src/kernels/cpu/q2_avx2.cpp)\n+            src/kernels/cpu/expert_layout.cpp src/kernels/cpu/q2_avx2.cpp)  # q2_avx2: AVX2-only, no AVX-512\n```\n\n**Verification cases:**\n1. Build on a machine without AVX-512 and confirm `q2_avx2.cpp` compiles with only `/arch:AVX2` / `-mavx2`.\n2. Run `ctest -R expert_parity` and confirm it passes.\n\n---\n\n## 10. CMakeLists.txt: `FetchContent` for llama.cpp — No `GIT_SHALLOW` for Speed\n\n**Component:** The `FetchContent_Declare(strata_llamacpp ...)` block.\n\n**Responsibilities:** This fetches the pinned llama.cpp commit for ggml. `GIT_SHALLOW FALSE` means a full clone, which is slow. Since only the `ggml/` subdirectory is used, a shallow clone of the specific commit would be faster.\n\n**Proposed change:** Use `GIT_SHALLOW TRUE` with the specific commit hash.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n     FetchContent_Declare(strata_llamacpp\n       GIT_REPOSITORY https://github.com/ggml-org/llama.cpp.git\n       GIT_TAG 3cf03257f219afbe7334045ff7c6a06ac68c627d\n-      GIT_SHALLOW FALSE)\n+      GIT_SHALLOW TRUE)\n```\n\n**Verification cases:**\n1. Configure with `-DSTRATA_NATIVE_EXPERTS=ON` and confirm the fetch completes in under 30 seconds on a fast connection.\n2. Confirm `add_subdirectory(${strata_llamacpp_SOURCE_DIR}/ggml ...)` succeeds and `ggml-cpu` links.\n\n---\n\n## 11. CMakeLists.txt: `iq_parity` Fixture Generation — Python Probe Does Not Check `gguf-py`\n\n**Component:** The `_iq_python` probe loop.\n\n**Responsibilities:** The probe checks `import numpy` but not `import gguf` (the vendored gguf-py). If numpy is present but gguf-py is missing, the fixture generator fails at runtime with a confusing error.\n\n**Proposed change:** Extend the probe to check both imports.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n-    execute_process(COMMAND ${_cand} -c \"import numpy\" OUTPUT_QUIET ERROR_QUIET RESULT_VARIABLE _iq_probe)\n+    execute_process(COMMAND ${_cand} -c \"import numpy; import gguf\" OUTPUT_QUIET ERROR_QUIET RESULT_VARIABLE _iq_probe)\n```\n\n**Verification cases:**\n1. Configure with a Python that has numpy but not gguf-py; confirm the iq_parity tests are NOT registered and the STATUS message appears.\n2. Configure with a Python that has both; confirm the fixture generation test is registered.\n\n---\n\n## 12. CMakeLists.txt: `strata_mmq` for HIP — Missing `--extended-lambda` Equivalent\n\n**Component:** The HIP `strata_mmq` target.\n\n**Responsibilities:** The CUDA path uses `--extended-lambda` for MMQ template instances. HIP's clang does not support this flag, but the MMQ code may use lambdas that require it. The HIP path should either avoid lambdas or use a HIP-compatible equivalent.\n\n**Proposed change:** Add a compile definition that disables lambda-based MMQ dispatch on HIP, falling back to function pointers.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n     target_compile_definitions(strata_mmq PRIVATE GGML_USE_HIP=1)\n+    target_compile_definitions(strata_mmq PRIVATE GGML_CUDA_DISABLE_LAMBDA_DISPATCH=1)\n```\n\n**Verification cases:**\n1. Build with `-DSTRATA_ENABLE_HIP=ON -DSTRATA_PREFILL_MMQ=ON` and confirm compilation succeeds.\n2. Run `ctest -R hip_prefill_mmq_parity` and confirm it passes.\n\n---\n\n## 13. CMakeLists.txt: `strata_core` — `layout.cpp` Missing from Source List\n\n**Component:** The `add_library(strata_core STATIC ...)` source list.\n\n**Responsibilities:** `src/core/layout.cpp` is listed. Verify it exists and is needed. If it was recently added and the build breaks on a clean checkout, this is a missing-file issue.\n\n**Proposed change:** Add a CMake existence guard for each source file in `strata_core` to produce a clear error rather than a cryptic \"no such file\" from the compiler.\n\n```diff\n--- a/CMakeLists.txt\n+++ b/CMakeLists.txt\n@@ -1,0 +1,0 @@\n+  foreach(_src IN ITEMS src/core/device.cu src/core/pinned.cu src/platform/memory.cpp src/core/graph.cpp\n+                        src/core/weights.cpp src/core/layout.cpp)\n+    if(NOT EXISTS \"${CMAKE_CURRENT_SOURCE_DIR}/${_src}\")\n+      message(FATAL_ERROR \"strata_core: source file '${_src}' is missing from the source tree\")\n+    endif()\n+  endforeach()\n   add_library(strata_core STATIC src/core/device.cu src/core/pinned.cu src/platform/memory.cpp src/core/graph.cpp src/core/weights.cpp\n                                src/core/layout.cpp)\n```\n\n**Verification cases:**\n1. Delete `src/core/layout.cpp` and configure; confirm the FATAL_ERROR names the missing file.\n2. With the",
+      "reasoning": "",
+      "usage": {
+        "prompt_tokens": 28378,
+        "completion_tokens": 4096,
+        "total_tokens": 32474,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 28378,
+        "prompt_ms": 7960.4,
+        "prompt_per_token_ms": 0.281,
+        "prompt_per_second": 3564.9,
+        "predicted_n": 4096,
+        "predicted_ms": 26863.3,
+        "predicted_per_token_ms": 6.558,
+        "predicted_per_second": 152.5,
+        "draft_n": 3358,
+        "draft_n_accepted": 2642,
+        "at": 1791171422
+      },
+      "telemetry": {
+        "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E016-device-plan-ids/diagnostic-v1/32k/telemetry/trace-run1.jsonl",
+        "samples": 35,
+        "system_cpu_mean_pct": 78.45142857142856,
+        "system_cpu_peak_pct": 99.9,
+        "peak_rss_gib": 50.999053955078125,
+        "peak_ram_used_gib": 55.37031173706055,
+        "min_available_gib": 105.7623062133789,
+        "gpus": {
+          "0": {
+            "mean_util_pct": 48.114285714285714,
+            "peak_vram_mib": 23834.0
+          },
+          "1": {
+            "mean_util_pct": 52.628571428571426,
+            "peak_vram_mib": 23952.0
+          }
+        },
+        "abort": null
+      },
+      "output_text_sha256": "695adffa725931fadd4865fc947f6c0aa375ac4d81c1ba658c8adcd9e5e7413a",
+      "output_ids": "UNAVAILABLE: frontend strips internal special markers; text/reasoning and raw chunks hashed instead",
+      "application_status": "NONEMPTY_ANSWER_LENGTH_LIMIT",
+      "mtp_acceptance_pct": 78.6777843954735,
+      "mtp_accepted_per_window": 1.8170563961485557,
+      "state": "VALID",
+      "invalid_reasons": []
+    }
+  ],
+  "headline": false,
+  "question": "dispatch/timing/accounting diagnosis; free-generation overhead comparison limited by trajectory"
+}

@@ -1,0 +1,147 @@
+{
+  "natural": [
+    {
+      "label": "overhead-v3-natural-attempt1",
+      "valid": true,
+      "input": 4096,
+      "output": 256,
+      "PP": 1034.3,
+      "decode_s": 2.2049000000000003,
+      "equivalent_tok_s": 116.10503877726879,
+      "TTFT_s": 3.9877919529681094,
+      "wall_s": 6.178732520958874,
+      "MTP_proposed": 217,
+      "MTP_accepted": 166
+    },
+    {
+      "label": "overhead-v3-natural-attempt2",
+      "valid": true,
+      "input": 4096,
+      "output": 256,
+      "PP": 1034.1,
+      "decode_s": 2.3434,
+      "equivalent_tok_s": 109.2429802850559,
+      "TTFT_s": 3.98902444698615,
+      "wall_s": 6.320594749005977,
+      "MTP_proposed": 217,
+      "MTP_accepted": 166
+    },
+    {
+      "label": "overhead-v3-natural-attempt3",
+      "valid": true,
+      "input": 4096,
+      "output": 256,
+      "PP": 1034.2,
+      "decode_s": 2.157,
+      "equivalent_tok_s": 118.6833565136764,
+      "TTFT_s": 3.9870005960110575,
+      "wall_s": 6.131467477011029,
+      "MTP_proposed": 217,
+      "MTP_accepted": 166
+    }
+  ],
+  "replay": [
+    {
+      "label": "overhead-v3-replay-attempt1",
+      "valid": true,
+      "input": 4096,
+      "output": 256,
+      "PP": 1034.1,
+      "decode_s": 2.2607,
+      "equivalent_tok_s": 113.23926217543239,
+      "TTFT_s": 4.511493601021357,
+      "wall_s": 6.779710988048464,
+      "MTP_proposed": 217,
+      "MTP_accepted": 166
+    },
+    {
+      "label": "overhead-v3-replay-attempt2",
+      "valid": true,
+      "input": 4096,
+      "output": 256,
+      "PP": 1034.0,
+      "decode_s": 2.2613000000000003,
+      "equivalent_tok_s": 113.20921593773491,
+      "TTFT_s": 4.520078789035324,
+      "wall_s": 6.79518191103125,
+      "MTP_proposed": 217,
+      "MTP_accepted": 166
+    },
+    {
+      "label": "overhead-v3-replay-attempt3",
+      "valid": true,
+      "input": 4096,
+      "output": 256,
+      "PP": 1034.2,
+      "decode_s": 2.2096,
+      "equivalent_tok_s": 115.85807385952208,
+      "TTFT_s": 4.508737970958464,
+      "wall_s": 6.722463673970196,
+      "MTP_proposed": 217,
+      "MTP_accepted": 166
+    }
+  ],
+  "paired": [
+    {
+      "natural": "overhead-v3-natural-attempt1",
+      "replay": "overhead-v3-replay-attempt1",
+      "same_output_ids": true,
+      "same_MTP": true,
+      "decode_replay_over_natural": 1.0253072701709827,
+      "wall_replay_over_natural": 1.0972656552215216,
+      "attestation_s": 0.522925,
+      "lookup_ms": 8.231
+    },
+    {
+      "natural": "overhead-v3-natural-attempt2",
+      "replay": "overhead-v3-replay-attempt2",
+      "same_output_ids": true,
+      "same_MTP": true,
+      "decode_replay_over_natural": 0.9649654348382694,
+      "wall_replay_over_natural": 1.0750858393666054,
+      "attestation_s": 0.532341,
+      "lookup_ms": 10.038
+    },
+    {
+      "natural": "overhead-v3-natural-attempt3",
+      "replay": "overhead-v3-replay-attempt3",
+      "same_output_ids": true,
+      "same_MTP": true,
+      "decode_replay_over_natural": 1.0243857209086695,
+      "wall_replay_over_natural": 1.0963873981514238,
+      "attestation_s": 0.52075,
+      "lookup_ms": 7.912
+    }
+  ],
+  "median_paired_decode_time_ratio": 1.0243857209086695,
+  "median_paired_wall_ratio": 1.0963873981514238,
+  "original_binary_output_matches_all_natural": true,
+  "capture_output_matches_all_natural": true,
+  "original_binary_reference": {
+    "label": "original-natural-development-v3",
+    "valid": true,
+    "input": 4096,
+    "output": 256,
+    "PP": 1033.9,
+    "decode_s": 2.1953,
+    "equivalent_tok_s": 116.61276363139434,
+    "TTFT_s": 3.9894252920057625,
+    "wall_s": 6.172037593030836,
+    "MTP_proposed": 217,
+    "MTP_accepted": 166
+  },
+  "recording": {
+    "label": "development-capture-v3",
+    "valid": true,
+    "input": 4096,
+    "output": 256,
+    "PP": 1034.4,
+    "decode_s": 2.3986,
+    "equivalent_tok_s": 106.72892520637038,
+    "TTFT_s": 4.662196097022388,
+    "wall_s": 7.11968203401193,
+    "MTP_proposed": 217,
+    "MTP_accepted": 166
+  },
+  "caveat": "Short 256-output development workload only. Recording overhead separate; not primary 4096-tape decode."
+}

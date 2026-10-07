@@ -1,0 +1,60 @@
+[
+  {
+    "experiment": "E014-policy-off-guard",
+    "name": "battery",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/correctness_battery.py",
+      "--variant",
+      "compatible-policy-off",
+      "--experiment",
+      "E014-policy-off-guard",
+      "--reference",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control"
+    ],
+    "returncode": 0,
+    "elapsed_s": 136.55547642707825,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/analysis/batteries-E014-E013-v1/E014-policy-off-guard-battery.log"
+  },
+  {
+    "experiment": "E014-policy-off-guard",
+    "name": "known-ground-truth",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_battery.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E014-policy-off-guard/v1/correctness/compatible-policy-off"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.11505365371704102,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/analysis/batteries-E014-E013-v1/E014-policy-off-guard-known-ground-truth.log"
+  },
+  {
+    "experiment": "E013-compatible-fast",
+    "name": "battery",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/correctness_battery.py",
+      "--variant",
+      "compatible-fast-v2",
+      "--experiment",
+      "E013-compatible-fast",
+      "--reference",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E006-frequency/correctness-r2/correctness/control"
+    ],
+    "returncode": 0,
+    "elapsed_s": 150.91616344451904,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/analysis/batteries-E014-E013-v1/E013-compatible-fast-battery.log"
+  },
+  {
+    "experiment": "E013-compatible-fast",
+    "name": "known-ground-truth",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_battery.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E013-compatible-fast/v1/correctness/compatible-fast-v2"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.11908745765686035,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/analysis/batteries-E014-E013-v1/E013-compatible-fast-known-ground-truth.log"
+  }
+]

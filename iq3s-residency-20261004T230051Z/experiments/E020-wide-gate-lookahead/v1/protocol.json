@@ -1,0 +1,25 @@
+{
+  "question": "Does a causally earlier4/8layer gate projection retain enough demand accuracy to cover the measured1.8GB/s blob transferdeadline?",
+  "reason": "E017nativeGPUprojection16-19us removesCPUscoringblocker, butnext-layer lead~244us isshorter than~1ms fullblobcopy. E018temporaryscheme islargelylate evenwithqueue/physicalslots charged. A widerlookahead directlytests timingheadroom, notmore repetition or1%tuning.",
+  "horizons": [
+    4,
+    8
+  ],
+  "same_device_current_layers": [
+    5,
+    12,
+    25,
+    32,
+    38
+  ],
+  "pairs": "5->9/13,12->16/20 onGPU0;25->29/33,32->36/40,38->42/46 onGPU1. No boundary/P2P/free gate duplication.",
+  "change": "Diagnostic-only exactnativeGPUgateproject/top10 oncurrentfreshactivation, afterrealcurrentrouter. Existingtargetweightsandscratchreused; ownpredictedIDs/weights are neveractualmodelrouting. Capturepredictednormalizedtop10weights asconfidence alongsideIDs forpossibleboundedcausal filtering.",
+  "budget": "320explicitGPUbytes/device reused across10pairs. CPUmappedIDs1600bytes +weights1600bytes +sequence64bytes/device.20externaltimingevents total. InternalCUDAalloc/event costs unknown, actualVRAM/classes checked.",
+  "scope": "DefaultoffserialG1frozenlayer split, actualmodel/MTP/KV/workers unchanged. Twomeaningfullyseparatedhorizonschosenfromtransfercost beforeanylabels.",
+  "finite_batch": "Onefreshserver/profile, same64outputwarmup andone4Krepositoryrequest. Sixindependent1024task traces once. Noheadlines. Correctnessnative13/realIQ andfullactualoutput/router/MTP/heat/headparity withcontrol beforeinterpreting signals.",
+  "selection": "Evaluateboth horizons ondev-code/dev-math/cal-prose first. Freeze horizon/filterdecision beforeholdout orbenchmarkranking; do notpickperholdout. If neither survivescost/queue/fullslot model, retainnegative withscope.",
+  "completion": "Report precision/tailrecall, nativeGPUcost, realhostlead andchargedreadiness, wrongproposalbytes; boundedreplay/live followup onlywhenmeaningfulcausalheadroom. Current gatesignalmathunchanged.",
+  "schedule": "Prepare now; do notbuild/runduringE016headlineconfirmation. No claim allgateprediction exhausted from1layernegative.",
+  "selection_rule_recorded_utc": "2026-10-05T04:48:27.332716+00:00",
+  "selection_rule": "Choose horizon4or8 by pooled warm optimistic ready-tail recall at1.8GB/s on dev-code/dev-math/cal-prose only; tie fewer false nonresident proposals. Freeze before holds/benchmarks. No confidence threshold tuning; native top10 ordering. Then fixed rank-first vsEMA min2/gain1.5 queue/physical-slot feasibility, not a TGclaim."
+}

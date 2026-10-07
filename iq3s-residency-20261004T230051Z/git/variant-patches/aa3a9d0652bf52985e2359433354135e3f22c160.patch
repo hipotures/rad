@@ -1,0 +1,116 @@
+diff --git a/include/strata/core/verify.hpp b/include/strata/core/verify.hpp
+index e68f7b3..adb158c 100644
+--- a/include/strata/core/verify.hpp
++++ b/include/strata/core/verify.hpp
+@@ -256,6 +256,9 @@ private:
+     int device_ = -1;                    ///< the device `init` ran on: run/commit switch to it (layer split)
+     std::atomic<bool> released_{false};  ///< #267: release_gpu_waits ran (maybe on the watchdog thread): no more windows
+     bool all_resident_ = false;           ///< 100% of experts in [lb_, le_) resident in VRAM: zero-doorbell graph
++    bool device_plan_ids_ = false;       ///< Local serial-layer-split experiment; stable per-layer IDs
++    int32_t* h_plan_ids_ = nullptr;
++    int32_t* m_plan_ids_ = nullptr;
+     bool device_plan_ = false;            ///< E-6: resident-only layers planned on the device (STRATA_VERIFY_DEVICE_PLAN)
+     uint32_t* skip_ = nullptr;            ///< E-6: per group, the ring whose plan the device built (0: the host's)
+     unsigned long long* slot_off_d_ = nullptr;   ///< E-6: the slot offsets on the device
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index dd5362b..5f717d6 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -292,7 +292,8 @@ Verifier::~Verifier() {
+     if (ev_fork_) cudaEventDestroy(ev_fork_);
+     if (ev_join_) cudaEventDestroy(ev_join_);
+     if (arena_) cudaFree(arena_);
+-    void* hosts[] = {h_tok_, h_step_, h_pos_, h_commit_, h_ple_, h_out_, h_x_, h_ids_, h_w_, h_seq_, h_flag_, h_ymiss_,
++    if (device_plan_ids_) { if (skip_) cudaFree(skip_); if (slot_off_d_) cudaFree(slot_off_d_); }
++    void* hosts[] = {h_plan_ids_, h_tok_, h_step_, h_pos_, h_commit_, h_ple_, h_out_, h_x_, h_ids_, h_w_, h_seq_, h_flag_, h_ymiss_,
+                      h_flagA_, h_plan_, h_flagB_};
+     for (void* h : hosts)
+         if (h) cudaFreeHost(h);
+@@ -507,12 +508,31 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
+             all_resident_ = all_ok;
+         }
+     }
++    const char* lab_ids = std::getenv("STRATA_LAB_PLAN_IDS");
++    device_plan_ids_ = lab_ids && lab_ids[0] == '1';
++    if (device_plan_ids_ && (all_resident_ || remote_opt_ || (lb_ == 0 && le_ == g.n_layers))) {
++        err = "lab plan IDs: only the frozen serial mixed-cache layer-split path is supported";
++        return false;
++    }
+     // E-6: a layer whose routed experts are all resident is planned on the device (STRATA_VERIFY_DEVICE_PLAN=1: on;
+     // exact, but neutral on RIBPC 1-2 GPUs: off by default)
+     {
+         const char* v = std::getenv("STRATA_VERIFY_DEVICE_PLAN");
+         device_plan_ = !all_resident_ && (v != nullptr && std::atoi(v) != 0);
+     }
++    if (device_plan_ids_ && !device_plan_) {
++        err = "lab plan IDs: STRATA_VERIFY_DEVICE_PLAN=1 is required";
++        return false;
++    }
++    if (device_plan_ids_) {
++        const size_t bytes = (size_t)(le_ - lb_) * (size_t)max_t_ * (size_t)ss.k * sizeof(int32_t);
++        if (!mapped(bytes, (void**)&h_plan_ids_, (void**)&m_plan_ids_)) {
++            err = "lab plan IDs: mapped per-layer ID allocation failed";
++            return false;
++        }
++        std::fprintf(stderr, "strata lab plan IDs: stage [%lld,%lld), %zu mapped CPU bytes; device slot offsets %zu bytes plus64 skip bytes\n",
++                     (long long)lb_, (long long)le_, bytes, (size_t)hits.n_slots * sizeof(unsigned long long));
++    }
+     if (all_resident_ || device_plan_) {
+         bool ok2 = true;
+         if (device_plan_)
+@@ -522,7 +542,11 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
+                   cudaMemcpy(slot_off_d_, hits.slot_off, (size_t) hits.n_slots * sizeof(unsigned long long),
+                              cudaMemcpyHostToDevice) == cudaSuccess;
+         }
+-        if (!ok2) { cudaGetLastError(); all_resident_ = false; device_plan_ = false; }
++        if (!ok2) {
++            cudaGetLastError();
++            if (device_plan_ids_) { err = "lab plan IDs: device-plan allocation failed"; return false; }
++            all_resident_ = false; device_plan_ = false;
++        }
+     }
+     std::fprintf(stderr, "strata verify: window up to %d tokens, %.1f MiB of device buffers%s\n", max_t,
+                  (double) count.used / 1048576.0,
+@@ -559,6 +583,10 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+     const bool ple_on = ss.ple.ready() && ple_stage();
+     auto Rt = [&](int t) { return R_ + (size_t) t * HC * N; };
+     const int G = (split_ && T >= 2 && !batch_rec_) ? 2 : 1;   // a batch window is one group
++    if (device_plan_ids_ && (G != 1 || batch_rec_)) {
++        err = "lab plan IDs: split-token groups and concurrent slots are outside the validated experiment";
++        return false;
++    }
+     static const bool dec_batch = [] { const char* v = std::getenv("STRATA_DEC_BATCH"); return v == nullptr || std::atoi(v) != 0; }();
+     auto stamp = [&](int64_t l, int i, int grp) {
+         if (prof_on_ && grp == 0) gpu_stamp(prof_, (int) (l * kProfPer + i), cs);
+@@ -956,7 +984,10 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             else {
+                 const int32_t* layer_res = hits_.d_res != nullptr ? (hits_.d_res + l * g.n_expert) : nullptr;
+                 doorbell_publish_res(xm, ids_ + tb * K, layer_res, (int) g.n_expert, (int64_t) n * N, (int64_t) n * K,
+-                                     m_x_ + tb * N, m_ids_ + tb * K, m_seq_, cs);
++                                     m_x_ + tb * N,
++                                     device_plan_ids_ ? m_plan_ids_ + (size_t)(l - lb_) * (size_t)max_t_ * K + tb * K
++                                                      : m_ids_ + tb * K,
++                                     m_seq_, cs);
+             }
+         }
+         stamp(l, 17, grp);
+@@ -1487,7 +1518,10 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
+         progress_at("verify window: the CPU experts of layer", l);
+         if (remote_opt_) remote_opt_->begin(h_w_ + (size_t) tb * ss.k, tb, n);
+         if (pool != nullptr)
+-            pool(user, h_x_ + (size_t) tb * g.n_embd, h_ids_ + (size_t) tb * ss.k, n, ss.k,
++            pool(user, h_x_ + (size_t) tb * g.n_embd,
++                 device_plan_ids_ ? h_plan_ids_ + (size_t)(l - lb_) * (size_t)max_t_ * (size_t)ss.k + (size_t)tb * ss.k
++                                  : h_ids_ + (size_t)tb * ss.k,
++                 n, ss.k,
+                  h_ymiss_ + (size_t) tb * ss.k * g.n_embd, l);
+         if (remote_opt_) remote_opt_->end();
+         VDBG("layer %lld served\n", (long long) l);
+@@ -1741,6 +1775,7 @@ bool Verifier::wait_commit(std::string& err) {
+ // ================================ BATCH WINDOWS (see init_slots) ================================
+ 
+ bool Verifier::init_slots(const std::vector<SessionState*>& slots, std::string& err) {
++    if (device_plan_ids_) { err = "lab plan IDs: concurrent slot mode is not supported"; return false; }
+     const OnDevice on_device(device_);
+     if (g_ == nullptr || ss_ == nullptr) { err = "verify: init_slots before init"; return false; }
+     if (slots.empty() || (int) slots.size() > max_t_) {

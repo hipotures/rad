@@ -1,0 +1,14 @@
+{
+  "question": "Can causal transition units or already known MTP output-token history improve selection without future router IDs?",
+  "finite_candidates": ["markov-scaled", "token-bigram-hybrid"],
+  "profiles": ["32k", "128k"],
+  "repetitions": "one deterministic replay per policy/profile, no sweep",
+  "resource": "same trace per-GPU byte/slot classes, K25 and asynchronous safe publication; no additional GPU allocation",
+  "markov_repair": "Normalize one-window expected count to heat steady-state units: .5 heat + .5 * (4/.3) predicted. Earlier weak-scale results retained.",
+  "token_signal": "After verify, outv[a] is the known next input token and last committed window[a] is its preceding token. A 256-entry causal LRU bigram dictionary stores only previously committed actual routed rows. Earlier rejected branches still count as work but cannot train the dictionary.",
+  "token_score": "Existing heat plus one anticipated routed-row count / .3. No routing or kernels change. No future router information used.",
+  "availability_check": "Offline assertion validates next known output ID against next window input; actual features use only previous outputs and committed rows.",
+  "transfer_model": "12.6 GB/s aggregate pinned reference for initial replay; slower-range sensitivities required for promising follow-up",
+  "cost": "Report Python selection/update time and predictor payload bytes separately; no invented TG projection. Feature/selection deployment cost must be measured before adoption.",
+  "completion": "Evaluate both profiles, preserve negative results. Runtime integration only if evidence is competitive or a clearly diagnosed repair is supported."
+}

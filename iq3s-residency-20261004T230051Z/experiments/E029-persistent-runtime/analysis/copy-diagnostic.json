@@ -1,0 +1,148 @@
+{
+  "state": "COMPLETE_DIAGNOSTICS",
+  "rows": [
+    {
+      "profile": "32k",
+      "state": "PARITY_PASS",
+      "parity": {
+        "actual_input_tokens": true,
+        "actual_output_tokens": true,
+        "mtp_proposed": true,
+        "mtp_accepted": true,
+        "verify_windows": true,
+        "local_vram_entries": true,
+        "cpu_fallback_entries": true,
+        "offloaded_entries": true,
+        "actual_output_IDs": true,
+        "input_IDs": true
+      },
+      "diagnostic_stats": {
+        "promotions": 1793,
+        "bytes": 3608806400,
+        "useful": 1778,
+        "wasted": 15,
+        "repeated": 1757,
+        "ready": 1778,
+        "late": 0,
+        "unpublished": 0,
+        "useful_entries": 173571,
+        "victim_entries": 9413,
+        "prediction_entries": 227400,
+        "selector_ms": 253.661,
+        "pending_ms": 39.039,
+        "enqueue_ms": 27.028,
+        "join_ms": 1.03
+      },
+      "lifetimes": {
+        "ready_before_first_subsequent_use": 1778,
+        "repeated_use": 1757,
+        "uses_per_useful_admission": {
+          "min": 1,
+          "median": 67.0,
+          "p95": 300,
+          "max": 1086
+        },
+        "lifetime_us_evicted": null,
+        "publication_after_enqueue_return": true,
+        "enqueue_to_publication_us": {
+          "min": 171.128,
+          "median": 2345.953,
+          "p95": 3635.648,
+          "max": 4814.363
+        },
+        "admissions_with_recorded_prediction": 146,
+        "predicted_useful_but_current_miss_preceded_enqueue": 127,
+        "first_subsequent_use_after_prediction_us": {
+          "min": 20156.995,
+          "median": 308859.608,
+          "p95": 5613085.739,
+          "max": 14137485.493
+        }
+      },
+      "headline": false,
+      "diagnostic_TG": 160.0,
+      "clean_TG": 181.7,
+      "limits": [
+        "Host enqueue interval includes CUDA-call CPU/staging/blocking cost, not isolated GPU transferduration.",
+        "Join duration measures onlyexposed adaptionthreadtail afterdraft.",
+        "Exact GPUcompletion time unavailable; publication is a checkedcompletion observationupperbound.",
+        "Prediction observed may be from anolder window forretainedheat;0meansactualdemand-onlytarget.",
+        "Diagnostic clocks/buffers excludedfromheadline. No summation ofoverlappingphases into fabricatedcausal TG."
+      ]
+    },
+    {
+      "profile": "128k",
+      "state": "PARITY_PASS",
+      "parity": {
+        "actual_input_tokens": true,
+        "actual_output_tokens": true,
+        "mtp_proposed": true,
+        "mtp_accepted": true,
+        "verify_windows": true,
+        "local_vram_entries": true,
+        "cpu_fallback_entries": true,
+        "offloaded_entries": true,
+        "actual_output_IDs": true,
+        "input_IDs": true
+      },
+      "diagnostic_stats": {
+        "promotions": 2524,
+        "bytes": 5059456000,
+        "useful": 2486,
+        "wasted": 38,
+        "repeated": 2443,
+        "ready": 2486,
+        "late": 0,
+        "unpublished": 0,
+        "useful_entries": 213502,
+        "victim_entries": 14818,
+        "prediction_entries": 242350,
+        "selector_ms": 276.206,
+        "pending_ms": 59.607,
+        "enqueue_ms": 30.517,
+        "join_ms": 3.315
+      },
+      "lifetimes": {
+        "ready_before_first_subsequent_use": 2486,
+        "repeated_use": 2443,
+        "uses_per_useful_admission": {
+          "min": 1,
+          "median": 52.5,
+          "p95": 274,
+          "max": 1533
+        },
+        "lifetime_us_evicted": {
+          "min": 9275101.015,
+          "median": 17211499.5355,
+          "p95": 25062022.527,
+          "max": 26591098.039
+        },
+        "publication_after_enqueue_return": true,
+        "enqueue_to_publication_us": {
+          "min": 186.07,
+          "median": 2493.6220000000003,
+          "p95": 4246.506,
+          "max": 5113.374
+        },
+        "admissions_with_recorded_prediction": 201,
+        "predicted_useful_but_current_miss_preceded_enqueue": 168,
+        "first_subsequent_use_after_prediction_us": {
+          "min": 22855.025,
+          "median": 246902.93099999998,
+          "p95": 6718227.86,
+          "max": 32675277.595
+        }
+      },
+      "headline": false,
+      "diagnostic_TG": 138.4,
+      "clean_TG": 148.2,
+      "limits": [
+        "Host enqueue interval includes CUDA-call CPU/staging/blocking cost, not isolated GPU transferduration.",
+        "Join duration measures onlyexposed adaptionthreadtail afterdraft.",
+        "Exact GPUcompletion time unavailable; publication is a checkedcompletion observationupperbound.",
+        "Prediction observed may be from anolder window forretainedheat;0meansactualdemand-onlytarget.",
+        "Diagnostic clocks/buffers excludedfromheadline. No summation ofoverlappingphases into fabricatedcausal TG."
+      ]
+    }
+  ]
+}

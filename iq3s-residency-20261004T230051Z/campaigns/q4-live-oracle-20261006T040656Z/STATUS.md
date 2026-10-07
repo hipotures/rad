@@ -1,0 +1,51 @@
+# Q4 live oracle — complete
+
+18/18 primary requests valid. FEASIBLE_LIVE_ORACLE_GAIN. Unchanged Q4/100us remains real-use. No additional experiments start automatically.
+
+[Report](report.md) · [Summary](summary.json) · [Final audit](analysis/final-audit.json)
+
+```json
+{
+  "state": "COMPLETE",
+  "completed": [
+    "Frozen source/binary/model and existing evidence audit",
+    "Phase A: full-main/MTP/QSA tape, strict v3 initial state, ordinary/replay overhead and numerical diagnostics",
+    "Phase B: all48-layer/all3-class feasible logical full-future scheduling and strict offline horizons",
+    "Phase C:18/18 final paired requests, independent1024-output task, one negative H64 confirmation",
+    "Safety fixtures, reproducibility checks, preserved raw evidence, reports and owned-process/GPU cleanup"
+  ],
+  "running": null,
+  "pending": [],
+  "next_exact_action": "Review report; use unchanged control launchers for real prompts. No new residency work starts automatically.",
+  "deadline": {
+    "start_utc": "2026-10-06T04:06:56+00:00",
+    "deadline_utc": "2026-10-06T12:06:56+00:00",
+    "experiment_cutoff_utc": "2026-10-06T11:21:56+00:00",
+    "start_epoch": 1791259616.0,
+    "deadline_epoch": 1791288416.0,
+    "experiment_cutoff_epoch": 1791285716.0,
+    "start_monotonic": 407536.86752329714,
+    "deadline_monotonic": 436336.86752329714,
+    "experiment_cutoff_monotonic": 433636.86752329714,
+    "clock": "Linux CLOCK_MONOTONIC; never reset across processes/compaction",
+    "boot_id": "f0f64758-b607-4f47-b300-9585efa577c6"
+  },
+  "updated_utc": "2026-10-06T07:32:29.827545+00:00",
+  "error": null,
+  "last_completed": "short64-v3-32k-attempt1",
+  "current_winners": {
+    "research": "Full-future same-device oracle improves fixed-work replay",
+    "real_use": "Unchanged original Q4/100us K24/.28 serving baseline"
+  },
+  "main_matrix_completed": 18,
+  "recommendation": "FEASIBLE_LIVE_ORACLE_GAIN",
+  "completed_utc": "2026-10-06T07:32:29.827545+00:00",
+  "elapsed_monotonic_s": 13867.018030275882,
+  "finished_before_deadline": true,
+  "unfinished_due_to_deadline": [],
+  "launcher_validation": "tests/launcher-checks/summary.json",
+  "final_audit": "analysis/final-audit.json",
+  "artifact_finalize_utc": "2026-10-06T07:58:03.004872+00:00",
+  "research_code_commit": "6adf4636db83700dcd0b966c51f5c5b9dd482fd6"
+}
+```

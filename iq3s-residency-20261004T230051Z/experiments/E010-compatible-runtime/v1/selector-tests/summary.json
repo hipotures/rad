@@ -1,0 +1,36 @@
+{
+  "state": "PASS",
+  "rows": [
+    {
+      "profile": "32k",
+      "state": "PASS",
+      "selection_calls_all_match": 310,
+      "nonlocal_entries": 34838,
+      "promotion_bytes": 10008294400,
+      "native_bridge_selector_us": {
+        "median": 786.4665,
+        "p95": 804.34,
+        "max": 928.286,
+        "sum": 244130.181
+      },
+      "cost_scope": "Single-thread offline native selector plus bridge vector copies/ctypes. Includes temporary native vectors, excludes causal runtime contention; not a TG projection.",
+      "header_sha256": "cec8f029fd4a3d9d2cc841367d7ce11a48fa9974c48558ff6632ba4574fee146"
+    },
+    {
+      "profile": "128k",
+      "state": "PASS",
+      "selection_calls_all_match": 362,
+      "nonlocal_entries": 43284,
+      "promotion_bytes": 13807692800,
+      "native_bridge_selector_us": {
+        "median": 786.2065,
+        "p95": 812.0186,
+        "max": 873.547,
+        "sum": 285550.476
+      },
+      "cost_scope": "Single-thread offline native selector plus bridge vector copies/ctypes. Includes temporary native vectors, excludes causal runtime contention; not a TG projection.",
+      "header_sha256": "cec8f029fd4a3d9d2cc841367d7ce11a48fa9974c48558ff6632ba4574fee146"
+    }
+  ],
+  "synthetic_unit": "owner/fit/unique victim slot/immutable selection/withdraw-before-publish/no-hot/invalid slot/split/max cases pass. This is not a CUDA race proof; live copy backend is unchanged and source safety is separately audited."
+}

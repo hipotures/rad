@@ -1,0 +1,29 @@
+{
+  "label": "v3-current-32k-attempt1",
+  "host_quant_group_compute_completion_span": {
+    "CPU_positive": {
+      "count": 52198,
+      "sum_ms": 15033.476357,
+      "median_us": 242.11,
+      "p95_us": 613.2308499999998,
+      "max_us": 3948.297
+    },
+    "all_no_CPU": {
+      "count": 9674,
+      "sum_ms": 8.404947,
+      "median_us": 0.209,
+      "p95_us": 4.07,
+      "max_us": 385.599
+    },
+    "mapped_positive": {
+      "count": 23362,
+      "sum_ms": 9795.255343,
+      "median_us": 382.0635,
+      "p95_us": 729.4540000000004,
+      "max_us": 3237.129
+    }
+  },
+  "scope_caveat": "CPU span includes activation quantization/job construction/native CPU completion. It is not an isolated wait, and overlaps GPU work. No CPU/mapped/GPU timers are summed.",
+  "future_lead": {},
+  "copy_lifetimes": {}
+}

@@ -1,0 +1,24 @@
+# Closing goal audit
+
+This is an audit of the bounded10-hour research task, not a claim that every possible predictor/scheduler was exhausted.
+
+| Requirement | Evidence and disposition |
+|---|---|
+| Frozen CURRENT source, historical references and new control | `references/`, `sources.json`, `git/control-build.json`, E001/E002. Exact frozen6f32ec base, rebuilt CUDA sm89 control; old scores are historical only. |
+| Existing IQ3_S weights/profile/pack and no downloads/modification | Frozen model revision and paths in both configs; prior SHA256 manifest retained, current sizes/mtime and small metadata/profile hashes checked by final audit. |
+| Actual32768/131072 total limits,4096output and reserve | `workloads/manifest.json`, token-ID files and every raw request. Deterministic whole-line trim; actual inputs28378–28381 and126715–126719. No64K/256K testing or hidden context increase. |
+| Fair per-GPU bytes/slots and predictor resources | `analysis/control-budgets-v2.json`, E003 layouts, every candidate resource check and stage reports. Separate24GiB devices; smaller context releases only57/40slots. No extra capacity labeled a policy gain. |
+| Separated local Git laboratory/source/builds | Root research repository, distinct frozen source/build paths, retained binaries, full local patches and commands. `git/final-provenance.json` and launch index verify identities. |
+| Source/counter audit and critical path | E001/E003/E008/E011/E015/E021. Local/CPU/mapped categories include rejected speculative work. Scoped host/GPU clocks, publication observation and overlap limits remain explicit. |
+| Complete candidate tree and primary literature | `sources.json`, `candidate-ledger.json`, E004–E009 and E015/E017/E018/E020. Open-Jev revision inspected; linear, MLP and temporal numeric scorers trained on separate whole episodes. No proprietary/backbone-performance claim. |
+| Replay validation and future references | E003 selector reproduces promotions/heat; E004 byte/queue/slot replay. Capacity-free reference and future-aware next-use heuristic are separate. Legacy queue repair retained; corrected peak and sensitivity data authoritative. Neither is a proven optimum or measured TG. |
+| Learned target/splits/cost/checkpoints | E005 data/checkpoint manifests, scripts and report. Next-four-window count target, development-only normalization, separate calibration and holdout. Feature/transfer/runtime costs not silently declared zero; poor bounded replay does not exhaust learned methods. |
+| Runtime candidates and correctness | Frequency, compatible placement/heap, stable device IDs, host-plan suppression, direct output rows and existing pool sleep option all completed both-profile confirmations. Native/short batteries and scoped numerical diagnostics gate speed. PLE producer race repaired in separate v2; unsafe v1 remains excluded. |
+| No repeated unchanged points beyond3 | Final audit:22cells/66valid headline requests, exactly3each, same64outputwarmup; diagnostics and genuine implementation repairs are separate. No unbounded retry,16K extension or dense tuning grid. |
+| Every failure/slower result retained | Root exclusions, stage repair-history and immutable attempt directories; invalid event/logit capture, stale CPU activation diagnosis and snapshot-directory failure explicitly withdrawn/repaired. Four original native fixture/VM failures retained, not waived new correctness regressions. |
+| Lightweight telemetry and progression | Clean one-Hz RSS/CPU/GPU/PCIe; no per-second PSS. Bracketed approximate interval TG and scoped diagnostic cache/MTP progression, not fabricated exact per-token burst causes. |
+| Launch/rebuild/reproduce preservation | Executable frozen scripts/READMEs for30registered variants. Shared launch backend exercised in normal flows; thin aliases syntax/help validated. No assertion all aliases were separately smoke-started. Explicit later replay flag cannot reset/extend active deadline. |
+| Final decision and untested branches | `PROMISING_NEEDS_MORE_WORK`:100us pool option reduces CPU and improves this scoped latency comparison; independent miss-heavy tasks remain untested. Persistent admissions/cross-device scheduling explicitly NOT_ATTEMPTED under the time budget. No production switch. |
+| Finish/cleanup/no push | `analysis/cleanup.json` records only-owned process audit, private port and GPU compute state. Final status/report and local Git commit preserve all evidence. No push, PR, sudo, external paid API or user service changes. |
+
+The normal inference launcher/backend was exercised for every registered variant. New diagnostic replay aliases generated during consolidation received syntax/parser checks rather than additional GPU runs; such a run would violate the declared no-new-session consolidation boundary. The linked original normal-flow records preserve actual source/binary/config evidence.

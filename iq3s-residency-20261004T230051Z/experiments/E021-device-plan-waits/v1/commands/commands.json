@@ -1,0 +1,204 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/test_coordination_waits.py",
+      "--variant",
+      "diagnostic-coordination-v1",
+      "--experiment",
+      "E021-device-plan-waits",
+      "--attempt",
+      "v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 11.038153886795044,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/tests.log"
+  },
+  {
+    "name": "register-off",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "diagnostic-coordination-off-v1",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-coordination-v1",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-coordination-v1/strata",
+      "--diagnostic",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off-overrides.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.21485137939453125,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/register-off.log"
+  },
+  {
+    "name": "profiles-off",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-off-v1/diagnose-profiles.sh"
+    ],
+    "returncode": 0,
+    "elapsed_s": 207.65136194229126,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/profiles-off.log"
+  },
+  {
+    "name": "parity-off-32k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_trace_parity.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/32k/traces/runtime-request2",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/32k/traces/runtime-request2",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/32k/parity.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.866692304611206,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/parity-off-32k.log"
+  },
+  {
+    "name": "analysis-off-32k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_coordination_waits.py",
+      "32k",
+      "--experiment",
+      "E021-device-plan-waits",
+      "--attempt",
+      "v1/off",
+      "--reference-experiment",
+      "E015-lowrank-router",
+      "--reference-attempt",
+      "v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 1.116523027420044,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/analysis-off-32k.log"
+  },
+  {
+    "name": "parity-off-128k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_trace_parity.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/128k/traces/runtime-request2",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E015-lowrank-router/v1/128k/traces/runtime-request2",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/128k/parity.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.9163374900817871,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/parity-off-128k.log"
+  },
+  {
+    "name": "analysis-off-128k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_coordination_waits.py",
+      "128k",
+      "--experiment",
+      "E021-device-plan-waits",
+      "--attempt",
+      "v1/off",
+      "--reference-experiment",
+      "E015-lowrank-router",
+      "--reference-attempt",
+      "v1"
+    ],
+    "returncode": 0,
+    "elapsed_s": 1.2171299457550049,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/analysis-off-128k.log"
+  },
+  {
+    "name": "register-on",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/register_variant.py",
+      "diagnostic-coordination-on-v1",
+      "--source",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/diagnostic-coordination-v1",
+      "--binary",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/builds/diagnostic-coordination-v1/strata",
+      "--diagnostic",
+      "--overrides",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on-overrides.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 0.21440815925598145,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/register-on.log"
+  },
+  {
+    "name": "profiles-on",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/variants/diagnostic-coordination-on-v1/diagnose-profiles.sh"
+    ],
+    "returncode": 0,
+    "elapsed_s": 222.65549612045288,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/profiles-on.log"
+  },
+  {
+    "name": "parity-on-32k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_trace_parity.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/32k/traces/runtime-request2",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/32k/traces/runtime-request2",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/32k/parity.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 1.668578863143921,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/parity-on-32k.log"
+  },
+  {
+    "name": "analysis-on-32k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_coordination_waits.py",
+      "32k",
+      "--experiment",
+      "E021-device-plan-waits",
+      "--attempt",
+      "v1/on",
+      "--reference-experiment",
+      "E021-device-plan-waits",
+      "--reference-attempt",
+      "v1/off"
+    ],
+    "returncode": 0,
+    "elapsed_s": 2.1688263416290283,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/analysis-on-32k.log"
+  },
+  {
+    "name": "parity-on-128k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/check_trace_parity.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/128k/traces/runtime-request2",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/off/128k/traces/runtime-request2",
+      "--output",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/on/128k/parity.json"
+    ],
+    "returncode": 0,
+    "elapsed_s": 1.9193127155303955,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/parity-on-128k.log"
+  },
+  {
+    "name": "analysis-on-128k",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "scripts/analyze_coordination_waits.py",
+      "128k",
+      "--experiment",
+      "E021-device-plan-waits",
+      "--attempt",
+      "v1/on",
+      "--reference-experiment",
+      "E021-device-plan-waits",
+      "--reference-attempt",
+      "v1/off"
+    ],
+    "returncode": 0,
+    "elapsed_s": 2.477635383605957,
+    "log": "/srv/ai/research/iq3s-residency-20261004T230051Z/experiments/E021-device-plan-waits/v1/commands/analysis-on-128k.log"
+  }
+]

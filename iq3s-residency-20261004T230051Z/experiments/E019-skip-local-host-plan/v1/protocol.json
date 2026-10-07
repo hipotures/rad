@@ -1,0 +1,10 @@
+{
+  "question": "After safeGPUall-localplanning, does redundantCPUplan construction/outputzeroing remain exposed or expensive?",
+  "evidence": "Originalexpert_pool_dispatch_multi still builds groups/pointers/publishesplan and zeroesmappedCPUrows evenwhenallentrieslocal; correcteddeviceplan independentlyplansGPUgroups andzeroesparts, so thosehostwritesare unused. E011measuredemptyplan spans8–9us, notwhollyexposed.",
+  "change": "Same frozenbase, E016stableID+PLEfence prerequisites. Opt-in hostearlyreturn forverifiedalllocal groups, preservingbegin_layer/actualusage andalltruecounters. NoGPUexpertmath,cachepolicy,routing,KV,MTP,workers,slotsorquantization change.",
+  "correctness": "Requirecorrecteddeviceplanmode/serialG1, rejectremote/helper/peer/batchpaths. Actuald_res andhost_res synchronizedbeforewindow; no withinwindowadapt. MixedCPU/mapped groups retainoriginaldispatch. Headercounts/layers/expertentries exactlysame meaning; CPUmulti_entries remainszero forlocalgroups.",
+  "funnel": "E016v2mustpassnumericaldemand/head checks andfiniteconfirmationfirst. Builddefaultoff, native/Python/realIQ, shortbattery andisolatedboth-profiletrue-ID/output/heat/counterdiagnostic. Sourceofffastguard thenconditional3x2cleanrequests.",
+  "budget": "No newexplicitGPUbuffers/expertslots; existingcorrecteddeviceplanCPU/GPUstatecharged. DefaultoffflagSTRATA_LAB_SKIP_LOCAL_PLAN, startupguardrequiresSTRATA_LAB_PLAN_IDS andSTRATA_VERIFY_DEVICE_PLAN.",
+  "batch": "Onefreshserver/profile, commonsaved4096input/64outputwarmup, 3saved4096outputs/profile. ReferenceE016v2plusE002; no repeatedunchangedcontrols. No build/training/heavyanalysisduringheadlines.",
+  "completion": "MeasureactualTG/wall/CPU andsameoutput/miss/heat parity. Preserveunfavorableprofile. No universalclaimfromminor3-run differences; no userlauncher switch."
+}

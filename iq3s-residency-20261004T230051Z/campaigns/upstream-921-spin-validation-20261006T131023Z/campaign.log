@@ -1,0 +1,22 @@
+IQ3_S 32K pair 1/12 arm A family code
+READY IQ3_S 32768 A 89.7 capacity {'expert_slots': 18709, 'expert_slots_primary': 10235, 'expert_cache_mib': 36365, 'expert_cache_primary_mib': 18897, 'kv_resident': 0, 'kv': 'int8', 'max_context': 32768}
+RESULT IQ3_S-32k 1 A TG 135.9 wall 42.456 CPU 92.14 steal 4.472
+IQ3_S 32K pair 1/12 arm B family code
+READY IQ3_S 32768 B 58.6 capacity {'expert_slots': 18709, 'expert_slots_primary': 10235, 'expert_cache_mib': 36365, 'expert_cache_primary_mib': 18897, 'kv_resident': 0, 'kv': 'int8', 'max_context': 32768}
+RESULT IQ3_S-32k 1 B TG 157.2 wall 38.506 CPU 16.65 steal 4.704
+PAIR VALID IQ3_S-32k 1 TG ratio 1.15673
+Q4 32K pair 1/12 arm A family code
+READY Q4 32768 A 73.6 capacity {'expert_slots': 11537, 'expert_slots_primary': 6029, 'expert_cache_mib': 34493, 'expert_cache_primary_mib': 18037, 'kv_resident': 0, 'kv': 'int8', 'max_context': 32768}
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/scripts/run.py", line 291, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/scripts/run.py", line 286, in main
+    runpair(cell,point,env,bases,manifest,timing)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/scripts/run.py", line 247, in runpair
+    r=s.request(f"{regime}/{point['family']}-{profile}-run{point['payload_variant']}",'measured',manifest)
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/upstream-921-spin-validation-20261006T131023Z/scripts/run.py", line 190, in request
+    assert capture['output_count']==p['max_tokens'],'OUTPUT_ID_COUNT'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: OUTPUT_ID_COUNT

@@ -1,0 +1,83 @@
+loading the model (the first start takes a minute or two) ...
+[strata] layer split across GPUs [0, 1] (24)
+[strata] starting the engine: reading the model's weights ...
+[strata] loading the experts into RAM (tens of GB) and locking part of them for the GPU.
+         YOUR PC CAN BE SLOW OR STOP RESPONDING FOR 1-3 MINUTES NOW - this is normal.
+         Please wait and don't close this window; the browser opens when it is ready.
+[strata] still starting (30 s) - please wait ...
+[strata] experts loaded: 71.73 GiB at 2.43 GiB/s (46 s so far)
+[strata] filling the GPU's expert cache (6031 experts, 17.62 GiB of VRAM) ...
+[strata] almost ready ...
+ready: http://127.0.0.1:18136/v1  (OpenAI: /v1/chat/completions, Anthropic: /v1/messages, context 32768 tokens)
+       open http://127.0.0.1:18136/ in a browser to chat; close this window to stop the model
+[strata] reading the prompt: 4,095 of 4,096 tokens, 6 s so far
+[strata] done: 64 tokens in 7 s (101.0 tok/s) (length, cancel=False), expert cache 94.1% hit (+0.5% of the routed experts over PCIe)
+[strata] reading the prompt: 8,192 of 28,378 tokens, 6 s so far
+[strata] reading the prompt: 16,384 of 28,378 tokens, 9 s so far
+[strata] reading the prompt: 24,576 of 28,378 tokens, 15 s so far
+[strata] reading the prompt: 28,377 of 28,378 tokens, 17 s so far
+[strata] answering: 48 of max 4096 tokens, 95.8 tok/s, 18 s
+[strata] answering: 150 of max 4096 tokens, 98.9 tok/s, 19 s
+[strata] answering: 246 of max 4096 tokens, 97.1 tok/s, 20 s
+[strata] answering: 355 of max 4096 tokens, 100.2 tok/s, 21 s
+[strata] answering: 464 of max 4096 tokens, 101.9 tok/s, 22 s
+[strata] answering: 593 of max 4096 tokens, 106.3 tok/s, 23 s
+[strata] answering: 701 of max 4096 tokens, 106.5 tok/s, 24 s
+[strata] answering: 813 of max 4096 tokens, 107.1 tok/s, 25 s
+[strata] answering: 928 of max 4096 tokens, 107.9 tok/s, 26 s
+[strata] answering: 1032 of max 4096 tokens, 107.2 tok/s, 27 s
+[strata] answering: 1141 of max 4096 tokens, 107.3 tok/s, 28 s
+[strata] answering: 1272 of max 4096 tokens, 109.2 tok/s, 29 s
+[strata] answering: 1379 of max 4096 tokens, 108.9 tok/s, 30 s
+[strata] answering: 1488 of max 4096 tokens, 108.8 tok/s, 31 s
+[strata] answering: 1608 of max 4096 tokens, 109.4 tok/s, 32 s
+[strata] answering: 1720 of max 4096 tokens, 109.5 tok/s, 33 s
+[strata] answering: 1827 of max 4096 tokens, 109.4 tok/s, 34 s
+[strata] answering: 1943 of max 4096 tokens, 109.5 tok/s, 35 s
+[strata] answering: 2065 of max 4096 tokens, 110.1 tok/s, 36 s
+[strata] answering: 2174 of max 4096 tokens, 110.0 tok/s, 37 s
+[strata] answering: 2275 of max 4096 tokens, 109.4 tok/s, 38 s
+[strata] answering: 2366 of max 4096 tokens, 108.6 tok/s, 39 s
+[strata] answering: 2474 of max 4096 tokens, 108.5 tok/s, 40 s
+[strata] answering: 2584 of max 4096 tokens, 108.5 tok/s, 41 s
+[strata] answering: 2692 of max 4096 tokens, 108.5 tok/s, 42 s
+[strata] answering: 2800 of max 4096 tokens, 108.4 tok/s, 43 s
+[strata] answering: 2902 of max 4096 tokens, 108.1 tok/s, 44 s
+[strata] answering: 3003 of max 4096 tokens, 107.8 tok/s, 45 s
+[strata] answering: 3115 of max 4096 tokens, 107.9 tok/s, 46 s
+[strata] answering: 3229 of max 4096 tokens, 108.0 tok/s, 47 s
+[strata] answering: 3356 of max 4096 tokens, 108.6 tok/s, 49 s
+[strata] answering: 3454 of max 4096 tokens, 108.2 tok/s, 50 s
+[strata] answering: 3556 of max 4096 tokens, 108.0 tok/s, 51 s
+[strata] answering: 3680 of max 4096 tokens, 108.4 tok/s, 52 s
+[strata] answering: 3824 of max 4096 tokens, 109.4 tok/s, 53 s
+[strata] answering: 3926 of max 4096 tokens, 109.1 tok/s, 54 s
+[strata] answering: 4038 of max 4096 tokens, 109.1 tok/s, 55 s
+[strata] done: 4096 tokens in 55 s (108.8 tok/s) (length, cancel=False), expert cache 92.2% hit (+1.1% of the routed experts over PCIe)
+
+[strata] stopping (Ctrl+C again to end the engine at once) ...
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/early-v1/serve/server.py", line 4129, in main
+    time.sleep(1)                               # Windows never delivers Ctrl+C to an untimed Event.wait()
+    ~~~~~~~~~~^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/early-v1/serve/server.py", line 4122, in on_sigterm
+    raise KeyboardInterrupt
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+BrokenPipeError: [Errno 32] Broken pipe
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/serve_capture.py", line 32, in <module>
+    if __name__=='__main__':server.main()
+                            ~~~~~~~~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/early-v1/serve/server.py", line 4136, in main
+    close()
+    ~~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/early-v1/serve/server.py", line 1253, in close
+    self.proc.stdin.close()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+BrokenPipeError: [Errno 32] Broken pipe

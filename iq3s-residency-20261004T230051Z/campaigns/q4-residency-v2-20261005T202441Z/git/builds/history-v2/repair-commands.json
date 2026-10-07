@@ -1,0 +1,112 @@
+[
+  {
+    "name": "reset-owned-patch",
+    "command": [
+      "git",
+      "restore",
+      "--source=HEAD",
+      "--worktree",
+      "--staged",
+      "."
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/history-v2",
+    "exit_code": 0,
+    "wall_s": 0.16447758674621582
+  },
+  {
+    "name": "patch-repaired",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/python",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/patch_history.py",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/history-v2"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 0.06429672241210938
+  },
+  {
+    "name": "patch-repaired-diff",
+    "command": [
+      "git",
+      "diff",
+      "--binary"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/history-v2",
+    "exit_code": 0,
+    "wall_s": 0.03198957443237305
+  },
+  {
+    "name": "add-repaired",
+    "command": [
+      "git",
+      "add",
+      "."
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/history-v2",
+    "exit_code": 0,
+    "wall_s": 0.06403398513793945
+  },
+  {
+    "name": "commit-repaired",
+    "command": [
+      "git",
+      "-c",
+      "user.name=Local Research",
+      "-c",
+      "user.email=research@localhost",
+      "commit",
+      "-m",
+      "Local Q4 residency v2 history-v2"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/history-v2",
+    "exit_code": 0,
+    "wall_s": 0.03209638595581055
+  },
+  {
+    "name": "configure",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "-S",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/history-v2",
+      "-B",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/builds/history-v2",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DSTRATA_ENABLE_CUDA=ON",
+      "-DCMAKE_CUDA_ARCHITECTURES=89",
+      "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325",
+      "-DSTRATA_BUILD_TESTS=ON"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 4.622453927993774
+  },
+  {
+    "name": "build",
+    "command": [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "--build",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/builds/history-v2",
+      "-j",
+      "8"
+    ],
+    "cwd": null,
+    "exit_code": 0,
+    "wall_s": 65.13021421432495
+  },
+  {
+    "name": "full-patch",
+    "command": [
+      "git",
+      "diff",
+      "6f32ec070f23ced9f50e704d854d775da52591ab",
+      "9aff434de692ae16eeb05b9aa34064e31b095aba",
+      "--binary"
+    ],
+    "cwd": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/src/history-v2",
+    "exit_code": 0,
+    "wall_s": 0.015810489654541016
+  }
+]

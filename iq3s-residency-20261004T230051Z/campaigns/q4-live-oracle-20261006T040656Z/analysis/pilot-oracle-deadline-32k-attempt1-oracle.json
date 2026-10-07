@@ -1,0 +1,48 @@
+{
+  "label": "pilot-oracle-deadline-32k-attempt1",
+  "state": "PASS",
+  "errors": [],
+  "main_events": 61872,
+  "demand": {
+    "local": 2188225,
+    "cpu": 10620,
+    "mapped": 1475,
+    "other": 0
+  },
+  "copies": {
+    "issued": 66097,
+    "bytes_issued": 208019456000,
+    "completed": 66097,
+    "published": 66097,
+    "published_bytes": 208019456000,
+    "ready_publications": 66089,
+    "late_publications": 8,
+    "uses": 1088818,
+    "victim_absent": 9588,
+    "unused_bytes": 0,
+    "native_issued": 0,
+    "native_bytes": 0
+  },
+  "ms": {
+    "staging": {
+      "min": 0.07147,
+      "median": 0.125289,
+      "p95": 0.32161179999999967,
+      "max": 1.760004
+    },
+    "copy_with_host_wait": {
+      "min": 0.235169,
+      "median": 0.241179,
+      "p95": 0.39634279999999994,
+      "max": 1.368484
+    },
+    "publication_delay_after_copy": {
+      "min": 0.02372,
+      "median": 0.239288,
+      "p95": 0.6071439999999999,
+      "max": 5.86375
+    }
+  },
+  "scope": "48main layers, all3physical classes, MTP routes computed/frozen but residency unchanged",
+  "clock": "CPU monotonic timestamps include scheduling, cudaEventSynchronize wait; not exact DMA-only GPU duration"
+}

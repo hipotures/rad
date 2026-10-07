@@ -1,0 +1,48 @@
+"""Predeclared fresh counterbalanced18requests; no opportunistic repeats."""
+from campaign import C,load,save,point,status,guard
+import argparse,datetime,signal
+def parse_summary(log):
+ import re
+ text=log.read_text();out={}
+ for tag in ('Q4_EARLY','Q4_CONDITIONAL'):
+  lines=[l for l in text.splitlines() if l.startswith(tag+' ')]
+  if lines:out[tag]={k:float(v) if '.' in v else int(v) for k,v in re.findall(r'(\w+)=([0-9]+(?:\.[0-9]+)?)',lines[-1])}
+ return out
+def screen():
+ results=[]
+ for variant in ['control','conditional']:
+  path=C/'screen'/variant/'32k'
+  if (path/'results.json').exists():results.append(load(path/'results.json'));continue
+  assert not path.exists()
+  from campaign import Session
+  cfg=load(C/'configs'/f'{variant}-32k.json')
+  with Session(C,cfg,path,'32k',port=18144) as s:
+   warm=s.request('warmup','warmup','warmup');assert warm['state']=='VALID'
+   r=s.request('32k-run1','run','exploratory');assert r['state']=='VALID' and r['actual_output_tokens']==4096 and r['actual_engine_output_ID_count']==4096;r['admission']=parse_summary(path/'raw/run-engine.log');save(path/'results.json',{'runs':[r],'warmup':warm,'headline':False,'purpose':'One32Kscreen, notfinalmeasuredrep'});results.append(load(path/'results.json'))
+ c=results[0]['runs'][0];p=results[1]['runs'][0];ratio=p['wall_s']/c['wall_s'];decision={'completed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'TG_ratio':p['TG']/c['TG'],'wall_ratio':ratio,'candidate_counters':p['admission'],'mechanics':'Rejectedbeforecopy andpublication positive; fullthreshold unchanged. Onefreegeneration screencannotestablishwin.','proceed':ratio<=1.10,'rules':'If>10%slowerdiagnosebeforefullmatrix; no thresholdtuning/extra unchangedscreen'};save(C/'phase-c/screen.json',decision);print('SCREEN',decision,flush=True)
+ assert p['admission']['Q4_CONDITIONAL']['rejected_before_copy']>0 and p['admission']['Q4_CONDITIONAL']['published']>0
+def matrix():
+ assert load(C/'phase-c/screen.json')['proceed'],'Diagnosebeforefullmatrix'
+ plan={'declared_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'variants':['control','conditional'],'contexts':['32k','128k','256k'],'replicates':3,'measured_requests_maximum':18,'warmup':'fixed4096input/64output','output':4096,'server':'fresh per measuredrequest, no concurrency','zero_reuse':True,'suffix':0,'counterbalanced_order':'For eachrep/contextalternatearmfirst; rotatecontextorderbyrep','screen_separate':'Oneexploratoryrequest per arm beforematrix; notheadline','invalid':'Preserve failure/EOS; nofavorable retry; diagnose/version realprotocolerroronly'}
+ if not (C/'phase-c/matrix-plan.json').exists():save(C/'phase-c/matrix-plan.json',plan)
+ base=['32k','128k','256k'];orders=[]
+ for rep in (1,2,3):
+  for ci,profile in enumerate(base[rep-1:]+base[:rep-1]):
+   variants=['control','conditional'] if (rep+ci)%2 else ['conditional','control']
+   for variant in variants:orders.append({'rep':rep,'profile':profile,'variant':variant})
+ if (C/'phase-c/matrix-order-v2.json').exists():
+  revised=load(C/'phase-c/matrix-order-v2.json');assert revised[:12]==orders[:12] and sorted((x['rep'],x['profile'],x['variant']) for x in revised)==sorted((x['rep'],x['profile'],x['variant']) for x in orders)
+  orders=revised
+ save(C/'phase-c/matrix-order.json',orders)
+ for x in orders:
+  guard();status('FINAL_MATRIX',phase='C',running=x,next_exact_action='Fixedwarmup+one4096; cleanupownedserver; nextfrozenpoint')
+  result=point(f"{x['profile']}-run{x['rep']}",x['profile'],'measured',x['variant'],x['rep']);r=result['runs'][0];assert r['state']=='VALID' and r['actual_output_tokens']==4096 and r['actual_engine_output_ID_count']==4096
+  save(C/'phase-c/matrix-progress.json',{'completed':len(list((C/'raw').glob('*/*/rep*/results.json'))),'planned':18,'last':x})
+ status('MATRIX_COMPLETE',phase='C',running=None,next_exact_action='Analyzevalidranges/pairs/trajectory/copyfunnel; independentconfirmationonlyifpositive')
+def main():
+ p=argparse.ArgumentParser();p.add_argument('action',choices=['screen','matrix']);a=p.parse_args();signal.signal(signal.SIGTERM,lambda *_:(_ for _ in ()).throw(KeyboardInterrupt('Ownedtimeout')))
+ import os,psutil,sys
+ save(C/'logs'/f'live-{a.action}-driver-pid.json',{'pid':os.getpid(),'create_time':psutil.Process().create_time(),'command':sys.argv,'bounded_by':'Shell timeout plus absolute campaign deadline','cleanup':'Session context owns server/native engine/dmon'})
+ if a.action=='screen':screen()
+ else:matrix()
+if __name__=='__main__':main()

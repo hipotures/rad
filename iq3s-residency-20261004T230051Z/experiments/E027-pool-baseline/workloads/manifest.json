@@ -1,0 +1,128 @@
+{
+  "runtime_reserve_tokens": 8,
+  "additional_safety_tokens": 248,
+  "output_tokens": 4096,
+  "trim_policy": "Preserve original system/nonce and final long-output task. Trim repository source to the largest complete line prefix within limit-output-256. No RoPE/admission changes.",
+  "profiles": {
+    "32k": {
+      "max_total_context": 32768,
+      "input_ceiling": 28416,
+      "required_service_slack": 8,
+      "fixed_output": 4096
+    },
+    "128k": {
+      "max_total_context": 131072,
+      "input_ceiling": 126720,
+      "required_service_slack": 8,
+      "fixed_output": 4096
+    }
+  },
+  "payloads": {
+    "warmup": {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/warmup.json",
+      "payload_sha256": "887763b5fe7df1e4b73f2ab39f7b235d87d256e0002fdfc2495918314acb5477",
+      "messages_sha256": "2fd322bc92f1ffb13aa360a7b9cb381f4eef5c6ab285ff0a74588be3133e5097",
+      "input_ids_sha256": "35c9da5a3710b8416abdd65e3491ad14a7e385188f76b19bfcd7e5c8a4551051",
+      "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/35c9da5a3710b8416abdd65e3491ad14a7e385188f76b19bfcd7e5c8a4551051.json",
+      "actual_input_tokens": 4096,
+      "fixed_output": 64,
+      "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/warmup.json"
+    },
+    "standard-32k-run1": {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/32k-run1.json",
+      "payload_sha256": "4a37f403b112a06d3a3ae13ffca8d8b6b4578676183c17d22dfe7d699da110af",
+      "messages_sha256": "25f02fe1cf19ec7f34d3ba08fd9021a053bdeec37c6fd3a1af17b57a2451e829",
+      "input_ids_sha256": "f584d9ba57c4a536f5c83b212f40baa87723c811ad532c33df09550a21209583",
+      "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/f584d9ba57c4a536f5c83b212f40baa87723c811ad532c33df09550a21209583.json",
+      "actual_input_tokens": 28378,
+      "profile": "32k",
+      "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/32K-long-run1.json",
+      "source_payload_file_sha256": "738c7383b8ccf0317ac1abf581e60b6428ad02d71c5c89c41a4a2d8832712056",
+      "retained_source_characters": 98996,
+      "removed_source_characters": 10061,
+      "trim_boundary": "complete source line",
+      "total_requested_tokens": 32474,
+      "admission_verified_offline": true
+    },
+    "standard-32k-run2": {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/32k-run2.json",
+      "payload_sha256": "508a02b4315ac3d7ae5b37db540083bb64166be1af3996cdb06df4801851e4dd",
+      "messages_sha256": "37d4d46f277b05829c6f7d1ebdc56cc1dc189dee3b9b6feff9bd6f98c3332fc1",
+      "input_ids_sha256": "17bd58abd7aa19dd596e190e6f13522407f32362d3dc696b66bc82fffb4a90ff",
+      "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/17bd58abd7aa19dd596e190e6f13522407f32362d3dc696b66bc82fffb4a90ff.json",
+      "actual_input_tokens": 28379,
+      "profile": "32k",
+      "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/32K-long-run2.json",
+      "source_payload_file_sha256": "9f194a7eaa2a445222e729207df9d3fec4d3b9a9d249c590136af0fb2573b5a5",
+      "retained_source_characters": 98996,
+      "removed_source_characters": 10061,
+      "trim_boundary": "complete source line",
+      "total_requested_tokens": 32475,
+      "admission_verified_offline": true
+    },
+    "standard-32k-run3": {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/32k-run3.json",
+      "payload_sha256": "d8d3983f3b8f2abef1582b8825755e2ee9242ef5be6038f0522b19d510a4936c",
+      "messages_sha256": "aea0c46b013761d803e2a1e8cee066db1e1c58c5fb0ef4038620a440ac7bbecf",
+      "input_ids_sha256": "fea2205c65046a1efd55c9b3793ab89b77b2e75ae943823ffdda88322d388bb7",
+      "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/fea2205c65046a1efd55c9b3793ab89b77b2e75ae943823ffdda88322d388bb7.json",
+      "actual_input_tokens": 28381,
+      "profile": "32k",
+      "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/32K-long-run3.json",
+      "source_payload_file_sha256": "46272ec9ba62644a222ab3e8212faa52b00309fdc0f4aa6ec680ee15d752b1a4",
+      "retained_source_characters": 98996,
+      "removed_source_characters": 10061,
+      "trim_boundary": "complete source line",
+      "total_requested_tokens": 32477,
+      "admission_verified_offline": true
+    },
+    "standard-128k-run1": {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/128k-run1.json",
+      "payload_sha256": "d4c8a6dc0e3da3056203c00844d339503a216009d45147933a1d189ba7de3036",
+      "messages_sha256": "1b9859fede0e0a9d17dcd4f5a72a215ef79ab0448ef4272dd1bbfbe2cac6dbcf",
+      "input_ids_sha256": "798f2529bb9cc57a5074bd5e61319f7015e2a61000083f1e991463eab11d2d88",
+      "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/798f2529bb9cc57a5074bd5e61319f7015e2a61000083f1e991463eab11d2d88.json",
+      "actual_input_tokens": 126715,
+      "profile": "128k",
+      "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/128K-long-run1.json",
+      "source_payload_file_sha256": "b0d5c54c1350d62c0805f466ddb674eeb41b2ef04bfc6e82027ff160d2c8d4f3",
+      "retained_source_characters": 428857,
+      "removed_source_characters": 1160,
+      "trim_boundary": "complete source line",
+      "total_requested_tokens": 130811,
+      "admission_verified_offline": true
+    },
+    "standard-128k-run2": {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/128k-run2.json",
+      "payload_sha256": "370d27a46d868ada8dd0fe00dbded2f95ef564a1bd53ff43a776a4c91f78e80b",
+      "messages_sha256": "02b26df29233f5fe6085b7c373fe22881aac407ce0dbf1c804e3c11a74fa9871",
+      "input_ids_sha256": "4cf8f922a8d35084c987d5df81d6136c7402df844ed3f9f4787e5fa1ee315b83",
+      "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/4cf8f922a8d35084c987d5df81d6136c7402df844ed3f9f4787e5fa1ee315b83.json",
+      "actual_input_tokens": 126716,
+      "profile": "128k",
+      "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/128K-long-run2.json",
+      "source_payload_file_sha256": "8e3aa941bfe4192da17d11fd2a000f6f42e61e7f4bffeecb586611634ace5cb9",
+      "retained_source_characters": 428857,
+      "removed_source_characters": 1157,
+      "trim_boundary": "complete source line",
+      "total_requested_tokens": 130812,
+      "admission_verified_offline": true
+    },
+    "standard-128k-run3": {
+      "path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/128k-run3.json",
+      "payload_sha256": "984a48d41d69e3e6bf6519f191780857f672cf71b824e11958ce895461e02b3b",
+      "messages_sha256": "b92ed8dd39508beb744ec149dcf07bb64a1c799980e43ec508a7846b4eb7ecb9",
+      "input_ids_sha256": "15133b0faef9c3da0b82f2db022743557e949969840f42ea911f07c5f7dd1833",
+      "token_ids_path": "/srv/ai/research/iq3s-residency-20261004T230051Z/workloads/token-ids/15133b0faef9c3da0b82f2db022743557e949969840f42ea911f07c5f7dd1833.json",
+      "actual_input_tokens": 126719,
+      "profile": "128k",
+      "source_payload": "/srv/ai/benchmarks/strata-qwen38/threeway-32k-128k-longdecode-20261004T212330Z/payloads/128K-long-run3.json",
+      "source_payload_file_sha256": "77d4b8cf6723e901094761ce3d2e9793fd4d93f58c1e0ecf25264ff22faa2483",
+      "retained_source_characters": 428857,
+      "removed_source_characters": 1154,
+      "trim_boundary": "complete source line",
+      "total_requested_tokens": 130815,
+      "admission_verified_offline": true
+    }
+  }
+}

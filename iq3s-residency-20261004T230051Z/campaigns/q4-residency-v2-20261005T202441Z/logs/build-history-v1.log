@@ -1,0 +1,14 @@
+BUILD history-v1 clone 0
+BUILD history-v1 checkout 0
+BUILD history-v1 patch 1
+Traceback (most recent call last):
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/build.py", line 34, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/build.py", line 22, in main
+    run('patch',[str(R/'src/control/.venv/bin/python'),str(C/'scripts'/args.patch),str(source)],timeout=90)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/build.py", line 16, in run
+    if r.returncode:raise RuntimeError((name,(logs/f'{name}.log').read_text()[-5000:]))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: ('patch', 'Traceback (most recent call last):\n  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/patch_history.py", line 17, in <module>\n    edit(\'src/program/generate.cpp\',\'            std::vector<std::pair<float, int32_t>> cand, vict;\\n            for (int64_t l = 0; l < g.n_layers; ++l) {\',\'            std::vector<std::pair<float, int32_t>> cand, vict;\\n            if(!(strata::research::q4_history.enabled&&strata::research::q4_history.active)){\\n            for (int64_t l = 0; l < g.n_layers; ++l) {\')\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/q4-residency-v2-20261005T202441Z/scripts/patch_history.py", line 6, in edit\n    p=S/path;t=p.read_text();assert t.count(old)==count,(path,old[:90],t.count(old));p.write_text(t.replace(old,new,count))\n                                    ^^^^^^^^^^^^^^^^^^^\nAssertionError: (\'src/program/generate.cpp\', \'            std::vector<std::pair<float, int32_t>> cand, vict;\\n            for (int64_t l \', 2)\n')
