@@ -1,25 +1,26 @@
 # Golden Swap Phase 4: publication wait attribution
 
-Status: **PLANNED_NOT_STARTED**. No Phase 4 inference, build, or experimental
-clock has started. This is a continuation of the Golden Swap investigation.
+Status: **COMPLETED — INSTRUMENTATION_OR_FIDELITY_BLOCKED**. Fidelity and
+trace identity passed; quantitative neutrality failed the symmetric gate.
+All six v2 requests and the earlier two v1 requests are preserved. No Phase 3
+GPU campaign rerun and no automatic Phase 5.
 
-The execution document is [GOAL.md](GOAL.md). It defines one development tape,
-six full replays in three CONTROL/TRACE pairs, a proposed four-hour execution
-cap, an instrumentation overhead guard, uncertainty-aware dependency attribution,
-and decision rules. The runtime policy remains Phase 3 history + first-use
-transaction control + incoming-query memoization, with oracle incoming.
+Read the [report](report.md), [final results](results/final/analysis.json),
+[completion audit](completion-audit.json), and [reproduction](reproduce.md).
+The narrow post-notify opportunity is at most0.065–0.240% on recorded TRACE
+trajectories; ideal opportunity bounds reach2.74–4.14%, with zero lower bounds
+and incomplete graph coverage. These are not uninstrumented-request estimates.
 
-- [Machine-readable protocol](configs/protocol.json) and [run order](configs/run-order.json).
-- [Source findings and implementation entry points](source-map.md).
-- [Inputs and frozen references](input-manifest.json), [workspace](workspace.json),
-  and [external artifact recovery](artifact-manifest.json).
-- [Planning status](STATUS.md) and [validation/start instructions](reproduce.md).
+- [Frozen brief](GOAL.md), [protocol](configs/protocol.json), [run order](configs/run-order.json).
+- [Phase 3 erratum](../golden-swap-phase3-20261007T150955Z/corrections/publication-chronology-20261007/erratum.md).
+- [Actual execution clock, freeze and ledger](runs/20261007T194914Z/clock.json).
+- [Source map](source-map.md), [active dependencies](dependency-model.md), [trace schema](configs/trace-schema.json).
+- [Inputs](input-manifest.json), [artifact recovery](artifact-manifest.json), [evidence budget](configs/evidence-budget.json).
+- [Status](STATUS.md), [machine progress](progress.json), [append-only progress](progress.jsonl).
 
-On this host the external work directory is
+`workspace.json` and protocol-history/v1 preserve preparation state; their null
+clock is historical, not the execution clock. Actual work root on this host:
 `/srv/ai/work/rad/golden-swap-phase4-publication-wait/20261007T184009Z/`.
-Use `RAD_WORK_ROOT` to select another recorded location. Execution writes a new
-run namespace; the timestamp above records preparation, not the future start.
-
-The planned question is whether residency publication acknowledgment reaches
-the required GPU consumer path after accounting for shared/CPU/peer work. A
-fixed-trace sensitivity estimate will not be reported as a measured speedup.
+Original large inputs remain immutable. Complete text/journal exports are under
+evidence/; exact tape and activation bytes have no identified off-host backup.
+Normal launchers, weights, and prior measurement records are unchanged.

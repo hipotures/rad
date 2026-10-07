@@ -1,0 +1,74 @@
+{
+  "state": "COMPLETED_WITH_QUANTITATIVE_ATTRIBUTION_BLOCKED",
+  "primary": "INSTRUMENTATION_OR_FIDELITY_BLOCKED",
+  "replay_fidelity": "PASS",
+  "instrumentation_quantitative_gate": "FAIL",
+  "Phase3_headline_changed": false,
+  "Phase3_GPU_reruns": 0,
+  "Phase3_precedence": "14/14 same-logical-event publication precedes first differing recorded admission action; exact causal attribution unresolved; rejected decisions not recorded",
+  "execution_clock": {
+    "start_utc": "2026-10-07T19:49:14.064443+00:00",
+    "deadline_utc": "2026-10-07T23:49:14.064443+00:00",
+    "start_monotonic": 550474.932686491,
+    "budget_s": 14400,
+    "stop_substantial_s": 11700,
+    "reset": false,
+    "planning_time_excluded": true
+  },
+  "audit_utc": "2026-10-07T21:12:01.357462+00:00",
+  "elapsed_s_at_audit": 4967.292268445948,
+  "requests": {
+    "v1_valid": 2,
+    "v1_attempts": 2,
+    "v2_valid": 6,
+    "v2_attempts": 6,
+    "intended_v2_requests": 6,
+    "total_valid": 8,
+    "total_attempts": 8,
+    "invalid_completed_requests": 0,
+    "attempt_cap_per_unchanged_version_arm": 3,
+    "mixed_version_pairs": false
+  },
+  "protocol_freeze_sha256": "715ab7dff70d66f58972092adb385efa8a3c183a37f7277ab3cde08e80ee2d2c",
+  "phase4_steps_completed": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "tests": "See tests/ outcome JSON and complete gzip logs; chronology4, dependency graph6, native9, lifecycle/scorer/information/copy/readback/wait/memo/kernel endpoint fixtures passed",
+  "reproduction_receipt": "checks/reproduction-results.json",
+  "preservation_cleanup_receipt": "checks/preservation-and-cleanup.json",
+  "deviations": [
+    "v1 first valid pair gross-gate failure; one substantive instrumentation repair; v2 six retained requests",
+    "v2 first pair gross gate pause; remaining frozen pairs structural only after bounded diagnostic; final full symmetric gate failed",
+    "host buffers allocated inside charged decode before first event, identically both arms, instead of pre-timing",
+    "v2 shared/combine math-store completion before kernel retirement; no exact shared event or independent prejoin endpoint",
+    "two clock brackets cannot bound interior drift; affine overlap conditional",
+    "full completion graph missing commit/draft/host-gap edges; no validated full-graph residual",
+    "v1 prose launch count six corrected to actual five; footer device trace bytes undercount16B",
+    "complete typed text exports per original independent journal, combined oversized TRACE export retained external",
+    "scoped one-time128MiB aggregate gzip evidence publication decision; ordinary20MiB guard unchanged",
+    "Final plan-validator directory link rejected; repaired document link and revalidated, preserving failed check. Prepare-only capsule repaired to include input manifest/FNV helper; isolated import and tape validation then passed.",
+    "Calibration introduces an ordered readback and cudaStreamSynchronize of the calibration-only compute-stream work at each already-safe request boundary, identically in both arms; no per-invocation or device-wide synchronization was added. This is an extra boundary barrier for clock observation, so the strict no-convenience-barrier wording was not fully met. Its cost is charged to completion wall; it is not assumed cost-free or evidence of a nonperturbing baseline."
+  ],
+  "missing_or_unmeasured": [
+    "causal publication contribution to CONTROL completion",
+    "full graph path residual",
+    "interior GPU clock drift",
+    "exact shared/peer masking contribution",
+    "natural-generation quality or mathematical bit equality",
+    "fresh off-host backup of natural tape/sidecar/activation records"
+  ],
+  "ordinary_launchers_weights_previous_measurements_unchanged": true,
+  "owned_GPU_work_remaining": false,
+  "port18166_closed": true,
+  "no_automatic_Phase5": true,
+  "recommended_next_experiment": "Adjacent same-binary CONTROL/CONTROL paired timing with CPU/scheduler telemetry; separately frozen protocol",
+  "publication": {
+    "status": "PENDING_STAGED_AUDIT_COMMIT_PUSH_REMOTE_VERIFICATION",
+    "staged_audit": "PASS scoped128MiB evidence; ordinary staged1,859,968 bytes; receipt checks/staged-evidence-audit.json",
+    "state_before_commit": "All request journals recoverable from complete gzip exports; code/config/report explicit scope reviewed"
+  },
+  "step5_state": "Research/report/recovery complete; staged audit and publication pending"
+}

@@ -8,6 +8,42 @@ Immutable incoming-query memoization removed about 97% of targeted recomputation
 
 This is conditional fixed-work oracle-incoming replay with causal history victims, minimum first-use TC and privileged current-window protection. All main/MTP routing, coefficients, required expert computation and initial state stay fixed. CPU/GPU arithmetic may differ: forced output/work fingerprints do not establish natural-generation quality or bitwise mathematical equivalence. Q4/K24/PCIe0.28/pool100us/15workers/MTP4minp0.5/INT8KV/prefillauto/reuseOFF and ordinary serving remain unchanged. Five charged spares 17,305,600 B remain inside existing capacity.
 
+## Correction: publication chronology (2026-10-07)
+
+The original post-hoc live-trajectory script compared admission-array positions
+as though they proved publication-before-selection chronology. That inference
+was invalid. An earlier-created admission may publish after a later proposal.
+The original report, conclusion, script and diagnostic are retained under
+`corrections/publication-chronology-20261007/original/` and in Git history.
+
+The corrected diagnostic examines every matching proposal generation before
+the first action divergence, actual `published_at` logical events, within-run
+host publication/issue times, source publication-before-selection ordering,
+and service slots/generations. It does not compare absolute clocks across runs.
+On Archive block 1, the original generation-0 witness publishes at events14/12,
+after the first action divergence at event10; it does not establish precedence.
+A different generation3 publishes at event10 in BASE and12 in OPT. BASE's
+publication timestamp535817545215441 precedes its new issue535817545242651;
+the released slot4962 is the destination of that new copy, on device1/class0.
+This is a real same-hook state/worker-release witness, not a vector-index argument.
+
+All14 pairs have a corrected same-logical-event, source-ordered publication
+witness before their first observed differing admission action; none has a
+strictly earlier logical-event witness in the matched prefix. Relevant service
+records are separately linked through actual publication timestamps and slots.
+**Exact causal attribution remains unresolved in14/14 pairs:** candidate scans,
+complete worker-state snapshots and copy/event EWMA were not retained. This
+withdraws the original automatic vector-order justification and its causal
+implication. It does not establish that asynchronous readiness is irrelevant,
+nor does it prove that every later divergence has the same cause.
+
+The headline **DECISION_PRESERVING_OPTIMIZATION_NO_CONFIRMED_PRACTICAL_GAIN**,
+all42 valid measurements, work/copy safety, deterministic policy parity and
+paired performance results remain unchanged. Four targeted chronology regression
+cases passed; the timing file identities were verified unchanged. No Phase3 GPU
+request was rerun. See `corrections/publication-chronology-20261007/summary.json`
+and the regenerated `results/live-trajectory-diagnostics.json`.
+
 ## Existing evidence, before new inference
 
 Phase 1/2 established premature eviction before first target/use as the original unused-copy mechanism, minimum TC removed it, post-use 48 lost useful service, inactive risk thresholds did not change actions, and no confirmed learned-scorer advantage existed. These are prior results, not new Phase 3 measurements. Phase 3 read 56 prior complete journals without modifying previous campaigns.
@@ -131,7 +167,7 @@ Negative time changes are gains. Criterion frozen before main outcomes: median d
 
 Targeted evaluation means the expensive incoming next/count query pair. Candidate opportunities, cost-floor comparisons and logical veto scans continue, preserving policy coverage. Do not claim that all candidate enumeration disappeared. Cache lookups/hits/misses/invalidations and optional diagnostic lookup/recompute-maintenance timer are retained; maintenance timing is gated OFF for headline runs, so its zero counter means unmeasured, not free.
 
-Some targeted work is visibly reflected in lower dependent-stream wait, so blanket H2 (mostly overlapped planner) is not established. H1 has partial CPU/wait evidence but no predeclared practical main-task latency success. H3 is consistent with the unchanged task classification, yet remaining victim selection and publication work could still be exposed. H4 is not observed in exhaustive fixed-cadence decision/query validation; live schedules differ after earlier publication visibility changes. Exact critical-path oracle/publication attribution remains bounded, not measured as a unique percentage. The unusually fast RFC8259 OPT block1 and Chinook block3 are retained: their CPU/planning/stream-wait changes are larger than the other pairs and sampled VM steal/operating conditions vary. They are not corrected, discarded, or used to select extra repeats.
+Some targeted work is visibly reflected in lower dependent-stream wait, so blanket H2 (mostly overlapped planner) is not established. H1 has partial CPU/wait evidence but no predeclared practical main-task latency success. H3 is consistent with the unchanged task classification, yet remaining victim selection and publication work could still be exposed. H4 is not observed in exhaustive fixed-cadence decision/query validation; live schedules differ; corrected same-hook publication witnesses precede observed admission-action divergence, while causal attribution remains unresolved (see the chronology correction). Exact critical-path oracle/publication attribution remains bounded, not measured as a unique percentage. The unusually fast RFC8259 OPT block1 and Chinook block3 are retained: their CPU/planning/stream-wait changes are larger than the other pairs and sampled VM steal/operating conditions vary. They are not corrected, discarded, or used to select extra repeats.
 
 ## Independent continuous-tail check
 
@@ -182,7 +218,7 @@ Confidence is high for exact conditional query/decision parity in deterministic 
 
 1. Incoming next/count recomputation fell by median 97.286% Archive,97.208% Inventory,96.909% Chinook and96.996% WebSocket; RFC8259 median 97.456%. These are exact targeted query pairs, not all incoming scans or veto opportunities, which remain reevaluated. The >50% targeted-work mechanism gate passed.
 
-2. All 26 deterministic OFF/ON task/scorer pairs preserve candidate outcomes/NO_SWAP hashes and full logical admission/lifecycle/ownership/work. 16 inherited OFF points match retained Phase 2 accounting/admission hashes. Live action/service traces differ in all14 blocks; in 14/14 an earlier publication visibility difference precedes the first incoming-selection divergence. This supports the allowed asynchronous readiness/lead explanation; exact attribution of every later difference is not recorded. Required work and actual slot/publication safety pass 42/42.
+2. All 26 deterministic OFF/ON task/scorer pairs preserve candidate outcomes/NO_SWAP hashes and full logical admission/lifecycle/ownership/work. 16 inherited OFF points match retained Phase 2 accounting/admission hashes. Live action/service traces differ in all14 blocks. The corrected event/time audit finds same-hook publication-state differences preceding the first observed differing admission action in14/14; the original vector-index proof was invalid. Exact causal publication/worker/EWMA attribution remains unresolved in14/14. Required work and actual slot/publication safety pass 42/42.
 
 3. Median paired oracle-hook CPU removed: Archive 70.708 ms(5.371%), Inventory 63.358 ms(4.705%), Chinook 132.627 ms(9.197%), WebSocket 100.261 ms(8.194%). Individual pairs include small CPU regressions; remaining median optimized hook CPU is approximately 1.12–1.29s. RFC8259 median 423.585 ms is dominated by one unusually fast optimized run and is not robust N2 evidence.
 

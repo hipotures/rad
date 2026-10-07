@@ -51,7 +51,7 @@ def main():
     order = read_json(campaign / "configs/run-order.json")
     manifest = read_json(campaign / "input-manifest.json")
     workspace = read_json(campaign / "workspace.json")
-    require(protocol["state"] == "PLANNED_NOT_STARTED", "This checker validates the frozen plan")
+    require(protocol["state"] in {"AUTHORIZED_READY_TO_FREEZE", "FROZEN_READY"}, "Unexpected protocol state")
     require(workspace["execution_started_utc"] is None, "Planning workspace has an execution clock")
     require(workspace["execution_deadline_utc"] is None, "Planning workspace has an execution deadline")
     require(protocol["runtime"]["new_binary_sha256"] is None, "Plan unexpectedly claims a new binary")
@@ -80,6 +80,23 @@ def main():
     require("STRATA_VERIFY_PROFILE" in protocol["instrumentation"]["must_be_unset"],
             "Scheduling-changing profiler is not excluded")
     require(not protocol["decision_rules"]["is_measured_speedup"], "Attribution is mislabeled as acceleration")
+    require(protocol['counterfactuals']['primary']['id'] == 'C_NOTIFY_TAIL', 'Primary scenario undefined')
+    require(protocol['counterfactuals']['idealized']['id'] == 'I_EARLIEST_SAFE', 'Idealized scenario undefined')
+    require(protocol['decision_rules']['primary_and_idealized_scenarios_separate'], 'Scenario/uncertainty ambiguity')
+    require(protocol['instrumentation_gate']['absolute_median_decode_change_pct_max'] == 3, 'Asymmetric decode gate')
+    require(protocol['instrumentation_gate']['absolute_median_completion_wall_change_pct_max'] == 3, 'Asymmetric wall gate')
+    from protocol_rules import perturbation_gate, notify_tail
+    for sign in [-1, 1]:
+        require(not perturbation_gate([{'decode_change_pct': sign * 6, 'wall_change_pct': 0}] * 3)['pass'],
+                'Gate misses systematic perturbation')
+        require(not perturbation_gate([{'decode_change_pct': 0, 'wall_change_pct': sign * 6}] * 3)['pass'],
+                'Gate misses systematic wall perturbation')
+    require(perturbation_gate([{'decode_change_pct': -2, 'wall_change_pct': 2}] * 3)['pass'], 'Neutral gate regression')
+    require(not perturbation_gate([{'decode_change_pct': 0, 'wall_change_pct': 0},
+                                  {'decode_change_pct': 0, 'wall_change_pct': 0},
+                                  {'decode_change_pct': -11, 'wall_change_pct': 0}])['pass'], 'Extreme speedup missed')
+    require(notify_tail(100, 80, 10, 15) == 15, 'Primary scenario removes required CPU')
+    require(notify_tail(100, 110, 10, 15) == 0, 'Late notification observation produces false saving')
 
     for item in manifest["references"]:
         path = (root / item["path"]).resolve()

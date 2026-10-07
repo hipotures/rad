@@ -5,14 +5,14 @@
   "references": [
     {
       "path": "iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase3-20261007T150955Z/report.md",
-      "bytes": 29554,
-      "sha256": "b94328fe296504c171ae3793465706fb4a1fdb85f0110e766af6d7162241a819",
+      "bytes": 32076,
+      "sha256": "3de907ec86358a74e118d3a05bb16fff8ddd3cbe319b1a12333d01ca8c29a04f",
       "role": "Read-only frozen reference; adapt writers into the new campaign before use"
     },
     {
       "path": "iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase3-20261007T150955Z/completion-audit.json",
-      "bytes": 9289,
-      "sha256": "d27c55eb04b901504a515494d86e9e66a48418e2f6e68b830479842abedbed0e",
+      "bytes": 9648,
+      "sha256": "bf34637434744af8b71c8b20ff8003b641fae1701a42db8f930419a04e2d3b93",
       "role": "Read-only frozen reference; adapt writers into the new campaign before use"
     },
     {
@@ -77,8 +77,8 @@
     },
     {
       "path": "iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase3-20261007T150955Z/reproduce.md",
-      "bytes": 6149,
-      "sha256": "037d509db9610b16e8bd8a392430f881cb9dbafd35b948d68b5951e7088a4872",
+      "bytes": 6585,
+      "sha256": "248d9cabf9c5ee28191c471b28b01f32d2b64ec245dd82f725193e40dc239454",
       "role": "Read-only frozen reference; adapt writers into the new campaign before use"
     },
     {
@@ -140,6 +140,18 @@
       "bytes": 3885,
       "sha256": "491c1f5ea2a823bdd6f083d80e02c5742b313fee671c7865be303aa5c83fd47d",
       "role": "Read-only frozen reference; adapt writers into the new campaign before use"
+    },
+    {
+      "path": "iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase3-20261007T150955Z/corrections/publication-chronology-20261007/summary.json",
+      "bytes": 11736,
+      "sha256": "551652f918f33d76be6f1809f8197a7d745c127a3616ac04588c31bb973c61dc",
+      "role": "Authorized correction; exact chronology and unresolved causal attribution"
+    },
+    {
+      "path": "iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase3-20261007T150955Z/corrections/publication-chronology-20261007/erratum.md",
+      "bytes": 2400,
+      "sha256": "fe0c5b640d44c16db176ea21f187a6f6102d78364611f6aa570a79e541829950",
+      "role": "Authorized correction; exact chronology and unresolved causal attribution"
     }
   ],
   "external_inputs": [
@@ -332,5 +344,7 @@
       "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase0-20261006T185015Z/raw/math-rational/tape.bin.initial-state.bin": "bef7b3ed1546b7e8898c6584327d16f4e394efb5f457a67973d40fcd2b8bce4d"
     }
   },
-  "verification_scope": "Reference file hashes captured during planning; run code/check_plan.py --local-inputs for actual tape, binary and local source verification. No new inference."
+  "verification_scope": "Reference file hashes captured during planning; run code/check_plan.py --local-inputs for actual tape, binary and local source verification. No new inference.",
+  "prior_reference_manifest": "protocol-history/v1/input-manifest.json",
+  "reference_refresh_reason": "Authorized Phase3 chronology erratum; preserve prior identities, refresh changed explanatory references before Phase4 freeze."
 }

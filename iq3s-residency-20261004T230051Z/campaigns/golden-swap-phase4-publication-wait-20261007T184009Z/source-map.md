@@ -39,3 +39,14 @@ Recovery recipe: public Strata base
 `patches/cumulative-from-original.diff`, with the `.venv` link excluded and the
 pinned ggml dependency. See Phase 3 reproduce.md. Do not push the derivative
 to the dependency's remote; preserve patches in RaD.
+
+## Execution verification
+
+The prepared source map was verified against the active parent. K24 uses serial
+verifier stages with mapped portable pinned handoff after compute-stream
+completion. A hook may acknowledge workers belonging to either GPU. Shared fork
+is active; helper/remote, peer-expert, device-plan and all-resident shortcuts are
+inactive. The final v2 derivative is recorded in configs/runtime-identity.json,
+with both cumulative and parent-relative patches. See dependency-model.md and
+report.md for actual recorder coverage, unsupported edges and the failed timing
+neutrality gate.

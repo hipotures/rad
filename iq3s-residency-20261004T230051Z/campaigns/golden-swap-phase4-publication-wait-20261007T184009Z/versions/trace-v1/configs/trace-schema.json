@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "host_clock": "Q4Tape::ns / Linux steady CLOCK_MONOTONIC; host wait CPU CLOCK_THREAD_CPUTIME_ID",
+  "publication_record": {
+    "format": "16 little-endian uint64",
+    "fields": [
+      "generation",
+      "event",
+      "device",
+      "class",
+      "validation_begin",
+      "command_available",
+      "wait_begin",
+      "wait_end",
+      "cpu_begin",
+      "cpu_end",
+      "commit_end",
+      "worker_observed",
+      "metadata_submit",
+      "cuda_observed",
+      "ack_state",
+      "notify_unlock_return"
+    ],
+    "cap": 65536
+  },
+  "producer_record": {
+    "format": "12 little-endian uint64",
+    "fields": [
+      "event",
+      "hook_begin",
+      "publications_end",
+      "hook_end",
+      "flag_before",
+      "flag_after",
+      "plan_end",
+      "cpu_end",
+      "flag_b_before",
+      "flag_b_after",
+      "flag_cpu_before",
+      "flag_cpu_after"
+    ],
+    "cap": 65536
+  },
+  "gpu_header": {
+    "format": "20 little-endian uint64",
+    "fields": [
+      "version",
+      "device",
+      "cap",
+      "kinds",
+      "detail",
+      "count_0",
+      "count_1",
+      "count_2",
+      "count_3",
+      "count_4",
+      "count_5",
+      "count_6",
+      "count_7",
+      "count_8",
+      "count_9",
+      "count_10",
+      "start_host_lo",
+      "start_host_hi",
+      "end_host_lo",
+      "end_host_hi"
+    ]
+  },
+  "gpu_record": {
+    "format": "4 little-endian uint64",
+    "fields": [
+      "begin_globaltimer",
+      "end_globaltimer",
+      "ring",
+      "ordinal"
+    ],
+    "cap_per_kind": 20000,
+    "kind_names": [
+      "wait_A",
+      "wait_B",
+      "wait_CPU",
+      "shared_begin",
+      "shared_end",
+      "prejoin",
+      "postjoin",
+      "combine_end",
+      "calibration",
+      "window_begin",
+      "window_end"
+    ],
+    "clock_domain": "separate GPU globaltimer domains"
+  },
+  "memory": {
+    "host_preallocated_bytes": 14680064,
+    "device_each_bytes": 7040088,
+    "temporary_host_readback_each_bytes": 640000,
+    "expert_capacity_unchanged": true
+  },
+  "calibration": {
+    "count_per_gpu_request": 2,
+    "identical_in_CONTROL_TRACE": true,
+    "boundary_only": true,
+    "interior_drift": "unmeasured; affine assumption explicitly limits quantitative interpretation"
+  },
+  "metadata_payload": "8 H2D bytes/publication, separate from ordinary expert payload and trace readback"
+}

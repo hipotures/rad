@@ -1,0 +1,323 @@
+diff --git a/include/strata/core/verify.hpp b/include/strata/core/verify.hpp
+index a494a54..00ef65e 100644
+--- a/include/strata/core/verify.hpp
++++ b/include/strata/core/verify.hpp
+@@ -212,6 +212,8 @@ public:
+     /// window), as one line; empty when off.
+     std::string profile_report();
+     void wait_report();
++    void publication_trace_begin();
++    void publication_trace_calibrate(int boundary);
+ 
+ private:
+     RemoteExpertOpt* remote_opt_ = nullptr;
+@@ -279,6 +281,11 @@ private:
+     size_t trace_n_ = 0;
+     static constexpr int kProfPer = 33;              // stamps per layer (32 left the hc-read second
+                                       // half's up-stamp at slot 32 = the next layer's slot 0: D8)
++    static constexpr size_t publication_cap_=20000,publication_kinds_=11;
++    unsigned long long *publication_data_=nullptr,*publication_counts_=nullptr;
++    bool publication_detail_=false,publication_measured_=false;
++    uint64_t publication_cal_host_[4]{};
++    void publication_mark(int kind,uint32_t value,void* stream);
+     unsigned long long* wait_stats_ = nullptr; // Six counters, request-scoped, opt-in.
+     bool prof_on_ = false;
+     unsigned long long* prof_ = nullptr;              // device: n_layers * kProfPer + 4 stamps
+diff --git a/include/strata/kernels/verify_kernels.hpp b/include/strata/kernels/verify_kernels.hpp
+index 4f9f283..1a2fc8c 100644
+--- a/include/strata/kernels/verify_kernels.hpp
++++ b/include/strata/kernels/verify_kernels.hpp
+@@ -15,6 +15,7 @@
+ #pragma once
+ 
+ #include <cstdint>
++#include <cstddef>
+ 
+ namespace strata::kernels {
+ 
+@@ -38,7 +39,8 @@ void gdn_step_norm_multi(float* state, const float* h, int conv_channels, const
+ /// Spin until *flag >= value (a mapped host flag).  The value is fixed at capture, so several rings can be
+ /// outstanding at once (the split verify window keeps two).
+ void wait_flag_ge(const uint32_t* flag, uint32_t value, void* stream);
+-void wait_flag_ge_timed(const uint32_t* flag, uint32_t value, unsigned long long* stats, void* stream);
++void wait_flag_ge_timed(const uint32_t* flag, uint32_t value, unsigned long long* stats, void* stream, unsigned long long* records=nullptr, unsigned long long* count=nullptr, size_t cap=0);
++void q4_trace_mark(unsigned long long* records, unsigned long long* count, size_t cap, uint32_t value, void* stream);
+ /// the GPU's %globaltimer (ns) into buf[i] (a one-thread kernel: the verify window's stage profiler).
+ void gpu_stamp(unsigned long long* buf, int i, void* stream);
+ 
+diff --git a/include/strata/research/q4_oracle.hpp b/include/strata/research/q4_oracle.hpp
+index 73eab34..300923b 100644
+--- a/include/strata/research/q4_oracle.hpp
++++ b/include/strata/research/q4_oracle.hpp
+@@ -18,7 +18,20 @@ struct OracleEvent { uint64_t issue_ns,stage_begin,stage_end,copy_begin,copy_end
+ struct NativeCopy { uint64_t issue_ns,publish_ns,bytes;int32_t window,layer,incoming,victim,slot; };
+ // Buffered generation lifecycle evidence; logical units are routed-layer invocations.
+ struct LifecycleEvent {int32_t generation,first_use,last_use,distinct_uses,evicted_at,released_at,expiry,reason;};
++// All producer/worker observations use one CLOCK_MONOTONIC domain.
++struct PublicationTrace {uint64_t generation,event,device,cls,validation_begin,command_available,wait_begin,wait_end,cpu_begin,cpu_end,commit_end,worker_observed,metadata_submit,cuda_observed,ack_state,notify_unlock_return;};
++struct ProducerTrace {uint64_t event,hook_begin,publications_end,hook_end,flag_before,flag_after,plan_end,cpu_end,flag_b_before,flag_b_after,flag_cpu_before,flag_cpu_after;};
+ struct Q4Oracle {
++ static constexpr size_t pub_trace_cap=65536,host_trace_cap=65536;
++ bool publication_trace=[](){const char* p=std::getenv("STRATA_Q4_PUBLICATION_TRACE");return p&&p[0]=='1';}();
++ std::vector<PublicationTrace> publication_records;
++ std::vector<ProducerTrace> producer_records;
++ uint64_t publication_trace_overflow=0;
++ PublicationTrace* pt(int index){if(!publication_trace)return nullptr;if(index<0||size_t(index)>=pub_trace_cap){++publication_trace_overflow;return nullptr;}return &publication_records[index];}
++ ProducerTrace* ht(){if(!publication_trace||!tracked||!q4_tape.active)return nullptr;if(current<0||size_t(current)>=host_trace_cap){++publication_trace_overflow;return nullptr;}return &producer_records[current];}
++ void other_flag(int kind,bool after){auto* h=ht();if(h){auto& t=kind==1?(after?h->flag_b_after:h->flag_b_before):(after?h->flag_cpu_after:h->flag_cpu_before);t=ns();}}
++ void flag_a(bool after){auto* h=ht();if(h){if(after)h->flag_after=ns();else h->flag_before=ns();}}
++
+  static constexpr int ne=512,nl=48,classes=3; static constexpr uint64_t sizes[3]={3072000,3584000,3993600};
+  bool configured=false,active=false,requested=false,direct=false,check_bytes=false,tracked=false;int horizon=0,strategy=0;int incoming_horizon=0,victim_horizon=0;bool ema_tail=false;static constexpr int eligibility=64;IncomingFutureView incoming_view;VictimFutureView victim_view;
+  mutable std::array<int,48> victim_cache_at{},victim_cache_owner{},victim_cache_history{},victim_cache_best{},victim_cache_slot{};std::array<int,48> ownership_generation{};
+@@ -65,8 +78,8 @@ struct Q4Oracle {
+   incoming_horizon=read_h("STRATA_Q4_ORACLE_INCOMING",incoming_horizon);victim_horizon=read_h("STRATA_Q4_ORACLE_VICTIM",victim_horizon);
+  }
+  void configure(){const char* p=std::getenv("STRATA_Q4_ORACLE_SUBSTRATE");if(!p||p[0]!='1')return;int old;ck(cudaGetDevice(&old));for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;ck(cudaSetDevice(d));auto& w=workers[d][c];w.dev=d;w.cls=c;ck(cudaHostAlloc(&w.staging,sizes[c],cudaHostAllocDefault));ck(cudaHostAlloc(&w.metadata,8,cudaHostAllocDefault));ck(cudaStreamCreateWithFlags(&w.stream,cudaStreamNonBlocking));ck(cudaEventCreateWithFlags(&w.done,cudaEventDisableTiming));w.thread=std::thread([this,d,c]{worker(d,c);});}ck(cudaSetDevice(old));configured=true;}
+- static void publish_state(Worker& w,int s){std::lock_guard<std::mutex> lk(w.mu);w.state.store(s,std::memory_order_release);w.cv.notify_all();}
+- void worker(int d,int c){auto& w=workers[d][c];try{ck(cudaSetDevice(d));while(true){int command;{std::unique_lock<std::mutex> lk(w.mu);w.cv.wait(lk,[&]{int s=w.state.load();return w.quit||s==1||s==4||s==6;});if(w.quit)break;command=w.state.load();if(command==1)w.state.store(2,std::memory_order_release);}if(command==1){auto& e=events[w.index];e.stage_begin=ns();if(!direct)std::memcpy(w.staging,w.src,w.n);e.stage_end=ns();const char* delay=std::getenv("STRATA_Q4_ORACLE_DELAY_US");if(delay)std::this_thread::sleep_for(std::chrono::microseconds(std::atoi(delay)));e.copy_begin=ns();ck(cudaMemcpyAsync(slot(d,w.destination),direct?w.src:w.staging,w.n,cudaMemcpyHostToDevice,w.stream));ck(cudaEventRecord(w.done,w.stream));ck(cudaEventSynchronize(w.done));e.copy_end=ns();if(check_bytes&&w.readbacks<2){std::vector<uint8_t> bytes(w.n);ck(cudaMemcpy(bytes.data(),slot(d,w.destination),w.n,cudaMemcpyDeviceToHost));require(std::memcmp(bytes.data(),w.src,w.n)==0,"oracle copied weight bytes mismatch");++w.readbacks;}publish_state(w,3);}else if(command==4){w.metadata[0]=-1;w.metadata[1]=w.destination;ck(cudaMemcpyAsync(dres[d]+w.layer*512+w.victim,w.metadata,4,cudaMemcpyHostToDevice,w.stream));ck(cudaMemcpyAsync(dres[d]+w.layer*512+w.expert,w.metadata+1,4,cudaMemcpyHostToDevice,w.stream));ck(cudaEventRecord(w.done,w.stream));ck(cudaEventSynchronize(w.done));publish_state(w,5);}else if(command==6)publish_state(w,0);}}catch(const std::exception& e){std::fprintf(stderr,"Q4_ORACLE_WORKER_FAIL device%d class%d %s\n",d,c,e.what());publish_state(w,7);}}
++ static void publish_state(Worker& w,int s,PublicationTrace* p=nullptr){{std::lock_guard<std::mutex> lk(w.mu);w.state.store(s,std::memory_order_release);if(p)p->ack_state=ns();w.cv.notify_all();}if(p)p->notify_unlock_return=ns();}
++ void worker(int d,int c){auto& w=workers[d][c];try{ck(cudaSetDevice(d));while(true){int command;{std::unique_lock<std::mutex> lk(w.mu);w.cv.wait(lk,[&]{int s=w.state.load();return w.quit||s==1||s==4||s==6;});if(w.quit)break;command=w.state.load();if(command==1)w.state.store(2,std::memory_order_release);}if(command==1){auto& e=events[w.index];e.stage_begin=ns();if(!direct)std::memcpy(w.staging,w.src,w.n);e.stage_end=ns();const char* delay=std::getenv("STRATA_Q4_ORACLE_DELAY_US");if(delay)std::this_thread::sleep_for(std::chrono::microseconds(std::atoi(delay)));e.copy_begin=ns();ck(cudaMemcpyAsync(slot(d,w.destination),direct?w.src:w.staging,w.n,cudaMemcpyHostToDevice,w.stream));ck(cudaEventRecord(w.done,w.stream));ck(cudaEventSynchronize(w.done));e.copy_end=ns();if(check_bytes&&w.readbacks<2){std::vector<uint8_t> bytes(w.n);ck(cudaMemcpy(bytes.data(),slot(d,w.destination),w.n,cudaMemcpyDeviceToHost));require(std::memcmp(bytes.data(),w.src,w.n)==0,"oracle copied weight bytes mismatch");++w.readbacks;}publish_state(w,3);}else if(command==4){int generation=w.index;auto* p=pt(generation);if(p)p->worker_observed=ns();w.metadata[0]=-1;w.metadata[1]=w.destination;if(p)p->metadata_submit=ns();ck(cudaMemcpyAsync(dres[d]+w.layer*512+w.victim,w.metadata,4,cudaMemcpyHostToDevice,w.stream));ck(cudaMemcpyAsync(dres[d]+w.layer*512+w.expert,w.metadata+1,4,cudaMemcpyHostToDevice,w.stream));ck(cudaEventRecord(w.done,w.stream));ck(cudaEventSynchronize(w.done));if(p)p->cuda_observed=ns();publish_state(w,5,p);}else if(command==6)publish_state(w,0);}}catch(const std::exception& e){std::fprintf(stderr,"Q4_ORACLE_WORKER_FAIL device%d class%d %s\n",d,c,e.what());publish_state(w,7);}}
+  void runtime(int32_t* r,const float* u,std::vector<uint64_t> b,std::array<int32_t*,2> dr,std::function<const uint8_t*(int,int)> src,std::function<void*(int,int)> sl){res=r;heat=u;blobs=std::move(b);dres=dr;source=std::move(src);slot=std::move(sl);prepare();}
+  void prepare(){for(auto& m:demand_memo)m={};++memo_reset;if(!configured||!q4_tape.replaying)return;uint64_t t=ns();future.resize(48*512);for(size_t wi=0;wi<q4_tape.windows.size();++wi){const auto& w=q4_tape.windows[wi];for(int l=0;l<48;++l){int count[512]={};for(int j=0;j<w.T*10;++j)++count[w.routes.ids[l][j]];for(int e=0;e<512;++e)if(count[e])future[l*512+e].emplace_back((int)wi*48+l,count[e]);}}incoming_view.index=victim_view.index=&future;incoming_view.horizon=incoming_horizon;victim_view.horizon=victim_horizon;incoming_view.total_events=victim_view.total_events=(int)q4_tape.windows.size()*48;setup_ns=ns()-t;std::fprintf(stderr,"Q4_ORACLE_SETUP future_index_ms=%.3f horizon_main_routed_invocations=%s classes=3072000,3584000,3993600 scope_layers=48\n",setup_ns/1e6,horizon?std::to_string(horizon).c_str():"full");}
+  // Scheduler future reads are role-typed. The replay engine retains its own full tape.
+@@ -90,24 +103,25 @@ struct Q4Oracle {
+  void note_publication(int i,int l,int expert,int victim,int at){if(i>=int(lifetimes.size()))lifetimes.resize(i+1,{-1,-1,-1,0,-1,-1,-1,0});int old=incoming_event[l*512+victim];if(old>=0&&old<int(lifetimes.size()))lifetimes[old].evicted_at=at;leases[l*512+victim]=-1;auto& a=lifetimes[i];a.generation=i;a.expiry=events[i].target+48;if(transaction_control&&causal_policy){leases[l*512+expert]=i;protected_keys.push_back(l*512+expert);++protected_occupancy[l/24][cls(l)];++protection_version[l];max_protected=std::max(max_protected,protected_count(l/24,cls(l)));}}
+  void note_service(int l,const int32_t* ids,const int32_t* slots,int n,int at){int seen[512]={};for(int j=0;j<n;++j){int e=ids[j],i=incoming_event[l*512+e];if(slots[j]<0||i<0||seen[e]++)continue;auto& a=lifetimes[i];if(a.first_use<0)a.first_use=at;a.last_use=at;++a.distinct_uses;}}
+  int victim(int l,int incoming,int at)const{uint64_t start=VictimScorer::now();if(causal_policy&&res[l*512+incoming]<0&&victim_cache_at[l]==at&&victim_cache_owner[l]==ownership_generation[l]&&victim_cache_history[l]==scorer.versions[l]){int b=victim_cache_best[l];if(b<0||(res[l*512+b]==victim_cache_slot[l]&&!protected_now(l,b)&&!lease_protected(l,b))){scorer.selection_ns+=VictimScorer::now()-start;return b;}}int best=-1;double score=-1e100;uint64_t enumeration_start=ns();for(int e=0;e<512;++e){++enumerated;if(res[l*512+e]<0||e==incoming||protected_now(l,e))continue;if(lease_protected(l,e)){++protection_veto;continue;}double value=victim_value(l,e,at);if(value>score){score=value;best=e;}}enumeration_ns+=ns()-enumeration_start;if(best<0)++empty_victims;if(causal_policy){victim_cache_at[l]=at;victim_cache_owner[l]=ownership_generation[l];victim_cache_history[l]=scorer.versions[l];victim_cache_best[l]=best;victim_cache_slot[l]=best<0?-1:res[l*512+best];scorer.selection_ns+=VictimScorer::now()-start;}return best;}
+- void begin(){if(!configured||!q4_tape.active)return;for(auto& m:demand_memo)m={};memo_lookups=memo_hits=memo_misses=memo_lower=memo_upper=memo_rewind=memo_time_ns=host_cpu_ns=0;memo_reset=1;decision_hash=1469598103934665603ull;decision_records=0;victim_cache_at.fill(-1);ownership_generation.fill(0);scorer.reset();tracked=true;active=requested;require(!active||q4_tape.replaying,"oracle requires fixed-work replay");events.clear();lifetimes.clear();protected_keys.clear();for(auto& a:protected_occupancy)a.fill(0);leases.fill(-1);protection_version.fill(0);capacity_veto=cost_veto=victim_cost_veto=risk_veto=expiry_count=release_count=late_abort=history_ns=0;protection_veto=empty_victims=enumeration_ns=enumerated=0;max_protected=0;layers.clear();natives.clear();events.reserve(q4_tape.header.output_budget*240);lifetimes.reserve(q4_tape.header.output_budget*240);layers.reserve(q4_tape.header.output_budget*48);natives.reserve(q4_tape.header.output_budget*96);incoming_event.assign(48*512,-1);victim_event.assign(48*512,-1);planner_ns=publication_ns=drain_ns=restore_ns=ready_entries=late_entries=redundant=protected_reject=opportunities=0;incoming_view.audit={};victim_view.audit={};last_boundary=0;last_event=-1;current=-1;
++ void begin(){if(!configured||!q4_tape.active)return;for(auto& m:demand_memo)m={};memo_lookups=memo_hits=memo_misses=memo_lower=memo_upper=memo_rewind=memo_time_ns=host_cpu_ns=0;memo_reset=1;decision_hash=1469598103934665603ull;decision_records=0;victim_cache_at.fill(-1);ownership_generation.fill(0);scorer.reset();tracked=true;active=requested;require(!active||q4_tape.replaying,"oracle requires fixed-work replay");publication_records.assign(pub_trace_cap,{});producer_records.assign(host_trace_cap,{});publication_trace_overflow=0;events.clear();lifetimes.clear();protected_keys.clear();for(auto& a:protected_occupancy)a.fill(0);leases.fill(-1);protection_version.fill(0);capacity_veto=cost_veto=victim_cost_veto=risk_veto=expiry_count=release_count=late_abort=history_ns=0;protection_veto=empty_victims=enumeration_ns=enumerated=0;max_protected=0;layers.clear();natives.clear();events.reserve(q4_tape.header.output_budget*240);lifetimes.reserve(q4_tape.header.output_budget*240);layers.reserve(q4_tape.header.output_budget*48);natives.reserve(q4_tape.header.output_budget*96);incoming_event.assign(48*512,-1);victim_event.assign(48*512,-1);planner_ns=publication_ns=drain_ns=restore_ns=ready_entries=late_entries=redundant=protected_reject=opportunities=0;incoming_view.audit={};victim_view.audit={};last_boundary=0;last_event=-1;current=-1;
+   if(!active)return;uint64_t t=ns();for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int pick=-1;double value=-1e100;for(int l=d*24;l<(d+1)*24;++l)if(cls(l)==c)for(int e=0;e<512;++e){if(res[l*512+e]<0)continue;const auto& first=q4_tape.windows.front();bool protected_first=false;for(int j=0;j<first.T*10;++j)protected_first|=first.routes.ids[l][j]==e;if(protected_first)continue;double val=victim_value(l,e,0);if(val>value){value=val;pick=l*512+e;}}require(pick>=0,"no same-class reserve");donor_layer[d][c]=pick/512;donor_expert[d][c]=pick%512;spare[d][c]=res[pick];res[pick]=-1;int old;ck(cudaGetDevice(&old));ck(cudaSetDevice(d));ck(cudaMemcpy(dres[d]+pick,res+pick,4,cudaMemcpyHostToDevice));ck(cudaSetDevice(old));std::fprintf(stderr,"Q4_ORACLE_RESERVE device=%d class=%d bytes=%llu slot=%d layer=%d expert=%d active_minus1\n",d,c,(unsigned long long)sizes[c],spare[d][c],pick/512,pick%512);}planner_ns+=ns()-t;
+  }
+  void retire(Worker& w,int status){uint64_t t=ns();std::unique_lock<std::mutex> lk(w.mu);require(w.cv.wait_for(lk,std::chrono::seconds(10),[&]{int s=w.state.load();return s==0||s==3||s==7;}),"oracle retirement timeout");require(w.state.load()!=7,"oracle worker failure");if(w.state.load()==3){events[w.index].status=status;w.state.store(6,std::memory_order_release);w.cv.notify_all();require(w.cv.wait_for(lk,std::chrono::seconds(5),[&]{return w.state.load()==0||w.state.load()==7;}),"oracle retirement ack");require(w.state.load()==0,"oracle retirement failure");}drain_ns+=ns()-t;}
+- void publish(Worker& w){if(w.state.load(std::memory_order_acquire)!=3)return;auto& e=events[w.index];if(transaction_control&&causal_policy&&current>e.target+48){++late_abort;retire(w,8);return;}if(transaction_control&&causal_policy&&protected_count(w.dev,w.cls)>=protection_cap){++capacity_veto;retire(w,9);return;}if(res[w.layer*512+w.expert]>=0){++redundant;retire(w,2);return;}int v=victim(w.layer,w.expert,current);if(v<0){++protected_reject;return;}if(causal_policy&&!scorer.accept(w.layer,v,current,std::max(current,e.target),causal_policy,heat,victim_threshold)){retire(w,5);return;}int old=res[w.layer*512+v];require(old>=0&&v!=w.expert&&!protected_now(w.layer,v)&&!lease_protected(w.layer,v),"publication victim changed");uint64_t t=ns();{std::unique_lock<std::mutex> lk(w.mu);w.victim=v;w.state.store(4,std::memory_order_release);w.cv.notify_all();require(w.cv.wait_for(lk,std::chrono::seconds(5),[&]{return w.state.load()==5||w.state.load()==7;}),"oracle publication timeout");require(w.state.load()==5,"oracle publication failure");}publication_ns+=ns()-t;res[w.layer*512+v]=-1;res[w.layer*512+w.expert]=w.destination;++ownership_generation[w.layer];spare[w.dev][w.cls]=old;e.victim=v;e.oldslot=old;e.publish_ns=ns();e.published_at=current;e.status=current<=e.target?1:3;note_publication(w.index,w.layer,w.expert,v,current);incoming_event[w.layer*512+w.expert]=w.index;victim_event[w.layer*512+v]=w.index;copy_us=.9*copy_us+.1*((e.stage_end-e.stage_begin+e.copy_end-e.copy_begin)/1000.);w.state.store(0,std::memory_order_release);}
++ void publish(Worker& w){if(w.state.load(std::memory_order_acquire)!=3)return;auto& e=events[w.index];auto* trace=pt(w.index);if(trace){trace->generation=w.index;trace->event=current;trace->device=w.dev;trace->cls=w.cls;trace->validation_begin=ns();}if(transaction_control&&causal_policy&&current>e.target+48){++late_abort;retire(w,8);return;}if(transaction_control&&causal_policy&&protected_count(w.dev,w.cls)>=protection_cap){++capacity_veto;retire(w,9);return;}if(res[w.layer*512+w.expert]>=0){++redundant;retire(w,2);return;}int v=victim(w.layer,w.expert,current);if(v<0){++protected_reject;return;}if(causal_policy&&!scorer.accept(w.layer,v,current,std::max(current,e.target),causal_policy,heat,victim_threshold)){retire(w,5);return;}int old=res[w.layer*512+v];require(old>=0&&v!=w.expert&&!protected_now(w.layer,v)&&!lease_protected(w.layer,v),"publication victim changed");uint64_t t=ns();if(trace){trace->wait_begin=ns();trace->cpu_begin=thread_cpu();}{std::unique_lock<std::mutex> lk(w.mu);w.victim=v;if(trace)trace->command_available=ns();w.state.store(4,std::memory_order_release);w.cv.notify_all();require(w.cv.wait_for(lk,std::chrono::seconds(5),[&]{return w.state.load()==5||w.state.load()==7;}),"oracle publication timeout");require(w.state.load()==5,"oracle publication failure");}if(trace){trace->cpu_end=thread_cpu();trace->wait_end=ns();}publication_ns+=ns()-t;res[w.layer*512+v]=-1;res[w.layer*512+w.expert]=w.destination;++ownership_generation[w.layer];spare[w.dev][w.cls]=old;e.victim=v;e.oldslot=old;e.publish_ns=ns();e.published_at=current;e.status=current<=e.target?1:3;note_publication(w.index,w.layer,w.expert,v,current);incoming_event[w.layer*512+w.expert]=w.index;victim_event[w.layer*512+v]=w.index;copy_us=.9*copy_us+.1*((e.stage_end-e.stage_begin+e.copy_end-e.copy_begin)/1000.);w.state.store(0,std::memory_order_release);if(trace)trace->commit_end=ns();}
+  void issue(Worker& w,int l,int expert,int target){require(w.state.load()==0,"issue into busy spare");const uint8_t* src=source(l,expert);require(src,"missing immutable RAM expert");require(blobs[l]==sizes[w.cls]&&l/24==w.dev,"byte-class/device mismatch");OracleEvent e{};e.issue_ns=ns();e.trigger=current;e.target=target;e.published_at=-1;e.layer=l;e.incoming=expert;e.victim=e.oldslot=-1;e.slot=spare[w.dev][w.cls];e.bytes=blobs[l];e.status=0;require(events.size()<events.capacity(),"event buffer capacity");events.push_back(e);lifetimes.push_back({int(events.size()-1),-1,-1,0,-1,-1,target+48,0});{std::lock_guard<std::mutex> lk(w.mu);w.index=(int)events.size()-1;w.layer=l;w.expert=expert;w.destination=e.slot;w.src=src;w.n=e.bytes;w.state.store(1,std::memory_order_release);}w.cv.notify_all();}
+  void plan(Worker& w){if(w.state.load()!=0){decision(w.dev,w.cls,-1,9);return;}if(transaction_control&&causal_policy&&protected_count(w.dev,w.cls)>=protection_cap){++capacity_veto;decision(w.dev,w.cls,-1,10);return;}int lead=std::clamp((int)std::ceil(copy_us/std::max(40.,event_us))+1,2,16);int limit=incoming_horizon?std::min(eligibility,incoming_horizon):eligibility;int end=std::min((int)q4_tape.windows.size()*48-1,current+limit);int bestl=-1,beste=-1,besttarget=-1;double best=-1e100;if(++seen_generation==0){candidate_seen.fill(0);++seen_generation;}
+   for(int ev=current+lead;ev<=end;++ev){int l=ev%48;if(l/24!=w.dev||cls(l)!=w.cls)continue;const auto& future_window=q4_tape.windows[ev/48];for(int j=0;j<future_window.T*10;++j){int expert=future_window.routes.ids[l][j],key=l*512+expert;if(candidate_seen[key]==seen_generation||res[key]>=0)continue;candidate_seen[key]=seen_generation;++opportunities;int utility_end=std::min((int)q4_tape.windows.size()*48-1,current+768);int target,uses=0;if(causal_policy){auto value=demand(l,expert,current,utility_end);target=value.first;uses=value.second;}else target=next(l,expert,current+1);if(target<0){decision(w.dev,w.cls,key,1);continue;}double copy_entries=(double(blobs[l])/25e9+double(blobs[l])/13.2e9)/160e-6;if(causal_policy&&double(uses)<copy_entries){++cost_veto;++scorer.rejections;decision(w.dev,w.cls,key,2,target,uses);continue;}int v=victim(l,expert,current);if(v<0){decision(w.dev,w.cls,key,3,target,uses);continue;}if(causal_policy){if(!scorer.accept(l,v,current,target,causal_policy,heat,victim_threshold)){++risk_veto;decision(w.dev,w.cls,key,4,target,uses,v);continue;}}else{int vn=victim_view.next(l*512+v,current,current).event;if(vn>=0&&vn<=target)continue;}if(!causal_policy)uses=count(l,expert,current+1,utility_end);int damage=causal_policy?0:victim_view.count(l*512+v,current+1,utility_end,current);if(causal_policy){double victim_loss=scorer.expected_entries16(l,v,current,causal_policy,heat);if(double(uses)<copy_entries+victim_loss){++victim_cost_veto;++scorer.rejections;decision(w.dev,w.cls,key,5,target,uses,v);continue;}}decision(w.dev,w.cls,key,6,target,uses,v);double utility=strategy?double(uses-damage)-2.0:double(limit-(target-current))+.05*(uses-damage);if(strategy&&uses-damage<4)continue;if(utility>best){best=utility;bestl=l;beste=expert;besttarget=target;}if(!strategy&&bestl>=0)break;}if(!strategy&&bestl>=0)break;}
+   decision(w.dev,w.cls,bestl<0?-1:bestl*512+beste,bestl<0?7:8,besttarget);if(bestl>=0)issue(w,bestl,beste,besttarget);
+  }
+- void host(int l,const int32_t* ids,int n){if(!tracked||!q4_tape.active)return;current=(int)q4_tape.index*48+l;uint64_t cpu=thread_cpu();uint64_t t=ns();if(active){advance_lifetimes(current);if(last_event>=0&&current==last_event+1){double us=(t-last_boundary)/1000.;event_us=.95*event_us+.05*std::clamp(us,40.,5000.);}last_event=current;last_boundary=t;for(auto& a:workers)for(auto& w:a)if(w.dev>=0){require(w.state.load()!=7,"worker error at milestone");publish(w);}for(int j=0;j<n;++j){int key=l*512+ids[j];int i=incoming_event[key];if(i>=0&&res[key]>=0){++events[i].uses;if(current<=events[i].target)++ready_entries;else if(events[i].published_at>events[i].target)++late_entries;}int v=victim_event[key];if(v>=0&&res[key]<0)++events[v].victim_uses;}for(auto& a:workers)for(auto& w:a)if(w.dev>=0)plan(w);}if(!active)last_boundary=t;planner_ns+=ns()-t;host_cpu_ns+=thread_cpu()-cpu;}
+- void observe_plan(int l,const int32_t* ids,int n,const int32_t* kind){if(!tracked||!q4_tape.active)return;OracleLayer a{};a.event=q4_tape.index*48+l;a.layer=l;a.n=n;a.begin=last_boundary;a.plan_end=ns();for(int j=0;j<n;++j){a.ids[j]=ids[j];a.slots[j]=res[l*512+ids[j]];a.path[j]=kind[j];}layers.push_back(a);if(active)note_service(l,a.ids,a.slots,n,int(a.event));}
+- void observe_cpu(){if(tracked&&q4_tape.active&&!layers.empty()){layers.back().cpu_end=ns();if(causal_policy){auto& a=layers.back();uint64_t ht=ns();scorer.observe(a.layer,a.ids,a.n,(int)a.event);history_ns+=ns()-ht;}}}
++ void host(int l,const int32_t* ids,int n){if(!tracked||!q4_tape.active)return;current=(int)q4_tape.index*48+l;uint64_t cpu=thread_cpu();uint64_t t=ns();auto* host_trace=ht();if(host_trace){host_trace->event=current;host_trace->hook_begin=t;}if(active){advance_lifetimes(current);if(last_event>=0&&current==last_event+1){double us=(t-last_boundary)/1000.;event_us=.95*event_us+.05*std::clamp(us,40.,5000.);}last_event=current;last_boundary=t;for(auto& a:workers)for(auto& w:a)if(w.dev>=0){require(w.state.load()!=7,"worker error at milestone");publish(w);}if(host_trace)host_trace->publications_end=ns();for(int j=0;j<n;++j){int key=l*512+ids[j];int i=incoming_event[key];if(i>=0&&res[key]>=0){++events[i].uses;if(current<=events[i].target)++ready_entries;else if(events[i].published_at>events[i].target)++late_entries;}int v=victim_event[key];if(v>=0&&res[key]<0)++events[v].victim_uses;}for(auto& a:workers)for(auto& w:a)if(w.dev>=0)plan(w);}if(!active)last_boundary=t;planner_ns+=ns()-t;host_cpu_ns+=thread_cpu()-cpu;if(host_trace)host_trace->hook_end=ns();}
++ void observe_plan(int l,const int32_t* ids,int n,const int32_t* kind){if(!tracked||!q4_tape.active)return;OracleLayer a{};a.event=q4_tape.index*48+l;a.layer=l;a.n=n;a.begin=last_boundary;a.plan_end=ns();for(int j=0;j<n;++j){a.ids[j]=ids[j];a.slots[j]=res[l*512+ids[j]];a.path[j]=kind[j];}layers.push_back(a);if(auto* h=ht())h->plan_end=a.plan_end;if(active)note_service(l,a.ids,a.slots,n,int(a.event));}
++ void observe_cpu(){if(tracked&&q4_tape.active&&!layers.empty()){layers.back().cpu_end=ns();if(auto* h=ht())h->cpu_end=layers.back().cpu_end;if(causal_policy){auto& a=layers.back();uint64_t ht=ns();scorer.observe(a.layer,a.ids,a.n,(int)a.event);history_ns+=ns()-ht;}}}
+  void note_native(int l,int in,int out,int s,uint64_t n){if(!tracked||!q4_tape.active)return;natives.push_back({ns(),0,n,(int)q4_tape.index,l,in,out,s});}
+  void native_ready(int l,int expert){if(!tracked||!q4_tape.active)return;for(auto i=natives.rbegin();i!=natives.rend();++i)if(i->layer==l&&i->incoming==expert&&!i->publish_ns){i->publish_ns=ns();break;}}
+  void finish(){if(!tracked)return;uint64_t t=ns();if(active){for(auto& a:workers)for(auto& w:a)if(w.dev>=0)retire(w,4);drain_ns+=ns()-t;t=ns();int old;ck(cudaGetDevice(&old));for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int l=donor_layer[d][c],e=donor_expert[d][c];if(res[l*512+e]>=0){float best=-1;e=-1;for(int x=0;x<512;++x)if(res[l*512+x]<0&&heat[l*512+x]>best){best=heat[l*512+x];e=x;}require(e>=0,"reserve restoration needs a nonresident expert");}ck(cudaSetDevice(d));ck(cudaMemcpy(slot(d,spare[d][c]),source(l,e),blobs[l],cudaMemcpyHostToDevice));res[l*512+e]=spare[d][c];ck(cudaMemcpy(dres[d]+l*512+e,res+l*512+e,4,cudaMemcpyHostToDevice));}ck(cudaSetDevice(old));restore_ns=ns()-t;}
+   uint64_t copied=0,published=0,unused=0,uses=0,victims=0,nbytes=0,npub=0,ready=0,late=0;for(auto& e:events){if(e.copy_end)copied+=e.bytes;if(e.publish_ns){++published;uses+=e.uses;victims+=e.victim_uses;if(e.status==1)++ready;else++late;}if(!e.uses)unused+=e.bytes;}for(auto& n:natives){nbytes+=n.bytes;npub+=n.publish_ns!=0;}
+-  const char* prefix=std::getenv("STRATA_Q4_ORACLE_LOG");if(prefix){auto write=[&](const char* name,auto& values){std::string p=std::string(prefix)+name;FILE* f=std::fopen(p.c_str(),"wbx");require(f,"oracle artifact exists");Q4Tape::io(f,values.data(),values.size(),true);std::fclose(f);};write("-layers.bin",layers);write("-admissions.bin",events);write("-native.bin",natives);write("-lifecycle.bin",lifetimes);}
++  const char* prefix=std::getenv("STRATA_Q4_ORACLE_LOG");if(prefix){auto write=[&](const char* name,auto& values){std::string p=std::string(prefix)+name;FILE* f=std::fopen(p.c_str(),"wbx");require(f,"oracle artifact exists");Q4Tape::io(f,values.data(),values.size(),true);std::fclose(f);};write("-layers.bin",layers);write("-admissions.bin",events);write("-native.bin",natives);write("-lifecycle.bin",lifetimes);if(publication_trace){publication_records.resize(std::min(events.size(),pub_trace_cap));producer_records.resize(std::min(layers.size(),host_trace_cap));write("-publication-trace.bin",publication_records);write("-producer-trace.bin",producer_records);}}
++  std::fprintf(stderr,"Q4_PUBLICATION_TRACE enabled=%d overflow=%llu host_alloc_bytes=%zu pub_cap=%zu producer_cap=%zu\n",publication_trace,(unsigned long long)publication_trace_overflow,pub_trace_cap*sizeof(PublicationTrace)+host_trace_cap*sizeof(ProducerTrace),pub_trace_cap,host_trace_cap);
+   std::fprintf(stderr,"Q4_ORACLE_END active=%d scope_layers=48 horizon=%d strategy=%s layers=%zu issued=%zu completed_bytes=%llu published=%llu ready_publications=%llu late_publications=%llu used_entries=%llu target_ready_entries=%llu late_useful_entries=%llu unused_bytes=%llu victim_absent_entries=%llu native_issued=%zu native_bytes=%llu native_published=%llu planner_ms=%.3f publication_ms=%.3f drain_ms=%.3f restoration_ms=%.3f setup_ms=%.3f active_spares=%d\n",active, horizon,strategy?"reuse":"deadline",layers.size(),events.size(),(unsigned long long)copied,(unsigned long long)published,(unsigned long long)ready,(unsigned long long)late,(unsigned long long)uses,(unsigned long long)ready_entries,(unsigned long long)late_entries,(unsigned long long)unused,(unsigned long long)victims,natives.size(),(unsigned long long)nbytes,(unsigned long long)npub,planner_ns/1e6,publication_ns/1e6,drain_ns/1e6,restore_ns/1e6,setup_ns/1e6,active?5:0);std::fprintf(stderr,"Q4_INFORMATION_END E=64 I=%d V=%d protection=full_current_window incoming_next=%llu incoming_count=%llu incoming_unknown=%llu incoming_max_visible=%d victim_next=%llu victim_count=%llu victim_unknown=%llu victim_max_visible=%d eligibility_coupled=%d first_feasible=1 utility_rank_effective=0 unknown_ema_tail=%d\n",incoming_horizon,victim_horizon,(unsigned long long)incoming_view.audit.next_calls,(unsigned long long)incoming_view.audit.count_calls,(unsigned long long)incoming_view.audit.unknown,incoming_view.audit.max_visible_ahead,(unsigned long long)victim_view.audit.next_calls,(unsigned long long)victim_view.audit.count_calls,(unsigned long long)victim_view.audit.unknown,victim_view.audit.max_visible_ahead,incoming_horizon&&incoming_horizon<64,ema_tail);
+   std::fprintf(stderr,"Q4_VICTIM_END policy=%d threshold=%.6f scores=%llu cache_hits=%llu invalid=%llu rejected=%llu feature_ms=%.3f score_ms=%.3f selection_ms=%.3f host_bytes=%zu frozen_weights=1 prefix_only=1 max_cache_age_windows=1\n",causal_policy,victim_threshold,(unsigned long long)scorer.scores,(unsigned long long)scorer.cache_hits,(unsigned long long)scorer.invalid,(unsigned long long)scorer.rejections,scorer.feature_ns/1e6,scorer.score_ns/1e6,scorer.selection_ns/1e6,scorer.memory_bytes());
+   std::fprintf(stderr,"Q4_TC_END enabled=%d post_use_events=%d cap_per_device_class=16 max_protected=%d protection_veto=%llu empty_victims=%llu capacity_veto=%llu cost_veto=%llu victim_cost_veto=%llu risk_veto=%llu expired=%llu released=%llu late_abort=%llu history_ms=%.3f enumeration_ms=%.3f enumerated=%llu\n",transaction_control&&causal_policy,post_use_events,max_protected,(unsigned long long)protection_veto,(unsigned long long)empty_victims,(unsigned long long)capacity_veto,(unsigned long long)cost_veto,(unsigned long long)victim_cost_veto,(unsigned long long)risk_veto,(unsigned long long)expiry_count,(unsigned long long)release_count,(unsigned long long)late_abort,history_ns/1e6,enumeration_ns/1e6,(unsigned long long)enumerated);
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index 98d065b..8d79c28 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -1,4 +1,5 @@
+ #include "strata/research/q4_tape.hpp"
++#include "strata/research/q4_oracle.hpp"
+ // src/core/verify.cpp - see include/strata/core/verify.hpp.
+ #include "strata/core/verify.hpp"
+ #include "strata/core/remote_expert_opt.hpp"
+@@ -293,6 +294,7 @@ Verifier::~Verifier() {
+     if (ev_fork_) cudaEventDestroy(ev_fork_);
+     if (ev_join_) cudaEventDestroy(ev_join_);
+     if (wait_stats_) cudaFree(wait_stats_);
++    if(publication_data_)cudaFree(publication_data_);if(publication_counts_)cudaFree(publication_counts_);
+     if (arena_) cudaFree(arena_);
+     void* hosts[] = {h_tok_, h_step_, h_pos_, h_commit_, h_ple_, h_out_, h_x_, h_ids_, h_w_, h_seq_, h_flag_, h_ymiss_,
+                      h_flagA_, h_plan_, h_flagB_};
+@@ -465,6 +467,8 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
+     }
+     const char* wp=std::getenv("STRATA_Q4_WAIT_PROFILE");
+     if(wp&&wp[0]=='1') {if(cudaMalloc((void**)&wait_stats_,6*sizeof(unsigned long long))!=cudaSuccess){err="wait stats allocation";return false;}cudaMemset(wait_stats_,0,6*sizeof(unsigned long long));}
++    const char* publication_switch=std::getenv("STRATA_Q4_PUBLICATION_TRACE");
++    if(publication_switch){publication_detail_=publication_switch[0]=='1';if(cudaMalloc((void**)&publication_data_,publication_kinds_*publication_cap_*4*8)!=cudaSuccess||cudaMalloc((void**)&publication_counts_,publication_kinds_*8)!=cudaSuccess){err="publication trace allocation";return false;}cudaMemset(publication_counts_,0,publication_kinds_*8);}
+     prof_on_ = std::getenv("STRATA_VERIFY_PROFILE") != nullptr;
+     if (prof_on_) {
+         const size_t np = (size_t) g.n_layers * kProfPer + 4;
+@@ -577,6 +581,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+ 
+     // ---- the window's inputs, from mapped staging
+     copy_i32_from_mapped(tok_, m_tok_, T, cs);
++    if(publication_detail_)publication_mark(9,0,cs);
+     copy_i32_from_mapped(step_, m_step_, (int64_t) T * kStepCount, cs);
+     copy_i32_from_mapped(pos_, m_pos_, (int64_t) MT * (NH + NKV + IQ), cs);
+     // per-ROW positions of the K rows [t][NKV] and the indexer query rows [t][IQ] (for batched RoPE)
+@@ -915,6 +920,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             cudaEventRecord(ev_fork_, cs);
+             cudaStreamWaitEvent(sh_cs_, ev_fork_, 0);
+         }
++        if(publication_detail_)publication_mark(3,(uint32_t)((l-lb_)*G+grp+1),sh_stream);
+         // the window's rows routed in 2 launches (one router GEMV reading the weight once, one
+         // top-10) instead of 2 per token; every row's arithmetic is the single-token call's (STRATA_DEC_BATCH=0: old)
+         const WeightRef* w_router = v.get("ffn_gate_inp.weight");
+@@ -989,6 +995,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                 err = std::string("verify shared expert: ") + e.what();
+                 return false;
+             }
++            if(publication_detail_)publication_mark(4,(uint32_t)((l-lb_)*G+grp+1),sh_stream);
+             if (sh_fork) cudaEventRecord(ev_join_, sh_cs_);
+         }
+         if (strata::kernels::cpu::expert_layout().native)
+@@ -1045,14 +1052,14 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                 wait_flag_ge_or(m_flagA_, ring, skip_ + grp, cs);
+                 copy_i32_from_mapped_unless(pl, m_plan_ + (size_t) grp * (size_t) plan_i32_, plan_i32_, skip_ + grp, ring, cs);
+             } else {
+-                if(wait_stats_)wait_flag_ge_timed(m_flagA_,ring,wait_stats_+0,cs);else wait_flag_ge(m_flagA_, ring, cs);                  // the pool published this group's GPU plan
++                if(wait_stats_)wait_flag_ge_timed(m_flagA_,ring,wait_stats_+0,cs,publication_detail_?publication_data_:nullptr,publication_counts_,publication_cap_);else wait_flag_ge(m_flagA_, ring, cs);                  // the pool published this group's GPU plan
+                 copy_i32_from_mapped(pl, m_plan_ + (size_t) grp * (size_t) plan_i32_, plan_i32_, cs);
+             }
+             stamp(l, 19, grp);
+             grouped(p_ptr, p_start, p_counts, 0, hit_out);
+             stamp(l, 20, grp);
+             if (device_plan_) wait_flag_ge_or(m_flagB_, ring, skip_ + grp, cs);
+-            else if(wait_stats_)wait_flag_ge_timed(m_flagB_,ring,wait_stats_+2,cs);else wait_flag_ge(m_flagB_, ring, cs);                 // the PCIe share is in staging (DMA) or mapped
++            else if(wait_stats_)wait_flag_ge_timed(m_flagB_,ring,wait_stats_+2,cs,publication_detail_?publication_data_+publication_cap_*4:nullptr,publication_counts_?publication_counts_+1:nullptr,publication_cap_);else wait_flag_ge(m_flagB_, ring, cs);                 // the PCIe share is in staging (DMA) or mapped
+             if (sink_.pcie_mode == 2) {                            // stage it with a copy kernel, then point at staging
+                 const int64_t per = G == 2 ? kStagingBlobs / 2 : kStagingBlobs;
+                 uint8_t* stage = staging_ + (size_t) (grp * per) * lay.max_blob;
+@@ -1069,7 +1076,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                 copy_or_zero_from_mapped(parts_out, m_ymiss_ + (size_t) tb * K * N, (long long) n * K * N,
+                                          skip_ + grp, ring, cs);
+             } else {
+-                if(wait_stats_)wait_flag_ge_timed(m_flag_,ring,wait_stats_+4,cs);else wait_flag_ge(m_flag_, ring, cs);               // the CPU's share is in the mapped rows
++                if(wait_stats_)wait_flag_ge_timed(m_flag_,ring,wait_stats_+4,cs,publication_detail_?publication_data_+publication_cap_*8:nullptr,publication_counts_?publication_counts_+2:nullptr,publication_cap_);else wait_flag_ge(m_flag_, ring, cs);               // the CPU's share is in the mapped rows
+                 stamp(l, 23, grp);
+                 if (remote_opt_)   // #578: the helper's rows come back reduced; skip them as well
+                     remote_opt_->copy_rows(parts_out, m_ymiss_ + (size_t) tb * K * N, tb, n, p_dst, p_counts + 1, cs);
+@@ -1081,9 +1088,11 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             }
+             moe_hit_add(parts_out, hit_out, p_dst, p_counts + 1, cap, N, cs);
+         }
++        if(publication_detail_)publication_mark(5,ring,cs);
+         if (!prof_on_ && sh_cs_ != nullptr && ev_fork_ != nullptr && ev_join_ != nullptr) {
+             cudaStreamWaitEvent(cs, ev_join_, 0);
+         }
++        if(publication_detail_)publication_mark(6,ring,cs);
+         if (dec_batch && n > 1 && native_moe_combine_enabled()) {   // one launch for the window's rows
+             try {
+                 native_moe_combine_multi(parts_ + (size_t) tb * K * N, w_ + tb * K, shared_ + tb * N, bo_ + tb * N, N, K, n, cs);
+@@ -1097,6 +1106,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         if (remote_opt_) remote_opt_->combine(bo_ + tb * N, y_dummy_ + tb * N, tb, n,
+                               device_plan_ ? skip_ + grp : nullptr, ring, cs);
+         stamp(l, 24, grp);
++        if(publication_detail_)publication_mark(7,ring,cs);
+         if (l == g.n_layers - 1) {
+             if (!fuse_head_gr) {
+                 for (int t = tb; t < te; ++t) gr_write(Rt(t), bo_ + t * N, inj2_ + t * HC, gs, Rt(t), cs);
+@@ -1120,6 +1130,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         copy_from_mapped(hout, R_, (int64_t) T * HC * N, cs);
+         copy_from_mapped(hout + (size_t) T * HC * N, bo_, (int64_t) T * N, cs);
+         copy_from_mapped(hout + (size_t) T * (HC + 1) * N, inj2_, (int64_t) T * HC, cs);
++        if(publication_detail_)publication_mark(10,0,cs);
+         return true;
+     }
+ 
+@@ -1176,14 +1187,33 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         sample_tokens(head_logits_, T, (int) n_vocab_, nullptr, 0, sp, m_out_, cs);
+     }
+     stamp(g.n_layers, 1, 0);
++    if(publication_detail_)publication_mark(10,0,cs);
+     return true;
+ }
+ 
++void Verifier::publication_mark(int kind,uint32_t value,void* stream){if(!publication_data_)return;strata::kernels::q4_trace_mark(publication_data_+kind*publication_cap_*4,publication_counts_+kind,publication_cap_,value,stream);}
++void Verifier::publication_trace_calibrate(int boundary){
++ if(!publication_data_)return;const OnDevice on_device(device_);
++ publication_cal_host_[2*boundary]=strata::research::Q4Tape::ns();
++ publication_mark(8,uint32_t(boundary),cs_);
++ unsigned long long sample[4]{};cudaMemcpyAsync(sample,publication_data_+8*publication_cap_*4+boundary*4,sizeof(sample),cudaMemcpyDeviceToHost,cs_);cudaStreamSynchronize(cs_);
++ publication_cal_host_[2*boundary+1]=strata::research::Q4Tape::ns();
++}
++void Verifier::publication_trace_begin(){if(!publication_data_)return;publication_measured_=strata::research::q4_tape.active;const OnDevice on_device(device_);cudaMemset(publication_counts_,0,publication_kinds_*8);publication_trace_calibrate(0);}
+ void Verifier::wait_report(){
+     if(!wait_stats_)return;const OnDevice on_device(device_);unsigned long long s[6]{};
+     // Request completion has already waited for final commit; no routed-event sync.
+     cudaMemcpy(s,wait_stats_,sizeof(s),cudaMemcpyDeviceToHost);
+     std::fprintf(stderr,"Q4_WAIT_END device=%d plan_ns=%llu plan_count=%llu mapped_ns=%llu mapped_count=%llu cpu_ns=%llu cpu_count=%llu metadata_bytes=48\n",device_,s[0],s[1],s[2],s[3],s[4],s[5]);
++    if(publication_data_){
++      publication_trace_calibrate(1);unsigned long long counts[publication_kinds_]{};cudaMemcpy(counts,publication_counts_,sizeof(counts),cudaMemcpyDeviceToHost);
++      const char* prefix=std::getenv("STRATA_Q4_ORACLE_LOG");
++      if(prefix&&publication_measured_){std::string path=std::string(prefix)+"-gpu"+std::to_string(device_)+"-trace.bin";FILE* f=std::fopen(path.c_str(),"wbx");strata::research::Q4Tape::require(f,"GPU trace exists");
++       uint64_t header[20]={1,uint64_t(device_),publication_cap_,publication_kinds_,publication_detail_};for(int i=0;i<11;++i)header[5+i]=counts[i];for(int i=0;i<4;++i)header[16+i]=publication_cal_host_[i];strata::research::Q4Tape::io(f,header,20,true);
++       std::vector<unsigned long long> buffer(publication_cap_*4);for(int i=0;i<11;++i){size_t n=std::min<size_t>(counts[i],publication_cap_);if(n)cudaMemcpy(buffer.data(),publication_data_+i*publication_cap_*4,n*32,cudaMemcpyDeviceToHost);strata::research::Q4Tape::io(f,buffer.data(),n*4,true);}std::fclose(f);
++      }
++      std::fprintf(stderr,"Q4_GPU_TRACE device=%d detail=%d alloc_bytes=%zu A=%llu B=%llu CPU=%llu shared_begin=%llu shared_end=%llu prejoin=%llu postjoin=%llu layer_end=%llu calibration=%llu overflow=%d\n",device_,publication_detail_,publication_kinds_*publication_cap_*32+publication_kinds_*8,counts[0],counts[1],counts[2],counts[3],counts[4],counts[5],counts[6],counts[7],counts[8],std::any_of(counts,counts+11,[](auto v){return v>publication_cap_;}));
++    }
+     cudaMemsetAsync(wait_stats_,0,sizeof(s),cs_);
+ }
+ std::string Verifier::profile_report() {
+@@ -1530,7 +1560,7 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
+             _mm_sfence();
+             ms_host += ms_since(tp);
+         }
+-        if (!(test_stall && k + 1 == steps)) *flag = want;
++        if (!(test_stall && k + 1 == steps)) {strata::research::q4_oracle.other_flag(2,false);*flag = want;strata::research::q4_oracle.other_flag(2,true);}
+         ms_wait += std::chrono::duration<double, std::milli>(b - a).count();
+         ms_pool += ms_since(b);
+     }
+@@ -1634,7 +1664,7 @@ void Verifier::raise_flag(uint32_t* flag, uint32_t value) {
+ void Verifier::fetch_dma(void* ctx, const uint8_t* const* src, int n, size_t bytes) {
+     Verifier* v = (Verifier*) ctx;
+     const uint32_t want = v->cur_layer_ + 1;
+-    if (n <= 0) { raise_flag(v->h_flagB_, want); return; }
++    if (n <= 0) { strata::research::q4_oracle.other_flag(1,false);raise_flag(v->h_flagB_, want);strata::research::q4_oracle.other_flag(1,true); return; }
+     v->copy_used_ = true;
+     uint8_t* stage = (uint8_t*) v->sink_.staging;                  // this group's half in a split window
+     for (int i = 0; i < n; ++i) cudaMemcpyAsync(stage + (size_t) i * bytes, src[i], bytes, cudaMemcpyHostToDevice, v->copy_);
+@@ -1646,8 +1676,10 @@ void Verifier::fetch_dma(void* ctx, const uint8_t* const* src, int n, size_t byt
+ 
+ void Verifier::publish_plan(void* ctx) {
+     Verifier* v = (Verifier*) ctx;
++    strata::research::q4_oracle.flag_a(false);
+     _mm_sfence();
+     *(volatile uint32_t*) v->h_flagA_ = v->cur_layer_ + 1;
++    strata::research::q4_oracle.flag_a(true);
+ }
+ 
+ bool Verifier::window_logprobs(const int32_t* targets, int T, int64_t pos0, int32_t extra_id, std::FILE* out,
+diff --git a/src/kernels/cuda/verify_kernels.cu b/src/kernels/cuda/verify_kernels.cu
+index 7e59dd4..2a86d99 100644
+--- a/src/kernels/cuda/verify_kernels.cu
++++ b/src/kernels/cuda/verify_kernels.cu
+@@ -639,14 +639,20 @@ void copy_or_zero_from_mapped(float* dst, const float* src, long long n, const u
+ 
+ namespace {
+ __device__ unsigned long long wait_clock(){unsigned long long v;asm volatile("mov.u64 %0, %%globaltimer;":"=l"(v));return v;}
+-__global__ void wait_flag_ge_timed_kernel(const volatile uint32_t* flag,uint32_t value,unsigned long long* stats){
++__global__ void wait_flag_ge_timed_kernel(const volatile uint32_t* flag,uint32_t value,unsigned long long* stats,unsigned long long* records,unsigned long long* count,size_t cap){
+     unsigned long long begin=wait_clock();while(*flag<value)strata_spin_pause();unsigned long long end=wait_clock();
+     __threadfence_system();stats[0]+=end-begin;stats[1]+=1;
++    if(records){unsigned long long i=(*count)++;if(i<cap){auto* r=records+4*i;r[0]=begin;r[1]=end;r[2]=value;r[3]=i;}}
+ }
+ }
+-void wait_flag_ge_timed(const uint32_t* flag,uint32_t value,unsigned long long* stats,void* stream){
+-    wait_flag_ge_timed_kernel<<<1,1,0,(cudaStream_t)stream>>>(flag,value,stats);check("wait_flag_ge_timed");
++void wait_flag_ge_timed(const uint32_t* flag,uint32_t value,unsigned long long* stats,void* stream,unsigned long long* records,unsigned long long* count,size_t cap){
++    wait_flag_ge_timed_kernel<<<1,1,0,(cudaStream_t)stream>>>(flag,value,stats,records,count,cap);check("wait_flag_ge_timed");
+ }
++namespace {
++__global__ void q4_trace_mark_kernel(unsigned long long* records,unsigned long long* count,size_t cap,uint32_t value){auto t=wait_clock();auto i=(*count)++;if(i<cap){auto* r=records+4*i;r[0]=t;r[1]=t;r[2]=value;r[3]=i;}}
++}
++void q4_trace_mark(unsigned long long* records,unsigned long long* count,size_t cap,uint32_t value,void* stream){q4_trace_mark_kernel<<<1,1,0,(cudaStream_t)stream>>>(records,count,cap,value);check("q4_trace_mark");}
++
+ void wait_flag_ge(const uint32_t* flag, uint32_t value, void* stream) {
+     wait_flag_ge_kernel<<<1, 1, 0, (cudaStream_t) stream>>>(flag, value);
+     check("wait_flag_ge");
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 09f43de..3073657 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -7077,6 +7077,7 @@ int main(int argc, char** argv) {
+             for (int64_t i = 0; i < n - 1; ++i) consumed.push_back((int32_t) ids[(size_t) i]);
+             const char* finish = "length";
+             if(strata::research::q4_tape.enabled){apply_pending(true);strata::research::q4_tape.begin(ids,max_new,host_res.data(),drive.d.usage.data(),rounds);strata::research::q4_state.begin(ss,stages[0]->ss,mtp.kv_state(),g,n);}
++            ver.publication_trace_begin();for(auto& stage:stages)stage->ver.publication_trace_begin();
+             const Clock::time_point d0 = Clock::now();
+             strata::research::q4_oracle.begin();
+             // STRATA_DECODE_TIMING=1: where a request's decode time goes (one line per request)

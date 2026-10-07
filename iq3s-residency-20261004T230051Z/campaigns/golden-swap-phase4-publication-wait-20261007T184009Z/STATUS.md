@@ -1,26 +1,42 @@
-# Status
+# Phase 4 execution status
 
-**PLANNED_NOT_STARTED**
+Step 5/5 — Gzip result regeneration and source recovery passed; final audit and publication next
 
-The user requested an experiment plan, a working directory, and the document
-from which tests will start. That preparation is complete; runtime implementation
-and all measurements remain future work under [GOAL.md](GOAL.md).
+Elapsed 82.8 min; remaining 157.2 min; ETA unknown.
 
-- Current state: execution brief prepared; planning-package validation passed.
-- Inference requests: 0 of 6 planned.
-- New source patches/builds: none.
-- Execution start/deadline/elapsed: not started; no inherited clock.
-- Planned execution cap: 4 hours; stop substantial new work at 3h15.
-- Next action: after an explicit start, record the clock and perform Step 1/5.
-- ETA for completing the experiment: unknown; allocations are in the protocol.
-
-Existing Phase 3 inputs and source were inspected read-only. The source map
-records that `STRATA_VERIFY_PROFILE` changes shared-stream scheduling and must
-remain unset. The public research index distinguishes this plan from completed
-Phase 3 results. No server or GPU workload was launched during preparation.
-
-[Planning validation](checks/plan-validation.json) verifies 23 frozen repository
-references and 11 local input/source identities. The initial payload check used
-a canonical JSON hash as a file hash; both identities now have separate checks,
-with the failure and repair retained in [the identity note](checks/identity-check-repair.json).
-Runtime instrumentation, safety fixtures and overhead gates are not yet tested.
+```json
+{
+  "utc": "2026-10-07T21:12:01.359718+00:00",
+  "step": 5,
+  "message": "Gzip result regeneration and source recovery passed; final audit and publication next",
+  "elapsed_s": 4967.294330456993,
+  "remaining_s": 9432.705669543007,
+  "eta": "unknown",
+  "execution_run": "/srv/ai/research/iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase4-publication-wait-20261007T184009Z/runs/20261007T194914Z",
+  "clock": {
+    "start_utc": "2026-10-07T19:49:14.064443+00:00",
+    "deadline_utc": "2026-10-07T23:49:14.064443+00:00",
+    "start_monotonic": 550474.932686491,
+    "budget_s": 14400,
+    "stop_substantial_s": 11700,
+    "reset": false,
+    "planning_time_excluded": true
+  },
+  "status": "RUNNING",
+  "version": "trace-v2",
+  "completed_requests": 8,
+  "planned_requests": 8,
+  "next_action": "Validate frozen identities, staged archive audit, commit/push/remote verify",
+  "block": 3,
+  "task": "math-rational",
+  "arm": "ALL",
+  "valid": true,
+  "phase": "idle",
+  "model": null,
+  "owned_pid": null,
+  "operating_s": 99.99469541304279,
+  "retained_v1_requests": 2,
+  "planned_execution_total": 8,
+  "valid_requests": 8
+}
+```

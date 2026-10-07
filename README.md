@@ -24,16 +24,18 @@ Its original absolute path remains
 manifests and existing reproduction commands retain their original addressing.
 The repository root on this host is `/srv/ai/research`.
 
-Start with the [research index](docs/research-index.md). The latest completed
+Start with the [research index](docs/research-index.md). A prior completed
 study is [Golden Swap Phase 3](iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase3-20261007T150955Z/report.md):
 36/36 valid main and 6/6 RFC8259 replay requests. Incoming-query memoization
 removed about 97% of targeted recomputation, but no main task met the greater-
 than-3% incremental practical gain criterion. Inventory and Chinook retain
 conditional gains against current; remaining publication/wait attribution is
-unresolved. [Phase 4's execution brief](iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase4-publication-wait-20261007T184009Z/GOAL.md)
-is prepared, with no tests started: one development tape and six paired
-instrumentation measurements. This remains oracle-incoming research.
-Normal Q4 / K24 / PCIe 0.28 / pool 100 us serving remains unchanged.
+unresolved. [Phase 4's report](iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase4-publication-wait-20261007T184009Z/report.md)
+records six valid v2 CONTROL/TRACE requests plus the retained v1 pair. Replay
+fidelity passed; the symmetric instrumentation-neutrality gate failed. Structural
+publication overlap is retained, but quantitative completion-path attribution
+remains blocked. The Phase 3 post-hoc chronology correction leaves its headline
+performance conclusion and timed measurements unchanged.
 
 Reports, scripts, patches, contracts, compact JSON/CSV results, small numeric
 model exports and research plots belong in Git. Build trees, model weights,

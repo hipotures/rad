@@ -70,3 +70,7 @@ Each gzip is a complete source file strictly smaller than10MiB; originals remain
 Four completed namespaces were packed and verified against originals: main/offline/development raw text, runner logs, isolated reproduction text and fixture text. `code/publish_text.py` records their exact pack/verification commands; it refuses to overwrite these namespaces. Raw binary journals/tapes are not in Git. The publication manifest and `artifact-manifest.json` state every non-text omission and the host-local recovery gap.
 
 The root publication suite was actually run: 26 tests passed. The initial analysis field-name mismatch and source comparison of Git LF blobs with declared CRLF checkouts are retained, with the exact minimal repairs. No request was rerun to repair those analysis/reconstruction issues.
+
+## Post-hoc chronology correction
+
+Without inference, run `code/live_trajectory.py --output <fresh-output.json>` using the recorded NumPy environment, then `tests/chronology_regression.py`. The original analysis and outputs are retained under `corrections/publication-chronology-20261007/original/`. This exercises retained admission/layer journals, not new GPU requests. See the correction summary for unchanged timing-result hashes.

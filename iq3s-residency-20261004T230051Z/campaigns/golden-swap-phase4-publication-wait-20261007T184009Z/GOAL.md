@@ -1,11 +1,12 @@
 # Golden Swap Phase 4: publication acknowledgment and consumer wait
 
-Status: **PLANNED_NOT_STARTED**. This document is the execution brief for a later,
-explicit start. Preparing this directory does not start its clock, build the
-runtime, or authorize an automatic follow-on campaign. Once asked to execute
-this brief, carry the bounded experiment through implementation, validation,
-measurement, analysis, cleanup, commit, push, and remote verification without
-asking the operator to launch each internal step.
+Status: **AUTHORIZED_READY_TO_FREEZE**. The user has authorized the connected
+Phase3 correction, this protocol repair, and immediate Phase4 execution in
+[REQUEST.md](REQUEST.md). Validate and freeze this corrected protocol, then start
+a fresh four-hour execution clock and complete implementation, measurements,
+analysis, cleanup, commit, push and remote verification in the same goal. Do not
+ask the operator to launch tests separately. Protocol v1 is preserved under
+`protocol-history/v1/`.
 
 ## 1. Objective and decision
 
@@ -245,24 +246,55 @@ consumer. Do not add the wait duration as another compute node after already
 accounting for the producer that caused it. Validate this on synthetic fork/join
 fixtures before interpreting a runtime graph.
 
-Compute a **fixed-trace sensitivity interval** by shortening only acknowledgment
-readiness, from unchanged duration to the earliest known completed-weight
-predecessor, while retaining recorded model work, admission decisions and
-dependencies outside that acknowledgment subgraph. This idealizes the metadata
-and notification operations within the subgraph; list those operations rather
-than double-counting their host wait as independent work. Propagate using
-maximum predecessor completion at joins. Also report a tighter scenario that
-retains measured metadata-service constraints when those are actually known.
-Zero acknowledgment is an idealized upper opportunity, not a safe executable
-policy: some metadata work is required.
-Missing competing edges force a wider bound, including zero when necessary.
-Do not move downstream readiness earlier merely by subtracting one timer from
-decode. Record CPU/mapped and shared-path masking explicitly.
+### Fixed counterfactual scenarios and their separate uncertainty
 
-Distinguish three outputs: measured host acknowledgment time; measured/bounded
-consumer overlap; and modeled change to recorded completion. Even a precise
-modeled contribution does not establish an achievable speedup or unchanged
-policy under a future asynchronous publication implementation.
+The **RECORDED baseline** leaves observed publication and dependencies unchanged.
+Define one primary constrained scenario, **C_NOTIFY_TAIL**: remove only post-ready
+coordination latency between a copy worker's completed notification/unlock return
+and the host's acknowledgment wait return, retaining all measured host wait
+thread CPU. For each publication j:
+
+```text
+CPU_wait_j = max(0, host_wait_cpu_end_j - host_wait_cpu_begin_j)
+delta_primary_j = max(0, host_ack_wait_end_j
+                         - worker_notify_unlock_return_j - CPU_wait_j)
+```
+
+This is one fixed intervention, not a sweep from zero to all delay. Preserve
+worker command/wakeup, metadata submits, CUDA-completion observation, ack state
+store/notification/mutex unlock, all measured host-wait CPU, publication
+validation, ownership commit, and all required downstream work/edges. If worker
+notification-return observation is later than host resume, this rule removes
+zero. It eliminates a conservatively identified host post-ready scheduling gap;
+it does not remove required metadata service.
+
+For that **same fixed scenario c**, compute:
+
+```text
+S_c = (T_recorded - T_counterfactual_c) / T_recorded
+[S_c_min, S_c_max] = uncertainty in S_c for scenario c
+```
+
+Propagate clock/bracket uncertainty, missing or unsupported dependency edges,
+host timestamp ambiguity and graph residuals. This interval varies evidence
+consistent with the recorded trace, not intervention strength. It can include
+zero because of missing/masking dependencies, but does not include the unchanged
+baseline by definition. Never use a baseline-to-idealized intervention range as
+an uncertainty interval. Point reconstructions, if shown, remain labeled and
+cannot decide a threshold without their bounds.
+
+Separately model **I_EARLIEST_SAFE**: acknowledgment readiness at its actual
+publication command availability, after completed weights and publication
+validation. This deliberately idealizes metadata/notification service to zero
+and remains an opportunity upper bound, not an executable optimization. Preserve
+external model work and ownership/read-safety order. Report its own uncertainty
+interval, distinct from C_NOTIFY_TAIL. Do not remove metadata service from the
+primary scenario just because exact DMA-only time is unavailable.
+
+Propagate both scenarios through actual maximum-predecessor readiness at joins.
+Missing competing edges widen the bounds and can force a zero lower contribution.
+Report measured host wait, measured/bounded consumer overlap, and modeled
+completion change separately. No counterfactual is measured acceleration.
 
 ## 7. Fixtures before complete replay
 
@@ -316,12 +348,12 @@ Do not rerun a valid point to improve signs or remove CPU steal.
 
 After the first pair, inspect fidelity, event association, gross overhead and
 remaining budget. If unsafe or overflowed, stop inference and repair. If either
-decode or completion-wall overhead exceeds 10%, diagnose before continuing.
+absolute decode or completion-wall change exceeds 10%, diagnose before continuing.
 Complete the three pairs if safe and usable; do not stop on an attractive trace.
 
 Declare detailed instrumentation acceptable for quantitative attribution only
-when median paired decode and completion-wall increases are each at most 3%,
-fewer than two pairs exceed 5% on either metric, and no pair differs by more
+when the absolute median paired decode and completion-wall changes are each
+at most 3%, fewer than two pairs exceed 5% in absolute value on either metric, and no pair differs by more
 than 10% in absolute value on either metric. A large speedup can also indicate
 scheduling perturbation. Check workload/transaction distributions and first
 visibility divergence in addition to timing; low overhead alone is insufficient.
@@ -361,9 +393,9 @@ The following are prioritization rules, not performance claims:
 
 | Primary conclusion | Required evidence | Next action to recommend |
 |---|---|---|
-| PUBLICATION_ON_OBSERVED_DEPENDENCY_PATH | All gates pass; fixed-trace sensitivity lower bound exceeds 3% of decode in every TRACE run | Design one safe publication-coordination optimization, then measure it with same-policy controls |
-| PUBLICATION_SMALL_ON_TESTED_TRAJECTORY | Gates pass; idealized contribution upper bound is below 1% in every TRACE run | Prioritize the largest measured remaining host/CPU/mapped component, with its uncertainty |
-| PUBLICATION_MOSTLY_HIDDEN_ON_TESTED_TRAJECTORY | Publication overlaps wait A substantially, but complete competing edges bound path contribution below 1% in every TRACE run | Investigate the dependency that absorbs it; retain stage-versus-wall distinction |
+| PUBLICATION_ON_OBSERVED_DEPENDENCY_PATH | All gates pass; C_NOTIFY_TAIL uncertainty lower bound exceeds 3% of decode in every TRACE run | Design one safe publication-coordination optimization, then measure it with same-policy controls |
+| PUBLICATION_SMALL_ON_TESTED_TRAJECTORY | Gates pass; I_EARLIEST_SAFE uncertainty upper bound is below 1% in every TRACE run | Prioritize the largest measured remaining host/CPU/mapped component, with its uncertainty |
+| PUBLICATION_MOSTLY_HIDDEN_ON_TESTED_TRAJECTORY | Publication overlaps wait A substantially, but complete competing edges bound I_EARLIEST_SAFE contribution below 1% in every TRACE run | Investigate the dependency that absorbs it; retain stage-versus-wall distinction |
 | ATTRIBUTION_INCONCLUSIVE | Intermediate/variable bounds, insufficient valid pairs, or incomplete clock/dependency coverage | State one smallest missing measurement |
 | INSTRUMENTATION_OR_FIDELITY_BLOCKED | An unrepaired fidelity, indexing, capacity or overhead failure prevents interpretable traces | Preserve failures and the minimal repair required |
 
@@ -395,8 +427,8 @@ time and one strongest next experiment. Do not automatically start Phase 5.
 ## 10. Start instructions
 
 Use [reproduce.md](reproduce.md) to validate this planning package without GPU
-execution. When explicitly asked to begin the experiment, record a fresh clock
-and execute Steps 1–5 above inside this campaign and its declared external
+execution. The explicit execution request is already supplied. After repaired validation
+and freezing, immediately record a fresh clock and execute Steps 1–5 above inside this campaign and its declared external
 workspace. Instrumentation and the new inference runner still need to be
 implemented in Step 2; this planning package does not claim that a Phase 4
 benchmark command or compiled instrumented binary already exists.

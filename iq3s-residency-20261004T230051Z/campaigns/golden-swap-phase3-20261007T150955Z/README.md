@@ -13,3 +13,5 @@ The [report](report.md) answers all twelve research questions. [Paired results](
 - [Runtime identity](configs/runtime-identity.json), [source patches](patches/phase3.diff), [reproduction](reproduce.md), [run order](run-order.json).
 
 Raw binary data/builds remain external in the recorded task workspace. Eligible completed text evidence is published with the repository gzip workflow at finalization. Reproduction checks are not claimed complete before their actual outcomes exist.
+
+The [publication chronology erratum](corrections/publication-chronology-20261007/erratum.md) corrects array-position attribution without rerunning inference or changing performance results. Exact worker-readiness causation remains unresolved.

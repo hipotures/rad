@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "protocol_id": "golden-swap-phase4-publication-wait-v1",
+  "state": "PLANNED_NOT_STARTED",
+  "execution_document": "GOAL.md",
+  "scope": "One exposed development trajectory; fixed-policy consumer-wait attribution and instrumentation guard",
+  "execution_budget": {
+    "max_wall_seconds": 14400,
+    "stop_substantial_work_after_seconds": 11700,
+    "finalization_reserve_seconds": 2700,
+    "start": "On explicit execution, before substantive work; never directory timestamp"
+  },
+  "task": {
+    "id": "math-rational",
+    "role": "development",
+    "prior_exposure": true,
+    "tool_execution": false,
+    "configured_context": 32768,
+    "input_tokens": 10943,
+    "emitted_tokens": 2048,
+    "main_windows": 653,
+    "main_routed_invocations": 31344,
+    "main_lane_entries": 1146240,
+    "mtp_lane_entries": 18480,
+    "end_context_position": "Verify from actual execution"
+  },
+  "runtime": {
+    "parent_source": "f3b4f19157b39ae017e2fd91814c8f5728e3b1cc",
+    "parent_binary_sha256": "1bf524e32fd3233aeb3149231a4f48da1e52401b9f4686bd6669b1690033ae82",
+    "upstream_base": "6f32ec070f23ced9f50e704d854d775da52591ab",
+    "model": "Qwen3.8-Flash-Next",
+    "quantization": "UD-Q4_K_XL",
+    "model_revision": "38bb39ee97821de2c9009abb7e93950eec396e66",
+    "new_source": null,
+    "new_binary_sha256": null,
+    "new_instrumentation_implemented": false,
+    "common_binary_across_arms": true,
+    "gpu_count": 2,
+    "gpu": "RTX 4090 24 GiB",
+    "layer_split": 24,
+    "pcie_fraction": 0.28,
+    "pool_spin_us": 100,
+    "workers": 15,
+    "mtp_spec": 4,
+    "mtp_min_p": 0.5,
+    "kv": "int8",
+    "kv_resident": 32768,
+    "prefill": "auto",
+    "suffix_reuse": false,
+    "serial": true,
+    "charged_spare_slots": 5,
+    "charged_spare_bytes": 17305600
+  },
+  "policy": {
+    "incoming": "full oracle",
+    "incoming_eligibility_invocations": 64,
+    "incoming_order": "inherited first feasible",
+    "victim": "native causal history",
+    "victim_future_queries": 0,
+    "current_window_protection": "inherited privileged",
+    "transaction_control": 1,
+    "post_use_events": 0,
+    "victim_threshold": 0.5,
+    "entry_benefit_assumption_us": 160,
+    "planner_opt": 1
+  },
+  "instrumentation": {
+    "common_wait_profile": 1,
+    "detail_switch_proposed": "STRATA_Q4_PUBLICATION_TRACE",
+    "detail_switch_implemented": false,
+    "must_be_unset": [
+      "STRATA_VERIFY_PROFILE",
+      "STRATA_POOL_TRACE"
+    ],
+    "per_event_disk_io": false,
+    "new_per_event_device_synchronization": false,
+    "trace_buffer_host_cap_bytes": 67108864,
+    "trace_buffer_per_gpu_cap_bytes": 8388608,
+    "matching_buffer_allocations": true,
+    "no_capacity_reduction": true,
+    "clock_calibration": "Freeze bounded count at request boundaries in both arms; propagate mapping uncertainty",
+    "missing_edges": "Unknown, conservative bounds; never zero by default"
+  },
+  "arms": [
+    {
+      "name": "CONTROL",
+      "detail_recording": false
+    },
+    {
+      "name": "TRACE",
+      "detail_recording": true
+    }
+  ],
+  "request_limits": {
+    "planned_requests": 6,
+    "blocks": 3,
+    "attempts_per_unchanged_point_max": 3,
+    "substantive_repairs_max": 1,
+    "execution_inference_attempts_max": 12,
+    "first_pair_is_smoke": true,
+    "startup_plus_warmup_timeout_s": 180,
+    "request_timeout_s": 240,
+    "owned_parent_timeout_s": 440,
+    "cleanup_reserve_per_request_s": 40,
+    "fourth_matching_live_reproduction": false
+  },
+  "instrumentation_gate": {
+    "first_pair_pause_if_positive_overhead_pct_gt": 10,
+    "median_decode_overhead_pct_max": 3,
+    "median_completion_wall_overhead_pct_max": 3,
+    "pairs_above_5pct_on_either_metric_max": 1,
+    "any_pair_absolute_decode_or_wall_change_pct_max": 10,
+    "timing_and_fidelity_both_required": true
+  },
+  "attribution_gate": {
+    "trace_overflow_max": 0,
+    "aliased_or_corrupt_events_max": 0,
+    "wait_time_matched_producer_pct_min": 99,
+    "graph_completion_residual_pct_of_decode_max": 1,
+    "all_uncertainty_propagated": true
+  },
+  "decision_rules": {
+    "material_fixed_trace_lower_bound_pct_of_decode_gt": 3,
+    "small_idealized_upper_bound_pct_of_decode_lt": 1,
+    "hidden_requires_overlap_lower_bound_pct_of_wait_A_at_least": 20,
+    "consistency": "All three TRACE runs; gates must pass",
+    "incomplete_pairs": "Descriptive partial only",
+    "is_measured_speedup": false
+  },
+  "primary_conclusions": [
+    "PUBLICATION_ON_OBSERVED_DEPENDENCY_PATH",
+    "PUBLICATION_SMALL_ON_TESTED_TRAJECTORY",
+    "PUBLICATION_MOSTLY_HIDDEN_ON_TESTED_TRAJECTORY",
+    "ATTRIBUTION_INCONCLUSIVE",
+    "INSTRUMENTATION_OR_FIDELITY_BLOCKED"
+  ],
+  "result": null
+}

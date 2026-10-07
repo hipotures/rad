@@ -14,3 +14,7 @@
 - Measured plan A wait reductions show some dependent-stream exposure, so do not claim all planner work is mostly overlapped. The residual publication contribution to whole-request critical path remains unresolved. Do not force a stronger economics-only conclusion.
 - Fast RFC8259 block1 and Chinook block3 remain in the evidence. Request-phase CPU steal varies; no post-hoc timing correction or repeat was selected.
 - Publish complete eligible text through four verified gzip namespaces under the ordinary20MiB staged-content budget. Non-text binary journals remain local with hashes and explicit recovery limitations. Narrow campaign Git attributes preserve exact source-patch whitespace; archive credential/byte validation remains intact.
+
+## 2026-10-07: post-hoc chronology correction
+
+Admission vector indices did not establish publication chronology. The corrected event/time and same-hook state audit replaces that inference; exact causal attribution remains unresolved in all14 pairs. The original interpretation is preserved, headline/timings are unchanged, and no Phase3 inference was rerun. See corrections/publication-chronology-20261007/erratum.md.

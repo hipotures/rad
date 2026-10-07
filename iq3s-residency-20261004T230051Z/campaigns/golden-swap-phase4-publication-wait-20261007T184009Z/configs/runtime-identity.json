@@ -1,0 +1,35 @@
+{
+  "source": "/srv/ai/work/rad/golden-swap-phase4-publication-wait/20261007T184009Z/repos/runtime",
+  "build": "/srv/ai/work/rad/golden-swap-phase4-publication-wait/20261007T184009Z/builds/runtime",
+  "exe": "/srv/ai/work/rad/golden-swap-phase4-publication-wait/20261007T184009Z/builds/runtime/strata",
+  "source_sha": "95fba2541a57fe6be8290faa639f493c7b8e895f",
+  "binary_sha256": "22b86f775b9e3985361cb8f8a3512c4358df53e03fe24f8b0eab34c06cc9d358",
+  "base_configs_sha256": "2dd93120d9d1c8202304e88c4c6586a8f94692210c1def5bad71fda7a9ffc5f6",
+  "checkpoint_sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
+  "parent_source": "f3b4f19157b39ae017e2fd91814c8f5728e3b1cc",
+  "commands": [
+    [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "-S",
+      "/srv/ai/work/rad/golden-swap-phase4-publication-wait/20261007T184009Z/repos/runtime",
+      "-B",
+      "/srv/ai/work/rad/golden-swap-phase4-publication-wait/20261007T184009Z/builds/runtime",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ninja",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DSTRATA_ENABLE_CUDA=ON",
+      "-DCMAKE_CUDA_ARCHITECTURES=89",
+      "-DSTRATA_BUILD_TESTS=ON",
+      "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325"
+    ],
+    [
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+      "--build",
+      "/srv/ai/work/rad/golden-swap-phase4-publication-wait/20261007T184009Z/builds/runtime",
+      "-j",
+      "8"
+    ]
+  ],
+  "ggml": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325"
+}

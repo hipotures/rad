@@ -1,0 +1,1013 @@
+diff --git a/.venv b/.venv
+new file mode 120000
+index 0000000..d0131dc
+--- /dev/null
++++ b/.venv
+@@ -0,0 +1 @@
++/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv
+\ No newline at end of file
+diff --git a/include/strata/core/layer.hpp b/include/strata/core/layer.hpp
+index aec6e9e..3290309 100644
+--- a/include/strata/core/layer.hpp
++++ b/include/strata/core/layer.hpp
+@@ -31,6 +31,7 @@
+ // activation format for all five would be a 0.66-1.41% error on the three that matter - measured, in
+ // `s_gemv_q8k_parity` and `bf16_gemv_parity`.
+ #pragma once
++#include "strata/kernels/q4_trace.hpp"
+ 
+ #include "strata/core/layout.hpp"
+ #include "strata/core/weights.hpp"
+@@ -186,7 +187,7 @@ bool moe_finish(const WeightTable& tables, const ModelGeometry& g, int64_t layer
+ bool moe_shared(const WeightTable& tables, const ModelGeometry& g, int64_t layer, const MoEBuffers& b,
+                 const float* x, void* stream, std::string& err);
+ bool moe_combine_parts(const ModelGeometry& g, int64_t layer, int64_t k, const MoEBuffers& b, const float* parts,
+-                       float* out, void* stream, std::string& err);
++                       float* out, void* stream, std::string& err,strata::kernels::Q4KernelTrace trace={});
+ 
+ /// Plan v0.3 P3 (default ON): the shared expert runs at the END OF `pre[l]`, after the doorbell has rung, so
+ /// the GPU computes it while the host runs the CPU pool; `post[l]` then only combines.  Same kernels on the
+diff --git a/include/strata/core/verify.hpp b/include/strata/core/verify.hpp
+index e68f7b3..48d565c 100644
+--- a/include/strata/core/verify.hpp
++++ b/include/strata/core/verify.hpp
+@@ -20,6 +20,7 @@
+ // Requires the default native decode configuration (native projections, fused GR, fused GDN, fast attention and
+ // selection, native indexer) and a profile-filled VRAM expert tier with its residency table on the device.
+ #pragma once
++#include "strata/kernels/q4_trace.hpp"
+ 
+ #include <cstdio>
+ 
+@@ -211,6 +212,9 @@ public:
+     /// STRATA_VERIFY_PROFILE=1 - GPU stage times of the windows since the last call (ms per
+     /// window), as one line; empty when off.
+     std::string profile_report();
++    void wait_report();
++    void publication_trace_begin();
++    void publication_trace_calibrate(int boundary);
+ 
+ private:
+     RemoteExpertOpt* remote_opt_ = nullptr;
+@@ -278,6 +282,13 @@ private:
+     size_t trace_n_ = 0;
+     static constexpr int kProfPer = 33;              // stamps per layer (32 left the hc-read second
+                                       // half's up-stamp at slot 32 = the next layer's slot 0: D8)
++    static constexpr size_t publication_cap_=20000,publication_kinds_=11;
++    unsigned long long *publication_data_=nullptr,*publication_counts_=nullptr;
++    bool publication_detail_=false,publication_measured_=false;
++    strata::kernels::Q4KernelTrace publication_kernel(int kind,uint32_t value);
++    uint64_t publication_cal_host_[4]{};
++    void publication_mark(int kind,uint32_t value,void* stream);
++    unsigned long long* wait_stats_ = nullptr; // Six counters, request-scoped, opt-in.
+     bool prof_on_ = false;
+     unsigned long long* prof_ = nullptr;              // device: n_layers * kProfPer + 4 stamps
+     std::vector<unsigned long long> prof_h_;
+diff --git a/include/strata/kernels/native_moe.hpp b/include/strata/kernels/native_moe.hpp
+index 34760ef..598370a 100644
+--- a/include/strata/kernels/native_moe.hpp
++++ b/include/strata/kernels/native_moe.hpp
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include <cstdint>
++#include "strata/kernels/q4_trace.hpp"
+ 
+ namespace strata::kernels {
+ // Configure before constructing/capturing sessions. Existing captures keep their
+@@ -14,8 +15,8 @@ bool native_moe_combine_enabled();
+ // and optional shared is added once afterward. Shared is not router weighted.
+ // Requires a nonnull ordered stream and disjoint output. No allocation or sync.
+ void native_moe_combine(const float* parts, const float* weights, const float* shared,
+-                        float* output, int64_t n_embd, int64_t k, void* stream);
++                        float* output, int64_t n_embd, int64_t k, void* stream,Q4KernelTrace trace={});
+ /// n_tok rows (parts [n,k,N], weights [n,k], shared/output [n,N]) in one launch, each as the single call.
+ void native_moe_combine_multi(const float* parts, const float* weights, const float* shared, float* output,
+-                              int64_t n_embd, int64_t k, int n_tok, void* stream);
++                              int64_t n_embd, int64_t k, int n_tok, void* stream,Q4KernelTrace trace={});
+ }
+diff --git a/include/strata/kernels/q4_trace.hpp b/include/strata/kernels/q4_trace.hpp
+new file mode 100644
+index 0000000..8c66d19
+--- /dev/null
++++ b/include/strata/kernels/q4_trace.hpp
+@@ -0,0 +1,12 @@
++// Optional recorder inside existing kernels; no new launch or global barrier.
++#pragma once
++#include <cstdint>
++#include <cstddef>
++namespace strata::kernels {
++struct Q4KernelTrace {unsigned long long *data=nullptr,*count=nullptr;unsigned int* finished=nullptr;size_t cap=0;uint32_t value=0;};
++#ifdef __CUDACC__
++__device__ inline unsigned long long q4_clock(){unsigned long long t;asm volatile("mov.u64 %0, %%globaltimer;":"=l"(t));return t;}
++__device__ inline void q4_kernel_begin(Q4KernelTrace t){if(t.data&&blockIdx.x==0&&blockIdx.y==0&&threadIdx.x==0){auto i=*t.count;if(i<t.cap)t.data[4*i]=q4_clock();}}
++__device__ inline void q4_kernel_end(Q4KernelTrace t){if(!t.data)return;__syncthreads();if(threadIdx.x==0){__threadfence();auto n=atomicAdd(t.finished,1u);if(n+1==gridDim.x*gridDim.y){auto i=*t.count;if(i<t.cap){auto* r=t.data+4*i;r[1]=q4_clock();r[2]=t.value;r[3]=i;}*t.count=i+1;*t.finished=0;}}}
++#endif
++}
+diff --git a/include/strata/kernels/shared_expert.hpp b/include/strata/kernels/shared_expert.hpp
+index 44b37d8..48ecede 100644
+--- a/include/strata/kernels/shared_expert.hpp
++++ b/include/strata/kernels/shared_expert.hpp
+@@ -15,6 +15,7 @@
+ #pragma once
+ 
+ #include <cstdint>
++#include "strata/kernels/q4_trace.hpp"
+ 
+ #include "strata/kernels/s_gemv.hpp"
+ 
+@@ -33,6 +34,7 @@ bool shared_expert_native_bf16_enabled();
+ /// (n_embd for gate/up, n_ff for down), sized by native_q8_1_bytes. All storage
+ /// must survive graph execution; use one ordered nonnull stream with no overlap.
+ struct NativeSharedWeights {
++    Q4KernelTrace trace{};
+     int gate_type = -1, up_type = -1, down_type = -1;
+     const void* gate_data = nullptr;
+     const void* up_data = nullptr;
+diff --git a/include/strata/kernels/verify_kernels.hpp b/include/strata/kernels/verify_kernels.hpp
+index 50d951a..1a2fc8c 100644
+--- a/include/strata/kernels/verify_kernels.hpp
++++ b/include/strata/kernels/verify_kernels.hpp
+@@ -15,6 +15,7 @@
+ #pragma once
+ 
+ #include <cstdint>
++#include <cstddef>
+ 
+ namespace strata::kernels {
+ 
+@@ -38,6 +39,8 @@ void gdn_step_norm_multi(float* state, const float* h, int conv_channels, const
+ /// Spin until *flag >= value (a mapped host flag).  The value is fixed at capture, so several rings can be
+ /// outstanding at once (the split verify window keeps two).
+ void wait_flag_ge(const uint32_t* flag, uint32_t value, void* stream);
++void wait_flag_ge_timed(const uint32_t* flag, uint32_t value, unsigned long long* stats, void* stream, unsigned long long* records=nullptr, unsigned long long* count=nullptr, size_t cap=0);
++void q4_trace_mark(unsigned long long* records, unsigned long long* count, size_t cap, uint32_t value, void* stream);
+ /// the GPU's %globaltimer (ns) into buf[i] (a one-thread kernel: the verify window's stage profiler).
+ void gpu_stamp(unsigned long long* buf, int i, void* stream);
+ 
+diff --git a/include/strata/research/q4_future_view.hpp b/include/strata/research/q4_future_view.hpp
+new file mode 100644
+index 0000000..ed02b8e
+--- /dev/null
++++ b/include/strata/research/q4_future_view.hpp
+@@ -0,0 +1,31 @@
++// Research-only causal information boundary. FULL is the finite tape, not eternity.
++#pragma once
++#include <algorithm>
++#include <cstdint>
++#include <utility>
++#include <vector>
++namespace strata::research {
++enum class FutureStatus { Known, UnknownBeyondHorizon, FiniteTapeEnd };
++struct FutureUse { FutureStatus status; int event=-1; };
++struct FutureQueryAudit { uint64_t next_calls=0,count_calls=0,unknown=0; int max_visible_ahead=0; };
++template<int Role> struct FutureView {
++ const std::vector<std::vector<std::pair<int,int>>>* index=nullptr;
++ int horizon=0,total_events=0; // 0 means FULL.
++ mutable FutureQueryAudit audit;
++ int end(int now)const{return horizon?std::min(total_events-1,now+horizon):total_events-1;}
++ FutureUse next(int key,int at,int now)const {
++  ++audit.next_calls; const int stop=end(now);
++  const auto& v=(*index)[key]; auto it=std::lower_bound(v.begin(),v.end(),std::make_pair(at,-1));
++  if(it!=v.end()&&it->first<=stop){audit.max_visible_ahead=std::max(audit.max_visible_ahead,it->first-now);return {FutureStatus::Known,it->first};}
++  if(stop<total_events-1){++audit.unknown;return {FutureStatus::UnknownBeyondHorizon,-1};}
++  return {FutureStatus::FiniteTapeEnd,-1};
++ }
++ int count(int key,int at,int until,int now)const {
++  ++audit.count_calls;until=std::min(until,end(now));if(until<at)return 0;
++  const auto& v=(*index)[key];auto it=std::lower_bound(v.begin(),v.end(),std::make_pair(at,-1));int n=0;
++  for(;it!=v.end()&&it->first<=until;++it){n+=it->second;audit.max_visible_ahead=std::max(audit.max_visible_ahead,it->first-now);}return n;
++ }
++};
++using IncomingFutureView=FutureView<0>;
++using VictimFutureView=FutureView<1>;
++}
+diff --git a/include/strata/research/q4_oracle.hpp b/include/strata/research/q4_oracle.hpp
+new file mode 100644
+index 0000000..300923b
+--- /dev/null
++++ b/include/strata/research/q4_oracle.hpp
+@@ -0,0 +1,133 @@
++// Experimental full-work oracle. No effect on normal serving without explicit research configuration.
++#pragma once
++#include "strata/research/q4_tape.hpp"
++#include "strata/research/q4_future_view.hpp"
++#include "strata/research/q4_victim_model.hpp"
++#include <atomic>
++#include <cmath>
++#include <condition_variable>
++#include <functional>
++#include <mutex>
++#include <thread>
++#include <limits>
++#include <ctime>
++#include <climits>
++namespace strata::research {
++struct OracleLayer { uint64_t event,begin,plan_end,cpu_end; int32_t layer,n; int32_t ids[40],slots[40],path[40]; };
++struct OracleEvent { uint64_t issue_ns,stage_begin,stage_end,copy_begin,copy_end,publish_ns; int32_t trigger,target,published_at,layer,incoming,victim,slot,oldslot,status; uint64_t bytes,uses,victim_uses; };
++struct NativeCopy { uint64_t issue_ns,publish_ns,bytes;int32_t window,layer,incoming,victim,slot; };
++// Buffered generation lifecycle evidence; logical units are routed-layer invocations.
++struct LifecycleEvent {int32_t generation,first_use,last_use,distinct_uses,evicted_at,released_at,expiry,reason;};
++// All producer/worker observations use one CLOCK_MONOTONIC domain.
++struct PublicationTrace {uint64_t generation,event,device,cls,validation_begin,command_available,wait_begin,wait_end,cpu_begin,cpu_end,commit_end,worker_observed,metadata_submit,cuda_observed,ack_state,notify_unlock_return;};
++struct ProducerTrace {uint64_t event,hook_begin,publications_end,hook_end,flag_before,flag_after,plan_end,cpu_end,flag_b_before,flag_b_after,flag_cpu_before,flag_cpu_after;};
++struct Q4Oracle {
++ static constexpr size_t pub_trace_cap=65536,host_trace_cap=65536;
++ bool publication_trace=[](){const char* p=std::getenv("STRATA_Q4_PUBLICATION_TRACE");return p&&p[0]=='1';}();
++ std::vector<PublicationTrace> publication_records;
++ std::vector<ProducerTrace> producer_records;
++ uint64_t publication_trace_overflow=0;
++ PublicationTrace* pt(int index){if(!publication_trace)return nullptr;if(index<0||size_t(index)>=pub_trace_cap){++publication_trace_overflow;return nullptr;}return &publication_records[index];}
++ ProducerTrace* ht(){if(!publication_trace||!tracked||!q4_tape.active)return nullptr;if(current<0||size_t(current)>=host_trace_cap){++publication_trace_overflow;return nullptr;}return &producer_records[current];}
++ void other_flag(int kind,bool after){auto* h=ht();if(h){auto& t=kind==1?(after?h->flag_b_after:h->flag_b_before):(after?h->flag_cpu_after:h->flag_cpu_before);t=ns();}}
++ void flag_a(bool after){auto* h=ht();if(h){if(after)h->flag_after=ns();else h->flag_before=ns();}}
++
++ static constexpr int ne=512,nl=48,classes=3; static constexpr uint64_t sizes[3]={3072000,3584000,3993600};
++ bool configured=false,active=false,requested=false,direct=false,check_bytes=false,tracked=false;int horizon=0,strategy=0;int incoming_horizon=0,victim_horizon=0;bool ema_tail=false;static constexpr int eligibility=64;IncomingFutureView incoming_view;VictimFutureView victim_view;
++ mutable std::array<int,48> victim_cache_at{},victim_cache_owner{},victim_cache_history{},victim_cache_best{},victim_cache_slot{};std::array<int,48> ownership_generation{};
++ mutable VictimScorer scorer; int causal_policy=0;double victim_threshold=.4;
++ bool transaction_control=false;int post_use_events=0;static constexpr int protection_cap=16;
++ std::array<int,48*512> leases{};std::array<int,48> protection_version{};
++ std::vector<LifecycleEvent> lifetimes;std::vector<int> protected_keys;std::array<std::array<int,3>,2> protected_occupancy{};
++ mutable uint64_t protection_veto=0,empty_victims=0,enumeration_ns=0,enumerated=0;
++ uint64_t capacity_veto=0,cost_veto=0,victim_cost_veto=0,risk_veto=0,expiry_count=0,release_count=0,late_abort=0;
++ uint64_t history_ns=0;int max_protected=0;
++ int32_t* res=nullptr;const float* heat=nullptr;std::vector<uint64_t> blobs;std::array<int32_t*,2> dres{};
++ std::function<const uint8_t*(int,int)> source;std::function<void*(int,int)> slot;
++ std::vector<std::vector<std::pair<int,int>>> future;std::vector<OracleEvent> events;std::vector<OracleLayer> layers;std::vector<NativeCopy> natives;std::vector<int> incoming_event,victim_event;std::array<unsigned,48*512> candidate_seen{};unsigned seen_generation=0;
++ struct DemandMemo {int from=-1,until=-1,target=-1,uses=0,boundary_reason=0;};
++ std::array<DemandMemo,48*512> demand_memo{};
++ bool planner_opt=false,decision_audit=false,cache_timing=false;
++ uint64_t memo_lookups=0,memo_hits=0,memo_misses=0,memo_lower=0,memo_upper=0,memo_rewind=0,memo_reset=0,memo_time_ns=0,host_cpu_ns=0;
++ uint64_t decision_hash=1469598103934665603ull,decision_records=0;
++ void decision(int d,int c,int key,int reason,int target=-1,int uses=-1,int victim=-1){if(!decision_audit)return;for(int v:{current,d,c,key,reason,target,uses,victim}){decision_hash^=uint32_t(v);decision_hash*=1099511628211ull;}++decision_records;}
++ static uint64_t thread_cpu(){timespec t{};clock_gettime(CLOCK_THREAD_CPUTIME_ID,&t);return uint64_t(t.tv_sec)*1000000000ull+t.tv_nsec;}
++ std::pair<int,int> demand(int l,int expert,int at,int until){
++  if(!planner_opt||!causal_policy||incoming_horizon)return {next(l,expert,at+1),count(l,expert,at+1,until)};
++  uint64_t started=cache_timing?ns():0;++memo_lookups;auto& m=demand_memo[l*512+expert];
++  if(m.from>=0&&at>=m.from&&at<m.until){++memo_hits;if(cache_timing)memo_time_ns+=ns()-started;return {m.target,m.uses};}
++  ++memo_misses;if(m.from>=0){if(at<m.from)++memo_rewind;else if(m.boundary_reason==1)++memo_lower;else ++memo_upper;}
++  int target=next(l,expert,at+1),uses=count(l,expert,at+1,until);
++  // Cache only immutable incoming facts. A lower occurrence leaves when at==target;
++  // an upper occurrence enters when at==next_after_upper-768. Inclusive upper bound.
++  const auto& v=future[l*512+expert];auto hi=std::upper_bound(v.begin(),v.end(),std::make_pair(until,INT_MAX));
++  int lower=target<0?INT_MAX:target,upper=hi==v.end()?INT_MAX:hi->first-768;
++  int stop=std::min(lower,upper);require(stop>at,"invalid memo boundary");
++  m={at,stop,target,uses,lower<=upper?1:2};if(cache_timing)memo_time_ns+=ns()-started;return {target,uses};
++ }
++ int current=-1;uint64_t planner_ns=0,publication_ns=0,drain_ns=0,restore_ns=0,setup_ns=0,ready_entries=0,late_entries=0,redundant=0,protected_reject=0,opportunities=0;
++ double event_us=650,copy_us=750;uint64_t last_boundary=0;int last_event=-1;std::array<std::array<int,3>,2> spare{},donor_layer{},donor_expert{};
++ struct Worker {std::mutex mu;std::condition_variable cv;std::thread thread;std::atomic<int> state{0};bool quit=false;int dev=-1,cls=-1,index=-1,layer=-1,expert=-1,victim=-1,destination=-1;size_t n=0;const uint8_t* src=nullptr;uint8_t* staging=nullptr;int32_t* metadata=nullptr;cudaStream_t stream=nullptr;cudaEvent_t done=nullptr;int readbacks=0;};
++ std::array<std::array<Worker,3>,2> workers;
++ static uint64_t ns(){return Q4Tape::ns();}static void require(bool x,const char* why){Q4Tape::require(x,why);}static void ck(cudaError_t e){require(e==cudaSuccess,cudaGetErrorString(e));}
++ int cls(int l)const{auto it=std::find(sizes,sizes+3,blobs[l]);require(it!=sizes+3,"unknown expert size class");return int(it-sizes);}
++ Q4Oracle(){const char* opt=std::getenv("STRATA_Q4_PLANNER_OPT");planner_opt=opt&&opt[0]=='1';const char* da=std::getenv("STRATA_Q4_DECISION_AUDIT");decision_audit=da&&da[0]=='1';const char* ct=std::getenv("STRATA_Q4_CACHE_TIMING");cache_timing=ct&&ct[0]=='1';leases.fill(-1);const char* tc=std::getenv("STRATA_Q4_TRANSACTION_CONTROL");transaction_control=tc&&tc[0]=='1';const char* pu=std::getenv("STRATA_Q4_POST_USE_EVENTS");post_use_events=pu?std::atoi(pu):0;require(post_use_events==0||post_use_events==48,"unsupported post-use interval");victim_cache_at.fill(-1);scorer.reset();const char* vp=std::getenv("STRATA_Q4_CAUSAL_VICTIM");if(vp){std::string v(vp);causal_policy=v=="native"?1:v=="recency"?2:v=="logistic"?3:v=="tree"?4:0;require(causal_policy||v=="off","unknown causal victim mode");}if(causal_policy>=3)require(scorer.load(std::getenv("STRATA_Q4_VICTIM_MODEL")),"invalid victim checkpoint");const char* th=std::getenv("STRATA_Q4_VICTIM_THRESHOLD");if(th)victim_threshold=std::atof(th);require(std::isfinite(victim_threshold)&&victim_threshold>=0&&victim_threshold<=1,"invalid victim threshold");const char* p=std::getenv("STRATA_Q4_ORACLE_MODE");requested=p&&(std::string(p)=="full"||std::string(p)=="short");if(requested&&std::string(p)=="short"){p=std::getenv("STRATA_Q4_ORACLE_HORIZON");require(p,"short horizon missing");horizon=std::atoi(p);require(horizon==1||horizon==4||horizon==16||horizon==64,"unsupported horizon");}p=std::getenv("STRATA_Q4_ORACLE_STRATEGY");strategy=p&&std::string(p)=="reuse";p=std::getenv("STRATA_Q4_ORACLE_DIRECT");direct=p&&p[0]=='1';p=std::getenv("STRATA_Q4_ORACLE_CHECK");check_bytes=p&&p[0]=='1';for(auto& a:spare)a.fill(-1);
++  incoming_horizon=victim_horizon=horizon;
++  auto read_h=[](const char* key,int fallback){const char* value=std::getenv(key);if(!value)return fallback;std::string v(value);if(v=="full")return 0;int h=std::atoi(value);require(h==4||h==16||h==64||h==256,"unsupported I/V horizon");return h;};
++  const char* unknown=std::getenv("STRATA_Q4_ORACLE_UNKNOWN");ema_tail=unknown&&std::string(unknown)=="ema-tail";
++  incoming_horizon=read_h("STRATA_Q4_ORACLE_INCOMING",incoming_horizon);victim_horizon=read_h("STRATA_Q4_ORACLE_VICTIM",victim_horizon);
++ }
++ void configure(){const char* p=std::getenv("STRATA_Q4_ORACLE_SUBSTRATE");if(!p||p[0]!='1')return;int old;ck(cudaGetDevice(&old));for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;ck(cudaSetDevice(d));auto& w=workers[d][c];w.dev=d;w.cls=c;ck(cudaHostAlloc(&w.staging,sizes[c],cudaHostAllocDefault));ck(cudaHostAlloc(&w.metadata,8,cudaHostAllocDefault));ck(cudaStreamCreateWithFlags(&w.stream,cudaStreamNonBlocking));ck(cudaEventCreateWithFlags(&w.done,cudaEventDisableTiming));w.thread=std::thread([this,d,c]{worker(d,c);});}ck(cudaSetDevice(old));configured=true;}
++ static void publish_state(Worker& w,int s,PublicationTrace* p=nullptr){{std::lock_guard<std::mutex> lk(w.mu);w.state.store(s,std::memory_order_release);if(p)p->ack_state=ns();w.cv.notify_all();}if(p)p->notify_unlock_return=ns();}
++ void worker(int d,int c){auto& w=workers[d][c];try{ck(cudaSetDevice(d));while(true){int command;{std::unique_lock<std::mutex> lk(w.mu);w.cv.wait(lk,[&]{int s=w.state.load();return w.quit||s==1||s==4||s==6;});if(w.quit)break;command=w.state.load();if(command==1)w.state.store(2,std::memory_order_release);}if(command==1){auto& e=events[w.index];e.stage_begin=ns();if(!direct)std::memcpy(w.staging,w.src,w.n);e.stage_end=ns();const char* delay=std::getenv("STRATA_Q4_ORACLE_DELAY_US");if(delay)std::this_thread::sleep_for(std::chrono::microseconds(std::atoi(delay)));e.copy_begin=ns();ck(cudaMemcpyAsync(slot(d,w.destination),direct?w.src:w.staging,w.n,cudaMemcpyHostToDevice,w.stream));ck(cudaEventRecord(w.done,w.stream));ck(cudaEventSynchronize(w.done));e.copy_end=ns();if(check_bytes&&w.readbacks<2){std::vector<uint8_t> bytes(w.n);ck(cudaMemcpy(bytes.data(),slot(d,w.destination),w.n,cudaMemcpyDeviceToHost));require(std::memcmp(bytes.data(),w.src,w.n)==0,"oracle copied weight bytes mismatch");++w.readbacks;}publish_state(w,3);}else if(command==4){int generation=w.index;auto* p=pt(generation);if(p)p->worker_observed=ns();w.metadata[0]=-1;w.metadata[1]=w.destination;if(p)p->metadata_submit=ns();ck(cudaMemcpyAsync(dres[d]+w.layer*512+w.victim,w.metadata,4,cudaMemcpyHostToDevice,w.stream));ck(cudaMemcpyAsync(dres[d]+w.layer*512+w.expert,w.metadata+1,4,cudaMemcpyHostToDevice,w.stream));ck(cudaEventRecord(w.done,w.stream));ck(cudaEventSynchronize(w.done));if(p)p->cuda_observed=ns();publish_state(w,5,p);}else if(command==6)publish_state(w,0);}}catch(const std::exception& e){std::fprintf(stderr,"Q4_ORACLE_WORKER_FAIL device%d class%d %s\n",d,c,e.what());publish_state(w,7);}}
++ void runtime(int32_t* r,const float* u,std::vector<uint64_t> b,std::array<int32_t*,2> dr,std::function<const uint8_t*(int,int)> src,std::function<void*(int,int)> sl){res=r;heat=u;blobs=std::move(b);dres=dr;source=std::move(src);slot=std::move(sl);prepare();}
++ void prepare(){for(auto& m:demand_memo)m={};++memo_reset;if(!configured||!q4_tape.replaying)return;uint64_t t=ns();future.resize(48*512);for(size_t wi=0;wi<q4_tape.windows.size();++wi){const auto& w=q4_tape.windows[wi];for(int l=0;l<48;++l){int count[512]={};for(int j=0;j<w.T*10;++j)++count[w.routes.ids[l][j]];for(int e=0;e<512;++e)if(count[e])future[l*512+e].emplace_back((int)wi*48+l,count[e]);}}incoming_view.index=victim_view.index=&future;incoming_view.horizon=incoming_horizon;victim_view.horizon=victim_horizon;incoming_view.total_events=victim_view.total_events=(int)q4_tape.windows.size()*48;setup_ns=ns()-t;std::fprintf(stderr,"Q4_ORACLE_SETUP future_index_ms=%.3f horizon_main_routed_invocations=%s classes=3072000,3584000,3993600 scope_layers=48\n",setup_ns/1e6,horizon?std::to_string(horizon).c_str():"full");}
++ // Scheduler future reads are role-typed. The replay engine retains its own full tape.
++ int next(int l,int e,int at)const{return incoming_view.next(l*512+e,at,std::max(0,current)).event;}
++ int count(int l,int e,int at,int until)const{return incoming_view.count(l*512+e,at,until,std::max(0,current));}
++ double victim_value(int l,int e,int at)const {
++  if(causal_policy)return scorer.value(l,e,at,causal_policy,heat);
++  auto nx=victim_view.next(l*512+e,at,at);
++  if(nx.status==FutureStatus::Known)return double(nx.event-at);
++  if(nx.status==FutureStatus::FiniteTapeEnd)return 1e12;
++  // Unknown beyond V is NOT never. Fixed causal heat fallback, identical in all arms.
++  if(ema_tail)return double(victim_horizon)+640.0/(1.0+std::max(0.f,heat[l*512+e]));
++  return double(victim_horizon+1)-std::log1p(std::max(0.f,heat[l*512+e]));
++ }
++ bool protected_now(int l,int e)const{const auto& w=q4_tape.current;for(int j=0;j<w.T*10;++j)if(w.routes.ids[l][j]==e)return true;return false;}
++ // The next verifier layer milestone occurs after preceding GPU expert reads and post work.
++ // Actual service is observed from the published plan; policy release waits for that next milestone.
++ bool lease_protected(int l,int e)const{return transaction_control&&causal_policy&&leases[l*512+e]>=0;}
++ int protected_count(int d,int c)const{return protected_occupancy[d][c];}
++ void advance_lifetimes(int at){if(!transaction_control||!causal_policy)return;for(int key:protected_keys){int i=leases[key];if(i<0)continue;auto& a=lifetimes[i];if((a.first_use>=0&&at>a.first_use+post_use_events)||at>a.expiry){a.released_at=at;a.reason=a.first_use>=0?1:2;release_count+=a.reason==1;expiry_count+=a.reason==2;leases[key]=-1;--protected_occupancy[key/512/24][cls(key/512)];++protection_version[key/512];++ownership_generation[key/512];}}protected_keys.erase(std::remove_if(protected_keys.begin(),protected_keys.end(),[&](int key){return leases[key]<0;}),protected_keys.end());}
++ void note_publication(int i,int l,int expert,int victim,int at){if(i>=int(lifetimes.size()))lifetimes.resize(i+1,{-1,-1,-1,0,-1,-1,-1,0});int old=incoming_event[l*512+victim];if(old>=0&&old<int(lifetimes.size()))lifetimes[old].evicted_at=at;leases[l*512+victim]=-1;auto& a=lifetimes[i];a.generation=i;a.expiry=events[i].target+48;if(transaction_control&&causal_policy){leases[l*512+expert]=i;protected_keys.push_back(l*512+expert);++protected_occupancy[l/24][cls(l)];++protection_version[l];max_protected=std::max(max_protected,protected_count(l/24,cls(l)));}}
++ void note_service(int l,const int32_t* ids,const int32_t* slots,int n,int at){int seen[512]={};for(int j=0;j<n;++j){int e=ids[j],i=incoming_event[l*512+e];if(slots[j]<0||i<0||seen[e]++)continue;auto& a=lifetimes[i];if(a.first_use<0)a.first_use=at;a.last_use=at;++a.distinct_uses;}}
++ int victim(int l,int incoming,int at)const{uint64_t start=VictimScorer::now();if(causal_policy&&res[l*512+incoming]<0&&victim_cache_at[l]==at&&victim_cache_owner[l]==ownership_generation[l]&&victim_cache_history[l]==scorer.versions[l]){int b=victim_cache_best[l];if(b<0||(res[l*512+b]==victim_cache_slot[l]&&!protected_now(l,b)&&!lease_protected(l,b))){scorer.selection_ns+=VictimScorer::now()-start;return b;}}int best=-1;double score=-1e100;uint64_t enumeration_start=ns();for(int e=0;e<512;++e){++enumerated;if(res[l*512+e]<0||e==incoming||protected_now(l,e))continue;if(lease_protected(l,e)){++protection_veto;continue;}double value=victim_value(l,e,at);if(value>score){score=value;best=e;}}enumeration_ns+=ns()-enumeration_start;if(best<0)++empty_victims;if(causal_policy){victim_cache_at[l]=at;victim_cache_owner[l]=ownership_generation[l];victim_cache_history[l]=scorer.versions[l];victim_cache_best[l]=best;victim_cache_slot[l]=best<0?-1:res[l*512+best];scorer.selection_ns+=VictimScorer::now()-start;}return best;}
++ void begin(){if(!configured||!q4_tape.active)return;for(auto& m:demand_memo)m={};memo_lookups=memo_hits=memo_misses=memo_lower=memo_upper=memo_rewind=memo_time_ns=host_cpu_ns=0;memo_reset=1;decision_hash=1469598103934665603ull;decision_records=0;victim_cache_at.fill(-1);ownership_generation.fill(0);scorer.reset();tracked=true;active=requested;require(!active||q4_tape.replaying,"oracle requires fixed-work replay");publication_records.assign(pub_trace_cap,{});producer_records.assign(host_trace_cap,{});publication_trace_overflow=0;events.clear();lifetimes.clear();protected_keys.clear();for(auto& a:protected_occupancy)a.fill(0);leases.fill(-1);protection_version.fill(0);capacity_veto=cost_veto=victim_cost_veto=risk_veto=expiry_count=release_count=late_abort=history_ns=0;protection_veto=empty_victims=enumeration_ns=enumerated=0;max_protected=0;layers.clear();natives.clear();events.reserve(q4_tape.header.output_budget*240);lifetimes.reserve(q4_tape.header.output_budget*240);layers.reserve(q4_tape.header.output_budget*48);natives.reserve(q4_tape.header.output_budget*96);incoming_event.assign(48*512,-1);victim_event.assign(48*512,-1);planner_ns=publication_ns=drain_ns=restore_ns=ready_entries=late_entries=redundant=protected_reject=opportunities=0;incoming_view.audit={};victim_view.audit={};last_boundary=0;last_event=-1;current=-1;
++  if(!active)return;uint64_t t=ns();for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int pick=-1;double value=-1e100;for(int l=d*24;l<(d+1)*24;++l)if(cls(l)==c)for(int e=0;e<512;++e){if(res[l*512+e]<0)continue;const auto& first=q4_tape.windows.front();bool protected_first=false;for(int j=0;j<first.T*10;++j)protected_first|=first.routes.ids[l][j]==e;if(protected_first)continue;double val=victim_value(l,e,0);if(val>value){value=val;pick=l*512+e;}}require(pick>=0,"no same-class reserve");donor_layer[d][c]=pick/512;donor_expert[d][c]=pick%512;spare[d][c]=res[pick];res[pick]=-1;int old;ck(cudaGetDevice(&old));ck(cudaSetDevice(d));ck(cudaMemcpy(dres[d]+pick,res+pick,4,cudaMemcpyHostToDevice));ck(cudaSetDevice(old));std::fprintf(stderr,"Q4_ORACLE_RESERVE device=%d class=%d bytes=%llu slot=%d layer=%d expert=%d active_minus1\n",d,c,(unsigned long long)sizes[c],spare[d][c],pick/512,pick%512);}planner_ns+=ns()-t;
++ }
++ void retire(Worker& w,int status){uint64_t t=ns();std::unique_lock<std::mutex> lk(w.mu);require(w.cv.wait_for(lk,std::chrono::seconds(10),[&]{int s=w.state.load();return s==0||s==3||s==7;}),"oracle retirement timeout");require(w.state.load()!=7,"oracle worker failure");if(w.state.load()==3){events[w.index].status=status;w.state.store(6,std::memory_order_release);w.cv.notify_all();require(w.cv.wait_for(lk,std::chrono::seconds(5),[&]{return w.state.load()==0||w.state.load()==7;}),"oracle retirement ack");require(w.state.load()==0,"oracle retirement failure");}drain_ns+=ns()-t;}
++ void publish(Worker& w){if(w.state.load(std::memory_order_acquire)!=3)return;auto& e=events[w.index];auto* trace=pt(w.index);if(trace){trace->generation=w.index;trace->event=current;trace->device=w.dev;trace->cls=w.cls;trace->validation_begin=ns();}if(transaction_control&&causal_policy&&current>e.target+48){++late_abort;retire(w,8);return;}if(transaction_control&&causal_policy&&protected_count(w.dev,w.cls)>=protection_cap){++capacity_veto;retire(w,9);return;}if(res[w.layer*512+w.expert]>=0){++redundant;retire(w,2);return;}int v=victim(w.layer,w.expert,current);if(v<0){++protected_reject;return;}if(causal_policy&&!scorer.accept(w.layer,v,current,std::max(current,e.target),causal_policy,heat,victim_threshold)){retire(w,5);return;}int old=res[w.layer*512+v];require(old>=0&&v!=w.expert&&!protected_now(w.layer,v)&&!lease_protected(w.layer,v),"publication victim changed");uint64_t t=ns();if(trace){trace->wait_begin=ns();trace->cpu_begin=thread_cpu();}{std::unique_lock<std::mutex> lk(w.mu);w.victim=v;if(trace)trace->command_available=ns();w.state.store(4,std::memory_order_release);w.cv.notify_all();require(w.cv.wait_for(lk,std::chrono::seconds(5),[&]{return w.state.load()==5||w.state.load()==7;}),"oracle publication timeout");require(w.state.load()==5,"oracle publication failure");}if(trace){trace->cpu_end=thread_cpu();trace->wait_end=ns();}publication_ns+=ns()-t;res[w.layer*512+v]=-1;res[w.layer*512+w.expert]=w.destination;++ownership_generation[w.layer];spare[w.dev][w.cls]=old;e.victim=v;e.oldslot=old;e.publish_ns=ns();e.published_at=current;e.status=current<=e.target?1:3;note_publication(w.index,w.layer,w.expert,v,current);incoming_event[w.layer*512+w.expert]=w.index;victim_event[w.layer*512+v]=w.index;copy_us=.9*copy_us+.1*((e.stage_end-e.stage_begin+e.copy_end-e.copy_begin)/1000.);w.state.store(0,std::memory_order_release);if(trace)trace->commit_end=ns();}
++ void issue(Worker& w,int l,int expert,int target){require(w.state.load()==0,"issue into busy spare");const uint8_t* src=source(l,expert);require(src,"missing immutable RAM expert");require(blobs[l]==sizes[w.cls]&&l/24==w.dev,"byte-class/device mismatch");OracleEvent e{};e.issue_ns=ns();e.trigger=current;e.target=target;e.published_at=-1;e.layer=l;e.incoming=expert;e.victim=e.oldslot=-1;e.slot=spare[w.dev][w.cls];e.bytes=blobs[l];e.status=0;require(events.size()<events.capacity(),"event buffer capacity");events.push_back(e);lifetimes.push_back({int(events.size()-1),-1,-1,0,-1,-1,target+48,0});{std::lock_guard<std::mutex> lk(w.mu);w.index=(int)events.size()-1;w.layer=l;w.expert=expert;w.destination=e.slot;w.src=src;w.n=e.bytes;w.state.store(1,std::memory_order_release);}w.cv.notify_all();}
++ void plan(Worker& w){if(w.state.load()!=0){decision(w.dev,w.cls,-1,9);return;}if(transaction_control&&causal_policy&&protected_count(w.dev,w.cls)>=protection_cap){++capacity_veto;decision(w.dev,w.cls,-1,10);return;}int lead=std::clamp((int)std::ceil(copy_us/std::max(40.,event_us))+1,2,16);int limit=incoming_horizon?std::min(eligibility,incoming_horizon):eligibility;int end=std::min((int)q4_tape.windows.size()*48-1,current+limit);int bestl=-1,beste=-1,besttarget=-1;double best=-1e100;if(++seen_generation==0){candidate_seen.fill(0);++seen_generation;}
++  for(int ev=current+lead;ev<=end;++ev){int l=ev%48;if(l/24!=w.dev||cls(l)!=w.cls)continue;const auto& future_window=q4_tape.windows[ev/48];for(int j=0;j<future_window.T*10;++j){int expert=future_window.routes.ids[l][j],key=l*512+expert;if(candidate_seen[key]==seen_generation||res[key]>=0)continue;candidate_seen[key]=seen_generation;++opportunities;int utility_end=std::min((int)q4_tape.windows.size()*48-1,current+768);int target,uses=0;if(causal_policy){auto value=demand(l,expert,current,utility_end);target=value.first;uses=value.second;}else target=next(l,expert,current+1);if(target<0){decision(w.dev,w.cls,key,1);continue;}double copy_entries=(double(blobs[l])/25e9+double(blobs[l])/13.2e9)/160e-6;if(causal_policy&&double(uses)<copy_entries){++cost_veto;++scorer.rejections;decision(w.dev,w.cls,key,2,target,uses);continue;}int v=victim(l,expert,current);if(v<0){decision(w.dev,w.cls,key,3,target,uses);continue;}if(causal_policy){if(!scorer.accept(l,v,current,target,causal_policy,heat,victim_threshold)){++risk_veto;decision(w.dev,w.cls,key,4,target,uses,v);continue;}}else{int vn=victim_view.next(l*512+v,current,current).event;if(vn>=0&&vn<=target)continue;}if(!causal_policy)uses=count(l,expert,current+1,utility_end);int damage=causal_policy?0:victim_view.count(l*512+v,current+1,utility_end,current);if(causal_policy){double victim_loss=scorer.expected_entries16(l,v,current,causal_policy,heat);if(double(uses)<copy_entries+victim_loss){++victim_cost_veto;++scorer.rejections;decision(w.dev,w.cls,key,5,target,uses,v);continue;}}decision(w.dev,w.cls,key,6,target,uses,v);double utility=strategy?double(uses-damage)-2.0:double(limit-(target-current))+.05*(uses-damage);if(strategy&&uses-damage<4)continue;if(utility>best){best=utility;bestl=l;beste=expert;besttarget=target;}if(!strategy&&bestl>=0)break;}if(!strategy&&bestl>=0)break;}
++  decision(w.dev,w.cls,bestl<0?-1:bestl*512+beste,bestl<0?7:8,besttarget);if(bestl>=0)issue(w,bestl,beste,besttarget);
++ }
++ void host(int l,const int32_t* ids,int n){if(!tracked||!q4_tape.active)return;current=(int)q4_tape.index*48+l;uint64_t cpu=thread_cpu();uint64_t t=ns();auto* host_trace=ht();if(host_trace){host_trace->event=current;host_trace->hook_begin=t;}if(active){advance_lifetimes(current);if(last_event>=0&&current==last_event+1){double us=(t-last_boundary)/1000.;event_us=.95*event_us+.05*std::clamp(us,40.,5000.);}last_event=current;last_boundary=t;for(auto& a:workers)for(auto& w:a)if(w.dev>=0){require(w.state.load()!=7,"worker error at milestone");publish(w);}if(host_trace)host_trace->publications_end=ns();for(int j=0;j<n;++j){int key=l*512+ids[j];int i=incoming_event[key];if(i>=0&&res[key]>=0){++events[i].uses;if(current<=events[i].target)++ready_entries;else if(events[i].published_at>events[i].target)++late_entries;}int v=victim_event[key];if(v>=0&&res[key]<0)++events[v].victim_uses;}for(auto& a:workers)for(auto& w:a)if(w.dev>=0)plan(w);}if(!active)last_boundary=t;planner_ns+=ns()-t;host_cpu_ns+=thread_cpu()-cpu;if(host_trace)host_trace->hook_end=ns();}
++ void observe_plan(int l,const int32_t* ids,int n,const int32_t* kind){if(!tracked||!q4_tape.active)return;OracleLayer a{};a.event=q4_tape.index*48+l;a.layer=l;a.n=n;a.begin=last_boundary;a.plan_end=ns();for(int j=0;j<n;++j){a.ids[j]=ids[j];a.slots[j]=res[l*512+ids[j]];a.path[j]=kind[j];}layers.push_back(a);if(auto* h=ht())h->plan_end=a.plan_end;if(active)note_service(l,a.ids,a.slots,n,int(a.event));}
++ void observe_cpu(){if(tracked&&q4_tape.active&&!layers.empty()){layers.back().cpu_end=ns();if(auto* h=ht())h->cpu_end=layers.back().cpu_end;if(causal_policy){auto& a=layers.back();uint64_t ht=ns();scorer.observe(a.layer,a.ids,a.n,(int)a.event);history_ns+=ns()-ht;}}}
++ void note_native(int l,int in,int out,int s,uint64_t n){if(!tracked||!q4_tape.active)return;natives.push_back({ns(),0,n,(int)q4_tape.index,l,in,out,s});}
++ void native_ready(int l,int expert){if(!tracked||!q4_tape.active)return;for(auto i=natives.rbegin();i!=natives.rend();++i)if(i->layer==l&&i->incoming==expert&&!i->publish_ns){i->publish_ns=ns();break;}}
++ void finish(){if(!tracked)return;uint64_t t=ns();if(active){for(auto& a:workers)for(auto& w:a)if(w.dev>=0)retire(w,4);drain_ns+=ns()-t;t=ns();int old;ck(cudaGetDevice(&old));for(int d=0;d<2;++d)for(int c=0;c<3;++c){if(d==1&&c==2)continue;int l=donor_layer[d][c],e=donor_expert[d][c];if(res[l*512+e]>=0){float best=-1;e=-1;for(int x=0;x<512;++x)if(res[l*512+x]<0&&heat[l*512+x]>best){best=heat[l*512+x];e=x;}require(e>=0,"reserve restoration needs a nonresident expert");}ck(cudaSetDevice(d));ck(cudaMemcpy(slot(d,spare[d][c]),source(l,e),blobs[l],cudaMemcpyHostToDevice));res[l*512+e]=spare[d][c];ck(cudaMemcpy(dres[d]+l*512+e,res+l*512+e,4,cudaMemcpyHostToDevice));}ck(cudaSetDevice(old));restore_ns=ns()-t;}
++  uint64_t copied=0,published=0,unused=0,uses=0,victims=0,nbytes=0,npub=0,ready=0,late=0;for(auto& e:events){if(e.copy_end)copied+=e.bytes;if(e.publish_ns){++published;uses+=e.uses;victims+=e.victim_uses;if(e.status==1)++ready;else++late;}if(!e.uses)unused+=e.bytes;}for(auto& n:natives){nbytes+=n.bytes;npub+=n.publish_ns!=0;}
++  const char* prefix=std::getenv("STRATA_Q4_ORACLE_LOG");if(prefix){auto write=[&](const char* name,auto& values){std::string p=std::string(prefix)+name;FILE* f=std::fopen(p.c_str(),"wbx");require(f,"oracle artifact exists");Q4Tape::io(f,values.data(),values.size(),true);std::fclose(f);};write("-layers.bin",layers);write("-admissions.bin",events);write("-native.bin",natives);write("-lifecycle.bin",lifetimes);if(publication_trace){publication_records.resize(std::min(events.size(),pub_trace_cap));producer_records.resize(std::min(layers.size(),host_trace_cap));write("-publication-trace.bin",publication_records);write("-producer-trace.bin",producer_records);}}
++  std::fprintf(stderr,"Q4_PUBLICATION_TRACE enabled=%d overflow=%llu host_alloc_bytes=%zu pub_cap=%zu producer_cap=%zu\n",publication_trace,(unsigned long long)publication_trace_overflow,pub_trace_cap*sizeof(PublicationTrace)+host_trace_cap*sizeof(ProducerTrace),pub_trace_cap,host_trace_cap);
++  std::fprintf(stderr,"Q4_ORACLE_END active=%d scope_layers=48 horizon=%d strategy=%s layers=%zu issued=%zu completed_bytes=%llu published=%llu ready_publications=%llu late_publications=%llu used_entries=%llu target_ready_entries=%llu late_useful_entries=%llu unused_bytes=%llu victim_absent_entries=%llu native_issued=%zu native_bytes=%llu native_published=%llu planner_ms=%.3f publication_ms=%.3f drain_ms=%.3f restoration_ms=%.3f setup_ms=%.3f active_spares=%d\n",active, horizon,strategy?"reuse":"deadline",layers.size(),events.size(),(unsigned long long)copied,(unsigned long long)published,(unsigned long long)ready,(unsigned long long)late,(unsigned long long)uses,(unsigned long long)ready_entries,(unsigned long long)late_entries,(unsigned long long)unused,(unsigned long long)victims,natives.size(),(unsigned long long)nbytes,(unsigned long long)npub,planner_ns/1e6,publication_ns/1e6,drain_ns/1e6,restore_ns/1e6,setup_ns/1e6,active?5:0);std::fprintf(stderr,"Q4_INFORMATION_END E=64 I=%d V=%d protection=full_current_window incoming_next=%llu incoming_count=%llu incoming_unknown=%llu incoming_max_visible=%d victim_next=%llu victim_count=%llu victim_unknown=%llu victim_max_visible=%d eligibility_coupled=%d first_feasible=1 utility_rank_effective=0 unknown_ema_tail=%d\n",incoming_horizon,victim_horizon,(unsigned long long)incoming_view.audit.next_calls,(unsigned long long)incoming_view.audit.count_calls,(unsigned long long)incoming_view.audit.unknown,incoming_view.audit.max_visible_ahead,(unsigned long long)victim_view.audit.next_calls,(unsigned long long)victim_view.audit.count_calls,(unsigned long long)victim_view.audit.unknown,victim_view.audit.max_visible_ahead,incoming_horizon&&incoming_horizon<64,ema_tail);
++  std::fprintf(stderr,"Q4_VICTIM_END policy=%d threshold=%.6f scores=%llu cache_hits=%llu invalid=%llu rejected=%llu feature_ms=%.3f score_ms=%.3f selection_ms=%.3f host_bytes=%zu frozen_weights=1 prefix_only=1 max_cache_age_windows=1\n",causal_policy,victim_threshold,(unsigned long long)scorer.scores,(unsigned long long)scorer.cache_hits,(unsigned long long)scorer.invalid,(unsigned long long)scorer.rejections,scorer.feature_ns/1e6,scorer.score_ns/1e6,scorer.selection_ns/1e6,scorer.memory_bytes());
++  std::fprintf(stderr,"Q4_TC_END enabled=%d post_use_events=%d cap_per_device_class=16 max_protected=%d protection_veto=%llu empty_victims=%llu capacity_veto=%llu cost_veto=%llu victim_cost_veto=%llu risk_veto=%llu expired=%llu released=%llu late_abort=%llu history_ms=%.3f enumeration_ms=%.3f enumerated=%llu\n",transaction_control&&causal_policy,post_use_events,max_protected,(unsigned long long)protection_veto,(unsigned long long)empty_victims,(unsigned long long)capacity_veto,(unsigned long long)cost_veto,(unsigned long long)victim_cost_veto,(unsigned long long)risk_veto,(unsigned long long)expiry_count,(unsigned long long)release_count,(unsigned long long)late_abort,history_ns/1e6,enumeration_ns/1e6,(unsigned long long)enumerated);
++  std::fprintf(stderr,"Q4_PLANNER_END optimized=%d lookups=%llu hits=%llu misses=%llu invalid_lower=%llu invalid_upper=%llu invalid_rewind=%llu reset=%llu avoided_queries=%llu retained_evaluations=%llu memo_bytes=%zu maintenance_ms=%.3f maintenance_timed=%d host_cpu_ms=%.3f decision_audit=%d decision_records=%llu decision_hash=%016llx opportunities=%llu\n",planner_opt,(unsigned long long)memo_lookups,(unsigned long long)memo_hits,(unsigned long long)memo_misses,(unsigned long long)memo_lower,(unsigned long long)memo_upper,(unsigned long long)memo_rewind,(unsigned long long)memo_reset,(unsigned long long)(2*memo_hits),(unsigned long long)(planner_opt?memo_misses:opportunities),sizeof(demand_memo),memo_time_ns/1e6,cache_timing,host_cpu_ns/1e6,decision_audit,(unsigned long long)decision_records,(unsigned long long)decision_hash,(unsigned long long)opportunities);
++  active=false;tracked=false;
++ }
++ ~Q4Oracle(){for(auto& a:workers)for(auto& w:a)if(w.dev>=0){if(w.thread.joinable()){{std::lock_guard<std::mutex> lk(w.mu);w.quit=true;w.cv.notify_all();}w.thread.join();}cudaSetDevice(w.dev);cudaEventDestroy(w.done);cudaStreamDestroy(w.stream);cudaFreeHost(w.staging);cudaFreeHost(w.metadata);}}
++};inline Q4Oracle q4_oracle;
++}
+diff --git a/include/strata/research/q4_state.hpp b/include/strata/research/q4_state.hpp
+new file mode 100644
+index 0000000..1b12cbd
+--- /dev/null
++++ b/include/strata/research/q4_state.hpp
+@@ -0,0 +1,27 @@
++// Initial-state attestation for fixed-work research; no residency or mathematics changes.
++#pragma once
++#include "strata/research/q4_tape.hpp"
++#include "strata/core/session.hpp"
++#include "strata/kernels/ngram.hpp"
++namespace strata::research {
++struct StateEntry { char name[80]{};uint64_t bytes=0,hash=0; };
++struct Q4State {
++ std::vector<StateEntry> values;std::vector<uint8_t> buffer;uint64_t read_bytes=0;
++ void add(const std::string& name,const void* src,uint64_t n,bool gpu){if(!src||!n)return;StateEntry e{};require_name(name);std::memcpy(e.name,name.c_str(),name.size());e.bytes=n;uint64_t h=1469598103934665603ull;buffer.resize(4*1024*1024);cudaPointerAttributes attr{};if(gpu){auto err=cudaPointerGetAttributes(&attr,src);Q4Tape::require(err==cudaSuccess,"state pointer attributes");if(attr.type==cudaMemoryTypeHost){src=attr.hostPointer;gpu=false;}}
++  auto* p=(const uint8_t*)src;for(uint64_t off=0;off<n;){size_t take=std::min<uint64_t>(buffer.size(),n-off);const uint8_t* b=p+off;if(gpu){Q4Tape::require(cudaMemcpy(buffer.data(),b,take,cudaMemcpyDeviceToHost)==cudaSuccess,"state D2H read");b=buffer.data();}for(size_t i=0;i<take;++i){h^=b[i];h*=1099511628211ull;}off+=take;}e.hash=h;read_bytes+=n;values.push_back(e);
++ }
++ static void require_name(const std::string& n){Q4Tape::require(n.size()<80,"state component name");}
++ void qsa(const std::string& prefix,const strata::core::QsaState& q,int64_t used){auto a=[&](const char* n,const void* p,uint64_t bytes){add(prefix+"."+n,p,bytes,true);};int64_t shape[]={q.max_cells,q.n_pages,q.n_slots,q.kv_mode,q.idx_pooled_rows,q.kv_int8,q.kv_rot};add(prefix+".shape",shape,sizeof(shape),false);
++  a("page_table",q.page_table,q.n_pages*4);if(q.kv_mode==1){a("slot_block",q.map.slot_block,q.map.n_slots*4);a("slot_stamp",q.map.slot_stamp,q.map.n_slots*4);a("slot_ref",q.map.slot_ref,q.map.n_slots*4);a("map_ctl",q.map.ctl,strata::kernels::kKvCtlInts*4);}
++  a("idx_tail",q.idx_tail,3*128*4);a("idx_dead",q.idx_dead,128*4);a("idx_pooled",q.idx_pooled,q.idx_pooled_rows*128*4);a("idx_block_pos",q.idx_block_pos,4);
++  uint64_t slots=q.n_slots,logical=std::min<int64_t>(q.n_pages,used/4);if(q.kv_mode!=1){a("k_q",q.k_q,slots*4*2*256);a("v_q",q.v_q,slots*4*2*256);a("k_scale",q.k_scale,slots*4*2*4*2);a("v_scale",q.v_scale,slots*4*2*4*2);} // Streamed pools are redundant authoritative-host copies; maps checked, canonical host payload below.
++  if(q.host.present()&&q.kv_mode==1){a("host_k_q",q.host.k_q,logical*4*2*256);a("host_v_q",q.host.v_q,logical*4*2*256);a("host_k_scale",q.host.k_scale,logical*4*2*4*2);a("host_v_scale",q.host.v_scale,logical*4*2*4*2);int rem=(int)(used%4);if(rem)for(int h=0;h<2;++h){auto tag="tail"+std::to_string(h);a(("host_k_q."+tag).c_str(),q.host.k_q+logical*2048+h*1024,rem*256);a(("host_v_q."+tag).c_str(),q.host.v_q+logical*2048+h*1024,rem*256);a(("host_k_scale."+tag).c_str(),q.host.k_scale+logical*32+h*16,rem*4*2);a(("host_v_scale."+tag).c_str(),q.host.v_scale+logical*32+h*16,rem*4*2);}}
++ }
++ void session(const std::string& prefix,strata::core::SessionState& s,const strata::core::ModelGeometry& g,int64_t used){add(prefix+".GDN",s.gdn_state,s.gdn_alloc*((uint64_t)g.ssm_state_size*g.ssm_v_heads*g.ssm_state_size+(uint64_t)g.ssm_conv_channels*(g.ssm_d_conv-1))*4,true);add(prefix+".HC_R",s.R,g.hc_dim()*4,true);add(prefix+".PLE_hist",s.ple_hist,strata::kernels::NG_HIST*strata::kernels::NG_HC_DIM*4,true);add(prefix+".PLE_prev",s.ple_prev,sizeof(s.ple_prev),false);add(prefix+".PLE_token",&s.ple_token,4,false);for(int i=0;i<s.qsa_alloc;++i)qsa(prefix+".QSA"+std::to_string(s.qsa_ord0+i),s.qsa_states[s.qsa_ord0+i],used);}
++ void begin(strata::core::SessionState& s0,strata::core::SessionState& s1,const strata::core::QsaState& mtp,const strata::core::ModelGeometry& g,int64_t used){if(!q4_tape.active)return;uint64_t start=Q4Tape::ns();values.clear();read_bytes=0;int old;cudaGetDevice(&old);cudaSetDevice(0);Q4Tape::require(cudaDeviceSynchronize()==cudaSuccess,"state stage0 sync");session("GPU0",s0,g,used-1);cudaSetDevice(1);Q4Tape::require(cudaDeviceSynchronize()==cudaSuccess,"state stage1 sync");session("GPU1",s1,g,used-1);qsa("MTP",mtp,used);cudaSetDevice(old);auto path=q4_tape.path+".initial-state.bin";
++  if(q4_tape.replaying){FILE* f=std::fopen(path.c_str(),"rb");Q4Tape::require(f,"initial-state sidecar missing");uint64_t n=0;Q4Tape::io(f,&n,1,false);Q4Tape::require(n==values.size(),"initial-state component count");std::vector<StateEntry> expected(n);Q4Tape::io(f,expected.data(),n,false);Q4Tape::require(std::fgetc(f)==EOF,"initial-state sidecar trailing");std::fclose(f);int mismatches=0;for(size_t i=0;i<n;++i)if(std::memcmp(&expected[i],&values[i],sizeof(StateEntry))){++mismatches;std::fprintf(stderr,"Q4_STATE_MISMATCH component=%s expected=%016llx actual=%016llx bytes=%llu\n",values[i].name,(unsigned long long)expected[i].hash,(unsigned long long)values[i].hash,(unsigned long long)values[i].bytes);}Q4Tape::require(!mismatches,"initial KV/GDN/PLE/MTP state differs");}
++  else{FILE* f=std::fopen(path.c_str(),"wbx");Q4Tape::require(f,"state record path exists");uint64_t n=values.size();Q4Tape::io(f,&n,1,true);Q4Tape::io(f,values.data(),n,true);std::fclose(f);}
++  const char* p=std::getenv("STRATA_Q4_TAPE_OBSERVATIONS");if(p){auto name=std::string(p)+".initial-state.bin";FILE* f=std::fopen(name.c_str(),"wbx");Q4Tape::require(f,"state observation exists");uint64_t n=values.size();Q4Tape::io(f,&n,1,true);Q4Tape::io(f,values.data(),n,true);std::fclose(f);}std::fprintf(stderr,"Q4_STATE_READY components=%zu read_bytes=%llu setup_ms=%.3f exact_initial_state=1\n",values.size(),(unsigned long long)read_bytes,(Q4Tape::ns()-start)/1e6);
++ }
++};inline Q4State q4_state;
++}
+diff --git a/include/strata/research/q4_tape.hpp b/include/strata/research/q4_tape.hpp
+new file mode 100644
+index 0000000..94d9f9a
+--- /dev/null
++++ b/include/strata/research/q4_tape.hpp
+@@ -0,0 +1,53 @@
++// Fixed-work Q4 research tape. OFF unless explicitly enabled; not a serving model.
++#pragma once
++#include "strata/research/q4_tape_gpu.hpp"
++#include <cuda_runtime.h>
++#include <array>
++#include <algorithm>
++#include <chrono>
++#include <cstdio>
++#include <cstdlib>
++#include <cstring>
++#include <string>
++#include <stdexcept>
++#include <vector>
++namespace strata::research {
++struct TapeWindow {
++ int64_t position; int32_t T,accepted,draft_count,emitted_before;
++ int32_t inputs[4],outputs[4]; TapeRoutes routes;
++};
++struct TapeObservation {
++ uint64_t begin_ns,end_ns; int32_t seen[51],disagreements[51],native_outputs[4],qsa_seen[12],qsa_disagreements[12]; float activation[51][8];
++};
++struct TapeHeader { uint64_t magic=0x3150455441343451ull; uint32_t version=2,window_bytes=sizeof(TapeWindow); uint64_t windows=0,prompt_count=0,output_budget=0,output_count=0,work_hash=0; int64_t initial_rounds=0; };
++struct Q4Tape {
++ bool enabled=false,replaying=false,active=false; int request=0,selected=2; size_t index=0;
++ std::string path; TapeHeader header; std::vector<int32_t> prompt,initial_res; std::vector<float> initial_heat;
++ std::vector<TapeWindow> windows; std::vector<TapeObservation> observations; TapeWindow current{}; TapeObservation obs{};
++ std::array<TapePage*,2> host{},mapped{}; uint64_t lookup_ns=0,main_events=0,mtp_events=0; int output_divergence=-1;
++ static uint64_t ns(){return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
++ static void require(bool ok,const char* why){if(!ok)throw std::runtime_error(std::string("Q4_TAPE_CONTRACT ")+why);}
++ Q4Tape(){const char* p=std::getenv("STRATA_Q4_TAPE");if(!p)return;enabled=true;path=p;const char* m=std::getenv("STRATA_Q4_TAPE_MODE");require(m,"mode missing");require(std::string(m)=="record"||std::string(m)=="replay","invalid mode");replaying=std::string(m)=="replay";p=std::getenv("STRATA_Q4_TAPE_REQUEST");if(p)selected=std::atoi(p);if(replaying)load();}
++ template<class T> static void io(FILE* f,T* p,size_t n,bool write){require((write?std::fwrite(p,sizeof(T),n,f):std::fread(p,sizeof(T),n,f))==n,"truncated tape IO");}
++ void load(){FILE* f=std::fopen(path.c_str(),"rb");require(f,"cannot open replay tape");io(f,&header,1,false);require(header.magic==0x3150455441343451ull&&header.version==2&&header.window_bytes==sizeof(TapeWindow)&&header.windows<100000&&header.prompt_count<300000,"unsupported tape schema");prompt.resize(header.prompt_count);initial_res.resize(48*512);initial_heat.resize(48*512);windows.resize(header.windows);io(f,prompt.data(),prompt.size(),false);io(f,initial_res.data(),initial_res.size(),false);io(f,initial_heat.data(),initial_heat.size(),false);io(f,windows.data(),windows.size(),false);require(std::fgetc(f)==EOF,"trailing tape bytes");std::fclose(f);require(hash()==header.work_hash,"corrupt work hash");}
++ void configure(){if(!enabled)return;int old;cudaGetDevice(&old);for(int d=0;d<2;++d){require(cudaSetDevice(d)==cudaSuccess,"device setup");require(cudaHostAlloc(&host[d],sizeof(TapePage),cudaHostAllocMapped)==cudaSuccess,"mapped tape allocation");require(cudaHostGetDevicePointer(&mapped[d],host[d],0)==cudaSuccess,"mapped tape pointer");std::memset(host[d],0,sizeof(TapePage));}cudaSetDevice(old);}
++ void graph_main(int d,int l,int off,int n,int32_t* ids,float* weights,const float* x,void* stream){if(enabled)tape_route(mapped[d],l,off,n,ids,weights,x,stream);}
++ void graph_attention(int d,int qi,int off,int n,int cap,int32_t* sel,const int32_t* step,void* stream){require(qi>=0&&qi<12&&cap==2051,"QSA geometry differs");if(enabled)tape_attention(mapped[d],qi,off,n,cap,sel,step,stream);}
++ void graph_mtp(int d,int step,int32_t* ids,float* weights,const float* x,void* stream){if(enabled)tape_route(mapped[d],48+step,0,10,ids,weights,x,stream);}
++ void graph_mtp_head(int d,int step,int32_t* out,float* prob,void* stream){if(enabled)tape_mtp_head(mapped[d],step,out,prob,stream);}
++ void begin(const std::vector<int64_t>& ids,int64_t budget,const int32_t* res,const float* heat,int64_t rounds){if(!enabled)return;++request;if(request!=selected)return;require(host[0]&&host[1],"configure missing");active=true;index=0;lookup_ns=main_events=mtp_events=0;observations.clear();observations.reserve((size_t)budget);output_divergence=-1;
++  if(replaying){require(rounds==header.initial_rounds,"native adaptation phase differs");require(ids.size()==prompt.size()&&budget==(int64_t)header.output_budget,"request shape differs");for(size_t i=0;i<ids.size();++i)require(ids[i]==prompt[i],"input token differs");if(std::memcmp(res,initial_res.data(),48*512*sizeof(int32_t))){int n=0;for(int j=0;j<48*512;++j)n+=res[j]!=initial_res[j];std::fprintf(stderr,"Q4_TAPE_INITIAL_RES_MISMATCH count=%d\n",n);require(false,"initial resident sets/slots differ");}require(!std::memcmp(heat,initial_heat.data(),48*512*sizeof(float)),"initial native usage differs");}
++  else{header.initial_rounds=rounds;header.output_budget=budget;header.prompt_count=ids.size();prompt.assign(ids.begin(),ids.end());initial_res.assign(res,res+48*512);initial_heat.assign(heat,heat+48*512);windows.clear();windows.reserve((size_t)budget);}
++  std::fprintf(stderr,"Q4_TAPE_BEGIN mode=%s input=%zu budget=%lld initial_residents=%zu ram_tape_bytes=%zu\n",replaying?"replay":"record",ids.size(),(long long)budget,(size_t)std::count_if(initial_res.begin(),initial_res.end(),[](int x){return x>=0;}),windows.size()*sizeof(TapeWindow));}
++ void pre(int& T,int64_t p,int32_t* inputs,int emitted){if(!active)return;uint64_t t=ns();std::memset(&current,0,sizeof(current));std::memset(&obs,0,sizeof(obs));if(replaying){require(index<windows.size(),"extra window");current=windows[index];require(current.position==p&&current.T==T&&current.emitted_before==emitted,"window schedule differs");require(!std::memcmp(current.inputs,inputs,T*sizeof(int32_t)),"window input differs");}else{current.position=p;current.T=T;current.emitted_before=emitted;std::memcpy(current.inputs,inputs,T*sizeof(int32_t));}
++  for(int d=0;d<2;++d){std::memset(host[d],0,sizeof(TapePage));if(replaying)host[d]->routes=current.routes;host[d]->mode=replaying?2:1;}lookup_ns+=ns()-t;obs.begin_ns=ns();}
++ void head(int T,int32_t* outputs){if(!active)return;std::memcpy(obs.native_outputs,outputs,T*sizeof(int32_t));if(replaying){if(output_divergence<0&&std::memcmp(current.outputs,outputs,T*sizeof(int32_t)))output_divergence=(int)index;std::memcpy(outputs,current.outputs,T*sizeof(int32_t));}else std::memcpy(current.outputs,outputs,T*sizeof(int32_t));}
++ void accepted(int a){if(!active)return;if(replaying)require(current.accepted==a,"commit prefix differs");else current.accepted=a;}
++ void drafted(int n){if(!active)return;if(replaying)require(current.draft_count==n,"draft invocation count differs");else current.draft_count=n;}
++ void post(){if(!active)return;uint64_t t=ns();int nonfinite=0;for(int l=0;l<51;++l){int d=l<24?0:1;auto* p=host[d];obs.seen[l]=p->seen[l];obs.disagreements[l]=p->disagreements[l];std::memcpy(obs.activation[l],p->activation[l],sizeof(obs.activation[l]));require(p->seen[l]==(l<48?1:(l-48<current.draft_count?1:0)),"route call count differs");if(l<48){if(!replaying){std::memcpy(current.routes.ids[l],p->routes.ids[l],40*4);std::memcpy(current.routes.weights[l],p->routes.weights[l],40*4);}++main_events;}else{int j=l-48;if(!replaying){std::memcpy(current.routes.mtp_ids[j],p->routes.mtp_ids[j],10*4);std::memcpy(current.routes.mtp_weights[j],p->routes.mtp_weights[j],10*4);current.routes.drafts[j]=p->routes.drafts[j];current.routes.probs[j]=p->routes.probs[j];}mtp_events+=p->seen[l];}nonfinite|=p->nonfinite;}for(int qi=0;qi<12;++qi){int d=qi<6?0:1;auto* p=host[d];obs.qsa_seen[qi]=p->qsa_seen[qi];obs.qsa_disagreements[qi]=p->qsa_disagreements[qi];require(p->qsa_seen[qi]==1,"QSA invocation differs");if(!replaying)std::memcpy(current.routes.qsa[qi],p->routes.qsa[qi],sizeof(current.routes.qsa[qi]));}require(!nonfinite,"nonfinite route/activation");obs.end_ns=ns();observations.push_back(obs);if(!replaying)windows.push_back(current);++index;lookup_ns+=ns()-t;for(auto* p:host)p->mode=0;}
++ uint64_t hash()const{uint64_t x=1469598103934665603ull;auto add=[&](const void* p,size_t n){auto* b=(const uint8_t*)p;for(size_t i=0;i<n;++i){x^=b[i];x*=1099511628211ull;}};add(prompt.data(),prompt.size()*4);add(&header.output_budget,8);for(const auto& w:windows)add(&w,sizeof(w));return x;}
++ void finish(int64_t output_count,bool cancelled){if(!active)return;require(!cancelled,"cancelled tape is invalid");if(replaying)require(index==windows.size()&&output_count==(int64_t)header.output_count,"incomplete replay");else{header.windows=windows.size();header.output_count=output_count;header.work_hash=hash();FILE* f=std::fopen(path.c_str(),"wbx");require(f,"record tape path already exists");io(f,&header,1,true);io(f,prompt.data(),prompt.size(),true);io(f,initial_res.data(),initial_res.size(),true);io(f,initial_heat.data(),initial_heat.size(),true);io(f,windows.data(),windows.size(),true);std::fclose(f);}
++  const char* p=std::getenv("STRATA_Q4_TAPE_OBSERVATIONS");if(p){FILE* f=std::fopen(p,"wbx");require(f,"observation path already exists");io(f,observations.data(),observations.size(),true);std::fclose(f);}std::fprintf(stderr,"Q4_TAPE_END mode=%s windows=%zu main_events=%llu mtp_events=%llu output=%lld work_hash=%016llx lookup_ms=%.3f native_head_first_divergence=%d\n",replaying?"replay":"record",index,(unsigned long long)main_events,(unsigned long long)mtp_events,(long long)output_count,(unsigned long long)header.work_hash,lookup_ns/1e6,output_divergence);active=false;}
++ ~Q4Tape(){for(auto* p:host)if(p)cudaFreeHost(p);}
++};inline Q4Tape q4_tape;
++}
+diff --git a/include/strata/research/q4_tape_gpu.hpp b/include/strata/research/q4_tape_gpu.hpp
+new file mode 100644
+index 0000000..c3e6e17
+--- /dev/null
++++ b/include/strata/research/q4_tape_gpu.hpp
+@@ -0,0 +1,10 @@
++#pragma once
++#include <cstdint>
++namespace strata::research {
++constexpr int TapeLayers=48,TapeK=10,TapeT=4,TapeDrafts=3;
++struct TapeRoutes { int32_t ids[48][40]; float weights[48][40]; int32_t mtp_ids[3][10]; float mtp_weights[3][10]; int32_t drafts[3]; float probs[3]; int32_t qsa[12][4*2051]; };
++struct TapePage { int32_t mode; int32_t seen[51]; int32_t disagreements[51]; int32_t nonfinite; int32_t qsa_seen[12],qsa_disagreements[12]; TapeRoutes routes; float activation[51][8]; };
++void tape_attention(TapePage* page,int qi,int row_offset,int n,int cap,int32_t* selection,const int32_t* steps,void* stream);
++void tape_route(TapePage* page,int layer,int row_offset,int n,int32_t* ids,float* weights,const float* activation,void* stream);
++void tape_mtp_head(TapePage* page,int step,int32_t* out,float* prob,void* stream);
++}
+diff --git a/include/strata/research/q4_victim_model.hpp b/include/strata/research/q4_victim_model.hpp
+new file mode 100644
+index 0000000..d25cb51
+--- /dev/null
++++ b/include/strata/research/q4_victim_model.hpp
+@@ -0,0 +1,31 @@
++// CPU-only causal return-risk model. Prefix histories reset for each taped request.
++#pragma once
++#include <array>
++#include <vector>
++#include <fstream>
++#include <cmath>
++#include <chrono>
++#include <string>
++#include <algorithm>
++namespace strata::research {
++struct VictimScorer {
++ static constexpr int F=13,N=48*512;
++ struct Node {int left,right,feature;double threshold,value;};
++ struct Head {double bias=0,lr=1;std::array<double,F> coefficients{};std::vector<std::vector<Node>> trees;};
++ std::array<Head,4> heads;std::array<double,F> mean{},scale{};bool tree=false,loaded=false;
++ std::array<int,N> last{},last_gap{},gap_n{},cache_version{};std::array<double,N> total{},fast{},slow{},gap_sum{},gap_sq{};
++ std::array<int,48> updated{},versions{};std::array<std::array<double,4>,N> cached{};
++ uint64_t feature_ns=0,score_ns=0,selection_ns=0,scores=0,cache_hits=0,rejections=0,invalid=0;
++ static uint64_t now(){return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();}
++ void reset(){last.fill(-1);last_gap.fill(0);gap_n.fill(0);cache_version.fill(-1);total.fill(0);fast.fill(0);slow.fill(0);gap_sum.fill(0);gap_sq.fill(0);updated.fill(-1);versions.fill(0);feature_ns=score_ns=selection_ns=scores=cache_hits=rejections=invalid=0;}
++ bool load(const char* path){if(!path)return false;std::ifstream f(path);std::string magic;int kind,features;f>>magic>>kind>>features;if(magic!="Q4VICTIM1"||features!=F||(kind!=0&&kind!=1))return false;tree=kind;for(auto& x:mean)f>>x;for(auto& x:scale)f>>x;for(auto& h:heads){f>>h.bias;if(!tree){for(auto& x:h.coefficients)f>>x;}else{int nt;f>>h.lr>>nt;if(nt<1||nt>64)return false;h.trees.resize(nt);for(auto& t:h.trees){int nn;f>>nn;if(nn<1||nn>255)return false;t.resize(nn);for(auto& n:t)f>>n.left>>n.right>>n.feature>>n.threshold>>n.value;for(auto& n:t)if(n.left>=0&&(n.left>=nn||n.right<0||n.right>=nn||n.feature<0||n.feature>=F))return false;}}}if(!f)return false;for(int j=0;j<F;++j)if(!std::isfinite(mean[j])||!std::isfinite(scale[j])||scale[j]<=0)return false;loaded=true;return true;}
++ std::array<double,F> features(int l,int e,int at)const{int k=l*512+e;double wi=at/48.,dt=wi-std::max(0,updated[l]);bool seen=last[k]>=0;double rec=seen?wi-last[k]:wi+1,mu=gap_n[k]?gap_sum[k]/gap_n[k]:0,var=gap_n[k]?std::max(0.,gap_sq[k]/gap_n[k]-mu*mu):0;return {l/47.,double(l/24),double(l==4||l==30||l==46||l==47),double(l==2),double(seen),std::log1p(std::max(0.,rec)),std::log1p(fast[k]*std::exp(-dt/4)),std::log1p(slow[k]*std::exp(-dt/64)),std::log1p(total[k]),std::log1p(double(last_gap[k])),std::log1p(mu),mu>0?std::sqrt(var)/mu:0,std::log1p(wi)};}
++ std::array<double,4> predict(const std::array<double,F>& raw)const{std::array<double,F>x;for(int j=0;j<F;++j)x[j]=(double(float(raw[j]))-mean[j])/scale[j];std::array<double,4>p;for(int i=0;i<4;++i){const auto& h=heads[i];double v=h.bias;if(tree){for(const auto& t:h.trees){int n=0,steps=0;while(t[n].left>=0&&steps++<255)n=x[t[n].feature]<=t[n].threshold?t[n].left:t[n].right;if(steps>=255)return {NAN,NAN,NAN,NAN};v+=h.lr*t[n].value;}}else for(int j=0;j<F;++j)v+=x[j]*h.coefficients[j];p[i]=1/(1+std::exp(-std::clamp(v,-40.,40.)));if(i)p[i]=std::max(p[i],p[i-1]);}return p;}
++ void observe(int l,const int32_t* ids,int n,int ev){int wi=ev/48;double dt=wi-std::max(0,updated[l]),a=std::exp(-dt/4),b=std::exp(-dt/64);for(int e=0;e<512;++e){int k=l*512+e;fast[k]*=a;slow[k]*=b;}updated[l]=wi;++versions[l];int count[512]={};for(int j=0;j<n;++j)++count[ids[j]];for(int e=0;e<512;++e)if(count[e]){int k=l*512+e;if(last[k]>=0){int gap=wi-last[k];last_gap[k]=gap;++gap_n[k];gap_sum[k]+=gap;gap_sq[k]+=double(gap)*gap;}last[k]=wi;total[k]+=count[e];fast[k]+=count[e];slow[k]+=count[e];}}
++ std::array<double,4> risk(int l,int e,int at,int policy,const float* heat){int k=l*512+e;int version=(at/48)*4096+versions[l];if(cache_version[k]==version){++cache_hits;return cached[k];}uint64_t t=now();auto x=features(l,e,at);feature_ns+=now()-t;t=now();std::array<double,4>p;if(policy>=3&&loaded)p=predict(x);else{double rate;if(policy==1)rate=std::max(0.f,heat[k])*.089168735;else rate=(std::expm1(x[6])/4+std::expm1(x[7])/64)*.5*std::exp(-std::expm1(x[5])/16);for(int i=0;i<4;++i)p[i]=1-std::exp(-rate*std::array<double,4>{1,4,16,64}[i]);}bool ok=true;for(double v:p)ok=ok&&std::isfinite(v)&&v>=0&&v<=1;if(!ok){++invalid;for(int i=0;i<4;++i)p[i]=1-std::exp(-std::max(0.f,heat[k])*.089168735*std::array<double,4>{1,4,16,64}[i]);}score_ns+=now()-t;++scores;cache_version[k]=version;cached[k]=p;return p;}
++ double value(int l,int e,int at,int policy,const float* heat){auto p=risk(l,e,at,policy,heat);return -(p[0]+.5*p[1]+.25*p[2]+.125*p[3]);}
++ bool accept(int l,int e,int at,int target,int policy,const float* heat,double threshold){auto p=risk(l,e,at,policy,heat);double interval=(target-at)/48.;double r=interval<=1?p[0]:p[0]+std::clamp((interval-1)/3,0.,1.)*(p[1]-p[0]);bool ok=r<=threshold;if(!ok)++rejections;return ok;}
++ double expected_entries16(int l,int e,int at,int policy,const float* heat){int k=l*512+e;double wi=at/48.,dt=wi-std::max(0,updated[l]);double rate=policy==1?std::max(0.f,heat[k])*.089168735:.5*(fast[k]*std::exp(-dt/4)/4+slow[k]*std::exp(-dt/64)/64);auto p=risk(l,e,at,policy,heat);return p[2]*std::max(1.,16*rate);}
++ size_t memory_bytes()const{size_t n=sizeof(*this);for(auto& h:heads)for(auto& t:h.trees)n+=t.capacity()*sizeof(Node);return n;}
++};
++}
+diff --git a/src/core/expert_source.cpp b/src/core/expert_source.cpp
+index 98e1952..7eaf763 100644
+--- a/src/core/expert_source.cpp
++++ b/src/core/expert_source.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_oracle.hpp"
+ // src/core/expert_source.cpp - the adapter.  See the header for the three clauses of the contract.
+ #include "strata/core/expert_source.hpp"
+ #include "strata/core/remote_experts.hpp"
+@@ -2008,6 +2009,7 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+     };
+     const auto c0 = std::chrono::steady_clock::now();
+     pt("begin");
++    strata::research::q4_oracle.host((int)d.layers,ids,(int)(n_tok*k));
+     d.src->begin_layer(d.layers, ids, n_tok * k);
+     pt("begun");
+     if (!d.usage.empty())
+@@ -2132,6 +2134,7 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+     // copy_or_zero_from_mapped copies every row, so there the host still zeroes them
+     static const bool device_plan = [] { const char* v = std::getenv("STRATA_VERIFY_DEVICE_PLAN"); return v != nullptr && std::atoi(v) != 0; }();
+     const bool gpu_zeroes_hits = (d.plan != nullptr && n <= kMaxWindowEntries && n <= d.plan->cap && dec_batch && !device_plan);
++    strata::research::q4_oracle.observe_plan((int)d.layers,ids,(int)n,kind);
+     bool any_cpu = false;
+     for (int64_t i = 0; i < n; ++i)
+         if (kind[i] < 0) { any_cpu = true; break; }
+@@ -2231,6 +2234,7 @@ void expert_pool_dispatch_multi(ExpertDispatch& d, const float* x_f, const int32
+         }
+     }
+     const auto c4 = std::chrono::steady_clock::now();
++    strata::research::q4_oracle.observe_cpu();
+     pt("ran");
+     auto ms = [](auto a, auto b) { return std::chrono::duration<double, std::milli>(b - a).count(); };
+     d.ms_plan += ms(c0, c1);
+diff --git a/src/core/layer.cpp b/src/core/layer.cpp
+index 33450f7..eb6602a 100644
+--- a/src/core/layer.cpp
++++ b/src/core/layer.cpp
+@@ -451,7 +451,7 @@ f32_to_bf16_bulk(x, b.x_bf16, g.n_embd, stream);
+     return true;
+ }
+ bool moe_combine_parts(const ModelGeometry& g, int64_t layer, int64_t k, const MoEBuffers& b, const float* parts,
+-                       float* out, void* stream, std::string& err) {
++                       float* out, void* stream, std::string& err,strata::kernels::Q4KernelTrace trace) {
+     using namespace strata::kernels;
+     if (k < 1 || k > 64) { err = "moe_finish: k must be 1..64"; return false; }
+     // ---- the combination: sum of w[i] * parts[i], plus the shared output ADDED PLAIN.
+@@ -460,7 +460,7 @@ bool moe_combine_parts(const ModelGeometry& g, int64_t layer, int64_t k, const M
+ // reason this is a separate function: a caller that passes the previous layer's expert vectors gets
+ // `sum_j w_l[j] * expert_{ids_{l-1},j}(x_{l-1})`, which is finite, fluent and not the model.
+ try {
+-    if (native_moe_combine_enabled()) native_moe_combine(parts, b.weights, b.shared, out, g.n_embd, k, stream);
++    if (native_moe_combine_enabled()) native_moe_combine(parts, b.weights, b.shared, out, g.n_embd, k, stream,trace);
+     else moe_combine(parts, b.weights, b.shared, out, g.n_embd, k, stream);
+ } catch (const std::exception& error) {
+     err = "blk." + std::to_string(layer) + ".moe_combine" + ": " + error.what();
+diff --git a/src/core/mtp.cpp b/src/core/mtp.cpp
+index e9953e3..76115e9 100644
+--- a/src/core/mtp.cpp
++++ b/src/core/mtp.cpp
+@@ -1,3 +1,4 @@
++#include "strata/research/q4_tape.hpp"
+ // src/core/mtp.cpp - see include/strata/core/mtp.hpp.
+ #include "strata/core/mtp.hpp"
+ #include "strata/core/coupled_draft.hpp"
+@@ -576,6 +577,7 @@ bool MtpDrafter::record_forward(int T, int step_row0, cudaStream_t cs, std::stri
+             if (native_router_enabled()) native_router_top10(logits_ + t * g.n_expert, ids_ + t * K, w_ + t * K, cs);
+             else router_top10(logits_ + t * g.n_expert, 1, (int) g.n_expert, (int) K, ids_ + t * K, w_ + t * K, cs);
+         }
++        strata::research::q4_tape.graph_mtp(device_,coupled_j_,ids_,w_,mixed_,cs);
+         moe_group_resident(ids_, (int) (T * K), (int) K, experts_, (int64_t) strata::kernels::cpu::BLOB, grp_ptr_,
+                            grp_start_, grp_counts_, hit_dst_, hit_slot_, cs);
+         quantize_q8_0_scaled(mixed_, hit_xq_, hit_xs_, (int64_t) T * N, cs);
+@@ -642,6 +644,7 @@ bool MtpDrafter::record_forward(int T, int step_row0, cudaStream_t cs, std::stri
+         sample_tokens(head_logits_, T, (int) nv, nullptr, 0, sp, out_ids_, cs);
+         row_top_prob(head_logits_, T, (int) nv, out_ids_, probs_, cs);
+         if (sub) map_ids(out_ids_, dvocab_, T, cs);
++        strata::research::q4_tape.graph_mtp_head(device_,coupled_j_,out_ids_,probs_,cs);
+     } catch (const std::exception& e) {
+         err = std::string("mtp: ") + e.what();
+         return false;
+@@ -969,6 +972,7 @@ bool MtpDrafter::draft(int T, const int32_t* tokens, int64_t p, int a, int32_t*
+         }
+     }
+     for (int j = n; j < max_t_ - 1; ++j) { drafts[j] = 0; if (probs) probs[j] = 0.0f; }
++    strata::research::q4_tape.drafted(n);
+     if (n_drafts) *n_drafts = n;
+     ms_draft += ms_since(t0);
+     ++rounds;
+diff --git a/src/core/verify.cpp b/src/core/verify.cpp
+index dd5362b..bf32fb3 100644
+--- a/src/core/verify.cpp
++++ b/src/core/verify.cpp
+@@ -1,3 +1,5 @@
++#include "strata/research/q4_tape.hpp"
++#include "strata/research/q4_oracle.hpp"
+ // src/core/verify.cpp - see include/strata/core/verify.hpp.
+ #include "strata/core/verify.hpp"
+ #include "strata/core/remote_expert_opt.hpp"
+@@ -291,6 +293,8 @@ Verifier::~Verifier() {
+     if (commit_done_) cudaEventDestroy(commit_done_);
+     if (ev_fork_) cudaEventDestroy(ev_fork_);
+     if (ev_join_) cudaEventDestroy(ev_join_);
++    if (wait_stats_) cudaFree(wait_stats_);
++    if(publication_data_)cudaFree(publication_data_);if(publication_counts_)cudaFree(publication_counts_);
+     if (arena_) cudaFree(arena_);
+     void* hosts[] = {h_tok_, h_step_, h_pos_, h_commit_, h_ple_, h_out_, h_x_, h_ids_, h_w_, h_seq_, h_flag_, h_ymiss_,
+                      h_flagA_, h_plan_, h_flagB_};
+@@ -461,6 +465,10 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
+         std::fprintf(stderr, "strata verify trace (#649): on\n");
+ #endif
+     }
++    const char* wp=std::getenv("STRATA_Q4_WAIT_PROFILE");
++    if(wp&&wp[0]=='1') {if(cudaMalloc((void**)&wait_stats_,6*sizeof(unsigned long long))!=cudaSuccess){err="wait stats allocation";return false;}cudaMemset(wait_stats_,0,6*sizeof(unsigned long long));}
++    const char* publication_switch=std::getenv("STRATA_Q4_PUBLICATION_TRACE");
++    if(publication_switch){publication_detail_=publication_switch[0]=='1';if(cudaMalloc((void**)&publication_data_,publication_kinds_*publication_cap_*4*8)!=cudaSuccess||cudaMalloc((void**)&publication_counts_,(publication_kinds_+2)*8)!=cudaSuccess){err="publication trace allocation";return false;}cudaMemset(publication_counts_,0,(publication_kinds_+2)*8);}
+     prof_on_ = std::getenv("STRATA_VERIFY_PROFILE") != nullptr;
+     if (prof_on_) {
+         const size_t np = (size_t) g.n_layers * kProfPer + 4;
+@@ -573,6 +581,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+ 
+     // ---- the window's inputs, from mapped staging
+     copy_i32_from_mapped(tok_, m_tok_, T, cs);
++    if(publication_detail_)publication_mark(9,0,cs);
+     copy_i32_from_mapped(step_, m_step_, (int64_t) T * kStepCount, cs);
+     copy_i32_from_mapped(pos_, m_pos_, (int64_t) MT * (NH + NKV + IQ), cs);
+     // per-ROW positions of the K rows [t][NKV] and the indexer query rows [t][IQ] (for batched RoPE)
+@@ -870,6 +879,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                                  s, scores_ + (size_t) tb * max_blocks_, cs);
+                 qsa_block_topk(scores_ + (size_t) tb * max_blocks_, step_ + tb * kStepCount, n, max_blocks_, cap_, s,
+                                sel_ + (size_t) tb * cap_, cs);
++                strata::research::q4_tape.graph_attention(device_,(int)qi,tb,n,(int)cap_,sel_+(size_t)tb*cap_,step_+tb*kStepCount,cs);
+                 stamp(l, 11, grp);
+                 // KV streaming: the n selections' blocks resident (device-side, inside the graph)
+                 qsa_kv_resolve(st, *g_, sel_ + (size_t) tb * cap_, step_ + tb * kStepCount, n, cap_, cs);
+@@ -934,6 +944,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             mb.logits = logits_ + t * NE; mb.ids = ids_ + t * K; mb.weights = w_ + t * K;
+             if (!moe_route(wt, g, l, K, mb, mixed_ + t * N, cs, err, nullptr)) return false;
+         }
++        strata::research::q4_tape.graph_main(device_,(int)l,tb*K,n*K,ids_+tb*K,w_+tb*K,xm,cs);
+         if (all_resident_) {
+             resident_plan(ids_ + tb * K, n * (int) K, (int) K, hits_.d_res + l * g.n_expert, (int) g.n_expert,
+                           hits_.cache_base, slot_off_d_, (long long) hits_.blob,
+@@ -967,7 +978,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+             if (!native_of(wsg, v.name("ffn_gate_shexp.weight"), err) || !native_of(wsu, v.name("ffn_up_shexp.weight"), err) ||
+                 !native_of(wsd, v.name("ffn_down_shexp.weight"), err))
+                 return false;
+-            NativeSharedWeights nsw;
++            NativeSharedWeights nsw;nsw.trace=publication_kernel(4,(uint32_t)((l-lb_)*G+grp+1));
+             nsw.gate_type = wsg->native_type; nsw.gate_data = wsg->native_data;
+             nsw.up_type = wsu->native_type; nsw.up_data = wsu->native_data;
+             nsw.down_type = wsd->native_type; nsw.down_data = wsd->native_data;
+@@ -1039,14 +1050,14 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                 wait_flag_ge_or(m_flagA_, ring, skip_ + grp, cs);
+                 copy_i32_from_mapped_unless(pl, m_plan_ + (size_t) grp * (size_t) plan_i32_, plan_i32_, skip_ + grp, ring, cs);
+             } else {
+-                wait_flag_ge(m_flagA_, ring, cs);                  // the pool published this group's GPU plan
++                if(wait_stats_)wait_flag_ge_timed(m_flagA_,ring,wait_stats_+0,cs,publication_detail_?publication_data_:nullptr,publication_counts_,publication_cap_);else wait_flag_ge(m_flagA_, ring, cs);                  // the pool published this group's GPU plan
+                 copy_i32_from_mapped(pl, m_plan_ + (size_t) grp * (size_t) plan_i32_, plan_i32_, cs);
+             }
+             stamp(l, 19, grp);
+             grouped(p_ptr, p_start, p_counts, 0, hit_out);
+             stamp(l, 20, grp);
+             if (device_plan_) wait_flag_ge_or(m_flagB_, ring, skip_ + grp, cs);
+-            else wait_flag_ge(m_flagB_, ring, cs);                 // the PCIe share is in staging (DMA) or mapped
++            else if(wait_stats_)wait_flag_ge_timed(m_flagB_,ring,wait_stats_+2,cs,publication_detail_?publication_data_+publication_cap_*4:nullptr,publication_counts_?publication_counts_+1:nullptr,publication_cap_);else wait_flag_ge(m_flagB_, ring, cs);                 // the PCIe share is in staging (DMA) or mapped
+             if (sink_.pcie_mode == 2) {                            // stage it with a copy kernel, then point at staging
+                 const int64_t per = G == 2 ? kStagingBlobs / 2 : kStagingBlobs;
+                 uint8_t* stage = staging_ + (size_t) (grp * per) * lay.max_blob;
+@@ -1063,7 +1074,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+                 copy_or_zero_from_mapped(parts_out, m_ymiss_ + (size_t) tb * K * N, (long long) n * K * N,
+                                          skip_ + grp, ring, cs);
+             } else {
+-                wait_flag_ge(m_flag_, ring, cs);               // the CPU's share is in the mapped rows
++                if(wait_stats_)wait_flag_ge_timed(m_flag_,ring,wait_stats_+4,cs,publication_detail_?publication_data_+publication_cap_*8:nullptr,publication_counts_?publication_counts_+2:nullptr,publication_cap_);else wait_flag_ge(m_flag_, ring, cs);               // the CPU's share is in the mapped rows
+                 stamp(l, 23, grp);
+                 if (remote_opt_)   // #578: the helper's rows come back reduced; skip them as well
+                     remote_opt_->copy_rows(parts_out, m_ymiss_ + (size_t) tb * K * N, tb, n, p_dst, p_counts + 1, cs);
+@@ -1080,13 +1091,13 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         }
+         if (dec_batch && n > 1 && native_moe_combine_enabled()) {   // one launch for the window's rows
+             try {
+-                native_moe_combine_multi(parts_ + (size_t) tb * K * N, w_ + tb * K, shared_ + tb * N, bo_ + tb * N, N, K, n, cs);
++                native_moe_combine_multi(parts_ + (size_t) tb * K * N, w_ + tb * K, shared_ + tb * N, bo_ + tb * N, N, K, n, cs,publication_kernel(7,ring));
+             } catch (const std::exception& e) { err = "verify combine: " + std::string(e.what()); return false; }
+         } else
+         for (int t = tb; t < te; ++t) {
+             MoEBuffers mb = ss.moe;
+             mb.weights = w_ + t * K; mb.shared = shared_ + t * N;
+-            if (!moe_combine_parts(g, l, K, mb, parts_ + (size_t) t * K * N, bo_ + t * N, cs, err)) return false;
++            if (!moe_combine_parts(g, l, K, mb, parts_ + (size_t) t * K * N, bo_ + t * N, cs, err,publication_kernel(7,ring))) return false;
+         }
+         if (remote_opt_) remote_opt_->combine(bo_ + tb * N, y_dummy_ + tb * N, tb, n,
+                               device_plan_ ? skip_ + grp : nullptr, ring, cs);
+@@ -1114,6 +1125,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         copy_from_mapped(hout, R_, (int64_t) T * HC * N, cs);
+         copy_from_mapped(hout + (size_t) T * HC * N, bo_, (int64_t) T * N, cs);
+         copy_from_mapped(hout + (size_t) T * (HC + 1) * N, inj2_, (int64_t) T * HC, cs);
++        if(publication_detail_)publication_mark(10,0,cs);
+         return true;
+     }
+ 
+@@ -1170,9 +1182,36 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
+         sample_tokens(head_logits_, T, (int) n_vocab_, nullptr, 0, sp, m_out_, cs);
+     }
+     stamp(g.n_layers, 1, 0);
++    if(publication_detail_)publication_mark(10,0,cs);
+     return true;
+ }
+ 
++strata::kernels::Q4KernelTrace Verifier::publication_kernel(int kind,uint32_t value){if(!publication_detail_)return {};return {publication_data_+kind*publication_cap_*4,publication_counts_+kind,(unsigned int*)(publication_counts_+publication_kinds_+(kind==7)),publication_cap_,value};}
++void Verifier::publication_mark(int kind,uint32_t value,void* stream){if(!publication_data_)return;strata::kernels::q4_trace_mark(publication_data_+kind*publication_cap_*4,publication_counts_+kind,publication_cap_,value,stream);}
++void Verifier::publication_trace_calibrate(int boundary){
++ if(!publication_data_)return;const OnDevice on_device(device_);
++ publication_cal_host_[2*boundary]=strata::research::Q4Tape::ns();
++ publication_mark(8,uint32_t(boundary),cs_);
++ unsigned long long sample[4]{};cudaMemcpyAsync(sample,publication_data_+8*publication_cap_*4+boundary*4,sizeof(sample),cudaMemcpyDeviceToHost,cs_);cudaStreamSynchronize(cs_);
++ publication_cal_host_[2*boundary+1]=strata::research::Q4Tape::ns();
++}
++void Verifier::publication_trace_begin(){if(!publication_data_)return;publication_measured_=strata::research::q4_tape.active;const OnDevice on_device(device_);cudaMemset(publication_counts_,0,(publication_kinds_+2)*8);publication_trace_calibrate(0);}
++void Verifier::wait_report(){
++    if(!wait_stats_)return;const OnDevice on_device(device_);unsigned long long s[6]{};
++    // Request completion has already waited for final commit; no routed-event sync.
++    cudaMemcpy(s,wait_stats_,sizeof(s),cudaMemcpyDeviceToHost);
++    std::fprintf(stderr,"Q4_WAIT_END device=%d plan_ns=%llu plan_count=%llu mapped_ns=%llu mapped_count=%llu cpu_ns=%llu cpu_count=%llu metadata_bytes=48\n",device_,s[0],s[1],s[2],s[3],s[4],s[5]);
++    if(publication_data_){
++      publication_trace_calibrate(1);unsigned long long counts[publication_kinds_]{};cudaMemcpy(counts,publication_counts_,sizeof(counts),cudaMemcpyDeviceToHost);
++      const char* prefix=std::getenv("STRATA_Q4_ORACLE_LOG");
++      if(prefix&&publication_measured_){std::string path=std::string(prefix)+"-gpu"+std::to_string(device_)+"-trace.bin";FILE* f=std::fopen(path.c_str(),"wbx");strata::research::Q4Tape::require(f,"GPU trace exists");
++       uint64_t header[20]={1,uint64_t(device_),publication_cap_,publication_kinds_,publication_detail_};for(int i=0;i<11;++i)header[5+i]=counts[i];for(int i=0;i<4;++i)header[16+i]=publication_cal_host_[i];strata::research::Q4Tape::io(f,header,20,true);
++       std::vector<unsigned long long> buffer(publication_cap_*4);for(int i=0;i<11;++i){size_t n=std::min<size_t>(counts[i],publication_cap_);if(n)cudaMemcpy(buffer.data(),publication_data_+i*publication_cap_*4,n*32,cudaMemcpyDeviceToHost);strata::research::Q4Tape::io(f,buffer.data(),n*4,true);}std::fclose(f);
++      }
++      std::fprintf(stderr,"Q4_GPU_TRACE device=%d detail=%d alloc_bytes=%zu A=%llu B=%llu CPU=%llu shared_begin=%llu shared_end=%llu prejoin=%llu postjoin=%llu layer_end=%llu calibration=%llu overflow=%d\n",device_,publication_detail_,publication_kinds_*publication_cap_*32+publication_kinds_*8,counts[0],counts[1],counts[2],counts[3],counts[4],counts[5],counts[6],counts[7],counts[8],std::any_of(counts,counts+11,[](auto v){return v>publication_cap_;}));
++    }
++    cudaMemsetAsync(wait_stats_,0,sizeof(s),cs_);
++}
+ std::string Verifier::profile_report() {
+     if (!prof_on_ || prof_windows_ == 0) return std::string();
+     static const char* names[kProfPer] = {"-", "hc-read0", "q8+qkv/q-idx gemv", "conv", "ab", "z", "rec", "q8+kv-idx",
+@@ -1517,7 +1556,7 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
+             _mm_sfence();
+             ms_host += ms_since(tp);
+         }
+-        if (!(test_stall && k + 1 == steps)) *flag = want;
++        if (!(test_stall && k + 1 == steps)) {strata::research::q4_oracle.other_flag(2,false);*flag = want;strata::research::q4_oracle.other_flag(2,true);}
+         ms_wait += std::chrono::duration<double, std::milli>(b - a).count();
+         ms_pool += ms_since(b);
+     }
+@@ -1621,7 +1660,7 @@ void Verifier::raise_flag(uint32_t* flag, uint32_t value) {
+ void Verifier::fetch_dma(void* ctx, const uint8_t* const* src, int n, size_t bytes) {
+     Verifier* v = (Verifier*) ctx;
+     const uint32_t want = v->cur_layer_ + 1;
+-    if (n <= 0) { raise_flag(v->h_flagB_, want); return; }
++    if (n <= 0) { strata::research::q4_oracle.other_flag(1,false);raise_flag(v->h_flagB_, want);strata::research::q4_oracle.other_flag(1,true); return; }
+     v->copy_used_ = true;
+     uint8_t* stage = (uint8_t*) v->sink_.staging;                  // this group's half in a split window
+     for (int i = 0; i < n; ++i) cudaMemcpyAsync(stage + (size_t) i * bytes, src[i], bytes, cudaMemcpyHostToDevice, v->copy_);
+@@ -1633,8 +1672,10 @@ void Verifier::fetch_dma(void* ctx, const uint8_t* const* src, int n, size_t byt
+ 
+ void Verifier::publish_plan(void* ctx) {
+     Verifier* v = (Verifier*) ctx;
++    strata::research::q4_oracle.flag_a(false);
+     _mm_sfence();
+     *(volatile uint32_t*) v->h_flagA_ = v->cur_layer_ + 1;
++    strata::research::q4_oracle.flag_a(true);
+ }
+ 
+ bool Verifier::window_logprobs(const int32_t* targets, int T, int64_t pos0, int32_t extra_id, std::FILE* out,
+diff --git a/src/kernels/cuda/elementwise.cu b/src/kernels/cuda/elementwise.cu
+index 4817763..17e7569 100644
+--- a/src/kernels/cuda/elementwise.cu
++++ b/src/kernels/cuda/elementwise.cu
+@@ -395,3 +395,32 @@ void rms_norm_weighted(float* x, const float* w, int64_t rows, int64_t cols, flo
+ }
+ 
+ }  // namespace strata::kernels
++
++#include "strata/research/q4_tape_gpu.hpp"
++namespace strata::research {
++__global__ void tape_route_kernel(TapePage* p,int layer,int off,int n,int32_t* ids,float* weights,const float* x){
++ int mode=((volatile int32_t*)&p->mode)[0];if(!mode)return;int i=threadIdx.x;
++ if(i==0)atomicAdd(p->seen+layer,1);
++ if(i<8){p->activation[layer][i]=x[i];if(!isfinite(x[i]))atomicOr(&p->nonfinite,1);}
++ if(i<n){int32_t* pi=layer<48?p->routes.ids[layer]+off:p->routes.mtp_ids[layer-48];float* pw=layer<48?p->routes.weights[layer]+off:p->routes.mtp_weights[layer-48];
++  if(!isfinite(weights[i])||ids[i]<0||ids[i]>=512)atomicOr(&p->nonfinite,1);
++  if(mode==1){pi[i]=ids[i];pw[i]=weights[i];}else{if(ids[i]!=pi[i]||__float_as_uint(weights[i])!=__float_as_uint(pw[i]))atomicAdd(p->disagreements+layer,1);ids[i]=pi[i];weights[i]=pw[i];}
++ }
++ __threadfence_system();
++}
++__global__ void tape_head_kernel(TapePage* p,int j,int32_t* out,float* prob){int mode=((volatile int32_t*)&p->mode)[0];if(!mode)return;if(mode==1){p->routes.drafts[j]=out[0];p->routes.probs[j]=prob[0];}else{out[0]=p->routes.drafts[j];prob[0]=p->routes.probs[j];}__threadfence_system();}
++void tape_route(TapePage* p,int l,int off,int n,int32_t* ids,float* w,const float* x,void* s){tape_route_kernel<<<1,64,0,(cudaStream_t)s>>>(p,l,off,n,ids,w,x);}
++void tape_mtp_head(TapePage* p,int j,int32_t* out,float* prob,void* s){tape_head_kernel<<<1,1,0,(cudaStream_t)s>>>(p,j,out,prob);}
++}
++
++namespace strata::research {
++__global__ void tape_attention_kernel(TapePage* p,int qi,int off,int n,int cap,int32_t* sel,const int32_t* steps){
++ int mode=((volatile int32_t*)&p->mode)[0];if(!mode)return;
++ if(threadIdx.x==0)atomicAdd(p->qsa_seen+qi,1);
++ for(int j=threadIdx.x;j<n*cap;j+=blockDim.x){int row=j/cap,i=j%cap;int width=steps[row*4+3];int32_t* saved=p->routes.qsa[qi]+(off+row)*cap+i;
++  if(i<width){if(mode==1)*saved=sel[j];else{if(sel[j]!=*saved)atomicAdd(p->qsa_disagreements+qi,1);sel[j]=*saved;}}
++ }
++ __threadfence_system();
++}
++void tape_attention(TapePage* p,int qi,int off,int n,int cap,int32_t* sel,const int32_t* steps,void* stream){tape_attention_kernel<<<1,256,0,(cudaStream_t)stream>>>(p,qi,off,n,cap,sel,steps);}
++}
+diff --git a/src/kernels/cuda/native_moe.cu b/src/kernels/cuda/native_moe.cu
+index 7f1f91c..ff479a2 100644
+--- a/src/kernels/cuda/native_moe.cu
++++ b/src/kernels/cuda/native_moe.cu
+@@ -33,18 +33,21 @@ namespace {
+ std::atomic<bool> enabled{false};
+ __global__ void combine(const float* __restrict__ parts, const float* __restrict__ weights,
+                         const float* __restrict__ shared, float* __restrict__ output,
+-                        int64_t n_embd, int k) {
++                        int64_t n_embd, int k,Q4KernelTrace trace) {
++    q4_kernel_begin(trace);
+     // blockIdx.y = the token of a multi-token launch (0 for the single one)
+     const int64_t tk = blockIdx.y;
+     parts += tk * k * n_embd; weights += tk * k; if (shared) shared += tk * n_embd; output += tk * n_embd;
+     const int64_t col = int64_t(blockIdx.x) * blockDim.x + threadIdx.x;
+-    if (col >= n_embd) return;
++    if (col < n_embd) {
+     float sum = parts[col] * weights[0];
+     for (int expert = 1; expert < k; ++expert) {
+         sum += parts[int64_t(expert) * n_embd + col] * weights[expert];
+     }
+     if (shared) sum += shared[col];
+     output[col] = sum;
++    }
++    q4_kernel_end(trace);
+ }
+ bool valid_span(const void* p, size_t bytes) {
+     const auto address = reinterpret_cast<uintptr_t>(p);
+@@ -58,7 +61,7 @@ bool overlap(const void* a, size_t an, const void* b, size_t bn) {
+ void native_moe_combine_set_enabled(bool value) { enabled.store(value, std::memory_order_relaxed); }
+ bool native_moe_combine_enabled() { return enabled.load(std::memory_order_relaxed); }
+ void native_moe_combine(const float* parts, const float* weights, const float* shared,
+-                        float* output, int64_t n_embd, int64_t k, void* stream) {
++                        float* output, int64_t n_embd, int64_t k, void* stream,Q4KernelTrace trace) {
+     if (!stream || n_embd <= 0 || n_embd > std::numeric_limits<int>::max() || k < 1 || k > 15)
+         throw std::invalid_argument("native MoE combine requires a stream, positive width and 1..15 experts");
+     const size_t row_bytes = size_t(n_embd) * sizeof(float);
+@@ -70,16 +73,16 @@ void native_moe_combine(const float* parts, const float* weights, const float* s
+             || (shared && overlap(output, row_bytes, shared, row_bytes)))
+         throw std::invalid_argument("native MoE combine requires aligned spans and disjoint output");
+     combine<<<unsigned((n_embd + 255) / 256), 256, 0, static_cast<cudaStream_t>(stream)>>>(
+-        parts, weights, shared, output, n_embd, int(k));
++        parts, weights, shared, output, n_embd, int(k),trace);
+     const auto error = cudaGetLastError();
+     if (error != cudaSuccess) throw std::runtime_error(cudaGetErrorString(error));
+ }
+ void native_moe_combine_multi(const float* parts, const float* weights, const float* shared, float* output,
+-                              int64_t n_embd, int64_t k, int n_tok, void* stream) {
++                              int64_t n_embd, int64_t k, int n_tok, void* stream,Q4KernelTrace trace) {
+     if (!stream || n_embd <= 0 || k < 1 || k > 15 || n_tok < 1)
+         throw std::invalid_argument("native MoE combine (multi) requires a stream, width, 1..15 experts, tokens");
+     combine<<<dim3(unsigned((n_embd + 255) / 256), (unsigned) n_tok), 256, 0, static_cast<cudaStream_t>(stream)>>>(
+-        parts, weights, shared, output, n_embd, int(k));
++        parts, weights, shared, output, n_embd, int(k),trace);
+     const auto error = cudaGetLastError();
+     if (error != cudaSuccess) throw std::runtime_error(cudaGetErrorString(error));
+ }
+diff --git a/src/kernels/cuda/shared_expert.cu b/src/kernels/cuda/shared_expert.cu
+index 28bb7ed..fa36973 100644
+--- a/src/kernels/cuda/shared_expert.cu
++++ b/src/kernels/cuda/shared_expert.cu
+@@ -161,19 +161,23 @@ void shared_expert_set_native_bf16(bool enabled) { native_bf16 = enabled; }
+ bool shared_expert_native_bf16_enabled() { return native_bf16; }
+ 
+ namespace {
+-__global__ void scale_rows_kernel(float* __restrict__ out, const float* __restrict__ g, int n) {
++__global__ void scale_rows_kernel(float* __restrict__ out, const float* __restrict__ g, int n, Q4KernelTrace trace={}) {
++    q4_kernel_begin(trace);
+     const int t = blockIdx.y;
+     const int i = blockIdx.x * blockDim.x + threadIdx.x;
+     if (i < n) out[(size_t) t * n + i] *= g[t];
++    q4_kernel_end(trace);
+ }
+ 
+-__global__ void sigmoid_scale_rows_kernel(float* __restrict__ out, const float* __restrict__ g, int n) {
++__global__ void sigmoid_scale_rows_kernel(float* __restrict__ out, const float* __restrict__ g, int n, Q4KernelTrace trace={}) {
++    q4_kernel_begin(trace);
+     const int t = blockIdx.y;
+     const int i = blockIdx.x * blockDim.x + threadIdx.x;
+     if (i < n) {
+         const float gt = __fdividef(1.0f, 1.0f + __expf(-g[t]));
+         out[(size_t) t * n + i] *= gt;
+     }
++    q4_kernel_end(trace);
+ }
+ 
+ bool fused_swiglu_q81_enabled() {
+@@ -210,11 +214,11 @@ void shared_expert_multi(int n_tok, const float* x, const uint16_t* x_bf16, cons
+     if (native_bf16 && batch && n_tok > 1) {   // one gemv for all rows (outputs identical), fused sigmoid+scale
+         bf16_gemv_fp32_mmvf_multi(x, n_embd, gate_inp_bf16, g, 1, n_embd, 1, n_tok, stream);
+         sigmoid_scale_rows_kernel<<<dim3((unsigned) ((n_embd + THREADS - 1) / THREADS), (unsigned) n_tok), THREADS, 0, cs>>>(
+-            out, g, (int) n_embd);
++            out, g, (int) n_embd,nw.trace);
+     } else if (native_bf16 && n_tok == 1) {
+         bf16_gemv_fp32_mmvf(x, gate_inp_bf16, g, n_embd, 1, stream);
+         sigmoid_scale_rows_kernel<<<dim3((unsigned) ((n_embd + THREADS - 1) / THREADS), 1u), THREADS, 0, cs>>>(
+-            out, g, (int) n_embd);
++            out, g, (int) n_embd,nw.trace);
+     } else {
+         for (int t = 0; t < n_tok; ++t) {
+             if (native_bf16) {
+@@ -225,7 +229,7 @@ void shared_expert_multi(int n_tok, const float* x, const uint16_t* x_bf16, cons
+             }
+         }
+         scale_rows_kernel<<<dim3((unsigned) ((n_embd + THREADS - 1) / THREADS), (unsigned) n_tok), THREADS, 0, cs>>>(
+-            out, g, (int) n_embd);
++            out, g, (int) n_embd,nw.trace);
+     }
+     const cudaError_t e = cudaGetLastError();
+     if (e != cudaSuccess) throw std::runtime_error(std::string("shared_expert_multi: ") + cudaGetErrorString(e));
+diff --git a/src/kernels/cuda/verify_kernels.cu b/src/kernels/cuda/verify_kernels.cu
+index f7c4843..2a86d99 100644
+--- a/src/kernels/cuda/verify_kernels.cu
++++ b/src/kernels/cuda/verify_kernels.cu
+@@ -637,6 +637,22 @@ void copy_or_zero_from_mapped(float* dst, const float* src, long long n, const u
+     check("copy_or_zero_from_mapped");
+ }
+ 
++namespace {
++__device__ unsigned long long wait_clock(){unsigned long long v;asm volatile("mov.u64 %0, %%globaltimer;":"=l"(v));return v;}
++__global__ void wait_flag_ge_timed_kernel(const volatile uint32_t* flag,uint32_t value,unsigned long long* stats,unsigned long long* records,unsigned long long* count,size_t cap){
++    unsigned long long begin=wait_clock();while(*flag<value)strata_spin_pause();unsigned long long end=wait_clock();
++    __threadfence_system();stats[0]+=end-begin;stats[1]+=1;
++    if(records){unsigned long long i=(*count)++;if(i<cap){auto* r=records+4*i;r[0]=begin;r[1]=end;r[2]=value;r[3]=i;}}
++}
++}
++void wait_flag_ge_timed(const uint32_t* flag,uint32_t value,unsigned long long* stats,void* stream,unsigned long long* records,unsigned long long* count,size_t cap){
++    wait_flag_ge_timed_kernel<<<1,1,0,(cudaStream_t)stream>>>(flag,value,stats,records,count,cap);check("wait_flag_ge_timed");
++}
++namespace {
++__global__ void q4_trace_mark_kernel(unsigned long long* records,unsigned long long* count,size_t cap,uint32_t value){auto t=wait_clock();auto i=(*count)++;if(i<cap){auto* r=records+4*i;r[0]=t;r[1]=t;r[2]=value;r[3]=i;}}
++}
++void q4_trace_mark(unsigned long long* records,unsigned long long* count,size_t cap,uint32_t value,void* stream){q4_trace_mark_kernel<<<1,1,0,(cudaStream_t)stream>>>(records,count,cap,value);check("q4_trace_mark");}
++
+ void wait_flag_ge(const uint32_t* flag, uint32_t value, void* stream) {
+     wait_flag_ge_kernel<<<1, 1, 0, (cudaStream_t) stream>>>(flag, value);
+     check("wait_flag_ge");
+diff --git a/src/program/generate.cpp b/src/program/generate.cpp
+index 085c3d8..3073657 100644
+--- a/src/program/generate.cpp
++++ b/src/program/generate.cpp
+@@ -1,3 +1,6 @@
++#include "strata/research/q4_state.hpp"
++#include "strata/research/q4_oracle.hpp"
++#include "strata/research/q4_tape.hpp"
+ // src/program/generate.cpp - P2.S6: `strata generate`.
+ //
+ // THE DRIVER, and the first program in this project that answers a question.  Everything below it is a
+@@ -3199,6 +3202,8 @@ int main(int argc, char** argv) {
+     // sees the memory this process actually has left rather than the card's idle figure - and refuses with both
+     // numbers if the slots do not fit, instead of handing back a cache smaller than it was asked for.
+     mem_mark("the weights, the session and the drafter");
++    strata::research::q4_tape.configure();
++    strata::research::q4_oracle.configure();
+     strata::core::ExpertCache xcache;
+     // THE HEAD BEFORE THE CACHE: the native head and the logits are allocated above, before the expert arena (#620)
+     const bool auto_cache = o.expert_cache < 0;
+@@ -5447,6 +5452,12 @@ int main(int argc, char** argv) {
+             else
+                 heat.assign(drive.d.usage.size(), 0.0);
+         }
++        if(strata::research::q4_oracle.configured){
++            if(!multi_gpu||stages.size()!=1||stage_of(23)!=0||stage_of(24)!=1||o.pcie_frac!=.28||o.batch>0||o.resident_budget>0||dynamic_cast<strata::core::ArenaExpertSource*>(srcp)==nullptr)throw std::runtime_error("Oracle requires frozen full-arena serial K24/PCIe0.28");
++            std::vector<uint64_t> blobs;for(int l=0;l<g.n_layers;++l)blobs.push_back(strata::kernels::cpu::expert_layout().blob_bytes(l));
++            strata::research::q4_oracle.runtime(host_res.data(),drive.d.usage.data(),std::move(blobs),{d_res,stages[0]->d_res},
++                [&](int l,int e){return srcp->blob(l,e);},[&](int dev,int slot)->void*{return dev?stages[0]->cache.device_slot(slot):xcache.device_slot(slot);});
++        }
+         Clock::time_point profile_saved_at = Clock::now();
+         cudaStream_t adapt_stream = nullptr;
+         if (cudaStreamCreateWithFlags(&adapt_stream, cudaStreamNonBlocking) != cudaSuccess) {
+@@ -5481,6 +5492,7 @@ int main(int argc, char** argv) {
+             unpin_blobs(pin_live);
+             src.commit_exchanges();   // the resident RAM mode: the evicted experts take their places in RAM
+             for (const auto& [i, slot] : pending) {
++                strata::research::q4_oracle.native_ready((int)i/(int)g.n_expert,(int)i%(int)g.n_expert);
+                 host_res[(size_t) i] = slot;
+                 srcp->release((int64_t) i / g.n_expert, (int64_t) i % g.n_expert);   // in VRAM now: RAM not needed
+             }
+@@ -5489,6 +5501,7 @@ int main(int argc, char** argv) {
+         };
+         // the VRAM tier follows the conversation (the same rule as the speculative loop below)
+         auto adapt = [&]() -> bool {
++            if(strata::research::q4_oracle.active){for(float& v:drive.d.usage)v*=o.adapt_decay;return true;}
+             if (!pending.empty()) return true;   // the previous swaps are still in flight
+             if (remote_opt && !remote_opt->adapt(drive.d.usage, host_res, pending, o.adapt_swaps, *srcp)) return false;
+             struct Swap { float gain; int32_t layer, in, out; };
+@@ -5540,6 +5553,7 @@ int main(int argc, char** argv) {
+                                  (int) s.layer, (int) slot, pin_live.empty() ? 0 : 1, cudaGetErrorString(cudaGetLastError()));
+                     return false;
+                 }
++                strata::research::q4_oracle.note_native((int)s.layer,(int)s.in,(int)s.out,slot,strata::kernels::cpu::expert_layout().blob_bytes(s.layer));
+                 if (gs) gs->adapt_live = true;
+                 else main_live = true;
+                 host_res[out] = strata::core::kNotResident;   // evicted now: the CPU computes it meanwhile
+@@ -7062,7 +7076,10 @@ int main(int argc, char** argv) {
+             consumed.reserve((size_t) (n + max_new + S));
+             for (int64_t i = 0; i < n - 1; ++i) consumed.push_back((int32_t) ids[(size_t) i]);
+             const char* finish = "length";
++            if(strata::research::q4_tape.enabled){apply_pending(true);strata::research::q4_tape.begin(ids,max_new,host_res.data(),drive.d.usage.data(),rounds);strata::research::q4_state.begin(ss,stages[0]->ss,mtp.kv_state(),g,n);}
++            ver.publication_trace_begin();for(auto& stage:stages)stage->ver.publication_trace_begin();
+             const Clock::time_point d0 = Clock::now();
++            strata::research::q4_oracle.begin();
+             // STRATA_DECODE_TIMING=1: where a request's decode time goes (one line per request)
+             static const bool dec_timing = std::getenv("STRATA_DECODE_TIMING") != nullptr;
+             struct DecSnap {
+@@ -7108,6 +7125,7 @@ int main(int argc, char** argv) {
+                 if (p + T > o.max_context) break;
+                 window[0] = x;
+                 for (int i = 1; i < T; ++i) window[(size_t) i] = from_sfx ? sbuf[(size_t) i - 1] : drafts[(size_t) i - 1];
++                strata::research::q4_tape.pre(T,p,window.data(),(int)produced_n);
+                 drive.d.layers = 0;
+                 drive.d.experts = 0;
+                 drive.d.failed = false;
+@@ -7132,8 +7150,10 @@ int main(int argc, char** argv) {
+                     std::printf("ERR %s\n", drive.d.failed && drive.d.fail ? drive.d.fail : err.c_str());
+                     return 1;
+                 }
++                strata::research::q4_tape.head(T,outv.data());
+                 int a = 0;
+                 while (a < T - 1 && window[(size_t) a + 1] == outv[(size_t) a]) ++a;
++                strata::research::q4_tape.accepted(a);
+                 if (from_sfx) { ++sfx_windows; sfx_drafts += T - 1; sfx_ok += a; }
+                 const Clock::time_point tw1 = Clock::now();
+                 std::thread adapt_thr;   // the adaptive tier beside the commit and the draft (as in generate)
+@@ -7182,6 +7202,7 @@ int main(int argc, char** argv) {
+                     std::printf("ERR %s\n", err.c_str());
+                     return 1;
+                 }
++                strata::research::q4_tape.post();
+                 if (timed_round && !eos)
+                     policy.observe(from_sfx, T, a, sfx_match,
+                                    std::chrono::duration<double, std::milli>(Clock::now() - round0).count());
+@@ -7196,6 +7217,9 @@ int main(int argc, char** argv) {
+                 std::printf("ERR %s\n", err.c_str());
+                 return 1;
+             }
++            if(strata::research::q4_oracle.tracked){apply_pending(true);strata::research::q4_oracle.finish();}
++            strata::research::q4_tape.finish(produced_n,cancelled);
++            ver.wait_report();for(auto& stage:stages)stage->ver.wait_report();
+             if (dec_timing && dec_windows > 0) {
+                 const DecSnap d1 = dec_snap();
+                 const double w = (double) dec_windows, L = (double) g.n_layers;
