@@ -26,26 +26,42 @@ row-level result dumps stay local. Git ignores them; it does not delete them.
 See [storage and reproduction](docs/storage.md) and the
 [local artifact catalog](docs/local-artifacts.json).
 
-To inspect and prepare a durable snapshot:
+For a fresh task, read [AGENTS.md](AGENTS.md) before creating files. Durable
+material goes in `research/<topic>/`: authored `code/`, small `fixtures/`,
+`configs/`, isolated run results, reports and recovery manifests. Large inputs,
+downloaded repositories, environments and compiled output belong in a task-owned
+directory under `/srv/ai/work/rad/`. Create/check `.gitignore` before execution.
+
+At completion, stage the actual task-owned paths explicitly, inspect the diff
+and run the publication check:
 
 ```bash
 cd /srv/ai/research
 git status --short --branch
-python3 tools/archive_workspace.py plan
-python3 tools/archive_workspace.py stage
-python3 tools/archive_workspace.py audit
+git add -- <actual-task-owned-paths>
 git diff --cached --stat
+git diff --cached --check
+python3 tools/archive_workspace.py audit --staged-only
+git commit -m "Record the task outcome and reproduction material"
+git push origin <actual-branch>
 ```
 
-The selector never commits, pushes, deletes, rebuilds or runs a benchmark.
-Review its plan in `storage/retention-plan.json`, then commit and push the
-reviewed snapshot. Do not use `git add -f .` to bypass the storage policy.
+Replace placeholders with reviewed paths and the appropriate upstream branch.
+Verify the remote contains the commit. The default limits are 1 MiB per file,
+4 MiB per patch and 20 MiB of staged content per commit.
+
+`tools/archive_workspace.py plan` and `stage` are bulk-import tools for the
+managed workspace, rather than the completion workflow for an individual task.
+Review their plan in `storage/retention-plan.json` before explicitly using them.
+The helper never commits, pushes, deletes, rebuilds or runs a benchmark.
+Do not use `git add -f .` to bypass the storage policy.
 
 Read [AGENTS.md](AGENTS.md) for the execution protocol. Continue this
 investigation in its existing directory. New, unrelated research topics use
 `research/<short-kebab-case-name>/` as specified there.
 
 The [migration record](docs/migration.md) identifies the preserved legacy Git
-history. The original remote AGENTS.md and LICENSE were retained. Existing
+history. The original remote instructions remain in that history; AGENTS.md
+now defines the fresh-task workflow. LICENSE was retained. Existing
 source material and dependencies keep their own licensing; see
 [third-party provenance](docs/third-party.md).

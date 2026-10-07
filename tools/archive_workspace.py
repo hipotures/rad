@@ -2,7 +2,8 @@
 """Select durable research files; inventory local payloads; audit the Git index.
 
 This tool never deletes artifacts, downloads resources, runs research, commits,
-or pushes. Staging is explicit and refuses unrelated existing staged changes.
+or pushes. plan/stage are bulk-import operations; individual tasks stage their
+own paths with Git and use audit --staged-only before committing.
 """
 import argparse
 import collections
@@ -18,18 +19,25 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 STUDY = "iq3s-residency-20261004T230051Z"
 MAX_BYTES = 1024 * 1024
-EXTENSIONS = {
+MAX_STAGED_BYTES = 20 * MAX_BYTES
+LEGACY_EXTENSIONS = {
     ".md", ".py", ".sh", ".c", ".cpp", ".cu", ".h", ".hpp", ".cuh",
     ".json", ".jsonl", ".csv", ".txt", ".patch", ".diff", ".toml",
     ".yaml", ".yml", ".ini", ".cfg", ".cmake", ".svg", ".png", ".log",
 }
-NAMES = {".gitignore", "LICENSE", "LICENSE.txt", "NOTICE", "CMakeLists.txt", "Makefile"}
+EXTENSIONS = LEGACY_EXTENSIONS | {
+    ".rs", ".go", ".R", ".r", ".js", ".mjs", ".cjs", ".ts", ".tsx",
+    ".jsx", ".html", ".css", ".sql", ".lock", ".ipynb",
+}
+LEGACY_NAMES = {".gitignore", "LICENSE", "LICENSE.txt", "NOTICE", "CMakeLists.txt", "Makefile"}
+NAMES = LEGACY_NAMES | {".gitattributes", "Dockerfile"}
 LOCAL_DIRS = {
     ".git", ".venv", ".analysis-venv", "venv", "__pycache__", ".cache",
     "node_modules", "builds", "build", "src", "source", "dependency",
     "dependencies", "vendor", "third_party", "raw", "traces", "telemetry",
     "tapes", "extended", "checkpoints", "token-ids", "corpus", "inputs", "data",
-    "datasets", "manual",
+    "datasets", "manual", "work", "downloads", "repos", "envs", "tmp",
+    "derived", "dist", "target",
 }
 # Retain bounded run contracts even when located inside otherwise local raw data.
 CONTRACTS = {
@@ -54,12 +62,16 @@ def save(path, value):
     temp.write_text(json.dumps(value, indent=2) + "\n")
     os.replace(temp, path)
 
-def reason(path):
-    """Use artifact role and size, not just a blanket binary extension list."""
+def file_limit(path):
+    return 4 * MAX_BYTES if path.suffix in {".patch", ".diff"} else MAX_BYTES
+
+def reason(path, data=None):
+    """Check artifact role/size; audit can supply the actual indexed bytes."""
     relative = path.relative_to(ROOT)
     parts = relative.parts
     if parts[0] not in {STUDY, "docs", "tools", "research"}:
-        return None if len(parts) == 1 and path.name in {"README.md", "AGENTS.md", "LICENSE", ".gitignore"} else "outside-managed-research"
+        if not (len(parts) == 1 and path.name in {"README.md", "AGENTS.md", "LICENSE", ".gitignore"}):
+            return "outside-managed-research"
     if path.is_symlink():
         return "local-symlink"
     if any(p.startswith(".env") or p in {"credentials", "secrets", ".ssh"} for p in parts):
@@ -69,7 +81,9 @@ def reason(path):
     if "sources" in parts and "open-jev" in parts:
         return "third-party-source-snapshot"
     blocked = set(parts[:-1]) & LOCAL_DIRS
-    if any(parts[i:i+2] == ("git", "builds") for i in range(len(parts)-2)):
+    if parts[0] == "research" and "logs" in parts[:-1]:
+        blocked.add("logs")
+    if parts[0] == STUDY and any(parts[i:i+2] == ("git", "builds") for i in range(len(parts)-2)):
         # This is provenance (commands/patches/logs), not a compiled build tree.
         blocked.discard("builds")
     hard = blocked - {"raw", "data", "inputs"}
@@ -81,15 +95,17 @@ def reason(path):
         return "transient-process-state"
     if path.name.endswith("-ids.json"):
         return "token-id-payload"
-    if path.name not in NAMES and path.suffix not in EXTENSIONS:
+    names = LEGACY_NAMES if parts[0] == STUDY else NAMES
+    extensions = LEGACY_EXTENSIONS if parts[0] == STUDY else EXTENSIONS
+    if path.name not in names and path.suffix not in extensions:
         return "non-durable-format"
     if path.suffix == ".png" and not ({"plots", "figures"} & set(parts)):
         return "non-research-image"
-    size = path.stat().st_size
-    limit = 4 * MAX_BYTES if path.suffix in {".patch", ".diff"} else MAX_BYTES
-    if size > limit:
+    size = len(data) if data is not None else path.stat().st_size
+    if size > file_limit(path):
         return "large-artifact"
-    data = path.read_bytes()
+    if data is None:
+        data = path.read_bytes()
     if path.suffix != ".png":
         if b"\0" in data:
             return "binary-content"
@@ -97,11 +113,17 @@ def reason(path):
             data.decode("utf-8")
         except UnicodeDecodeError:
             return "non-utf8-content"
-    if path.suffix == ".json":
+    if path.suffix in {".json", ".ipynb"}:
         try:
             parsed = json.loads(data)
         except json.JSONDecodeError:
-            return None
+            return "invalid-notebook" if path.suffix == ".ipynb" else None
+        if path.suffix == ".ipynb":
+            if not isinstance(parsed, dict) or not isinstance(parsed.get("cells"), list):
+                return "invalid-notebook"
+            if any(cell.get("outputs") or cell.get("execution_count") is not None
+                   for cell in parsed["cells"] if isinstance(cell, dict)):
+                return "notebook-execution-payload"
         if isinstance(parsed, dict) and "messages" in parsed and "model" in parsed:
             return "request-payload"
         def rows(value):
@@ -208,48 +230,76 @@ def plan():
             selected.append({"path": relative, "bytes": size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()})
     return selected, excluded, dict(sorted(grouped.items()))
 
-def audit():
-    failures, total, largest = [], 0, []
+def audit(staged_only=False):
+    failures, total, staged_total, largest = [], 0, 0, []
+    staged_paths = set(git("diff", "--cached", "--name-only", "--diff-filter=ACMRU", "-z").split("\0")) - {""}
     records = git("ls-files", "--stage", "-z", binary=True).decode().split("\0")
-    objects = subprocess.Popen(["git", "cat-file", "--batch"], cwd=ROOT, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    last = time.monotonic()
-    for record in records:
-        if not record:
-            continue
+    entries = []
+    for record in filter(None, records):
         metadata, relative = record.split("\t", 1)
         mode, oid, stage = metadata.split()
+        if staged_only and relative not in staged_paths:
+            continue
         if mode not in {"100644", "100755"} or stage != "0":
             failures.append({"path": relative, "reason": "symlink, nested repository or unmerged index"})
             continue
-        p = ROOT / relative
-        why = reason(p)
-        if why:
-            failures.append({"path": relative, "reason": why})
-        # Inspect indexed bytes: a different worktree file must not hide a
-        # credential or binary which was staged earlier.
-        objects.stdin.write((oid + "\n").encode())
-        objects.stdin.flush()
-        header = objects.stdout.readline().decode().split()
-        assert header[1] == "blob", header
-        data = objects.stdout.read(int(header[2]))
-        assert objects.stdout.read(1) == b"\n"
-        size = len(data)
-        total += size
-        largest.append((size, relative))
-        for label, pattern in SECRETS:
-            if pattern.search(data):
-                failures.append({"path": relative, "reason": label})
-        if p.read_bytes() != data:
-            failures.append({"path": relative, "reason": "worktree changed after staging"})
-        if time.monotonic() - last > 25:
-            print("HEARTBEAT publication audit", len(largest), "files", flush=True)
-            last = time.monotonic()
-    objects.stdin.close()
-    objects.wait(timeout=10)
+        entries.append((oid, relative))
+    # Check sizes before requesting contents: a force-added 30 GiB blob must
+    # fail without loading or streaming the payload into this Python process.
+    oids = sorted({oid for oid, _ in entries})
+    metadata = subprocess.run(
+        ["git", "cat-file", "--batch-check"], cwd=ROOT,
+        input="".join(oid + "\n" for oid in oids), text=True,
+        capture_output=True, check=True,
+    ).stdout
+    sizes = {}
+    for line in metadata.splitlines():
+        oid, kind, size = line.split()
+        if kind != "blob":
+            raise ValueError("Expected an indexed blob")
+        sizes[oid] = int(size)
+    last = time.monotonic()
+    with subprocess.Popen(["git", "cat-file", "--batch"], cwd=ROOT,
+                          stdin=subprocess.PIPE, stdout=subprocess.PIPE) as objects:
+        for oid, relative in entries:
+            p = ROOT / relative
+            size = sizes[oid]
+            total += size
+            if relative in staged_paths:
+                staged_total += size
+            largest.append((size, relative))
+            if size > file_limit(p):
+                failures.append({"path": relative, "reason": "large-artifact", "bytes": size})
+                continue
+            # Inspect indexed bytes, even if the worktree was subsequently
+            # changed to hide a credential or binary which was staged earlier.
+            objects.stdin.write((oid + "\n").encode())
+            objects.stdin.flush()
+            header = objects.stdout.readline().decode().split()
+            assert header[1] == "blob" and int(header[2]) == size, header
+            data = objects.stdout.read(size)
+            assert objects.stdout.read(1) == b"\n"
+            why = reason(p, data=data)
+            if why:
+                failures.append({"path": relative, "reason": why})
+            for label, pattern in SECRETS:
+                if pattern.search(data):
+                    failures.append({"path": relative, "reason": label})
+            if p.is_symlink() or not p.is_file() or p.stat().st_size != size or p.read_bytes() != data:
+                failures.append({"path": relative, "reason": "worktree changed after staging"})
+            if time.monotonic() - last > 25:
+                print("HEARTBEAT publication audit", len(largest), "files", flush=True)
+                last = time.monotonic()
+        objects.stdin.close()
+        objects.wait(timeout=10)
+    if staged_total > MAX_STAGED_BYTES:
+        failures.append({"reason": "staged-content-budget", "bytes": staged_total, "limit_bytes": MAX_STAGED_BYTES})
     report = {
         "utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "state": "PASS" if not failures else "FAIL", "files": len(largest),
         "bytes": total, "largest_files": [{"path": p, "bytes": n} for n, p in sorted(largest, reverse=True)[:12]],
+        "selection": "staged-changes" if staged_only else "entire-index",
+        "staged_content_bytes": staged_total, "staged_content_limit_bytes": MAX_STAGED_BYTES,
         "failures": failures,
         "scope": "Index/worktree equality, role and size policy, no Git links/symlinks, UTF-8 text/bounded plots, recognizable credential formats. This is not a comprehensive secret detection guarantee.",
     }
@@ -260,9 +310,12 @@ def audit():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["plan", "stage", "audit"])
+    parser.add_argument("--staged-only", action="store_true", help="Audit only changed indexed files; retain unrelated unstaged edits")
     args = parser.parse_args()
+    if args.staged_only and args.command != "audit":
+        parser.error("--staged-only is only supported by audit")
     if args.command == "audit":
-        raise SystemExit(audit())
+        raise SystemExit(audit(staged_only=args.staged_only))
     selected, excluded, grouped = plan()
     generated = compact_results(excluded)
     save(ROOT / "storage/retention-plan.json", {"selected": selected, "excluded": excluded})
