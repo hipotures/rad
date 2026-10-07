@@ -1,0 +1,13 @@
+{
+  "stage": "Planning input verification; no experiment request",
+  "initial_outcome": "FAIL",
+  "failed_input": "math-rational-payload",
+  "error": "SHA256 mismatch in the newly prepared input manifest",
+  "cause": "The inherited payload_sha256 hashes canonical JSON, while the new file checker hashes stored bytes. They are different identity types.",
+  "inherited_canonical_json_sha256": "1890c32854fbc0edd29bd08195acf26829f8cb4e52e8d951b47ffac125e486c1",
+  "actual_file_sha256": "e864183dac6e8587e3a441f9e79416eb6a7a038485cf44011c2a7ef5c2f2b387",
+  "canonicalization": "Python json.dumps(parsed_payload, sort_keys=True, separators=(',', ':'), ensure_ascii=True).encode('utf-8')",
+  "evidence": "Canonicalization reproduces the inherited hash exactly. Phase3 code/reproduce.py explicitly uses that definition for supplied payload validation.",
+  "repair": "Record both file and canonical JSON identities for request payloads; verify both. No prior payload, tape, source, binary or campaign was modified.",
+  "final_validation": "See plan-validation.json for the actual rerun outcome."
+}

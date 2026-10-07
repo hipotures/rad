@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "state": "PLANNED_NOT_STARTED",
+  "work_root_reference": "workspace.json",
+  "planned_large_outputs": [
+    {
+      "role": "repos",
+      "location": "${RAD_WORK_ROOT}/repos",
+      "recovery": "Public upstream plus tracked parent and new patches",
+      "exists_as_experiment_result": false
+    },
+    {
+      "role": "builds",
+      "location": "${RAD_WORK_ROOT}/builds",
+      "recovery": "Rebuild from pinned source/dependencies; exact binary bytes not guaranteed",
+      "exists_as_experiment_result": false
+    },
+    {
+      "role": "raw",
+      "location": "${RAD_WORK_ROOT}/raw",
+      "recovery": "New traces will be irreplaceable observations; save raw and eligible complete gzip text, identify backup or disclose gap",
+      "exists_as_experiment_result": false
+    },
+    {
+      "role": "logs",
+      "location": "${RAD_WORK_ROOT}/logs",
+      "recovery": "Preserve failures and complete eligible text with gzip",
+      "exists_as_experiment_result": false
+    },
+    {
+      "role": "tmp",
+      "location": "${RAD_WORK_ROOT}/tmp",
+      "recovery": "Disposable intermediates; never the sole location of essential evidence",
+      "exists_as_experiment_result": false
+    }
+  ],
+  "existing_required_inputs": "input-manifest.json",
+  "model_backing": "Use the frozen model files referenced by the retained Phase3 configuration, verify model manifest at execution start; model weights excluded from Git",
+  "new_runtime_patch_available": false,
+  "new_binary_available": false,
+  "independent_raw_backup": null,
+  "recovery_gap": "Exact retained natural tapes are host-local. No independent off-host backup has been identified. A hash or public prompt cannot recover exact capture bytes."
+}

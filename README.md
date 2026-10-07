@@ -25,12 +25,14 @@ manifests and existing reproduction commands retain their original addressing.
 The repository root on this host is `/srv/ai/research`.
 
 Start with the [research index](docs/research-index.md). The latest completed
-study is [Golden Swap Phase 2](iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase2-20261007T093357Z/report.md):
-48/48 valid main and 8/8 independent-source replay requests. Bounded first-use
-control removed pre-target unused re-eviction and produced conditional timing
-gains on the inventory and Chinook tapes. Archive and WebSocket did not meet
-the frozen gain criterion; there is no confirmed cheap-history versus frozen
-logistic scorer difference. This is oracle-incoming research, not deployment.
+study is [Golden Swap Phase 3](iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase3-20261007T150955Z/report.md):
+36/36 valid main and 6/6 RFC8259 replay requests. Incoming-query memoization
+removed about 97% of targeted recomputation, but no main task met the greater-
+than-3% incremental practical gain criterion. Inventory and Chinook retain
+conditional gains against current; remaining publication/wait attribution is
+unresolved. [Phase 4's execution brief](iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase4-publication-wait-20261007T184009Z/GOAL.md)
+is prepared, with no tests started: one development tape and six paired
+instrumentation measurements. This remains oracle-incoming research.
 Normal Q4 / K24 / PCIe 0.28 / pool 100 us serving remains unchanged.
 
 Reports, scripts, patches, contracts, compact JSON/CSV results, small numeric
