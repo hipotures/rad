@@ -18,6 +18,9 @@ Result regeneration (read-only prior campaigns, writes only Phase 3 derived resu
 
 ```bash
 $PY code/summarize.py
+$PY code/live_trajectory.py
+$PY code/relative_mechanism.py
+$PY code/phase_resources.py
 $PY code/render_report.py
 ```
 
@@ -31,7 +34,7 @@ It reads Phase 2 binary journals at their original locations. It does not rerun 
 
 # Explicit source rebuild
 
-The public base and cumulative patch reconstruct experimental source; local Phase 2/3 engine commit SHAs alone are not portable recovery. Keep rebuild separate from frozen replay, use a fresh task-owned path, and require safety/parity gates for any new binary identity.
+The public base and cumulative patch reconstruct experimental source; local Phase 2/3 engine commit SHAs alone are not portable recovery. `code/source_recovery_check.py` was actually exercised: 858 source files match the measured checkout bytes, executable modes and canonical Git blobs, excluding the machine-local `.venv` link. Public `.gitattributes` CRLF conversion for Windows scripts is honored. Keep rebuild separate from frozen replay, use a fresh task-owned path, and require safety/parity gates for any new binary identity.
 
 ```bash
 set -euo pipefail
@@ -63,3 +66,7 @@ python3 /srv/ai/research/tools/archive_workspace.py verify-text --destination "$
 ```
 
 Each gzip is a complete source file strictly smaller than10MiB; originals remain unchanged. The manifest lists omissions, source paths, bytes and hashes. Reports/configs/source stay readable. Tested reproduction/analysis paths and the final indexed audit are recorded in `completion-audit.json`; skipped or failed paths are not blanket PASS claims.
+
+Four completed namespaces were packed and verified against originals: main/offline/development raw text, runner logs, isolated reproduction text and fixture text. `code/publish_text.py` records their exact pack/verification commands; it refuses to overwrite these namespaces. Raw binary journals/tapes are not in Git. The publication manifest and `artifact-manifest.json` state every non-text omission and the host-local recovery gap.
+
+The root publication suite was actually run: 26 tests passed. The initial analysis field-name mismatch and source comparison of Git LF blobs with declared CRLF checkouts are retained, with the exact minimal repairs. No request was rerun to repair those analysis/reconstruction issues.

@@ -123,6 +123,15 @@ class PublicationTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, relative)
             self.assertIsNotNone(ARCHIVE.reason(path))
 
+    def test_legacy_campaign_patch_attributes_are_durable(self):
+        relative = ARCHIVE.STUDY + "/campaigns/golden-swap-phase3-20261007T150955Z/.gitattributes"
+        path = self.write(relative, "patches/*.diff -whitespace\n")
+        self.assertEqual(subprocess.run(["git", "check-ignore", "--quiet", relative], cwd=self.root).returncode, 1)
+        self.assertIsNone(ARCHIVE.reason(path))
+        self.git("add", "--", relative)
+        status, report, _ = self.audit()
+        self.assertEqual(status, 0, report)
+
     def test_portable_root_report_shortcuts_are_tracked(self):
         for name in sorted(n for n in ARCHIVE.ROOT_FILES if n.startswith("QWEN38_")):
             path = self.write(name, "[Preserved report](benchmarks/study/REPORT.md)\n")

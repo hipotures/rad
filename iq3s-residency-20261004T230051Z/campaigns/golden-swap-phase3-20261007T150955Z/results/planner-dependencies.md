@@ -18,6 +18,8 @@ The memo is bounded to 24,576 entries, 491,520 host bytes (five 32-bit fields pe
 
 Counters distinguish lookup/hit/miss, lower/upper/rewind invalidation and reset. An optional diagnostic timer measures lookup/miss maintenance including underlying recomputation; it is disabled for headline timing. No claim of exclusive cache-maintenance CPU time is made. Separate request-scoped thread CPU time measures the oracle host hook; wall planner includes worker acknowledgments and overlaps inference.
 
+Timer nesting follows the actual source: `selection_ns` wraps `victim()`, including cache validation and the resident-enumeration loop; `enumeration_ns` covers only that resident loop. It is not the incoming E64 candidate scan. Feature/model timers are inside scorer calls during that loop and also reserve/guard calls. Publication acknowledgment is inside the host-hook wall interval. The host CPU timer excludes reservation/setup before `host()` and copy workers. These intervals must not be summed as exposed stall or treated as one identical scope.
+
 # Wait instrumentation
 
 Opt-in `STRATA_Q4_WAIT_PROFILE=1` substitutes the existing one-thread flag wait kernel with one reading `%globaltimer` immediately before/after the spin. Same stream, one kernel launch, same fence, no new routed-event synchronization. Device-local counters sum elapsed ns and count for plan A, mapped B and CPU completion flags. Six 64-bit counters/device = 96 bytes total of logical counter payload (allocator granularity is included in VRAM telemetry); expert capacity/spares unchanged. Request-end readback/reset occurs after existing final commit and is charged to completion wall. Ordinary serving defaults OFF.

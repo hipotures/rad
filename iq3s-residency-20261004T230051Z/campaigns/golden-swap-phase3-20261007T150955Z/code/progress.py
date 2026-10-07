@@ -4,7 +4,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def update(step,status,message,**extra):
  c=json.loads((ROOT/'clock.json').read_text());elapsed=time.monotonic()-c['start_monotonic_s']
  previous=json.loads((ROOT/'progress.json').read_text()) if (ROOT/'progress.json').exists() else {}
- retained={k:v for k,v in previous.items() if k in ['task','arm','version','completed','remaining','next_action','eta_range_s']} if previous.get('step')==step else {}
+ retained={k:v for k,v in previous.items() if k in ['task','arm','version','completed','remaining','next_action','eta_range_s','block','kind']} if previous.get('step')==step else {}
  retained.update(extra)
  extra=retained
  r=dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),step=step,status=status,message=message,elapsed_s=elapsed,remaining_s=max(0,c['hard_budget_s']-elapsed),**extra)

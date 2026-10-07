@@ -1,0 +1,152 @@
+{
+  "campaign_complete": false,
+  "scientific_and_reproduction_checks_complete": true,
+  "publication_pending": true,
+  "primary": "DECISION_PRESERVING_OPTIMIZATION_NO_CONFIRMED_PRACTICAL_GAIN",
+  "start_utc": "2026-10-07T15:09:55.841843+00:00",
+  "deadline_utc": "2026-10-07T21:09:55.841843+00:00",
+  "elapsed_s": 8753.481498709996,
+  "deadline_reset": false,
+  "main_valid_attempts": [
+    36,
+    36
+  ],
+  "independent_valid_attempts": [
+    6,
+    6
+  ],
+  "development_valid_attempts": [
+    6,
+    7
+  ],
+  "attempt_cap": {
+    "unchanged_primary_max": 3,
+    "development_OPT": {
+      "failed_before_warmup": 1,
+      "compiled_smoke_valid": 1,
+      "isolated_reproduction_valid": 1,
+      "total": 3
+    }
+  },
+  "required_artifacts": [
+    "GOAL.md",
+    "clock.json",
+    "STATUS.md",
+    "progress.json",
+    "progress.jsonl",
+    "attempt-ledger.jsonl",
+    "DECISIONS.md",
+    "README.md",
+    "report.md",
+    "reproduce.md",
+    "input-manifest.json",
+    "artifact-manifest.json",
+    "run-order.json",
+    "configs/conclusion.json",
+    "results/planner-dependencies.md",
+    "results/existing-data-analysis.json",
+    "results/phase0-reuse-reference.json",
+    "results/main-summary.json",
+    "results/paired-blocks.json",
+    "results/live-attempts.json",
+    "results/primary-table.csv",
+    "results/live-trajectory-diagnostics.json",
+    "tests/development-guard.json",
+    "tests/deterministic-parity.json",
+    "tests/frozen-phase2-off-parity.json",
+    "tests/scorer-parity.json",
+    "tests/reproduction-checks.json",
+    "tests/source-recovery-summary.json",
+    "evidence/completed-text-v1/archive-manifest.jsonl.gz",
+    "evidence/runner-logs-v1/archive-manifest.jsonl.gz",
+    "evidence/reproduction-text-v1/archive-manifest.jsonl.gz",
+    "evidence/fixtures-text-v1/archive-manifest.jsonl.gz",
+    "results/text-publication.json",
+    "results/phase-resource-diagnostics.json",
+    "results/relative-mechanism.json",
+    "tests/archive-tools-outcome.json"
+  ],
+  "identity": {
+    "source": "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/repos/runtime",
+    "build": "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/builds/runtime",
+    "exe": "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/builds/runtime/strata",
+    "source_sha": "f3b4f19157b39ae017e2fd91814c8f5728e3b1cc",
+    "binary_sha256": "1bf524e32fd3233aeb3149231a4f48da1e52401b9f4686bd6669b1690033ae82",
+    "base_configs_sha256": "2dd93120d9d1c8202304e88c4c6586a8f94692210c1def5bad71fda7a9ffc5f6",
+    "checkpoint_sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
+    "phase2": {
+      "source": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/repos/runtime",
+      "build": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/runtime",
+      "exe": "/srv/ai/work/rad/golden-swap-phase2/20261007T093357Z/builds/runtime/strata",
+      "source_sha": "c12a0b11f02ae7b635dc3c6a15ff14f37319ce22",
+      "binary_sha256": "46b53020499a8d9b859a59bcf723ab32b65f42b32ff5c6c4639dabf5be6d6aff",
+      "phase1_source": "20e1e10f6848f11ec5580fc5ec7f97ea5d4e520b",
+      "base_configs_sha256": "2dd93120d9d1c8202304e88c4c6586a8f94692210c1def5bad71fda7a9ffc5f6",
+      "checkpoint_sha256": "065afa1eec792a5dc2408165d3ecf0206eccce27ccca23da09b4855a5a3a229e",
+      "binary_bytes": 40223352
+    },
+    "commands": [
+      [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+        "-S",
+        "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/repos/runtime",
+        "-B",
+        "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/builds/runtime",
+        "-G",
+        "Ninja",
+        "-DCMAKE_MAKE_PROGRAM=/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/ninja",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DSTRATA_ENABLE_CUDA=ON",
+        "-DCMAKE_CUDA_ARCHITECTURES=89",
+        "-DSTRATA_BUILD_TESTS=ON",
+        "-DSTRATA_GGML_DIR=/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325"
+      ],
+      [
+        "/srv/ai/research/iq3s-residency-20261004T230051Z/src/control/.venv/bin/cmake",
+        "--build",
+        "/srv/ai/work/rad/golden-swap-phase3/20261007T150955Z/builds/runtime",
+        "-j",
+        "8"
+      ]
+    ],
+    "ggml": "/srv/ai/benchmarks/strata-qwen38/pr578-dual4090-refresh-20261004T124028Z/vendor/ggml-org-llama.cpp-3cf0325"
+  },
+  "requirements": {
+    "step1": "56 retained Phase2 journals analyzed; four primary tasks plus RFC8259, lifetime/reuse/slack/queue/cap/scans; missing fields explicit",
+    "step2": "Narrow immutable-query memo, exact boundary/reset/rewind invalidation; complete mutable policy checks retained; finite-information fallback; host memory and counters retained",
+    "step3": "26 deterministic candidate/admission/ownership/work pairs;16 inherited OFF accounting hashes; real copy/ownership/lease/wait/scorer/prefix fixtures;9 native tests; compiled integration and two overhead guard pairs before headline",
+    "step4": "36 primary +6 continuous independent-source full-tape requests in frozen counterbalanced adjacent blocks; same binary/settings/work, complete charged wall; no steal correction; all observations retained",
+    "step5": "Paired ratios/signs/ranges, nested/exposed semantics, explicit12 answers, resources, failures and recovery material; tested actual replay/prepare/analysis, source reconstruction, gzip identity/readback checks; indexed audit and commit/push remain final gates"
+  },
+  "preservation": {
+    "changed_files": [],
+    "verified_files": 24,
+    "owned_processes_alive": [],
+    "GPU_apps": "none",
+    "ordinary_launchers_unchanged": true
+  },
+  "deviations": [
+    "Initial simulator SHA parity used an unmodeled host issue timestamp; retained failure and normalized only that field, no repeated policy evaluation",
+    "Initial scorer parity environment lacked sklearn; repaired with frozen Phase1 environment before native parity ran",
+    "Initial subprocess wrapper timeout argument order failed before process start",
+    "First smoke startup reached readiness but missing payload manifest prevented warmup/request; retained invalid startup and fresh repaired attempt2",
+    "Initial heartbeat field retention omitted block; completed counts plus frozen order preserve identity, corrected future runners/quick status",
+    "Continuation lost the original observation handle; PID/create-time/command/child evidence confirmed the same live parent, attached read-only monitor without restarting",
+    "First analysis regeneration referenced prefill_s rather than measured pp_s; repaired reader only, original failed log retained and no inference rerun",
+    "First source reconstruction compared declared CRLF Windows checkout bytes with LF Git blobs; exact checkout plus canonical-filtered blob verification repaired the comparator, no source/binary change",
+    "Inherited descriptive variant label called history arms Native current residency; clarified subsequent metadata while retaining original configs and actual authoritative STRATA environment unchanged",
+    "Initial staged publication audit rejected full source-file inventory as ordinary row-level JSON; unchanged original remains local and its complete verified gzip is published, compact summary links to it"
+  ],
+  "unmeasured_or_skipped": [
+    "Full unrelated native test suite",
+    "Live logistic sensitivity: optional, offline parity complete",
+    "Exact attribution of all plan A delay to oracle CPU or whole-request critical path; shared/peer overlap gives bounds",
+    "Exclusive per-entry nonlocal service economics,160us remains an assumption",
+    "DMA-only H2D duration or peak bus saturation",
+    "Full native adaptation CPU outside routed host plan",
+    "Fresh independent source: reused previously evaluated RFC8259, no new-generalization claim",
+    "Natural-generation output quality or bitwise CPU/GPU equivalence",
+    "Longer context/model or production deployment",
+    "Independent off-host backup for irreplaceable raw binary tapes/journals"
+  ]
+}

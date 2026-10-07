@@ -12,7 +12,7 @@ def dist(v):return dict(zip(['min','median','max'],map(float,np.quantile(v,[0,.5
 def kv(log,name):
  m=re.search(name+r' ([^\n]+)',log)
  if not m:return None
- return {k:float(v) for k,v in re.findall(r'(\w+)=([\d.]+)',m[1])}
+ return {k:float(v) if re.fullmatch(r'\d+(?:\.\d+)?',v) and k!='decision_hash' else v for k,v in re.findall(r'(\w+)=([^\s]+)',m[1])}
 
 def analyze(p):
  ep=load(p/'episode.json');log=(p/'raw/run-engine.log').read_text();r=ep['run'];a=ep['ownership'];oracle=kv(log,'Q4_ORACLE_END');tc=kv(log,'Q4_TC_END');planner=kv(log,'Q4_PLANNER_END');score=kv(log,'Q4_VICTIM_END');wait=[]
@@ -29,10 +29,11 @@ def analyze(p):
  h=hashlib.sha256();
  for x in e:
   for key in ['trigger','target','published_at','layer','incoming','victim','slot','oldslot','status','bytes','uses','victim_uses']:h.update(int(x[key]).to_bytes(8,'little',signed=True))
- row={'label':p.name,'task':ep['task'],'arm':ep['arm'],'block':ep.get('block'),'kind':ep.get('kind'),'valid':ep['valid'],'input':r['actual_input_tokens'],'output':r['actual_output_tokens'],'windows':r['verify_windows'],'decode_s':r['decode_s'],'tok_s':r['actual_output_tokens']/r['decode_s'],'wall_s':r['wall_s'],'prefill_s':r['prefill_s'],'startup_s':ep['startup_s'],'warmup_s':ep['warmup_s'],'cleanup_s':ep['cleanup_s'],'operating_s':ep['total_operating_s'],'local':a['demand']['local'],'cpu':a['demand']['cpu'],'mapped':a['demand']['mapped'],'main_entries':ep['fidelity']['main_entries'],'mtp_entries':ep['fidelity']['mtp_entries'],'work_sha256':ep['fidelity']['work_sha256'],'initial_state_sha256':ep['fidelity']['initial_state_sha256'],'oracle':oracle,'tc':tc,'planner':planner,'score':score,'wait':wait,'transactions':transaction,'victims':vt,'logical_live_admissions_sha256':h.hexdigest(),'host_plan_ms':float(np.sum(layers['plan_end']-layers['begin'])/1e6),'gpu_plan_wait_ms':sum(x['plan_ns'] for x in wait)/1e6,'gpu_cpu_wait_ms':sum(x['cpu_ns'] for x in wait)/1e6,'gpu_mapped_wait_ms':sum(x['mapped_ns'] for x in wait)/1e6}
+ row={'label':p.name,'task':ep['task'],'arm':ep['arm'],'block':ep.get('block'),'kind':ep.get('kind'),'valid':ep['valid'],'input':r['actual_input_tokens'],'output':r['actual_output_tokens'],'windows':r['verify_windows'],'decode_s':r['decode_s'],'tok_s':r['actual_output_tokens']/r['decode_s'],'wall_s':r['wall_s'],'prefill_s':r['pp_s'],'startup_s':ep['startup_s'],'warmup_s':ep['warmup_s'],'cleanup_s':ep['cleanup_s'],'operating_s':ep['total_operating_s'],'local':a['demand']['local'],'cpu':a['demand']['cpu'],'mapped':a['demand']['mapped'],'main_entries':ep['fidelity']['main_entries'],'mtp_entries':ep['fidelity']['mtp_entries'],'work_sha256':ep['fidelity']['work_sha256'],'initial_state_sha256':ep['fidelity']['initial_state_sha256'],'oracle':oracle,'tc':tc,'planner':planner,'score':score,'wait':wait,'transactions':transaction,'victims':vt,'logical_live_admissions_sha256':h.hexdigest(),'host_plan_ms':float(np.sum(layers['plan_end']-layers['begin'])/1e6),'gpu_plan_wait_ms':sum(x['plan_ns'] for x in wait)/1e6,'gpu_cpu_wait_ms':sum(x['cpu_ns'] for x in wait)/1e6,'gpu_mapped_wait_ms':sum(x['mapped_ns'] for x in wait)/1e6}
  row['information']=kv(log,'Q4_INFORMATION_END');
+ row['isolated_plan_wait_exposure_bounds_ms']={'lower':0,'upper':min(row['decode_s']*1000,row['gpu_plan_wait_ms']),'definition':'Contribution of observed plan A stalls holding all other work/dependencies fixed. Shared/peer overlap and absent absolute cross-device alignment prevent a tighter bound. Not an exclusive oracle CPU attribution or counterfactual speedup prediction.'}
  if ep['arm'] in ['PLANNER_BASELINE','PLANNER_OPT']:assert row['information']['victim_next']==0 and row['information']['victim_count']==0
- row['copy_GB']=(transaction['completed_bytes']+a['copies']['restoration_bytes'])/1e9;row['local_pct']=100*row['local']/row['main_entries']
+ row['restoration_bytes']=a['copies']['restoration_bytes'];row['copy_GB']=(transaction['completed_bytes']+row['restoration_bytes'])/1e9;row['local_pct']=100*row['local']/row['main_entries']
  assert len(wait)==2 and all(x['plan_count']==24*row['windows'] for x in wait),('wait coverage',p.name,wait)
  assert row['main_entries']==sum(a['demand'].values())
  if tail:
@@ -45,7 +46,7 @@ def resources(p):
  for path in (p/'telemetry').glob('*.jsonl'):
   rows.extend(json.loads(line) for line in path.read_text().splitlines() if line.strip())
  def range_of(vals):return dict(zip(['min','median','max'],map(float,np.quantile(vals,[0,.5,1])))) if vals else None
- return {'scope':'Lightweight sampled telemetry; startup, warmup and replay separate log names, aggregate ranges retained without steal correction.','samples':len(rows),'cpu_pct':range_of([x['system_cpu_pct'] for x in rows if 'system_cpu_pct' in x]),'steal_pct':range_of([x['cpu_times_percent']['steal'] for x in rows if 'steal' in x.get('cpu_times_percent',{})]),'available_ram_GiB':range_of([x['mem_available_gib'] for x in rows if 'mem_available_gib' in x]),'swap_used_bytes':range_of([x['swap_memory']['used'] for x in rows if 'swap_memory' in x]),'gpus':{str(d):{k:range_of([g[k] for x in rows for g in x.get('gpus',[]) if int(g['index'])==d and k in g]) for k in ['util_pct','power_w','vram_mib','sm_mhz','temperature_c','memory_mhz','pcie_generation','pcie_width']} for d in [0,1]}}
+ return {'scope':'Lightweight sampled telemetry; startup, warmup and replay separate log names, aggregate ranges retained without steal correction.','samples':len(rows),'cpu_pct':range_of([x['system_cpu_pct'] for x in rows if 'system_cpu_pct' in x]),'steal_pct':range_of([x['cpu_times_percent']['steal'] for x in rows if 'steal' in x.get('cpu_times_percent',{})]),'process_CPU_pct':range_of([p['cpu_pct'] for x in rows for p in x.get('processes',[]) if 'cpu_pct' in p]),'process_RSS_GiB':range_of([p['rss_gib'] for x in rows for p in x.get('processes',[]) if 'rss_gib' in p]),'available_ram_GiB':range_of([x['mem_available_gib'] for x in rows if 'mem_available_gib' in x]),'swap_used_bytes':range_of([x['swap_memory']['used'] for x in rows if 'swap_memory' in x]),'gpus':{str(d):{k:range_of([g[k] for x in rows for g in x.get('gpus',[]) if int(g['index'])==d and k in g]) for k in ['util_pct','power_w','vram_mib','sm_mhz','temperature_c','memory_mhz','pcie_generation','pcie_width']} for d in [0,1]}}
 
 if __name__=='__main__':
  no_gpu();rows=[]

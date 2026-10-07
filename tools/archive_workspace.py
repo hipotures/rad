@@ -144,6 +144,9 @@ def reason(path, data=None):
     if path.name.endswith("-ids.json"):
         return "token-id-payload"
     names = LEGACY_NAMES if parts[0] == STUDY else NAMES
+    if parts[:2] == (STUDY, "campaigns"):
+        # A campaign may preserve exact external source patches with local attributes.
+        names = names | {".gitattributes"}
     extensions = LEGACY_EXTENSIONS if parts[0] == STUDY else EXTENSIONS
     if parts[0] == "benchmarks":
         extensions = extensions | {".tsv", ".stdout", ".stderr", ".sha256"}
