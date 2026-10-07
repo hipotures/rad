@@ -2,7 +2,7 @@
 
 **DOMAIN_SCOPED_CONDITIONAL_REPLAY_GAIN**
 
-Scorer comparison: **NO_CONFIRMED_SCORER_DIFFERENCE**. 48/48 main requests valid. Independent replay: 8/8 valid. Actual elapsed at regeneration: 184.69 minutes; start 2026-10-07T09:33:57Z; hard deadline 2026-10-07T15:33:57Z. No deadline reset. No deployment, push, PR or ordinary launcher change.
+Scorer comparison: **NO_CONFIRMED_SCORER_DIFFERENCE**. 48/48 main requests valid. Independent replay: 8/8 valid. Actual elapsed at regeneration: 184.69 minutes; start 2026-10-07T09:33:57Z; hard deadline 2026-10-07T15:33:57Z. No deadline reset. No deployment or ordinary launcher change.
 
 This is oracle incoming plus causal cheap/frozen-learned victim control with inherited privileged full-current-window protection. It is a conditional fixed-work replay study. All expert computations, coefficients, physical slots, main/MTP work, token/window dependencies and initial state are preserved. Different CPU/GPU arithmetic can produce different sampled activations and natural output; forced output equality does not establish natural quality or bitwise equivalence.
 
@@ -219,7 +219,7 @@ Retained failure: information fixture first invocation lacked mandatory tape env
 
 A repaired diagnostic assumption separated first-use release from expiry: unused intent can expire, and the resident can be served later while unprotected. Runtime decision and safety behavior did not change. The original assertion failure is retained in the analysis log.
 
-See [exact reproduction](reproduce.md), [identities](configs/runtime-identity.json), [frozen selection](models/selection.json), [Phase2 patch](patches/phase2.diff), [attempt ledger](attempt-ledger.jsonl), [storage/recovery manifest](artifact-manifest.json) and [progress](STATUS.md). Raw tapes and journals remain external/local; compact outcomes and all authored scripts are in Git. Their recovery/backup limits are explicit. The local commit is not pushed under this goal; no off-host copy of the new campaign record is established. No automatic update/rebuild from live launchers. Original weights, serving binary/launchers and prior campaigns are verified intact.
+See [exact reproduction](reproduce.md), [identities](configs/runtime-identity.json), [frozen selection](models/selection.json), [Phase2 patch](patches/phase2.diff), [attempt ledger](attempt-ledger.jsonl), [storage/recovery manifest](artifact-manifest.json) and [progress](STATUS.md). Raw tapes and journals remain external/local; compact outcomes and all authored scripts are in Git. Their recovery/backup limits are explicit. The campaign results were published to the canonical GitHub repository in commit 22be02507a86db78b254630414ee4530fb47beb3 after the operator lifted the publication restriction. No automatic update/rebuild from live launchers. Original weights, serving binary/launchers and prior campaigns are verified intact.
 
 ## Decision and strongest next experiment
 

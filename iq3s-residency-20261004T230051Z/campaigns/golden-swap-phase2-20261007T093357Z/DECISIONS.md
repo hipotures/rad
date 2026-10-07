@@ -18,3 +18,7 @@ All16 first-pass requests are valid. Both candidates lose time on WebSocket whil
 ## Independent second-block budget gate
 
 At elapsed approximately102 minutes,35/48 main points are valid and reporting reserve is secure. Exercise the originally declared optional second independent block, with one-position rotated arm order. No independent policy outcome has been inspected. Both blocks execute the full same continuous tape; no retune.
+
+## Publication restriction removed
+
+2026-10-07T12:51:09.714341+00:00: The operator removed the push/PR prohibition from the Phase2 brief. Routine repository publication follows AGENTS.md. The original results commit 22be02507a86db78b254630414ee4530fb47beb3 is published and verified on origin/main. Earlier no-push decision/ledger entries describe the original instructions and remain historical evidence. No scientific result, runtime, model, tape or ordinary launcher changed. Exact large raw captures still lack an independent backup.
