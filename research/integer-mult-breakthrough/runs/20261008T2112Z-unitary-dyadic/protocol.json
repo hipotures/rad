@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "run_id": "20261008T2112Z-unitary-dyadic",
+  "track": "D: primary-source mechanisms and independent obstructions",
+  "question": "What restrictions do exact Gaussian-dyadic two-coordinate unitary gates impose, and where does the unitary entropy bound stop applying?",
+  "baseline": "Identity to a flat normalized Walsh transform using balanced dyadic butterflies",
+  "hypothesis": "Normalized exact Gaussian-dyadic two-coordinate unitary rows are monomial or balanced; a unitary-only fixed-arity transform compiler cannot change the asymptotic n log n gate scale.",
+  "claim_scope": "Exact finite row enumeration and butterfly matrix/entropy replay; separately documented analytic lemmas, no multiplication theorem",
+  "input_ids": ["ailon-unitary-2013-v1", "ailon-conditioned-2014-v5"],
+  "initial_repository_commit": "cb2ae8734a58eae09432b307409b5553a19d79db",
+  "command": ["python3", "-B", "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py", "--workers", "4", "--max-row-power", "7", "--max-butterfly-power", "5", "--output", "research/integer-mult-breakthrough/work/obstructions/20261008T2112Z-unitary-dyadic/results.json"],
+  "workers": 4,
+  "native_threads_per_worker": 1,
+  "seed": null,
+  "randomness": "None",
+  "metrics": ["exact signed row count", "possible squared coordinate norms", "full exact unitary Gram matrix", "final exact dyadic entropy", "literal gate count", "maximum exact entropy increase", "nonunitary negative-control entropy jump"],
+  "continuation_criterion": "Identify a concrete escape mechanism using wider arity, nonunitary changes, different transform representation or recursive compressed primitives; preserve the restriction instead of claiming a general lower bound."
+}

@@ -1,0 +1,127 @@
+{
+  "status": "EXACT_ARITHMETIC_AND_SCOPED_POSITIVE_RECURRENCE_OBSTRUCTION",
+  "recorded_utc": "2026-10-08T21:09:28.736958+00:00",
+  "scope": "Retained full row moments under arbitrary positive child type assignment and products; no circuit or all-size multiplication theorem.",
+  "target_saving": "1/10000",
+  "complete_moments_at_target": {
+    "binary": [
+      "638276375834444735945708806803918198109801358933/638261382945112103673985611651356075487133696000",
+      "638276375834444735945708806803918198216020125489/638261382945112103673985611651356075487133696000"
+    ],
+    "complex": [
+      "2736724824606314418686568966228986747205779583/2736710046925906122373359452282558024052113408",
+      "21893798596850515349492551729831893979241021081/21893680375407248978986875618260464192416907264"
+    ]
+  },
+  "root_brackets": {
+    "binary": {
+      "saving_interval": [
+        "476829673/10000000000000",
+        "19073187/400000000000"
+      ],
+      "lower_point_moment": [
+        "55500989821314090617221783333037252849249304329/55500989821314095971650922752291832651055104000",
+        "638261382945112042098050508329928407817972083633/638261382945112103673985611651356075487133696000"
+      ],
+      "upper_point_moment": [
+        "319130691472584676029004157073136351919273674953/319130691472556051836992805825678037743566848000",
+        "127652276589033870411601662829254540778031112421/127652276589022420734797122330271215097426739200"
+      ]
+    },
+    "complex": {
+      "saving_interval": [
+        "71744621/1000000000000",
+        "35872311/500000000000"
+      ],
+      "lower_point_moment": [
+        "10946840187703559763803751162008357758337032043/10946840187703624489493437809130232096208453632",
+        "10946840187703559763803751162008357758918297795/10946840187703624489493437809130232096208453632"
+      ],
+      "upper_point_moment": [
+        "21893680375411303352717679715725074645707629111/21893680375407248978986875618260464192416907264",
+        "21893680375411303352717679715725074646869915487/21893680375407248978986875618260464192416907264"
+      ]
+    }
+  },
+  "experiments": [
+    {
+      "family": "random-types",
+      "seed": 2026100801,
+      "matrix_cases": 96,
+      "varying_level_products": 0,
+      "smallest_lower_row_excess": "14777680408296313209513946428723153666175/2736710046925906122373359452282558024052113408",
+      "seconds": 0.048081763001391664
+    },
+    {
+      "family": "reducible-types",
+      "seed": 2026100802,
+      "matrix_cases": 96,
+      "varying_level_products": 0,
+      "smallest_lower_row_excess": "14777680408296313209513946428723153666175/2736710046925906122373359452282558024052113408",
+      "seconds": 0.05630714799917769
+    },
+    {
+      "family": "varying-levels",
+      "seed": 2026100803,
+      "matrix_cases": 96,
+      "varying_level_products": 1584,
+      "smallest_lower_row_excess": "14777680408296313209513946428723153666175/2736710046925906122373359452282558024052113408",
+      "seconds": 1.7800822589997551
+    },
+    {
+      "family": "boundary-and-negatives",
+      "seed": 2026100804,
+      "matrix_cases": 96,
+      "varying_level_products": 0,
+      "smallest_lower_row_excess": "14777680408296313209513946428723153666175/2736710046925906122373359452282558024052113408",
+      "seconds": 0.04073613599757664
+    }
+  ],
+  "negative_controls": {
+    "binary_omit_high_rank_payloads": {
+      "fictitious_moment_upper": "14019166918499249014809251862674117721745382291/159565345736278025918496402912839018871783424000",
+      "actual_complete_moment_lower": "638276375834444735945708806803918198109801358933/638261382945112103673985611651356075487133696000",
+      "claim": "Omitting paid complete children fakes contraction at 1e-4."
+    },
+    "complex_omit_high_rank_payloads": {
+      "fictitious_moment_upper": "812054408957166074319710006965896032923848941/21893680375407248978986875618260464192416907264",
+      "actual_complete_moment_lower": "2736724824606314418686568966228986747205779583/2736710046925906122373359452282558024052113408",
+      "claim": "Omitting paid complete children fakes contraction at 1e-4."
+    },
+    "unpaid_nonlinear_crt_conversion": {
+      "kappa": "47682490470327/1000000000000000000",
+      "honest_triangular_crt_slack": "-46682490470327/1000000000000000000",
+      "fictitious_coordinate_router_slack": "476829673/1000000000000000000",
+      "claim": "Replacing nonlinear d-pass CRT by a known bit permutation fakes this necessary cost row."
+    },
+    "signed_cost_row": {
+      "rejected": true,
+      "reason": "negative work charges cannot define this recurrence"
+    },
+    "zero_potential": {
+      "rejected": true,
+      "reason": "a cost potential must be strictly positive"
+    },
+    "subunit_row": {
+      "rejected": true,
+      "reason": "row dominance hypothesis is absent"
+    },
+    "reducible_unit_boundary": {
+      "verified": true,
+      "witness_index": 0,
+      "excess": "0"
+    }
+  },
+  "workers": 4,
+  "total_seconds": 1.9103211640031077,
+  "inputs": {
+    "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/fixtures/transfers/frozen-full-moments.json": {
+      "bytes": 3087,
+      "sha256": "a2ba54780c8327fa19cbe043c1c75e9462812ce0e2605bdfdff7d9ce54c79398"
+    },
+    "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/transfers/coupled_moments.py": {
+      "bytes": 14435,
+      "sha256": "2870c1781132983040f40a128e5a3911fbeb86547fa459e2dfcdb3fe25ce7c63"
+    }
+  }
+}

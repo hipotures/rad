@@ -1,0 +1,213 @@
+{
+  "status": "EXACT_FINITE_SEMANTIC_AND_CAPACITY_CONTROLS",
+  "recorded_utc": "2026-10-08T21:18:46.127560+00:00",
+  "scope": "Finite-field auxiliary model for normalization interfaces; no Gaussian or fixed-tape multiplier certificate.",
+  "prime": 65537,
+  "transform_lengths": [
+    4,
+    8,
+    16,
+    32
+  ],
+  "workers": 4,
+  "families": [
+    {
+      "family": "normalization-boundary",
+      "seed": 2026100811,
+      "checks": 96,
+      "changed_spectral_boundaries": 96,
+      "witness": {
+        "base": 4,
+        "input_a": [
+          3,
+          1
+        ],
+        "input_b": [
+          3,
+          2
+        ],
+        "unnormalized": [
+          9,
+          9,
+          2
+        ],
+        "normalized": [
+          1,
+          3,
+          0,
+          1
+        ],
+        "spectrum_before": [
+          20,
+          63240,
+          2,
+          2311
+        ],
+        "spectrum_after": [
+          5,
+          65026,
+          65534,
+          513
+        ]
+      },
+      "seconds": 0.024974503998237196
+    },
+    {
+      "family": "redundant-linear-domain",
+      "seed": 2026100812,
+      "checks": 96,
+      "changed_spectral_boundaries": 0,
+      "witness": {
+        "base": 4,
+        "redundant": [
+          8,
+          15,
+          6,
+          0
+        ],
+        "normalized_final": [
+          0,
+          1,
+          2,
+          2
+        ],
+        "exact_value": 164,
+        "raw_coefficient_bits": 12,
+        "canonical_digit_bits": 6
+      },
+      "seconds": 0.03198386099393247
+    },
+    {
+      "family": "carry-free-domain",
+      "seed": 2026100813,
+      "checks": 96,
+      "changed_spectral_boundaries": 0,
+      "witness": {
+        "original_base": 4,
+        "guarded_base": 16,
+        "original_digit_bits": 2,
+        "guarded_digit_bits": 4,
+        "coefficient_count": 3,
+        "claim": "Format changed; this is not equality of evaluations at different bases."
+      },
+      "seconds": 0.02544095300254412
+    },
+    {
+      "family": "nonlinear-digit-extraction",
+      "seed": 2026100814,
+      "checks": 96,
+      "changed_spectral_boundaries": 0,
+      "witness": {
+        "base": 4,
+        "scalar_x": 3,
+        "scalar_y": 1,
+        "low_digit_after_sum": 0,
+        "sum_of_low_digits": 4,
+        "unnormalized": [
+          4,
+          0,
+          0,
+          0
+        ],
+        "normalized": [
+          0,
+          1,
+          0,
+          0
+        ]
+      },
+      "seconds": 0.0008059980027610436
+    }
+  ],
+  "capacity_controls": {
+    "missing_degree_capacity": {
+      "base": 4,
+      "length": 4,
+      "true_coefficients": [
+        1,
+        4,
+        6,
+        4,
+        1
+      ],
+      "aliased_coefficients": [
+        2,
+        4,
+        6,
+        4
+      ],
+      "true_integer": 625,
+      "aliased_integer": 370,
+      "repaired_length": 8
+    },
+    "redundant_binomial_widths": [
+      {
+        "factors": 2,
+        "degree": 2,
+        "minimum_power_of_two_transform_length": 4,
+        "raw_variable_width_bits": 4,
+        "canonical_integer_bits": 4,
+        "center_coefficient_bits": 2
+      },
+      {
+        "factors": 4,
+        "degree": 4,
+        "minimum_power_of_two_transform_length": 8,
+        "raw_variable_width_bits": 11,
+        "canonical_integer_bits": 7,
+        "center_coefficient_bits": 3
+      },
+      {
+        "factors": 8,
+        "degree": 8,
+        "minimum_power_of_two_transform_length": 16,
+        "raw_variable_width_bits": 39,
+        "canonical_integer_bits": 13,
+        "center_coefficient_bits": 7
+      },
+      {
+        "factors": 16,
+        "degree": 16,
+        "minimum_power_of_two_transform_length": 32,
+        "raw_variable_width_bits": 162,
+        "canonical_integer_bits": 26,
+        "center_coefficient_bits": 14
+      },
+      {
+        "factors": 32,
+        "degree": 32,
+        "minimum_power_of_two_transform_length": 64,
+        "raw_variable_width_bits": 676,
+        "canonical_integer_bits": 51,
+        "center_coefficient_bits": 30
+      },
+      {
+        "factors": 64,
+        "degree": 64,
+        "minimum_power_of_two_transform_length": 128,
+        "raw_variable_width_bits": 2805,
+        "canonical_integer_bits": 102,
+        "center_coefficient_bits": 61
+      },
+      {
+        "factors": 128,
+        "degree": 128,
+        "minimum_power_of_two_transform_length": 256,
+        "raw_variable_width_bits": 11451,
+        "canonical_integer_bits": 203,
+        "center_coefficient_bits": 125
+      },
+      {
+        "factors": 256,
+        "degree": 256,
+        "minimum_power_of_two_transform_length": 512,
+        "raw_variable_width_bits": 46414,
+        "canonical_integer_bits": 406,
+        "center_coefficient_bits": 252
+      }
+    ],
+    "scope": "Multi-product stress case. Integer multiplication remains bilinear; this is not a lower bound against bilinear multilevel spectral representations."
+  },
+  "source_sha256": "e36c4d763a7e328656c8bc96bc4bb24e6f009deaa5e37ee768f88231846bb9a0",
+  "seconds": 0.07563476300128968
+}

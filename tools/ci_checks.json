@@ -92,6 +92,105 @@
       ],
       "timeout_seconds": 60,
       "scope": "Exact consequences of a < (1-beta)b and kappa < a/(1+a), under explicitly assumed fixed inputs"
+    },
+    {
+      "id": "unitary-dyadic-controls",
+      "group": "smoke",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py",
+        "--self-test"
+      ],
+      "inputs": [
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py"
+      ],
+      "paths": [
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py"
+      ],
+      "timeout_seconds": 120,
+      "scope": "Exact finite Gaussian-dyadic unitary arithmetic and corruption/scope controls; no multiplier claim"
+    },
+    {
+      "id": "unitary-dyadic-finite-replay",
+      "group": "certificates",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py",
+        "--workers",
+        "1",
+        "--max-row-power",
+        "4",
+        "--max-butterfly-power",
+        "4"
+      ],
+      "inputs": [
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py"
+      ],
+      "paths": [
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py"
+      ],
+      "timeout_seconds": 120,
+      "scope": "Bounded exact row enumeration and complete finite Walsh Gram/entropy replay; analytic all-size lemmas are not formalized"
+    },
+    {
+      "id": "wider-unitary-macro",
+      "group": "certificates",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/wider_unitary.py"
+      ],
+      "inputs": [
+        "research/integer-mult-breakthrough/code/obstructions/wider_unitary.py",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py"
+      ],
+      "paths": [
+        "research/integer-mult-breakthrough/code/obstructions/wider_unitary.py",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py"
+      ],
+      "timeout_seconds": 120,
+      "scope": "Exact literal three-gate Gaussian-dyadic unitary macro; no free macro cost or recurrence saving"
+    },
+    {
+      "id": "positive-type-mixing-barrier",
+      "group": "certificates",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/transfers/coupled_moments.py",
+        "--workers",
+        "1",
+        "--cases",
+        "8"
+      ],
+      "inputs": [
+        "research/integer-mult-breakthrough/code/transfers/coupled_moments.py",
+        "research/integer-mult-breakthrough/fixtures/transfers/frozen-full-moments.json"
+      ],
+      "paths": [
+        "research/integer-mult-breakthrough/code/transfers/coupled_moments.py",
+        "research/integer-mult-breakthrough/fixtures/transfers/frozen-full-moments.json"
+      ],
+      "timeout_seconds": 120,
+      "scope": "Exact complete frozen moment arithmetic and finite nonnegative type-mixing controls; scoped polynomial-certificate obstruction, no multiplication lower bound"
+    },
+    {
+      "id": "deferred-normalization-controls",
+      "group": "smoke",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/transfers/deferred_normalization.py",
+        "--workers",
+        "1",
+        "--cases",
+        "8"
+      ],
+      "inputs": [
+        "research/integer-mult-breakthrough/code/transfers/deferred_normalization.py"
+      ],
+      "paths": [
+        "research/integer-mult-breakthrough/code/transfers/deferred_normalization.py"
+      ],
+      "timeout_seconds": 120,
+      "scope": "Exact auxiliary finite-field/radix carry, representation and padding controls; no Gaussian all-size transfer"
     }
   ]
 }
