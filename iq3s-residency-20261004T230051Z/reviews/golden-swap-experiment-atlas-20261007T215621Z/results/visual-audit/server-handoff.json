@@ -1,0 +1,49 @@
+{
+  "state": "PASS",
+  "checked_at": "2026-10-08T01:19:26.691640+00:00",
+  "server": {
+    "pid": 3328573,
+    "started_at": "2026-10-08T00:50:27.877777+00:00",
+    "command": [
+      "/usr/bin/python3",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/reviews/golden-swap-experiment-atlas-20261007T215621Z/code/serve.py",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8765"
+    ],
+    "host": "0.0.0.0",
+    "port": 8765,
+    "interfaces": [
+      "172.17.0.1",
+      "192.168.100.207"
+    ],
+    "urls": [
+      "http://172.17.0.1:8765/",
+      "http://192.168.100.207:8765/"
+    ],
+    "process_start_ticks": "56854868",
+    "identity_rule": "PID plus /proc start ticks and exact command; never use a historical PID alone."
+  },
+  "health": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/gallery",
+      "status": 200
+    },
+    {
+      "path": "/api/views",
+      "status": 200
+    },
+    {
+      "path": "/api/runs?task=code-archive",
+      "status": 200
+    }
+  ],
+  "active_owned_visual_tests": [],
+  "live_service_intentionally_retained": true,
+  "pid_note": "Historical launch/check receipt, not authority to control a future reused PID. Consult and verify current server-status.json."
+}

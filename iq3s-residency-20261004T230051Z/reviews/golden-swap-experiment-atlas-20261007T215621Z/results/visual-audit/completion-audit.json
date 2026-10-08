@@ -1,7 +1,7 @@
 {
-  "state": "VALIDATED_AUDITED_PENDING_REMOTE_PUBLICATION",
-  "utc": "2026-10-08T01:05:53.207623+00:00",
-  "elapsed_wall_s_including_user_pause": 4089.207623,
+  "state": "COMPLETE",
+  "utc": "2026-10-08T01:19:26.704572+00:00",
+  "elapsed_wall_s_including_user_pause": 4902.704591,
   "task": "Atlas visual review, not a new experimental phase",
   "indexed": {
     "experiments": 12,
@@ -29,7 +29,7 @@
     "raw_expert122_generation_checks": "5 PASS",
     "url_filter_edges": "4 PASS",
     "discovery_api": "PASS including null identity and unknown route checks",
-    "gzip_complete_files": "263 PASS CRC/UTF-8/identity, zero omissions",
+    "gzip_complete_files": "274 PASS: 263 main and 11 final-publication complete files; zero omissions, hashes/CRC/UTF-8 checked against originals.",
     "js_python_syntax": "PASS",
     "staged_archive_audit": {
       "state": "PASS",
@@ -45,7 +45,9 @@
     "Edge harness relative output-path failure",
     "Original aggregate no-op and stale reset controls",
     "Shared publication receipt overwrite by a concurrent audit",
-    "Stale index parent after a concurrent unrelated main commit; refreshed safely"
+    "Stale index parent after a concurrent unrelated main commit; refreshed safely",
+    "Derived screenshot inventory reused a completed name; both versions preserved, original restored from gzip, future naming repaired",
+    "Whole-repository remote API tree truncated; untruncated root and exact Atlas subtree verified all 435 changed blobs"
   ],
   "limitations": [
     "Unfiltered catalog and unfocused predictor remain dense",
@@ -83,5 +85,19 @@
   "ttl_implemented": false,
   "normal_serving_configuration_changed": false,
   "cleanup": "No visual test remains active; owned temporary browser/frozen-source HTTP sessions closed. The explicitly requested dashboard server is retained. Unrelated research processes untouched.",
-  "publication": "Only task-owned Atlas namespace and root Atlas link; isolated index, audit, main commit/push and remote verification pending."
+  "publication": {
+    "state": "PASS",
+    "utc": "2026-10-08T01:16:52.440249+00:00",
+    "canonical_repository": "hipotures/rad",
+    "branch": "main",
+    "commit": "ea190a7aafc2515446ec36d4d4513c4fb2aab112",
+    "tree": "cea9ad1bd4f0383453cde744f5d02c3fb0dd311d",
+    "remote_branch_sha": "ea190a7aafc2515446ec36d4d4513c4fb2aab112",
+    "task_files_verified": 435,
+    "verification": "gh API untruncated root and Atlas subtree identities match every task-owned changed blob in the pushed commit.",
+    "unrelated_parent_preserved": "771ef256f796342832166aa013f955b48591b0d1",
+    "normal_serving_paths_changed": false,
+    "repair": "Whole-repository recursive API tree was truncated; exact Atlas subtree plus nonrecursive root verifies the complete task without interpreting a partial listing."
+  },
+  "screenshot_collection": "figures/curated/README.md"
 }

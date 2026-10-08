@@ -1,5 +1,5 @@
 # Atlas status
 
-Direct image review and fresh-browser reproduction complete. 86 durable PNGs, 12 curated views, 11 final pages; publishing complete text/spec evidence and auditing only task-owned changes.
+Visual audit, repairs, 12 curated PNG/deep links and gallery complete. All 435 core changed files verified on canonical main. Dashboard remains running; no new GPU research or normal serving changes.
 
-2026-10-08T01:00:48.077953+00:00
+2026-10-08T01:19:26.723089+00:00
