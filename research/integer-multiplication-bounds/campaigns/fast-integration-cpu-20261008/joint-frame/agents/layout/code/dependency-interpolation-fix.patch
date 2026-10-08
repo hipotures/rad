@@ -1,0 +1,11 @@
+--- a/dependency_selection_variant.py
++++ b/dependency_selection_variant.py
+@@ -90,6 +90,8 @@
+     stats['selected_clearing_rank_growth']+=score[0] if CLEARING_POLICY=='min-rank-growth' else score[1]
+     return s
+ """
++    new_body=new_body.replace('"+priority+"',priority).replace('"+score+"',score)
++    assert '"+priority+"' not in new_body and '"+score+"' not in new_body
+     changed=text.replace(old_body,new_body)
+     variant=original.with_name('binary_frame_compiler_horizon.py');variant.write_text(changed)
+     sys.path.insert(0,str(original.parent))

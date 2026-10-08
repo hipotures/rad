@@ -105,13 +105,25 @@ unit-order sweep is planned in this branch. A separate
 [future frame accessibility rule](future-frame-horizon.md) changes a structural
 selection criterion rather than repeating those completion controls.
 
-The repeated dirty scalar wrapper also needs an explicit all-size frame
-schedule. The inherited common-frame identity applies to every physical gate
-incidence, not just the first L word. It is insufficient to infer one charged
-monotone path from scalar dirty correctness alone. The inverse agent is
-checking a schedule whose first and last mixers run in common completed
-frames, whose middle L follows the recorded paths, and whose copied centers
-and ordinary outputs retain their full charged scatter/cleanup costs.
+The repeated dirty scalar wrapper needs an explicit all-size frame schedule.
+The [accepted conditional schedule](../inverse/reports/framed-dirty-word-schedule.md)
+assigns every actual gate: the first mixer/read/unmixer uses the common entry
+frame, only the middle mixer follows the recorded paths, and the final
+unmixer uses the completed full frame. Complete copied centers pass through
+owned disposable ports, with paid reads, parking, initialization and erase;
+the literal adjoint uses paid zero-gather ports. Original arbitrary dirty
+roles are preserved with their specified endpoint address permutations.
+The center transforms are counted once, so the local recursive rank mass
+remains hR+h(h-1). Complete scalar traffic for all four mixers is still paid.
+This resolves the additional schedule obligation under the named inherited
+copied-stream and residual contracts; it does not prove those contracts.
+
+The coordinator and scout independently replayed the future-horizon h23
+word (30,667 roles) together with the nested high-rank h25 word (40,324 roles),
+constructed exact fixed-I+J profiles, and checked the full moment and all
+47 inequalities. Their [reviewed-pair receipt](../scout/latest-reviewed-pair.md)
+supports conditional arithmetic saving 4.766283731e-5. Later screening results
+are kept separate until their complete profiles and assembly are reviewed.
 
 ## Provenance and credit
 

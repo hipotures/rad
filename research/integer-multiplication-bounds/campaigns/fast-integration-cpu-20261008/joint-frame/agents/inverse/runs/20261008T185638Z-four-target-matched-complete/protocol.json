@@ -1,0 +1,37 @@
+{
+  "run_id": "20261008T185638Z-four-target-matched-complete",
+  "question": "Matched complete baseline for the new25-bit four-target omitted-inner-repair discriminator",
+  "source_sha256": {
+    "compiled_reflection_four_recycle.cpp": "1eff9749e963814d189df754a22ea2722291b87115bea985ad3715f711436174",
+    "compiled_crt_native_recycle.cpp": "ba65805741cc7260f0cfb4688ac57340f589cfd1e7ca98e440d14683b8dbfd40"
+  },
+  "arguments": [
+    "--family",
+    "mixed-small",
+    "--outer-guard",
+    "2",
+    "--inner-guard",
+    "1"
+  ],
+  "workers": 1,
+  "native_threads": 1,
+  "expected": "PASS",
+  "state": "completed",
+  "rebuild": "g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic code/compiled_reflection_four_recycle.cpp -o <fresh-work>/control",
+  "live_build_binary_sha256": "31b65d16dd6514e5002e2dfa98bf0e8b0dfc2237f2f6ab383e964fb1c97d46c4",
+  "matched_negative_run": "20261008T184322Z-four-target-inner-omission",
+  "compute_pid": 294235,
+  "exit_code": 0,
+  "completed_utc": "2026-10-08T19:27:36.414250+00:00",
+  "status": "PASS",
+  "certificate_sha256": "2309c1ee1bbca1bb908ceced8f68eff1799d6b9cbc6a918dc16f21f247526cf4",
+  "wall_seconds": 1858.24,
+  "exit_code_record": "Unavailable after original controller turn interruption; complete certificate independently recovered and checked",
+  "result_fields": {
+    "address_bits": 25,
+    "valid_tagged_records": 15728640,
+    "added_address_bits": 0,
+    "actual_F_u_calls": 48,
+    "actual_radix_record_sum": 2878962688
+  }
+}

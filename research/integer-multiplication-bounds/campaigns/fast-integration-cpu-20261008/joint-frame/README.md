@@ -34,3 +34,5 @@ Global optimum and practical speedup are not claimed.
 
 The original indefinite campaign clock continues. Immutable public inputs,
 all earlier accepted witnesses and the separate active GPU branch are preserved.
+
+The [causal scheduling and changed-transfer control checkpoint](runs/20261008T1926Z-causal-structure-and-cpu-transfer-controls/report.md) preserves full negative profiles, the genuine public47 rejection of the larger CPU arithmetic target, and interruption recovery without resetting the campaign. Global causal region orders, future-directed invertible completions and paid nullspace-circuit reclamation continue alongside exact CRT/Gaussian controls.

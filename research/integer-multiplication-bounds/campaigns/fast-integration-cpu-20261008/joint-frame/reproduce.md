@@ -24,3 +24,35 @@ public focused scripts requires a fresh writable execution copy. Do not run
 the entire inherited repository verification repeatedly. New mechanism
 acceptance also requires an independent source/causality/physical-word review
 and every all-size transfer charge under agents/inverse.
+
+## Accepted finite pair and stronger transfer control
+
+The immutable accepted pair and complete costs are in
+`runs/20261008T1854Z-accepted-future-horizon/`; exact word gzip hashes and
+independent profile inputs are in its protocol and the preceding exact-pair run.
+Use the independent scout recovery commands for a complete replay from archived
+words. The root bounded arithmetic reproduction below compares the changed
+38-row CPU ledger against the actual rejecting public47 checker.
+It deliberately reports an open transfer obligation.
+
+```bash
+python3 -B joint-frame/code/check_cpu_transfer.py --native joint-frame/runs/20261008T1854Z-accepted-future-horizon/complete-moment.json --literal-ledger joint-frame/runs/20261008T1854Z-accepted-future-horizon/root-independent-ledger.json --public-assembly work/joint-frame/inputs/pr58-tested-bc2f7ed4c20dc18898305ab17165c0c995cbb804/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py --output work/joint-frame/fresh-cpu38-control.json
+```
+
+## Global causal region orders
+
+Run one persistent worker with all ten distinct configured schedules; a fresh
+output is mandatory. Repeatable `--completed-queue` paths skip exactly completed
+configurations during recovery, while original partial outputs remain intact.
+Each attempt freezes source, configuration and source-certificate hashes,
+recomputes legal future carries, and verifies the entire literal dirty word.
+
+```bash
+env OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 -B joint-frame/code/run_region_queue.py --source-root work/joint-frame/inputs/pr58-tested-bc2f7ed4c20dc18898305ab17165c0c995cbb804 --output work/joint-frame/fresh-causal-region-queue
+```
+
+The first h23/h25 rank-reversed schedules and recovered rank-pressure variants
+were exercised, including full scalar/dirty word checks and controller profiles.
+The remaining configured cases run asynchronously; no uncompleted case is
+reported as verified. Independent twelve-prime physical/profile review and
+complete changed all-size acceptance are required for any new improvement.

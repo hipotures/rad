@@ -1,12 +1,31 @@
 # Joint-frame compiler structural branch
 
-Investigate cross-region nested frames, component reclamation and global synthesis windows beyond pinned public PR58, targeting a defensible conditional saving above 4.750735690e-5. Inputs are immutable public PR55/57/58 snapshots. Two one-thread structural lanes are assigned; the legacy strong-gap Gaussian worker remains separate. Only the coordinator publishes Git changes.
+The independently reviewed future-horizon h23 and guarded nested h25 pair
+supports conditional arithmetic saving **4.766283731e-5**, above the authorized
+public PR58 baseline 4.750735690e-5. The full moments and all 47 inequalities
+are independently checked in the [reviewed-pair report](../scout/latest-reviewed-pair.md).
+The claim retains the inherited native residual, tape, row-stock, and analytic
+premises; finite scalar correctness alone is insufficient.
 
-Initial variants change reclaim selection, then test nested-frame synthesis. Complete physical words, arbitrary dirty recovery, actual fixed-I+J profiles and full assembly must be verified before promotion.
+This branch investigates cross-region nested frames, retirement selection,
+and guarded synthesis windows on immutable public PR55/57/58 inputs. Three
+one-thread structural lanes are now assigned. The earlier strong-gap Gaussian
+worker completed and has a separate legacy receipt. Only the coordinator
+publishes Git changes.
 
-The [causal review](reclamation-review.md) records the 102/108-role high-rank
-savings, guarded borrowing, and informative negatives. The newer
-[future frame horizon rule](future-frame-horizon.md) improves the finite
-23-axis count further. [Reproduction instructions](reproduce.md) reconstruct
-every changed compiler from immutable public source. The complete wrapper's
-all-size common-frame schedule remains under independent review.
+The [causal review](reclamation-review.md) records high-rank savings, guarded
+borrowing, and informative negatives. The [future frame horizon rule](future-frame-horizon.md)
+improves the 23-axis count further. The [profile and clearing frontier](profile-clearing-frontier.md)
+records derivative ties, fused regions, and dependency selection. The
+[complete physical dirty schedule](../inverse/reports/framed-dirty-word-schedule.md)
+explains the one charged frame traversal despite four scalar mixers, including
+paid disposable center ports and the literal adjoint.
+[Reproduction instructions](reproduce.md) reconstruct every changed compiler
+from pinned obtainable public source. Complete physical words are regenerable
+execution artifacts; compact outcomes and source changes are durable.
+
+The [paid nullspace-circuit search](nullspace-reclamation.md) goes beyond a
+single fundamental elimination dependency. Exact small cases show useful
+cancellations, expose anchor-only kernel relations, and reject an illegal
+future-frame shortcut. Full finite compiler runs are queued; no new native
+exponent follows from those small discriminators.
