@@ -26,6 +26,30 @@ regression is pending; finite producer/CRT/moment/assembly checks are reported.
 The pinned source and [fixed-basis interface map](fixed-basis-interface.md)
 were sent promptly to the coordinator and computational agents.
 
+At 13:04:26, new [PR39](https://github.com/CrocSwap/integer-mult-bounds/pull/39)
+by Rohan Arun was found, head `50e54ece17afa4bd3cccd1927e9cdea5098038c2`,
+updated 12:58:44 UTC. It fixes only the middle L25=I+J and leaves GL23 free
+in reversed (23,25), retaining the second 17-block and claiming conditional
+`kappa=971668963/25000000000000=3.886675852e-5`. Its source is pinned in
+the manifest. [The scoped hybrid review](hybrid-basis-review.md) maps the
+common-basis argument and changed-graph obligations. PR38 meanwhile became
+ready at documentation/validation follow-up
+`605323bab4ba330de3d1785dc5b3ecb14e8ab747`; its scientific sources remain
+the pinned `cc794077...`.
+
+At 13:15:27, PR39 became ready at validation-only follow-up
+`70ae24129649f6d6d4ec6360962a80c3c42a38f1`; its scientific inputs remain
+`50e54ece...`. The [receipt](validation-pr39.json) records the upstream
+executable rerun. CrocSwap main separately advanced to
+`1a74950ce5074b848243ba89d8022fbadba66105`, preserving a conditional
+2^-30 checkpoint and crediting parallel contributions. Its new contribution
+review explicitly treats the stronger submitted PRs as unaccepted claims,
+since the full chains have not been audited there. The campaign must keep
+its own conditional proof/review scope clear. A newly visible James Chang
+A5 branch was inspected; it is earlier 11:20 UTC geometry, not a new
+copied-center or graph rewrite. Details and citations are in
+[supplementary-sources.json](supplementary-sources.json).
+
 PR37 physical invariants are `m=575`, `N=4073300`, `W=188181929`,
 `L=2226400`, `s=Wm-N+L=108202762275`, maximum child 529, with all
 4073300 paid endpoint corrections retained. Relative to PR36 it removes

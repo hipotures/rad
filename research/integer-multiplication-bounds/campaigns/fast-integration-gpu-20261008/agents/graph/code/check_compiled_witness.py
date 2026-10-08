@@ -278,6 +278,18 @@ def check(document, small_dirty=False):
             scatter[target] ^= scalar[node]
     assert scatter == [1<<i for i in range(v)], 'JLV must be the complete scalar identity'
     assert all(frame is None for frame in slot_frames), 'Every physical role must terminate'
+    reverse_frames = [None]*expected_roles
+    for j,slot in enumerate(output_slots):
+        assert reverse_frames[slot] is None, 'Designated output terminals must have separate physical roles'
+        reverse_frames[slot] = frames[roots[j]]
+    reverse_checks = 0
+    for node,ins,outs in reversed(gates):
+        for slot in set(ins+outs):
+            assert reverse_frames[slot] is None or contained(frames[node],reverse_frames[slot])
+            reverse_frames[slot] = frames[node]
+            reverse_checks += 1
+    for input_id,slot in sources.items():
+        assert contained(reverse_frames[slot],frames[input_id+1]) and contained(frames[input_id+1],reverse_frames[slot])
     actual_hist = [histogram[r] for r in range(h+1)]
     expected_hist = list(row['histogram'])
     expected_hist[1] += h
@@ -288,6 +300,7 @@ def check(document, small_dirty=False):
                   h=h,v=v,additions=additions,designated_outputs=q,retained_links=len(native['links']),
                   roles=expected_roles,center_terminal_count=h,center_rank=h-1,
                   full_output_coefficients=v*v,physical_frame_transitions=transitions,
+                  reverse_complement_frame_incidences=reverse_checks,
                   copied_histogram=actual_hist,copied_rank_sum=sum(r*n for r,n in enumerate(actual_hist)),
                   native_zero_rank_bookkeeping=expected_hist[0],
                   zero_rank_scope='Explicit output incidences include no-operation frame checks omitted from native histogram bookkeeping; only positive ranks enter the recurrence',
@@ -298,46 +311,29 @@ def check(document, small_dirty=False):
     if small_dirty:
         assert h<=12
         R = expected_roles
-        initial = [1<<(v+i) for i in range(R)]
-        inputs = [1<<i for i in range(v)]
-
-        def mixer(state,inverse=False):
-            for _,ins,outs in reversed(gates) if inverse else gates:
-                pivot = ins[0]
-                if inverse:
-                    for slot in outs[1:]:
-                        state[slot] ^= state[pivot]
-                    if len(ins)==2:
-                        state[pivot] ^= state[ins[1]]
-                else:
-                    if len(ins)==2:
-                        state[pivot] ^= state[ins[1]]
-                    for slot in outs[1:]:
-                        state[slot] ^= state[pivot]
-
-        def source_add(state):
-            for input_id,slot in sources.items():
-                state[slot] ^= inputs[input_id]
-
-        def scatter_add(state,target):
-            for j,slot in enumerate(output_slots):
-                for out in output_targets[j]:
-                    target[out] ^= state[slot]
-
-        for orientation in ('forward','reverse-complement'):
-            state = initial.copy()
-            target = [1<<(v+R+i) for i in range(v)]
-            original_target = target.copy()
-            mixer(state)
-            scatter_add(state,target)
-            mixer(state,True)
-            source_add(state)
-            mixer(state)
-            scatter_add(state,target)
-            mixer(state,True)
-            source_add(state)
-            assert state==initial and target==[a^b for a,b in zip(original_target,inputs)]
-        result['complete_dirty_basis'] = dict(auxiliary_basis_vectors=R,inputs=v,targets=v,
+        initial = [1<<i for i in range(2*v+R)]
+        mixer = []
+        for _,ins,outs in gates:
+            if len(ins)==2:
+                mixer.append((2*v+ins[0],2*v+ins[1]))
+            for slot in outs[1:]:
+                mixer.append((2*v+slot,2*v+ins[0]))
+        J = [(v+out,2*v+slot) for j,slot in enumerate(output_slots) for out in output_targets[j]]
+        V = [(2*v+slot,input_id) for input_id,slot in sources.items()]
+        word = mixer+J+list(reversed(mixer))+V+mixer+J+list(reversed(mixer))+V
+        forward = initial.copy()
+        for target,source in word:
+            assert target!=source
+            forward[target] ^= forward[source]
+        assert forward[:v] == initial[:v] and forward[2*v:] == initial[2*v:]
+        assert forward[v:2*v] == [initial[v+i]^initial[i] for i in range(v)]
+        dual = initial.copy()
+        for target,source in reversed(word):
+            dual[source] ^= dual[target]
+        assert dual[v:2*v] == initial[v:2*v] and dual[2*v:] == initial[2*v:]
+        assert dual[:v] == [initial[i]^initial[v+i] for i in range(v)]
+        result['complete_dirty_basis'] = dict(auxiliary_basis_vectors=R,total_basis_vectors=2*v+R,
+                                             elementary_word_length=len(word),inputs=v,targets=v,
                                              orientations=['forward','reverse-complement'],all_dirty_restore=True)
     result['seconds'] = time.monotonic()-start
     return result
