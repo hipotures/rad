@@ -205,7 +205,16 @@ def main():
         assert recovery['every_original_frame_contained']
         assert recovery['all_actual_word_transitions_contained']
         assert recovery['every_original_xor_preserved']
-        assert recovery['original_roles_and_xors_unchanged']
+        if recovery.get('original_roles_and_xors_unchanged', False):
+            pass
+        else:
+            # Componentwise constructors record the same literal-word
+            # invariant separately from their maximal-frame containment.
+            summary = recovery['summary']
+            assert summary['unchanged_all_XOR_instructions']
+            assert summary['unchanged_physical_roles'] == row['profile']['R']
+            assert recovery['every_selected_frame_inside_maximal']
+            assert summary['maximal_signed_containment']
         assert recovery['copied_center_spaces_unchanged'] == row['profile']['h']
         # Reconstruct the complete source-family coordinate bijection;
         # literal source destinations and labels have independently been

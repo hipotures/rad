@@ -1,15 +1,15 @@
 {
-  "construction": "Joint interval synthesis with actual enlarged signed positive-frame retention",
+  "construction": "Componentwise positive-frame retention in joint interval circuits",
   "source_pins": {
     "62": "ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
     "57": "cd350f76c9bc01489ec83568bded532cb69be938",
     "61": "afb7cb67d1858641315cfbf4ac768ee64a8eff3a"
   },
-  "accepted": "reports/signed-joint-region-acceptance.json",
-  "selected_axes": "fixtures/interval-joint-intermediate-signed-core18-one15-seven207-axes.json",
+  "accepted": "reports/componentwise-joint-region-acceptance.json",
+  "selected_axes": "fixtures/interval-joint-component-balanced12-one15-seven207-axes.json",
   "source_recoveries": [
-    "agents/graph/results/joint-signed-intermediate-Q-source-only-23.json",
-    "agents/graph/results/joint-signed-intermediate-Q-source-only-25.json"
+    "agents/graph/results/joint-component-balanced12-Q-source-only-23.json",
+    "agents/graph/results/joint-component-balanced12-Q-source-only-25.json"
   ],
   "classification": "ACCEPTED CONDITIONAL CONSTRUCTION",
   "portable_placeholders": {
@@ -22,7 +22,7 @@
   "source_word_commands": [
     [
       "python3",
-      "<campaign>/agents/graph/code/source_only_selective_signed_joint.py",
+      "<campaign>/agents/graph/code/source_only_componentwise_signed_joint.py",
       "--source",
       "<snapshot>",
       "--work",
@@ -34,13 +34,15 @@
       "--budget",
       "3584",
       "--mode",
+      "balanced",
+      "--threshold",
+      "12",
+      "--scope",
       "core-single",
-      "--value",
-      "18",
       "--expected-parent-sha256",
       "40e40425b52408f9cf4be7f6bce5ffe5c46fcc1d551990553db53ed1baf2515f",
       "--expected-word-sha256",
-      "b8e3e030e49585145aee0b8fbb50ef99f9dda27af091324717ac0ca0fab55e19",
+      "53866254a9ec0f21f602e293f69ce5c30981fada4899394b7633f4861d928fb2",
       "--order",
       "0",
       "1",
@@ -68,7 +70,7 @@
     ],
     [
       "python3",
-      "<campaign>/agents/graph/code/source_only_selective_signed_joint.py",
+      "<campaign>/agents/graph/code/source_only_componentwise_signed_joint.py",
       "--source",
       "<snapshot>",
       "--work",
@@ -80,13 +82,15 @@
       "--budget",
       "5120",
       "--mode",
+      "balanced",
+      "--threshold",
+      "12",
+      "--scope",
       "core-single",
-      "--value",
-      "18",
       "--expected-parent-sha256",
       "5af6e1bdf2e6fafe888fd6b224bfa1e940fceb264df5362bb66a2d40592259c8",
       "--expected-word-sha256",
-      "84c11453798a37b2c0525fb0cfcb0bdaca5943428c43caffcc43472cb52f4039",
+      "d3e4ecff6e1b10a5ec0269139e20e089bcda56f8b68102f4fbf4b007769a1fb4",
       "--order",
       "0",
       "1",
@@ -135,69 +139,69 @@
     {
       "h": 23,
       "role": "word",
-      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-intermediate-source-2000-h23/raw/h23-budget3584-Q-core-single-18/word.json.gz",
-      "bytes": 2628948,
-      "sha256": "c3330df86289c526245088c88c17706252bfb8ac874c8e38bc096c53771b9469",
-      "recovery": "Deterministically regenerable from pinned public source with source-word, native and independent Gram commands. External execution payload; absent from Git clone."
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-component-balanced12-source-2015-h23/word.json.gz",
+      "bytes": 2643116,
+      "sha256": "eefb7f3c7e2159a22a92a3f0f62f48de2493d8a37646cb7f9ae9440f338ed7b2",
+      "recovery": "Deterministically regenerable from pinned public source using this exact componentwise constructor and native/Gram commands. Execution payload external, not in Git clone."
     },
     {
       "h": 23,
       "role": "transition binary",
-      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-intermediate-source-2000-h23/raw/h23-budget3584-Q-core-single-18/signed-transitions.bin",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-component-balanced12-source-2015-h23/signed-transitions.bin",
       "bytes": 3859817,
-      "sha256": "4dd20f628b863c6b273eed914da5fffb51a1838f003235d04ff78266fb26637e",
-      "recovery": "Deterministically regenerable from pinned public source with source-word, native and independent Gram commands. External execution payload; absent from Git clone."
+      "sha256": "e16b7a9753dfcde68f2383df3834929b7657b8bda343631c397bfa77d931b14e",
+      "recovery": "Deterministically regenerable from pinned public source using this exact componentwise constructor and native/Gram commands. Execution payload external, not in Git clone."
     },
     {
       "h": 23,
       "role": "matrix audit",
-      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-intermediate-signed-profiles-20261008T195255-h23/profiles/h23-intermediate3584-Q-core-single-18-beta-1-15/transitions.json",
-      "bytes": 19912671,
-      "sha256": "54dd1d6e1cb134448d0d5b1489914f3ab48816c70f38e60453d336dbdbcf6bef",
-      "recovery": "Deterministically regenerable from pinned public source with source-word, native and independent Gram commands. External execution payload; absent from Git clone."
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-componentwise-20261008T201004/h23-component-balanced-12-core-single/transitions.json",
+      "bytes": 20067182,
+      "sha256": "b678cdcecd2040deabf77a821871c43c2cb31d795a2f38892072645eeae4ada9",
+      "recovery": "Deterministically regenerable from pinned public source using this exact componentwise constructor and native/Gram commands. Execution payload external, not in Git clone."
     },
     {
       "h": 23,
       "role": "profile",
-      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-intermediate-signed-profiles-20261008T195255-h23/profiles/h23-intermediate3584-Q-core-single-18-beta-1-15/profile.json",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-componentwise-20261008T201004/h23-component-balanced-12-core-single/profile.json",
       "bytes": 785,
-      "sha256": "3551f8cdf35e858d46df4ba7bd70d85b7c58c5ec7ab7ab674276468cae0e020d",
-      "recovery": "Deterministically regenerable from pinned public source with source-word, native and independent Gram commands. External execution payload; absent from Git clone."
+      "sha256": "3bab1844cd50211dfa711a67bcd3bc53eee4d19c49f7f3d6f8bdb3df759e6e95",
+      "recovery": "Deterministically regenerable from pinned public source using this exact componentwise constructor and native/Gram commands. Execution payload external, not in Git clone."
     },
     {
       "h": 25,
       "role": "word",
-      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-intermediate-source-2001-h25/raw/h25-budget5120-Q-core-single-18/word.json.gz",
-      "bytes": 3634896,
-      "sha256": "92ee7444e53f53ec1a076f25114ffa604f6b8af98e41f039a67a53145db909c6",
-      "recovery": "Deterministically regenerable from pinned public source with source-word, native and independent Gram commands. External execution payload; absent from Git clone."
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-component-balanced12-source-2016-h25/word.json.gz",
+      "bytes": 3653609,
+      "sha256": "16299e19b20c1a3955b1c3143a1d1d78aae5f55f2ade1ab99a0b1ac2a5d1b0f0",
+      "recovery": "Deterministically regenerable from pinned public source using this exact componentwise constructor and native/Gram commands. Execution payload external, not in Git clone."
     },
     {
       "h": 25,
       "role": "transition binary",
-      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-intermediate-source-2001-h25/raw/h25-budget5120-Q-core-single-18/signed-transitions.bin",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-component-balanced12-source-2016-h25/signed-transitions.bin",
       "bytes": 5507949,
-      "sha256": "a59cafdc6efe3348583f2afb84de561e4f18781ba3488af0ba51803d51f8341e",
-      "recovery": "Deterministically regenerable from pinned public source with source-word, native and independent Gram commands. External execution payload; absent from Git clone."
+      "sha256": "44115312599c85e17c0b51f3cf41944849b6ce3b9a792f78de0355237acfbcf1",
+      "recovery": "Deterministically regenerable from pinned public source using this exact componentwise constructor and native/Gram commands. Execution payload external, not in Git clone."
     },
     {
       "h": 25,
       "role": "matrix audit",
-      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-intermediate-signed-entry-loci-20261008T195758/actual-profile-replays/h25-signed-entry-root-beta-7-207/transitions.json",
-      "bytes": 28878046,
-      "sha256": "ead5171c1d0990add457deed7a2b344d69507b3056bcbc439ce47402702475d9",
-      "recovery": "Deterministically regenerable from pinned public source with source-word, native and independent Gram commands. External execution payload; absent from Git clone."
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-component-balanced12-conjugates-20261008T201722/h25-component-balanced12-beta-7-207/transitions.json",
+      "bytes": 29080298,
+      "sha256": "88bd4f9b73b2d8e461a784149d4b0437f37995d9111b3b633a9459242e7ade29",
+      "recovery": "Deterministically regenerable from pinned public source using this exact componentwise constructor and native/Gram commands. Execution payload external, not in Git clone."
     },
     {
       "h": 25,
       "role": "profile",
-      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-intermediate-signed-entry-loci-20261008T195758/actual-profile-replays/h25-signed-entry-root-beta-7-207/profile.json",
-      "bytes": 884,
-      "sha256": "5b643a1fc822f1404d361c8e471b22523d5bf0aebb8117f875101164c5ceaf87",
-      "recovery": "Deterministically regenerable from pinned public source with source-word, native and independent Gram commands. External execution payload; absent from Git clone."
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-component-balanced12-conjugates-20261008T201722/h25-component-balanced12-beta-7-207/profile.json",
+      "bytes": 885,
+      "sha256": "74b38a7cd1a80b7c6f89dde26c9ba22bf9b47195f85c5a2699fafb962b465a64",
+      "recovery": "Deterministically regenerable from pinned public source using this exact componentwise constructor and native/Gram commands. Execution payload external, not in Git clone."
     }
   ],
-  "reproduction_tested": "Complete clean two-axis regeneration from a new public detached Git checkout passed: scalar/source words, both-orientation dirty bases, actual signed bytes, native rigorous CRT and96 exact Fraction controls. Full4073300 DATA, stock, independent moments/assembly and eight adversarial controls also passed. The original archived-source wrapper attempt failed solely because the combined driver verifies Git HEAD; the documented detached-checkout retry succeeded.",
+  "reproduction_tested": "Both complete source-only componentwise words, all dirty role vectors in both orientations, exact native CRT,96 Gram/NE/minor controls, all4073300 DATA, stock and primitive endpoints, independent moments/assembly and eight adversarial controls passed. Primary clean two-axis driver also regenerated both parent/core18 words and all native/Gram checks. No complete upstream suite was repeated.",
   "fetch_command": [
     "python3",
     "<campaign>/code/fetch_interval_joint_sources.py",
@@ -316,28 +320,21 @@
     "--output",
     "<work>/independent-rational-controls.json"
   ],
-  "independent_controls_reproduction": "Use the two rows[].case descriptors of agents/geometry/results/joint-intermediate-seven207-controls-20261008T2012.json, replacing binary/audit paths with freshly generated files. Independent explicit-B/Gram Fraction matrix products are recomputed.",
-  "published_certificate": "evidence/signed-joint-core-2030/certificate.json.gz",
-  "original_certificate_path": "runs/interval-joint-intermediate-signed-core18-one15-seven207/certificate.json",
+  "independent_controls_reproduction": "Copy only the two retained rows[].case descriptors from reports/component-balanced12-seven207-independent-controls-2037.json; substitute fresh generated binary/audit paths and recompute every explicit-B/Gram Fraction control with review_signed_joint_word_profiles.py.",
+  "published_certificate": "evidence/componentwise-joint-core-2050/certificate.json.gz",
+  "original_certificate_path": "runs/interval-joint-component-balanced12-one15-seven207/certificate.json",
   "certificate_decompression": [
     "gzip",
     "-dc",
-    "<campaign>/evidence/signed-joint-core-2030/certificate.json.gz"
+    "<campaign>/evidence/componentwise-joint-core-2050/certificate.json.gz"
   ],
   "archive_recovery": "Write the complete decompressed bytes to a fresh external certificate.json file. The independent binding hashes those exact original bytes; generation/reconstruction remains the primary verification path.",
-  "axis_reproduction_command": [
-    "python3",
-    "<campaign>/agents/geometry/code/reproduce_selected_core18_axes.py",
-    "--source",
-    "<Git checkout detached at pinned PR62 revision>",
-    "--work",
-    "<work>/complete-axis-replay",
-    "--output",
-    "<work>/complete-axis-replay.json"
-  ],
-  "axis_reproduction_documentation": "agents/geometry/reports/selected-core18-reproduction.md",
   "dependency_manifest": "agents/geometry/configs/selected-core18-reproduction-dependencies.json",
-  "preserved_original_source_verifier": "agents/graph/code/source_only_selective_signed_joint_v1.py",
-  "clean_axis_reproduction": "reports/signed-joint-region-clean-regeneration-2035.json",
-  "clean_axis_reproduction_sha256": "723949200658d72a56616631a56c5f642bae693f124c32c96da7df428ace45e1"
+  "preserved_original_source_verifier": "agents/graph/code/source_only_componentwise_signed_joint_v1.py",
+  "additional_authored_dependencies": [
+    "agents/graph/code/source_only_componentwise_signed_joint.py",
+    "agents/geometry/code/componentwise_signed_word_enlargement.py",
+    "agents/scout/code/check_signed_endpoint_decomposition.py"
+  ],
+  "conditional_address_scope": "agents/scout/signed-address-transfer-scope.md"
 }

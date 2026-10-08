@@ -112,3 +112,5 @@ commands, source pins and external artifact recovery. Complete unsplit
 [exact certificate](../evidence/signed-joint-core-2030/certificate.json.gz)
 bytes are published; large generated words and CRT audits remain explicitly
 external and deterministically regenerable.
+
+The full clean two-axis generator subsequently passed: [receipt](signed-joint-region-clean-regeneration-2035.json). The2v+R basis count refers to binary roles. Arbitrary dirty address arrays use the universal echo and pinned common endpoint-gauge algebra under the inherited compiler realization/charged-schedule contract, as stated in the [precise address-transfer scope](../agents/scout/signed-address-transfer-scope.md); no enumeration of all address components is claimed.
