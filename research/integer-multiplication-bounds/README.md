@@ -22,12 +22,14 @@ layout, repair and assembly arguments have passed independent review within
 the retained conditional interfaces. The campaign start is unchanged.
 
 The current independently reviewed strict conditional witness is
-**`kappa = 31879574566994548341758160620003/10^40`**, approximately
-**3.1879574566994547e-9**, more than **38.40912598433078 times 83/10^12**
-and greater than **2^-29**. It combines the independently promoted h51
-bit circuit with 502,265 roles, the h28 shared complex circuit with 97,586
+**`kappa = 30283937459028968342298108616971/(25*10^38)`**, approximately
+**1.2113574983611587e-8**, more than **145.946686549537196 times 83/10^12**
+and greater than **2^-27**. It combines the independently promoted h51
+bit circuit with 500,703 roles, the h28 shared complex circuit with 97,586
 roles, compact movement, arbitrary-source coordinate routing, a linear
-semantic-child precision guard and complete local microbox resampling.
+semantic-child precision guard, complete local microbox resampling and
+a newly reviewed contiguous-pivot bit recurrence with a globally permuted
+tensor compiler, full middle runs and exact third data-family profiles.
 The movement and resampling changes are jointly accounted for. Separate
 independent all-size interface proofs and exact final arithmetic are
 retained; an inexpensive arithmetic certificate alone is not their proof.
@@ -36,15 +38,17 @@ The tight balanced common numeric cutoff is
 `log2(b_input)>=258254417031933722624`, with separate eventual prime,
 record-domination, logarithm-absorption and unaffected-machine thresholds.
 The original-prefix witness
-`15939787232681910604248015281721/(5*10^39)` has a smaller numeric cutoff
-`6297308145207339265`. These are asymptotic conditional results, not
+`60567874184364451154344927021321/(5*10^39)` has a smaller numeric cutoff
+`436149451555854401`. These are asymptotic conditional results, not
 practical multiplication benchmarks or formal machine verification.
 The complete upstream theorem remains assumed and novelty is unclaimed.
 A separately reviewed h28 complex controller construction uses 92,309 roles
 and certifies a saving of `4003/10^11`. The displayed composition retains the
-earlier 97,586-role complex input; its complex margin is inactive. New
-contiguous-pivot batching and joint graph/controller rewrites are under study
-and are not part of the displayed witness.
+earlier 97,586-role complex input; its complex margin is inactive. The new
+full-middle global-axis transfer and fixed-frame clone graph are part of
+the displayed witness. Longer calls use the explicitly checked p^2600
+row stock. Dense ground reflections, sharper joined profiles and delayed
+graph/controller frames are being investigated separately.
 
 All older accepted interfaces remain preserved. The generic compact
 R473026 checkpoint is
@@ -57,9 +61,18 @@ limitations. Research continues through the authorized deadline.
 
 - [Full goal](GOAL.md)
 - [Campaign clock, protocol and resume state](runs/20261007T222521Z-campaign/protocol.json)
-- [Current odd-ground composition](reports/odd51-composition.md)
+- [Current full-middle composition](reports/uncapped-middle-composition.md)
+- [Independent full-middle transfer](reports/review-uncapped-middle.md)
+- [Previous capped global-axis composition](reports/global-axis-composition.md)
+- [Independent global-axis transfer](reports/review-global-axis-batching.md)
+- [Independent global-axis exact primitive](reports/review-global-axis-witnesses.md)
+- [Independent fixed-frame clone promotion](reports/review-clone-promotion-followup.md)
+- [Previous three-family composition](reports/batched-bulk-composition.md)
+- [Independent complete contiguous transfer](reports/review-contiguous-pivot-transfer.md)
+- [Independent third data-family proof](reports/review-pivot-extension.md)
+- [Previous uniform odd-ground composition](reports/odd51-composition.md)
 - [Independent odd-ground finite review](reports/review-odd51.md)
-- [Current independent arithmetic](runs/20261008T043000Z-review-odd51-bulk/)
+- [Current independent arithmetic](runs/20261008T054255Z-review-uncapped-assembly/)
 - [New complex controller review](reports/review-complex-controller.md)
 - [Odd-ground finite search family](reports/finite-odd-pair-family.md)
 - [Joint graph/controller duplication controls](reports/finite-clone-gate-discriminator.md)

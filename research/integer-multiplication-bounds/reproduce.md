@@ -399,3 +399,60 @@ a fresh execution directory and compare the declared original SHA256.
 The new contiguous Bruhat recurrence controls are research evidence with a
 separate full transfer review; they are not part of the seventh checkpoint's
 accepted uniform h51 multiplication witness.
+
+
+## Eighth checkpoint: full middle calls and explicit clone promotion
+
+The targeted new root finite and complete arithmetic commands were exercised
+fully, with original input/source hashes retained in:
+
+- `runs/20261008T051931Z-review-explicit-clone-repair/protocol.json`
+- `runs/20261008T052819Z-review-axis-assembly/protocol.json`
+- `runs/20261008T054255Z-review-uncapped-assembly/protocol.json`
+
+Use the pinned mathematical environment and a fresh output path. Exact
+long fractions require the explicitly recorded `PYTHONINTMAXSTRDIGITS=0`.
+The full-middle reviewer checks the p^2600 row reservoir; the earlier
+capped checker is preserved separately and uses p^100. Accepted baselines
+were not repeated. All conditional and eventual thresholds are stated in
+[the current composition](reports/uncapped-middle-composition.md).
+
+Completed text is archived under `evidence/20261008T0541Z-axis-clone-external`
+(986 files), `evidence/20261008T0541Z-axis-clone-topic` (101 files), the two
+`20261008T0548Z-uncapped-assembly-*` supplements, and
+`evidence/20261008T0550Z-axis-clone-nested-external` (26 files). Original
+paths, sizes and SHA256 values are indexed by complete gzip manifests.
+Every copy passed `verify-text --check-originals`; originals were unchanged.
+The external archive was published in its own scoped commit because the
+combined source/evidence would exceed the ordinary20MiB commit budget.
+Each complete source remains intact; no payload was split.
+
+Restore a required gzip-only topic table before invoking its saved command:
+
+```bash
+python3 - <<'PYRESTORE'
+import gzip
+from pathlib import Path
+topic = Path('research/integer-multiplication-bounds')
+archive = topic / 'evidence/20261008T0541Z-axis-clone-topic'
+paths = [
+    'runs/20261008T050900Z-finite-clone-recovered51/results/certificate.json',
+    'runs/20261008T051000Z-finite-clone-plan-export/results/selected-links.json',
+    'runs/20261008T051200Z-finite-clone-recovered-cohort/results/terminal-summary.json',
+    'runs/20261008T052800Z-finite-clone-descendant-small/results/certificate.json',
+]
+for rel in paths:
+    target = topic / rel
+    if not target.exists():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(gzip.decompress((archive / (rel+'.gz')).read_bytes()))
+PYRESTORE
+```
+
+The full delayed-frame producer certificate and selected-link artifact are
+external archive members under their original `derived/finite/052900` and
+`053400` run names, including the complete UTC prefix. They are preserved
+new candidates, not finite inputs to the accepted full-middle composition.
+Restore external members into a fresh task-owned execution directory and
+compare the manifest's original hash. Live workers and telemetry are
+excluded; archived PID values are historical evidence only.

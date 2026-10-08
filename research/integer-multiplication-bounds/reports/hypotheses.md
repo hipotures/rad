@@ -67,3 +67,42 @@ interfaces and are superseded only by separately reviewed checkpoints.
   this evidence is distinct from the all-size argument.
 - Pair-star binary motifs and four-subset scalar identities yield new
   scoped negatives, without repeating the prior five-subset exclusion.
+
+
+## Contiguous native recurrence and global tensor order
+
+The fixed-axis contiguous-pivot hypothesis has a complete independent
+tape/row proof and exact assembly. Its two-family witness is
+`2646714117957216181019532004157/(5*10^38)`; adding the independently
+reviewed X stage3 in->2 and Y stage3 0->1 family gives
+`5385522372704445616023138582561/10^39`. The rank sum remains unchanged,
+but recursive child widths change the characteristic. See
+[the composition](batched-bulk-composition.md).
+
+One global tensor-axis permutation may enlarge the middle-family batches
+without a runtime gathering adapter. This changes the canonical rational
+factor table and fixed prime exclusions. Its new exact controls and
+conditional assembly must be reviewed before promotion. Explicit unused
+gate clones provide a separate large finite candidate; old scoped
+clone negatives do not exclude this changed capacity premise.
+
+
+## Global-axis composition and new structural leads
+
+A single compiler-wide (3,1,2) tensor order has passed all-size transfer
+review, strict native characteristic review and independent complete
+assembly. Accepted kappa is 79953885463171944810044117311939/10^40
+with R502265/h51 and R97586/h28. The fixed rational table and eligible
+odd-prime set change; no runtime gather is assumed.
+
+Explicit fixed-frame whole-chain duplication separately passed full
+independent finite promotion at R500703. Its actual larger gate count
+and literal scalar guard are checked rather than borrowing the old G
+bound. Enlarging a clone frame to its first delayed consumer is a new
+mechanism and needs separate all-size input/output and dirty proofs.
+
+Removing the h-squared cap on middle calls improves the native moment.
+It changes the depth bound to 26*ceil(log2(e)) at h51, so the row stock
+requires p^2600 instead of p^100. A cheap global reflection Q=I-(2/h)J
+may additionally make every triple's first support coordinate zero.
+These hypotheses retain separate primitive, assembly and finite evidence.

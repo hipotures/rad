@@ -1,0 +1,63 @@
+{
+  "active_deadline": "2026-10-08T10:00:00Z",
+  "address_space_limit_bytes": 17179869184,
+  "admission": {
+    "checkpoint": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/finite/20261008T043400Z-finite-odd-window-transfer/checkpoint.json",
+    "pending": 0,
+    "reserved": 1
+  },
+  "campaign_start": "2026-10-07T22:25:21Z",
+  "command": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "120s",
+    "/usr/bin/time",
+    "-v",
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/math/bin/python",
+    "-B",
+    "/srv/ai/research/research/integer-multiplication-bounds/code/review_pivot_extension.py",
+    "--finite-review",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T041200Z-review-odd51/results/certificate.json",
+    "--join-witness",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T043510Z-downstream-diagonal-join-bound/results/certificate.json",
+    "--data-witness",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T044503Z-downstream-diagonal-data-bound/results/certificate.json",
+    "--output",
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/review/20261008T0454Z-review-pivot-extension/certificate.json"
+  ],
+  "cpu_workers": 1,
+  "execution_started_utc": "2026-10-08T04:54:31.087391+00:00",
+  "exit_code": 0,
+  "finished_utc": "2026-10-08T04:54:33.106798+00:00",
+  "historical_deadline": "2026-10-08T08:25:21Z",
+  "inputs": {
+    "runs/20261008T041200Z-review-odd51/results/certificate.json": "a1ee766e8705772432874250ce9e0398ce928fcb092569513f833f3e647518fa",
+    "runs/20261008T043510Z-downstream-diagonal-join-bound/results/certificate.json": "6dffd26119b35d828468f7f31b88687f12bd252e2e7cf1db0fa8ac24c644aa61",
+    "runs/20261008T044503Z-downstream-diagonal-data-bound/results/certificate.json": "c07b8f957b3867f0bb389cdaa3b41e29797d126b20d0ddfa3c7107d13101f9be"
+  },
+  "interpreter": "Python 3.14.7",
+  "process_pid": 3488156,
+  "reservation_acquired": [
+    0,
+    1
+  ],
+  "reservation_owned": 1,
+  "reservation_released": [
+    1,
+    0
+  ],
+  "result": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/review/20261008T0454Z-review-pivot-extension/certificate.json",
+  "result_sha256": "b4962136b2b0e1a3f6ce9b05f9e28097a9b767fee1b4e96fef0978c828c95865",
+  "run_id": "20261008T0454Z-review-pivot-extension",
+  "seed": null,
+  "source_sha256": {
+    "review_asymmetric_motif.py": "15d6511b92ac6a3a3c1873106e3fc165db0590330898690db880e6b91e016552",
+    "review_parameter_audit.py": "dca1a3e97c26209e59eceec3d5a86a8f5205ff90c9d46f1d40d7bab499ac6bd8",
+    "review_pivot_batching.py": "661dd9337c601c6a791815bd022c35faed27f1f68753a4f544bdc8ee5dafc7ca",
+    "review_pivot_extension.py": "7928f9bb07744dfe10b475b536eb77d9d9d7b6ae565f981b0310d881c2d507d0"
+  },
+  "started_utc": "2026-10-08T04:54:31.083434+00:00",
+  "status": "Terminal PASS",
+  "stdout_stderr": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/review/20261008T0454Z-review-pivot-extension/execution.log",
+  "timeout_seconds": 120
+}

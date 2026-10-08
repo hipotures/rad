@@ -1,0 +1,61 @@
+{
+  "campaign": "20261007T222521Z",
+  "extended_deadline_utc": "2026-10-08T10:00:00Z",
+  "created_utc": "2026-10-08T04:58:24.329530+00:00",
+  "command": [
+    "/usr/bin/time",
+    "-v",
+    "timeout",
+    "60",
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/math/bin/python",
+    "-B",
+    "/srv/ai/research/research/integer-multiplication-bounds/code/review_batched_bulk_assembly.py",
+    "--certificate",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T045209Z-downstream-batched-semantic-bulk/results/certificate.json",
+    "--uniform",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T042624Z-downstream-odd51-semantic-bulk/results/certificate.json",
+    "--uniform-review",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T043000Z-review-odd51-bulk/results/certificate.json",
+    "--primitive",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T043510Z-downstream-diagonal-join-bound/results/certificate.json",
+    "--interface-review",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T0439Z-review-pivot-batching/results/certificate.json",
+    "--kernel-review",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T0443Z-review-pivot-forbidden/results/certificate.json",
+    "--finite-review",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T041200Z-review-odd51/results/certificate.json",
+    "--output",
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/20261008T045824Z-review-batched-bulk-repair/certificate.json"
+  ],
+  "input_sha256": {
+    "certificate": "76c30d10fcd8c8aa0aac96734e48b4c3baed0932217e79feeb5aade82af8d052",
+    "uniform": "4e2efac976b9c0bc554834ff0e543d9e7eaae89b478a95dd16a8eadcb1bec6a1",
+    "uniform-review": "19e862368a0586910a052bd1a64e42f6ee4ec66bdb5724fcf74934c8de70704b",
+    "primitive": "6dffd26119b35d828468f7f31b88687f12bd252e2e7cf1db0fa8ac24c644aa61",
+    "interface-review": "7a45ba9ac30c8ed179d50d46a9ab335e86d9443ed733ed7c7637a1f1e96476b5",
+    "kernel-review": "6abd191f62560e8f5bb6d4c9ddd61aad0962ce7e1f995d2f0fd04e87572940d4",
+    "finite-review": "a1ee766e8705772432874250ce9e0398ce928fcb092569513f833f3e647518fa"
+  },
+  "source_sha256": "029135301ee4cef02aec66b4c9fec5aeac6373b7b5062af6ac4788d09b99227f",
+  "active_queue": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/finite/20261008T045400Z-finite-odd-window-followup/checkpoint.json",
+  "external_results": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/20261008T045824Z-review-batched-bulk-repair",
+  "logs": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/20261008T045824Z-review-batched-bulk-repair",
+  "status": "PASS",
+  "repair_of": "20261008T045702Z-review-batched-bulk",
+  "environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "PYTHONINTMAXSTRDIGITS": "0"
+  },
+  "repair": "Permit serialization of exact rational integers beyond the default4300digit Python limit; source and mathematical arithmetic unchanged",
+  "started_utc": "2026-10-08T04:58:24.331777+00:00",
+  "completed_utc": "2026-10-08T04:58:24.828576+00:00",
+  "exit_code": 0,
+  "wall_seconds": 0.4968189479550347,
+  "source_unchanged": true,
+  "inputs_unchanged": true,
+  "result_sha256": {
+    "certificate.json": "3911637f70f3f15e179fead6e4106af434f2bc42ff26fcf932fcf1db70bd23c8"
+  }
+}

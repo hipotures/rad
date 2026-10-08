@@ -1,0 +1,60 @@
+{
+  "active_deadline": "2026-10-08T10:00:00Z",
+  "address_space_limit_bytes": 17179869184,
+  "admission": {
+    "checkpoint": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/finite/20261008T045400Z-finite-odd-window-followup/checkpoint.json",
+    "pending": 15,
+    "reserved": 1
+  },
+  "campaign_start": "2026-10-07T22:25:21Z",
+  "command": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "120s",
+    "/usr/bin/time",
+    "-v",
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/math/bin/python",
+    "-B",
+    "/srv/ai/research/research/integer-multiplication-bounds/code/review_axis_witness.py",
+    "--axis-review",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T0506Z-review-axis-batching/results/certificate.json",
+    "--producer",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T050504Z-downstream-rotated-batch-characteristic/results/certificate.json",
+    "--output",
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/review/20261008T0511Z-review-axis-witness/certificate.json"
+  ],
+  "cpu_workers": 1,
+  "execution_started_utc": "2026-10-08T05:11:26.169008+00:00",
+  "exit_code": 0,
+  "finished_utc": "2026-10-08T05:11:26.889927+00:00",
+  "historical_deadline": "2026-10-08T08:25:21Z",
+  "inputs": {
+    "runs/20261008T050504Z-downstream-rotated-batch-characteristic/results/certificate.json": "6d9bc88013f87e4f997ff44fe66ad95ffbde522412610d04e78c4944ff664705",
+    "runs/20261008T0506Z-review-axis-batching/results/certificate.json": "6b0a6fcf470753341bed22374f68e67b2f5631a605a4202a33bd199903fa18c6"
+  },
+  "interpreter": "Python 3.14.7",
+  "process_pid": 3496656,
+  "reservation_acquired": [
+    0,
+    1
+  ],
+  "reservation_owned": 1,
+  "reservation_released": [
+    1,
+    0
+  ],
+  "result": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/review/20261008T0511Z-review-axis-witness/certificate.json",
+  "result_sha256": "943cc9d31c2be01dc9489220561956a9c1e2c11dd73938e05a974041c1e6e8b1",
+  "run_id": "20261008T0511Z-review-axis-witness",
+  "seed": null,
+  "source_sha256": {
+    "review_axis_witness.py": "e7cfef34f161f461c66f5c6964c7613488f1d45edad32c712aa72b39d07030ad",
+    "review_parameter_audit.py": "dca1a3e97c26209e59eceec3d5a86a8f5205ff90c9d46f1d40d7bab499ac6bd8",
+    "review_pivot_batching.py": "661dd9337c601c6a791815bd022c35faed27f1f68753a4f544bdc8ee5dafc7ca",
+    "review_pivot_extension.py": "7928f9bb07744dfe10b475b536eb77d9d9d7b6ae565f981b0310d881c2d507d0"
+  },
+  "started_utc": "2026-10-08T05:11:26.146576+00:00",
+  "status": "Terminal PASS",
+  "stdout_stderr": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/review/20261008T0511Z-review-axis-witness/execution.log",
+  "timeout_seconds": 120
+}

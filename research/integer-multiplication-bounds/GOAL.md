@@ -186,3 +186,41 @@ construction has 92,309 roles; it does not itself change the bit-limited
 headline. Contiguous Bruhat-pivot batching and joint DAG/controller rewrites
 are new hypotheses requiring their own complete transfers. Continue to the
 user-extended 2026-10-08 10:00 UTC deadline without resetting the campaign.
+
+
+### Continued structural checkpoint: contiguous pivot calls
+
+The original clock and user-authorized extension remain unchanged. The
+accepted h51/h28 finite graphs now support an independently reviewed
+nonuniform contiguous-pivot recurrence with a third data-edge family.
+The complete conditional witness is
+`5385522372704445616023138582561/10^39`, greater than `2^-28`. Exact new
+primitive, row-padding and final assembly checks are preserved separately
+from older uniform witnesses. A globally permuted tensor compiler and
+explicit clones are still separate candidates. Finding this improvement
+does not end the campaign. See reports/batched-bulk-composition.md.
+
+
+### Continued structural checkpoint: global tensor order
+
+The same active campaign now has an independently reviewed complete
+conditional witness `79953885463171944810044117311939/10^40`, above
+`2^-27`. One compiler-wide tensor coordinate permutation changes the
+native profiles without an uncharged runtime gather. A new fixed
+rational table/odd-prime qualification is explicit. A distinct R500703
+clone graph passed independent finite promotion and remains a separate
+input. Longer middle runs and enlarged clone frames are new hypotheses.
+See reports/global-axis-composition.md. Continue to the existing
+2026-10-08 10:00 UTC deadline; preserve the original campaign clock.
+
+
+### Eighth accepted full-middle checkpoint
+
+The same campaign now certifies the stronger conditional saving
+`30283937459028968342298108616971/(25*10^38)` using the independently
+promoted R500703 bit graph, full contiguous middle runs and a complete
+p^2600 recursive-row reservoir. Separate exact arithmetic verifies all
+eight complete rows. See reports/uncapped-middle-composition.md. Preserve
+all capped/uniform predecessors and continue through the existing
+2026-10-08 10:00 UTC deadline; new reflection and delayed-frame candidates
+remain separate until complete review.

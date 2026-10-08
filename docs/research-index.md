@@ -21,10 +21,10 @@ The pinned conditional
 2^-59 baseline passed its supplied checks. Independently reviewed h51
 odd-ground and h28 shared complex circuits, phase-cell Gaussian inverse,
 and the separately pinned compact-control update now combine with independently
-reviewed arbitrary routing, a linear semantic guard and complete microbox
-resampling. They support the exact strict conditional saving
-`31879574566994548341758160620003/10^40`, greater than 2^-29 and
-more than 38.40912598433078 times the new upstream witness `83/10^12`.
+reviewed arbitrary routing, a linear semantic guard, complete microbox
+resampling and a full-middle contiguous-pivot bit recurrence with an independently promoted cloned graph. They support the exact strict conditional saving
+`30283937459028968342298108616971/(25*10^38)`, greater than 2^-27 and
+more than 145.946686549537196 times the new upstream witness `83/10^12`.
 The complete upstream theorem remains assumed. Original hypotheses and
 concurrent searches continue without resetting the campaign clock. See the [reassessment](../research/integer-multiplication-bounds/reports/compact-upstream-reassessment.md)
 and [evolving report](../research/integer-multiplication-bounds/reports/campaign-20261007T222521Z.md)

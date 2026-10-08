@@ -1,0 +1,38 @@
+PASS independent changed logical 51 70471800
+Traceback (most recent call last):
+  File "/srv/ai/research/research/integer-multiplication-bounds/code/review_explicit_clone_witness.py", line 266, in <module>
+    main()
+    ~~~~^^
+  File "/srv/ai/research/research/integer-multiplication-bounds/code/review_explicit_clone_witness.py", line 244, in main
+    full = verify(data['rows'][0], exported)
+  File "/srv/ai/research/research/integer-multiplication-bounds/code/review_explicit_clone_witness.py", line 211, in verify
+    assert all(int(row['exact_counts'][k]) == value for k, value in counts.items())
+           ^^^
+  File "/srv/ai/research/research/integer-multiplication-bounds/code/review_explicit_clone_witness.py", line 211, in <genexpr>
+    assert all(int(row['exact_counts'][k]) == value for k, value in counts.items())
+                   ~~~~~~~~~~~~~~~~~~~^^^
+KeyError: 'v'
+Command exited with non-zero status 1
+	Command being timed: "timeout 300 /srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/math/bin/python -B /srv/ai/research/research/integer-multiplication-bounds/code/review_explicit_clone_witness.py --reference /srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/repos/upstream-reference --certificate /srv/ai/research/research/integer-multiplication-bounds/runs/20261008T050900Z-finite-clone-recovered51/results/certificate.json --plan /srv/ai/research/research/integer-multiplication-bounds/runs/20261008T051000Z-finite-clone-plan-export/results/selected-links.json --parent /srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/finite/20261008T041100Z-finite-odd-pair-refinement/cases/52ce3ca9416394668daacec55e648096fd419747f393391c9bfb7fdcd039f878.json --small-certificate /srv/ai/research/research/integer-multiplication-bounds/runs/20261008T050800Z-finite-clone-recovered-small/results/certificate.json --output /srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/20261008T051433Z-review-explicit-clone/certificate.json"
+	User time (seconds): 87.47
+	System time (seconds): 2.00
+	Percent of CPU this job got: 97%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:31.64
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 3485128
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 903475
+	Voluntary context switches: 251
+	Involuntary context switches: 4655
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 1
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
