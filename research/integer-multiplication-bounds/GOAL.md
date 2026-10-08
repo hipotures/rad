@@ -224,3 +224,45 @@ eight complete rows. See reports/uncapped-middle-composition.md. Preserve
 all capped/uniform predecessors and continue through the existing
 2026-10-08 10:00 UTC deadline; new reflection and delayed-frame candidates
 remain separate until complete review.
+
+
+### Ninth accepted structural checkpoint
+
+The same active campaign independently accepts
+`33675510618975860722801055113417/(2*10^39)`, above `2^-26`, using
+actual delayed-clone frames, a shared reflected basis and sharper joined
+profiles. The complete changed-frame rank categories and all four
+assembly rows are independently checked. See
+reports/reflected-clone-composition.md. General ambient isometries remain
+a separate new construction until their deeper rows and general-beta
+assembly are verified. Preserve every predecessor and continue through
+the authorized 2026-10-08 10:00 UTC deadline.
+
+### Continued ninth checkpoint: constructive generic native basis
+
+Independent full assembly review accepts
+`400341739374364208307342473772447/10^40`, above `2^-25`, with the
+actual R485680 bit graph, constructive simultaneous metric flags,
+R92309 complex controller graph and general stopping beta=2^-64.
+All eight complete arithmetic rows, new p^66000 stock and stopped-leaf
+cutoff are checked; giant native table/prime remain constructive finite
+setup. See reports/generic-general-beta-composition.md. The newer
+R88377 complex finite circuit is independently accepted but not included
+in that witness. Whole-rank complex children are a separate transfer
+under review. Continue the same campaign through 10:00 UTC; do not reset
+the clock or stop at this improvement.
+
+### Continued checkpoint: whole-rank complex children
+
+Independent complete review accepts
+`717460322074304862199809239626027/(5*10^39)`, above 2^-23, from
+the unchanged accepted R485680 bit graph and independently promoted
+R88377 complex graph. Mixed phases, exact arbitrary tails, native bit
+overhead, actual 8s+32m scalar guard and the PRODUCT p^89000 row stock
+are charged. All four new full rows and 42/43 strict margins pass a
+separate exact root review. See reports/whole-complex-composition.md.
+The native giant table/prime and complete-machine thresholds remain
+explicitly eventual. Preserve all predecessors and continue through
+the same 2026-10-08T10:00:00Z deadline. New sequential bit clones and
+protected central frames are separate hypotheses pending their own
+complete independent interfaces and assembly.

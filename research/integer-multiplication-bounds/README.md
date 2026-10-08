@@ -22,33 +22,35 @@ layout, repair and assembly arguments have passed independent review within
 the retained conditional interfaces. The campaign start is unchanged.
 
 The current independently reviewed strict conditional witness is
-**`kappa = 30283937459028968342298108616971/(25*10^38)`**, approximately
-**1.2113574983611587e-8**, more than **145.946686549537196 times 83/10^12**
-and greater than **2^-27**. It combines the independently promoted h51
-bit circuit with 500,703 roles, the h28 shared complex circuit with 97,586
-roles, compact movement, arbitrary-source coordinate routing, a linear
-semantic-child precision guard, complete local microbox resampling and
-a newly reviewed contiguous-pivot bit recurrence with a globally permuted
-tensor compiler, full middle runs and exact third data-family profiles.
-The movement and resampling changes are jointly accounted for. Separate
-independent all-size interface proofs and exact final arithmetic are
-retained; an inexpensive arithmetic certificate alone is not their proof.
+**`kappa=717460322074304862199809239626027/(5*10^39)`**, approximately
+**1.4349206441486097e-07**, more than **1728.820053191096 times 83/10^12** and above
+**2^-23**. It combines the independently promoted h51 delayed-clone graph
+with 485,680 roles, the h28 delayed complex graph with 88,377 roles, one
+constructively defined common rational ambient metric basis, compact controls,
+arbitrary-source routing, linear semantic precision, complete local
+resampling, balanced FFT and whole-rank complex children at stopping beta=1/2.
+The actual changed-frame categories, constructive all-size flag theorem,
+complete mixed-phase/tail transfer, nested product row reservoir and all four
+new complete arithmetic rows are independently
+reviewed. The giant native basis/table/new prime are not instantiated;
+their finite deterministic setup remains separately eventual.
 
-The tight balanced common numeric cutoff is
-`log2(b_input)>=258254417031933722624`, with separate eventual prime,
-record-domination, logarithm-absorption and unaffected-machine thresholds.
-The original-prefix witness
-`60567874184364451154344927021321/(5*10^39)` has a smaller numeric cutoff
-`436149451555854401`. These are asymptotic conditional results, not
-practical multiplication benchmarks or formal machine verification.
-The complete upstream theorem remains assumed and novelty is unclaimed.
-A separately reviewed h28 complex controller construction uses 92,309 roles
-and certifies a saving of `4003/10^11`. The displayed composition retains the
-earlier 97,586-role complex input; its complex margin is inactive. The new
-full-middle global-axis transfer and fixed-frame clone graph are part of
-the displayed witness. Longer calls use the explicitly checked p^2600
-row stock. Dense ground reflections, sharper joined profiles and delayed
-graph/controller frames are being investigated separately.
+The tight balanced common numeric cutoff remains
+`log2(b_input)>=258254417031933722624`, with separate eventual native-prime,
+factor-table, layout, record-domination, logarithm-absorption and upstream
+machine thresholds. The largest bit child is 132447 out of 132651, and
+the largest complex child is 21896 out of 21952. Complete nested bit/complex
+row stock is `p^89000`, with one paid leading prefix and less than twice
+the initial padded volume. These are conditional asymptotic
+results, not practical benchmarks, an unconditional theorem, formal
+machine verification or established novelty claims.
+
+The homogeneous complex branching saving is 10^-6; native bit overhead
+remains paid at tau. The retained construction is now bit limited.
+New joint graph/controller rewrites and protected central frames remain
+separate hypotheses requiring their complete independent checks.
+Research and independent computational experiments continue through the
+existing 12:00 CEST deadline.
 
 All older accepted interfaces remain preserved. The generic compact
 R473026 checkpoint is
@@ -61,7 +63,19 @@ limitations. Research continues through the authorized deadline.
 
 - [Full goal](GOAL.md)
 - [Campaign clock, protocol and resume state](runs/20261007T222521Z-campaign/protocol.json)
-- [Current full-middle composition](reports/uncapped-middle-composition.md)
+- [Current whole-complex composition](reports/whole-complex-composition.md)
+- [Previous generic-basis general-beta composition](reports/generic-general-beta-composition.md)
+- [Previous uniform delayed-complex composition](reports/delayed-complex-general-beta-independent.md)
+- [Independent generic-basis inputs and constructive setup scope](reports/generic-basis-independent-review.md)
+- [Independently accepted whole-complex transfer](reports/review-whole-complex-transfer.md)
+- [Whole-rank complex actual tape construction](reports/whole-complex-concatenation.md)
+- [Independent delayed binary complex circuit](reports/review-complex-delayed-clones.md)
+- [Previous reflected delayed-clone composition](reports/reflected-clone-composition.md)
+- [Independent delayed-clone promotion](reports/review-descendant-clone-promotion.md)
+- [Independent reflected basis](reports/review-reflected-basis.md)
+- [Independent sharper joined moment](reports/review-joined-block-moment.md)
+- [Generic ambient-isometry constructive proof and exact controls](reports/review-generic-metric-basis.md)
+- [Previous full-middle composition](reports/uncapped-middle-composition.md)
 - [Independent full-middle transfer](reports/review-uncapped-middle.md)
 - [Previous capped global-axis composition](reports/global-axis-composition.md)
 - [Independent global-axis transfer](reports/review-global-axis-batching.md)
@@ -72,7 +86,10 @@ limitations. Research continues through the authorized deadline.
 - [Independent third data-family proof](reports/review-pivot-extension.md)
 - [Previous uniform odd-ground composition](reports/odd51-composition.md)
 - [Independent odd-ground finite review](reports/review-odd51.md)
-- [Current independent arithmetic](runs/20261008T054255Z-review-uncapped-assembly/)
+- [Current independent arithmetic](runs/20261008T075232Z-review-whole-complex-assembly/)
+- [Previous generic independent arithmetic](runs/20261008T070246Z-review-general-beta-assembly/)
+- [Previous reflected independent arithmetic](runs/20261008T063322Z-review-descendant-joined-assembly-repair/)
+- [Previous full-middle arithmetic](runs/20261008T054255Z-review-uncapped-assembly/)
 - [New complex controller review](reports/review-complex-controller.md)
 - [Odd-ground finite search family](reports/finite-odd-pair-family.md)
 - [Joint graph/controller duplication controls](reports/finite-clone-gate-discriminator.md)

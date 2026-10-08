@@ -456,3 +456,82 @@ new candidates, not finite inputs to the accepted full-middle composition.
 Restore external members into a fresh task-owned execution directory and
 compare the manifest's original hash. Live workers and telemetry are
 excluded; archived PID values are historical evidence only.
+
+
+## Ninth checkpoint: complete generic and whole-complex witnesses
+
+The targeted changed finite and mathematical paths were exercised completely
+under their frozen commands and input/source SHA256 values:
+
+- `runs/20261008T060418Z-review-descendant-clone-repair/protocol.json`
+- `runs/20261008T064015Z-review-generic-composition-inputs/protocol.json`
+- `runs/20261008T070246Z-review-general-beta-assembly/protocol.json`
+- `runs/20261008T0700Z-review-complex-delayed28/protocol.json`
+- `runs/20261008T073134Z-review-delayed88377-general-beta-repair/protocol.json`
+- `runs/20261008T0718Z-review-whole-complex/protocol.json`
+- `runs/20261008T0728Z-review-whole-complex-characteristic/protocol.json`
+- `runs/20261008T0732Z-review-whole-complex-transfer/protocol.json`
+- `runs/20261008T075232Z-review-whole-complex-assembly/protocol.json`
+
+The last command independently certifies all four exact assembly rows; its
+strongest fraction and conditional limits are in
+[whole-complex-composition.md](reports/whole-complex-composition.md).
+The original accepted baseline suites were not replayed. Set
+`PYTHONINTMAXSTRDIGITS=0`, `PYTHONOPTIMIZE=0`, and one OpenBLAS/OMP/MKL
+thread per CPU process. Use a fresh output for every reproduction.
+
+Completed full external inputs can be recovered by decompressing their exact
+manifest-relative members from `evidence/20261008T0645Z-descendant-cohort-full`,
+`evidence/20261008T0645Z-capacity-cohort-full`, or
+`evidence/20261008T0754Z-closed-structural-external`. Completed topic text is
+in `evidence/20261008T0754Z-closed-structural-topic`. Each
+`archive-manifest.jsonl.gz` records original paths, byte sizes and hashes.
+Decompression must reproduce the full original SHA256 before it is used as
+an input. The two 600-case terminal-summary tables are intentionally gzip-only
+in the Git clone. The original local evidence is unchanged.
+
+The exact command below rebases the recorded protocol to the current checkout
+and a prepared external math environment, checks all nine exact input hashes,
+and places the new assembly output in a fresh directory.
+
+```bash
+export RAD_WORK_ROOT=/path/to/task-owned/recovered-campaign
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+export PYTHONOPTIMIZE=0 PYTHONINTMAXSTRDIGITS=0
+python3 - <<'PYRUN'
+import hashlib, json, os, subprocess
+from pathlib import Path
+root = Path.cwd().resolve()
+topic = root / 'research/integer-multiplication-bounds'
+work = Path(os.environ['RAD_WORK_ROOT']).resolve()
+protocol = json.loads((topic / 'runs/20261008T075232Z-review-whole-complex-assembly/protocol.json').read_text())
+def rebase(value):
+    return value.replace('/srv/ai/research', str(root)).replace(
+        '/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z', str(work))
+for spec in protocol['inputs'].values():
+    path = Path(rebase(spec['path']))
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == spec['sha256'], path
+source = Path(rebase(protocol['source']))
+assert hashlib.sha256(source.read_bytes()).hexdigest() == protocol['source_sha256']
+output = work / 'derived/fresh-whole-complex-independent/certificate.json'
+assert not output.exists(), 'Choose a fresh run directory'
+output.parent.mkdir(parents=True, exist_ok=True)
+argv = [rebase(value) for value in protocol['command']]
+argv[argv.index('--output') + 1] = str(output)
+subprocess.run(argv, check=True)
+PYRUN
+```
+
+The independent assembly path above was exercised on the actual new inputs;
+archive recovery was checked byte-for-byte with `verify-text --check-originals`.
+Separate full changed finite controls validate the graphs, and the written
+all-size proofs specify which claims finite tests cannot establish.
+Native symmetry perf binaries remain local; readable stack reports and
+commands are preserved, with the exact-binary recovery gap stated in
+artifact-manifest.json. Live queues and telemetry are excluded from closed
+archives. Historical PID records never authorize control of live processes.
+
+Additional finite small-case row tables omitted from plain Git are listed
+exactly in artifact-manifest.json under the ninth checkpoint. Their complete
+original bytes are in the0754 closed-topic archive, including the h12 dirty
+controls; restore them from the corresponding manifest-relative path.

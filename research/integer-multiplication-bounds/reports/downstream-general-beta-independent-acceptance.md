@@ -1,0 +1,7 @@
+# Independent acceptance of the generic general-beta checkpoint
+
+The root's fresh complete reviewer independently accepted all eight generic/general-beta rows at [run070246](../runs/20261008T070246Z-review-general-beta-assembly/results/certificate.json), certificate SHA256 `dbde7c3db9a737f23c3b40c1eefede60c5bd08c1addd625b6481d211de39484a`. The accepted strongest witness is `400341739374364208307342473772447/10^40`, above `2^-25` and more than `482.339445029354467` times the updated `83/10^12` claim.
+
+The independent reviewer uses its own 64-term/320-bit log enclosures, reconstructs exact useful kernel ranks, checks actual scalar G/E, all 44–45 strict slacks, explicit stopped-leaf and p^66000 compressed certificates, and reads the complete constructive fixed-basis theorem. The giant h51 basis/table/prime and separately eventual setup/absorption constants are explicitly not instantiated. All original [producer report](downstream-generic-general-beta.md), source, protocol and certificate bytes remain historical; this later acceptance is recorded separately.
+
+The [new uniform R88377 composition](downstream-delayed-complex-general-beta.md) is a separate fresh producer, pending independent final arithmetic at its creation. Whole-residual complex calls and their nested reservoirs remain a distinct proposal. The original campaign start and user-authorized 10:00 UTC deadline are unchanged.

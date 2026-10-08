@@ -6,9 +6,8 @@ Its strongest promoted-clone exact-tensor tight balanced witness is
 `kappa=30283937459028968342298108616971/(2.5*10^39)`.
 
 This is approximately `1.21135749836e-8`. The finite clone and all-size
-uncapped primitive transfer have passed independent review. Final
-independent arithmetic for this complete producer remains pending when
-this report is written.
+uncapped primitive transfer and complete assembly arithmetic have passed
+independent review.
 
 The [thin source](../code/downstream_uncapped_middle_semantic_bulk.py)
 exactly regenerates every accepted capped-axis parameter and p^100 row
@@ -62,8 +61,15 @@ contains all eight rows, capped regressions, the whole input primitive
 certificate and six-point new row checks. Reproduce using the saved
 command and a fresh output path.
 
+The later root
+[independent run054255Z](../runs/20261008T054255Z-review-uncapped-assembly/protocol.json)
+accepted all eight rows, rebuilt the uncapped and tensor histograms with
+64-term log bounds, and checked the actual p^2600/10400 reservoir
+certificates in 2.1611 seconds. The producer's historical pending status
+and result bytes remain unchanged.
+
 All executed source and result bytes are frozen. Parent publication
-coordinates final arithmetic review, archive, commit/push and remote
+coordinates the archive, commit/push and remote
 verification. Householder and sharper joined-profile hypotheses are
 excluded. This is a changed conditional fixed-model movement primitive;
 the original campaign clock and authorized 10:00 UTC extension remain

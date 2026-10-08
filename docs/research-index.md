@@ -22,9 +22,16 @@ The pinned conditional
 odd-ground and h28 shared complex circuits, phase-cell Gaussian inverse,
 and the separately pinned compact-control update now combine with independently
 reviewed arbitrary routing, a linear semantic guard, complete microbox
-resampling and a full-middle contiguous-pivot bit recurrence with an independently promoted cloned graph. They support the exact strict conditional saving
-`30283937459028968342298108616971/(25*10^38)`, greater than 2^-27 and
-more than 145.946686549537196 times the new upstream witness `83/10^12`.
+resampling, a constructive common ambient metric basis on independently
+promoted actual delayed-clone frames, and general rational stopping depth.
+They now combine with the independently reviewed whole-rank complex
+children, mixed phases, arbitrary tails and complete nested row-stock
+product to support strict conditional saving
+`717460322074304862199809239626027/(5*10^39)`, greater than 2^-23 and
+more than 1728.820053191096053 times the new upstream witness `83/10^12`.
+The giant new native table and eligible prime remain finite constructive
+setup. Further changed bit graphs and central scheduling remain separate
+candidates until complete independent review and assembly.
 The complete upstream theorem remains assumed. Original hypotheses and
 concurrent searches continue without resetting the campaign clock. See the [reassessment](../research/integer-multiplication-bounds/reports/compact-upstream-reassessment.md)
 and [evolving report](../research/integer-multiplication-bounds/reports/campaign-20261007T222521Z.md)

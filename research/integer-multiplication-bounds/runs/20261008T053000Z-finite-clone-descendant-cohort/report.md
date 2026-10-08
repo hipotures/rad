@@ -1,0 +1,7 @@
+# Delayed-frame clone cohort, completed
+
+All 300 distinct changed witnesses passed in 1546.804 seconds (698.214 verified cases/hour). No scientific errors occurred. Each new DAG used the inherited first-consumer positive envelope and received complete changed logical, physical, frame, target and rank checks. Original accepted graphs were compared by their pinned identities.
+
+The best physical role counts were h49=427721, h50=458715, h51=485443, h52=519122, h53=548098. Counts across grounds are not directly comparable; the compact summary retains each ground's exact rank/count data and uniform-saving interval. These cohort winners are producer-verified candidates. The separately reviewed h51 R485680 witness remains the independent promotion boundary until another exact input is reviewed.
+
+`results/terminal-summary.json` retains every candidate's definition, input and complete result SHA256, plus the exact per-ground frontiers. The complete originals, including all clone edits and physical identities, remain in `/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/finite/20261008T053000Z-finite-clone-descendant-cohort`. Large repeated edit lists are omitted from the compact summary, not represented as present in the Git clone. Their deterministic recipe is the frozen `finite_clone_descendant_cohort.py` command in `protocol.json`, using the preserved parent candidate inputs. Timing bytes are observational and cannot be regenerated exactly.
