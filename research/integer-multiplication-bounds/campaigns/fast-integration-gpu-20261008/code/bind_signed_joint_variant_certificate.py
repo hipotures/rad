@@ -211,8 +211,11 @@ def main():
             # Componentwise constructors record the same literal-word
             # invariant separately from their maximal-frame containment.
             summary = recovery['summary']
-            assert summary['unchanged_all_XOR_instructions']
-            assert summary['unchanged_physical_roles'] == row['profile']['R']
+            if summary.get('original_roles_and_XORs_unchanged', False):
+                assert summary['R'] == row['profile']['R']
+            else:
+                assert summary['unchanged_all_XOR_instructions']
+                assert summary['unchanged_physical_roles'] == row['profile']['R']
             assert recovery['every_selected_frame_inside_maximal']
             assert summary['maximal_signed_containment']
         assert recovery['copied_center_spaces_unchanged'] == row['profile']['h']
