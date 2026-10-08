@@ -266,3 +266,41 @@ explicitly eventual. Preserve all predecessors and continue through
 the same 2026-10-08T10:00:00Z deadline. New sequential bit clones and
 protected central frames are separate hypotheses pending their own
 complete independent interfaces and assembly.
+
+
+### Compound h53 and one protected central direction
+
+Independent full finite and complete eight-row assembly review accepts
+`94708510074674025092679517951047/(625*10^36)`, above 2^-23.
+The actual h53 R531483 compound graph and a separately identified one-star
+native chronology combine with the reviewed h28 whole-complex transfer.
+The exact normalized bit characteristic, new 487-step halving and complete
+p^73000 joint product are verified. See reports/compound-protected-composition.md.
+Giant table/prime and complete-machine thresholds remain separately eventual.
+Continue through the same 2026-10-08T10:00:00Z deadline. New two-star
+arithmetic and earlier-allocation circuits remain separate until reviewed.
+
+
+## Final early-allocation accepted checkpoint
+
+At 2026-10-08T09:31:10Z the fresh complete independent review accepted
+`304557589707355997437708583390283/(2*10^39)`, with h53/R529181 and
+two protected F2 payload centers. The full new graph/dirty controls,
+actual scalar guard, exact normalized characteristic, joint73000 row
+stock and all twelve complete rows are independently checked. See
+[the checkpoint](reports/final-early-composition.md). The same deadline
+remains2026-10-08T10:00:00Z. New larger PR13/14/15 source-frame claims
+are separate inputs undergoing targeted review; no clock reset.
+
+
+## Source-framed complete accepted checkpoint
+
+At2026-10-08T09:46:04Z fresh independent complete arithmetic accepted
+`5834475279233921242758637328164947/(5*10^39) >2^-20`, combining
+the final h53/R529181 graph, two protected centers, eumemic PR13
+source frames and our reviewed common metric basis/whole complex
+interface. beta1/8,b_phase7/(5*10^6), exact974/272depth and123000
+joint row stock are independently rederived. See
+[the complete result](reports/source-framed-final-composition.md).
+All previous discoveries/failures remain preserved. Deadline10:00UTC
+(12:00CEST) is unchanged; publication continues through it.

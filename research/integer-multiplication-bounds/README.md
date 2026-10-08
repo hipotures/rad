@@ -21,36 +21,41 @@ passes regeneration (163 tests and 17 patch checks). Its compact movement,
 layout, repair and assembly arguments have passed independent review within
 the retained conditional interfaces. The campaign start is unchanged.
 
-The current independently reviewed strict conditional witness is
-**`kappa=717460322074304862199809239626027/(5*10^39)`**, approximately
-**1.4349206441486097e-07**, more than **1728.820053191096 times 83/10^12** and above
-**2^-23**. It combines the independently promoted h51 delayed-clone graph
-with 485,680 roles, the h28 delayed complex graph with 88,377 roles, one
-constructively defined common rational ambient metric basis, compact controls,
-arbitrary-source routing, linear semantic precision, complete local
-resampling, balanced FFT and whole-rank complex children at stopping beta=1/2.
-The actual changed-frame categories, constructive all-size flag theorem,
-complete mixed-phase/tail transfer, nested product row reservoir and all four
-new complete arithmetic rows are independently
-reviewed. The giant native basis/table/new prime are not instantiated;
-their finite deterministic setup remains separately eventual.
+The current independently reviewed complete conditional witness is
+**`kappa=5834475279233921242758637328164947/(5*10^39)`**, approximately
+**1.1668950558467843e-06 >2^-20**. It combines our independently promoted
+h53/R529181 early-allocation graph, two protected payload directions,
+eumemic PR13's nonzero auxiliary source frames, our common ambient
+metric flags and the h28/R88377 whole-complex interface. Same complex
+rank families recertify b_phase=1.4e-6; stopping beta=1/8 keeps the
+complex leaf clear of the new bit primitive a≈1.1668964e-6.
+All twelve complete rows, source/dirty/interface arguments and
+actual endpoint incidences have separate independent reviews.
 
-The tight balanced common numeric cutoff remains
-`log2(b_input)>=258254417031933722624`, with separate eventual native-prime,
-factor-table, layout, record-domination, logarithm-absorption and upstream
-machine thresholds. The largest bit child is 132447 out of 132651, and
-the largest complex child is 21896 out of 21952. Complete nested bit/complex
-row stock is `p^89000`, with one paid leading prefix and less than twice
-the initial padded volume. These are conditional asymptotic
-results, not practical benchmarks, an unconditional theorem, formal
-machine verification or established novelty claims.
+It is 8.379204910547466% above the pinned PR15 reported saving1076678/10^12;
+these compare conditional asymptotic exponent savings, not runtimes.
+Source-frame credit belongs to eumemic. No PR14 data corners or
+PR15 all-residual complex classes are imported. Formal verification,
+unconditional theorem, global optimality and worldwide novelty
+are not claimed.
 
-The homogeneous complex branching saving is 10^-6; native bit overhead
-remains paid at tau. The retained construction is now bit limited.
-New joint graph/controller rewrites and protected central frames remain
-separate hypotheses requiring their complete independent checks.
-Research and independent computational experiments continue through the
-existing 12:00 CEST deadline.
+Complete joint bit/complex row stock is p^123000, with depths974/272,
+one paid leading prefix/padding and suffix492000(log2b_input+8).
+Common balanced numeric cutoff remains
+log2b_input>=258254417031933722624. Giant native basis/table/new
+prime, layout/alphabetC, record domination, strict absorption and
+complete-machine thresholds remain separately eventual. The giant
+h53 native table is not materialized.
+
+- [Current complete conditional construction and attribution](reports/source-framed-final-composition.md)
+- [Final graph independent full verification](reports/review-final-early-compound.md)
+- [Nonzero auxiliary-source all-size proof](reports/review-auxiliary-source-frames.md)
+- [Actual endpoint and dirty-scratch acceptance](reports/review-auxiliary-source-boundary-acceptance.md)
+- [Current exact independent twelve-row assembly](runs/20261008T094604Z-review-source-framed-whole-assembly/)
+- [Previous final early-allocation composition](reports/final-early-composition.md)
+
+Research and publication continue through12:00CEST without restarting
+the campaign clock.
 
 All older accepted interfaces remain preserved. The generic compact
 R473026 checkpoint is
@@ -63,7 +68,7 @@ limitations. Research continues through the authorized deadline.
 
 - [Full goal](GOAL.md)
 - [Campaign clock, protocol and resume state](runs/20261007T222521Z-campaign/protocol.json)
-- [Current whole-complex composition](reports/whole-complex-composition.md)
+- [Previous whole-complex composition](reports/whole-complex-composition.md)
 - [Previous generic-basis general-beta composition](reports/generic-general-beta-composition.md)
 - [Previous uniform delayed-complex composition](reports/delayed-complex-general-beta-independent.md)
 - [Independent generic-basis inputs and constructive setup scope](reports/generic-basis-independent-review.md)
@@ -86,7 +91,7 @@ limitations. Research continues through the authorized deadline.
 - [Independent third data-family proof](reports/review-pivot-extension.md)
 - [Previous uniform odd-ground composition](reports/odd51-composition.md)
 - [Independent odd-ground finite review](reports/review-odd51.md)
-- [Current independent arithmetic](runs/20261008T075232Z-review-whole-complex-assembly/)
+- [Previous whole-complex arithmetic](runs/20261008T075232Z-review-whole-complex-assembly/)
 - [Previous generic independent arithmetic](runs/20261008T070246Z-review-general-beta-assembly/)
 - [Previous reflected independent arithmetic](runs/20261008T063322Z-review-descendant-joined-assembly-repair/)
 - [Previous full-middle arithmetic](runs/20261008T054255Z-review-uncapped-assembly/)

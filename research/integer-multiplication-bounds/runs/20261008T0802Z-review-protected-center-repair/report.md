@@ -1,0 +1,3 @@
+# Protected-center control: preserved count failure
+
+The changed star/normal frames, both chronological stage paths and full central-only dirty basis controls completed. The characteristic checker rejected an authored count expression that allocated three auxiliary banks; the accepted stage1/stage3 sharing allocates two. The exact failed expression is W=2N+3v²(R+h), compared with the immutable accepted W=2N+2v²(R+h). No characteristic was promoted. The executed source is retained as review_protected_center_v2.py. A fresh attempt corrects only that expression. The 13.25-second run used 22860 KiB peak RSS and zero swaps.

@@ -18,7 +18,7 @@ is an active mathematical research campaign, started 2026-10-07
 22:25:21 UTC. The user explicitly extended its original ten-hour deadline
 to 2026-10-08 10:00:00 UTC (12:00 CEST), without restarting the campaign.
 The pinned conditional
-2^-59 baseline passed its supplied checks. Independently reviewed h51
+2^-59 baseline passed its supplied checks. Independently reviewed h53
 odd-ground and h28 shared complex circuits, phase-cell Gaussian inverse,
 and the separately pinned compact-control update now combine with independently
 reviewed arbitrary routing, a linear semantic guard, complete microbox
@@ -27,13 +27,16 @@ promoted actual delayed-clone frames, and general rational stopping depth.
 They now combine with the independently reviewed whole-rank complex
 children, mixed phases, arbitrary tails and complete nested row-stock
 product to support strict conditional saving
-`717460322074304862199809239626027/(5*10^39)`, greater than 2^-23 and
-more than 1728.820053191096053 times the new upstream witness `83/10^12`.
-The giant new native table and eligible prime remain finite constructive
-setup. Further changed bit graphs and central scheduling remain separate
-candidates until complete independent review and assembly.
-The complete upstream theorem remains assumed. Original hypotheses and
-concurrent searches continue without resetting the campaign clock. See the [reassessment](../research/integer-multiplication-bounds/reports/compact-upstream-reassessment.md)
+`5834475279233921242758637328164947/(5*10^39)`, greater than2^-20,
+with independently reviewed h53/R529181 early allocation, two protected
+centers, eumemic PR13 source frames, common ambient metric flags and
+the same h28/R88377 whole-complex interface recertified at b1.4e-6,
+beta1/8. Complete product row stock p^123000 and all twelve exact
+assembly rows are independently checked. See the
+[complete conditional result](../research/integer-multiplication-bounds/reports/source-framed-final-composition.md).
+Giant table/prime and full-machine thresholds remain separately
+eventual; formal verification and unconditional/novelty claims are
+unasserted. The same campaign continues through12:00CEST. See the [reassessment](../research/integer-multiplication-bounds/reports/compact-upstream-reassessment.md)
 and [evolving report](../research/integer-multiplication-bounds/reports/campaign-20261007T222521Z.md)
 for current status and verification limits.
 

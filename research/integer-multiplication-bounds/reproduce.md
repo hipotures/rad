@@ -535,3 +535,57 @@ Additional finite small-case row tables omitted from plain Git are listed
 exactly in artifact-manifest.json under the ninth checkpoint. Their complete
 original bytes are in the0754 closed-topic archive, including the h12 dirty
 controls; restore them from the corresponding manifest-relative path.
+
+
+## Final early allocation and nonzero sources
+
+The final changed finite path was run completely once, not as a replay of
+accepted baselines. Protocol0916Z-review-final-early-compound53 pins the
+original upstream bcd4ebde checkout, early case439f31, its original input
+parent3e969848, complete v3 export, small direct-allocation control, all
+authored sources, Python3.14.7 and exact flags. It needs about5.1GiB
+peak RSS and one CPU; all86,090,550coefficients and4028dirtybasis
+coordinates per direction passed. Source-frame actual endpoint/control
+protocol093600Z-finite-auxiliary-source-frames-repair passed separately.
+
+Complete external inputs are recoverable from
+`evidence/20261008T0845Z-successive-full-external` and
+`evidence/20261008T0933Z-final-finite-external`, plus the older archives
+indexed in artifact-manifest.json. Every member is whole, hashed and
+CRC checked; the original sources were not modified. New compact
+JSON/log evidence is in the0950 final closed-topic/external namespaces.
+
+Restore an indispensable member by reading its archive manifest's
+`path`, decompressing `<path>.gz`, and checking `original_sha256`.
+The archive header specifies its historical source root. Keep the
+restored bytes unchanged in a task-owned recovery tree. Existing
+commands preserve historical absolute paths as provenance; the exact
+full chain is directly executable when those paths are recreated.
+At a relocated checkout, rebase CLI paths as in the prior checkpoint
+example, and account for historical absolute keys inside pinned
+certificates: those keys must refer to the preserved input bytes.
+Do not silently rewrite pinned original certificates or claim a
+relocated full-chain run has been exercised. The validated execution
+was on this host's recorded paths; archive recovery is checked by SHA.
+
+The successive exact arithmetic commands are in these protocols:
+
+1. runs/20261008T092237Z-review-final-generic-inputs/protocol.json
+2. runs/20261008T093110Z-review-closing-whole-assembly/protocol.json
+3. runs/20261008T094001Z-review-source-frame-inputs/protocol.json
+4. runs/20261008T094604Z-review-source-framed-whole-assembly/protocol.json
+
+Use each protocol's `command` with the math environment and replace
+only its `--output` argument by a fresh path. Its `inputs` records
+provide every exact input SHA256. Run with PYTHONINTMAXSTRDIGITS=0,
+PYTHONOPTIMIZE=0 and OPENBLAS/OMP/MKL threads1. All four commands
+were exercised against unchanged source/input bytes; the final full
+command checks twelve source-framed general-beta rows, all strict
+margins, same-histogram complex recertification and123000 jointstock.
+
+PR13 source-frame attribution and exact upstream13/14/15commit
+identities are in input-manifest.json; primary proof snapshots can
+be fetched with the recorded gh API commands. The giant native
+address table/prime are constructively specified mathematical fixed
+setup, not a retained materialized binary artifact. This limitation
+is independent of recovery of the finite graph/certificates.

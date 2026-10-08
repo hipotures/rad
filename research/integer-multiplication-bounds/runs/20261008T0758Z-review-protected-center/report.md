@@ -1,0 +1,3 @@
+# Protected-center control: preserved schema failure
+
+All new star-frame, stage timeline and central dirty controls completed before the characteristic input reader stopped on KeyError R. The immutable generic input names that field side_roles. No certificate was promoted from this attempt. The exact executed source is retained as code/review_protected_center_v1.py with its original hash. A fresh repair changes that lookup and accepts the original count schema; it also permits large exact integer strings during certificate serialization. The 9.17-second run used 22748 KiB peak RSS and zero swaps.

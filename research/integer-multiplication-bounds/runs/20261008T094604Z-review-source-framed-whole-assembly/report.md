@@ -1,0 +1,3 @@
+# Independent complete source-frame assembly
+
+Fresh independent exact twelve-row review of source-framed h53/R529181, zero/one/two protected centers, same three-family whole-complex phase recertification at b=7/(5*10^6), beta=1/8 and deeper123000 productstock. All actual finite/scalar/interface inputs and the complete predecessor are pinned. Every new strict inequality, stock/stopped-leaf certificate and cutoff is recomputed. Status: PASS. No old physical baseline replay. Written conditional construction, not formal machine verification or an unconditional theorem. Source-frame mechanism credited to eumemic PR13. Original log: /srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/20261008T094604Z-review-source-framed-whole-assembly/stdout.log.

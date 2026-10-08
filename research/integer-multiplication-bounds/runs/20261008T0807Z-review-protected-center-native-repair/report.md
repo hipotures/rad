@@ -1,0 +1,3 @@
+# Native protected-center replay: preserved nontrivial-fiber failure
+
+The first complete native fiber in the original basis passed both orientations and its omitted-edge negative. The subsequent Householder-reflected fixture D=(1,0,2,3) lies in the reflected star hyperplane, giving zero normal-address shift. The explicit nonzero-shift premise rejected this vacuous fixture before its replay. The executed source is retained as review_protected_center_native_v1.py. A fresh run changes the two D vectors to have nonzero normal shifts in both bases; no gate or projection code changes. The failed run lasted0.82s, used372912KiB and zero swaps.
