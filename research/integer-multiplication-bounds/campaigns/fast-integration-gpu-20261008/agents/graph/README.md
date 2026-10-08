@@ -6,7 +6,7 @@ The initial historical h53 lead was superseded before execution by public
 PR36 and PR37. Their copied-center schedules and source attribution are
 retained as inputs, not claimed as discoveries here.
 
-Allocated compute: eight single-thread CPU workers. GPU use requires the
+Allocated compute: ten single-thread CPU compute slots (initially eight). GPU use requires the
 coordinator's separate allocation. This agent performs no Git publication.
 
 - [Hypotheses and progress](hypotheses.md)

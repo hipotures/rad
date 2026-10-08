@@ -203,13 +203,16 @@ def main():
     p.add_argument('--output',type=Path,required=True);p.add_argument('--workers',type=int,default=10)
     p.add_argument('--rounds',type=int,default=3);p.add_argument('--small',action='store_true')
     p.add_argument('--tag-input',action='store_true')
+    p.add_argument('--policies',nargs='+',choices=['wide2','wide8','scarce','late'],
+                   default=['wide2','wide8','scarce','late'])
     a=p.parse_args();assert not a.output.exists()and 1<=a.workers<=10
     (a.work/'builds').mkdir(parents=True,exist_ok=True);(a.work/'raw').mkdir(exist_ok=True)
     native=Path(__file__).with_name('moment_match_rank_node.cpp');matcher=a.work/'builds'/'matcher'
     subprocess.run(['c++','-O3','-std=c++17',str(native),'-o',str(matcher)],check=True)
     tasks=[]
     for parent in a.parent:
-        for policy,limit in (('wide',2),('wide',8),('scarce',4),('late',4)):
+        families={'wide2':('wide',2),'wide8':('wide',8),'scarce':('scarce',4),'late':('late',4)}
+        for policy,limit in (families[k]for k in a.policies):
             task=(parent,a.work,matcher,policy,limit,104729,a.rounds)
             if a.tag_input:task+= (parent.stem+'-'+digest(parent)[:8],)
             tasks.append(task)

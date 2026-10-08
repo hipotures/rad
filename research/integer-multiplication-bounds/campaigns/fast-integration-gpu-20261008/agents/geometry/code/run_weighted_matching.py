@@ -16,7 +16,7 @@ import subprocess
 import time
 
 
-def worker(task, matcher, profiler, root):
+def worker(task, matcher, profiler, root, profile_suffix):
     started = time.monotonic()
     case = root/task['case_id']
     case.mkdir(parents=True, exist_ok=False)
@@ -37,7 +37,7 @@ def worker(task, matcher, profiler, root):
         if code:
             return dict(configuration=task, status='failed', exit_code=code, phase=index, pids=pids, commands=commands)
     producer = json.loads((case/'phase-1.stdout.json').read_text())
-    profile = json.loads(Path(str(dag)+'.round3_rankone_certified_profiles.json').read_text())
+    profile = json.loads(Path(str(dag)+profile_suffix).read_text())
     result = dict(configuration=task, status='complete exact local profile', pids=pids,
                   elapsed_seconds=time.monotonic()-started, commands=commands,
                   producer=producer, fixed_profile=profile,
@@ -58,6 +58,7 @@ def main():
     ap.add_argument('--work', type=Path, required=True)
     ap.add_argument('--output', type=Path, required=True)
     ap.add_argument('--workers', type=int, required=True)
+    ap.add_argument('--profile-suffix', default='.round3_rankone_certified_profiles.json')
     args = ap.parse_args()
     assert 1 <= args.workers <= 6 and not args.work.exists() and not args.output.exists()
     args.work.mkdir(parents=True)
@@ -69,7 +70,7 @@ def main():
                   source_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),
                   workers=args.workers, tasks=len(tasks), rows=[])
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
-        futures = [pool.submit(worker, task, args.matcher, args.profiler, args.work) for task in tasks]
+        futures = [pool.submit(worker, task, args.matcher, args.profiler, args.work, args.profile_suffix) for task in tasks]
         for future in as_completed(futures):
             row = future.result()
             result['rows'].append(row)

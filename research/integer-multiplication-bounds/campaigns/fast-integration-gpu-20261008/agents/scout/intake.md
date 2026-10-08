@@ -1,10 +1,13 @@
 # Public-source intake and live scouting
 
 Observed 2026-10-08 12:43:39 UTC. Public GitHub content was read through
-`gh api`; no other RaD campaign, branch, host or unpublished work was read.
+`gh api`; no other RaD campaign files, new-branch source contents or
+unpublished results were consumed, and no other execution host was contacted.
 The scout has no CPU-bound execution allocation. Source snapshots are external,
 immutable campaign inputs; [input-manifest.json](input-manifest.json) records
 their obtainable commits, tarball hashes, locations and license hashes.
+The snapshots and archives are read-only; generator/build replays must work
+from a copy in the receiving agent's task-owned derived directory.
 
 ## Findings at intake
 
@@ -62,6 +65,18 @@ maps the full finite data-family proof and changed-DAG obligations. Its
 upstream receipt records full validation at research commit
 `43f59ff533598762cbc43a5e14af2bbbc76fabbd`. No new full replay is attributed
 to the scout, and no generic profile survives on either fixed axis.
+
+At13:45:27, both default scientific heads and every allowed PR scientific
+head were unchanged. PR40's metadata update changed no pinned source, and
+allowed comments/reviews on PR38/39/40 supplied no new mathematical review.
+The Colkitt public integration branch's new transfer-review document at
+`731a70c67b0d82e3a86db11fc6c1777c579739bd` was acquired separately and
+reported to the coordinator. It conditionally supports generic batching,
+mixed-width row/volume recurrence and larger-child semantic induction;
+selected geometry, bulk/tape and full analytic transfer remain open there.
+It explicitly identifies itself as an assistant review, not human peer
+review. The changed-DAG scalar E must still cover the actual new schedule.
+Pinned citations and recovery are in the manifests.
 
 PR37 physical invariants are `m=575`, `N=4073300`, `W=188181929`,
 `L=2226400`, `s=Wm-N+L=108202762275`, maximum child 529, with all
@@ -131,11 +146,18 @@ use remain pinned; a public update does not alter running input identities.
 To preserve campaign independence, every mutable branch and new PR of the
 RaD public fork is excluded from source acquisition and compact poll interpretation.
 Only its completed historical source20 commit
-`4f8d6c8272b5ff307a0da51df545ec3cd96a8b6e` is retained. Initial API metadata
-acquisitions are immutable external provenance, but the reduced poll exports
-omit mutable RaD branch metadata. No source content or unpublished result
-from those branches was fetched or used. This omission is explicit; the
+`4f8d6c8272b5ff307a0da51df545ec3cd96a8b6e` is retained. Initial broad public
+API listings exposed mutable reference/submission metadata before the
+exclusion gate was added. Those acquisitions are immutable external
+provenance, but the reduced poll exports omit that metadata, and future raw
+PR retention filters it before interpretation. No source content or
+unpublished result from those branches was opened or used. This omission is
+explicit; the
 compact exports do not claim to preserve every raw API field.
+New public derivatives referring to current RaD producer work are held
+outside the consumed source set until their originating campaign is
+confirmed as this GPU campaign. [The exclusion record](independence-exclusions.json)
+preserves that scope without incorporating their mathematical contents.
 
 Only the campaign coordinator performs Git index, branch, commit and push
 operations. All new scout-authored durable files stay in `agents/scout/`.

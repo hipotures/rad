@@ -199,7 +199,9 @@ def check(document, small_dirty=False):
     for donor,receiver in native['links']:
         assert donor not in retained and receiver not in receivers and args[2*donor]
         value = use_value(receiver)
-        positions = [pos for pos in (0,1) if args[2*donor+pos] == value]
+        positions = [pos for pos in (0,1)
+                     if (scalar[args[2*donor+pos]] == scalar[value]
+                         if row.get('semantic_routing') else args[2*donor+pos] == value)]
         assert len(positions)==1
         previous = 2*donor+positions[0]
         assert previous not in successor
@@ -232,7 +234,9 @@ def check(document, small_dirty=False):
         seen = set()
         e = first
         while True:
-            assert e not in seen and e not in edge_slots and use_value(e)==value
+            assert e not in seen and e not in edge_slots
+            assert (scalar[use_value(e)] == scalar[value]
+                    if row.get('semantic_routing') else use_value(e) == value)
             seen.add(e)
             edge_slots[e] = slot
             if e not in successor:
