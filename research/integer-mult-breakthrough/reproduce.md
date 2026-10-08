@@ -76,6 +76,13 @@ copied-center controls. Track C independently reconstructs the serialized
 weighted DAG without importing its producer. Internal independent analysis
 is not formal verification or external peer review.
 
+The independently contributed [Lean package](formal/README.md) has its own
+pinned prerequisites, verifier and path-filtered workflow. It formalizes only
+the positive-matrix minimum-coordinate lemma, finite compositions and named
+boundary counterexamples. Its workflow passed on remote commit `1576511c`;
+this is separate from the finite Python root/component checks above. Follow
+its own instructions to reproduce that formal scope.
+
 The full mathematical motivation and limitations are in the linked reports.
 Primary literature and framework provenance are pinned in input-manifest.json;
 no downloaded source modifications are required to run these new checks.

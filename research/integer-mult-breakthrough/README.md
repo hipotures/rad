@@ -72,8 +72,12 @@ quadratic phase frames are a new hypothesis for broadening eligible edge
 changes. The old library already contains alternating projector phases;
 their identity alone is not a new discovery or a larger saving.
 
-Registered CI checks replay only their stated finite arithmetic and semantic
-controls. There is no formal proof package or external human review.
+Registered Python CI checks replay only their stated finite arithmetic and
+semantic controls. A separately contributed [Lean package](formal/README.md)
+formalizes the named positive-matrix obstruction and finite-level extension;
+its pinned clean-runner workflow passed at remote commit `1576511c`. It does
+not formalize concrete moment roots, native networks, fixed-tape transfer or
+a new exponent. There is no external human review.
 
 Repository: `hipotures/rad`.
 Branch: `research/integer-mult-breakthrough-20261008`.
