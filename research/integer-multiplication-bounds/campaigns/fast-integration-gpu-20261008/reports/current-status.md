@@ -1,15 +1,15 @@
 # Current scientific status
 
 Research remains active indefinitely. The accepted conditional exponent is
-**κ=5.14028687e-5**, bit saving5.14055111e-5, R23=27719, R25=36354,
+**κ=5.140302329e-5**, bit saving5.14056657e-5, R23=27719, R25=36354,
 W=136283234, rank mass78361012650. Matrix-weighted carrier allocation in the
 actual signed-frame PR62+PR57 word passes all finite acceptance gates under
 the explicit inherited address-compiler and all-size assumptions.
-[Proof](matrix-weighted-joint-region-proof.md),
-[acceptance](matrix-weighted-joint-region-acceptance.json),
-[reproduction](../configs/matrix-weighted-joint-region-manifest.json).
+[Proof](matrix-weighted-rational-root-proof.md),
+[acceptance](matrix-weighted-rational-root-acceptance.json),
+[reproduction](../configs/matrix-weighted-rational-root-manifest.json).
 
-The gain over PR61 is approximately0.75651%. The new matching pays one extra
+The gain over PR61 is approximately0.75681%. The new matching pays one extra
 role at dimension25 and nevertheless improves the complete exact moment.
 No large asymptotic breakthrough is claimed. Fresh selected-only source words,
 independent literal replay, actual rational controls, complete DATA and changed
@@ -24,9 +24,12 @@ matching. The existing signed MAX already used downstream physical-event
 constraints, so repeating that enlargement at interned-frame granularity is
 not claimed as a new mechanism.
 
-The rational basis beta=-1/15 improves the exact complete local dimension25
-word moment, but a new complete source-pair geometry certificate and final
-assembly remain pending. Its local profile is not an accepted exponent.
+The rational basis beta=-1/15 now passes complete fresh DATA, source/center
+interfaces and independent final acceptance. Its local gain is a small exact
+rank-profile change, rather than an architectural discovery. New fixed-word
+coordinate orders and actual weighted two-core frames remain pending coherent
+source reconstruction and final acceptance. The primary new architecture
+compiles minimal source-line spans in complemented positive frames.
 Free terminal gauge substitution fails the inherited arbitrary-array contract:
 [negative receipt](unrestricted-terminal-frame-transfer-falsification-2151.json).
 Dense per-output paid retirement is excluded by a scoped rank-mass obstruction;
