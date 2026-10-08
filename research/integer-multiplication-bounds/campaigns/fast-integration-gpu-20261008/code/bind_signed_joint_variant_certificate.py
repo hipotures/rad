@@ -202,12 +202,39 @@ def main():
         assert recovery['source_permutation'] == row['coordinate_order']
         assert recovery['source_only']
         assert recovery['source_injection_frames_unchanged']
-        assert recovery['every_original_frame_contained']
-        assert recovery['all_actual_word_transitions_contained']
-        assert recovery['every_original_xor_preserved']
-        if recovery.get('original_roles_and_xors_unchanged', False):
+        if recovery.get('physical_matching_and_literal_xors_changed', False):
+            # A new matching is reconstructed independently from the pinned
+            # scalar DAG and frozen selected capacities. Its XOR word and
+            # role count may differ from the preceding accepted network.
+            for key in ('word_regenerated_from_source_and_selected_carriers',
+                        'original_scalar_dag_outputs_preserved',
+                        'every_selected_use_reconstructed',
+                        'distinct_recipient_capacity',
+                        'donor_row_capacity_exactly_independent',
+                        'strict_carrier_chronology',
+                        'actual_frame_assignment_reconstructed'):
+                assert recovery[key], key
+            assert digest(recovery['selected_matching_path']) == recovery['selected_matching_sha256']
+            selection = read(recovery['selected_matching_path'])
+            assert selection['h'] == row['profile']['h']
+            assert selection['source_permutation'] == row['coordinate_order']
+            assert selection['source_parent_sha256'] == recovery['source_parent_sha256']
+            assert len(selection['selected']) == recovery['selected_carriers']
+            assert recovery['selected_carriers'] == recovery['compiled']['stats']['matched']
+            summary = recovery['frame_summary']
+            assert summary['every_actual_transition_containment']
+            assert summary['original_and_maximal_containment']
+            assert summary['unchanged_R'] == row['profile']['R']
+            assert summary['unchanged_XORs']  # Relative to the NEW matching word.
+        elif recovery.get('original_roles_and_xors_unchanged', False):
+            assert recovery['every_original_frame_contained']
+            assert recovery['all_actual_word_transitions_contained']
+            assert recovery['every_original_xor_preserved']
             pass
         else:
+            assert recovery['every_original_frame_contained']
+            assert recovery['all_actual_word_transitions_contained']
+            assert recovery['every_original_xor_preserved']
             # Componentwise constructors record the same literal-word
             # invariant separately from their maximal-frame containment.
             summary = recovery['summary']
@@ -215,12 +242,14 @@ def main():
                 assert summary['R'] == row['profile']['R']
             elif summary.get('unchanged_XORs', False):
                 assert summary['unchanged_R'] == row['profile']['R']
-                assert summary['original_and_maximal_containment']
+                assert summary.get('original_and_maximal_containment', False) or summary.get('original_base_and_maximal_containment', False)
             else:
                 assert summary['unchanged_all_XOR_instructions']
                 assert summary['unchanged_physical_roles'] == row['profile']['R']
             assert recovery['every_selected_frame_inside_maximal']
-            assert summary.get('maximal_signed_containment', False) or summary.get('original_and_maximal_containment', False)
+            assert (summary.get('maximal_signed_containment', False)
+                    or summary.get('original_and_maximal_containment', False)
+                    or summary.get('original_base_and_maximal_containment', False))
         assert recovery['copied_center_spaces_unchanged'] == row['profile']['h']
         # Reconstruct the complete source-family coordinate bijection;
         # literal source destinations and labels have independently been

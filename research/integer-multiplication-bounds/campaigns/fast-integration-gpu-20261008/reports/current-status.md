@@ -1,15 +1,15 @@
 # Current scientific status
 
 Research remains active indefinitely. The accepted conditional exponent is
-**κ=5.140188376e-5**, bit saving5.140452605e-5, R23=27719, R25=36353,
+**κ=5.140192674e-5**, bit saving5.140456904e-5, R23=27719, R25=36353,
 W=136281463, rank mass78359994325. Context-dependent actual positive frames
 in the selectively compiled PR62+PR57 network pass all finite acceptance
 gates under the explicit inherited address-compiler and all-size assumptions.
-[Proof](multifamily-joint-region-proof.md),
-[acceptance](multifamily-joint-region-acceptance.json),
-[reproduction](../configs/multifamily-joint-region-manifest.json).
+[Proof](coupled-pair-joint-region-proof.md),
+[acceptance](coupled-pair-joint-region-acceptance.json),
+[reproduction](../configs/coupled-pair-joint-region-manifest.json).
 
-The gain over PR61 is about0.75458%. No large asymptotic breakthrough is claimed.
+The gain over PR61 is about0.75466%. No large asymptotic breakthrough is claimed.
 The multifamily context allocation now passes fresh source-only words, native
 exact profiles, independent Fraction controls, stock and final paired assembly
 binding. New matrix-weighted carrier words are being profiled independently;
@@ -34,3 +34,10 @@ snapshots remain preserved. Abstract dirty basis checks are separated from
 the universal echo and conditional address-gauge transfer:
 [scope](../agents/scout/signed-address-transfer-scope.md).
 No separate CPU campaign was accessed; no public PR was opened.
+
+The strongest pending matrix-weighted matching candidate isκ=5.14028687e-5,
+R27719/36354,W136283234. Both fresh changed-matching source reconstructions
+and actual rational controls pass; changed-word stock and final independent
+acceptance remain pending. Free terminal gauge substitution failed the actual
+unrestricted-array contract. New frames determined by downstream sink kernels
+are being constructed under full physical containment.
