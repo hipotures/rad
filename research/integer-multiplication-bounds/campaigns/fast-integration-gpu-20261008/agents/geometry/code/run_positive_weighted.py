@@ -31,6 +31,8 @@ if __name__=='__main__':
         profiled=work/'complete-profile.json';run(interim,a.profiler,config['basis'],work/'profile',profiled)
         retained=json.loads(profiled.read_text());retained['configuration'].update(matching='Actual positive physical matrix moments',seed=config['seed'],mode=config['mode'],
             lost_link_charge='Phi(h)+Phi(575-2h)',matching_discovery='One finite field; accepted profiles reconstructed with full bounded-minor CRT')
+        if config['basis'].startswith('beta:'):
+            retained['configuration']['data_status']='Changed rational-beta source family; requires its complete source-pair data certificate or proved conjugate transfer'
         retained['weighted_provenance']=dict(original_witness=str(input_file),original_witness_sha256=sha256(input_file.read_bytes()).hexdigest(),
              config=config,matcher_command=command,matcher_source_sha256=sha256(Path(__file__).with_name(a.matcher.name+'.cpp').read_bytes()).hexdigest(),
              matcher_binary_sha256=sha256(a.matcher.read_bytes()).hexdigest(),matcher_log=str(work/'matcher.log'),

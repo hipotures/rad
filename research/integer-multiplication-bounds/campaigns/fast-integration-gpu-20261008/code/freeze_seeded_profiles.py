@@ -14,7 +14,11 @@ def main():
     rows=[]
     for path in a.cohorts:
         obj=json.loads(path.read_text());assert obj['status']=='complete'
-        rows.extend(obj['rows'])
+        for item in obj['rows']:
+            if item.get('status')=='failed':continue
+            row=dict(item.get('producer',item))
+            row.setdefault('case_id',item.get('case_id',row.get('dag_sha256','unknown')[:12]))
+            rows.append(row)
     selected=[]
     for h in a.dimensions:
         candidates=sorted([r for r in rows if r.get('h')==h and 'dag_sha256' in r],key=lambda r:r['R'])

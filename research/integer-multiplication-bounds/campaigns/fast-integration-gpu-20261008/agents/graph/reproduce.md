@@ -94,3 +94,71 @@ positive-frame histogram cannot be inserted into that fixed-basis
 interface. The eventual common bases, finite alphabets, setup, tape
 interfaces and strict absorption remain conditional mathematical transfer
 dependencies.
+
+The best actual-positive negative-basis parents are a different selection
+from the earlier minimum-role parents. Their complete source-only recovery
+was exercised independently for both dimensions:
+
+```bash
+for h in 23 25; do
+  python3 "$GRAPH_OWN/code/rebuild_alternative_selected.py" \
+    --source "$PR36_ROOT" --work "$GRAPH_RUN/best-positive-negative-$h" \
+    --base-parent "$GRAPH_OWN/fixtures/best-positive-negative-base-parent-$h.json" \
+    --whole-selected "$GRAPH_OWN/fixtures/best-positive-negative-whole-clones-$h.json" \
+    --selected "$GRAPH_OWN/fixtures/best-positive-negative-mapped-partitions-$h.json"
+done
+```
+
+Expected roles are h23 R36,219 and h25 R47,461. The fixtures preserve each
+coefficient partition, actual rewritten donor, consumed controller capacity,
+chain edit, seed and terminal stage. Both runs assert exact DAG, positive
+label, selected-link and histogram digests and run the independent literal
+compiler. Receipts are `results/best-positive-negative-recovery-{23,25}.json`.
+Geometry's later weighted/global controller maps are separately preserved
+in its complete profile wrappers and source-only replay receipts. Replacing
+the retained map requires a fresh literal audit of that actual map.
+
+The versioned `check_permuted_compiled_witness.py` additionally binds every
+primitive source and designated target to the recorded `old_to_new`
+coordinate permutation. It retains the independently implemented physical
+compiler, terminal checks and both dirty orientations. Its small complete
+controls are reproducible after the earlier h10 alternative rebuild:
+
+```bash
+python3 "$GRAPH_OWN/code/audit_flag_controls.py" \
+  --parent "$GRAPH_OWN/results/alternative-small-producer-clones.json" \
+  --work "$GRAPH_RUN/flag-small-controls" \
+  --output "$GRAPH_RUN/flag-small-controls.json"
+```
+
+If the historical paths inside that parent wrapper are unavailable, replace
+its `producer` with the source-only h10 `rebuild-result.json` producer first;
+the scalar DAG, frame and selected-use digests must agree. The two controls
+exercise all 2,044 source, target and arbitrary dirty-role basis vectors over
+F2 in both invocation orientations. They do not establish a corresponding
+integer or odd-characteristic dirty word.
+
+For a completed flagged candidate, `code/flag_permutation_search.py`
+provides `transform(parent_wrapper, fresh_directory, order)`. Use the
+recovered DAG/positive labels, the retained complete chosen controller map,
+and the explicitly retained `global_coordinate_order` and `old_to_new`
+arrays. Inverse byte normalization must reproduce the unpermuted DAG and
+frame digests exactly. Then run:
+
+```bash
+python3 "$GRAPH_OWN/code/check_permuted_compiled_witness.py" \
+  --witness "$GRAPH_RUN/flagged/input-witness.json" \
+  --output "$GRAPH_RUN/flagged/literal-audit.json"
+```
+
+The actual negative-basis CRT profiler is authored under `../geometry/code/`.
+Compile `positive_frame_profiles.cpp` with `c++ -O3 -std=c++17`, and run
+`run_positive_profiles.py --help` for the retained wrapper interface. Both
+flag search drivers perform that build and preserve the exact invocation,
+source hashes, literal profile input, minor bounds and primes. A coordinate
+flag changes internal ordered matrix profiles; its complete source-pair
+family transfers by the reviewed coherent permutation lemma. Every scalar
+mask, signed frame and both source/target endpoint labels must receive the
+same permutation. The initial broad 606 orders are excluded from the 2,286
+nearby transposition/window orders; these counts are coordinate flags on
+two unchanged scalar graphs, not thousands of new scalar producer graphs.

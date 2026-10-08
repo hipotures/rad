@@ -38,6 +38,7 @@ def main():
             try:protocol=json.loads(protocol_path.read_text())
             except ValueError:continue
             summary=directory/'summary.json'
+            state='complete' if summary.exists() else 'failed' if (directory/'failure.json').exists() else 'stopped' if (directory/'termination.json').exists() else 'running'
             record=json.loads(summary.read_text()) if summary.exists() else tail(directory/'progress.jsonl')
             attempts=record.get('attempts',0);num=protocol['parameter_pairs'];batch=protocol['batch']
             key=str(directory)
@@ -82,7 +83,18 @@ def main():
                         candidates[-1]['sample_rational_check']=review['saved_prime_matches_q']
                         candidates[-1]['classification']='SAMPLE DISCOVERY ONLY' if review['saved_prime_matches_q'] else 'REJECTED BAD-PRIME SAMPLE'
                         candidates[-1]['independent_rational_review']=str(review_path)
-            records.append({'run_id':directory.name,'state':'complete' if summary.exists() else 'running','device':protocol['device'],'seed':protocol['seed'],'utc':record.get('utc',record.get('finish_utc')),'attempts_may_repeat':attempts,'parameter_catalogue_pairs':num,'tested_canonical_beta_pairs':unique,'tested_pairs_by_source_fixture':per_source,'source_weight_catalogue_classes':weight_count,'tested_source_weight_classes':weight_unique,'tested_weight_classes_by_source_fixture':weight_per_source,'coverage_method':'Exact NumPy RNG index replay to actual recorded batch count; stops once all catalogue indices observed. Weight classes use exact rational conjugacy. No matrix replay.','coverage_rng_blocks_replayed':replayed,'elapsed_seconds':record.get('elapsed_seconds',record.get('elapsed')),'next_batch':None if summary.exists() else {'size':batch,'varying_parameter_pairs':True,'source_fixtures':2,'fields':len(protocol.get('primes',[protocol.get('prime')])), 'mutations':'cycle1,0,0,2,0,0'},'sample_candidates':candidates})
+            records.append({'run_id':directory.name,'state':state,'device':protocol['device'],'seed':protocol['seed'],'utc':record.get('utc',record.get('finish_utc')),'attempts_may_repeat':attempts,'parameter_catalogue_pairs':num,'tested_canonical_beta_pairs':unique,'tested_pairs_by_source_fixture':per_source,'source_weight_catalogue_classes':weight_count,'tested_source_weight_classes':weight_unique,'tested_weight_classes_by_source_fixture':weight_per_source,'coverage_method':'Exact NumPy RNG index replay to actual recorded batch count; stops once all catalogue indices observed. Weight classes use exact rational conjugacy. No matrix replay.','coverage_rng_blocks_replayed':replayed,'elapsed_seconds':record.get('elapsed_seconds',record.get('elapsed')),'next_batch':None if state!='running' else {'size':batch,'varying_parameter_pairs':True,'source_fixtures':2,'fields':len(protocol.get('primes',[protocol.get('prime')])), 'mutations':'cycle1,0,0,2,0,0'},'sample_candidates':candidates})
+            if protocol.get('method_kind','').startswith('full_source_family'):
+                value=records[-1];value['tested_canonical_beta_pairs']=int(attempts>0);value['tested_source_weight_classes']=int(attempts>0)
+                value['source_weight_catalogue_classes']=1;value['tested_pairs_by_source_fixture']=None;value['tested_weight_classes_by_source_fixture']=None
+                value['coverage_method']='Exhaustive lexicographic source-pair partition; recorded CRT fields repeat pairs to answer distinct required rank questions.'
+                value['method_kind']=protocol['method_kind'];value['source_family_size']=protocol['source_family_size']
+                value['source_partition']=[protocol['source_partition_start_inclusive'],protocol['source_partition_end_exclusive']]
+                value['source_pairs_completed']=record.get('source_pairs_completed',record.get('source_pairs_completed_current_prime'))
+                value['prime_index']=record.get('prime_index');value['prime_replays_completed']=record.get('prime_replays_completed')
+                value['primes_required']=len(protocol['primes']);value['upper_rank_violations']=record.get('upper_rank_violations')
+                value['field_profile_disagreements']=record.get('field_profile_disagreements')
+                if value['next_batch'] is not None:value['next_batch']={'size':batch,'varying_parameter_pairs':False,'varying_source_pairs':True,'prime_index':record.get('prime_index'),'fields':len(protocol['primes'])}
         gpu=[];applications=[]
         for query,target in [('index,uuid,utilization.gpu,memory.used',gpu),('pid,gpu_uuid,process_name',applications)]:
             kind='gpu' if target is gpu else 'compute-apps'
@@ -94,9 +106,9 @@ def main():
         for pid,uuid,name in applications:
             try:argv=(Path('/proc')/pid/'cmdline').read_bytes().decode().split('\0')
             except (OSError,UnicodeDecodeError):continue
-            if not any('gpu_basis_parameter_' in x for x in argv):continue
+            if not any('/agents/scout/code/gpu_basis_' in x for x in argv):continue
             device=int(argv[argv.index('--device')+1]) if '--device' in argv else None
-            processes.append({'pid':int(pid),'gpu_uuid':uuid,'device':device,'script':next(x for x in argv if 'gpu_basis_parameter_' in x)})
+            processes.append({'pid':int(pid),'gpu_uuid':uuid,'device':device,'script':next(x for x in argv if '/agents/scout/code/gpu_basis_' in x)})
         value={'updated_utc':datetime.now(timezone.utc).isoformat(),'status_scope':'Actual sampled parameter discovery only; no full family, local frame, bridge or kappa certificate.','completed_experiments':sum(x['state']=='complete' for x in records),'running_experiments':sum(x['state']=='running' for x in records),'gpu_observation':[{'device':int(x[0]),'uuid':x[1],'utilization_percent':int(x[2]),'memory_mib':int(x[3])} for x in gpu],'actual_gpu_processes':processes,'experiments':records}
         temporary=root/'live-status.json.tmp';temporary.write_text(json.dumps(value,indent=2)+'\n');temporary.replace(root/'live-status.json')
         time.sleep(args.interval)

@@ -13,7 +13,8 @@ a=ap.parse_args();assert not a.work.exists() and not a.output.exists();a.work.mk
 configs=json.loads(a.input.read_text());start=time.monotonic();rows=[]
 for config in configs:
     witness=Path(config['witness']);case=config['case_id'];out=a.work/f'{case}.json'
-    run(witness,a.binary,config['basis'],a.work/case,out)
+    binary=Path(config['binary']) if 'binary' in config else a.binary
+    run(witness,binary,config['basis'],a.work/case,out)
     document=json.loads(out.read_text());original=json.loads(witness.read_text());h=document['producer']['h']
     if config.get('expected_same_histogram'):assert document['copied_blocks']==original['copied_blocks']
     document['configuration'].update(data_status=config.get('data_status','Changed source weights; complete all-source data certificate required'),parameter=config)
