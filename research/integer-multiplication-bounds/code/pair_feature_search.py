@@ -56,6 +56,28 @@ def baseline(s):
     return (3*(s['member'][s['first']]+s['member'][s['second']])-2)/12
 
 
+def seven_color(s, xp):
+    """Known exact rank-seven h8 control, expressed in pure pair features.
+
+    Identify vertices with F2^3. Each triple has one nonzero normal
+    annihilating its two differences. A normal's pair coefficient is
+    1/3 for equal normal bits and -1/6 for different normal bits.
+    Summing a source triangle's coefficients detects its normal color.
+    The independent rational checker verifies rank, diagonal and edges.
+    """
+    assert s['h'] == 8, 'Seven-color control is defined only for h8'
+    normals = []
+    for a, b, c in s['triples']:
+        values = [n for n in range(1, 8)
+                  if (n & (a ^ b)).bit_count() % 2 == 0
+                  and (n & (a ^ c)).bit_count() % 2 == 0]
+        assert len(values) == 1
+        normals.append(values[0])
+    data = np.array([[1/3 if (n & (a ^ b)).bit_count() % 2 == 0
+                      else -1/6 for n in normals] for a, b in s['pairs']])
+    return xp.asarray(data)
+
+
 def rank_projection(x, rank, xp):
     gram = x @ x.T
     eigenvalues, vectors = xp.linalg.eigh((gram+gram.T)/2)
@@ -122,6 +144,7 @@ def main():
     parser.add_argument('--noise', type=float, default=0.05)
     parser.add_argument('--relaxation', type=float, default=0.5)
     parser.add_argument('--method', choices=['alternating','douglas-rachford'], default='douglas-rachford')
+    parser.add_argument('--initialization', choices=['vertex', 'seven-color'], default='vertex')
     parser.add_argument('--output-dir', type=Path, required=True)
     args = parser.parse_args()
     assert args.h >= 6 and 1 <= args.rank <= args.h and args.iterations > 0
@@ -148,7 +171,7 @@ def main():
         assert comparison < 2e-11
         calibration['cpu_gpu_rank_projection_error'] = comparison
     s = structure(args.h, xp)
-    base = baseline(s)
+    base = baseline(s) if args.initialization == 'vertex' else seven_color(s, xp)
     rng = np.random.default_rng(args.seed)
     x = base+xp.asarray(rng.normal(scale=args.noise, size=base.shape))
     protocol = dict(start_utc=datetime.now(timezone.utc).isoformat(),

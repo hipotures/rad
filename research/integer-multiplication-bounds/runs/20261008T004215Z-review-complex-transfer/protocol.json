@@ -1,0 +1,38 @@
+{
+  "campaign": "20261007T222521Z",
+  "campaign_deadline": "2026-10-08T08:25:21Z",
+  "campaign_start": "2026-10-07T22:25:21Z",
+  "commands": [
+    "python3 -B research/integer-multiplication-bounds/code/review_complex_frames.py --h 8 10 12 --output /tmp/complex-small-independent.json",
+    "python3 -B research/integer-multiplication-bounds/code/review_complex_frames.py --h 50 --output /tmp/complex-h50-independent.json",
+    "python3 -B research/integer-multiplication-bounds/code/review_complex_boundaries.py --output /tmp/complex-boundaries-independent.json",
+    "python3 -B research/integer-multiplication-bounds/code/review_complex_assembly.py --certificate research/integer-multiplication-bounds/runs/20261008T003550Z-downstream-complex-assembly/results/certificate.json --output /tmp/complex-assembly-independent.json"
+  ],
+  "initial_attempt": "initial-v1 is a successful smaller review, retained unchanged before adding full analytic complement/reverse timeline checks; no failed arithmetic assertion",
+  "input_sha256": {
+    "runs/20261008T001704Z-downstream-complex-basis/results/certificate.json": "9c474ec2e684010aa58c488c6bcac13d23571f5ee89fcc284489fbe97882cd25",
+    "runs/20261008T001704Z-downstream-complex50/results/certificate.json": "a0486c16bc095c55dffdd58abb403f8a7f01390e9bdaac040566436f2c4f3d90",
+    "runs/20261008T003305Z-downstream-complex-sharing/results/certificate.json": "2c475af58aa0efee49a79101022ab69652dda2a118430386ff53195461bc11a9",
+    "runs/20261008T003550Z-downstream-complex-assembly/results/certificate.json": "8d018ca33aa2bbae00d63aa011a94a90c383618936dde29260eb56858ac1d971"
+  },
+  "interpreter": "python3",
+  "measured_independent_peak_rss": null,
+  "memory_allocation_gib": 16,
+  "peak_rss_status": "Not instrumented in the completed independent complex run; producer timing evidence records its own measured RSS",
+  "python_version": "3.14.4",
+  "result": "PASS complete independent binary, dirty scalar and decaying composition audit",
+  "run_id": "20261008T004215Z-review-complex-transfer",
+  "scope": "Original complete multiplication and retained phase-cell/lifting proof remain conditional inputs; finite circuit, new binary frames, sharing, guard and changed decaying estimate independently reviewed",
+  "source_sha256": {
+    "code/downstream_complex_assembly.py": "f21dc99ebeaf99b96b8961da6101159e1da8470906dd75c31b9413905e6a81ac",
+    "code/downstream_complex_certificate.py": "a8692267a4af30e48717c41ca937e8ca883a877d7a7e1f0fc37f7076b251bde9",
+    "code/downstream_complex_circuit.py": "5773617bf59ae7287080ae2b4d2c3ddf019670143197571507b7377c9c3f3bd3",
+    "code/review_asymmetric_motif.py": "15d6511b92ac6a3a3c1873106e3fc165db0590330898690db880e6b91e016552",
+    "code/review_complex_assembly.py": "15962948d711066d5857d68fbde960a6ac7477d25ee3f7feceac113e4d5be12a",
+    "code/review_complex_boundaries.py": "f2a35473c81695a642d431ebf7c45534a53186f2857905d581dc42acd29566f6",
+    "code/review_complex_frames.py": "336e241f6cf25a525c94e06bece87bc686e45e4383346ca5fdc29f93640023b7",
+    "code/review_packed_unrolling.py": "5363ab4769c760e8d518d4b942552bf0fa30f0a9ee7f97446c4408d737949bb3",
+    "code/review_parameter_audit.py": "dca1a3e97c26209e59eceec3d5a86a8f5205ff90c9d46f1d40d7bab499ac6bd8"
+  },
+  "workers": 1
+}

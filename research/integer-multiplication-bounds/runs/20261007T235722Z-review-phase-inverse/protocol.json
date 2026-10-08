@@ -1,0 +1,48 @@
+{
+  "campaign_id": "20261007T222521Z",
+  "campaign_start": "2026-10-07T22:25:21Z",
+  "campaign_end": "2026-10-08T08:25:21Z",
+  "artifact_assembly_time_utc": "2026-10-07T23:59:50.466489+00:00",
+  "execution_clock_note": "Independent checks completed earlier in this same turn; exact start UTC was not captured. Run ID denotes artifact assembly. Wall seconds are preserved in each result.",
+  "question": "Independent all-size and finite audit of phase-cell similarity, GS, boundary Schur, precision, fixed tapes and phase-family witness arithmetic",
+  "reference_commit": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "python_executable": "/usr/bin/python3",
+  "python_version": "3.14.4",
+  "version_provenance": "Verified same python3 executable used for both preceding successful commands",
+  "resource_policy": "One CPU process per check; sequential finite and assembly checks; within 16 GiB review allocation",
+  "source_sha256": {
+    "downstream_banded_inverse.py": "024770e7ba33a3739f9d5aa474687109a35e1488c3ad6486656615911ab4cbb0",
+    "downstream_phase_inverse.py": "423a67c300b7c93051e0c86edfc6e1c26d342854d06571f8975bfb64181e4f6d",
+    "review_banded_inverse.py": "3e91715a1f185efcc5428798779064e0bf2ef892b57e7998afabed1820cd7dca",
+    "review_phase_inverse.py": "53a5b28fa30807ab0fbd66628b7ff2f3a33aa1a1e993d101fcea9a8c28564ad3",
+    "review_phase_assembly.py": "2248ef345df5d414be1eae7125080b484e093a445a0c4e7d9e883f4b0908427b",
+    "review_parameter_audit.py": "dca1a3e97c26209e59eceec3d5a86a8f5205ff90c9d46f1d40d7bab499ac6bd8"
+  },
+  "input_certificate": "research/integer-multiplication-bounds/runs/20261007T234812Z-downstream-phase-assembly-cutoffs/results/certificate.json",
+  "input_certificate_sha256": "c835309e2fe000205aab405305da9c634ba052b5539cbb92bc0c21709c8adc48",
+  "reviewed_derivation": "research/integer-multiplication-bounds/reports/downstream-phase-cell-inverse.md",
+  "reviewed_derivation_sha256": "932789785367cb7a75bba2d023eaf9a747a00634ef94e4fdbefe9addc7eb13a3",
+  "primary_GS_source": {
+    "title": "Inexact Shift-and-Invert Arnoldi for Toeplitz Matrix Exponential",
+    "authors": [
+      "Ting-ting Feng",
+      "Gang Wu",
+      "Yimin Wei"
+    ],
+    "revision": "arXiv1503.04886v1",
+    "submitted": "2015-03-17T00:57:32Z",
+    "url": "https://arxiv.org/pdf/1503.04886v1",
+    "location": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/inputs/review/feng-wu-wei-1503.04886v1.pdf",
+    "bytes": 254077,
+    "sha256": "feb9ec2d4b6607685e9d34a3d19b863843c02c0fd4aba116a00e4316ba42c50a",
+    "inspected": "2026-10-07",
+    "recovery": "Download pinned arXiv revision; immutable local original"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/integer-multiplication-bounds/code/review_phase_inverse.py --output research/integer-multiplication-bounds/runs/20261007T235722Z-review-phase-inverse/results/phase-inverse-independent.json",
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/integer-multiplication-bounds/code/review_phase_assembly.py --certificate research/integer-multiplication-bounds/runs/20261007T234812Z-downstream-phase-assembly-cutoffs/results/certificate.json --output research/integer-multiplication-bounds/runs/20261007T235722Z-review-phase-inverse/results/phase-assembly-independent.json"
+  ],
+  "status": "PASS: positive all-size conditional transfer review after downward-weight4eta repair; independent exact matrix/cell/rounding and all eight parameter rows",
+  "repaired_derivation_issue": "Finite exponential routine supplies downward weight error below4eta rather than exact-grid error beloweta; H\u2212N bound repaired to p*2^(16p+7)*eta+tail before approval",
+  "verification_boundary": "Finite tests calibrate rational matrices and rounded operations, not a complete asymptotic tape implementation. Written proof separately covers tape cost, precision and setup. Finite motif realization and unchanged upstream complete multiplication interfaces remain conditional inputs."
+}

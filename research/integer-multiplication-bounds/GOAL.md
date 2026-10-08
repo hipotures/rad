@@ -135,3 +135,14 @@ Resolve issues, commit the durable task artifacts, **push to the appropriate bra
 The final user-facing handoff must include the strongest result and its status, actual campaign duration, report and reproduction paths, commit SHA, branch, and verified push status.
 
 **Begin now: inspect the environment and repository, establish the clock, and conduct the research. Keep investigating until the campaign's closing phase rather than stopping at implementation, reproduction, or the first discovery.**
+
+## Subsequent execution steering, 2026-10-08
+
+The user explicitly requested sixteen CPU worker processes for useful
+independent exact tasks, delegated calculations, and preparation of the
+next batch while computations run. This supersedes earlier twelve/fourteen
+process headroom choices. The campaign deadline is unchanged; aggregate
+RAM remains capped at 96 GiB and nested BLAS/OMP threads remain one per
+process. Measure verified candidates and meaningful experiments per hour,
+retain deterministic identities/checkpoints, and continue mathematical
+exploration rather than building generic orchestration infrastructure.

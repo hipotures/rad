@@ -1,0 +1,38 @@
+{
+  "blas_threads": 1,
+  "campaign": "20261007T222521Z",
+  "campaign_deadline": "2026-10-08T08:25:21Z",
+  "campaign_start": "2026-10-07T22:25:21Z",
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \"$MATH_PY\" -B research/integer-multiplication-bounds/code/review_singleton_witness.py --reference \"$REFERENCE\" --h 50 --gap 23 --output \"$FRESH_FULL\"",
+    "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \"$MATH_PY\" -B research/integer-multiplication-bounds/code/review_singleton_witness.py --reference \"$REFERENCE\" --h 8 --gap 2 --small --output \"$FRESH_SMALL\""
+  ],
+  "dependencies": {
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "input_sha256": {
+    "runs/20261008T000730Z-finite-singleton-transfer/results/certificate.json": "f13437859a4626b2ee84d9d483dd24eaeda3e7900d2c80ba9724d5c7864a443c"
+  },
+  "interpreter": "campaign envs/math/bin/python",
+  "memory_allocation_gib": 16,
+  "pinned_reference_commit": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "python_version": "3.14.7",
+  "result": "PASS independent logical/physical scalar and rational-frame witness",
+  "run_id": "20261008T002315Z-review-singleton-witness",
+  "scope": "Full dense h50 logical and compiled physical maps plus constraint-based rational frames; complete small side dirty basis, not a large full dirty matrix; central/three-stage/analytic interfaces separately reviewed",
+  "source_sha256": {
+    "finite_block_search.py": "15bcf2741760cf07604b2e1278b6b1f696fc9ad7257b233c4614e7830e09d4f1",
+    "finite_singleton_certificate.py": "2493c6dc0b11e91ae6a001ffb0c4258c977c1efe77eecb778c1b2d955fb4d23b",
+    "finite_singleton_search.py": "7d90deb027c6e1495497a1d7e7f909fe023e322bcd9af8b757bee932285d9738",
+    "frame_envelope.py": "76208f5c86e28a43bcf93cba5731274000a34398437d62efa0009cb069b51f30",
+    "frame_reuse.py": "3f286b5f775cc34d125695f4f1923dcec90aa9454b4a439c159718e6d7360bf6",
+    "frame_reuse_certificate.py": "9156b2648977b7b398739fa27508093719c310ed9669bdd22958987a14d9fba7",
+    "review_aligned_graph.py": "e611104e156b8461d163bcab9f0a2b31aead519f4a7449b5744f32860c7cab5f",
+    "review_envelopes.py": "baaca55effeef16b0c5a150594375514873710c425ea6e4d9d2af1798aac805f",
+    "review_frame_reuse.py": "dd2eaab82d2143c173e4cdbc956e291577f41142a6b70f1b57b15a6febc25d38",
+    "review_rational_frames.py": "dc965795fc1886cad7053ae7f5514d2af8f614c08dfaaa96a1023cca7d778331",
+    "review_singleton_witness.py": "0f86268e9b6f6d3210b2edeee14b1e24c91b0e58a3a12d2f099da95865dc8a36"
+  },
+  "workers": 1
+}

@@ -1,0 +1,29 @@
+{
+  "campaign_id": "20261007T222521Z",
+  "campaign_start": "2026-10-07T22:25:21Z",
+  "campaign_end": "2026-10-08T08:25:21Z",
+  "observed_successful_execution_utc": "2026-10-08T00:05:19Z",
+  "artifact_assembly_time_utc": "2026-10-08T00:09:13.282800+00:00",
+  "question": "Independently audit selected unequal-motif phase parameters and certify finite-grid dominance without producer sorting",
+  "reference_commit": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "python_executable": "/usr/bin/python3",
+  "python_version": "3.14.4",
+  "version_provenance": "Verified same executable used in immediately preceding successful commands",
+  "input_certificate": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/20261008T000209Z-asymmetric-phase-repaired/certificate.json",
+  "input_certificate_sha256": "0822291caa6c85f689bbfbcb9f4356eabab3acfb59792d1134c691fb380c1d52",
+  "source_sha256": {
+    "review_asymmetric_phase.py": "961865b8e47b5927f97edc736004b67b8fcb2fa843da1667dc066bd6ed0ea5f2",
+    "review_asymmetric_motif.py": "15d6511b92ac6a3a3c1873106e3fc165db0590330898690db880e6b91e016552",
+    "review_parameter_audit.py": "dca1a3e97c26209e59eceec3d5a86a8f5205ff90c9d46f1d40d7bab499ac6bd8"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/integer-multiplication-bounds/code/review_asymmetric_phase.py --certificate /srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/20261008T000209Z-asymmetric-phase-repaired/certificate.json --output research/integer-multiplication-bounds/runs/20261008T000519Z-review-asymmetric-phase/results/asymmetric-phase-independent.json"
+  ],
+  "resources": "One standard-library CPU process; within 16 GiB allocation",
+  "prior_attempt": {
+    "output": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/review/asymmetric-phase-independent-v1.json",
+    "status": "PASS; final version replaces long ratio by strict12-decimal rational lower; arithmetic unchanged"
+  },
+  "status": "PASS: two selected rows,32 independent strict constraints each; all120 other grid candidates below rigorous favorable ceilings",
+  "scope": "Only supplied121 motifs and original packed recurrence/refined phase guard. Newly calibrated graphs are separate inputs. Finite tensor transfer, phase inverse and original unaffected interfaces separately required."
+}

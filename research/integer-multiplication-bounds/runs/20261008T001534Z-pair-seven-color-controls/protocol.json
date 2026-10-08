@@ -1,0 +1,109 @@
+{
+  "campaign_id": "20261007T222521Z",
+  "start_utc": "2026-10-08T00:15:34.088655+00:00",
+  "status": "Terminal controls; outcomes recorded",
+  "question": "Does calibrated pair-feature discovery recover a known rational rank7 h8 control from noise on both GPUs?",
+  "settings": {
+    "h": 8,
+    "rank": 7,
+    "initialization": "seven-color",
+    "seed": 109,
+    "iterations": 2000,
+    "seconds": 180,
+    "noise": 0.05,
+    "method": "douglas-rachford",
+    "relaxation": 0.5,
+    "devices": [
+      0,
+      1
+    ]
+  },
+  "source_sha256": {
+    "pair_feature_search.py": "d1f9f31481464f4067e44abb2e0e9f5e5c59ce5acb9744faa13efa9ca13de3b2",
+    "asymmetric_ground_scan.py": "d80e4eaac3618060b5d28881aa4ac4b92f9d67aadbc4498563f2e1c366bca4a4",
+    "review_pair_feature_control.py": "3cba91678ef4c6c47dd3c3ce96f7635e6f92ba84bd0a21e476fb7def03dbadc0"
+  },
+  "cases": [
+    {
+      "device": 0,
+      "command": [
+        "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/gpu/bin/python",
+        "-B",
+        "/srv/ai/research/research/integer-multiplication-bounds/code/pair_feature_search.py",
+        "--h",
+        "8",
+        "--rank",
+        "7",
+        "--initialization",
+        "seven-color",
+        "--device",
+        "0",
+        "--seed",
+        "109",
+        "--iterations",
+        "2000",
+        "--seconds",
+        "180",
+        "--noise",
+        "0.05",
+        "--method",
+        "douglas-rachford",
+        "--relaxation",
+        "0.5",
+        "--output-dir",
+        "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/pair-features/20261008T001534Z-pair-seven-color-controls/gpu0"
+      ],
+      "output_dir": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/pair-features/20261008T001534Z-pair-seven-color-controls/gpu0",
+      "log": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/pair-features/20261008T001534Z-pair-seven-color-controls/gpu0.log",
+      "metrics": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/pair-features/20261008T001534Z-pair-seven-color-controls/gpu0.time.txt"
+    },
+    {
+      "device": 1,
+      "command": [
+        "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/gpu/bin/python",
+        "-B",
+        "/srv/ai/research/research/integer-multiplication-bounds/code/pair_feature_search.py",
+        "--h",
+        "8",
+        "--rank",
+        "7",
+        "--initialization",
+        "seven-color",
+        "--device",
+        "1",
+        "--seed",
+        "109",
+        "--iterations",
+        "2000",
+        "--seconds",
+        "180",
+        "--noise",
+        "0.05",
+        "--method",
+        "douglas-rachford",
+        "--relaxation",
+        "0.5",
+        "--output-dir",
+        "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/pair-features/20261008T001534Z-pair-seven-color-controls/gpu1"
+      ],
+      "output_dir": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/pair-features/20261008T001534Z-pair-seven-color-controls/gpu1",
+      "log": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/pair-features/20261008T001534Z-pair-seven-color-controls/gpu1.log",
+      "metrics": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/pair-features/20261008T001534Z-pair-seven-color-controls/gpu1.time.txt"
+    }
+  ],
+  "wall_timeout_per_case_seconds": 210,
+  "scientific_boundary": "Known exact fixture is independently certified; numerical recovery calibrates a search, not a new multiplication bound",
+  "completed_utc": "2026-10-08T00:15:35.408152+00:00",
+  "results": [
+    {
+      "device": 0,
+      "returncode": 0,
+      "best_residual": 6.415645792401392e-12
+    },
+    {
+      "device": 1,
+      "returncode": 0,
+      "best_residual": 6.415645792401392e-12
+    }
+  ]
+}

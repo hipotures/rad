@@ -14,13 +14,16 @@ The ten-hour campaign `20261007T222521Z` began at
 passes all 85 tests and regenerates its certificates and patches unchanged.
 
 The current strongest verified composition supports the strict conditional
-saving `6412736146231/10^30`, more than `3.696690703179 * 2^-59`.
-It combines positive support envelopes and retained controllers, unequal
-52/48/52 bit tensor factors, and a reused banded Gaussian inverse with
-reviewed precision, guard and prime-interval proofs. Exact parameter
-tuning follows those substantive changes. The complete upstream
-theorem remains assumed, and the enormous eventual cutoff is an asymptotic
-limitation. Research continues through the immutable deadline.
+saving `12053467103858103170301/(125*10^37)`, more than `5.558680571643687 * 2^-59`.
+It combines the 50/50/50 nonuniform singleton bit circuit with 485,237 side roles,
+positive support envelopes and retained controllers, a reused phase-cell
+Toeplitz/Schur Gaussian inverse, and a shared binary complex D/E circuit
+with 629,617 side roles. The changed order of the two primitive exponents
+requires the independently reviewed decaying recurrence estimate.
+Independent full finite replay and analytic/arithmetic reviews pass.
+The complete upstream theorem remains assumed, and the enormous eventual
+cutoff is an asymptotic limitation. Research continues through the
+immutable deadline.
 
 - [Full goal](GOAL.md)
 - [Campaign clock, protocol and resume state](runs/20261007T222521Z-campaign/protocol.json)
@@ -31,11 +34,20 @@ limitation. Research continues through the immutable deadline.
 - [Weighted Gaussian estimate](reports/downstream-weighted-gaussian.md)
 - [Blocked convolution and review](reports/downstream-blocked-gaussian.md)
 - [Blocked Gaussian parameters and scoped ceiling](reports/downstream-parameter-optimum.md)
-- [Current composed result and unequal-factor proof](reports/asymmetric-motifs.md)
+- [Current promoted composition and limits](reports/downstream-promoted-complex-composition.md)
+- [Shared complex construction and transfer](reports/downstream-complex-side-circuit.md)
+- [Independent complete complex transfer review](reports/review-complex-transfer.md)
+- [Previous phase and packed composition](reports/phase-singleton-composition.md)
+- [Measured candidate throughput and resource use](reports/computational-throughput.md)
+- [Unequal-factor proof and earlier milestone](reports/asymmetric-motifs.md)
 - [Reusable Gaussian inverse and independent review](reports/downstream-reusable-banded-inverse.md)
+- [Phase-cell inverse and full review](reports/downstream-phase-cell-inverse.md)
+- [Exact packed recurrence and review](reports/downstream-packed-unrolling.md)
+- [Singleton circuit and independent full witness](reports/finite-singleton-gaps.md)
 - [Rational support-envelope review](reports/review-rational-envelopes.md)
 - [Scoped negative frame searches](reports/finite-target-frames.md)
 - [Calibrated pair-feature discovery](reports/pair-feature-discovery.md)
+- [Vertex-feature uniqueness and scoped XOR obstruction](reports/vertex-feature-uniqueness.md)
 - [Reproduction and recovery](reproduce.md)
 
 Durable authored code, compact evidence and reports live here. Downloaded

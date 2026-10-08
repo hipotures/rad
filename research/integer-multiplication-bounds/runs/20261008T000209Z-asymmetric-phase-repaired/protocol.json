@@ -1,0 +1,47 @@
+{
+  "campaign_id": "20261007T222521Z",
+  "start_utc": "2026-10-08T00:02:09.451240+00:00",
+  "question": "Compose reviewed phase-cell inverse with fully checked unequal tensor factors",
+  "command": [
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/math/bin/python",
+    "-B",
+    "/srv/ai/research/research/integer-multiplication-bounds/code/asymmetric_phase.py",
+    "--upstream",
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/repos/upstream-reference",
+    "--motif-certificate",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261007T2343Z-asymmetric-motifs-v2/results/certificate.json",
+    "--phase-certificate",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261007T234812Z-downstream-phase-assembly-cutoffs/results/certificate.json",
+    "--output",
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/20261008T000209Z-asymmetric-phase-repaired/certificate.json"
+  ],
+  "input_hashes": {
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261007T2343Z-asymmetric-motifs-v2/results/certificate.json": "28952e3d8ec11db1fa755361f8115a6e6439010df4a4e07a0ed7322cbbf1cc2c",
+    "/srv/ai/research/research/integer-multiplication-bounds/runs/20261007T234812Z-downstream-phase-assembly-cutoffs/results/certificate.json": "c835309e2fe000205aab405305da9c634ba052b5539cbb92bc0c21709c8adc48"
+  },
+  "source_sha256": "004474dd46e4a2afe733b1d00ca42046134e13a207044de6e9da8511d51f79f7",
+  "upstream_revision": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "independent_analytic_review": "reports/review-phase-cell-inverse.md",
+  "finite_review": "reports/review-asymmetric-motifs.md",
+  "settings": {
+    "modes": [
+      "conservative",
+      "optimized"
+    ],
+    "pairs": 121,
+    "uniform_phase_regressions": 8,
+    "blas_threads": 1,
+    "omp_threads": 1
+  },
+  "status": "Terminal PASS; independent phase-cell inverse and unequal arithmetic reviews accepted",
+  "previous_failed_run": "20261008T000100Z-asymmetric-phase",
+  "repair": "Exact numeric Fraction comparison accepts both integer and rational JSON serialization",
+  "completed_utc": "2026-10-08T00:14:27.598157+00:00",
+  "elapsed_seconds": 6.081708353944123,
+  "independent_arithmetic_review": "reports/review-asymmetric-phase.md",
+  "result": {
+    "path": "results/certificate.json",
+    "bytes": 104870,
+    "sha256": "0822291caa6c85f689bbfbcb9f4356eabab3acfb59792d1134c691fb380c1d52"
+  }
+}

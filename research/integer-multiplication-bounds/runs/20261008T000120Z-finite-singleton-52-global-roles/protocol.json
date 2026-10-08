@@ -1,0 +1,67 @@
+{
+  "campaign_deadline_utc": "2026-10-08T08:25:21Z",
+  "campaign_id": "20261007T222521Z",
+  "campaign_start_utc": "2026-10-07T22:25:21Z",
+  "command": [
+    "python",
+    "research/integer-multiplication-bounds/code/finite_singleton_reuse_scan.py",
+    "--base",
+    "4",
+    "--h",
+    "52",
+    "--kind",
+    "global",
+    "--output",
+    "research/integer-multiplication-bounds/runs/20261008T000120Z-finite-singleton-52-global-roles/results/certificate.json",
+    "--parameters",
+    "24,25,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0,-1,-2",
+    "--reference",
+    "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/repos/upstream-reference",
+    "--workers",
+    "4"
+  ],
+  "environment": {
+    "blas_threads": 1,
+    "highs_threads": 1,
+    "interpreter": "campaign envs/math/bin/python",
+    "maximum_simultaneous_owned_workers": 8,
+    "mkl_threads": 1,
+    "omp_threads": 1,
+    "resource_authorization": "Parent authorized8 cohort workers under aggregate14 CPUs/96GiB; these h48/h52 cohorts used4 perground"
+  },
+  "external_log": {
+    "bytes": 4169,
+    "path": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/finite/20261008T000120Z-finite-singleton-52-global-roles.log",
+    "recovery": "Deterministically regenerable command output; original completed log unchanged and eligible for gzip text publication",
+    "sha256": "f62764dc006538653c3de2342103abe7ecfc28f48685b5a0d17b79636db6e674"
+  },
+  "failure": {
+    "explanation": "Explicit descending list included one extra invalid value. Valid rows remain exact. Some still-running valid worker results were not consumed after exception; fresh repair retains only missing valid evidence.",
+    "failure_observed_utc": "2026-10-08T00:07:21Z",
+    "planned_cases_including_invalid": 28,
+    "repair_run": "20261008T000730Z-finite-singleton-52-global-repair",
+    "retained_valid_cases": 24,
+    "type": "Invalid command gap-2 rejected by unchanged range assertion"
+  },
+  "last_checkpoint_utc": "2026-10-08T00:05:51.025426+00:00",
+  "objective": "Actual singleton roles and unchanged transfer, or joint positive-core/controller optimization",
+  "recovery": "Retained source, math configuration and immutable obtainable upstream revision regenerate checks; fresh outputs required. Failed commands reproduce the recorded range assertion.",
+  "reference_commit": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "result_sha256": "5a5d50b33453a8656d57f2500c8398751ec79176fd1cd651b312b1b387f13c21",
+  "runtime": {
+    "numpy": "2.5.3",
+    "python": "3.14.7 (main, Sep  1 2026, 14:18:09) [Clang 22.1.3 ]",
+    "scipy": "1.18.1"
+  },
+  "scope": "Actual compiled roles for this bounded singleton family; exact finite map/frame/target checks; dirty-stage transfer not claimed",
+  "source_sha256": {
+    "finite_block_search.py": "15bcf2741760cf07604b2e1278b6b1f696fc9ad7257b233c4614e7830e09d4f1",
+    "finite_singleton_reuse_scan.py": "b8e38c22e1b55f7f261eb27f53305fee6edbe8c9bb9e733a4cb7833fd0b3e91c",
+    "finite_singleton_search.py": "7d90deb027c6e1495497a1d7e7f909fe023e322bcd9af8b757bee932285d9738",
+    "frame_envelope.py": "76208f5c86e28a43bcf93cba5731274000a34398437d62efa0009cb069b51f30",
+    "frame_reuse.py": "3f286b5f775cc34d125695f4f1923dcec90aa9454b4a439c159718e6d7360bf6"
+  },
+  "started_utc": "2026-10-07T23:59:41.513002+00:00",
+  "status": "failed",
+  "wall_seconds_at_last_checkpoint": 369.5124320118921
+}

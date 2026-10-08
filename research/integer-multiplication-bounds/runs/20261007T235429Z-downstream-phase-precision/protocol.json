@@ -1,0 +1,15 @@
+{
+  "campaign": "20261007T222521Z",
+  "campaign_deadline": "2026-10-08T08:25:21Z",
+  "campaign_start": "2026-10-07T22:25:21Z",
+  "command": "python3 -B research/integer-multiplication-bounds/code/downstream_phase_precision.py --upstream /srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/repos/upstream-reference --output research/integer-multiplication-bounds/runs/20261007T235429Z-downstream-phase-precision/results/certificate.json",
+  "elapsed_seconds": 0.037379492074251175,
+  "reason": "Two polynomial comparisons incorrectly substituted p^k<=2^(kp) with negative powers; this reverses the inequality. The relevant coefficients are still much smaller than the target, but the first certificate is not accepted. Two small boundary errors also need to be individually below1/2 to imply their sum below1.",
+  "source_recovery_from_corrected": "Replace affine_strict(0,10-60) by affine_strict(3-20,10-60), replace affine_strict(0,33-60) by affine_strict(7-20,33-60), replace the two boundary half-error calls with the original exponent0 calls and names stored in the certificate. Other check code is unchanged; original source hash is retained.",
+  "source_sha256": {
+    "downstream_phase_precision.py": "e39fb28b101138a2ec0ee7eaa57a9cc04610c6f3e61049476731881820abfc8f"
+  },
+  "status": "INVALID first symbolic checker; superseded by corrected source/run",
+  "upstream_commit": "bcd4ebde8692383539f8a48734e5fbf3a18a32c2",
+  "workers": 1
+}

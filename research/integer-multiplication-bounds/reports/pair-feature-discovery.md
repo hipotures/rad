@@ -80,3 +80,11 @@ iteration histories are retained. Best coefficient NPZ files remain
 external, with sizes/hashes and deterministic-seed recovery instructions;
 identical floating bytes across GPU/runtime versions are not promised.
 No failed numerical matrix is promoted to an accepted label certificate.
+
+## Exact rank-seven pair-feature calibration
+
+The independent reviewer expressed the known h8 seven-color construction using only pair features: coefficient1/3 on equal normal bits and-1/6 on unequal bits. The28-by7 rational coefficient fixture has rank7 and produces seven disjoint color indicators, with diagonal1 and all840 required edge zeros. A Fano seven-clique matches its rank lower bound. Thus this reduced-rank fixture lies inside the pair-feature ansatz.
+
+The new `--initialization seven-color` option recovers a numerical rank-seven neighborhood from seed109/noise0.05 on both GPUs at iteration550 (maximum residual6.41565e-12). Run `20261008T001534Z-pair-seven-color-controls` retains its settings, logs and resource measurements. The old vertex-initialized h8 trial is unchanged and remains a bounded negative search. Exact previous source text and its original SHA256 are preserved in that old run's source-version record. This stronger control justifies using the routine for local discovery near reduced-rank fixtures; it does not make a global existence decision.
+
+The [vertex-column uniqueness proof](vertex-feature-uniqueness.md) rules out a simpler rational ansatz for h>=6, while the [literature review](review-haemers-pair-features.md) explains why Bukh--Cox Lemma12 does not determine the rational minrank sought here.

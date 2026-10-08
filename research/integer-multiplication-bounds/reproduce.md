@@ -84,9 +84,76 @@ envelope certificate and review.
 Thread variables cap each process, while `--workers 8` runs eight independent
 single-thread circuit instances. Exact Python fractions, graph traversal and
 max flow do not become sixteen-core computations through a BLAS setting.
-The campaign computational ceiling was raised from twelve to fourteen CPUs
-after measurements and user steering; remaining cores provide operating
-headroom. Matrix workloads can use a separately declared allocation.
+Following explicit user steering, new CPU-bound queues target sixteen
+processes in aggregate, including an independently reserved reviewer.
+Earlier completed eight/twelve/fourteen-worker records retain their actual
+historical settings. Exact verification is unchanged and every experiment
+has a distinct candidate identity. Matrix workloads use a separately
+declared allocation, without nested BLAS oversubscription.
+
+## Current phase, singleton and complex witnesses
+
+Use a fresh output for every command. The producer and independent reports
+retain full exact invocation arguments and input hashes:
+
+```bash
+python3 -B research/integer-multiplication-bounds/code/downstream_phase_inverse.py --upstream "$REF" --output "$RAD_WORK_ROOT/derived/fresh-phase-inverse.json"
+python3 -B research/integer-multiplication-bounds/code/downstream_phase_generator.py --upstream "$REF" --max-s 256 --output "$RAD_WORK_ROOT/derived/fresh-phase-generator.json"
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 "$MATH_PY" research/integer-multiplication-bounds/code/finite_singleton_certificate.py --reference "$REF" --full 50:23 --small 6 8 --output "$RAD_WORK_ROOT/derived/fresh-singleton-transfer.json"
+python3 -B research/integer-multiplication-bounds/code/finite_phase_composition.py --upstream "$REF" --motif-certificate research/integer-multiplication-bounds/runs/20261007T2343Z-asymmetric-motifs-v2/results/certificate.json --phase-certificate research/integer-multiplication-bounds/runs/20261007T234812Z-downstream-phase-assembly-cutoffs/results/certificate.json --promoted-certificate research/integer-multiplication-bounds/runs/20261008T000730Z-finite-singleton-transfer/results/certificate.json --output "$RAD_WORK_ROOT/derived/fresh-phase-composition.json"
+python3 -B research/integer-multiplication-bounds/code/finite_packed_composition.py --upstream "$REF" --phase-composition research/integer-multiplication-bounds/runs/20261008T001933Z-singleton-phase-composition/results/certificate.json --output "$RAD_WORK_ROOT/derived/fresh-packed-composition.json"
+python3 -B research/integer-multiplication-bounds/code/downstream_complex_circuit.py --upstream "$REF" --h 8 --all-basis --output "$RAD_WORK_ROOT/derived/fresh-complex-basis.json"
+python3 -B research/integer-multiplication-bounds/code/downstream_complex_certificate.py --upstream "$REF" --h 8 50 --global-exchange-h8 --output "$RAD_WORK_ROOT/derived/fresh-complex-sharing.json"
+python3 -B research/integer-multiplication-bounds/code/downstream_complex_assembly.py --upstream "$REF" --bit-certificate research/integer-multiplication-bounds/runs/20261008T001933Z-singleton-phase-composition/results/certificate.json --complex-certificate "$RAD_WORK_ROOT/derived/fresh-complex-sharing.json" --output "$RAD_WORK_ROOT/derived/fresh-complex-assembly.json"
+python3 -B research/integer-multiplication-bounds/code/review_complex_frames.py --h 8 10 12 --output "$RAD_WORK_ROOT/derived/fresh-complex-frames.json"
+python3 -B research/integer-multiplication-bounds/code/review_complex_boundaries.py --output "$RAD_WORK_ROOT/derived/fresh-complex-boundaries.json"
+python3 -B research/integer-multiplication-bounds/code/review_complex_assembly.py --certificate "$RAD_WORK_ROOT/derived/fresh-complex-assembly.json" --output "$RAD_WORK_ROOT/derived/fresh-complex-review.json"
+```
+
+The original shared-complex composition uses the independently promoted R485360
+bit primitive and R629617 shared complex primitive. Full h50 finite maps,
+frames and physical transitions, small complete dirty shears and bank
+exchanges, all-size transfer arguments, exact parameter margins and 680
+stopped decaying recurrences passed. The logarithmic parameter cutoff is
+6640328716877726785; separate eventual prime, recurrence and retained
+machine-interface thresholds remain. These commands regenerate finite
+certificates and arithmetic audits, not a complete multiplication machine.
+
+The newer independently promoted nonuniform R485237 bit graph is composed
+by a thin adapter without repeating any complete finite graph. Both its
+uncached independent finite replay and its independently re-enclosed
+arithmetic pass. Reproduce the current strongest row with fresh outputs:
+
+```bash
+python3 -B research/integer-multiplication-bounds/code/downstream_promoted_complex_composition.py --upstream "$REF" --candidate research/integer-multiplication-bounds/runs/20261008T005350Z-review-singleton-positions/results/candidate-input.json --promotion-review research/integer-multiplication-bounds/runs/20261008T005350Z-review-singleton-positions/results/certificate.json --complex-certificate research/integer-multiplication-bounds/runs/20261008T003305Z-downstream-complex-sharing/results/certificate.json --previous-assembly research/integer-multiplication-bounds/runs/20261008T003550Z-downstream-complex-assembly/results/certificate.json --output "$RAD_WORK_ROOT/derived/fresh-promoted-composition.json"
+```
+
+This gives kappa 12053467103858103170301/(125*10^37), with common
+logarithmic parameter cutoff 6637094462284810001 and the same separate
+eventual source/absorption obligations. Full commands for the independent
+promotion and refinement audits are retained in their run protocols.
+
+## Useful computational throughput
+
+The completed fifty-candidate benchmark is indexed in
+[the throughput report](reports/computational-throughput.md). Its original
+source keeps the historical twelve-worker allocation. Subsequent targeted
+queues use `finite_singleton_neighborhood.py` with a sixteen-worker maximum.
+Choose fresh run locations and explicitly recorded deadlines:
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 "$MATH_PY" research/integer-multiplication-bounds/code/finite_singleton_neighborhood.py --help
+python3 -B research/integer-multiplication-bounds/code/fast_frame_envelope.py --reference "$REF" --h 8 12 --output "$RAD_WORK_ROOT/derived/fresh-envelope-equality.json"
+```
+
+The initial cache controls compare complete cached/uncached verifier
+results on two different small vectors. All large global map/frame/flow
+checks execute afresh. Candidate IDs are SHA256 of canonical JSON containing
+the ground size, base, complete position vector and pinned upstream commit.
+Every completed case is immutable; checkpoints are separate atomic updates.
+Before adopting the direct envelope constructor, compare every Space field
+and target check against the original. A pending optimization is never
+treated as a verified research improvement.
 
 ## Optional GPU discovery
 
@@ -113,8 +180,45 @@ with fresh directories, for example:
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 "$RAD_WORK_ROOT/envs/gpu/bin/python" research/integer-multiplication-bounds/code/pair_feature_search.py --h 9 --rank 8 --device 0 --seed 109 --noise .05 --iterations 2000 --seconds 180 --output-dir "$RAD_WORK_ROOT/derived/fresh-pair-control"
 ```
 
-The h9 fixture calibrates numerical recovery only; its degenerate ambient
-form is unsuitable for the retained finite motif transfer.
+The h9 fixture calibrates numerical recovery only. Its exact positive
+eight-dimensional quotient exists, but the retained count screen has
+negative motif deficit; it provides no improved composed bound. The h8
+pure-pair rank-seven control uses `--initialization seven-color` and is
+independently exact-reconstructed. GPU discovery remains separate from
+deterministic acceptance.
+
+## Restore gzip-only row-level certificates
+
+Six full node/choice tables exceed the ordinary readable-result role policy.
+Their complete UTF-8 JSON is preserved as gzip evidence, with hashes and
+framing checks. Restore them in a fresh clone before commands which consume
+these optional finite/negative checkpoints; existing originals are skipped.
+
+```bash
+python3 - <<'PYRESTORE'
+import gzip
+from pathlib import Path
+topic = Path('research/integer-multiplication-bounds')
+archive = topic / 'evidence/20261008T0058Z-phase-singleton-complex-compact'
+for run_id in (
+    '20261008T000730Z-finite-adaptive-cores50',
+    '20261008T000730Z-finite-adaptive-gap23-cores50',
+    '20261008T002145Z-finite-nearend-composition',
+    '20261008T002400Z-finite-complement-schedule-small',
+    '20261008T002730Z-finite-adaptive-complements50-gap23',
+    '20261008T002730Z-finite-adaptive-complements50',
+):
+    rel = Path('runs') / run_id / 'results/certificate.json'
+    target = topic / rel
+    if not target.exists():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(gzip.decompress((archive / (str(rel)+'.gz')).read_bytes()))
+PYRESTORE
+```
+
+The original-source path in an archive manifest describes the local evidence
+source; it does not mean an omitted plain JSON is present in the Git clone.
+The gzip copies are complete, without sampling or split payloads.
 
 ## Evidence recovery and resume
 

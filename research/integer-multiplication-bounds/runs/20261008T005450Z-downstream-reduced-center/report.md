@@ -1,0 +1,5 @@
+# Reduced complex central channel control
+
+PASS: h8 complete 1,018-coordinate scalar basis in both orientations and six signed dirty controls; all h50 gather columns and scatter rows verify the exact eliminated-channel factorization. Central channels drop from 51 to 50, with the reviewed side source/frame proof retained. The current tight kappa and common parameter cutoff are exactly unchanged because the prefix cost dominates.
+
+The [independent refinement review](../../reports/review-complex-refinements.md) derives the factorization and arbitrary-dirty argument and passes longer logarithm enclosures, all 30 strict conditions per row, counts, guards/cutoffs and 680 stopped recurrences. Derivation and exact scope are in [the reduced-center report](../../reports/downstream-complex-reduced-center.md). Reproduction, source/input hashes and the completed independent result link are in [protocol](protocol.json); historical exact producer evidence remains unchanged in [certificate](results/certificate.json).

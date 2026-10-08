@@ -1,0 +1,1 @@
+Exact h8 pure pair-feature rank-seven fitting control passed. See [source interpretation and derivation](../../reports/review-haemers-pair-features.md). The full small coefficient fixture is included in the compact result. Bukh--Cox Lemma12 does not determine rational/real minimum rank for the campaign complement problem at h24.
