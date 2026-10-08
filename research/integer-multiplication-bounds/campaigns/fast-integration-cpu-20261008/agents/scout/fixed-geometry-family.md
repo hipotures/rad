@@ -10,10 +10,11 @@ The completed controls are:
 |---|---:|---:|---|
 | `(8,10)` | 6,720 | 114,240 | nine singletons; `6,2,46` |
 | `(10,12)` | 26,400 | 554,400 | nine singletons; `8,4,78` |
+| `(22,24)` | 3,116,960 | 140,263,200 | nine singletons; `20,16,438` |
 | `(24,26)` | 5,262,400 | 257,857,600 | nine singletons; `22,18,526` |
 | `(26,28)` | 8,517,600 | 451,432,800 | nine singletons; `24,20,622` |
 
-The `(24,26)` run retained 18 primary-prime zero events and `(26,28)` retained44; each affected pair was completely replayed at another admissible prime. All pairs obtained a full nonzero prescribed-pivot sequence; no unresolved pair was omitted. Both full new-dimension runs are complete.
+The `(22,24)` run retained32 primary-prime zero events, `(24,26)` retained18 and `(26,28)` retained44; each affected pair was completely replayed at another admissible prime. All pairs obtained a full nonzero prescribed-pivot sequence; no unresolved pair was omitted. All three full new-dimension runs are complete. The coordinator executed the22/24 modular run in an allocated root CPU slot; the scout checked its source identities and independently replayed all32 exceptional pairs over the rationals.
 
 ## Fixed basis and exact corner matrix
 
@@ -39,6 +40,8 @@ The three primes are `1000003`, `2147483647`, `1000000007`, with explicit trial-
 
 [geometry_rational_controls.py](code/geometry_rational_controls.py) independently replays ALL62 preserved unlucky-prime pairs over exact rational arithmetic. [Its completed receipt](fixed-geometry-rational-controls.json) confirms every prescribed rightmost pivot is nonzero, the reported first primary-zero pivot is an exact nonzero fraction whose numerator vanishes modulo1000003 with admissible denominator, and every pivot in its complete alternate-prime replay remains admissible and nonzero. These are distinct exact controls; the complete Cartesian nonvanishing proof is still supplied by the all-pair native certificates.
 
+[The separate22/24 receipt](fixed-geometry-rational-h22-controls.json) supplies the same independent exact rational checks for ALL32 additional primary-zero pairs. [Its execution/source protocol](fixed-geometry-h22-h24-protocol.json) records the unchanged eligible dependency, generator identity and one-thread root allocation. No full modular run was repeated for this review.
+
 The corner's increasing pivot runs are nine singletons plus `h−2` and `h−6`. The remaining middle is an exact identity block of width `m−2d`. Indeed, if the null projector is `U V^T`, the invertible first-d/last-d corner makes `U_first` and `V_last` invertible. Eliminating that corner in `I−U V^T` cancels the null term on the middle coordinates and leaves their identity. The projection rank `m−d` exhausts the remaining pivots. This proves the full data profile, not only its mass.
 
 ## Local, auxiliary, copied and growth interfaces
@@ -57,4 +60,4 @@ python3 -B agents/scout/code/fixed_geometry_family.py \
   --dimensions 8 10 24 26 --output work/<fresh-geometry-run>
 ```
 
-The compact completed certificates are [8/10](fixed-geometry-h8-h10.json), [10/12](fixed-geometry-h10-h12.json), [24/26](fixed-geometry-h24-h26.json), and [26/28](fixed-geometry-h26-h28.json). These finite exact geometric statements do not certify a new complete multiplier exponent. Changed producer/output families, original matching uses, full fixed matrix moments, native wire/halving/row parameters and the all-size compiler/assembly remain separate requirements. In particular `(24,26)` has `m=624`, largest inherited exterior child576 and halving degree9; `(26,28)` has `m=728`, exterior child676 and degree10. Its degree9 is insufficient.
+The compact completed certificates are [8/10](fixed-geometry-h8-h10.json), [10/12](fixed-geometry-h10-h12.json), [22/24](fixed-geometry-h22-h24.json), [24/26](fixed-geometry-h24-h26.json), and [26/28](fixed-geometry-h26-h28.json). To reproduce the additional22/24 geometry, use `--dimensions 22` with a fresh output directory. These finite exact geometric statements do not certify a new complete multiplier exponent. Changed producer/output families, original matching uses, full fixed matrix moments, native wire/halving/row parameters and the all-size compiler/assembly remain separate requirements. In particular `(22,24)` has `m=528`, exterior child484 and halving degree8; `(24,26)` has `m=624`, largest inherited exterior child576 and halving degree9; `(26,28)` has `m=728`, exterior child676 and degree10. Its degree9 is insufficient.

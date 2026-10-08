@@ -51,11 +51,16 @@ three-bit inner control passes; its planned missing-inner negative also
 passes both actual oracles, an anomaly retained unchanged. Full unique tags
 confirm that its outer composition absorbs raw-inner errors on all addresses;
 the standalone raw fanout still differs from ideal XOR on 49,152 addresses.
-Further bank restoration and fixed-source controls are queued.
+The four-target three-bit-inner bank restoration and two-target fixed-source
+controls are complete, preserving both positive and negative outcomes.
 The [Hadamard routing budget](reports/hadamard-routing-budget.md) proves the
 long-record arithmetic identity and excludes its literal per-residual
 complex-only basis substitution by a source-reviewed rank-mass count.
 It leaves a globally shared or changed compiler unresolved.
+The [dyadic interval Gaussian certificates](reports/dyadic-interval-gaussian.md)
+give five exact residual/all-alias positive enclosures, three matched failed
+target certificates and a frozen-word replay, independent of floating LU
+accuracy. These bounded certificates do not change the conditional exponent.
 The [cyclic free-axis interface](reports/cyclic-free-axis-repair.md) supplies
 global principal-window band LU on every complete free axis of inverse repair
 packets, including regular face packets.

@@ -253,3 +253,37 @@ its declared analytic precision screen; its failure is retained as a component
 eligibility negative, not a coefficient failure or a claim about all-size
 prime ordering. Matched lower work grids and changed layouts continue in
 serial lanes. Pending runs are not described as completed evidence.
+
+## Changed whole packed/actual-CRT work-grid discriminator
+
+Matched inputs at source `(251,241)`, alpha4 and eight-bit digits distinguish
+whole coefficient failures from successful cell tests. At Q112, the complete
+producer loses142 integer coefficients, with real error13.6107 and maximum
+integer difference14. Q128 passes every coefficient and the actual inverse
+CRT with error0.000203746; Q144 passes with error`3.151e-9`. Their wall times
+are309.14,318.28 and352.61 seconds. The failed coefficient producer correctly
+returns before final actual CRT inversion. These measurements are retained as
+matched finite precision evidence, not a uniform eventual precision theorem.
+
+A reordered-prime cyclic-cut `(241,251)` control also passes actual CRT input
+and output plus genuinely packed forward/inverse cells, taking439.24 seconds.
+The full current layouts and kernel screens remain charged in its receipt.
+Further short-halo and adjacent-grid cases are allowed to finish their current
+children while obsolete queued continuations are withheld under the user's
+new structural joint-frame priority.
+
+Those current children completed normally. Q116 loses65 integer coefficients
+with maximum real error0.8507303. Q117 rounds all60,491 coefficients correctly
+but has error0.4247479, so it fails the declared quarter-unit guard. This
+distinction prevents incidental nearest-integer success from being promoted
+to the required recovery margin. Q118 and Q119 were withheld without running.
+
+At Q128 the shorter radius2 full packed/physical-CRT pipeline passes with
+error0.000203746 in312.58 seconds. Radius1 admits no eligible regular inverse
+under its analytic screen and returns before any full coefficient comparison;
+it is a kernel-eligibility negative. The corresponding Q144/radius2 queued
+continuation was withheld. The historical steering receipt records that only
+the queue coordinators were stopped; current scientific children were allowed
+to finish. The user's new joint-frame directive supersedes the remaining
+obsolete queue, while the already expensive strong-gap Gaussian control
+continues in its reserved legacy lane.

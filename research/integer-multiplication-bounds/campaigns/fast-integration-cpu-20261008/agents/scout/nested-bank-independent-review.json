@@ -1,0 +1,29 @@
+{
+  "reviewed_utc": "2026-10-08T17:39:23.424666+00:00",
+  "status": "WRITTEN COMPLETED-MAP COMPOSITION REVIEW",
+  "source_files": [
+    {
+      "path": "agents/inverse/reports/nested-bank-recycling.md",
+      "sha256": "f7e97aca37f72f0569d745b43b870fb08eadda7e29dbff78c68345bf41aab60b"
+    },
+    {
+      "path": "agents/inverse/code/compiled_crt_native_recycle.cpp",
+      "sha256": "ba65805741cc7260f0cfb4688ac57340f589cfd1e7ca98e440d14683b8dbfd40"
+    },
+    {
+      "path": "agents/inverse/code/compiled_reflection_four_recycle.cpp",
+      "sha256": "1eff9749e963814d189df754a22ea2722291b87115bea985ad3715f711436174"
+    }
+  ],
+  "analytic_result": "If completed inner F fixes every non-target physical bit and reads preserved source bits only, outer operations may borrow dormant non-source/non-target bits temporarily and then read their restored contents after completion.",
+  "source_semantics": "Digit parity is integer oddness U_i&1, the single physical bit ubits[Gout*i]; high bits are not live sources.",
+  "conditions": [
+    "All-address pointwise exact inner completion, including bad addresses",
+    "Live low-bit sources and active targets excluded from inner scratch",
+    "Every physical bit appears exactly once in each layout",
+    "No outer read, validity pruning, padding deletion or split before complete restoration",
+    "Original outer endpoint source remains outside its outer U/T bank"
+  ],
+  "finite_evidence_scope": "Source/reports reviewed; no new native replay. The all-tag two-target omission success is finite, while larger retained omission failures remain. No general inner-repair omission theorem or exponent change.",
+  "not_external_peer_review": true
+}

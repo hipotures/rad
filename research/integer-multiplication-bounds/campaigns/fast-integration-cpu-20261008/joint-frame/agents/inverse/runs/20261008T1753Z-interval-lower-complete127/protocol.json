@@ -1,0 +1,41 @@
+{
+  "run_id": "20261008T1753Z-interval-lower-complete127",
+  "status": "RIGOROUS_TARGET_CERTIFIED",
+  "queued_utc": "2026-10-08T17:52:58.457936+00:00",
+  "source_sha256": {
+    "dyadic_interval_lower.py": "d52617a7eaefedb422956152a258fd9aeb48738c9e1aa9a31b82af882a4c7a1f",
+    "run_interval_lower_queue.py": "153ecd57bab2c4a95855a88c218f590ae565353abdd6b6805a74e2cf8ba9d465"
+  },
+  "arguments": [
+    "--source",
+    "127",
+    "--target",
+    "128",
+    "--alpha",
+    "2",
+    "--target-bits",
+    "128",
+    "--mode",
+    "complete",
+    "--seed",
+    "202610081752"
+  ],
+  "reproduction": "python3 code/dyadic_interval_lower.py --source 127 --target 128 --alpha 2 --target-bits 128 --mode complete --seed 202610081752 --output <fresh-ignored-work>/certificate.json",
+  "dependencies": "Python3 standard library only",
+  "workers": 1,
+  "native_threads": 1,
+  "input_generator": "Random sixteenth-grid RHS; frozen exact dyadic words from an untrusted sparse bordered Decimal proposal",
+  "methodology": "Integer Machin/exp enclosures, full residual upper/lower, ALL-alias tail, row-DD upper and matrix-norm lower solution-error bounds",
+  "expected_status": "RIGOROUS_TARGET_CERTIFIED",
+  "negative_control": null,
+  "raw_execution_path": "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/joint-frame/inverse/20261008T1753Z-interval-lower-complete127",
+  "start_unix_time": 1791481978.4596255,
+  "compute_pid": 252391,
+  "exit_code": 0,
+  "expected_matched": true,
+  "wall_seconds": 0.04494524002075195,
+  "certificate_sha256": "fd9ad6d16db601866dfc3c3ae29e266878af05f386535f7512fcfbc4d4fc7c1e",
+  "completed_unix_time": 1791481978.5371013,
+  "replay_sha256": "c4a9064a210abdf4c402f4f252946e6694721a2d6c832c0a3ea79b79c40fb997",
+  "replay_reproduction": "python3 code/dyadic_interval_lower.py --verify-certificate results/certificate.json --output <fresh-ignored-work>/replay.json"
+}

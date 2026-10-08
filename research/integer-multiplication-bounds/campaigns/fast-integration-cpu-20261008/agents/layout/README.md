@@ -133,3 +133,11 @@ are exact on up to1,048,576 records. The native C-only selected-mask exposure
 premise remains unproved because the pinned completed C layer uses BIT basis
 routing. No improvement in the multiplication exponent follows from this
 algebra alone.
+
+The whole-mask circuit now removes external target-bit exposure: six full H
+transforms and pointwise diagonals implement every known coordinate permutation,
+with exact3b-bit and fourth-root restoration. Native internal BIT costs remain.
+The [fixed-coordinate cut-rank obstruction](coordinate-cut-rank-lemma.md) is
+independently criticized and has45 exact controls; it applies only to
+coordinate-aligned recursive C/H children and cut-preserving scalar overhead.
+Changing or shared native XOR frames are outside that class.

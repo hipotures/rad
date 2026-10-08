@@ -39,12 +39,13 @@ each individual payload bit as a Q-bit coefficient would multiply volume by Q
 and is not authorized by this lemma. No arbitrary computed-key permutation or
 nonlinear CRT residue update follows from this known-coordinate circuit.
 
-## Physical premise remains unresolved
+## Earlier selected-mask premise and native internal dependence
 
-The required additional premise is a completed native H0 layer on each chosen
-target mask, with its physical exposure and restoration paid without the BIT
-router that the proposed circuit is intended to replace. No such premise is
-proved here.
+The original six-CNOT construction requires a completed H0 layer on each
+chosen target mask. No direct arbitrary-mask native layer is proved here.
+The whole-mask construction below removes that external exposure requirement
+by transforming every main-axis chunk, while retaining native internal BIT
+basis changes.
 
 Pinned public source `CrocSwap/integer-mult-bounds` at commit
 `cb86e50e9a07685068874d8e4174b2e6c209b95c`, file
@@ -96,3 +97,54 @@ python3 "$LAYOUT/code/check_hadamard_coordinate_permutation.py" \
 
 Set LAYOUT to this durable agent directory and LAYOUT_WORK to its task-owned
 ignored execution root. The output directory must be fresh.
+
+## Whole-mask spectator cancellation removes external target exposure
+
+Exact rational multiplication gives
+
+`(CZ (H0 tensor H0))^3=SWAP/8`,
+
+The normalized gate identity is standard: Bravyi and Maslov,
+*Hadamard-free circuits expose the structure of the Clifford group*,
+arXiv:2003.09412v2, equation34 (PDF page21), give the SWAP/CZ/H relation
+from which the three-step identity follows. DOI:10.1109/TIT.2021.3081415;
+primary source: <https://arxiv.org/pdf/2003.09412>. The factor1/8 here comes
+from H0=H/sqrt(2). This campaign's contribution is the whole-address
+spectator cancellation and charged long-word routing interface below,
+rather than the underlying Clifford gate identity.
+
+and Gaussian-dyadic multiplication gives `(S H0)^3=(1+i)I/4`. For any SWAP
+matching, apply H0 to ALL address bits three times, each followed by the
+address diagonal formed from CZ on each paired coordinate and S on every
+unpaired coordinate. Each pair swaps; each spectator becomes scalar identity.
+For the two involutions of a b-coordinate permutation with c cycles, the
+complete six-H circuit is `2^(-3b) i^c P`. Its correction is exactly3b binary
+places and the fourth-root phase `(-i)^c`. Deferring the scale preserves
+contracting intermediate H0 and phase factors. The same P>=Q+3b+log2(12b)+2
+word-recovery bound applies.
+
+A whole-address H tensor on the campaign's original representation needs
+ell common-offset passes over ALL consecutive equal-width main-axis chunks,
+plus the ordinary distinguished-suffix transform. The latter costs
+O(n log r)=O(n ell), since log r<2ell. The main calls preserve the full
+polynomial record and all spectator rows. Pointwise diagonals use original
+address bits and the coefficient-index counter; Q≫b charges that metadata
+inside the word scan. This supplies external native framing without a
+selected-target gather. It does not remove BIT basis changes inside native C,
+and it does not make the finite complex-only moment its actual physical cost.
+
+`code/check_whole_hadamard_matching.py` and its pinned helper execute all
+signed complex-word butterflies, diagonal phases and recovery. Controls
+cover14,19 and21 address bits, with16,384,524,288 and2,097,152 records.
+Every word and final zero imaginary component is correct. Times are1.23,
+84.28 and446.10 seconds. Eight missing normalization precision bits fail
+on16,365,523,633 and2,094,403 records. Omitting spectator S phases fails in
+every family; the global-phase omission is recorded as either a failure or
+a neutral control when the correct phase happens to equal one.
+
+These six whole-H passes are a constructive conditional physical interface,
+not an independent faster native C implementation. The separate
+[coordinate-cut rank lemma](coordinate-cut-rank-lemma.md) excludes a strictly
+saving exact compiler consisting only of coordinate-aligned C/H children and
+cut-preserving scalar overhead. Native changing/shared XOR frames remain
+outside that scoped exclusion.

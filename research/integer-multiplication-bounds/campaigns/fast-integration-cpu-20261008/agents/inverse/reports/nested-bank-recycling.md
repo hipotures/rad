@@ -23,7 +23,8 @@ borrowed bank. It does not permit passing a partially repaired state to A.
 The previous native missing-inner-repair counterexample already demonstrates
 that the outer repair is not a substitute for this exact completion.
 
-In the conditional reflection, inner BIT fanout reads only parity(U_i).
+In the conditional reflection, inner BIT fanout reads only parity(U_i),
+meaning its integer low bit U_i mod2, not population parity of all its bits.
 The high bits of outer U_i and every outer T_i bit are dormant until the
 fanout finishes. They may therefore be inner scratch, provided those parity
 sources stay outside it and all inner repairs finish before the outer guarded
@@ -118,6 +119,16 @@ why endpoint controls must avoid their own guard bank. This is a newly
 executed finite negative, while the earlier every-G statement is analytic.
 The failed certificate's zero counters are not an assertion that no partial
 program ran; its successful return object was never produced.
+
+[20261008T1650Z-reflection-recycle-four-target-inner-G3](../runs/20261008T1650Z-reflection-recycle-four-target-inner-G3/protocol.json)
+now passes both complete oracles on all 33,554,432 physical records, with
+15,728,640 valid unique tags and every original bank pattern. Four high-U
+bits and five outer-T bits supply the actual inner scratch. Its 109 events
+contain 48 F_u calls and 480 rotations. The 98 forward/inverse repairs
+process 1,431,927,808 summed records, restoring 9,243,272 wrong outer
+records and 1,743,512 nonzero invalid intermediates. Native runtime is
+1,537 seconds. This completes the distinct three-bit-inner control and
+restores the original owned Python worker; no address bits were added.
 
 ## Full unique tags resolve zero-padding ambiguity
 
