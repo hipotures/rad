@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "run_id": "20261008T213935Z-transfer-row-budget",
+  "recorded_utc": "2026-10-08T21:45:37.851393+00:00",
+  "actual_completion_utc": "2026-10-08T21:39:35.711377+00:00",
+  "branch": "research/integer-mult-breakthrough-20261008",
+  "base_commit": "d1ef326f0fc8b6f888887d8132e0854d3d92b5b2",
+  "python": "3.14.4",
+  "workers": 4,
+  "hypothesis": "Explicit depth/row budget may permit full-width children while preserving termination and a contracting complete moment.",
+  "command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/transfers/row_budget_recursion.py",
+    "--workers",
+    "4",
+    "--output",
+    "research/integer-mult-breakthrough/work/transfers/20261008T213147Z-transfer-row-budget/results/full.json"
+  ],
+  "inputs": {
+    "research/integer-mult-breakthrough/code/transfers/row_budget_recursion.py": {
+      "bytes": 7171,
+      "sha256": "3fd568d6506a480faf8d62b675d4c858e3d2f1c1fd6f516f9704625ac981fb16"
+    },
+    "declared-toy-profile": {
+      "m": 4,
+      "W": 10,
+      "children": {
+        "1": 4,
+        "2": 1,
+        "4": 6
+      },
+      "precision": "Source-defined illustrative recurrence; not an actual Gaussian guard."
+    }
+  },
+  "raw_result": {
+    "path": "research/integer-mult-breakthrough/work/transfers/20261008T213147Z-transfer-row-budget/results/full.json",
+    "bytes": 10294,
+    "sha256": "c6938e31751794f606bdca06b7dbf2884565098ec561e78aa8a2c2b1103a4da2",
+    "recovery": "Source deterministically regenerates all exact values; timestamp and timings vary."
+  },
+  "scientific_scope": "Declared nonnegative cost and guard recurrences only; no scalar/frame phase program or actual all-size multiplication transfer.",
+  "status": "EXACT_TOY_SAME_WIDTH_ROW_BUDGET_CERTIFICATE"
+}

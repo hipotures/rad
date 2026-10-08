@@ -1,0 +1,33 @@
+{
+  "run_id": "20261008T2142Z-complex-five-subset-envelope",
+  "base_commit": "d1ef326f0fc8b6f888887d8132e0854d3d92b5b2",
+  "branch": "research/integer-mult-breakthrough-20261008",
+  "worker_count": 1,
+  "native_threads_per_worker": 1,
+  "seeds": "Deterministic; no random seed",
+  "python": "Python 3.14.4",
+  "inputs": {
+    "code/complex/five_subset_envelope.py": "db6f3ce7ff5fb9fbbe2ba82568159f168aeceae4aba299ec8185b6996d45ceb1",
+    "code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9"
+  },
+  "outcome": "PASS: dyadic scalar identities and optimistic necessary role envelope only.",
+  "scope": "Finite exact or exploratory characteristic arithmetic as described in linked complex reports; no new all-size exponent",
+  "source_configuration_note": "Source hashes identify the retained final implementation; failed first attempts are described in report.md rather than treated as successful certificates.",
+  "commands": [
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T2142Z-complex-five-subset-envelope/results/envelope.json"
+    ]
+  ],
+  "source_recovery": {
+    "prior_source_sha256": "db6f3ce7ff5fb9fbbe2ba82568159f168aeceae4aba299ec8185b6996d45ceb1",
+    "current_source_sha256": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+    "patch": "configs/complex/five-envelope-precision-annotation.patch",
+    "instruction": "Apply this zero-context annotation-only patch in reverse to a separate source copy (patch --reverse; or git apply --reverse --unidiff-zero in an isolated copied tree). The recovered source SHA256 must equal prior_source_sha256. Do not reverse-edit the live research checkout.",
+    "patch_sha256": "3da34070e57030717d071c558dfe32abaa8e3af272278bc7908aa6154df92578"
+  },
+  "namespace_timestamp_scope": "Manually allocated UTC-style attempt namespace, not an instrumented wall-clock start. Exact initial wall-clock start unavailable; any perf_counter duration is measured elapsed time."
+}

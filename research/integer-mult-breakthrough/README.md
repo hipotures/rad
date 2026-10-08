@@ -18,7 +18,7 @@ The goal is a structural route to a conditional integer-multiplication exponent 
   changed assumptions and continuation criteria for the live tracks.
 - [Reproduction](reproduce.md) and [artifact recovery](artifact-manifest.json).
 
-## First evidence and current directions
+## Evidence and current directions
 
 The inherited assembly's exact arithmetic ceiling and the complete frozen
 moments both rule out reaching 1e-4 through parameter polishing or positive
@@ -37,13 +37,40 @@ These facts constrain their stated fixed models, not other algorithms.
   two-coordinate unitary rows are monomial or balanced; an exact paid
   three-coordinate macro escapes that angle restriction. This auxiliary model
   does not bound the original nonunitary bulk network.
+- [Weight-five mixed pair centers](reports/complex/five-subset-mixed-pair.md)
+  and [general odd-weight kernels](reports/obstructions/odd-weight-kernel-family.md):
+  exact scalar components change the label/feature geometry. At h20 the
+  optimistic necessary side-role budget is about 31.42 roles per source.
+  A [joint weighted tree](reports/complex/weighted-tree-and-frame-obstruction.md)
+  instead uses about 103.33 and has nested-frame obstructions. This redirects
+  the search toward different circuits and chronology.
+- [Independent component review](reports/transfers/five-subset-component-review.md):
+  paid complete-stream copied reads survive; the new scatter needs an
+  eight-bit denominator allowance and updated endpoint phases. The old guard
+  and a full native compiler require separate verification.
+- [Literal auxiliary dirty scalar words](reports/synthesis/global-incidence-first-discriminators.md),
+  [frozen native ceiling](reports/synthesis/frozen-native-ledger-ceiling.md)
+  and [stationary joint-frame obstruction](reports/synthesis/static-joint-frame-obstruction.md):
+  scalar cancellations are exact, but stationary compressed address frames
+  cannot realize the proposed target intertwiners. SMT timeouts are UNKNOWN.
+- [Shared dynamic scatter factors](reports/synthesis/shared-twist-factorization.md):
+  a literal arbitrary-dirty auxiliary word pays 2(h+v) rank-one permutations
+  against 6v rank-two permutations in a specified unshared implementation.
+  Endpoint absorption and a complete native cost ledger are the next tests.
+- [Same-width row/depth budgets](reports/transfers/same-width-row-budget.md):
+  an exact toy recurrence demonstrates terminating same-width children under
+  complete contracting moments. A real native phase program and its changed
+  precision/layout obligations remain open.
 
 Live structural work includes cancellation-allowing reversible synthesis,
 changed spectral interfaces, and a weight-five complex family. The latter uses
 `f(t)=(t-1)(t-3)/8` on five-subset intersections, keeping binary label dimension
 h while changing central features and side corrections. Efficient paid side
 circuits and the complete child distribution remain open; its optimistic
-component envelope is not an exponent certificate.
+component envelope is not an exponent certificate. Arbitrary symmetric
+quadratic phase frames are a new hypothesis for broadening eligible edge
+changes. The old library already contains alternating projector phases;
+their identity alone is not a new discovery or a larger saving.
 
 Registered CI checks replay only their stated finite arithmetic and semantic
 controls. There is no formal proof package or external human review.

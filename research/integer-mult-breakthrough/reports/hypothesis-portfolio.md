@@ -1,4 +1,4 @@
-# Initial structural hypothesis portfolio
+# Structural hypothesis portfolio
 
 Opened 2026-10-08 21:01 UTC on `research/integer-mult-breakthrough-20261008`.
 All new research is authored in this topic. The coordinator and three autonomous
@@ -33,8 +33,12 @@ Owner: autonomous `complex_primitives` agent.
 - First discriminator: reconstruct all complex children and paid scalar
   charges, enclose the characteristic root, then compare optimistic changes
   to required `b > 20/189981`.
-- Status: complete child reconstruction reported; exact root and sensitivity
-  experiments in preparation. No new complex circuit has been accepted.
+- Status: full frozen root independently enclosed. Mixed pair/complement
+  centers lower weight-five feature loss to `C(h,2)*(h-2)+4`. At h20 the
+  optimistic full moment requires fewer than 31.42 local roles/source.
+  Direct scalar sides and the joint weighted tree exceed that allowance;
+  the latter also has independently checked nested-frame obstructions.
+  [Component details](complex/five-subset-mixed-pair.md).
 - Continue when a changed family has an honest optimistic bound crossing the
   required component saving; otherwise retain the scoped ceiling and replace it.
 
@@ -50,8 +54,12 @@ Owner: autonomous `reversible_synthesis` agent.
 - First discriminators: exact scalar identities, projector-weighted
   counterexamples, literal reversible dirty restoration, and optimistic
   controller sensitivity; naturally independent variants use four workers.
-- Status: global side-cancellation identity identified as a HYPOTHESIS for
-  physical implementation. Scalar equality alone cannot pay payload movements.
+- Status: literal auxiliary scalar words restore every source/dirty column.
+  Stationary compressed intertwiners fail an all-size invariant-space argument
+  and exact small witnesses. A new dynamic [shared twisted scatter](synthesis/shared-twist-factorization.md)
+  passes every-address group-algebra replay and reduces its declared rank mass
+  from 12v to 2(h+v). Integration and endpoint absorption remain hypotheses.
+  Two solver formulations retain UNKNOWN timeouts rather than false optima.
 - Continue only if surviving projector/semantic identities admit a paid
   physical implementation with a scale-changing cost reduction.
 
@@ -65,7 +73,11 @@ Owner: autonomous `coupled_transfers` agent.
   frozen `a < (1-beta)b` bottleneck; merely deleting that inequality is invalid.
 - First discriminator: derive a complete optimistic cost ledger and size
   decreases, then falsify unpaid/circular conversion shortcuts with exact cases.
-- Status: guarded CRT and packed Gaussian open boundaries under investigation.
+- Status: unchanged positive type mixing cannot repair complete frozen moments;
+  carry/padding counterexamples reject unpaid spectral cancellations. A new
+  [depth/row budget](transfers/same-width-row-budget.md) permits same-width
+  children in an explicitly contracting toy recurrence. A complete native
+  schedule and its O(e log(e)) precision/layout charges remain open.
 - Continue only for a recurrence whose paid conversions and well-founded
   recursion remain compatible with a target-crossing parameter range.
 
@@ -82,12 +94,25 @@ Owner: coordinator.
 - First discriminator: read primary unitary/well-conditioned Fourier circuit
   results, reconstruct their potentials on exact small transforms, and test
   what happens after an explicit nonunitary change of basis.
-- Status: Ailon's 2013 and 2014 papers and Bürgisser--Lotz's bounded-coefficient
-  convolution result identified; scope and executable controls are next.
+- Status: exact dyadic unitary row/entropy controls and a paid three-coordinate
+  escape are retained with the restricted-model scope. General odd-weight
+  kernels and finite feature spans are checked. Primary graph-polynomial and
+  intersection-summation literature informs new constructions. Arbitrary
+  symmetric quadratic phase differences are now under independent scrutiny;
+  the old library's alternating projector identity is attributed separately.
 - Continue by translating every useful source into a lemma, counterexample,
   concrete construction, or scoped quantitative cost constraint.
 
 ## Evidence policy and coordination
+
+The next decisive experiments are complete endpoint integration of the shared
+scatter, the algebra and paid tape realization of general quadratic edge
+frames, and a fresh one-axis chronology compatible with depth-budget recursion.
+The new phase model alone cannot repair a node simultaneously required to fix
+and annihilate the same nonzero source/target span vector. A changed chronology
+or cancellation must remove that conflict. These are hypotheses, not accepted
+larger kappa results. Every auxiliary comparison will receive a full new ledger
+before being compared with the frozen native controller.
 
 Numerical roots are discovery evidence; accepted inequalities use rational
 bounds or rigorous enclosures. Tiny-instance optima are local to the specified

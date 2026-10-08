@@ -1,0 +1,69 @@
+{
+  "run_id": "20261008T2155Z-complex-five-side-screen",
+  "base_commit": "d1ef326f0fc8b6f888887d8132e0854d3d92b5b2",
+  "worker_count": 4,
+  "native_threads_per_worker": 1,
+  "randomness": "None; exact deterministic support generation",
+  "python": "Python 3.14.4",
+  "inputs": {
+    "code/complex/five_side_screen.py": "838b8293766939d2657f5ef950b8bcac29b279eba3ea4c2c52ddc6034855aca6",
+    "code/complex/block_exclusion.py": "28c89e844561e34dbb7a79c47ddc5ccca44dc814b1ead378252db939ac8d12d2"
+  },
+  "commands": [
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/five_side_screen.py",
+      "--h",
+      "10",
+      "--block-size",
+      "2",
+      "--base",
+      "2",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/five_side_screen.py",
+      "--h",
+      "10",
+      "--block-size",
+      "3",
+      "--base",
+      "2",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/five_side_screen.py",
+      "--h",
+      "12",
+      "--block-size",
+      "2",
+      "--base",
+      "2",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/five_side_screen.py",
+      "--h",
+      "12",
+      "--block-size",
+      "3",
+      "--base",
+      "2",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ]
+  ],
+  "outcome": "All support checks pass; direct side-family role cost is too large to prioritize",
+  "scope": "Cancellation-free scalar side DAGs only; centers, carrier matching, phase feasibility and asymptotic integration excluded",
+  "namespace_timestamp_scope": "Manually allocated UTC-style attempt namespace, not an instrumented wall-clock start. Exact initial wall-clock start unavailable; any perf_counter duration is measured elapsed time."
+}

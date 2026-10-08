@@ -1,0 +1,63 @@
+{
+  "run_id": "20261008T214226Z-complex-frame-obstruction",
+  "base_commit": "d1ef326f0fc8b6f888887d8132e0854d3d92b5b2",
+  "branch": "research/integer-mult-breakthrough-20261008",
+  "namespace_timestamp_scope": "UTC-generated at launch; the run ID records launch time to one second",
+  "worker_count": 4,
+  "native_threads_per_worker": 1,
+  "worker_virtual_memory_limit_bytes": 10737418240,
+  "python": "3.14.4",
+  "randomness": "None; deterministic support, binary-span and radical computations",
+  "inputs": {
+    "code/complex/frame_feasibility.py": "ea8c9af6baad4eebeb52af4a671f98e900e13417ef12c11db5012e35efa8b764",
+    "code/complex/tree_intersection.py": "ebb65e3884ec7b916b7c1e1aa4cedbf1a28e0fda5623e835c793511c25d2a15a"
+  },
+  "commands": [
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/frame_feasibility.py",
+      "--h",
+      "8",
+      "--combine",
+      "balanced",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/frame_feasibility.py",
+      "--h",
+      "8",
+      "--combine",
+      "serial",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/frame_feasibility.py",
+      "--h",
+      "10",
+      "--combine",
+      "balanced",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/frame_feasibility.py",
+      "--h",
+      "12",
+      "--combine",
+      "balanced",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ]
+  ],
+  "outcome": "PASS: independent exact output supports or stored nonzero radical witnesses",
+  "scope": "Exact nodewise necessary obstruction for a fixed cancellation-free DAG under monotone nondegenerate nested-frame chronology"
+}

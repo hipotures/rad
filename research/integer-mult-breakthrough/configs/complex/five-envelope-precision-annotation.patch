@@ -1,0 +1,19 @@
+--- a/research/integer-mult-breakthrough/code/complex/five_subset_envelope.py
++++ b/research/integer-mult-breakthrough/code/complex/five_subset_envelope.py
+@@ -44,0 +45,12 @@
++    # The dense substituted scatter pays finer scalar coefficients than
++    # the inherited triple centers. Independent track C identified this
++    # explicit denominator-256 witness; retaining dyadicity alone misses it.
++    replaced=((0,1),(0,2))
++    target={1,4,5,6,7}
++    def alpha(pair):
++        intersection=len(set(pair)&target)
++        return Q(int(intersection==2),4)-Q(3*intersection,32)
++    gamma=Q(3,8)+sum((alpha(pair) for pair in replaced),Q(0))
++    outside=(0,3)
++    witness=alpha(outside)+gamma/8
++    if witness!=Q(9,256):raise ValueError('dense scatter precision witness failed')
+@@ -46,0 +59,3 @@
++                dense_scatter_denominator_bits=8,
++                denominator_256_witness=dict(replaced_pairs=replaced,target=sorted(target),
++                    unreplaced_pair=outside,gamma=gamma,scatter_coefficient=witness),

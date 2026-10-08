@@ -1,0 +1,62 @@
+{
+  "run_id": "20261008T213708Z-complex-tree-intersection",
+  "base_commit": "d1ef326f0fc8b6f888887d8132e0854d3d92b5b2",
+  "branch": "research/integer-mult-breakthrough-20261008",
+  "namespace_timestamp_scope": "UTC-generated at launch; the run ID records launch time to one second",
+  "worker_count": 4,
+  "native_threads_per_worker": 1,
+  "worker_virtual_memory_limit_bytes": 10737418240,
+  "python": "3.14.4",
+  "randomness": "None; deterministic support, binary-span and radical computations",
+  "inputs": {
+    "code/complex/tree_intersection.py": "ebb65e3884ec7b916b7c1e1aa4cedbf1a28e0fda5623e835c793511c25d2a15a"
+  },
+  "commands": [
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/tree_intersection.py",
+      "--h",
+      "10",
+      "--combine",
+      "balanced",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/tree_intersection.py",
+      "--h",
+      "12",
+      "--combine",
+      "balanced",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/tree_intersection.py",
+      "--h",
+      "16",
+      "--combine",
+      "balanced",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/tree_intersection.py",
+      "--h",
+      "20",
+      "--combine",
+      "balanced",
+      "--output",
+      "<fresh-output-for-setting>.json"
+    ]
+  ],
+  "outcome": "PASS: independent exact output supports or stored nonzero radical witnesses",
+  "scope": "Joint weighted scalar DAG only; no physical frame assignment, carrier matching, center addition, or asymptotic certificate"
+}

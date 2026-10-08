@@ -1,0 +1,17 @@
+{
+  "recorded_utc": "2026-10-08T21:59:42.725618+00:00",
+  "starting_commit": "d1ef326f0fc8b6f888887d8132e0854d3d92b5b2",
+  "registry": "tools/ci_checks.json",
+  "registry_sha256": "5a82bdb54dcbd02a99d872518e9f4f81dc5b01dbfe5a7fcd5c2a53773f7e0ef3",
+  "commands": [
+    "python3 tools/run_ci.py --group repository --all --output NEW",
+    "python3 tools/run_ci.py --group smoke --all --output NEW",
+    "python3 tools/run_ci.py --group certificates --all --output NEW"
+  ],
+  "report_paths": [
+    "work/ci/20261008T2200Z-repository/report.json",
+    "work/ci/20261008T2153Z-smoke/report.json",
+    "work/ci/20261008T2200Z-certificates/report.json"
+  ],
+  "note": "Smoke effective inputs unchanged after its run; two added certificate checks and final registry were verified in final repository/certificate runs. Full receipts bind every effective input hash. Execution directory labels are namespaces; report metadata is authoritative."
+}

@@ -43,6 +43,39 @@ evidence is packed into this topic's evidence namespaces without altering
 originals. Run protocols, compact summaries and source hashes distinguish
 retained finite evidence from analytical assumptions.
 
+## Additional structural components
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/test_complex.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_certificates.py
+python3 -B research/integer-mult-breakthrough/code/obstructions/odd_weight_kernels.py --workers 4 --output research/integer-mult-breakthrough/work/REPRO-UNIQUE/odd/results.json
+python3 -B research/integer-mult-breakthrough/code/transfers/row_budget_recursion.py --workers 4 --output research/integer-mult-breakthrough/work/REPRO-UNIQUE/row-budget/results.json
+python3 -B research/integer-mult-breakthrough/code/transfers/copied_center_review.py --workers 4 --output research/integer-mult-breakthrough/work/REPRO-UNIQUE/copied-review/results.json
+python3 -B research/integer-mult-breakthrough/code/synthesis/shared_twist_factorization.py --workers 4 --output research/integer-mult-breakthrough/work/REPRO-UNIQUE/shared-twist/results
+```
+
+The complex controls cover exact moments, scalar output partitions, corruption
+tests, hypothetical role caps and restricted frame obstructions. Synthesis
+replays the complete auxiliary source/sink/dirty maps and a necessary frozen
+native ceiling. The shared scatter checks actual odd-field address maps on
+arbitrary dirty payload functions; its cost comparison is between two named
+auxiliary words. The row-budget check is a declared toy recurrence. Neither
+the toy nor the auxiliary components establish an improved native network.
+
+Detailed discovery commands and failed repairs are in each retained run report.
+The optional XOR-SMT experiments require the wheel/version/hash in
+`configs/synthesis/solver-provenance.json` and requirements file. Their retained
+UNKNOWN results are inconclusive; solver timeouts and exact timings need not
+recur on a different host. SMT2 input text is regenerable from retained source
+and is omitted from the four-format gzip publication. Solver binaries and
+environments are excluded from Git. Ordinary bounded CI needs no solver.
+
+The coordinator reran the complex and synthesis verifiers, reviewed the static
+intertwiner and dynamic scatter algebra, and checked the row-budget and
+copied-center controls. Track C independently reconstructs the serialized
+weighted DAG without importing its producer. Internal independent analysis
+is not formal verification or external peer review.
+
 The full mathematical motivation and limitations are in the linked reports.
 Primary literature and framework provenance are pinned in input-manifest.json;
 no downloaded source modifications are required to run these new checks.
