@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/tmp/rad-publication-portability-9h7f4ss2/corrupted-bundle/verify.py", line 275, in <module>
+    main()
+    ~~~~^^
+  File "/tmp/rad-publication-portability-9h7f4ss2/corrupted-bundle/verify.py", line 260, in main
+    result = replay(args.bundle.resolve())
+  File "/tmp/rad-publication-portability-9h7f4ss2/corrupted-bundle/verify.py", line 111, in replay
+    manifest, hashes = verify_manifest(bundle)
+                       ~~~~~~~~~~~~~~~^^^^^^^^
+  File "/tmp/rad-publication-portability-9h7f4ss2/corrupted-bundle/verify.py", line 77, in verify_manifest
+    require(actual == expected, "Publication hash mismatch: " + relative)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/rad-publication-portability-9h7f4ss2/corrupted-bundle/verify.py", line 53, in require
+    raise AssertionError(message)
+AssertionError: Publication hash mismatch: data/selected-normal-input.json

@@ -61,7 +61,7 @@ logarithms with448-bit outward rational enclosures prove the
 normalized positive-exponential Taylor inequality. The maximum
 child148771/148877 has exact minimal halving degree974, compared
 with487 before the source-frame change. W<2^50 and the unchanged
-complex272/41 stock give joint coefficient122109.12<123000.
+complex272/41 stock give joint coefficient122098.08<123000.
 Complete nested stock p^123000, one leading prefix and padding,
 and suffix492000(log2b_input+8) are paid and certified. The old
 73000 stock is explicitly superseded for this construction.
@@ -125,3 +125,15 @@ telemetry closure continue until that deadline. For further gains,
 bit structure and per-role source choices at other stages are
 promising; all-residual complex batching alone is presently
 nonlimiting. These are leads, not additional certified results.
+
+
+## Publication clarification
+
+A targeted publication-text review corrected the displayed joint-stock
+coefficient to `(50*974+41*272)*(2+1/25)=122098.08`; the certified
+`p^123000` reservation, source, exact certificates and kappa are unchanged.
+The stricter enhanced complex guard charges
+`2*G*W^2+8*s+4*W+4+32*m<E`; `8*s+32*m` alone is not the complete depth
+charge. Separate campaign-agent reviews are not external human peer review.
+The later PR17 and PR18 claims state larger savings and remain unreviewed
+by this campaign; no current-best or priority claim is made.

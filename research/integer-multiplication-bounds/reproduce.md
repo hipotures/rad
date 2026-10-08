@@ -589,3 +589,16 @@ be fetched with the recorded gh API commands. The giant native
 address table/prime are constructively specified mathematical fixed
 setup, not a retained materialized binary artifact. This limitation
 is independent of recovery of the finite graph/certificates.
+
+
+## Published standalone draft package
+
+The final user-requested draft is
+https://github.com/CrocSwap/integer-mult-bounds/pull/20. Follow
+[the publication report](reports/upstream-publication.md) to obtain its
+pinned fork head or reconstruct it from the retained patch against main.
+The fresh portable entry point uses only the Python3.10+ standard library.
+Targeted publication checks passed full twelve-row arithmetic replay,
+unrelated-path relocation, corruption rejection and fresh patch recovery.
+These checks do not repeat historical finite reconstruction or change the
+conditional native-table/shared-prime/eventual-threshold qualifications.

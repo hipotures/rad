@@ -304,3 +304,13 @@ joint row stock are independently rederived. See
 [the complete result](reports/source-framed-final-composition.md).
 All previous discoveries/failures remain preserved. Deadline10:00UTC
 (12:00CEST) is unchanged; publication continues through it.
+
+
+## Final publication
+
+Scientific research closed at the user-extended 2026-10-08T10:00:00Z deadline
+without resetting its original campaign clock. The requested attributed
+upstream draft is PR20, with source/replay/recovery recorded in
+reports/upstream-publication.md and runs/20261008T1030Z-upstream-publication/.
+The final conditional witness is5834475279233921242758637328164947/(5*10^39).
+No current-best claim or external human peer-review claim is made.

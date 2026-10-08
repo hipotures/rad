@@ -25,3 +25,7 @@ Existing benchmark source/protocol/results and all independent reviews
 remain recoverable; giant native basis/table/prime remain constructive
 mathematical setup, not materialized byte artifacts. Exact nondeterministic
 perf binary recovery gap remains stated in artifact-manifest.json.
+
+The requested upstream draft PR20 is now published and independently byte-checked
+through gh, with full source credit and the requested AI-assistance sentence.
+See upstream-publication.md for fork commit, reconstruction patch and limits.

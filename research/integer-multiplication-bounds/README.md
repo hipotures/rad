@@ -56,7 +56,9 @@ h53 native table is not materialized.
 - [Previous final early-allocation composition](reports/final-early-composition.md)
 
 Research concluded at12:00CEST with its original campaign clock
-preserved. Final publication continues.
+preserved. The requested [upstream draft PR20](https://github.com/CrocSwap/integer-mult-bounds/pull/20)
+is published with full attribution and a portable exact-arithmetic package.
+[Publication and recovery](reports/upstream-publication.md) record its final head and scope.
 
 All older accepted interfaces remain preserved. The generic compact
 R473026 checkpoint is
@@ -65,7 +67,7 @@ cutoff 1033, and its balanced variant is
 `15911230743666875756818042088353/10^40`. Independently promoted
 R472985 compositions and the earlier old-movement witness
 `12053467103858103170301/(125*10^37)` retain their own reports and
-limitations. Research continues through the authorized deadline.
+limitations. Scientific work closed at the authorized deadline; publication is complete.
 
 - [Full goal](GOAL.md)
 - [Campaign clock, protocol and resume state](runs/20261007T222521Z-campaign/protocol.json)
