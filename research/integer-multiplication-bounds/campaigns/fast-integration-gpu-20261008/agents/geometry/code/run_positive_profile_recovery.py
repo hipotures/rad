@@ -26,7 +26,12 @@ for config in configs:
     source_receipt = Path(config['source_receipt'])
     source = json.loads(source_receipt.read_text())
     assert 'PASS' in source['status']
-    producer = source['producer']
+    weighted = source.get('weighted_selected')
+    if weighted is not None and Path(weighted['fixture']).resolve() == Path(config['expected']).resolve():
+        assert weighted['fixture_sha256'] == sha256(Path(config['expected']).read_bytes()).hexdigest()
+        producer = weighted['producer']
+    else:
+        producer = source['producer']
     case = args.work/config['case_id']
     case.mkdir()
     receipt = case/'receipt.json'

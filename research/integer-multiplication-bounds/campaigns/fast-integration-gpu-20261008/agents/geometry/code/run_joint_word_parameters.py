@@ -52,6 +52,9 @@ def main():
                          transition_audit=str(audit),transition_audit_sha256=digest(audit),input_binary_sha256=digest(Path(config['transitions']))))
         status = dict(utc=datetime.now(timezone.utc).isoformat(),completed=len(rows),total=len(configs),elapsed_seconds=time.monotonic()-start,workers=1)
         (args.work/'status.json').write_text(json.dumps(status,indent=2)+'\n')
+        # A completed row is immutable and reviewable while the rest of a
+        # substantive queue continues. Full transition tables stay external.
+        (args.work/'completed-rows.json').write_text(json.dumps(rows,indent=2)+'\n')
         print(json.dumps(status),flush=True)
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(dict(status='PASS EXACT RATIONAL-BASIS EXECUTED WORD PROFILE COHORT',rows=rows,

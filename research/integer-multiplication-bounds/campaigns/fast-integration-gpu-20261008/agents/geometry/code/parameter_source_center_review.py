@@ -37,8 +37,15 @@ def check(h,beta):
                 coefficient_max=str(max(abs(x) for v in [p,xi,pc,nuc] for x in v)),minimum_coordinate=str(min(abs(x) for v in [p,xi,pc,nuc] for x in v)),
                 scope='One representative triple and center suffice by coordinate-permutation symmetry; ordered projector profiles and full source-pair data remain separate')
 
-p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args();assert not a.output.exists()
-rows=[check(h,b) for h,b in [(23,Q(1,51)),(23,Q(1,6)),(23,Q(5,3)),(23,Q(1,24)),(25,Q(1,57)),(25,Q(1,6))]]
-a.output.write_text(json.dumps(dict(status='PASS DIRECT RATIONAL NEW-PARAMETER SOURCE AND COPIED-CENTER REVIEW',rows=rows,
-    completed_utc=datetime.now(timezone.utc).isoformat(),source_sha256=sha256(Path(__file__).read_bytes()).hexdigest()),indent=2)+'\n')
-print(json.dumps(dict(status='PASS',parameters=len(rows))),flush=True)
+if __name__=='__main__':
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--parameters',type=Path)
+    a=p.parse_args();assert not a.output.exists()
+    parameters=[(23,Q(1,51)),(23,Q(1,6)),(23,Q(5,3)),(23,Q(1,24)),(25,Q(1,57)),(25,Q(1,6))]
+    if a.parameters:
+        parameters=[(int(row['h']),Q(row['beta'])) for row in json.loads(a.parameters.read_text())]
+    rows=[check(h,b) for h,b in parameters]
+    a.output.write_text(json.dumps(dict(status='PASS DIRECT RATIONAL NEW-PARAMETER SOURCE AND COPIED-CENTER REVIEW',rows=rows,
+        completed_utc=datetime.now(timezone.utc).isoformat(),source_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),
+        parameter_input_sha256=sha256(a.parameters.read_bytes()).hexdigest() if a.parameters else None),indent=2)+'\n')
+    print(json.dumps(dict(status='PASS',parameters=len(rows))),flush=True)

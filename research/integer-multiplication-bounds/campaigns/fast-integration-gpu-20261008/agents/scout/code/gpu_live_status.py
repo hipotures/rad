@@ -33,14 +33,16 @@ def main():
     coverage={};root=args.work_root/'derived/scout';root.mkdir(parents=True,exist_ok=True)
     while True:
         records=[]
-        for protocol_path in sorted(root.glob('gpu-basis-*/protocol.json')):
+        for protocol_path in sorted(set(root.glob('gpu-basis-*/protocol.json')) | set(root.glob('gpu-boundary-*/protocol.json'))):
             directory=protocol_path.parent
             try:protocol=json.loads(protocol_path.read_text())
             except ValueError:continue
             summary=directory/'summary.json'
             state='complete' if summary.exists() else 'failed' if (directory/'failure.json').exists() else 'stopped' if (directory/'termination.json').exists() else 'running'
-            record=json.loads(summary.read_text()) if summary.exists() else tail(directory/'progress.jsonl')
-            attempts=record.get('attempts',0);num=protocol['parameter_pairs'];batch=protocol['batch']
+            record=json.loads(summary.read_text()) if summary.exists() else json.loads((directory/'failure.json').read_text()) if state=='failed' else tail(directory/'progress.jsonl')
+            if state=='failed' and 'NO PRIME REPLAY ACCEPTED' in record.get('status',''):
+                record={**record,'attempts':0,'source_pairs_completed':0,'prime_replays_completed':0,'prime_index':0}
+            attempts=record.get('attempts',0);num=protocol.get('parameter_pairs',1);batch=protocol['batch']
             key=str(directory)
             known=protocol['source_sha256'] in modes or protocol.get('parameter_rng_dtype') in ('int32','int64')
             dtype={'int32':np.int32,'int64':np.int64}.get(protocol.get('parameter_rng_dtype'),modes.get(protocol['source_sha256']))
@@ -89,12 +91,26 @@ def main():
                 value['source_weight_catalogue_classes']=1;value['tested_pairs_by_source_fixture']=None;value['tested_weight_classes_by_source_fixture']=None
                 value['coverage_method']='Exhaustive lexicographic source-pair partition; recorded CRT fields repeat pairs to answer distinct required rank questions.'
                 value['method_kind']=protocol['method_kind'];value['source_family_size']=protocol['source_family_size']
-                value['source_partition']=[protocol['source_partition_start_inclusive'],protocol['source_partition_end_exclusive']]
+                value['source_partition']=[protocol.get('source_partition_start_inclusive',0),protocol.get('source_partition_end_exclusive',protocol['source_family_size'])]
                 value['source_pairs_completed']=record.get('source_pairs_completed',record.get('source_pairs_completed_current_prime'))
                 value['prime_index']=record.get('prime_index');value['prime_replays_completed']=record.get('prime_replays_completed')
                 value['primes_required']=len(protocol['primes']);value['upper_rank_violations']=record.get('upper_rank_violations')
                 value['field_profile_disagreements']=record.get('field_profile_disagreements')
+                if 'single_swap' in protocol['method_kind']:
+                    value['permutations_required']=len(protocol['selected_indices']);value['completed_permutations']=record.get('completed_permutations',0)
+                    value['catalogue_range']=protocol['catalogue_range'];value['coverage_method']='Distinct actual single-swap endpoint signatures; complete lexical source family in two fields per order. No raw binary pivots retained.'
                 if value['next_batch'] is not None:value['next_batch']={'size':batch,'varying_parameter_pairs':False,'varying_source_pairs':True,'prime_index':record.get('prime_index'),'fields':len(protocol['primes'])}
+            elif protocol.get('method_kind','').startswith('exhaustive_'):
+                value=records[-1]
+                value['method_kind']=protocol['method_kind'];value['tested_canonical_beta_pairs']=None
+                value['tested_pairs_by_source_fixture']=None;value['source_weight_catalogue_classes']=None
+                value['tested_source_weight_classes']=None;value['tested_weight_classes_by_source_fixture']=None
+                value['field_prime']=protocol['prime'];value['field_classes_catalogue']=protocol.get('joint_classes_total',protocol.get('field_classes_total'))
+                value['field_class_partition']=protocol.get('joint_class_partition',protocol.get('class_partition'))
+                value['unique_field_joint_classes_completed']=record.get('unique_joint_classes_completed',num if state=='complete' else None)
+                value['rational_sample_controls']=record.get('rational_sample_controls') if isinstance(record.get('rational_sample_controls'),int) else len(record.get('rational_sample_controls',[]))
+                value['coverage_method']='Exhaustive finite-field canonical weight-class Cartesian enumeration; field discoveries are separate from rational full-source-family certificates.'
+                if value['next_batch'] is not None:value['next_batch']={'size':batch,'varying_field_weight_class_pairs':True,'source_fixtures':2,'fields':1,'mutations':0}
         gpu=[];applications=[]
         for query,target in [('index,uuid,utilization.gpu,memory.used',gpu),('pid,gpu_uuid,process_name',applications)]:
             kind='gpu' if target is gpu else 'compute-apps'
@@ -106,11 +122,11 @@ def main():
         for pid,uuid,name in applications:
             try:argv=(Path('/proc')/pid/'cmdline').read_bytes().decode().split('\0')
             except (OSError,UnicodeDecodeError):continue
-            if not any('/agents/scout/code/gpu_basis_' in x for x in argv):continue
+            if not any('/agents/scout/code/gpu_basis_' in x or '/agents/scout/code/gpu_boundary_' in x for x in argv):continue
             device=int(argv[argv.index('--device')+1]) if '--device' in argv else None
-            processes.append({'pid':int(pid),'gpu_uuid':uuid,'device':device,'script':next(x for x in argv if '/agents/scout/code/gpu_basis_' in x)})
-        value={'updated_utc':datetime.now(timezone.utc).isoformat(),'status_scope':'Actual sampled parameter discovery only; no full family, local frame, bridge or kappa certificate.','completed_experiments':sum(x['state']=='complete' for x in records),'running_experiments':sum(x['state']=='running' for x in records),'gpu_observation':[{'device':int(x[0]),'uuid':x[1],'utilization_percent':int(x[2]),'memory_mib':int(x[3])} for x in gpu],'actual_gpu_processes':processes,'experiments':records}
-        temporary=root/'live-status.json.tmp';temporary.write_text(json.dumps(value,indent=2)+'\n');temporary.replace(root/'live-status.json')
+            processes.append({'pid':int(pid),'gpu_uuid':uuid,'device':device,'script':next(x for x in argv if '/agents/scout/code/gpu_basis_' in x or '/agents/scout/code/gpu_boundary_' in x)})
+        value={'updated_utc':datetime.now(timezone.utc).isoformat(),'status_scope':'Sample discovery and separately recorded complete DATA-family rank certificates; no local-frame, compiler, bridge or kappa certificate.','completed_experiments':sum(x['state']=='complete' for x in records),'running_experiments':sum(x['state']=='running' for x in records),'gpu_observation':[{'device':int(x[0]),'uuid':x[1],'utilization_percent':int(x[2]),'memory_mib':int(x[3])} for x in gpu],'actual_gpu_processes':processes,'experiments':records}
+        temporary=root/'live-status.json.tmp';temporary.write_text(json.dumps(value,separators=(',',':'))+'\n');temporary.replace(root/'live-status.json')
         time.sleep(args.interval)
 
 if __name__=='__main__':main()

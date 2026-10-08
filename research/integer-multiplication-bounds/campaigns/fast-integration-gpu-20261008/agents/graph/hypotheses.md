@@ -1,3 +1,5 @@
+Campaign closed at the user's request. Final accepted conditional κ=5.143624568e-5; see the [final handoff](../../reports/final-campaign-handoff.md). The checkpoint narrative below is historical.
+
 # Live graph hypotheses
 
 1. **Moment-sensitive carrier matching.** The public producers maximize
@@ -45,3 +47,38 @@ the entire broad family, not 2,286 distinct scalar DAGs. Each winner keeps
 both permutation directions, inverse-normalized byte digests, actual
 chosen links and complete CRT profile inputs. No worldwide priority,
 global optimum, formal verification or external human review is claimed.
+
+
+### Public skip mechanism and continuation, 16:50–17:45 UTC
+
+The public PR53 skip-prefix identity was independently implemented on pinned
+PR36, credited to Avi Eisenberg / ikeboy with Anthropic assistance. Later user
+authorization allowed pinned public PR54/53/51 implementation inspection.
+The original campaign clock and the indefinite extension are preserved.
+
+- Independently implemented producer plus 300/435 paid whole-chain copies
+  gives selected R32,669/42,974. Complete literal dirty audits and source-only
+  rebuilds pass on both exact selected fixed-profile graphs. An equal-role
+  wide-l8 h25 tie initially passed its own recovery but failed the geometry
+  winner binding; the exact scarce-l4 graph was then freshly recovered.
+  Equal role counts do not identify a construction. Both outcomes remain.
+- Public PR54 baseline606 copies independently replays exactly, with
+  R32,693/43,056 and W159,592,676. Geometry/root separately check fixed
+  matrix profiles and the conditional composition.
+- Task-owned first-consumer-frame copies on that public baseline add333/395
+  paid gates and produce R32,360/42,661. Full dirty and complete selected
+  source-only paths pass. Later alternative partitions give role-only
+  R32,337/42,544; actual moments and source-only winner closure remain gates.
+- Original-envelope alternate partitions from unused controllers alone offer
+  no eligible copy in the six bounded public baseline controls. Allowing one
+  paid removed old continuation admits110/232 new copies at unchanged roles.
+  The h10 control has20 paid copies+40 new links−20 removed links and passes
+  every one of2,075 payload basis vectors in both orientations. Full23/25
+  dirty checks pass. Exact matrix cost, rather than zero role change, decides
+  whether this is useful.
+- All1,944 generalized inner-gap/triple-group configurations complete with
+  1,116 distinct final DAG byte strings, zero failures, and role minima
+  36,205/47,317. These role-only negatives are scoped to the tested family.
+- Twelve exact small shared-window/top-gap controls pass full dirty checks.
+  The live1,296-case queue changes top gaps2/3/4 and shared left/balanced/
+  aligned-dyadic interval sums; it is a discovery family, not a proved optimum.

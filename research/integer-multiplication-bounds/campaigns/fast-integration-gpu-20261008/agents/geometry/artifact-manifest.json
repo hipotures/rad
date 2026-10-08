@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-08T14:35:05.747845+00:00",
+  "updated_utc": "2026-10-08T18:39:25.403564+00:00",
   "work_root": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry",
   "artifacts": [
     {
@@ -69,6 +69,46 @@
       "recovery": "deterministically regenerable",
       "durable_copy": "results/negative-exception-exact-part-3.json",
       "regeneration": "negative_exception_rank_union exceptions.bin 3 4"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-word-20261008T1818-attempt2-h23/transitions.bin",
+      "bytes": 3258340,
+      "sha256": "abc7ed0e61267b7f247476352e4de209d219ba5fa0b8518f814ae9005d73127a",
+      "role": "Exact transition multiset independently reconstructed from executed XOR word and matched to event chronology",
+      "recovery": "deterministically regenerable",
+      "regeneration": "code/profile_joint_word.py --source PINNED_PR62 --h 23 --binary FRESH_BUILD --work FRESH_WORK --output FRESH_RECEIPT"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-word-20261008T1818-attempt2-h25/transitions.bin",
+      "bytes": 4529740,
+      "sha256": "62b018a327f6514f552b9d2da51608169ba3143c129ceb257e60827b3f57afee",
+      "role": "Exact transition multiset independently reconstructed from executed XOR word and matched to event chronology",
+      "recovery": "deterministically regenerable",
+      "regeneration": "code/profile_joint_word.py --source PINNED_PR62 --h 25 --binary FRESH_BUILD --work FRESH_WORK --output FRESH_RECEIPT"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-word-parameters-20261008T1820-part0-input.json",
+      "bytes": 1248,
+      "sha256": "e0fd1c93b1a451d3417312be84626bb4e9ee57662868fc58c198c40861297069",
+      "role": "Complete rational parameter cohort configuration; all cases also retained in compact durable result receipts",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Extract rows[].config from results/joint-word-parameters-20261008T1820-part0.json; replace transitions path with freshly extracted word binary"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-word-parameters-20261008T1820-part1-input.json",
+      "bytes": 1248,
+      "sha256": "f75fe1a0f026ed4119195edaa068f95e77353c5127ef4798a83881918f6d013c",
+      "role": "Complete rational parameter cohort configuration; all cases also retained in compact durable result receipts",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Extract rows[].config from results/joint-word-parameters-20261008T1820-part1.json; replace transitions path with freshly extracted word binary"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-word-parameters-20261008T1820-part2-input.json",
+      "bytes": 997,
+      "sha256": "0596c3469fa6817715c4547008483ec59bab63862ebf09dfa1d0da3222c82b79",
+      "role": "Complete rational parameter cohort configuration; all cases also retained in compact durable result receipts",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Extract rows[].config from results/joint-word-parameters-20261008T1820-part2.json; replace transitions path with freshly extracted word binary"
     }
   ],
   "notes": [
@@ -76,5 +116,26 @@
     "Native executables/environments/DAGs stay external; rebuild from retained source and sibling graph configurations",
     "Completed large JSON has a complete gzip publication path controlled by the coordinator; original execution files remain unchanged",
     "No irreplaceable acquisition payload was created"
-  ]
+  ],
+  "artifact_groups": {
+    "joint_word_rational_profiles": {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-word-parameters-20261008T1820-part{0,1,2}",
+      "role": "Complete per-transition denominators, integer bounds, prime counts and exact rook pivots",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Build parameter_joint_word_profiles.cpp; run run_joint_word_parameters.py with retained configurations and fresh word transitions"
+    },
+    "actual_positive_frame_cohorts": {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived",
+      "role": "Completed finite positive-frame DAG/matching/basis cohorts and source-only recovery evidence",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Recover exact sibling graph DAG/actual labels/maps from retained lineage. Cohort compact receipts retain every configuration, source and actual-frame digest; execute matching/profile drivers with fresh --work roots"
+    },
+    "coherent_word_flags": {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/joint-word-flags-20261008T1828-part{0,1,2}",
+      "status": "RUNNING",
+      "role": "553 distinct coherent coordinate flag experiments, exact local width profiles, original and permuted mask binaries",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Enumerate all transpositions of h23/h25 coordinates, prepare config as search_joint_word_flags.py expects, and execute fresh native fixed-IJ full rank-two profiles; literal source/output gates remain separate"
+    }
+  }
 }

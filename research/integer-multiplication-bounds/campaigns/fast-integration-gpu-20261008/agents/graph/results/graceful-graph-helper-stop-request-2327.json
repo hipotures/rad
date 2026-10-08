@@ -1,0 +1,89 @@
+{
+  "classification": "OWNED IDLE SCHEDULER AND MULTIPROCESSING HELPER SHUTDOWN",
+  "utc": "2026-10-08T23:25:57.026141+00:00",
+  "reason": "The user explicitly requested graceful finish; scientific jobs 143046 and 29050 already exited after SIGINT. Completed worker files are preserved. No pending case may be admitted. All targets were revalidated live with start ticks, command, child tree and sleeping/stopped state before the action.",
+  "before": [
+    {
+      "pid": 28450,
+      "state": "T",
+      "ppid": 8692,
+      "start_ticks": 63755757,
+      "cmdline": "python3 -u research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py --source /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e --parents research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/fixtures/joint-signed-recompile-parents-1953.json --work /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-recompile-frontier-2000 --output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-signed-recompile-frontier-2000.json --workers 6 --previous-output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-Gaussian-4096-frontier-1926.json --previous-total 288 --seed-claims research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/joint-signed-recompile-intermediate-preflight-1955.json ",
+      "children": [
+        "28451",
+        "28935"
+      ],
+      "wchan": "do_signal_stop"
+    },
+    {
+      "pid": 28451,
+      "state": "S",
+      "ppid": 28450,
+      "start_ticks": 63755768,
+      "cmdline": "/usr/bin/python3 -c from multiprocessing.resource_tracker import main;main(8) ",
+      "children": [],
+      "wchan": "anon_pipe_read"
+    },
+    {
+      "pid": 28935,
+      "state": "S",
+      "ppid": 28450,
+      "start_ticks": 63759736,
+      "cmdline": "/usr/bin/python3 -c import sys; from multiprocessing.forkserver import main; main(11, 12, ['__main__'], sys_argv=sys.argv[1:], **{'sys_path': ['/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code', '/usr/lib/python314.zip', '/usr/lib/python3.14', '/usr/lib/python3.14/lib-dynload', '/usr/local/lib/python3.14/dist-packages', '/usr/lib/python3/dist-packages'], 'main_path': '/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py', 'authkey_r': 14}) research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py --source /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e --parents research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/fixtures/joint-signed-recompile-parents-1953.json --work /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-recompile-frontier-2000 --output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-signed-recompile-frontier-2000.json --workers 6 --previous-output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-Gaussian-4096-frontier-1926.json --previous-total 288 --seed-claims research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/joint-signed-recompile-intermediate-preflight-1955.json ",
+      "children": [
+        "28936",
+        "29019",
+        "29047",
+        "29557",
+        "29623"
+      ],
+      "wchan": "ep_poll"
+    },
+    {
+      "pid": 28936,
+      "state": "S",
+      "ppid": 28935,
+      "start_ticks": 63759741,
+      "cmdline": "/usr/bin/python3 -c import sys; from multiprocessing.forkserver import main; main(11, 12, ['__main__'], sys_argv=sys.argv[1:], **{'sys_path': ['/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code', '/usr/lib/python314.zip', '/usr/lib/python3.14', '/usr/lib/python3.14/lib-dynload', '/usr/local/lib/python3.14/dist-packages', '/usr/lib/python3/dist-packages'], 'main_path': '/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py', 'authkey_r': 14}) research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py --source /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e --parents research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/fixtures/joint-signed-recompile-parents-1953.json --work /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-recompile-frontier-2000 --output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-signed-recompile-frontier-2000.json --workers 6 --previous-output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-Gaussian-4096-frontier-1926.json --previous-total 288 --seed-claims research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/joint-signed-recompile-intermediate-preflight-1955.json ",
+      "children": [],
+      "wchan": "futex_do_wait"
+    },
+    {
+      "pid": 29019,
+      "state": "S",
+      "ppid": 28935,
+      "start_ticks": 63760447,
+      "cmdline": "/usr/bin/python3 -c import sys; from multiprocessing.forkserver import main; main(11, 12, ['__main__'], sys_argv=sys.argv[1:], **{'sys_path': ['/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code', '/usr/lib/python314.zip', '/usr/lib/python3.14', '/usr/lib/python3.14/lib-dynload', '/usr/local/lib/python3.14/dist-packages', '/usr/lib/python3/dist-packages'], 'main_path': '/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py', 'authkey_r': 14}) research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py --source /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e --parents research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/fixtures/joint-signed-recompile-parents-1953.json --work /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-recompile-frontier-2000 --output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-signed-recompile-frontier-2000.json --workers 6 --previous-output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-Gaussian-4096-frontier-1926.json --previous-total 288 --seed-claims research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/joint-signed-recompile-intermediate-preflight-1955.json ",
+      "children": [],
+      "wchan": "anon_pipe_read"
+    },
+    {
+      "pid": 29047,
+      "state": "S",
+      "ppid": 28935,
+      "start_ticks": 63760801,
+      "cmdline": "/usr/bin/python3 -c import sys; from multiprocessing.forkserver import main; main(11, 12, ['__main__'], sys_argv=sys.argv[1:], **{'sys_path': ['/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code', '/usr/lib/python314.zip', '/usr/lib/python3.14', '/usr/lib/python3.14/lib-dynload', '/usr/local/lib/python3.14/dist-packages', '/usr/lib/python3/dist-packages'], 'main_path': '/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py', 'authkey_r': 14}) research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py --source /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e --parents research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/fixtures/joint-signed-recompile-parents-1953.json --work /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-recompile-frontier-2000 --output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-signed-recompile-frontier-2000.json --workers 6 --previous-output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-Gaussian-4096-frontier-1926.json --previous-total 288 --seed-claims research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/joint-signed-recompile-intermediate-preflight-1955.json ",
+      "children": [],
+      "wchan": "futex_do_wait"
+    },
+    {
+      "pid": 29557,
+      "state": "S",
+      "ppid": 28935,
+      "start_ticks": 63765240,
+      "cmdline": "/usr/bin/python3 -c import sys; from multiprocessing.forkserver import main; main(11, 12, ['__main__'], sys_argv=sys.argv[1:], **{'sys_path': ['/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code', '/usr/lib/python314.zip', '/usr/lib/python3.14', '/usr/lib/python3.14/lib-dynload', '/usr/local/lib/python3.14/dist-packages', '/usr/lib/python3/dist-packages'], 'main_path': '/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py', 'authkey_r': 14}) research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py --source /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e --parents research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/fixtures/joint-signed-recompile-parents-1953.json --work /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-recompile-frontier-2000 --output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-signed-recompile-frontier-2000.json --workers 6 --previous-output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-Gaussian-4096-frontier-1926.json --previous-total 288 --seed-claims research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/joint-signed-recompile-intermediate-preflight-1955.json ",
+      "children": [],
+      "wchan": "futex_do_wait"
+    },
+    {
+      "pid": 29623,
+      "state": "S",
+      "ppid": 28935,
+      "start_ticks": 63765544,
+      "cmdline": "/usr/bin/python3 -c import sys; from multiprocessing.forkserver import main; main(11, 12, ['__main__'], sys_argv=sys.argv[1:], **{'sys_path': ['/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code', '/usr/lib/python314.zip', '/usr/lib/python3.14', '/usr/lib/python3.14/lib-dynload', '/usr/local/lib/python3.14/dist-packages', '/usr/lib/python3/dist-packages'], 'main_path': '/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py', 'authkey_r': 14}) research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_signed_word_recompile.py --source /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e --parents research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/fixtures/joint-signed-recompile-parents-1953.json --work /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-signed-recompile-frontier-2000 --output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-signed-recompile-frontier-2000.json --workers 6 --previous-output /srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-Gaussian-4096-frontier-1926.json --previous-total 288 --seed-claims research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/joint-signed-recompile-intermediate-preflight-1955.json ",
+      "children": [],
+      "wchan": "futex_do_wait"
+    }
+  ],
+  "order": "SIGTERM five idle workers; SIGTERM forkserver; SIGTERM stopped supervisor then SIGCONT to deliver pending termination before user code; allow resource tracker to exit from closed pipes; SIGTERM only if it remains idle."
+}

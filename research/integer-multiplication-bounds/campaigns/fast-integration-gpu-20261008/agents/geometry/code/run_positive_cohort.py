@@ -11,7 +11,7 @@ from run_positive_profiles import run
 if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('--input',type=Path,required=True);ap.add_argument('--binary',type=Path,required=True)
     ap.add_argument('--work',type=Path,required=True);ap.add_argument('--output',type=Path,required=True)
-    ap.add_argument('--workers',type=int,required=True);ap.add_argument('--bases',nargs='+',choices=['negative','fixed'],default=['negative'])
+    ap.add_argument('--workers',type=int,required=True);ap.add_argument('--bases',nargs='+',choices=['negative','fixed','negative-transpose','fixed-transpose'],default=['negative'])
     ap.add_argument('--dimensions',nargs='+',type=int);ap.add_argument('--skip',type=Path)
     ap.add_argument('--live-output',type=Path)
     a=ap.parse_args();assert 1<=a.workers<=6 and not a.work.exists() and not a.output.exists();a.work.mkdir(parents=True)

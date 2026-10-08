@@ -1,0 +1,161 @@
+{
+  "status": "PASS PORTABLE WRAPPER/STOCK/EXACT COMPOSITION/INDEPENDENT BINDING",
+  "completed_utc": "2026-10-08T23:40:46.447273+00:00",
+  "kappa": "642953071/12500000000000",
+  "W": 136283234,
+  "rank_mass": 78361012650,
+  "strict_constraints": 47,
+  "positive_margins": 7,
+  "commands": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/code/prepare_selected_coframe_replay.py",
+        "--source-receipts",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/final-explicit-coframe-source-only-2317-h23.json",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/final-explicit-coframe-source-only-2317-h25.json",
+        "--profiles",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/final-finite-milp-coframe-word-h23-20261008T231358/profile.json",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/final-finite-milp-coframe-word-h25-20261008T231358/profile.json",
+        "--audits",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/final-finite-milp-coframe-word-h23-20261008T231358/transitions.json",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/final-finite-milp-coframe-word-h25-20261008T231358/transitions.json",
+        "--output-directory",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1672744291136041,
+      "stdout": "{\"status\": \"PREPARED REGENERATED VERIFIER INPUTS\", \"axes\": 2, \"output\": \"/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/audit_mixed_coframe_word_interfaces.py",
+        "--phase-snapshot",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+        "--graph-receipts",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/final-explicit-coframe-source-only-2317-h23.json",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/final-explicit-coframe-source-only-2317-h25.json",
+        "--geometry-fixtures",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/axis-23.json",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/axis-25.json",
+        "--data-certificate",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/gpu-parameter-results/one15-minusone15-uniform-data-certificate-20261008T2226.json",
+        "--beta23",
+        "1/15",
+        "--beta25=-1/15",
+        "--output",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/stock.json"
+      ],
+      "exit_code": 0,
+      "seconds": 24.01806166698225,
+      "stdout": "{\"status\": \"PASS ACTUAL MIXED COFRAME SOURCE/CENTER/DATA AND PAID SCALAR/STOCK INTERFACES\", \"W\": 136283234, \"L\": 2226400, \"total_rank\": 78361012650, \"paid_local_XOR_steps\": 3022020600, \"conservative_bit_scalar_upper\": 3034434850, \"scalar_domination_gap\": 1758916622}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/code/compose_joint_word_profiles.py",
+        "--axes",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/axes.json",
+        "--phase",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/fixtures/phase-pr36.json",
+        "--baseline",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e/research/pair-assembly/frame/frame-certificate.json",
+        "--assembly",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py",
+        "--geometry",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/gpu-parameter-results/one15-minusone15-uniform-data-certificate-20261008T2226.json",
+        "--output",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/certificate.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.2752046339446679,
+      "stdout": "{\"kappa\": \"642953071/12500000000000\", \"bit_saving\": \"5143889151/100000000000000\", \"W\": 136283234, \"rank\": 78361012650, \"exceeds_PR61\": true, \"constraints\": 47}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/code/bind_signed_joint_variant_certificate.py",
+        "--axes",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/axes.json",
+        "--certificate",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/certificate.json",
+        "--data",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/gpu-parameter-results/one15-minusone15-uniform-data-certificate-20261008T2226.json",
+        "--stock",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/stock.json",
+        "--scalar",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/reports/public62-fresh-scalar-replay-1828.json",
+        "--assembly",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py",
+        "--words",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/word-23.json",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/word-25.json",
+        "--source-recoveries",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/final-explicit-coframe-source-only-2317-h23.json",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/final-explicit-coframe-source-only-2317-h25.json",
+        "--rational-controls",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/results/final-finite-milp-actual-coframe-controls-20261008T2316.json",
+        "--output",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/binding.json"
+      ],
+      "exit_code": 0,
+      "seconds": 3.4974002270027995,
+      "stdout": "{\"status\": \"PASS INDEPENDENT ACTUAL SIGNED JOINT WORD/SOURCE/CRT/DATA/SCALAR/RECURRENCE BINDING\", \"kappa\": \"642953071/12500000000000\", \"W\": 136283234, \"rank_mass\": 78361012650}\n",
+      "stderr": ""
+    }
+  ],
+  "source_sha256": "2cfe992c9757d08a38a0bc6a2b7c30ec47783c3dd83b95c890921a99b82258d3",
+  "scope": "Fresh portable adapters, independent stock and full assembly/binder exercised on already independently regenerated final source words and certified profiles. No new discovery or assertion of a second new public-source replay.",
+  "work": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017",
+  "regenerable_outputs": [
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/axes.json",
+      "bytes": 6790,
+      "sha256": "65a93156db878fab4356d6e70c10ab2e59c2573800a7f33240670bf306249e0e"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/axis-23.json",
+      "bytes": 4028,
+      "sha256": "11f90f4eb431d2b34492157f7f297ed9a7f76751e162f2fa5ecbc5f0ca7823fc"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/axis-25.json",
+      "bytes": 4151,
+      "sha256": "5cc460a54d7bdd140641ef233c50b2b6fe5b6cda71da7eefb95c7233ff9afac0"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/binding.json",
+      "bytes": 4653,
+      "sha256": "5a500dc0a1a31a54412545e184dabc26abe1530fd01a25d6a888d5886ce1fefd"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/certificate.json",
+      "bytes": 116166,
+      "sha256": "bfcc2f7ddb664d12681aa0d42e94e1b1ca2bc0176c9c2a1b1eb5d49dcff06557"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/controls-input.json",
+      "bytes": 1218,
+      "sha256": "822e11c2a62760e0eb2803d23192e04f375e2789a2c45aa2821b748ca35629f1"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/stock.json",
+      "bytes": 125445,
+      "sha256": "017262836f7af7675c7a3ccdb8c59b7c03056e4b07390c1bb3bc10e6a048ed66"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/word-23.json",
+      "bytes": 2278,
+      "sha256": "6c66a6814c09f5052e8d5a0b70f611ebf9dad0fcecd66931fa68184bff655793"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/final-portable-validation-20261008T234017/word-25.json",
+      "bytes": 2296,
+      "sha256": "ced6d2f054c026fbe5450713da61ed21606bbf266de8155edde47689ba772f48"
+    }
+  ]
+}

@@ -21,7 +21,7 @@ HELD_DERIVATIVE_BRANCHES = {
 
 def allowed_pull(pull):
     """Keep completed public RaD history; exclude every mutable RaD PR."""
-    if pull.get("number") in (42, 43, 44, 46, 48):
+    if pull.get("number") in (42, 43, 44, 46, 48, 49, 50, 54):
         return False
     repo = (pull.get("head", {}).get("repo") or {}).get("full_name")
     author = pull.get("user", {}).get("login")

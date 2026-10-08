@@ -14,22 +14,32 @@ def refresh(work,output,next_batch):
         batch=Path(batch)
         if (batch/'status.json').exists():
             progress_records.append(dict(batch=str(batch),**json.loads((batch/'status.json').read_text())))
-    for path in [p for b in registered for pattern in ('*/process.json','*/profile/process.json') for p in Path(b).glob(pattern)]:
+    for path in [p for b in registered for pattern in ('process.json','native-process.json','*/process.json','*/profile/process.json') for p in Path(b).glob(pattern)]:
         old=json.loads(path.read_text());proc=Path(f'/proc/{old["pid"]}')
         try:
             argv=[x.decode() for x in (proc/'cmdline').read_bytes().split(b'\0') if x]
-            if not argv or argv[0]!=old['command'][0]:continue
+            expected=old['command']
+            # Match all arguments; an archived PID may have been reused.
+            # sys.argv records omit the Python interpreter and its flags.
+            if not argv or len(argv)<len(expected) or argv[-len(expected):]!=expected:continue
             state=(proc/'stat').read_text().split(') ',1)[1].split()[0]
             if state=='Z':continue
         except (FileNotFoundError,ProcessLookupError):continue
         records.append(dict(pid=old['pid'],case=path.parent.name,state=state,command=argv))
     progress=json.loads((work/'status.json').read_text()) if (work/'status.json').exists() else {'completed':0,'phase':'starting'}
-    result=dict(utc=datetime.now(timezone.utc).isoformat(),closed_profile_cohorts={'initial':172,'mapped':544,'full_center':512},
+    best={}
+    for h in (23,25):
+        wrapper=Path(__file__).parent.parent/'results'/f'selected-budget4096-Q-joint-word-axis-{h}.json'
+        if wrapper.exists():
+            doc=json.loads(wrapper.read_text())
+            best[str(h)]=dict(R=doc['profiles'][0]['profile']['R'],scope='Actual4096-region joint word plus coherent Q',component_fixture=str(wrapper))
+    result=dict(utc=datetime.now(timezone.utc).isoformat(),closed_profile_cohorts={'initial':172,'mapped':544,'full_center':512,
+                'mapped_center':1088,'partial_copy':270,'unmodified_joint_word_basis_controls':8},
                 registered_batches=registered,current_batch=str(work),progress=progress,all_batch_progress=progress_records,
                 actual_live_processes=records,next_batch=next_batch,
-                best_completed_local_profiles={'23':dict(R=36219,Phi_at_a_4e_5=170.32040770722017),
-                                               '25':dict(R=47461,Phi_at_a_4e_5=237.38695654382752)},
-                best_status='Global-negative matching profiles exact; fresh literal compiler pending. Earlier weighted maps compiled and source-only replay passed. Full assembly belongs to coordinator')
+                actual_compute_processes=[r for r in records if r['state']=='R'],
+                best_completed_local_profiles=best,
+                best_status='Exact4096-region word components and local CRT profiles complete. Source-only Q/scalar-stock and complete recurrence binding are separate graph/scout/coordinator gates. Fresh signed same-role words and algebraically selected rational basis loci are being tested.')
     output.write_text(json.dumps(result,indent=2)+'\n');return result
 
 

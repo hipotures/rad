@@ -10,14 +10,17 @@ import time
 
 def processes(work_paths):
     records=[]
+    uptime=float(Path('/proc/uptime').read_text().split()[0])
+    hz=os.sysconf('SC_CLK_TCK')
     for path in Path('/proc').glob('[0-9]*'):
         try:
             command=(path/'cmdline').read_bytes().replace(b'\0',b' ').decode()
             if not any(work in command for work in work_paths): continue
-            stat=(path/'stat').read_text().split()
+            stat=(path/'stat').read_text().rsplit(')',1)[1].split()
             if command.startswith('/bin/bash') or 'write_live_status.py' in command: continue
-            records.append(dict(pid=int(path.name),ppid=int(stat[3]),state=stat[2],
-                                cpu_ticks=int(stat[13])+int(stat[14]),
+            ticks=int(stat[11])+int(stat[12]);age=max(.01,uptime-int(stat[19])/hz)
+            records.append(dict(pid=int(path.name),ppid=int(stat[1]),state=stat[0],
+                                cpu_ticks=ticks,lifetime_cpu_percent=round(100*ticks/hz/age,1),
                                 command_prefix=command[:140]))
         except (OSError,ValueError,UnicodeDecodeError):pass
     return records
@@ -40,10 +43,11 @@ def main():
             for row in rows:
                 case=row['case_id']
                 if row.get('status')=='failed': failures+=1;continue
-                result=work/batch.get('result_subdirectory','raw')/case/batch.get('result_filename','result.json')
+                if 'result_pattern'in batch:result=work/batch['result_pattern'].format(case=case)
+                else:result=work/batch.get('result_subdirectory','raw')/case/batch.get('result_filename','result.json')
                 cache_key=(str(work),case)
                 if cache_key not in cache:
-                    try: document=json.loads(result.read_text()); producer=document['producer']
+                    try: document=json.loads(result.read_text()); producer=document.get('producer',document)
                     except (OSError,ValueError,KeyError):continue
                     cache[cache_key]=dict(h=producer['h'],R=producer['R'],dag_sha256=producer['dag_sha256'],
                                      role_saving=document.get('role_saving'),witness=str(result),

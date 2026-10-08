@@ -10,6 +10,7 @@ from copy import deepcopy
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+import struct
 import bind_signed_joint_variant_certificate as verifier
 
 
@@ -57,12 +58,54 @@ def main():
             cases.append(dict(case=name,status='REJECTED AS REQUIRED'))
         else:
             raise AssertionError('Incorrect scientific input was accepted: '+name)
+    raw = Path(row['config']['transitions']).read_bytes()
+    if raw[:8] == b'RADCOF01':
+        h, _, _, nf, *_ = struct.unpack_from('<6I2Q', raw, 8)
+        offsets = [48+i*(12+h) for i in range(2,nf)
+                   if struct.unpack_from('<Q', raw, 48+i*(12+h))[0] >> 63]
+        assert offsets, 'Mixed controls require an actual complemented frame'
+        offset = offsets[0]
+        flagged, rank = struct.unpack_from('<QI', raw, offset)
+        forced = flagged & ((1 << 63)-1)
+        common = forced.bit_length()-1
+        for name in ['removed-complemented-semantic-tag', 'wrong-coframe-rank',
+                     'missing-coframe-common-symbol', 'invalid-normal-symbol',
+                     'complemented-zero-frame', 'wrong-mixed-header']:
+            candidate, receipt = deepcopy(row), deepcopy(graph)
+            modified = bytearray(raw)
+            if name == 'removed-complemented-semantic-tag':
+                struct.pack_into('<Q', modified, offset, forced)
+            elif name == 'wrong-coframe-rank':
+                struct.pack_into('<I', modified, offset+8, rank+1)
+            elif name == 'missing-coframe-common-symbol':
+                struct.pack_into('<b', modified, offset+12+common, 0)
+            elif name == 'invalid-normal-symbol':
+                outside = next(i for i in range(h) if i != common)
+                struct.pack_into('<b', modified, offset+12+outside, 1)
+            elif name == 'complemented-zero-frame':
+                struct.pack_into('<Q', modified, 48, 1 << 63)
+            else:
+                modified[7] = ord('2')
+            path = args.work/(name+'.bin')
+            path.write_bytes(modified)
+            # Rehash both authorities, so these test the actual typed
+            # mathematical conventions rather than a stale SHA shortcut.
+            candidate['config']['transitions'] = str(path)
+            candidate['input_binary_sha256'] = verifier.digest(path)
+            receipt['transition_sha256'] = verifier.digest(path)
+            try:
+                verifier.local(candidate, receipt)
+            except AssertionError:
+                cases.append(dict(case=name,status='REJECTED AS REQUIRED'))
+            else:
+                raise AssertionError('Invalid coframe semantics were accepted: '+name)
     result = dict(status='PASS INDEPENDENT SIGNED-WORD ADVERSARIAL CONTROLS',
                   created_utc=datetime.now(timezone.utc).isoformat(),cases=cases,
                   verifier_sha256=verifier.digest(verifier.__file__),
                   source_sha256=verifier.digest(__file__),
                   inputs={str(p):verifier.digest(p) for p in [args.axes,args.word]},
-                  scope='Targeted incompatible coordinates, word, roles, frame format, orientation and insufficient rigorous CRT bound.')
+                  scope='Targeted incompatible coordinates, word, roles, frame format, orientation and insufficient rigorous CRT bound. '
+                        'Actual mixed words additionally reject rehashed semantic tags, ranks, normal conventions and header errors.')
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(dict(status=result['status'],rejected=len(cases))))

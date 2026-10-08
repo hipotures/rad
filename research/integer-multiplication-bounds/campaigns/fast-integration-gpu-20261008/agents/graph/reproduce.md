@@ -1,3 +1,5 @@
+Campaign closed at the user's request. Final accepted conditional κ=5.143624568e-5; see the [final handoff](../../reports/final-campaign-handoff.md). The checkpoint narrative below is historical.
+
 # Executable graph and controller recovery
 
 Requirements: Python 3.10 or later with the standard library, a C++17
@@ -162,3 +164,104 @@ mask, signed frame and both source/target endpoint labels must receive the
 same permutation. The initial broad 606 orders are excluded from the 2,286
 nearby transposition/window orders; these counts are coordinate flags on
 two unchanged scalar graphs, not thousands of new scalar producer graphs.
+
+
+## Independently implemented skip producer and selected clone recovery
+
+The public skip-prefix identity is credited to Avi Eisenberg / ikeboy, with
+Anthropic assistance, in CrocSwap PR53. The first implementation here used
+that public mathematical description and pinned PR36; later user authorization
+allowed inspection of public PR54, PR53 and PR51 implementation snapshots.
+The selected R=32,669 / 42,974 graphs below are regenerated from PR36 and the
+retained independently authored identity, rather than imported PR54 outputs.
+
+Run from the RaD repository root. `C` is this campaign and `G` its graph branch;
+`PR36` is an immutable unpacked source snapshot at the indicated public commit.
+All writable paths below must be fresh external directories.
+
+```bash
+C=research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008
+G=$C/agents/graph
+PR36=/path/to/immutable/pr36-11817ccacb564bb7f98789c20dc11d3fece207e3
+REPLAY=/path/to/fresh/external/skip-recovery
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+export PYTHONDONTWRITEBYTECODE=1
+python3 "$G/code/rebuild_skip_selected.py" --source "$PR36" \
+  --work "$REPLAY/h23" --parent "$G/fixtures/skip-selected-parent-23.json" \
+  --selected "$G/results/skip-cloned-axis-23.json" \
+  --skip-driver "$C/code/independent_skip_search.py" --dirty
+python3 "$G/code/rebuild_skip_selected.py" --source "$PR36" \
+  --work "$REPLAY/h25" --parent "$G/fixtures/skip-selected-parent-25.json" \
+  --selected "$G/results/skip-fixed-selected-axis-25.json" \
+  --skip-driver "$C/code/independent_skip_search.py" --dirty
+```
+
+If the input snapshot is unavailable, acquire the exact public source with
+`gh api repos/icekylinx/integer-mult-bounds/tarball/11817ccacb564bb7f98789c20dc11d3fece207e3`
+and unpack it outside Git. Retain its Apache-2.0 license and existing author
+notices. The driver compiles three retained/pinned native matchers in its own
+external build directory, rebuilds the frozen parent, checks its DAG/frame/map
+hashes, reproduces every selected whole-carrier-chain edit, rematches, and
+checks all final hashes and the exact histogram. It then independently verifies
+scalar coefficients, rational frame containment, the physical chronology,
+copied-center terminal uses, and the complete F2 payload basis in both dirty
+orientations. No old derived DAG or executable is consumed.
+
+This complete path was exercised on both actual selected dimensions on
+2026-10-08: h23 had 264+36 paid copies and 36,211 total basis vectors; h25 had
+368+67 paid copies and 47,574 basis vectors. See
+`results/skip-source-only-recovery-23.json` and
+`results/skip-fixed-source-only-recovery-25.json`. The earlier wide-l8 h25
+role tie has a separate successful recovery; its DAG is not substituted for
+the fixed-profile scarce-l4 winner. Matrix profiles and
+conditional composition are separate geometry/coordinator checks; a dirty
+PASS does not itself prove the asymptotic conditional theorem.
+
+## Public PR54 reference replay
+
+Acquire the authorized public source with
+`gh api repos/CrocSwap/integer-mult-bounds/tarball/84eb0b067741dc2690da837743fda06d133da865`
+and unpack into another immutable external directory. Never compile or write
+Python bytecode there. Then run:
+
+```bash
+python3 "$G/code/rebuild_public_pr54.py" --source /path/to/immutable/pr54 \
+  --work /path/to/fresh/external/public54-replay \
+  --output /path/to/fresh/external/public54-replay.json
+```
+
+This pinned reference path was fully exercised: all 606 paid clone edits, both
+literal selected-use maps, exact scalar ledgers, R=32,693 / 43,056 and
+W=159,592,676, with complete dirty basis checks in both orientations.
+`results/public-pr54-rebuild-1710.json` retains the receipt. The public fixed
+matrix and exact composition checks are owned separately by geometry/root.
+
+
+## Public PR54 followed by task-owned whole-chain copies
+
+The following source-only path preserves every pinned original frame and
+replays each retained new paid whole-carrier-chain copy. All matchers compile
+into the fresh external output directory. No old DAG, frame labels, matching
+file or executable is consumed.
+
+```bash
+PR54=/path/to/immutable/pr54-84eb0b067741dc2690da837743fda06d133da865
+NEW_REPLAY=/path/to/fresh/external/public54-enlarged-replay
+python3 "$G/code/rebuild_public_enlarged.py" --source "$PR54" \
+  --work "$NEW_REPLAY/h23" --parent "$G/results/public-pr54-original-axis-23.json" \
+  --selected "$G/results/public54-enlarged-axis-23.json"
+python3 "$G/code/rebuild_public_enlarged.py" --source "$PR54" \
+  --work "$NEW_REPLAY/h25" --parent "$G/results/public-pr54-original-axis-25.json" \
+  --selected "$G/results/public54-enlarged-axis-25.json"
+```
+
+Both complete actual-dimension paths were exercised on2026-10-08. They add333
+and395 task-owned paid copies after the pinned253/353 upstream copies and
+produce R32,360/42,661, with35,902/47,261 complete payload basis vectors
+checked in both dirty orientations. The fresh DAG/frame/map byte hashes
+match these precise retained wrappers. H25 uses the wide-l8 clone policy;
+a different scarce-l4 graph has the same role count and a different matrix
+profile and must be separately recovered if selected. Receipts:
+`results/public54-enlarged-source-only-recovery-23.json` and `-25.json`.
+The graph source remains public upstream work; the later first-consumer-frame
+copy mechanism and its independent checks are task-owned contributions.

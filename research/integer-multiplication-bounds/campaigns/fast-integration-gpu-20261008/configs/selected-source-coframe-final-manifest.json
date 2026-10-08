@@ -1,0 +1,895 @@
+{
+  "construction": "Selective source-span frames in joint interval compilation",
+  "classification": "ACCEPTED CONDITIONAL CONSTRUCTION",
+  "source_pins": {
+    "62": "ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+    "57": "cd350f76c9bc01489ec83568bded532cb69be938",
+    "61": "afb7cb67d1858641315cfbf4ac768ee64a8eff3a"
+  },
+  "public_head_intake": "configs/interval-joint-intake-1810.json",
+  "accepted": "reports/selected-source-coframe-final-acceptance.json",
+  "proof": "reports/selected-source-coframe-final-proof.md",
+  "selected_axes": "fixtures/interval-joint-selected-source-coframes-one15-minusone15-final.json",
+  "selected_allocation": [
+    {
+      "h": 23,
+      "basis": "beta:1:15",
+      "word_sha256": "f1cd262d1259558b30f3653519ad0c7550a26db8ff30447330633ab0d5f95334",
+      "transition_sha256": "2faacb8deda52da074db589a17604385f8e4084d6ab69fc0046e0766a002b0c8",
+      "selected_allocation": "agents/geometry/fixtures/selected-finite-milp-coframe-h23-20261008T2315.json",
+      "source_receipt": "agents/graph/results/final-explicit-coframe-source-only-2317-h23.json",
+      "actual_producer": "agents/geometry/results/final-finite-milp-coframe-word-h23-20261008T231358.json"
+    },
+    {
+      "h": 25,
+      "basis": "beta:-1:15",
+      "word_sha256": "8c7215758ce95612724d118dcdde620efd36b3219357a316d56d6c3387a47ea5",
+      "transition_sha256": "f82227d2b6f538936e06c309e467b44df4058ab526e260df86bb17d1cfca2c4b",
+      "selected_allocation": "agents/geometry/fixtures/selected-finite-milp-coframe-h25-20261008T2315.json",
+      "source_receipt": "agents/graph/results/final-explicit-coframe-source-only-2317-h25.json",
+      "actual_producer": "agents/geometry/results/final-finite-milp-coframe-word-h25-20261008T231358.json"
+    }
+  ],
+  "frozen_authored_dependencies": [
+    {
+      "path": "agents/geometry/code/apply_explicit_fixed_coframe_selection.py",
+      "sha256": "d7b9eb65754779b886ad202dc48123f6c9f57b52841bc604cccaeb9b85644f4d",
+      "bytes": 6513
+    },
+    {
+      "path": "agents/geometry/code/componentwise_signed_word_enlargement.py",
+      "sha256": "473672fa8eafdaae0b6d39069a15d946725c00b84d33a0dc8d7baa8e1f3b283a",
+      "bytes": 9722
+    },
+    {
+      "path": "agents/geometry/code/decompose_common_context_profiles.py",
+      "sha256": "ac01062a81db796aac68578873b3d1763b88ab021875ff9ccd8504779bf232a4",
+      "bytes": 6441
+    },
+    {
+      "path": "agents/geometry/code/fixed_word_source_coframes.py",
+      "sha256": "4cbdc0e3541e82cbf75d55db263baeca74907294800fe73fe89f7d542f0c22fa",
+      "bytes": 11107
+    },
+    {
+      "path": "agents/geometry/code/independent_axis_review.py",
+      "sha256": "3876fc762a0ddf71dc76c10bc2faa0a4eb86cf51adf1623a2ce13e3b82c35c01",
+      "bytes": 10003
+    },
+    {
+      "path": "agents/geometry/code/mix_common_context_frames.py",
+      "sha256": "6224dfc758d4f9e33397f9c73c4f7470ccb2217c2d18dddd134c6e0404f285ad",
+      "bytes": 7879
+    },
+    {
+      "path": "agents/geometry/code/mix_common_frame_families.py",
+      "sha256": "9c29493298719c276a25fb213eb2bb6f645de2211d8af7c9244a989bddcbeb8b",
+      "bytes": 7253
+    },
+    {
+      "path": "agents/geometry/code/partial_fixed_word_coframes.py",
+      "sha256": "9fc29de916e569baf75f65eba9ee8f633a3e624e1b8da73f69d4d88d1391ea0d",
+      "bytes": 8351
+    },
+    {
+      "path": "agents/geometry/code/rational_one_core_frame_controls.py",
+      "sha256": "3b05e90660f9bb25475e549784f58d99bf7e467a61afe616fc204b770d9ccc67",
+      "bytes": 8519
+    },
+    {
+      "path": "agents/geometry/code/review_mixed_coframe_word_profiles.py",
+      "sha256": "83bdcfd75b1aecb88fd31fe9da1add9cfdddd39a8bf63971a1e62e44363a0ca9",
+      "bytes": 9528
+    },
+    {
+      "path": "agents/geometry/code/review_positive_physical_profiles.py",
+      "sha256": "6126d2509e57be3f3a4ce73446f96663c072e1e4008d7749027bbb55d9e672ab",
+      "bytes": 5145
+    },
+    {
+      "path": "agents/graph/code/check_compiled_witness.py",
+      "sha256": "beac997e307fbfbacd658bd9ffd79deb84a84bec72298fbd627be5c2852bd880",
+      "bytes": 16956
+    },
+    {
+      "path": "agents/graph/code/co_signed_source_frames.py",
+      "sha256": "48b61de83495df0031d4f5afea1b8d019850f613df33d241962efe9a8885ec93",
+      "bytes": 8216
+    },
+    {
+      "path": "agents/graph/code/joint_positive_frontier.py",
+      "sha256": "734c6cb1c3c86dc8fec4bd643c037d14cb1fed74c1ed500feabb0588c93b74b4",
+      "bytes": 7993
+    },
+    {
+      "path": "agents/graph/code/joint_region_search_v3.py",
+      "sha256": "9a9d5be9161c8f1e838c25329e2c8d0eadf5023d8558b48676b443e8f6a476c0",
+      "bytes": 11804
+    },
+    {
+      "path": "agents/graph/code/joint_scalar_future_frames.py",
+      "sha256": "bdc951c909ba1b52266923c201f2daf56d79a79d48d50695fd2aa1a9e4421f04",
+      "bytes": 10479
+    },
+    {
+      "path": "agents/graph/code/joint_signed_word_recompile.py",
+      "sha256": "1a7945da0b1a13140ecae21d73813a48799da87f1b5e69cdb308e812519a81e9",
+      "bytes": 16632
+    },
+    {
+      "path": "agents/graph/code/joint_word_check_v2.py",
+      "sha256": "dc4086b6725e57bafcbc9b617e73e7c58ade1c6273d8e4bf9a7a91b2820d86b5",
+      "bytes": 7842
+    },
+    {
+      "path": "agents/graph/code/joint_word_check_v4.py",
+      "sha256": "70c54c305344c3221f99dee0bdaf00af3a26e9164fbb96728a267fb59acfce73",
+      "bytes": 9782
+    },
+    {
+      "path": "agents/graph/code/joint_word_check_v5.py",
+      "sha256": "d273b5e64436a902437a7fedb55b6740abee45f99dcc98ebc3f989ec07171478",
+      "bytes": 10216
+    },
+    {
+      "path": "agents/graph/code/joint_word_positive_closure.py",
+      "sha256": "2b2aad2d274aaf240d7c49860479a7dd1253af5c42a0f3fa580b7ba5f95e2548",
+      "bytes": 6309
+    },
+    {
+      "path": "agents/graph/code/matrix_weighted_joint_carriers.py",
+      "sha256": "bada9d4d0d22b13852fcc6d8d84dbd6a7ea1427ed396da03ba97dc1d31362629",
+      "bytes": 8451
+    },
+    {
+      "path": "agents/graph/code/source_only_explicit_weighted_coframes.py",
+      "sha256": "dab9a7f108b6df44b699f53a4ef22e3fda1ca3a3593a3ffe7c3f4be90480ca60",
+      "bytes": 10318
+    },
+    {
+      "path": "agents/graph/code/source_only_matrix_weighted_joint.py",
+      "sha256": "e955889e0f38a6077a46a59c643f349c1c49d7ee8fee99f3707939132fe9741a",
+      "bytes": 11329
+    },
+    {
+      "path": "code/mixed_coframe_word_profiles.cpp",
+      "sha256": "aa966e8edf2f777018a7c5274ebcccf24393be10287c1b93e2a59e6406d5af03",
+      "bytes": 13830
+    }
+  ],
+  "source_commands": [
+    [
+      "python3",
+      "<campaign>/agents/graph/code/source_only_explicit_weighted_coframes.py",
+      "--source",
+      "<snapshot>",
+      "--choices-file",
+      "<campaign>/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json",
+      "--selected-matching",
+      "<recovered-selected-matching-h23.json>",
+      "--allocation",
+      "<campaign>/agents/geometry/fixtures/selected-finite-milp-coframe-h23-20261008T2315.json",
+      "--h",
+      "23",
+      "--work",
+      "<fresh-work>/source-h23",
+      "--output",
+      "<fresh-work>/source-h23.json",
+      "--expected-word-sha256",
+      "f1cd262d1259558b30f3653519ad0c7550a26db8ff30447330633ab0d5f95334",
+      "--expected-transition-sha256",
+      "2faacb8deda52da074db589a17604385f8e4084d6ab69fc0046e0766a002b0c8"
+    ],
+    [
+      "python3",
+      "<campaign>/agents/graph/code/source_only_explicit_weighted_coframes.py",
+      "--source",
+      "<snapshot>",
+      "--choices-file",
+      "<campaign>/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json",
+      "--selected-matching",
+      "<recovered-selected-matching-h25.json>",
+      "--allocation",
+      "<campaign>/agents/geometry/fixtures/selected-finite-milp-coframe-h25-20261008T2315.json",
+      "--h",
+      "25",
+      "--work",
+      "<fresh-work>/source-h25",
+      "--output",
+      "<fresh-work>/source-h25.json",
+      "--expected-word-sha256",
+      "8c7215758ce95612724d118dcdde620efd36b3219357a316d56d6c3387a47ea5",
+      "--expected-transition-sha256",
+      "f82227d2b6f538936e06c309e467b44df4058ab526e260df86bb17d1cfca2c4b"
+    ]
+  ],
+  "fetch_command": [
+    "python3",
+    "<campaign>/code/fetch_interval_joint_sources.py",
+    "--work",
+    "<work>/public-sources"
+  ],
+  "native_build": [
+    "g++",
+    "-std=c++17",
+    "-O3",
+    "<campaign>/code/mixed_coframe_word_profiles.cpp",
+    "-o",
+    "<fresh-work>/mixed-coframe-profile"
+  ],
+  "native_profile_commands": [
+    [
+      "<fresh-work>/mixed-coframe-profile",
+      "<regenerated-h23-mixed-transitions.bin>",
+      "beta:1:15",
+      "<fresh-work>/profile-h23.json",
+      "<fresh-work>/audit-h23.json"
+    ],
+    [
+      "<fresh-work>/mixed-coframe-profile",
+      "<regenerated-h25-mixed-transitions.bin>",
+      "beta:-1:15",
+      "<fresh-work>/profile-h25.json",
+      "<fresh-work>/audit-h25.json"
+    ]
+  ],
+  "independent_controls_command": [
+    "python3",
+    "<campaign>/agents/geometry/code/review_mixed_coframe_word_profiles.py",
+    "--input",
+    "<fresh-control-input.json>",
+    "--output",
+    "<fresh-work>/controls.json",
+    "--samples",
+    "48",
+    "--minimum-coframe-controls",
+    "24"
+  ],
+  "selected_matching_recovery": [
+    {
+      "original_path": "agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json",
+      "published_complete_gzip": "evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h23.json.gz",
+      "original_sha256": "835899e9425924f960a4f1decb2a937d2fee46d033c989ff102590b4f4e4a2a1",
+      "recovery": "Decompress the complete gzip bytes to the original path in the cloned campaign before source reconstruction. The original local input remains unchanged.",
+      "decompression": [
+        "python3",
+        "-c",
+        "import gzip,pathlib; pathlib.Path(\"<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json\").write_bytes(gzip.decompress(pathlib.Path(\"<campaign>/evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h23.json.gz\").read_bytes()))"
+      ]
+    },
+    {
+      "original_path": "agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json",
+      "published_complete_gzip": "evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h25.json.gz",
+      "original_sha256": "d2123be9945cf1be89c5c41e1cb2b12f7547c08e247e0d9c52d6b98d8c76c326",
+      "recovery": "Decompress the complete gzip bytes to the original path in the cloned campaign before source reconstruction. The original local input remains unchanged.",
+      "decompression": [
+        "python3",
+        "-c",
+        "import gzip,pathlib; pathlib.Path(\"<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json\").write_bytes(gzip.decompress(pathlib.Path(\"<campaign>/evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h25.json.gz\").read_bytes()))"
+      ]
+    }
+  ],
+  "data_generation_command": [
+    "<cuda-python>",
+    "<campaign>/agents/scout/code/gpu_basis_configured_full_family.py",
+    "--device",
+    "0",
+    "--seed",
+    "2026102216",
+    "--batch",
+    "8192",
+    "--candidate",
+    "<campaign>/agents/scout/gpu-parameter-results/joint-new-rational-basis-candidate.json",
+    "--baseline-histogram",
+    "<campaign>/agents/geometry/results/fixed23-negative25-data-pairs.json",
+    "--beta23",
+    "1/15",
+    "--beta25=-1/15",
+    "--whole-family",
+    "--output",
+    "<work>/data"
+  ],
+  "data_audit_command": [
+    "<cuda-python>",
+    "<campaign>/agents/scout/code/audit_basis_full_family_incidence.py",
+    "--run",
+    "<work>/data",
+    "--mixed-cut-receipt",
+    "<campaign>/agents/scout/gpu-parameter-results/mixed-fixed23-negative25-data-input-audit-20261008T1800.json",
+    "--output",
+    "<work>/data-certificate.json"
+  ],
+  "complete_DATA": "agents/scout/gpu-parameter-results/one15-minusone15-uniform-data-certificate-20261008T2226.json",
+  "large_artifacts": [
+    {
+      "h": 23,
+      "role": "word",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/final-explicit-coframe-source-2317-h23/word.json.gz",
+      "bytes": 2653649,
+      "sha256": "d976e244c46c4f8524687b55a0905571762d718226e512b6cd40f1bd6bc7e18f",
+      "recovery": "Deterministically regenerable mathematical contents from pinned public source, inherited complete selected matching, explicit allocation and retained profiler. JSON timing/path fields are execution-specific. Not present as a large payload in Git."
+    },
+    {
+      "h": 23,
+      "role": "transition binary",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/final-explicit-coframe-source-2317-h23/mixed-transitions.bin",
+      "bytes": 3860881,
+      "sha256": "2faacb8deda52da074db589a17604385f8e4084d6ab69fc0046e0766a002b0c8",
+      "recovery": "Deterministically regenerable mathematical contents from pinned public source, inherited complete selected matching, explicit allocation and retained profiler. JSON timing/path fields are execution-specific. Not present as a large payload in Git."
+    },
+    {
+      "h": 23,
+      "role": "profile",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/final-finite-milp-coframe-word-h23-20261008T231358/profile.json",
+      "bytes": 805,
+      "sha256": "8e4a571dec8603820918e1eaca7711811a39994fd86b4459ef7a237eea426982",
+      "recovery": "Deterministically regenerable mathematical contents from pinned public source, inherited complete selected matching, explicit allocation and retained profiler. JSON timing/path fields are execution-specific. Not present as a large payload in Git."
+    },
+    {
+      "h": 23,
+      "role": "matrix audit",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/final-finite-milp-coframe-word-h23-20261008T231358/transitions.json",
+      "bytes": 19931453,
+      "sha256": "eb069b8e94a1c8e023b30464f61ad017c49d584703e61dd1a06c1349b214845d",
+      "recovery": "Deterministically regenerable mathematical contents from pinned public source, inherited complete selected matching, explicit allocation and retained profiler. JSON timing/path fields are execution-specific. Not present as a large payload in Git."
+    },
+    {
+      "h": 25,
+      "role": "word",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/final-explicit-coframe-source-2317-h25/word.json.gz",
+      "bytes": 3668865,
+      "sha256": "8febd50eb073f45732113368118cfe1c4641d4a6f8bb6a2e7e5cb1d4c30f786f",
+      "recovery": "Deterministically regenerable mathematical contents from pinned public source, inherited complete selected matching, explicit allocation and retained profiler. JSON timing/path fields are execution-specific. Not present as a large payload in Git."
+    },
+    {
+      "h": 25,
+      "role": "transition binary",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/final-explicit-coframe-source-2317-h25/mixed-transitions.bin",
+      "bytes": 5507957,
+      "sha256": "f82227d2b6f538936e06c309e467b44df4058ab526e260df86bb17d1cfca2c4b",
+      "recovery": "Deterministically regenerable mathematical contents from pinned public source, inherited complete selected matching, explicit allocation and retained profiler. JSON timing/path fields are execution-specific. Not present as a large payload in Git."
+    },
+    {
+      "h": 25,
+      "role": "profile",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/final-finite-milp-coframe-word-h25-20261008T231358/profile.json",
+      "bytes": 844,
+      "sha256": "7530e773f7cf36e3e6791b099846ca822b9cb8200234f2b66ee3b529eaf9d74a",
+      "recovery": "Deterministically regenerable mathematical contents from pinned public source, inherited complete selected matching, explicit allocation and retained profiler. JSON timing/path fields are execution-specific. Not present as a large payload in Git."
+    },
+    {
+      "h": 25,
+      "role": "matrix audit",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/final-finite-milp-coframe-word-h25-20261008T231358/transitions.json",
+      "bytes": 28181766,
+      "sha256": "acb61e7b7727b8005881abf088a8f27aeda9f4ba6c6b8b025ac18820d4be6b3b",
+      "recovery": "Deterministically regenerable mathematical contents from pinned public source, inherited complete selected matching, explicit allocation and retained profiler. JSON timing/path fields are execution-specific. Not present as a large payload in Git."
+    }
+  ],
+  "portable_placeholders": {
+    "<campaign>": "Campaign directory in a clone of hipotures/rad",
+    "<snapshot>": "Pinned PR62 archive downloaded automatically by code/fetch_interval_joint_sources.py",
+    "<fresh-work>": "A fresh writable external execution directory",
+    "<cuda-python>": "Validated Python/CuPy/CUDA environment for full DATA regeneration"
+  },
+  "archived_receipts": [
+    {
+      "original_path": "agents/geometry/results/actual-weighted-longstar-negative-basis-20261008T2248.json",
+      "original_sha256": "72f9001c7bdc95b3706c7acbbcccbe60f3b981ca5b4e34fc0fb314ffcf065f35",
+      "bytes": 112644,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/actual-weighted-longstar-negative-basis-20261008T2248.json.gz",
+      "gzip_sha256": "c3a874451c81d1fb49c233151007f3f75d82d018d601a03abf6da6537a18a1a9"
+    },
+    {
+      "original_path": "agents/geometry/results/final-discovery-and-negative-manifest-20261008T2323.json",
+      "original_sha256": "f6c6800fbf26b8e5ea91c063bd4a00e9489db38846bb2e9e4276333aecf9ec41",
+      "bytes": 5506,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/final-discovery-and-negative-manifest-20261008T2323.json.gz",
+      "gzip_sha256": "ef2d8cae495bbdb3b8a48cd870ac86c90fc791f222e5f02d619157364bed6be4"
+    },
+    {
+      "original_path": "agents/geometry/results/final-finite-milp-actual-coframe-controls-20261008T2316.json",
+      "original_sha256": "76c64f83c44494142ba3be0e81aae7c11f4f297b31f81a29a8d620b24ea5bcb2",
+      "bytes": 168334,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/final-finite-milp-actual-coframe-controls-20261008T2316.json.gz",
+      "gzip_sha256": "750bb5ad99cd5789e12b67e115b4d45670838c14ebc9aaafcdbd2924a9812d50"
+    },
+    {
+      "original_path": "agents/geometry/results/final-finite-milp-coframe-word-h23-20261008T231358.json",
+      "original_sha256": "be367aa84167d24ab23886ab1fb3618a0ed52699de5d5ce0eda223e57370e07f",
+      "bytes": 7197,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/final-finite-milp-coframe-word-h23-20261008T231358.json.gz",
+      "gzip_sha256": "324cd59ba515c24e36ec09ab8ff37549cc9f4dd5b8cd4b12c9118bb856a1178e"
+    },
+    {
+      "original_path": "agents/geometry/results/final-finite-milp-coframe-word-h25-20261008T231358.json",
+      "original_sha256": "130b67be61407feb4aee94601e45f7819207b1615a220c95517a559e03cbc97c",
+      "bytes": 7303,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/final-finite-milp-coframe-word-h25-20261008T231358.json.gz",
+      "gzip_sha256": "b1bbec139a78bc18bf3e1ac9cf04cdf871b1488ce96c4a0af428ced7b7400d68"
+    },
+    {
+      "original_path": "agents/geometry/results/fixed-coframe-conjugate-four-cost-h23-20261008T230248.json",
+      "original_sha256": "4849f93e7372b2e7c8b15c2f7cb515c0f7eb09f4eadc00dbd9d4c1446b57ce49",
+      "bytes": 8920,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/fixed-coframe-conjugate-four-cost-h23-20261008T230248.json.gz",
+      "gzip_sha256": "db8af2dab1277a67d38e9454c5833d14c737695044962bdfc5ae2df08651228f"
+    },
+    {
+      "original_path": "agents/geometry/results/fixed-coframe-conjugate-four-cost-h25-20261008T230248.json",
+      "original_sha256": "205abe37bcac5a4f6c3ad08b2deb2ec4bd06bf6412907ab42aa0234498952379",
+      "bytes": 8911,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/fixed-coframe-conjugate-four-cost-h25-20261008T230248.json.gz",
+      "gzip_sha256": "54bcac9fc30c95476632c30e1082fa91126bd779c5942158d32b1ad9157f69c4"
+    },
+    {
+      "original_path": "agents/geometry/results/fixed-coframe-four-cost-h23-20261008T230150.json",
+      "original_sha256": "ea8fd507a01d6434e7bf05bfed329200b942b2a68132cc3b13901c0ab03a9997",
+      "bytes": 8859,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/fixed-coframe-four-cost-h23-20261008T230150.json.gz",
+      "gzip_sha256": "6adccc5d9ca638f3f83a270fb03961cf661276ed2a7a4f0362fee0e737a8c3c7"
+    },
+    {
+      "original_path": "agents/geometry/results/fixed-coframe-four-cost-h25-20261008T230150.json",
+      "original_sha256": "6a1d283fe62ff364d93530fedc34746e501a21181fe46d580717042bc8a7d925",
+      "bytes": 8852,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/fixed-coframe-four-cost-h25-20261008T230150.json.gz",
+      "gzip_sha256": "a2ff3bd76dc85bb3792ce77d68ce1a9bf2f6c1921d0173e421dfcadac1dc8831"
+    },
+    {
+      "original_path": "agents/geometry/results/fixed-coframe-milp-h23-20261008T231157.json",
+      "original_sha256": "837d02224d4f266a771ce526803f804420dbe0ab5e7c1d7eb68d21ff261617c1",
+      "bytes": 1204,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/fixed-coframe-milp-h23-20261008T231157.json.gz",
+      "gzip_sha256": "3dbf1d91fb906e47c12b790d0d67eb77079ae28d49a529162e80f97f8aaeaa07"
+    },
+    {
+      "original_path": "agents/geometry/results/fixed-coframe-milp-h25-20261008T231157.json",
+      "original_sha256": "9a922285544691558ece86ba66040640af4ae6ec1984f7763e01dad159ad153f",
+      "bytes": 1206,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/fixed-coframe-milp-h25-20261008T231157.json.gz",
+      "gzip_sha256": "53e68eceb34bc21ac82ce2421727a8f14e7fb6ada3860dae5f762b966f328dd2"
+    },
+    {
+      "original_path": "agents/geometry/results/fixed-coframe-rank-mass-conservation-20261008T2320.json",
+      "original_sha256": "6d4941334a94948c50e7dd0fc4c22ef06c38977e26af47f087b1959d45a4d535",
+      "bytes": 1214,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/fixed-coframe-rank-mass-conservation-20261008T2320.json.gz",
+      "gzip_sha256": "76e04e3f1a53bfa6c7cf6912b552b4ead0f98ddde1abd315df3c31e6abfc90ea"
+    },
+    {
+      "original_path": "agents/geometry/results/fixed-weighted-source-coframes-h23-20261008T2248.json",
+      "original_sha256": "85762b1793d14138a42de843f052c74194d60245222a1ac45ae8fc93898b032a",
+      "bytes": 14797,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/fixed-weighted-source-coframes-h23-20261008T2248.json.gz",
+      "gzip_sha256": "bf5f8cf6343182e775f54ef7fd8bb1e1ca0c3f1c297dd5e0e54db6d08bc8547d"
+    },
+    {
+      "original_path": "agents/geometry/results/fixed-weighted-source-coframes-h25-20261008T2248.json",
+      "original_sha256": "807b4747dfa0a9abb752841d383409bab7772b796bbb9b9e5f3502c964d937c3",
+      "bytes": 15110,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/fixed-weighted-source-coframes-h25-20261008T2248.json.gz",
+      "gzip_sha256": "61fea4137d9fe2f0e02b3a0537536b61ecdb1757cef00f77b0ec50d25607ba6f"
+    },
+    {
+      "original_path": "agents/geometry/results/partial-conjugate-coframes-h23-20261008T230608.json",
+      "original_sha256": "156b4d1713edc25750527d82b8e830628528dd8cb77eee64a40365e75805cdf9",
+      "bytes": 93843,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/partial-conjugate-coframes-h23-20261008T230608.json.gz",
+      "gzip_sha256": "0417dfc0959243b1192eb84c9d2ab4efe2a299f92f7922e79583508b41e4f1ef"
+    },
+    {
+      "original_path": "agents/geometry/results/partial-conjugate-coframes-h25-20261008T230608.json",
+      "original_sha256": "62281ba58b306d805666addf616f3bd6147d62efb29f23539f46f6f354f9d302",
+      "bytes": 101892,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/partial-conjugate-coframes-h25-20261008T230608.json.gz",
+      "gzip_sha256": "901175d9c595bf0b2c439a7190202e53b390a19126ec178071bc4d8c3734e343"
+    },
+    {
+      "original_path": "agents/geometry/results/partial-fixed-word-coframes-h23-20261008T225540.json",
+      "original_sha256": "175ec646f5388b0355e1e9c844b74e66aeca3a969a37fe239b57486ffe0eb418",
+      "bytes": 93129,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/partial-fixed-word-coframes-h23-20261008T225540.json.gz",
+      "gzip_sha256": "172a5b3de81db199cc7045321c7f8c91fd68bd8474dac7e18909f2287eae6d99"
+    },
+    {
+      "original_path": "agents/geometry/results/partial-fixed-word-coframes-h25-20261008T225540.json",
+      "original_sha256": "4d9ec42761f6952d8095b2d2a93112d736aafef4dc7d81b1942c0aba9796f364",
+      "bytes": 101191,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/partial-fixed-word-coframes-h25-20261008T225540.json.gz",
+      "gzip_sha256": "01431aa9e53cca5952d01e071a220212b29e760f8e84c1c365bfbf394cdef14f"
+    },
+    {
+      "original_path": "agents/geometry/results/partial-newpair-coframes-h23-20261008T230534.json",
+      "original_sha256": "eb5b7cc487a62b4b96bdb357abd1c23b8d17417c0da9beb915d22b21c291dca7",
+      "bytes": 94783,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/partial-newpair-coframes-h23-20261008T230534.json.gz",
+      "gzip_sha256": "578e419740c5fdebdf8e0de0ce73006456da5ebe3248ace427551f7bbdd37f07"
+    },
+    {
+      "original_path": "agents/geometry/results/partial-newpair-coframes-h25-20261008T230534.json",
+      "original_sha256": "3cbf7a172b05cd7b14434b971eea2cfe12c980bf5f7e8206948c43d57d2b2abf",
+      "bytes": 103515,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/partial-newpair-coframes-h25-20261008T230534.json.gz",
+      "gzip_sha256": "81a17365a5639a5336faed2a378253bcd72702f9ec69b96d70c4fbc7dd74dd03"
+    },
+    {
+      "original_path": "agents/geometry/results/selected-source-bound-finite-coframe-axis-23-20261008T2322.json",
+      "original_sha256": "c7827472775bffb24e05902a569bdde240d7f9812d6d889f318673b667e143f5",
+      "bytes": 4673,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/selected-source-bound-finite-coframe-axis-23-20261008T2322.json.gz",
+      "gzip_sha256": "e8919c0848f321e1c0ee1da4e7191fefa3f9b4df240f733397afbd3b8541a00c"
+    },
+    {
+      "original_path": "agents/geometry/results/selected-source-bound-finite-coframe-axis-25-20261008T2322.json",
+      "original_sha256": "8a3d29a95c8054c1ec69081d7b099890a696c9cfab956fada3194dd9e122e2d6",
+      "bytes": 4796,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/geometry/results/selected-source-bound-finite-coframe-axis-25-20261008T2322.json.gz",
+      "gzip_sha256": "84443fc2d3df5db242dfc9a5b1d75d4360d4942b084206cec67f83f5b670ef6b"
+    },
+    {
+      "original_path": "agents/graph/results/completed-graph-source-family-catalog-2330.json",
+      "original_sha256": "3c2d4099cd9863b30ee22f56a144c06dad94d89fd1f0304e29fc16c1f813190d",
+      "bytes": 54712,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/completed-graph-source-family-catalog-2330.json.gz",
+      "gzip_sha256": "6aeb7195f2a6023554a2422de02b806684cffe7c2f42cc8dfc6db585eebb528e"
+    },
+    {
+      "original_path": "agents/graph/results/final-explicit-coframe-source-only-2317-h23.json",
+      "original_sha256": "26e3c96711f454542ad2dc3b1088522f30c41b307ba25f382c80357ff5e678f1",
+      "bytes": 139899,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/final-explicit-coframe-source-only-2317-h23.json.gz",
+      "gzip_sha256": "39bf26214c7299f711d8497c3d873821cd8b96916619894ed64eca3766fdf3c2"
+    },
+    {
+      "original_path": "agents/graph/results/final-explicit-coframe-source-only-2317-h25.json",
+      "original_sha256": "c6a2f8ddbd10d56924937f235d8a80f93bbb63f7acfecb2290baa406d0f4bb7a",
+      "bytes": 210924,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/final-explicit-coframe-source-only-2317-h25.json.gz",
+      "gzip_sha256": "d549c1bdb027825189ac3f03a372de80456d290aefdc81f9911514acdd76c765"
+    },
+    {
+      "original_path": "agents/graph/results/future-source-coframe-2252-h23.json",
+      "original_sha256": "28a8b77936150cd3beab1ab53fd6b9ea324b8d1333aafc64a501861a0b2f868a",
+      "bytes": 22458,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/future-source-coframe-2252-h23.json.gz",
+      "gzip_sha256": "fe30d6a2e13a3206609b7c066c4d6693c0255a3b955ca72ae073cd2c924ae75f"
+    },
+    {
+      "original_path": "agents/graph/results/future-source-coframe-2255-h25.json",
+      "original_sha256": "051aebd7b056e7d43e5c1c8232c540e154a0dea5e688dcf953b611236bfa0121",
+      "bytes": 22811,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/future-source-coframe-2255-h25.json.gz",
+      "gzip_sha256": "915ff604fca693bd7e93fdba06b4a2f09fc43c7ca2cf5c8d6abbcb16977e0620"
+    },
+    {
+      "original_path": "agents/graph/results/graceful-graph-helper-stop-request-2327.json",
+      "original_sha256": "565314ae5f4b69f43629ea1279fdcb31b9392f86ab42008467bb54c5cd41c849",
+      "bytes": 13492,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/graceful-graph-helper-stop-request-2327.json.gz",
+      "gzip_sha256": "3f2724e41102d53294d251d1bf956de1e99de8bd896d813fe64c324dd48e74e4"
+    },
+    {
+      "original_path": "agents/graph/results/graceful-graph-shutdown-closure-2329.json",
+      "original_sha256": "9b366bfa9bf49138a07a501480e56e3d288e673833f9b7459fe4d69b04115729",
+      "bytes": 7801,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/graceful-graph-shutdown-closure-2329.json.gz",
+      "gzip_sha256": "a7f3ad75912624a4fcf7ce2846d3964f1bd566889ce1ffd0dd695c25b89aaa11"
+    },
+    {
+      "original_path": "agents/graph/results/graceful-graph-stop-request-2325.json",
+      "original_sha256": "f4efb338b25189657588078f9096fe8350f14a7ebaf3ed08b59c747391b66123",
+      "bytes": 6884,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/graceful-graph-stop-request-2325.json.gz",
+      "gzip_sha256": "501b0c069e27865f198da5bae54b0b353e18ea5fe9e4508d223ec12015012458"
+    },
+    {
+      "original_path": "agents/graph/results/hybrid-oddification-envelope-equivalence-2257.json",
+      "original_sha256": "80f07b41ad88837088be59cb12ff2be2a6e6eaf2a5bfd0a85cfd143c04034a33",
+      "bytes": 2709,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/hybrid-oddification-envelope-equivalence-2257.json.gz",
+      "gzip_sha256": "09722283263527e60613911d239087085aa8312af3c6780bcffc16e1a903ab15"
+    },
+    {
+      "original_path": "agents/graph/results/hybrid-source-carrier-2303-h23.json",
+      "original_sha256": "8f9ec4f07bf955fdb7149fb707fa3c1f95536530a19712a08f22f600b90a653c",
+      "bytes": 15005,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/hybrid-source-carrier-2303-h23.json.gz",
+      "gzip_sha256": "2aba6ae68e558d32b0121b97dbab6540c65d0b162fbeb429d4691e48b3d61d6a"
+    },
+    {
+      "original_path": "agents/graph/results/hybrid-source-coframe-2244-h23.json",
+      "original_sha256": "ba402dedc1256782cb941d3409801eb61776b6b331b8331c28193376e29ec4d7",
+      "bytes": 28874,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/hybrid-source-coframe-2244-h23.json.gz",
+      "gzip_sha256": "5e7b7ac5a1c7015b80891a35272c609afc82e5c351e2ee5888f0f3eb71f0d1f1"
+    },
+    {
+      "original_path": "agents/graph/results/hybrid-source-coframe-2248-h25.json",
+      "original_sha256": "a20d2eb94d7566eff13b7970949cf5041df33b330d4207c8afd5c2fa36e3065b",
+      "bytes": 29274,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/hybrid-source-coframe-2248-h25.json.gz",
+      "gzip_sha256": "276d30341f95243d5536b73752dc712dfe94db6054604ee9b5fa6eb90aaeefdb"
+    },
+    {
+      "original_path": "agents/graph/results/hybrid-source-partial-2255-h23.json",
+      "original_sha256": "854670dc48406c40c3a9fcc5891358082ebbd48207631eee2dc0602b0665f6ce",
+      "bytes": 16931,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/hybrid-source-partial-2255-h23.json.gz",
+      "gzip_sha256": "652df430c186c5d96a2959eeb142d609b074667c35a80b6a321b6fc6d7ef91e8"
+    },
+    {
+      "original_path": "agents/graph/results/hybrid-source-partial-2303-h25.json",
+      "original_sha256": "e279067e797d9e27232bf9f3b5e3cfe59de20456dd1821ea35ed02e95d5ac4db",
+      "bytes": 10098,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/hybrid-source-partial-2303-h25.json.gz",
+      "gzip_sha256": "0b843abc8454f98b417813384098c64bcceaaad9bcf72999d0428591eadb1d03"
+    },
+    {
+      "original_path": "agents/graph/results/minimal-source-coframe-2231-h23.json",
+      "original_sha256": "9bbdc9c732c5ede77da7957f9fc978f1006a1c25f9bdb6d9d4eab109fc7752ce",
+      "bytes": 13907,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/minimal-source-coframe-2231-h23.json.gz",
+      "gzip_sha256": "5908ea17a7a64668f12db3c577b9d1cf3bbbcc2d50aaacf42314429dedf93cc7"
+    },
+    {
+      "original_path": "agents/graph/results/minimal-source-coframe-2231-h25.json",
+      "original_sha256": "52bb830f32c28b8783835ef91eaee6ab92401dad535b4c4a21a19bbb3befd88a",
+      "bytes": 14133,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/minimal-source-coframe-2231-h25.json.gz",
+      "gzip_sha256": "d71d03bb8ef5fc3091c754803806f260d18e66f61505880d6b03e0d8b4443254"
+    },
+    {
+      "original_path": "agents/graph/results/minimal-source-coframe-carriers-2241-h23.json",
+      "original_sha256": "6995889a98cdc9872a4e3feedde6dcfca3409019c2615974d537965d6984a6a0",
+      "bytes": 14086,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/minimal-source-coframe-carriers-2241-h23.json.gz",
+      "gzip_sha256": "e61680e2c416ad8610a0d10c925b49fd74fc33bf75e57fe1eaf53555cf0b6783"
+    },
+    {
+      "original_path": "agents/graph/results/minimal-source-coframe-carriers-2241-h25.json",
+      "original_sha256": "a73ba979ec0201f4edbc20a47b1c88fc3977fff3f07254513ff29b7164c7b682",
+      "bytes": 7642,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/minimal-source-coframe-carriers-2241-h25.json.gz",
+      "gzip_sha256": "d35f393e5d5e26c89d9adf6bd3fc73fb256aad6b099ebdb9e1059e4846c4323c"
+    },
+    {
+      "original_path": "agents/graph/results/minimal-source-coframe-small-2231.json",
+      "original_sha256": "7ca2d676d0314602a8e42a79abbb49e4995ef25da706f732d56c3430e4a850b8",
+      "bytes": 6285,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/minimal-source-coframe-small-2231.json.gz",
+      "gzip_sha256": "ffc9467331e0fa5ae4d36539ce98ab6bb2b446d638c3c3dc4c96621bd6117aa5"
+    },
+    {
+      "original_path": "agents/graph/results/partial-weighted-coframe-source-only-2311-h23.json",
+      "original_sha256": "5064f9cea0e40de6c16881d2337c123a1228e9a15f388ac197e87e28a15b882b",
+      "bytes": 10570,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/partial-weighted-coframe-source-only-2311-h23.json.gz",
+      "gzip_sha256": "3ac3833d24aa92e08e47bcb39517f58bd52a0e278b5a8d2b6f4385207bf800b4"
+    },
+    {
+      "original_path": "agents/graph/results/partial-weighted-coframe-source-only-2311-h25.json",
+      "original_sha256": "cb6697055757bacb04b40c954a6e5438ea3be2012ddcb0544d06ca14eeed1502",
+      "bytes": 10680,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/partial-weighted-coframe-source-only-2311-h25.json.gz",
+      "gzip_sha256": "56682cd3d193b52a6b2368c1dd2cc011e7b22a63656ce60762670fde590cabc2"
+    },
+    {
+      "original_path": "agents/graph/results/region-source-coframe-2312-h23.json",
+      "original_sha256": "c259e667488ec41a4278fd29c021e713e1286016c05bd68da9d29dc6480abb36",
+      "bytes": 15361,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/region-source-coframe-2312-h23.json.gz",
+      "gzip_sha256": "dc21d76c34f86e91dfc30433eaca25369da2302d33cc3efc76427f250c21d540"
+    },
+    {
+      "original_path": "agents/graph/results/region-source-coframe-2312-h25.json",
+      "original_sha256": "50115b2a5921a5317f79201215b252dc651714e15fe1a67f8a22ed2e912a992e",
+      "bytes": 15565,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/region-source-coframe-2312-h25.json.gz",
+      "gzip_sha256": "b9d12f33d422e698f3c5f565b9b76e166f5a64bdcd3cc3fb54184983ae530c81"
+    },
+    {
+      "original_path": "agents/graph/results/region-source-coframe-wide-2313-h23.json",
+      "original_sha256": "b4a9b70d34ace44b60c76f958603d3b2c808f9696598b440d5dd57eb38fb2b79",
+      "bytes": 15408,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/region-source-coframe-wide-2313-h23.json.gz",
+      "gzip_sha256": "8b82c1e22abf8919de23b55327c84ddf6c6f2265f50521863437d4258831ae80"
+    },
+    {
+      "original_path": "agents/graph/results/region-source-coframe-wide-2315-h25.json",
+      "original_sha256": "80963cb83238c127a1bc6d3ac097f14c4ebca0d51909219300918fc73539eeb4",
+      "bytes": 15617,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/region-source-coframe-wide-2315-h25.json.gz",
+      "gzip_sha256": "22a942ee27e4f56549adda53aa9efa75f6719d7437956149ab1e2585b4d836cc"
+    },
+    {
+      "original_path": "agents/graph/results/signed-source-graph-span-controls-2256.json",
+      "original_sha256": "f6000159cecd8ccc98ce5b9580a899a06912571351fe133e488fdd4cd5ca7032",
+      "bytes": 8355,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/graph/results/signed-source-graph-span-controls-2256.json.gz",
+      "gzip_sha256": "a2f7dd1fce65fee7a5f02bbb3459ca4b444a9d7f07c7e175fb8621b8c8d0d245"
+    },
+    {
+      "original_path": "agents/scout/gpu-parameter-results/final-finite-milp-mixed-coframe-source-center-data-scalar-stock-20261008T2324-attempt2.json",
+      "original_sha256": "9c55ef8d43effddfd12a0a80f0cbd19900d0abefa45e0d03276b72cd7a192a2a",
+      "bytes": 125549,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/scout/gpu-parameter-results/final-finite-milp-mixed-coframe-source-center-data-scalar-stock-20261008T2324-attempt2.json.gz",
+      "gzip_sha256": "dbc5fd7fb47cf53d34e0722cf4121fc7a8c4ae80f42611ef25058ea118f00efd"
+    },
+    {
+      "original_path": "agents/scout/gpu-parameter-results/final-mixed-interface-path-binding-diagnosis-20261008T2328.json",
+      "original_sha256": "f7c60d7030fcf7b3a7efec3fb2b036f4d39a580e6fc9b98ca419b0b500f4422c",
+      "bytes": 876,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/scout/gpu-parameter-results/final-mixed-interface-path-binding-diagnosis-20261008T2328.json.gz",
+      "gzip_sha256": "ef5e7e87422758bff403dad745115db5b6d0cce5300b8b785c614c9f6738bf8b"
+    },
+    {
+      "original_path": "agents/scout/gpu-parameter-results/finite-coframe-gpu-search-summary-20261008T2328.json",
+      "original_sha256": "af7b151e17ae78462ec48a5ac23d6986f27140ef3d20ae8172a90717d150edf1",
+      "bytes": 9226,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/scout/gpu-parameter-results/finite-coframe-gpu-search-summary-20261008T2328.json.gz",
+      "gzip_sha256": "d831fdcb46b62183b5909970fa12c3809809397faa1fff24e33cab94576fac26"
+    },
+    {
+      "original_path": "agents/scout/gpu-parameter-results/scout-graceful-process-closure-20261008T2331.json",
+      "original_sha256": "21ea339dff93f4f65fe247ac6b973b3165744dad83876557bdc985f599479f9f",
+      "bytes": 982,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/agents/scout/gpu-parameter-results/scout-graceful-process-closure-20261008T2331.json.gz",
+      "gzip_sha256": "f608469528b31282f2e2aefadc179bea4792f6675ebdac25beff855d808f01c9"
+    },
+    {
+      "original_path": "reports/completed-mixed-moment-closure.json",
+      "original_sha256": "3e20a0692ebcf28473505939074ae7f5c516d7d83356e9b969f3f48a5fb05604",
+      "bytes": 18862,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/completed-mixed-moment-closure.json.gz",
+      "gzip_sha256": "28cb32d89fcb242e89d8681093753497d7a092423b0f8b5a1e8f67f8e1e1b806"
+    },
+    {
+      "original_path": "reports/cross-common-complete-moments-2220.json",
+      "original_sha256": "2e5c3666fa4f4ede3e6d3851e91c2ec83ce0cd1c7510c87e42acaa956b2b9012",
+      "bytes": 32474,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/cross-common-complete-moments-2220.json.gz",
+      "gzip_sha256": "7adf201da2d220779af874dcd67a774a9c88592e4dfaf9624e4e227e1c806a81"
+    },
+    {
+      "original_path": "reports/final-coframe-fresh-weighted-parent-23.json",
+      "original_sha256": "02e3fd1d5984fe5bc0b652bc6fd26587a4d81fb7691253bbf6a90e339627fb8e",
+      "bytes": 8578,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/final-coframe-fresh-weighted-parent-23.json.gz",
+      "gzip_sha256": "a0dd9334aee5dca1799b7679c0806da3048ce9c9bddeec91c81529503373369b"
+    },
+    {
+      "original_path": "reports/final-coframe-fresh-weighted-parent-25.json",
+      "original_sha256": "046b697c344a84a0fd1017e207f650dc321b8482b89df4ceba953b884fe9c98d",
+      "bytes": 8680,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/final-coframe-fresh-weighted-parent-25.json.gz",
+      "gzip_sha256": "b65ed872fc78137b3e09bcedb5790eed5ac36316ef1d2ea4a68ce10f89729b0e"
+    },
+    {
+      "original_path": "reports/final-console-monitor-closure.json",
+      "original_sha256": "e19ea661cb78f6145ad85cda0c37001e67d27a41b87df8de8e7da84a7e8d8d13",
+      "bytes": 749,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/final-console-monitor-closure.json.gz",
+      "gzip_sha256": "113726e0e4e422046f4e32c59af73264c1ad67fd292e5033bf74784acebf10cd"
+    },
+    {
+      "original_path": "reports/final-portable-wrapper-validation.json",
+      "original_sha256": "97674497e00844ec588394f8c6d4fb8f34849b39ae6721e7b82391b91d1d83df",
+      "bytes": 11449,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/final-portable-wrapper-validation.json.gz",
+      "gzip_sha256": "818be993b4b40c11237e334e896ba78a3189a29e567b6de219707dfc36339aee"
+    },
+    {
+      "original_path": "reports/final-selected-source-coframe-independent-binding-publication.json",
+      "original_sha256": "4502f1e5668f80796e6a14294a4db7acaba8ce951f02a5864252736183ec1f43",
+      "bytes": 4702,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/final-selected-source-coframe-independent-binding-publication.json.gz",
+      "gzip_sha256": "2c45cd55a81cea63917b9295a5b01037797710d9c8f04886596af34b8ca86ce0"
+    },
+    {
+      "original_path": "reports/final-selected-source-coframe-independent-word-23.json",
+      "original_sha256": "6c66a6814c09f5052e8d5a0b70f611ebf9dad0fcecd66931fa68184bff655793",
+      "bytes": 2278,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/final-selected-source-coframe-independent-word-23.json.gz",
+      "gzip_sha256": "ecc8abddb10526577f08963a51ffb22123507aa691ac09b486cc48bad3e0f9f7"
+    },
+    {
+      "original_path": "reports/final-selected-source-coframe-independent-word-25.json",
+      "original_sha256": "ced6d2f054c026fbe5450713da61ed21606bbf266de8155edde47689ba772f48",
+      "bytes": 2296,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/final-selected-source-coframe-independent-word-25.json.gz",
+      "gzip_sha256": "fbef5e934630a65984fa215692f120150dc389eeadfb050c551193adcfc39940"
+    },
+    {
+      "original_path": "reports/final-selected-source-coframe-publication-adversarial.json",
+      "original_sha256": "388a994cebfb6c53d27f59a08bb26d25ba30cd878daebbc5633023e9009db69a",
+      "bytes": 2336,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/final-selected-source-coframe-publication-adversarial.json.gz",
+      "gzip_sha256": "5979c71e949659e0318febdd262493faed31d23188ae4575bad76c6b57fdc165"
+    },
+    {
+      "original_path": "reports/idle-joint-profiler-final-stop.json",
+      "original_sha256": "dbbf529b62fcb711a1133581b6b3a51fafad3bde77c5fde0a278948844bb4058",
+      "bytes": 1986,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/idle-joint-profiler-final-stop.json.gz",
+      "gzip_sha256": "2152c46a0a5d8cb47463b153dab3df21ddd8c7281cebdd043ffe10783b0f09d7"
+    },
+    {
+      "original_path": "reports/live-mixed-source-frontier-2301.json",
+      "original_sha256": "82f1bc47e36c13be93de2a07720912e5a09ab9efa2c2d1f63983161073c9d650",
+      "bytes": 67411,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/live-mixed-source-frontier-2301.json.gz",
+      "gzip_sha256": "c297afeaf59fbd90d825a3bf602d9c52df3fa55587650f1d26168c7417a8fd92"
+    },
+    {
+      "original_path": "reports/mixed-native-admission-handoff-2314.json",
+      "original_sha256": "acccb97c4450dd5283e4029aef0adb2f70995f9d66d9444b4762b067ea1673c3",
+      "bytes": 1369,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/mixed-native-admission-handoff-2314.json.gz",
+      "gzip_sha256": "850941449f664584078b3b6a0b94e6909d008312ae7871dde46e79cbae8a84cb"
+    },
+    {
+      "original_path": "reports/mixed-source-profile-population-2244.json",
+      "original_sha256": "a89e4db8139828004d75d981c4c9e9d1c3465e03a71e44783adc0bac59d633b3",
+      "bytes": 53137,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/mixed-source-profile-population-2244.json.gz",
+      "gzip_sha256": "5758b456b43ddb69d81e3e553bd684eebf850fc5fba4fb2e9ba70c4d0bfd74a5"
+    },
+    {
+      "original_path": "reports/region-source-final-native-2315.json",
+      "original_sha256": "3b49ef85815123fdab12c27a6fcff6b9974040776c360609cbca88b85ff6ebdb",
+      "bytes": 26617,
+      "published_complete_gzip": "evidence/final-coframe-verification-and-negatives/reports/region-source-final-native-2315.json.gz",
+      "gzip_sha256": "d195036a563d2ed867b1b93a8c5cf6d4e7fa08e4f73262ab89f07a9031d65491"
+    }
+  ],
+  "published_complete_certificate": "evidence/final-selected-source-coframe-core/certificate.json.gz",
+  "original_certificate_path": "runs/interval-joint-selected-source-coframes-final/certificate.json",
+  "source_only_recipe": "Use source_commands with fresh selected-matching files decompressed from inherited complete gzip fixtures. Default recompiles public scalar graph and selected weighted parent; do not supply discovery words, profiles, solver tables or parent-reuse options.",
+  "wrapper_recipe": "code/prepare_selected_coframe_replay.py binds source receipts to separately regenerated native profiles, creates the two axis wrappers, combined axes, flattened literal receipts and exact-control descriptors. All profile, audit and binary hashes are recomputed; no stored profile value is authoritative.",
+  "verification_order": [
+    "Automatic pinned-source acquisition and complete selected matching recovery",
+    "Fresh default source-only reconstruction for each axis and frozen explicit allocation",
+    "Compile mixed_coframe_word_profiles.cpp and profile both independently generated typed words",
+    "Prepare fresh wrappers and exact-control descriptors with prepare_selected_coframe_replay.py",
+    "Run review_mixed_coframe_word_profiles.py with48 samples/minimum24 coframe controls per axis",
+    "Reproduce complete DATA or use its exact byte-bound retained certificate after source/basis compatibility",
+    "Run audit_mixed_coframe_word_interfaces.py on fresh source/wrapper/DATA inputs",
+    "Compose complete recurrence with compose_joint_word_profiles.py and pinned inherited assembly",
+    "Run bind_signed_joint_variant_certificate.py with fresh source, word, controls, DATA and stock",
+    "Run14 adversarial controls with check_signed_joint_binding_controls.py"
+  ],
+  "reproduction_tested": "Complete fresh public-source weighted parents and newly regenerated final allocation words, native full profiles,96 exact Gram controls, full source-family DATA compatibility, actual source/native byte equality, all stock/moment/47+7 assembly gates,14 adversarial rejection controls. Portable wrapper/stock/assembly/binder path additionally replayed and passed; it reused already independently reconstructed source words/profiles rather than running discovery.",
+  "runtime_hash_note": "Literal word and typed-binary bytes are deterministic. JSON receipts/profile tables include execution paths and timing; their hashes change on a fresh machine. Regenerate fresh wrappers, controls, stock and certificates together instead of replacing paths inside a retained receipt.",
+  "conditional_scope": "Inherited analytic, routing, resampling, prime setup, precision and fixed-tape assumptions plus explicit all-size rational address realization premise. No ridge-payload restriction or unpaid terminal frame shrink.",
+  "negative_catalog": "agents/graph/results/completed-graph-source-family-catalog-2330.json",
+  "completed_moment_closure": "reports/completed-mixed-moment-closure.json",
+  "archive_recovery": "Decompress each complete gzip to a fresh destination, verify original SHA256, and keep original publication receipts unchanged. Default source recipe regenerates external parent words and metadata and does not depend on historical absolute paths.",
+  "additional_authored_dependencies": [
+    {
+      "path": "code/prepare_selected_coframe_replay.py",
+      "sha256": "2cfe992c9757d08a38a0bc6a2b7c30ec47783c3dd83b95c890921a99b82258d3",
+      "bytes": 3954
+    },
+    {
+      "path": "code/bind_signed_joint_variant_certificate.py",
+      "sha256": "8b387f2f3f4adbc7af24ec95e11e442d4d6bb2996fa19893be54b21bf97bdd01",
+      "bytes": 25108
+    },
+    {
+      "path": "code/check_signed_joint_binding_controls.py",
+      "sha256": "48d9693a8b88f16f4d06e793d35163381b2ce7e1f87aed2a3d579dfc0477ef1d",
+      "bytes": 6020
+    },
+    {
+      "path": "code/compose_joint_word_profiles.py",
+      "sha256": "10c72dc873976ba2e1ee3fd237884e43c08341434d8974b0409d891be7c6d6d1",
+      "bytes": 5199
+    },
+    {
+      "path": "agents/scout/code/audit_mixed_coframe_word_interfaces.py",
+      "sha256": "b6ab55554af6912c2b7867a6e000c853dab15931f728d3956113e1381e22bcb9",
+      "bytes": 20668
+    }
+  ]
+}

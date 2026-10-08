@@ -1,48 +1,15 @@
-# Current scientific status
+# Final scientific status
 
-Research remains active indefinitely. The accepted conditional exponent is
-**κ=5.140321877e-5**, bit saving5.14058612e-5, R23=27719, R25=36354,
-W=136283234, rank mass78361012650. Matrix-weighted carrier allocation in the
-actual signed-frame PR62+PR57 word passes all finite acceptance gates under
-the explicit inherited address-compiler and all-size assumptions.
-[Proof](weighted-coupled-pair-joint-proof.md),
-[acceptance](weighted-coupled-pair-joint-acceptance.json),
-[reproduction](../configs/weighted-coupled-pair-joint-manifest.json).
+The user requested a graceful finish. Discovery admissions ended and all owned experiment processes exited. The original scheduling protocol and historical evidence are preserved.
 
-The gain over PR61 is approximately0.75720%. The new matching pays one extra
-role at dimension25 and nevertheless improves the complete exact moment.
-No large asymptotic breakthrough is claimed. Fresh selected-only source words,
-independent literal replay, actual rational controls, complete DATA and changed
-stock, exact assembly and eight adversarial checks all pass. Previous accepted
-multifamily and two-core capacities remain separate coherent constructions.
+**ACCEPTED CONDITIONAL CONSTRUCTION: κ = 5.143624568e-5**, bit saving `5.143889151e-5`, `R23=27719`, `R25=36354`, `W=136283234`, recursive rank `78361012650`. The gain over pinned PR #61 is approximately **0.822%**. Selective source-span frames improve actual ordered transitions at unchanged scalar word and weighted matching. Every finite acceptance gate, 96 independent exact matrix controls, 14 adversarial rejections and all 47+7 assembly checks pass. All-size/address realization assumptions remain conditional.
 
-The larger search investigates region grouping determined by actual downstream
-sinks, cross-common shared producers and joint carrier/frame optimization.
-A first scalar-region enlargement merges1478/1480 regions but increases roles
-to29657/38840; it remains a discovery tradeoff requiring actual costs and new
-matching. The existing signed MAX already used downstream physical-event
-constraints, so repeating that enlargement at interned-frame granularity is
-not claimed as a new mechanism.
+[Proof](selected-source-coframe-final-proof.md), [acceptance](selected-source-coframe-final-acceptance.json), [reproduction](../configs/selected-source-coframe-final-manifest.json).
 
-The rational basis beta=-1/15 now passes complete fresh DATA, source/center
-interfaces and independent final acceptance. Its local gain is a small exact
-rank-profile change, rather than an architectural discovery. Actual weighted two-core frames now pass complete independent source reconstruction
-and final acceptance. New fixed-word coordinate orders remain pending binding. The primary new architecture
-compiles minimal source-line spans in complemented positive frames.
-Free terminal gauge substitution fails the inherited arbitrary-array contract:
-[negative receipt](unrestricted-terminal-frame-transfer-falsification-2151.json).
-Dense per-output paid retirement is excluded by a scoped rank-mass obstruction;
-source-partition relocation and modular basis aliases retain precise negatives.
+The weaker selective balanced allocation, κ `5.140380959e-5`, remains an EXACT CANDIDATE without separate complete stock acceptance. It is superseded by the fully checked final construction. No higher unaccepted candidate is claimed. Numerical discovery scores and solver bounds are not exponents.
 
-Both GPUs run useful batched complete-word ordered-rank discovery. Bounded CPU
-queues compile distinct scalar regions and certify actual rational profiles.
-Actual60-second utilization, PIDs, completed configurations and active batches
-remain in the external console telemetry. Abstract dirty role checks are
-separated from universal echo and conditional address-gauge transfer:
-[scope](../agents/scout/signed-address-transfer-scope.md).
-No separate CPU campaign was accessed; no public PR was opened.
+All 21 final completed mixed/region profiles received complete moment evaluation without surpassing the accepted result. Minimum frames everywhere, source-based regrouping and cross-common sharing have precise negative scopes; reduced roles or dimensions alone did not imply better moments. Unpaid terminal-frame transfer fails the inherited arbitrary-array contract. These results do not prove a general architectural impossibility.
 
-Uniform minimal source coframes, including fixed weighted words at unchanged R,
-lose complete moment despite smaller dimensions. Selective compatible old/minimal
-assignments and new future-constrained source generators are the active architectural
-search. These scoped negatives do not exclude profitable nonuniform choices.
+Both GPUs ended with 0% utilization and no owned compute job. Final GPU populations tested 4194304 configurations, with distinct-fingerprint lower bound 4160586. Their best allocations were weaker than the finally checked numerical-MILP selection. Historical utilization and throughput receipts are preserved. Only the minimal-source h25 large-rise graph attempt was interrupted before producing a complete result; six late signed cases were harvested as complete. The graph record retains 87 completed signed cases and 105 unstarted configs.
+
+[Final handoff](final-campaign-handoff.md), [graph catalog](../agents/graph/results/completed-graph-source-family-catalog-2330.json), [completed exact moments](completed-mixed-moment-closure.json), [address scope](../agents/scout/signed-address-transfer-scope.md). No separate CPU campaign was accessed and no public PR was opened.

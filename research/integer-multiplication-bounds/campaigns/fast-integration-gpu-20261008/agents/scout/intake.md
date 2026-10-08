@@ -1,3 +1,5 @@
+Campaign closed at the user's request. Final accepted conditional κ=5.143624568e-5; see the [final handoff](../../reports/final-campaign-handoff.md). The checkpoint narrative below is historical.
+
 # Public-source intake and live scouting
 
 Observed 2026-10-08 12:43:39 UTC. Public GitHub content was read through
@@ -195,3 +197,48 @@ preserves that scope without incorporating their mathematical contents.
 
 Only the campaign coordinator performs Git index, branch, commit and push
 operations. All new scout-authored durable files stay in `agents/scout/`.
+
+## Basis discovery and complete changed-data certificates
+
+After15:04 the coordinator assigned both GPUs and two CPU host slots for
+actual rational basis-parameter discovery. The
+[review](gpu-basis-parameter-review.md) records source/center gates,
+conjugate source-weight classes, exact sample controls, the rejected first
+bad-prime candidate and the full-family falsification of its promising
+one-mutation permutation. At the inherited order, three changed source
+families now have exact uniform21+17 data profiles across all4,073,300 pairs.
+Their independent full-input audit and prime-product proofs are linked in
+that review. DATA geometry is certified; local frame costs and complete
+physical/compiler assembly remain separate coordinator/geometry work.
+
+[The terminal interface review](side-terminal-interface-review.md) identifies
+the actual cleanup as I-P_T-P_side in the source target hyperplane and
+preserves the paid rank-one endpoint correction. Geometry's bounded side
+rank discriminator establishes that all selected positive sides already
+have rankh-2, so this correction offers no width improvement for the current
+selected axes. This negative result avoids a false saving from substituting
+the center hyperplane projector.
+
+Public PR50 and PR54 bodies were separately user-referenced and compared by
+the coordinator. A subsequent explicit user authorization released the
+implementation hold for exact pinned PR54,PR53 and PR51 snapshots. The
+[PR54 compatibility review](pr54-data-basis-compatibility.md) and
+[receipt](gpu-parameter-results/pr54-IJ-conjugate-data-compatibility-20261008T1714.json)
+bind four I+J/conjugate choices to identical retained complete data geometry.
+Earlier hold records remain historical; the exclusion record records the
+authorization transition. Other uncertain mutable sources remain excluded.
+Independent new literature acquisition remains paused while useful assigned
+GPU/algebra work is active; lightweight metadata polling continues every ten
+minutes.
+
+
+The explicit18:10 authorization adds exact PR62/57/61 implementation intake.
+The [interval/joint interface review](interval-joint-interface-review.md) and
+[scoped audit](gpu-parameter-results/interval-joint-source-center-data-compatibility-20261008T1822.json)
+close source-line, copied-center and complete DATA compatibility for original
+and conjugate I+J choices. The current PR57 head differs from the requested
+cd350 snapshot; no moving head is substituted. The actual complete source
+and terminal slots are checked in the public serialized words, without
+duplicating the graph worker's dirty replay. The [mixed DATA audit](mixed-fixed-negative-data-proof.md)
+separately closes I+J23/negative25 through universal incidence bounds and the
+retained fresh mixed full-family run.

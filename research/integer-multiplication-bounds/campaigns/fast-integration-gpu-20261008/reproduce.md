@@ -1,3 +1,90 @@
+# Final accepted construction: reproduction
+
+The campaign is closed at the user's request. The final accepted conditional exponent is **κ=5.143624568e-5**, bit saving **5.143889151e-5**. [Proof](reports/selected-source-coframe-final-proof.md), [acceptance](reports/selected-source-coframe-final-acceptance.json), and [complete source/recovery manifest](configs/selected-source-coframe-final-manifest.json) define the scope. Earlier commands below are historical checkpoints, not the final construction.
+
+Python 3.11+ and a C++17 compiler suffice to reconstruct the selected graph words, native exact profiles, controls, stock and assembly using the retained complete DATA certificate. Full DATA regeneration uses the validated CUDA/CuPy environment and commands in the manifest. The final word does not require a GPU, HiGHS, a discovery cost table or manual source transfers. All public inputs are acquired automatically with `gh`/Git. Run from the repository root and use fresh external directories.
+
+```bash
+C=research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008
+R=$(mktemp -d "${RAD_WORK_ROOT:-/tmp}/selected-source-coframes-XXXXXX")
+python3 "$C/code/fetch_interval_joint_sources.py" --work "$R/public"
+S="$R/public/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e"
+for h in 23 25; do
+  gzip -dc "$C/evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h$h.json.gz" > "$R/selected-matching-$h.json"
+done
+python3 "$C/agents/graph/code/source_only_explicit_weighted_coframes.py" \
+  --source "$S" --choices-file "$C/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json" \
+  --selected-matching "$R/selected-matching-23.json" \
+  --allocation "$C/agents/geometry/fixtures/selected-finite-milp-coframe-h23-20261008T2315.json" \
+  --h 23 --work "$R/source-23" --output "$R/source-23.json" \
+  --expected-word-sha256 f1cd262d1259558b30f3653519ad0c7550a26db8ff30447330633ab0d5f95334   --expected-transition-sha256 2faacb8deda52da074db589a17604385f8e4084d6ab69fc0046e0766a002b0c8
+python3 "$C/agents/graph/code/source_only_explicit_weighted_coframes.py" \
+  --source "$S" --choices-file "$C/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json" \
+  --selected-matching "$R/selected-matching-25.json" \
+  --allocation "$C/agents/geometry/fixtures/selected-finite-milp-coframe-h25-20261008T2315.json" \
+  --h 25 --work "$R/source-25" --output "$R/source-25.json" \
+  --expected-word-sha256 8c7215758ce95612724d118dcdde620efd36b3219357a316d56d6c3387a47ea5   --expected-transition-sha256 f82227d2b6f538936e06c309e467b44df4058ab526e260df86bb17d1cfca2c4b
+
+g++ -std=c++17 -O3 "$C/code/mixed_coframe_word_profiles.cpp" -o "$R/mixed-profile"
+"$R/mixed-profile" "$R/source-23/mixed-transitions.bin" beta:1:15 "$R/profile-23.json" "$R/audit-23.json"
+"$R/mixed-profile" "$R/source-25/mixed-transitions.bin" beta:-1:15 "$R/profile-25.json" "$R/audit-25.json"
+python3 "$C/code/prepare_selected_coframe_replay.py" \
+  --source-receipts "$R/source-23.json" "$R/source-25.json" \
+  --profiles "$R/profile-23.json" "$R/profile-25.json" \
+  --audits "$R/audit-23.json" "$R/audit-25.json" --output-directory "$R/inputs"
+python3 "$C/agents/geometry/code/review_mixed_coframe_word_profiles.py" \
+  --input "$R/inputs/controls-input.json" --samples 48 --minimum-coframe-controls 24 \
+  --output "$R/controls.json"
+D="$C/agents/scout/gpu-parameter-results/one15-minusone15-uniform-data-certificate-20261008T2226.json"
+A="$S/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py"
+python3 "$C/agents/scout/code/audit_mixed_coframe_word_interfaces.py" \
+  --phase-snapshot "$S" --graph-receipts "$R/source-23.json" "$R/source-25.json" \
+  --geometry-fixtures "$R/inputs/axis-23.json" "$R/inputs/axis-25.json" \
+  --data-certificate "$D" --beta23 1/15 --beta25=-1/15 --output "$R/stock.json"
+python3 "$C/code/compose_joint_word_profiles.py" \
+  --axes "$R/inputs/axes.json" --phase "$C/fixtures/phase-pr36.json" \
+  --baseline "$S/research/pair-assembly/frame/frame-certificate.json" \
+  --assembly "$A" --geometry "$D" --output "$R/certificate.json"
+python3 "$C/code/bind_signed_joint_variant_certificate.py" \
+  --axes "$R/inputs/axes.json" --certificate "$R/certificate.json" --data "$D" \
+  --stock "$R/stock.json" --scalar "$C/reports/public62-fresh-scalar-replay-1828.json" \
+  --assembly "$A" --words "$R/inputs/word-23.json" "$R/inputs/word-25.json" \
+  --source-recoveries "$R/source-23.json" "$R/source-25.json" \
+  --rational-controls "$R/controls.json" --output "$R/binding.json"
+python3 "$C/code/check_signed_joint_binding_controls.py" \
+  --axes "$R/inputs/axes.json" --word "$R/inputs/word-23.json" \
+  --work "$R/adversarial-work" --output "$R/adversarial.json"
+```
+
+Expected: `642953071/12500000000000`, saving `5143889151/100000000000000`, `W=136283234`, rank `78361012650`, 47 positive constraints, seven positive margins, 96 actual rational controls and 14 adversarial rejections. The selected lists are zero-based IDs in the original source-bound weighted parent. Word and binary bytes must match the frozen hashes; receipt paths and timings are execution-specific. Never patch paths inside a retained certificate and keep its old hashes. Generate fresh wrappers, controls, stock and assembly together.
+
+The retained final source receipts explicitly reused the just-completed independently rebuilt public-source weighted parents by hashes. Those parents were rebuilt from scratch with exact scalar/use/capacity checks. The new explicit selected frames and both complete literal words were independently regenerated and compared with native bytes. The command above takes the supported default fresh-parent path. Native full profiling, 96 independent rational controls, complete DATA, stock, 47+7 assembly and 14 adversarial checks were exercised. The portable wrapper/stock/composition/binder adapter was additionally replayed and passed on the already independently reconstructed words/profiles; see [bounded portable validation](reports/final-portable-wrapper-validation.json). No assertion is made that the entire displayed command block was rerun as a new full-suite job after the stop request.
+
+Completed final verification and negative receipts are whole gzip copies under `evidence/final-coframe-verification-and-negatives/`. The source and independent Gram receipts exceeding row-level publication limits are deliberately recovered from these copies. To recover all receipts to a fresh external directory, verify each uncompressed hash:
+
+```python
+import gzip, hashlib, json
+from pathlib import Path
+campaign = Path("research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008")
+destination = Path("/tmp/final-coframe-receipts-fresh")
+destination.mkdir(exist_ok=False)
+archive = campaign / "evidence/final-coframe-verification-and-negatives"
+records = gzip.decompress((archive / "archive-manifest.jsonl.gz").read_bytes()).decode().splitlines()
+for line in records[1:]:
+    row = json.loads(line)
+    blob = gzip.decompress((archive / (row["path"] + ".gz")).read_bytes())
+    assert hashlib.sha256(blob).hexdigest() == row["original_sha256"]
+    output = destination / row["path"]
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_bytes(blob)
+```
+
+These publication receipts preserve historical paths as provenance; the fresh source recipe regenerates all required large payloads and does not depend on those paths. The complete final certificate is `evidence/final-selected-source-coframe-core/certificate.json.gz`. Complete final console telemetry and two GPU search populations are also archived. Their archived PIDs are never authority to control live processes. Public sources and binaries are excluded from Git and regenerable; all-size analytic/address/tape assumptions remain conditional.
+
+---
+
+# Historical checkpoint commands
+
 # Reproduction
 
 From a clone of hipotures/rad on the GPU research branch, set `CAMPAIGN=research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008`. Python3.11+ and C++17 suffice for the exact producer and assembly paths. Source snapshots are pinned in the scout/graph input manifests; retrieve their GitHub commits via `gh api repos/<owner>/<repo>/tarball/<sha>` into external task-owned storage. Preserve the Apache2 licenses and all inherited notices.

@@ -1,0 +1,262 @@
+{
+  "construction": "Selected source-span frames in joint interval circuits",
+  "classification": "EXACT FINITE CANDIDATE; final acceptance binder authoritative",
+  "inherits": "configs/matrix-weighted-joint-region-manifest.json",
+  "source_pins": {
+    "62": "ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+    "57": "cd350f76c9bc01489ec83568bded532cb69be938",
+    "61": "afb7cb67d1858641315cfbf4ac768ee64a8eff3a"
+  },
+  "selected_axes": [
+    {
+      "h": 23,
+      "basis": "beta:1:15",
+      "word_sha256": "f1cd262d1259558b30f3653519ad0c7550a26db8ff30447330633ab0d5f95334",
+      "transition_sha256": "2faacb8deda52da074db589a17604385f8e4084d6ab69fc0046e0766a002b0c8",
+      "selected_allocation": "agents/geometry/fixtures/selected-finite-milp-coframe-h23-20261008T2315.json",
+      "source_receipt": "agents/graph/results/final-explicit-coframe-source-only-2317-h23.json",
+      "actual_producer": "agents/geometry/results/final-finite-milp-coframe-word-h23-20261008T231358.json"
+    },
+    {
+      "h": 25,
+      "basis": "beta:-1:15",
+      "word_sha256": "8c7215758ce95612724d118dcdde620efd36b3219357a316d56d6c3387a47ea5",
+      "transition_sha256": "f82227d2b6f538936e06c309e467b44df4058ab526e260df86bb17d1cfca2c4b",
+      "selected_allocation": "agents/geometry/fixtures/selected-finite-milp-coframe-h25-20261008T2315.json",
+      "source_receipt": "agents/graph/results/final-explicit-coframe-source-only-2317-h25.json",
+      "actual_producer": "agents/geometry/results/final-finite-milp-coframe-word-h25-20261008T231358.json"
+    }
+  ],
+  "source_commands": [
+    [
+      "python3",
+      "<campaign>/agents/graph/code/source_only_explicit_weighted_coframes.py",
+      "--source",
+      "<snapshot>",
+      "--choices-file",
+      "<campaign>/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json",
+      "--selected-matching",
+      "<recovered-selected-matching-h23.json>",
+      "--allocation",
+      "<campaign>/agents/geometry/fixtures/selected-finite-milp-coframe-h23-20261008T2315.json",
+      "--h",
+      "23",
+      "--work",
+      "<fresh-work>/source-h23",
+      "--output",
+      "<fresh-work>/source-h23.json",
+      "--expected-word-sha256",
+      "f1cd262d1259558b30f3653519ad0c7550a26db8ff30447330633ab0d5f95334",
+      "--expected-transition-sha256",
+      "2faacb8deda52da074db589a17604385f8e4084d6ab69fc0046e0766a002b0c8"
+    ],
+    [
+      "python3",
+      "<campaign>/agents/graph/code/source_only_explicit_weighted_coframes.py",
+      "--source",
+      "<snapshot>",
+      "--choices-file",
+      "<campaign>/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json",
+      "--selected-matching",
+      "<recovered-selected-matching-h25.json>",
+      "--allocation",
+      "<campaign>/agents/geometry/fixtures/selected-finite-milp-coframe-h25-20261008T2315.json",
+      "--h",
+      "25",
+      "--work",
+      "<fresh-work>/source-h25",
+      "--output",
+      "<fresh-work>/source-h25.json",
+      "--expected-word-sha256",
+      "8c7215758ce95612724d118dcdde620efd36b3219357a316d56d6c3387a47ea5",
+      "--expected-transition-sha256",
+      "f82227d2b6f538936e06c309e467b44df4058ab526e260df86bb17d1cfca2c4b"
+    ]
+  ],
+  "frozen_authored_dependencies": [
+    {
+      "path": "agents/geometry/code/apply_explicit_fixed_coframe_selection.py",
+      "sha256": "d7b9eb65754779b886ad202dc48123f6c9f57b52841bc604cccaeb9b85644f4d",
+      "bytes": 6513
+    },
+    {
+      "path": "agents/geometry/code/componentwise_signed_word_enlargement.py",
+      "sha256": "473672fa8eafdaae0b6d39069a15d946725c00b84d33a0dc8d7baa8e1f3b283a",
+      "bytes": 9722
+    },
+    {
+      "path": "agents/geometry/code/decompose_common_context_profiles.py",
+      "sha256": "ac01062a81db796aac68578873b3d1763b88ab021875ff9ccd8504779bf232a4",
+      "bytes": 6441
+    },
+    {
+      "path": "agents/geometry/code/fixed_word_source_coframes.py",
+      "sha256": "4cbdc0e3541e82cbf75d55db263baeca74907294800fe73fe89f7d542f0c22fa",
+      "bytes": 11107
+    },
+    {
+      "path": "agents/geometry/code/independent_axis_review.py",
+      "sha256": "3876fc762a0ddf71dc76c10bc2faa0a4eb86cf51adf1623a2ce13e3b82c35c01",
+      "bytes": 10003
+    },
+    {
+      "path": "agents/geometry/code/mix_common_context_frames.py",
+      "sha256": "6224dfc758d4f9e33397f9c73c4f7470ccb2217c2d18dddd134c6e0404f285ad",
+      "bytes": 7879
+    },
+    {
+      "path": "agents/geometry/code/mix_common_frame_families.py",
+      "sha256": "9c29493298719c276a25fb213eb2bb6f645de2211d8af7c9244a989bddcbeb8b",
+      "bytes": 7253
+    },
+    {
+      "path": "agents/geometry/code/partial_fixed_word_coframes.py",
+      "sha256": "9fc29de916e569baf75f65eba9ee8f633a3e624e1b8da73f69d4d88d1391ea0d",
+      "bytes": 8351
+    },
+    {
+      "path": "agents/geometry/code/rational_one_core_frame_controls.py",
+      "sha256": "3b05e90660f9bb25475e549784f58d99bf7e467a61afe616fc204b770d9ccc67",
+      "bytes": 8519
+    },
+    {
+      "path": "agents/geometry/code/review_mixed_coframe_word_profiles.py",
+      "sha256": "83bdcfd75b1aecb88fd31fe9da1add9cfdddd39a8bf63971a1e62e44363a0ca9",
+      "bytes": 9528
+    },
+    {
+      "path": "agents/geometry/code/review_positive_physical_profiles.py",
+      "sha256": "6126d2509e57be3f3a4ce73446f96663c072e1e4008d7749027bbb55d9e672ab",
+      "bytes": 5145
+    },
+    {
+      "path": "agents/graph/code/check_compiled_witness.py",
+      "sha256": "beac997e307fbfbacd658bd9ffd79deb84a84bec72298fbd627be5c2852bd880",
+      "bytes": 16956
+    },
+    {
+      "path": "agents/graph/code/co_signed_source_frames.py",
+      "sha256": "48b61de83495df0031d4f5afea1b8d019850f613df33d241962efe9a8885ec93",
+      "bytes": 8216
+    },
+    {
+      "path": "agents/graph/code/joint_positive_frontier.py",
+      "sha256": "734c6cb1c3c86dc8fec4bd643c037d14cb1fed74c1ed500feabb0588c93b74b4",
+      "bytes": 7993
+    },
+    {
+      "path": "agents/graph/code/joint_region_search_v3.py",
+      "sha256": "9a9d5be9161c8f1e838c25329e2c8d0eadf5023d8558b48676b443e8f6a476c0",
+      "bytes": 11804
+    },
+    {
+      "path": "agents/graph/code/joint_scalar_future_frames.py",
+      "sha256": "bdc951c909ba1b52266923c201f2daf56d79a79d48d50695fd2aa1a9e4421f04",
+      "bytes": 10479
+    },
+    {
+      "path": "agents/graph/code/joint_signed_word_recompile.py",
+      "sha256": "1a7945da0b1a13140ecae21d73813a48799da87f1b5e69cdb308e812519a81e9",
+      "bytes": 16632
+    },
+    {
+      "path": "agents/graph/code/joint_word_check_v2.py",
+      "sha256": "dc4086b6725e57bafcbc9b617e73e7c58ade1c6273d8e4bf9a7a91b2820d86b5",
+      "bytes": 7842
+    },
+    {
+      "path": "agents/graph/code/joint_word_check_v4.py",
+      "sha256": "70c54c305344c3221f99dee0bdaf00af3a26e9164fbb96728a267fb59acfce73",
+      "bytes": 9782
+    },
+    {
+      "path": "agents/graph/code/joint_word_check_v5.py",
+      "sha256": "d273b5e64436a902437a7fedb55b6740abee45f99dcc98ebc3f989ec07171478",
+      "bytes": 10216
+    },
+    {
+      "path": "agents/graph/code/joint_word_positive_closure.py",
+      "sha256": "2b2aad2d274aaf240d7c49860479a7dd1253af5c42a0f3fa580b7ba5f95e2548",
+      "bytes": 6309
+    },
+    {
+      "path": "agents/graph/code/matrix_weighted_joint_carriers.py",
+      "sha256": "bada9d4d0d22b13852fcc6d8d84dbd6a7ea1427ed396da03ba97dc1d31362629",
+      "bytes": 8451
+    },
+    {
+      "path": "agents/graph/code/source_only_explicit_weighted_coframes.py",
+      "sha256": "dab9a7f108b6df44b699f53a4ef22e3fda1ca3a3593a3ffe7c3f4be90480ca60",
+      "bytes": 10318
+    },
+    {
+      "path": "agents/graph/code/source_only_matrix_weighted_joint.py",
+      "sha256": "e955889e0f38a6077a46a59c643f349c1c49d7ee8fee99f3707939132fe9741a",
+      "bytes": 11329
+    },
+    {
+      "path": "code/mixed_coframe_word_profiles.cpp",
+      "sha256": "aa966e8edf2f777018a7c5274ebcccf24393be10287c1b93e2a59e6406d5af03",
+      "bytes": 13830
+    }
+  ],
+  "native_build": [
+    "g++",
+    "-std=c++17",
+    "-O3",
+    "<campaign>/code/mixed_coframe_word_profiles.cpp",
+    "-o",
+    "<fresh-work>/mixed-coframe-profile"
+  ],
+  "native_profile_commands": [
+    [
+      "<fresh-work>/mixed-coframe-profile",
+      "<regenerated-h23-mixed-transitions.bin>",
+      "beta:1:15",
+      "<fresh-work>/profile-h23.json",
+      "<fresh-work>/audit-h23.json"
+    ],
+    [
+      "<fresh-work>/mixed-coframe-profile",
+      "<regenerated-h25-mixed-transitions.bin>",
+      "beta:-1:15",
+      "<fresh-work>/profile-h25.json",
+      "<fresh-work>/audit-h25.json"
+    ]
+  ],
+  "independent_control_command": [
+    "python3",
+    "<campaign>/agents/geometry/code/review_mixed_coframe_word_profiles.py",
+    "--input",
+    "<fresh-control-input.json>",
+    "--output",
+    "<fresh-work>/controls.json",
+    "--samples",
+    "48",
+    "--minimum-coframe-controls",
+    "24"
+  ],
+  "independent_controls": "agents/geometry/results/final-finite-milp-actual-coframe-controls-20261008T2316.json",
+  "proof": "agents/geometry/reports/selective-source-coframe-allocation.md",
+  "finite_evidence": "agents/geometry/reports/final-selected-source-coframe-evidence.md",
+  "geometry_rank_mass_control": "agents/geometry/results/fixed-coframe-rank-mass-conservation-20261008T2320.json",
+  "data_certificate": "agents/scout/gpu-parameter-results/one15-minusone15-uniform-data-certificate-20261008T2226.json",
+  "recovery": "Full words/binaries deterministically regenerated from pinned public source, inherited selected carriers, and compact frozen allocation lists. Native matrix audit and all child widths regenerated from these words. Verification requires no HiGHS, CUDA or discovery tables; DATA regeneration follows inherited manifest with the actual source/basis compatibility receipt.",
+  "source_replay_scope": "Default command independently recompiles pinned public source. The final acceptance also permits reusing the just-completed independent public-source parent receipt ONLY by exact word/receipt hashes; this is explicitly recorded by source helper.",
+  "conditional_scope": "Inherited analytic, routing, resampling, prime setup, precision and fixed-tape assumptions plus explicit all-size rational address realization premise. No ridge-payload restriction or unpaid terminal frame shrink.",
+  "source_commands_tested": "Final source replay CLOSED both axes. Mandatory expected literalword/transition hashes and independent byte equality PASS. Full actual literal words, native CRT and96 independent Fraction controls PASS. Final root stock/assembly acceptance remains authoritative.",
+  "fresh_source_receipts": [
+    {
+      "path": "agents/graph/results/final-explicit-coframe-source-only-2317-h23.json",
+      "sha256": "26e3c96711f454542ad2dc3b1088522f30c41b307ba25f382c80357ff5e678f1"
+    },
+    {
+      "path": "agents/graph/results/final-explicit-coframe-source-only-2317-h25.json",
+      "sha256": "c6a2f8ddbd10d56924937f235d8a80f93bbb63f7acfecb2290baa406d0f4bb7a"
+    }
+  ],
+  "source_bound_axes": [
+    "agents/geometry/results/selected-source-bound-finite-coframe-axis-23-20261008T2322.json",
+    "agents/geometry/results/selected-source-bound-finite-coframe-axis-25-20261008T2322.json"
+  ]
+}

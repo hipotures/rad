@@ -12,6 +12,7 @@ from collections import Counter
 from fractions import Fraction as Q
 from hashlib import sha256
 import importlib.util
+import gzip
 import json
 from math import comb, prod
 from itertools import combinations
@@ -62,18 +63,35 @@ def local(row, graph):
     assert sorted(graph['source_permutation']) == list(range(h))
     assert graph['source_permutation'] == row['coordinate_order']
     raw = binary.read_bytes()
-    bh, bv, br, nf, nt, singles, mass, loss = struct.unpack_from('<6I2Q', raw)
+    mixed = raw[:8] == b'RADCOF01'
+    offset = 8 if mixed else 0
+    bh, bv, br, nf, nt, singles, mass, loss = struct.unpack_from('<6I2Q', raw, offset)
     assert (bh, bv, br, mass, loss) == (h, v, R, h*R+h*(h-1), p['loss'])
-    assert graph['frame_format'] == 'positive-signed-v1'
+    assert graph['frame_format'] == ('mixed-signed-complemented-v1' if mixed else 'positive-signed-v1')
     stride = 12+h
-    assert len(raw) == 40+stride*nf+16*nt
+    assert len(raw) == offset+40+stride*nf+16*nt
     frames = []
     for i in range(nf):
-        forced, rank = struct.unpack_from('<QI', raw, 40+stride*i)
-        symbols = struct.unpack_from('<'+str(h)+'b', raw, 52+stride*i)
+        flagged, rank = struct.unpack_from('<QI', raw, offset+40+stride*i)
+        complemented = bool(flagged >> 63)
+        assert mixed or not complemented
+        forced = flagged & ((1 << 63)-1)
+        symbols = struct.unpack_from('<'+str(h)+'b', raw, offset+52+stride*i)
         assert forced < 1<<h and rank <= h
         if i < 2:
-            assert forced == 0 and rank == (h if i else 0)
+            assert forced == 0 and rank == (h if i else 0) and not complemented
+        elif complemented:
+            # The distinctly tagged frame is Gamma_c minus disjoint signed
+            # normal classes, NOT the span of those normal columns. Gamma_c
+            # has T^T H0 T=4I, so each normal costs one dimension. Independent
+            # kernel-B/Gram controls check this actual projector formula.
+            assert forced.bit_count() == 1
+            common = forced.bit_length()-1
+            assert symbols[common] == 1
+            assert all(j == common or x == 0 or abs(x) > 1
+                       for j, x in enumerate(symbols))
+            labels = {abs(x) for x in symbols if abs(x) > 1}
+            assert rank == h-1-len(labels)
         else:
             f = forced.bit_count()
             assert f in (1,2,3)
@@ -91,7 +109,8 @@ def local(row, graph):
         frames.append((forced,symbols,rank))
     transitions = {}
     for i in range(nt):
-        a, b, count = struct.unpack_from('<2Iq', raw, 40+stride*nf+16*i)
+        a, b, count = struct.unpack_from('<2Iq', raw, offset+40+stride*nf+16*i)
+        assert a < nf and b < nf
         assert (a,b) not in transitions and count > 0
         ca, ua, ra = frames[a]
         cb, ub, rb = frames[b]
@@ -180,17 +199,33 @@ def main():
     assert all(r['exact_original_pinned_statistics'] for r in scalar['rows'])
     recoveries = [read(path) for path in args.source_recoveries]
     controls = read(args.rational_controls)
-    assert controls['status'] == 'PASS INDEPENDENT EXACT SIGNED JOINT WORD GRAM AND ORDERED-PIVOT CONTROLS'
-    assert len(controls['rows']) == 2
-    for row, control in zip(axes, controls['rows']):
-        assert control['case']['basis'] == row['profile']['basis']
-        assert digest(control['case']['binary']) == row['input_binary_sha256']
-        assert digest(control['case']['audit']) == row['transition_audit_sha256']
-        assert len(control['checks']) >= 48
-        for check in control['checks']:
-            assert check['independent_gram_pass']
-            assert check['nested_idempotent_pass']
-            assert check['integer_minor_bound_pass']
+    if controls['status'] == 'PASS INDEPENDENT EXACT MIXED COFRAME GRAM AND NE CONTROLS':
+        assert len(controls['cases']) == 2
+        for row, control in zip(axes, controls['cases']):
+            assert control['config']['basis'] == row['profile']['basis']
+            assert digest(control['config']['binary']) == control['binary_sha256'] == row['input_binary_sha256']
+            assert digest(control['config']['audit']) == control['audit_sha256'] == row['transition_audit_sha256']
+            assert digest(control['config']['profile']) == control['profile_sha256'] == row['profile_sha256']
+            assert len(control['checks']) >= 48
+            assert sum(check['contains_complemented_frame'] for check in control['checks']) >= 24
+            for frame in control['frames'].values():
+                for key in ('explicit_kernel_B_H0_Gram', 'idempotent', 'trace_rank', 'transformed_H0_selfadjoint'):
+                    assert frame[key]
+            for check in control['checks']:
+                for key in ('both_sided_containment', 'exact_integer_minor_bound', 'proven_prime_product_sufficient'):
+                    assert check[key]
+    else:
+        assert controls['status'] == 'PASS INDEPENDENT EXACT SIGNED JOINT WORD GRAM AND ORDERED-PIVOT CONTROLS'
+        assert len(controls['rows']) == 2
+        for row, control in zip(axes, controls['rows']):
+            assert control['case']['basis'] == row['profile']['basis']
+            assert digest(control['case']['binary']) == row['input_binary_sha256']
+            assert digest(control['case']['audit']) == row['transition_audit_sha256']
+            assert len(control['checks']) >= 48
+            for check in control['checks']:
+                assert check['independent_gram_pass']
+                assert check['nested_idempotent_pass']
+                assert check['integer_minor_bound_pass']
     for row, word, recovery in zip(axes,args.words,recoveries):
         assert recovery['source_head'] == 'ad0f25ff7b23cff7f08ad237c2254e6ecf74257e'
         assert recovery['independent'] == read(word)
@@ -222,7 +257,53 @@ def main():
             assert len(selection['selected']) == recovery['selected_carriers']
             assert recovery['selected_carriers'] == recovery['compiled']['stats']['matched']
             summary = recovery['frame_summary']
-            if recovery.get('current_signed_lower_spaces_preserved', False):
+            if recovery.get('selected_source_coframes', False):
+                # Actual source-containing smaller coframes are selected
+                # after reconstructing the chosen weighted word. The old
+                # actual spaces are upper bounds; old E containment in the
+                # new space would be an incorrect acceptance condition.
+                parent_path = Path(recovery['fresh_weighted_source_receipt_path'])
+                assert digest(parent_path) == recovery['fresh_weighted_source_receipt_sha256']
+                parent = read(parent_path)
+                assert parent['source_head'] == recovery['source_head']
+                assert parent['source_only'] and parent['word_regenerated_from_source_and_selected_carriers']
+                assert parent['word_sha256'] == recovery['actual_parent_word_sha256']
+                assert parent['selected_matching_sha256'] == recovery['selected_matching_sha256']
+                assert parent['source_permutation'] == row['coordinate_order']
+                assert parent['scalar'] == recovery['scalar']
+                assert read(word)['frame_format'] == 'mixed-signed-complemented-v1'
+                assert summary['minimum_contained_in_selected_contained_in_old']
+                assert summary['all_actual_continuations_strictly_nested']
+                assert summary['unchanged_R'] == parent['compiled']['roles']
+                assert summary['unchanged_every_XOR']
+                minimum = recovery['minimum_receipt']
+                assert minimum['source_two_core_and_copied_center_spaces_unchanged']
+                assert minimum['old_actual_space_is_upper_bound']
+                assert minimum['every_actual_continuation_contained']
+                assert recovery['literal_xors_unchanged_from_selected_weighted_parent']
+                if recovery.get('explicit_coframe_allocation', False):
+                    assert digest(recovery['allocation_path']) == recovery['allocation_sha256']
+                    allocation = read(recovery['allocation_path'])
+                    assert allocation['h'] == row['profile']['h']
+                    assert allocation['basis'] == row['profile']['basis']
+                    assert allocation['parent_word_sha256'] == parent['word_sha256']
+                    assert allocation['physical_R'] == row['profile']['R']
+                    assert allocation['physical_rank_mass'] == row['profile']['rank_sum']
+                    assert allocation['exact_predicted_child_histogram'] == row['profile']['blocks']
+                    selected = allocation['minimum_frame_ids']
+                    assert selected == sorted(set(selected))
+                    assert selected == recovery['selected_minimum_frame_ids']
+                    parent_word = json.loads(gzip.decompress(Path(parent['word_path']).read_bytes()))
+                    assert all(0 <= i < len(parent_word['frames']) for i in selected)
+                    assert recovery['source_injection_spaces_mutually_checked'] == row['profile']['v']
+                    assert recovery['copied_center_spaces_mutually_checked']
+                    # A clean reconstruction need not receive an existing
+                    # discovery binary. Actual byte equality is also checked
+                    # separately by the hash-bound stock audit below.
+                    if recovery['saved_source_reconstruction_reused']:
+                        assert digest(recovery['reused_source_receipt_path']) == recovery['reused_source_receipt_sha256']
+                        assert read(recovery['reused_source_receipt_path']) == parent
+            elif recovery.get('current_signed_lower_spaces_preserved', False):
                 # This enlargement follows the NEW selected matching.
                 # Bind its complete fresh parent rather than the earlier
                 # conservative matching's potentially different R.
@@ -318,6 +399,8 @@ def main():
     for item, recovery, row in zip(stock['axes'],args.source_recoveries,axes):
         assert item['graph_receipt']['sha256'] == digest(recovery)
         assert item['selected_profile']['sha256'] == row['profile_sha256']
+        if read(recovery).get('explicit_coframe_allocation', False):
+            assert item['source_and_native_binary_bytes_independently_equal']
     assert [r['word_sha256'] for widths,r in local_rows] == [r['raw_word_sha256'] for r in stock['axes']]
     spec = importlib.util.spec_from_file_location('independent_pinned_joint_assembly',args.assembly)
     module = importlib.util.module_from_spec(spec)
