@@ -1,0 +1,28 @@
+{
+  "run_id": "20261008T1941Z-changed-cpu47-map",
+  "recorded_utc": "2026-10-08T19:41:14.569877+00:00",
+  "status": "EXACT CHANGED47 MAP AND SUPPLEMENTS PASS",
+  "arithmetic_only": true,
+  "written_review": "joint-frame/agents/inverse/reports/changed-cpu-transfer-review.md",
+  "written_review_sha256": "df9f96fb86e4f01c59fa19c44ba182c5d0052fe00f6b46d6f365c59d5eb9942f",
+  "source_sha256": "d495cb68e51f48fb43a3a103d420a51e718551f654762b1591babf786a760a5a",
+  "receipt_sha256": "ca079c5ceb1314cf90291f28cceee12fca1759854ae6ff27dbc86f22a397f52c",
+  "inputs": {
+    "complete-moment.json": {
+      "source": "joint-frame/runs/20261008T1854Z-accepted-future-horizon/complete-moment.json",
+      "sha256": "49bdbecb969815a57c8aab7158b6369d64ac1873b6189a1dc9a97f7aa5680f61"
+    },
+    "literal-ledger.json": {
+      "source": "joint-frame/runs/20261008T1854Z-accepted-future-horizon/root-independent-ledger.json",
+      "sha256": "4788bd0f5d4906262891dba08dcebcdb508d685d39495b7724993f9ce221c7f5"
+    },
+    "cpu38-arithmetic.json": {
+      "source": "work/joint-frame/root/cpu38-future-horizon-20261008T1900Z.json",
+      "sha256": "f3625775d568323396f31a952df6f32140feab2c89ba98f46953efebb53781e4"
+    }
+  },
+  "reproduce_from_run": "python3 -B code/check_changed_cpu47_mapping.py --native fixtures/complete-moment.json --literal-ledger fixtures/literal-ledger.json --cpu38 fixtures/cpu38-arithmetic.json --output <fresh ignored work>/result.json",
+  "source_proof_scope": "All47 mapped obligations and separate uniform conditional review, not unchanged public47 PASS",
+  "workers": 1,
+  "native_threads": 1
+}

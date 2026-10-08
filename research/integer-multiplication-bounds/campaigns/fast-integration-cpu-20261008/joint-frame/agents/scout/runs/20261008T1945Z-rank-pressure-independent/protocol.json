@@ -1,0 +1,80 @@
+{
+  "run_id": "20261008T1945Z-rank-pressure-independent",
+  "finite_status": "INDEPENDENT FINITE PASS",
+  "conditional_transfer_status": "PUBLIC47 EXACT ARITHMETIC PASS; REUSE OF PREVIOUSLY REVIEWED ALL-PHASE WORD CONTRACTS",
+  "word_sha256": "c4ba85a9fdf811a205f1218766ba67bdd935d801b17a9f70295deec62fab3422",
+  "unchanged_source_commit": "bc2f7ed4c20dc18898305ab17165c0c995cbb804",
+  "review_commands": [
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/check_pr58_word.py",
+      "--word",
+      "work/joint-frame/root/causal-region-orders-recovery-20261008T1922Z/job02-rank-pressure-h23/case00/word.json",
+      "--transitions",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/transitions.bin",
+      "--output",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/physical.json"
+    ],
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/integer_crt_certificate.py",
+      "--binary",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/independent/integer-crt-profiles-v2",
+      "--transitions",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/transitions.bin",
+      "--profiles",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/integer.profiles.json",
+      "--output",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/integer.certificate.json"
+    ],
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/check_joint_moment.py",
+      "--profile23",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/integer.profiles.json",
+      "--profile25",
+      "work/joint-frame/scout/nested-high-rank-h25-independent-20261008T1822Z/integer.profiles.json",
+      "--physical23",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/physical.json",
+      "--physical25",
+      "work/joint-frame/scout/nested-high-rank-h25-independent-20261008T1822Z/physical.json",
+      "--inherited-certificate",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/source/certificates/joint-dual-kappa.json",
+      "--assembly",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/source/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py",
+      "--output",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/complete-moment.json"
+    ]
+  ],
+  "root_source_hashes": {
+    "joint-frame/code/causal_region_order.py": "d8464790b9073f1bfc91df5ff2e5265369aac84090298bc4a05d2ab240f5f7eb",
+    "joint-frame/code/region_schedule_family.py": "1aa831659c7f7fbc251da11adb1124929680ae4c82c18ceaf334c33e290da7ed"
+  },
+  "receipt_files": {
+    "joint-frame/agents/scout/results/rank-pressure-h23-profiles.json": {
+      "bytes": 342,
+      "sha256": "468f6659803d06da7f7b839d8b8943df8495f5826590a6539748fc3d08219528"
+    },
+    "joint-frame/agents/scout/results/rank-pressure-h23-protocol.json": {
+      "bytes": 2615,
+      "sha256": "5c59767ccc7dc18c674118424724f32b0d2758dbf728316c44cf36ab7a84ea8f"
+    },
+    "joint-frame/agents/scout/results/rank-pressure-h23-physical.json": {
+      "bytes": 2009,
+      "sha256": "eac6cf18763aa3c6706ef5198e93e988ea5f9c7acca0f85bac1f478a66663919"
+    },
+    "joint-frame/agents/scout/results/rank-pressure-h23-crt.json": {
+      "bytes": 4864,
+      "sha256": "02096b002a9dcd1fafc18ac67e70aeaa0172c024a89f0b3d2650f0980f128026"
+    },
+    "joint-frame/agents/scout/results/rank-pressure-h23-complete-moment.json": {
+      "bytes": 17313,
+      "sha256": "462d17b47cce662fe9ce5154c852fbec6993ece88b8956a98ff4825a786ea13c"
+    }
+  },
+  "root_full_word": "work/joint-frame/root/causal-region-orders-recovery-20261008T1922Z/job02-rank-pressure-h23/case00/word.json",
+  "publication": "The root coordinator publishes the complete physical word or exact reproducible generator/configuration. This compact review does not claim that raw full word is stored here."
+}

@@ -147,3 +147,10 @@ python3 -B "$CAMPAIGN/joint-frame/agents/layout/code/check_nullspace_discriminat
 
 It checks two exact cancellation opportunities and deliberate missing-guard
 and missing-gate controls. It supplies no native exponent certificate.
+
+The extended kernel plans under `configs/full-kernel-*-20261008T194321Z*`
+freeze six actual 23/25-axis commands with `--include-anchor-relations`,
+complete driver hashes, the small-discriminator receipt hash and one CPU lane
+per serial pair. Their queue coordinators wait for the corresponding frozen
+version-1 serial plan, checking its live PID and command marker. Historical
+PID records are provenance only and never authorize process control.

@@ -1,0 +1,51 @@
+{
+  "recorded_utc": "2026-10-08T19:48:51.950601+00:00",
+  "commands": [
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/check_pr58_word.py",
+      "--word",
+      "work/joint-frame/scout/causal-pressure-basis-h23-20261008T1948Z/sum/word.json",
+      "--transitions",
+      "work/joint-frame/scout/causal-pressure-basis-h23-20261008T1948Z/sum/review/transitions.bin",
+      "--output",
+      "work/joint-frame/scout/causal-pressure-basis-h23-20261008T1948Z/sum/review/physical.json"
+    ],
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/integer_crt_certificate.py",
+      "--binary",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/independent/integer-crt-profiles-v2",
+      "--transitions",
+      "work/joint-frame/scout/causal-pressure-basis-h23-20261008T1948Z/sum/review/transitions.bin",
+      "--profiles",
+      "work/joint-frame/scout/causal-pressure-basis-h23-20261008T1948Z/sum/review/integer.profiles.json",
+      "--output",
+      "work/joint-frame/scout/causal-pressure-basis-h23-20261008T1948Z/sum/review/integer.certificate.json"
+    ],
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/check_joint_moment.py",
+      "--profile23",
+      "work/joint-frame/scout/causal-pressure-basis-h23-20261008T1948Z/sum/review/integer.profiles.json",
+      "--profile25",
+      "work/joint-frame/scout/nested-high-rank-h25-independent-20261008T1822Z/integer.profiles.json",
+      "--physical23",
+      "work/joint-frame/scout/causal-pressure-basis-h23-20261008T1948Z/sum/review/physical.json",
+      "--physical25",
+      "work/joint-frame/scout/nested-high-rank-h25-independent-20261008T1822Z/physical.json",
+      "--inherited-certificate",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/source/certificates/joint-dual-kappa.json",
+      "--assembly",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/source/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py",
+      "--output",
+      "work/joint-frame/scout/causal-pressure-basis-h23-20261008T1948Z/sum/review/complete-moment.json"
+    ]
+  ],
+  "word_sha256": "76b856ed35909a9e45ecc85b743486a16f9cbf3541014b507b04cdf0953dc790",
+  "source_sha256": "0e35916a076afc99349f074d9c138e1dc578b3390302fd5706e7725ce02928ec",
+  "native_threads": 1
+}

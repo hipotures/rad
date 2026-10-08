@@ -50,6 +50,16 @@ optimality claim. Overlapping pairs in the extended kernel must contain a
 retired coordinate after cancellation, avoiding a budget spent solely on
 anchor-only relations.
 
+No cross-component combination is needed for the three stated nonnegative
+objectives. Distinct support components use disjoint physical roles. A
+relation spanning several components has its preferred retired target in
+one component. The component's own nonzero relation retains that target,
+has no larger summed rank growth, and strictly fewer supporting roles than
+the union. Its clearing XOR count is therefore smaller. The earliest
+deadline and target-rank choices are preserved within that component.
+This reduces the search scope correctly; it does not make the bounded
+search within large components exhaustive.
+
 Three policies select among actual circuits: first preserving the earliest
 future retirement deadline, minimizing immediate summed rank growth, or
 minimizing clearing XOR count. They use deterministic ties and no
@@ -83,6 +93,13 @@ immutable configurations. Any candidate needs independent literal-word
 replay, all physical transitions, rational fixed-basis profiles, complete
 child moments, scalar charges, and the chosen all-size assembly before an
 exponent claim is accepted.
+
+The first recovered 25-axis complete-basis rank-growth screen finished in
+836.16 seconds with 40,357 roles and full scalar/dirty PASS. This is larger
+than the selected 40,324-role word. Its
+[compact receipt](results/dependency-live-rank-h25-recovery-20261008T192628Z.json)
+retains the source and full-word hashes. A distinct nullspace deadline
+experiment immediately succeeded it in the same one-thread lane.
 
 The public dual-suffix producer and joint compiler are scientific inputs
 from the authorized PR55/57/58 commits. Attribution and AI-assistance notices

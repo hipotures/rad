@@ -1,16 +1,19 @@
 # Joint-frame CPU research
 
 The strongest independently reviewed CPU conditional exponent is now
-**kappa=4766283731/100000000000000=4.766283731e-5**,
-about0.327% above pinned public PR58. Native saving is
-`a=4.766510917e-5`, with `R23=30667`, `R25=40324`, `W=150094504`
-and total rank `86302492900`. The full finite graph/profile/moment and all
-47 assembly inequalities pass. The actual four-mixer framing and literal
-reverse transpose have an explicit independently reviewed paid schedule.
-See the [accepted checkpoint](runs/20261008T1854Z-accepted-future-horizon/report.md).
-Acceptance is conditional on the named residual, complete-payload, owned-copy,
-fixed-tape, semantic native, analytic/recovery and prime/setup contracts.
-The stronger CPU transfer is still a separate open integration obligation.
+**kappa=23838963307983/500000000000000000=4.7677926615966e-5**,
+about0.359% above pinned public PR58. Native saving is
+`a=4.76784034e-5`, with `R23=30647`, `R25=40324`, `W=150048504`
+and total rank `86276042900`. Global causal regional ordering reduces
+physical roles while preserving the original producer and envelopes.
+The full finite graph/profile/moment passes. An independently reviewed
+changed CPU transfer maps all47 obligations, including replaced guarded CRT,
+packed Gaussian, deferred donor, complete repair and all-size induction rows.
+See the [accepted checkpoint](runs/20261008T1954Z-accepted-rank-pressure/report.md).
+Acceptance retains the explicitly named native, residual, full-payload,
+owned-copy, fixed-tape, routing, analytic/recovery and prime/setup contracts.
+The unchanged public47 checker accepts the lower finite-input witness and
+rejects the stronger CPU target; these negative controls are preserved.
 
 The public baseline has R23=30790,R25=40446,W150593466 and rank86589396050,
 with safe saving1187740349/25000000000000. Every source and dirty basis column,

@@ -94,17 +94,24 @@ def refresh():
             saving=row['saving'], candidate_kappa=row['candidate_kappa'],
             result=str(path.relative_to(ROOT)), pool_sizes=row['pool_sizes'],
             scope='Exact finite original23/25 pool moment; independent native/integration review remains separate.')
-    accepted = read(ROOT/'joint-frame/runs/20261008T1854Z-accepted-future-horizon/protocol.json')
+    pointer = read(ROOT/'joint-frame/current-accepted.json')
+    accepted_path = ROOT / (pointer['protocol'] if pointer else 'joint-frame/runs/20261008T1854Z-accepted-future-horizon/protocol.json')
+    accepted = read(accepted_path)
     if accepted and accepted.get('status') == 'CONDITIONAL TRANSFER ACCEPTED':
         context['best_reviewed_conditional_kappa'] = accepted['kappa']
         reviewed = Fraction(accepted['kappa'])
-        context['candidate_status'] = 'Joint future-horizon/guarded live-reclamation finite witness and 47-row conditional transfer independently accepted under explicit inherited residual, full-payload, owned-copy, fixed-tape, native, analytic/recovery and eligible-prime hypotheses.'
+        context['candidate_status'] = 'Full finite source/dirty/profile/moment and changed conditional CPU transfer independently accepted under the named native residual, full-payload, owned-copy, fixed-tape, routing, analytic/recovery and eligible-prime contracts.'
+        context['accepted_checkpoint'] = str(accepted_path.relative_to(ROOT))
         target = Fraction(accepted['saving'])*Fraction(99999,100000)
-        unreviewed.append(target)
-        context['open_stronger_cpu_transfer_target'] = dict(kappa=str(target),scope='Arithmetic target only; changed 38-row transfer and complete obligation mapping remain open.')
+        if target > reviewed:
+            unreviewed.append(target)
+            context['open_stronger_cpu_transfer_target'] = dict(kappa=str(target),scope='Arithmetic target only; complete changed native/transfer review remains open.')
+        else:
+            context.pop('open_stronger_cpu_transfer_target', None)
     new_joint = []
     paths = list(ROOT.glob('joint-frame/agents/scout/results/*complete-moment.json'))
-    paths.append(ROOT/'joint-frame/runs/20261008T1854Z-accepted-future-horizon/complete-moment.json')
+    paths.append(accepted_path.with_name('complete-moment.json'))
+    paths.extend(ROOT.glob('joint-frame/agents/scout/runs/*/results/complete-moment.json'))
     for path in paths:
         row=read(path)
         if row and row.get('kappa') and row.get('saving'):
@@ -136,7 +143,7 @@ def refresh():
         context['current_joint_frame_frontier']=dict(saving=row['saving'],candidate_kappa=row['kappa'],
             W=row['controller']['W'],rank_mass=row['controller']['total_rank'],
             wrapped_scalar_xors=row['controller']['wrapped_scalar_xors'],result=str(path.relative_to(ROOT)),
-            scope=('Finite word, rational profiles, complete moment and explicit framed dirty/adjoint conditional transfer accepted under named inherited contracts.' if accepted and row['kappa']==accepted['kappa'] else 'Finite word/rational profiles/moment and inherited47-row arithmetic PASS; mechanism-specific all-size review remains separate.'))
+            scope=('Finite word, rational profiles, complete moment and explicit framed dirty/adjoint conditional transfer accepted under named inherited contracts.' if accepted and row['saving']==accepted['saving'] else 'Finite word/rational profiles/moment and inherited47-row arithmetic PASS; mechanism-specific all-size review remains separate.'))
     context['best_unverified_kappa'] = str(max(unreviewed)) if unreviewed and max(unreviewed) > reviewed else None
     if optimistic:
         path,row = max(optimistic,key=lambda item: Fraction(item[1]['safe_saving']))

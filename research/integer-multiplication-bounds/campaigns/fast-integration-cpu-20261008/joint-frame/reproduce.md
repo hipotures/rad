@@ -56,3 +56,15 @@ were exercised, including full scalar/dirty word checks and controller profiles.
 The remaining configured cases run asynchronously; no uncompleted case is
 reported as verified. Independent twelve-prime physical/profile review and
 complete changed all-size acceptance are required for any new improvement.
+
+## Accepted causal rank-pressure / stronger CPU transfer
+
+All commands run from the CPU campaign directory. Obtain the pinned public inputs as above; use fresh ignored output directories and one BLAS/OpenMP thread. Generate the exact23 word with `joint-frame/code/region_schedule_family.py --source-root <tested58> --dimension 23 --schedule rank-pressure --retired-policy high-rank --order-seed 0 --config joint-frame/configs/reclamation-fixed-dag.json --output <fresh>`. The complete source, configuration and seed are frozen in `runs/20261008T1954Z-accepted-rank-pressure/construction-protocol.json`. Complete recorded words can also be decompressed from the exact archive paths in its protocol; check both uncompressed SHA-256 values before using them.
+
+Replay the independent changed47 arithmetic on all actual compact fixtures:
+
+```bash
+python3 -B joint-frame/agents/inverse/runs/20261008T195056Z-rank-pressure-transfer-review/code/check_changed_cpu47_mapping_v2.py --native joint-frame/agents/inverse/runs/20261008T195056Z-rank-pressure-transfer-review/fixtures/complete-moment.json --literal-ledger joint-frame/agents/inverse/runs/20261008T195056Z-rank-pressure-transfer-review/fixtures/literal-ledger.json --cpu38 joint-frame/agents/inverse/runs/20261008T195056Z-rank-pressure-transfer-review/fixtures/cpu38-arithmetic.json --output work/fresh-rank-pressure-map.json
+```
+
+Expected:47 mapped obligations, all strict cost/constant margins positive, old coupled K exactlyzero and other old-algorithm controls negative; kappa23838963307983/500000000000000000. Rebuild CPU38 with `joint-frame/code/check_cpu_transfer.py` and the retained root literal adapter; public source is `references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py` under the tested58 input. The actual unchanged public47 control rejects g1/g3/g5/g6 at the stronger target. These bounded replays were actually exercised by the root. Arithmetic PASS requires the linked written conditional proof and native/source/dirty receipts for acceptance; it does not discharge analytic machine hypotheses.
