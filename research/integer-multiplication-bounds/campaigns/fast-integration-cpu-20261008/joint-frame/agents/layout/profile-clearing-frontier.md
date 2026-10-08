@@ -1,10 +1,12 @@
 # Profile ties, future accessibility, and clearing relations
 
-The best independently reviewed pair remains the future-horizon 23-axis
-compiler and the guarded high-rank 25-axis compiler. Their complete native
-profiles support conditional arithmetic saving 4.766283731e-5; see the
+The initial independently reviewed pair was the future-horizon 23-axis
+compiler and the guarded high-rank 25-axis compiler. Its complete native
+profiles supported conditional arithmetic saving 4.766283731e-5; see the
 [independent review](../scout/latest-reviewed-pair.md). The experiments here
-screen additional finite words. A smaller role count or a valid scalar word
+screened additional finite words. Later campaign checkpoints supersede that
+initial frontier; use the coordinator's final accepted report for the current
+exponent. A smaller role count or a valid scalar word
 does not replace native profiling and complete assembly.
 
 ## Native profile gradient
@@ -145,3 +147,15 @@ outputs are retained unchanged, and only those pending configurations were
 continued in fresh execution copies on 2026-10-08 at 19:26:28 UTC. The
 [recovery receipt](results/structural-interruption-recovery-20261008T192628Z.json)
 binds the completed cases and interrupted attempts.
+
+The recovered 25-axis rank and rank-plus-fusion cases both completed at
+40,357 roles; their literal words differ. Minimum-clearing-XOR completed at
+40,333 roles. Its independent complete moment, paired with the root's
+30,647-role rank-pressure 23-axis word, gives native saving 4.767608439e-5
+and public-47 conditional exponent 4.767381148e-5. The guarded nested 25-axis
+pair gave the larger native saving 4.76784034e-5 with that same 23-axis word.
+Thus this minimum-XOR case is an actual full-profile negative, despite fewer
+replicated scalar XORs. The retained independent receipt is
+[min-clearing-xors-h25-independent-full-moment-negative](results/min-clearing-xors-h25-independent-full-moment-negative-20261008T1948Z.json).
+Other unprofiled role-count screens remain open for full-moment comparison.
+The [shutdown handoff](shutdown-20261008T2016Z.md) records the final statuses.

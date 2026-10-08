@@ -10,6 +10,8 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
+import struct
+import subprocess
 import sys
 from time import perf_counter
 
@@ -172,6 +174,11 @@ def main():
     parser.add_argument('--exact-limit', type=int, default=8)
     parser.add_argument('--pair-limit', type=int, default=256)
     parser.add_argument('--include-anchor-relations', action='store_true')
+    parser.add_argument('--schedule', choices=['original', 'rank-pressure'], default='original')
+    parser.add_argument('--schedule-helper', type=Path)
+    parser.add_argument('--record-cost-queries', action='store_true')
+    parser.add_argument('--crt-cpp', type=Path)
+    parser.add_argument('--crt-wrapper', type=Path)
     parser.add_argument('--output', required=True)
     args = parser.parse_args()
     assert 1 <= args.exact_limit <= 10 and 1 <= args.pair_limit <= 4096
@@ -187,10 +194,27 @@ def main():
     start = text.index(' def acquire(g,anchors):')
     end = text.index(' for step,g in enumerate(order):', start)
     acquire_source = prepare_acquire(args.include_anchor_relations)
+    if args.record_cost_queries:
+        marker = "     growth=sum(blocks[g]['rank']-blocks[frames[a]]['rank'] for a in roles)"
+        queries = """     for a in roles:
+      old=frames[a]
+      if blocks[g]['rank']>blocks[old]['rank']:NATIVE_COST_QUERIES.add((old+2,g+2))
+      NATIVE_COST_QUERIES.add((old+2,1))
+     NATIVE_COST_QUERIES.add((0,g+2));NATIVE_COST_QUERIES.add((g+2,1))
+"""
+        assert acquire_source.count(marker) == 1
+        acquire_source = acquire_source.replace(marker, queries+marker)
     text = text[:start]+acquire_source+text[end:]
     token = 'build(h);v=len(c.inputs)'
     assert text.count(token) == 1
     text = text.replace(token, token+SETUP)
+    if args.record_cost_queries:
+        text = text.replace(token, token+";globals()['NATIVE_COST_FRAMES']=[tuple(b['frame'])+(b['rank'],) for b in blocks]")
+    if args.schedule != 'original':
+        assert args.schedule_helper
+        marker = "order=sorted(range(len(blocks)),key=lambda g:(blocks[g]['rank'],min(blocks[g]['nodes'])))"
+        assert text.count(marker) == 1
+        text = text.replace(marker, 'order=scheduled_order(blocks,uses,owner,SCHEDULE_POLICY)')
     variant = original.with_name('binary_frame_compiler_nullspace.py')
     variant.write_text(text)
     sys.path.insert(0, str(original.parent))
@@ -198,12 +222,19 @@ def main():
     compiler.CYCLE_POLICY = args.policy
     compiler.CYCLE_EXACT_LIMIT = args.exact_limit
     compiler.CYCLE_PAIR_LIMIT = args.pair_limit
+    if args.record_cost_queries:
+        compiler.NATIVE_COST_QUERIES = set()
+    if args.schedule != 'original':
+        helper = load('owned_causal_order', args.schedule_helper)
+        compiler.scheduled_order = helper.scheduled_order
+        compiler.SCHEDULE_POLICY = args.schedule
     producer = load('joint_dual_compiler', original.parent/'joint_dual_compiler.py')
     started = perf_counter()
     result, word = producer.compile_axis(args.h)
     result.update(policy='guarded-live-'+('complete-kernel-' if args.include_anchor_relations else 'nullspace-')+args.policy,
                   exact_component_limit=args.exact_limit,
                   includes_anchor_zero_relations=args.include_anchor_relations,
+                  causal_schedule=args.schedule,
                   overlapping_pair_limit=args.pair_limit,
                   seconds=perf_counter()-started,
                   source_commit=intake['commit'],
@@ -217,6 +248,39 @@ def main():
     result['physical_word_sha256'] = hashlib.sha256(packed).hexdigest()
     result['physical_word_bytes'] = len(packed)
     (out/'word.json').write_bytes(packed)
+    if args.schedule_helper:
+        result['scheduling_helper_sha256'] = hashlib.sha256(args.schedule_helper.read_bytes()).hexdigest()
+    if args.record_cost_queries:
+        rows = [(0, 0, 0), (0, 0, args.h)]+compiler.NATIVE_COST_FRAMES
+        pairs = sorted(compiler.NATIVE_COST_QUERIES)
+        assert all(rows[b][2] > rows[a][2] for a, b in pairs)
+        mass = sum(rows[b][2]-rows[a][2] for a, b in pairs)
+        binary = out/'native-cost-query-input.bin'
+        with binary.open('wb') as stream:
+            stream.write(struct.pack('<6I2Q', args.h, word['v'], 0, len(rows), len(pairs), 0, mass, mass))
+            for row in rows:
+                stream.write(struct.pack('<2QI', *row))
+            for a, b in pairs:
+                stream.write(struct.pack('<2Iq', a, b, 1))
+        result['native_cost_query_count'] = len(pairs)
+        result['native_cost_query_input_sha256'] = hashlib.sha256(binary.read_bytes()).hexdigest()
+        result['query_cost_scope'] = 'Actual considered zero-relation support raises, births and possible cleanup differences. These are local optimization data, not full recurrence deltas. Donor future paths, retained signals and future reclamation still require whole-word acceptance.'
+        (out/'finite-result.json').write_text(json.dumps(result, indent=2)+'\n')
+        print(json.dumps(dict(event='FINITE WORD PASS BEFORE QUERY PROFILING', h=args.h, roles=result['roles'], query_pairs=len(pairs), word_sha256=result['physical_word_sha256'])), flush=True)
+        if args.crt_cpp or args.crt_wrapper:
+            assert args.crt_cpp and args.crt_wrapper
+            executable = out/'native-cost-profiler'
+            subprocess.run(['c++', '-O3', '-std=c++17', str(args.crt_cpp), '-o', str(executable)], check=True)
+            command = [sys.executable, '-B', str(args.crt_wrapper), '--binary', str(executable),
+                       '--transitions', str(binary), '--profiles', str(out/'native-cost-profile.json'),
+                       '--dump', str(out/'native-cost-queries.jsonl'), '--output', str(out/'native-cost-certificate.json')]
+            with (out/'native-cost-profile.log').open('wb') as log:
+                subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=True)
+            result['native_cost_profiles_status'] = 'TWELVE-PRIME ALL-CORNER PASS'
+            result['native_cost_profiles_sha256'] = hashlib.sha256((out/'native-cost-queries.jsonl').read_bytes()).hexdigest()
+            result['native_cost_certificate_sha256'] = hashlib.sha256((out/'native-cost-certificate.json').read_bytes()).hexdigest()
+            result['query_cpp_sha256'] = hashlib.sha256(args.crt_cpp.read_bytes()).hexdigest()
+            result['query_crt_wrapper_sha256'] = hashlib.sha256(args.crt_wrapper.read_bytes()).hexdigest()
     (out/'result.json').write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps({key: result[key] for key in ['h', 'policy', 'roles', 'seconds', 'physical_word_sha256']}), flush=True)
 

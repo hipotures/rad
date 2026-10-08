@@ -52,7 +52,7 @@ guarded live-carrier generated compiler. Apply it to the pinned base
 `patch -p1`. The authored driver is the preferred reproduction because it
 checks the base hash and pins the result hashes.
 
-For the current reviewed 23-axis word, use `code/future_horizon_variant.py`
+For the historical reviewed 23-axis word, use `code/future_horizon_variant.py`
 with `--h 23 --policy last-compatible`. Expected role count is 30,667 and
 word SHA256 is
 `f833497c99613b1f98091bc54cedc31d3d48fbe42bd3c9c76389bdc6f35c978e`.
@@ -108,8 +108,9 @@ actual frame profiles. Each attempt uses fresh compiler/output directories.
 Use `code/dependency_selection_variant.py --policy min-rank-growth` or
 `--policy min-clearing-xors`, preserving the other common arguments. The
 corrected 23-axis expected counts are 30,699 and 30,731. The minimum-rank
-25-axis counterpart gives 40,365. These are finished finite negatives, not
-the selected bound. `code/dependency_live_fusion_variant.py` additionally
+25-axis counterpart gives 40,365. These are finished finite screens with
+larger role counts; the complete native moments remain necessary to establish
+an exponent comparison. `code/dependency_live_fusion_variant.py` additionally
 inserts future-live carriers guarded by all outstanding uses and optionally
 the frozen fusion helper. Its exact per-attempt configurations are recorded
 under `configs/`; each new result remains pending until completed.
@@ -151,6 +152,13 @@ and missing-gate controls. It supplies no native exponent certificate.
 The extended kernel plans under `configs/full-kernel-*-20261008T194321Z*`
 freeze six actual 23/25-axis commands with `--include-anchor-relations`,
 complete driver hashes, the small-discriminator receipt hash and one CPU lane
-per serial pair. Their queue coordinators wait for the corresponding frozen
-version-1 serial plan, checking its live PID and command marker. Historical
-PID records are provenance only and never authorize process control.
+per serial pair. These original-order plans were superseded before execution.
+The replacement `configs/pressure-kernel-query-*-20261008T200020Z*` plans add
+the root's causal rank-pressure order at 23 axes and actual considered native
+cost queries certified with the frozen twelve-prime integer profiler. Only
+the deadline 23-axis replacement completed before graceful shutdown. Its
+22,880-query table is optimization input, not the entire native witness
+histogram. All queue coordinators are stopped; historical PID records are
+provenance only and never authorize process control. The
+[shutdown handoff](shutdown-20261008T2016Z.md) records completed and partial
+cases and exact recovery inputs. No reproduction command is running.

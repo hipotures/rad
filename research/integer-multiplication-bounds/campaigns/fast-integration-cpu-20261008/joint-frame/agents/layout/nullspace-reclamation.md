@@ -38,7 +38,7 @@ logic and identified a useful limitation: dependencies entirely among the
 anchors were discarded by the original insertion routine. Thus version 1
 does not represent the complete kernel of the admitted role pool. Its frozen
 source is [nullspace_cycle_variant_v1.py](code/nullspace_cycle_variant_v1.py),
-and the six queued version-1 configurations retain exactly those bytes.
+and the six completed version-1 configurations retain exactly those bytes.
 
 The current driver [nullspace_cycle_variant.py](code/nullspace_cycle_variant.py)
 adds `--include-anchor-relations`. It records dependencies from all distinct
@@ -105,3 +105,15 @@ The public dual-suffix producer and joint compiler are scientific inputs
 from the authorized PR55/57/58 commits. Attribution and AI-assistance notices
 remain in the campaign [credits](../../CREDITS.md); this contribution is the
 paid nullspace-circuit search and its guarded finite discrimination.
+
+At the user's graceful stop, all six version-1 native finite words had passed
+the indexed scalar, both-orientation complete arbitrary-dirty-basis, and
+physical inclusion checks. The complete admitted-pool deadline search with
+causal rank-pressure order also passed at 23 axes (30,706 roles and 477,346
+complete local wrapped XORs). It additionally certified 22,880 actual
+candidate frame-cost queries using twelve CRT primes and integer minor
+bounds. That query aggregate has zero witness role mass and is not a full
+child histogram. All seven native witness profile/moment screens remain
+open. Higher role counts alone do not establish a worse exponent.
+The [shutdown handoff](shutdown-20261008T2016Z.md) preserves literal words,
+source/configuration recovery, exact completed results, and partial statuses.
