@@ -1,0 +1,188 @@
+{
+  "purpose": "Complete authored Python import closure and exact selected-only reconstruction inputs for the new matrix-weighted physical words",
+  "source_pins": {
+    "PR62": "ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+    "PR57": "cd350f76c9bc01489ec83568bded532cb69be938",
+    "PR61": "afb7cb67d1858641315cfbf4ac768ee64a8eff3a"
+  },
+  "entrypoint": "agents/graph/code/source_only_matrix_weighted_joint.py",
+  "authored_python_dependencies": [
+    {
+      "path": "agents/geometry/code/componentwise_signed_word_enlargement.py",
+      "bytes": 9722,
+      "sha256": "473672fa8eafdaae0b6d39069a15d946725c00b84d33a0dc8d7baa8e1f3b283a"
+    },
+    {
+      "path": "agents/geometry/code/mix_common_context_frames.py",
+      "bytes": 7879,
+      "sha256": "6224dfc758d4f9e33397f9c73c4f7470ccb2217c2d18dddd134c6e0404f285ad"
+    },
+    {
+      "path": "agents/geometry/code/mix_common_frame_families.py",
+      "bytes": 7253,
+      "sha256": "9c29493298719c276a25fb213eb2bb6f645de2211d8af7c9244a989bddcbeb8b"
+    },
+    {
+      "path": "agents/graph/code/check_compiled_witness.py",
+      "bytes": 16956,
+      "sha256": "beac997e307fbfbacd658bd9ffd79deb84a84bec72298fbd627be5c2852bd880"
+    },
+    {
+      "path": "agents/graph/code/joint_positive_frontier.py",
+      "bytes": 7993,
+      "sha256": "734c6cb1c3c86dc8fec4bd643c037d14cb1fed74c1ed500feabb0588c93b74b4"
+    },
+    {
+      "path": "agents/graph/code/joint_region_search_v3.py",
+      "bytes": 11804,
+      "sha256": "9a9d5be9161c8f1e838c25329e2c8d0eadf5023d8558b48676b443e8f6a476c0"
+    },
+    {
+      "path": "agents/graph/code/joint_signed_word_recompile.py",
+      "bytes": 16632,
+      "sha256": "1a7945da0b1a13140ecae21d73813a48799da87f1b5e69cdb308e812519a81e9"
+    },
+    {
+      "path": "agents/graph/code/joint_word_check_v2.py",
+      "bytes": 7842,
+      "sha256": "dc4086b6725e57bafcbc9b617e73e7c58ade1c6273d8e4bf9a7a91b2820d86b5"
+    },
+    {
+      "path": "agents/graph/code/joint_word_check_v4.py",
+      "bytes": 9782,
+      "sha256": "70c54c305344c3221f99dee0bdaf00af3a26e9164fbb96728a267fb59acfce73"
+    },
+    {
+      "path": "agents/graph/code/joint_word_positive_closure.py",
+      "bytes": 6309,
+      "sha256": "2b2aad2d274aaf240d7c49860479a7dd1253af5c42a0f3fa580b7ba5f95e2548"
+    },
+    {
+      "path": "agents/graph/code/matrix_weighted_joint_carriers.py",
+      "bytes": 8451,
+      "sha256": "bada9d4d0d22b13852fcc6d8d84dbd6a7ea1427ed396da03ba97dc1d31362629"
+    },
+    {
+      "path": "agents/graph/code/source_only_matrix_weighted_joint.py",
+      "bytes": 11329,
+      "sha256": "e955889e0f38a6077a46a59c643f349c1c49d7ee8fee99f3707939132fe9741a"
+    }
+  ],
+  "portable_inputs": [
+    {
+      "path": "agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json",
+      "bytes": 2531,
+      "sha256": "871d8ce242fa9a6406ed22aea9fa0308e2e908bec501f4c957796a3241a02d70"
+    },
+    {
+      "path": "agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json",
+      "bytes": 528580,
+      "sha256": "835899e9425924f960a4f1decb2a937d2fee46d033c989ff102590b4f4e4a2a1"
+    },
+    {
+      "path": "agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json",
+      "bytes": 776140,
+      "sha256": "d2123be9945cf1be89c5c41e1cb2b12f7547c08e247e0d9c52d6b98d8c76c326"
+    }
+  ],
+  "pinned_public_entrypoints": [
+    {
+      "path": "scripts/experiments/binary_frame_compiler.py",
+      "bytes": 11518,
+      "sha256": "bc6910c8bbe8224285164323d3c06e9035ad3eaa55416abc2867ae0066454a0c"
+    },
+    {
+      "path": "research/pair-assembly/pair_graph.py",
+      "bytes": 10259,
+      "sha256": "3d47e89d2649c90800a276bdd0480131def50e0bdf92c122a19494b55bf17420"
+    },
+    {
+      "path": "references/frame-compiler/pr48/SOURCE.json",
+      "bytes": 1245,
+      "sha256": "6ccc673f88d3650d75ed600b082fe2fc2866dd88a172d182a38c1d0cd27d24b3"
+    }
+  ],
+  "public_recovery": "Download the complete immutable PR62 Git snapshot. Its reference SOURCE.json checks the directly inherited PR48 files at import. Preserve every public file and license rather than copying only the public entrypoints.",
+  "source_word_commands": [
+    [
+      "python3",
+      "<campaign>/agents/graph/code/source_only_matrix_weighted_joint.py",
+      "--source",
+      "<snapshot>",
+      "--choices-file",
+      "<campaign>/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json",
+      "--h",
+      "23",
+      "--work",
+      "<work>/h23",
+      "--output",
+      "<work>/h23-source.json",
+      "--expected-word-sha256",
+      "6f9c33370d171d407e3be66becc65f86adde884b37b3add15f22efe78121e71c",
+      "--selected-matching",
+      "<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json"
+    ],
+    [
+      "python3",
+      "<campaign>/agents/graph/code/source_only_matrix_weighted_joint.py",
+      "--source",
+      "<snapshot>",
+      "--choices-file",
+      "<campaign>/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json",
+      "--h",
+      "25",
+      "--work",
+      "<work>/h25",
+      "--output",
+      "<work>/h25-source.json",
+      "--expected-word-sha256",
+      "5f4a4496af267f2e44efb0d67cfd450fe14e7ec841cfa457527b814206f78a93",
+      "--selected-matching",
+      "<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json"
+    ]
+  ],
+  "clean_tests": [
+    {
+      "h": 23,
+      "receipt": "agents/graph/results/joint-matrix-weighted-clean-selected-2152-h23.json",
+      "seconds": 122.14339823601767
+    },
+    {
+      "h": 25,
+      "receipt": "agents/graph/results/joint-matrix-weighted-clean-selected-2157-h25.json",
+      "seconds": 213.5226344030816
+    }
+  ],
+  "not_required_for_selected_only_path": [
+    "discovery cost matrices",
+    "discovery carrier tables",
+    "a candidate output word",
+    "a preexisting transition binary"
+  ],
+  "scope": "This manifest regenerates and independently checks the complete source/scalar/use/capacity/chronology and literal dirty role word, then freshly writes the actual transition binary. Native matrix CRT, DATA/stock, exact moments, 47+7 assembly and inherited all-size address/gauge/tape assumptions are separate checks.",
+  "attribution": "Avi Eisenberg (PR62 interval strips and core-aware pair assembly), eumemic (PR57 joint invertible binary synthesis and paid reclamation), Alejandro Zarzuelo Urdiales (PR61 parameter refinement), Rohan Arun, Chafik Boukhalfa, icekylinx, jacklightChen, earlier RaD source-partition and whole-chain cloning work, and all directly imported predecessor attributions. OpenAI Codex assisted this campaign.",
+  "published_selected_input_recovery": [
+    {
+      "original_path": "agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json",
+      "published_complete_gzip": "evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h23.json.gz",
+      "original_sha256": "835899e9425924f960a4f1decb2a937d2fee46d033c989ff102590b4f4e4a2a1",
+      "recovery": "Decompress the complete gzip bytes to the original path in the cloned campaign before source reconstruction. The original local input remains unchanged.",
+      "decompression": [
+        "python3",
+        "-c",
+        "import gzip,pathlib; pathlib.Path(\"<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json\").write_bytes(gzip.decompress(pathlib.Path(\"<campaign>/evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h23.json.gz\").read_bytes()))"
+      ]
+    },
+    {
+      "original_path": "agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json",
+      "published_complete_gzip": "evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h25.json.gz",
+      "original_sha256": "d2123be9945cf1be89c5c41e1cb2b12f7547c08e247e0d9c52d6b98d8c76c326",
+      "recovery": "Decompress the complete gzip bytes to the original path in the cloned campaign before source reconstruction. The original local input remains unchanged.",
+      "decompression": [
+        "python3",
+        "-c",
+        "import gzip,pathlib; pathlib.Path(\"<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json\").write_bytes(gzip.decompress(pathlib.Path(\"<campaign>/evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h25.json.gz\").read_bytes()))"
+      ]
+    }
+  ]
+}

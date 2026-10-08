@@ -224,8 +224,12 @@ def main():
             summary = recovery['frame_summary']
             assert summary['every_actual_transition_containment']
             assert summary['original_and_maximal_containment']
-            assert summary['unchanged_R'] == row['profile']['R']
-            assert summary['unchanged_XORs']  # Relative to the NEW matching word.
+            # The family allocation precedes matching and preserves the
+            # independently rebuilt parent word. The NEW matching's roles
+            # are checked separately against its literal word and header.
+            assert summary['unchanged_R'] == recovery['compiled_parent']['roles']
+            assert summary['unchanged_XORs']
+            assert recovery['R'] == row['profile']['R']
         elif recovery.get('original_roles_and_xors_unchanged', False):
             assert recovery['every_original_frame_contained']
             assert recovery['all_actual_word_transitions_contained']

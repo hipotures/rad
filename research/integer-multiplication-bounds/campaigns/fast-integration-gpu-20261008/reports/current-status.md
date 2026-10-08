@@ -1,43 +1,41 @@
 # Current scientific status
 
 Research remains active indefinitely. The accepted conditional exponent is
-**κ=5.140192674e-5**, bit saving5.140456904e-5, R23=27719, R25=36353,
-W=136281463, rank mass78359994325. Context-dependent actual positive frames
-in the selectively compiled PR62+PR57 network pass all finite acceptance
-gates under the explicit inherited address-compiler and all-size assumptions.
-[Proof](coupled-pair-joint-region-proof.md),
-[acceptance](coupled-pair-joint-region-acceptance.json),
-[reproduction](../configs/coupled-pair-joint-region-manifest.json).
+**κ=5.14028687e-5**, bit saving5.14055111e-5, R23=27719, R25=36354,
+W=136283234, rank mass78361012650. Matrix-weighted carrier allocation in the
+actual signed-frame PR62+PR57 word passes all finite acceptance gates under
+the explicit inherited address-compiler and all-size assumptions.
+[Proof](matrix-weighted-joint-region-proof.md),
+[acceptance](matrix-weighted-joint-region-acceptance.json),
+[reproduction](../configs/matrix-weighted-joint-region-manifest.json).
 
-The gain over PR61 is about0.75466%. No large asymptotic breakthrough is claimed.
-The multifamily context allocation now passes fresh source-only words, native
-exact profiles, independent Fraction controls, stock and final paired assembly
-binding. New matrix-weighted carrier words are being profiled independently;
-they remain discovery variants until complete acceptance.
+The gain over PR61 is approximately0.75651%. The new matching pays one extra
+role at dimension25 and nevertheless improves the complete exact moment.
+No large asymptotic breakthrough is claimed. Fresh selected-only source words,
+independent literal replay, actual rational controls, complete DATA and changed
+stock, exact assembly and eight adversarial checks all pass. Previous accepted
+multifamily and two-core capacities remain separate coherent constructions.
 
-The larger architectural search explores newly created shared pair sums,
-dense complementary-pair synthesis, paid frame retirement, source-partition
-relocation and actual matrix-weighted carrier edges. Dense scalar identities
-pass exact checks in dimensions23,25,27,29; physical address retirement
-remains a discovery question. Existing-form relocation found no alternative
-disjoint partitions among78942 and108440 pairs, a scoped negative result.
+The larger search investigates region grouping determined by actual downstream
+sinks, cross-common shared producers and joint carrier/frame optimization.
+A first scalar-region enlargement merges1478/1480 regions but increases roles
+to29657/38840; it remains a discovery tradeoff requiring actual costs and new
+matching. The existing signed MAX already used downstream physical-event
+constraints, so repeating that enlargement at interned-frame granularity is
+not claimed as a new mechanism.
 
-Native CRT rejected three apparent GPU rational-basis improvements:
-[negative receipt](gpu-rational-alias-checks-2110.json). Finite-field aliases
-are not rational certificates. GPU discovery now screens complete actual word
-corners and exact minor polynomials. Bounded CPU queues compile distinct
-networks and certify actual frame profiles. Actual60-second utilization and
-process telemetry remain in external execution logs.
+The rational basis beta=-1/15 improves the exact complete local dimension25
+word moment, but a new complete source-pair geometry certificate and final
+assembly remain pending. Its local profile is not an accepted exponent.
+Free terminal gauge substitution fails the inherited arbitrary-array contract:
+[negative receipt](unrestricted-terminal-frame-transfer-falsification-2151.json).
+Dense per-output paid retirement is excluded by a scoped rank-mass obstruction;
+source-partition relocation and modular basis aliases retain precise negatives.
 
-Previous accepted constructions, clean regeneration receipts and source
-snapshots remain preserved. Abstract dirty basis checks are separated from
-the universal echo and conditional address-gauge transfer:
+Both GPUs run useful batched complete-word ordered-rank discovery. Bounded CPU
+queues compile distinct scalar regions and certify actual rational profiles.
+Actual60-second utilization, PIDs, completed configurations and active batches
+remain in the external console telemetry. Abstract dirty role checks are
+separated from universal echo and conditional address-gauge transfer:
 [scope](../agents/scout/signed-address-transfer-scope.md).
 No separate CPU campaign was accessed; no public PR was opened.
-
-The strongest pending matrix-weighted matching candidate isκ=5.14028687e-5,
-R27719/36354,W136283234. Both fresh changed-matching source reconstructions
-and actual rational controls pass; changed-word stock and final independent
-acceptance remain pending. Free terminal gauge substitution failed the actual
-unrestricted-array contract. New frames determined by downstream sink kernels
-are being constructed under full physical containment.
