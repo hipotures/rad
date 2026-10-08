@@ -1,5 +1,5 @@
 // New RaD negative-basis complete source pair certificate.
-// Exhaustive fallback structure credited to Dominik Scholz PR40 e3bf3ab0cb1ec48588e279b31a97e7a49c72f99e.
+// Exhaustive fallback structure credited to Rohan Arun PR40 e3bf3ab0cb1ec48588e279b31a97e7a49c72f99e.
 // Apache-2.0; inherited credits PR34 James Chang, PR32/36 icekylinx, PR37/39 and prior authors.
 // Complete both-I+J data-prefix witness. Each pair is replayed from scratch
 // at a fallback prime if a primary modular pivot vanishes. Such a vanishing

@@ -78,6 +78,31 @@ It explicitly identifies itself as an assistant review, not human peer
 review. The changed-DAG scalar E must still cover the actual new schedule.
 Pinned citations and recovery are in the manifests.
 
+At14:05:27, Swapnil's main advanced to round six
+`f2176bc1124821bf17eb63725bd366d7bdc020a3`, committed14:01:26 UTC.
+Its conditional final kappa is `3666565558019/10^17`; it adopts copied
+centers and retained point totals, and adds a two-stage h24 complex
+pair-exclusion producer with claimed complex saving
+`36926111/(5*10^11)`. The snapshot is pinned and read-only. Its useful
+producer lead is to reconstruct retained totals from reusable disjoint
+active supports, trying two-/three-node covers then a greedy exact cover.
+This is not a proven global-minimum set-cover algorithm. The lead was sent
+to the graph agent; no saving in our graph is inferred. Its separate complex
+construction/analytic stack remains an unadopted alternative. No unchanged
+baseline replay was run.
+
+At14:45:27, new [PR45](https://github.com/CrocSwap/integer-mult-bounds/pull/45)
+by Alejandro Zarzuelo Urdiales supplies a scoped Gaussian parity/denominator
+audit at `5e219f7b3513b092d3ee919a303db0f55a3a0a0e`. Selected sources and
+provenance are pinned. [The scope review](gaussian-parity-scope-review.md)
+checks the written arithmetic and distinguishes completed C-tensor returns
+from the D-bit final normalization. The author reports69 Lean declarations
+and finite arithmetic controls; the scout did not run either suite. This
+changes no selected network or exponent. Another current producer derivative
+discovered in the same poll is held under the provenance gate; its body and
+source were not opened or mathematically consumed, and its discovery metadata
+is omitted from the reduced poll.
+
 PR37 physical invariants are `m=575`, `N=4073300`, `W=188181929`,
 `L=2226400`, `s=Wm-N+L=108202762275`, maximum child 529, with all
 4073300 paid endpoint corrections retained. Relative to PR36 it removes
@@ -139,9 +164,18 @@ attributed to that incorrect prescription.
 heads, linked fork identities and one public repository search. Raw API
 responses stay in the campaign external `raw/scout/<UTC>/` tree; compact
 timestamped metadata is retained under `polls/`. Poll approximately every ten
-minutes until the closing phase, compare changed heads, and inspect new
+minutes until explicit campaign closing, compare changed heads, and inspect new
 mathematical mechanisms before alerting the coordinator. Snapshots already in
 use remain pinned; a public update does not alter running input identities.
+The user's14:24 indefinite extension is preserved in
+[extension-protocol.json](extension-protocol.json), without resetting the
+original start or rewriting the historical initial deadline.
+
+The [new-basis algebra review](new-basis-algebra-review.md) independently
+derives the selected negative rank-one basis, actual lines and centers, and
+original-envelope rank bounds. The [data classification review](new-data-classification-review.md)
+assesses the exact169 exceptional profiles and complete source-index audit.
+These scoped reviews do not assert a new headline bound or full theorem.
 
 To preserve campaign independence, every mutable branch and new PR of the
 RaD public fork is excluded from source acquisition and compact poll interpretation.

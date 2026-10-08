@@ -1,0 +1,31 @@
+{
+  "observed_utc": "2026-10-08T14:57:50.729172+00:00",
+  "status": "PASS SELECTED DISCOVERY API FIELDS",
+  "method": "Four bounded read-only gh API calls; no mathematical baseline or source body/patch review.",
+  "checks": [
+    {
+      "check": "pull_metadata",
+      "endpoint": "repos/CrocSwap/integer-mult-bounds/pulls?state=all&per_page=1",
+      "selected_fields_valid": true,
+      "unreviewed_body_or_patch_retained": false
+    },
+    {
+      "check": "head_metadata",
+      "endpoint": "repos/CrocSwap/integer-mult-bounds/commits/main",
+      "selected_fields_valid": true,
+      "unreviewed_body_or_patch_retained": false
+    },
+    {
+      "check": "fork_metadata",
+      "endpoint": "repos/CrocSwap/integer-mult-bounds/forks?sort=newest&per_page=1",
+      "selected_fields_valid": true,
+      "unreviewed_body_or_patch_retained": false
+    },
+    {
+      "check": "repository_search",
+      "endpoint": "search/repositories?q=integer%20multiplication%20kappa&per_page=1",
+      "selected_fields_valid": true,
+      "unreviewed_body_or_patch_retained": false
+    }
+  ]
+}

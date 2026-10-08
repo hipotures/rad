@@ -1,0 +1,5 @@
+# Producer/order/threshold cohorts
+
+The pinned public PR36 producer was changed through tree association, point ordering, retained grouping and recursive base threshold. The three completed cohorts contain180,720 and1080 configurations. Exact configuration files and full completed native rank/scalar results are retained; binary graphs are regenerable in fresh external storage. Identical logical DAGs arose from distinct settings, and their counts are reported without promoting them to distinct constructions.
+
+At h23 and25 the odd high-threshold regimes have minimumR37716 and49815, worse than the retained positive refined producers. This is a scoped measured negative. The even18..28 variants constitute a new producer regime; their local counts alone do not establish a composed bound. Source-specific complete corner/data and conditional assembly remain necessary. All completed rows passed their native producer/rank audits. The mode4 seeded continuation is separate; its first failed directory-collision attempt is preserved and its repaired joint settings have unique seeds.

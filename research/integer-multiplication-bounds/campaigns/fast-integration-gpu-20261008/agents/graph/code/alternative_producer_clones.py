@@ -13,16 +13,17 @@ from collections import Counter
 from concurrent.futures import ProcessPoolExecutor,as_completed
 from datetime import datetime,timezone
 import json
+import math
 from pathlib import Path
 import struct
 import subprocess
 import sys
 import time
 from check_compiled_witness import contained,read_dag,read_labels
-from producer_search import digest
+from producer_search import digest,ordinary_profile
 
 
-def opportunities(row,limit):
+def opportunities(row,limit,policy='conservative'):
     h,v,n,q,args,core,cover,roots,kinds,active=read_dag(row['dag_path'])
     ranks,frames=read_labels(row['dag_path']+'.positive',h,n)
     order=sorted((x for x in range(1,n)if active[x]),key=lambda x:(ranks[x],x))
@@ -91,11 +92,24 @@ def opportunities(row,limit):
                     if found==2:break
     loads=Counter(g for o in offers for g in o['providers'])
     counts=Counter(o['parent']for o in offers)
-    offers.sort(key=lambda o:(-o['frame_rank'],sum(loads[g]for g in o['providers']),counts[o['parent']],o['parent'],o['first']))
+    if policy=='conservative':
+        offers.sort(key=lambda o:(-o['frame_rank'],sum(loads[g]for g in o['providers']),counts[o['parent']],o['parent'],o['first']))
+    else:
+        phi=[sum(k*t*math.expm1(.0000413*math.log(575/t))for t,k in ordinary_profile(h,r).items()if t)for r in range(h+1)]
+        external=h*math.expm1(.0000413*math.log(575/h))+(575-2*h)*math.expm1(.0000413*math.log(575/(575-2*h)))
+        def benefit(o):
+            rx=ranks[o['parent']];rf=o['frame_rank'];r1,r2=(ranks[g]for g in o['providers'])
+            return external+phi[rx]+phi[h-r1]+phi[h-r2]+phi[rf-rx]-phi[rf-r1]-phi[rf-r2]-phi[h-rf]
+        def priority(o):
+            score=benefit(o)
+            if policy=='mapped-scarce':score/=math.sqrt(1+sum(loads[g]for g in o['providers']))
+            return(-score,sum(loads[g]for g in o['providers']),counts[o['parent']],o['parent'],o['first'])
+        offers.sort(key=priority)
     chosen=[];caps=set();parents=set();formal=set()
     for o in offers:
         x=o['parent'];gs=set(o['providers']);ys=set(o['source_children'])
-        if gs&caps or x in parents or x in formal or ys&parents:continue
+        if gs&caps or x in parents:continue
+        if policy=='conservative'and(x in formal or ys&parents):continue
         chosen.append(o);caps|=gs;parents.add(x);formal|=ys
     return chosen,dict(partitions_tested=tested,offered=len(offers),chosen=len(chosen)),order,frames
 
@@ -110,9 +124,14 @@ def rewrite(row,jobs,order,frames,target):
         else:before.setdefault(job['first']//2,[]).append(i)
     aa=[0,0];cc=[0];vv=[0];ff=[None];mapping={};clones={}
     def clone(i):
-        job=jobs[i];x=job['parent'];a,b=job['source_children'];node=len(cc)
-        assert a in mapping and b in mapping
-        clones[i]=node;aa.extend((mapping[a],mapping[b]));cc.append(core[x]);vv.append(cover[x]);ff.append(frames[job['frame_owner']])
+        job=jobs[i];x=job['parent'];node=len(cc);children=[]
+        for g,old_child in zip(job['providers'],job['source_children']):
+            pos=0 if args[2*g]==old_child else 1
+            assert args[2*g+pos]==old_child
+            edge=2*g+pos
+            child=clones[move[edge]]if edge in move else mapping[old_child]
+            children.append(child)
+        clones[i]=node;aa.extend(children);cc.append(core[x]);vv.append(cover[x]);ff.append(frames[job['frame_owner']])
     for x in order:
         for i in before.get(x,[]):clone(i)
         mapping[x]=len(cc)
@@ -137,18 +156,24 @@ def rewrite(row,jobs,order,frames,target):
 
 
 def evaluate(task):
-    parent,work,matcher,limit,rounds=task;at=time.monotonic()
-    document=json.loads(Path(parent).read_text());row=dict(document['producer']);initial=dict(row)
+    parent,work,matcher,limit,rounds,*options=task;at=time.monotonic();policy=options[0]if options else'conservative'
+    document=json.loads(Path(parent).read_text())
+    if 'rows'in document:
+        assert len(document['rows'])==1
+        document=document['rows'][0]
+    row=dict(document['producer']);initial=dict(row)
     name=f"h{row['h']}-alternative-l{limit}-"+digest(parent)[:12];stages=[]
+    if policy!='conservative':name+='-'+policy
     try:
         for iteration in range(rounds):
-            jobs,diagnostic,order,frames=opportunities(row,limit)
+            jobs,diagnostic,order,frames=opportunities(row,limit,policy)
             stage=dict(round=iteration+1,parent_roles=row['R'],diagnostic=diagnostic)
             if not jobs:stage['terminal']=True;stages.append(stage);break
             target=Path(work)/'raw'/name/f'round-{iteration+1}';dag=rewrite(row,jobs,order,frames,target);witness=target/'selected-links.json'
             native=subprocess.run([str(matcher),str(dag),str(dag)+'.positive','104729','2',str(witness)],capture_output=True,text=True,check=True)
             new=json.loads(native.stdout);assert new['matched']>=row['matched']+2*len(jobs);assert new['R']<=row['R']-len(jobs)
             new.update(dag_path=str(dag),dag_sha256=digest(dag),positive_sha256=digest(str(dag)+'.positive'),witness_path=str(witness),witness_sha256=digest(witness),schedule='rank-node',configuration=dict(alternative_partitions=True,limit=limit,round=iteration+1),original_producer_path=str(parent))
+            if policy!='conservative':new['configuration']['selection_policy']=policy
             stage.update(chosen=jobs,new_roles=new['R'],rewrite_path=str(target/'rewrite.json'),new_dag_sha256=new['dag_sha256']);stages.append(stage);row=new
         result=dict(status='alternative-producer clone candidate',case_id=name,producer=row,
                     initial_roles=initial['R'],role_saving=initial['R']-row['R'],stages=stages,
@@ -163,13 +188,14 @@ def main():
     p.add_argument('--parent',type=Path,nargs='+',required=True);p.add_argument('--work',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True);p.add_argument('--workers',type=int,default=7)
     p.add_argument('--limit',type=int,default=32);p.add_argument('--rounds',type=int,default=2)
+    p.add_argument('--policy',choices=['conservative','mapped-moment','mapped-scarce'],default='conservative')
     a=p.parse_args();assert not a.work.exists()and not a.output.exists()
     (a.work/'builds').mkdir(parents=True);(a.work/'raw').mkdir()
     native=Path(__file__).with_name('moment_match_rank_node.cpp');matcher=a.work/'builds'/'matcher'
     subprocess.run(['c++','-O3','-std=c++17',str(native),'-o',str(matcher)],check=True)
     result=dict(status='running',command=sys.argv,started_utc=datetime.now(timezone.utc).isoformat(),workers=a.workers,rows=[])
     with ProcessPoolExecutor(max_workers=a.workers)as pool:
-        futures=[pool.submit(evaluate,(parent,a.work,matcher,a.limit,a.rounds))for parent in a.parent]
+        futures=[pool.submit(evaluate,(parent,a.work,matcher,a.limit,a.rounds,a.policy))for parent in a.parent]
         for future in as_completed(futures):
             row=future.result();result['rows'].append(row);a.output.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n');print(json.dumps({k:row.get(k)for k in('case_id','status','role_saving','seconds','error')}),flush=True)
     result.update(status='complete',completed_utc=datetime.now(timezone.utc).isoformat());a.output.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')

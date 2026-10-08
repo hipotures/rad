@@ -1,0 +1,80 @@
+{
+  "updated_utc": "2026-10-08T14:35:05.747845+00:00",
+  "work_root": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry",
+  "artifacts": [
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/negative-basis-classified-pairs-20261008T1401.json",
+      "bytes": 23447022,
+      "sha256": "d5af857ca7b5ebeadbecca4271696db71be663b1cb8b330a8fcffcdb9de4126b",
+      "role": "Complete changed-basis expected-profile classification and192596 exception indices",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Compile/run code/negative_basis_classify_pairs.cpp"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/negative-exception-pairs-20261008T1410.bin",
+      "bytes": 1925964,
+      "sha256": "cf4e194ad69cfa7b02dee171eea16347ff04533e3e2fa6aff79d3ee60abb5f03",
+      "role": "Derived exact exception fixture",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Construct from classification failures, verify with code/audit_negative_data.py"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/full-clone-original-20261008T1404-summary.json",
+      "bytes": 398128,
+      "sha256": "67b7ea20526d583429ca1be942823742294e0077c3a162cb203f995ab2300299",
+      "role": "86 distinct ORIGINAL fixed-profile discovery/review rows",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Recover sibling graph clone-refinement DAGs; run code/run_weighted_matching.py using retained source DAG hashes and configs"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/negative-basis-clone-original-20261008T1407-summary.json",
+      "bytes": 420339,
+      "sha256": "8c667eb4f212c85d4a935a3452c65c347284cfbf7f03a0cf192db37647da503d",
+      "role": "86 negative-basis ORIGINAL profile rows",
+      "recovery": "deterministically regenerable",
+      "regeneration": "Same graph DAGs; run native negative_basis_moment_match and negative_basis_profiles through run_weighted_matching.py"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/negative-exception-exact-part-0-20261008T1417.json",
+      "bytes": 13619,
+      "sha256": "25fee7dd354998aa31b2bbcd708b319d8461ffe30e6865948e32c17cd0aceab8",
+      "role": "Complete exact exception profile part",
+      "recovery": "deterministically regenerable",
+      "durable_copy": "results/negative-exception-exact-part-0.json",
+      "regeneration": "negative_exception_rank_union exceptions.bin 0 4"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/negative-exception-exact-part-1-20261008T1417.json",
+      "bytes": 13702,
+      "sha256": "c1fc23ad8b5f9809ebea320f40412620dfd1103252166b2eb8675ee40f9f7664",
+      "role": "Complete exact exception profile part",
+      "recovery": "deterministically regenerable",
+      "durable_copy": "results/negative-exception-exact-part-1.json",
+      "regeneration": "negative_exception_rank_union exceptions.bin 1 4"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/negative-exception-exact-part-2-20261008T1417.json",
+      "bytes": 13806,
+      "sha256": "d17c6235d85fa4d85d72f2c470aaebba372a21a62b86315402ec7b2a9b6861e6",
+      "role": "Complete exact exception profile part",
+      "recovery": "deterministically regenerable",
+      "durable_copy": "results/negative-exception-exact-part-2.json",
+      "regeneration": "negative_exception_rank_union exceptions.bin 2 4"
+    },
+    {
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/negative-exception-exact-part-3-20261008T1417.json",
+      "bytes": 13608,
+      "sha256": "76677c56373bc343e09c66275e56cd7f7e43968cf8a832980e65a74e1e90927e",
+      "role": "Complete exact exception profile part",
+      "recovery": "deterministically regenerable",
+      "durable_copy": "results/negative-exception-exact-part-3.json",
+      "regeneration": "negative_exception_rank_union exceptions.bin 3 4"
+    }
+  ],
+  "notes": [
+    "Source snapshots are downloadable from listed GH commits",
+    "Native executables/environments/DAGs stay external; rebuild from retained source and sibling graph configurations",
+    "Completed large JSON has a complete gzip publication path controlled by the coordinator; original execution files remain unchanged",
+    "No irreplaceable acquisition payload was created"
+  ]
+}

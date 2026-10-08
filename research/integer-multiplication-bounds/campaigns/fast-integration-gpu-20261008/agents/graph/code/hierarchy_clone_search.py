@@ -21,7 +21,7 @@ from positive_clone_search import evaluate as clone_evaluate
 from producer_search import digest, initialize, worker
 
 
-def evaluate(config, work, matcher):
+def configure_points(config):
     import partial_swap.graph as graph
     def points(h, common):
         pairs = [(a,a+1) for a in range(0,h-1,2) if common not in (a,a+1)]
@@ -61,6 +61,10 @@ def evaluate(config, work, matcher):
         head=[a for pair in pairs for a in pair]
         return head+[a for a in range(h) if a!=common and a not in head]
     graph.aligned_points=points
+
+
+def evaluate(config, work, matcher):
+    configure_points(config)
     at=time.monotonic()
     initial=worker(config)
     if initial['status']=='failed':return initial

@@ -135,6 +135,13 @@ nonzero-prefix residues concern different weights and cannot certify this
 specialization. A complete bad-prime fallback or exact-Q witness scheme is
 valid, with every pair and every prefix retained.
 
+Subsequent complete computation showed192596 exceptions to the former
+uniform17-block. The geometry worker instead retained their exact169 run
+profiles and audited all source indices and histogram frequencies. The
+[classification review](new-data-classification-review.md) records the
+independent CRT rank argument and links the complete input audit; it closes
+this data gate without claiming that the old uniform profile survives.
+
 Each modular reduction must avoid actual denominator factors. In addition
 to profile denominators and source weights, the rational basis requires
 avoiding the factors of `3(h+3)(h-9)`. The eventual address prime is separate

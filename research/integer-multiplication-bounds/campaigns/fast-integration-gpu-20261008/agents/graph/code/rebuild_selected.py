@@ -39,7 +39,11 @@ def rebuild(source, work, parent_path, selected_path, dirty=False):
                       (authored / 'moment_match_rank_node.cpp', 'moment_match_rank_node')):
         subprocess.run(['c++', '-O3', '-std=c++17', str(src), '-o', str(builds / name)], check=True)
     initialize(source, work, builds / 'moment_match_positive')
-    if 'reflection_mode' in config:
+    if 'hierarchy_policy' in config:
+        from hierarchy_clone_search import configure_points
+        configure_points(config)
+        evaluate = worker
+    elif 'reflection_mode' in config:
         from alternating_refinement import evaluate
     elif 'point_policy' in config:
         from point_order_search import evaluate

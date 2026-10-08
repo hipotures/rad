@@ -12,22 +12,22 @@ import time
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--work-root", required=True)
-    parser.add_argument("--until", required=True)
+    parser.add_argument("--until", help="Optional UTC stopping time; omit only for an authorized indefinite extension")
     parser.add_argument("--interval", type=int, default=600)
     args = parser.parse_args()
     here = Path(__file__).resolve().parent
-    deadline = dt.datetime.fromisoformat(args.until.replace("Z", "+00:00"))
+    deadline = dt.datetime.fromisoformat(args.until.replace("Z", "+00:00")) if args.until else None
     prior_path = sorted((here/"polls").glob("*.json"))[-1]
     prior = json.loads(prior_path.read_text())
-    due = time.time() + args.interval
+    due = max(time.time(), dt.datetime.fromisoformat(prior["observed_utc"].replace("Z", "+00:00")).timestamp() + args.interval)
     queries = ["integer-mult-bounds fork:true", "integer multiplication kappa",
                '"Gaussian resampling"', "integer-mult-kappa"]
     query_index = 0
-    while dt.datetime.now(dt.timezone.utc) < deadline:
+    while deadline is None or dt.datetime.now(dt.timezone.utc) < deadline:
         time.sleep(min(max(0, due-time.time()), 60))
         if time.time() < due:
             continue
-        if dt.datetime.now(dt.timezone.utc) >= deadline:
+        if deadline is not None and dt.datetime.now(dt.timezone.utc) >= deadline:
             break
         result = subprocess.run(
             [sys.executable, str(here/"scout_poll.py"), "--work-root", args.work_root,

@@ -1,0 +1,82 @@
+{
+  "status": "PASS SELECTED ORIGINAL FIXED AXIS RECOVERY",
+  "h": 25,
+  "v": 2300,
+  "n": 51860,
+  "q": 6925,
+  "roles": 48089,
+  "seed": 130363,
+  "mode": 2,
+  "elapsed_seconds": 18.292537903995253,
+  "completed_utc": "2026-10-08T14:21:01.834702+00:00",
+  "commands": [
+    [
+      "c++",
+      "-O3",
+      "-std=c++17",
+      "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/code/negative_basis_moment_match.cpp",
+      "-o",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/builds/matcher"
+    ],
+    [
+      "c++",
+      "-O3",
+      "-std=c++17",
+      "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/code/negative_basis_profiles.cpp",
+      "-o",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/builds/profiler"
+    ],
+    [
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/builds/matcher",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/derived/dag.bin",
+      "130363",
+      "2",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/derived/weighted"
+    ],
+    [
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/builds/profiler",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/derived/dag.bin",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/derived/exact-links.bin",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/derived/exact-uses.json",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/derived/weighted.uses.bin"
+    ],
+    [
+      "/usr/bin/python3",
+      "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/code/independent_axis_review.py",
+      "--record",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/axis.json",
+      "--output",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/independent-axis-review.json"
+    ],
+    [
+      "/usr/bin/python3",
+      "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/check_compiled_witness.py",
+      "--witness",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/axis.json",
+      "--frame-source",
+      "original-envelope",
+      "--output",
+      "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/recovery-best-negative-25-20261008T1420/independent-compiled-review.json"
+    ]
+  ],
+  "input_sha256": {
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/negative-basis-clone-original-20261008T1407/negative-basis-full-clone-original-25-e7ee43172cfa/dag.bin": "e7ee43172cfa924ac843f1ff11b4c8686d2e5e267af2a3bb7d8aa118161decb8",
+    "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/results/best-negative-original-axis-25.json": "40154684e0c61a9d146a690227bb982f39a4bbdc0d434192794c54eb3a66ded3"
+  },
+  "source_sha256": {
+    "reproduce_selected_axis.py": "4e712238401738e3c6233cc2e42753f1e946acab12e95d7a5087233b3383cc07",
+    "negative_basis_moment_match.cpp": "8095699f543e88087b83b7d983552149da1e66773694502471eb7733b1922ddb",
+    "negative_basis_profiles.cpp": "71c3b4f33182c0974f665223b97c104e44c8e0fbde1bda01238d5152332ef787",
+    "binary_io.hpp": "7e143eb75bb342ac8f0c82a60005e7c35c9ec827de479bf6fb773151f3af5fa1",
+    "original_envelope_labels.py": "d4cbd1cf1c232f235b79cb45ff0817e42b90d5e74da69be0573dbcee9cbe67e3",
+    "independent_axis_review.py": "3876fc762a0ddf71dc76c10bc2faa0a4eb86cf51adf1623a2ce13e3b82c35c01"
+  },
+  "complete_selected_uses_match": true,
+  "complete_physical_block_histogram_matches": true,
+  "independently_compiled": true,
+  "limitations": [
+    "Scalar DAG regeneration belongs to the separate graph recovery protocol",
+    "Common ambient source/data geometry uses pinned public evidence",
+    "Global recurrence and 47 assembly conditions are separate coordinator checks"
+  ]
+}

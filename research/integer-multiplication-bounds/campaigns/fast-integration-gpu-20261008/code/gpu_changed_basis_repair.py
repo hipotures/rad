@@ -33,7 +33,7 @@ extern "C" __global__ void search(const int *base,const int *xx,const int *yy,
  __shared__ int perm[575],mat[2209],factors[47],q,inv,valid;
  for(int j=t;j<m;j+=blockDim.x)perm[j]=base[j];
  __syncthreads();
- if(t==0){unsigned s=seed^(offset+id+1)*2654435761u;valid=1;
+ if(t==0){unsigned s=seed^(offset+id+1)*2654435761u;if(!s)s=0x6d2b79f5u;valid=1;
   for(int k=0;k<mutations;k++) {
    int beta=rng(&s)%b,freec[4],n=0;
    if(beta>=a)freec[n++]=0;
@@ -100,14 +100,14 @@ def baseline():
 
 
 def weights(h,negative,p):
-    triple={0,1,22}
+    triple=SOURCE_TRIPLES[h]
     if negative:return [((h-1) if i in triple else -2)*pow(h+3,-1,p)%p for i in range(h)]
     inside,outside=(((31,18),(-5,24)) if h==23 else ((68,39),(-5,26)))
     return [(inside[0]*pow(inside[1],-1,p) if i in triple else outside[0]*pow(outside[1],-1,p))%p for i in range(h)]
 
 def reference(perms,p):
     a,b,d,m=23,25,47,575
-    wa=weights(23,True,p);wb=weights(25,ACTIVE_DEVICE==0,p)
+    wa=weights(23,BASIS_MODES[23]=="negative",p);wb=weights(25,BASIS_MODES[25]=="negative",p)
     xx=[pow(w,-1,p) for w in wa]
     yy=[pow(w,-1,p) for w in wb]
     rows=[(int(perms[i%b,i//b]),i%b) for i in range(d)]
@@ -138,14 +138,20 @@ def main():
     parser.add_argument('--seed',type=int,required=True)
     parser.add_argument('--seconds',type=int,default=600)
     parser.add_argument('--batch',type=int,default=16384)
+    parser.add_argument('--source23',default='0,1,22')
+    parser.add_argument('--source25',default='0,1,22')
+    parser.add_argument('--basis23',choices=('negative','I+J'),default='negative')
+    parser.add_argument('--basis25',choices=('negative','I+J'))
     parser.add_argument('--output',type=Path,required=True)
     args=parser.parse_args();args.output.mkdir(parents=True,exist_ok=True)
     prime=(65521,65537)[args.device]
     cp.cuda.Device(args.device).use();cp.get_default_memory_pool().set_limit(size=8*1024**3)
     kernel=cp.RawKernel(CUDA,'search')
-    global ACTIVE_DEVICE
-    ACTIVE_DEVICE=args.device
-    wa=weights(23,True,prime);wb=weights(25,args.device==0,prime)
+    global SOURCE_TRIPLES,BASIS_MODES
+    SOURCE_TRIPLES={23:set(map(int,args.source23.split(','))),25:set(map(int,args.source25.split(',')))}
+    assert all(len(t)==3 and min(t)>=0 and max(t)<h for h,t in SOURCE_TRIPLES.items())
+    BASIS_MODES={23:args.basis23,25:args.basis25 or ('negative' if args.device==0 else 'I+J')}
+    wa=weights(23,BASIS_MODES[23]=='negative',prime);wb=weights(25,BASIS_MODES[25]=='negative',prime)
     xx=cp.asarray([pow(w,-1,prime) for w in wa],dtype=cp.int32)
     yy=cp.asarray([pow(w,-1,prime) for w in wb],dtype=cp.int32)
     base=baseline();best=base.copy();piv=reference(base,prime)
@@ -161,7 +167,7 @@ def main():
     started=time.monotonic();batchid=0;attempts=0;accepted=[]
     protocol=dict(start_utc=datetime.now(timezone.utc).isoformat(),device=args.device,seed=args.seed,
                   prime=prime,seconds=args.seconds,batch=args.batch,source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                  fixed_dimensions=[23,25],source_triples=[[0,1,22],[0,1,22]],basis_modes=['negative-special','negative-special' if args.device==0 else 'I+J'],method='Valid permutation mutations; exact modular elimination; entropy discovery heuristic',
+                  fixed_dimensions=[23,25],source_triples=[sorted(SOURCE_TRIPLES[h])for h in (23,25)],basis_modes=[BASIS_MODES[h]for h in (23,25)],method='Valid permutation mutations; exact modular elimination; entropy discovery heuristic',
                   certification='Discovery only; sample-specific finite-field zeros do not prove generic rational identities')
     (args.output/'protocol.json').write_text(json.dumps(protocol,indent=2)+'\n')
     with (args.output/'progress.jsonl').open('x') as stream:
@@ -169,7 +175,7 @@ def main():
             mutations=1+batchid%6
             # Distinct seeds and primes split devices; occasional baseline exploration avoids a single basin.
             parent=base if batchid%7==0 else best
-            kernel((args.batch,),(128,),(cp.asarray(parent),xx,yy,np.int32(prime),np.uint32(args.seed),np.uint32(attempts),np.int32(mutations),outscore,outpiv,outperm))
+            kernel((args.batch,),(128,),(cp.asarray(parent),xx,yy,np.int32(prime),np.uint32(args.seed),np.uint32(attempts%(2**32)),np.int32(mutations),outscore,outpiv,outperm))
             cp.cuda.Stream.null.synchronize();attempts+=args.batch;batchid+=1
             k=int(cp.argmax(outscore));score=float(outscore[k])
             if score>bestscore+1e-9:

@@ -12,11 +12,17 @@ CAMPAIGN_START = "2026-10-08T12:41:06Z"
 HELD_DERIVATIVE_BRANCHES = {
     ("rohanarun/integer-mult-bounds", "research/rad-fixed-reversed"),
     ("chafreaky/integer-mult-bounds", "research/alternating-fixed-corners"),
+    ("rohanarun/integer-mult-bounds", "research/optimal-carrier-matching"),
+    ("chafreaky/integer-mult-bounds", "research/weighted-data-recovery"),
+    ("rohanarun/integer-mult-bounds", "research/climbed-producers"),
+    ("chafreaky/integer-mult-bounds", "research/exclusion-sum-order"),
 }
 
 
 def allowed_pull(pull):
     """Keep completed public RaD history; exclude every mutable RaD PR."""
+    if pull.get("number") in (42, 43, 44, 46, 48):
+        return False
     repo = (pull.get("head", {}).get("repo") or {}).get("full_name")
     author = pull.get("user", {}).get("login")
     if author == "hipotures" or repo == "hipotures/integer-mult-bounds":
@@ -32,9 +38,12 @@ def allowed_pull(pull):
     return True
 
 
-def get(endpoint):
+def get(endpoint, jq=None):
+    command = ["gh", "api", endpoint]
+    if jq is not None:
+        command.extend(["--jq", jq])
     result = subprocess.run(
-        ["gh", "api", endpoint], text=True, capture_output=True, check=False
+        command, text=True, capture_output=True, check=False
     )
     if result.returncode:
         return {"error": result.stderr.strip(), "endpoint": endpoint}
@@ -52,7 +61,12 @@ def main():
     output.parent.mkdir(parents=True, exist_ok=True)
     raw_dir = args.work_root / "raw" / "scout" / stamp
     raw_dir.mkdir(parents=True, exist_ok=True)
-    pulls = get("repos/CrocSwap/integer-mult-bounds/pulls?state=all&per_page=100")
+    # Select discovery metadata inside gh: do not deliver unreviewed PR bodies
+    # or commit patches to the collector or its retained acquisition file.
+    pulls = get("repos/CrocSwap/integer-mult-bounds/pulls?state=all&per_page=100",
+                '[.[] | {number,title,html_url,state,draft,created_at,updated_at,'
+                'user:{login:.user.login},head:{sha:.head.sha,ref:.head.ref,'
+                'repo:{full_name:.head.repo.full_name}}}]')
     if isinstance(pulls, list):
         # Do not interpret, persist, or print new RaD submission content.
         pulls = [pull for pull in pulls if allowed_pull(pull)]
@@ -60,7 +74,8 @@ def main():
     repos = {}
     for repo in repo_ids:
         info = get("repos/" + repo)
-        head = get("repos/" + repo + "/commits/" + info.get("default_branch", "main"))
+        head = get("repos/" + repo + "/commits/" + info.get("default_branch", "main"),
+                   '{sha,commit:{committer:.commit.committer,message:.commit.message}}')
         repos[repo] = {
             "url": info.get("html_url"), "description": info.get("description"),
             "pushed_at": info.get("pushed_at"), "head_sha": head.get("sha"),
@@ -68,7 +83,8 @@ def main():
             "head_message": head.get("commit", {}).get("message"),
             "license": (info.get("license") or {}).get("spdx_id"),
         }
-    forks = get("repos/CrocSwap/integer-mult-bounds/forks?sort=newest&per_page=100")
+    forks = get("repos/CrocSwap/integer-mult-bounds/forks?sort=newest&per_page=100",
+                '[.[] | {full_name,html_url,pushed_at}]')
     fork_heads = []
     if isinstance(forks, list):
         for fork in forks:
@@ -92,9 +108,12 @@ def main():
                             if isinstance(branches, list) else branches,
             })
     query = "search/repositories?q=" + quote(args.search) + "&per_page=20"
-    search = get(query)
+    search = get(query, '{total_count,incomplete_results,items:[.items[] | '
+                 'select(.full_name | startswith("hipotures/") | not)]}')
     code_query = '"partial-swap" "integer"'
-    code_search = get("search/code?q=" + quote(code_query) + "&per_page=20")
+    code_search = get("search/code?q=" + quote(code_query) + "&per_page=20",
+                      '{total_count,incomplete_results,items:[.items[] | '
+                      'select(.repository.full_name | startswith("hipotures/") | not)]}')
     compact_pulls = []
     if isinstance(pulls, list):
         for pull in pulls:
@@ -108,7 +127,7 @@ def main():
             })
     raw = {"observed_utc": observed, "pulls": pulls, "repository_search": search,
            "forks": forks, "code_search": code_search,
-           "omission": "Mutable RaD PRs and uncertain current derivatives are excluded; historical source20 only."}
+           "omission": "Discovery metadata only: PR bodies/patches, mutable RaD PRs, and uncertain current derivatives are excluded; historical source20 only."}
     (raw_dir / "api-responses.json").write_text(json.dumps(raw, indent=2) + "\n")
     record = {
         "observed_utc": observed, "method": "gh api, read-only public sources",

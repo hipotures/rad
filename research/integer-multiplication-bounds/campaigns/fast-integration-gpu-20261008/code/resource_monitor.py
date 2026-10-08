@@ -75,24 +75,24 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--work-root',type=Path,required=True)
     parser.add_argument('--output',type=Path,required=True)
-    parser.add_argument('--deadline',required=True)
+    parser.add_argument('--deadline')
     parser.add_argument('--interval',type=float,default=60)
     args = parser.parse_args()
-    deadline = datetime.fromisoformat(args.deadline.replace('Z','+00:00'))
-    assert deadline.tzinfo is not None and args.interval >= 10
+    deadline = datetime.fromisoformat(args.deadline.replace('Z','+00:00')) if args.deadline else None
+    assert (deadline is None or deadline.tzinfo is not None) and args.interval >= 10
     args.output.parent.mkdir(parents=True,exist_ok=True)
     previous = {}
     ticks = os.sysconf('SC_CLK_TCK')
     with args.output.open('x') as out:
-        while datetime.now(timezone.utc) < deadline:
+        while deadline is None or datetime.now(timezone.utc) < deadline:
             row = snapshot(args.work_root,previous,ticks)
             out.write(json.dumps(row)+'\n')
             out.flush()
-            remaining = (deadline-datetime.now(timezone.utc)).total_seconds()
+            remaining = (deadline-datetime.now(timezone.utc)).total_seconds() if deadline else args.interval
             if remaining <= 0:
                 break
             time.sleep(min(args.interval,remaining))
-    print(json.dumps({'status':'terminal','output':str(args.output),'deadline_utc':deadline.isoformat()}),flush=True)
+    print(json.dumps({'status':'terminal','output':str(args.output),'deadline_utc':deadline.isoformat() if deadline else None}),flush=True)
 
 
 if __name__ == '__main__':

@@ -44,6 +44,9 @@ def main():
     config = expected['configuration']
     seed = config['seed']
     mode = config['mode']
+    negative = config.get('basis','').startswith('I-4/')
+    native_sources = [('negative_basis_moment_match.cpp','matcher'),('negative_basis_profiles.cpp','profiler')] if negative else [('fixed_moment_match.cpp','matcher'),('fixed_selected_profiles.cpp','profiler')]
+    profile_suffix = '.negative_basis_certified_profiles.json' if negative else '.round3_rankone_certified_profiles.json'
     original = args.dag.resolve()
     assert sha256(original.read_bytes()).hexdigest() == expected['producer']['dag_sha256']
     h,v,n,q = struct.unpack_from('<4I',original.read_bytes())
@@ -65,7 +68,7 @@ def main():
         with (logs/(name+'.stdout')).open('w') as out, (logs/(name+'.stderr')).open('w') as err:
             subprocess.run(command,check=True,env=env,stdout=out,stderr=err)
 
-    for source,name in [('fixed_moment_match.cpp','matcher'),('fixed_selected_profiles.cpp','profiler')]:
+    for source,name in native_sources:
         run([*shlex.split(args.compiler),'-O3','-std=c++17',str(HERE/source),'-o',str(builds/name)],'compile-'+name)
     dag = derived/'dag.bin'
     shutil.copy2(original,dag)
@@ -74,7 +77,7 @@ def main():
     uses = derived/'exact-uses.json'
     run([str(builds/'profiler'),str(dag),str(derived/'exact-links.bin'),str(uses),str(prefix)+'.uses.bin'],'profiles')
     producer = document(logs/'profiles.stdout')
-    profile = document(Path(str(dag)+'.round3_rankone_certified_profiles.json'))
+    profile = document(Path(str(dag)+profile_suffix))
     for key in ('h','v','c','q','matched','R','loss','rank_sum','histogram'):
         assert producer[key] == expected['producer'][key], 'Producer mismatch: '+key
     for key in ('h','v','R','loss','rank_sum','blocks','crt_disagreements'):
@@ -97,7 +100,7 @@ def main():
                     seed=seed,mode=mode,elapsed_seconds=time.monotonic()-start,completed_utc=datetime.now(timezone.utc).isoformat(),
                     commands=commands,input_sha256={str(original):expected['producer']['dag_sha256'],
                                                   str(args.expected):sha256(args.expected.read_bytes()).hexdigest()},
-                    source_sha256={str(p.relative_to(HERE)):sha256(p.read_bytes()).hexdigest() for p in [Path(__file__).resolve(),HERE/'fixed_moment_match.cpp',HERE/'fixed_selected_profiles.cpp',HERE/'binary_io.hpp',HERE/'original_envelope_labels.py',HERE/'independent_axis_review.py']},
+                    source_sha256={str(p.relative_to(HERE)):sha256(p.read_bytes()).hexdigest() for p in [Path(__file__).resolve(),*[HERE/source for source,name in native_sources],HERE/'binary_io.hpp',HERE/'original_envelope_labels.py',HERE/'independent_axis_review.py']},
                     complete_selected_uses_match=True,complete_physical_block_histogram_matches=True,
                     independently_compiled=not args.skip_compiled,
                     limitations=['Scalar DAG regeneration belongs to the separate graph recovery protocol',
