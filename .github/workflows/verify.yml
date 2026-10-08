@@ -1,0 +1,88 @@
+name: Verify RaD research
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Automatic checks, or all registered checks including full/formal'
+        type: choice
+        options: [automatic, full]
+        default: automatic
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rad-ci-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  plan:
+    name: Validate verification registry
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Select registered verification groups
+        id: matrix
+        env:
+          MODE: ${{ inputs.mode || 'automatic' }}
+        run: |
+          set -euo pipefail
+          matrix=$(python3 tools/run_ci.py --matrix "$MODE")
+          printf 'matrix=%s\n' "$matrix" >> "$GITHUB_OUTPUT"
+          echo 'Only explicitly registered checks run. This is not a complete mathematical proof.' >> "$GITHUB_STEP_SUMMARY"
+
+  verify:
+    name: ${{ matrix.group }} / Python ${{ matrix.python }}
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run bounded checks
+        env:
+          CI_GROUP: ${{ matrix.group }}
+          CI_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          CI_EVENT: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          args=(--group "$CI_GROUP" --output "$RUNNER_TEMP/rad-ci")
+          if [[ "$CI_EVENT" == workflow_dispatch ]]; then
+            args+=(--all)
+          elif [[ -n "$CI_BASE" ]]; then
+            args+=(--base "$CI_BASE")
+          fi
+          python tools/run_ci.py "${args[@]}"
+      - name: Require no changes to tracked source or certificates
+        if: always()
+        run: |
+          git diff --exit-code
+          git diff --cached --exit-code
+      - name: Preserve verification reports and logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rad-ci-${{ matrix.group }}-py${{ matrix.python }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/rad-ci/
+          if-no-files-found: warn
+          retention-days: 14

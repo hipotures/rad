@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "checks": [
+    {
+      "id": "publication-policy",
+      "group": "repository",
+      "command": [
+        "{python}",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_archive_workspace.py",
+        "-v"
+      ],
+      "inputs": [
+        "tools/archive_workspace.py",
+        "tools/test_archive_workspace.py",
+        "tools/text_evidence.py",
+        "tools/import_external_workspaces.py",
+        ".gitignore"
+      ],
+      "paths": [
+        "tools/**",
+        ".gitignore"
+      ],
+      "timeout_seconds": 240,
+      "scope": "Existing repository publication, retention and artifact-policy regressions"
+    },
+    {
+      "id": "ci-runner-controls",
+      "group": "repository",
+      "command": [
+        "{python}",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_ci.py",
+        "-v"
+      ],
+      "inputs": [
+        "tools/run_ci.py",
+        "tools/test_ci.py",
+        "tools/ci_archive_audit.py",
+        "tools/ci_checks.json"
+      ],
+      "paths": [
+        "tools/**",
+        ".github/workflows/**"
+      ],
+      "timeout_seconds": 120,
+      "scope": "Runner validation, failure propagation, timeouts, safe paths and evidence preservation"
+    },
+    {
+      "id": "assembly-arithmetic-controls",
+      "group": "smoke",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py",
+        "--self-test"
+      ],
+      "inputs": [
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py",
+        "research/integer-mult-breakthrough/fixtures/frozen-assembly-ceiling.json"
+      ],
+      "paths": [
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py",
+        "research/integer-mult-breakthrough/fixtures/frozen-assembly-ceiling.json"
+      ],
+      "timeout_seconds": 60,
+      "scope": "Exact arithmetic and negative controls for frozen assumed inequalities; not an integer-multiplication proof"
+    },
+    {
+      "id": "frozen-assembly-ceiling",
+      "group": "certificates",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py"
+      ],
+      "inputs": [
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py",
+        "research/integer-mult-breakthrough/fixtures/frozen-assembly-ceiling.json"
+      ],
+      "paths": [
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py",
+        "research/integer-mult-breakthrough/fixtures/frozen-assembly-ceiling.json"
+      ],
+      "timeout_seconds": 60,
+      "scope": "Exact consequences of a < (1-beta)b and kappa < a/(1+a), under explicitly assumed fixed inputs"
+    }
+  ]
+}
