@@ -44,6 +44,12 @@ Owner: autonomous `complex_primitives` agent.
   literal review. General quadratic interfaces retain paid singular shifts;
   a wider noncommuting chronology is needed to overcome the commuting-chart
   obstruction. Whole-network integration remains the discriminator.
+- Further leverage: [degenerate subspace frames](complex/degenerate-subspace-clifford-frames.md)
+  remove the old radical obstruction and realize a complete branching component
+  with auxiliary rank 12 against graph minimum 14. External rank 12 remains
+  charged. Every zero-to-full geodesic is an L_E path with nested E, so this
+  escape does not remove the trimmed circuit's cancellation frontier.
+  New nonlinear/direct-sum block interfaces are hypotheses under investigation.
 - Continue when a changed family has an honest optimistic bound crossing the
   required component saving; otherwise retain the scoped ceiling and replace it.
 
@@ -70,6 +76,12 @@ Owner: autonomous `reversible_synthesis` agent.
   their prescribed roles/endpoints. Larger roles, other source geometry and
   per-address scalar functions are outside these exclusions. A final full
   incidence-wrapper ledger also rejects its optimistic chronology.
+- Whole-word discriminator: [dirty trimmed compilation](synthesis/trimmed-zeta-dirty-and-monotone.md)
+  is exact over the rationals, but its optimistic monotone endpoint telescope
+  spends every boundary saving. [Complete nonmonotone frame heuristics](synthesis/whole-cancellation-word-frames.md)
+  likewise found no deficit, with all chronological transitions counted.
+  These are heuristic negative results, not arbitrary-word exclusions.
+  Residual per-address gauges and compressed operator words are new hypotheses.
 - Continue only if surviving projector/semantic identities admit a paid
   physical implementation with a scale-changing cost reduction.
 
@@ -93,6 +105,12 @@ Owner: autonomous `coupled_transfers` agent.
   induction is under investigation: completed exact children may contribute
   their target-map bounds rather than their entire elementary execution depth.
   That hypothesis needs separate internal guard and native interface proofs.
+- The [conditional endpoint-aware induction](transfers/endpoint-aware-guards.md)
+  now has literal internal-register controls and two independent analytical
+  reviews. Uniform charged prefixes, exact child endpoints and a decreasing
+  budget yield O(e log e) guard at logarithmic depth. A routing-aware stopping
+  analysis is being tested against actual child widths; its transfer and
+  connection to a favorable complete native ledger remain open.
 - Continue only for a recurrence whose paid conversions and well-founded
   recursion remain compatible with a target-crossing parameter range.
 
@@ -122,6 +140,11 @@ Owner: coordinator.
   cancellation across the pair frontier and complete dirty restoration are
   the next tests. A separate all-Lagrangian triangle bound excludes a bare
   three-shear exchange saving and leaves larger networks open.
+- Guard scope: [independent review](obstructions/endpoint-guard-review.md)
+  accepts the conditional active-child induction. Exact same-endpoint scaling
+  words demonstrate why the local-prefix assumptions cannot be omitted.
+  A new geodesic transport lemma is being investigated separately from a
+  quantitative global rank deficit bound.
 - Continue by translating every useful source into a lemma, counterexample,
   concrete construction, or scoped quantitative cost constraint.
 

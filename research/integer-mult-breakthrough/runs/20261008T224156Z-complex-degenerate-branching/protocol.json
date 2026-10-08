@@ -1,0 +1,126 @@
+{
+  "run_id": "20261008T224156Z-complex-degenerate-branching",
+  "started_utc": "2026-10-08T22:41:56.117107+00:00",
+  "question": "Can a degenerate-subspace geodesic be implemented with actual one-child Clifford phase edges and arbitrary dirty restoration in a complete branching component?",
+  "scope": "Exact finite complete-stream interfaces, all auxiliary and external transitions charged, not full motif/tape exponent",
+  "python": "3.14.4",
+  "dependencies": "Python standard library and task-owned source modules",
+  "source_sha256": {
+    "degenerate_branching_component.py": "e840a01881c08da4f08f763c64fb59676a9fd0e8e8efed5ed123e122bae1bfa0",
+    "degenerate_frame_geodesics.py": "799d25643b48552efc0523fd64966f9cba42d6b6b5272d9ac7f32436ce70bba9",
+    "lagrangian_gate_witness.py": "03ddabab75a80959facc8cec3bf2f4a3d698b9998f7a272329bf57da8f5956a1",
+    "lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9",
+    "quadratic_rank_interface.py": "c7435adc75bee5c38af1c59af4ae840a80bd6f33e53ce5e34d180c719b6a5c0a"
+  },
+  "cases": [
+    {
+      "name": "forward-f1-k1",
+      "f": 1,
+      "k": 1,
+      "offset": 0,
+      "reverse": false
+    },
+    {
+      "name": "forward-f2-k1",
+      "f": 2,
+      "k": 1,
+      "offset": 0,
+      "reverse": false
+    },
+    {
+      "name": "forward-f1-k2-offset0",
+      "f": 1,
+      "k": 2,
+      "offset": 0,
+      "reverse": false
+    },
+    {
+      "name": "reverse-f1-k2-offset1",
+      "f": 1,
+      "k": 2,
+      "offset": 1,
+      "reverse": true
+    }
+  ],
+  "workers": 4,
+  "memory_limit_bytes_per_process": 1073741824,
+  "randomness": "None; exact deterministic Gaussian field payloads",
+  "raw_log_location": "research/integer-mult-breakthrough/work/complex/20261008T224156Z-complex-degenerate-branching",
+  "output_location": "research/integer-mult-breakthrough/runs/20261008T224156Z-complex-degenerate-branching/results",
+  "finished_utc": "2026-10-08T22:41:57.950542+00:00",
+  "completion": [
+    {
+      "name": "forward-f1-k1",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/degenerate_branching_component.py",
+        "--columns",
+        "1",
+        "--chunk-width",
+        "1",
+        "--offset",
+        "0",
+        "--output",
+        "research/integer-mult-breakthrough/runs/20261008T224156Z-complex-degenerate-branching/results/forward-f1-k1.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.41057755700603593
+    },
+    {
+      "name": "forward-f2-k1",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/degenerate_branching_component.py",
+        "--columns",
+        "2",
+        "--chunk-width",
+        "1",
+        "--offset",
+        "0",
+        "--output",
+        "research/integer-mult-breakthrough/runs/20261008T224156Z-complex-degenerate-branching/results/forward-f2-k1.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.8323673009945196
+    },
+    {
+      "name": "forward-f1-k2-offset0",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/degenerate_branching_component.py",
+        "--columns",
+        "1",
+        "--chunk-width",
+        "2",
+        "--offset",
+        "0",
+        "--output",
+        "research/integer-mult-breakthrough/runs/20261008T224156Z-complex-degenerate-branching/results/forward-f1-k2-offset0.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.0983164309946005
+    },
+    {
+      "name": "reverse-f1-k2-offset1",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/degenerate_branching_component.py",
+        "--columns",
+        "1",
+        "--chunk-width",
+        "2",
+        "--offset",
+        "1",
+        "--output",
+        "research/integer-mult-breakthrough/runs/20261008T224156Z-complex-degenerate-branching/results/reverse-f1-k2-offset1.json",
+        "--reverse"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.1159419379982864
+    }
+  ]
+}

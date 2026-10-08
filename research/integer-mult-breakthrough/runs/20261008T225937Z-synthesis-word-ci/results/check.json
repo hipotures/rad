@@ -1,0 +1,51 @@
+{
+  "status": "PASS EXACT BOUNDED WORD CONTROLS",
+  "recorded_utc": "2026-10-08T22:59:37.101410+00:00",
+  "h": 4,
+  "k": 3,
+  "complete_scalar_columns": 54,
+  "source_columns": 4,
+  "sink_columns": 4,
+  "dirty_columns": 46,
+  "scalar_replay": {
+    "status": "EXACT FULL SCALAR PASS",
+    "restored_dirty_columns": 46,
+    "source_columns": 4,
+    "sink_columns": 4,
+    "witness": null
+  },
+  "scalar_corruption": {
+    "status": "CORRUPTION DETECTED",
+    "restored_dirty_columns": 46,
+    "source_columns": 4,
+    "sink_columns": 4,
+    "witness": {
+      "output_role": 11,
+      "initial_column": 3,
+      "expected": "0",
+      "actual": "1"
+    }
+  },
+  "chronological_graph_checks": 10,
+  "binary_expansion_controls": {
+    "binary_expansion_controls": 32,
+    "independent_choices_each": 32,
+    "status": "PASS"
+  },
+  "complete_payload_stock": 54,
+  "capacity": 216,
+  "false_dirty_omission_rank": 212,
+  "matched_negative_controls": [
+    "omitted source subtraction",
+    "omitted dirty endpoint",
+    "omitted positive chronological transition"
+  ],
+  "scope": "Complete rational scalar map and arbitrary-dirty/source restoration, exact rank accounting for all common-frame incidences/endpoints, finite binary mincut controls. No many-label optimum, Gaussian operator lift, native tape or exponent is certified.",
+  "source_sha256": {
+    "verify_word_frames.py": "632c15703d7a718c2e0c1515f78d14a216e4a1879439d64994a323918035994a",
+    "global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+    "lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+    "trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+    "trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced"
+  }
+}

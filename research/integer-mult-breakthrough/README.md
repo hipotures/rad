@@ -81,8 +81,27 @@ These facts constrain their stated fixed models, not other algorithms.
   exact k5 scalar arithmetic uses about 10.81 SSA roles/source at h20, versus
   about 103.33 in the earlier tree. Zero initialization and fan-out are explicit;
   the [independent scalar review](reports/transfers/trimmed-side-independent-review.md)
-  confirms all tested coefficients. Arbitrary-dirty compilation and shared
+  confirms all tested coefficients. Gaussian native compilation and shared
   cancellation frames remain open.
+- [Degenerate Clifford helper frames](reports/complex/degenerate-subspace-clifford-frames.md):
+  arbitrary binary subspaces, including radicals, admit shortest zero-to-full
+  frame paths. A complete three-helper branching component costs auxiliary
+  rank 12 versus graph minimum 14; its external transitions cost another 12.
+  [Independent literal review](reports/transfers/degenerate-branching-independent-review.md)
+  confirms every phase, arbitrary dirty field and retired helper. The earlier
+  nondegenerate-frame obstruction has this explicit escape.
+- [Trimmed cancellation frontier](reports/complex/trimmed-cancellation-frontier.md),
+  [dirty scalar realization](reports/synthesis/trimmed-zeta-dirty-and-monotone.md)
+  and [whole-word frame search](reports/synthesis/whole-cancellation-word-frames.md):
+  the scalar circuit is exact, but the retained monotone geometry has zero
+  rank deficit. Broader nonmonotone heuristics also find no deficit; these
+  searches do not exclude other words or prove global optimality.
+- [Endpoint-aware precision](reports/transfers/endpoint-aware-guards.md):
+  charged local prefixes and exact returned children support a conditional
+  O(e log e) internal guard under a logarithmic depth budget. Separate
+  [coordinator review](reports/obstructions/endpoint-guard-review.md) and
+  [complex review](reports/complex/endpoint-guard-independent-critique.md)
+  accept that scope. Exact endpoints alone do not bound intermediate registers.
 
 Live structural work includes cancellation-allowing reversible synthesis,
 changed spectral interfaces, and a weight-five complex family. The latter uses
@@ -96,7 +115,7 @@ frames demonstrate an actual local escape; whole-network chronology must
 retain its benefit. The old library's alternating projector identity is
 credited separately and does not itself establish a larger saving.
 
-Registered Python CI checks replay only their stated finite arithmetic and
+Thirty-two registered Python CI checks replay only their stated finite arithmetic and
 semantic controls. A separately contributed [Lean package](formal/README.md)
 formalizes the named positive-matrix obstruction and finite-level extension;
 its pinned clean-runner workflow passed at remote commit `1576511c`. It does

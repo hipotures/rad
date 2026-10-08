@@ -1,0 +1,43 @@
+{
+  "run_id": "20261008T225828Z-transfer-degenerate-branching-review",
+  "track": "C: alternative transfer and independent cost review",
+  "status": "pre-execution protocol",
+  "question": "Does the proposed degenerate three-helper branching component bind exact full-payload matrices, dirty anchors, all phase units and every retirement transition independently?",
+  "git_head_before_execution": "dec896edb7adc57e944fa317faa51ca9b9d9bf37",
+  "source_closure_sha256": {
+    "code/transfers/branching_component_review.py": "bb444815b613933b08a02fcbed77e4446a3d69e6c1a87052251c2a0c47a5dc2b",
+    "code/transfers/lagrangian_component_review.py": "6d1d98bab1517a6942e0e031123e88f2417f13f692ae098c4983edfdb98fefe0",
+    "fixtures/transfers/degenerate-branching-candidates.json": "e8bad63d0c1b61ca27c13e54cf4b502ec020d58b0b27cebb7c9e23c46956cf64"
+  },
+  "candidate_input_provenance": "See the retained immutable candidate fixture source records",
+  "python": "3.14.4",
+  "workers": 4,
+  "seeds": [
+    202610085000,
+    202610085001,
+    202610085002,
+    202610085003
+  ],
+  "command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/transfers/branching_component_review.py",
+    "--workers",
+    "4",
+    "--output",
+    "research/integer-mult-breakthrough/work/transfers/20261008T225828Z-transfer-degenerate-branching-review/results/full.json"
+  ],
+  "ci_command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/transfers/branching_component_review.py",
+    "--workers",
+    "1",
+    "--small"
+  ],
+  "immutable_input": "fixtures/transfers/degenerate-branching-candidates.json",
+  "raw_result": "work/transfers/20261008T225828Z-transfer-degenerate-branching-review/results/full.json",
+  "compact_result": "results/summary.json",
+  "producer_imports": false,
+  "scope": "Exact finite component and auxiliary graph-chart comparison; paid fixed-tape routing, native chronology and larger exponent remain separate obligations"
+}

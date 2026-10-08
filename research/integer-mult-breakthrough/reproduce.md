@@ -120,3 +120,35 @@ The coordinator reran bounded phase, translation, four-port and exchange checks,
 reviewed the literal common-frame cancellation and free-row-unit quotient, and
 ran the trimmed transform and its actual corrupted-DAG controls. Internal
 agent review is not external peer review or a formal proof package.
+
+## Degenerate branching, complete cancellation words and charged guards
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/test_degenerate_frames.py
+python3 -B research/integer-mult-breakthrough/code/transfers/branching_component_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/endpoint_guard_literal.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/obstructions/endpoint_guard_counterexamples.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_word_frames.py
+```
+
+Seven complex tests and an independent no-producer-import review bind the
+degenerate three-helper component, every dirty/source/sink anchor, all fourteen
+phase edges, auxiliary rank 12 and external rank 12. Its graph-chart comparison
+is auxiliary minimum 14. This is a complete local component, not a native motif.
+The whole-word verifier independently recounts chronological transitions and
+checks exact small binary cuts; the many-label discovery searches remain
+heuristic negative results. The monotone trimmed telescope is an optimistic
+endpoint/support ledger rather than a literal four-pass Gaussian histogram.
+
+Guard controls distinguish exact returned endpoints from charged local prefixes
+and literal internal registers. The proposed O(e log e) induction has independent
+analytical reviews under its listed assumptions; no fast native time/row contract
+is supplied by the deliberately inefficient precision stress word.
+
+All fourth-checkpoint run protocols identify source closures and original local
+paths. Complete JSON/log text is archived under `evidence/20261008T230948Z-*`.
+Large readable receipts are summaries with exact omission lists, original byte
+sizes and hashes; their full frame words and cancellation frontiers remain in
+complete gzip copies in the clone. No original evidence was modified or deleted.
+Decompress a listed gzip to a fresh location to recover the exact original text,
+or replay the report command with a fresh output directory.
