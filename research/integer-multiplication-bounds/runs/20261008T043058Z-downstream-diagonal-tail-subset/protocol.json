@@ -1,0 +1,57 @@
+{
+  "admission": {
+    "pending": 14,
+    "reserved": 2,
+    "status": "Running"
+  },
+  "campaign": "20261007T222521Z",
+  "checkpoint": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/finite/20261008T041100Z-finite-odd-pair-refinement/checkpoint.json",
+  "commands": [
+    [
+      "python3",
+      "/srv/ai/research/research/integer-multiplication-bounds/code/downstream_arbitrary_width_tail.py",
+      "--output",
+      "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T043058Z-downstream-diagonal-tail-subset/results/tail-certificate.json"
+    ],
+    [
+      "python3",
+      "/srv/ai/research/research/integer-multiplication-bounds/code/downstream_diagonal_batch_subset.py",
+      "--h",
+      "51",
+      "--roles",
+      "502265",
+      "--finite-review",
+      "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T041200Z-review-odd51/results/certificate.json",
+      "--output",
+      "/srv/ai/research/research/integer-multiplication-bounds/runs/20261008T043058Z-downstream-diagonal-tail-subset/results/subset-certificate.json"
+    ]
+  ],
+  "completed_utc": "2026-10-08T04:31:03.910785+00:00",
+  "created_utc": "2026-10-08T04:30:58.437166+00:00",
+  "extended_deadline_utc": "2026-10-08T10:00:00Z",
+  "external_logs": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/logs/downstream/20261008T043058Z-downstream-diagonal-tail-subset",
+  "original_deadline_utc": "2026-10-08T08:25:21Z",
+  "original_start_utc": "2026-10-07T22:25:21Z",
+  "reservation_file": "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/tmp/finite/20261008T004828Z-finite-singleton-neighborhood-reserve.json",
+  "result_sha256": {
+    "subset-certificate.json": "cd98160b97e6e946b098a45d75db4b682653cec4377a565913e75417fbc51a78",
+    "tail-certificate.json": "5f36f0dda062efa36eb57c1e01e420c7a1fb1a8f3e597f579840bc4e4e66c8e9"
+  },
+  "source_sha256": {
+    "/srv/ai/research/research/integer-multiplication-bounds/code/downstream_arbitrary_width_tail.py": "d54789bf923d6506a790fd95bdc3eb0c1221801a5a00ea1b0d8a98d8625ffb6b",
+    "/srv/ai/research/research/integer-multiplication-bounds/code/downstream_diagonal_batch_subset.py": "d363e074dc7e691cb600b5876b119d78c028137b568af11f315bfbf264290a0f"
+  },
+  "started_utc": "2026-10-08T04:30:58.438768+00:00",
+  "status": "PASS",
+  "steps": [
+    {
+      "elapsed_seconds": 5.3977228458970785,
+      "returncode": 0
+    },
+    {
+      "elapsed_seconds": 0.061976791941560805,
+      "returncode": 0
+    }
+  ],
+  "workers": 1
+}

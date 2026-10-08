@@ -48,3 +48,22 @@ The user extended this same campaign to 2026-10-08 10:00:00 UTC
 (12:00 CEST); start, identities, accepted evidence and running queues
 are unchanged. Historical ledger numbers remain linked to their own
 interfaces and are superseded only by separately reviewed checkpoints.
+
+## New structural leads after the h51 checkpoint
+
+- Odd full-pair root placement yields the independently reviewed h51
+  finite witness and[complete composition](odd51-composition.md). Refined
+  windows continue with distinct canonical candidate identities.
+- Compatible explicit DAG clones can add retained links faster than
+  additions. The h12 combined witness saves 3 roles and passes complete
+  dirty invocation controls; full-size usefulness remains separate.
+- Consecutive increasing Bruhat pivots can share one larger interchange
+  without an address gather. Exact small profiles and the original lower
+  factors are retained; arbitrary tails, row-depth reservations and a
+  complete weighted recurrence require independent review.
+- A rank-d perturbation of a lower triangular invertible matrix has a
+  proposed profile with at least m-2d diagonal pivots in at most 2d+1 runs.
+  Exact random projection and invertible-update controls found no failure;
+  this evidence is distinct from the all-size argument.
+- Pair-star binary motifs and four-subset scalar identities yield new
+  scoped negatives, without repeating the prior five-subset exclusion.

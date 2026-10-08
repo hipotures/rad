@@ -173,3 +173,16 @@ experiments. Preserve successful and failed old work. The original deadline
 milestone, never a reason to stop. Distinguish numerical screens, exact
 finite certificates and complete conditional proofs. Commit and push all
 durable results with verified remote publication.
+
+## Seventh campaign checkpoint
+
+The same active campaign now independently reviews the h51 bit witness with
+502,265 roles and exact conditional saving
+`31879574566994548341758160620003/10^40`. The full source, dirty controls,
+finite review and exact arithmetic are linked from
+[the composition report](reports/odd51-composition.md). The preceding h50
+checkpoint is retained unchanged. A separately reviewed h28 controller
+construction has 92,309 roles; it does not itself change the bit-limited
+headline. Contiguous Bruhat-pivot batching and joint DAG/controller rewrites
+are new hypotheses requiring their own complete transfers. Continue to the
+user-extended 2026-10-08 10:00 UTC deadline without resetting the campaign.

@@ -18,13 +18,13 @@ is an active mathematical research campaign, started 2026-10-07
 22:25:21 UTC. The user explicitly extended its original ten-hour deadline
 to 2026-10-08 10:00:00 UTC (12:00 CEST), without restarting the campaign.
 The pinned conditional
-2^-59 baseline passed its supplied checks. Independently reviewed h50
-singleton and h28 shared complex circuits, phase-cell Gaussian inverse,
+2^-59 baseline passed its supplied checks. Independently reviewed h51
+odd-ground and h28 shared complex circuits, phase-cell Gaussian inverse,
 and the separately pinned compact-control update now combine with independently
 reviewed arbitrary routing, a linear semantic guard and complete microbox
 resampling. They support the exact strict conditional saving
-`31831959104772222375982318046677/10^40`, greater than 2^-29 and
-more than 38.351757957556894 times the new upstream witness `83/10^12`.
+`31879574566994548341758160620003/10^40`, greater than 2^-29 and
+more than 38.40912598433078 times the new upstream witness `83/10^12`.
 The complete upstream theorem remains assumed. Original hypotheses and
 concurrent searches continue without resetting the campaign clock. See the [reassessment](../research/integer-multiplication-bounds/reports/compact-upstream-reassessment.md)
 and [evolving report](../research/integer-multiplication-bounds/reports/campaign-20261007T222521Z.md)

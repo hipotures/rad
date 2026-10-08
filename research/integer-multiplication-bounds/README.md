@@ -22,10 +22,10 @@ layout, repair and assembly arguments have passed independent review within
 the retained conditional interfaces. The campaign start is unchanged.
 
 The current independently reviewed strict conditional witness is
-**`kappa = 31831959104772222375982318046677/10^40`**, approximately
-**3.183195910477222e-9**, more than **38.351757957556894 times 83/10^12**
-and greater than **2^-29**. It combines the independently promoted h50
-bit circuit with 472,879 roles, the h28 shared complex circuit with 97,586
+**`kappa = 31879574566994548341758160620003/10^40`**, approximately
+**3.1879574566994547e-9**, more than **38.40912598433078 times 83/10^12**
+and greater than **2^-29**. It combines the independently promoted h51
+bit circuit with 502,265 roles, the h28 shared complex circuit with 97,586
 roles, compact movement, arbitrary-source coordinate routing, a linear
 semantic-child precision guard and complete local microbox resampling.
 The movement and resampling changes are jointly accounted for. Separate
@@ -36,10 +36,15 @@ The tight balanced common numeric cutoff is
 `log2(b_input)>=258254417031933722624`, with separate eventual prime,
 record-domination, logarithm-absorption and unaffected-machine thresholds.
 The original-prefix witness
-`31831959003444860653738042989433/10^40` has a smaller numeric cutoff
-`6316161734322990145`. These are asymptotic conditional results, not
+`15939787232681910604248015281721/(5*10^39)` has a smaller numeric cutoff
+`6297308145207339265`. These are asymptotic conditional results, not
 practical multiplication benchmarks or formal machine verification.
 The complete upstream theorem remains assumed and novelty is unclaimed.
+A separately reviewed h28 complex controller construction uses 92,309 roles
+and certifies a saving of `4003/10^11`. The displayed composition retains the
+earlier 97,586-role complex input; its complex margin is inactive. New
+contiguous-pivot batching and joint graph/controller rewrites are under study
+and are not part of the displayed witness.
 
 All older accepted interfaces remain preserved. The generic compact
 R473026 checkpoint is
@@ -52,10 +57,21 @@ limitations. Research continues through the authorized deadline.
 
 - [Full goal](GOAL.md)
 - [Campaign clock, protocol and resume state](runs/20261007T222521Z-campaign/protocol.json)
-- [Newest six-role refinement and exact composition](reports/refinement472879-composition.md)
+- [Current odd-ground composition](reports/odd51-composition.md)
+- [Independent odd-ground finite review](reports/review-odd51.md)
+- [Current independent arithmetic](runs/20261008T043000Z-review-odd51-bulk/)
+- [New complex controller review](reports/review-complex-controller.md)
+- [Odd-ground finite search family](reports/finite-odd-pair-family.md)
+- [Joint graph/controller duplication controls](reports/finite-clone-gate-discriminator.md)
+- [Contiguous Bruhat recurrence investigation](reports/contiguous-bruhat-discriminator.md)
+- [Ground search memory failures and recovery](reports/finite-ground-rank-memory.md)
+- [Scoped pair-star central obstruction](reports/downstream-pair-star-central-negative.md)
+- [Four-subset scalar and rank obstruction](reports/downstream-subset4-root02-screen.md)
+- [Scoped finite-field Walsh bridge obstruction](reports/review-walsh-bridge.md)
+- [Previous h50 six-role refinement](reports/refinement472879-composition.md)
 - [Current complete conditional assembly](reports/downstream-cutoff2-compositions.md)
 - [Independent complete assembly review](reports/review-semantic-bulk-assembly.md)
-- [Independent exact current arithmetic](runs/20261008T033303Z-review-semantic-bulk472879/)
+- [Previous h50 independent arithmetic](runs/20261008T033303Z-review-semantic-bulk472879/)
 - [Independent arbitrary-source routing](reports/review-arbitrary-routing.md)
 - [Independent linear semantic precision guard](reports/review-semantic-child-guard.md)
 - [Independent complete bulk resampling](reports/review-bulk-resampling.md)

@@ -351,3 +351,51 @@ The independent alternating primitive control is also archived intact in
 source and written review distinguish the actual fK layout, selected-only
 word exchanges and upstream bit-volume convention from the initial
 producer algebra. It does not certify a new complete odd-ground network.
+
+
+## Seventh checkpoint: odd h51 and completed structural discriminators
+
+The new h51 witness is reproduced with the exact commands and input hashes
+in `runs/20261008T041200Z-review-odd51/protocol.json` and
+`runs/20261008T043000Z-review-odd51-bulk/protocol.json`. Those targeted new
+finite and assembly paths were exercised completely; previously accepted
+h28 and analytic baselines were not replayed. The complete new complex
+controller review has its own protocol under
+`runs/20261008T0415Z-review-complex-controller/`.
+
+Full completed external text is in
+`evidence/20261008T0453Z-odd-network-external` (1401 files), and full topic
+text is in `evidence/20261008T0454Z-odd-network-topic` (111 files). These
+include all original 309-case and 420-case candidate definitions and
+certificates, memory failures and repaired/partial outcomes. Each archive
+has an `archive-manifest.jsonl.gz` listing original paths, complete sizes,
+and hashes. Original files are unchanged. Live workers, telemetry and
+new incomplete controls are excluded. Completed process IDs are historical
+records and cannot authorize control of live processes.
+
+The two large row-level tables listed below are gzip-only. Restore a
+needed table from the topic archive, then use its original protocol.
+
+```bash
+python3 - <<'PYRESTORE'
+import gzip
+from pathlib import Path
+topic = Path('research/integer-multiplication-bounds')
+archive = topic / 'evidence/20261008T0454Z-odd-network-topic'
+paths = [
+    'runs/20261008T040600Z-finite-clone-gates-small/results/certificate.json',
+    'runs/20261008T043500Z-lowrank-bruhat-bound/results/certificate.json',
+]
+for rel in paths:
+    target = topic / rel
+    if not target.exists():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(gzip.decompress((archive / (rel+'.gz')).read_bytes()))
+PYRESTORE
+```
+
+For any external archived case, decompress its manifest-relative path into
+a fresh execution directory and compare the declared original SHA256.
+The new contiguous Bruhat recurrence controls are research evidence with a
+separate full transfer review; they are not part of the seventh checkpoint's
+accepted uniform h51 multiplication witness.

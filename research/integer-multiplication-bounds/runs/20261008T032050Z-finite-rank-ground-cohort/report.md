@@ -1,0 +1,7 @@
+# Multi-ground exact rank study: preserved partial failure
+
+The original sixteen-worker cohort retained 176 fully verified distinct graph/rank candidates out of 307 planned. It failed scientifically when 36 candidates raised MemoryError under the 6 GiB per-process address-space limit and another 16 futures raised BrokenProcessPool. The wrapper returned 1. The original checkpoint retained its last Running label; it is not evidence that the dispatcher is still active. All original candidate results, errors, protocol and logs remain unchanged.
+
+The failures concentrate at grounds 54, 56 and 58. Reused workers also retained immutable local DAG caches across multiple grounds; a fresh repair separates worker lifetimes and calibrates the larger grounds before re-admission. This is an execution repair, with the exact scalar, frame, target, matching and residual-histogram checks retained. No completed candidate is rerun merely to change resource policy.
+
+The compact partial-summary.json preserves each ground's strongest supported uniform-shrink saving separately from the hypothetical rank-batched score. Different grounds must be ranked by the saving rather than by raw physical roles. Neither a partial screen nor a weighted score promotes a new multiplication theorem. Full original evidence is external at /srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/derived/finite/20261008T032050Z-finite-rank-ground-cohort.
