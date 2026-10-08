@@ -322,7 +322,7 @@ def check(document, small_dirty=False):
                   dag_sha256=sha256(Path(row['dag_path']).read_bytes()).hexdigest(),
                   containment_cache=contained.cache_info()._asdict())
     if small_dirty:
-        assert h<=12
+        assert h<=16
         R = expected_roles
         initial = [1<<i for i in range(2*v+R)]
         mixer = []

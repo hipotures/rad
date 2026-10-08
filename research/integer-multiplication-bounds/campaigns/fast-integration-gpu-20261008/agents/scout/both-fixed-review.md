@@ -4,6 +4,15 @@ Reviewed 2026-10-08 13:35 UTC by the GPU campaign literature scout.
 This is a source and proof review, with zero CPU-bound execution allocation.
 It does not claim a new replay of the full source-family computation.
 
+At13:38:39 UTC, on a temporary coordinator-assigned single CPU slot, I ran
+the pinned default `geometry.py` with `PYTHONDONTWRITEBYTECODE=1`, all native
+thread counts one, and external logs. It passed in0.565 seconds, preserving
+all inspected source hashes. [The compact receipt](bounded-pr40-verification.json)
+records the exact command, environment and log hashes. This run rechecked
+saved full-family evidence and inherited finite restriction controls,
+all4071 source lines/all48 complements, and all10 exact rational bad-prime
+pairs. It did not pass `--full` or rerun the4.07-million-pair enumeration.
+
 [Rohan Arun's CrocSwap PR40](https://github.com/CrocSwap/integer-mult-bounds/pull/40)
 fixes both local bases to `L_h=I+J` at ordered dimensions `(23,25)`.
 The pinned obtainable head is `e3bf3ab0cb1ec48588e279b31a97e7a49c72f99e`;
