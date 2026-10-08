@@ -111,11 +111,16 @@ def refresh():
     new_joint = []
     paths = list(ROOT.glob('joint-frame/agents/scout/results/*complete-moment.json'))
     paths.append(accepted_path.with_name('complete-moment.json'))
-    paths.extend(ROOT.glob('joint-frame/agents/scout/runs/*/results/complete-moment.json'))
+    paths.extend(ROOT.glob('joint-frame/agents/scout/runs/*/results/*complete-moment.json'))
+    paths.extend(ROOT.glob('joint-frame/runs/*/complete-moment.json'))
+    seen_joint = set()
     for path in paths:
         row=read(path)
         if row and row.get('kappa') and row.get('saving'):
-            new_joint.append((path,row))
+            key = (row['saving'], json.dumps(row['controller']['child_multiplicities'], sort_keys=True), row['controller']['wrapped_scalar_xors'])
+            if key not in seen_joint:
+                seen_joint.add(key)
+                new_joint.append((path,row))
     strip_cases = []
     duplicate_dags = 0
     seen_words = set()

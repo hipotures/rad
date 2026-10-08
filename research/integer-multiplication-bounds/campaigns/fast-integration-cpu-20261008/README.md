@@ -1,6 +1,6 @@
 # CPU fast-integration campaign
 
-Status: active since 2026-10-08 12:40:55 UTC; extended indefinitely by the user. Closure will begin only when the user requests it.
+Status: closed by user directive on 2026-10-08. Started 12:40:55 UTC, later extended indefinitely; all owned research workers and queues are stopped. See [final handoff](reports/final-cpu-handoff.md).
 
 [GOAL.md](GOAL.md) is the execution prompt. This directory is the exclusive working and durable-output location for the CPU track.
 
@@ -10,7 +10,7 @@ Status: active since 2026-10-08 12:40:55 UTC; extended indefinitely by the user.
 - Research branch: `research/fast-cpu-20261008`.
 - Initial emphasis: Gaussian inversion, precision, transform layouts, tape movement and compatible integrations.
 
-Use local subagents and sustained useful parallel computation. Print actual resource observations every minute; target 11–12 useful CPU workers during compute phases. Commit and push descriptive scientific checkpoints at least every twenty minutes when durable work changes.
+The completed execution used local subagents and useful parallel computation, with minute resource observations and scientific checkpoints. The final shutdown instruction superseded compute targets and queue replenishment.
 
 No communication with the independent GPU campaign. Historical results and shared infrastructure are read-only. All new durable artifacts belong here; large execution payloads belong in ignored or external task-owned storage.
 

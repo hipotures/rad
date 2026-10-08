@@ -1,0 +1,41 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "joint-frame/agents/scout/runs/20261008T1954Z-causal-sum-complement/code/causal_basis_serial.py",
+    "--source-root",
+    "work/joint-frame/inputs/pr58-tested-bc2f7ed4c20dc18898305ab17165c0c995cbb804",
+    "--binary",
+    "work/joint-frame/scout/pr58-baseline-20261008T1748Z/independent/integer-crt-profiles-v2",
+    "--h",
+    "23",
+    "--policies",
+    "sum",
+    "--region-protocol",
+    "joint-frame/agents/scout/runs/20261008T1954Z-causal-sum-complement/results/root-region-protocol.json",
+    "--region-result",
+    "joint-frame/agents/scout/runs/20261008T1954Z-causal-sum-complement/results/root-region-result.json",
+    "--other-profile",
+    "joint-frame/agents/scout/runs/20261008T2002Z-live-pair25-profile/results/integer.profiles.json",
+    "--other-physical",
+    "joint-frame/agents/scout/runs/20261008T2002Z-live-pair25-profile/results/physical.json",
+    "--output",
+    "work/joint-frame/scout/fresh-reproduced-causal-sum23"
+  ],
+  "prerequisites": "Acquire hash-pinned public PR58 input; build the independent CRT profiler according to scout/reproduce.md; choose a fresh task-owned output directory.",
+  "tested_scope": "The same frozen wrapper and full native/CRT/moment path executed in this run; portable source relocation is recorded, not claimed as an additional full compile.",
+  "input_receipts": [
+    {
+      "path": "joint-frame/agents/scout/runs/20261008T1954Z-causal-sum-complement/results/root-region-protocol.json",
+      "sha256": "d13d192327e0f02b09f66d38e6a09e7c9ee085c2708196341842f15804f32c77"
+    },
+    {
+      "path": "joint-frame/agents/scout/runs/20261008T1954Z-causal-sum-complement/results/root-region-result.json",
+      "sha256": "7e62ee35e90e6f403f2e7f99779e307697cf65653a6bdb21c5df53da29764fd6"
+    },
+    {
+      "path": "joint-frame/agents/scout/runs/20261008T2002Z-live-pair25-profile/results/accepted-compiler-receipt.json",
+      "sha256": "c03466b00f9a052d1af21ca21b657ad08b0482f5a550126b166d12dfb95cd3b7"
+    }
+  ]
+}

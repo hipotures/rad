@@ -68,3 +68,9 @@ python3 -B joint-frame/agents/inverse/runs/20261008T195056Z-rank-pressure-transf
 ```
 
 Expected:47 mapped obligations, all strict cost/constant margins positive, old coupled K exactlyzero and other old-algorithm controls negative; kappa23838963307983/500000000000000000. Rebuild CPU38 with `joint-frame/code/check_cpu_transfer.py` and the retained root literal adapter; public source is `references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py` under the tested58 input. The actual unchanged public47 control rejects g1/g3/g5/g6 at the stronger target. These bounded replays were actually exercised by the root. Arithmetic PASS requires the linked written conditional proof and native/source/dirty receipts for acceptance; it does not discharge analytic machine hypotheses.
+
+## Final accepted witness and stopped workers
+
+Use the final frozen review at `agents/inverse/runs/20261008T200929Z-future-complement-joint-transfer/` and the exact campaign-root command in `../reproduce.md`. Root also independently replayed `verify_changed_ledger.py` with the two actual SUM23/PAIR25 words, their complete certified profiles and physical receipts, and saving476829673/10^13; the exact receipt and source input identities are retained in `runs/20261008T2012Z-final-accepted-sum-pair/`. Complete words can be recovered from the archive paths and SHA-256 values in its protocol. Code and public dependency pins are preserved by both scout and inverse protocols.
+
+The independent R30636/PAIR25 candidate uses `code/profile_pool_search.py` with its frozen `pool-input-manifest.json`; its mathematical selection and subsequent full finite validation passed. Transfer review was not begun after shutdown. Do not treat its arithmetic exponent as an accepted bound. All old, partial and unstarted queue configurations remain recoverable; they must not be restarted automatically. Cancellation logs distinguish interrupted computation from mathematical failure.

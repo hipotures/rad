@@ -1,0 +1,51 @@
+{
+  "recorded_utc": "2026-10-08T19:46:18.999075+00:00",
+  "commands": [
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/check_pr58_word.py",
+      "--word",
+      "work/joint-frame/layout/dependency-live-xors-h25-recovery-20261008T192628Z/results/word.json",
+      "--transitions",
+      "work/joint-frame/scout/dependency-live-xors-h25-independent-20261008T1948Z/transitions.bin",
+      "--output",
+      "work/joint-frame/scout/dependency-live-xors-h25-independent-20261008T1948Z/physical.json"
+    ],
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/integer_crt_certificate.py",
+      "--binary",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/independent/integer-crt-profiles-v2",
+      "--transitions",
+      "work/joint-frame/scout/dependency-live-xors-h25-independent-20261008T1948Z/transitions.bin",
+      "--profiles",
+      "work/joint-frame/scout/dependency-live-xors-h25-independent-20261008T1948Z/integer.profiles.json",
+      "--output",
+      "work/joint-frame/scout/dependency-live-xors-h25-independent-20261008T1948Z/integer.certificate.json"
+    ],
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/check_joint_moment.py",
+      "--profile23",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/integer.profiles.json",
+      "--profile25",
+      "work/joint-frame/scout/dependency-live-xors-h25-independent-20261008T1948Z/integer.profiles.json",
+      "--physical23",
+      "work/joint-frame/scout/rank-pressure-h23-independent-20261008T1941Z/physical.json",
+      "--physical25",
+      "work/joint-frame/scout/dependency-live-xors-h25-independent-20261008T1948Z/physical.json",
+      "--inherited-certificate",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/source/certificates/joint-dual-kappa.json",
+      "--assembly",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/source/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py",
+      "--output",
+      "work/joint-frame/scout/dependency-live-xors-h25-independent-20261008T1948Z/complete-moment.json"
+    ]
+  ],
+  "word_sha256": "e14fc5d4c6e4a7599779755a34665b9a481167cc8d4e902bcb08ecd7b6a89ab8",
+  "source_sha256": "0e35916a076afc99349f074d9c138e1dc578b3390302fd5706e7725ce02928ec",
+  "native_threads": 1
+}

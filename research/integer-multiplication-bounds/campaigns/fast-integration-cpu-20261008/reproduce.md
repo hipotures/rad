@@ -194,3 +194,15 @@ then run code/joint_profile_pool.py with its recorded first/second dimensions,
 geometry certificate and frozen input list. The per-attempt protocol retains
 the exact wrapper source, every input hash and safety margin. The first
 24/26 enclosure-overlap attempt failed; use the fresh successful protocol.
+
+## Closed campaign: final certificate replay
+
+This campaign is closed. Replaying a retained certificate is distinct from restarting its queues. The [final handoff](reports/final-cpu-handoff.md) and [joint reproduction](joint-frame/reproduce.md) identify final accepted and unaccepted results, pinned public input acquisition, complete word archives and named remaining hypotheses. No scheduler or new campaign is started by the bounded commands below.
+
+From this campaign directory, use a fresh ignored output path:
+
+```bash
+python3 -B joint-frame/agents/inverse/runs/20261008T200929Z-future-complement-joint-transfer/code/check_changed_cpu47_mapping_v2.py --native joint-frame/agents/inverse/runs/20261008T200929Z-future-complement-joint-transfer/fixtures/joint-complete-moment.json --literal-ledger joint-frame/agents/inverse/runs/20261008T200929Z-future-complement-joint-transfer/fixtures/joint-literal-ledger.json --cpu38 joint-frame/agents/inverse/runs/20261008T200929Z-future-complement-joint-transfer/fixtures/joint-cpu38-arithmetic.json --output work/fresh-final-map.json
+```
+
+Expected:47 mapped obligations, positive exact cost/constant margins, kappa47682490470327/10^18 and explicit old-algorithm negatives. This exact bounded replay was exercised by root. Original47 arithmetic alone does not prove the changed theorem: read the independently reviewed transfer and native/dirty/source receipts. Stronger sparse-first23 a=4.768654647e-5 has a separate unaccepted application review.

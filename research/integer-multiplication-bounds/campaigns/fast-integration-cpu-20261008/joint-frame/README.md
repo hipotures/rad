@@ -1,19 +1,10 @@
-# Joint-frame CPU research
+# Joint-frame CPU research — closed
 
-The strongest independently reviewed CPU conditional exponent is now
-**kappa=23838963307983/500000000000000000=4.7677926615966e-5**,
-about0.359% above pinned public PR58. Native saving is
-`a=4.76784034e-5`, with `R23=30647`, `R25=40324`, `W=150048504`
-and total rank `86276042900`. Global causal regional ordering reduces
-physical roles while preserving the original producer and envelopes.
-The full finite graph/profile/moment passes. An independently reviewed
-changed CPU transfer maps all47 obligations, including replaced guarded CRT,
-packed Gaussian, deferred donor, complete repair and all-size induction rows.
-See the [accepted checkpoint](runs/20261008T1954Z-accepted-rank-pressure/report.md).
-Acceptance retains the explicitly named native, residual, full-payload,
-owned-copy, fixed-tape, routing, analytic/recovery and prime/setup contracts.
-The unchanged public47 checker accepts the lower finite-input witness and
-rejects the stronger CPU target; these negative controls are preserved.
+Final reviewed conditional **kappa=4.7682490470327e-5**, exactly47682490470327/10^18, retains the named native, residual, full-payload, owned-copy, fixed-tape, routing, analytic/recovery and prime/setup contracts. Native **a=4.76829673e-5**, with R23=30645, R25=40330, W=150054530 and rank=86279507850. Paid future-consumer SUM/PAIR complements and causal regional compilation received independent finite and changed-transfer review. See the [accepted witness](runs/20261008T2012Z-final-accepted-sum-pair/report.md) and [final handoff](../reports/final-cpu-handoff.md).
+
+A stronger finite candidate has **a=4.768654647e-5**, R23=30636, R25=40330, W=150033830 and rank=86267605350. Source/dirty/rational-profile/moment checks pass; its exact sparse-first changed-transfer review remains **unaccepted**. The [candidate record](runs/20261008T2013Z-final-unaccepted-sparse-pair/report.md) separates a from arithmetic exponent targets.
+
+All owned workers and queues stopped under the user's shutdown directive. No next campaign or public PR was started. Earlier accepted witnesses and public inputs are preserved.
 
 The public baseline has R23=30790,R25=40446,W150593466 and rank86589396050,
 with safe saving1187740349/25000000000000. Every source and dirty basis column,
@@ -35,7 +26,7 @@ Global optimum and practical speedup are not claimed.
 - [Consumer fusion source](code/consumer_guarded_fusion.py)
 - [Recovery manifest](artifact-manifest.json) and [root reproduction](reproduce.md)
 
-The original indefinite campaign clock continues. Immutable public inputs,
+The original campaign clock and indefinite extension remain historical; this campaign is closed. Immutable public inputs,
 all earlier accepted witnesses and the separate active GPU branch are preserved.
 
-The [causal scheduling and changed-transfer control checkpoint](runs/20261008T1926Z-causal-structure-and-cpu-transfer-controls/report.md) preserves full negative profiles, the genuine public47 rejection of the larger CPU arithmetic target, and interruption recovery without resetting the campaign. Global causal region orders, future-directed invertible completions and paid nullspace-circuit reclamation continue alongside exact CRT/Gaussian controls.
+The [causal scheduling and changed-transfer control checkpoint](runs/20261008T1926Z-causal-structure-and-cpu-transfer-controls/report.md) preserves full negative profiles, the genuine public47 rejection of the larger CPU arithmetic target, and interruption recovery without resetting the campaign. Global causal region orders, future-directed invertible completions and paid nullspace-circuit reclamation are preserved alongside exact CRT/Gaussian controls.

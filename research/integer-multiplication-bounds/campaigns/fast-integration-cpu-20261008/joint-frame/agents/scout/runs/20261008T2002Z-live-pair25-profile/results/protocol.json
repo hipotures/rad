@@ -1,0 +1,51 @@
+{
+  "recorded_utc": "2026-10-08T19:57:20.722540+00:00",
+  "commands": [
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/check_pr58_word.py",
+      "--word",
+      "work/joint-frame/scout/future-retirement-best-h25-20261008T1944Z/pair/word.json",
+      "--transitions",
+      "work/joint-frame/scout/future-retirement-best-h25-20261008T1944Z/pair/review/transitions.bin",
+      "--output",
+      "work/joint-frame/scout/future-retirement-best-h25-20261008T1944Z/pair/review/physical.json"
+    ],
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/integer_crt_certificate.py",
+      "--binary",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/independent/integer-crt-profiles-v2",
+      "--transitions",
+      "work/joint-frame/scout/future-retirement-best-h25-20261008T1944Z/pair/review/transitions.bin",
+      "--profiles",
+      "work/joint-frame/scout/future-retirement-best-h25-20261008T1944Z/pair/review/integer.profiles.json",
+      "--output",
+      "work/joint-frame/scout/future-retirement-best-h25-20261008T1944Z/pair/review/integer.certificate.json"
+    ],
+    [
+      "/usr/bin/python3",
+      "-B",
+      "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/scout/code/check_joint_moment.py",
+      "--profile23",
+      "work/joint-frame/scout/future-horizon-h23-independent-20261008T1826Z/integer.profiles.json",
+      "--profile25",
+      "work/joint-frame/scout/future-retirement-best-h25-20261008T1944Z/pair/review/integer.profiles.json",
+      "--physical23",
+      "work/joint-frame/scout/future-horizon-h23-independent-20261008T1826Z/physical.json",
+      "--physical25",
+      "work/joint-frame/scout/future-retirement-best-h25-20261008T1944Z/pair/review/physical.json",
+      "--inherited-certificate",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/source/certificates/joint-dual-kappa.json",
+      "--assembly",
+      "work/joint-frame/scout/pr58-baseline-20261008T1748Z/source/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py",
+      "--output",
+      "work/joint-frame/scout/future-retirement-best-h25-20261008T1944Z/pair/review/complete-moment.json"
+    ]
+  ],
+  "word_sha256": "e19939224cfe5e517f4b572d210ca98bd367a945ef78623ea3d64bb7fa0096bb",
+  "source_sha256": "0e35916a076afc99349f074d9c138e1dc578b3390302fd5706e7725ce02928ec",
+  "native_threads": 1
+}

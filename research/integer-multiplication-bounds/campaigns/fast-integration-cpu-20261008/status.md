@@ -1,5 +1,7 @@
 # Campaign status
 
+Final state: **closed by user directive; no owned research workers remain**. Reviewed conditional kappa=4.7682490470327e-5, native a=4.76829673e-5. Stronger finite candidate a=4.768654647e-5 retains an unaccepted transfer. See [final handoff](reports/final-cpu-handoff.md) for exact verdicts, evidence, hypotheses, shutdown and recovery. The entries below preserve historical observations.
+
 Started 2026-10-08 12:40:55 UTC from prepared commit 05004ecd. Deadline 14:40:55 UTC, including publication. Branch and clean starting state verified; origin fetched. Twelve usable CPU cores and about 61.4 GiB available RAM observed, no swap; disk free space is only about 3.91 GiB. Keep dependencies and evidence compact.
 
 All durable additions remain in this campaign directory; old research and the independent campaign are read-only and excluded from intake.

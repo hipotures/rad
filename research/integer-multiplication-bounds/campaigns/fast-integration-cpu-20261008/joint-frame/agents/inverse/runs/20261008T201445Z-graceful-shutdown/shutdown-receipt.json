@@ -1,0 +1,119 @@
+{
+  "recorded_utc": "2026-10-08T20:14:47.008905+00:00",
+  "instruction": "Graceful shutdown; do not launch queued successors or new research",
+  "before": {
+    "313412": {
+      "pid": 313412,
+      "cmdline": "python3 -B -u joint-frame/agents/inverse/code/run_resumed_precision_queue.py",
+      "cwd": "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008",
+      "starttime_ticks": "2763160",
+      "state": "S",
+      "ppid": 301443
+    },
+    "336069": {
+      "pid": 336069,
+      "cmdline": "python3 -B -u joint-frame/agents/inverse/code/run_asymmetric_tree_queue.py",
+      "cwd": "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008",
+      "starttime_ticks": "2959584",
+      "state": "S",
+      "ppid": 301443
+    },
+    "319512": {
+      "pid": 319512,
+      "cmdline": "python3 -B -u /home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/inverse/runs/20261008T192558Z-resume-s65521-a64-q4096-complete/code/dyadic_interval_lower.py --source 65521 --target 65536 --alpha 64 --target-bits 4096 --mode complete --seed 202610081925 --output /home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/joint-frame/inverse/20261008T192558Z-resume-s65521-a64-q4096-complete/certificate.json",
+      "cwd": "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008",
+      "starttime_ticks": "2814005",
+      "state": "R",
+      "ppid": 313412
+    },
+    "336150": {
+      "pid": 336150,
+      "cmdline": "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/joint-frame/inverse/20261008T195842Z-tree-asymmetric-six-bank-outer2-inner1-complete/control --family asymmetric-six-bank --outer-guard 2 --inner-guard 1 --output /home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/joint-frame/inverse/20261008T195842Z-tree-asymmetric-six-bank-outer2-inner1-complete/certificate.json",
+      "cwd": "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008",
+      "starttime_ticks": "2959801",
+      "state": "R",
+      "ppid": 336069
+    }
+  },
+  "actions": [
+    {
+      "pid": 313412,
+      "signal": "SIGSTOP",
+      "utc": "2026-10-08T20:14:45.907404+00:00"
+    },
+    {
+      "pid": 336069,
+      "signal": "SIGSTOP",
+      "utc": "2026-10-08T20:14:45.907460+00:00"
+    },
+    {
+      "pid": 319512,
+      "signal": "SIGTERM",
+      "utc": "2026-10-08T20:14:45.907502+00:00"
+    },
+    {
+      "pid": 336150,
+      "signal": "SIGTERM",
+      "utc": "2026-10-08T20:14:45.907540+00:00"
+    },
+    {
+      "pid": 313412,
+      "signal": "SIGTERM",
+      "utc": "2026-10-08T20:14:46.007897+00:00"
+    },
+    {
+      "pid": 313412,
+      "signal": "SIGCONT",
+      "utc": "2026-10-08T20:14:46.007963+00:00"
+    },
+    {
+      "pid": 336069,
+      "signal": "SIGTERM",
+      "utc": "2026-10-08T20:14:46.008017+00:00"
+    },
+    {
+      "pid": 336069,
+      "signal": "SIGCONT",
+      "utc": "2026-10-08T20:14:46.008087+00:00"
+    }
+  ],
+  "after": {
+    "313412": null,
+    "336069": null,
+    "319512": null,
+    "336150": null
+  },
+  "partial_experiments": [
+    {
+      "directory": "work/joint-frame/inverse/20261008T192558Z-resume-s65521-a64-q4096-complete",
+      "status": "CANCELED_AT_USER_GRACEFUL_SHUTDOWN",
+      "certificate_exists": false,
+      "files": [
+        {
+          "path": "work/joint-frame/inverse/20261008T192558Z-resume-s65521-a64-q4096-complete/stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "directory": "work/joint-frame/inverse/20261008T195842Z-tree-asymmetric-six-bank-outer2-inner1-complete",
+      "status": "CANCELED_AT_USER_GRACEFUL_SHUTDOWN",
+      "certificate_exists": false,
+      "files": [
+        {
+          "path": "work/joint-frame/inverse/20261008T195842Z-tree-asymmetric-six-bank-outer2-inner1-complete/control",
+          "bytes": 168040,
+          "sha256": "2824cdcf842a3b19a58dadb0ba0e2f5680be335b16e9f06461ca6bee4c685b2c"
+        },
+        {
+          "path": "work/joint-frame/inverse/20261008T195842Z-tree-asymmetric-six-bank-outer2-inner1-complete/stdout.log",
+          "bytes": 439,
+          "sha256": "94bc45488b266ed2c0fe21ba6420917ebad7185f58db33d2d66d68b2bd095ae5"
+        }
+      ]
+    }
+  ],
+  "acceptance_scope": "Completed SUM23/PAIR25 review only; sparse23/PAIR25 remains unaccepted transfer",
+  "queued_cases_status": "Canceled before launch; no mathematical result claimed"
+}
