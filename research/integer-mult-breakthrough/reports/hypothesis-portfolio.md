@@ -39,6 +39,11 @@ Owner: autonomous `complex_primitives` agent.
   Direct scalar sides and the joint weighted tree exceed that allowance;
   the latter also has independently checked nested-frame obstructions.
   [Component details](complex/five-subset-mixed-pair.md).
+- New leverage: [full Clifford frames](complex/noncommuting-lagrangian-component.md)
+  beat symmetric graph frames on an exact four-incidence shear, with independent
+  literal review. General quadratic interfaces retain paid singular shifts;
+  a wider noncommuting chronology is needed to overcome the commuting-chart
+  obstruction. Whole-network integration remains the discriminator.
 - Continue when a changed family has an honest optimistic bound crossing the
   required component saving; otherwise retain the scoped ceiling and replace it.
 
@@ -60,6 +65,11 @@ Owner: autonomous `reversible_synthesis` agent.
   passes every-address group-algebra replay and reduces its declared rank mass
   from 12v to 2(h+v). Integration and endpoint absorption remain hypotheses.
   Two solver formulations retain UNKNOWN timeouts rather than false optima.
+- New evidence: complete small global exchanges, including all invertible
+  scalar gates over F9 under an exact free-unit quotient, have no deficit in
+  their prescribed roles/endpoints. Larger roles, other source geometry and
+  per-address scalar functions are outside these exclusions. A final full
+  incidence-wrapper ledger also rejects its optimistic chronology.
 - Continue only if surviving projector/semantic identities admit a paid
   physical implementation with a scale-changing cost reduction.
 
@@ -78,6 +88,11 @@ Owner: autonomous `coupled_transfers` agent.
   [depth/row budget](transfers/same-width-row-budget.md) permits same-width
   children in an explicitly contracting toy recurrence. A complete native
   schedule and its O(e log(e)) precision/layout charges remain open.
+- New components: independent singular phase and four-port matrix/payload
+  review, with a paid packed translation extension. An endpoint-aware precision
+  induction is under investigation: completed exact children may contribute
+  their target-map bounds rather than their entire elementary execution depth.
+  That hypothesis needs separate internal guard and native interface proofs.
 - Continue only for a recurrence whose paid conversions and well-founded
   recursion remain compatible with a target-crossing parameter range.
 
@@ -100,14 +115,23 @@ Owner: coordinator.
   intersection-summation literature informs new constructions. Arbitrary
   symmetric quadratic phase differences are now under independent scrutiny;
   the old library's alternating projector identity is attributed separately.
+- New direction: two [trimmed zeta passes](obstructions/trimmed-side-transform.md)
+  give an exact cancellation-allowing k5 side DAG with about 10.81 SSA roles/source
+  at h20. This changes the scalar circuit, not the recursive histogram.
+  Independent-output materialization loses the intended advantage; shared
+  cancellation across the pair frontier and complete dirty restoration are
+  the next tests. A separate all-Lagrangian triangle bound excludes a bare
+  three-shear exchange saving and leaves larger networks open.
 - Continue by translating every useful source into a lemma, counterexample,
   concrete construction, or scoped quantitative cost constraint.
 
 ## Evidence policy and coordination
 
-The next decisive experiments are complete endpoint integration of the shared
-scatter, the algebra and paid tape realization of general quadratic edge
-frames, and a fresh one-axis chronology compatible with depth-budget recursion.
+The next decisive experiments are joint cancellation-frontier compilation,
+full Clifford support frames on branching networks, and an endpoint-aware
+precision induction compatible with depth-budget recursion. The shared scatter
+must also satisfy a complete new native ledger; its simplest tested incidence
+wrapper fails even after favorable endpoint absorption.
 The new phase model alone cannot repair a node simultaneously required to fix
 and annihilate the same nonzero source/target span vector. A changed chronology
 or cancellation must remove that conflict. These are hypotheses, not accepted

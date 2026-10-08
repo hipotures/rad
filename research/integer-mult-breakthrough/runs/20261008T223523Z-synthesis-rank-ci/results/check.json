@@ -1,0 +1,49 @@
+{
+  "status": "PASS BOUNDED COMPLETE RANK SEARCH CERTIFICATES",
+  "created_utc": "2026-10-08T22:35:23.544828+00:00",
+  "cases": [
+    {
+      "domain": "graph",
+      "binary_states": 120,
+      "gaussian_projective_states": 24480,
+      "F3_states": 3648,
+      "F3_projective_states": 456,
+      "binary_state_sha256": "f890f00ab1aabc800b52c4bd94c56c165b1935c6a21508131a768e10f8eac1a4",
+      "gaussian_state_sha256": "02a157a3405e3171d954c2e8d4180ea2438159f736aedadc2ebd9f9e516b8aa8",
+      "exact_no_strict_rank_word": true,
+      "complete_helper_columns": true
+    },
+    {
+      "domain": "full",
+      "binary_states": 120,
+      "gaussian_projective_states": 24480,
+      "F3_states": 3648,
+      "F3_projective_states": 456,
+      "binary_state_sha256": "24f85c916140b5c1cf56647e1ddf64d50393359300c13828c9d20b185fdf6767",
+      "gaussian_state_sha256": "68adfb1c7f939e32c20a1f40a7aeaa0b3653043a23bb212f4e655052b7756965",
+      "exact_no_strict_rank_word": true,
+      "complete_helper_columns": true
+    }
+  ],
+  "field_contracts": [
+    "F3",
+    "F3[i] with i^2=-1"
+  ],
+  "full_n2_metric_triangle_controls": 3375,
+  "negative_controls": [
+    "Gaussian field corruption rejected",
+    "Invalid endpoint-pruning metric rejected",
+    "Missing dirty-helper source column rejected",
+    "Nonstrict capacity budget rejected",
+    "Incorrect unquotiented/quotiented count equality rejected"
+  ],
+  "source_sha256": {
+    "verify_rank_search.py": "7ccefe21158c4ad149940513906e04f67542ad2ff6f7e8af0c4c8b67ad5b2fe5",
+    "dirty_helper_rank_search.py": "cf3f79a574f4a9155f6cb263b28105365b5442267c30ab629541d1b0059730b2",
+    "lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+    "scalar_field_rank_search.py": "99a6735cb3579775deb2dd0a420a3d5b388d9eea095021b1f9ff8c236c67be8a",
+    "scalar_projective_rank_search.py": "0e7589fe1425c5cef8b35de48d5072bab894cbfa70cad2c3ae33b043551ec59c"
+  },
+  "seconds": 0.7717415659935796,
+  "scope": "Bounded actual finite scalar/frame searches and corruption controls. No physical Gaussian lift, larger sweep, recurrence or integer-multiplication exponent is certified."
+}

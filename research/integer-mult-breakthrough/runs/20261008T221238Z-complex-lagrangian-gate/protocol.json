@@ -1,0 +1,78 @@
+{
+  "run_id": "20261008T221238Z-complex-lagrangian-gate",
+  "base_commit": "04d76e29af30af396306dc22768a35abdc59912b",
+  "branch": "research/integer-mult-breakthrough-20261008",
+  "utc_started_at": "2026-10-08T22:12:38.808546+00:00",
+  "worker_count": 4,
+  "native_threads_per_worker": 1,
+  "worker_virtual_memory_limit_bytes": 1073741824,
+  "python": "3.14.4",
+  "inputs": {
+    "code/complex/lagrangian_gate_witness.py": "03ddabab75a80959facc8cec3bf2f4a3d698b9998f7a272329bf57da8f5956a1",
+    "code/complex/quadratic_rank_interface.py": "c7435adc75bee5c38af1c59af4ae840a80bd6f33e53ce5e34d180c719b6a5c0a",
+    "code/complex/lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9"
+  },
+  "commands": [
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/lagrangian_gate_witness.py",
+      "--columns",
+      "1",
+      "--chunk-width",
+      "1",
+      "--offset",
+      "0",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T221238Z-complex-lagrangian-gate/results/f1-k1-o0.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/lagrangian_gate_witness.py",
+      "--columns",
+      "2",
+      "--chunk-width",
+      "1",
+      "--offset",
+      "0",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T221238Z-complex-lagrangian-gate/results/f2-k1-o0.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/lagrangian_gate_witness.py",
+      "--columns",
+      "1",
+      "--chunk-width",
+      "2",
+      "--offset",
+      "0",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T221238Z-complex-lagrangian-gate/results/f1-k2-o0.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/lagrangian_gate_witness.py",
+      "--columns",
+      "1",
+      "--chunk-width",
+      "2",
+      "--offset",
+      "1",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T221238Z-complex-lagrangian-gate/results/f1-k2-o1.json"
+    ]
+  ],
+  "scope": "One virtual in-place two-role shear, all four input/output phase incidences, exact Gaussian-dyadic rank normal forms and complete payload reverse; no global motif or fixed-tape cost theorem",
+  "utc_completed_at": "2026-10-08T22:12:39.007933+00:00",
+  "exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "outcome": "PASS all four bounded physical-layout controls"
+}

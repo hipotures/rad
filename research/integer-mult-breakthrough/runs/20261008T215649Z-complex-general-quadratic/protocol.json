@@ -1,0 +1,84 @@
+{
+  "run_id": "20261008T215649Z-complex-general-quadratic",
+  "base_commit": "d1ef326f0fc8b6f888887d8132e0854d3d92b5b2",
+  "branch": "research/integer-mult-breakthrough-20261008",
+  "utc_started_at": "2026-10-08T21:56:49.714903+00:00",
+  "worker_count": 4,
+  "native_threads_per_worker": 1,
+  "worker_virtual_memory_limit_bytes": 1073741824,
+  "python": "3.14.4",
+  "inputs": {
+    "code/complex/quadratic_rank_interface.py": "c7435adc75bee5c38af1c59af4ae840a80bd6f33e53ce5e34d180c719b6a5c0a"
+  },
+  "commands": [
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/quadratic_rank_interface.py",
+      "--n",
+      "3",
+      "--mode",
+      "exhaustive",
+      "--samples",
+      "512",
+      "--seed",
+      "20261008",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T215649Z-complex-general-quadratic/results/n3-exhaustive.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/quadratic_rank_interface.py",
+      "--n",
+      "4",
+      "--mode",
+      "sampled",
+      "--samples",
+      "2048",
+      "--seed",
+      "20261009",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T215649Z-complex-general-quadratic/results/n4-sampled.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/quadratic_rank_interface.py",
+      "--n",
+      "5",
+      "--mode",
+      "sampled",
+      "--samples",
+      "256",
+      "--seed",
+      "20261010",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T215649Z-complex-general-quadratic/results/n5-sampled.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/quadratic_rank_interface.py",
+      "--n",
+      "6",
+      "--mode",
+      "sampled",
+      "--samples",
+      "128",
+      "--seed",
+      "20261011",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T215649Z-complex-general-quadratic/results/n6-sampled.json"
+    ]
+  ],
+  "scope": "Independent finite arbitrary symmetric Z4 quadratic Fourier normal forms; no new finite scalar network or asymptotic exponent",
+  "utc_completed_at": "2026-10-08T21:56:54.617277+00:00",
+  "exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "outcome": "PASS all four independent finite cases"
+}

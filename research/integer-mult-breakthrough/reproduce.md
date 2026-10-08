@@ -1,4 +1,4 @@
-# Reproduce the initial breakthrough discriminators
+# Reproduce the breakthrough research components
 
 Use the canonical `hipotures/rad` repository on branch
 `research/integer-mult-breakthrough-20261008`. On the CPU host, the isolated
@@ -86,3 +86,37 @@ its own instructions to reproduce that formal scope.
 The full mathematical motivation and limitations are in the linked reports.
 Primary literature and framework provenance are pinned in input-manifest.json;
 no downloaded source modifications are required to run these new checks.
+
+## General phases, full Clifford components and cancellation transforms
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/test_quadratic_rank_interface.py
+python3 -B research/integer-mult-breakthrough/code/complex/test_lagrangian_phase_interface.py
+python3 -B research/integer-mult-breakthrough/code/transfers/general_phase_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/packed_translation.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/lagrangian_component_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/obstructions/lagrangian_exchange.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/test_trimmed_side_transform.py
+python3 -B research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py --workers 4 --output research/integer-mult-breakthrough/work/REPRO-UNIQUE/trimmed/results.json
+```
+
+General phase controls retain affine radical translations and nonalternating
+odd-rank C children. The four-incidence shear has exact paid ranks 1,1,1,2,
+total 5, against graph minimum 6; independent review reconstructs all phases and
+complete payloads. These ranks do not include a surrounding motif's endpoint
+establishment. Paid translation timing is conditional on the stated streaming
+primitives, not finite array runtime. The trimmed side circuit has complete
+scalar matrix checks and exact SSA counts, with zeros/aliasing explicitly outside
+the arbitrary-dirty model. It has no native child histogram yet.
+
+Each new run report pins its full discovery command and source hashes.
+[Global helper search reproduction](reports/synthesis/global-helper-rank-search.md)
+includes the complete GF2/F3/F9 cases and retained unquotiented F9 state-limit
+UNKNOWNs. [Independent graph completion](reports/synthesis/lagrangian-chart-boundary.md)
+and the [incidence-wrapper report](reports/synthesis/incidence-wrapper-chronology-negative.md)
+give their separate exact models. No new code requires an external solver.
+
+The coordinator reran bounded phase, translation, four-port and exchange checks,
+reviewed the literal common-frame cancellation and free-row-unit quotient, and
+ran the trimmed transform and its actual corrupted-DAG controls. Internal
+agent review is not external peer review or a formal proof package.

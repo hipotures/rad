@@ -1,0 +1,92 @@
+{
+  "run_id": "20261008T220448Z-complex-lagrangian-screen",
+  "base_commit": "9deb5cabc9f8f2984b47a534702785260b3b890c",
+  "branch": "research/integer-mult-breakthrough-20261008",
+  "utc_started_at": "2026-10-08T22:04:48.423477+00:00",
+  "worker_count": 4,
+  "native_threads_per_worker": 1,
+  "worker_virtual_memory_limit_bytes": 2147483648,
+  "python": "3.14.4",
+  "inputs": {
+    "code/complex/lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9"
+  },
+  "commands": [
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py",
+      "--n",
+      "2",
+      "--arity",
+      "3",
+      "--mode",
+      "exhaustive",
+      "--samples",
+      "56",
+      "--seed",
+      "20261008",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T220448Z-complex-lagrangian-screen/results/n2-a3-exhaustive.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py",
+      "--n",
+      "3",
+      "--arity",
+      "3",
+      "--mode",
+      "exhaustive",
+      "--samples",
+      "41664",
+      "--seed",
+      "20261009",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T220448Z-complex-lagrangian-screen/results/n3-a3-exhaustive.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py",
+      "--n",
+      "3",
+      "--arity",
+      "5",
+      "--mode",
+      "sampled",
+      "--samples",
+      "2048",
+      "--seed",
+      "20261010",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T220448Z-complex-lagrangian-screen/results/n3-a5-sampled.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py",
+      "--n",
+      "4",
+      "--arity",
+      "5",
+      "--mode",
+      "sampled",
+      "--samples",
+      "512",
+      "--seed",
+      "20261011",
+      "--output",
+      "research/integer-mult-breakthrough/runs/20261008T220448Z-complex-lagrangian-screen/results/n4-a5-sampled.json"
+    ]
+  ],
+  "scope": "Finite common-gate abstract Fourier-rank metric assignments; no scalar network, endpoint phase lift, dirty restoration or full exponent",
+  "utc_completed_at": "2026-10-08T22:04:56.824580+00:00",
+  "exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "outcome": "PASS all four bounded cases"
+}

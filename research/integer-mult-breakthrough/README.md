@@ -61,16 +61,40 @@ These facts constrain their stated fixed models, not other algorithms.
   an exact toy recurrence demonstrates terminating same-width children under
   complete contracting moments. A real native phase program and its changed
   precision/layout obligations remain open.
+- [General quadratic rank interfaces](reports/complex/general-quadratic-rank-interface.md)
+  and [independent phase review](reports/transfers/general-quadratic-phase-review.md):
+  exact singular/nonalternating forms retain affine radical shifts, unit
+  phases and paid child ranks. A [packed translation component](reports/transfers/paid-packed-translations.md)
+  supplies a conditional tape route under the original complete-stream assumptions.
+- [Full Clifford four-incidence component](reports/complex/noncommuting-lagrangian-component.md):
+  all inputs and outputs are charged; rank 5 beats the symmetric graph minimum 6.
+  The [independent literal review](reports/transfers/four-incidence-component-review.md)
+  confirms actual Gaussian phases, complete payloads, reverse and endpoint bounds.
+  [Graph completion](reports/synthesis/lagrangian-chart-boundary.md) identifies
+  the structural condition permitting a nongraph gain.
+- [Complete small helper searches](reports/synthesis/global-helper-rank-search.md),
+  [bare exchange bound](reports/obstructions/direct-exchange-lagrangian-bound.md)
+  and [incidence chronology obstruction](reports/synthesis/incidence-wrapper-chronology-negative.md):
+  local frame gains have not lowered the full budget in these stated models.
+  Gaussian-residue searches distinguish complete exclusions from state-limit UNKNOWNs.
+- [Cancellation-allowing trimmed side circuit](reports/obstructions/trimmed-side-transform.md):
+  exact k5 scalar arithmetic uses about 10.81 SSA roles/source at h20, versus
+  about 103.33 in the earlier tree. Zero initialization and fan-out are explicit;
+  the [independent scalar review](reports/transfers/trimmed-side-independent-review.md)
+  confirms all tested coefficients. Arbitrary-dirty compilation and shared
+  cancellation frames remain open.
 
 Live structural work includes cancellation-allowing reversible synthesis,
 changed spectral interfaces, and a weight-five complex family. The latter uses
 `f(t)=(t-1)(t-3)/8` on five-subset intersections, keeping binary label dimension
 h while changing central features and side corrections. Efficient paid side
 circuits and the complete child distribution remain open; its optimistic
-component envelope is not an exponent certificate. Arbitrary symmetric
-quadratic phase frames are a new hypothesis for broadening eligible edge
-changes. The old library already contains alternating projector phases;
-their identity alone is not a new discovery or a larger saving.
+component envelope is not an exponent certificate. General symmetric
+quadratic phase interfaces now pass exact finite checks, but their commuting
+chart does not remove the old span conflicts. Full noncommuting Clifford
+frames demonstrate an actual local escape; whole-network chronology must
+retain its benefit. The old library's alternating projector identity is
+credited separately and does not itself establish a larger saving.
 
 Registered Python CI checks replay only their stated finite arithmetic and
 semantic controls. A separately contributed [Lean package](formal/README.md)
