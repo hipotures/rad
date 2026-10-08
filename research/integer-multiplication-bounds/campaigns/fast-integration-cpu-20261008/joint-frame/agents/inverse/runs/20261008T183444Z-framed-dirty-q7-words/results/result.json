@@ -1,0 +1,80 @@
+{
+  "status": "PASS_POSITIVES_AND_PREDECLARED_PHYSICAL_NEGATIVES",
+  "address_prime": 7,
+  "local_dimension": 3,
+  "addresses_per_role": 117649,
+  "original_roles": 5,
+  "arbitrary_dirty_roles": 3,
+  "all_basis_columns": null,
+  "full_source_target_dirty_basis": false,
+  "all_addresses_checked": true,
+  "sampled_words": "Distinct deterministic64-bit words at every physical address/role",
+  "source_frame": "S_triple",
+  "target_and_dirty_source_frame": "I",
+  "expected_source_output": "S_triple_perp*x",
+  "expected_target_output": "S_full*x+S_triple_perp*y",
+  "expected_dirty_output": "S_full*d",
+  "mixer_XORs": 5,
+  "wrapped_scalar_XORs": 28,
+  "charged_auxiliary_residual_rank": 15,
+  "permutation_tables": 12,
+  "controls": [
+    {
+      "source_role": 0,
+      "target_role": 1,
+      "mode": "complete",
+      "status": "PASS_EXACT_PHYSICAL_ARRAY",
+      "mismatched_records": 0,
+      "first_mismatch": null
+    },
+    {
+      "source_role": 1,
+      "target_role": 0,
+      "mode": "complete",
+      "status": "PASS_EXACT_PHYSICAL_ARRAY",
+      "mismatched_records": 0,
+      "first_mismatch": null
+    },
+    {
+      "source_role": 0,
+      "target_role": 1,
+      "mode": "omit-center-transform",
+      "status": "PHYSICAL_ARRAY_MISMATCH",
+      "mismatched_records": 117306,
+      "first_mismatch": {
+        "physical_role": 1,
+        "address": 1,
+        "first_differing_basis_column": null
+      }
+    },
+    {
+      "source_role": 0,
+      "target_role": 1,
+      "mode": "omit-cleanup",
+      "status": "PHYSICAL_ARRAY_MISMATCH",
+      "mismatched_records": 331338,
+      "first_mismatch": {
+        "physical_role": 2,
+        "address": 1,
+        "first_differing_basis_column": null
+      }
+    },
+    {
+      "source_role": 0,
+      "target_role": 1,
+      "mode": "wrong-last-inverse",
+      "status": "PHYSICAL_ARRAY_MISMATCH",
+      "mismatched_records": 352947,
+      "first_mismatch": {
+        "physical_role": 2,
+        "address": 0,
+        "first_differing_basis_column": null
+      }
+    }
+  ],
+  "workers": 1,
+  "native_threads": 1,
+  "wall_seconds": 5.546789646148682,
+  "source_sha256": "f9f2e0e1d8c6f043018cb68521f9510451bf8e7b42ddee05b9e0cf0af4fe3694",
+  "scope": "Actual finite partial-swap address permutations and raw XOR payloads for a non-self-inverse3-center contract fixture. Opposite shear uses data-role exchange. Literal public23/25-axis words and the reverse-transposed owned-port compiler are separate obligations."
+}

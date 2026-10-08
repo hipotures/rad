@@ -1,0 +1,35 @@
+--- a/scripts/experiments/binary_frame_compiler.py
++++ b/scripts/experiments/binary_frame_compiler.py
+@@ -108,6 +108,23 @@
+ 
+ def compile_(h,matching=True,reclaim=False,dirty=True):
+  t0=time.time();c,blocks,uses,value_uses,owner,signal,order,contains=build(h);v=len(c.inputs)
++ core_index={};cover_index=[0]*h
++ for position,g in enumerate(order):
++  core,cover=blocks[g]['frame'];bit=1<<position
++  core_index[core]=core_index.get(core,0)|bit
++  for axis in range(h):
++   if cover>>axis&1:cover_index[axis]|=bit
++ compatible_frames=[];last_compatible=[];all_regions=(1<<len(order))-1
++ for b in blocks:
++  core,cover=b['frame'];allowed=0;subset=core
++  while subset:
++   allowed|=core_index.get(subset,0);subset=(subset-1)&core
++  candidates=all_regions
++  while cover:
++   bit=cover&-cover;candidates&=cover_index[bit.bit_length()-1];cover^=bit
++  candidates&=allowed;assert candidates
++  compatible_frames.append(candidates);last_compatible.append(candidates.bit_length()-1)
++
+  print('built',h,len(blocks),'regions',flush=True,file=sys.stderr)
+  edges,chosen,right,stats=match(blocks,uses,matching)
+  print('matched',len(chosen),'seconds',time.time()-t0,flush=True,file=sys.stderr)
+@@ -129,7 +146,7 @@
+      old,e=bb[p];row^=old;expr^=e
+     return expr
+    for s in anchors:ins(s)
+-   for s in sorted(retired):
++   for s in sorted(retired,key=lambda s: (last_compatible[frames[s]],-blocks[frames[s]]['rank'],s)):
+     if not contains(blocks[frames[s]]['frame'],blocks[g]['frame']):continue
+     e=ins(s)
+     if e is None:continue

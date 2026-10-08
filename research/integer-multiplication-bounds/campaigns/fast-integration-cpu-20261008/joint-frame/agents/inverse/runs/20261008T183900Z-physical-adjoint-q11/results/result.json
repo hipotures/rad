@@ -1,0 +1,53 @@
+{
+  "status": "PASS_LITERAL_PHYSICAL_ADJOINT_AND_NEGATIVES",
+  "prime": 11,
+  "addresses_per_role": 1771561,
+  "original_roles": 5,
+  "all_basis_columns": null,
+  "all_addresses_checked": true,
+  "full_dirty_basis": false,
+  "frozen_words": "Distinct deterministic 64-bit role/address words",
+  "forward_physical_events": 39,
+  "all_events_reversed": true,
+  "every_role_XOR_transposed": true,
+  "copied_ports": "Owned zeroed work stream; original dirty roles are never initialized or erased",
+  "expected": [
+    "S_triple_perp*x+S_full*y",
+    "S_triple_perp*y",
+    "S_full*d"
+  ],
+  "controls": [
+    {
+      "mode": "complete",
+      "mismatches": 0,
+      "first_mismatch": null,
+      "owned_zero_gather_ports": 3
+    },
+    {
+      "mode": "omit-inverse-copy-transform",
+      "mismatches": 7054300,
+      "first_mismatch": {
+        "physical_role": 0,
+        "address": 1,
+        "differing_basis_column": null
+      },
+      "owned_zero_gather_ports": 3
+    },
+    {
+      "mode": "omit-adjoint-cleanup",
+      "mismatches": 6734860,
+      "first_mismatch": {
+        "physical_role": 0,
+        "address": 1,
+        "differing_basis_column": null
+      },
+      "owned_zero_gather_ports": 3
+    }
+  ],
+  "workers": 1,
+  "native_threads": 1,
+  "seconds": 86.45690267199825,
+  "source_sha256": "e2be746f631b6f3b5f0af38284f05b7a3e85ec832531913a5a68f51249c3dcbc",
+  "dependency_sha256": "f9f2e0e1d8c6f043018cb68521f9510451bf8e7b42ddee05b9e0cf0af4fe3694",
+  "scope": "Exact finite physical reverse-transposed event program, including three actual zero-gather copy adjoints. Not the literal public 23/25-axis address cube or an all-size tape implementation."
+}

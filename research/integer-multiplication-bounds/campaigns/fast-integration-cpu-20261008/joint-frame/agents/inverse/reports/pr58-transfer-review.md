@@ -8,14 +8,20 @@ mixed-width row theorem, and semantic-guard proof. It does not execute a
 second unchanged full producer suite. The scout's separate replay is not
 represented as this reviewer's computation.
 
-The new local word is compatible with the inherited framed residual
-interface, conditional on that interface acting on complete arbitrary
-payload strings and on the accepted rational frame semantics. Its full
-XOR cost remains an explicit fixed node cost. The native characteristic,
-row stock, and unchanged complex guard pass an independent exact ledger.
-This supports substituting the new native saving into the campaign's
-already reviewed transfer; the arithmetic target alone is not an all-size
-proof or an executed fast integer multiplier.
+The additional **FRAMED-DIRTY-WORD** obligation now has an
+[explicit all-phase construction](framed-dirty-word-schedule.md), accepted
+by independent layout review and corroborated by independent symbolic and
+actual-array controls. The first mixers use a common initial frame, only
+the middle mixer follows the recorded paths, and cleanup precedes the final
+inverse. Center reads use an owned complete stream with one paid transform,
+linear copy/parking/erase and no dirty-original initialization. The literal
+reverse-transposed word uses its paid zero-gather adjoint. This supplies
+the one-pass rank count without omitting any of the four scalar words.
+The native characteristic, row stock and unchanged complex guard pass an
+independent exact ledger. Transfer remains conditional on the named
+inherited residual, owned-copy and fixed-tape implementations and the
+analytic/recovery interfaces. The arithmetic target alone is not an
+executed fast integer multiplier.
 
 ## Local algebra and arbitrary dirty roles
 
@@ -35,9 +41,9 @@ matter. A feasible continuation suffices; matching optimality is irrelevant
 to correctness and to the moment of the actually selected word.
 
 Reclaiming a retired role removes its source-dependent signal by actual
-compatible XORs. Its unknown dirty component persists. Let `L` include the
-whole invertible auxiliary schedule and its physical address transports,
-`V` the source injection, and `J` the target scatter. The framed scalar
+compatible XORs. Its unknown dirty component persists. Let `L` denote the
+invertible scalar auxiliary mixer, `V` the source injection, and `J` the target
+scatter. The scalar
 identity is `J L V=I`. Chronological execution
 
 ```
@@ -49,9 +55,11 @@ and arbitrary `d` return. No physical slot is asserted to become zero.
 Reverse order and transpose each elementary XOR to obtain the other
 orientation. The finite words check all source, target and dirty basis
 columns; linearity extends those columns to all strings in the same finite
-address cube. Lifting the framed identity to arbitrary chunk widths still
-uses the inherited physical residual compiler. This review does not replace
-that general contract with the finite bitset replay.
+address cube. Lifting this identity to arbitrary chunk widths requires
+assigning common frames to every actual gate of the complete word. The
+implemented array map then equals `D_out*S*D_in^-1`. Reusing a scalar symbol
+`L` does not by itself make its physical address transports free. This review
+does not replace that cost obligation with the finite bitset replay.
 
 ## Complete charges and exact native moments
 
@@ -199,8 +207,9 @@ ledger, all error/recovery contracts, and explicit inherited hypotheses.
 The small strict margins and extremely large fixed constants prevent a
 practical runtime interpretation.
 
-The supported conclusion is a conditional transfer of the new finite
-word through the accepted interfaces. No new unconditional bound, formal
+The supported conclusion is an exact fixed ledger and a conditional transfer
+using the explicit FRAMED-DIRTY-WORD construction and named inherited interfaces.
+No new unconditional bound, formal
 verification, practical speedup, or globally optimal compiler is asserted.
 
 ## Reproduction and evidence

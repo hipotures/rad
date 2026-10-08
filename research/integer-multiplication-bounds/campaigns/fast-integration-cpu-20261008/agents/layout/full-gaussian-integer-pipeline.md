@@ -287,3 +287,21 @@ the queue coordinators were stopped; current scientific children were allowed
 to finish. The user's new joint-frame directive supersedes the remaining
 obsolete queue, while the already expensive strong-gap Gaussian control
 continues in its reserved legacy lane.
+
+That final legacy control has now completed normally. Source `(29,23,37)`,
+target `(32,32,64)`, alpha18, Q3072, eight-bit digits, and97 input digits
+recover all24,679 cyclic-ring coefficients and the independent1,552-bit
+carried product. Both input CRT programs execute30 actual F_u calls and300
+rotations, with76 events and zero new address bits; the final76-event reverse
+CRT restores all scalar padding. Maximum real coefficient error is
+`1.736854722573e-325`; the separately checked source-transform error is
+`3.544282538707e-340`. Total wall time is8,724.87 seconds.
+
+Every axis satisfies u theta>=1 and u^2 theta>=Q, and gamma1944<Q3072.
+The deliberately omitted source normalization loses193 coefficients. The
+Gaussian stages remain explicitly charged dense references, so this is
+whole arithmetic/physical-CRT correctness evidence, not a timing certificate
+for the localized tape algorithm. `configs/full-gaussian-strong-gap-source-manifest.json`
+verifies that all five executed frozen source hashes equal their durable
+producer, wrapper, and inverse API/dependency files. The complete receipt
+and finished stage receipts are archived under `evidence/20261008T183500Z`.

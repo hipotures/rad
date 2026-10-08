@@ -26,8 +26,11 @@ conditional bound.
 
 Borrowing future live carriers, with the guard below and ordinary slot order,
 changes the 23-axis compiler from 30,790 to 30,780 roles. It uses 118 borrowed
-carrier XORs and retains every actual frame raise in its word. Its 25-axis
-counterpart and combined priority variants are still running. The small
+carrier XORs and retains every actual frame raise in its word. The 25-axis
+counterpart gives40,476, a 30-role negative. Combined with high-rank retirement,
+the rule gives30,711 and40,324 roles. The first is worse than pure high-rank
+priority, while the second is14 roles better. Thus the benefits are not
+additive. The small
 7-axis control passes the full dirty and scalar checks, but uses no borrowed
 carrier XOR, so it validates the implementation rather than the new benefit.
 
@@ -94,6 +97,21 @@ while adding the high-rank retired order. A separate live-source ordering is
 available for a later controlled comparison. The final profile can improve or
 worsen even when the number of roles falls, so role counts are screening
 measurements rather than a substitute for the recurrence moment.
+
+Reversing the unit-vector completion order, while keeping requested output
+rows and high-rank retirement fixed, gives31,023 and40,802 roles. These
+controlled negatives retain the complete valid physical words. No further
+unit-order sweep is planned in this branch. A separate
+[future frame accessibility rule](future-frame-horizon.md) changes a structural
+selection criterion rather than repeating those completion controls.
+
+The repeated dirty scalar wrapper also needs an explicit all-size frame
+schedule. The inherited common-frame identity applies to every physical gate
+incidence, not just the first L word. It is insufficient to infer one charged
+monotone path from scalar dirty correctness alone. The inverse agent is
+checking a schedule whose first and last mixers run in common completed
+frames, whose middle L follows the recorded paths, and whose copied centers
+and ordinary outputs retain their full charged scatter/cleanup costs.
 
 ## Provenance and credit
 

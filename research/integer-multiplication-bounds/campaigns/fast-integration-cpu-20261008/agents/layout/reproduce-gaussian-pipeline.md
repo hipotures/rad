@@ -78,6 +78,15 @@ cp "$LAYOUT/../inverse/code/crt_guard_controls.py" "$LAYOUT_WORK/"
 python3 "$LAYOUT/code/check_full_pipeline_compiled_crt.py" --final-inverse --producer "$LAYOUT_WORK/producer.py" --crt-api "$LAYOUT_WORK/compiled_crt_payload_api.py" --config "$LAYOUT/configs/full-gaussian-compiled-crt-final-inverse.json" --output "$LAYOUT_WORK/actual-CRT"
 ```
 
+The completed long strong-gap control uses the same durable producer,
+wrapper, and inverse API/dependency bytes, verified in
+`configs/full-gaussian-strong-gap-source-manifest.json`. Replace the above
+config with `configs/full-gaussian-strong-gap-compiled-crt.json` and choose a
+fresh output directory to reproduce its Q3072, alpha18, three-prime case.
+It takes roughly145 minutes on the measured single CPU lane. The retained
+bounded actual-CRT controls above exercise the same source path; rerunning
+this long control is unnecessary for a routine source recovery check.
+
 Use `full-gaussian-compiled-crt-cyclic.json` for the changed actual-CRT cyclic
 cut control. The reverse API compiles its forward address template separately
 and includes that cost. This program still uses charged reference Gaussian

@@ -94,6 +94,49 @@ def refresh():
             saving=row['saving'], candidate_kappa=row['candidate_kappa'],
             result=str(path.relative_to(ROOT)), pool_sizes=row['pool_sizes'],
             scope='Exact finite original23/25 pool moment; independent native/integration review remains separate.')
+    accepted = read(ROOT/'joint-frame/runs/20261008T1854Z-accepted-future-horizon/protocol.json')
+    if accepted and accepted.get('status') == 'CONDITIONAL TRANSFER ACCEPTED':
+        context['best_reviewed_conditional_kappa'] = accepted['kappa']
+        reviewed = Fraction(accepted['kappa'])
+        context['candidate_status'] = 'Joint future-horizon/guarded live-reclamation finite witness and 47-row conditional transfer independently accepted under explicit inherited residual, full-payload, owned-copy, fixed-tape, native, analytic/recovery and eligible-prime hypotheses.'
+        target = Fraction(accepted['saving'])*Fraction(99999,100000)
+        unreviewed.append(target)
+        context['open_stronger_cpu_transfer_target'] = dict(kappa=str(target),scope='Arithmetic target only; changed 38-row transfer and complete obligation mapping remain open.')
+    new_joint = []
+    paths = list(ROOT.glob('joint-frame/agents/scout/results/*complete-moment.json'))
+    paths.append(ROOT/'joint-frame/runs/20261008T1854Z-accepted-future-horizon/complete-moment.json')
+    for path in paths:
+        row=read(path)
+        if row and row.get('kappa') and row.get('saving'):
+            new_joint.append((path,row))
+    strip_cases = []
+    duplicate_dags = 0
+    seen_words = set()
+    repeated_words = 0
+    for path in ROOT.glob('work/joint-frame/root/**/result.json'):
+        row=read(path)
+        if not row:continue
+        if row.get('status','').startswith('EXACT DUPLICATE'):
+            duplicate_dags += 1
+        elif row.get('safe_saving'):
+            digest = row.get('word_sha256')
+            if digest and digest in seen_words:
+                repeated_words += 1
+                continue
+            if digest:
+                seen_words.add(digest)
+            strip_cases.append((path,row))
+    context['completed_experiments']['new_joint_complete_independent_moments']=len(new_joint)
+    context['completed_experiments']['new_strip_complete_word_profiles']=len(strip_cases)
+    context['completed_experiments']['new_strip_exact_duplicate_dags_skipped']=duplicate_dags
+    context['completed_experiments']['new_joint_repeated_physical_words_excluded']=repeated_words
+    if new_joint:
+        path,row=max(new_joint,key=lambda item:Fraction(item[1]['kappa']))
+        unreviewed.append(Fraction(row['kappa']))
+        context['current_joint_frame_frontier']=dict(saving=row['saving'],candidate_kappa=row['kappa'],
+            W=row['controller']['W'],rank_mass=row['controller']['total_rank'],
+            wrapped_scalar_xors=row['controller']['wrapped_scalar_xors'],result=str(path.relative_to(ROOT)),
+            scope=('Finite word, rational profiles, complete moment and explicit framed dirty/adjoint conditional transfer accepted under named inherited contracts.' if accepted and row['kappa']==accepted['kappa'] else 'Finite word/rational profiles/moment and inherited47-row arithmetic PASS; mechanism-specific all-size review remains separate.'))
     context['best_unverified_kappa'] = str(max(unreviewed)) if unreviewed and max(unreviewed) > reviewed else None
     if optimistic:
         path,row = max(optimistic,key=lambda item: Fraction(item[1]['safe_saving']))

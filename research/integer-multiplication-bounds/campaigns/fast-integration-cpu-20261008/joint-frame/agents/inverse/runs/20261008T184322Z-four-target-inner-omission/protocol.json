@@ -1,0 +1,35 @@
+{
+  "run_id": "20261008T184322Z-four-target-inner-omission",
+  "question": "Can outer full repair absorb omitted inner damage with four simultaneous unequal targets and recycled outer selector banks?",
+  "source_sha256": {
+    "compiled_reflection_four_recycle.cpp": "1eff9749e963814d189df754a22ea2722291b87115bea985ad3715f711436174",
+    "compiled_crt_native_recycle.cpp": "ba65805741cc7260f0cfb4688ac57340f589cfd1e7ca98e440d14683b8dbfd40"
+  },
+  "arguments": [
+    "--family",
+    "mixed-small",
+    "--outer-guard",
+    "2",
+    "--inner-guard",
+    "1",
+    "--omit-inner-repair"
+  ],
+  "workers": 1,
+  "native_threads": 1,
+  "expected": "EXPECTED_NEGATIVE; unexpected pass must be retained as an anomaly",
+  "state": "complete",
+  "build_command": [
+    "g++",
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/joint-frame/agents/inverse/runs/20261008T184322Z-four-target-inner-omission/code/compiled_reflection_four_recycle.cpp",
+    "-o",
+    "/home/user/DEV/rad/research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/joint-frame/inverse/20261008T184322Z-four-target-inner-omission/control"
+  ],
+  "compute_pid": 285462,
+  "exit_code": 0,
+  "completed_utc": "2026-10-08T18:47:46.599898+00:00"
+}
