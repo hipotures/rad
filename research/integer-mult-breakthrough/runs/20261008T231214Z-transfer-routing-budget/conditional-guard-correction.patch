@@ -1,0 +1,57 @@
+--- a/research/integer-mult-breakthrough/code/transfers/routing_budget_transfer.py
++++ b/research/integer-mult-breakthrough/code/transfers/routing_budget_transfer.py
+@@ -109,6 +109,8 @@
+         raise AssertionError("the complete first-width moment must contract")
+     if profile["constant"] != 2 / (1 - profile["moment_upper"]) + 2:
+         raise AssertionError("a local router or leaf charge disappeared")
++    serial_width_coefficient = sum(Q(count * t, profile["m"])
++                                   for t, count in profile["children"].items())
+     if sigma == Q(1, 2):
+         if rank_mass ** 8 > Q(1, 8):
+             raise AssertionError("the final-budget bound fails")
+@@ -124,6 +126,7 @@
+             "tau": "1/2", "sigma": str(sigma), "routing_power_c": "1/4",
+             "balanced_threshold": "H=K=ceil(d^(1/4))",
+             "sufficient_time_power": str(profile["power"]),
++            "conditional_serial_child_width_coefficient": str(serial_width_coefficient),
+             "bound_constant": str(profile["constant"])}
+ 
+ 
+@@ -159,13 +162,17 @@
+         if rows.bit_length() > 4 * budget + 1:
+             raise AssertionError("the row prefix exceeds its stated bit bound")
+         # This is a declared endpoint-aware charge, not a physical circuit.
+-        guard = width + 1 + (8 * width + 4) * budget
++        serial_width = sum(Q(count * t, profile["m"])
++                           for t, count in profile["children"].items())
++        q = (serial_width.numerator + serial_width.denominator - 1) // serial_width.denominator
++        guard = width + 1 + (q * width + 4) * budget
+         cases.append({"width": str(width), "routing_chunk": str(k), "threshold": str(k),
+                       "depth_budget": budget, "complete_rows": str(rows),
+                       "row_prefix_bits": rows.bit_length(), "memoized_states": states,
+                       "exact_time_numerator": str(cost.numerator), "exact_time_denominator": str(cost.denominator),
+                       "normalized_bound_power_ratio": float(normalized_power_ratio),
+-                      "exact_bound_passed": True, "declared_endpoint_guard": str(guard)})
++                      "exact_bound_passed": True, "conditional_guard_serial_coefficient": q,
++                      "declared_endpoint_guard": str(guard)})
+     return {"profile": name, "schedule": schedule, "checks": protocol_checks(profile),
+             "cases": cases, "seconds": time.monotonic() - started}
+ 
+@@ -194,11 +201,17 @@
+     bad["children"][4] = bad["W"]
+     if moment_interval(bad, Q(1, 2))[0] <= 1:
+         raise AssertionError("unpaid unit self-mass was accepted")
++    p2 = PROFILES["primitive_dominates"]
++    serial_width = sum(Q(count * t, p2["m"]) for t, count in p2["children"].items())
++    if serial_width <= 8:
++        raise AssertionError("the undercharged guard control lost its witness")
+     return {"missing_row_level_rejected": True, "incomplete_W_boundary_rejected": True,
+             "width_only_same_width_call_does_not_terminate": True,
+             "unpaid_routing_chunk_witness": {"width": str(width), "K": str(k),
+                 "paid_root_router": str(actual_root_router), "false_K_free_bound": str(false_bound)},
+             "unit_self_mass_with_other_children_rejected": True,
++            "undercharged_serial_guard_coefficient_rejected": {"invalid_uniform_q": 8,
++                                                               "second_profile_required_coefficient": str(serial_width)},
+             "same_ledger_coarse_power_router_profile": "3/4 versus improved5/8",
+             "same_ledger_coarse_power_primitive_profile": "(5+sqrt(3))/8 versus improved13/16",
+             "primitive_profile_incompatible_coarse_beta_bounds": ["beta>=2/5", "beta<=1/4"]}

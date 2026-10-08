@@ -1,0 +1,45 @@
+{
+  "run_id": "20261008T233150Z-central-minrank",
+  "recorded_before_execution_utc": "2026-10-08T23:31:50.999546+00:00",
+  "base_commit": "f33ca603769edd1f7b58b5cc052d58fd1b885835",
+  "question": "Can a nonsymmetric odd-subset central completion beat the feature order, and can its rank be imported into characteristic two?",
+  "source_sha256": "fa53fc36a724c3708d683189fcd98198ee1925074f8c9c0add51e894eb08a70f",
+  "input_closure": [
+    "code/obstructions/central_minrank_controls.py"
+  ],
+  "workers": 4,
+  "cases": [
+    [
+      8,
+      5,
+      true
+    ],
+    [
+      10,
+      5,
+      true
+    ],
+    [
+      20,
+      5,
+      false
+    ],
+    [
+      24,
+      7,
+      false
+    ]
+  ],
+  "randomness": "None",
+  "command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/obstructions/central_minrank_controls.py",
+    "--workers",
+    "4",
+    "--output",
+    "research/integer-mult-breakthrough/work/obstructions/20261008T233150Z-central-minrank/results/full.json"
+  ],
+  "raw_evidence": "work/obstructions/20261008T233150Z-central-minrank/results/full.json",
+  "scope": "Exact principal identity minor and field reduction controls; no optimal completion or paid feature basis"
+}

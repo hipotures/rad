@@ -1,0 +1,64 @@
+{
+  "run_id": "20261008T231214Z-transfer-routing-budget",
+  "question": "Does a complete current-width routing sum improve the conservative root-width stopping bound while retaining row stock, remainders, fixed routing chunk and final budget leaves?",
+  "status": "pre-execution protocol",
+  "git_head_before_execution": "dec896edb7adc57e944fa317faa51ca9b9d9bf37",
+  "source_closure_sha256": {
+    "code/transfers/routing_budget_transfer.py": "4857b201c4a97716dac6456ebf3e06de264822973f5c728b1757cb95d92d4d45"
+  },
+  "python": "3.14.4",
+  "workers": 4,
+  "generator": "Explicit immutable profile definitions and aligned/remainder width schedules in the authored standard-library source",
+  "seeds": null,
+  "profiles": {
+    "router_dominates": {
+      "m": 4,
+      "W": 10,
+      "child_multiplicities": {
+        "1": 4,
+        "2": 1,
+        "4": 6
+      },
+      "tau": "1/2",
+      "sigma": "1/2",
+      "routing_chunk": "ceil(d^(1/4))",
+      "threshold": "K",
+      "depth": "ceil(log2(d))"
+    },
+    "primitive_dominates": {
+      "m": 4,
+      "W": 10,
+      "child_multiplicities": {
+        "1": 2,
+        "2": 2,
+        "4": 8
+      },
+      "tau": "1/2",
+      "sigma": "3/4",
+      "routing_chunk": "ceil(d^(1/4))",
+      "threshold": "K",
+      "depth": "3*ceil(log2(d))"
+    }
+  },
+  "declared_local_cost": "ceil(sqrt(e*K))+(e mod4) per complete current volume; all child costs weighted by n_t/W",
+  "command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/transfers/routing_budget_transfer.py",
+    "--workers",
+    "4",
+    "--output",
+    "research/integer-mult-breakthrough/work/transfers/20261008T231214Z-transfer-routing-budget/results/full.json"
+  ],
+  "ci_command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/transfers/routing_budget_transfer.py",
+    "--workers",
+    "1",
+    "--small"
+  ],
+  "raw_result": "work/transfers/20261008T231214Z-transfer-routing-budget/results/full.json",
+  "compact_result": "results/summary.json",
+  "scientific_scope": "Exact declared recurrence controls and proposed conditional transfer lemma. No native phase circuit, Gaussian numerical integration or larger kappa is claimed."
+}

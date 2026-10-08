@@ -1,0 +1,11 @@
+--- code/synthesis/compressed_tensor_chronology.py
++++ code/synthesis/compressed_tensor_chronology.py
+@@ -58,7 +58,7 @@
+     n=h*f;events=[]
+     def c(bank,inverse=False):
+         for bit in reversed(range(n)) if inverse else range(n):
+-            if inverse:events.extend([('conditional_shear',bank,bit,1,PLUS_I),('conditional_scale',bank,bit,ALPHA_INVERSE,GAMMA_INVERSE),('conditional_shear',bank,bit,0,PLUS_I)])
++            if inverse:events.extend([('conditional_shear',bank,bit,1,PLUS_I),('conditional_scale',bank,bit,GAMMA_INVERSE,ALPHA_INVERSE),('conditional_shear',bank,bit,0,PLUS_I)])
+             else:events.extend([('conditional_shear',bank,bit,0,MINUS_I),('conditional_scale',bank,bit,p.ALPHA,GAMMA),('conditional_shear',bank,bit,1,MINUS_I)])
+     c(0);events.append(('bank_copy',1,0));c(0,True);c(2)
+     return events

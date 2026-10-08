@@ -50,6 +50,11 @@ Owner: autonomous `complex_primitives` agent.
   charged. Every zero-to-full geodesic is an L_E path with nested E, so this
   escape does not remove the trimmed circuit's cancellation frontier.
   New nonlinear/direct-sum block interfaces are hypotheses under investigation.
+- Replacement criterion: [tested right-Toffoli blocks](complex/nonlinear-blocks-and-convex-obstruction.md)
+  have complete fixed-pair convex certificates against local asymptotic moment
+  gains. This does not order finite-f costs or exclude other nonlinear words.
+  Sparse center/null-complement data bases are the next distinct hypothesis;
+  dyadic invertibility and fully paid external adapters are required.
 - Continue when a changed family has an honest optimistic bound crossing the
   required component saving; otherwise retain the scoped ceiling and replace it.
 
@@ -82,6 +87,11 @@ Owner: autonomous `reversible_synthesis` agent.
   likewise found no deficit, with all chronological transitions counted.
   These are heuristic negative results, not arbitrary-word exclusions.
   Residual per-address gauges and compressed operator words are new hypotheses.
+- Literal [tensor words](synthesis/residual-gauge-tensor-costs.md) preserve all
+  dirty endpoints, but a direct monomial sum costs 2^(hf) terms; a compressed
+  exact word still costs 9hf+1 stages. A multiplicative finite-field Walsh core
+  now suggests cyclic convolution, with discrete-log routing and noncircular
+  convolution costs under separate investigation.
 - Continue only if surviving projector/semantic identities admit a paid
   physical implementation with a scale-changing cost reduction.
 
@@ -111,6 +121,11 @@ Owner: autonomous `coupled_transfers` agent.
   budget yield O(e log e) guard at logarithmic depth. A routing-aware stopping
   analysis is being tested against actual child widths; its transfer and
   connection to a favorable complete native ledger remain open.
+- The [routing-aware bound](transfers/routing-aware-depth-transfer.md) passed
+  independent analytical review and exact complete stopped-recurrence controls.
+  It improves sufficient powers under the same declared overhead, while all
+  native row/routing/endpoint obligations remain assumptions. A new literal
+  monotone split-tape interface is being tested separately.
 - Continue only for a recurrence whose paid conversions and well-founded
   recursion remain compatible with a target-crossing parameter range.
 
@@ -145,6 +160,13 @@ Owner: coordinator.
   words demonstrate why the local-prefix assumptions cannot be omitted.
   A new geodesic transport lemma is being investigated separately from a
   quantitative global rank deficit bound.
+- The [geodesic lemma](obstructions/geodesic-transport-boundary.md) now has
+  independent review and exact all-Lagrangian interval/flow controls. It proves
+  only a zero-excess orthogonality boundary, not an additive per-output loss.
+  [Central completion bounds](obstructions/central-minrank-and-field-boundary.md)
+  retain room for constant-factor rank gains while ruling out a lower feature
+  order at fixed odd weight. Their characteristic-two bound explicitly excludes
+  uncharged reduction of dyadic denominators.
 - Continue by translating every useful source into a lemma, counterexample,
   concrete construction, or scoped quantitative cost constraint.
 

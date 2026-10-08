@@ -102,6 +102,25 @@ These facts constrain their stated fixed models, not other algorithms.
   [coordinator review](reports/obstructions/endpoint-guard-review.md) and
   [complex review](reports/complex/endpoint-guard-independent-critique.md)
   accept that scope. Exact endpoints alone do not bound intermediate registers.
+- [Nonlinear variable-block frames](reports/complex/nonlinear-blocks-and-convex-obstruction.md):
+  every tested right-Toffoli candidate has a fixed convex Clifford substitute
+  on its admitted graph endpoints. A separately reviewed tensor limit excludes
+  a local asymptotic moment gain; finite-column moments are not ordered by it.
+- [Residual tensor words](reports/synthesis/residual-gauge-tensor-costs.md):
+  a direct monomial sum has exponential width. An exact reversible alternative
+  uses 9hf+1 stages and retains its failed inverse-scale attempt. The growing
+  stage count supplies no exponent improvement.
+- [Routing-aware stopping](reports/transfers/routing-aware-depth-transfer.md)
+  and [independent review](reports/obstructions/routing-budget-independent-review.md):
+  complete actual-width charging improves two declared recurrence bounds
+  under explicit time/row/guard premises. A native circuit remains required,
+  and the frozen characteristic ceiling remains below the target.
+- [Geodesic transport boundary](reports/obstructions/geodesic-transport-boundary.md)
+  and [central minrank/field bounds](reports/obstructions/central-minrank-and-field-boundary.md):
+  a shared nongeodesic release remains possible, while shortest coherent
+  frame paths permit only orthogonal transfers. Central feature rank has a
+  necessary polynomial order; reduction modulo two requires different premises
+  from the dyadic construction.
 
 Live structural work includes cancellation-allowing reversible synthesis,
 changed spectral interfaces, and a weight-five complex family. The latter uses
@@ -115,7 +134,7 @@ frames demonstrate an actual local escape; whole-network chronology must
 retain its benefit. The old library's alternating projector identity is
 credited separately and does not itself establish a larger saving.
 
-Thirty-two registered Python CI checks replay only their stated finite arithmetic and
+Thirty-seven registered Python CI checks replay only their stated finite arithmetic and
 semantic controls. A separately contributed [Lean package](formal/README.md)
 formalizes the named positive-matrix obstruction and finite-level extension;
 its pinned clean-runner workflow passed at remote commit `1576511c`. It does

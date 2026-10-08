@@ -152,3 +152,35 @@ sizes and hashes; their full frame words and cancellation frontiers remain in
 complete gzip copies in the clone. No original evidence was modified or deleted.
 Decompress a listed gzip to a fresh location to recover the exact original text,
 or replay the report command with a fresh output directory.
+
+## Nonlinear blocks, tensor controls and routing-aware transfer
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/test_nonlinear_blocks.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_tensor_chronologies.py
+python3 -B research/integer-mult-breakthrough/code/transfers/routing_budget_transfer.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/obstructions/geodesic_transport.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/central_minrank_controls.py --workers 1 --bounded
+```
+
+These five checks use only retained source and Python's standard library. The
+nonlinear conclusion concerns a conditional asymptotic local tensor moment; it
+does not order finite-column moments. Literal tensor controls include arbitrary
+dirty columns and the previously rejected inverse-scale ordering. The stopped
+recurrence retains the fixed routing chunk, complete rows and every leaf.
+Geodesic/minrank checks distinguish exact finite controls from independently
+reviewed analytical implications and field/representation restrictions.
+
+Historical failures are reconstructable from the retained source and patches.
+The coordinator applied the tensor failure patch in an isolated copy, matched
+the original SHA256 and reran its complete-column failure. Reversing the routing
+guard patch likewise matched the initial source hash. This optional historical
+source recovery uses GNU patch in addition to Python; all registered bounded
+checks remain standard-library-only. The checkpoint validation retains exact
+patch hashes, recovered source hashes and the observed exception log.
+
+Complete fifth-checkpoint text evidence is published in its recorded gzip
+namespaces. Large convex Toffoli rows have compact summaries with exact original
+hashes and omission lists. Downloaded primary PDFs remain ignored and have
+versioned URLs, byte sizes, hashes and recovery entries. All original attempts,
+including rejected numeric guards and failed operator words, are unchanged.
