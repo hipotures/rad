@@ -14,13 +14,17 @@ per-file identities and explicit omissions.
 ## Integer multiplication bounds
 
 [Integer multiplication bounds](../research/integer-multiplication-bounds/README.md)
-is an active ten-hour mathematical research campaign, started 2026-10-07
-22:25:21 UTC with an immutable deadline ten hours later. The pinned conditional
+is an active mathematical research campaign, started 2026-10-07
+22:25:21 UTC. The user explicitly extended its original ten-hour deadline
+to 2026-10-08 10:00:00 UTC (12:00 CEST), without restarting the campaign.
+The pinned conditional
 2^-59 baseline passed its supplied checks. Independently reviewed h50
 singleton and h28 shared complex circuits, phase-cell Gaussian inverse,
-and the separately pinned compact-control update support the exact strict
-conditional saving `1988903839793768677409884189549/(125*10^37)`,
-more than 19.170157491988131 times the new upstream witness `83/10^12`.
+and the separately pinned compact-control update now combine with independently
+reviewed arbitrary routing, a linear semantic guard and complete microbox
+resampling. They support the exact strict conditional saving
+`31831959104772222375982318046677/10^40`, greater than 2^-29 and
+more than 38.351757957556894 times the new upstream witness `83/10^12`.
 The complete upstream theorem remains assumed. Original hypotheses and
 concurrent searches continue without resetting the campaign clock. See the [reassessment](../research/integer-multiplication-bounds/reports/compact-upstream-reassessment.md)
 and [evolving report](../research/integer-multiplication-bounds/reports/campaign-20261007T222521Z.md)

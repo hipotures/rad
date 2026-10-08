@@ -1,5 +1,17 @@
 # Goal: Ten-Hour Autonomous Integer-Multiplication Research Campaign
 
+## Active deadline: explicit user extension
+
+On 2026-10-08 at approximately 03:10 UTC, the user explicitly extended
+this same campaign to **2026-10-08 12:00 Polish time (CEST, UTC+02:00)**,
+which is **2026-10-08 10:00:00 UTC**. This supersedes the original
+08:25:21 UTC deadline without changing the campaign ID, start time,
+running experiments, scheduling or accumulated findings. The original
+start remains 2026-10-07 22:25:21 UTC. The original ten-hour brief and
+deadline below are retained as history. The authorized interval is now
+11 hours, 34 minutes, 39 seconds. Reserve approximately the last 45
+minutes, from 09:15 UTC, for final verification and publication.
+
 Act as an autonomous mathematical researcher and experimental programmer, not merely an implementation agent. Build and test research code, formulate your own hypotheses, investigate alternatives, search the literature, inspect proofs, and pursue stronger results. Execute the research; do not stop after producing a plan, installing tools, reproducing the baseline, or building a search framework.
 
 ## Objective

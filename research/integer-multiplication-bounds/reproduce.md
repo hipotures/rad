@@ -227,7 +227,8 @@ source sizes, SHA256 values, original external locations and gzip checks.
 Original local bytes are unchanged. Git preserves reports, compact certificates,
 exact source, locks and protocols. Downloaded repositories/PDFs, environments,
 GPU NPZ files and binaries are external and separately obtainable/regenerable.
-The campaign protocol records the immutable deadline and live-job status;
+The campaign protocol records the original start, historical deadline,
+explicit user-authorized extension to2026-10-08 10:00:00 UTC and live-job status;
 archived PID/session records do not authorize controlling live processes.
 
 ## New compact input and current reviewed composition
@@ -266,3 +267,87 @@ Use `tools/archive_workspace.py verify-text --destination <namespace>` to
 check copies; to restore an external case, decompress its manifest-indexed
 gzip into a fresh work root at the same relative path. A gzip PID/session
 record is historical evidence and must never authorize live process control.
+
+## New structural interfaces and targeted reproduction
+
+The independently reviewed arbitrary-source router, linear semantic guard
+and bulk principal-window resampling have separate proof reports and
+completed run protocols. They do not rerun the accepted bit/complex
+baseline. The bulk review distinguishes exact selector/tape payload
+controls from the analytic Gaussian error proof. Restore the complete
+finite candidate files from the sixth external archive if reproducing
+searches, rather than treating compact rankings as the original inputs.
+
+Run the new standalone phase and tape discriminators into fresh outputs:
+
+```bash
+python3 -B research/integer-multiplication-bounds/code/alternating_quadratic_phase.py --output "$RAD_WORK_ROOT/derived/fresh-alternating-phase/certificate.json"
+python3 -B research/integer-multiplication-bounds/code/quadratic_phase_counter.py --output "$RAD_WORK_ROOT/derived/fresh-quadratic-counter/certificate.json"
+python3 -B research/integer-multiplication-bounds/code/review_bulk_resampling.py --output "$RAD_WORK_ROOT/derived/fresh-bulk-stream/certificate.json"
+```
+
+The first two controls were exercised completely during the campaign:
+219,024 exact phase entries and457,412 complete counter addresses.
+They support the new alternating-phase hypothesis only; the complete
+odd-ground network and tape/guard transfer remain separate obligations.
+The third command is the independent bulk stream control exercised
+over84,824 complete output records. Its accepted all-size analytic
+scope and limitations are in reports/review-bulk-resampling.md.
+
+For final exponent arithmetic use the exact argv and input identities
+in the current composition and independent review protocols. Keep the
+old compact and balanced checkpoints under their original interfaces.
+Parameter cutoffs are exact numeric obligations, while prime existence,
+strict logarithmic absorption and unchanged full-machine interfaces
+still have separate eventual thresholds.
+
+The sixth milestone's complete archives are
+`evidence/20261008T0330Z-structural-transfer-topic` (136 files) and
+`evidence/20261008T0322Z-structural-transfer-external` (2073 files).
+The terminal six-role refinement adds
+`evidence/20261008T0339Z-refinement-topic` (12 files) and
+`evidence/20261008T0339Z-refinement-external` (455 files).
+These preserve full candidate definitions, completed successes, initial
+import failures and meaningful negatives. Four large candidate-protocol
+tables, the new phase case table and the final refinement candidate
+protocol are gzip-only. Restore a needed plain copy from its exact
+manifest-relative path; existing originals remain unchanged.
+
+```bash
+python3 - <<'PYRESTORE'
+import gzip
+from pathlib import Path
+topic = Path('research/integer-multiplication-bounds')
+groups = {
+    '20261008T0330Z-structural-transfer-topic': [
+        'runs/20261008T020031Z-finite-pair-block-orders/results/candidate-protocol.json',
+        'runs/20261008T021514Z-finite-retained-schedule-repair/results/candidate-protocol.json',
+        'runs/20261008T022630Z-finite-cutoff-cohort/results/candidate-protocol.json',
+        'runs/20261008T024520Z-finite-association-repair/results/candidate-protocol.json',
+        'runs/20261008T030740Z-alternating-quadratic-phase/results/certificate.json',
+    ],
+    '20261008T0339Z-refinement-topic': [
+        'runs/20261008T030610Z-finite-cutoff2-refinement/results/candidate-protocol.json',
+    ],
+}
+for archive, relative_paths in groups.items():
+    for rel in relative_paths:
+        target = topic / rel
+        if not target.exists():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(gzip.decompress((topic / 'evidence' / archive / (rel+'.gz')).read_bytes()))
+PYRESTORE
+```
+
+The current R472879 follow-up uses the unchanged independent assembly
+checker. Its full finite promotion and fresh arithmetic commands are in
+runs/20261008T032418Z-review-refinement472879/protocol.json and
+runs/20261008T033303Z-review-semantic-bulk472879/protocol.json.
+The bounded new algebra and counter reproduction paths were actually
+exercised; accepted older baseline checks were not repeated.
+
+The independent alternating primitive control is also archived intact in
+`evidence/20261008T0343Z-alternating-primitive-topic` (3 files). Its fresh
+source and written review distinguish the actual fK layout, selected-only
+word exchanges and upstream bit-volume convention from the initial
+producer algebra. It does not certify a new complete odd-ground network.

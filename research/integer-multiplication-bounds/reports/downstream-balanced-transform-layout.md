@@ -15,8 +15,9 @@ O(T*p*[d + p*K^(tau-1) + ell*d^lambda']).
 
 The old `d*K` term becomes `d`. The named-slot and movement checker passed
 3,800 shapes and2,068,936 axis-round chronology checks in4.506 seconds on
-one reserved CPU. Independent analytic transfer review is pending. No
-upgraded multiplication headline is claimed here.
+one reserved CPU. Independent analytic transfer and composed arithmetic review are now
+accepted conditional on the retained fixed-model interfaces. The exact
+composed witness is recorded in the separate assembly report below.
 
 ## Complete positional construction
 
@@ -151,8 +152,7 @@ g2<a*(1-epsilon). Combined withg3<epsilon*a this gives the scoped upper
 bounda/2. When the complex savingb>4a, the guard has fixed headroom as
 epsilon tends to1/2, c tends to1 and q tends toa. The phase inverse's
 gamma and cell gaps remain positive. Thus the declared family can
-approach a/2 with strict fixed rational parameters if this layout transfer
-is accepted. The preceding compact family approacheda/(2+a).
+approach a/2 with strict fixed rational parameters under the independently accepted layout transfer. The preceding compact family approacheda/(2+a).
 
 The exact difference is `a^2/[2*(2+a)]`. For current a near3.1e-9 this
 is only about2.4e-18 in kappa, a relative gain near1.6e-9. It is an actual
@@ -169,7 +169,10 @@ exact symbolic operations and inverses, exhaustive tiny address patterns,
 deterministic larger boundary patterns and forward/reverse named-round
 chronology. These are finite controls supporting the written proof; they
 do not establish asymptotic fixed-tape costs by execution. Novelty is
-unclaimed, and independent transfer review is pending.
+unclaimed. The [independent transfer review](review-balanced-transform.md)
+accepted the all-size layout, operators, compact extension and arithmetic.
+The [composed assembly report](downstream-balanced-transform-assembly.md)
+preserves the exact strict witness and the separate geometry cutoff.
 
 The actual movement controls include1,718 unequal-width swaps implemented
 as one bit move plus one completed equal-width interchange. The inverse

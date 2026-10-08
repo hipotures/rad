@@ -9,9 +9,10 @@ are covered by consecutive equal-across-axis groups with widths in[K,2K).
 The run took4.506 wrapper seconds on one reserved CPU, with no job
 interruption or restart. No dense large Fourier operator was replayed.
 These finite controls support the written all-size layout and chronology
-proof; uniform compact-layer and full transform transfer review remain
-pending. The theoretical scoped gain is froma/(2+a) toa/2 and is tiny for
-the current bit saving. No new kappa headline is promoted.
+proof; uniform compact-layer and full transform transfer review are independently
+accepted in [review-balanced-transform.md](../../reports/review-balanced-transform.md). The theoretical scoped gain is froma/(2+a) toa/2 and is tiny for
+the current bit saving. The exact composed witness appears in the separate
+[assembly report](../../reports/downstream-balanced-transform-assembly.md).
 
 See [the full derivation](../../reports/downstream-balanced-transform-layout.md),
 [source](../../code/downstream_balanced_transform_layout.py), protocol.json
