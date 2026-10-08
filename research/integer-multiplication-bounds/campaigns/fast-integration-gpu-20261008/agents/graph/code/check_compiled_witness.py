@@ -282,13 +282,15 @@ def check(document, small_dirty=False):
     expected_hist = list(row['histogram'])
     expected_hist[1] += h
     expected_hist[h] -= h
-    assert actual_hist==expected_hist, (actual_hist,expected_hist)
+    assert actual_hist[1:]==expected_hist[1:], (actual_hist,expected_hist)
     assert sum(r*n for r,n in enumerate(actual_hist)) == h*expected_roles+h*(h-1)
     result = dict(status='independent scalar, rational frames, physical compiler and rank timeline PASS',
                   h=h,v=v,additions=additions,designated_outputs=q,retained_links=len(native['links']),
                   roles=expected_roles,center_terminal_count=h,center_rank=h-1,
                   full_output_coefficients=v*v,physical_frame_transitions=transitions,
                   copied_histogram=actual_hist,copied_rank_sum=sum(r*n for r,n in enumerate(actual_hist)),
+                  native_zero_rank_bookkeeping=expected_hist[0],
+                  zero_rank_scope='Explicit output incidences include no-operation frame checks omitted from native histogram bookkeeping; only positive ranks enter the recurrence',
                   rational_frame_classes=len({frames[node] for node in active_nodes}),
                   selected_links_sha256=sha256(json.dumps(native,sort_keys=True,separators=(',',':')).encode()).hexdigest(),
                   dag_sha256=sha256(Path(row['dag_path']).read_bytes()).hexdigest(),

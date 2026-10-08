@@ -15,6 +15,17 @@ their obtainable commits, tarball hashes, locations and license hashes.
 | [Swapnil round five](https://github.com/Swapnil-jain/integer-mult-kappa/tree/c2c2f279d93643e5ff3fe121a0fbc68e0e6f4007), Swapnil Jain with Claude assistance | `c2c2f279d93643e5ff3fe121a0fbc68e0e6f4007` | Commit 12:38:33 UTC | A common flag basis batches both auxiliary corners, centers and side residuals one level down; global-matching side graph `R=403248` at `h=47`; data-entrance run; conditional `kappa=309575208081/(2*10^16)` | Written equal-factor proof plus small exact / working-dimension modular checks. Lean checks arithmetic certificates with analytic premises, not the complete multiplication theorem or geometry. Retains Paureel motif, PR7 complex source frames, own analytic/routing stack. |
 | [CrocSwap PR35](https://github.com/CrocSwap/integer-mult-bounds/pull/35), Dominik Scholz with OpenAI/Anthropic assistance | `9c345a2a11e5f4f3649f7c68214bf9a2a0a3fe9c` | Updated 12:37:15 UTC | Fixed local bases `I+J` at `(47,45)` replace generic internal profiles, retain data `48*[1]+[43,1933]`; conditional `kappa=16631776/10^12` | Claimed integrated validation complete, 183 regressions and exact bounded-minor reconstruction. Separate reusable fixed-basis result; adopts PR32 profiler and PR33/29 dependencies. |
 
+At the 12:58:02 poll, the new [PR38](https://github.com/CrocSwap/integer-mult-bounds/pull/38)
+by Dominik Scholz was found, head `cc794077f6c103e24ec0939be765cd1521239aab`,
+updated 12:49:21 UTC. It composes copied centers with fixed I+J **original**
+envelopes on the actual PR36 (25,23) graphs, giving conditional
+`kappa=242889/6250000000=3.886224e-5`, bit saving
+`19432631/500000000000`, and conservative data `26*[1]+[21,481]`.
+It explicitly preserves all paid copies and physical accounting. Draft full
+regression is pending; finite producer/CRT/moment/assembly checks are reported.
+The pinned source and [fixed-basis interface map](fixed-basis-interface.md)
+were sent promptly to the coordinator and computational agents.
+
 PR37 physical invariants are `m=575`, `N=4073300`, `W=188181929`,
 `L=2226400`, `s=Wm-N+L=108202762275`, maximum child 529, with all
 4073300 paid endpoint corrections retained. Relative to PR36 it removes
@@ -59,6 +70,16 @@ in the same admissible family. The square support proof does not automatically
 establish those conditions at `(23,25)`. Similarly, a fixed `I+J` specialization
 must establish the data corners rather than invoke a generic open-set argument
 after all local freedom has been removed.
+
+The geometry agent independently derived a shifted rectangular flag extension.
+Interface inspection shows its auxiliary and ordinary-local batching already
+overlaps PR37's controlled basis. In particular, the PR37 boundary is a sparse
+specialization of that flag family. A lower delta-Hessenberg data corner plus
+a rank-one term gives the same first run of width a-2; any extra saving needs
+the full data profile, especially the second 17-block. A scout's initial
+unshifted rectangular support suggestion ignored the last-a inverse-column
+offset and was explicitly withdrawn before testing. No improvement is
+attributed to that incorrect prescription.
 
 ## Scout method and continuation
 
