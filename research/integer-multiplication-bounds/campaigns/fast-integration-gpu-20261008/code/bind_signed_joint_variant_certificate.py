@@ -222,13 +222,34 @@ def main():
             assert len(selection['selected']) == recovery['selected_carriers']
             assert recovery['selected_carriers'] == recovery['compiled']['stats']['matched']
             summary = recovery['frame_summary']
-            assert summary['every_actual_transition_containment']
-            assert summary['original_and_maximal_containment']
-            # The family allocation precedes matching and preserves the
-            # independently rebuilt parent word. The NEW matching's roles
-            # are checked separately against its literal word and header.
-            assert summary['unchanged_R'] == recovery['compiled_parent']['roles']
-            assert summary['unchanged_XORs']
+            if recovery.get('current_signed_lower_spaces_preserved', False):
+                # This enlargement follows the NEW selected matching.
+                # Bind its complete fresh parent rather than the earlier
+                # conservative matching's potentially different R.
+                parent_path = Path(recovery['fresh_weighted_source_receipt_path'])
+                assert digest(parent_path) == recovery['fresh_weighted_source_receipt_sha256']
+                parent = read(parent_path)
+                assert parent['source_head'] == recovery['source_head']
+                assert parent['source_only']
+                assert parent['word_regenerated_from_source_and_selected_carriers']
+                assert parent['word_sha256'] == recovery['actual_parent_word_sha256']
+                assert parent['selected_matching_sha256'] == recovery['selected_matching_sha256']
+                assert parent['scalar'] == recovery['scalar']
+                assert parent['source_permutation'] == row['coordinate_order']
+                assert summary['current_signed_space_containment']
+                assert summary['every_new_upper_transition_containment']
+                assert summary['terminal_constraints_propagated_to_fixed_point']
+                assert summary['source_and_copied_center_spaces_unchanged']
+                assert summary['unchanged_R'] == parent['compiled']['roles']
+                assert summary['unchanged_every_XOR']
+                assert recovery['literal_xors_unchanged_from_selected_weighted_parent']
+            else:
+                assert summary['every_actual_transition_containment']
+                assert summary['original_and_maximal_containment']
+                # The family allocation precedes matching and preserves
+                # the independently rebuilt conservative parent word.
+                assert summary['unchanged_R'] == recovery['compiled_parent']['roles']
+                assert summary['unchanged_XORs']
             assert recovery['R'] == row['profile']['R']
         elif recovery.get('original_roles_and_xors_unchanged', False):
             assert recovery['every_original_frame_contained']

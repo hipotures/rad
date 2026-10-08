@@ -1,0 +1,317 @@
+{
+  "construction": "Actual positive pair-frame enlargement after matrix-weighted joint matching",
+  "source_pins": {
+    "62": "ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+    "57": "cd350f76c9bc01489ec83568bded532cb69be938",
+    "61": "afb7cb67d1858641315cfbf4ac768ee64a8eff3a"
+  },
+  "accepted": "reports/weighted-coupled-pair-joint-acceptance.json",
+  "selected_axes": "fixtures/interval-joint-weighted-coupled-pair-one15-minusone15-axes.json",
+  "source_recoveries": [
+    "agents/graph/results/actual-matching-pair-source-only-2239-h23.json",
+    "agents/graph/results/actual-matching-pair-source-only-2239-h25.json"
+  ],
+  "classification": "ACCEPTED CONDITIONAL CONSTRUCTION",
+  "portable_placeholders": {
+    "<campaign>": "this campaign directory in a cloned hipotures/rad repository",
+    "<snapshot>": "immutable pinned PR62 snapshot downloaded by code/fetch_interval_joint_sources.py",
+    "<work>": "a new task-owned writable external execution directory",
+    "<native>": "newly compiled parameter_joint_word_profiles executable",
+    "<cuda-python>": "Python environment with NumPy and validated CuPy/CUDA support"
+  },
+  "source_word_commands": [
+    [
+      "python3",
+      "<campaign>/agents/graph/code/source_only_actual_matching_pair_frames.py",
+      "--source",
+      "<snapshot>",
+      "--choices-file",
+      "<campaign>/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json",
+      "--selected-matching",
+      "<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json",
+      "--pair-config",
+      "<campaign>/agents/graph/fixtures/selected-actual-matching-pair-enlargement-2238.json",
+      "--h",
+      "23",
+      "--work",
+      "<work>/fresh-pair-h23",
+      "--output",
+      "<work>/fresh-pair-source-h23.json"
+    ],
+    [
+      "python3",
+      "<campaign>/agents/graph/code/source_only_actual_matching_pair_frames.py",
+      "--source",
+      "<snapshot>",
+      "--choices-file",
+      "<campaign>/agents/graph/fixtures/joint-common-multifamily-reproduction-2107.json",
+      "--selected-matching",
+      "<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json",
+      "--pair-config",
+      "<campaign>/agents/graph/fixtures/selected-actual-matching-pair-enlargement-2238.json",
+      "--h",
+      "25",
+      "--work",
+      "<work>/fresh-pair-h25",
+      "--output",
+      "<work>/fresh-pair-source-h25.json"
+    ]
+  ],
+  "native_profile_commands": [
+    [
+      "<native>",
+      "<transition_path from fresh h23-source.json independent receipt>",
+      "beta:1:15",
+      "<work>/h23/profile.json",
+      "<work>/h23/matrix-audit.json"
+    ],
+    [
+      "<native>",
+      "<transition_path from fresh h25-source.json independent receipt>",
+      "beta:-1:15",
+      "<work>/h25/profile.json",
+      "<work>/h25/matrix-audit.json"
+    ]
+  ],
+  "large_artifacts": [
+    {
+      "h": 23,
+      "role": "word",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/actual-matching-pair-source-2239-h23/word.json.gz",
+      "bytes": 2647083,
+      "sha256": "624c5cd356fc3dbbf353f6e4f64eb14514641c5b6dcfd45e04758f910e820edc",
+      "recovery": "Deterministically regenerable from the immutable public source pin, complete published selected matching, frozen pair choice and authored source closure with the listed commands. External execution payload; not present in the Git clone."
+    },
+    {
+      "h": 23,
+      "role": "transition binary",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/actual-matching-pair-source-2239-h23/signed-transitions.bin",
+      "bytes": 3860873,
+      "sha256": "b1e00d6517b10ff0779c0fd937404ed96d8201f9c904fd149230ba31f31b8e5b",
+      "recovery": "Deterministically regenerable from the immutable public source pin, complete published selected matching, frozen pair choice and authored source closure with the listed commands. External execution payload; not present in the Git clone."
+    },
+    {
+      "h": 23,
+      "role": "matrix audit",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/actual-matching-coupled-pair-families-h23-20261008T222206/h23-actual-pair-star-c20-d2/transitions.json",
+      "bytes": 20103260,
+      "sha256": "395614e438f3de3bd66d5e1a16dc3f7a6c9ef5cfd13bfa9be58985b75187727b",
+      "recovery": "Deterministically regenerable from the immutable public source pin, complete published selected matching, frozen pair choice and authored source closure with the listed commands. External execution payload; not present in the Git clone."
+    },
+    {
+      "h": 23,
+      "role": "profile",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/actual-matching-coupled-pair-families-h23-20261008T222206/h23-actual-pair-star-c20-d2/profile.json",
+      "bytes": 785,
+      "sha256": "2f66548dc6feaa0984f4e6ad4d3d92c3e223dfbf4cb882ad978a002667c5a3ac",
+      "recovery": "Deterministically regenerable from the immutable public source pin, complete published selected matching, frozen pair choice and authored source closure with the listed commands. External execution payload; not present in the Git clone."
+    },
+    {
+      "h": 25,
+      "role": "word",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/actual-matching-pair-source-2239-h25/word.json.gz",
+      "bytes": 3658684,
+      "sha256": "97e83b0721b94d5df3a48f1142eea9858e511ed287a5b919e4376f110b213136",
+      "recovery": "Deterministically regenerable from the immutable public source pin, complete published selected matching, frozen pair choice and authored source closure with the listed commands. External execution payload; not present in the Git clone."
+    },
+    {
+      "h": 25,
+      "role": "transition binary",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/actual-matching-pair-source-2239-h25/signed-transitions.bin",
+      "bytes": 5507949,
+      "sha256": "54048f330f9d4859ad2766cd3b8653f9402d2bd1e4d0831cb1ca92a67f5429b0",
+      "recovery": "Deterministically regenerable from the immutable public source pin, complete published selected matching, frozen pair choice and authored source closure with the listed commands. External execution payload; not present in the Git clone."
+    },
+    {
+      "h": 25,
+      "role": "matrix audit",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/actual-weighted-coupled-pair-compatible-bases-20261008T2231/h25-coupled-pair-beta--1-15/transitions.json",
+      "bytes": 28209706,
+      "sha256": "2b747377824e94a1b4bdc99a496ba486aac03ad39cd37ec9045d88b65222246f",
+      "recovery": "Deterministically regenerable from the immutable public source pin, complete published selected matching, frozen pair choice and authored source closure with the listed commands. External execution payload; not present in the Git clone."
+    },
+    {
+      "h": 25,
+      "role": "profile",
+      "path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/derived/actual-weighted-coupled-pair-compatible-bases-20261008T2231/h25-coupled-pair-beta--1-15/profile.json",
+      "bytes": 826,
+      "sha256": "86f8995ac13a9a490c83c1d7a1c47250065d2672154e261045f5876ef001f70d",
+      "recovery": "Deterministically regenerable from the immutable public source pin, complete published selected matching, frozen pair choice and authored source closure with the listed commands. External execution payload; not present in the Git clone."
+    }
+  ],
+  "reproduction_tested": "Both full clean selected-only source reconstructions, exact new word and binary hashes, every selected carrier/capacity/chronology, every weighted parent lower-space inclusion, full forward/reversed dirty roles, literal independent source binary versus selected native byte equality, all actual CRT profiles,96 independent Fraction controls, unchanged compatible complete4073300 DATA, stock, exact full recurrence and47+7 assembly;8 adversarial failures.",
+  "fetch_command": [
+    "python3",
+    "<campaign>/code/fetch_interval_joint_sources.py",
+    "--work",
+    "<work>/public-sources"
+  ],
+  "build_command": [
+    "g++",
+    "-O3",
+    "-std=c++17",
+    "<campaign>/agents/geometry/code/signed_joint_word_profiles.cpp",
+    "-o",
+    "<native>"
+  ],
+  "data_generation_command": [
+    "<cuda-python>",
+    "<campaign>/agents/scout/code/gpu_basis_configured_full_family.py",
+    "--device",
+    "0",
+    "--seed",
+    "2026102216",
+    "--batch",
+    "8192",
+    "--candidate",
+    "<campaign>/agents/scout/gpu-parameter-results/joint-new-rational-basis-candidate.json",
+    "--baseline-histogram",
+    "<campaign>/agents/geometry/results/fixed23-negative25-data-pairs.json",
+    "--beta23",
+    "1/15",
+    "--beta25=-1/15",
+    "--whole-family",
+    "--output",
+    "<work>/data"
+  ],
+  "data_audit_command": [
+    "<cuda-python>",
+    "<campaign>/agents/scout/code/audit_basis_full_family_incidence.py",
+    "--run",
+    "<work>/data",
+    "--mixed-cut-receipt",
+    "<campaign>/agents/scout/gpu-parameter-results/mixed-fixed23-negative25-data-input-audit-20261008T1800.json",
+    "--output",
+    "<work>/data-certificate.json"
+  ],
+  "remaining_commands": [
+    [
+      "python3",
+      "<campaign>/agents/scout/code/audit_weighted_pair_joint_word_interfaces.py",
+      "--phase-snapshot",
+      "<snapshot>",
+      "--graph-receipts",
+      "<work>/h23-source.json",
+      "<work>/h25-source.json",
+      "--geometry-fixtures",
+      "<fresh h23 selected wrapper>",
+      "<fresh h25 selected wrapper>",
+      "--data-certificate",
+      "<work>/data-certificate.json",
+      "--beta23",
+      "1/15",
+      "--beta25=-1/15",
+      "--output",
+      "<work>/stock.json"
+    ],
+    [
+      "python3",
+      "<campaign>/code/compose_joint_word_profiles.py",
+      "--axes",
+      "<fresh combined wrappers>",
+      "--phase",
+      "<campaign>/fixtures/phase-pr36.json",
+      "--baseline",
+      "<snapshot>/research/pair-assembly/frame/frame-certificate.json",
+      "--assembly",
+      "<snapshot>/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py",
+      "--geometry",
+      "<work>/data-certificate.json",
+      "--output",
+      "<work>/certificate.json"
+    ],
+    [
+      "python3",
+      "<campaign>/code/bind_signed_joint_variant_certificate.py",
+      "--axes",
+      "<fresh combined wrappers>",
+      "--certificate",
+      "<work>/certificate.json",
+      "--data",
+      "<work>/data-certificate.json",
+      "--stock",
+      "<work>/stock.json",
+      "--scalar",
+      "<campaign>/reports/public62-fresh-scalar-replay-1828.json",
+      "--assembly",
+      "<snapshot>/references/frame-compiler/pr48/research/copied-fixed/balanced_assembly.py",
+      "--words",
+      "<flat h23 independent word receipt>",
+      "<flat h25 independent word receipt>",
+      "--source-recoveries",
+      "<work>/h23-source.json",
+      "<work>/h25-source.json",
+      "--output",
+      "<work>/binding.json",
+      "--rational-controls",
+      "<work>/independent-rational-controls.json"
+    ]
+  ],
+  "wrapper_reconstruction": "For each fresh native profile, copy only the selected basis/configuration from the retained axis wrapper. Replace config.transitions, profile_path and transition_audit with the fresh generated files, load profile.json afresh, and recompute all three SHA256 fields. Set coordinate_order to the fresh word receipt source_permutation. Combine the two rows in an array; flatten source_receipt.independent as each word receipt. No retained profile values are authority for the regenerated result.",
+  "independent_controls_command": [
+    "python3",
+    "<campaign>/agents/geometry/code/review_signed_joint_word_profiles.py",
+    "--input",
+    "<fresh control descriptors matching regenerated bins and audits>",
+    "--output",
+    "<work>/independent-rational-controls.json"
+  ],
+  "independent_controls_reproduction": "Use the two retained case descriptors in agents/geometry/results/joint-actual-coupled-one15-minusone15-controls-20261008T2242.json, replace binary/audit paths by freshly regenerated files and rerun review_signed_joint_word_profiles.py.",
+  "published_certificate": "evidence/weighted-coupled-pair-2300/certificate.json.gz",
+  "original_certificate_path": "runs/interval-joint-weighted-coupled-pair-one15-minusone15/certificate.json",
+  "certificate_decompression": [
+    "python3",
+    "-c",
+    "import gzip,pathlib; pathlib.Path(\"<work>/certificate.json\").write_bytes(gzip.decompress(pathlib.Path(\"<campaign>/evidence/weighted-coupled-pair-2300/certificate.json.gz\").read_bytes()))"
+  ],
+  "archive_recovery": {
+    "path": "evidence/weighted-coupled-pair-2300/certificate.json.gz",
+    "role": "Complete unsplit exact certificate; gzip checked against the unchanged original."
+  },
+  "dependency_manifest": "agents/graph/fixtures/matrix-weighted-selected-regeneration-manifest-2210.json",
+  "additional_authored_dependencies": [
+    "agents/geometry/code/componentwise_signed_word_enlargement.py",
+    "agents/geometry/code/mix_common_context_frames.py",
+    "agents/geometry/code/mix_common_frame_families.py",
+    "agents/graph/code/check_compiled_witness.py",
+    "agents/graph/code/joint_positive_frontier.py",
+    "agents/graph/code/joint_region_search_v3.py",
+    "agents/graph/code/joint_signed_word_recompile.py",
+    "agents/graph/code/joint_word_check_v2.py",
+    "agents/graph/code/joint_word_check_v4.py",
+    "agents/graph/code/joint_word_positive_closure.py",
+    "agents/graph/code/matrix_weighted_joint_carriers.py",
+    "agents/graph/code/source_only_matrix_weighted_joint.py"
+  ],
+  "conditional_address_scope": "agents/scout/signed-address-transfer-scope.md",
+  "selected_matching_inputs": [
+    "agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json",
+    "agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json"
+  ],
+  "selected_input_recovery": [
+    {
+      "original_path": "agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json",
+      "published_complete_gzip": "evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h23.json.gz",
+      "original_sha256": "835899e9425924f960a4f1decb2a937d2fee46d033c989ff102590b4f4e4a2a1",
+      "recovery": "Decompress the complete gzip bytes to the original path in the cloned campaign before source reconstruction. The original local input remains unchanged.",
+      "decompression": [
+        "python3",
+        "-c",
+        "import gzip,pathlib; pathlib.Path(\"<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h23.json\").write_bytes(gzip.decompress(pathlib.Path(\"<campaign>/evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h23.json.gz\").read_bytes()))"
+      ]
+    },
+    {
+      "original_path": "agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json",
+      "published_complete_gzip": "evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h25.json.gz",
+      "original_sha256": "d2123be9945cf1be89c5c41e1cb2b12f7547c08e247e0d9c52d6b98d8c76c326",
+      "recovery": "Decompress the complete gzip bytes to the original path in the cloned campaign before source reconstruction. The original local input remains unchanged.",
+      "decompression": [
+        "python3",
+        "-c",
+        "import gzip,pathlib; pathlib.Path(\"<campaign>/agents/graph/fixtures/selected-matrix-weighted-carriers-h25.json\").write_bytes(gzip.decompress(pathlib.Path(\"<campaign>/evidence/matrix-weighted-selected-carriers-2216/selected-matrix-weighted-carriers-h25.json.gz\").read_bytes()))"
+      ]
+    }
+  ],
+  "source_regeneration_closure": "agents/graph/fixtures/actual-matching-pair-selected-regeneration-manifest-2249.json",
+  "fresh_weighted_parent_recovery": "Each selected-only source command first regenerates its selected weighted parent, then enlarges frames. Parent receipt hashes are bound by the new source receipt. Compact immutable copies are retained at reports/weighted-coupled-pair-fresh-weighted-parent-23.json, reports/weighted-coupled-pair-fresh-weighted-parent-25.json."
+}
