@@ -1,0 +1,25 @@
+{
+  "campaign_id": "fast-integration-gpu-20261008",
+  "start_utc": "2026-10-08T12:41:06Z",
+  "deadline_utc": "2026-10-08T14:41:06Z",
+  "closing_phase_utc": "2026-10-08T14:26:06Z",
+  "start_commit": "05004ecd6fc90c6a522d4d2e76bf5588609ccb19",
+  "historical_reference_commit": "6b32837aee0561af85e4efaca21af07b9f2749d2",
+  "branch": "research/fast-gpu-20261008",
+  "host": "gpu",
+  "cpu_slots": 16,
+  "allocations": {
+    "graph_agent": 8,
+    "geometry_agent": 6,
+    "coordinator_gpu_and_checks": 2,
+    "scout_cpu_bound": 0
+  },
+  "work_root": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008",
+  "constraints": [
+    "No CPU campaign access or communication",
+    "All new durable files in this campaign",
+    "Only coordinator writes Git index or publishes",
+    "OMP/BLAS threads=1 per process worker",
+    "No clock reset"
+  ]
+}

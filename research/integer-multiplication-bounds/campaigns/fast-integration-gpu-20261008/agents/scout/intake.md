@@ -1,0 +1,74 @@
+# Public-source intake and live scouting
+
+Observed 2026-10-08 12:43:39 UTC. Public GitHub content was read through
+`gh api`; no other RaD campaign, branch, host or unpublished work was read.
+The scout has no CPU-bound execution allocation. Source snapshots are external,
+immutable campaign inputs; [input-manifest.json](input-manifest.json) records
+their obtainable commits, tarball hashes, locations and license hashes.
+
+## Findings at intake
+
+| Source / author | Pinned head | Public timestamp | Mechanism / claimed saving | Proof status and overlap |
+| --- | --- | --- | --- | --- |
+| [CrocSwap PR36](https://github.com/CrocSwap/integer-mult-bounds/pull/36), icekylinx, substantial OpenAI assistance | `11817ccacb564bb7f98789c20dc11d3fece207e3` | Updated 12:27:27 UTC | Copied retained centers replace local ranks `(r,h)` by `(r,h-r)`; two-stage mass `Wm-N+L`; bit factors `(25,23)`, complex `(28,28)`; conditional `kappa=384569/10^10` | Written scalar/frame/dirty-scratch lemma, exact incremental producer and moment checks; upstream interfaces remain hypotheses. Directly incorporates Paureel/#29 topology and correction, #31/#33 corners, #21/#23/RaD semantic and bulk transfer. |
+| [CrocSwap PR37](https://github.com/CrocSwap/integer-mult-bounds/pull/37), Rohan Arun with OpenAI Codex | `cb86e50e9a07685068874d8e4174b2e6c209b95c` | Updated 12:39:52 UTC | PR36 centers composed with James Chang's reversed PR34 family at `(23,25)`; data profile `9*[1]+[21,17,481]`; conditional `kappa=3850771033/10^14` | Draft at intake; focused checks complete, integrated `make verify` pending. Claimed +0.132122792% versus PR36. Inherits full conditional setup/tape/analytic/assembly assumptions; no external expert or formal theorem acceptance. |
+| [Swapnil round five](https://github.com/Swapnil-jain/integer-mult-kappa/tree/c2c2f279d93643e5ff3fe121a0fbc68e0e6f4007), Swapnil Jain with Claude assistance | `c2c2f279d93643e5ff3fe121a0fbc68e0e6f4007` | Commit 12:38:33 UTC | A common flag basis batches both auxiliary corners, centers and side residuals one level down; global-matching side graph `R=403248` at `h=47`; data-entrance run; conditional `kappa=309575208081/(2*10^16)` | Written equal-factor proof plus small exact / working-dimension modular checks. Lean checks arithmetic certificates with analytic premises, not the complete multiplication theorem or geometry. Retains Paureel motif, PR7 complex source frames, own analytic/routing stack. |
+| [CrocSwap PR35](https://github.com/CrocSwap/integer-mult-bounds/pull/35), Dominik Scholz with OpenAI/Anthropic assistance | `9c345a2a11e5f4f3649f7c68214bf9a2a0a3fe9c` | Updated 12:37:15 UTC | Fixed local bases `I+J` at `(47,45)` replace generic internal profiles, retain data `48*[1]+[43,1933]`; conditional `kappa=16631776/10^12` | Claimed integrated validation complete, 183 regressions and exact bounded-minor reconstruction. Separate reusable fixed-basis result; adopts PR32 profiler and PR33/29 dependencies. |
+
+PR37 physical invariants are `m=575`, `N=4073300`, `W=188181929`,
+`L=2226400`, `s=Wm-N+L=108202762275`, maximum child 529, with all
+4073300 paid endpoint corrections retained. Relative to PR36 it removes
+`4N` width-one children and `2N` width-15 children and adds `2N` width-17
+children. For `0<tau<1`, its moment change
+`2N*(17^tau-15^tau-2)<0` follows directly by integrating
+`tau*x^(tau-1)<1` from 15 to 17. The source README presents this general
+profile inequality separately from rational moment certification.
+
+At the 12:48:39 poll, PR37 advanced to
+`2f7578affce416ad4b6c41f3438ebb734f66a899` and became ready for review.
+GitHub's exact comparison lists only README/patch metadata and the new
+[validation receipt](validation-pr37.json); the scientific source at the pinned
+research commit is unchanged. The author reports full `make verify` finished
+12:45:18 UTC, 182 tests, 18 historical patch checks, plus 12 focused tests.
+This is a reported executable-validation improvement, not external theorem
+review. There is no reason to change or restart the pinned experiment inputs.
+
+## Actionable mathematical dependencies
+
+The copied-center schedule is admissible only for a designated retained
+terminal carrier with no later producer consumer. Its temporary stream must
+be the complete role stream, spectators and control included; all scatter
+reads leave the retained scalar unchanged. The rank-`r` temporary transform,
+separate rank-one endpoint copy correction, scalar charge, copy/read/erase
+cost and source/sink frame cancellation all remain charged. Merely replacing
+histogram entries without these contracts would not certify a new graph.
+
+Swapnil's flag mechanism is structurally distinct. On `F tensor F`, the first
+`h` rows of a common basis correspond to `U R_i V^T`, and the last `h` inverse
+columns to `U^{-T} C_i V^{-1}`. Prefix-square `R_i` and suffix-square `C_i`
+force both corner families lower triangular. The pairing constraints are
+solved before completing the ambient basis. This can merge `h` corner
+singletons into one width-`h` call; it should not be combined by multiplying
+headline savings.
+
+The written flag proof is equal-dimension only. A rectangular extension needs
+independent row/inverse-column prescriptions through the larger factor,
+exact pairing and completion, both auxiliary corner sizes, the one-level-down
+side profiles, both data-entrance profiles, and the copied rank-one complements
+in the same admissible family. The square support proof does not automatically
+establish those conditions at `(23,25)`. Similarly, a fixed `I+J` specialization
+must establish the data corners rather than invoke a generic open-set argument
+after all local freedom has been removed.
+
+## Scout method and continuation
+
+[scout_poll.py](scout_poll.py) records both default heads, all active/recent PR
+heads, linked fork identities and one public repository search. Raw API
+responses stay in the campaign external `raw/scout/<UTC>/` tree; compact
+timestamped metadata is retained under `polls/`. Poll approximately every ten
+minutes until the closing phase, compare changed heads, and inspect new
+mathematical mechanisms before alerting the coordinator. Snapshots already in
+use remain pinned; a public update does not alter running input identities.
+
+Only the campaign coordinator performs Git index, branch, commit and push
+operations. All new scout-authored durable files stay in `agents/scout/`.

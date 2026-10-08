@@ -1,15 +1,7 @@
 # GPU fast-integration campaign
 
-Status: prepared; research has not started.
+Status: active. Start2026-10-08 12:41:06UTC; deadline2026-10-08 14:41:06UTC; closing phase near14:26UTC. [Protocol](protocol.json) fixes the clock/resources and [GOAL.md](GOAL.md) contains the brief.
 
-[GOAL.md](GOAL.md) is the execution prompt. This directory is the exclusive working and durable-output location for the GPU track.
+First new candidate combines changed left-associated23/25 scalar producers with credited copied-center and reversed-corner geometry: exact complete conditional arithmetic supports κ3941587961/10^14,2.3584% above pinned public PR37. Independent finite/interface acceptance remains pending. See [candidate](reports/left-producer-candidate.md), [exact certificate](runs/left23-left25-composition/certificate.json), [graph branch](agents/graph/README.md) and [geometry branch](agents/geometry/report.md). Search continues.
 
-- Host: `gpu`; checkout `/srv/ai/research`.
-- Budget: 16 CPU slots, approximately 160 GB RAM, two RTX 4090 GPUs.
-- Duration: 120 minutes from explicit goal launch, not file creation.
-- Research branch: `research/fast-gpu-20261008`.
-- Initial emphasis: finite constructions, graph/register co-design, rank geometry and compatible integrations.
-
-Use local subagents and sustained useful parallel computation. Check resource use at least every three minutes. Commit and push descriptive scientific checkpoints at least every twenty minutes when durable work changes.
-
-No communication with the independent CPU campaign. Historical results and shared infrastructure are read-only. All new durable artifacts belong here; large execution payloads belong in ignored or external task-owned storage.
+The [GPU negative](reports/gpu-corner-negative.md) rejects a sampled modular extra block. The live [scout](agents/scout/intake.md) pins PR36/37/38 and Swapnil inputs; [hypotheses](reports/hypotheses.md), [resources](reports/resource-status.md), [reproduction](reproduce.md) and manifests retain context. All authored artifacts stay here; prior research and the independent CPU campaign remain untouched.

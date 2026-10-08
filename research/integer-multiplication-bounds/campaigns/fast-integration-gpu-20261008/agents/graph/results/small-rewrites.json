@@ -1,0 +1,328 @@
+{
+  "authored_source_sha256": {
+    "moment_match_positive.cpp": "75a91c1599a522dbf07a0b7212c986856f525cdf5572a2b21e4c8d59445d7c0e",
+    "producer_search.py": "b466cca77435b7b26d0ba3d51c48895587355fe921e45043be24e77dcf4e6516"
+  },
+  "command": [
+    "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/producer_search.py",
+    "--source",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/repos/pr36",
+    "--work",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/small",
+    "--output",
+    "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/results/small-rewrites.json",
+    "--workers",
+    "4",
+    "--small"
+  ],
+  "completed_utc": "2026-10-08T12:49:52.692953+00:00",
+  "configurations": [
+    {
+      "grouping": "pairs",
+      "h": 8,
+      "mode": 1,
+      "seed": 104729,
+      "threshold": 2,
+      "tree": "balanced"
+    },
+    {
+      "grouping": "triple-head",
+      "h": 8,
+      "mode": 1,
+      "seed": 104729,
+      "threshold": 3,
+      "tree": "balanced"
+    },
+    {
+      "grouping": "pairs",
+      "h": 8,
+      "mode": 1,
+      "seed": 104729,
+      "threshold": 2,
+      "tree": "left"
+    },
+    {
+      "grouping": "pairs",
+      "h": 8,
+      "mode": 1,
+      "seed": 104729,
+      "threshold": 2,
+      "tree": "support"
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "8-3-triple-head-balanced-1-104729",
+      "configuration": {
+        "grouping": "triple-head",
+        "h": 8,
+        "mode": 1,
+        "seed": 104729,
+        "threshold": 3,
+        "tree": "balanced"
+      },
+      "error": "AssertionError()",
+      "pid": 3838838,
+      "seconds": 0.0016278330003842711,
+      "started_utc": "2026-10-08T12:49:52.655186+00:00",
+      "status": "failed"
+    },
+    {
+      "R": 664,
+      "baseline_R": 832,
+      "c": 656,
+      "case_id": "8-2-pairs-support-1-104729",
+      "configuration": {
+        "grouping": "pairs",
+        "h": 8,
+        "mode": 1,
+        "seed": 104729,
+        "threshold": 2,
+        "tree": "support"
+      },
+      "dag_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/small/raw/8-2-pairs-support-1-104729/dag.bin",
+      "dag_sha256": "297884d2a1868d12f2e6538afbd969149b727f8cbbd25ab8b55197a0a592e3aa",
+      "envelope_carriers": {
+        "R": 680,
+        "baseline_R": 832,
+        "c": 656,
+        "h": 8,
+        "histogram": [
+          96,
+          1408,
+          532,
+          376,
+          328,
+          32,
+          60,
+          8,
+          8
+        ],
+        "loss": 56,
+        "matched": 152,
+        "orientation_changes": 88,
+        "q": 176,
+        "rank_sum": 5552,
+        "v": 56
+      },
+      "exchanges": 0,
+      "h": 8,
+      "histogram": [
+        212,
+        1231,
+        650,
+        359,
+        104,
+        184,
+        60,
+        8,
+        8
+      ],
+      "labels": {
+        "forward_classes": 616,
+        "h": 8,
+        "nodes": 713,
+        "positive_classes": 500
+      },
+      "logical_graph_sha256": "a7995fa4861bdbc492485992e39be6899b83944c924c06e878caba3c112f838e",
+      "loss": 56,
+      "matched": 168,
+      "orientation_changes": 88,
+      "pid": 3838840,
+      "positive_sha256": "42b03c08b09f3f92464fafcb51246d1f5405e6adef0edd78d48368c3475ea3dd",
+      "q": 176,
+      "rank_sum": 5424,
+      "scalar": {
+        "additions": 656,
+        "all_additions_disjoint": true,
+        "all_partial_outputs_exact": true,
+        "circuit_sha256": "a7995fa4861bdbc492485992e39be6899b83944c924c06e878caba3c112f838e",
+        "every_node_has_common_point": true,
+        "h": 8,
+        "inputs": 56,
+        "merged_additions": 88,
+        "partial_outputs": 176,
+        "roles": 832
+      },
+      "seconds": 0.03437260794453323,
+      "started_utc": "2026-10-08T12:49:52.654131+00:00",
+      "status": "producer and native rank audit passed",
+      "v": 56,
+      "witness_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/small/raw/8-2-pairs-support-1-104729/selected-links.json",
+      "witness_sha256": "56e0d2dc191d6a4f3737f08f8b22e05564f3236c538e7f222a17bbc120659b9e"
+    },
+    {
+      "R": 664,
+      "baseline_R": 824,
+      "c": 648,
+      "case_id": "8-2-pairs-balanced-1-104729",
+      "configuration": {
+        "grouping": "pairs",
+        "h": 8,
+        "mode": 1,
+        "seed": 104729,
+        "threshold": 2,
+        "tree": "balanced"
+      },
+      "dag_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/small/raw/8-2-pairs-balanced-1-104729/dag.bin",
+      "dag_sha256": "f003ac131baaa387708a7be6ad86e622312e68041773bf28fd22a40bc1f6268f",
+      "envelope_carriers": {
+        "R": 664,
+        "baseline_R": 824,
+        "c": 648,
+        "h": 8,
+        "histogram": [
+          96,
+          1400,
+          516,
+          368,
+          312,
+          32,
+          60,
+          8,
+          8
+        ],
+        "loss": 56,
+        "matched": 160,
+        "orientation_changes": 88,
+        "q": 176,
+        "rank_sum": 5424,
+        "v": 56
+      },
+      "exchanges": 0,
+      "h": 8,
+      "histogram": [
+        204,
+        1215,
+        658,
+        359,
+        104,
+        184,
+        60,
+        8,
+        8
+      ],
+      "labels": {
+        "forward_classes": 608,
+        "h": 8,
+        "nodes": 705,
+        "positive_classes": 500
+      },
+      "logical_graph_sha256": "b4a4df1ed7f5089f34a6c78c5704b612e6ac94b152a8d9a8e175a1e79f661706",
+      "loss": 56,
+      "matched": 160,
+      "orientation_changes": 88,
+      "pid": 3838835,
+      "positive_sha256": "cc69d0e99f9471f3cfde357f0eb1664e7d03d390097564f9bb1d0d15631bb7c9",
+      "q": 176,
+      "rank_sum": 5424,
+      "scalar": {
+        "additions": 648,
+        "all_additions_disjoint": true,
+        "all_partial_outputs_exact": true,
+        "circuit_sha256": "b4a4df1ed7f5089f34a6c78c5704b612e6ac94b152a8d9a8e175a1e79f661706",
+        "every_node_has_common_point": true,
+        "h": 8,
+        "inputs": 56,
+        "merged_additions": 88,
+        "partial_outputs": 176,
+        "roles": 824
+      },
+      "seconds": 0.03490016493014991,
+      "started_utc": "2026-10-08T12:49:52.653682+00:00",
+      "status": "producer and native rank audit passed",
+      "v": 56,
+      "witness_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/small/raw/8-2-pairs-balanced-1-104729/selected-links.json",
+      "witness_sha256": "e6b26263e0320bfc3ea6e28b87a0a539ac10a831824d859bd5fe7583f32ce807"
+    },
+    {
+      "R": 652,
+      "baseline_R": 856,
+      "c": 680,
+      "case_id": "8-2-pairs-left-1-104729",
+      "configuration": {
+        "grouping": "pairs",
+        "h": 8,
+        "mode": 1,
+        "seed": 104729,
+        "threshold": 2,
+        "tree": "left"
+      },
+      "dag_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/small/raw/8-2-pairs-left-1-104729/dag.bin",
+      "dag_sha256": "91e447170202138eda55961e06b35523c78c4c9b7e518963616a82944a5134e3",
+      "envelope_carriers": {
+        "R": 652,
+        "baseline_R": 856,
+        "c": 680,
+        "h": 8,
+        "histogram": [
+          128,
+          1392,
+          556,
+          360,
+          336,
+          32,
+          20,
+          8,
+          8
+        ],
+        "loss": 56,
+        "matched": 204,
+        "orientation_changes": 88,
+        "q": 176,
+        "rank_sum": 5328,
+        "v": 56
+      },
+      "exchanges": 0,
+      "h": 8,
+      "histogram": [
+        236,
+        1211,
+        698,
+        339,
+        136,
+        184,
+        20,
+        8,
+        8
+      ],
+      "labels": {
+        "forward_classes": 608,
+        "h": 8,
+        "nodes": 737,
+        "positive_classes": 500
+      },
+      "logical_graph_sha256": "78827abdf86ebbad907c646ad568eb6e02027b6fb945b8fdc2881eed67b4dbe0",
+      "loss": 56,
+      "matched": 204,
+      "orientation_changes": 88,
+      "pid": 3838839,
+      "positive_sha256": "8c2a8b1f0a3f44d5af43c4bf3bc0ef320001bd8602c4777bcc9a9e068a55d774",
+      "q": 176,
+      "rank_sum": 5328,
+      "scalar": {
+        "additions": 680,
+        "all_additions_disjoint": true,
+        "all_partial_outputs_exact": true,
+        "circuit_sha256": "78827abdf86ebbad907c646ad568eb6e02027b6fb945b8fdc2881eed67b4dbe0",
+        "every_node_has_common_point": true,
+        "h": 8,
+        "inputs": 56,
+        "merged_additions": 88,
+        "partial_outputs": 176,
+        "roles": 856
+      },
+      "seconds": 0.03582695405930281,
+      "started_utc": "2026-10-08T12:49:52.653348+00:00",
+      "status": "producer and native rank audit passed",
+      "v": 56,
+      "witness_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/small/raw/8-2-pairs-left-1-104729/selected-links.json",
+      "witness_sha256": "ad2bb37b43766e6aff27115caee720c32e83cc0db77e5cb90b4a9929d681cc84"
+    }
+  ],
+  "source_repository": "https://github.com/icekylinx/integer-mult-bounds",
+  "source_revision": "11817ccacb564bb7f98789c20dc11d3fece207e3",
+  "started_utc": "2026-10-08T12:49:52.572155+00:00",
+  "status": "complete",
+  "workers": 4
+}

@@ -1,0 +1,7 @@
+# GPU controlled-corner discovery
+
+Both RTX4090 devices ran a new batched integer modular elimination search in the pinned PR34/PR37 controlled permutation family at dimensions23/25. Mandatory first23 and last23 local prescriptions remained fixed; free boundary/interior permutation entries were exchanged. Entropy of ascending pivot runs ranked profiles. CPU and GPU implementations agreed on the starting witness and each retained same-prime candidate.
+
+Device0 found a sampled apparent replacement of two singleton calls by a2-block at prime65521. An independent CPU elimination at prime65537 restores the original nine-singleton profile. The candidate is rejected: finite-field zeros at fixed weights do not establish universal rational rank cuts. Device1 retained the original best entropy. Attempts are proposals, not distinct candidates; duplicate prescriptions are possible. This excludes only acceptance of the retained candidate and records a finite search negative, not a global geometry ceiling.
+
+The coordinator checkpointed the completed progress and stopped these owned jobs when useful throughput diminished. [Compact counts](../runs/gpu-corner-discovery/summary.json) link the external whole progress streams; completed text evidence will be gzip-published before final publication. The immutable source is [gpu_corner_discovery.py](../code/gpu_corner_discovery.py). All raw source inputs and unchanged PR34/PR37 mechanisms retain their credited authors/licenses; this search is new campaign code.
