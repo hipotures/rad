@@ -13,6 +13,7 @@ if __name__=='__main__':
     ap.add_argument('--work',type=Path,required=True);ap.add_argument('--output',type=Path,required=True)
     ap.add_argument('--workers',type=int,required=True);ap.add_argument('--bases',nargs='+',choices=['negative','fixed'],default=['negative'])
     ap.add_argument('--dimensions',nargs='+',type=int);ap.add_argument('--skip',type=Path)
+    ap.add_argument('--live-output',type=Path)
     a=ap.parse_args();assert 1<=a.workers<=6 and not a.work.exists() and not a.output.exists();a.work.mkdir(parents=True)
     original=json.loads(a.input.read_text());rows=original['rows'] if isinstance(original,dict) else original
     skipped=set()
@@ -45,9 +46,12 @@ if __name__=='__main__':
             task=submitted[future]
             try:completed.append(future.result())
             except Exception as error:failures.append(dict(index=task[0],basis=task[2],error=repr(error)))
-            status=dict(started_utc=started,completed=len(completed),failed=len(failures),total=len(tasks),
+            status=dict(utc=datetime.now(timezone.utc).isoformat(),started_utc=started,completed=len(completed),failed=len(failures),total=len(tasks),
                         elapsed_seconds=time.monotonic()-begin,workers=a.workers)
             (a.work/'status.json').write_text(json.dumps(status,indent=2)+'\n');print(json.dumps(status),flush=True)
+            if a.live_output:
+                from refresh_geometry_status import refresh
+                refresh(a.work,a.live_output,'Global weighted-positive matching components, then selected new-center CRT and literal compiler gates')
     result=dict(status='COMPLETE' if not failures else 'COMPLETE WITH FAILURES',started_utc=started,
                 completed_utc=datetime.now(timezone.utc).isoformat(),elapsed_seconds=time.monotonic()-begin,
                 distinct_inputs=len(unique),input_rows=len(rows),bases=a.bases,workers=a.workers,

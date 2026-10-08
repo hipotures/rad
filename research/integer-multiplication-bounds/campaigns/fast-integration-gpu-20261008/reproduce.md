@@ -23,3 +23,35 @@ Expected bit saving1031979409/25000000000000, kappa825549449/20000000000000, W17
 Complete selected use maps are gzip-published under `evidence/checkpoint-1457-selected/`. To materialize a specifically named original, decompress its full `<campaign-relative-path>.gz` to a fresh task-owned destination and pass that path to the verifier, or recover its original campaign-relative path when reproducing the historical commands. The manifest records original and compressed hashes. Full completed discovery/control logs and root producer cohorts are retained under `evidence/checkpoint-1504/`; originals remain external. The capacity336-case full payload exceeded the single gzip10MiB limit and was retained externally without splitting; the compact summary and regeneration source remain in Git.
 
 The campaign was extended indefinitely by the user. The original120-minute deadline is a historical scheduling field; ongoing monitors omit their optional `--deadline`. New attempts always use fresh external directories. `code/producer_order_queue.py` runs a bounded worker pool using a pinned PR36 source and compiled binaries regenerated as documented by graph reproduction; exact configurations are under `configs/`. GPU changed-basis discovery accepts explicit source triples and basis modes. Its xorshift zero-state correction prevents an otherwise infinite mutation rejection loop; the interrupted original attempts and repaired distinct source-pair attempts are preserved separately. A finite-field discovery remains separate from a complete conditional construction certificate.
+
+## Accepted enlarged-positive-frame construction (16:05 UTC)
+
+The exact accepted saving is4171385779/100000000000000 and κ=4171211781/100000000000000. Complete data geometry retains169 exact classes. Selected map fixtures and full wrappers are archived whole, with unchanged source-byte hashes.
+
+From the repository root, after the pinned PR36 source and task environment described above are available:
+
+```bash
+C=research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008
+RAD_WORK_ROOT=/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008
+mkdir -p "$RAD_WORK_ROOT/reproduce-accepted-1605"
+for H in 23 25; do
+  for KIND in base-parent whole-clones mapped-partitions; do
+    gzip -dc "$C/evidence/checkpoint-1605-recovery/agents/graph/fixtures/best-positive-negative-$KIND-$H.json.gz" > "$RAD_WORK_ROOT/reproduce-accepted-1605/best-positive-negative-$KIND-$H.json"
+  done
+  python3 "$C/agents/graph/code/rebuild_alternative_selected.py" \
+    --source "$RAD_WORK_ROOT/repos/scout/croc-pr36-11817ccacb56" \
+    --work "$RAD_WORK_ROOT/reproduce-accepted-1605/h$H" \
+    --base-parent "$RAD_WORK_ROOT/reproduce-accepted-1605/best-positive-negative-base-parent-$H.json" \
+    --whole-selected "$RAD_WORK_ROOT/reproduce-accepted-1605/best-positive-negative-whole-clones-$H.json" \
+    --selected "$RAD_WORK_ROOT/reproduce-accepted-1605/best-positive-negative-mapped-partitions-$H.json"
+done
+python3 "$C/code/explicit_profile_composition.py" \
+  --axes "$C/fixtures/mapped-positive-negative-axis-profiles.json" \
+  --phase "$C/fixtures/phase-pr36.json" \
+  --assembly "$C/code/adopted_pr37_balanced_assembly.py" \
+  --geometry "$C/agents/geometry/results/both-negative-data-input-audit.json" \
+  --data "$C/fixtures/both-negative-data-profile.json" \
+  --output "$RAD_WORK_ROOT/reproduce-accepted-1605/exact-certificate.json"
+```
+
+Both source-only scalar/frame/link recoveries were exercised, not only the recurrence calculation. For native physical basis profiles, replay each retained provenance.native_command after replacing its DAG and selected-use inputs with the recovered copies; build the profiler from retained positive_frame_profiles.cpp using the documented command. Compare all child multiplicities and rank mass with the retained fixture. The exact local profiles use per-transition rank upper bounds and sufficient proven-prime products, rather than a sampled generic rank assumption. Completed GPU parameter catalogues are discovery evidence only and are not dependencies of this accepted certificate.

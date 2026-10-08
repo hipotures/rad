@@ -1,5 +1,5 @@
 {
-  "as_of_utc": "2026-10-08T14:35:29.579043+00:00",
+  "as_of_utc": "2026-10-08T16:03:46.993845+00:00",
   "scope": "Conditional composition with pinned analytic/tape/setup assumptions; separate implementation checks are not human external review or formal verification.",
   "rows": [
     {
@@ -121,14 +121,46 @@
     },
     {
       "name": "Positive enlarged frames in the new negative basis, refined23/25",
-      "status": "candidate pending finite compiler/profile acceptance",
+      "status": "accepted conditional construction",
       "kappa_decimal": 4.146147107e-05,
       "kappa": "4146147107/100000000000000",
       "certificate": "runs/positive-negative-refined-composition/certificate.json",
       "source_data": "Complete both-negative169-profile source family",
-      "acceptance_pending": [
-        "Independent selected positive frame/use/compiler closure",
-        "Complete rational controls and per-transition integer-minor/prime-product review"
+      "run": "runs/positive-negative-refined-composition/certificate.json",
+      "independent_check": "agents/graph/results/positive-negative-refined-compiler-1515.json",
+      "basis_review": "agents/geometry/positive-frame-basis-proof.md",
+      "data_audit": "agents/geometry/results/both-negative-data-input-audit.json"
+    },
+    {
+      "name": "Mapped enlarged positive frames in negative bases",
+      "run": "runs/mapped-positive-negative-composition/certificate.json",
+      "kappa": "4171211781/100000000000000",
+      "kappa_decimal": 4.171211781e-05,
+      "saving": "4171385779/100000000000000",
+      "W": 175503731,
+      "status": "accepted conditional construction",
+      "independent_check": "agents/graph/results/best-mapped-positive-negative-compiler-1535.json",
+      "basis_review": "agents/geometry/positive-frame-basis-proof.md",
+      "data_audit": "agents/geometry/results/both-negative-data-input-audit.json",
+      "source_recovery": [
+        "agents/graph/results/best-positive-negative-recovery-23.json",
+        "agents/graph/results/best-positive-negative-recovery-25.json"
+      ]
+    },
+    {
+      "name": "Matrix-weighted mapped positive frames in negative bases",
+      "run": "runs/weighted-positive-negative-composition/certificate.json",
+      "kappa": "4171572903/100000000000000",
+      "kappa_decimal": 4.171572903e-05,
+      "saving": "4171746931/100000000000000",
+      "W": 175503731,
+      "status": "exact candidate; weighted source-only recovery pending",
+      "independent_check": "agents/graph/results/best-weighted-positive-negative-compiler-1539.json",
+      "basis_review": "agents/geometry/positive-frame-basis-proof.md",
+      "data_audit": "agents/geometry/results/both-negative-data-input-audit.json",
+      "source_recovery": [
+        "agents/graph/results/best-positive-negative-recovery-23.json",
+        "agents/graph/results/best-positive-negative-recovery-25.json"
       ]
     }
   ]

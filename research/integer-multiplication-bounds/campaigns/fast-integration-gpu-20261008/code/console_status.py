@@ -14,7 +14,7 @@ def processes(needle):
         try:
             raw=(p/'cmdline').read_bytes().replace(b'\0',b' ').decode(errors='replace')
             if needle not in raw or any(x in raw for x in ('console_status.py','resource_monitor.py','scout_watch.py','scout_poll.py')):continue
-            s=(p/'stat').read_text().split();out[int(p.name)]={'ticks':int(s[13])+int(s[14]),'threads':int(s[19]),'state':s[2],'program':Path(raw.split()[0]).name}
+            s=(p/'stat').read_text().split();out[int(p.name)]={'ticks':int(s[13])+int(s[14]),'threads':int(s[19]),'state':s[2],'program':Path(raw.split()[0]).name,'command':raw[:1200]}
         except (OSError,ValueError,IndexError):pass
     return out
 
@@ -26,17 +26,24 @@ def main():
         delta=[b-a for a,b in zip(s0,s1)];system=100*(sum(delta)-delta[3]-delta[4])/max(1,sum(delta));hz=os.sysconf('SC_CLK_TCK');active=[]
         for pid,v in p1.items():
             pct=100*(v['ticks']-p0.get(pid,v)['ticks'])/hz/elapsed
-            if pct>1 or v['state']=='R':active.append(dict(pid=pid,cpu_percent=round(pct,1),threads=v['threads'],program=v['program']))
-        tested={}
-        for name,rel in [('hierarchy','graph/raw/hierarchy-clones.json'),('orders','root-distinct-orders-20261008T1402/results.json'),('semantic','graph/raw/equal-forms.json'),('joint180','root-joint-orders-repair-20261008T1422/results.json'),('high_threshold720','root-high-thresholds-20261008T1443/results.json'),('capacity336','graph/raw/hierarchy-alternative-allocation.json'),('mapped_provider','graph/raw/mapped-provider-cohort-v2.json')]:
+            if pct>1 or v['state']=='R':active.append(dict(pid=pid,cpu_percent=round(pct,1),threads=v['threads'],program=v['program'],command=v['command']))
+        tested={};agent_status={}
+        for name,rel in [('graph','graph/live-status.json'),('geometry','geometry/live-status.json'),('scout','derived/scout/live-status.json')]:
             try:
-                obj=json.loads((x.work/rel).read_text());tested[name]={'complete':len(obj.get('rows',[])),'planned':len(obj.get('configurations',[])) or obj.get('planned')}
+                obj=json.loads((x.work/rel).read_text())
+                agent_status[name]={k:obj[k] for k in ('utc','updated_utc','completed_cohorts','completed_experiments','running_experiments','current_batch','progress','next_batch','running','completed_prior_positive_exact_profiles') if k in obj}
+                if name=='scout':
+                    agent_status[name]['experiments']=[{k:e[k] for k in ('run_id','state','attempts_may_repeat','tested_canonical_beta_pairs','tested_source_weight_classes','source_weight_catalogue_classes') if k in e} for e in obj.get('experiments',[])]
+            except (OSError,ValueError):pass
+        for path in sorted(x.work.glob('root-*/results.json')):
+            try:
+                obj=json.loads(path.read_text());tested[path.parent.name]={'status':obj.get('status'),'complete':len(obj.get('rows',[])),'planned':len(obj.get('configurations',[]))}
             except (OSError,ValueError):pass
         ledger=json.loads((x.campaign/'reports/construction-ledger.json').read_text());rows=ledger['rows'];best=max((r['kappa_decimal'] for r in rows if r['status']=='accepted conditional construction'),default=None);candidate=max((r['kappa_decimal'] for r in rows if r['status']!='accepted conditional construction'),default=None)
         gpu=subprocess.run(['nvidia-smi','--query-gpu=index,utilization.gpu,memory.used,power.draw','--format=csv,noheader,nounits'],capture_output=True,text=True).stdout.strip()
         if system<70:low_since=low_since or time.monotonic()
         else:low_since=None
-        print(json.dumps({'utc':datetime.now(timezone.utc).isoformat(),'actual_system_cpu_percent':round(system,1),'campaign_cpu_percent_of_16':round(sum(r['cpu_percent'] for r in active)/16,1),'active_compute_processes':active,'gpu_utilization_memory_power':gpu,'tested_configurations':tested,'best_certified_kappa':best,'best_unverified_kappa':candidate,'running_batches':'provider-remapped alternative gates (7 slots); high-threshold producer/order exploration (4 slots); exact positive-frame discriminators (2 slots); changed-source-pair GPU geometry (2 devices)','below70_seconds':round(time.monotonic()-low_since,1) if low_since else 0}),flush=True)
+        print(json.dumps({'utc':datetime.now(timezone.utc).isoformat(),'actual_system_cpu_percent':round(system,1),'campaign_cpu_percent_of_16':round(sum(r['cpu_percent'] for r in active)/16,1),'active_compute_processes':active,'gpu_utilization_memory_power':gpu,'tested_configurations':tested,'best_certified_kappa':best,'best_unverified_kappa':candidate,'live_agent_batches':agent_status,'below70_seconds':round(time.monotonic()-low_since,1) if low_since else 0}),flush=True)
         time.sleep(max(0,60-(time.monotonic()-t)))
 
 if __name__=='__main__':main()
