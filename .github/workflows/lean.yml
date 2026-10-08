@@ -1,0 +1,74 @@
+name: Verify Lean lemmas
+
+on:
+  push:
+    paths:
+      - 'research/integer-mult-breakthrough/formal/**'
+      - 'research/integer-mult-breakthrough/reports/transfers/positive-type-mixing.md'
+      - '.github/workflows/lean.yml'
+      - 'tools/lean_archive_audit.py'
+  pull_request:
+    paths:
+      - 'research/integer-mult-breakthrough/formal/**'
+      - 'research/integer-mult-breakthrough/reports/transfers/positive-type-mixing.md'
+      - '.github/workflows/lean.yml'
+      - 'tools/lean_archive_audit.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rad-lean-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  formal:
+    name: Lean 4.31 / proofs and axiom audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+        working-directory: research/integer-mult-breakthrough/formal
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            .github/workflows
+            tools
+            research/integer-mult-breakthrough/formal
+      - name: Install pinned Lean toolchain via elan
+        run: |
+          set -euo pipefail
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error --location \
+            https://raw.githubusercontent.com/leanprover/elan/0e36a07b9bbcc5381fa6250df109f9a4f94d7bac/elan-init.sh \
+            --output "$RUNNER_TEMP/elan-init.sh"
+          sh "$RUNNER_TEMP/elan-init.sh" -y --no-modify-path --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/lean" --version
+      - name: Retrieve pinned Mathlib build cache
+        run: |
+          set -euo pipefail
+          lake exe cache get Mathlib.Data.Finset.Max Mathlib.Data.Fintype.Basic \
+            Mathlib.Data.Real.Basic Mathlib.Algebra.Order.BigOperators.Ring.Finset \
+            Mathlib.Tactic.NormNum Mathlib.Tactic.FinCases Mathlib.Algebra.BigOperators.Fin
+      - name: Test the proof auditor
+        run: python3 verify.py --self-test
+      - name: Compile proofs, audit every theorem, and run negative controls
+        run: python3 verify.py --output "$RUNNER_TEMP/rad-lean"
+      - name: Require immutable proof sources and dependency lock
+        if: always()
+        run: |
+          git diff --exit-code
+          git diff --cached --exit-code
+      - name: Preserve formal coverage, axioms and verification logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rad-lean-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/rad-lean/
+          if-no-files-found: warn
+          retention-days: 14
