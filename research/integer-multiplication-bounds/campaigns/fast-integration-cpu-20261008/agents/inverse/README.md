@@ -5,6 +5,11 @@ their precision/tape interfaces. It owns only this directory. The coordinating
 agent owns Git publication. Campaign start: 2026-10-08 12:40:55 UTC; deadline:
 14:40:55 UTC; closing phase starts 14:25:55 UTC.
 
+The user extended the campaign indefinitely at approximately 14:23 UTC.
+The initial deadline and closing phase above are historical; research now
+continues until the user stops it. This branch has three compute slots under
+the coordinating agent's extended allocation.
+
 The main new general lemma is [global physical Gaussian inverse locality](reports/global-gaussian-locality.md),
 including periodic aliases and principal-window errors. A second general
 interface is [fixed-grid physical banded LU](reports/physical-band-lu.md) for
@@ -18,6 +23,19 @@ node rotations by a paid `O(V b^tau polylog b)` movement schedule, conditional
 on the credited fixed-tape primitives and documented wide-record regime.
 Independent local reviews accepted the changed bank and source interfaces;
 the coordinating agent owns any resulting full multiplication bound.
+
+The [extended compiled validation](reports/compiled-crt-validation.md)
+executes the ACTUAL masked `F_u` rotations and their
+computed-inverse-key radix repairs inside full CRT trees, including reverse
+padding and existing-coordinate banks. Four/five-prime completed controls are
+retained under `runs/20261008T1440Z-compiled-crt-*`; a genuine two-node batch
+with 14,608 wrong outer records repaired also passes the full forward and
+reverse pipeline in `runs/20261008T1448Z-compiled-crt-bankleaf-five-bank`.
+Six-prime and two-bit guard variants have explicit running protocols and
+pinned code snapshots.
+The [cyclic free-axis interface](reports/cyclic-free-axis-repair.md) supplies
+global principal-window band LU on every complete free axis of inverse repair
+packets, including regular face packets.
 
 The [regular Laurent split](reports/regular-laurent-interface.md) and
 [uniform phase-edge obstruction](reports/phase-edge-obstruction.md) separate
@@ -33,5 +51,7 @@ Downloaded inputs and execution payloads live under campaign `work/inverse/`.
 
 All authored code is independent and standard-library-only. Reproduction
 commands and scope limitations are in the linked reports; completed numerical
-and exact controls are in `runs/`. One CPU slot has been assigned to this
-branch since its initial brief four-worker cyclic controls.
+and exact controls are in `runs/`. Resource allocation changed from an initial
+four-worker cyclic phase to one proof-focused slot, then to three slots after
+the campaign extension. Current execution must follow the coordinator's live
+allocation rather than these historical counts.

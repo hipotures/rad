@@ -110,6 +110,49 @@ error is bounded by the sum of their individual errors. Alternatively, choose
 global `N=I+E` estimate gives `d*||E||=o(1)`, so the tensor norms are bounded
 by a constant. Neither condition follows from dimensionality alone.
 
+### Inverse-kernel normalization and prefix rounding
+
+Individual inverse Laurent coefficients need not contract: even the central
+coefficient can exceed one. To generate their tensor product constructively,
+suppose each axis has the stronger eventual weighted bound
+`r_(A,i)<=1/(4*d^2)`, which holds for the long-digit campaign parameters.
+Then every coefficient obeys
+
+```
+|b_(i,h)| <= 1/(1-r_(A,i)) <= 1+1/d^2 = L.
+```
+
+Normalize each one-axis coefficient by the SAME rational `L=1+1/d^2`.
+Its weighted coefficient l1 norm is also at most one, so the exact normalized
+axis convolution contracts that norm. Generate tensor prefixes
+by multiplying one normalized factor at a time, rounding to `P` fractional
+bits and clamping to `[-1,1]` after each multiplication. Clamping preserves
+the error bound because the exact normalized prefix lies in that interval.
+For each output coefficient the propagated rounding error is at most
+`d*2^-P`; the construction still uses `O(lambda^d)` multiplications in total,
+not `d*lambda^d`, when each axis has at least two entries.
+
+Restore the common scalar `L^d` once for the complete tensor kernel. For
+`d>=2`, `L^d<=exp(1/d)<2`, so this requires one guard bit, not d independent
+guard bits. Including the final scalar multiplication gives a coefficient
+error bounded by `(2*d+1)*2^-P` before the separately charged chirp reserve.
+For a generated tensor page with at most `lambda^d` coefficients, its total
+unweighted coefficient error is at most
+`lambda^d*(2*d+1)*2^-P`. Thus include
+`d*ceil(log2 lambda)+ceil(log2(2*d+1))` guard bits in P before the separately
+charged chirp reserve. This remains `O(Q)` for the campaign parameters.
+Restoring the common scalar needs at most one additional scalar product
+per generated coefficient, not d coefficient-generation passes.
+The exact rational setup for `L^d` has `O(d*log d)` bits, which is below Q
+under the campaign's `Q=Theta(d^18)` choice. Fixed-tape scalar setup and
+rounded scalar multiplication must still be paid in their corresponding
+rows. This normalization argument does not assume an exact denominator
+of `dP` bits for every tensor prefix.
+
+The common-L correction and its one-bit reserve were independently proposed
+by the campaign scout on 2026-10-08. The forward Gaussian factors already
+contract without this inverse-specific normalization.
+
 ## Regular/exception parameter mechanism
 
 Let `delta=d^-B` and `u=Theta(Q/d)`. The regular radius is

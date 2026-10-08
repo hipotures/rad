@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 
-def assembly(a, b, eps, q, kappa, beta=F(1, 20), *, guarded_crt=False):
+def assembly(a, b, eps, q, kappa, beta=F(1, 20), *, guarded_crt=False, zeta=F(1,1000)):
     tau, sigma, lp = 1 - a, 1 - b, 1 - q
     internal = tau + (1 - beta) * max(sigma - tau, F(0))
     leaf = sigma + beta * (1 - sigma)
@@ -23,13 +23,16 @@ def assembly(a, b, eps, q, kappa, beta=F(1, 20), *, guarded_crt=False):
         suffix_ring_product=1 - eps,
         packed_recursive_children=eps * (1 - kappa),
         sparse_repair_sorting=1 - 2 * eps,
-        phase_band_lu=-eps,
+        phase_band_lu=-eps+18*eps*zeta,
+        regular_free_axis_band_lu=-2*eps+18*eps*zeta,
+        source_elementary_phase=18*eps*zeta,
         scalar_polynomial_window_arithmetic=F(0),
         linear_scans=F(0),
     )
     target = 1 - kappa
     strict = dict(
         bit_saving=a, complex_saving=b, complex_above_bit=b-a,
+        zeta_positive=zeta,zeta_below_one_eighth=F(1,8)-zeta,
         beta_positive=beta, beta_below_one=1-beta,
         epsilon_above_half=eps-F(1,2), epsilon_below_one=1-eps,
         q_positive=q, q_below_bit=a-q,
@@ -56,7 +59,7 @@ def assembly(a, b, eps, q, kappa, beta=F(1, 20), *, guarded_crt=False):
         old_compact_geometry=1-eps*(1+q),
     )
     return dict(parameters=dict(a_bit=a, a_complex=b, epsilon=eps, q=q,
-                                 kappa=kappa, beta=beta, tau=tau, sigma=sigma,
+                                 kappa=kappa, beta=beta, zeta=zeta,tau=tau, sigma=sigma,
                                  lambda_=lam, lambda_prime=lp),
                 cost_exponents=cost_exponents, target_exponent=target,
                 strict_slacks=strict, rejected_unchanged_controls=controls,
@@ -73,6 +76,7 @@ def assembly(a, b, eps, q, kappa, beta=F(1, 20), *, guarded_crt=False):
                     'source-closed sparse repair and band-LU precision',
                     'terminating strong-induction recursive integer multiplication',
                     'prime, catalogue, setup and eventual exact recovery',
+                    'fixed elementary-function exponent zeta, including one source phase per coefficient',
                 ],
                 arithmetic_pass=not failures, failed_slacks=failures,
                 proof_status='exact arithmetic only; all-size premises reviewed separately',

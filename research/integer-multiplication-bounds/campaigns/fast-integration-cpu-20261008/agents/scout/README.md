@@ -37,6 +37,8 @@ The surviving physical rows include prefix movement, phase localization and phas
 - [Guarded CRT review](guarded-crt-review.md): independent criticism of the new arithmetic repair and its actual banks, scans and repair boundaries.
 - [Round-six source receipt](swapnil-round6-source.json): compact selected source provenance for Swapnil's 14:01 public update.
 - [Prime interval review](prime-interval-review.md): primary Baker–Harman–Pintz citation, distinct-prime supply and charged deterministic setup for the long-digit chooser.
+- [Complete composition review](full-composition-review.md): independent uniform Gaussian/native precision, exact recovery and strict-margin review, with three explicit implementation clarifications.
+- [PR45 source receipt](pr45-source.json): selected eligible Gaussian parity audit inputs, without cloning the community integration branch.
 - `observations/`: timestamped compact observations and differences.
 - [refresh_public_sources.py](code/refresh_public_sources.py): one read-only `gh api` observation, with optional broader searches; it never fetches RaD branches or performs Git mutations.
 

@@ -183,10 +183,17 @@ right group words to target fields, batches the independent valid-interval
 rotations, and restores the layout required for the next splitting scan.
 The first bounded number of levels has only a bounded number of nodes and
 may use the original ordinary rotations. At later levels split nodes into
-two classes; the inactive class provides actual dirty coordinate banks for
-the active class. Node widths are `O(b/number_of_nodes)`, so both classes
-have a fixed fraction of the address bits after bounded rounding changes.
-There are `O(log d)` levels.
+two classes by greedily balancing their TOTAL binary word widths, not their
+counts. The inactive class and all already unsplit singleton leaves provide
+actual dirty coordinate banks for the active class. In the campaign every
+leaf has width ell except one suffix leaf of width below `2ell`; after a
+bounded number of balanced levels the largest remaining node has at most
+`N/4` bits. Greedy balancing puts at most `(N_split+N/4)/2<=5N/8` bits in
+either active class, where `N_split<=N` is the total split-node width. Hence
+the complement contains at least `3N/8` existing inactive bits, more than
+the conservative `N/8` bank used below. Highly unequal arbitrary leaf
+widths need a separate width-balanced tree argument. There are
+`O(log d)` levels for the campaign's specified leaf widths.
 
 Write `N=log2(T)=Theta(b)`. For fixed `epsilon<1`,
 `2mG=O(d log b)=o(N)`. Use the conservative inactive

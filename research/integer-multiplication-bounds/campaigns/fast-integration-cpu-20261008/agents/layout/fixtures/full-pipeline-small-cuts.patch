@@ -1,0 +1,33 @@
+--- producer.py
++++ producer.py
+@@ -22,8 +22,6 @@
+ from time import perf_counter
+ 
+ import mpmath as mp
+-
+-SOURCE_SHA256_AT_IMPORT = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+ 
+ 
+ def tz(value, bits):
+@@ -395,9 +393,9 @@
+     assert maximum_real_error < mp.mpf('0.25') and maximum_imaginary_error < mp.mpf('0.25')
+     assert missing_source_scale_wrong > 0
+     radix = 1 << digit_bits
+-    input_a = sum(value * radix ** k for k, value in enumerate(a) if value)
+-    input_b = sum(value * radix ** k for k, value in enumerate(b) if value)
+-    recovered_integer = sum(value * radix ** k for k, value in enumerate(actual) if value)
++    input_a = sum(value * radix ** k for k, value in enumerate(a))
++    input_b = sum(value * radix ** k for k, value in enumerate(b))
++    recovered_integer = sum(value * radix ** k for k, value in enumerate(actual))
+     if config.get('input_mode') == 'cyclic-cut':
+         assert recovered_integer == input_a * input_b % (radix ** volume - 1)
+         assert recovered_integer != input_a * input_b
+@@ -456,7 +454,7 @@
+     with ProcessPoolExecutor(max_workers=args.workers) as executor:
+         rows = list(executor.map(run_case, configs))
+     result = {'status': 'bounded full dyadic Gaussian CRT multiplication pipeline passed', 'workers': args.workers,
+-              'dependency': {'mpmath': mp.__version__}, 'source_sha256': SOURCE_SHA256_AT_IMPORT,
++              'dependency': {'mpmath': mp.__version__}, 'source_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+               'rows': rows, 'seconds': perf_counter() - started}
+     (output / 'certificate.json').write_text(json.dumps(result, indent=2) + '\n')
+     print(json.dumps({'status': result['status'], 'seconds': result['seconds'],

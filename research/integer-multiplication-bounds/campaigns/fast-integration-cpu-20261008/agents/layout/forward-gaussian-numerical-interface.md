@@ -113,7 +113,10 @@ precision limitation is explicit. The producer now chooses
 and evaluates pi by Machin's formula with a matching convergent-tail cutoff.
 It rebuilds rational geometry after increasing precision. A changed rerun of
 ONLY those two affected cases uses205 decimal digits and the same predefined
-614-bit grid; the corrected receipt is added when complete. The other finite
+614-bit grid. Both corrected cases passed at 14:25:23 UTC, with maximum
+errors 8.42e-152 and 3.19e-143, retained in
+`results/forward-L128-precision-repair.json`. Batch wall time 244.49 seconds
+includes the recorded allocation pause; it is not two-worker CPU time. The other finite
 cases need no unchanged rerun because P<=374 fits their original160 digits.
 
 Reproduce the changed families by adding `--config` with respectively

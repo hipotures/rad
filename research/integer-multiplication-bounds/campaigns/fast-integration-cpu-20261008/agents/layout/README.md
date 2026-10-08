@@ -1,8 +1,9 @@
 # Fixed-tape layout and localization branch
 
 This is the task-owned branch of the CPU campaign beginning
-2026-10-08 12:40:55 UTC and ending 14:40:55 UTC. Substantive research closes
-approximately 14:25:55 UTC. Only the coordinating agent commits and pushes.
+2026-10-08 12:40:55 UTC. The user extended substantive research indefinitely
+at approximately 14:23 UTC; the original 14:40:55 UTC deadline is retained
+only as initial provenance. Only the coordinating agent commits and pushes.
 
 The question is whether persistent short-field representations and localized
 resampling can improve the complete multiplication cost, with every fixed-tape
@@ -48,10 +49,10 @@ It records the acyclic chooser that makes the last polynomial axis at most
 twice as wide in bits as every main axis, and checks actual guard, row stock,
 superpolynomial records and supplied-K uses in the pinned source.
 
-Current status at 14:22 UTC: actual signed Kronecker products and independently
+Historical milestone at 14:22 UTC: actual signed Kronecker products and independently
 evaluated periodic Gaussian references passed twelve fractional cells in three
-changed parameter families. A higher-precision repair is running for the two
-largest cells. The independent full CRT audit retained the old O(dV) payload
+changed parameter families. A higher-precision repair subsequently passed for both
+largest cells at 14:25:23 UTC. The independent full CRT audit retained the old O(dV) payload
 row until a NEW guarded-reflection mechanism was provided; the coordinate-bit
 router alone cannot implement modular residue updates.
 
@@ -72,3 +73,21 @@ retained as sensitivity evidence and a corrected source computes enough digits
 and pi from each case's precision. Bounded checks are not an all-size proof.
 The guarded CRT review supports a changed conditional physical program; the
 coordinator owns its full numerical composition and final exponent claim.
+
+At 14:48 UTC the complete bounded arithmetic pipeline passed four ordinary
+integer products and four deliberately wrapped cyclic products. It composes
+prefix-normalized balanced CRT, periodic Gaussian expansion and compression,
+true source/target frequency permutations, synthetic polynomial-record FFTs,
+actual signed Kronecker products, suffix twists, opposite transforms and final
+source-volume-squared coefficient recovery. The Gaussian stages currently use
+explicitly charged dense reference passes, so these receipts establish
+normalization and composition, rather than fast asymptotic tape execution.
+Larger unequal-ratio and end-to-end cases continue in the allocated CPU queue.
+
+- [Full Gaussian/CRT/integer-recovery composition report](full-gaussian-integer-pipeline.md).
+- [Executable dyadic pipeline](code/check_full_gaussian_integer_pipeline.py).
+- [Four ordinary products](results/full-gaussian-integer-pipeline.json).
+- [Four real cyclic-cut products and omitted-twist negatives](results/full-gaussian-cyclic-cuts.json).
+- [Large source-transform composition](results/source-transform-large-family.json).
+- [Dependency and source recovery manifest](configs/gaussian-pipeline-provenance.json).
+- [Ordered reproduction commands](reproduce-gaussian-pipeline.md).

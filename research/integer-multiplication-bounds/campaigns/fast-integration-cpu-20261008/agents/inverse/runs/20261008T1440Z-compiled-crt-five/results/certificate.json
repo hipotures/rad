@@ -1,0 +1,675 @@
+{
+  "primes": [
+    3,
+    5,
+    7,
+    11,
+    13
+  ],
+  "address_bits": 16,
+  "allocated_records": 65536,
+  "valid_records": 15015,
+  "initial_padding_provenance": "input k+1 for0<=k<S; every other payload explicitly zero",
+  "added_address_bits": 0,
+  "compiled_batches": [
+    {
+      "active_nodes": 1,
+      "target_widths": [
+        3
+      ],
+      "donor_available_bits": 11,
+      "borrowed_U_T_bits": 2,
+      "borrowed_F_u_scratch_bits": 3,
+      "added_address_bits": 0,
+      "wrong_before_outer_repair": 0,
+      "actual_F_u_calls": 18,
+      "actual_F_u_rotations": 180
+    },
+    {
+      "active_nodes": 1,
+      "target_widths": [
+        4
+      ],
+      "donor_available_bits": 8,
+      "borrowed_U_T_bits": 2,
+      "borrowed_F_u_scratch_bits": 3,
+      "added_address_bits": 0,
+      "wrong_before_outer_repair": 0,
+      "actual_F_u_calls": 24,
+      "actual_F_u_rotations": 240
+    }
+  ],
+  "full_leaf_oracle": true,
+  "full_reverse_pipeline": true,
+  "all_padding_boundaries_restored": true,
+  "events": 115,
+  "ledger": [
+    {
+      "name": "joint-split",
+      "occupied_records": 15015,
+      "kind": "joint_monotone_scan"
+    },
+    {
+      "name": "bounded-small-node-ordinary-rotation",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "joint-split",
+      "occupied_records": 15015,
+      "kind": "joint_monotone_scan"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-load",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-unload",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-load",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-unload",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-load",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-unload",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "three-reflection-OUTER-repair",
+      "records": 49152,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "bounded-small-node-ordinary-rotation",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "joint-split",
+      "occupied_records": 15015,
+      "kind": "joint_monotone_scan"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho3-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho3-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-load",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho3-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho3-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-unload",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho3-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho3-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-load",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho3-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho3-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-unload",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho3-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho3-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-load",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho0-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho1-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho1-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho2-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho2-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "F_u-rho3-ten-rotations",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "F_u-rho3-actual-radix-repair",
+      "records": 57344,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    },
+    {
+      "name": "actual-guarded-binary-addition",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "computed-predicate-unload",
+      "records": 65536,
+      "kind": "permutation"
+    },
+    {
+      "name": "three-reflection-OUTER-repair",
+      "records": 49152,
+      "radix_passes": 16,
+      "kind": "computed_inverse_key_repair"
+    }
+  ],
+  "wall_seconds": 174.01271393199931,
+  "run_id": "20261008T1440Z-compiled-crt-five",
+  "status": "PASS",
+  "source_sha256": "e6a4cbfa63885bb0a2a6ade6b5f45b44ec54e9d0865b289bfb93b70bb45bab80",
+  "guard_dependency_sha256": "28692297f7383f055ccc18f0622f5ce2c1e1a1865ddb7ae90a8b968e8eff9eb0",
+  "workers": 1,
+  "native_threads": 1,
+  "scope": "Actual F_u inside compiled CRT, actual multistage reverse-key radix repairs; finite model, no tape complexity measurement"
+}

@@ -46,3 +46,15 @@ Expanded cyclic inverse, Gaussian packet and exact CRT families are running.
 14:34 UTC checkpoint: the new [guarded-reflection CRT tree](agents/inverse/reports/guarded-crt-batching.md) has independent [algebra review](agents/scout/guarded-crt-review.md) and [physical layout review](agents/layout/crt-reflection-layout-review.md). It batches the modular rotations using dirty banks from existing inactive coordinates, restores the banks, and repairs bad guard states. This is a new construction, not a relabeling of bit routing. Exact controls include complete four-target payload repair, actual repeated-bit native fanout, joint splitting, and borrowing an existing bank without extra address bits.
 
 The revised exact ledger supports a stronger **conditional candidate**, kappa=78376985522307/2000000000000000000 (approximately 0.0000391884927611535). Full end-to-end Gaussian/FFT/recovery composition remains under independent review and executable falsification; this checkpoint does not promote a complete new certified multiplication exponent. The old unbatched CRT exclusion remains valid for the old algorithm.
+
+15:03 UTC milestone: the [complete conditional transfer](reports/conditional-composition.md)
+has an [independent complete-map/error/recovery review](agents/scout/full-composition-review.md).
+It supports every fixed rational kappa<a under the pinned named native
+contracts, with explicit witness kappa=78376985522307/2000000000000000000.
+This improves the old unbatched a/(1+a) ceiling. Fixed-zeta scalar charges,
+normalized inverse prefix factors, global LU on all free repair axes and the
+strict u^2*theta>=2Q constant choice are included. The [updated exact ledger](results/packed-assembly-precision-repair.json)
+passes. This is a reviewed written conditional result; no new finite native
+witness, formal verification, practical cutoff or executed complete fast-tape
+implementation is claimed. The full small Gaussian/integer pipeline and an
+actual two-node CRT pipeline passed, while larger/precision tests continue.

@@ -37,3 +37,15 @@ The exact ledger has been repaired. New dirty-guard/parallel carry CRT
 constructions are being independently tested; they are unverified leads.
 The user requested sustained CPU exploration without changing the clock.
 Expanded cyclic inverse, Gaussian packet and exact CRT families are running.
+
+15:03 UTC milestone: the [complete conditional transfer](reports/conditional-composition.md)
+has an [independent complete-map/error/recovery review](agents/scout/full-composition-review.md).
+It supports every fixed rational kappa<a under the pinned named native
+contracts, with explicit witness kappa=78376985522307/2000000000000000000.
+This improves the old unbatched a/(1+a) ceiling. Fixed-zeta scalar charges,
+normalized inverse prefix factors, global LU on all free repair axes and the
+strict u^2*theta>=2Q constant choice are included. The [updated exact ledger](results/packed-assembly-precision-repair.json)
+passes. This is a reviewed written conditional result; no new finite native
+witness, formal verification, practical cutoff or executed complete fast-tape
+implementation is claimed. The full small Gaussian/integer pipeline and an
+actual two-node CRT pipeline passed, while larger/precision tests continue.

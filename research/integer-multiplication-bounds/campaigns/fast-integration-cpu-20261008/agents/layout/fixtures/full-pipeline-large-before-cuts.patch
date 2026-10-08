@@ -1,0 +1,91 @@
+--- producer.py
++++ producer.py
+@@ -22,8 +22,6 @@
+ from time import perf_counter
+ 
+ import mpmath as mp
+-
+-SOURCE_SHA256_AT_IMPORT = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+ 
+ 
+ def tz(value, bits):
+@@ -327,11 +325,8 @@
+ def direct_integer_convolution(a, b, volume):
+     result = [0] * volume
+     for j, x in enumerate(a):
+-        if not x:
+-            continue
+         for k, y in enumerate(b):
+-            if y:
+-                result[(j + k) % volume] += x * y
++            result[(j + k) % volume] += x * y
+     return result
+ 
+ 
+@@ -357,9 +352,6 @@
+     a = [rng.randrange(1 << digit_bits) for _ in range(count)]
+     b = [rng.randrange(1 << digit_bits) for _ in range(count)]
+     a[-1] = b[-1] = (1 << digit_bits) - 1
+-    if config.get('input_mode') == 'cyclic-cut':
+-        a, b = [0] * volume, [0, (1 << digit_bits) - 1]
+-        a[-1] = (1 << digit_bits) - 2
+     u = crt_checked_source(a, source_shape, q, digit_bits)
+     v = crt_checked_source(b, source_shape, q, digit_bits)
+     matrices = [setup_axis(s, t, config['alpha'], q) for s, t in zip(source_shape, target_shape)]
+@@ -395,39 +387,23 @@
+     assert maximum_real_error < mp.mpf('0.25') and maximum_imaginary_error < mp.mpf('0.25')
+     assert missing_source_scale_wrong > 0
+     radix = 1 << digit_bits
+-    input_a = sum(value * radix ** k for k, value in enumerate(a) if value)
+-    input_b = sum(value * radix ** k for k, value in enumerate(b) if value)
+-    recovered_integer = sum(value * radix ** k for k, value in enumerate(actual) if value)
+-    if config.get('input_mode') == 'cyclic-cut':
+-        assert recovered_integer == input_a * input_b % (radix ** volume - 1)
+-        assert recovered_integer != input_a * input_b
+-    else:
+-        assert recovered_integer == input_a * input_b
++    input_a = sum(value * radix ** k for k, value in enumerate(a))
++    input_b = sum(value * radix ** k for k, value in enumerate(b))
++    recovered_integer = sum(value * radix ** k for k, value in enumerate(actual))
++    assert recovered_integer == input_a * input_b
+     # Independent explicit cyclic cut exercises the CRT homomorphism.
+     cut_left, cut_right = crt_forward(volume - 1, source_shape), crt_forward(1, source_shape)
+     assert tuple((a + b) % s for a, b, s in zip(cut_left, cut_right, source_shape)) == crt_forward(0, source_shape)
+-    cut_f = [(0, 0)] * math.prod(target_shape)
+-    cut_g = [(0, 0)] * math.prod(target_shape)
+-    cut_f[target_shape[-1] - 1] = (1 << (q - 2), 0)
+-    cut_g[1] = (1 << (q - 3), 0)
+-    correct_cut = scalar_cyclic_convolution(cut_f, cut_g, target_shape, q, suffix_phases, ledger)[0]
+-    wrong_cut = scalar_cyclic_convolution(cut_f, cut_g, target_shape, q, [(1 << q, 0)] * target_shape[-1], ledger)[0]
+-    expected_cut = mp.mpf(1) / (32 * math.prod(target_shape))
+-    assert abs(mp.mpf(correct_cut[0]) / (1 << q) - expected_cut) < mp.mpf(2) ** (-q + 32)
+-    assert abs(mp.mpf(wrong_cut[0]) / (1 << q) + expected_cut) < mp.mpf(2) ** (-q + 32)
++    wrong_negacyclic_wrap = -1
++    assert wrong_negacyclic_wrap != 1
+     receipt = {'config': config, 'status': 'full dyadic Gaussian CRT synthetic-ring multiplication recovery passed',
+                'source_volume': volume, 'target_volume': math.prod(target_shape), 'crt_addresses_checked': 2 * volume,
+                'direct_source_frequency_indices': direct_indices,
+                'source_transform_error': str(transform_error), 'coefficient_real_error': str(maximum_real_error),
+                'coefficient_imaginary_error': str(maximum_imaginary_error), 'recovered_coefficients': volume,
+-               'input_digit_arrays': [a, b] if volume <= 8192 else None,
+-               'input_integer_product_hex_sha256': hashlib.sha256(hex(input_a * input_b).encode()).hexdigest(),
+-               'input_integer_product_bits': (input_a * input_b).bit_length(),
+-               'input_integer_product': str(input_a * input_b) if (input_a * input_b).bit_length() < 10000 else None,
++               'input_digit_arrays': [a, b], 'input_integer_product': str(input_a * input_b),
+                'negative_missing_source_scale_wrong_coefficients': missing_source_scale_wrong,
+-               'negative_missing_suffix_twist': {'correct_cyclic_cut': [str(mp.mpf(x) / (1 << q)) for x in correct_cut],
+-                                               'incorrect_untwisted_cut': [str(mp.mpf(x) / (1 << q)) for x in wrong_cut],
+-                                               'expected_coefficient': str(expected_cut)},
++               'negative_missing_suffix_twist': 'cyclic cut gives -1 rather than +1',
+                'axis_setup': [x[2] for x in matrices], 'movement_ledger': ledger, 'seconds': perf_counter() - started,
+                'limitations': ['finite dense Gaussian reference passes are charged and do not instantiate the fast tensor-cell producer',
+                                'bounded CRT tree permutation is checked exactly; tiny cases use explicit reference routes, without an all-size rowbank stock claim',
+@@ -456,7 +432,7 @@
+     with ProcessPoolExecutor(max_workers=args.workers) as executor:
+         rows = list(executor.map(run_case, configs))
+     result = {'status': 'bounded full dyadic Gaussian CRT multiplication pipeline passed', 'workers': args.workers,
+-              'dependency': {'mpmath': mp.__version__}, 'source_sha256': SOURCE_SHA256_AT_IMPORT,
++              'dependency': {'mpmath': mp.__version__}, 'source_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+               'rows': rows, 'seconds': perf_counter() - started}
+     (output / 'certificate.json').write_text(json.dumps(result, indent=2) + '\n')
+     print(json.dumps({'status': result['status'], 'seconds': result['seconds'],
