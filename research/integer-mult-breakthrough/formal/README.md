@@ -33,7 +33,7 @@ Python continues to replay the separate exact arithmetic certificates.
 With elan installed, from this directory:
 
 ```sh
-lake exe cache get Mathlib/Data/Finset/Max.lean Mathlib/Data/Fintype/Basic.lean Mathlib/Data/Real/Basic.lean Mathlib/Algebra/Order/BigOperators/Ring/Finset.lean Mathlib/Tactic/NormNum.lean Mathlib/Tactic/FinCases.lean Mathlib/Algebra/BigOperators/Fin.lean
+lake exe cache get Mathlib.Data.Finset.Max Mathlib.Data.Fintype.Basic Mathlib.Data.Real.Basic Mathlib.Algebra.Order.BigOperators.Ring.Finset Mathlib.Tactic.NormNum Mathlib.Tactic.FinCases Mathlib.Algebra.BigOperators.Fin
 python3 verify.py --self-test
 python3 verify.py
 ```

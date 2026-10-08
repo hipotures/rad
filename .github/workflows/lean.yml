@@ -52,9 +52,9 @@ jobs:
       - name: Retrieve pinned Mathlib build cache
         run: |
           set -euo pipefail
-          lake exe cache get Mathlib/Data/Finset/Max.lean Mathlib/Data/Fintype/Basic.lean \
-            Mathlib/Data/Real/Basic.lean Mathlib/Algebra/Order/BigOperators/Ring/Finset.lean \
-            Mathlib/Tactic/NormNum.lean Mathlib/Tactic/FinCases.lean Mathlib/Algebra/BigOperators/Fin.lean
+          lake exe cache get Mathlib.Data.Finset.Max Mathlib.Data.Fintype.Basic \
+            Mathlib.Data.Real.Basic Mathlib.Algebra.Order.BigOperators.Ring.Finset \
+            Mathlib.Tactic.NormNum Mathlib.Tactic.FinCases Mathlib.Algebra.BigOperators.Fin
       - name: Test the proof auditor
         run: python3 verify.py --self-test
       - name: Compile proofs, audit every theorem, and run negative controls
