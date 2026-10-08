@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 
-def assembly(a, b, eps, q, kappa, beta=F(1, 20)):
+def assembly(a, b, eps, q, kappa, beta=F(1, 20), *, guarded_crt=False):
     tau, sigma, lp = 1 - a, 1 - b, 1 - q
     internal = tau + (1 - beta) * max(sigma - tau, F(0))
     leaf = sigma + beta * (1 - sigma)
@@ -19,7 +19,7 @@ def assembly(a, b, eps, q, kappa, beta=F(1, 20)):
     cost_exponents = dict(
         completed_fft=1 - eps * q,
         coordinate_routing=tau,
-        triangular_controlled_crt=eps,
+        triangular_controlled_crt=tau if guarded_crt else eps,
         suffix_ring_product=1 - eps,
         packed_recursive_children=eps * (1 - kappa),
         sparse_repair_sorting=1 - 2 * eps,
@@ -43,6 +43,8 @@ def assembly(a, b, eps, q, kappa, beta=F(1, 20)):
         forward_tensor_chirp_gap=F(18)-F(9),
         tensor_diagonal_prefix_depth=18*eps-eps,
         catalogue_cell_growth=eps-(1-eps),
+        crt_inverse_metadata=18*eps-4,
+        crt_bank_and_suffix_growth=1-eps,
     )
     strict.update({name+'_below_target': target-exponent
                    for name, exponent in cost_exponents.items()})
@@ -74,7 +76,9 @@ def assembly(a, b, eps, q, kappa, beta=F(1, 20)):
                 ],
                 arithmetic_pass=not failures, failed_slacks=failures,
                 proof_status='exact arithmetic only; all-size premises reviewed separately',
-                crt_correction='The known-coordinate router does not replace d controlled modular CRT rotations.')
+                crt_correction=('New independently reviewed guarded-reflection CRT tree pays the rotations.' if guarded_crt else
+                                'The known-coordinate router does not replace d controlled modular CRT rotations.'),
+                guarded_crt=guarded_crt)
 
 
 def encode(x):
@@ -102,9 +106,14 @@ def main():
                       a/(1+a)*F(9999999,10000000))
     assert balanced['arithmetic_pass']
     assert balanced['gain_over_old_supremum']<0
+    guarded=assembly(a,F(717,10000000),F(999999,1000000),
+                     a*F(999999,1000000),a*F(99999,100000),guarded_crt=True)
+    assert guarded['arithmetic_pass']
+    assert guarded['gain_over_old_supremum']>0
     result=dict(rejected_near_primitive_candidate=rejected,
                 corrected_balanced_arithmetic=balanced,
-                scientific_conclusion='Surviving triangular CRT preserves the a/(1+a) ceiling; no improved exponent is promoted.')
+                new_guarded_crt_composition=guarded,
+                scientific_conclusion='Old triangular CRT preserves a/(1+a); the new guarded-reflection tree supports a written conditional composition approaching a, subject to the separately reviewed all-size proofs and named native premises.')
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(encode(result),indent=2)+'\n')
     print(json.dumps(encode(dict(rejected_crt_slack=rejected['failed_slacks'],

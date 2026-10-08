@@ -18,19 +18,14 @@ reference interfaces at RaD commit
 Public current inputs will be pinned in the campaign scout snapshot.
 Work files belong to the ignored campaign `work/layout/` directory.
 
-Status at12:57UTC: first exact controls completed. The following stable artifacts
-are ready for the coordinating agent's first checkpoint:
+Initial exact controls preserve usable lemmas and excluded shortcuts:
 
 - [Dimensional halo and paid catalogue lemma](halo-budget-lemma.md).
 - [Equal main axes with one wide distinguished-axis candidate](distinguished-axis-candidate.md).
 - [Independent exact layout checker](code/exact_layout_discriminators.py).
 - [Compact finite results](results/initial-discriminators.json).
 
-Next: independently check full distinguished-axis Fourier/product alignment and
-investigate packed tensor convolution with regular/exception phase regions.
-The latter is a speculative analytic interface and has no promoted exponent.
-
-Status at13:36UTC: the exact generalized Fourier/product check is complete;
+The exact generalized Fourier/product check is complete;
 the deferred whole-reservoir FFT transfer is written and has a separate source
 review. Joint fractional source embedding, nearest selectors, shifted-grid
 alignment and final source assembly now have a written fixed-tape interface
@@ -47,8 +42,33 @@ The full packed Gaussian and sparse-repair candidate is coordinated outside this
 owned subdirectory. Its analytic inverse precision and kernel interfaces remain
 separate conditions. No complete improved kappa is claimed by these files.
 
-At13:40UTC the [native parameter audit](native-parameter-audit.md) explicitly
+The [native parameter audit](native-parameter-audit.md) explicitly
 reparameterizes the coefficient precision independently of the address length.
 It records the acyclic chooser that makes the last polynomial axis at most
 twice as wide in bits as every main axis, and checks actual guard, row stock,
 superpolynomial records and supplied-K uses in the pinned source.
+
+Current status at 14:22 UTC: actual signed Kronecker products and independently
+evaluated periodic Gaussian references passed twelve fractional cells in three
+changed parameter families. A higher-precision repair is running for the two
+largest cells. The independent full CRT audit retained the old O(dV) payload
+row until a NEW guarded-reflection mechanism was provided; the coordinate-bit
+router alone cannot implement modular residue updates.
+
+- [True forward Gaussian/selector numerical interface](forward-gaussian-numerical-interface.md).
+- [Independent guarded-reflection CRT layout review](crt-reflection-layout-review.md).
+- [CRT scoped negatives and unpromoted carry backup](crt-scoped-negatives-and-carry-backup.md).
+- [Initial four Gaussian cells](results/forward-fractional-gaussian.json).
+- [Six changed larger-cell Gaussian cases](results/forward-large-family-gaussian.json).
+- [Two new 3D L32/global-period Gaussian cells](results/forward-three-dimensional-L32-gaussian.json).
+- [Old CRT payload schedule and substitution negatives](results/crt-movement-obligations.json).
+- [One million exact mixed-radix carry controls](results/joint-crt-carries.json).
+
+The twelve Gaussian cases pass a 128-bit output target, totaling 72 checked
+outputs and 36 exact global-selector samples. Their work grids include the
+complete tensor chirp reserve. The two L128 cases originally used too few
+Decimal setup digits for their declared work grids; their old receipts are
+retained as sensitivity evidence and a corrected source computes enough digits
+and pi from each case's precision. Bounded checks are not an all-size proof.
+The guarded CRT review supports a changed conditional physical program; the
+coordinator owns its full numerical composition and final exponent claim.

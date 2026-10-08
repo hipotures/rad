@@ -34,7 +34,7 @@ The rational log enclosure uses range reduction to `[1,2]` followed by a positiv
 From the repository root, after regenerating the coordinator's two exported edge fixtures:
 
 ```bash
-python3 research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/agents/scout/check_continuations.py \
+python3 research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/agents/scout/code/check_continuations.py \
   research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/matching-20261008T125010Z/h23-edges.csv \
   research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/matching-20261008T125010Z/h25-edges.csv \
   --output research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/agents/scout/continuation-review.json

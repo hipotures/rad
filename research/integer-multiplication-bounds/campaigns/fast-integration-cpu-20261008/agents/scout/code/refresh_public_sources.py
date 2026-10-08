@@ -17,7 +17,7 @@ from pathlib import Path
 import subprocess
 
 
-OWN = Path(__file__).resolve().parent
+OWN = Path(__file__).resolve().parents[1]
 CAMPAIGN = OWN.parent.parent
 WORK = CAMPAIGN / "work" / "scout"
 WATCHED = {
@@ -54,7 +54,9 @@ def eligible_pulls():
         repository = (p["headRepository"] or {}).get("nameWithOwner", "")
         campaign_linked = (author.lower() == "hipotures"
                            or repository.lower().startswith("hipotures/")
-                           or "rad " in p["title"].lower())
+                           or "rad " in p["title"].lower()
+                           or bool(re.search(r"(?:^|[-/_])rad(?:$|[-/_])",
+                                             p["headRefName"], re.I)))
         if p["createdAt"] >= "2026-10-08T13:35:00Z":
             # Incidental new changed-graph metadata coincided with the excluded
             # independent RaD publication. Conservative quarantine prevents

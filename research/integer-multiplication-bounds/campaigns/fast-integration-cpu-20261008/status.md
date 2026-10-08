@@ -26,3 +26,5 @@ The exact ledger has been repaired. New dirty-guard/parallel carry CRT
 constructions are being independently tested; they are unverified leads.
 The user requested sustained CPU exploration without changing the clock.
 Expanded cyclic inverse, Gaussian packet and exact CRT families are running.
+
+14:34 UTC: the user removed the closing deadline. The original start remains unchanged. Disk capacity was expanded to100GB; live observations show about88GiB free. Root allocation is4CPU, inverse3CPU, layout4CPU, with one coordination slot. New guarded CRT algebra/layout reviews pass under explicit native bit/compiler premises; full-map tests and complete multiplication recovery checks continue. Native47 parameter search tested29,700 cases (27,000 passed the scoped inequalities); analytic shape search tested2,735,712 cases (529,520 passed the scoped inequalities). These are parameter tests, not distinct proved algorithms. Twenty-nine cyclic inverse attempts completed:27 passed and2 exposed the non-strict u*theta boundary; separately recorded strict-margin repairs passed. Minute records preserve idle intervals honestly.

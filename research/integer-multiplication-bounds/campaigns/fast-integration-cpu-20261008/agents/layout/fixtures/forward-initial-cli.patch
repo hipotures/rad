@@ -1,0 +1,152 @@
+--- code/check_forward_gaussian_fractional_cells.py
++++ code/check_forward_gaussian_fractional_cells.py
+@@ -23,31 +23,6 @@
+ PI = Decimal("3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481")
+ 
+ 
+-def decimal_pi(digits):
+-    """Machin's formula with a precision-dependent convergent tail cutoff."""
+-    with localcontext() as context:
+-        context.prec = digits + 12
+-        cutoff = Decimal(10) ** (-digits - 8)
+-
+-        def atan_inverse(q):
+-            x = Decimal(1) / q
+-            square = x * x
+-            power = x
+-            answer = Decimal(0)
+-            k = 0
+-            while True:
+-                term = power / (2 * k + 1)
+-                answer += term if k % 2 == 0 else -term
+-                if abs(term) < cutoff:
+-                    break
+-                power *= square
+-                k += 1
+-            return answer
+-
+-        answer = 16 * atan_inverse(5) - 4 * atan_inverse(239)
+-    return +answer
+-
+-
+ def coordinates(shape):
+     return itertools.product(*(range(s) for s in shape))
+ 
+@@ -79,7 +54,6 @@
+     start = perf_counter()
+     with localcontext() as context:
+         context.prec = 160
+-        pi = PI
+         shape = tuple(config["source_shape"])
+         target = config["target_side"]
+         dimension = len(shape)
+@@ -97,17 +71,10 @@
+         theta = tuple(r - 1 for r in rho)
+         g = tuple(1 / (r * r * alpha * alpha) for r in rho)
+         y = tuple(r * j - k for r, j, k in zip(rho, source_origins, target_origins))
+-        reserve_log = sum(pi * gi * th * Decimal((side - 1) ** 2) for gi, th in zip(g, theta))
++        reserve_log = sum(PI * gi * th * Decimal((side - 1) ** 2) for gi, th in zip(g, theta))
+         reserve_bits = math.ceil(reserve_log / Decimal(2).ln())
+         target_bits = 128
+         work_bits = target_bits + reserve_bits + math.ceil(math.log2(side ** dimension)) + math.ceil(math.log2(dimension)) + 48
+-        context.prec = max(160, math.ceil((work_bits + 64) / math.log2(10)))
+-        pi = decimal_pi(context.prec)
+-        # Rebuild rational geometry after raising the work precision.
+-        rho = tuple(Decimal(target) / Decimal(s) for s in shape)
+-        theta = tuple(r - 1 for r in rho)
+-        g = tuple(1 / (r * r * alpha * alpha) for r in rho)
+-        y = tuple(r * j - k for r, j, k in zip(rho, source_origins, target_origins))
+         scale = 1 << work_bits
+         base = side + 2 * radius
+         slot_bits = 8 * math.ceil((2 * work_bits + math.ceil(math.log2(side ** dimension)) + 5) / 8)
+@@ -129,11 +96,11 @@
+         output_diagonals = []
+         kernels = []
+         for gi, r, th, yi in zip(g, rho, theta, y):
+-            input_diagonals.append(tuple((-pi * gi * r * th * (Decimal(a) + yi / r) ** 2).exp() for a in range(side)))
+-            output_diagonals.append(tuple((pi * gi * th * Decimal(b * b)).exp() for b in range(side)))
++            input_diagonals.append(tuple((-PI * gi * r * th * (Decimal(a) + yi / r) ** 2).exp() for a in range(side)))
++            output_diagonals.append(tuple((PI * gi * th * Decimal(b * b)).exp() for b in range(side)))
+             # The packed polynomial displacement is b-a; the analytic
+             # Toeplitz argument is a-b. This sign is deliberately explicit.
+-            kernels.append(tuple((-pi * gi * r * (Decimal(-h) + yi / r) ** 2).exp()
++            kernels.append(tuple((-PI * gi * r * (Decimal(-h) + yi / r) ** 2).exp()
+                                  for h in range(-radius, radius + 1)))
+         positive = []
+         negative = []
+@@ -170,7 +137,7 @@
+                     for j in range(s):
+                         # v=+-1 is included, rather than treating a periodic
+                         # source cut as a translated unwrapped cell.
+-                        weight = sum((-pi * g[i] * (rho[i] * j - k + v * target) ** 2).exp()
++                        weight = sum((-PI * g[i] * (rho[i] * j - k + v * target) ** 2).exp()
+                                      for v in (-1, 0, 1))
+                         subtotal += component[i][j] * weight / (2 * alpha)
+                     product *= subtotal
+@@ -214,15 +181,15 @@
+             wrong_cell = Decimal(0)
+             for a in coordinates(lengths):
+                 value = input_value(tuple(j0 + ai for j0, ai in zip(source_origins, a)))
+-                direct_weight = math.prod((-pi * gi * (r * (j0 + ai) - (k0 + bi)) ** 2).exp()
++                direct_weight = math.prod((-PI * gi * (r * (j0 + ai) - (k0 + bi)) ** 2).exp()
+                                           for gi, r, j0, k0, ai, bi in zip(g, rho, source_origins, target_origins, a, b))
+                 factor_weight = math.prod(input_diagonals[i][ai] * output_diagonals[i][bi] *
+-                                          (-pi * g[i] * rho[i] * (Decimal(ai - bi) + y[i] / rho[i]) ** 2).exp()
++                                          (-PI * g[i] * rho[i] * (Decimal(ai - bi) + y[i] / rho[i]) ** 2).exp()
+                                           for i, (ai, bi) in enumerate(zip(a, b)))
+                 # A constant y=0 drops the cell's true fractional source origin.
+-                wrong_weight = math.prod((pi * g[i] * theta[i] * bi * bi).exp() *
+-                                         (-pi * g[i] * rho[i] * theta[i] * ai * ai).exp() *
+-                                         (-pi * g[i] * rho[i] * Decimal(ai - bi) ** 2).exp()
++                wrong_weight = math.prod((PI * g[i] * theta[i] * bi * bi).exp() *
++                                         (-PI * g[i] * rho[i] * theta[i] * ai * ai).exp() *
++                                         (-PI * g[i] * rho[i] * Decimal(ai - bi) ** 2).exp()
+                                          for i, (ai, bi) in enumerate(zip(a, b)))
+                 direct_cell += value * direct_weight * normalization
+                 factor_cell += value * factor_weight * normalization
+@@ -243,14 +210,13 @@
+         # A source-period cut is not covariance of an unwrapped global shift.
+         cut_j = shape[0] - 1
+         cut_k = 0
+-        unwrapped_cut = (-pi * g[0] * (rho[0] * cut_j - cut_k) ** 2).exp()
+-        periodic_cut = sum((-pi * g[0] * (rho[0] * cut_j - cut_k + v * target) ** 2).exp()
++        unwrapped_cut = (-PI * g[0] * (rho[0] * cut_j - cut_k) ** 2).exp()
++        periodic_cut = sum((-PI * g[0] * (rho[0] * cut_j - cut_k + v * target) ** 2).exp()
+                            for v in (-1, 0, 1))
+         assert periodic_cut > unwrapped_cut + Decimal("1e-4")
+         return {"name": config["name"], "config": config, "source_origins": source_origins,
+                 "target_origins": target_origins, "core_lengths": lengths, "true_y": [str(x) for x in y],
+                 "target_bits": target_bits, "work_bits": work_bits, "full_tensor_reserve_bits": reserve_bits,
+-                "decimal_digits": context.prec,
+                 "kronecker_base": base, "slot_bits": slot_bits, "input_records": occupied,
+                 "kernel_records": len(kernel_rows), "padded_records": base ** dimension,
+                 "outputs_checked": len(outputs), "exact_global_selector_outputs": selector_samples,
+@@ -267,10 +233,9 @@
+     parser = argparse.ArgumentParser()
+     parser.add_argument("--output", required=True)
+     parser.add_argument("--workers", type=int, default=4)
+-    parser.add_argument("--config", help="JSON list of independently specified changed parameter cases")
+     args = parser.parse_args()
+-    if not 1 <= args.workers <= 6:
+-        parser.error("one to six changed-interface workers")
++    if not 1 <= args.workers <= 4:
++        parser.error("one to four changed-interface workers")
+     for key in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS"):
+         os.environ[key] = "1"
+     out = Path(args.output)
+@@ -285,14 +250,12 @@
+         {"name": "three-dimensional-shifted-L16", "source_shape": [251, 253, 249], "target_side": 256,
+          "side": 16, "radius": 7, "alpha": "0.75", "shift": 8, "cell_indices": [2, 4, 7], "seed": 202610086004},
+     ]
+-    if args.config:
+-        configs = json.loads(Path(args.config).read_text())
+     start = perf_counter()
+     with ProcessPoolExecutor(max_workers=args.workers) as executor:
+         rows = list(executor.map(run_case, configs))
+     result = {"status": "changed fractional Gaussian cell interface passed", "workers": args.workers,
+               "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+-              "decimal_policy": "max(160,ceil((work_bits+64)/log2(10)))", "seconds": perf_counter() - start, "rows": rows,
++              "decimal_digits": 160, "seconds": perf_counter() - start, "rows": rows,
+               "limitations": ["bounded representative cells, not an all-size Gaussian tail proof",
+                               "periodic reference retains images -1,0,+1; remote images are far below target precision",
+                               "known-bit global gather is a separately paid routing premise",

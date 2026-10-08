@@ -11,6 +11,14 @@ interface is [fixed-grid physical banded LU](reports/physical-band-lu.md) for
 rare repairs. The [packed forward precision interface](reports/packed-forward-precision.md)
 uses a separate cell scale and keeps the full tensor reserve `O(Q)`.
 
+The later [guarded CRT batching lemma](reports/guarded-crt-batching.md)
+uses balanced CRT recursion, joint monotone splits, repeated BIT fanout,
+dirty predicate controls and exact sparse repair. It replaces independent
+node rotations by a paid `O(V b^tau polylog b)` movement schedule, conditional
+on the credited fixed-tape primitives and documented wide-record regime.
+Independent local reviews accepted the changed bank and source interfaces;
+the coordinating agent owns any resulting full multiplication bound.
+
 The [regular Laurent split](reports/regular-laurent-interface.md) and
 [uniform phase-edge obstruction](reports/phase-edge-obstruction.md) separate
 the promising mechanism from the excluded naive halo inference. The earlier

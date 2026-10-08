@@ -24,3 +24,26 @@ At 13:21, CrocSwap main changed to `1a74950ce5074b848243ba89d8022fbadba66105`, D
 The initial source snapshots and PR 38/39 snapshots are listed in [input-manifest.json](input-manifest.json). Readiness-only follow-up heads are identified above and in the observation files; no duplicate whole snapshot is necessary where scientific files are unchanged.
 
 At 13:30, platypii's public Lean head was `57652088e3adf0c1aa7714803b6b270d5eaaa236` (commit 13:29:29), adding sparse optimized invocation and instruction bounds. No new full analytic theorem or stronger numerical saving was identified in that change. CrocSwap main and Swapnil main were unchanged at this poll.
+
+At 14:07, Swapnil Jain's main advanced to
+[`f2176bc1124821bf17eb63725bd366d7bdc020a3`](https://github.com/Swapnil-jain/integer-mult-kappa/commit/f2176bc1124821bf17eb63725bd366d7bdc020a3),
+committed at 14:01:26 UTC. Round six claims
+`kappa=3666565558019/10^17`, with bit saving `36667/10^9` at `h=23`
+and complex saving `36926111/(5*10^11)` at `h=24`. The changed mechanism
+adopts PR36's copied centres, then replaces direct centre wires by retained
+point totals built from existing side roles. Copies pay rank `h-1`, originals
+pay rank `1`, and centre roles leave `W`. The complex side adopts the copied
+centre and whole-residual batching schedules. A new Lean round-six file checks
+finite moments and assembly arithmetic under the earlier analytic premises.
+These are conditional public claims; no new proof of the arithmetic CRT
+payload cost was identified in the changed files. The pinned eligible PR40
+reference has the larger bit saving; this update does not require replacing
+its primitive in the CPU composition. Source licensing is Apache-2.0 with
+the prior-work notices retained. A compact selected source snapshot and exact
+archive identity are recorded in [swapnil-round6-source.json](swapnil-round6-source.json).
+
+At the same poll platypii's public head was
+`69f017a0e88129ea227d5d399904c062923f4e03`, committed at 14:05:29 UTC,
+with local-projector and reused-boundary finite proofs. No complete analytic
+multiplier theorem was identified. New campaign-linked and suspected derivative
+branches remained metadata-only quarantines and were not used in the science.

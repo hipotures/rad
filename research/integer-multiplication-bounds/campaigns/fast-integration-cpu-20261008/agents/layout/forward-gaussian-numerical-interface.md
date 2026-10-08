@@ -90,3 +90,37 @@ deterministically regenerable. This checks true Gaussian factors, normalization,
 fractional padding and selector alignment. It grants neither an all-size error
 bound nor a fast modular CRT router. The latter remains a distinct full-algorithm
 obligation after these local interfaces pass.
+
+## Changed larger families and setup-precision correction
+
+Two additional parameter families passed with the same independent operator
+comparison. Six cases vary L32/64/128, source sides509/503/499, alpha and radius;
+they check32 outputs and14 exact selectors. Two new 3D L32 cases use source
+periods1009/1013/1019 and target1024, checking16 outputs and8 exact selectors.
+They contain31,744/30,752 occupied source records,9,261 kernel records each,
+and140,608 actual padded slots each. Their largest absolute error is9.41e-95;
+both use324-bit work grids with a131-bit full-tensor reserve. This second pair
+took358.27 seconds with two one-thread workers.
+
+The larger-family review found a meaningful bounded-check issue: its two L128
+cases choose P614 but initially used160 Decimal digits, only about531 bits.
+Their sampled interior outputs pass128-bit tolerance, but this cannot validate
+614-bit setup factors. The original receipts are preserved unchanged and this
+precision limitation is explicit. The producer now chooses
+
+`Decimal digits=max(160,ceil((P+64)/log2(10)))`
+
+and evaluates pi by Machin's formula with a matching convergent-tail cutoff.
+It rebuilds rational geometry after increasing precision. A changed rerun of
+ONLY those two affected cases uses205 decimal digits and the same predefined
+614-bit grid; the corrected receipt is added when complete. The other finite
+cases need no unchanged rerun because P<=374 fits their original160 digits.
+
+Reproduce the changed families by adding `--config` with respectively
+`configs/forward-large-family.json`, `configs/forward-three-dimensional-L32.json`,
+or `configs/forward-L128-precision-repair.json` to the command above. Use at most
+the currently allocated workers. Configurations include all seeds and shapes.
+Original source versions are reconstructible from the final published producer
+using the small reverse patches in `fixtures/`; their digests match the receipts.
+The CLI extension and subsequent precision correction are separate retained
+source histories, not silently replaced successful attempts.

@@ -1,0 +1,1 @@
+The archived code path in protocol.json was rerun during closing at 2026-10-08 14:25 UTC. All 65,536 padded-address outputs, inverse and repair metrics, source SHA256 and dependency SHA256 matched the retained certificate exactly after excluding measured wall time. No machine-local dependency or historical source import was needed.

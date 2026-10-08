@@ -1,0 +1,76 @@
+{
+  "run_id": "20261008T1412Z-masked-bit-fanout",
+  "status": "PASS",
+  "source_sha256": "85e71eab87ca913e476c5cdb62ac5a3c713d98ad5cab4128070973b58430d4a7",
+  "inherited_identity": "RaD6b32837a, masked arbitrary-source BIT shear; distinctness removed and explicitly tested",
+  "exhaustive": [
+    {
+      "K": 5,
+      "source": 2,
+      "complete_states": 65536,
+      "good_states": 1024,
+      "wrong_unrepaired_bad_states": 38272,
+      "bijection": true,
+      "explicit_inverse": true,
+      "wall_seconds": 1.0623202990009304
+    },
+    {
+      "K": 6,
+      "source": 11,
+      "complete_states": 262144,
+      "good_states": 9216,
+      "wrong_unrepaired_bad_states": 152192,
+      "bijection": true,
+      "explicit_inverse": true,
+      "wall_seconds": 4.103522985999007
+    }
+  ],
+  "adversarial": {
+    "seed": 2026100842,
+    "states": 400000,
+    "good_states": 200117,
+    "wrong_unrepaired_bad_states": 171816,
+    "families": [
+      {
+        "slots": 4,
+        "G": 2,
+        "K": 10,
+        "rho": 0,
+        "source_mode": "one",
+        "good_states": 50117,
+        "wrong_unrepaired_bad_states": 32527
+      },
+      {
+        "slots": 8,
+        "G": 3,
+        "K": 12,
+        "rho": 11,
+        "source_mode": "one",
+        "good_states": 50000,
+        "wrong_unrepaired_bad_states": 42448
+      },
+      {
+        "slots": 12,
+        "G": 2,
+        "K": 10,
+        "rho": 1,
+        "source_mode": "pairs",
+        "good_states": 50000,
+        "wrong_unrepaired_bad_states": 47901
+      },
+      {
+        "slots": 16,
+        "G": 3,
+        "K": 12,
+        "rho": 2,
+        "source_mode": "pairs",
+        "good_states": 50000,
+        "wrong_unrepaired_bad_states": 48940
+      }
+    ],
+    "active_target_source_rejected": true
+  },
+  "workers": 1,
+  "native_threads": 1,
+  "wall_seconds": 27.415019210000537
+}

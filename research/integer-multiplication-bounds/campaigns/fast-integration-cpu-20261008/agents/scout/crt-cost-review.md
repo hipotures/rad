@@ -70,7 +70,11 @@ lower bound for every integer-multiplication algorithm.
 
 The coordinating agent was alerted immediately. A new joint arithmetic CRT
 movement argument or another exact ordinary-convolution layout may resolve this
-obligation. No such argument has been independently reviewed here yet.
+obligation. At the time of this audit no such argument had been independently
+reviewed. The later [guarded CRT review](guarded-crt-review.md) supports a new
+independent-node arithmetic batching lemma under the inherited primitives;
+its completed schedules can remove this particular row. The scoped ceiling
+above still applies to the original individual-rotation schedule.
 
 ## Long-precision source chirps do admit a different accounting
 

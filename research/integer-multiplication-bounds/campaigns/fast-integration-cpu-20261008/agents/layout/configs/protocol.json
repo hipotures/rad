@@ -1,7 +1,5 @@
 {
   "campaign_start_utc": "2026-10-08T12:40:55Z",
-  "campaign_deadline_utc": "2026-10-08T14:40:55Z",
-  "substantive_closing_utc": "2026-10-08T14:25:55Z",
   "owner": "layout",
   "allocated_cpu_slots": 4,
   "native_threads_per_process": 1,
@@ -17,5 +15,74 @@
     "disposable": "work/layout/",
     "immutable_inputs": "scout-pinned public snapshots; historical commit"
   },
-  "scope": "Layout and replication accounting; no independent GPU campaign inputs"
+  "scope": "Layout and replication accounting; no independent GPU campaign inputs",
+  "public_pins": {
+    "swapnil": "c2c2f279d93643e5ff3fe121a0fbc68e0e6f4007",
+    "croc_pr37": "cb86e50e9a07685068874d8e4174b2e6c209b95c",
+    "croc_pr38_gaussian": "cc794077f6c103e24ec0939be765cd1521239aab"
+  },
+  "allocation_note": "Initial four-slot allocation was changed by coordinator messages; numerical batches used only currently authorized busy workers, with own workers paused immediately when allocations changed.",
+  "numerical_batches": [
+    {
+      "name": "initial-fractional-Gaussian",
+      "launch_utc": "2026-10-08T13:51:00Z",
+      "workers": 4,
+      "elapsed_seconds": 44.121004202,
+      "result": "results/forward-fractional-gaussian.json",
+      "old_source_patch": "fixtures/forward-initial-cli.patch"
+    },
+    {
+      "name": "CRT-existing-schedule-negatives",
+      "launch_utc": "2026-10-08T13:58:54Z",
+      "workers": 1,
+      "elapsed_seconds": 0.074930818,
+      "result": "results/crt-movement-obligations.json"
+    },
+    {
+      "name": "larger-fractional-Gaussian",
+      "launch_utc": "2026-10-08T14:05:10Z",
+      "workers": 6,
+      "elapsed_seconds": 167.562204821,
+      "config": "configs/forward-large-family.json",
+      "result": "results/forward-large-family-gaussian.json",
+      "old_source_patch": "fixtures/forward-preprecision.patch",
+      "pause_note": "Four workers paused at14:05:31; two resumed14:06:18, one14:07:01 and one14:07:11. Elapsed time includes pauses. Two L128 cases require retained corrected setup-precision rerun."
+    },
+    {
+      "name": "mixed-radix-carry-controls",
+      "launch_utc": "2026-10-08T14:10:13Z",
+      "workers": 3,
+      "elapsed_seconds": 75.511295498,
+      "result": "results/joint-crt-carries.json"
+    },
+    {
+      "name": "three-dimensional-L32-new-period",
+      "launch_utc": "2026-10-08T14:11:07Z",
+      "workers": 2,
+      "elapsed_seconds": 358.267401323,
+      "config": "configs/forward-three-dimensional-L32.json",
+      "result": "results/forward-three-dimensional-L32-gaussian.json",
+      "old_source_patch": "fixtures/forward-preprecision.patch"
+    },
+    {
+      "name": "L128-precision-repair",
+      "launch_utc": "2026-10-08T14:21:19Z",
+      "workers": 2,
+      "maximum_busy_workers_after_correction": 1,
+      "config": "configs/forward-L128-precision-repair.json",
+      "status": "passed",
+      "pause_note": "Second own worker paused14:21:33 after allocation changed toMAX1; resumed14:23:36 after first worker completed.",
+      "elapsed_seconds": 244.492301623,
+      "result": "results/forward-L128-precision-repair.json"
+    }
+  ],
+  "original_campaign_deadline_utc": "2026-10-08T14:40:55Z",
+  "original_substantive_closing_utc": "2026-10-08T14:25:55Z",
+  "extension": {
+    "authorized_by": "user instruction relayed by coordinator at14:26 UTC",
+    "effective_approximately_utc": "2026-10-08T14:23:00Z",
+    "new_deadline": null,
+    "instruction": "Continue substantive research indefinitely until the user instructs otherwise.",
+    "steady_cpu_slots": 4
+  }
 }

@@ -18,7 +18,7 @@ def snapshot(root):
         try:
             command = (proc / 'cmdline').read_bytes().replace(b'\0', b' ').decode(errors='replace')
             cwd = (proc / 'cwd').resolve()
-            if str(root) not in command and not cwd.is_relative_to(root):
+            if str(root) not in command and root.name not in command and not cwd.is_relative_to(root):
                 continue
             stat = (proc / 'stat').read_text().rsplit(')', 1)[1].split()
             status = dict(line.split(':', 1) for line in (proc / 'status').read_text().splitlines() if ':' in line)
@@ -27,7 +27,7 @@ def snapshot(root):
                               'threads': int(status.get('Threads', '0')),
                               'rss_kib': int(status.get('VmRSS', '0 kB').split()[0]),
                               'state': status.get('State', '').strip(),
-                              'name': status.get('Name', '').strip()})
+                              'name': status.get('Name', '').strip(), 'command': command[:500].strip()})
         except (OSError, ValueError):
             continue
     mem = dict(line.split(':', 1) for line in Path('/proc/meminfo').read_text().splitlines())
@@ -43,16 +43,18 @@ def snapshot(root):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--root', type=Path, required=True)
-    parser.add_argument('--deadline', required=True)
+    parser.add_argument('--deadline')
+    parser.add_argument('--run-id', default='legacy')
+    parser.add_argument('--compact-output', type=Path)
     parser.add_argument('--interval', type=float, default=150)
     args = parser.parse_args()
     root = args.root.resolve()
-    raw = root / 'work' / 'telemetry'
+    raw = root / 'work' / ('telemetry' if args.run_id == 'legacy' else 'telemetry-' + args.run_id)
     raw.mkdir(parents=True, exist_ok=True)
-    deadline = dt.datetime.fromisoformat(args.deadline.replace('Z', '+00:00'))
+    deadline = dt.datetime.fromisoformat(args.deadline.replace('Z', '+00:00')) if args.deadline else None
     previous = None
     tick_hz = os.sysconf(os.sysconf_names['SC_CLK_TCK'])
-    csv_path = root / 'results' / 'resources.csv'
+    csv_path = args.compact_output or root / 'results' / 'resources.csv'
     fields = ['utc', 'system_busy_cpu_slots', 'observed_task_cpu_slots', 'task_processes',
               'task_threads', 'task_rss_kib', 'mem_available_kib', 'disk_free_bytes', 'compact_result_files']
     with (raw / 'observations.jsonl').open('x') as output, csv_path.open('x', newline='') as compact:
@@ -81,7 +83,7 @@ def main():
             compact.flush()
             print(json.dumps({key: current[key] for key in ['utc', 'system_busy_cpu_slots', 'observed_task_cpu_slots', 'mem_available_kib', 'disk_free_bytes', 'compact_result_files']}), flush=True)
             previous = current
-            remaining = (deadline - dt.datetime.now(dt.timezone.utc)).total_seconds()
+            remaining = (deadline - dt.datetime.now(dt.timezone.utc)).total_seconds() if deadline else float('inf')
             if remaining <= 0:
                 break
             time.sleep(min(args.interval, remaining))

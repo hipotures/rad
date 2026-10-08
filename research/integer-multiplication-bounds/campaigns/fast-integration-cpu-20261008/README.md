@@ -1,16 +1,16 @@
 # CPU fast-integration campaign
 
-Status: active since 2026-10-08 12:40:55 UTC; deadline 14:40:55 UTC.
+Status: active since 2026-10-08 12:40:55 UTC; extended indefinitely by the user. Closure will begin only when the user requests it.
 
 [GOAL.md](GOAL.md) is the execution prompt. This directory is the exclusive working and durable-output location for the CPU track.
 
 - Host: `cpu`; checkout `/home/user/DEV/rad`.
 - Budget: 12 CPU slots, approximately 62 GiB RAM; no GPU.
-- Duration: 120 minutes from explicit goal launch, not file creation.
+- Original duration: 120 minutes. The user subsequently removed the deadline; the original start and deadline remain in the protocol as history.
 - Research branch: `research/fast-cpu-20261008`.
 - Initial emphasis: Gaussian inversion, precision, transform layouts, tape movement and compatible integrations.
 
-Use local subagents and sustained useful parallel computation. Check resource use at least every three minutes. Commit and push descriptive scientific checkpoints at least every twenty minutes when durable work changes.
+Use local subagents and sustained useful parallel computation. Print actual resource observations every minute; target 11–12 useful CPU workers during compute phases. Commit and push descriptive scientific checkpoints at least every twenty minutes when durable work changes.
 
 No communication with the independent GPU campaign. Historical results and shared infrastructure are read-only. All new durable artifacts belong here; large execution payloads belong in ignored or external task-owned storage.
 
@@ -42,3 +42,7 @@ The exact ledger has been repaired. New dirty-guard/parallel carry CRT
 constructions are being independently tested; they are unverified leads.
 The user requested sustained CPU exploration without changing the clock.
 Expanded cyclic inverse, Gaussian packet and exact CRT families are running.
+
+14:34 UTC checkpoint: the new [guarded-reflection CRT tree](agents/inverse/reports/guarded-crt-batching.md) has independent [algebra review](agents/scout/guarded-crt-review.md) and [physical layout review](agents/layout/crt-reflection-layout-review.md). It batches the modular rotations using dirty banks from existing inactive coordinates, restores the banks, and repairs bad guard states. This is a new construction, not a relabeling of bit routing. Exact controls include complete four-target payload repair, actual repeated-bit native fanout, joint splitting, and borrowing an existing bank without extra address bits.
+
+The revised exact ledger supports a stronger **conditional candidate**, kappa=78376985522307/2000000000000000000 (approximately 0.0000391884927611535). Full end-to-end Gaussian/FFT/recovery composition remains under independent review and executable falsification; this checkpoint does not promote a complete new certified multiplication exponent. The old unbatched CRT exclusion remains valid for the old algorithm.
