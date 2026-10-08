@@ -1,0 +1,1 @@
+PASS. Exact result and measured resource evidence are preserved in results/. Scope, conditional written transfer and reproduction are documented in [the independent review](../../reports/review-compact-controls.md).

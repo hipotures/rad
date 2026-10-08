@@ -146,3 +146,18 @@ RAM remains capped at 96 GiB and nested BLAS/OMP threads remain one per
 process. Measure verified candidates and meaningful experiments per hour,
 retain deterministic identities/checkpoints, and continue mathematical
 exploration rather than building generic orchestration infrastructure.
+
+## Major upstream update received during the same campaign
+
+The user reported the new CrocSwap compact-control conditional claim
+kappa=83/10^12, with bit ground50 and independent complex ground25. Fetch
+and preserve its exact revision, critically examine the new wider-control
+movement, recursive full-field layout, exceptional-address repair and
+separate complex interface, then maximize the strongest defensible saving.
+Reassess which previous results remain useful and combine valid interfaces;
+continue original mathematical constructions and productive concurrent
+experiments. Preserve successful and failed old work. The original deadline
+2026-10-08 08:25:21 UTC remains immutable. Finding an improvement is a
+milestone, never a reason to stop. Distinguish numerical screens, exact
+finite certificates and complete conditional proofs. Commit and push all
+durable results with verified remote publication.

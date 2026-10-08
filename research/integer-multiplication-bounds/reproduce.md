@@ -122,7 +122,7 @@ certificates and arithmetic audits, not a complete multiplication machine.
 The newer independently promoted nonuniform R485237 bit graph is composed
 by a thin adapter without repeating any complete finite graph. Both its
 uncached independent finite replay and its independently re-enclosed
-arithmetic pass. Reproduce the current strongest row with fresh outputs:
+arithmetic pass. Reproduce this old-interface checkpoint with fresh outputs:
 
 ```bash
 python3 -B research/integer-multiplication-bounds/code/downstream_promoted_complex_composition.py --upstream "$REF" --candidate research/integer-multiplication-bounds/runs/20261008T005350Z-review-singleton-positions/results/candidate-input.json --promotion-review research/integer-multiplication-bounds/runs/20261008T005350Z-review-singleton-positions/results/certificate.json --complex-certificate research/integer-multiplication-bounds/runs/20261008T003305Z-downstream-complex-sharing/results/certificate.json --previous-assembly research/integer-multiplication-bounds/runs/20261008T003550Z-downstream-complex-assembly/results/certificate.json --output "$RAD_WORK_ROOT/derived/fresh-promoted-composition.json"
@@ -229,3 +229,40 @@ exact source, locks and protocols. Downloaded repositories/PDFs, environments,
 GPU NPZ files and binaries are external and separately obtainable/regenerable.
 The campaign protocol records the immutable deadline and live-job status;
 archived PID/session records do not authorize controlling live processes.
+
+## New compact input and current reviewed composition
+
+Acquire the separate immutable input without modifying the old reference:
+
+```bash
+gh repo clone CrocSwap/integer-mult-bounds "$RAD_WORK_ROOT/repos/fresh-compact-reference"
+git -C "$RAD_WORK_ROOT/repos/fresh-compact-reference" checkout --detach 6e564879f51ae16f23d392e9e196c605f36d90df
+```
+
+The compact producer and independent generic review commands are retained as
+argv arrays in runs/20261008T014759Z-downstream-generic-compact473026/protocol.json
+and runs/20261008T015019Z-review-compact-generic473026/protocol.json.
+Replace only checkout/environment/output paths in a fresh reproduction.
+Their complete inputs are the immutable candidate copy and review at
+20261008T014255Z-review-singleton-final420, complex producer copy/audit at
+20261008T013158Z-review-complex28, existing complete h8 calibration,
+and earlier compact assembly. No row sampling is used.
+
+For the full finite bit reproduction use the exact command in
+[its independent report](reports/review-singleton-final420.md).
+Complex/count reproductions and the unchanged all-even transfer are in
+[the h28 report](reports/review-complex28.md). The compact review reports
+retain standalone exact address, recurrence and arithmetic invocations.
+The original-clock policy remains authoritative. Reproduction after this
+campaign uses fresh output locations and must not reinterpret old run clocks.
+
+The fifth checkpoint's complete completed JSON/text evidence is in
+`evidence/20261008T0212Z-compact-verified-topic` (93 files) and
+`evidence/20261008T0212Z-compact-verified-external` (1178 files).
+The external namespace includes complete case-level evaluations, terminal
+logs, failed-attempt traces and the stopped earlier telemetry stream.
+It excludes live outputs. Each manifest records original byte identities.
+Use `tools/archive_workspace.py verify-text --destination <namespace>` to
+check copies; to restore an external case, decompress its manifest-indexed
+gzip into a fresh work root at the same relative path. A gzip PID/session
+record is historical evidence and must never authorize live process control.
