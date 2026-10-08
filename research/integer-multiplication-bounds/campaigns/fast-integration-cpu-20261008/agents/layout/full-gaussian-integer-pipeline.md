@@ -221,7 +221,35 @@ wall time. Their exact four-product core and all outer applications use frozen
 dyadic words; arbitrary precision is used for setup and independent reference
 coefficients. These finite parameters remain distinct from an all-size cutoff.
 
-Changed cyclic source cuts, higher digit scales and smaller inverse radii are
-queued serially per assigned CPU slot. Actual physical CRT composition with
-the packed-both pipeline has an independent driver; pending runs are not
-described as completed evidence.
+Changed work grids and digits also pass complete genuine forward/inverse
+composition. At Q188, eight-bit digits and inverse radius4 the coefficient
+error is `1.802e-22`; Q184, ten-bit digits and radius4 give `4.603e-20`.
+The cyclic-cut Q192/radius5 control puts a source coefficient at S-1 and
+another at one, and recovers the correct wrapped coefficient at scalar zero.
+Each case checks every coefficient rather than a selected final subset.
+
+The independent driver `code/check_full_packed_both_actual_crt.py` now
+composes both actual physical CRT input programs and the actual final inverse
+program with all three genuine packed forward/inverse source transforms.
+Ordinary and cyclic-cut source `(251,241)`, target `256^2`, alpha4 and Q192
+pass all60,491 coefficient comparisons and restore scalar zero padding.
+Their real coefficient errors are `6.987e-25` and `4.969e-25`; wall times are
+441.62 and433.26 seconds. The driver explicitly pays source/binary axis-field
+conversion, padding filters and embedding before inverse CRT. A two-prime
+tree has ordinary top maps, so these two controls do not claim execution of
+multi-target F_u; the earlier three-prime complete controls establish that
+separate changed interface.
+
+The long-precision three-prime actual-CRT pipeline at source `(29,31,37)`,
+target `(32,32,64)`, alpha16 and Q2048 also completes, with all33,263
+coefficients correct and maximum real error `5.387e-141`. Its wall time is
+4,309.36 seconds. Both u theta>=1 and u^2 theta>=Q hold on every axis,
+and gamma1536<Q2048. Its Gaussian passes remain explicit dense references,
+so this receipt addresses the large-precision/near-identity arithmetic
+interface and is distinct from the genuine localized two-axis prototype.
+
+A reordered-prime Q200 attempt has no eligible regular inverse cells under
+its declared analytic precision screen; its failure is retained as a component
+eligibility negative, not a coefficient failure or a claim about all-size
+prime ordering. Matched lower work grids and changed layouts continue in
+serial lanes. Pending runs are not described as completed evidence.

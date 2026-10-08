@@ -197,3 +197,23 @@ binary/source field conversions. A two-prime case has ordinary top nodes;
 actual multi-target F_u execution is documented by the separate earlier
 three-prime controls. Pending actual-CRT integration is not claimed as a
 completed reproduction until its receipt is retained.
+
+## Completed actual CRT plus packed-both composition
+
+The ordinary and cyclic-cut configurations now pass both actual input CRT
+programs, every full arithmetic coefficient and the actual inverse program.
+Their results are `results/full-pipeline-packed-both-actual-crt-ordinary.json`
+and `results/full-pipeline-packed-both-actual-crt-cyclic.json`. These are
+two-prime ordinary top maps; they do not establish F_u execution.
+
+The all-address normalized-H circuit has a separate conditional report at
+`hadamard-routing-conditional-lemma.md`, standard-library source at
+`code/check_hadamard_coordinate_permutation.py`, pinned configuration and
+`results/hadamard-coordinate-precision.json`. Native C-only mask exposure
+remains unproved; the exact finite circuit does not imply a new exponent.
+
+Matched whole packed/actual-CRT precision attempts use
+`code/check_packed_pipeline_precision_observation.py`, which retains producer
+coefficient failures separately from component eligibility assertions.
+A failed coefficient producer does not reach the final actual CRT inverse.
+Only completed receipts are published as measured evidence.

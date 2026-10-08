@@ -45,6 +45,17 @@ The [four-target reflection controls](reports/four-target-reflection-controls.md
 also pass mixed binary/odd moduli with a shared fixed source. Deliberately
 borrowing that endpoint control as a dirty guard makes addresses0 and1
 collide, giving an explicit exclusion required by the legal bank interface.
+The [nested bank recycling note](reports/nested-bank-recycling.md) states when
+completed inner shears may borrow high outer-U bits. A complete two-target
+three-bit inner control passes; its planned missing-inner negative also
+passes both actual oracles, an anomaly retained unchanged. Full unique tags
+confirm that its outer composition absorbs raw-inner errors on all addresses;
+the standalone raw fanout still differs from ideal XOR on 49,152 addresses.
+Further bank restoration and fixed-source controls are queued.
+The [Hadamard routing budget](reports/hadamard-routing-budget.md) proves the
+long-record arithmetic identity and excludes its literal per-residual
+complex-only basis substitution by a source-reviewed rank-mass count.
+It leaves a globally shared or changed compiler unresolved.
 The [cyclic free-axis interface](reports/cyclic-free-axis-repair.md) supplies
 global principal-window band LU on every complete free axis of inverse repair
 packets, including regular face packets.

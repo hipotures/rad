@@ -121,3 +121,15 @@ The tensor catalogue construction uses geometrically growing prefix buffers
 on fixed old/new/catalogue tapes, paying catalogue rewinds. Exact controls
 through262,144 final records have `sum_j V_j<2V_d` and obey the rounded-prefix
 error envelope. Arithmetic child costs remain separately charged.
+
+The complete genuine packed forward and inverse arithmetic prototype also
+passes actual CRT input and output programs for ordinary and cyclic-cut
+inputs at source `(251,241)`. All60,491 coefficients and scalar zero padding
+are checked. The long-Q2048 three-prime actual-CRT arithmetic reference also
+passes; its dense Gaussian stages remain explicitly charged.
+
+[Known-coordinate Hadamard circuit and precision controls](hadamard-routing-conditional-lemma.md)
+are exact on up to1,048,576 records. The native C-only selected-mask exposure
+premise remains unproved because the pinned completed C layer uses BIT basis
+routing. No improvement in the multiplication exponent follows from this
+algebra alone.

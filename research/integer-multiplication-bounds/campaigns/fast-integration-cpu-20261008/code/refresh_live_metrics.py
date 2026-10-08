@@ -72,13 +72,29 @@ def refresh():
     context['count_units'] = 'Parameter grid tuples, rounded prefix operations and configured experiment rows are separate counts.'
     reviewed = Fraction(context['best_reviewed_conditional_kappa'])
     native_candidates = moments+ordered+weighted
+    unreviewed = []
     if native_candidates:
         path, row = max(native_candidates, key=lambda item: Fraction(item[1]['safe_saving']))
         candidate = Fraction(row['safe_saving'])*Fraction(99999,100000)
-        context['best_unverified_kappa'] = str(candidate) if candidate > reviewed else None
+        unreviewed.append(candidate)
         context['current_finite_moment_frontier'] = dict(id=row['id'], saving=row['safe_saving'],
                                                        result=str(path.relative_to(ROOT)),
                                                        scope='Exact finite moment; a new producer still needs independent integration review.')
+    joint_candidates = []
+    for path in ROOT.glob('work/joint-profile-*/result.json'):
+        row = read(path)
+        if (row and row.get('status') == 'exact_joint_frozen_pool_search'
+                and row.get('dimensions', [23,25]) == [23,25]
+                and row.get('candidate_kappa')):
+            joint_candidates.append((path, row))
+    if joint_candidates:
+        path, row = max(joint_candidates, key=lambda item: Fraction(item[1]['candidate_kappa']))
+        unreviewed.append(Fraction(row['candidate_kappa']))
+        context['current_joint_pool_frontier'] = dict(
+            saving=row['saving'], candidate_kappa=row['candidate_kappa'],
+            result=str(path.relative_to(ROOT)), pool_sizes=row['pool_sizes'],
+            scope='Exact finite original23/25 pool moment; independent native/integration review remains separate.')
+    context['best_unverified_kappa'] = str(max(unreviewed)) if unreviewed and max(unreviewed) > reviewed else None
     if optimistic:
         path,row = max(optimistic,key=lambda item: Fraction(item[1]['safe_saving']))
         context['best_optimistic_geometry_saving'] = dict(saving=row['safe_saving'],result=str(path.relative_to(ROOT)),

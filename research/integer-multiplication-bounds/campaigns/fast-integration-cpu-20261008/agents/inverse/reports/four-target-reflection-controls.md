@@ -55,6 +55,16 @@ radix repairs process 765,394,944 summed records; native validation takes
 546.16 seconds. This extends the simultaneous interface beyond binary target
 periods without changing the source or bank exclusion premise.
 
+[20261008T1620Z-reflection-four-mixed-inner-outer-G2](../runs/20261008T1620Z-reflection-four-mixed-inner-outer-G2/protocol.json)
+uses two-bit inner and outer guards on the same (2,3,4,5) target words.
+Sixteen original bank bits give a complete T=33,554,432 cube with
+15,728,640 valid tagged records. Both complete oracles pass, with 109
+events, 48 actual F_u calls, 480 rotations and 98 actual radix repairs.
+Those repairs process 1,696,168,960 summed records, restoring 9,243,272
+wrong outer records and 1,743,512 nonzero invalid intermediate records.
+The one-thread native validator takes 1,643.35 seconds. No address bit
+was added, and the finite runtime has no asymptotic interpretation.
+
 ## Deliberate fixed-control bank violation
 
 [20261008T1620Z-reflection-four-source-bank-negative](../runs/20261008T1620Z-reflection-four-source-bank-negative/protocol.json)
@@ -104,9 +114,8 @@ partial program ran.
 The original queue restored its positively identified owned Python worker
 when the classification mismatch stopped it. A fresh retained continuation
 controller skips both completed results without rerunning them and executes
-only the previously queued legal cases. The mixed inner-G2 and unequal odd
-cases now pass as retained above. The mixed inner/outer-G2 case remains
-running until its certificate is completed. The controller
+only the previously queued legal cases. The mixed inner-G2, unequal odd
+and mixed inner/outer-G2 cases now pass as retained above. The controller
 uses one replacement compute slot and resumes the paused worker in finally.
 
 To reproduce a complete case, use its frozen code directory. Compile

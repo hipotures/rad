@@ -164,3 +164,33 @@ python3 -B agents/scout/code/fixed_controller_score.py --first fixtures/weighted
 ```
 
 Expected: strictly_passes=true, W182180194, total_rank104751764650, deficit1846900. Root exercised this bounded path. See reports/weighted-fixed-composition.md and scout recovery receipts for deterministic matching regeneration and exact occurrence identities. The --previous selector now excludes planned IDs as well as complete results, preventing concurrent repeated profiling.
+
+## Expanded weighted pair and actual geometry
+
+```bash
+python3 -B agents/scout/code/fixed_controller_score.py --first fixtures/weighted-expanded-h23-seed257-noise0.json --second fixtures/weighted-expanded-h25-seed401-noise100.json --saving 40278503243/1000000000000000 --output work/fresh-expanded-weighted-controller.json
+```
+
+Expected: strictly_passes=true, W182180194, total_rank104751764650 and
+deficit1846900. Root exercised this exact bounded path. The resulting
+conditional kappa is4027810045796757/10^20. See
+reports/weighted-expanded-composition.md for the complete finite-pool scope,
+independent receipts and unchanged full compiler/all-size premises.
+
+Root also exercised complete source recovery for the expanded pair:
+
+```bash
+python3 -B agents/scout/code/recover_weighted_native.py --source-root work/scout/snapshots/pr40-43f59ff53359 --profiler work/scout/weighted-profiler-20261008T1631Z/fixed_ij_weighted_profiles --witness agents/scout/evidence/20261008T1721Z-expanded-exact-uses/weighted-expanded-exact-uses.json.gz --output work/fresh-expanded-weighted-recovery
+```
+
+Expected: exact_recovery_pass, axes[0,1], dag_only=false. Acquire and compile
+the pinned source/profiler using the scout reproduction instructions first;
+the example paths name campaign-local ignored execution directories.
+
+The actual24/26 and26/28 geometry certificates have separate source and
+replay commands in agents/scout/fixed-geometry-family.md. To regenerate a
+joint search, restore the complete input profiles from checkpoint evidence,
+then run code/joint_profile_pool.py with its recorded first/second dimensions,
+geometry certificate and frozen input list. The per-attempt protocol retains
+the exact wrapper source, every input hash and safety margin. The first
+24/26 enclosure-overlap attempt failed; use the fresh successful protocol.

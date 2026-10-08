@@ -4,7 +4,7 @@
 At a fixed saving, each axis contributes independently to numerator minus mW.
 Thus two linear pool scans replace a Cartesian scan of every pair. Positive
 width weights are enclosed with rational logarithms and a common dyadic grid.
-Only the ordered23/25 inherited data geometry is used.
+New (h,h+2) dimensions require a complete actual-pair geometry certificate.
 """
 import argparse
 from collections import Counter
@@ -13,7 +13,7 @@ from fractions import Fraction as Q
 import hashlib
 import importlib.util
 import json
-from math import comb
+from math import comb,factorial
 from pathlib import Path
 import time
 
@@ -65,13 +65,32 @@ def axis_terms(row, m, N):
     return terms, bank
 
 
-def fixed_terms(N):
-    terms = Counter({1: 19*N, 21: 2*N, 17: 2*N, 481: 2*N})
-    # Data has eighteen N singleton blocks; paid endpoint adds N.
-    for h in (23,25):
+def fixed_terms(N,dimensions,data_profile):
+    terms = Counter()
+    for t in data_profile:
+        terms[t] += 2*N
+    terms[1] += N
+    for h in dimensions:
         terms[1] += 2*N
         terms[h-2] += 2*N
     return terms
+
+
+def complete_profile(score,first,second,data_profile):
+    if (first['h'],second['h']) == (23,25):
+        assert data_profile == [1]*9+[21,17,481]
+        return score.profile(first,second)
+    counts = score.profile(first,second,optimistic=True)
+    counts['parts']['data'] = Counter()
+    for t in data_profile:
+        counts['parts']['data'][t] += 2*counts['N']
+    widths = sum(counts['parts'].values(),Counter())
+    counts['child_multiplicities'] = dict(sorted(widths.items()))
+    counts['maxchild'] = max(widths)
+    counts['total_rank'] = sum(t*n for t,n in widths.items())
+    assert counts['total_rank'] == counts['m']*counts['W']-counts['N']+counts['L']
+    counts['data_scope'] = 'Complete actual-pair fixed I+J geometry supplied by an independently checked certificate'
+    return counts
 
 
 def weights(score, widths, saving, m):
@@ -79,8 +98,9 @@ def weights(score, widths, saving, m):
     for t in widths:
         x,y = (saving*z for z in score.logarithms(Q(m,t)))
         assert 0 <= x <= y < 1
-        a = t*(1+x+x*x/2+x*x*x/6)
-        b = t*(1+y+y*y/(2*(1-y/3)))
+        a = t*sum((x**j/Q(factorial(j)) for j in range(9)),Q(0))
+        b = t*(sum((y**j/Q(factorial(j)) for j in range(9)),Q(0))
+               +y**9/(Q(factorial(9))*(1-y/10)))
         low[t] = (a.numerator*DYADIC)//a.denominator
         high[t] = (b.numerator*DYADIC+b.denominator-1)//b.denominator
     return low,high
@@ -117,21 +137,43 @@ def main():
     parser.add_argument('--second-directory', required=True, type=Path)
     parser.add_argument('--first-extra', action='append', type=Path, default=[])
     parser.add_argument('--second-extra', action='append', type=Path, default=[])
+    parser.add_argument('--first-dimension',type=int,default=23)
+    parser.add_argument('--second-dimension',type=int,default=25)
+    parser.add_argument('--geometry-certificate',type=Path)
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--margin-ticks', type=int, default=1000)
     args = parser.parse_args()
     began = time.time()
     args.output.mkdir(parents=True,exist_ok=False)
     score = score_module()
-    first,first_sources = load_pool(args.first_directory,23,args.first_extra)
-    second,second_sources = load_pool(args.second_directory,25,args.second_extra)
+    dimensions = [args.first_dimension,args.second_dimension]
+    geometry_identity = None
+    if dimensions == [23,25]:
+        data_profile = [1]*9+[21,17,481]
+    else:
+        assert dimensions[1] == dimensions[0]+2 and args.geometry_certificate
+        raw_geometry = args.geometry_certificate.read_bytes()
+        geometry = json.loads(raw_geometry)
+        analytic,actual = geometry['analytic_geometry'],geometry['all_actual_pairs']
+        assert analytic['dimensions'] == actual['dimensions'] == dimensions
+        assert actual['status'] == 'COMPLETE ACTUAL-PAIR NONVANISHING CERTIFICATE'
+        assert actual['unresolved_failures'] == 0
+        assert actual['pairs'] == comb(dimensions[0],3)*comb(dimensions[1],3)
+        data_profile = analytic['data_profile']
+        assert data_profile == [1]*9+[dimensions[0]-2,dimensions[0]-6,dimensions[0]*dimensions[1]-2*sum(dimensions)+2]
+        assert sum(data_profile) == dimensions[0]*dimensions[1]-sum(dimensions)+1
+        geometry_identity = dict(path=str(args.geometry_certificate),sha256=hashlib.sha256(raw_geometry).hexdigest(),
+                                 pairs=actual['pairs'],data_profile=data_profile)
+    first,first_sources = load_pool(args.first_directory,dimensions[0],args.first_extra)
+    second,second_sources = load_pool(args.second_directory,dimensions[1],args.second_extra)
     pools = [first,second]
-    m,N = 575,comb(23,3)*comb(25,3)
+    m,N = dimensions[0]*dimensions[1],comb(dimensions[0],3)*comb(dimensions[1],3)
     axes = [[axis_terms(row['profile'],m,N) for row in pool] for pool in pools]
-    constant = fixed_terms(N)
+    constant = fixed_terms(N,dimensions,data_profile)
     protocol = dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                     pool_sizes=[len(pool) for pool in pools],
                     input_files=[first_sources,second_sources],
+                    dimensions=dimensions,geometry_certificate=geometry_identity,
                     grid_denominator=DENOMINATOR,weight_grid=DYADIC,
                     margin_ticks=args.margin_ticks,
                     source=Path(__file__).read_text(),
@@ -141,7 +183,7 @@ def main():
     (args.output/'protocol.json').write_text(json.dumps(protocol,indent=2)+'\n')
     # The separable expression must equal the complete controller at zero.
     zero = scan(score,pools,axes,constant,0,m,N)
-    expected = score.profile(first[0]['profile'],second[0]['profile'])
+    expected = complete_profile(score,first[0]['profile'],second[0]['profile'],data_profile)
     assert int(zero['lower_numerator_minus_mW_dyadic']) == -expected['deficit']*DYADIC
     assert zero['lower_numerator_minus_mW_dyadic'] == zero['upper_numerator_minus_mW_dyadic']
     trials = [zero]
@@ -163,7 +205,7 @@ def main():
     final = scan(score,pools,axes,constant,safe_tick,m,N)
     assert final['some_pair_strictly_passes']
     selected = [pool[i] for pool,i in zip(pools,final['upper_indices'])]
-    counts = score.profile(*(row['profile'] for row in selected))
+    counts = complete_profile(score,*(row['profile'] for row in selected),data_profile)
     saving = Q(safe_tick,DENOMINATOR)
     moment = score.moment(m,counts['W'],counts['child_multiplicities'],saving)
     assert moment['strictly_passes']
@@ -171,6 +213,7 @@ def main():
     complete_upper = sum(n*upper_weights[t] for t,n in counts['child_multiplicities'].items())-m*counts['W']*DYADIC
     assert complete_upper == int(final['upper_numerator_minus_mW_dyadic'])
     result = dict(status='exact_joint_frozen_pool_search',pool_sizes=protocol['pool_sizes'],
+                  dimensions=dimensions,geometry_certificate=geometry_identity,
                   pair_combinations=len(first)*len(second),strict_threshold_grid=[lo,hi],
                   saving=str(saving),candidate_kappa=str(saving*Q(99999,100000)),
                   selected=selected,complete_controller=score.jsonable(counts),

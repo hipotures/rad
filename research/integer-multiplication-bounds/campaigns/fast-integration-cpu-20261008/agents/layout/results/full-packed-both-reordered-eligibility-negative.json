@@ -1,0 +1,79 @@
+{
+  "status": "no eligible regular inverse cell at the declared finite work grid",
+  "scientific_class": "component eligibility negative, not coefficient recovery failure",
+  "config": {
+    "source": [
+      241,
+      251
+    ],
+    "target": [
+      256,
+      256
+    ],
+    "alpha": 4,
+    "q": 200,
+    "digits": 150,
+    "packed_digits": 400,
+    "digit_bits": 10,
+    "input_digits": 89,
+    "direct_frequency_limit": 64,
+    "side": 128,
+    "radius": 34,
+    "inverse_side": 2,
+    "inverse_radius": 5,
+    "seed": 202610104101,
+    "input_mode": "ordinary"
+  },
+  "run": {
+    "job": {
+      "id": "reordered-large-digit",
+      "scientific_change": "swap ordered prime factors: changes triangular CRT normalization, binary axes and Gaussian selector phases; ordinary",
+      "command": [
+        "python3",
+        "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/layout/full-packed-both-actual-crt-reordered-queue-20261008T170950Z/driver.py",
+        "--packed-wrapper",
+        "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/layout/full-packed-both-actual-crt-reordered-queue-20261008T170950Z/wrapper.py",
+        "--crt-api",
+        "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/layout/full-packed-both-actual-crt-reordered-queue-20261008T170950Z/compiled_crt_payload_api.py",
+        "--producer",
+        "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/layout/full-packed-both-actual-crt-reordered-queue-20261008T170950Z/producer.py",
+        "--forward-stage",
+        "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/layout/full-packed-both-actual-crt-reordered-queue-20261008T170950Z/forward.py",
+        "--cyclic-api",
+        "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/layout/full-packed-both-actual-crt-reordered-queue-20261008T170950Z/cyclic_gaussian_reference.py",
+        "--laurent-api",
+        "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/layout/full-packed-both-actual-crt-reordered-queue-20261008T170950Z/regular_laurent_kernel.py",
+        "--config",
+        "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/agents/layout/configs/full-packed-both-actual-crt-reordered-large-digit.json",
+        "--output",
+        "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/layout/full-packed-both-actual-crt-reordered-queue-20261008T170950Z/reordered-large-digit"
+      ]
+    },
+    "start_utc": "2026-10-08T17:10:05.724480+00:00",
+    "end_utc": "2026-10-08T17:13:35.486115+00:00",
+    "returncode": 1,
+    "seconds": 209.76164787499874,
+    "status": "failed command retained",
+    "log": "job-0.log"
+  },
+  "assertion": "no actual regular inverse output in this changed finite regime",
+  "completed_actual_crt_inputs": 2,
+  "log_sha256": "1adbe453b0a010f82de87cfdbb5ba9682d1b966205720149ba5bd83c2e79d905",
+  "source_hashes": {
+    "regular_laurent_kernel.py": "0f624abaf3e4e0767c6579467c885f37c21294168c1eb912e23379a835bc95e6",
+    "lane.py": "af80b458ab26117e90a42f46ab1ebc18067039b173a37db9d74183810684eb17",
+    "compiled_crt_pipeline_bankleaf.py": "4c79a581e3f102499117d8dacd076aad938893d8db776fe34f32c61baf12ece3",
+    "cyclic_gaussian_reference.py": "21fa3749711da59b48059406a9db85f56a373405c1c8a51322dc3fe58600ad36",
+    "driver.py": "cc479943a86fd3cc1757b6768cc11f277841b30ae3a7539ac5bd1f54f2daa497",
+    "crt_guard_controls.py": "28692297f7383f055ccc18f0622f5ce2c1e1a1865ddb7ae90a8b968e8eff9eb0",
+    "forward.py": "b9c1712ae42b1350d3f6fb1bac0fbe0a6244afc6b93ce3042c9e9671c69ec689",
+    "producer.py": "5389c83077565369f453fd2967ba5b12c0c3b86073b6983d76c240cc66fc9f04",
+    "compiled_crt_payload_api.py": "fd06498f5e81c1835fcae726180f40e3baab5fadf2b3b41ef660c69d195250b7",
+    "wrapper.py": "078e533cf27bc77cbdf1281c6df653cec4dc6e7fbebfb54663f4f968ce61b55a"
+  },
+  "raw_log_location": "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/layout/full-packed-both-actual-crt-reordered-queue-20261008T170950Z/queue-results-repaired/job-0.log",
+  "limitations": [
+    "The changed configuration also increases Q and digit size; this failure does not isolate prime order.",
+    "No final coefficient observation or final actual CRT inverse was produced."
+  ]
+}
