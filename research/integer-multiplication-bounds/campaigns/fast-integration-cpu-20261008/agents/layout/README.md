@@ -29,3 +29,20 @@ are ready for the coordinating agent's first checkpoint:
 Next: independently check full distinguished-axis Fourier/product alignment and
 investigate packed tensor convolution with regular/exception phase regions.
 The latter is a speculative analytic interface and has no promoted exponent.
+
+Status at13:36UTC: the exact generalized Fourier/product check is complete;
+the deferred whole-reservoir FFT transfer is written and has a separate source
+review. Joint fractional source embedding, nearest selectors, shifted-grid
+alignment and final source assembly now have a written fixed-tape interface
+and independent exact finite controls:
+
+- [Deferred-reservoir transform proposal](deferred-reservoir-transform-lemma.md).
+- [Joint fractional gather and grid-alignment lemma](joint-fractional-gather-lemma.md).
+- [Wide polynomial-axis Fourier result](results/wide-axis-operators.json).
+- [Fractional source-core embedding result](results/fractional-core-embedding.json).
+- [Joint selectors and fractional face result](results/joint-selector-fractional-faces.json).
+- [Global rotations, expanded source volumes and packing controls](results/joint-grid-packets.json).
+
+The full packed Gaussian and sparse-repair candidate is coordinated outside this
+owned subdirectory. Its analytic inverse precision and kernel interfaces remain
+separate conditions. No complete improved kappa is claimed by these files.

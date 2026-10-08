@@ -20,5 +20,12 @@ ceiling is already near the bit primitive; unchanged tuning is low value.
 H5 (new): moment-aware continuation matching in the pinned PR36 positive-label
 graphs. Maximum-cardinality alternatives are exactly excluded by independent
 componentwise majorization; all-cardinality full characteristic extension is
-coordinator-checked and pending separate review. This excludes only these
+coordinator-checked and independently reviewed. This excludes only these
 generic native profiles. It does not exclude PR38 fixed I+J profiles.
+
+13:39 UTC: H1 has a general spatial inverse locality lemma and written forward
+precision; H2 has source-closed sparse repair with exact controls; H3 has joint
+fractional embeddings and deferred whole-axis Fourier controls. H4 now has an
+original conditional transfer candidate approaching the primitive saving a,
+instead of the inherited balanced a/(1+a) ceiling. Exact arithmetic passes,
+but full machine/precision/recurrence composition remains unpromoted.

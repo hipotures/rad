@@ -27,3 +27,10 @@ separation; the layout branch has a growing-dimensional halo budget lemma.
 - [Reproduction](reproduce.md)
 - [Inverse branch](agents/inverse/README.md), [layout branch](agents/layout/README.md)
 - [Independent continuation review](agents/scout/continuation-review.md)
+
+New written interfaces: [spatial inverse locality](agents/inverse/reports/global-gaussian-locality.md),
+[joint fractional tape gathering](agents/layout/joint-fractional-gather-lemma.md),
+[deferred whole-axis transforms](agents/layout/deferred-reservoir-transform-lemma.md)
+and [source-closed sparse repair](reports/sparse-source-closure.md).
+[Exact exponent arithmetic](results/packed-assembly-candidate.json) is a candidate
+check, not proof of the changed all-size premises.
