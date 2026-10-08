@@ -104,3 +104,26 @@ candidate definitions, deadlines, commands and environment. Completed
 case JSON, summary and timing/resource evidence are retained. Dynamic
 neighborhood source and protocol are recorded separately; a live checkpoint
 is not an immutable evidence archive or permission to control a process.
+
+
+## Campaign closure and later matched limits
+
+The user extended this same clock to10:00UTC/12:00CEST. The historical
+12-worker benchmark above retains its actual configuration; later
+productive sweeps use the authorized16-process scheduling policy with
+shared owned reservations and no nested BLAS/OMP teams. Final early
+cohort085400completed56scientific cases with42distinct compiled
+witnesses and zero failures in774.701seconds:260.23cases/hour, or
+195.17distinct compiled witnesses/hour. Those search families differ
+from the original50-case perturbation benchmark, so these are not
+a controlled universal before/after speedup comparison. Outcomes include
+the independently promotedR529181graph. Peakworker lifetimeRSS was
+6518696KiB; complete original case timing/memory records are archived.
+
+Read-only telemetry was extended without restarting workers. Its final
+86samples ended naturally at09:59UTC; no process was signalled. Complete
+JSONL and execution evidence, protocol and closure hashes are retained
+in the final telemetry inventory and archive. GPUs were not forced
+into sparse exact symbolic traversal. The verified phase improvements,
+scientific throughput, distinct graphs and limitations remain separate
+from machine utilization.

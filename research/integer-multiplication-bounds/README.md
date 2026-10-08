@@ -12,7 +12,8 @@ The campaign `20261007T222521Z` began at 2026-10-07 22:25:21 UTC.
 The user explicitly extended its original ten-hour deadline of
 2026-10-08 08:25:21 UTC to **2026-10-08 10:00:00 UTC**, or **12:00 CEST
 in Poland**, during the same uninterrupted campaign. Substantive research
-is active. The pinned baseline
+concluded at the extended deadline; the user-requested upstream draft
+publication is now being prepared. The pinned baseline
 passes all 85 tests and regenerates its certificates and patches unchanged.
 The new upstream compact-control revision
 `6e564879f51ae16f23d392e9e196c605f36d90df`, published during this campaign,
@@ -54,8 +55,8 @@ h53 native table is not materialized.
 - [Current exact independent twelve-row assembly](runs/20261008T094604Z-review-source-framed-whole-assembly/)
 - [Previous final early-allocation composition](reports/final-early-composition.md)
 
-Research and publication continue through12:00CEST without restarting
-the campaign clock.
+Research concluded at12:00CEST with its original campaign clock
+preserved. Final publication continues.
 
 All older accepted interfaces remain preserved. The generic compact
 R473026 checkpoint is
