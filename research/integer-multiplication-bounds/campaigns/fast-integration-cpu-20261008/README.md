@@ -34,3 +34,11 @@ New written interfaces: [spatial inverse locality](agents/inverse/reports/global
 and [source-closed sparse repair](reports/sparse-source-closure.md).
 [Exact exponent arithmetic](results/packed-assembly-candidate.json) is a candidate
 check, not proof of the changed all-size premises.
+
+14:06 UTC correction: the native known-bit router does not implement the
+triangular modular CRT payload map. Its O(nd) row rejects the previously
+uncosted near-primitive candidate and retains the scoped a/(1+a) ceiling.
+The exact ledger has been repaired. New dirty-guard/parallel carry CRT
+constructions are being independently tested; they are unverified leads.
+The user requested sustained CPU exploration without changing the clock.
+Expanded cyclic inverse, Gaussian packet and exact CRT families are running.

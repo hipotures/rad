@@ -14,7 +14,9 @@ The leading discovered public claim is [CrocSwap PR 37](https://github.com/CrocS
 
 The leading balanced assembly already has semantic `C1=1` and permits `epsilon` approaching one. With `q = a_bit*(1-2h)` it chooses `epsilon=(1-h)/(1+q)`. Its scoped limit is `a_bit/(1+a_bit)`. The complex stopped-leaf condition `(1-beta)*a_complex > a_bit` survives, with `beta=1/20` and `a_complex=717/10^7`, but is not binding for this witness. The product row degree 2000 is explicitly charged. An isolated removal of the old `epsilon<1/2` ceiling is therefore not a new leading result.
 
-The intake was superseded during the campaign by PR 38 and then PR 39. [The live findings](live-findings.md) records the exact heads, changed profiles and later validation receipts; PR 39 claims `kappa=3.886675852e-5` and was ready for review by the 13:11 observation.
+The eligible intake was superseded by PR38, PR39 and PR40. [The live findings](live-findings.md) records exact heads, changed profiles and validation receipts. The pinned eligible PR40 science head is `43f59ff533598762cbc43a5e14af2bbbc76fabbd`, with `kappa=3.918734894e-5`, bit saving `783777693/(2*10^13)`, and readiness head `e3bf3ab0cb1ec48588e279b31a97e7a49c72f99e`. Its full checks support a conditional argument, not external acceptance.
+
+At13:48 a source audit identified the full-payload CRT rotations that survive an improved axis reversal. The coordinator withdrew the tentative stronger full composition. [The CRT review](crt-cost-review.md) proves the scoped ceiling `a/(1+a)` with those rotations retained and records a Hamming-weight discriminator showing that the true modular map is not a named-bit permutation. The new product gather, spatial locality, physical band-LU and deferred transform remain useful separately reviewed interfaces.
 
 The surviving physical rows include prefix movement, phase localization and phase boundaries, with savings `1-epsilon`, `1-epsilon-delta`, and `min(1-epsilon-delta,r-delta)`. A stronger full algorithm must change the limiting rows or improve the bit child-width moment.
 
@@ -26,6 +28,10 @@ The surviving physical rows include prefix movement, phase localization and phas
 - [Analytic leads](analytic-leads.md): tensor packing, a proved regular Laurent estimate and explicit missing machine interfaces.
 - [Deferred-reservoir criticism](deferred-reservoir-review.md): source-grounded review of the new equal-axis transform schedule.
 - [Continuation reviews](all-cardinality-continuation-review.md): independent complete-profile enumeration and universal concavity exclusion for the coordinator's exported generic graph.
+- [Global inverse locality review](global-locality-review.md): weighted lifted-kernel and principal-window criticism, including aliases.
+- [Joint product and cap review](joint-interface-review.md): exact occupied order, metadata, cut exclusions and the explicitly conditional primitive cap.
+- [Physical LU and long-record review](physical-lu-review.md): independent backward-error induction and address/precision/bank comparisons.
+- [CRT audit](crt-cost-review.md): remaining payload rotations, exact scoped ceiling and primary literature follow-up.
 - `observations/`: timestamped compact observations and differences.
 - [refresh_public_sources.py](refresh_public_sources.py): one read-only `gh api` observation, with optional broader searches; it never fetches RaD branches or performs Git mutations.
 
@@ -38,3 +44,5 @@ python3 research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20
 ```
 
 No remote human acceptance or full formal verification is inferred from passing numerical, finite or Lean arithmetic checks.
+
+The live watcher now lists PR metadata without requesting bodies, excludes new campaign-linked RaD entries and suspected derivatives, then fetches only eligible bodies. It never enumerates live hipotures forks. No independent campaign's new branch, source, result or bound is used for scientific comparison. Two earlier automatic raw list captures are quarantined in ignored work and explicitly excluded from publication in the input manifest; their excluded metadata was removed from the durable compact observations. The pinned eligible reference is PR40, without a claim that it is the current global best.

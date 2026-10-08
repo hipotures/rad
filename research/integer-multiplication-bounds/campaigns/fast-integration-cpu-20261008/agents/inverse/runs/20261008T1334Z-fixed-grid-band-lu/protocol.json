@@ -1,0 +1,44 @@
+{
+  "run_id": "20261008T1334Z-fixed-grid-band-lu",
+  "status": "complete",
+  "question": "Verify no-pivot fixed-grid band factorization and exact original-matrix residuals",
+  "source": "../../code/fixed_grid_band_lu.py",
+  "source_sha256": "8315287fc42ba3fd88885f2e3072ef72bd1ae5639d2355b3ef11ea964b6e5fd5",
+  "source_provenance": "Original independent standard-library implementation; no upstream code imports",
+  "settings": {
+    "workers": 1,
+    "seeds": [
+      2026100831,
+      2026100832,
+      2026100833,
+      2026100834
+    ],
+    "dimensions": [
+      32,
+      48,
+      64,
+      96
+    ],
+    "half_bandwidths": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "fractional_bits": [
+      24,
+      40,
+      64,
+      96
+    ]
+  },
+  "command": "python3 -B agents/inverse/code/fixed_grid_band_lu.py --output work/inverse/raw/20261008T1334Z-fixed-grid-band-lu.json",
+  "cwd": "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008",
+  "native_thread_limits": {
+    "OPENBLAS_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "MKL_NUM_THREADS": 1
+  },
+  "completion_observed_by_utc": "2026-10-08T13:39:21Z",
+  "scope_limitation": "Generic row-dominant band systems; cyclic windows require an explicit lifted ordering and remote-alias perturbation"
+}

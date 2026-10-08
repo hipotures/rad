@@ -1,0 +1,32 @@
+{
+  "run_id": "20261008T1328Z-packed-interiors",
+  "status": "complete",
+  "question": "Verify halo-free Kronecker convolution interiors and reject face carry collisions",
+  "source": "../../code/packed_tensor_controls.py",
+  "source_sha256": "146adfd351832b171c8f269bb68af1ad73e9b090915844ac967194e1c96dbc4f",
+  "source_provenance": "Original independent standard-library implementation; no upstream code imports",
+  "settings": {
+    "workers": 1,
+    "seeds": [
+      2026100811,
+      2026100812,
+      2026100813,
+      2026100814
+    ],
+    "dimensions": [
+      2,
+      3,
+      2,
+      4
+    ]
+  },
+  "command": "python3 -B agents/inverse/code/packed_tensor_controls.py --output work/inverse/raw/20261008T1328Z-packed-interiors.json",
+  "cwd": "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008",
+  "native_thread_limits": {
+    "OPENBLAS_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "MKL_NUM_THREADS": 1
+  },
+  "completion_observed_by_utc": "2026-10-08T13:39:21Z",
+  "scope_limitation": "changed algebraic packing interface; no claim about global box acquisition"
+}

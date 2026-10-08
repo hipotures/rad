@@ -12,6 +12,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 
@@ -24,11 +25,70 @@ WATCHED = {
     "Swapnil-jain/integer-mult-kappa": "main",
     "platypii/integer-mult-bounds-lean": "master",
 }
+CAMPAIGN_START = "2026-10-08T12:40:55Z"
 
 
 def api(path: str):
     raw = subprocess.check_output(["gh", "api", path], stderr=subprocess.PIPE)
     return json.loads(raw)
+
+
+def graphql(query: str):
+    raw = subprocess.check_output(["gh", "api", "graphql", "-f", "query=" + query],
+                                  stderr=subprocess.PIPE)
+    return json.loads(raw)["data"]["repository"]
+
+
+def eligible_pulls():
+    # List metadata without requesting any body. An independent RaD campaign
+    # may publish during this run; its new branch/results remain excluded.
+    meta = graphql('''query { repository(owner:"CrocSwap",name:"integer-mult-bounds") {
+      pullRequests(first:100,states:[OPEN,CLOSED,MERGED],
+        orderBy:{field:CREATED_AT,direction:DESC}) { nodes {
+        number title author {login} state isDraft createdAt updatedAt
+        headRefOid headRefName headRepository {nameWithOwner} url
+      }} }}''')["pullRequests"]["nodes"]
+    eligible, excluded = [], []
+    for p in meta:
+        author = (p["author"] or {}).get("login", "")
+        repository = (p["headRepository"] or {}).get("nameWithOwner", "")
+        campaign_linked = (author.lower() == "hipotures"
+                           or repository.lower().startswith("hipotures/")
+                           or "rad " in p["title"].lower())
+        if p["createdAt"] >= "2026-10-08T13:35:00Z":
+            # Incidental new changed-graph metadata coincided with the excluded
+            # independent RaD publication. Conservative quarantine prevents
+            # derivative results entering our source set without provenance.
+            campaign_linked |= bool(re.search(r"changed[ -]*(?:dag|graph)",
+                                              p["title"], re.I))
+        if p["createdAt"] >= CAMPAIGN_START and campaign_linked:
+            excluded.append(p["number"])
+            continue
+        eligible.append(p)
+    fields = " ".join(f'p{p["number"]}:pullRequest(number:{p["number"]}){{body}}'
+                      for p in eligible)
+    bodies = graphql('query {repository(owner:"CrocSwap",name:"integer-mult-bounds") {'
+                     + fields + '}}') if fields else {}
+    pulls = [{"number":p["number"], "title":p["title"],
+              "user":{"login":(p["author"] or {}).get("login")},
+              "state":"closed" if p["state"] in ("CLOSED","MERGED") else "open",
+              "draft":p["isDraft"], "created_at":p["createdAt"], "updated_at":p["updatedAt"],
+              "head":{"sha":p["headRefOid"], "ref":p["headRefName"],
+                      "repo":{"full_name":(p["headRepository"] or {}).get("nameWithOwner")}},
+              "html_url":p["url"], "body":bodies[f'p{p["number"]}']["body"]}
+             for p in eligible]
+    retained = []
+    for p in pulls:
+        # Do not retain an eligible-looking derivative that expressly cites
+        # quarantined PR41--43. Only this provenance filter sees such a body.
+        derivative = bool(re.search(r"(?:#|PR\s*#?|pull/)(?:41|42|43)\b",
+                                    p["body"] or "", re.I))
+        if derivative:
+            excluded.append(p["number"])
+        else:
+            retained.append(p)
+    pulls = retained
+    return pulls, excluded
 
 
 def observed_head(item):
@@ -52,12 +112,13 @@ def main():
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     rawdir = WORK / "observations" / stamp
     rawdir.mkdir(parents=True, exist_ok=False)
-    pulls = api("repos/CrocSwap/integer-mult-bounds/pulls?state=all&per_page=100")
+    pulls, excluded = eligible_pulls()
     (rawdir / "pulls.json").write_text(json.dumps(pulls, indent=2) + "\n")
     with ThreadPoolExecutor(max_workers=3) as pool:
         heads = dict(pool.map(observed_head, WATCHED.items()))
     compact = {
         "observed_utc": stamp,
+        "excluded_campaign_linked_pr_numbers": excluded,
         "heads": heads,
         "pull_requests": {
             str(p["number"]): {
@@ -76,8 +137,10 @@ def main():
         compact["forks"] = {}
         for fork in forks:
             name = fork["full_name"]
-            if name.lower() == "hipotures/rad":
-                raise RuntimeError("Independent RaD campaigns are not scout inputs")
+            if name.lower().startswith("hipotures/"):
+                # Completed historical snapshots are pinned separately. Never
+                # enumerate newly published RaD campaign branches in a live poll.
+                continue
             branches = api(f"repos/{name}/branches?per_page=100")
             compact["forks"][name] = {b["name"]: b["commit"]["sha"] for b in branches}
     if args.search:

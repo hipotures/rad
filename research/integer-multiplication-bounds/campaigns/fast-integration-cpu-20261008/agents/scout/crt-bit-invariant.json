@@ -1,0 +1,103 @@
+{
+  "observed_utc": "2026-10-08T13:56:46.086304+00:00",
+  "source_sha256": "4eeb59d001967218143777671301ea9c443166e00ff384cf84c490cdd5c6f487",
+  "status": "CRT valid-address weight changes exclude pure binary slot permutation",
+  "rows": [
+    {
+      "prime_shape": [
+        3,
+        5
+      ],
+      "valid_addresses": 15,
+      "binary_slot_weight_changes": 7,
+      "wrong_if_only_axis_reordered": 10,
+      "first_weight_counterexample": {
+        "source": [
+          1,
+          0
+        ],
+        "target": [
+          1,
+          2
+        ],
+        "source_binary_weight": 1,
+        "target_binary_weight": 2
+      }
+    },
+    {
+      "prime_shape": [
+        5,
+        7
+      ],
+      "valid_addresses": 35,
+      "binary_slot_weight_changes": 20,
+      "wrong_if_only_axis_reordered": 28,
+      "first_weight_counterexample": {
+        "source": [
+          1,
+          0
+        ],
+        "target": [
+          1,
+          3
+        ],
+        "source_binary_weight": 1,
+        "target_binary_weight": 3
+      }
+    },
+    {
+      "prime_shape": [
+        3,
+        5,
+        7
+      ],
+      "valid_addresses": 105,
+      "binary_slot_weight_changes": 71,
+      "wrong_if_only_axis_reordered": 98,
+      "first_weight_counterexample": {
+        "source": [
+          0,
+          1,
+          0
+        ],
+        "target": [
+          0,
+          1,
+          3
+        ],
+        "source_binary_weight": 1,
+        "target_binary_weight": 3
+      }
+    },
+    {
+      "prime_shape": [
+        5,
+        7,
+        11
+      ],
+      "valid_addresses": 385,
+      "binary_slot_weight_changes": 288,
+      "wrong_if_only_axis_reordered": 374,
+      "first_weight_counterexample": {
+        "source": [
+          0,
+          1,
+          0
+        ],
+        "target": [
+          0,
+          1,
+          8
+        ],
+        "source_binary_weight": 1,
+        "target_binary_weight": 2
+      }
+    }
+  ],
+  "scoped_saving_ceiling": "783777693/20000783777693",
+  "proof": "Any permutation of named binary slots preserves total Hamming weight; the exact CRT map changes it on retained valid addresses.",
+  "limitations": [
+    "does not exclude arithmetic routers, Toffoli circuits or other new CRT algorithms",
+    "scoped cost ceiling assumes retained d full-payload rotations and q<a"
+  ]
+}

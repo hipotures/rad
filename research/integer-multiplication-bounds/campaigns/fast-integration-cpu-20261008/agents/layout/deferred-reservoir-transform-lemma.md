@@ -24,7 +24,9 @@ deleting a top-bit prefix does not remove this obstruction.
 
 ## Generalized box and polynomial suffix
 
-Write the total scalar padded-address length as `N=d ell+h`, `0<=h<ell`.
+Choose ell first and set `d=floor(N/ell)`, `h=N-d ell` for the scalar padded
+address length N, so `N=d ell+h`, `0<=h<ell`. Choosing d first instead would
+give a different remainder bound and is not the construction here.
 Use E=d-1 transformed main axes of length `t=2^ell` and one polynomial suffix
 `r=2^(ell+h)`. Their total scalar volume is exactly `T=2^N`.
 There are no differing main-axis top bits. All main axes divide2r; their
@@ -160,6 +162,49 @@ The source review is [the scout's independently read contract review](../scout/d
 Remaining obligations are a complete compiled external-field machine review,
 changed prime/assembly inequalities and final scalar error constants. Those
 should be completed before claiming a complete multiplication bound.
+
+## Adversarial audit of the second group's external row fields
+
+Rechecked against the pinned compact-control-layout proof at13:55 UTC.
+For group B choose disjoint donor sets from A: q0 whole axes for ROW,
+qF for FRONT, qB for BACK; all remaining A axes are spectators. The ONE
+paid exchange route writes fields in the following explicit order:
+
+`[ROW][FRONT1(H)][FRONT2(H)][front remainder][B active axes][BACK(H)][back remainder][spectators][polynomial suffix]`.
+
+Whole donor axes have K bits; `qF K>=2H`, `qB K>=H`, and each unused remainder
+is a complete spectator range. The front/back bits NEVER enter the row index.
+Every A frequency address occurs, including both values of every donated
+bit, because a Fourier transform changes payloads, not the physical address
+set. Frequency interpretation therefore changes neither row cardinality nor
+the fixed-tape basis placement. It also supplies no assertion that a donor
+payload is zero; arbitrary dirty payload is explicitly allowed.
+
+Let `R_row=2^(q0 K)` and `k0=ceil(log_m d)`. Use
+`R_pad=W^k0 ceil(R_row/W^k0)`. Since R_row>=W^k0,
+`R_pad<2 R_row`. Append complete zero rows, with exactly the same FRONT,
+B, BACK, spectator and polynomial suffix shape, BEFORE the first role split.
+At depth j the remaining row cardinality is divisible by W^(k0-j).
+Split its row number u=Wg+w. Aligned coefficient gates use the same g and
+within-row coordinates on every role. At every completed invocation the
+row permutation and all compact fields are restored; the resulting operator
+is identity on each external row. Thus the padded rows are zero on return
+even though they may contain nonzero scratch payload while a call is active.
+Delete ONLY those restored rows; carry neither padding nor a role permutation
+to the next Fourier level. This pays a current volume below2V per invocation,
+not2 raised to the number of Fourier levels.
+
+For any base-m piece smaller than d^beta, the fallback processes its own
+selected axes individually using the EXTERNAL banks; it does not reserve
+more selected axes. Its cost is O(Vd^beta), absorbed by the supplied strict
+leaf exponent. Intermediate exact arithmetic uses p=Q and the SAME global
+d guard; each completed level returns to the Q grid and disk before the
+next one. Long precision does not change m,W or require a rebuilt row basis.
+
+This audit found no new divisibility or transformed-frequency counterexample.
+It is a direct adaptation of the pinned physical proof with separately supplied
+fields, and remains conditional on that proof's primitive row, guard and
+restoration contracts. It is not a machine execution at the asymptotic cutoff.
 
 ## Reproduction and provenance
 

@@ -97,7 +97,8 @@ product once each. Their exact triangular residuals have row norm at most
 A sufficient common precision for target error `2^-Q` and bounded input is
 
 ```
-P=Q+ceil(log2[2^14*(w+1)^2])=Q+O(log w).
+P=Q+ceil(log2[2^14*(w+1)^2])+ceil(log2 B)
+ =Q+O(log w+log B), B=max(1,||b||).
 ```
 
 This bound concerns the rounded matrix `A`. Its Gaussian-entry and remote
@@ -183,3 +184,29 @@ These controls exercise the changed precision implementation; the general
 lemma is the written backward-error argument. Cyclic-to-local approximation,
 actual Gaussian exponent rounding and sparse volume remain explicit external
 interfaces, not facts implied by a PASS label.
+
+The separate `../code/gaussian_band_lu_controls.py` probes the same fixed-grid
+algorithm against independently evaluated physical Gaussian matrices at 200
+decimal digits. Three principal windows, including a lifted physical-period
+crossing and exact phase-edge starts, passed 36 basis/arbitrary-grid inputs at
+64-, 192- and 256-bit target accuracy. Gaussian coefficient truncation,
+rounding and retained cyclic-image perturbations are included in the actual
+original-matrix residual. Omitted images have an explicit exponentially small
+row bound. A diagonal-only negative control fails in every case.
+The complete result is retained under
+`../runs/20261008T1344Z-gaussian-band-lu/results/certificate.json`.
+
+The campaign scout independently criticized the Schur preservation, local
+backward-error embedding, reciprocal replacement and triangular residual
+argument and reported no blocking flaw. This is internal mathematical review,
+not external human peer review or formal verification.
+
+Reproduce the generic exact controls and Gaussian numerical controls from the
+repository root:
+
+```sh
+python3 -B research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/agents/inverse/code/fixed_grid_band_lu.py \
+  --output /tmp/fixed-grid-band-lu.json
+python3 -B research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/agents/inverse/code/gaussian_band_lu_controls.py \
+  --output /tmp/gaussian-band-lu.json
+```

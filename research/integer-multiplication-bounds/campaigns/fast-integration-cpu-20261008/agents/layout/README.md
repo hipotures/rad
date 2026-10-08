@@ -46,3 +46,9 @@ and independent exact finite controls:
 The full packed Gaussian and sparse-repair candidate is coordinated outside this
 owned subdirectory. Its analytic inverse precision and kernel interfaces remain
 separate conditions. No complete improved kappa is claimed by these files.
+
+At13:40UTC the [native parameter audit](native-parameter-audit.md) explicitly
+reparameterizes the coefficient precision independently of the address length.
+It records the acyclic chooser that makes the last polynomial axis at most
+twice as wide in bits as every main axis, and checks actual guard, row stock,
+superpolynomial records and supplied-K uses in the pinned source.

@@ -19,7 +19,7 @@ def assembly(a, b, eps, q, kappa, beta=F(1, 20)):
     cost_exponents = dict(
         completed_fft=1 - eps * q,
         coordinate_routing=tau,
-        selected_bit_crt=tau,
+        triangular_controlled_crt=eps,
         suffix_ring_product=1 - eps,
         packed_recursive_children=eps * (1 - kappa),
         sparse_repair_sorting=1 - 2 * eps,
@@ -46,14 +46,13 @@ def assembly(a, b, eps, q, kappa, beta=F(1, 20)):
     )
     strict.update({name+'_below_target': target-exponent
                    for name, exponent in cost_exponents.items()})
-    assert all(v>0 for v in strict.values()), {k:str(v) for k,v in strict.items() if v<=0}
+    failures={k:str(v) for k,v in strict.items() if v<=0}
     controls = dict(
         retained_full_axis_gaussian=target-eps,
         retained_per_level_reserved_axes=target-eps,
         old_short_digit_chirp_capacity=1-(F(1,2)+2*eps),
         old_compact_geometry=1-eps*(1+q),
     )
-    assert all(v<0 for v in controls.values())
     return dict(parameters=dict(a_bit=a, a_complex=b, epsilon=eps, q=q,
                                  kappa=kappa, beta=beta, tau=tau, sigma=sigma,
                                  lambda_=lam, lambda_prime=lp),
@@ -73,7 +72,9 @@ def assembly(a, b, eps, q, kappa, beta=F(1, 20)):
                     'terminating strong-induction recursive integer multiplication',
                     'prime, catalogue, setup and eventual exact recovery',
                 ],
-                proof_status='exact arithmetic only; all-size premises reviewed separately')
+                arithmetic_pass=not failures, failed_slacks=failures,
+                proof_status='exact arithmetic only; all-size premises reviewed separately',
+                crt_correction='The known-coordinate router does not replace d controlled modular CRT rotations.')
 
 
 def encode(x):
@@ -91,13 +92,24 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     args=parser.parse_args()
     a=F(783777693,20000000000000)  # Public PR40 scientific head43f59ff5.
-    result=assembly(a,F(717,10000000),F(999999,1000000),
-                    a*F(999999,1000000),a*F(99999,100000))
+    rejected=assembly(a,F(717,10000000),F(999999,1000000),
+                      a*F(999999,1000000),a*F(99999,100000))
+    assert not rejected['arithmetic_pass']
+    assert set(rejected['failed_slacks'])=={'triangular_controlled_crt_below_target'}
+    h=F(1,100000000)
+    q=a*(1-h)
+    balanced=assembly(a,F(717,10000000),(1-h)/(1+q),q,
+                      a/(1+a)*F(9999999,10000000))
+    assert balanced['arithmetic_pass']
+    assert balanced['gain_over_old_supremum']<0
+    result=dict(rejected_near_primitive_candidate=rejected,
+                corrected_balanced_arithmetic=balanced,
+                scientific_conclusion='Surviving triangular CRT preserves the a/(1+a) ceiling; no improved exponent is promoted.')
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(encode(result),indent=2)+'\n')
-    print(json.dumps(encode(dict(kappa=result['parameters']['kappa'],
-                                 smallest_slack=result['smallest_slack'],
-                                 gain=result['gain_over_old_supremum']))))
+    print(json.dumps(encode(dict(rejected_crt_slack=rejected['failed_slacks'],
+                                 corrected_smallest_slack=balanced['smallest_slack'],
+                                 corrected_kappa=balanced['parameters']['kappa']))))
 
 
 if __name__=='__main__':

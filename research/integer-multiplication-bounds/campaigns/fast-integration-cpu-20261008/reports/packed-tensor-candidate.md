@@ -1,7 +1,10 @@
 # Packed tensor cells and sparse tape repair
 
 This is an original analytic/movement candidate, not a promoted multiplication
-bound. It combines new spatial inverse locality, mixed-radix tensor packing,
+bound. At13:47 UTC, independent source review found a blocking surviving
+O(nd) triangular CRT movement row. The prediction of approaching the native
+bit saving a is withdrawn. The currently paid composition retains the
+a/(1+a) ceiling. It combines spatial inverse locality, mixed-radix tensor packing,
 two shifted cell grids and sparse classical repair. The deferred-reservoir FFT
 and distinguished suffix-axis interface are separate required components.
 

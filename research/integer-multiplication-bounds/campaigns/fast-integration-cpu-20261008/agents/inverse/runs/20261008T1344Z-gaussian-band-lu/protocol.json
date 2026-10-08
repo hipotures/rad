@@ -1,0 +1,25 @@
+{
+  "run_id": "20261008T1344Z-gaussian-band-lu",
+  "status": "complete",
+  "question": "Validate fixed-grid band LU against independently evaluated physical Gaussian principal windows",
+  "source": "../../code/gaussian_band_lu_controls.py",
+  "source_sha256": "4a78412e26c2ffd97987aaa1b716c97098619a05949f3194be364a180a14fe5a",
+  "factor_source": "../../code/fixed_grid_band_lu.py",
+  "factor_source_sha256": "8315287fc42ba3fd88885f2e3072ef72bd1ae5639d2355b3ef11ea964b6e5fd5",
+  "workers": 1,
+  "command": "python3 -B agents/inverse/code/gaussian_band_lu_controls.py --output work/inverse/raw/20261008T1344Z-gaussian-band-lu.json",
+  "cwd": "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008",
+  "native_thread_limits": {
+    "OPENBLAS_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "MKL_NUM_THREADS": 1
+  },
+  "decimal_digits": 200,
+  "retained_period_images": [
+    -1,
+    0,
+    1
+  ],
+  "omitted_images": "Explicit remote-alias Gaussian row bound in certificate",
+  "scope": "Independent numerical original-Gaussian residuals; generic fixed-grid residual checks are exact and separate"
+}

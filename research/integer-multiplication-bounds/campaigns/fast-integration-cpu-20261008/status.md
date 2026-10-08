@@ -18,3 +18,11 @@ Sparse source closure has independent exact controls and an early-cropping
 counterexample. Layout supplies joint fractional embedding and global carry
 masks. Exact candidate exponent arithmetic passes; changed all-size premises
 remain under review. No complete improved kappa is promoted.
+
+14:06 UTC correction: the native known-bit router does not implement the
+triangular modular CRT payload map. Its O(nd) row rejects the previously
+uncosted near-primitive candidate and retains the scoped a/(1+a) ceiling.
+The exact ledger has been repaired. New dirty-guard/parallel carry CRT
+constructions are being independently tested; they are unverified leads.
+The user requested sustained CPU exploration without changing the clock.
+Expanded cyclic inverse, Gaussian packet and exact CRT families are running.

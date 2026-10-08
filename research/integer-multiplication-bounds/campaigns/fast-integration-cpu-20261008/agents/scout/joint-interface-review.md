@@ -66,6 +66,13 @@ and common named frequency slots for both operands.
 
 ## The cap on any transferred saving
 
+**Subsequent CRT qualification at 13:48 UTC:** this paragraph's improved cap is
+conditional on removing the actual d modular CRT rotations, not only their
+axis-order reversal. [crt-cost-review.md](crt-cost-review.md) identifies that
+unresolved full-payload row. With the inherited rotations retained, the scoped
+ceiling remains a_bit/(1+a_bit), so no stronger multiplication kappa follows
+from the otherwise valid new local interfaces alone.
+
 Put tau=1-a_bit and sigma=1-a_complex. With the supplied external-field layer,
 lambda_prime must strictly exceed tau, sigma and the stopped leaf exponent
 sigma+beta(1-sigma). Its saving q=1-lambda_prime therefore satisfies
@@ -82,10 +89,12 @@ primitive savings.
 
 For beta=1/20 and a_complex=717/10^7, the complex leaf saving is
 6.8115e-5. It exceeds PR40's a_bit=783777693/(2*10^13)=3.918888465e-5, so the
-bit primitive remains the ceiling. PR40's public composed kappa is
+bit primitive remains the ceiling under that additional CRT-removal hypothesis.
+The pinned eligible PR40 reference's public composed kappa is
 3.918734894e-5. The largest possible absolute gain over that number within this
 transfer is 1.53571e-9, about 0.003919 percent. A result instantiated only with
-PR37's weaker bit primitive must not be described as beating current PR40.
+PR37's weaker bit primitive must not be described as beating that pinned PR40
+reference. This campaign makes no comparison to excluded independent RaD runs.
 
 ## Precision-source qualification
 
