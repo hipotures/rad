@@ -1,0 +1,132 @@
+{
+  "status": "independent finite layout discriminators completed",
+  "workers": 4,
+  "source_sha256": "a88f6498c1f97448dca8da30b634530e648172cc1001950916f77c22718586d3",
+  "results": {
+    "halo_budget": {
+      "status": "exact finite controls passed",
+      "examples": [
+        {
+          "dimension": 1,
+          "halo_ratio_num_bits": 15,
+          "halo_ratio_den_bits": 15,
+          "ratio_float": 1.17462158203125,
+          "entropy_budget_float": 0.17462158203125,
+          "simultaneous_binary_padding_ratio": "2"
+        },
+        {
+          "dimension": 2,
+          "halo_ratio_num_bits": 33,
+          "halo_ratio_den_bits": 33,
+          "ratio_float": 1.1982882383745164,
+          "entropy_budget_float": 0.18988037109375,
+          "simultaneous_binary_padding_ratio": "4"
+        },
+        {
+          "dimension": 3,
+          "halo_ratio_num_bits": 47,
+          "halo_ratio_den_bits": 47,
+          "ratio_float": 1.1907544005548942,
+          "entropy_budget_float": 0.179840087890625,
+          "simultaneous_binary_padding_ratio": "8"
+        },
+        {
+          "dimension": 7,
+          "halo_ratio_num_bits": 121,
+          "halo_ratio_den_bits": 121,
+          "ratio_float": 1.2056576696697692,
+          "entropy_budget_float": 0.189666748046875,
+          "simultaneous_binary_padding_ratio": "128"
+        },
+        {
+          "dimension": 16,
+          "halo_ratio_num_bits": 288,
+          "halo_ratio_den_bits": 288,
+          "ratio_float": 1.2025055140959249,
+          "entropy_budget_float": 0.18552398681640625,
+          "simultaneous_binary_padding_ratio": "65536"
+        },
+        {
+          "dimension": 64,
+          "halo_ratio_num_bits": 1237,
+          "halo_ratio_den_bits": 1237,
+          "ratio_float": 1.1920111244419247,
+          "entropy_budget_float": 0.17589545249938965,
+          "simultaneous_binary_padding_ratio": "18446744073709551616"
+        },
+        {
+          "dimension": 257,
+          "halo_ratio_num_bits": 5521,
+          "halo_ratio_den_bits": 5521,
+          "ratio_float": 1.1941547570659161,
+          "entropy_budget_float": 0.17750275135040283,
+          "simultaneous_binary_padding_ratio": "231584178474632390847141970017375815706539969331281128078915168015826259279872"
+        },
+        {
+          "dimension": 1024,
+          "halo_ratio_num_bits": 23928,
+          "halo_ratio_den_bits": 23928,
+          "ratio_float": 1.1942103834910243,
+          "entropy_budget_float": 0.17750127613544464,
+          "simultaneous_binary_padding_ratio": "179769313486231590772930519078902473361797697894230657273430081157732675805500963132708477322407536021120113879871393357658789768814416622492847430639474124377767893424865485276302219601246094119453082952085005768838150682342462881473913110540827237163350510684586298239947245938479716304835356329624224137216"
+        }
+      ],
+      "negative_fixed_relative_halo_D128_ratio": 2537941837315.6494,
+      "checks": "all axis crops only decrease persistent volume",
+      "seed": 202610081,
+      "seconds": 0.05077518899997813,
+      "pid": 43404
+    },
+    "exposure": {
+      "status": "exact finite controls passed",
+      "cases": 1600,
+      "records_checked": 1509060,
+      "charged_record_head_moves": 46369848,
+      "movement_per_bit_bound": 6,
+      "internal_bit_order": "preserved by complete current-suffix block interleave",
+      "negative_stale_return": {
+        "before_radix": 4,
+        "after_radix": 5,
+        "stale_records": 12,
+        "required_records": 15
+      },
+      "seed": 202610082,
+      "seconds": 0.27053013900012957,
+      "pid": 43407
+    },
+    "catalogue": {
+      "status": "exact finite controls passed",
+      "cases": 3500,
+      "paid_coefficient_reads": 315013501,
+      "maximum_page_to_slab_record_ratio": "25/4",
+      "negative_reusing_wrong_origin_page_bad_entries": 299093032,
+      "scope": "sequential page reuse independent of outer X and spectator Y; not free reads",
+      "seed": 202610083,
+      "seconds": 12.855964643999869,
+      "pid": 43408
+    },
+    "cyclic_splice": {
+      "status": "exact finite controls passed",
+      "cases": 2200,
+      "records_checked": 2056224,
+      "two_head_record_movement_bound": 16379962,
+      "single_head_movement_lower_example_sum": 160005197,
+      "negative_single_head_splice": {
+        "lines": 59,
+        "slab": 32,
+        "period": 228,
+        "residue": 4,
+        "one_head_to_payload_ratio": 116.01906779661017,
+        "two_head_to_payload_bound": 8
+      },
+      "seed": 202610084,
+      "seconds": 0.23596388199985086,
+      "pid": 43409
+    }
+  },
+  "limitations": [
+    "finite exact combinatorial controls, not Gaussian numerical checks",
+    "physical bounds correspond to stated scan schedules, not interpreter RAM runtime",
+    "no numerical multiplication exponent promoted"
+  ]
+}

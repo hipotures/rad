@@ -1,0 +1,16 @@
+{
+  "run_id": "20261008T1254Z-reuse-extended",
+  "status": "complete",
+  "question": "Separate cyclic block factor setup from repeated online solves and verify exact and bounded-precision changed interfaces",
+  "source": "../../code/reusable_cyclic.py",
+  "source_sha256": "aee4a37b1f691bac2a9a24a1bf386619bb6b0c84157c7475004177494779af9a",
+  "source_provenance": "Original independent implementation; no upstream code imports",
+  "environment": "Python standard library; process pool with four workers; BLAS/OpenMP limits one",
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 -B agents/inverse/code/reusable_cyclic.py --workers 4 --profile extended --output work/inverse/raw/20261008T1254Z-reuse-extended.json",
+  "cwd": "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008",
+  "input_generator": "Directed rational near-identity cyclic block matrices",
+  "seeds": [202610091, 202610092, 202610093, 202610094],
+  "fractional_bits": [24, 48, 96],
+  "metrics": ["exact residuals", "rounded errors", "dropped-cyclic negative controls", "setup arithmetic", "online arithmetic", "catalogue entries"],
+  "limitation": "Finite generic boundary-system controls, not a full Gaussian or multiplication proof"
+}

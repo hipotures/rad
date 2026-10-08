@@ -1,0 +1,54 @@
+// Copyright 2026 icekylinx. Licensed under Apache-2.0.
+// Adapted with AI assistance from the archived partial-swap research producer.
+// Underlying circuit modules: jacklightChen/integer-mult-bounds, PR7
+// commit 6725c6a17b17871a35353fd29157f4ed851bc114; original credits retained.
+#include <algorithm>
+#include <array>
+#include <cassert>
+#include <cstdint>
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <random>
+#include <numeric>
+// RaD CPU campaign: moment-aware continuation traversal.
+// Heuristic traversal preserves maximum cardinality; exact moments validate results.
+using U=uint32_t;using V=uint64_t;
+#include "binary_io.hpp"
+int main(int argc,char**argv){assert(argc==6||argc==7);U mode=std::stoul(argv[3]),seed=std::stoul(argv[4]);double saving=std::stod(argv[5]);assert(saving>0&&saving<1);std::mt19937 random(seed);std::ifstream f(argv[1],std::ios::binary);U hdr[4];read_array(f,hdr);U h=hdr[0],v=hdr[1],n=hdr[2],q=hdr[3];
+std::vector<std::array<U,2>>args(n);std::vector<V>core(n),cover(n);std::vector<U>roots(q),kind(q);std::vector<uint8_t>active(n);readv(f,args);readv(f,core);readv(f,cover);readv(f,roots);readv(f,kind);readv(f,active);
+std::vector<U>ranks(n),degree(n),begin(n+1);V c=0,inputs=0,loss=0;
+for(U x=1;x<n;x++)if(active[x]){if(args[x][0]){c++;assert(args[x][0]<x&&args[x][1]<x);ranks[x]=popcount64(cover[x])-popcount64(core[x]);for(U y:args[x])degree[y]++;}else{ranks[x]=1;inputs++;}}
+assert(inputs==v);
+auto oldranks=ranks;
+std::ifstream lf(argv[2],std::ios::binary);U lh[2];read_array(lf,lh);assert(lh[0]==h&&lh[1]==n);std::vector<V>forced(n);std::vector<int8_t>symbols(V(n)*h);readv(lf,ranks);readv(lf,forced);readv(lf,symbols);
+for(U x:roots)degree[x]++;for(U x=1;x<n;x++)begin[x+1]=begin[x]+degree[x];
+std::vector<U>uses(begin.back()),cursor(begin.begin(),begin.end()-1);for(U x=1;x<n;x++)if(active[x]&&args[x][0]){uses[cursor[args[x][0]]++]=2*x;uses[cursor[args[x][1]]++]=2*x+1;}for(U j=0;j<q;j++)uses[cursor[roots[j]]++]=(1U<<31)|j;
+auto nd=[&](U e)->U{return e>>31?roots[e&0x7fffffff]:e/2;};
+auto before=[&](U a,U b){U x=nd(a),y=nd(b);if(ranks[x]!=ranks[y])return ranks[x]<ranks[y];if(oldranks[x]!=oldranks[y])return oldranks[x]<oldranks[y];V ox=a>>31?V(n)+(a&0x7fffffff):x,oy=b>>31?V(n)+(b&0x7fffffff):y;return ox<oy;};
+auto incl=[&](U a,U b){U x=nd(a),y=nd(b);if(forced[y]&~forced[x])return false;int expect[66]{};bool seen[66]{};
+for(U i=0;i<h;i++){int sx=symbols[V(x)*h+i],sy=symbols[V(y)*h+i];if(!sy){if(sx)return false;}else if(sy==1){if(sx!=1)return false;}else{int k=sy<0?-sy:sy,z=sy<0?-sx:sx;if(seen[k]){if(expect[k]!=z)return false;}else{seen[k]=true;expect[k]=z;}}}return true;};
+auto factor_cost=[&](U r)->double {if(!r)return 0;if(2*r<=h)return r;return h-r+std::pow(double(2*r-h),1-saving);};
+auto benefit=[&](U donor,U j)->double {U e=uses[j],target=nd(e),value=e>>31?target:args[target][e&1];U ru=ranks[donor],rv=ranks[value],rt=ranks[target];return factor_cost(h-ru)+factor_cost(rv)+factor_cost(rt-rv)-factor_cost(rt-ru);};
+std::vector<std::vector<U>> edges(n);
+for(U donor=1;donor<n;donor++)if(active[donor]&&args[donor][0]){
+ for(U value:args[donor])for(U j=begin[value];j<begin[value+1];j++)if(before(donor*2,uses[j])&&incl(donor*2,uses[j]))edges[donor].push_back(j);
+ if(mode==1||mode==2||mode==4)std::stable_sort(edges[donor].begin(),edges[donor].end(),[&](U x,U y){double bx=benefit(donor,x),by=benefit(donor,y);return mode==2?bx<by:bx>by;});
+ if(mode==3)std::shuffle(edges[donor].begin(),edges[donor].end(),random);
+}
+auto adjacency=[&](U donor,auto&& action){for(U j:edges[donor])if(action(j))return true;return false;};
+if(argc==7){std::ofstream dump(argv[6]);dump<<"donor,use,ru,rv,rt,target,value,event\n";for(U donor=1;donor<n;donor++)for(U j:edges[donor]){U e=uses[j],target=nd(e),value=e>>31?target:args[target][e&1];dump<<donor<<","<<j<<","<<ranks[donor]<<","<<ranks[value]<<","<<ranks[target]<<","<<target<<","<<value<<","<<e<<"\n";}assert(dump);}
+std::vector<U>donors;for(U x=1;x<n;x++)if(active[x]&&args[x][0]&&adjacency(x,[](U){return true;}))donors.push_back(x);
+if(mode==4)std::stable_sort(donors.begin(),donors.end(),[&](U x,U y){return benefit(x,edges[x][0])>benefit(y,edges[y][0]);});
+if(mode==3)std::shuffle(donors.begin(),donors.end(),random);
+std::vector<U>leftmatch(n),rightmatch(uses.size()),distance(n,UINT32_MAX),queue;V matches=0;U phase=0,inf=UINT32_MAX,shortest=inf;
+while(true){queue.clear();shortest=inf;for(U x:donors){if(!leftmatch[x]){distance[x]=0;queue.push_back(x);}else distance[x]=inf;}for(U at=0;at<queue.size();at++){U x=queue[at];if(distance[x]>=shortest)continue;adjacency(x,[&](U j){U y=rightmatch[j];if(!y)shortest=distance[x]+1;else if(distance[y]==inf){distance[y]=distance[x]+1;queue.push_back(y);}return false;});}if(shortest==inf)break;
+auto aug=[&](auto&&self,U x)->bool{bool ok=adjacency(x,[&](U j){U y=rightmatch[j];if((!y&&distance[x]+1==shortest)||(y&&distance[y]==distance[x]+1&&self(self,y))){leftmatch[x]=j+1;rightmatch[j]=x;return true;}return false;});if(!ok)distance[x]=inf;return ok;};V gained=0;for(U x:donors)if(!leftmatch[x]&&aug(aug,x)){matches++;gained++;}std::cerr<<"h="<<h<<" phase "<<++phase<<" length "<<shortest<<" gained "<<gained<<" total "<<matches<<"\n";assert(gained);}
+std::vector<int64_t>hist(h+1);for(U x=1;x<n;x++)if(active[x]){assert(degree[x]);U r=ranks[x];if(args[x][0]){hist[r]+=degree[x]-1;hist[h-r]++;for(U y:args[x]){assert(r>=ranks[y]);hist[r-ranks[y]]++;}}else hist[1]+=degree[x];}
+for(U j=0;j<q;j++){U r=ranks[roots[j]];if(kind[j]){hist[r]++;hist[h]++;loss+=r;}else{assert(r<=h-1);hist[h-1-r]++;hist[1]++;}}
+if(argc==7){std::ofstream unmatched(std::string(argv[6])+".unmatched.json");unmatched<<"{\"h\":"<<h<<",\"v\":"<<v<<",\"c\":"<<c<<",\"q\":"<<q<<",\"loss\":"<<loss<<",\"histogram\":[";for(U r=0;r<=h;r++){if(r)unmatched<<",";unmatched<<hist[r];}unmatched<<"]}\n";assert(unmatched);std::ofstream selected(std::string(argv[6])+".selected.csv");selected<<"donor,use\n";for(U donor:donors)if(leftmatch[donor])selected<<donor<<","<<leftmatch[donor]-1<<"\n";assert(selected);}
+V changed=0;for(U donor:donors)if(leftmatch[donor]){U e=uses[leftmatch[donor]-1],target=nd(e),value=e>>31?target:args[target][e&1];assert(value==args[donor][0]||value==args[donor][1]);if(value==args[donor][0])changed++;U ru=ranks[donor],rv=ranks[value],rt=ranks[target];assert(rt>=ru&&ru>=rv);hist[h-ru]--;hist[rv]--;hist[rt-rv]--;hist[rt-ru]++;}
+V R=c+q-matches,sum=0;for(U r=0;r<=h;r++){assert(hist[r]>=0);sum+=r*hist[r];}assert(sum==h*R+2*loss);
+std::cout<<"{\"mode\":"<<mode<<",\"seed\":"<<seed<<",\"h\":"<<h<<",\"v\":"<<v<<",\"c\":"<<c<<",\"q\":"<<q<<",\"baseline_R\":"<<c+q<<",\"matched\":"<<matches<<",\"R\":"<<R<<",\"orientation_changes\":"<<changed<<",\"rank_sum\":"<<sum<<",\"loss\":"<<loss<<",\"histogram\":[";for(U r=0;r<=h;r++){if(r)std::cout<<",";std::cout<<hist[r];}std::cout<<"]}"<<std::endl;
+}

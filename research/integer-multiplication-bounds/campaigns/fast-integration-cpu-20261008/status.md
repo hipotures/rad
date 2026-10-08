@@ -1,0 +1,13 @@
+# Campaign status
+
+Started 2026-10-08 12:40:55 UTC from prepared commit 05004ecd. Deadline 14:40:55 UTC, including publication. Branch and clean starting state verified; origin fetched. Twelve usable CPU cores and about 61.4 GiB available RAM observed, no swap; disk free space is only about 3.91 GiB. Keep dependencies and evidence compact.
+
+Intake and distinct local research/scout delegation are in progress. All durable additions remain in this campaign directory; old research and the independent campaign are read-only and excluded from intake.
+
+12:59 UTC: first scientific checkpoint contains the generic continuation
+exclusion, independent checker, inverse reuse controls and halo/layout lemmas.
+Public PR38 is a newer stronger conditional claim, pinned separately; no
+current-best claim is made for this campaign. The user enlarged /home to 100 GB;
+about 88 GiB free space was directly observed. The clock is unchanged.
+Small discriminators finish in seconds and the present work is proof-bound;
+unused CPU time is reported honestly and is not filled with duplicate sweeps.
