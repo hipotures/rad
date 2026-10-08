@@ -131,3 +131,28 @@ python3 "$C/code/explicit_profile_composition.py" \
 ```
 
 Expected: R32669/42974, W159392254, bit saving4551960559/10^14, κ1137938341/25000000000000, all47 strict constraints and seven positive margins. The exact source-only path, native matrix rebuild and independent compiler were exercised on both selected axes; acceptance hashes are in `reports/skip-enlarged-fixed-acceptance-1740.json`. Do not substitute the different h25 DAG with equalR. A fresh automatic public acquisition helper replay also passed for all three pinned sources; live PR54 head has since advanced, while the requested construction pin remains84eb0b067741dc2690da837743fda06d133da865.
+
+
+## Additional continuations on the pinned public skip-prefix construction
+
+The accepted κ = 142708979/3125000000000 uses the precise source-selected public enlarged pair. The preceding paid-clone/enlarged-frame checkpoint remains an independent accepted predecessor. This recipe uses only public pinned sources and the complete published selected inputs, and fresh task-owned build/run directories.
+
+```bash
+C=research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008
+R=/tmp/skip-prefix-additional-continuations-replay
+python3 "$C/code/fetch_public_baselines.py" --work "$R/public"
+S="$R/public/pr54-84eb0b067741dc2690da837743fda06d133da865"
+mkdir -p "$R/inputs"
+for h in 23 25; do
+    gzip -cd "$C/evidence/public54-enlarged-1800/agents/graph/results/public-pr54-original-axis-$h.json.gz" > "$R/inputs/parent-$h.json"
+    gzip -cd "$C/evidence/public54-enlarged-1800/agents/graph/results/public54-enlarged-axis-$h.json.gz" > "$R/inputs/selected-$h.json"
+    python3 "$C/agents/graph/code/rebuild_public_enlarged.py" --source "$S" --work "$R/graph-$h" --parent "$R/inputs/parent-$h.json" --selected "$R/inputs/selected-$h.json"
+done
+gzip -cd "$C/evidence/public54-enlarged-1800/agents/geometry/results/best-public54-enlarged-fixed-axis-23.json.gz" > "$R/inputs/profile-23.json"
+gzip -cd "$C/evidence/public54-enlarged-1800/agents/geometry/results/public54-source-selected-fixed-axis-25.json.gz" > "$R/inputs/profile-25.json"
+python3 "$C/agents/geometry/code/reproduce_positive_profile.py" --dag "$R/graph-23/clones/round-1/dag.bin" --selected "$R/graph-23/clones/round-1/selected-links.json" --expected "$R/inputs/profile-23.json" --source-receipt "$R/graph-23/rebuild-result.json" --work "$R/profile-23" --output "$R/profile-23-receipt.json"
+python3 "$C/agents/geometry/code/reproduce_positive_profile.py" --dag "$R/graph-25/clones/round-2/dag.bin" --selected "$R/graph-25/clones/round-2/selected-links.json" --expected "$R/inputs/profile-25.json" --source-receipt "$R/graph-25/rebuild-result.json" --work "$R/profile-25" --output "$R/profile-25-receipt.json"
+python3 "$C/code/explicit_profile_composition.py" --axes "$C/fixtures/public54-source-selected-fixed-axis-profiles.json" --phase "$C/fixtures/phase-pr36.json" --assembly "$C/code/adopted_pr37_balanced_assembly.py" --geometry "$C/agents/scout/gpu-parameter-results/pr54-IJ-conjugate-data-compatibility-20261008T1714.json" --data "$C/fixtures/uniform-21-17-data-profile.json" --output "$R/certificate.json"
+```
+
+The selected public graph and both complete source-only dirty replays were exercised; geometry rebuilt the precise fresh scalar/label/map outputs and compiled a new native profiler. Root independently compared every actual block list, reconstructed the complete child list and rank mass, checked deterministic primality and strict CRT products, and proved moments with a separately implemented rational series in `code/bind_source_profile_certificate.py`. Its retained receipt is `reports/public54-enlarged-independent-binding-1755.json`. Gzip publication verifies full-file SHA256/CRC against all originals. The paths above restate these exercised components using a fresh common root; a redundant complete upstream suite was not rerun.
