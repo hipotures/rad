@@ -1,14 +1,14 @@
 {
-  "observed_utc": "2026-10-08T12:48:39Z",
+  "observed_utc": "2026-10-08T13:35:27Z",
   "method": "gh api, read-only public sources",
   "repositories": {
     "CrocSwap/integer-mult-bounds": {
       "url": "https://github.com/CrocSwap/integer-mult-bounds",
       "description": "Conditional improvement to the exponent saving in OpenAI\u2019s integer multiplication result #109",
-      "pushed_at": "2026-10-08T00:27:57Z",
-      "head_sha": "6e564879f51ae16f23d392e9e196c605f36d90df",
-      "head_date": "2026-10-08T00:27:54Z",
-      "head_message": "Publish conditional compact-control bound beyond 2^-34",
+      "pushed_at": "2026-10-08T13:27:15Z",
+      "head_sha": "1a74950ce5074b848243ba89d8022fbadba66105",
+      "head_date": "2026-10-08T13:10:58Z",
+      "head_message": "Checkpoint conditional 2^-30 bound and recognize parallel community contributions",
       "license": "Apache-2.0"
     },
     "Swapnil-jain/integer-mult-kappa": {
@@ -22,6 +22,42 @@
     }
   },
   "pulls": [
+    {
+      "number": 40,
+      "title": "Both fixed bases and copied reversed corners: conditional \u03ba = 3.918734894e-5 > 2^-15",
+      "url": "https://github.com/CrocSwap/integer-mult-bounds/pull/40",
+      "author": "rohanarun",
+      "state": "open",
+      "draft": false,
+      "updated_at": "2026-10-08T13:24:23Z",
+      "head_sha": "e3bf3ab0cb1ec48588e279b31a97e7a49c72f99e",
+      "head_ref": "research/copied-both-reversed",
+      "head_repo": "rohanarun/integer-mult-bounds"
+    },
+    {
+      "number": 39,
+      "title": "Fixed middle basis and copied reversed corners: conditional \u03ba = 3.886675852e-5 > 2^-15",
+      "url": "https://github.com/CrocSwap/integer-mult-bounds/pull/39",
+      "author": "rohanarun",
+      "state": "open",
+      "draft": false,
+      "updated_at": "2026-10-08T13:05:47Z",
+      "head_sha": "70ae24129649f6d6d4ec6360962a80c3c42a38f1",
+      "head_ref": "research/copied-fixed-reversed",
+      "head_repo": "rohanarun/integer-mult-bounds"
+    },
+    {
+      "number": 38,
+      "title": "Copied centers with fixed local bases for conditional \u03ba = 3.886224e-5",
+      "url": "https://github.com/CrocSwap/integer-mult-bounds/pull/38",
+      "author": "DominikScholz",
+      "state": "open",
+      "draft": false,
+      "updated_at": "2026-10-08T13:01:24Z",
+      "head_sha": "605323bab4ba330de3d1785dc5b3ecb14e8ab747",
+      "head_ref": "research/copied-fixed-basis",
+      "head_repo": "DominikScholz/integer-mult-bounds"
+    },
     {
       "number": 37,
       "title": "Copied centers and reversed corners for conditional \u03ba = 3.850771033e-5 > 2^-15",
@@ -469,9 +505,28 @@
   ],
   "fork_heads": [
     {
+      "repository": "chafreaky/integer-mult-bounds",
+      "url": "https://github.com/chafreaky/integer-mult-bounds",
+      "pushed_at": "2026-10-08T13:27:15Z",
+      "branches": [
+        {
+          "name": "integration/community",
+          "head_sha": "731a70c67b0d82e3a86db11fc6c1777c579739bd"
+        },
+        {
+          "name": "main",
+          "head_sha": "1a74950ce5074b848243ba89d8022fbadba66105"
+        },
+        {
+          "name": "release/ternary-30",
+          "head_sha": "1a74950ce5074b848243ba89d8022fbadba66105"
+        }
+      ]
+    },
+    {
       "repository": "jamesyc/integer-mult-bounds",
       "url": "https://github.com/jamesyc/integer-mult-bounds",
-      "pushed_at": "2026-10-08T12:05:57Z",
+      "pushed_at": "2026-10-08T13:23:11Z",
       "branches": [
         {
           "name": "main",
@@ -480,6 +535,10 @@
         {
           "name": "research/a5-blocks-28-22-balanced",
           "head_sha": "a2d8ac18b2c5a6ca53efa802f48e64b8140ae2d9"
+        },
+        {
+          "name": "research/idea-log",
+          "head_sha": "8bd1cd4dd229f1ec8dcd31831b78928b1d119f95"
         },
         {
           "name": "research/rectangular-a5-extra22",
@@ -494,7 +553,7 @@
     {
       "repository": "DominikScholz/integer-mult-bounds",
       "url": "https://github.com/DominikScholz/integer-mult-bounds",
-      "pushed_at": "2026-10-08T12:48:21Z",
+      "pushed_at": "2026-10-08T13:01:13Z",
       "branches": [
         {
           "name": "main",
@@ -502,7 +561,7 @@
         },
         {
           "name": "research/copied-fixed-basis",
-          "head_sha": "cc794077f6c103e24ec0939be765cd1521239aab"
+          "head_sha": "605323bab4ba330de3d1785dc5b3ecb14e8ab747"
         },
         {
           "name": "research/fixed-basis-two-stage",
@@ -586,7 +645,7 @@
     {
       "repository": "rohanarun/integer-mult-bounds",
       "url": "https://github.com/rohanarun/integer-mult-bounds",
-      "pushed_at": "2026-10-08T12:47:02Z",
+      "pushed_at": "2026-10-08T13:24:20Z",
       "branches": [
         {
           "name": "main",
@@ -599,6 +658,14 @@
         {
           "name": "research/batched-geometric-followup",
           "head_sha": "35d31e30f28bc5da0ae6a88e7b03d75ebc855534"
+        },
+        {
+          "name": "research/copied-both-reversed",
+          "head_sha": "e3bf3ab0cb1ec48588e279b31a97e7a49c72f99e"
+        },
+        {
+          "name": "research/copied-fixed-reversed",
+          "head_sha": "70ae24129649f6d6d4ec6360962a80c3c42a38f1"
         },
         {
           "name": "research/copied-reversed-corners",
@@ -773,19 +840,19 @@
       ]
     }
   ],
-  "search_query": "integer multiplication kappa",
+  "search_query": "\"Gaussian resampling\"",
   "search_results": [
     {
-      "name": "erayyap/integer-multiplication-kappa",
-      "url": "https://github.com/erayyap/integer-multiplication-kappa",
-      "description": "Improving \u03ba from 2^-182 to 2^-59.335 in OpenAI's 'Integer multiplication below n log n' \u2014 computer-assisted, with exact verifiers",
-      "pushed_at": "2026-10-07T22:04:52Z"
+      "name": "Shivamshaiv/certified-hvdh-resampling",
+      "url": "https://github.com/Shivamshaiv/certified-hvdh-resampling",
+      "description": "Residual-certified Gaussian resampling for Harvey\u2013van der Hoeven multiplication",
+      "pushed_at": "2026-08-14T19:50:09Z"
     },
     {
-      "name": "Swapnil-jain/integer-mult-kappa",
-      "url": "https://github.com/Swapnil-jain/integer-mult-kappa",
-      "description": "Conditional witness kappa = 249/(5*10^10) for integer multiplication, building on OpenAI #109 and Colkitt's integer-mult-bounds",
-      "pushed_at": "2026-10-08T12:38:35Z"
+      "name": "Sparks29032/Gaussian_Resampling",
+      "url": "https://github.com/Sparks29032/Gaussian_Resampling",
+      "description": null,
+      "pushed_at": "2025-01-14T02:58:16Z"
     }
   ],
   "search_error": null,
@@ -893,6 +960,6 @@
     }
   ],
   "code_search_error": null,
-  "raw_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/raw/scout/20261008T124839Z/api-responses.json",
+  "raw_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/raw/scout/20261008T133527Z/api-responses.json",
   "scope": "Mutable RaD PRs and fork branches excluded; completed public source20 only."
 }

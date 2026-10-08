@@ -154,12 +154,13 @@ def rewrite(row,jobs,order,frames,target):
 
 
 def evaluate(task):
-    parent,work,matcher,policy,limit,seed,round_limit=task
+    parent,work,matcher,policy,limit,seed,round_limit,*extensions=task
     source=json.loads(Path(parent).read_text())
     if 'producer'in source:row=dict(source['producer'])
     else:row=dict(next(x for x in source['rows']if x.get('h')==8 and x['configuration']['tree']=='left'))
     initial=dict(row);stages=[];at=time.monotonic()
     name=f"h{row['h']}-{policy}-l{limit}-s{seed}"
+    if extensions:name+='-'+extensions[0]
     try:
         for iteration in range(round_limit):
             jobs,diagnostic,order,frames=opportunities(row,limit,policy,seed+1000003*iteration)
@@ -201,6 +202,7 @@ def main():
     p.add_argument('--parent',type=Path,nargs='+',required=True);p.add_argument('--work',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True);p.add_argument('--workers',type=int,default=10)
     p.add_argument('--rounds',type=int,default=3);p.add_argument('--small',action='store_true')
+    p.add_argument('--tag-input',action='store_true')
     a=p.parse_args();assert not a.output.exists()and 1<=a.workers<=10
     (a.work/'builds').mkdir(parents=True,exist_ok=True);(a.work/'raw').mkdir(exist_ok=True)
     native=Path(__file__).with_name('moment_match_rank_node.cpp');matcher=a.work/'builds'/'matcher'
@@ -208,7 +210,9 @@ def main():
     tasks=[]
     for parent in a.parent:
         for policy,limit in (('wide',2),('wide',8),('scarce',4),('late',4)):
-            tasks.append((parent,a.work,matcher,policy,limit,104729,a.rounds))
+            task=(parent,a.work,matcher,policy,limit,104729,a.rounds)
+            if a.tag_input:task+= (parent.stem+'-'+digest(parent)[:8],)
+            tasks.append(task)
     result=dict(status='running',command=sys.argv,started_utc=datetime.now(timezone.utc).isoformat(),
                 source_sha256={p.name:digest(p)for p in (Path(__file__),native,Path(__file__).with_name('check_compiled_witness.py'))},
                 workers=a.workers,rows=[])

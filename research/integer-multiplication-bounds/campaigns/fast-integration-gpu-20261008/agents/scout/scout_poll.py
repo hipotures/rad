@@ -7,6 +7,17 @@ from pathlib import Path
 import subprocess
 from urllib.parse import quote
 
+HISTORICAL_RAD_SHA = "4f8d6c8272b5ff307a0da51df545ec3cd96a8b6e"
+
+
+def allowed_pull(pull):
+    """Keep completed public RaD history; exclude every mutable RaD PR."""
+    repo = (pull.get("head", {}).get("repo") or {}).get("full_name")
+    author = pull.get("user", {}).get("login")
+    if author == "hipotures" or repo == "hipotures/integer-mult-bounds":
+        return pull.get("number") == 20 and pull.get("head", {}).get("sha") == HISTORICAL_RAD_SHA
+    return True
+
 
 def get(endpoint):
     result = subprocess.run(
@@ -29,6 +40,9 @@ def main():
     raw_dir = args.work_root / "raw" / "scout" / stamp
     raw_dir.mkdir(parents=True, exist_ok=True)
     pulls = get("repos/CrocSwap/integer-mult-bounds/pulls?state=all&per_page=100")
+    if isinstance(pulls, list):
+        # Do not interpret, persist, or print new RaD submission content.
+        pulls = [pull for pull in pulls if allowed_pull(pull)]
     repo_ids = ["CrocSwap/integer-mult-bounds", "Swapnil-jain/integer-mult-kappa"]
     repos = {}
     for repo in repo_ids:
@@ -45,6 +59,16 @@ def main():
     fork_heads = []
     if isinstance(forks, list):
         for fork in forks:
+            # Consume only the completed public RaD source. Mutable RaD fork
+            # branches could belong to the independent campaign and are excluded.
+            if fork["full_name"] == "hipotures/integer-mult-bounds":
+                fork_heads.append({
+                    "repository": fork["full_name"], "url": fork["html_url"],
+                    "branches": [{"name": "rad-source-framed-2pow20",
+                                  "head_sha": HISTORICAL_RAD_SHA}],
+                    "scope": "Completed published source only; mutable RaD branches excluded",
+                })
+                continue
             branches = get("repos/" + fork["full_name"] + "/branches?per_page=100")
             fork_heads.append({
                 "repository": fork["full_name"], "url": fork["html_url"],
@@ -68,22 +92,26 @@ def main():
                 "head_repo": (pull["head"].get("repo") or {}).get("full_name"),
             })
     raw = {"observed_utc": observed, "pulls": pulls, "repository_search": search,
-           "forks": forks, "code_search": code_search}
+           "forks": forks, "code_search": code_search,
+           "omission": "Mutable RaD PRs are excluded; historical source20 only."}
     (raw_dir / "api-responses.json").write_text(json.dumps(raw, indent=2) + "\n")
     record = {
         "observed_utc": observed, "method": "gh api, read-only public sources",
+        "scope": "Mutable RaD PRs and fork branches excluded; completed public source20 only.",
         "repositories": repos, "pulls": compact_pulls,
         "fork_heads": fork_heads,
         "search_query": args.search,
         "search_results": [{"name": x["full_name"], "url": x["html_url"],
                             "description": x.get("description"),
                             "pushed_at": x.get("pushed_at")}
-                           for x in search.get("items", [])],
+                           for x in search.get("items", [])
+                           if not x["full_name"].startswith("hipotures/")],
         "search_error": search.get("error"),
         "code_search_query": code_query,
         "code_search_results": [{"repository": x["repository"]["full_name"],
                                  "path": x["path"], "url": x["html_url"]}
-                                for x in code_search.get("items", [])],
+                                for x in code_search.get("items", [])
+                                if not x["repository"]["full_name"].startswith("hipotures/")],
         "code_search_error": code_search.get("error"),
         "raw_path": str(raw_dir / "api-responses.json"),
     }

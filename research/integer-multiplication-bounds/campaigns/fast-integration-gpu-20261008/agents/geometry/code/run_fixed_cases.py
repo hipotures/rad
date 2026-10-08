@@ -34,7 +34,7 @@ def worker(task,exe,root):
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--input',type=Path,required=True);ap.add_argument('--executable',type=Path,required=True);ap.add_argument('--work',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--workers',type=int,default=6);args=ap.parse_args()
     assert 1<=args.workers<=6 and not args.output.exists() and not args.work.exists()
-    args.work.mkdir(parents=True);raw=json.loads(args.input.read_text());rows=raw.get('rows',raw)
+    args.work.mkdir(parents=True);raw=json.loads(args.input.read_text());rows=raw.get('rows',raw) if isinstance(raw,dict) else raw
     tasks=[r for r in rows if r.get('status')=='producer and native rank audit passed' and r.get('h') in (23,25)]
     assert len({r['case_id'] for r in tasks})==len(tasks)
     result=dict(started_utc=datetime.now(timezone.utc).isoformat(),input_sha256=sha256(args.input.read_bytes()).hexdigest(),

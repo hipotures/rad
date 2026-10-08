@@ -2,7 +2,9 @@
 """Changed producers with exact fixed-envelope middle profiles.
 
 Fixed I+J profiles/CRT are icekylinx and Dominik Scholz PR32/35/38;
-one-factor generic reversed compatibility is Rohan Arun PR39.
+one-factor generic reversed compatibility is Rohan Arun PR39. PR40 proves
+the same reversed data profile with both fixed factors, for unchanged
+source triples and freshly certified original-envelope local profiles.
 The new DAGs are this campaign's contribution. Profile entries replace
 actual local transitions, never headline ratios or positive-frame counts.
 """
@@ -18,10 +20,10 @@ from exact_composition import reconstruct,choose,moment,bridge,js,read
 
 
 def bit_profile(positive,fixed,mode):
-    assert mode in ('generic','fixed-middle','fixed-both')
+    assert mode in ('generic','fixed-middle','fixed-both','fixed-both-reversed')
     rows=[dict(r) for r in positive]
     if mode!='generic':rows[1]=dict(fixed[1]['producer'])
-    if mode=='fixed-both':rows[0]=dict(fixed[0]['producer'])
+    if mode in ('fixed-both','fixed-both-reversed'):rows[0]=dict(fixed[0]['producer'])
     bit=reconstruct(rows)
     for k in range(2):
         if mode=='generic' or (mode=='fixed-middle' and k==0):continue
@@ -51,7 +53,7 @@ def main():
     phase=reconstruct([pr,pr],True);cm=moment(phase,Q(717,10**7));assert cm['strict_gap']>0
     sp=importlib.util.spec_from_file_location('balanced',args.assembly);am=importlib.util.module_from_spec(sp);sp.loader.exec_module(am)
     results=[]
-    for mode in ('generic','fixed-middle','fixed-both'):
+    for mode in ('generic','fixed-middle','fixed-both','fixed-both-reversed'):
         bit=bit_profile(positive,fixed,mode);bm=choose(bit);f=bridge(bit,phase,[pr,pr])
         a=bm['saving'];h=Q(1,10**12);q=a*(1-2*h);margin=(1-h)*q/(1+q)
         k=Q((margin*10**14).numerator//(margin*10**14).denominator,10**14);assert k<margin

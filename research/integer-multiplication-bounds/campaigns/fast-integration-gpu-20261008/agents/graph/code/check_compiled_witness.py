@@ -117,7 +117,20 @@ def check(document, small_dirty=False):
     row = document['producer'] if 'producer' in document else document
     native = document.get('selected_links') or json.loads(Path(row['witness_path']).read_text())
     h,v,n,q,args,core,cover,roots,kinds,active = read_dag(row['dag_path'])
-    ranks,frames = read_labels(row['dag_path']+'.positive',h,n)
+    if row.get('frame_source') == 'original-envelope':
+        ranks = [0]*n
+        frames = [None]*n
+        for node in range(1,n):
+            if active[node]:
+                if not args[2*node]:
+                    ranks[node] = 1
+                    frames[node] = (1,core[node],tuple(int(core[node]>>i&1)for i in range(h)))
+                else:
+                    ranks[node] = cover[node].bit_count()-core[node].bit_count()
+                    symbols = tuple(1 if core[node]>>i&1 else i+2 if cover[node]>>i&1 else 0 for i in range(h))
+                    frames[node] = (ranks[node],core[node],symbols)
+    else:
+        ranks,frames = read_labels(row['dag_path']+'.positive',h,n)
     triples = list(combinations(range(h),3))
     assert len(triples) == v
     active_nodes = [node for node in range(1,n) if active[node]]
@@ -178,7 +191,7 @@ def check(document, small_dirty=False):
 
     def order_key(node):
         old = 1 if not args[2*node] else cover[node].bit_count()-core[node].bit_count()
-        return ranks[node],old,node
+        return (ranks[node],node) if row.get('schedule')=='rank-node' else (ranks[node],old,node)
 
     successor = {}
     receivers = set()
@@ -344,6 +357,7 @@ def main():
     p.add_argument('--witness',type=Path,nargs='+',required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--dirty',action='store_true')
+    p.add_argument('--frame-source',choices=['positive','original-envelope'],default='positive')
     a = p.parse_args()
     assert not a.output.exists()
     results = []
@@ -352,6 +366,12 @@ def main():
         for row in document['rows'] if 'rows' in document else [document]:
             if row.get('status')=='failed':
                 continue
+            if a.frame_source=='original-envelope':
+                row = dict(row)
+                if 'producer'in row:
+                    row['producer']=dict(row['producer'],frame_source=a.frame_source)
+                else:
+                    row['frame_source']=a.frame_source
             result = check(row,a.dirty)
             result['input_path'] = str(path)
             results.append(result)

@@ -50,6 +50,19 @@ A5 branch was inspected; it is earlier 11:20 UTC geometry, not a new
 copied-center or graph rewrite. Details and citations are in
 [supplementary-sources.json](supplementary-sources.json).
 
+At13:25:27, ready [PR40](https://github.com/CrocSwap/integer-mult-bounds/pull/40)
+by Rohan Arun was found at
+`e3bf3ab0cb1ec48588e279b31a97e7a49c72f99e`, updated13:24:23 UTC.
+It fixes BOTH I+J factors at reversed23/25 while retaining data
+`9*[1]+[21,17,481]`, with final conditional
+`kappa=1959367447/50000000000000=3.918734894e-5`.
+The pinned snapshot, manuscript and code were sent to both computational
+agents immediately. [The scoped both-fixed review](both-fixed-review.md)
+maps the full finite data-family proof and changed-DAG obligations. Its
+upstream receipt records full validation at research commit
+`43f59ff533598762cbc43a5e14af2bbbc76fabbd`. No new full replay is attributed
+to the scout, and no generic profile survives on either fixed axis.
+
 PR37 physical invariants are `m=575`, `N=4073300`, `W=188181929`,
 `L=2226400`, `s=Wm-N+L=108202762275`, maximum child 529, with all
 4073300 paid endpoint corrections retained. Relative to PR36 it removes
@@ -114,6 +127,15 @@ timestamped metadata is retained under `polls/`. Poll approximately every ten
 minutes until the closing phase, compare changed heads, and inspect new
 mathematical mechanisms before alerting the coordinator. Snapshots already in
 use remain pinned; a public update does not alter running input identities.
+
+To preserve campaign independence, every mutable branch and new PR of the
+RaD public fork is excluded from source acquisition and compact poll interpretation.
+Only its completed historical source20 commit
+`4f8d6c8272b5ff307a0da51df545ec3cd96a8b6e` is retained. Initial API metadata
+acquisitions are immutable external provenance, but the reduced poll exports
+omit mutable RaD branch metadata. No source content or unpublished result
+from those branches was fetched or used. This omission is explicit; the
+compact exports do not claim to preserve every raw API field.
 
 Only the campaign coordinator performs Git index, branch, commit and push
 operations. All new scout-authored durable files stay in `agents/scout/`.
