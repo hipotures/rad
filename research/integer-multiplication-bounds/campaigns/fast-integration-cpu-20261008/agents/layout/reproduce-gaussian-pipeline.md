@@ -83,6 +83,14 @@ cut control. The reverse API compiles its forward address template separately
 and includes that cost. This program still uses charged reference Gaussian
 matrix passes.
 
+The earlier executed API contained one trailing space in its inverse-check
+line, subsequently removed without changing behavior. To reproduce its exact
+hash, restore that byte in an ignored copied API using
+`code/restore_crt_api_trailing_space.py --path <copied-api> --expected-sha256
+<receipt-api-sha256>`. For the initial input-only API, first apply
+`fixtures/compiled-crt-api-before-inverse.patch`, then restore the byte. The
+patch remains free of trailing whitespace; the helper verifies exact bytes.
+
 The actual joint packed forward stage and its complete multiplier composition
 are reproduced separately:
 

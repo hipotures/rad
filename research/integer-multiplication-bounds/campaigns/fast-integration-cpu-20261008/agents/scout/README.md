@@ -31,6 +31,9 @@ The surviving physical rows include prefix movement, phase localization and phas
 - [Deferred-reservoir criticism](deferred-reservoir-review.md): source-grounded review of the new equal-axis transform schedule.
 - [Continuation reviews](all-cardinality-continuation-review.md): independent complete-profile enumeration and universal concavity exclusion for the coordinator's exported generic graph.
 - [Changed-DAG search seed](changed-dag-seed.md): a tested small producer launcher that changes grouping and association, with exact support/frame checks and optional pinned matching.
+- [Global hierarchy seed](global-hierarchy-seed.md): independent support interning with a separate globally aligned hierarchy per common point, including bounded informative negatives.
+- [Fixed-profile API](fixed-profile-api.md): runnable bounded I+J profiler, exact CRT enclosure and complete controller scoring rules.
+- [Changed fixed-controller review](changed-fixed-review.md): independent exact support/link/moment check and finite physical/semantic transfer review for the new h23 tree.
 - [Global inverse locality review](global-locality-review.md): weighted lifted-kernel and principal-window criticism, including aliases.
 - [Extended Gaussian domain review](extended-gaussian-review.md): general positive-mismatch tail proof, cyclic folding and the separate physical-contraction condition.
 - [Joint product and cap review](joint-interface-review.md): exact occupied order, metadata, cut exclusions and the explicitly conditional primitive cap.

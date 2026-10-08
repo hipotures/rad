@@ -314,3 +314,9 @@ This is available at the existing degree equality18=16+2 and changes no
 power. Numerical grid tests are not substitutes for this constant choice.
 The full effective machine cutoff is unspecified and may be enormous.
 No practical speedup or worldwide-best theorem claim is made.
+
+## Changed-DAG input refinement, 15:58 UTC
+
+The same transfer now has a newly executed exact finite h23 input paired with the pinned h25 producer. Its independently checked full fixed-basis/controller saving is a_new=397034999791/10000000000000000, and the resulting reviewed conditional witness is kappa=39703102944100209/1000000000000000000000. The unchanged complex producer and C1 constants satisfy the same native bridge; replacing the bit input therefore extends the stated conditional range to every fixed rational0<kappa<a_new. See [construction, exact evidence and independent review](changed-fixed-composition.md). This retains the named full tape/compiler premises.
+
+The second changed axis has now also passed independent support/link/controller and native bridge checks. The [joint refinement](changed-fixed-composition.md) extends the conditional range to a_joint=80475950257/2000000000000000 and supports kappa_joint=8047514549749743/200000000000000000000. All named premises of the transfer remain explicit.

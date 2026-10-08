@@ -44,3 +44,7 @@ actual two-node CRT pipeline passed, while larger/precision tests continue.
 ## 15:33 UTC continuing execution
 
 The user extended the campaign indefinitely. Larger changed DAGs h22/24/26/28, nested actual CRT, GMP-backed packed3D products and whole integer pipelines continue. Complete actual CRT+Gaussian+final inverse and packed-forward integer controls passed; underprecision negatives are preserved. See reports/indefinite-validation-20261008T1533Z.md. No new unconditional certified exponent is claimed.
+
+## 15:58 UTC stronger conditional result
+
+The changed h23 left tree passes independent exact support/link/full moment and native bridge reviews. Reviewed conditionalkappa=39703102944100209/1000000000000000000000; native full tape/compiler premises remain explicit. See reports/changed-fixed-composition.md. Joint changedh23/h25 exact finite profiles are stronger and under independent validation; execution continues.

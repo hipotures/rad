@@ -60,3 +60,7 @@ implementation is claimed. The full small Gaussian/integer pipeline and an
 actual two-node CRT pipeline passed, while larger/precision tests continue.
 
 15:33 UTC continuing checkpoint: [independent validation and falsification](reports/indefinite-validation-20261008T1533Z.md) preserves complete actual CRT/Gaussian/final-inverse recovery, packed-forward cubes, sharp precision failures, 3,932,160 rounded prefixes, wider exact LU controls and 2,008 distinct changed-DAG profiles. The user has extended execution indefinitely; no closing phase is scheduled. Conditional kappa is unchanged.
+
+15:58 UTC scientific milestone: [changed computation tree and complete fixed-basis moments](reports/changed-fixed-composition.md) improve the reviewed conditional witness to kappa=39703102944100209/1000000000000000000000 (about0.000039703102944100209). Independent support, matching, complete moment and compiler/changed-row checks passed. Further joint h23/h25 improvements are being independently checked while new experiments run.
+
+16:01 UTC joint refinement: changing both23/25 computation trees gives independently checked a_joint=80475950257/2000000000000000 and reviewed conditionalkappa=8047514549749743/200000000000000000000 (about0.000040237572748748715). Full finite support, original fixed-basis profiles, complete moments and native bridge checks passed; full tape/compiler premises remain conditional. The [joint proof and receipts](reports/changed-fixed-composition.md) are durable.

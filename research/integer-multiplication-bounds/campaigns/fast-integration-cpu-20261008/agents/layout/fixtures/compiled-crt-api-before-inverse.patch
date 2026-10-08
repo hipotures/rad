@@ -13,7 +13,7 @@
 @@ -63,59 +62,8 @@
      output=machine.payload[:]
      if reverse_check:
-         machine.inverse();assert machine.payload==initial,'full reverse pipeline mismatch' 
+         machine.inverse();assert machine.payload==initial,'full reverse pipeline mismatch'
 -    result={'output':output,'primes':primes,'address_bits':N,'allocated_records':T,'valid_records':S,
 +    return {'output':output,'primes':primes,'address_bits':N,'allocated_records':T,'valid_records':S,
              'initial_padding_provenance':'caller nonnegative coefficients at scalar k<S; all other payloads explicit zero',

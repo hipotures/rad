@@ -14,6 +14,7 @@ import itertools
 import json
 import math
 import os
+from functools import lru_cache
 from concurrent.futures import ProcessPoolExecutor
 from decimal import Decimal, ROUND_FLOOR, localcontext
 from pathlib import Path
@@ -167,21 +168,41 @@ def run_case(config):
         mask = (1 << slot_bits) - 1
         normalization = (2 * alpha) ** (-dimension)
 
+        multiplication_seconds = perf_counter() - start
+
+        @lru_cache(maxsize=None)
+        def global_axis_reference(i, k):
+            # The two input components share coefficients, and sample outputs
+            # share axis coordinates. Keep the independently evaluated global
+            # periodic sum, but compute each coefficient only once.
+            totals = [Decimal(0), Decimal(0)]
+            for j in range(shape[i]):
+                weight = sum((-pi * g[i] * (rho[i] * j - k + v * target) ** 2).exp()
+                             for v in (-1, 0, 1)) / (2 * alpha)
+                for c, component in enumerate(components):
+                    totals[c] += component[i][j] * weight
+            return tuple(totals)
+
         def global_reference(output_point):
-            answer = Decimal(0)
-            for component in components:
-                product = Decimal(1)
-                for i, (s, k) in enumerate(zip(shape, output_point)):
-                    subtotal = Decimal(0)
-                    for j in range(s):
-                        # v=+-1 is included, rather than treating a periodic
-                        # source cut as a translated unwrapped cell.
-                        weight = sum((-pi * g[i] * (rho[i] * j - k + v * target) ** 2).exp()
-                                     for v in (-1, 0, 1))
-                        subtotal += component[i][j] * weight / (2 * alpha)
-                    product *= subtotal
-                answer += product
-            return answer
+            axis_values = [global_axis_reference(i, k) for i, k in enumerate(output_point)]
+            return sum(math.prod(values[c] for values in axis_values) for c in range(2))
+
+        @lru_cache(maxsize=None)
+        def cell_axis_references(i, bi):
+            totals = [[Decimal(0), Decimal(0)] for _ in range(3)]
+            for ai in range(lengths[i]):
+                direct_weight = (-pi * g[i] *
+                    (rho[i] * (source_origins[i] + ai) - (target_origins[i] + bi)) ** 2).exp()
+                factor_weight = (input_diagonals[i][ai] * output_diagonals[i][bi] *
+                    (-pi * g[i] * rho[i] * (Decimal(ai - bi) + y[i] / rho[i]) ** 2).exp())
+                wrong_weight = ((pi * g[i] * theta[i] * bi * bi).exp() *
+                    (-pi * g[i] * rho[i] * theta[i] * ai * ai).exp() *
+                    (-pi * g[i] * rho[i] * Decimal(ai - bi) ** 2).exp())
+                for c, component in enumerate(components):
+                    value = component[i][source_origins[i] + ai]
+                    for kind, weight in enumerate((direct_weight, factor_weight, wrong_weight)):
+                        totals[kind][c] += value * weight / (2 * alpha)
+            return tuple(tuple(row) for row in totals)
 
         # Check selector composition as well as plain forward target samples:
         # q_j=nearest(target*j/source) is an exact global selector. Both grids
@@ -215,24 +236,13 @@ def run_case(config):
             max_packed_error = max(max_packed_error, error)
             # Separately sum the exact cell factors and the direct unwrapped
             # Gaussian. This distinguishes algebra/normalization from tails.
-            direct_cell = Decimal(0)
-            factor_cell = Decimal(0)
-            wrong_cell = Decimal(0)
-            for a in coordinates(lengths):
-                value = input_value(tuple(j0 + ai for j0, ai in zip(source_origins, a)))
-                direct_weight = math.prod((-pi * gi * (r * (j0 + ai) - (k0 + bi)) ** 2).exp()
-                                          for gi, r, j0, k0, ai, bi in zip(g, rho, source_origins, target_origins, a, b))
-                factor_weight = math.prod(input_diagonals[i][ai] * output_diagonals[i][bi] *
-                                          (-pi * g[i] * rho[i] * (Decimal(ai - bi) + y[i] / rho[i]) ** 2).exp()
-                                          for i, (ai, bi) in enumerate(zip(a, b)))
-                # A constant y=0 drops the cell's true fractional source origin.
-                wrong_weight = math.prod((pi * g[i] * theta[i] * bi * bi).exp() *
-                                         (-pi * g[i] * rho[i] * theta[i] * ai * ai).exp() *
-                                         (-pi * g[i] * rho[i] * Decimal(ai - bi) ** 2).exp()
-                                         for i, (ai, bi) in enumerate(zip(a, b)))
-                direct_cell += value * direct_weight * normalization
-                factor_cell += value * factor_weight * normalization
-                wrong_cell += value * wrong_weight * normalization
+            # Distributivity is exact for the two-component input definition.
+            # This evaluates the SAME direct/factored/wrong-origin cell sum
+            # with rank*d*side terms instead of side**d high-precision exp calls.
+            axis_cells = [cell_axis_references(i, bi) for i, bi in enumerate(b)]
+            direct_cell, factor_cell, wrong_cell = (
+                sum(math.prod(axis[kind][c] for axis in axis_cells) for c in range(2))
+                for kind in range(3))
             max_factorization_error = max(max_factorization_error, abs(direct_cell - factor_cell))
             max_wrong_origin_error = max(max_wrong_origin_error, abs(wrong_cell - direct_cell))
             assert error < Decimal(2) ** -target_bits, (config, b, error)
@@ -257,6 +267,10 @@ def run_case(config):
                 "target_origins": target_origins, "core_lengths": lengths, "true_y": [str(x) for x in y],
                 "target_bits": target_bits, "work_bits": work_bits, "full_tensor_reserve_bits": reserve_bits,
                 "decimal_digits": context.prec,
+                "oracle_policy": "exact distributive rank-two sums; cached independent axis coefficients",
+                "multiplication_setup_and_input_seconds": multiplication_seconds,
+                "global_axis_reference_sums": global_axis_reference.cache_info().misses,
+                "cell_axis_reference_sums": cell_axis_references.cache_info().misses,
                 "kronecker_base": base, "slot_bits": slot_bits, "input_records": occupied,
                 "kernel_records": len(kernel_rows), "padded_records": base ** dimension,
                 "outputs_checked": len(outputs), "exact_global_selector_outputs": selector_samples,

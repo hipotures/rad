@@ -35,9 +35,15 @@ Six-prime and two-bit guard variants have explicit running protocols and
 pinned code snapshots.
 The [coefficient-payload API](code/compiled_crt_payload_api.py) lets the
 arithmetic integration branch execute these physical maps on ring residues.
+The [native complete-cube controls](reports/native-crt-controls.md) independently
+validate two-bit inner/outer dirty digits and a complete six-prime tree,
+including actual computed-key repairs and explicit omission counterexamples.
 The [cyclic free-axis interface](reports/cyclic-free-axis-repair.md) supplies
 global principal-window band LU on every complete free axis of inverse repair
 packets, including regular face packets.
+The [cyclic reference API](reports/cyclic-reference-api.md) supplies a separate
+bordered numerical solve for discriminating packed regular inverse cores;
+its integration caller is still being validated by the layout branch.
 
 The [regular Laurent split](reports/regular-laurent-interface.md) and
 [uniform phase-edge obstruction](reports/phase-edge-obstruction.md) separate
@@ -51,7 +57,9 @@ historical commit `6b32837aee0561af85e4efaca21af07b9f2749d2`, and Swapnil Jain's
 public repository at `c2c2f279d93643e5ff3fe121a0fbc68e0e6f4007` (2026-10-08).
 Downloaded inputs and execution payloads live under campaign `work/inverse/`.
 
-All authored code is independent and standard-library-only. Reproduction
+Exact Python address controls use only the standard library. Numerical Gaussian
+references additionally use the campaign's pinned mpmath dependency; the
+independent native controls use C++17 and g++. Reproduction
 commands and scope limitations are in the linked reports; completed numerical
 and exact controls are in `runs/`. Resource allocation changed from an initial
 four-worker cyclic phase to one proof-focused slot, then to three slots after

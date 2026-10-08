@@ -112,3 +112,47 @@ mpmath1.3.0 and exact-child gmpy2==2.3.0 provenance. See the inverse branch's
 actual native fanout, nested repair, inverse program execution and its retained
 C++ checker. Numerical finite tests validate their stated arithmetic; charged
 reference stages do not establish the complete fast-tape asymptotic cost.
+
+
+## Stronger changed-tree fixed-basis moment
+
+The small retained fixtures independently reproduce the full controller saving.
+They preserve the exact executed rational profiles and construction identities.
+
+```bash
+python3 -B agents/scout/code/fixed_controller_score.py --first fixtures/changed-fixed-h23-left.json --second fixtures/pinned-fixed-h25.json --saving 397034999791/10000000000000000 --output work/reproduction-changed-fixed-controller.json
+python3 -B agents/scout/code/fixed_profiler_prepare.py --help
+```
+
+Expected: strictly_passes=true, W185164329, mass106467642275, deficit1846900.
+See agents/scout/fixed-profile-api.md for the ordered source acquisition,
+profiler generation/compilation, five-prime determinant enclosure and independent
+binary geometry checks. Reconstruct the exact h23 DAG using its retained
+construction fixture and changed_dag_seed.py; fresh .fixed links/profile outputs
+must be generated with the original-envelope profiler, not the positive matcher.
+
+For new nonduplicate profile trials while DAG generation runs:
+
+```bash
+env OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 -B code/fixed_moment_family.py --dags <completed-h23-dag-directory> --profiler <prepared-fixed-profiler> --partner fixtures/pinned-fixed-h25.json --output work/reproduction-fixed-moment-family --limit 8 --diverse
+```
+
+Use --axis second with a h25 DAG directory and the retained changedh23 partner
+for joint trials. --previous <result-directory> excludes already completed IDs.
+The protocol pins exact wrapper/helper/binary identities and its full wrapper
+source. The first wrapper's pre-selector source is preserved in its completed
+evidence receipt. The exact search uses denominator10^16 and a1000-tick safety
+margin below the strict-upper moment threshold. Every passing finite moment
+still requires the stated compiler/physical-family and all-size integration
+review before promoting a multiplication bound.
+
+
+The independently verified joint refinement uses both retained changed profiles:
+
+```bash
+python3 -B agents/scout/code/fixed_controller_score.py --first fixtures/changed-fixed-h23-left.json --second fixtures/changed-fixed-h25-right.json --saving 80475950257/2000000000000000 --output work/reproduction-changed-joint-controller.json
+```
+
+Expected: strictly_passes=true, W182313019, mass104828139025, deficit1846900.
+The reviewed integrated witness is kappa8047514549749743/200000000000000000000,
+with the same epsilon/q/beta recipe and named native/all-size premises.

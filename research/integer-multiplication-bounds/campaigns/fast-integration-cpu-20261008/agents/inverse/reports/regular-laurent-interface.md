@@ -43,6 +43,43 @@ This is a general inverse-kernel lemma, not a forward-bandwidth heuristic.
 At `u*delta>=1`, using `pi>3` and `exp(3)>16` gives `r_A<2/15<1/2`,
 so the denominator can conservatively be replaced by two.
 
+### Sharper finite regular-phase radius
+
+For local numerical controls a stronger weight is useful. Assume `u*rho>=1`
+and define `A_star=pi*u*(rho-2*abs(beta))-ln(4)`. If `A_star>0`, then
+
+```
+|t_h|*exp(A_star*|h|)
+ <=4^(-|h|)*exp[-pi*u*rho*|h|*(|h|-1)],  h!=0.
+```
+
+The weighted perturbation norm is at most
+`2*sum_(h>=1)4^-h*exp[-pi*u*rho*h*(h-1)]<2/3`.
+Indeed the first term is1/2 and the entire remaining tail is below1/1536
+using `pi>3` and `exp(6)>256`. Therefore its inverse norm is below three,
+and the infinite inverse kernel has tail at most `3*exp(-A_star*R)`.
+This proof needs no near-identity physical-matrix condition `u*theta>=1`.
+It applies only to a wrap-free stationary phase and a positive A_star;
+it does not remove phase exceptions or a local window's boundary residual.
+
+For `(s,t,u)=(4093,4096,4)`, beta0=0, maximum recentring distance64 and radius20, the illustrative
+floating evaluations give `A_star≈11.19` and a one-axis full chirp reserve
+`pi*u*theta*lambda^2≈37.73` nats, or54.43 bits. The conservative kernel
+tail plus this full reserve is roughly267 bits. Thus a q256 local numerical
+control is plausible with these parameters, provided its additional finite
+kernel, rounding and boundary budgets are included. These parameters have
+`u*theta<1` and do NOT instantiate the campaign's all-size near-I regime.
+The actual origin beta, rather than beta0=0 for every cell, must be used.
+For a core of length64 and20-position halos, recentring at the core midpoint
+makes the maximum retained source distance52. A left-end origin would instead
+reach distance84 and would require a larger chirp reserve. A recentred beta
+must change with the chosen midpoint; these distances are not free phase
+translations.
+
+The unweighted inverse norm may be bounded separately by its exponentially
+small regular perturbation. Selecting the stronger spatial weight above
+does not alter the inverse-kernel L normalization described below.
+
 The same weighted row-norm argument applies to every finite principal Toeplitz
 block: weighting rows and columns by `exp(A*j)` or `exp(-A*j)` yields the
 corresponding directional decay. A local principal inverse and the Laurent

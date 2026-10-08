@@ -1,0 +1,34 @@
+{
+  "status": "owned execution checkpointed before exact oracle repair; no numerical conclusion",
+  "pid_at_control": 147655,
+  "utc": "2026-10-08T16:02:10.743131+00:00",
+  "cpu_seconds": 2051.1,
+  "source_sha256": "f9176c4fd63d4de2f09edc616395b645734aaa029b7b0b05a43546c9bd022bf1",
+  "config": [
+    {
+      "name": "three-dimensional-L128-GMP-new-radius",
+      "source_shape": [
+        4093,
+        4079,
+        4057
+      ],
+      "target_side": 4096,
+      "side": 128,
+      "radius": 19,
+      "alpha": "2",
+      "shift": 64,
+      "cell_indices": [
+        3,
+        8,
+        15
+      ],
+      "seed": 202610102101,
+      "integer_backend": "gmpy2-2.3.0"
+    }
+  ],
+  "reason": "Static code review shows a full side**dimension Gaussian summation per sample despite an exactly rank-two separable input. Replace it with distributive rank-two axis sums and cached independent coefficients, then validate against the original bounded cell sum. GMP multiplication alone did not remove this oracle workload.",
+  "limitations": [
+    "Actual live execution phase was not instrumented; this reason follows code inspection, not a sampled stack trace.",
+    "No accuracy result is claimed for the interrupted attempt."
+  ]
+}
