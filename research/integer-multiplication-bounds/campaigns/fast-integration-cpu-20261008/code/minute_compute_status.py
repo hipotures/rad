@@ -25,6 +25,8 @@ def main():
    context_path=ROOT/"results/live-compute-context.json"
    context=json.loads(context_path.read_text()) if context_path.exists() else {}
    row=dict(utc=b["utc"],cpu_percent_of_12=round(100*busy/12,2),busy_cpu_slots=round(busy,3),active_compute=active,completed_new_cyclic_cases=len(root_results),total_new_cyclic_cases=planned,passed_cyclic_attempts=passed,failed_cyclic_attempts=failed,complete_numeric_basis_probes=basis,mem_available_kib=b["mem_available_kib"],disk_free_bytes=b["disk_free_bytes"],best_campaign_certified_kappa=None,best_unverified_kappa=context.get("best_unverified_kappa"),eliminated=context.get("eliminated",[]),queue=context.get("queue",[]),completed_parameter_combinations=context.get("completed_parameter_combinations",0),passing_parameter_combinations=context.get("passing_parameter_combinations",0),candidate_status=context.get("candidate_status"),best_reviewed_conditional_kappa=context.get("best_reviewed_conditional_kappa"))
+   row["completed_experiments"]=context.get("completed_experiments",{})
+   row["gpu_utilization"]="No GPU is available on this CPU campaign host."
    console_row=dict(row);console_row["active_compute"]=[{k:x[k] for k in ("pid","ppid","cpu_slots","threads","rss_kib")} for x in active]
    print(json.dumps(console_row),flush=True);f.write(json.dumps(row)+"\n");f.flush()
    remaining=float("inf");time.sleep(max(0,min(59,remaining)))

@@ -1,6 +1,6 @@
 {
   "work_root": "work/",
-  "recovery": "Downloaded public inputs and generated scientific execution files are recoverable from pinned sources and campaign code. Transient telemetry is irreplaceable and will be archived before closure.",
+  "recovery": "Pinned eligible public inputs are downloadable; binary graphs, numerical outputs and layouts are regenerable with campaign and agent code. Irreplaceable host observations are preserved as checkpointed complete-prefix gzip evidence; future observations remain local until the next checkpoint.",
   "artifacts": [
     {
       "path": "work/scout/snapshots/",
@@ -21,6 +21,46 @@
       "path": "work/sparse-repair-20261008T1335Z/",
       "type": "deterministically regenerable finite support checks",
       "recovery": "python3 -B code/sparse_tensor_repair.py --workers 7 --output <fresh-work>/certificate.json"
+    },
+    {
+      "path": "work/changed-dag-*",
+      "type": "deterministically regenerable changed DAG binaries, labels and complete matching profiles",
+      "recovery": "agents/scout/code/changed_dag_seed.py with pinnedPR40; full CLI protocols are in each run and checkpoint evidence."
+    },
+    {
+      "path": "work/rounded-prefix-20261008T1501Z",
+      "type": "deterministically regenerable exact bounded-precision controls",
+      "recovery": "python3 -B code/rounded_prefix_controls.py --output <fresh-directory>"
+    },
+    {
+      "path": "work/band-lu-wide-*",
+      "type": "deterministically regenerable exact support-aware wider LU controls and failed harness receipt",
+      "recovery": "python3 -B code/band_lu_wide_family.py --workers 2 --output <fresh-directory>; first failed harness source and repair are retained."
+    },
+    {
+      "path": "work/cyclic-extended-tails-20261008T1455Z",
+      "type": "deterministically regenerable larger-theta cyclic inverse and nonvacuous tail controls",
+      "recovery": "python3 -B code/cyclic_extended_tail_family.py --workers 1 --output <fresh-directory>"
+    },
+    {
+      "path": "work/layout",
+      "type": "regenerable finite packed/Gaussian/CRT compositions and independent numerical oracles",
+      "recovery": "See agents/layout/reproduce-gaussian-pipeline.md and per-attempt frozen-source provenance/patches."
+    },
+    {
+      "path": "work/inverse",
+      "type": "regenerable actual guarded CRT programs and exact native controls",
+      "recovery": "See agents/inverse/README.md and reports/compiled-crt-validation.md."
+    },
+    {
+      "path": "work/compute-minute/observations.jsonl",
+      "type": "irreplaceable actual one-second utilization observations",
+      "recovery": "Complete prefixes archived in evidence/20261008T1533Z-independent-validation; original live observations are retained unchanged."
+    },
+    {
+      "path": "work/telemetry-indefinite-20261008T1427Z/observations.jsonl",
+      "type": "irreplaceable periodic host observations",
+      "recovery": "Complete prefix archived in evidence/20261008T1533Z-independent-validation; resources-indefinite.csv is the compact contemporaneous export."
     }
   ],
   "storage_change": {
@@ -28,5 +68,11 @@
     "user_requested_capacity_gb": 100,
     "observed_total_bytes": 105492529152,
     "observed_free_bytes": 94951972864
+  },
+  "checkpoint_evidence": {
+    "path": "evidence/20261008T1533Z-independent-validation",
+    "source": "work/20261008T1533Z-independent-validation",
+    "captured_utc": "2026-10-08T15:31:54.552876+00:00",
+    "format": "Complete JSON objects aggregated with source identities; complete-prefix telemetry snapshots. Original execution files are unchanged."
   }
 }

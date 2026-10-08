@@ -30,7 +30,9 @@ The surviving physical rows include prefix movement, phase localization and phas
 - [Analytic leads](analytic-leads.md): tensor packing, a proved regular Laurent estimate and explicit missing machine interfaces.
 - [Deferred-reservoir criticism](deferred-reservoir-review.md): source-grounded review of the new equal-axis transform schedule.
 - [Continuation reviews](all-cardinality-continuation-review.md): independent complete-profile enumeration and universal concavity exclusion for the coordinator's exported generic graph.
+- [Changed-DAG search seed](changed-dag-seed.md): a tested small producer launcher that changes grouping and association, with exact support/frame checks and optional pinned matching.
 - [Global inverse locality review](global-locality-review.md): weighted lifted-kernel and principal-window criticism, including aliases.
+- [Extended Gaussian domain review](extended-gaussian-review.md): general positive-mismatch tail proof, cyclic folding and the separate physical-contraction condition.
 - [Joint product and cap review](joint-interface-review.md): exact occupied order, metadata, cut exclusions and the explicitly conditional primitive cap.
 - [Physical LU and long-record review](physical-lu-review.md): independent backward-error induction and address/precision/bank comparisons.
 - [CRT audit](crt-cost-review.md): remaining payload rotations, exact scoped ceiling and primary literature follow-up.

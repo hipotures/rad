@@ -58,3 +58,5 @@ passes. This is a reviewed written conditional result; no new finite native
 witness, formal verification, practical cutoff or executed complete fast-tape
 implementation is claimed. The full small Gaussian/integer pipeline and an
 actual two-node CRT pipeline passed, while larger/precision tests continue.
+
+15:33 UTC continuing checkpoint: [independent validation and falsification](reports/indefinite-validation-20261008T1533Z.md) preserves complete actual CRT/Gaussian/final-inverse recovery, packed-forward cubes, sharp precision failures, 3,932,160 rounded prefixes, wider exact LU controls and 2,008 distinct changed-DAG profiles. The user has extended execution indefinitely; no closing phase is scheduled. Conditional kappa is unchanged.

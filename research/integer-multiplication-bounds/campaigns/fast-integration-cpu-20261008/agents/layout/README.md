@@ -91,3 +91,16 @@ Larger unequal-ratio and end-to-end cases continue in the allocated CPU queue.
 - [Large source-transform composition](results/source-transform-large-family.json).
 - [Dependency and source recovery manifest](configs/gaussian-pipeline-provenance.json).
 - [Ordered reproduction commands](reproduce-gaussian-pipeline.md).
+
+Subsequent complete replacements are retained separately:
+
+- [Actual CRT input programs inside the complete pipeline](results/full-gaussian-compiled-crt-input.json).
+- [Actual CRT forward and final inverse inside the complete pipeline](results/full-gaussian-compiled-crt-final-inverse.json).
+- [Whole paired-grid packed-forward stage](results/joint-packed-forward-stage.json).
+- [Ordinary integer recovery with packed forward expansions](results/full-pipeline-packed-forward-0.json).
+- [Matched insufficient work-grid observations](results/full-gaussian-precision-threshold-partial.json).
+- [Adjacent precision boundary and stronger margin failure](results/full-gaussian-precision-boundary-partial.json).
+
+All of these remain bounded experiments. Reference Gaussian compression,
+reference repair passes and the inherited known-bit router premise are charged
+or identified explicitly; no all-size exponent follows from finite PASS rows.

@@ -156,8 +156,14 @@ def run_case(config):
         packed_positive = pack_sparse(positive, slot_bytes, input_degree)
         packed_negative = pack_sparse(negative, slot_bytes, input_degree)
         packed_kernel = pack_sparse(kernel_rows, slot_bytes, kernel_degree)
-        product_positive = packed_positive * packed_kernel
-        product_negative = packed_negative * packed_kernel
+        if config.get("integer_backend") == "gmpy2-2.3.0":
+            import gmpy2
+            assert gmpy2.__version__ == "2.3.0"
+            product_positive = int(gmpy2.mpz(packed_positive) * gmpy2.mpz(packed_kernel))
+            product_negative = int(gmpy2.mpz(packed_negative) * gmpy2.mpz(packed_kernel))
+        else:
+            product_positive = packed_positive * packed_kernel
+            product_negative = packed_negative * packed_kernel
         mask = (1 << slot_bits) - 1
         normalization = (2 * alpha) ** (-dimension)
 

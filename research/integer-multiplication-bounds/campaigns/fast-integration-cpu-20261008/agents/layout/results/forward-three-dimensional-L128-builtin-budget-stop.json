@@ -1,0 +1,10 @@
+{
+  "status": "bounded slow builtin-integer child attempt stopped before accuracy receipt",
+  "worker_pid": 128746,
+  "observed_cpu_seconds": 1524.51,
+  "resident_memory_kib": 2774916,
+  "config": "configs/forward-three-dimensional-L128.json",
+  "source_sha256": "d1f9e0dbfc1af65b1e012835fceece52746a40b8639227f36e432077aff41af6",
+  "observation": "Large three-dimensional operands and Python builtin integer multiplication make this a poor finite execution backend. Exact stopped phase is unavailable; no numerical accuracy conclusion follows.",
+  "replacement": "Changed seed and radius, pinned exact GMP child multiplication backend; retain earlier successful fixtures and all historical source unchanged."
+}

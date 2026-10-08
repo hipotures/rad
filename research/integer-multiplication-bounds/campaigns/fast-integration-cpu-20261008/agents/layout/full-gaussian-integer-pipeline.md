@@ -107,3 +107,61 @@ recursive multiplier, or the all-size cutoff. The next implementation step
 is to replace each charged dense Gaussian stage by the actual joint source
 embedding, packed local kernels and sparse repairs, while keeping this
 independent coefficient oracle and the same explicit movement ledger.
+
+## Actual complete guarded CRT and packed forward replacements
+
+The complete arithmetic reference has now been extended in two independent
+ways. These receipts are materially stronger than isolated component checks.
+
+- Source `(17,19,23)` at target `32^3` passes both actual guarded-CRT input
+  programs, with 76 recorded events per program, followed by complete Gaussian,
+  synthetic-ring and integer recovery. All 7,429 coefficients match the oracle;
+  maximum real error is `6.17e-96`, and total wall time is 170.46 seconds.
+- Source `(17,19,31)` additionally executes the actual reverse guarded-CRT
+  program on the exact rounded leaf coefficients from the numerical producer.
+  Its forward template compilation uses separate positive provenance labels
+  and is explicitly charged. All 10,013 coefficients match; scalar padding is
+  restored, no address bits are added, and error is `5.54e-68`. Total wall time
+  is 159.66 seconds. API, compiler and guard sources were frozen before launch.
+- Complete joint packed-forward controls cover target volumes 4,096, 16,384,
+  65,536 and 262,144. They build real signed tensor products in mixed-radix
+  cells, combine interiors from two global grids, and explicitly repair all
+  unselected outputs. Every selected output differs from the independently
+  rounded periodic Gaussian reference by at most one integer grid unit. The
+  largest case computes 169,094 outputs by packed cells and repairs 93,050.
+  These finite repair fractions are reported rather than identified with the
+  all-size sparse-density bound.
+- The actual packed-forward stage now replaces all three forward expansions
+  inside an ordinary integer multiplier at source `(127,113)`, target `128^2`.
+  All 14,351 coefficients recover correctly, with maximum error `2.12e-22`
+  and 91.99 seconds wall time. Every expansion uses 2,355 genuine packed
+  coefficients and 14,029 explicitly charged repairs. Compression remains a
+  matrix reference. A changed larger whole-pipeline case continues running.
+
+The actual CRT API preserves complete event and repair ledgers. Converting its
+axis-zero-low binary cube to source lexicographic order pays one named axis
+field permutation and one padding filter. Embedding the final rounded source
+coefficients before reverse CRT pays the corresponding permutation and zero
+insertion. No computed modular key is treated as a free coordinate-bit route.
+The first CRT API helper was extended while its input-only run was active;
+its immutable raw receipt hashed the filename at completion. The derived
+publication records the exact reconstructed imported source hash separately
+and preserves this provenance sensitivity. The later complete inverse run
+freezes every dependency before execution.
+
+A matched precision family fixes source `(31,29,61)`, target `(32,32,64)`,
+alpha 5, digit bits, input seed and direct Fourier probes. Work grids 148 and
+172 lose coefficient recovery completely. Grids 196, 197 and 198 have maximum
+coefficient errors 2.73449, 1.39915 and 0.69896 and recover incorrect integers.
+Grid 200 has error 0.17476 and passes the quarter-unit guard; grid 224 has error
+`1.04e-8`. Grid 199 reaches correct rounding but fails the stronger quarter-unit
+margin; only this affected guard attempt is rerun to collect its exact compact
+statistics. Thus isolated transform accuracy is insufficient without charging
+final source-volume and power-of-two amplification.
+
+The largest original 3D L128 cell attempt was stopped after 1,524.51 CPU
+seconds and roughly 2.71 GiB resident memory, before an accuracy receipt.
+This is an execution-budget observation, not a numerical negative. A changed
+radius and seed use the pinned exact gmpy2 2.3.0 child-product backend; the
+mathematical factors and independent oracle remain the same. GMP's execution
+speed is not a fixed-tape complexity certificate.

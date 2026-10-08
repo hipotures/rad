@@ -47,3 +47,46 @@ At the same poll platypii's public head was
 with local-projector and reused-boundary finite proofs. No complete analytic
 multiplier theorem was identified. New campaign-linked and suspected derivative
 branches remained metadata-only quarantines and were not used in the science.
+
+At 14:53 the eligible new [PR45](https://github.com/CrocSwap/integer-mult-bounds/pull/45)
+by Alejandro Zarzuelo Urdiales was pinned at
+`5e219f7b3513b092d3ee919a303db0f55a3a0a0e`, submitted at 14:35:44 UTC.
+Its self-contained Gaussian parity audit identifies the exact legality
+condition for division by `1+i`, retains the shared parity defect bit, and
+distinguishes the sharp completed `C`-tensor denominator `ceil(D/2)` from
+the normalized `H0` denominator, which remains `D` bits in the worst case.
+The author reports 69 Lean finite arithmetic/lattice statements under Lean
+4.31 and exact Python controls. These statements do not formalize the full
+network, tape costs or analytic multiplier. The contribution explicitly
+credits historical PR23's completed-child semantic work and the established
+Gaussian denominator literature; no new campaign-linked RaD input was used
+in this intake. No changed full assembly exponent or arithmetic CRT cost
+was claimed. Ten selected files, totaling 72,087 bytes, are recorded in
+[pr45-source.json](pr45-source.json), with Apache-2.0 and author notices
+retained. The community integration branch and unrelated repository files
+were not downloaded.
+
+The scout replayed that selected Python exact-control file without changes;
+all 3,721 division, 13,122 pair, 72 tensor and 36 normalized tensor cases
+passed, including denominator sharpness and four negative controls.
+[pr45-controls.json](pr45-controls.json) records the pinned source hash and
+counts. Lean was not compiled by this scout. The replay adds bounded evidence
+only and changes no full-multiplier claim.
+
+At 15:11 the public watch retained unchanged eligible CrocSwap, Swapnil and
+PR40 heads. Newly associated branches for excluded PR44, PR46 and PR47 remain
+metadata-only quarantines. The watcher now carries exclusions forward,
+filters references transitively through known excluded derivatives, and
+omits their fork branches from actionable changes. No scientific source or
+bound from those branches enters this campaign.
+
+At 15:21 CrocSwap main moved to
+`0605a24a28836168ad29d6239b46064b892298fc`, Douglas R. Colkitt,
+committed at 15:18:13 UTC, with metadata headline "Publish audited community
+bound with contributor attribution". That aggregate new publication is
+metadata only here; its mathematical contents, bound and audit conclusions
+were not consumed. Eligible PR39, PR37, PR36, PR32, PR24, PR18 and PR10 changed
+to closed at 15:18:19 UTC with unchanged scientific heads. These status changes
+do not establish acceptance of the pinned PR40 primitive or change the CPU
+composition's named assumptions. The watcher now requests head metadata
+through GraphQL, without the source patches included by a REST commit response.

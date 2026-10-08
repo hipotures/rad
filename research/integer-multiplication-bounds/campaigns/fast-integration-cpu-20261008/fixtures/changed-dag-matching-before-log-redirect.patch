@@ -1,0 +1,13 @@
+--- a/code/changed_dag_matching_family.py
++++ b/code/changed_dag_matching_family.py
+@@ -9,9 +9,7 @@
+  result=dict(id=identifier,h=row["h"],grouping=row["grouping"],association=row["association"],threshold=row["threshold"],worker_pid=os.getpid(),dag_sha256=hashlib.sha256(dag.read_bytes()).hexdigest())
+  try:
+   def run(name,suffix):
+-   # Retain matching diagnostics without flooding the coordinator console.
+-   with (directory/(identifier+"-"+name+".log")).open("w") as log:
+-    return json.loads(subprocess.check_output([str(matcher/name),str(dag),str(dag)+suffix],text=True,stderr=log))
++   return json.loads(subprocess.check_output([str(matcher/name),str(dag),str(dag)+suffix],text=True))
+   result["original_matching"]=run("match_exported_dag",".links")
+   result["positive_labels"]=labels(str(dag))
+   result["positive_matching"]=run("match_positive_dag",".positive")

@@ -1,0 +1,31 @@
+--- a/code/band_lu_wide_family.py
++++ b/code/band_lu_wide_family.py
+@@ -20,10 +20,6 @@
+ def job(case):
+  m,w,p,seed=case;path=ROOT/"agents/inverse/code/fixed_grid_band_lu.py"
+  spec=importlib.util.spec_from_file_location("grid_lu",path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+- raw=path.read_text();start=raw.index("    poor_l, poor_u, poor_reciprocal, _ = factor(poor_a, w, poor_bits)");end=raw.index("    return {",start)
+- coarse=raw[start:end]
+- repair="    try:\n"+"".join("    "+line+"\n" for line in coarse.splitlines())+"    except AssertionError:\n        poor_error = None  # Coarse rounding has left the solver's near-identity domain.\n"
+- transformed=raw[:start]+repair+raw[end:];exec(compile(transformed,str(path),"exec"),module.__dict__)
+  # Validate the support-aware exact oracle against the dense independent oracle.
+  a=module.build(17,3,24,seed);l,u,_,_=module.factor(a,3,24)
+  assert band_residual(a,l,u,1<<24,3)==module.factor_residual(a,l,u,1<<24)
+@@ -33,7 +29,7 @@
+  tight_factor=F(w*(w+2),1<<p);tight_solution=F((1<<12)*(w+1)**2,1<<p)
+  assert F(r["factor_residual_row_norm"])<tight_factor
+  assert F(r["solution_error_bound_from_residual"])<tight_solution
+- r.update(tight_factor_bound=str(tight_factor),tight_solution_bound=str(tight_solution),coarse_negative_stability_failure=r["coarse_precision_negative_residual"]=="None",scope="All residual rows and band support checked by exact integers; dimension-free written bounds, generic matrices not cyclic Gaussian geometry",wall_seconds=time.time()-began)
++ r.update(tight_factor_bound=str(tight_factor),tight_solution_bound=str(tight_solution),scope="All residual rows and band support checked by exact integers; dimension-free written bounds, generic matrices not cyclic Gaussian geometry",wall_seconds=time.time()-began)
+  return r
+ if __name__=="__main__":
+  a=argparse.ArgumentParser();a.add_argument("--workers",type=int,default=3);a.add_argument("--output",type=Path,required=True);z=a.parse_args();z.output.mkdir(parents=True,exist_ok=False)
+@@ -41,7 +37,4 @@
+  with concurrent.futures.ProcessPoolExecutor(max_workers=z.workers) as pool:
+   pending={pool.submit(job,c):c for c in CASES}
+   for f in concurrent.futures.as_completed(pending):
+-   try:r=f.result()
+-   except Exception as error:
+-    m,w,p,seed=pending[f];r=dict(m=m,half_bandwidth=w,fractional_bits=p,seed=seed,status="failed",error=type(error).__name__+": "+str(error),wall_seconds=None)
+-   (z.output/("m%d-w%d.json"%(r["m"],r["half_bandwidth"]))).write_text(json.dumps(r,indent=2)+"\n");print(json.dumps(dict(event="done",m=r["m"],w=r["half_bandwidth"],seconds=r["wall_seconds"])),flush=True)
++   r=f.result();(z.output/("m%d-w%d.json"%(r["m"],r["half_bandwidth"]))).write_text(json.dumps(r,indent=2)+"\n");print(json.dumps(dict(event="done",m=r["m"],w=r["half_bandwidth"],seconds=r["wall_seconds"])),flush=True)

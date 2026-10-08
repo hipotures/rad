@@ -1,0 +1,73 @@
+--- compiled_crt_payload_api.py
++++ compiled_crt_payload_api.py
+@@ -15,8 +15,7 @@
+     Machine, shape, fields, compiled_rotation, ordinary_rotation, valid,
+ )
+ 
+-def transform_payload(primes, coefficients, *, reverse_check=True, emit_stdout=False,
+-                      _return_machine=False):
++def transform_payload(primes, coefficients, *, reverse_check=True, emit_stdout=False):
+     started=time.monotonic();N=sum((s-1).bit_length() for s in primes);S=math.prod(primes);T=1<<N
+     assert len(coefficients)==S, ('coefficient count',len(coefficients),S)
+     assert all(isinstance(value,int) and value>=0 for value in coefficients)
+@@ -63,59 +62,8 @@
+     output=machine.payload[:]
+     if reverse_check:
+         machine.inverse();assert machine.payload==initial,'full reverse pipeline mismatch' 
+-    result={'output':output,'primes':primes,'address_bits':N,'allocated_records':T,'valid_records':S,
++    return {'output':output,'primes':primes,'address_bits':N,'allocated_records':T,'valid_records':S,
+             'initial_padding_provenance':'caller nonnegative coefficients at scalar k<S; all other payloads explicit zero',
+             'added_address_bits':0,'compiled_batches':metrics,'full_leaf_oracle':True,
+             'full_reverse_pipeline':reverse_check,'all_padding_boundaries_restored':True,
+             'events':len(machine.events),'ledger':machine.ledger,'wall_seconds':time.monotonic()-started}
+-    if _return_machine:
+-        assert not reverse_check
+-        result['_machine']=machine
+-    return result
+-
+-
+-def inverse_payload(primes, leaf_coefficients, *, emit_stdout=False):
+-    """Execute actual reverse events on caller-supplied binary leaf records.
+-
+-    A separately charged forward template uses positive provenance labels to
+-    compile and verify the exact current-address event program. The inverse
+-    replaces only the coefficient payload, then reverses every ordinary map,
+-    repaired F_u, repaired outer reflection and joint occupied-slot scan.
+-    Its independent oracle only checks the resulting scalar payload.
+-    """
+-    started=time.monotonic()
+-    S=math.prod(primes)
+-    N=sum((s-1).bit_length() for s in primes)
+-    T=1<<N
+-    assert len(leaf_coefficients)==T, ('leaf box size',len(leaf_coefficients),T)
+-    assert all(isinstance(value,int) and value>=0 for value in leaf_coefficients)
+-    shapes=[shape((s,)) for s in primes]
+-    assert all(value==0 or valid(address,shapes)
+-               for address,value in enumerate(leaf_coefficients)), 'nonzero leaf padding'
+-    template=transform_payload(primes,list(range(1,S+1)),reverse_check=False,
+-                               emit_stdout=emit_stdout,_return_machine=True)
+-    machine=template.pop('_machine')
+-    template.pop('output')
+-    machine.payload=list(leaf_coefficients)
+-    machine.inverse()
+-    caps=[1<<((s-1).bit_length()) for s in primes]
+-    prefix=1
+-    mus=[]
+-    for s in primes:
+-        mus.append(pow(prefix,-1,s))
+-        prefix*=s
+-    expected=[0]*T
+-    for k in range(S):
+-        address=0
+-        stride=1
+-        for mu,s,capacity in zip(mus,primes,caps):
+-            address+=(mu*k%s)*stride
+-            stride*=capacity
+-        expected[k]=leaf_coefficients[address]
+-    assert machine.payload==expected, 'caller inverse payload oracle mismatch'
+-    return {'output':machine.payload,'coefficients':machine.payload[:S],
+-            'primes':primes,'allocated_records':T,'valid_records':S,
+-            'actual_reverse_events':len(machine.events),'full_inverse_oracle':True,
+-            'added_address_bits':0,'all_scalar_padding_restored':True,
+-            'separately_charged_forward_template':template,
+-            'wall_seconds':time.monotonic()-started}

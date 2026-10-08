@@ -1,5 +1,5 @@
---- code/check_forward_gaussian_fractional_cells.py
-+++ code/check_forward_gaussian_fractional_cells.py
+--- producer.py
++++ producer.py
 @@ -23,31 +23,6 @@
  PI = Decimal("3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481")
  
@@ -74,7 +74,24 @@
                                   for h in range(-radius, radius + 1)))
          positive = []
          negative = []
-@@ -170,7 +137,7 @@
+@@ -156,14 +123,8 @@
+         packed_positive = pack_sparse(positive, slot_bytes, input_degree)
+         packed_negative = pack_sparse(negative, slot_bytes, input_degree)
+         packed_kernel = pack_sparse(kernel_rows, slot_bytes, kernel_degree)
+-        if config.get("integer_backend") == "gmpy2-2.3.0":
+-            import gmpy2
+-            assert gmpy2.__version__ == "2.3.0"
+-            product_positive = int(gmpy2.mpz(packed_positive) * gmpy2.mpz(packed_kernel))
+-            product_negative = int(gmpy2.mpz(packed_negative) * gmpy2.mpz(packed_kernel))
+-        else:
+-            product_positive = packed_positive * packed_kernel
+-            product_negative = packed_negative * packed_kernel
++        product_positive = packed_positive * packed_kernel
++        product_negative = packed_negative * packed_kernel
+         mask = (1 << slot_bits) - 1
+         normalization = (2 * alpha) ** (-dimension)
+ 
+@@ -176,7 +137,7 @@
                      for j in range(s):
                          # v=+-1 is included, rather than treating a periodic
                          # source cut as a translated unwrapped cell.
@@ -83,7 +100,7 @@
                                       for v in (-1, 0, 1))
                          subtotal += component[i][j] * weight / (2 * alpha)
                      product *= subtotal
-@@ -214,15 +181,15 @@
+@@ -220,15 +181,15 @@
              wrong_cell = Decimal(0)
              for a in coordinates(lengths):
                  value = input_value(tuple(j0 + ai for j0, ai in zip(source_origins, a)))
@@ -104,7 +121,7 @@
                                           for i, (ai, bi) in enumerate(zip(a, b)))
                  direct_cell += value * direct_weight * normalization
                  factor_cell += value * factor_weight * normalization
-@@ -243,14 +210,13 @@
+@@ -249,14 +210,13 @@
          # A source-period cut is not covariance of an unwrapped global shift.
          cut_j = shape[0] - 1
          cut_k = 0
@@ -121,7 +138,7 @@
                  "kronecker_base": base, "slot_bits": slot_bits, "input_records": occupied,
                  "kernel_records": len(kernel_rows), "padded_records": base ** dimension,
                  "outputs_checked": len(outputs), "exact_global_selector_outputs": selector_samples,
-@@ -292,7 +258,7 @@
+@@ -298,7 +258,7 @@
          rows = list(executor.map(run_case, configs))
      result = {"status": "changed fractional Gaussian cell interface passed", "workers": args.workers,
                "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),

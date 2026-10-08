@@ -1,0 +1,12 @@
+--- wrapper.py
++++ wrapper.py
+@@ -107,8 +107,7 @@
+                                 'physical_operation': 'paid named axis-field reversal and joint zero-padding embedding before actual reverse CRT',
+                                 'payload_reads': volume, 'payload_writes': len(binary_leaf)})
+         (output / 'crt-final-inverse.json').write_text(json.dumps(inverse_receipt, indent=2) + '\n')
+-    result = {'status': ('complete Gaussian integer pipeline with actual compiled CRT forward and inverse programs passed'
+-                         if args.final_inverse else 'complete Gaussian integer pipeline with actual compiled CRT input programs passed'),
++    result = {'status': 'complete Gaussian integer pipeline with actual compiled CRT input programs passed',
+               'arithmetic': arithmetic, 'actual_crt_input_programs': api_rows,
+               'paid_binary_to_source_conversions': conversion_rows,
+               'actual_final_crt_inverse': inverse_receipt,

@@ -26,6 +26,7 @@ WATCHED = {
     "platypii/integer-mult-bounds-lean": "master",
 }
 CAMPAIGN_START = "2026-10-08T12:40:55Z"
+KNOWN_EXCLUDED_PRS = {41, 42, 43, 44, 46, 47}
 
 
 def api(path: str):
@@ -48,6 +49,9 @@ def eligible_pulls():
         number title author {login} state isDraft createdAt updatedAt
         headRefOid headRefName headRepository {nameWithOwner} url
       }} }}''')["pullRequests"]["nodes"]
+    prior_path = OWN / "latest-observation.json"
+    previous = json.loads(prior_path.read_text()) if prior_path.exists() else {}
+    known_excluded = KNOWN_EXCLUDED_PRS | set(previous.get("excluded_campaign_linked_pr_numbers", []))
     eligible, excluded = [], []
     for p in meta:
         author = (p["author"] or {}).get("login", "")
@@ -63,7 +67,7 @@ def eligible_pulls():
             # derivative results entering our source set without provenance.
             campaign_linked |= bool(re.search(r"changed[ -]*(?:dag|graph)",
                                               p["title"], re.I))
-        if p["createdAt"] >= CAMPAIGN_START and campaign_linked:
+        if p["number"] in known_excluded or (p["createdAt"] >= CAMPAIGN_START and campaign_linked):
             excluded.append(p["number"])
             continue
         eligible.append(p)
@@ -79,30 +83,46 @@ def eligible_pulls():
                       "repo":{"full_name":(p["headRepository"] or {}).get("nameWithOwner")}},
               "html_url":p["url"], "body":bodies[f'p{p["number"]}']["body"]}
              for p in eligible]
-    retained = []
-    for p in pulls:
-        # Do not retain an eligible-looking derivative that expressly cites
-        # quarantined PR41--43. Only this provenance filter sees such a body.
-        derivative = bool(re.search(r"(?:#|PR\s*#?|pull/)(?:41|42|43)\b",
-                                    p["body"] or "", re.I))
-        if derivative:
-            excluded.append(p["number"])
-        else:
-            retained.append(p)
-    pulls = retained
-    return pulls, excluded
+    # Only this provenance filter sees newly acquired bodies. Repeated passes
+    # quarantine references to a quarantined derivative as well as originals.
+    while True:
+        blocked = "|".join(map(str, sorted(known_excluded | set(excluded))))
+        retained, newly_excluded = [], []
+        for p in pulls:
+            derivative = bool(re.search(r"(?:#|PR\s*#?|pull/)(?:"+blocked+r")\b",
+                                        p["body"] or "", re.I))
+            if derivative:
+                newly_excluded.append(p["number"])
+            else:
+                retained.append(p)
+        pulls = retained
+        excluded.extend(newly_excluded)
+        if not newly_excluded:
+            break
+    excluded_branches = {
+        ((p["headRepository"] or {}).get("nameWithOwner", ""), p["headRefName"])
+        for p in meta if p["number"] in excluded
+    }
+    return pulls, excluded, excluded_branches
 
 
 def observed_head(item):
     repository, branch = item
-    data = api(f"repos/{repository}/commits/{branch}")
+    owner, name = repository.split("/", 1)
+    # Commit metadata only: the REST commit response also includes source
+    # patches. Aggregate upstream publication can now contain quarantined
+    # campaign inputs, so never acquire those patches merely to watch a head.
+    query = ('query {repository(owner:'+json.dumps(owner)+',name:'+json.dumps(name)
+             +') {object(expression:'+json.dumps(branch)+') {... on Commit {'
+              'oid committedDate author {name} messageHeadline url}}}}')
+    data = graphql(query)["object"]
     return repository, {
         "branch": branch,
-        "sha": data["sha"],
-        "commit_utc": data["commit"]["committer"]["date"],
-        "author": data["commit"]["author"]["name"],
-        "title": data["commit"]["message"].splitlines()[0],
-        "url": data["html_url"],
+        "sha": data["oid"],
+        "commit_utc": data["committedDate"],
+        "author": data["author"]["name"],
+        "title": data["messageHeadline"],
+        "url": data["url"],
     }
 
 
@@ -114,7 +134,7 @@ def main():
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     rawdir = WORK / "observations" / stamp
     rawdir.mkdir(parents=True, exist_ok=False)
-    pulls, excluded = eligible_pulls()
+    pulls, excluded, excluded_branches = eligible_pulls()
     (rawdir / "pulls.json").write_text(json.dumps(pulls, indent=2) + "\n")
     with ThreadPoolExecutor(max_workers=3) as pool:
         heads = dict(pool.map(observed_head, WATCHED.items()))
@@ -144,7 +164,11 @@ def main():
                 # enumerate newly published RaD campaign branches in a live poll.
                 continue
             branches = api(f"repos/{name}/branches?per_page=100")
-            compact["forks"][name] = {b["name"]: b["commit"]["sha"] for b in branches}
+            compact["forks"][name] = {
+                b["name"]: b["commit"]["sha"] for b in branches
+                if (name, b["name"]) not in excluded_branches
+                and not re.search(r"(?:^|[-/_])rad(?:$|[-/_])", b["name"], re.I)
+            }
     if args.search:
         data = api("search/repositories?q=integer-mult+in:name&sort=updated&per_page=50")
         (rawdir / "search.json").write_text(json.dumps(data, indent=2) + "\n")

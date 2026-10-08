@@ -129,3 +129,33 @@ The information contributed by the new compiler is interface composition,
 not a new native network moment or a timing-based exponent claim. Conditional
 full-multiplier assembly and the common eventual threshold remain the
 coordinating agent's responsibilities.
+
+## Coefficient-payload integration API
+
+[compiled_crt_payload_api.py](../code/compiled_crt_payload_api.py) exposes
+`transform_payload(primes, coefficients, reverse_check=True,
+emit_stdout=False)`. It executes the SAME completed bank-leaf forward loop,
+actual masked F_u and both levels of radix repair with caller-supplied
+nonnegative integer coefficient values. Those values occupy scalar indices
+`0<=k<S`; all remaining input addresses are numeric zero padding. Legitimate
+coefficient zeros are allowed. The result's `output` is the full padded leaf
+box of length T, axis zero in the least-significant binary field. An
+independent triangular-CRT oracle uses the supplied value for each k, and
+the optional reverse check must recover every initial coefficient and zero.
+
+This API depends on the frozen `compiled_crt_pipeline_bankleaf.py` and
+`crt_guard_controls.py` in the same directory. It does not support negative
+sentinel values or arbitrary object payloads; ring residues should first be
+represented by their nonnegative integer representatives. The API itself
+has been syntax checked; a composed Gaussian/ring producer caller check
+belongs to the layout branch and remains pending at this update.
+
+The companion `inverse_payload(primes, leaf_coefficients,
+emit_stdout=False)` accepts the entire padded binary leaf box. It separately
+charges a forward compilation template with positive provenance labels,
+then replaces only the coefficient payload and executes every actual reverse
+event on the supplied recovered coefficients. The inverse oracle is used
+only to check the result. It returns the full scalar padded box in `output`,
+the first S recovered coefficients in `coefficients`, and a compact forward
+template ledger. Nonzero leaf padding is rejected before compilation. No
+saved initial coefficient stream or inverse address lookup supplies outputs.

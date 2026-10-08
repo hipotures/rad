@@ -33,6 +33,8 @@ with 14,608 wrong outer records repaired also passes the full forward and
 reverse pipeline in `runs/20261008T1448Z-compiled-crt-bankleaf-five-bank`.
 Six-prime and two-bit guard variants have explicit running protocols and
 pinned code snapshots.
+The [coefficient-payload API](code/compiled_crt_payload_api.py) lets the
+arithmetic integration branch execute these physical maps on ring residues.
 The [cyclic free-axis interface](reports/cyclic-free-axis-repair.md) supplies
 global principal-window band LU on every complete free axis of inverse repair
 packets, including regular face packets.

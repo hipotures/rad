@@ -210,3 +210,18 @@ provides eventual constructive prime supply but no published numerical
 threshold for the complete machine. Full-map executables are valuable checks
 of the changed implementation; their PASS labels alone cannot establish any
 of these uniform contracts.
+
+## Adoption receipt after the initial review
+
+The coordinator adopted complete free-axis band-LU for ALL inverse repair
+packets, rational inverse-kernel normalization `L=1+1/d^2` with `L^d<2`
+restored once, and explicit fixed scalar exponent `zeta=1/1000`. The inverse
+branch also wrote the contracting-prefix interface with coefficient error
+`(2d+1)2^-P` and scalar setup denominators of only `O(d log d)` bits.
+These repair the three clarifications identified above without changing the
+limiting rows. The coordinator's current chooser now enforces
+`u^2 theta_i>=2Q`, which safely satisfies the pinned source's STRICT
+`theta_i>Q/u^2`. The written complete-map and recovery closure is supported
+relative to its named native hypotheses; no additional obstruction was
+identified by this scout review. The inherited machine/compiler premises and
+the absence of a numerical full-machine cutoff remain material limitations.

@@ -65,3 +65,49 @@ These commands exercise the complete arithmetic reference composition. The
 producer's dense Gaussian passes and finite array layouts do not constitute
 a fast fixed-tape kernel implementation. Source-level movement ledgers and
 the campaign's independent physical proofs must be interpreted separately.
+
+The later complete physical-CRT control freezes the inverse agent's executable
+API and both source dependencies. It actually moves arbitrary digit payloads
+through its compiled F_u events, repairs and reverse maps:
+
+```bash
+cp "$LAYOUT/code/check_full_gaussian_integer_pipeline.py" "$LAYOUT_WORK/producer.py"
+cp "$LAYOUT/../inverse/code/compiled_crt_payload_api.py" "$LAYOUT_WORK/"
+cp "$LAYOUT/../inverse/code/compiled_crt_pipeline_bankleaf.py" "$LAYOUT_WORK/"
+cp "$LAYOUT/../inverse/code/crt_guard_controls.py" "$LAYOUT_WORK/"
+python3 "$LAYOUT/code/check_full_pipeline_compiled_crt.py" --final-inverse --producer "$LAYOUT_WORK/producer.py" --crt-api "$LAYOUT_WORK/compiled_crt_payload_api.py" --config "$LAYOUT/configs/full-gaussian-compiled-crt-final-inverse.json" --output "$LAYOUT_WORK/actual-CRT"
+```
+
+Use `full-gaussian-compiled-crt-cyclic.json` for the changed actual-CRT cyclic
+cut control. The reverse API compiles its forward address template separately
+and includes that cost. This program still uses charged reference Gaussian
+matrix passes.
+
+The actual joint packed forward stage and its complete multiplier composition
+are reproduced separately:
+
+```bash
+python3 "$LAYOUT/code/check_joint_packed_forward_stage.py" --workers 2 --config "$LAYOUT/configs/joint-packed-forward-stage.json" --output "$LAYOUT_WORK/joint-forward"
+cp "$LAYOUT/code/check_joint_packed_forward_stage.py" "$LAYOUT_WORK/forward.py"
+python3 "$LAYOUT/code/check_full_pipeline_packed_forward.py" --producer "$LAYOUT_WORK/producer.py" --forward-stage "$LAYOUT_WORK/forward.py" --config "$LAYOUT/configs/full-pipeline-packed-forward-0.json" --output "$LAYOUT_WORK/packed-forward-integer"
+```
+
+The whole multiplier replaces each of its three forward expansions by actual
+signed tensor integer products and paired-grid interior assembly. Every
+remaining output is explicitly repaired. It preserves a separately charged
+periodic reference and retains Gaussian inverse compression as a matrix
+reference. Work-grid reserves are generated at sufficient setup precision;
+no finite repair fraction is asserted to prove an all-size density estimate.
+
+An optional exact integer child backend accelerates the changed larger 3D
+cell family. The dependency is pinned and downloadable:
+
+```bash
+python3 -m pip install --only-binary=:all: --no-deps --target "$LAYOUT_WORK/deps" gmpy2==2.3.0
+python3 "$LAYOUT/code/check_forward_gaussian_fractional_cells.py" --workers 1 --config "$LAYOUT/configs/forward-three-dimensional-L128-gmp.json" --output "$LAYOUT_WORK/large-GMP-cell"
+```
+
+The earlier builtin-child attempt was stopped for execution budget before an
+accuracy receipt. Its CPU and resident-memory observation is retained and
+does not constitute a numerical failure. Both native integer backends use
+exact signed arithmetic; GMP runtime is not a fixed-tape complexity bound.
