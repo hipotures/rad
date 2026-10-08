@@ -1,19 +1,19 @@
 # Current scientific status
 
 Research remains active indefinitely. The accepted conditional exponent is
-**κ=5.140127861e-5**, bit saving5.140392084e-5, R23=27719, R25=36353,
+**κ=5.140188376e-5**, bit saving5.140452605e-5, R23=27719, R25=36353,
 W=136281463, rank mass78359994325. Context-dependent actual positive frames
 in the selectively compiled PR62+PR57 network pass all finite acceptance
 gates under the explicit inherited address-compiler and all-size assumptions.
-[Proof](common-context-joint-region-proof.md),
-[acceptance](common-context-joint-region-acceptance.json),
-[reproduction](../configs/common-context-joint-region-manifest.json).
+[Proof](multifamily-joint-region-proof.md),
+[acceptance](multifamily-joint-region-acceptance.json),
+[reproduction](../configs/multifamily-joint-region-manifest.json).
 
-The gain over PR61 is about0.75339%. No large asymptotic breakthrough is claimed.
-A stronger multifamily context allocation has passed fresh source-only words
-and native exact profiles. Independent Fraction controls, stock and final
-paired assembly binding are being completed. It has distinct actual frames,
-hashes and profiles.
+The gain over PR61 is about0.75458%. No large asymptotic breakthrough is claimed.
+The multifamily context allocation now passes fresh source-only words, native
+exact profiles, independent Fraction controls, stock and final paired assembly
+binding. New matrix-weighted carrier words are being profiled independently;
+they remain discovery variants until complete acceptance.
 
 The larger architectural search explores newly created shared pair sums,
 dense complementary-pair synthesis, paid frame retirement, source-partition

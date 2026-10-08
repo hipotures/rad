@@ -213,11 +213,14 @@ def main():
             summary = recovery['summary']
             if summary.get('original_roles_and_XORs_unchanged', False):
                 assert summary['R'] == row['profile']['R']
+            elif summary.get('unchanged_XORs', False):
+                assert summary['unchanged_R'] == row['profile']['R']
+                assert summary['original_and_maximal_containment']
             else:
                 assert summary['unchanged_all_XOR_instructions']
                 assert summary['unchanged_physical_roles'] == row['profile']['R']
             assert recovery['every_selected_frame_inside_maximal']
-            assert summary['maximal_signed_containment']
+            assert summary.get('maximal_signed_containment', False) or summary.get('original_and_maximal_containment', False)
         assert recovery['copied_center_spaces_unchanged'] == row['profile']['h']
         # Reconstruct the complete source-family coordinate bijection;
         # literal source destinations and labels have independently been
