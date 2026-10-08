@@ -1,0 +1,87 @@
+{
+  "state": "VALIDATED_AUDITED_PENDING_REMOTE_PUBLICATION",
+  "utc": "2026-10-08T01:05:53.207623+00:00",
+  "elapsed_wall_s_including_user_pause": 4089.207623,
+  "task": "Atlas visual review, not a new experimental phase",
+  "indexed": {
+    "experiments": 12,
+    "runs": 335,
+    "detailed_trajectories": 102,
+    "expert_generations": 3615449,
+    "main_lane_entries": 156180000
+  },
+  "visual": {
+    "before_pages": 10,
+    "after_pages": 11,
+    "durable_pngs": 86,
+    "curated_views": 12,
+    "fresh_context_deep_links": "12/12 PASS",
+    "pixel_identical_to_directly_inspected": "12/12 PASS",
+    "poor_unfocused_pages": [
+      "overview",
+      "predictor"
+    ],
+    "navigation_reproducer": "Five aggregate-only pages had identical content; repaired",
+    "reset_regression": "Stale From/To confirmed and repaired"
+  },
+  "checks": {
+    "physical_slot_service_reconciliation": "4 runs \u00d7 48 layers PASS",
+    "raw_expert122_generation_checks": "5 PASS",
+    "url_filter_edges": "4 PASS",
+    "discovery_api": "PASS including null identity and unknown route checks",
+    "gzip_complete_files": "263 PASS CRC/UTF-8/identity, zero omissions",
+    "js_python_syntax": "PASS",
+    "staged_archive_audit": {
+      "state": "PASS",
+      "files": 434,
+      "total_bytes": 21885685,
+      "ordinary_bytes": 19914692,
+      "receipt": "results/visual-audit/staged-publication-audit.json"
+    }
+  },
+  "failures_preserved": [
+    "Early screenshot harness syntax/path failures",
+    "Intermediate overlapping sticky-navigation screenshots",
+    "Edge harness relative output-path failure",
+    "Original aggregate no-op and stale reset controls",
+    "Shared publication receipt overwrite by a concurrent audit",
+    "Stale index parent after a concurrent unrelated main commit; refreshed safely"
+  ],
+  "limitations": [
+    "Unfiltered catalog and unfocused predictor remain dense",
+    "Logical-event occupancy is not sub-event wall time",
+    "Original profile training and prefill expert routing are unknown",
+    "Duplicate/intermediate full-resolution PNGs have local-only derivative copies",
+    "Original binary journal/tape recovery gaps unchanged"
+  ],
+  "server": {
+    "pid": 3328573,
+    "started_at": "2026-10-08T00:50:27.877777+00:00",
+    "command": [
+      "/usr/bin/python3",
+      "/srv/ai/research/iq3s-residency-20261004T230051Z/reviews/golden-swap-experiment-atlas-20261007T215621Z/code/serve.py",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8765"
+    ],
+    "host": "0.0.0.0",
+    "port": 8765,
+    "interfaces": [
+      "172.17.0.1",
+      "192.168.100.207"
+    ],
+    "urls": [
+      "http://172.17.0.1:8765/",
+      "http://192.168.100.207:8765/"
+    ],
+    "process_start_ticks": "56854868",
+    "identity_rule": "PID plus /proc start ticks and exact command; never use a historical PID alone."
+  },
+  "gpu_benchmark_runs": 0,
+  "training_runs": 0,
+  "ttl_implemented": false,
+  "normal_serving_configuration_changed": false,
+  "cleanup": "No visual test remains active; owned temporary browser/frozen-source HTTP sessions closed. The explicitly requested dashboard server is retained. Unrelated research processes untouched.",
+  "publication": "Only task-owned Atlas namespace and root Atlas link; isolated index, audit, main commit/push and remote verification pending."
+}

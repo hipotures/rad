@@ -1,0 +1,9 @@
+{
+  "utc": "2026-10-08T01:12:59.635880+00:00",
+  "state": "STALE_INDEX_PARENT_DETECTED_BEFORE_COMMIT",
+  "old_parent": "3a6f011fa00dd9b0082475fe51b8b4b8d34712ca",
+  "new_parent": "771ef256f796342832166aa013f955b48591b0d1",
+  "cause": "Concurrent unrelated main commit advanced HEAD while the isolated index still contained its preceding baseline. Git diff then included reverse changes from that unrelated commit.",
+  "safety": "Atomic parent assertion prevented creating or publishing an Atlas commit on that obsolete tree. Nothing was discarded.",
+  "repair": "Recreate the isolated index from the latest main; restage and audit only explicit task paths."
+}

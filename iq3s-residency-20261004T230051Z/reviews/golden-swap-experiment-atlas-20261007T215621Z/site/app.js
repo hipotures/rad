@@ -33,7 +33,7 @@ function intro(title,text){const n=document.createElement('div');n.className='in
 function metrics(items){const n=document.createElement('div');n.className='metric-grid';n.innerHTML=items.map(([v,l])=>`<div class="metric"><strong>${esc(v)}</strong><span>${esc(l)}</span></div>`).join('');$('content').append(n);}
 function card(title,kind=''){const n=document.createElement('div');n.className='card';n.innerHTML=`<h3>${esc(title)}</h3><div class="chart-tools"><button data-export="png">PNG</button><button data-export="svg">SVG</button></div><div class="chart ${kind}"></div>`;$('content').append(n);return n.querySelector('.chart');}
 async function chart(title,traces,extra={},timelike=true,kind=''){
- const el=card(title,kind),light=document.documentElement.classList.contains('light');
+ const el=card(title,kind);if(extra.height)el.style.height=extra.height+'px';const light=document.documentElement.classList.contains('light');
  const layout={paper_bgcolor:light?'#fff':'#18202d',plot_bgcolor:light?'#fff':'#18202d',font:{color:light?'#192839':'#e6edf5',size:11},
    margin:{l:62,r:25,t:16,b:62},legend:{orientation:'h',y:-.18},hovermode:'closest',dragmode:'zoom',
    xaxis:{title:timelike?axis():undefined,gridcolor:light?'#d6dee9':'#344054',...(timelike&&state.range?{range:state.range}:{} )},
@@ -43,10 +43,10 @@ async function chart(title,traces,extra={},timelike=true,kind=''){
  el.parentElement.querySelectorAll('[data-export]').forEach(b=>b.onclick=()=>Plotly.downloadImage(el,{format:b.dataset.export,filename:'golden-swap-atlas',width:1500,height:800}));
  if(timelike){
   el.on('plotly_relayout',e=>{
-   if(!$('linked').checked||state.linkedBusy)return;
-   let range=e['xaxis.range']||[e['xaxis.range[0]'],e['xaxis.range[1]']];
-   const reset=e['xaxis.autorange'];if(!reset&&(range[0]==null||range[1]==null))return;
-   state.range=reset?null:range;state.linkedBusy=true;
+   if(state.linkedBusy)return;
+   let range=e['xaxis.range']||e['xaxis2.range']||[e['xaxis.range[0]']??e['xaxis2.range[0]'],e['xaxis.range[1]']??e['xaxis2.range[1]']];
+   const reset=e['xaxis.autorange']||e['xaxis2.autorange'];if(!reset&&(range[0]==null||range[1]==null))return;
+   state.range=reset?null:range;writeURL();rangeControls();if(['residency','oracle'].includes(state.page)){clearTimeout(state.zoomTimer);state.zoomTimer=setTimeout(()=>render(),220);}if(!$('linked').checked)return;state.linkedBusy=true;
    Promise.all(state.charts.filter(c=>c.timelike&&c.el!==el).map(c=>Plotly.relayout(c.el,reset?{'xaxis.autorange':true}:{'xaxis.range':range}))).finally(()=>state.linkedBusy=false);
   });
   el.on('plotly_hover',e=>{
@@ -90,7 +90,7 @@ function pairedLines(col,options={}){
 async function overview(){
  intro('A browser for the actual research record',`${state.catalog.counts.experiments} experiment namespaces · ${fmt(state.catalog.counts.runs)} retained run records · ${fmt(state.catalog.counts.detailed_runs)} detailed trajectories · ${fmt(state.catalog.counts.expert_lifecycles)} generation records. Click a row to make it Run A. Counts are main routed work; MTP paths are not silently added.`);
  metrics([[state.catalog.counts.experiments,'included experiments'],[state.catalog.counts.detailed_runs,'selected detailed trajectories'],[fmt(state.catalog.counts.expert_lifecycles),'initial + admitted generations'],['0','new GPU inference requests']]);
- table(['Run','Campaign','Date','Model / runtime SHA','Task','Policy','Profile / input / output','Future','Slots','Admissions','Evictions','Copy GB','Local %','CPU','Mapped','Decode s','TG','Evidence'],filtered().map(r=>[r.id,r.campaign.split('-2026')[0],r.date,`${r.model} / ${r.source_sha?.slice(0,10)||'unknown'}`,r.task,r.policy,`${r.context||r.profile||'?'} / ${r.input??'?'} / ${r.output??'?'}`,r.future?'privileged future':'causal/native',r.resident_slots,r.promotions,r.evictions,gb(r.copy_bytes),r.local_pct==null?'unknown':fmt(r.local_pct,2),r.cpu,r.mapped,r.decode_s==null?'unmeasured':fmt(r.decode_s,3),r.tok_s==null?'unmeasured':fmt(r.tok_s,2),r.evidence_quality]),row=>{$('runA').value=row[0];state.page='residency';activateTab();render();},1000);
+ table(['Run','Campaign','Date','Model / runtime SHA','Task','Policy','Profile / input / output','Future','Slots','Admissions','Evictions','Copy GB','Local %','CPU','Mapped','Decode s','TG','Evidence'],filtered().map(r=>[r.id,r.campaign.split('-2026')[0],r.date,`${r.model} / ${r.source_sha?.slice(0,10)||'unknown'}`,r.task,r.policy,`${r.context||r.profile||'?'} / ${r.input??'?'} / ${r.output??'?'}`,r.future?'privileged future':'causal/native',r.resident_slots,r.promotions,r.evictions,gb(r.copy_bytes),r.local_pct==null?'unknown':fmt(r.local_pct,2),r.cpu,r.mapped,r.decode_s==null?'unmeasured':fmt(r.decode_s,3),r.tok_s==null?'unmeasured':fmt(r.tok_s,2),r.evidence_quality]),row=>{$('runA').value=row[0];navigate('residency');},1000);
  const n=document.createElement('div');n.className='intro';n.innerHTML='<h3>What is included, and why</h3>'+state.catalog.experiments.map(e=>`<p><a href="/sources/${esc(e.report)}" target="_blank">${esc(e.title)}</a> — ${esc(e.reason)}</p>`).join('');$('content').append(n);
 }
 function genHover(g,run){return `${run.label}<br>L${g.layer} / E${g.expert} · GPU${g.device}<br>generation ${g.generation} / uid ${g.uid} · slot ${g.slot}<br>class ${fmt(g.byte_class)} B<br>trigger ${g.trigger??'unknown'} → target ${g.target??'unknown'}<br>publish ${g.publish_event??'unpublished'} · first ${g.first_use_event??'none observed'} · last ${g.last_use_event??'none observed'}<br>evict ${g.eviction_event??'end-censored'} · release ${g.release_event??'unmeasured'} · expiry ${g.expiry_event??'unmeasured'}<br>uses ${g.use_count} / distinct invocations ${g.distinct_use_count}<br>victim L${g.victim_layer??'?'} / E${g.victim??'?'}<br>copy ${gb(g.copy_bytes)} GB · ${g.copy_us==null?'DMA-only unknown':fmt(g.copy_us,2)+' us host-bracket copy'}<br>${g.status}`;}
@@ -108,9 +108,10 @@ function residencyTraces(d,run){
  return traces;
 }
 async function residency(){
- intro('Resident intervals, with admission generations',`Layer ${$('layer').value}. Horizontal intervals show actual publication → withdrawal. Startup means the attested decode boundary; use the Startup page for the earlier process profile fill. Select an expert to overlay every observed service entry. A null end is finite-request censoring.`);
- const el=await chart('Run A · '+state.A.label,residencyTraces(state.layerA,state.A),{yaxis:{title:'Expert ID',range:[$('expert').value===''?-3:Number($('expert').value)-2,$('expert').value===''?514:Number($('expert').value)+2]}},true,'tall');
- el.on('plotly_click',e=>{if(e.points?.length){$('expert').value=Math.round(e.points[0].y);state.page='expert';activateTab();render();}});
+
+ await residencyPrimary();
+ const el=await chart('Expert-interval drill-down · '+state.A.label,residencyTraces(state.layerA,state.A),{yaxis:{title:'Expert ID',range:[$('expert').value===''?-3:Number($('expert').value)-2,$('expert').value===''?514:Number($('expert').value)+2]}},true,'tall');
+ el.on('plotly_click',e=>{if(e.points?.length){$('expert').value=Math.round(e.points[0].y);navigate('expert');}});
  if(state.layerB)await chart('Run B · '+state.B.label,residencyTraces(state.layerB,state.B),{yaxis:{title:'Expert ID',range:[$('expert').value===''?-3:Number($('expert').value)-2,$('expert').value===''?514:Number($('expert').value)+2]}},true,'tall');
  await globalHeatmap($('globalMetric').value,'Full-model '+$('globalMetric').selectedOptions[0].text+' by layer × logical time');
 }
@@ -122,15 +123,15 @@ async function globalHeatmap(metric,title){
  const difference=state.summaryB&&$('comparison').value==='difference'&&state.A.alignment_id===state.B.alignment_id;
  if(difference){for(let i=0;i<ls.length;i++)for(let k=0;k<z[i].length;k++){let v=0;for(let j=k*bin;j<Math.min(state.B.windows,(k+1)*bin);j++)v+=value(state.summaryB,ls[i],j);z[i][k]-=v;}}
  const el=await chart(title+(difference?' · A − B':' · A'),[{x,y:ls,z,type:'heatmap',colorscale:difference?'RdBu':'Viridis',...(difference?{zmid:0}:{}),hovertemplate:`Layer %{y}<br>${axis()} %{x:.2f}<br>${metric} in ${bin}-window bin: %{z:,}<extra></extra>`}],{yaxis:{title:'Layer'},margin:{l:55,r:80,t:15,b:55}},true,'tall');
- el.on('plotly_click',e=>{if(e.points?.length){$('layer').value=Math.round(e.points[0].y);state.page='residency';activateTab();render();}});
+ el.on('plotly_click',e=>{if(e.points?.length){$('layer').value=Math.round(e.points[0].y);navigate('residency');}});
 }
 async function churn(){
  intro('Swap volume and repeated admissions',`Counts use complete generations, not routed lane entries. Rolling values use ${$('smooth').value} windows. The byte series counts published ordinary payload at its visibility event; issued/unpublished and mandatory restoration are retained separately in provenance. Aggregate veto totals have no invented per-window timeline.`);
- await chart('Admissions and evictions', [...pairedLines('admissions'),...pairedLines('evictions')]);
- await chart('Published copy payload per rolling interval (bytes)',pairedLines('copy_bytes'));
+ await churnPanel();
  await chart('Cumulative admitted copies',pairedLines('admissions',{cumulative:true}));
+
  await chart('Cumulative published payload (bytes)',pairedLines('copy_bytes',{cumulative:true}));
- await chart('Repeat admissions and late publications',[...pairedLines('repeat_admissions'),...pairedLines('late_publications')]);
+ await chart('Repeat admissions and late publications', [...pairedLines('repeat_admissions'),...pairedLines('late_publications').map(t=>({...t,line:{...t.line,color:palette[2]}}))]);
  await chart('Observed protected occupancy',pairedLines('protected',{raw:true}));
 }
 async function startup(){
@@ -144,6 +145,7 @@ async function startup(){
  const bt=state.summaryB?layerNumbers(state.summaryB,state.B).reduce((n,l)=>n+state.summaryB.initial_quality[l].residents,0):null;
  tr.push(...compareValues(sumSeries(s,r,'initial_survivors').map(x=>100*(1-x/denom)),bt?sumSeries(state.summaryB,state.B,'initial_survivors').map(x=>100*(1-x/bt)):null,'Cumulatively replaced',palette[3]));
  tr.push(...compareValues(sumSeries(s,r,'initial_demanded').map(x=>100*(1-x/denom)),bt?sumSeries(state.summaryB,state.B,'initial_demanded').map(x=>100*(1-x/bt)):null,'Never yet demanded','#95a2b7'));
+ const identityA=await initialIdentityService(s,r),identityB=state.summaryB?await initialIdentityService(state.summaryB,state.B):null;tr.push(...compareValues(identityA.map(v=>100*v/denom),identityB?identityB.map(v=>100*v/bt):null,'Initial identity ever served locally (including reload)','#f5e6b6'));
  await chart('Startup set survival and usefulness (%)',tr,{yaxis:{title:'Percent of selected decode-initial set',range:$('comparison').value==='difference'?[-100,100]:[0,100]}});
  const mem=sumSeries(s,r,'initial_members_resident'),res=sumSeries(s,r,'resident_count');
  const bmem=state.summaryB?sumSeries(state.summaryB,state.B,'initial_members_resident'):null,bres=state.summaryB?sumSeries(state.summaryB,state.B,'resident_count'):null;
@@ -158,20 +160,21 @@ async function startup(){
   {xaxis:{title:'First verifier windows (log scale)',type:'log'},yaxis:{title:'Percent of same per-layer slot count demanded'}},false);
  intro('Meaning of the frequency reference','This is a retrospective static set: same selected-layer slot count, full observed tape lane-frequency descending, expert ID breaks ties. It is not the live full-oracle scheduler, a startup intervention, or an achievable latency result.');
  intro('Layer startup placements',`Process-fill reference below is reconstructed from the immutable ranked file and attested slot counts; per-slot class parity is validated. It is not an observation of warmup demand. The decode table sorts experts by measured use, eviction and reloads. Click any expert to inspect it.`);
- table(['Expert','Profile slot','Global rank','First measured demand event','Still present at decode boundary'],state.layerA.process_startup||[],row=>{$('expert').value=row[0];state.page='expert';activateTab();render();},512);
+ table(['Expert','Profile slot','Global rank','First measured demand event','Still present at decode boundary'],state.layerA.process_startup||[],row=>{$('expert').value=row[0];navigate('expert');},512);
  const rows=state.layerA.startup_table.slice().sort((a,b)=>(a[4]!=null)-(b[4]!=null)||(b[6]-a[6]));
- table(['Expert','Decode slot','Bytes','First demand','First local service','Eviction','Demand after eviction','Reloads','Total lane demand'],rows,row=>{$('expert').value=row[0];state.page='expert';activateTab();render();},512);
+ table(['Expert','Decode slot','Bytes','First demand','First local service','Eviction','Demand after eviction','Reloads','Total lane demand'],rows,row=>{$('expert').value=row[0];navigate('expert');},512);
  await chart('Initial residents and admissions by layer',[{x:s.initial_quality.map(x=>x.layer),y:s.initial_quality.map(x=>x.residents),name:'Decode initial',type:'bar'},
   {x:s.initial_quality.map(x=>x.layer),y:s.all_layer_series.map(a=>a.reduce((n,w)=>n+w[0],0)),name:'Published admissions',type:'bar'}],{barmode:'group',xaxis:{title:'Layer'}},false);
 }
 function reuseInfo(d,expert){const rows=d.demand.filter(x=>x[1]===expert),evs=rows.map(x=>x[0]),gaps=evs.slice(1).map((x,i)=>x-evs[i]);const sorted=gaps.slice().sort((a,b)=>a-b);
  return {rows,evs,gaps,median:sorted.length?sorted[Math.floor(sorted.length/2)]:null,max:gaps.length?Math.max(...gaps):null};}
 async function expert(){
- let ex=$('expert').value===''?state.layerA.demand[0]?.[1]??0:Number($('expert').value);$('expert').value=ex;
+ let ex=$('expert').value===''?[...objects(state.layerA).filter(g=>g.generation>0).reduce((m,g)=>{m.set(g.expert,(m.get(g.expert)||0)+1);return m;},new Map()).entries()].sort((a,b)=>b[1]-a[1])[0]?.[0]??state.layerA.demand[0]?.[1]??0:Number($('expert').value);$('expert').value=ex;
  const ds=reuseInfo(state.layerA,ex),gs=objects(state.layerA).filter(g=>g.expert===ex),r=state.A;
  const lifetime=gs.reduce((n,g)=>n+(g.publish_event==null?0:(g.eviction_event??r.windows*48)-g.publish_event),0);
  intro(`Layer ${state.layerA.layer} / expert ${ex}`,`All generations and required demand on the selected tape. Resident time and reuse gaps are logical routed invocations. A long idle interval is observational lease evidence; it is not an exclusive latency estimate.`);
  metrics([[gs.filter(g=>g.publish_event!=null).length,'resident generations'],[fmt(lifetime/48,2),'observed resident windows'],[fmt(ds.rows.reduce((n,x)=>n+x[3]+x[4]+x[5],0)),'nonlocal lane entries'],[Math.max(0,gs.filter(g=>g.generation>0&&g.publish_event!=null).length-(gs.some(g=>g.generation===0)?0:1)),'observed readmissions'],[fmt(ds.max==null?null:ds.max/48,2),'longest inter-demand gap (windows)'],[fmt(ds.median==null?null:ds.median/48,2),'median gap (windows)'],[gb(gs.reduce((n,g)=>n+g.copy_bytes,0)),'issued copy GB']]);
+ await expertGenerations(ex,gs,ds);
  await chart('All residency intervals and local/CPU/mapped demand',residencyTraces(state.layerA,r),{yaxis:{title:'Expert ID',range:[ex-1,ex+1]}},true,'tall');
  if(state.layerB)await chart('Matching Run B expert',residencyTraces(state.layerB,state.B),{yaxis:{title:'Expert ID',range:[ex-1,ex+1]}},true,'tall');
  await chart('Required lane entries by service path',[2,3,4,5].map((idx,i)=>({x:ds.rows.map(x=>units(x[0],r)),y:ds.rows.map(x=>x[idx]),type:'bar',name:['Local VRAM','CPU','Mapped RAM','Unknown nonlocal'][i],marker:{color:palette[i]}})),{barmode:'stack',yaxis:{title:'Lane entries'}},true);
@@ -185,6 +188,7 @@ async function oracle(){
  metrics([[exact?'Shared logical source':'Different logical sources','alignment'],[state.A.policy,'Run A policy'],[state.B.policy,'Run B policy'],[`${fmt(state.A.decode_s,3)} / ${fmt(state.B.decode_s,3)}`,'retained decode seconds A / B']]);
  if(!exact)note('These runs are not a matched replay pair. Normalized time is descriptive; differences cannot be attributed to policy.');
  else if(state.A.campaign!==state.B.campaign||state.A.binary_sha256!==state.B.binary_sha256||state.A.attempt!==state.B.attempt)note('Logical work matches; these retained timings come from different campaigns, binaries or blocks. The overlay describes residency. Use the original paired analyses for performance attribution.');
+ if(exact)await alignedState();
  await chart('Admissions over time',pairedLines('admissions'));
  await chart('Cumulative copied bytes',pairedLines('copy_bytes',{cumulative:true}));
  await chart('Required nonlocal lane entries',[...pairedLines('cpu'),...pairedLines('mapped'),...pairedLines('unknown_nonlocal')]);
@@ -215,7 +219,7 @@ async function demand(){
  if(diff){display=mat.map(row=>row.slice());for(const row of state.layerB.demand)display[row[1]][Math.floor(row[0]/(48*bin))]-=row[2]+row[3]+row[4]+row[5];}
  const el=await chart(`Layer ${d.layer} expert demand · ${diff?'A − B':'A'}`,[{x:Array.from({length:bins},(_,i)=>units(i*bin*48,r)),y:Array.from({length:512},(_,i)=>i),z:display,type:'heatmap',colorscale:diff?'RdBu':'Viridis',...(diff?{zmid:0}:{}),hovertemplate:'Expert %{y}<br>time %{x:.2f}<br>lane entries in bin %{z:,}<extra></extra>'}],{yaxis:{title:'Expert ID'}},true,'tall');
  if(state.layerB&&!diff){const mb=Array.from({length:512},()=>Array(Math.ceil(state.B.windows/bin)).fill(0));for(const row of state.layerB.demand)mb[row[1]][Math.floor(row[0]/(48*bin))]+=row[2]+row[3]+row[4]+row[5];await chart('Run B expert demand',[{x:mb[0].map((_,i)=>units(i*bin*48,state.B)),y:Array.from({length:512},(_,i)=>i),z:mb,type:'heatmap',colorscale:'Viridis'}],{yaxis:{title:'Expert ID'}},true,'tall');}
- el.on('plotly_click',e=>{if(e.points?.length){$('expert').value=e.points[0].y;state.page='expert';activateTab();render();}});
+ el.on('plotly_click',e=>{if(e.points?.length){$('expert').value=e.points[0].y;navigate('expert');}});
  const active=[],jac=[];let prev=new Set();for(let i=0;i<bins;i++){const a=new Set(mat.flatMap((row,e)=>row[i]>0?[e]:[]));active.push(a.size);const intersection=[...a].filter(e=>prev.has(e)).length;jac.push(i?intersection/(a.size+prev.size-intersection):null);prev=a;}
  await chart('Rolling active experts and adjacent-window overlap',[{x:active.map((_,i)=>units(i*bin*48,r)),y:active,name:'Distinct experts / bin',type:'scatter',mode:'lines',line:{color:palette[0]}},
  {x:jac.map((_,i)=>units(i*bin*48,r)),y:jac,name:'Adjacent-set Jaccard',type:'scatter',mode:'lines',yaxis:'y2',line:{color:palette[2]}}],{yaxis:{title:'Active-set size'},yaxis2:{overlaying:'y',side:'right',range:[0,1],title:'Jaccard'}});
@@ -233,7 +237,7 @@ async function classes(){
 async function predictor(){
  const p=await data('/evidence/browser-v1/predictor.json.gz');
  intro('AUC → victim choice → paid transaction → latency','Return-risk AUC is a conditional ranking metric on sampled native residents. It does not price a new policy’s admission lifetime, queue, copier or planner. The frozen model omitted admission age. Incoming demand and current-window protection remain oracle privileges.');
- const task=state.A?.task;const ms=p.metrics.filter(x=>!task||x.task===task);const chosen=ms.length?ms:p.metrics;
+ const task=state.A?.task;await predictorPrimary(p,task);const ms=p.metrics.filter(x=>!task||x.task===task);const chosen=ms.length?ms:p.metrics;
  table(['Task','Model','Horizon windows','AUC','Brier','Positive fraction','Observed rows','Censored rows'],chosen.map(x=>[x.task,x.model,x.horizon,x.auc,x.brier,x.positive_fraction,x.n,x.censored]));
  await chart('Retained return-risk AUC by horizon', [...new Set(chosen.map(x=>x.model))].map((m,i)=>({x:chosen.filter(x=>x.model===m).map(x=>`${x.task} H${x.horizon}`),y:chosen.filter(x=>x.model===m).map(x=>x.auc),type:'bar',name:m,marker:{color:palette[i]}})),{xaxis:{title:'Task / main-window horizon'},yaxis:{title:'Retained AUC',range:[.4,1]},barmode:'group'},false);
  const cal=chosen.filter(x=>x.model==='logistic');await chart('Calibration from retained bins',[{x:[0,1],y:[0,1],type:'scatter',mode:'lines',name:'Calibrated reference',line:{dash:'dot',color:'#95a2b7'}},...cal.map((x,i)=>({x:x.bins.map(b=>b.prediction),y:x.bins.map(b=>b.observed),text:x.bins.map(b=>`n ${b.n} · Brier ${x.brier.toFixed(4)}`),type:'scatter',mode:'lines+markers',name:`${x.task} H${x.horizon}`,hovertemplate:'Pred %{x:.3f}<br>Observed %{y:.3f}<br>%{text}<extra></extra>',line:{color:palette[i%palette.length]}}))],{xaxis:{title:'Predicted return probability'},yaxis:{title:'Observed return fraction'}},false);
@@ -271,16 +275,17 @@ async function lease(){
  const d=state.layerA,r=state.A,gs=objects(d).filter(g=>(includeInitial||g.generation>0)&&g.publish_event!=null),ri=new Map();
  for(const row of d.demand){if(!ri.has(row[1]))ri.set(row[1],[]);ri.get(row[1]).push(row[0]);}
  const life=gs.map(g=>((g.eviction_event??r.windows*48)-g.publish_event)/48),distinct=gs.map(g=>g.distinct_use_count);
- const control=document.createElement('div');control.className='card controls-inline';control.innerHTML=`<label><input id="includeInitial" type="checkbox" ${includeInitial?'checked':''}> Include startup observations (prior age unknown)</label><label>Short lifetime ≤ windows <input id="shortLife" type="number" value="4" min="0"></label><label>Persistent lifetime ≥ windows <input id="longLife" type="number" value="64" min="0"></label><span id="leaseSummary"></span>`;$('content').append(control);
+ const control=document.createElement('div');control.className='card controls-inline';control.innerHTML=`<label><input id="includeInitial" type="checkbox" ${includeInitial?'checked':''}> Include startup observations (prior age unknown)</label><label>Short lifetime ≤ windows <input id="shortLife" type="number" value="${state.leaseShort??4}" min="0"></label><label>Persistent lifetime ≥ windows <input id="longLife" type="number" value="${state.leaseLong??64}" min="0"></label><span id="leaseSummary"></span>`;$('content').append(control);
  $('includeInitial').onchange=()=>{includeInitial=$('includeInitial').checked;render();};
- const summarize=()=>{const short=Number($('shortLife').value),long=Number($('longLife').value);$('leaseSummary').textContent=`${gs.filter((g,i)=>life[i]<=short).length} short observations · ${gs.filter((g,i)=>life[i]>=long).length} long observations · ${gs.filter(g=>!g.use_count).length} no observed service · exploratory labels only`;};summarize();$('shortLife').oninput=summarize;$('longLife').oninput=summarize;
- table(['Exploratory observation','Count','Interpretation'],[
+ const summarize=()=>{const short=Number($('shortLife').value),long=Number($('longLife').value);state.leaseShort=short;state.leaseLong=long;writeURL();$('leaseSummary').textContent=`${gs.filter((g,i)=>life[i]<=short).length} short observations · ${gs.filter((g,i)=>life[i]>=long).length} long observations · ${gs.filter(g=>!g.use_count).length} no observed service · exploratory labels only`;};summarize();$('shortLife').oninput=summarize;$('longLife').oninput=summarize;
+ const leaseRows=()=>[
   ['No observed local service',gs.filter(g=>!g.use_count).length,'Investigate do-not-admit; censoring and lateness must be separated.'],
   ['Short useful observed lifetime',gs.filter((g,i)=>g.use_count>0&&life[i]<=Number($('shortLife').value)).length,'Potential short lease; future returns and competing demand still matter.'],
   ['Long lifetime with repeated service',gs.filter((g,i)=>g.distinct_use_count>1&&life[i]>=Number($('longLife').value)).length,'Potential long lease; inspect idle gaps.'],
-  ['Resident at observation end with repeated service',gs.filter(g=>g.eviction_event==null&&g.distinct_use_count>1).length,'Potential persistent/pinned working set; not an optimal allocation label.']]);
+  ['Resident at observation end with repeated service',gs.filter(g=>g.eviction_event==null&&g.distinct_use_count>1).length,'Potential persistent/pinned working set; not an optimal allocation label.']];
+ let leaseTable=table(['Exploratory observation','Count','Interpretation'],leaseRows());const updateLease=()=>{summarize();const next=table(['Exploratory observation','Count','Interpretation'],leaseRows());leaseTable.replaceWith(next);leaseTable=next;};$('shortLife').oninput=updateLease;$('longLife').oninput=updateLease;
  const el=await chart('Generation lifetime × distinct useful invocations',[{x:life,y:distinct,text:gs.map(g=>genHover(g,r)),customdata:gs.map(g=>g.expert),type:'scatter',mode:'markers',name:'Observed generations; startup diamonds',marker:{symbol:gs.map(g=>g.generation===0?'diamond':'circle'),size:gs.map(g=>5+2*g.copy_bytes/3072000),color:gs.map(g=>g.eviction_event==null?2:g.previous_generation==null?0:1),cmin:0,cmax:2,showscale:true,colorbar:{title:'Observation',tickvals:[0,1,2],ticktext:['First generation','Readmission','End-censored'],thickness:12},colorscale:[[0,palette[0]],[.5,palette[3]],[1,palette[2]]],opacity:.65},hovertemplate:'%{text}<extra></extra>'}],{xaxis:{title:'Observed resident lifetime (windows)'},yaxis:{title:'Distinct local-service invocations'},margin:{l:62,r:150,t:20,b:60}},false);
- el.on('plotly_click',e=>{if(e.points?.length){$('expert').value=e.points[0].customdata;state.page='expert';activateTab();render();}});
+ el.on('plotly_click',e=>{if(e.points?.length){$('expert').value=e.points[0].customdata;navigate('expert');}});
  const first=gs.filter(g=>g.first_use_event!=null).map(g=>(g.first_use_event-g.publish_event)/48),uses=gs.map(g=>g.distinct_use_count),gaps=[],next=[],idle=[];
  for(const g of gs){const evs=(ri.get(g.expert)||[]).filter(e=>e>=g.publish_event&&e<(g.eviction_event??r.windows*48));const ag=evs.slice(1).map((e,i)=>(e-evs[i])/48);gaps.push(...ag);const untilEnd=evs.length?((g.eviction_event??r.windows*48)-evs.at(-1))/48:life[gs.indexOf(g)];idle.push(Math.max(untilEnd,...ag,0));
   if(g.eviction_event!=null){const n=(ri.get(g.expert)||[]).find(e=>e>=g.eviction_event);if(n!=null)next.push((n-g.eviction_event)/48);}}
@@ -291,16 +296,17 @@ async function lease(){
 function activateTab(){document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page));}
 async function render(){
  pendingRender=true;if(renderPromise)return renderPromise;
- state.busy=true;renderPromise=(async()=>{try{while(pendingRender){pendingRender=false;await renderNow();}}finally{renderPromise=null;state.busy=false;}})();return renderPromise;
+ state.busy=true;renderPromise=(async()=>{try{while(pendingRender){pendingRender=false;await renderNow();presentation();}}finally{renderPromise=null;state.busy=false;}})();return renderPromise;
 }
 async function renderNow(){
  const epoch=++state.epoch;state.charts.forEach(c=>Plotly.purge(c.el));state.charts=[];$('content').replaceChildren();note('');$('loading').textContent='Loading selected evidence…';
  state.A=state.catalog.runs.find(r=>r.id===$('runA').value);state.B=state.catalog.runs.find(r=>r.id===$('runB').value);
+ if(state.page==='oracle'&&!state.B){const matched=matchRun(state.A);if(matched){$('policy').value='';fillRunSelectors();$('runA').value=state.A.id;$('runB').value=matched.id;state.B=matched;}}
  $('provenanceContent').innerHTML=`<p><a href="/review/provenance/event-schema.md" target="_blank">Field meanings and missing evidence ↗</a></p><p>${state.A?`<a href="/sources/${esc(state.A.source_result)}" target="_blank">Original result ↗</a> · <a href="/sources/${esc(state.A.report)}" target="_blank">Original report ↗</a>`:'Choose a run'}</p><pre>${esc(JSON.stringify(state.A,null,2))}</pre>`;
  try{
   if(state.page==='overview'){await overview();$('loading').textContent='';return;}
   if(state.page==='predictor'){await predictor();$('loading').textContent='';return;}
-  if(!state.A?.summary_url){intro('This record has aggregate evidence',`Detailed trajectories were selected by first retained task/policy identity, not by timing. This repetition remains fully indexed. Choose a ● run for a chronological journal.`);$('loading').textContent='';return;}
+  if(!state.A?.summary_url){aggregatePage();$('loading').textContent='';return;}
   state.summaryA=await data(state.A.summary_url);
   for(const cls of new Set(state.summaryA.initial_quality.map(v=>v.byte_class)))if(![...$('byteClass').options].some(o=>Number(o.value)===cls))$('byteClass').append(option(cls,fmt(cls)+' B'));
   const permitted=layerNumbers(state.summaryA,state.A);if(!permitted.length){intro('No layers match this device and class','This physical pool has no matching layers. Change the GPU or byte-class filter.');$('loading').textContent='Empty physical filter';return;}
@@ -311,7 +317,7 @@ async function renderNow(){
   [state.summaryA,state.layerA,state.summaryB,state.layerB]=loaded;if(!state.B?.summary_url){state.summaryB=null;state.layerB=null;}
   $('filterSummary').textContent=`A: ${state.A.label} · B: ${state.B?.label||'none'} · GPU ${$('gpu').value||'both'} · L${la} · E${$('expert').value||'all'} · ${axis()} · ${$('smooth').value}-window display · exact drill-down`;
   $('provenanceContent').innerHTML=`<p class="small">${esc(state.A.campaign)} · ${esc(state.A.kind)} · ${esc(state.A.evidence_quality)} · ${fmt(state.summaryA.generations)} generation records. <a href="${esc(state.A.layer_url.replace('{layer}',la))}" target="_blank">Current exact layer JSON</a></p><p class="small">${esc(state.summaryA.native_boundary)}<br>${esc(state.summaryA.restoration)}</p><pre>${esc(JSON.stringify({identities:state.A,transaction_partition:state.summaryA.partition,field_schema:state.layerA.columns,validation:state.summaryA.validation,original_sources:state.summaryA.provenance,unknown:state.summaryA.unknowns},null,2))}</pre>`;
-  const pages={residency,churn,startup,expert,oracle,demand,classes,lease};await pages[state.page]();
+  const pages={residency,slots,churn,startup,expert,oracle,demand,classes,lease};await pages[state.page]();
   if(epoch!==state.epoch)return;$('loading').textContent=`Loaded ${fmt(state.layerA.generations.length)} layer generations and ${fmt(state.layerA.demand.length)} exact expert-demand batches.`;
  }catch(e){if(epoch===state.epoch){$('loading').textContent='Evidence loading failed';note(esc(e.message));console.error(e);}}
 }
@@ -321,13 +327,15 @@ async function init(){
  [...new Set(state.catalog.runs.map(r=>r.source_group))].sort().forEach(v=>$('source').append(option(v,v)));
  for(let l=0;l<48;l++)$('layer').append(option(l,'Layer '+l));for(const n of [3072000,3584000,3993600])$('byteClass').append(option(n,fmt(n)+' B'));
  for(const id of ['campaign','task','policy','context','source'])$(id).onchange=()=>{fillRunSelectors();state.range=null;render();};
- for(const id of ['runA','runB','gpu','layer','byteClass','expert','expertSubset','time','comparison','smooth','normalize','globalMetric'])$(id).onchange=()=>{if(id==='time'||id==='runA')state.range=null;if(id==='expert'&&$('expert').value!=='')$('expert').value=Math.max(0,Math.min(511,Math.round(Number($('expert').value))));render();};
- document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{state.page=b.dataset.page;activateTab();render();});
+ for(const id of ['runA','runB','gpu','layer','byteClass','expert','expertSubset','time','comparison','smooth','normalize','globalMetric','slotScope','slotLimit','changedSlots','focus'])$(id).onchange=()=>{if(id==='time'||id==='runA')state.range=null;if(id==='expert'&&$('expert').value!=='')$('expert').value=Math.max(0,Math.min(511,Math.round(Number($('expert').value))));render();};
+ document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{navigate(b.dataset.page);});
+ $('applyRange').onclick=()=>{const lo=Number($('timeFrom').value),hi=Number($('timeTo').value);if(Number.isFinite(lo)&&Number.isFinite(hi)&&hi>lo){state.range=[lo,hi];render();}else note('Time range must have a finite end greater than its start.');};
+ $('clearExpert').onclick=()=>{$('expert').value='';$('expertSubset').value='';render();};
+ $('fullRange').onclick=()=>{state.range=null;render();};
+ $('toggleFocus').onclick=()=>{$('focus').checked=!$('focus').checked;render();};
  $('theme').onclick=()=>{document.documentElement.classList.toggle('light');$('theme').textContent=document.documentElement.classList.contains('light')?'Dark theme':'Light theme';render();};
- $('reset').onclick=()=>{state.range=null;state.linkedBusy=true;Promise.all(state.charts.filter(c=>c.timelike).map(c=>Plotly.relayout(c.el,{'xaxis.autorange':true}))).finally(()=>state.linkedBusy=false);};
- $('match').onclick=()=>{const a=state.catalog.runs.find(r=>r.id===$('runA').value);if(!a)return;
-  const other=state.catalog.runs.find(r=>r.id!==a.id&&r.detail&&r.alignment_id===a.alignment_id&&r.campaign===a.campaign&&(a.future?(!r.future||r.policy==='REPLAY_CURRENT'):(r.policy==='ORACLE_FULL'||r.policy==='FULL_ORACLE'||r.policy.includes('ORACLE')||r.policy==='future-nextuse'||r.policy==='future-feasible')));
-  if(other){for(const id of ['policy'])$(id).value='';fillRunSelectors();$('runA').value=a.id;$('runB').value=other.id;state.page='oracle';activateTab();render();}else note('No detailed matched current/oracle counterpart in this campaign; select another recorded replay family.');};
- fillRunSelectors();await render();window.atlas=state;
+ $('reset').onclick=()=>{state.range=null;render();};
+ $('match').onclick=()=>{const a=state.catalog.runs.find(r=>r.id===$('runA').value),other=matchRun(a);if(other){$('policy').value='';fillRunSelectors();$('runA').value=a.id;$('runB').value=other.id;navigate('oracle');}else note('No detailed current/future counterpart shares this campaign and logical work.');};
+ fillRunSelectors();readURL();window.addEventListener('popstate',()=>{readURL();render();});await render();window.atlas=state;
 }
 init().catch(e=>{$('loading').textContent='Atlas initialization failed';note(esc(e.message));console.error(e);});

@@ -5,11 +5,11 @@
   <title>Golden Swap Experiment Atlas</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%237bd5c6'/%3E%3Ctext x='4' y='23' font-size='20'%3EGS%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
-  <script src="vendor/plotly.js" defer></script><script src="app.js" defer></script>
+  <script src="vendor/plotly.js" defer></script><script src="review_views.js" defer></script><script src="app.js" defer></script>
 </head>
 <body>
 <header><div><span class="eyebrow">RaD / retrospective evidence instrument</span><h1>Golden Swap Experiment Atlas</h1></div>
-  <div class="header-actions"><button id="theme">Light theme</button><a href="/review/report.md" target="_blank">Findings ↗</a><a href="/review/README.md" target="_blank">Guide ↗</a></div>
+  <div class="header-actions"><a class="gallery-link" href="/gallery">Curated evidence gallery ↗</a><button id="toggleFocus">Focus primary evidence</button><button id="theme">Light theme</button><a href="/review/report.md" target="_blank">Findings ↗</a><a href="/review/README.md" target="_blank">Guide ↗</a></div>
 </header>
 <div class="shell">
 <aside>
@@ -33,20 +33,20 @@
     <label>Rolling / demand bin (windows) <input id="smooth" type="number" min="1" max="256" value="8"></label>
     <label>Counts <select id="normalize"><option value="raw">Raw counts / bytes</option><option value="perWindow">Average per window</option><option value="share">Service shares (%)</option></select></label>
     <label><input id="linked" type="checkbox" checked> Link time zoom / hover</label>
-    <button id="reset">Reset all zoom</button>
+    <label><input id="focus" type="checkbox"> Focus primary evidence</label><label><input id="changedSlots" type="checkbox" checked> Changed slots only</label><label>Slot scope <select id="slotScope"><option value="all">All matching layers</option><option value="layer">Selected layer</option><option value="expert">Selected layer/expert</option></select></label><label>Most changed slots to display <input id="slotLimit" type="number" value="32" min="1" max="256"></label><button id="reset">Reset all zoom</button>
   </div>
   <div class="sidebar-note">No new GPU runs. Global series use GPU/class filters across all matching layers. Layer/expert filters select detail panels. Repetitions without a selected journal remain in the overview. Null means unmeasured.</div>
 </aside>
 <main>
   <nav id="tabs">
     <button data-page="overview" class="active">Experiments</button><button data-page="residency">Residency</button>
-    <button data-page="churn">Swaps & churn</button><button data-page="startup">Startup</button><button data-page="expert">Expert lifecycle</button>
+    <button data-page="slots">Physical slots</button><button data-page="churn">Swaps & churn</button><button data-page="startup">Startup</button><button data-page="expert">Expert lifecycle</button>
     <button data-page="oracle">Current ↔ future</button><button data-page="demand">Demand</button><button data-page="classes">Size classes</button>
     <button data-page="predictor">AUC → outcomes</button><button data-page="lease">Lease evidence</button>
   </nav>
   <div id="filterSummary" role="status"></div>
   <div id="loading" role="status">Loading retained experiment catalog…</div>
-  <div id="notice"></div>
+  <div id="notice"></div><div class="range-controls"><label>From <input id="timeFrom" type="number" step="any"></label><label>To <input id="timeTo" type="number" step="any"></label><span id="rangeUnits"></span><button id="applyRange">Apply time range</button><button id="fullRange">Full request</button><button id="clearExpert">All experts in layer</button></div>
   <section id="content"></section>
   <details id="provenance"><summary>Evidence and field provenance</summary><div id="provenanceContent"></div></details>
 </main>

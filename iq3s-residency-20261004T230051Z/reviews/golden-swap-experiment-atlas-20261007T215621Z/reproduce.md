@@ -79,14 +79,38 @@ node --check site/app.js
 
 The full data check validates all selected rows, partitions and generation use totals. Its seven original-record lifecycle spot checks additionally require original Phase 1/2 journals. The retained validation receipt records those checks as actually passed; a clone without originals cannot claim to repeat them.
 
-Optional browser validation through the running HTTP server:
+Current visual browser validation through the running HTTP server:
 
 ```bash
-"$atlas_work/envs/atlas/bin/pip" install playwright==1.55.0
-"$atlas_work/envs/atlas/bin/python" code/browser_validate.py --url http://127.0.0.1:8765/ --chromium /snap/bin/chromium
+"$atlas_work/envs/atlas/bin/pip" install playwright==1.55.0 pillow==11.3.0
+"$atlas_work/envs/atlas/bin/python" code/browser_validate.py --url http://127.0.0.1:8765/ --output results/visual-audit/browser-fresh
+"$atlas_work/envs/atlas/bin/python" code/visual_edges.py --url http://127.0.0.1:8765/ --output results/visual-audit/edges-fresh
 ```
 
-The validator uses the exact published representation when the uncompressed local reference is absent. It visits all ten pages, changes selectors, checks linked zoom/pan/hover, same-tape current/full-oracle comparison, exact decoding, provenance and PNG/SVG export. Chromium is launched with GPU rendering disabled; no GPU inference occurs. Screenshots and receipts are written in the working review, so preserve earlier receipts before a new validation.
+The current wrapper invokes `visual_acceptance.py`: twelve curated URLs, each in a fresh context, title/run/filter/range assertions, visible chart titles and nontrivial colored pixels, numerical state reconstruction in another fresh context, aggregate no-op regression, actual Plotly zoom-to-URL, pan/hover, rapid navigation, light theme and all twelve loaded gallery images. Its automatic receipt still requires direct image inspection. The exercised final reproduction has twelve PNGs byte-identical to the directly inspected curated PNGs. `visual_edges.py` checks GPU1/class ownership, A−B/subsets, percent time/service shares and lease threshold state. Both refuse an existing output namespace and leave published gallery PNGs untouched. They used `/snap/bin/chromium`; adapt that recorded executable location if the host differs. Software browser rendering is forced.
+
+The former mechanical checker is retained as `code/browser_validate_legacy.py`, and its receipts remain historical. It is not the revised visual acceptance standard.
+
+To capture all eleven pages through actual navigation and export numerical chart specs into separate fresh namespaces:
+
+```bash
+"$atlas_work/envs/atlas/bin/python" code/visual_audit.py --url http://127.0.0.1:8765/ --output results/visual-audit/pages-fresh --specs "$atlas_work/derived/plot-specs-fresh" --chromium /snap/bin/chromium
+```
+
+Inspect those images before filling readability judgments. The saved judgments in `finalize_visual_review.py` apply only to the already inspected named release captures. Do not apply them automatically to a new application version. `capture_frozen_before.py` recaptures the original oversized predictor page from Git's frozen BEFORE source on an owned temporary server; it does not replace the live dashboard.
+
+`code/validate_visual_data.py` exercises all 48 layers of the four curated policy runs and five source E/LC/replacement lifecycles. It reconciles publications, bytes, service counts, fixed slot classes and nonoverlapping physical ownership. The raw journal checks require local originals; a portable clone can inspect the retained receipt and all normalized browser data without those binaries.
+
+Read-only discovery examples:
+
+```bash
+curl -fsS http://127.0.0.1:8765/api/views
+curl -fsS 'http://127.0.0.1:8765/api/runs?task=code-archive'
+curl -fsS 'http://127.0.0.1:8765/api/matches?run=golden-swap-phase2--code-archive-block1-REPLAY_CURRENT'
+curl -fsS 'http://127.0.0.1:8765/api/interesting?run=golden-swap-phase2--code-archive-block1-REPLAY_CURRENT'
+```
+
+The complete chart specs, screenshot inventory and completed audit text have whole gzip archives in `evidence/visual-review-20261008T010000Z`; the source manifests identify exactly what was packaged. Ordinary PNGs remain below 1 MiB; all original oversized and duplicate captures are retained locally with hashes. The lower-DPR gallery and frozen BEFORE page are complete HTTP captures, not cropped substitutes or split evidence.
 
 The archive checker was tested with 27 repository tests. Before publication, stage only reviewed task paths and use the indexed scoped evidence decision:
 

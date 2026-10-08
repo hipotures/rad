@@ -1,0 +1,96 @@
+{
+  "state": "PASS",
+  "utc": "2026-10-08T00:30:43.237692+00:00",
+  "checks": [
+    {
+      "path": "/api/views",
+      "code": 200,
+      "keys": [
+        "views",
+        "url_parameters"
+      ],
+      "count": null,
+      "views": 11,
+      "matches": 0,
+      "layers": 0,
+      "experts": 0
+    },
+    {
+      "path": "/api/runs",
+      "code": 200,
+      "keys": [
+        "count",
+        "runs"
+      ],
+      "count": 335,
+      "views": 0,
+      "matches": 0,
+      "layers": 0,
+      "experts": 0
+    },
+    {
+      "path": "/api/runs?task=code-archive",
+      "code": 200,
+      "keys": [
+        "count",
+        "runs"
+      ],
+      "count": 31,
+      "views": 0,
+      "matches": 0,
+      "layers": 0,
+      "experts": 0
+    },
+    {
+      "path": "/api/matches?run=golden-swap-phase2--code-archive-block1-REPLAY_CURRENT",
+      "code": 200,
+      "keys": [
+        "run",
+        "matches",
+        "timing_caveat"
+      ],
+      "count": null,
+      "views": 0,
+      "matches": 10,
+      "layers": 0,
+      "experts": 0
+    },
+    {
+      "path": "/api/interesting?run=golden-swap-phase2--code-archive-block1-REPLAY_CURRENT",
+      "code": 200,
+      "keys": [
+        "run",
+        "ranking",
+        "layers",
+        "experts",
+        "early_range",
+        "windows"
+      ],
+      "count": null,
+      "views": 0,
+      "matches": 0,
+      "layers": 12,
+      "experts": 12
+    },
+    {
+      "path": "/api/files?path=/etc/passwd",
+      "code": 404,
+      "state": "EXPECTED_REFUSAL"
+    },
+    {
+      "path": "/api/interesting?run=../../etc/passwd",
+      "code": 404,
+      "state": "EXPECTED_REFUSAL"
+    },
+    {
+      "path": "/api/matches?run=missing",
+      "code": 404,
+      "state": "EXPECTED_REFUSAL"
+    },
+    {
+      "path": "POST /api/runs",
+      "code": 501,
+      "state": "EXPECTED_REFUSAL"
+    }
+  ]
+}

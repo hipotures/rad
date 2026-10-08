@@ -1,5 +1,7 @@
 # Golden Swap Experiment Atlas
 
+**Start with the [curated evidence gallery](http://192.168.100.207:8765/gallery).** Twelve selected views explain startup turnover, physical slot ownership, current/full-oracle behavior and the Phase 1/2 lifecycle mechanism. Each card opens the exact interactive deep link. See the [visual review and repairs](visual-review.md), [BEFORE/AFTER audit](results/visual-audit/visual-audit.json), [curated URLs](results/curated-views.json) and [URL/discovery API](provenance/url-state.md). The revised review uses direct screenshot inspection, not just the original mechanical browser receipt.
+
 An interactive research instrument for inspecting completed expert-residency experiments. It is a retrospective review, not another experimental phase. It runs from retained evidence and starts no inference service.
 
 **On the research host:** open <http://192.168.100.207:8765/>. The task-owned server binds to `0.0.0.0:8765`; its current identity is in ignored `server-status.json`. [results/server-launch.json](results/server-launch.json) is the historical launch receipt, not authority to signal a reused PID.
@@ -23,7 +25,8 @@ The server prints listening and discovered IPv4 URLs. Choose another unprivilege
 | Page | What to inspect |
 |---|---|
 | Experiments | Filter campaign/task/policy/profile/source group; click a row to select A. A filled dot means a selected complete trajectory. |
-| Residency | Layer/expert intervals and generations; publication, first actual local service, withdrawal, protection release. Click an expert; select subsets such as `3,17,100-120`. The compressed global map drills down to layers. |
+| Residency | Primary layer residency-state heatmap, local/CPU/mapped overlays and A−B. Exact expert intervals and the global layer map remain drill-downs. |
+| Physical slots | Actual device-local destination ownership over time; GPU/class, changed-only, most-changed count and layer/expert scope. Exact owner transitions in hover. |
 | Swaps & churn | Published admissions, withdrawals, bytes, repeat admissions, late publication, cumulative traffic and observed protection. Rolling smoothing can show counts or per-window averages. |
 | Startup | Process profile fill versus attested decode snapshot; early demand, service before eviction, uninterrupted survival, return of initial identities, Jaccard and sortable poor placements. |
 | Expert lifecycle | Every generation of one `(layer, expert)`, required local/CPU/mapped demand, readmissions and reuse gaps. |
@@ -57,7 +60,7 @@ Serving needs no dependencies. Derivation needs Python 3.10+ and NumPy 2.3.3; br
 
 The pipeline is `catalog.py` → `build_atlas.py` → `predictor.py` / `finish_data.py` → `compact_assets.py` → repository `pack-text`. Demand is shared by exact content hash across arms; generation intervals plus exact service exceptions reconstruct **every** original normalized row. All 4,896 layer payloads round-trip exactly. Gzip files are complete copies; no original was overwritten or split to meet a size cap.
 
-Validation receipts: [data](results/data-validation.json), [lossless encoding](results/compact-validation.json), [predictor](results/predictor-validation.json), [browser](results/browser-validation.json), [bounded regeneration](results/reproduction-validation.json). Screenshots in [figures](figures/) document tested HTTP views; the interactive site is the deliverable.
+Original validation receipts: [data](results/data-validation.json), [lossless encoding](results/compact-validation.json), [predictor](results/predictor-validation.json), [mechanical browser](results/browser-validation.json), [bounded regeneration](results/reproduction-validation.json). Revised visual validation: [final deep links, reset and pixel-identical reconstruction](results/visual-audit/reproduction-publish/acceptance.json), [direct image review](results/visual-audit/release-acceptance-v2/acceptance.json), [slot/service/raw lifecycle checks](results/visual-audit/data-validation.json) and [URL edge checks](results/visual-audit/edge-checks-v3/validation.json). Screenshots document tested HTTP views; the interactive site is the deliverable.
 
 ## Missing evidence and recovery
 

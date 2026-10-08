@@ -1,5 +1,13 @@
 # Golden Swap Experiment Atlas: visual findings
 
+## Visual-review addendum after the original publication
+
+The operator's observed tab-only behavior was reproduced: an aggregate-only run made five pages render the same generic empty state. Page-specific empty states and a direct detailed-run choice repair it. A blank comparison and retained scroll position also obscured distinct content. The original mechanical browser receipt did not establish visual usefulness; it remains historical evidence, not the acceptance standard for this revision.
+
+The revised Atlas adds physical destination-slot ownership, a primary residency state heatmap and aligned CURRENT/full-oracle panels; it reuses working churn, startup, demand and lease data. Twelve curated screenshots/deep links are available in the [gallery](http://192.168.100.207:8765/gallery). All eleven final pages were captured and directly inspected. Unfiltered overview and long unfocused predictor tables remain classified POOR, with useful focused alternatives rather than a blanket PASS. A fresh-browser reproduction recreates all twelve curated PNGs byte-for-byte and checks numerical URL state, real zoom, errors and page identity.
+
+See [visual-review.md](visual-review.md) for the complete BEFORE/AFTER matrix, source-backed physical-slot interpretation, selected lifecycle examples, URL/discovery API, evidence retention and limitations. This revision adds no GPU experiment and changes none of the historical performance conclusions below.
+
 This review makes the retained residency trajectories inspectable. It preserves prior timing conclusions and adds no headline performance experiment. The interactive dashboard contains 12 experiment namespaces, 335 indexed run records, 102 selected trajectories and 3,615,449 generation records. Every selected trajectory passed slot/service and aggregate reconciliation; the lossless browser representation covers 156,180,000 main routed lane entries.
 
 ## Startup is a ranked-file prefix, followed by adaptation

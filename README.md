@@ -42,7 +42,7 @@ provides a portable interactive retrospective dashboard: startup expert sets,
 residency generations, churn, current/future-informed comparisons, predictor
 decision funnels and lease/reuse evidence from 12 completed experiment namespaces.
 Its Python server needs no GPU service or external CDN; see the review for access
-and regeneration instructions.
+and regeneration instructions. Start with the [curated visual evidence gallery](http://192.168.100.207:8765/gallery): twelve exact interactive views, physical slot turnover, and a documented BEFORE/AFTER visual audit.
 
 Reports, scripts, patches, contracts, compact JSON/CSV results, small numeric
 model exports and research plots belong in Git. Build trees, model weights,

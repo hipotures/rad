@@ -11,6 +11,7 @@ import socket
 import subprocess
 import sys
 import urllib.parse
+from discovery import response
 
 REVIEW=Path(__file__).resolve().parents[1]
 REPO=REVIEW.parents[2]
@@ -30,9 +31,20 @@ def ipv4_addresses():
     return sorted(result)
 
 class Handler(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        parsed=urllib.parse.urlsplit(self.path)
+        if parsed.path.startswith('/api/'):
+            try:code,value=response(REVIEW,CATALOG,parsed.path,urllib.parse.parse_qs(parsed.query))
+            except (OSError,ValueError,KeyError) as error:code,value=500,{'error':'Retained discovery data unavailable','detail':str(error)}
+            body=json.dumps(value,separators=(',',':'),allow_nan=False).encode()
+            self.send_response(code);self.send_header('Content-Type','application/json; charset=utf-8')
+            self.send_header('Content-Length',str(len(body)));self.end_headers();self.wfile.write(body);return
+        super().do_GET()
+
     def translate_path(self,path):
         path=urllib.parse.unquote(urllib.parse.urlsplit(path).path)
         if '\\' in path or '..' in Path(path).parts:return str(REVIEW/'not-found')
+        if path in {'/gallery','/gallery/'}:return str(REVIEW/'site/gallery.html')
         if path=='/vendor/plotly.js':return str(REVIEW/'evidence/library-v1/plotly-2.35.2.txt.gz')
         if path.startswith('/evidence/'):
             base=REVIEW/'evidence';rel=path[len('/evidence/'):]
