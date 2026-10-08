@@ -1,5 +1,5 @@
 {
-  "as_of_utc": "2026-10-08T16:03:46.993845+00:00",
+  "as_of_utc": "2026-10-08T16:20:11.946495+00:00",
   "scope": "Conditional composition with pinned analytic/tape/setup assumptions; separate implementation checks are not human external review or formal verification.",
   "rows": [
     {
@@ -154,14 +154,59 @@
       "kappa_decimal": 4.171572903e-05,
       "saving": "4171746931/100000000000000",
       "W": 175503731,
-      "status": "exact candidate; weighted source-only recovery pending",
+      "status": "accepted conditional construction",
       "independent_check": "agents/graph/results/best-weighted-positive-negative-compiler-1539.json",
       "basis_review": "agents/geometry/positive-frame-basis-proof.md",
       "data_audit": "agents/geometry/results/both-negative-data-input-audit.json",
       "source_recovery": [
         "agents/graph/results/best-positive-negative-recovery-23.json",
         "agents/graph/results/best-positive-negative-recovery-25.json"
+      ],
+      "weighted_source_recovery": [
+        "agents/geometry/results/weighted-source-recovery-20261008T160331-23.json",
+        "agents/geometry/results/weighted-source-recovery-20261008T160331-25.json"
       ]
+    },
+    {
+      "name": "Matrix-weighted positive frames in conjugate negative bases",
+      "status": "accepted conditional construction",
+      "run": "runs/weighted-positive-dual-negative-composition/certificate.json",
+      "kappa": "104290869/2500000000000",
+      "kappa_decimal": 4.17163476e-05,
+      "saving": "4171808793/100000000000000",
+      "W": 175503731,
+      "basis": "I+J/3 on both axes; beta=-1/3",
+      "basis_review": "agents/scout/basis-conjugacy-review.md",
+      "data_audit": "agents/geometry/results/both-negative-data-input-audit.json",
+      "data_reuse": "Paired-root conjugacy preserves each source and copied-center coordinate product exactly; no repeated source-family computation",
+      "independent_check": "agents/graph/results/dual-basis-transfer-gate.json",
+      "weighted_source_recovery": [
+        "agents/geometry/results/weighted-source-recovery-20261008T160331-23.json",
+        "agents/geometry/results/weighted-source-recovery-20261008T160331-25.json"
+      ]
+    },
+    {
+      "name": "Global component matching in negative bases",
+      "run": "runs/global-positive-negative-composition/certificate.json",
+      "kappa": "4171627317/100000000000000",
+      "kappa_decimal": 4.171627317e-05,
+      "saving": "83436027/2000000000000",
+      "W": 175503731,
+      "status": "accepted conditional construction",
+      "basis_review": "agents/scout/basis-conjugacy-review.md",
+      "data_audit": "agents/geometry/results/both-negative-data-input-audit.json",
+      "independent_check": "agents/graph/results/global-component-positive-compiler-1616.json"
+    },
+    {
+      "name": "Global component matching in conjugate negative bases",
+      "run": "runs/global-positive-dual-negative-composition/certificate.json",
+      "kappa": "521461257/12500000000000",
+      "kappa_decimal": 4.171690056e-05,
+      "saving": "2085932047/50000000000000",
+      "W": 175503731,
+      "status": "exact candidate; fresh global dual matching compiler and source-only recovery pending",
+      "basis_review": "agents/scout/basis-conjugacy-review.md",
+      "data_audit": "agents/geometry/results/both-negative-data-input-audit.json"
     }
   ]
 }

@@ -34,7 +34,10 @@ def projector(h,F,sy,basis):
             columns.append([Q(sigma if F>>i&1 else s*(1 if sy[i]>0 else -1) if abs(sy[i])==c else 0) for i in range(h)])
     B=list(map(list,zip(*columns)));H=[[Q(i==j)-Q(1,9) for j in range(h)] for i in range(h)]
     P=mm(mm(mm(B,inverse(mm(mm(columns,H),B))),columns),H)
-    t=Q(-4,3*(h+3)) if basis=='negative' else Q(1);v=t/(1+h*t)
+    if basis.startswith('beta:'):
+        _,numerator,denominator=basis.split(':');t=-Q(int(numerator),int(denominator))
+    else:t={'negative':Q(-4,3*(h+3)),'fixed':Q(1),'negative-transpose':Q(1,3),'fixed-transpose':Q(-10,9*(h+1))}[basis]
+    v=t/(1+h*t)
     rows=[sum(row) for row in P];cols=[sum(row[j] for row in P) for j in range(h)];total=sum(rows)
     return [[P[i][j]+t*cols[j]-v*rows[i]-t*v*total for j in range(h)] for i in range(h)]
 

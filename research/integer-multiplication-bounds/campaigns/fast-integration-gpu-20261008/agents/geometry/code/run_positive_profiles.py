@@ -6,7 +6,7 @@ from pathlib import Path
 import argparse,json,math,os,shutil,struct,subprocess,time
 
 
-def run(witness,binary,basis,work,output):
+def run(witness,binary,basis,work,output,authored_source=None):
     assert not work.exists() and not output.exists();work.mkdir(parents=True)
     original=json.loads(witness.read_text())
     if 'rows' in original:
@@ -40,13 +40,23 @@ def run(witness,binary,basis,work,output):
     assert min(copied)>=0 and sum(t*n for t,n in enumerate(copied))==h*source['R']+source['loss']
     producer=dict(source,dag_path=str(local),witness_path=str(selected_json),witness_sha256=sha256(selected_json.read_bytes()).hexdigest())
     alpha=4e-5;phi=sum(n*t*math.expm1(alpha*math.log(575/t)) for t,n in enumerate(copied) if t and n)
+    basis_names={'negative':'I-4/[3(h+3)]J','fixed':'I+J','negative-transpose':'I+J/3',
+                 'fixed-transpose':'I-10/[9(h+1)]J'}
+    if basis.startswith('beta:'):
+        prefix,numerator,denominator=basis.split(':');assert int(denominator)>0
+        basis_names[basis]=f'I-({int(numerator)}/{int(denominator)})J'
+    source_path=authored_source or Path(__file__).with_name(binary.name+'.cpp')
+    if not source_path.exists():
+        standard='parameter_positive_profiles.cpp' if basis.startswith('beta:') else 'positive_transpose_profiles.cpp' if basis.endswith('-transpose') else 'positive_frame_profiles.cpp'
+        source_path=Path(__file__).with_name(standard)
+    assert basis in basis_names and source_path.exists(),(basis,source_path)
     retained=dict(status='Exact actual positive-frame local profiles; full multiplication assembly is separate',producer=producer,
-                  fixed_profile=result,selected_links=links,configuration=dict(basis='I-4/[3(h+3)]J' if basis=='negative' else 'I+J',
+                  fixed_profile=result,selected_links=links,configuration=dict(basis=basis_names[basis],
                   frame_family='actual signed positive labels',matching='retained positive selected-use map'),
                   copied_blocks=copied,local_phi=dict(alpha=alpha,value=phi),completion=completion,
                   provenance=dict(input_witness=str(witness),input_sha256=sha256(witness.read_bytes()).hexdigest(),
                   native_command=command,binary_sha256=sha256(binary.read_bytes()).hexdigest(),
-                  authored_source_sha256=sha256(Path(__file__).with_name('positive_frame_profiles.cpp').read_bytes()).hexdigest(),
+                  authored_source_path=str(source_path),authored_source_sha256=sha256(source_path.read_bytes()).hexdigest(),
                   transition_audit=str(audit),transition_audit_sha256=sha256(audit.read_bytes()).hexdigest()),
                   retained_utc=datetime.now(timezone.utc).isoformat())
     output.parent.mkdir(parents=True,exist_ok=True);output.write_text(json.dumps(retained,indent=2)+'\n')

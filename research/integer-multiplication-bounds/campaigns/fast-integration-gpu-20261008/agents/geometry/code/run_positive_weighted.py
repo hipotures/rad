@@ -11,7 +11,8 @@ from run_positive_profiles import run
 if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('--input',type=Path,required=True);ap.add_argument('--matcher',type=Path,required=True)
     ap.add_argument('--profiler',type=Path,required=True);ap.add_argument('--work',type=Path,required=True);ap.add_argument('--output',type=Path,required=True)
-    ap.add_argument('--workers',type=int,required=True);a=ap.parse_args();assert 1<=a.workers<=6 and not a.work.exists() and not a.output.exists();a.work.mkdir(parents=True)
+    ap.add_argument('--workers',type=int,required=True);ap.add_argument('--live-output',type=Path)
+    a=ap.parse_args();assert 1<=a.workers<=6 and not a.work.exists() and not a.output.exists();a.work.mkdir(parents=True)
     configs=json.loads(a.input.read_text());start=time.monotonic();started=datetime.now(timezone.utc).isoformat()
     env=os.environ.copy()
     for key in ['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS']:env[key]='1'
@@ -48,6 +49,9 @@ if __name__=='__main__':
             except Exception as error:failures.append(dict(configuration=futures[future],error=repr(error)))
             status=dict(utc=datetime.now(timezone.utc).isoformat(),completed=len(rows),failed=len(failures),total=len(configs),elapsed_seconds=time.monotonic()-start,workers=a.workers)
             (a.work/'status.json').write_text(json.dumps(status,indent=2)+'\n');print(json.dumps(status),flush=True)
+            if a.live_output:
+                from refresh_geometry_status import refresh
+                refresh(a.work,a.live_output,'Mapped-center profiles remain active; next actual source-specific side cleanup and rational-beta profiles')
     result=dict(status='COMPLETE' if not failures else 'COMPLETE WITH FAILURES',started_utc=started,completed_utc=datetime.now(timezone.utc).isoformat(),
                 elapsed_seconds=time.monotonic()-start,workers=a.workers,rows=rows,failures=failures,input=str(a.input),input_sha256=sha256(a.input.read_bytes()).hexdigest(),
                 source_sha256=sha256(Path(__file__).read_bytes()).hexdigest())

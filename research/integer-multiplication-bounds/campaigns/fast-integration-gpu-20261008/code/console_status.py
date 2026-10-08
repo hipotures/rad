@@ -39,6 +39,10 @@ def main():
             try:
                 obj=json.loads(path.read_text());tested[path.parent.name]={'status':obj.get('status'),'complete':len(obj.get('rows',[])),'planned':len(obj.get('configurations',[]))}
             except (OSError,ValueError):pass
+        for path in sorted(x.work.glob('root-*/status.json')):
+            try:
+                obj=json.loads(path.read_text());tested[path.parent.name]={k:obj[k] for k in ('completed','failed','total','workers','utc') if k in obj}
+            except (OSError,ValueError):pass
         ledger=json.loads((x.campaign/'reports/construction-ledger.json').read_text());rows=ledger['rows'];best=max((r['kappa_decimal'] for r in rows if r['status']=='accepted conditional construction'),default=None);candidate=max((r['kappa_decimal'] for r in rows if r['status']!='accepted conditional construction'),default=None)
         gpu=subprocess.run(['nvidia-smi','--query-gpu=index,utilization.gpu,memory.used,power.draw','--format=csv,noheader,nounits'],capture_output=True,text=True).stdout.strip()
         if system<70:low_since=low_since or time.monotonic()
