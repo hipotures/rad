@@ -64,6 +64,11 @@ def main():
             if r['h']==expected_dimension and not r.get('duplicate_exact_dag') and 'original_matching' in r]
     rows.sort(key=lambda r: (r['original_matching']['R'], r['id']))
     previous = {read_json(p)['id'] for directory in args.previous for p in directory.glob('h*.json')}
+    # Exclude queued IDs as well as completed results to prevent concurrent duplicate profiling.
+    for directory in args.previous:
+        protocol_path = directory/'protocol.json'
+        if protocol_path.exists():
+            previous.update(read_json(protocol_path).get('inputs', []))
     rows = [row for row in rows if row['id'] not in previous]
     if args.diverse:
         buckets = {}

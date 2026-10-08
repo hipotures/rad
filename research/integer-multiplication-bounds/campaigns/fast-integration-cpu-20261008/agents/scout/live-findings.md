@@ -90,3 +90,8 @@ to closed at 15:18:19 UTC with unchanged scientific heads. These status changes
 do not establish acceptance of the pinned PR40 primitive or change the CPU
 composition's named assumptions. The watcher now requests head metadata
 through GraphQL, without the source patches included by a REST commit response.
+# 2026-10-08 16:03 UTC: eligible metadata follow-up
+
+The 15:45 broad scout and 15:58 refresh found no new eligible scientific input needed by the active CPU construction. Swapnil round six remains pinned at `f2176bc1124821bf17eb63725bd366d7bdc020a3`. New aggregate-main and campaign-linked PR mathematics remain quarantined; recent Platypii theorem headlines are metadata only and supply no scientific premise.
+
+Eligible historical [PR2](https://github.com/CrocSwap/integer-mult-bounds/pull/2), Bortlesboat, advanced to `ff505ea9f6d5528cf2e2aba02e1db85471ff9bf4` at 15:36:13 UTC. Metadata identifies a two-parent integration of its old `1c200af99d348de496d78274de3584339dcf02e3` review packet with eligible public checkpoint `1a74950ce5074b848243ba89d8022fbadba66105` from 13:10:58. The PR body is unchanged; its substantive global-pair alignment is already present in the pinned native `aligned_points` interface. No new source snapshot, mathematical gain or external acceptance is inferred. This intake does not consume the later aggregate main.

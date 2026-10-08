@@ -1,9 +1,11 @@
 # Regular-phase Laurent inverse: a reusable analytic candidate
 
 Status: written analytic interface and parameter mechanism. The weighted
-Laurent estimate below is proved directly. A complete fixed-tape multiplication
-composition is not supplied. In particular, the required fast acquisition of
-shifted boxes or sparse exceptional patches remains open.
+Laurent estimate below is proved directly. This report owns the local analytic
+interface; the coordinating agent now supplies the separate
+[conditional full composition](../../../reports/conditional-composition.md),
+including shifted-box acquisition and sparse exceptional access. The earlier
+barriers below record the obligations that motivated those later schedules.
 
 ## Weighted Laurent inversion away from a phase edge
 
@@ -79,6 +81,30 @@ translations.
 The unweighted inverse norm may be bounded separately by its exponentially
 small regular perturbation. Selecting the stronger spatial weight above
 does not alter the inverse-kernel L normalization described below.
+
+The authored [kernel API](../code/regular_laurent_kernel.py) constructs the
+infinite stationary inverse by a finite Neumann sum. Every intermediate
+convolution support is retained through the last power; cropping occurs only
+when emitting the final radius. Its receipt separates the omitted input
+Gaussian band, the remaining Neumann powers and the final weighted inverse
+tail. The phase beta is computed from integer periods and the actual origin.
+Returned b_h acts from input column i+h to output row i; ordinary polynomial
+convolution therefore uses b_-h.
+
+An independent layout caller retained a first genuine two-dimensional signed
+packed control in
+[packed-laurent-inverse-initial-partial.json](../../layout/results/packed-laurent-inverse-initial-partial.json).
+It uses source periods4093/4091, target4096, origins1364/818, core side64 and
+radius28. Its complete retained input distances are[-60,59]; the SUM of both
+axis chirp reserves is charged at128 bits. All4096 packed outputs agree with
+the complete cyclic inverse reference to maximum error4.70e-126. Four global
+reference vector solves retain independently recomputed residuals and all-
+alias tails. Removing the output chirp produces error0.0312. The input is a
+rank-two tensor, while the packed convolution actually processes every input
+record and four signed integer products. This is high-precision numerical
+evidence for one regular core, outside u*theta>=1; it is not an interval proof
+or an all-size implementation. The receipt separately labels the global
+phase-boundary replacement checked by its numerical oracle.
 
 The same weighted row-norm argument applies to every finite principal Toeplitz
 block: weighting rows and columns by `exp(A*j)` or `exp(-A*j)` yields the
@@ -232,15 +258,27 @@ is `O(delta*sqrt(d))`; the replicated tensor volume remains bounded when
 exceptional volume small enough for an extra `d` factor of arithmetic. This
 last counting statement does **not** prove a sparse fixed-tape access bound.
 
-## Unresolved algorithmic barrier
+These parameter examples enforce the inverse-specific locality and chirp
+conditions only. The inherited source transform additionally needs
+u^2*theta>=2Q. For the first theta choice that requires Q at least a fixed
+multiple of d^(6+2B), and for the second it requires d^(8+2B). Thus the
+displayed smaller powers with zeta<1 cannot be transferred unchanged to the
+complete source algorithm. The later composition uses its separate
+lambda_I=Theta(d^8), theta=Theta(d^-16), Q=Theta(d^18) choice and checks the
+source condition explicitly.
+
+## Historical algorithmic barrier and later resolution
 
 The completed bulk inverse assembles halos in `d` full-volume passes. Reusing
 that assembly preserves the `O(Vd)` row even if local arithmetic becomes one
 recursive multiplication. An arbitrary binary coordinate router also does
 not grant an arbitrary nonlinear duplicated-key sort. Fast acquisition of
 all halo boxes, true globally shifted boxes, or physically contiguous sparse
-repair patches needs a new paid tape schedule. No improved end-to-end
-`kappa` is claimed until that schedule and all surviving rows are supplied.
+repair patches needs a new paid tape schedule. This was an unresolved barrier
+when the local mechanism was first written. The coordinating agent's linked
+composition now supplies its joint scans, shifted grids and source-closed
+repairs. Its multiplication claim and review status remain in that full
+ledger; this local report alone does not supply them.
 
 Attribution: the exact recentred Gaussian factorization is from Swapnil Jain's
 public segmented-inverse note pinned above; the complete phase-cell/local

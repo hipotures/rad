@@ -38,6 +38,7 @@ No address bit or clean bank is appended.
 | `1530Z-native-outer2-two-nodes` |1048576 /151305 | Two-bit OUTER predicate/guard digits and all-ones carry boundaries |198 events;84 F_u/840 rotations;104,216 wrong outer records repaired; PASS;73.82s |
 | `1530Z-native-six-balanced` |2097152 /255255 | Full balanced six-prime tree with real two-node late batch |307 events;132 F_u/1320 rotations;270 forward/inverse radix repairs;187,967 wrong outer records repaired; PASS;265.23s |
 | `1540Z-native-inner2outer2-two-nodes` |4194304 /601755 | Two-bit INNER and OUTER digits together, with ten original bank bits |198 events;317,908 wrong outer records repaired; full forward/inverse PASS;265.76s |
+| `1540Z-native-outer3-two-nodes` |16777216 /2371215 | Three-bit OUTER predicate/guard digits, with twelve original bank bits |198 events;84 F_u/840 rotations;801,496 wrong outer records repaired; full forward/inverse PASS;1152.06s |
 
 All complete run IDs have the prefix 20261008T. The reference bank-leaf case
 exactly matches the independent Python result's 198 events and 14,608 wrong
@@ -51,6 +52,10 @@ the actual tagged input and its zeros; they are not uniform guard-failure
 probabilities or asymptotic sparse-volume estimates. They give direct
 counterexamples to premature padding deletion.
 The combined inner-G2/outer-G2 case similarly restores 69,460 such records.
+The outer-G3 case restores 269,272, runs 172 actual forward/inverse radix
+repairs over a summed 2,488,000,512 extracted records, and recovers the entire
+24-bit padded cube. These counts continue to measure the finite validation
+program and its tagged input rather than an all-size cost or failure rate.
 
 ## Mandatory-repair negatives
 
@@ -95,6 +100,7 @@ negative cases, which must report EXPECTED_NEGATIVE.
 The fresh wider source
 [compiled_crt_native_wide.cpp](../code/compiled_crt_native_wide.cpp) adds a
 combined inner-G2/outer-G2 bank and an outer-G3 bank. The combined case passes
-as retained above. The full outer-G3 cube has an explicit running protocol
-under 20261008T1540Z-native-outer3-two-nodes and is not yet completed evidence
-in this report.
+as retained above. The full outer-G3 cube also passes with the exact protocol,
+source snapshot and certificate under
+20261008T1540Z-native-outer3-two-nodes. On completion the queue automatically
+restored the paused, task-owned Python guard-G2 worker.

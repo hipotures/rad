@@ -38,12 +38,22 @@ arithmetic integration branch execute these physical maps on ring residues.
 The [native complete-cube controls](reports/native-crt-controls.md) independently
 validate two-bit inner/outer dirty digits and a complete six-prime tree,
 including actual computed-key repairs and explicit omission counterexamples.
+A three-bit outer guard also passes the complete 24-bit cube, restoring
+801,496 wrong outer records before zero-padding scans and recovering every
+tag in the reverse program.
+The [four-target reflection controls](reports/four-target-reflection-controls.md)
+also pass mixed binary/odd moduli with a shared fixed source. Deliberately
+borrowing that endpoint control as a dirty guard makes addresses0 and1
+collide, giving an explicit exclusion required by the legal bank interface.
 The [cyclic free-axis interface](reports/cyclic-free-axis-repair.md) supplies
 global principal-window band LU on every complete free axis of inverse repair
 packets, including regular face packets.
 The [cyclic reference API](reports/cyclic-reference-api.md) supplies a separate
 bordered numerical solve for discriminating packed regular inverse cores;
-its integration caller is still being validated by the layout branch.
+eight independently executed layout callers pass their higher-precision
+residual plus all-alias tail estimates through source period262139.
+Seven are explicitly outside u*theta>=1; the final large-mismatch case lies
+inside it. Genuine packed Laurent inverse integration is still being tested.
 
 The [regular Laurent split](reports/regular-laurent-interface.md) and
 [uniform phase-edge obstruction](reports/phase-edge-obstruction.md) separate

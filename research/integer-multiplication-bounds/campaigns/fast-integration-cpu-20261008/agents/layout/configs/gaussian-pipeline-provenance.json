@@ -10,7 +10,7 @@
     "version": "1.3.0",
     "upstream": "https://github.com/mpmath/mpmath",
     "installation": "python3 -m pip install --no-deps --target <ignored-work>/deps mpmath==1.3.0",
-    "role": "setup and independent DFT oracle only; online pipeline uses integer dyadic pairs"
+    "role": "setup and independent DFT/global cyclic/Laurent reference coefficients; complete online pipeline uses integer dyadic pairs"
   },
   "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
   "work_grid_policy": "online integer dyadic arithmetic; setup precision exceeds q+128 binary bits; matrices q+64 fractional bits",
@@ -24,7 +24,7 @@
     {
       "patch": "fixtures/full-pipeline-large-before-cuts.patch",
       "sha256": "8577d512ea0ca8b5aa2cde025ff65064342ce8e0efc57feed2fe14d0321379b8",
-      "result": "larger family pending; this is the actual imported producer, not the subsequently edited filename"
+      "result": "results/full-gaussian-integer-pipeline-large.json; corrected imported-source hash preserves original raw filename hash"
     },
     {
       "patch": "fixtures/full-pipeline-small-cuts.patch",
@@ -65,6 +65,9 @@
     "API": "../../agents/inverse/code/compiled_crt_payload_api.py",
     "compiler": "../../agents/inverse/code/compiled_crt_pipeline_bankleaf.py",
     "guards": "../../agents/inverse/code/crt_guard_controls.py",
-    "pin_policy": "copy all3 source files into ignored run directory before import; every complete inverse receipt records their exact hashes"
-  }
+    "pin_policy": "copy all3 source files into ignored run directory before import; every complete inverse receipt records their exact hashes",
+    "cyclic_reference": "../../agents/inverse/code/cyclic_gaussian_reference.py",
+    "Laurent_kernel": "../../agents/inverse/code/regular_laurent_kernel.py"
+  },
+  "localized_inverse_scope": "The earliest four-product inverse controls use high-precision outer diagonal application; the current producer freezes P-bit diagonal words and applies them by integer dyadic products."
 }

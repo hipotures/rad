@@ -58,6 +58,31 @@ Mpmath1.3.0 is the campaign's pinned pure-Python dependency, recoverable by
 Expose that dependency and the API's directory in PYTHONPATH. The layout
 branch owns the numerical integration caller and its run provenance.
 
-At this update the API has been syntax checked and handed to that branch;
-its actual caller residual validation is pending. No API PASS is claimed
-before the caller's retained result exists.
+## Completed independent callers
+
+The layout branch retained eight independent random-vector callers in
+[cyclic-inverse-reference-family.json](../../layout/results/cyclic-inverse-reference-family.json)
+and
+[cyclic-inverse-large-reference-family.json](../../layout/results/cyclic-inverse-large-reference-family.json).
+Each passes its higher-precision residual plus the analytic bound on all
+omitted lifted coefficients, including periodic aliases. The retained API
+SHA256 is `21fa3749711da59b48059406a9db85f56a373405c1c8a51322dc3fe58600ad36`.
+
+| Source / target periods | alpha | Target bits | Reported solution-error upper estimate |
+|---|---|---|---|
+|4093 /4096 |2 |256 |4.42e-108 |
+|8191 /8192 |3 |320 |1.05e-127 |
+|16381 /16384 |4 |384 |1.41e-146 |
+|32749 /32768 |4 |384 |1.95e-147 |
+|65521 /65536 |2 |512 |1.85e-185 |
+|131071 /131072 |3 |640 |2.81e-223 |
+|262139 /262144 |4 |768 |3.58e-262 |
+|65521 /131072 |2 |512 |1.29e-188 |
+
+The first seven near-equal-period cases lie outside u*theta>=1 and remain
+labeled as such. The last case satisfies that inequality. The estimates are
+below their requested targets; they are numerical residual estimates with
+analytic tails, not interval-certified global inverses. They exercise the
+retained cyclic-border interface independently of later packed Laurent
+controls. Source hashes, seeds, working precision, bandwidths, exact result
+strings and timings are in the linked receipts.

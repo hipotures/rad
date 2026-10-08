@@ -1,0 +1,94 @@
+--- a/check_packed_laurent_inverse.py
++++ b/check_packed_laurent_inverse.py
+@@ -41,10 +41,6 @@
+     return gmpy2.mpz(int.from_bytes(buffer, 'little'))
+ 
+ 
+-def truncate_signed(value, bits):
+-    return (abs(value) >> bits) * (-1 if value < 0 else 1)
+-
+-
+ def run(config, cyclic, laurent):
+     started = perf_counter()
+     shape = tuple(config['source'])
+@@ -52,7 +48,7 @@
+     alpha, bits = config['alpha'], config['bits']
+     d = len(shape)
+     assert d == 2 and side % 2 == 0
+-    origins = tuple(config.get('origins', [(2*s + target-s)//(2*(target-s)) for s in shape]))
++    origins = tuple(round(s / (target - s)) for s in shape)
+     low = -side // 2 - radius
+     length = side + 2 * radius
+     high = low + length - 1
+@@ -69,7 +65,6 @@
+     kernels = []
+     with mp.workprec(work_bits):
+         for i, (s, origin) in enumerate(zip(shape, origins)):
+-            assert 0 <= origin + low <= origin + high < s, 'unwrapped retained cell touches a source-period cut'
+             for a in range(low, high + 1):
+                 assert cyclic.selector(origin + a, s, target) == cyclic.selector(origin, s, target) + a
+             reference = cyclic.CyclicGaussianReference(s, target, alpha, bits + 48)
+@@ -92,9 +87,7 @@
+             value = sum(math.prod(component[i][j] for i, j in enumerate(point))
+                         for component in components)
+             diagonal = mp.exp(-sum(mp.pi * alpha**2 * th * x*x for th, x in zip(theta, local)))
+-            diagonal_word = int(mp.nint(diagonal * scale))
+-            input_word = abs(value) * scale // (64**d)
+-            rounded = truncate_signed(diagonal_word * input_word, work_bits)
++            rounded = int(mp.nint(abs(value) * diagonal * scale / (64**d)))
+             input_rows[value < 0].append((encode(a, length + 2*radius), rounded))
+         base = length + 2*radius
+         kernel_rows = [[], []]
+@@ -125,47 +118,29 @@
+             numerator = parts[0] + parts[1] - parts[2] - parts[3]
+             unchirped = mp.mpf(numerator)/(scale*scale)
+             output_diagonal = mp.exp(sum(mp.pi*alpha**2*th*x*x for th,x in zip(theta,output)))
+-            output_diagonal_word = int(mp.nint(output_diagonal * scale))
+-            output_word = truncate_signed(numerator * output_diagonal_word, 2*work_bits)
+-            computed = mp.mpf(output_word) / scale
++            computed = unchirped*output_diagonal
+             reference = sum(math.prod(global_solutions[i][c][origins[i]+x]
+                             for i,x in enumerate(output)) for c in range(2))
+             maximum_error = max(maximum_error,abs(computed-reference))
+             maximum_wrong_chirp_error = max(maximum_wrong_chirp_error,abs(unchirped-reference))
+             checked += 1
+         amplification = mp.mpf(2)**reserve_bits
+-        # Telescoping a tensor product also charges the other inverse factors'
+-        # row norms. The bare Laurent inverse is slightly larger than one.
+-        tensor_norm_factor = math.prod(1/(1-kernel['unweighted_perturbation_row_bound']) +
+-                                      kernel['analytic_kernel_row_error'] for kernel in kernels)
+-        analytic_tail = (amplification * tensor_norm_factor *
+-                         sum(kernel['analytic_kernel_row_error'] for kernel in kernels))
+-        numerical_pass = maximum_error < mp.mpf(2)**(-bits)
+-        analytic_tail_pass = analytic_tail < mp.mpf(2)**(-bits)
+-        if config.get('expected_radius_failure'):
+-            assert not numerical_pass, 'the radius-negative fixture unexpectedly passed'
+-        else:
+-            assert analytic_tail_pass, analytic_tail
+-            assert numerical_pass, maximum_error
++        analytic_tail = amplification * sum(kernel['analytic_kernel_row_error'] for kernel in kernels)
++        assert analytic_tail < mp.mpf(2)**(-bits), analytic_tail
++        assert maximum_error < mp.mpf(2)**(-bits), maximum_error
+         assert maximum_wrong_chirp_error > mp.mpf('1e-8')
+ 
+         def scalar(value):
+             return mp.nstr(value, math.ceil(work_bits*math.log10(2))+8) if hasattr(value,'_mpf_') else value
+ 
+-        status = ('insufficient inverse radius fails requested numerical precision'
+-                  if config.get('expected_radius_failure') else
+-                  'genuine packed Laurent inverse agrees with global cyclic N inverse')
+-        return {'config':config,'status':status,
++        return {'config':config,'status':'genuine packed Laurent inverse agrees with global cyclic N inverse',
+             'origins':origins,'retained_input_distances':[low,high],
+             'target_bits':bits,'reserve_bits':reserve_bits,'work_bits':work_bits,
+             'maximum_error':scalar(maximum_error),'analytic_local_kernel_tail_after_reserve':scalar(analytic_tail),
+-            'tensor_operator_norm_factor':scalar(tensor_norm_factor),
+-            'numerical_precision_pass':numerical_pass,'analytic_local_tail_pass':analytic_tail_pass,
+             'negative_omitted_output_chirp_error':scalar(maximum_wrong_chirp_error),
+             'input_records':length**d,'output_records_checked':checked,'kernel_records':(2*radius+1)**d,
+             'kronecker_base':base,'slot_bits':slot_bits,'signed_integer_products':4,
+             'maximum_integer_operand_bits':max(x.bit_length() for x in [ip,im,kp,km]),
+-            'online_outer_factor_policy':'integer dyadic products of frozen P-bit input/output diagonal words',
+             'global_reference_receipts':[{k:scalar(v) for k,v in receipt.items()} for receipt in global_receipts],
+             'kernel_receipts':[{k:scalar(v) for k,v in kernel.items() if k!='coefficients'} for kernel in kernels],
+             'seconds':perf_counter()-started,

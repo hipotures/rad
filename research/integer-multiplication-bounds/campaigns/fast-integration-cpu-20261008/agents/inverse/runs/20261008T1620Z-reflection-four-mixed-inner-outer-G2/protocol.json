@@ -1,0 +1,30 @@
+{
+  "run_id": "20261008T1620Z-reflection-four-mixed-inner-outer-G2",
+  "status": "queued",
+  "queued_utc": "2026-10-08T16:24:09.694641+00:00",
+  "source_sha256": {
+    "compiled_reflection_four.cpp": "60d8b31e1a89f67d67591385083efb5314963073057dfcad6e3471a4165c411e",
+    "compiled_crt_native_wide.cpp": "2440f8720e0d3012a8f54ae4e3ca36b6127cdaa27c2f6f968e7e699ba6bf8cae",
+    "run_reflection_four_queue.py": "8c39d47f032fd0fd492171d380aeebc06bb48615a5ca80fc1dc238537da50934"
+  },
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "workers": 1,
+  "native_threads": 1,
+  "arguments": [
+    "--family",
+    "mixed-small",
+    "--outer-guard",
+    "2",
+    "--inner-guard",
+    "2"
+  ],
+  "build": "g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic <code/compiled_reflection_four.cpp> -o <ignored-work>/control",
+  "reproduction": "<ignored-work>/control --family mixed-small --outer-guard 2 --inner-guard 2 --output <ignored-work>/certificate.json",
+  "scope": "Four independent simultaneous target words, fixed repeated source BIT and original dirty bank; finite address validation only",
+  "expected": "PASS",
+  "input_generator": "Tag physical address+1 exactly at all source=0/1, valid target digits, arbitrary original bank bits; explicit zero elsewhere",
+  "independent_oracle": "Source BIT1 decrements every valid target digit, zero wraps to modulus-1; invalid digits fixed; source BIT0 fixes all targets",
+  "source_dependency_contract": "All four offsets read the SAME fixed source bit outside target words and legal dirty bank",
+  "negative_contract": null,
+  "raw_execution_path": "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008/work/inverse/reflection-four-20261008T1620Z/20261008T1620Z-reflection-four-mixed-inner-outer-G2"
+}

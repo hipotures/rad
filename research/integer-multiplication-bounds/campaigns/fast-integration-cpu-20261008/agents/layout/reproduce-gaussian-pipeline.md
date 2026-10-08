@@ -119,3 +119,43 @@ The earlier builtin-child attempt was stopped for execution budget before an
 accuracy receipt. Its CPU and resident-memory observation is retained and
 does not constitute a numerical failure. Both native integer backends use
 exact signed arithmetic; GMP runtime is not a fixed-tape complexity bound.
+
+The repaired rank-two oracle can be validated against the previous full-cell
+sum before executing the complete L128 cell. Only the reference sum changes;
+the entire packed input and integer products still run:
+
+```bash
+cp "$LAYOUT/code/check_forward_gaussian_fractional_cells.py" "$LAYOUT_WORK/forward-current.py"
+cp "$LAYOUT_WORK/forward-current.py" "$LAYOUT_WORK/forward-legacy.py"
+patch "$LAYOUT_WORK/forward-legacy.py" < "$LAYOUT/fixtures/forward-before-separable-oracle.patch"
+python3 "$LAYOUT/code/check_forward_separable_oracle_repair.py" --producer "$LAYOUT_WORK/forward-current.py" --legacy "$LAYOUT_WORK/forward-legacy.py" --config "$LAYOUT/configs/forward-three-dimensional-L128-gmp.json" --output "$LAYOUT_WORK/separable-oracle-repair"
+```
+
+Global cyclic inverse reference controls retain the entire cyclic border and
+charge every omitted alias through an analytic Gaussian tail. Reproduce the
+bounded first family with:
+
+```bash
+cp "$LAYOUT/../inverse/code/cyclic_gaussian_reference.py" "$LAYOUT_WORK/cyclic_gaussian_reference.py"
+cp "$LAYOUT/../inverse/code/regular_laurent_kernel.py" "$LAYOUT_WORK/regular_laurent_kernel.py"
+python3 "$LAYOUT/code/check_cyclic_inverse_reference_family.py" --api "$LAYOUT_WORK/cyclic_gaussian_reference.py" --config "$LAYOUT/configs/cyclic-inverse-reference-family.json" --output "$LAYOUT_WORK/global-cyclic-inverse"
+python3 "$LAYOUT/code/check_packed_laurent_inverse.py" --cyclic-api "$LAYOUT_WORK/cyclic_gaussian_reference.py" --laurent-api "$LAYOUT_WORK/regular_laurent_kernel.py" --config "$LAYOUT/configs/packed-laurent-inverse-repaired-and-radius.json" --output "$LAYOUT_WORK/packed-local-inverse"
+```
+
+The packed inverse command checks every core output against global physical
+inverse solutions. It also retains a matched insufficient-radius failure.
+The corrected internal anchor avoids untreated source-period cuts. Current
+source freezes the input/output diagonal words and applies them by integer
+dyadic products; the earliest retained cells used high-precision numerical
+outer diagonal application after the same four exact packed products.
+`packed-laurent-before-origin-guard.patch` and
+`packed-laurent-before-tensor-norm.patch` reconstruct those exact producer
+versions. Derived receipts explicitly correct their slightly omitted tensor
+operator norm factor without altering the immutable raw receipts.
+
+Use `cyclic-inverse-large-reference-family.json` or
+`cyclic-inverse-strict-theta-reference-family.json` for the changed larger
+global controls, and `packed-laurent-large-period-precision.json` for the
+larger genuine packed inverse family. These controls remain numerical rather
+than directed interval proofs. Bare `N^-1` does not include `J'`'s factor
+one half or the full source compression's `D'`.

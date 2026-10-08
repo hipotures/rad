@@ -82,9 +82,13 @@ coefficients in every case.
 The two initial four-case receipts check 4,728 source coefficients each and
 9,456 CRT input addresses each. Their complete inputs, grid precisions, source
 hashes, setup radii, residuals and measured movement ledgers are retained.
-Larger full-pipeline cases are running with target volumes up to 524,288 and
-384--512 bit grids. Larger direct Fourier controls use specified frequencies,
-while their final integer coefficient oracle still covers the complete cube.
+The four larger ordinary cases are complete, with target volumes up to
+524,288 and 320--512 bit grids. The largest source `(61,59,113)` recovers all
+406,687 coefficients, with error `2.494e-50`. The batch takes 4,555.94 seconds;
+these are reference implementation costs. Larger direct Fourier controls use
+specified frequencies, while the final coefficient oracle covers the entire
+cube. The retained larger receipt explicitly separates the source hash
+imported at launch from the subsequently edited filename hashed at completion.
 
 ## Separate source-transform setup sensitivity
 
@@ -161,7 +165,32 @@ final source-volume and power-of-two amplification.
 
 The largest original 3D L128 cell attempt was stopped after 1,524.51 CPU
 seconds and roughly 2.71 GiB resident memory, before an accuracy receipt.
-This is an execution-budget observation, not a numerical negative. A changed
-radius and seed use the pinned exact gmpy2 2.3.0 child-product backend; the
-mathematical factors and independent oracle remain the same. GMP's execution
-speed is not a fixed-tape complexity certificate.
+A changed GMP attempt was also checkpointed after 2,051.10 CPU seconds.
+Static source review identified a full `side^dimension` Gaussian oracle sum
+per output even though the independently generated input is exactly a sum of
+two separable tensors. This was an avoidable oracle workload; the live phase
+was not sampled, so it is not reported as an observed stack location.
+
+The repaired oracle uses exact distributivity and cached independently
+evaluated axis coefficients. A bounded comparison to the old dense oracle
+passes, with identical packed products. The same full 3D L128 GMP input,
+kernel and convolution then completes in 58.23 seconds with error `7.191e-132`,
+262 reserve bits and 461 work bits. The reference's rank-two shortcut does
+not reduce the actual packed tensor input or multiplication. The two stopped
+attempts remain execution-budget observations, not numerical negatives.
+GMP runtime is not a fixed-tape complexity certificate.
+
+The larger physical guarded-CRT family at source `(29,31,37)` completes all
+actual input programs and the final inverse program in 387.32 seconds, with
+coefficient error `6.113e-67`. The matched digit-precision family confirms
+that six-bit digits at work grid 199 recover integers but fail the required
+quarter-unit margin (`0.348862`). Eight-bit digits at grid 200 lose 156
+coefficients, while grid 208 passes with error `0.0108342`. Ten-bit digits at
+grid 204 lose 157 coefficients, while grid 216 passes with error `0.00067018`.
+Twelve-bit digits at grid 220 pass with error `0.00067909`. These are explicit
+finite thresholds, not a replacement for the all-size error calculation.
+
+Genuine packed inverse cells have also been checked against full cyclic
+physical inverse solves; see [the inverse report](packed-laurent-inverse.md).
+Their normalization is bare `N^-1`, so `J'=N^-1/2` and the outer `D'` factors
+must still be supplied in the complete compression interface.
