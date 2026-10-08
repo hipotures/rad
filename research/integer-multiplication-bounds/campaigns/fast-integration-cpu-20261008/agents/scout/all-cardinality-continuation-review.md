@@ -25,6 +25,6 @@ The scout's Cartesian-product implementation was extended independently with thi
 | 23 | 3706 | 2694 | 1485 |
 | 25 | 4328 | 3178 | 1714 |
 
-Majorization and strict concavity imply that the incumbent characteristic is no greater for every `0 < tau < 1`. A smaller alternative characteristic cannot create a stronger feasible moment saving in this family. This is a finite analytic exclusion for the exported graph, not global optimality of multiplication or verification of the upstream graph generator.
+Majorization and strict concavity imply that the incumbent characteristic is no greater for every `0 < tau < 1`. No alternative can satisfy the strict moment inequality at a saving for which the incumbent fails. This is a finite analytic exclusion for the exported graph, not global optimality of multiplication or verification of the upstream graph generator.
 
 The 0.38-second independent run and input hashes are recorded in [all-cardinality-continuation-review.json](all-cardinality-continuation-review.json). Reproduce with the command in the first review, adding `--all-degrees` and writing to the separate receipt path.

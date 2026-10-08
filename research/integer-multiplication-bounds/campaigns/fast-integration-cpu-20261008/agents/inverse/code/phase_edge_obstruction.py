@@ -44,13 +44,16 @@ def exact_case(dimension, core, halo):
     # Its inverse M^-1[0,h] is (-1)^h * 2^(-h*(h+1)).
     q = dimension*core*core
     h = halo+1
-    error = F(1, 1 << (h*(h+1)))
+    # Normalize every completed scalar inverse by 1/2, as in the Gaussian J'
+    # interface. Every normalized toy map is a strict row-norm contraction.
+    error = F(1, 1 << (dimension+h*(h+1)))
     target = F(1, 1 << q)
-    needed = next(k for k in range(q+1) if k*(k+1) >= q)
+    needed = next(k for k in range(q+1) if dimension+k*(k+1) >= q)
     assert error > target
     return {"dimension": dimension, "core": core, "halo": halo,
             "precision_Q": q, "first_omitted_displacement": h,
             "exact_omitted_coefficient": f"1/2^{h*(h+1)}",
+            "normalized_tensor_omitted_coefficient": f"1/2^{dimension+h*(h+1)}",
             "exact_target": f"1/2^{q}", "necessary_halo_lower_bound": needed-1,
             "necessary_halo_over_core": (needed-1)/core,
             "full_tensor_chirp_bits": dimension*core*core,

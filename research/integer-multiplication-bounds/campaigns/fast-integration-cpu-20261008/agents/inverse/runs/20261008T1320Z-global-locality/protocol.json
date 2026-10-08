@@ -1,0 +1,18 @@
+{
+  "run_id": "20261008T1320Z-global-locality",
+  "status": "complete",
+  "question": "Check new exact phase-square geometry and cyclic Gaussian inverse row-tail bounds",
+  "source": "../../code/global_locality_controls.py",
+  "source_provenance": "Independent standard-library implementation, no upstream code imports",
+  "workers": 1,
+  "native_thread_limits": {"OPENBLAS_NUM_THREADS": 1, "OMP_NUM_THREADS": 1, "MKL_NUM_THREADS": 1},
+  "command": "python3 -B agents/inverse/code/global_locality_controls.py --max-size 257 --digits 160 --output work/inverse/raw/20261008T1320Z-global-locality.json",
+  "cwd": "research/integer-multiplication-bounds/campaigns/fast-integration-cpu-20261008",
+  "exact_input_pairs": [[113,128],[1009,1024],[4093,4096],[10000,10004],[2401,2402]],
+  "numeric_input_pairs": [[61,64],[113,128],[257,261]],
+  "decimal_precision": 160,
+  "retained_period_images": [-1,0,1],
+  "omitted_period_images": "Bounded separately by Gaussian exponent; not described as present in the matrix",
+  "metrics": ["exact weighted identity", "exact phase gain", "exact regular gain", "nearest/far exponent bounds", "all basis inverse probes", "sampled original matrix residuals", "maximum circular row tails"],
+  "limitation": "Numerical controls do not formally verify transcendental arithmetic or the general analytic proof"
+}

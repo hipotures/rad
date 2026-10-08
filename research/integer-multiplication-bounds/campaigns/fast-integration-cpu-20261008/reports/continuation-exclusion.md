@@ -8,11 +8,10 @@ label graphs at dimensions 23 and 25. This is an exact finite, scoped exclusion,
 not a new multiplication saving. A separate implementation reproduced the
 component decomposition, cardinalities and every nonidentical comparison.
 
-The coordinator then extended the comparison to all matching cardinalities,
-including the changed exterior bank and moment denominator. That stronger
-extension has passed the coordinator's exact enumeration and is pending the
-separate checker. The original maximum-cardinality conclusion is separately
-reviewed. No claim covers changed producers, changed labels, fixed I+J native
+The comparison extends to all matching cardinalities, including the changed
+exterior bank and moment denominator. That stronger extension passed a separate
+Cartesian-product implementation over all 8,034 local states. No claim covers
+changed producers, changed labels, fixed I+J native
 profiles, other dimensions or other physical compilers.
 
 ## Inputs and experiment
@@ -50,10 +49,11 @@ One bank role disappears per continuation, removing exterior children h and
 `m-2h`, where `m=23*25=575`, and removing `m^tau` from `W*m^tau`.
 Thus the additive numerator-minus-denominator change is the native internal
 change minus `k*(h^tau+(m-2h)^tau)` plus `k*m^tau`. Its signed rank sum is zero.
-The coordinator exhaustively checked 1,485 and 1,714 nonidentical comparisons
-over all cardinalities with the same integer majorization method. None was
-unresolved. Independent validation of these exterior and denominator charges
-is the remaining acceptance step for the stronger exclusion.
+The coordinator and separate checker exhaustively checked 1,485 and 1,714
+nonidentical comparisons over all cardinalities with integer majorization.
+None was unresolved. The exterior and denominator charges passed source review.
+This excludes a better native power-interchange saving in this entire exported
+matching family for every `0<tau<1`.
 
 ## Recovery and attribution
 
@@ -64,6 +64,8 @@ positive-label producer, original matching and copied-center physical schedule
 belong to the pinned upstream contributors; source credits and Apache-2.0
 license remain in the retained source and [license](../code/LICENSE.txt).
 The independent review is [here](../agents/scout/continuation-review.md).
+The [full characteristic review](../agents/scout/all-cardinality-continuation-review.md)
+supersedes its maximum-cardinality restriction.
 Input hashes are in [input-manifest.json](../input-manifest.json).
 
 The useful implication is to change labels, actual producers or native

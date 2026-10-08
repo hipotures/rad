@@ -95,6 +95,16 @@ def main():
         for name, value in compact[key].items():
             if value != old.get(key, {}).get(name):
                 changes.append({"kind": key, "name": name, "previous": old.get(key, {}).get(name), "current": value})
+    if args.forks:
+        previous_forks = OWN / "latest-fork-observation.json"
+        old_forks = json.loads(previous_forks.read_text())["forks"] if previous_forks.exists() else old.get("forks", {})
+        for repository, branches in compact["forks"].items():
+            for branch, sha in branches.items():
+                before = old_forks.get(repository, {}).get(branch)
+                if before != sha:
+                    changes.append({"kind": "fork_branches", "name": repository + "/" + branch,
+                                    "previous": before, "current": {"sha": sha, "title": branch}})
+        previous_forks.write_text(json.dumps({"observed_utc": stamp, "forks": compact["forks"]}, indent=2) + "\n")
     result = {"observation": compact, "changes": changes}
     destination = OWN / "observations" / (stamp + ".json")
     destination.parent.mkdir(exist_ok=True)

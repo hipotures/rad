@@ -14,6 +14,8 @@ The leading discovered public claim is [CrocSwap PR 37](https://github.com/CrocS
 
 The leading balanced assembly already has semantic `C1=1` and permits `epsilon` approaching one. With `q = a_bit*(1-2h)` it chooses `epsilon=(1-h)/(1+q)`. Its scoped limit is `a_bit/(1+a_bit)`. The complex stopped-leaf condition `(1-beta)*a_complex > a_bit` survives, with `beta=1/20` and `a_complex=717/10^7`, but is not binding for this witness. The product row degree 2000 is explicitly charged. An isolated removal of the old `epsilon<1/2` ceiling is therefore not a new leading result.
 
+The intake was superseded during the campaign by PR 38 and then PR 39. [The live findings](live-findings.md) records the exact heads, changed profiles and later validation receipts; PR 39 claims `kappa=3.886675852e-5` and was ready for review by the 13:11 observation.
+
 The surviving physical rows include prefix movement, phase localization and phase boundaries, with savings `1-epsilon`, `1-epsilon-delta`, and `min(1-epsilon-delta,r-delta)`. A stronger full algorithm must change the limiting rows or improve the bit child-width moment.
 
 ## Records and recovery
@@ -21,6 +23,9 @@ The surviving physical rows include prefix movement, phase localization and phas
 - [Input manifest](input-manifest.json): public pinned commits, source snapshot paths, archive sizes/hashes, licenses and acquisition commands. Source snapshots are ignored execution inputs, not contents of the Git clone.
 - [Intake](intake.json): PR metadata and public claim text as observed.
 - [Fork heads](fork-heads.json): directly queried public fork branches at intake.
+- [Analytic leads](analytic-leads.md): tensor packing, a proved regular Laurent estimate and explicit missing machine interfaces.
+- [Deferred-reservoir criticism](deferred-reservoir-review.md): source-grounded review of the new equal-axis transform schedule.
+- [Continuation reviews](all-cardinality-continuation-review.md): independent complete-profile enumeration and universal concavity exclusion for the coordinator's exported generic graph.
 - `observations/`: timestamped compact observations and differences.
 - [refresh_public_sources.py](refresh_public_sources.py): one read-only `gh api` observation, with optional broader searches; it never fetches RaD branches or performs Git mutations.
 
