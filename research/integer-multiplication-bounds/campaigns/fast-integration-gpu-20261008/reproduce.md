@@ -71,3 +71,63 @@ The stronger global-dual certificate givesκ521461257/12500000000000 after all f
 The uniform hybrid source proof uses a different25 basis, beta=1/57. Its complete exact certificate is scout/gpu-parameter-results/hybrid-half-uniform-data-certificate.json; the independent audit is complete-data-input-audit-20261008T1655.json. Every47×47 integer99M matrix has entries bounded by7542. The 24 proven primes exceed the strict740bitminor bound, and directNE tables are bounded above at every pair/prime. Expected lower ranks are attained using the prior complete65521/1000003 arrays with disjoint exceptions. See retained scout/code/gpu_basis_family_crt_wide.py and its CUDA checker source hashes. GPU environment and regenerated input tables must match the audit; per-prime table hashes are deterministic reconstructions, not GPU readbacks. The exact hybrid composition remains a candidate until its new basis/interface/map reconstruction gates pass.
 
 The public PR53 skip-prefix identity is independently implemented in code/independent_skip_search.py on the pinned PR36 generator, with retained authorship credit. No PR53/54 derivative implementation is needed. After rebuilding the already documented moment_match_positive and match_exported_dag binaries into a task-owned external directory, run the script with --source <pinnedPR36> --code "$C/agents/graph/code" --work <fresh-external-run> --workers 3 --cached-builds <own-rebuilt-binary-dir>. The default147 joint configurations include smallh10 controls and23/25 producers. Threshold3/4 continuation uses --dimensions 23 25 --thresholds 3 4 --seed 1500000041 and6workers after reserving the global CPU allocation. Scalar/output verification, support disjointness and positive native ranks are discovery gates; fresh matrix profiles, full compiler and exact composition remain mandatory.
+
+
+## Pinned skip-prefix baseline and independent arithmetic
+
+Download read-only public snapshots outside the checkout, with `gh`, Git, and Python3.12+ available:
+
+```sh
+C=research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008
+python3 "$C/code/fetch_public_baselines.py" --work /tmp/skip-prefix-public-sources-fresh
+P54=/tmp/skip-prefix-public-sources-fresh/pr54-84eb0b067741dc2690da837743fda06d133da865
+env PYTHONDONTWRITEBYTECODE=1 python3 "$P54/research/skip-clones/witness.py" --output /tmp/skip-prefix-public-arithmetic.json
+python3 "$C/code/explicit_profile_composition.py" \
+  --axes "$C/fixtures/pr54-original-axis-profiles.json" \
+  --phase "$C/fixtures/phase-pr36.json" \
+  --assembly "$C/code/adopted_pr37_balanced_assembly.py" \
+  --geometry "$C/agents/scout/gpu-parameter-results/pr54-IJ-conjugate-data-compatibility-20261008T1714.json" \
+  --data "$C/fixtures/uniform-21-17-data-profile.json" \
+  --output /tmp/skip-prefix-independent-baseline.json
+```
+
+Both paths must return bit saving1132311451/25000000000000, κ141532521/3125000000000 and W159592676. The independently authored path reconstructs complete child counts, moments and all47 strict assembly inequalities; its frozen local matrices alone are not a source or compiler verifier. Fresh native/physical replay is recorded in `agents/graph/results/public-pr54-rebuild-1710.json` and `agents/geometry/results/pr54-unmodified-profile-comparison-20261008T1717.json`. All606 paid edits, source/target/dirty basis bits in both orientations, and the two full matrix profiles were independently reconstructed. Full-data compatibility includes exact recovery of all ten bad-primary-prime pairs and the unchanged complete coverage proof.
+
+Selected independent PR36 skip-prefix configurations can now be rerun with `code/independent_skip_search.py --config-file <frozen-configurations.json>` and its ordinary source/code/work/build arguments. The native matching binaries must be rebuilt from the retained matching sources before publication-level recovery. Each replay requires a fresh external output directory.
+
+
+## Accepted enlarged-frame skip-prefix construction
+
+The complete unchanged selected constructor/profile inputs are retained as six unsplit gzip files under `evidence/skip-selected-1740/`; `configs/skip-selected-publication-manifest-1740.json` records their original SHA256 values. Recovery does not require the old absolute execution paths embedded as provenance. Use a fresh external directory:
+
+```sh
+C=research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008
+R=/tmp/enlarged-skip-recovery-fresh
+mkdir "$R"
+python3 "$C/code/fetch_public_baselines.py" --work "$R/public"
+mkdir "$R/pr36"
+git --git-dir "$R/public/objects.git" archive 11817ccacb564bb7f98789c20dc11d3fece207e3 | tar -x -C "$R/pr36"
+for h in 23 25; do
+  gzip -cd "$C/evidence/skip-selected-1740/agents/graph/fixtures/skip-selected-parent-$h.json.gz" > "$R/parent-$h.json"
+  if [ "$h" = 23 ]; then selected=skip-cloned-axis-23; else selected=skip-fixed-selected-axis-25; fi
+  gzip -cd "$C/evidence/skip-selected-1740/agents/graph/results/$selected.json.gz" > "$R/selected-$h.json"
+  gzip -cd "$C/evidence/skip-selected-1740/agents/geometry/results/best-skip-enlarged-fixed-axis-$h.json.gz" > "$R/profile-$h.json"
+  env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python3 "$C/agents/graph/code/rebuild_skip_selected.py" \
+    --source "$R/pr36" --work "$R/graph-$h" --parent "$R/parent-$h.json" \
+    --selected "$R/selected-$h.json" --skip-driver "$C/code/independent_skip_search.py" --dirty
+  python3 "$C/agents/geometry/code/reproduce_positive_profile.py" \
+    --dag "$R/graph-$h/clones/round-2/dag.bin" \
+    --selected "$R/graph-$h/clones/round-2/selected-links.json" \
+    --expected "$R/profile-$h.json" --source-receipt "$R/graph-$h/rebuild-result.json" \
+    --work "$R/matrices-$h" --output "$R/profile-receipt-$h.json"
+done
+python3 "$C/code/explicit_profile_composition.py" \
+  --axes "$C/fixtures/skip-enlarged-fixed-axis-profiles.json" \
+  --phase "$C/fixtures/phase-pr36.json" \
+  --assembly "$C/code/adopted_pr37_balanced_assembly.py" \
+  --geometry "$C/agents/scout/gpu-parameter-results/pr54-IJ-conjugate-data-compatibility-20261008T1714.json" \
+  --data "$C/fixtures/uniform-21-17-data-profile.json" \
+  --output "$R/exact-certificate.json"
+```
+
+Expected: R32669/42974, W159392254, bit saving4551960559/10^14, κ1137938341/25000000000000, all47 strict constraints and seven positive margins. The exact source-only path, native matrix rebuild and independent compiler were exercised on both selected axes; acceptance hashes are in `reports/skip-enlarged-fixed-acceptance-1740.json`. Do not substitute the different h25 DAG with equalR. A fresh automatic public acquisition helper replay also passed for all three pinned sources; live PR54 head has since advanced, while the requested construction pin remains84eb0b067741dc2690da837743fda06d133da865.

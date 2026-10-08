@@ -54,6 +54,8 @@ def main():
     p.add_argument('--dimensions',type=int,nargs='+',default=[10,23,25])
     p.add_argument('--thresholds',type=int,nargs='+',default=[2])
     p.add_argument('--seed',type=int,default=1300000033)
+    p.add_argument('--config-file',type=Path,
+                   help='Replay an explicit frozen configuration list instead of the discovery grid.')
     a=p.parse_args();assert not a.work.exists();a.work.mkdir(parents=True)
     sys.path.insert(0,str(a.code));from producer_search import initialize
     import shutil
@@ -70,11 +72,18 @@ def main():
                         if h==10 and (tree!='left' or pp!='common-rotate' or mode!=2):continue
                         configs.append(dict(h=h,threshold=threshold,grouping='pairs',tree=tree,mode=mode,
                             seed=a.seed+104729*len(configs),point_policy=pp,vector_policy=vp))
+    if a.config_file:
+        frozen=json.loads(a.config_file.read_text())
+        configs=frozen['configurations'] if isinstance(frozen,dict) else frozen
+        assert configs and all(set(c)=={'h','threshold','grouping','tree','mode','seed','point_policy','vector_policy'} for c in configs)
+        assert all(c['grouping']=='pairs' and c['vector_policy'] in ['reverse-all','top-reverse-support-left','top-reverse-support-right'] for c in configs)
     result=dict(status='running',started_utc=datetime.now(timezone.utc).isoformat(),command=sys.argv,
         source_revision='11817ccacb564bb7f98789c20dc11d3fece207e3',
         borrowed_public_identity='PR53 skip-prefix strips only; no held implementation/source',
         authored_source_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),
         configurations=configs,workers=a.workers,rows=[])
+    if a.config_file:
+        result['frozen_configuration_input']=dict(path=str(a.config_file),sha256=sha256(a.config_file.read_bytes()).hexdigest())
     (a.work/'protocol.json').write_text(json.dumps({k:v for k,v in result.items()if k!='rows'},indent=2)+'\n')
     with ProcessPoolExecutor(max_workers=a.workers,mp_context=multiprocessing.get_context('fork'),
          initializer=initialize,initargs=(a.source,a.work,builds/'moment_match_positive'))as pool:
