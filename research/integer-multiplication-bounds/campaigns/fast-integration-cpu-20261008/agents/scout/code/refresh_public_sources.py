@@ -26,7 +26,7 @@ WATCHED = {
     "platypii/integer-mult-bounds-lean": "master",
 }
 CAMPAIGN_START = "2026-10-08T12:40:55Z"
-KNOWN_EXCLUDED_PRS = {41, 42, 43, 44, 46, 47}
+KNOWN_EXCLUDED_PRS = {41, 42, 43, 44, 46, 47, 48, 49, 50, 51, 54}
 
 
 def api(path: str):

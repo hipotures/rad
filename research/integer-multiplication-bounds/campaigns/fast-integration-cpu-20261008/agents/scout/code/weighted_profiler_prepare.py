@@ -72,7 +72,11 @@ def main():
     target = target.replace(ADJACENCY,WEIGHTED)
     reconstruction='// Reconstruct the actual transition multiset before changing the common basis.'
     assert target.count(reconstruction)==1
-    target=target.replace(reconstruction,'if(argc==6){assert(std::string(argv[5])=="--matching-only");return 0;}\n'+reconstruction)
+    exact_uses='''if(argc>=3){std::ofstream useout(std::string(argv[2])+".uses.bin",std::ios::binary);
+ U header[2]={n,U(matches)};write_array(useout,header);
+ for(U donor:donors)if(leftmatch[donor]){U pair[2]={donor,uses[leftmatch[donor]-1]};write_array(useout,pair);}assert(useout);}
+'''
+    target=target.replace(reconstruction,exact_uses+'if(argc==6){assert(std::string(argv[5])=="--matching-only");return 0;}\n'+reconstruction)
     needle='std::vector<U>leftmatch(n)'
     assert target.count(needle)==1
     sorting='''std::sort(donors.begin(),donors.end(),[&](U a,U b){
@@ -93,6 +97,7 @@ std::cerr<<"SURROGATE frames "<<scout_surrogate.frame_count()<<" pairs "<<scout_
                  header_sha256=hashlib.sha256(header.read_bytes()).hexdigest(),wrapper_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                  compile_command=command,compiled=False,crt_enclosures=[crt_enclosure(h) for h in range(6,args.max_dimension+1) if h!=9],
                  ranking='one-field sum(t*log(t)) marginal matching proxy, deterministic seed/noise_milli',
+                 matching_identity='Canonical sorted donor/exact-use pairs in links.uses.bin; node-pair link order alone is not a complete identity',
                  verification='unchanged full five-prime rational profiles on selected ORIGINAL matching',
                  invocation='binary input.bin fresh.links [seed [noise_milli [--matching-only]]]',
                  scope='HK preserves maximum cardinality; no weighted matching or controller optimum is asserted')

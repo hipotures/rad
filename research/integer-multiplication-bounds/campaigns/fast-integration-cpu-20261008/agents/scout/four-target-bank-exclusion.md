@@ -1,0 +1,7 @@
+# Independent fixed-control bank exclusion review
+
+The two-state collision in the inverse agent’s [four-target report](../inverse/reports/four-target-reflection-controls.md) is correct. For moduli2,3,4,5, Y=0 and offsets f_i=(s_i−1)c, all four prefix predicates equal c. The preceding conditional reflection fixes these two current states: only the first borrowed bank bit can be nonzero, and its first interval is[0,1), whose reflection fixes zero. Thus c=0 loads0, while c=1 loads1+15=0 modulo16. The complete remaining physical address agrees, so this ordinary load is nonbijective.
+
+For every guard G≥2, take a binary target, Y=0, source c=parity(U), offset f=c, and compare U=1 and U=2. Both are below2^G−1, hence both satisfy the stated outer good predicate. The conditional reflection fixes Y=0. Their prefix loads are1+1=2 and2+0=2 modulo2^G. Increasing the guard cannot repair dependence of an endpoint predicate on the bank being overwritten. The analytic argument holds for all G≥2; [the small exact arithmetic receipt](four-target-bank-exclusion.json) checks G2 through8 and the four-target example.
+
+The legal construction explicitly excludes every active endpoint source from its inactive-node banks. This negative therefore identifies a necessary interface premise and does not refute that construction. The raw native FAIL and the original expected-negative classifier mismatch must remain unchanged; the independent review makes no new native execution claim.

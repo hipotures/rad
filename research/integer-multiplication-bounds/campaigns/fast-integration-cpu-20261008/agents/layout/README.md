@@ -104,3 +104,20 @@ Subsequent complete replacements are retained separately:
 All of these remain bounded experiments. Reference Gaussian compression,
 reference repair passes and the inherited known-bit router premise are charged
 or identified explicitly; no all-size exponent follows from finite PASS rows.
+
+The later complete multiplier at source `(251,241)` now uses genuine packed
+forward AND inverse Gaussian cells inside every source transform. All 60,491
+integer coefficients recover correctly, with error `6.891e-25`; unselected
+outputs use explicitly charged repair references. The finite inverse regular
+fraction is small and is not identified with an all-size sparse-density bound.
+
+- [Whole genuine-forward/genuine-inverse composition](results/full-pipeline-packed-both.json).
+- [Packed Laurent inverse and global cyclic reference report](packed-laurent-inverse.md).
+- [Completely dyadic outer-factor inverse controls](results/packed-laurent-dyadic-outer-precision.json).
+- [Fixed-tape tensor catalogue lemma](tensor-catalogue-tape-lemma.md).
+- [Exact growing-prefix tape movement and rounding controls](results/tensor-catalogue-tape-controls.json).
+
+The tensor catalogue construction uses geometrically growing prefix buffers
+on fixed old/new/catalogue tapes, paying catalogue rewinds. Exact controls
+through262,144 final records have `sum_j V_j<2V_d` and obey the rounded-prefix
+error envelope. Arithmetic child costs remain separately charged.

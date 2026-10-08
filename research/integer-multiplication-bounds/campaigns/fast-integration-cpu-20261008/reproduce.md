@@ -156,3 +156,11 @@ python3 -B agents/scout/code/fixed_controller_score.py --first fixtures/changed-
 Expected: strictly_passes=true, W182313019, mass104828139025, deficit1846900.
 The reviewed integrated witness is kappa8047514549749743/200000000000000000000,
 with the same epsilon/q/beta recipe and named native/all-size premises.
+
+## Joint weighted original matching
+
+```bash
+python3 -B agents/scout/code/fixed_controller_score.py --first fixtures/weighted-fixed-h23-seed0.json --second fixtures/weighted-fixed-h25-seed1.json --saving 402783398207/10000000000000000 --output work/fresh-weighted-joint.json
+```
+
+Expected: strictly_passes=true, W182180194, total_rank104751764650, deficit1846900. Root exercised this bounded path. See reports/weighted-fixed-composition.md and scout recovery receipts for deterministic matching regeneration and exact occurrence identities. The --previous selector now excludes planned IDs as well as complete results, preventing concurrent repeated profiling.

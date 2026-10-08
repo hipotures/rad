@@ -19,7 +19,7 @@ shared source BIT c: c=1 decrements each valid target digit, with zero wrapping
 to modulus-1; c=0 fixes targets. Invalid digits are fixed in either case.
 The full reverse event program must recover every tag and padding zero.
 
-## Completed positive case
+## Completed positive cases
 
 [20261008T1620Z-reflection-four-mixed-G1](../runs/20261008T1620Z-reflection-four-mixed-G1/protocol.json)
 uses target moduli (2,3,4,5), one-bit inner/outer guards and eight original bank
@@ -35,6 +35,25 @@ passes the independent decrement oracle and the complete reverse program:
 The counts and runtime concern this finite program and its tagged input.
 They are not asymptotic guard probabilities, sparse-volume proofs or evidence
 for a multiplication exponent.
+
+[20261008T1620Z-reflection-four-mixed-inner-G2](../runs/20261008T1620Z-reflection-four-mixed-inner-G2/protocol.json)
+changes the inner F_u digits to two bits, while keeping all four target moduli
+and one-bit outer controls. Twelve original bank bits supply both the scratch
+and complete top guard; the initial physical problem contains those bits.
+Its full T=2,097,152 cube has 983,040 valid tagged records. It passes the same
+independent oracle and entire reverse program with 109 events, 48 F_u calls,
+480 rotations and 98 actual radix repairs. It restores 825,504 wrong outer
+records and 206,720 nonzero invalid intermediate records. The summed radix
+record count is 106,414,080; native validation takes 96.82 seconds.
+
+[20261008T1620Z-reflection-four-unequal-odd-G1](../runs/20261008T1620Z-reflection-four-unequal-odd-G1/protocol.json)
+uses unequal odd moduli (3,5,7,11), twelve target bits and ten original bank
+bits. Its T=8,388,608 cube has 2,365,440 valid tags. It passes both complete
+oracles with the same 109 events and 48 F_u calls, restoring 2,754,712 wrong
+outer records and 744,304 nonzero invalid intermediate records. Its 98 actual
+radix repairs process 765,394,944 summed records; native validation takes
+546.16 seconds. This extends the simultaneous interface beyond binary target
+periods without changing the source or bank exclusion premise.
 
 ## Deliberate fixed-control bank violation
 
@@ -61,6 +80,16 @@ as its own predicate register, not a failure of the legal bank construction.
 The all-size CRT lemma selects banks from inactive node groups, excluding
 all active left endpoint controls, and satisfies that necessary condition.
 
+The same issue is not confined to the one-bit guard's bad set. A single binary
+target gives an exact stronger counterexample for every G>=2. Let B=2^G,
+the endpoint control be c=parity(U), offset f=c, target Y=0 and T=0. Compare
+U=1 and U=2; both lie below B-1, so both satisfy the outer good predicate.
+In phase [0,f), the conditional reflection fixes Y=0: for U=1 its complete
+reflection is -Y modulo2; for U=2 its parity is zero. The interval predicate
+is c, and its load sends 1+1 to2 and 2+0 to2 modulo B. This is an analytic
+two-state collision, not an additional executed native run. It proves that
+larger guards cannot compensate for this missing fixed-control premise.
+
 The original certificate is retained unchanged with status FAIL. The run was
 predeclared as a negative, but the native exception classifier only recognized
 repair/oracle errors and did not classify a nonbijective ordinary map as
@@ -75,9 +104,9 @@ partial program ran.
 The original queue restored its positively identified owned Python worker
 when the classification mismatch stopped it. A fresh retained continuation
 controller skips both completed results without rerunning them and executes
-only the previously queued legal cases: mixed targets with inner-G2, unequal
-odd targets (3,5,7,11), and mixed targets with inner/outer-G2 together. These
-are running/queued until their own certificates are completed. The controller
+only the previously queued legal cases. The mixed inner-G2 and unequal odd
+cases now pass as retained above. The mixed inner/outer-G2 case remains
+running until its certificate is completed. The controller
 uses one replacement compute slot and resumes the paused worker in finally.
 
 To reproduce a complete case, use its frozen code directory. Compile

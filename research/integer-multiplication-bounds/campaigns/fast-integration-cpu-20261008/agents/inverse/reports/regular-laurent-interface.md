@@ -106,6 +106,38 @@ evidence for one regular core, outside u*theta>=1; it is not an interval proof
 or an all-size implementation. The receipt separately labels the global
 phase-boundary replacement checked by its numerical oracle.
 
+Further retained controls are in
+[packed-laurent-inverse-repaired-and-radius.json](../../layout/results/packed-laurent-inverse-repaired-and-radius.json)
+and
+[packed-laurent-large-period-precision.json](../../layout/results/packed-laurent-large-period-precision.json).
+All use actual signed packed multiplication and the complete cyclic reference:
+
+| Source periods / common target | Core side | Radius | Target bits | Total chirp reserve bits | Maximum reference disagreement | Outcome |
+|---|---|---|---|---|---|---|
+|8189,8191 /8192 |96 |42 |384 |72 |3.72e-161 |PASS |
+|4093,4091 /4096 |64 |8 |256 |57 |2.92e-48 |Expected precision failure |
+|4093,4091 /4096 |64 |28 |256 |128 |6.19e-126 |PASS, same input seed as radius8 |
+|65521,65519 /65536 |128 |40 |512 |96 |3.20e-202 |PASS |
+|65521,65519 /65536 |128 |58 |768 |132 |3.34e-281 |PASS |
+
+The second source pair uses explicit internal origins2730/1023; its retained
+distance is[-90,89]. The larger pair uses4368/3854 and distances[-104,103]
+or[-122,121]. The first attempted automatic anchor for8191/8192 equaled the
+source period and was rejected; no result at that cut is claimed. The repaired
+origin and explicit cut check prevent an uncharged wrap assumption.
+
+The radius8 failure and radius28 success share input seed202610103103; they
+discriminate the actual required inverse halo. Both the numerical target and
+analytic local tail fail at radius8. The derived receipts also include the
+slightly greater-than-one tensor inverse norm (roughly1.000014 to1.000168),
+which the first raw sum of one-axis tail bounds omitted. Original raw receipts
+are unchanged, and including this factor preserves every outcome. This is
+the numerical version of the common-L normalization obligation proved below.
+Every global reference receipt includes its residual and all-alias estimate;
+agreement values alone are not asserted to be certified true solution errors.
+Later layout variants explicitly freeze diagonal factors as integer words;
+their finite precision integration is separate from these initial controls.
+
 The same weighted row-norm argument applies to every finite principal Toeplitz
 block: weighting rows and columns by `exp(A*j)` or `exp(-A*j)` yields the
 corresponding directional decay. A local principal inverse and the Laurent

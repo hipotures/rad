@@ -159,3 +159,41 @@ global controls, and `packed-laurent-large-period-precision.json` for the
 larger genuine packed inverse family. These controls remain numerical rather
 than directed interval proofs. Bare `N^-1` does not include `J'`'s factor
 one half or the full source compression's `D'`.
+
+The complete multiplier with both directions supplied by genuine local cells
+uses the same frozen sources and a separately charged repair reference:
+
+```bash
+python3 "$LAYOUT/code/check_full_pipeline_packed_both.py" --producer "$LAYOUT_WORK/producer.py" --forward-stage "$LAYOUT_WORK/forward.py" --cyclic-api "$LAYOUT_WORK/cyclic_gaussian_reference.py" --laurent-api "$LAYOUT_WORK/regular_laurent_kernel.py" --config "$LAYOUT/configs/full-pipeline-packed-both.json" --output "$LAYOUT_WORK/packed-both-integer"
+python3 "$LAYOUT/code/check_tensor_catalogue_tapes.py" --config "$LAYOUT/configs/tensor-catalogue-tape-controls.json" --output "$LAYOUT_WORK/tensor-catalogue-tapes"
+```
+
+The first command checks every source coefficient after actual packed forward
+and inverse cells, Gaussian selectors/normalization, synthetic FFT, suffix
+twists, polynomial-record multiplication and final integer recovery. Every
+unselected Gaussian output uses a charged reference repair. The second is an
+exact independent word-head movement and rounded-prefix discriminator for
+the growing tensor catalogue construction, not an arithmetic benchmark.
+
+`full-pipeline-packed-both-cyclic-cut.json`,
+`full-pipeline-packed-both-radius4.json` and
+`full-pipeline-packed-both-higher-digits-radius4.json` preserve changed queued
+whole-pipeline controls. A minimal one-CPU serial runner is
+`code/run_scientific_serial_queue.py`; its JSON specifies complete argv arrays
+and it retains each return status/log before starting the next distinct job.
+Commands containing ignored frozen copies require those copies to be made
+first. Do not name the runner copy `queue.py`, which shadows Python's standard
+library queue module used by the forward producer.
+
+For the further actual CRT integration, prepend the independent driver and
+provide the already frozen physical API:
+
+```bash
+python3 "$LAYOUT/code/check_full_packed_both_actual_crt.py" --packed-wrapper "$LAYOUT/code/check_full_pipeline_packed_both.py" --crt-api "$LAYOUT_WORK/compiled_crt_payload_api.py" --producer "$LAYOUT_WORK/producer.py" --forward-stage "$LAYOUT_WORK/forward.py" --cyclic-api "$LAYOUT_WORK/cyclic_gaussian_reference.py" --laurent-api "$LAYOUT_WORK/regular_laurent_kernel.py" --config "$LAYOUT/configs/full-pipeline-packed-both.json" --output "$LAYOUT_WORK/packed-both-actual-CRT"
+```
+
+This performs actual CRT input and final inverse programs and pays the named
+binary/source field conversions. A two-prime case has ordinary top nodes;
+actual multi-target F_u execution is documented by the separate earlier
+three-prime controls. Pending actual-CRT integration is not claimed as a
+completed reproduction until its receipt is retained.

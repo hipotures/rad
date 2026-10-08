@@ -106,8 +106,14 @@ parity by `c_i`; the two conditional involutions give exactly `J_i^c_i`.
 The predicates are preserved throughout each completed `J_i`, so unloading
 restores every original dirty `U_i`. This remains true for arbitrary initial
 parities. All endpoints' controls must stay fixed and outside ALL active
-targets. This is why the old triangular per-axis schedule cannot simply be
-declared parallel.
+targets. In particular, endpoint controls must not be borrowed as the U or T
+digits whose prefix additions read those endpoints. The bank construction
+below excludes every active left control. The
+[four-target native counterexample](four-target-reflection-controls.md)
+shows why: if the fixed source c is also U[0], an interval-predicate load
+maps both U=0 and U=1 to zero for an explicit four-target phase. The raw map
+then has no address inverse even before sparse repair. This is why the old
+triangular per-axis schedule cannot simply be declared parallel.
 
 Every primitive in this program is globally bijective. Reversing the four
 operations and reversing the actual guarded additions gives a polynomial
@@ -121,8 +127,9 @@ For `0<=f<s<=2^L`, right rotation by `f` on `[0,s)`, fixing `[s,2^L)`, is:
 reflect `[0,s)`, then reflect `[0,f)`, then reflect `[f,s)`.
 If `y<s-f`, the result is `y+f`; otherwise it is `y+f-s`.
 Padded target addresses remain fixed. All three reflections can be batched
-as above when each pair's offset and modulus controls are outside all active
-target words. Each completed good-address call restores `U,T`.
+as above when each pair's offset and modulus controls stay fixed outside all
+active target words and borrowed U,T digits. Each completed good-address
+call restores `U,T`.
 
 For `m` active targets, the common outer bad set is
 `some U_i=B-1 or T_i=B-1`. Its density in the complete binary address box is

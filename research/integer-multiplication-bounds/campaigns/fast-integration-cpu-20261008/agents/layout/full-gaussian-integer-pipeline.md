@@ -194,3 +194,34 @@ Genuine packed inverse cells have also been checked against full cyclic
 physical inverse solves; see [the inverse report](packed-laurent-inverse.md).
 Their normalization is bare `N^-1`, so `J'=N^-1/2` and the outer `D'` factors
 must still be supplied in the complete compression interface.
+
+## Complete genuine forward and inverse cell composition
+
+The producer `code/check_full_pipeline_packed_both.py` now replaces both
+directions inside all three complete source transforms. Forward expansions
+use actual paired-grid signed tensor products. Compression selects the
+original nearest target rows, applies actual regular Laurent tensor inverse
+products with the centered W factors, and supplies D' and the required
+power-of-two normalization. Both source-period cuts and selector phase jumps
+are excluded from regular cells. The local error screen includes the full
+retained chirp reserve, tensor operator norm and output D' amplification.
+
+Source `(251,241)`, target `256^2`, alpha4 and work grid192 passes all60,491
+integer coefficient comparisons and the independent carried integer product
+in432.00 seconds. Maximum coefficient error is `6.891e-25`. Every one of the
+three compression stages contributes108 genuinely packed inverse outputs;
+the rest are explicit charged repairs. The entire periodic dense repair
+reference is computed and charged, so this is a correctness prototype rather
+than an implementation benchmark for the asymptotic sparse repair lemma.
+
+Completely dyadic input/output outer-factor inverse cells also pass target
+768 and1024 bits at source periods65,513--131,071. Maximum global inverse
+comparison errors are `2.617e-281` and `3.756e-346`, with186.37 and753.08 seconds
+wall time. Their exact four-product core and all outer applications use frozen
+dyadic words; arbitrary precision is used for setup and independent reference
+coefficients. These finite parameters remain distinct from an all-size cutoff.
+
+Changed cyclic source cuts, higher digit scales and smaller inverse radii are
+queued serially per assigned CPU slot. Actual physical CRT composition with
+the packed-both pipeline has an independent driver; pending runs are not
+described as completed evidence.
