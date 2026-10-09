@@ -1,6 +1,9 @@
 # Frontier sprint, 2026-10-09
 
-Status: active. The supplied 14-page report and matching arithmetic package have been read and checked. The sprint extends the completed parent campaign and preserves its frozen evidence.
+Status: the bounded construction series is concluded; no candidate meets the
+user's one-percent publication condition. The supplied 14-page report and
+matching arithmetic package have been read and checked. The sprint extends
+the completed parent campaign and preserves its frozen evidence.
 
 The strongest independently accepted conditional result is now
 `61728289/100000000000 = 0.000617282890`, from a freshly compiled binary
@@ -16,15 +19,17 @@ The converged PR161 complex frame placement has passed independent forward geome
 
 The user's publication condition requires at least 1% improvement in final
 kappa over the live maximum, including drafts and retained main. At
-2026-10-09 10:09:42 UTC the leading PR176 head is
-`96dc228f426252c969c99d3c4c1eb97cc44b7184`, with
-`81117750407097/125000000000000000 = 0.000648942003256776`;
-the minimum qualifying score is
-`8192892791116797/12500000000000000000 = 0.00065543142328934376`.
-The full native verification is author-reported; the scout independently
-observed all 48 hosted checks succeeding. Retained reviewed main is separate.
-Fresh source-specific construction batches continue, including explicit
-target-bank terminal-sink operations. The historical provisional package is
+2026-10-09 10:50:52 UTC the leading draft PR179 head is
+`15e21dca486b4deacb07608d65021962e5e6086a`, with
+`655920176686219/1000000000000000000 = 0.000655920176686219`; the minimum qualifying score is
+`66247937845308119/100000000000000000000 = 0.00066247937845308119`.
+The scout independently observed 45 successful exact-head hosted checks.
+The new draft body still reports its full local gate and CI pending; these
+evidence levels are kept separate.
+Reported full local reproduction remains separate from hosted checks and
+retained reviewed main. Source-specific construction batches, including actual
+target-bank terminal-sink operations and the final binary continuation, are
+frozen. The historical provisional package is
 research evidence; no publication-ready package, record script or upstream PR
 has been created.
 
@@ -33,6 +38,7 @@ has been created.
 - [Historical alternate-complement evidence](agents/complements/historical-e1-report.md)
 - [Baseline and independent review](agents/baseline/README.md)
 - [Construction status and acceptance scope](reports/construction-status.md)
+- [Final measured outcome, limits and next research direction](reports/final-sprint-assessment.md)
 - [Current exact public frontier](public-frontier.json)
 - [Signed-synthesis negative result](agents/signed/report.md)
 - [Input provenance](input-manifest.json) and [artifact recovery](artifact-manifest.json)

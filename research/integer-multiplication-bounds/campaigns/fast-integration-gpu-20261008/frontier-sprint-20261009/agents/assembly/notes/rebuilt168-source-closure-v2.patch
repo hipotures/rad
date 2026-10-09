@@ -1,0 +1,29 @@
+--- a/agents/assembly/code/review_rebuilt168_ceiling.py
++++ b/agents/assembly/code/review_rebuilt168_ceiling.py
+@@ -115,7 +115,7 @@
+     p.add_argument("--output",type=Path,required=True)
+     args=p.parse_args();need(not args.output.exists(),"Fresh review identity required")
+     config=json.loads(args.config.read_text());author=json.loads(args.certificate.read_text())
+-    need(len(config["sources"])==74 and len(config["inputs"])==22,"Source168 rebuilt inventory")
++    need(len(config["sources"]) in (74,79) and len(config["inputs"])==22,"Source168 rebuilt inventory")
+     rows={name:json.loads(pinned_bytes(args.sprint,pin)) for name,pin in config["inputs"].items()}
+     for pin in config["sources"].values():pinned_bytes(args.sprint,pin)
+     exact_match(author["source_pins"],config,"Source pin agreement")
+@@ -216,7 +216,7 @@
+     result=dict(status="PASS_INDEPENDENT_REBUILT168_PAID_CEILING_BELOW_ONE_PERCENT_FLOOR",
+         bit_profile=bp,complex_profile=cp,intervals=intervals,bridge=bill,public_assembly=public,
+         refined_bridge=refined_bill,refined_assembly=refined,target=independent_targets,obstruction=obstruction,
+-        input_pins=config["inputs"],source_pins=config["sources"],checked_inputs=22,checked_sources=74,
++        input_pins=config["inputs"],source_pins=config["sources"],checked_inputs=22,checked_sources=len(config["sources"]),
+         author_certificate_sha256=digest(args.certificate),config_sha256=digest(args.config),
+         own_source_sha256=digest(Path(__file__)),negative_controls=controls,
+         actual_rebuilt_profile_scope="Both rows and scalar input are fresh producer outputs; every field matches saved source and all recorded export bytes and source hashes are verified. Native finite bit/F2/local-ring review remains independently separate; complex reflection has a separate lane receipt.",
+@@ -224,7 +224,7 @@
+     args.output.parent.mkdir(parents=True,exist_ok=True)
+     args.output.write_text(json.dumps(encode(result),indent=2,sort_keys=True)+"\n")
+     print("PASS independent rebuilt168 ceiling="+str(ceiling)+" < one-percent floor="+str(target))
+-    print("All74 sources/22 inputs/full bills/public and refined47+7; "+str(len(controls))+" negative controls")
++    print("All"+str(len(config["sources"]))+" sources/22 inputs/full bills/public and refined47+7; "+str(len(controls))+" negative controls")
+ 
+ 
+ if __name__=="__main__":main()

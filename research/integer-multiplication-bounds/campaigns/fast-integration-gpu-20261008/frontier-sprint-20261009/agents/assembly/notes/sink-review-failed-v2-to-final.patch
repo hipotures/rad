@@ -1,0 +1,12 @@
+--- a/agents/assembly/code/review_sink_bound.py
++++ b/agents/assembly/code/review_sink_bound.py
+@@ -198,7 +198,8 @@
+     need(len(graph["args"])-graph["v"]==scalar["c"] and len(graph["roots"])==scalar["q"]
+         and len(word["ops"])==len(word["opcoeff"])==scalar["total_M_operations"]
+         and len(rows["body_physical_pairs"])==physical["pairs"]
+-        and all(k in (-1,1) for k in word["opcoeff"]),"Actual raw body/root/operation inventory")
++        and all(isinstance(pair,list) and len(pair)==2 and all(k in (-1,1) for k in pair)
++                for pair in word["opcoeff"]),"Actual raw body/root/operation inventory")
+     bp=components(bit,(72,21812,1568528,60));cp=components(physical,(66,13894,915684,20))
+     need((bit["R"],bit["physical_R"],bit["pairs"],physical["R"],physical["physical_R"],
+         physical["pairs"],physical["sinks"])==(20052,18292,1760,13606,11254,2310,42),"Native finite stocks")

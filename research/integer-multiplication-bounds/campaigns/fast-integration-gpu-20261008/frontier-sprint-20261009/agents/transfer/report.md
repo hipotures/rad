@@ -1,201 +1,65 @@
-# Independent paid balanced-transfer review
+# Verified historical paid transfer and current limits
 
-## Result and acceptance boundary
+The strongest fully bound result from this lane is `kappa=61728289/100000000000=0.00061728289`, conditional on the written all-size supplier, layout, routing, analytic and tape interfaces. Its identity is `balanced-lifetime-fused-168-170-20261009`. Independent finite reviews and source-clean arithmetic support that conditional result. It is historical research below the current 1% publication floor; no record or unconditional multiplication theorem is claimed.
 
-The exact unified transfer arithmetic supports
-`kappa=594087017/10^12=0.000594087017`, using the newly supplied binary
-component-pair frames and the previously frozen converged complex frames.
-The atom exponent remains `1/1000`; complex stopping remains `10^-9`,
-balanced backoff remains `10^-8`, and the strict supplier weakening remains
-`10^-10`. No atom refinement is included in this candidate identity.
+## One immutable supplier pair
 
-Its exact difference from the PR #163 mathematical claim is
-`29203480127/250000000000000000`, approximately `1.16813920508e-7` or
-`0.01966663%` of that claim. This compares pinned mathematics, not a
-permanent live leaderboard. The coordinator must independently complete
-the binary finite/eligible-prime, complex reflection and latest-frontier
-gates before scientific freeze or publication. At 08:19:18 UTC the
-coordinator observed draft PR165 at `7518fed2688baf25c7c32bae32674f3334b517da`
-claiming `297136180212477/(5*10^17)`, above this result. Thus this stable
-first composition is below the refreshed frontier and supplies no
-current-record publication authorization.
+The binary construction uses actual PR168 `98c115b53742b6613ad630de4d493f37b0119da7` and the PR170 lifetime method at `29892e2fe8a90714ef61bd8cbfb1a74bec6f8fd4`. The complex construction regenerates a coherent fused DAG, compensated aliases and selected operation frames on that PR168 module family, frozen as `fused168-joint-raise-frozen-20261009T0937Z`. Gains or histograms from different programs are never added together.
 
-The lane's result is conditional transfer and arithmetic verification.
-It does not certify finite word correctness from saved profiles or replace
-the inherited all-size hypotheses. The complete portable derivation is in
-[PROOF.md](publication/joint-balanced-frames/PROOF.md).
+| Paid quantity | Binary | Complex |
+|---|---:|---:|
+| Parent dimension | 72 | 66 |
+| Logical scalar roles | 20,492 | 14,843 |
+| Physical scalar roles | 18,732 | 12,203 |
+| Compensated aliases | 1,760 | 2,640 |
+| Persistent width | 22,252 | 14,843 |
+| Complete rank mass | 1,600,208 | 978,318 |
+| Deficit / largest child | 1,936 / 60 | 1,320 / 20 |
+| Source scalar operations | 41,288 | 33,568 |
+| Native saving | `161677519/250000000000` | `617664283/10^12` |
 
-## Exact inputs and full bills
+The complete binary characteristic pays `32*72^2` singleton fallback children on fraction `10^-16` of every positive ideal edge, subtracting no ideal work. Coarse saving accepts and `646710077/10^12` rejects; complex saving accepts and `617664284/10^12` rejects. These are rational log/exp interval statements. Floating roots locate discovery points only.
 
-The complex source is PR #161 at
-`d14e29157bc905be1ced0776dd893d0714013f3a`; the transfer source is PR #163
-at `15c702a929b7d640107a95e196186ad74e876c82`. The frontier scout observed
-at `2026-10-09T07:55:55Z` that newer PR #163 head
-`e1813796ef5c3ca38c5dd7b9e8d81b3908ff5997` changes attribution/source
-repinning while retaining identical proof and certificate mathematics.
-The source versions are recorded separately.
+The paid atom is `323158477/500000000000`. Ordinary saving is `5049351199992013407/7812500000000000000000`, with strict adapter gap `3132986593/7812500000000000000000`. Phase stop `10^-9`, backoff `10^-8` and weakening `10^-10` are positive. The available common saving is `617664182382335717/10^21`; the controlling margin exceeds the reported point by `1642426922087170449319715213/5003088320850145260346766428300000000000`.
 
-Binary frame SHA-256 is
-`0f84b5372fcca9d3eceda2ee1cd24c919619084361acb1cba4b2306d2d023be8`;
-complex frame SHA-256 is
-`f02a59311c667316b1f2e21916cebf71c58f79fbfbd3a126a24743d1d7ff016a`.
-Both raw fixtures, both complete profiles and the original complex scalar
-inventory are retained in the portable subset. The full research checker
-also verifies 75 source hashes and seven explicit mathematical inputs.
-The 61 original PR161 hashes and fourteen PR163 hashes were compared to
-their immutable original source manifests, rather than merely declared
-from whatever bytes happened to be present.
+## Full costs and conditional applicability
 
-| Quantity | Value |
-|---|---:|
-| Binary parent / width | 72 / 26,888 |
-| Binary complete rank / positive occurrences | 1,934,000 / 317,916 |
-| Binary deficit / maximum child | 1,936 / 60 |
-| Coarse saving | `594996721/10^12` |
-| Full fallback fraction / children per edge | `10^-16` / 165,888 |
-| Effective ordinary saving | `594440184179/10^15` |
-| Complex parent / width | 66 / 15,681 |
-| Complex complete rank / positive occurrences | 1,033,626 / 228,306 |
-| Complex deficit / maximum child | 1,320 / 20 |
-| Complex saving | `74320127/125000000000` |
-| Virtual / physical complex scalar stock | 16,011 / 13,041 |
-| Complex mixer operations / root count | 32,426 / 4,477 |
-| Complete complex local scalar bill | 5,485,169,032,704 |
-| Full-group W bits / complex halving degree | 2,159 / 1 |
-| External row coefficient / degree | 12,320 / 70,000 |
-| Exact row-degree gap | `224336/5` |
+The local complex scalar upper is `5264026273944`, retaining all virtual roles and operations. The complete orthogonal group order, logical bill, arbitrary router, semantic charge, E/B/C0, completed-child induction and linear guard are recomputed. Fixed odd divisor3 and both external row reserves9909/252 remain. Full wire bits2159 give row coefficient12320, degree70000 and strict gap `224336/5`.
 
-Independent rational intervals recompute both characteristics, charging
-the entire binary fallback on every positive ideal edge. Binary moment
-gap is greater than `5.68659679e-14`; the next `10^-12` point has lower
-excess greater than `1.62511452e-12`. Complex gap is greater than
-`1.34659764e-12`; its next `10^-12` point also exceeds one. There is no
-binary floating-point arithmetic in these certificates.
+The signed reviewer expands every14843-role by1320-target response and emitted read exactly over the rationals. Cleared denominator6 numerators have maximum6, so actual coefficient magnitude1 fits the retained h+4=26 reserve. Roots/centres, sourceK alignment and literal inverse scratch cleanup are checked in both orientations.
 
-The full ambient group is retained in scalar, finite route and row costs.
-The checks derive K, G, E, B and C0 from the actual complex scalar word,
-verify the full literal bill, and prove the linear completed-child induction
-with maximum child 20. The virtual scalar stock is not reduced to the
-physical stock. The old coarse reserve 9,909 and ordinary-leaf reserve
-252 remain separate. The uniform q-adic internal selector rows are not
-misrepresented as a finite external group-size stock.
+Balanced layout uses prefix margin `1-epsilon` and retains `epsilon*(1+c)<1`, positional rows, FFT/twiddle order, incoming odd grid and scratch/spectator restoration. Exact ordinary interchange, arbitrary-coordinate routing and bulk resampling remain the reviewed inherited contracts. No operation is commuted to obtain a saving. All40 structural and7 final margin conditions are explicit in the [portable proof](publication/lifetime-fused-frames/transfer/PROOF.md).
 
-Eligible address primes retain the original finite excluded-prime set
-for inherited frame/basis/denominator presentations. Some old Gram
-determinants exceed `2^80`; only the new selected-plan presentations are
-bounded below that threshold (at most 63 bits). They add no new exclusions
-above it. This distinction is explicit in the portable proof/input contract.
+Address primes retain the original finite excluded set. Some old raw determinants exceed2^80. Selected new witnesses have at most63bits; the own projector audit removes small prime factors exactly. There is no assertion that every prime above2^80 works. Uniform Clifford/shared-core recursion, completed tensor sharing, stopped ordinary restoration, analytic common-grid precision/recovery and fixed-tape machine interfaces remain conditional. No practical threshold or broad suite is claimed.
 
-## Paid layout applicability and potential
+## Independent acceptance and recovery
 
-The source lineage supplies concrete constructions for the relevant cost
-changes: complete arbitrary-coordinate routing, balanced named FFT groups,
-and bulk principal-window resampling with short-field streaming. Their
-written interfaces explicitly preserve active, scratch, spectator, phase,
-control and restored-row fields, FFT/twiddle order, forward/inverse alignment,
-the incoming odd grid and final prime-box order.
+`configs/lifetime-fused-168-170.json` preserves141source/24input records, SHA `e423b802770cb3477ef83598d2ca00acfddfa2b9843e3ece0a72fb61aace119f`. Author receipt SHA is `2f040351c0c1f27b11c7d4eba7734658eb014b57c5c0d7da8d8572ed76ce83ba`. The independent assembly implementation imports neither author nor upstream arithmetic, matches every complete moment/bill/cutoff/47+7 value and rejects22controls.
 
-PR161 already uses movement/bulk margins a and semantic constant C1=1.
-For this candidate the balanced layout changes the outer prefix margin
-from `1-epsilon(1+c)` to `1-epsilon`, while retaining the geometric
-condition `epsilon(1+c)<1`. No local scalar operation moves past another
-operation. Therefore no newly stronger ordinary supplier is introduced
-by this application, provided the inherited completed ordinary and exact
-complex contracts hold. The new frame/prime presentation has its own
-finite review; it is not supplied by layout arithmetic.
+The final binding supplements that unchanged identity with6executed review receipts and10source records. It binds all22252binary columns in both orientations, physical banks/G reflection, prime scope, exact arbitrary-dirty complex identity, scalar bounds and full complemented geometry. The additional old168 cover proof is explicitly outside the author141inventory.
 
-Every child is weighed by its actual logical volume and active width.
-The complete moment contracts the potential at every internal node, and
-the stopped leaf/internal exponents follow without an equal-depth assumption.
-All forty structural inequalities and seven final margin inequalities are
-explicit in the proof and executable certificate.
+The initial clean arithmetic export omitted two imported independent helpers. Both failures and successive manifests are preserved; the corrected export passes. A196file source-clean export reproduces final finite binding exactly. The executable recovery manifest then reconstructs191records as183unique files from downloadable source caches, committed readable files and full gzip evidence, without reading original derived work. Author arithmetic and final independent binding both pass on that recovered tree.
 
-The controlling margin is exactly
-`2972200831728972967590184179/5002972200861450981582100000000`.
-Its excess over the deliberate reported point is
-`7852687236503524494043/50029722008614509815821000000000000`.
-The common sufficient numeric checkpoint for the retained compressed-power
-tests is `log2(input bits)>=12007133412`. Additional prime/setup, catalogue,
-strict logarithm absorption and recovery thresholds remain inherited.
-There is no practical input-size claim.
+The normalized public13file package reproduces from a fresh directory and rejects optimized Python, changed frame bytes, a mass-preserving profile mutation and the newer publication floor. Public provenance has repository/ref/relative-source identity without private workspace paths. Its public certificate is mathematically equivalent and explicitly a different byte identity from the scientific receipt.
 
-## Independent reproduction and negative evidence
+Completed compact records and failed recovery/normalization attempts are full gzip copies under `evidence/completed-transfer-20261009T1020Z/`. Three otherwise missing historical protocol/review receipts are completely preserved under `evidence/supplemental-finite-closure-20261009T1021Z/`. Source trees and disposable execution trees are excluded. [Reproduction](reproduce.md) and the [manifest](artifact-manifest.json) identify every recovery route.
 
-The lane's standard-library checker reconstructs all scalar/group/row
-quantities and all 47 strict inequalities. A second pinned upstream
-arithmetic implementation agrees on every controlling quantity. An
-independent sibling reviewer imports neither implementation: its
-`agents/assembly/code/review_balanced_unified.py` freshly matches the
-complete supplier moments, all bills, all cutoffs, 47 constraints and
-seven margins. Its receipt is
-`work/assembly/20261009T-independent-unified-first/review.json`, with
-nineteen independently rejected controls.
+## Separate terminal-sink assessment
 
-The full 84-file clean export, 14,371,203 bytes, reproduces the unified
-source-bound arithmetic with Python's standard library only. A separate
-12-file portable public subset reproduces its derived certificate from
-a fresh copied directory with no dependency on research paths. It rejects
-actual changed frame bytes, a mass/occurrence-preserving histogram mutation,
-and `python3 -O`; restoring the original files passes again. Those profile
-mutation controls test immutable byte bindings. The sibling finite
-reviewers separately derive profiles from the actual words.
+PR168 `fd25adb7fbaa12ee761d02c733c54d1d2a7687ee` changes modules, aliases/frames and terminal sinks; old counts are not transplanted. Its42disjoint deleted sinks use115pivot half-writes and588target shears. Final complex physical roles11254, width13894 and mass915684 are paid; binary width/mass are21812/1568528.
 
-Fresh retained layout controls also passed:
+The separate86source/24input arithmetic checker reproduces sourceL4739694989468 and source47+7. Its conservative variant retains every base charge, takes D=588+32972=33560 extra events, pays4D primitives, and adds2D+3=67123readout digits. Two bits cover additive half-shears on a cleared dyadic grid;3extra bits cover the broader root envelope. L14383884804988, readout digit bound100111, full router/precision constants/cutoffs and47+7 are independently verified. Actual event counts fit the tighter source allowance, but this conservative result does not depend on that saving.
 
-- 38 balanced forward/opposite polynomial shapes, 454 basis columns and
-  114,180 exact polynomial entries, including unequal group widths.
-- 4,280 tiny complete routing addresses, 450 large/boundary probes,
-  55,170 compact calls, 110,340 inverse compositions and 36,461 actual
-  bad-address corrections.
-- Six joined bulk expansion/compression schedules and 84,824 complete
-  output records, including mixed-radix fields, halos and ordered pages.
+The86/24identity closes declared arithmetic/event inputs, not every input's generator. A distinct supplemental body-generator receipt/helper closes native regeneration provenance without changing that frozen identity. Exact signed identity, eligible primes and complemented geometry remain separately scoped gates.
 
-These are new executions of the pinned independent controls. They support
-the written layout interfaces; they neither time an all-size fixed-tape
-machine nor prove Gaussian numerical accuracy from selector-only controls.
+Complete roots are bit `[654940331,654940332]/10^12` and complex `[649333576,649333577]/10^12`. Every reserve/atom choice on these fixed profiles has `kappa < 649333577/1000649333577`, below both its own and newer176required floors. This is a fixed-profile obstruction, not a proof that all real frame/module/lifetime changes fail.
 
-Fourteen unified adverse controls retain old-prefix/old-guard/old-exposure
-rejections, excess kappa, full-group replacement, missing old row reserves,
-collapsed virtual scalar stock, stale C0, missing scalar bill, wrong row
-coefficient, insufficient rows, overstated ordinary saving and wrong source
-binding. The portable gate independently includes nine arithmetic controls.
+## Current comparison
 
-Completed records and all execution logs are published as complete gzip
-copies under `evidence/completed-transfer-20261009T0830Z/`, with their
-original source/hash provenance. Sixteen text files contain 636,696
-uncompressed bytes and 199,719 gzip bytes. Dependency checkouts and
-clean execution copies are excluded from that archive.
+At PR176 `96dc228f426252c969c99d3c4c1eb97cc44b7184`, decoded source saving is `81117750407097/125000000000000000`. The exact1%floor is `8192892791116797/12500000000000000000`. For reported final `655431424/10^12`, sufficient retained gates are ordinary655861316, complex655861417 and optimized coarsebit656266512, all over10^12. These are targets, not accepted suppliers.
 
-## Useful negative result from the unchanged bit supplier
+The best saved current discovery complex histogram rejects `649367209/10^12`, yielding a profile-conditional ceiling `649367209/1000649367209` below the floor. Its rounded finer floating point still accepts and must not be called an upper bound. [Frontier bounds](frontier-ceilings.md) separate exact source claims, supplier targets, profile-conditional exclusions and discovery points.
 
-Before the new binary profile was available, applying balanced layout to
-the original ordinary saving `1482692819/2500000000000` could not beat
-PR163: its strict balanced ceiling is
-`1482692819/2501482692819`, approximately `0.0005927255956063`.
-Optimizing the paid atom exponent of that same coarse certificate still
-leaves ceiling approximately `0.0005929511149722`. An optimistic upper
-bound derived from the rejected next coarse grid point also remains
-below the public claim. The new binary paid profile, rather than the
-layout change alone, is essential to this qualifying composition.
+Confidence is high for the stated exact arithmetic and tested recovery. A qualifying improvement needs new real supplier evidence. The coordinator owns Git/push, scientific checkpoint, live comparison and publication. All Apache-2.0 attributions, including RaD, icekylinx/eumemic, chafreaky, huxint, James Chang, Rohan Arun and terminal-sink credit to jamesyc, are retained. Prepared with OpenAI GPT-6.1 Sol assistance.
 
-## Recovery, status and attribution
-
-See [reproduce.md](reproduce.md),
-[artifact-manifest.json](artifact-manifest.json) and
-[publication-file-inventory.json](publication-file-inventory.json).
-All portable mathematical inputs and authored code are recoverable from
-the research commit once the coordinator publishes it. Immutable external
-sources are downloadable by their recorded obtainable commits. Exact
-arithmetic and layout controls are regenerable; historical timing is
-observational. There is no irreplaceable mathematical input in this lane.
-
-Confidence is high for the stated transfer arithmetic and its conditional
-applicability to completed suppliers. Final scientific freeze remains the
-coordinator's decision after all independent finite, eligible-prime,
-reflected, assembly and current-frontier gates. The lane performs no Git
-or upstream writes. No user publishing script is executed here.
-
-Attribution and Apache-2.0 notices are retained in the portable proof and
-NOTICE. This work credits icekylinx, eumemic, chafreaky, an664, Zhihao Chen,
-Swapnil Jain, RaD/hipotures, James Chang, Rohan Arun and the source's other
-contributors. It was prepared with OpenAI GPT-6.1 Sol assistance.
+The newer source-confirmed PR168 head `4a3c769e5c5430e7114c4d3e099ff34664677f17` has saving `3279447/5000000000`; its exact 1% floor is `331224147/500000000000`. Retained sufficient grids are ordinary `662887443/10^12`, complex `662887544/10^12`, and optimized coarse bit `663301643/10^12`. The176comparison above is historical; every earlier negative result remains below the raised floor. New modules/counts are not accepted or inferred from these targets.

@@ -26,6 +26,7 @@ HEX40 = re.compile(r"[0-9a-f]{40}\Z")
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 MAX_API_BYTES = 32 * 1024 * 1024
 MINIMUM_RELATIVE_IMPROVEMENT = "1/100"
+MINIMUM_PYTHON = (3, 11)
 
 
 class Stop(RuntimeError):
@@ -36,6 +37,11 @@ class CommandFailure(Stop):
     def __init__(self, command, code, message):
         self.command, self.code, self.message = command, code, message
         super().__init__(f"Command failed ({code}): {shlex.join(command)}\n{message}")
+
+
+def require_python():
+    if sys.version_info[:2] < MINIMUM_PYTHON:
+        raise Stop("Python 3.11 or newer is required; finite package tested with Python 3.14.4")
 
 
 def utc():
@@ -541,6 +547,7 @@ class Publisher:
                 "frontier_observed_utc": final["observed_utc"]}
 
     def execute(self, mode):
+        require_python()
         if self.spec.get("minimum_relative_improvement") != MINIMUM_RELATIVE_IMPROVEMENT:
             raise Stop("Frozen publication policy must require at least 1% relative improvement")
         if mode in {"--check", "--self-test"}:
@@ -583,6 +590,7 @@ class Publisher:
 
 
 def main():
+    require_python()
     if len(sys.argv) != 4:
         raise Stop("Internal invocation requires mode, extracted package and workspace")
     mode, package, workspace = sys.argv[1:]

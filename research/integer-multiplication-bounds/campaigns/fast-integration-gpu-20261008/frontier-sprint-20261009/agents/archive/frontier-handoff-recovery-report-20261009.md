@@ -1,0 +1,9 @@
+# Handoff public observation recovery
+
+The frontier owner froze all 17 originals in `agents/frontier/evidence-recovery-handoff-20261009T105500Z.json`, following the single completed observation at 10:50:52.891605 UTC. All originals were checked against inventory sizes and SHA256 identities. This preserves observation receipts, exact new draft source certificates and prior canonical snapshot bytes as historical evidence. Raw observation/source receipts do not imply scientific acceptance.
+
+Whole-original SHA256 deduplication against previous frontier archives found three already retained copies; [the retained mappings](frontier-handoff-selection-20261009.json) identify them. [The explicit frozen selection](frontier-handoff-frozen-paths-20261009.json) contains 14 new complete files, 7,212,244 original bytes. Previous namespaces and originals were unchanged. Downloaded trees/archive payloads, symlinks and queued serializers were excluded; no file was split.
+
+The fresh namespace is `agents/frontier/evidence/completed-public-observations-handoff-20261009T105500Z`. Gzip data total 1,087,655 bytes; its manifest adds 1,948 bytes. [Verification](frontier-handoff-verification-20261009.json) passed with current originals, complete membership, SHA256/size identities, gzip framing/CRC, UTF-8 and recognizable-credential checks.
+
+From the repository root, verify with `python3 tools/archive_workspace.py verify-text --destination research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/frontier-sprint-20261009/agents/frontier/evidence/completed-public-observations-handoff-20261009T105500Z --check-originals`. In a clone omit `--check-originals`. Recover a member using `gzip -dc` into a fresh destination with shell noclobber enabled; compare its SHA256 with `original_sha256` in the namespace manifest. Exact role/path associations remain in the supplied frozen inventory even when identical bytes are recovered from a prior namespace.

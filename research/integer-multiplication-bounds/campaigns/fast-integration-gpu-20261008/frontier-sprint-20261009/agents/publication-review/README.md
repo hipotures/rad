@@ -4,11 +4,19 @@ Scope: independently inspect and locally test the portable publication generator
 embedded runtime, and synthetic safeguards against section 8 of the sprint brief.
 This audit does not accept a scientific candidate or authorize a real publication.
 Only the root coordinator can freeze candidate science and publish RaD changes.
-The current exact 1% policy version passes 44 authored, 14 independent safety,
-and seven independent policy tests. The initial index-mutation finding is repaired.
-The earlier 40/14 receipt remains a historical snapshot.
+The current Python 3.11 minimum / exact 1% policy version passes 48 authored,
+14 independent safety, seven independent policy, and four independent version
+controls. An actual normalized complex constructor also passes independently.
+The proposed release gate closed on a stronger public claim; no actual record
+script exists. Earlier receipts remain historical snapshots.
 
-- [Current policy audit](reports/publication-policy-audit-20261009.md): exact 1%
+- [Latest source/version audit](reports/actual-release-source-audit-20261009.md):
+  actual portable reconstruction, final minimum-version checks, and closed release gate.
+- [Version receipt](results/python311-audit-20261009.json): current three source hashes
+  and all four passing publisher suites.
+- [Actual constructor receipt](results/actual-normalized-complex-constructor-20261009.json):
+  real local reconstruction and unchanged source/input pins.
+- [Historical policy audit](reports/publication-policy-audit-20261009.md): exact 1%
   threshold, fresh source hashes, and independent boundary tests.
 - [Policy receipt](results/policy-audit-20261009.json): all three passing suites and
   unchanged source hashes before/after execution.

@@ -329,6 +329,14 @@ class PublicationTests(unittest.TestCase):
             self.assertIn(b"all hashes verified before packaged code", result.stdout)
             self.assertIn(b"no GitHub requests or writes made", result.stdout)
 
+    def test_help_declares_current_python_requirement(self):
+        script, _ = self.script()
+        result = self.run_local(script, "--help")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn(b"Python 3.11+", result.stdout)
+        self.assertIn(b"tested with Python 3.14.4", result.stdout)
+        self.assertNotIn(b"Python 3.8", result.stdout)
+
     def test_synthetic_cli_publication_network_path_blocked(self):
         script, _ = self.script()
         result = self.run_local(script, "--dry-run")
@@ -345,6 +353,39 @@ class PublicationTests(unittest.TestCase):
         result = self.run_local(script, env=env)
         self.assertNotEqual(result.returncode, 0)
         self.assertIn(b"Missing prerequisite: gh", result.stdout + result.stderr)
+
+    def test_python_below_minimum_bootstrap_stops_before_payload(self):
+        script, _ = self.script()
+        # Only the synthetic bootstrap's reported version is overridden. This
+        # executes the real failure branch under the installed interpreter; it
+        # is not a claim that an older Python runtime was installed or tested.
+        shell = script.read_text()
+        self.assertEqual(shell.count("mode = sys.argv[1]"), 1)
+        script.write_text(shell.replace("mode = sys.argv[1]",
+                                       "sys.version_info = (3, 10, 99)\nmode = sys.argv[1]"))
+        result = self.run_local(script)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn(b"Python 3.11 or newer is required", result.stdout)
+        self.assertIn(b"Workspace/logs retained after failure", result.stdout)
+        self.assertNotIn(b"all hashes verified before packaged code", result.stdout)
+
+    def test_python_below_minimum_runtime_and_builder_make_no_commands(self):
+        pub, backend = self.fixture.publisher()
+        with unittest_mock.patch.object(runtime.sys, "version_info", (3, 10, 99)):
+            with self.assertRaisesRegex(runtime.Stop, "Python 3.11 or newer"):
+                pub.execute("publish")
+            with self.assertRaisesRegex(runtime.Stop, "Python 3.11 or newer"):
+                self.script()
+        self.assertEqual(backend.calls, [])
+        self.assertEqual(backend.writes, [])
+
+    def test_python_minimum_boundary_allows_local_check(self):
+        pub, backend = self.fixture.publisher()
+        with unittest_mock.patch.object(runtime.sys, "version_info", (3, 11, 0)):
+            result = pub.execute("--check")
+        self.assertEqual(result["mode"], "--check")
+        self.assertEqual(backend.calls, [])
+        self.assertEqual(runtime.MINIMUM_PYTHON, (3, 11))
 
     def test_compressed_hash_corruption(self):
         script, receipt = self.script()

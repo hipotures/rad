@@ -1,0 +1,61 @@
+--- a/agents/assembly/code/review_sink_bound.py
++++ b/agents/assembly/code/review_sink_bound.py
+@@ -130,6 +130,37 @@
+         need(F(saved["margins"][margins[name]])==value,"Named public margin "+name)
+ 
+ 
++def source_bills(saved,bill,assembly):
++    sections={"complex":dict(N=bill["N"],W=bill["W"],s=bill["s"],m=bill["m"],
++        maxchild=bill["maxchild"],invocations_per_stage=bill["V"],
++        local_group_upper=bill["local_scalar"],logical_group_upper=bill["logical_scalar"],
++        scalar_group_upper=bill["router"],finite_group_router_upper=bill["router"],
++        original_X_involution_scalar_group_upper=32*1320,halving_degree=bill["halving_degree"],
++        wire_bits=bill["wire_bits"],coefficient_bound=26,coefficient_denominator_divides=6,
++        auxiliary_banks_after_sharing=1,stages=3),
++        "bit_uniform":dict(atom_beta=ATOM,coarse_saving=COARSE,old_atom_saving=OLD,
++            ordinary_saving=bill["ordinary_saving"]),
++        "rows":dict(coefficient=bill["row_coefficient"],complex_coefficient=bill["complex_coefficient"],
++            degree=bill["row_degree"],degree_gap=bill["row_gap"],suffix_slope=bill["suffix_slope"]),
++        "semantic":{key:bill[key] for key in ("B","C0","C1","E","fixed_odd_divisor",
++            "induction_gap","strict_literal_gap")}}
++    sections["semantic"]["literal_charge"]=bill["literal"]
++    for section,values in sections.items():
++        for key,value in values.items():
++            exact_match(saved["finite_bridge"][section][key],value,"Named public bill "+section+"."+key)
++    exact_match(saved["finite_bridge"]["conservative_old_coarse_row_reserve"],9909,"Public old row reserve")
++    exact_match(saved["finite_bridge"]["ordinary_leaf_row_degree"],252,"Public ordinary leaf reserve")
++    parameters=dict(C0=bill["C0"],C1=1,a_bit=assembly["a"],a_complex=assembly["b"],
++        actual_bit_saving=bill["ordinary_saving"],alpha_squared_power=assembly["r"],
++        **{key:assembly[key] for key in ("beta","c","delta","epsilon","eta","kappa",
++            "lambda_","lambda_prime","q","sigma","tau")})
++    exact_match(saved["assembly"]["parameters"],parameters,"All public assembly parameters")
++    exact_match(saved["assembly"]["recurrence"],dict(internal=assembly["internal"],
++        leaf=assembly["leaf"],reservations=1-assembly["c"]),"All public recurrence exponents")
++    exact_match(saved["assembly"]["minimum_margin"],assembly["g"],"Public minimum margin")
++    exact_match(saved["assembly"]["absorption_gap"],assembly["absorption_gap"],"Public logarithm absorption")
++
++
+ def main():
+     need(not sys.flags.optimize,"Assertion-disabled Python is unsupported")
+     if hasattr(sys,"set_int_max_str_digits"):sys.set_int_max_str_digits(0)
+@@ -163,6 +194,12 @@
+     need(author["config_sha256"]==CONFIG,"Author config identity")
+     bit,physical,scalar=(rows[k] for k in ("bit","physical","scalar"))
+     need(rows["native_profile"]==physical,"Actual regenerated complete sink profile")
++    graph,word=rows["body_graph"],rows["body_word"]
++    need(len(graph["args"])-graph["v"]==scalar["c"] and len(graph["roots"])==scalar["q"]
++        and len(word["ops"])==len(word["opcoeff"])==scalar["total_M_operations"]
++        and len(rows["body_physical_pairs"])==physical["pairs"]
++        and all(isinstance(pair,list) and len(pair)==2 and all(k in (-1,1) for k in pair)
++                for pair in word["opcoeff"]),"Actual raw body/root/operation inventory")
+     bp=components(bit,(72,21812,1568528,60));cp=components(physical,(66,13894,915684,20))
+     need((bit["R"],bit["physical_R"],bit["pairs"],physical["R"],physical["physical_R"],
+         physical["pairs"],physical["sinks"])==(20052,18292,1760,13606,11254,2310,42),"Native finite stocks")
+@@ -181,6 +218,7 @@
+     sa=native_assembly(source,COMPLEX,BETA,ETA,ZETA,PUBLIC)
+     pa=native_assembly(paid,COMPLEX,BETA,ETA,ZETA,PUBLIC)
+     source_constraints(rows["public_certificate"]["assembly"],sa)
++    source_bills(rows["public_certificate"],source,sa)
+     own=dict(bit_profile=bp,complex_profile=cp,source_bridge=source,paid_bridge=paid,
+         source_assembly=sa,paid_assembly=pa,numeric_cutoffs=thresholds(paid,pa),**inventory)
+     for key,value in own.items():exact_match(author[key],value,"Independent sink "+key)

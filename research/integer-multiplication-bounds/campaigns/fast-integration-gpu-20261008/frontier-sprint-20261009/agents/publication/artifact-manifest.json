@@ -1,26 +1,38 @@
 {
   "schema_version": 1,
-  "status": "AUDITED_PREPARATION_NO_SCIENTIFIC_RELEASE",
+  "status": "AUDITED_PREPARATION_HISTORICAL_PACKAGE_NO_SCIENTIFIC_RELEASE",
   "minimum_relative_improvement": "1/100",
   "publication_boundary": "candidate >= (101/100)*max(all active comparable claims/bounds including drafts, retained reviewed main)",
   "authored_sources": [
     {
+      "path": "README.md",
+      "bytes": 10638,
+      "sha256": "dc9f77420fd02d6513125a6f19e3d10192c388c3a85959752efaa531a0f36368",
+      "role": "authored source or documentation"
+    },
+    {
       "path": "code/build_publication.py",
+      "bytes": 21484,
+      "sha256": "64b7947e2d46c12be6fd90155bf046900a7bef50b365cfa33a61587c0462db11",
+      "role": "authored source or documentation"
+    },
+    {
+      "path": "code/history/20261009-policy-python38/build_publication.py",
       "bytes": 21360,
       "sha256": "695c17525668eb7b4546196eae38ec8c52591bd8be6d445864ef8e6432b0a159",
-      "role": "authored source or documentation"
+      "role": "preserved historical audited source"
     },
     {
-      "path": "code/publication_runtime.py",
+      "path": "code/history/20261009-policy-python38/publication_runtime.py",
       "bytes": 33011,
       "sha256": "bf8601a55b4f9e71cf9b03d7d633d0e98b5cca62a8331fc970a0715ffd7720e6",
-      "role": "authored source or documentation"
+      "role": "preserved historical audited source"
     },
     {
-      "path": "code/test_publication.py",
+      "path": "code/history/20261009-policy-python38/test_publication.py",
       "bytes": 38005,
       "sha256": "5434f5d5c2873db2919a6c5f91dacec2e5ec5444e904b2552c34146c116fcd82",
-      "role": "authored source or documentation"
+      "role": "preserved historical audited source"
     },
     {
       "path": "code/prepare_candidate_export.py",
@@ -29,22 +41,52 @@
       "role": "authored source or documentation"
     },
     {
-      "path": "README.md",
-      "bytes": 9897,
-      "sha256": "760c5b9bddf2d794d8abbe475fe42ba943c79ae7c5970715d990c4dd13ade324",
+      "path": "code/prepare_lifetime_fused_export.py",
+      "bytes": 11965,
+      "sha256": "3d1d705dc9d649d9701d68eb4fd934eecb72c9419fe60df1180b22bd26a9f37b",
+      "role": "authored source or documentation"
+    },
+    {
+      "path": "code/publication_runtime.py",
+      "bytes": 33249,
+      "sha256": "54a228e01b9403cac4ef14b004c5ace845649e3dc93c4d79dca493945fff4a76",
+      "role": "authored source or documentation"
+    },
+    {
+      "path": "code/test_publication.py",
+      "bytes": 40248,
+      "sha256": "74db52e771982ac54c5c6c0d9fc31f000195af8b03dfae168a3e7e48bd4d1e47",
+      "role": "authored source or documentation"
+    },
+    {
+      "path": "fixtures/lifetime-fused-package/NOTICE",
+      "bytes": 1968,
+      "sha256": "2c36d5e982c55d1afdc8ccfa6764700ad265ea6f0f709f7f55fd5115b36e7904",
+      "role": "authored source or documentation"
+    },
+    {
+      "path": "fixtures/lifetime-fused-package/README.md",
+      "bytes": 4823,
+      "sha256": "478a5bcaa7ecafffd0fecfbb3e1e1db954946b331ede91ac7104df6d545b0242",
+      "role": "authored source or documentation"
+    },
+    {
+      "path": "reports/lifetime-fused-historical-package-20261009.md",
+      "bytes": 12814,
+      "sha256": "7d97b329ef183efe736f7b058a6e710b8088d2d47016aefdc5e95c6301400749",
       "role": "authored source or documentation"
     },
     {
       "path": "reports/publication-preparation-20261009.md",
-      "bytes": 8139,
-      "sha256": "ea7a546c2803e94359ab4d26a0e8b30a074e8adcec13a5130211f0d95a2e0ef7",
+      "bytes": 8407,
+      "sha256": "347e86e24cb5e5fd678cae712ada2f4ebb109c0f48bc53490f61d2b60cb851e9",
       "role": "authored source or documentation"
     }
   ],
-  "authored_test_count": 44,
+  "authored_test_count": 48,
   "independent_safety_test_count": 14,
   "independent_policy_test_count": 7,
-  "independent_audit": "../publication-review/reports/publication-policy-audit-20261009.md",
+  "independent_audit": "../publication-review/reports/actual-release-source-audit-20261009.md",
   "complete_evidence": [
     {
       "namespace": "evidence/20261009T084152Z-policy",
@@ -138,54 +180,189 @@
       ],
       "verification": "PASS verify-text --check-originals; complete unsplit text, gzip framing/CRC, UTF-8, credential scan, hashes and original bytes",
       "recovery": "All archived bytes are durable; gunzip to recover each complete original. Original ignored work files are not needed."
+    },
+    {
+      "namespace": "evidence/20261009T100641Z-lifetime-fused-python311",
+      "manifest": "evidence/20261009T100641Z-lifetime-fused-python311/archive-manifest.jsonl.gz",
+      "manifest_sha256": "1aaab5a3213ea047b5887e86c0830da47cff7ab8939f37ca5dcf2d754a6bc6c2",
+      "files": [
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/archive-manifest.jsonl.gz",
+          "bytes": 1571,
+          "sha256": "1aaab5a3213ea047b5887e86c0830da47cff7ab8939f37ca5dcf2d754a6bc6c2"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/final-export-inventory.json.gz",
+          "bytes": 8297,
+          "sha256": "503b9ba5e09bf1498f41cea3766394e9dcd4609743dd179881fd55643f50944e"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/independent-arithmetic.json.gz",
+          "bytes": 30608,
+          "sha256": "cc6baa14845dffe08a6e649b7fabf4f59684860b1dea0b4db0641f5af00fee53"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/independent-arithmetic.log.gz",
+          "bytes": 127,
+          "sha256": "98ed592f813c6d8e73029647296f5340fd248ea948503e3371fb023b522346f4"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/minimal-complex-protocol.json.gz",
+          "bytes": 1791,
+          "sha256": "6d6dd93555acbfdecd5201daf1446e445e80518860e53d7ad33f213603affe50"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/minimal-complex-reconstruction.json.gz",
+          "bytes": 1959,
+          "sha256": "597aaf8f49cd26565c35e63658e2335125c9753317c183ef545c9e2eed8f6669"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/prepare-export.log.gz",
+          "bytes": 161,
+          "sha256": "08c8ff09a7a8621c367424e08ae6f14651290b3072aefb610a8bbffb61e44ed1"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/public-package-SOURCE.json.gz",
+          "bytes": 7397,
+          "sha256": "423e0d5dc6eedca5e728d9b96a437bd46cdfc9c1422c18fa64773a36c4fe7068"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/publisher-source-and-audit-links.json.gz",
+          "bytes": 834,
+          "sha256": "cef82b4181bf46762e2b3ed48ac6380ec977715ab36a545af1cbff282a8e4bdf"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/transfer-check.log.gz",
+          "bytes": 131,
+          "sha256": "36a2fe536628b9275407cc507a13c03f89e7d1cc0ddc499871abab8aa702ebc3"
+        },
+        {
+          "path": "evidence/20261009T100641Z-lifetime-fused-python311/wiring-receipt.json.gz",
+          "bytes": 1191,
+          "sha256": "b00e64d8a3c233ab9731de69a501d4c64009673972d7e8feb9eff785ea8372c5"
+        }
+      ],
+      "verification": "PASS verify-text --check-originals; ten complete unsplit text files, gzip framing/CRC, UTF-8, credential scan, compressed/decompressed hashes and original bytes",
+      "recovery": "Gunzip complete archived originals; large graph/word exports are deterministically regenerated by the compact constructor and were not copied into this evidence archive."
     }
   ],
-  "provisional_export": {
-    "candidate_id": "balanced-components-bit-complex-161-20261009",
-    "package_alias": "research/joint-balanced-frames",
-    "exact_kappa": "594087017/1000000000000",
-    "classification": "historical, regenerable, disposable; no release authorization",
-    "location_relative_to_sprint": "work/publication/unified-provisional/repository",
-    "base_repository": "https://github.com/CrocSwap/integer-mult-bounds.git",
-    "base_sha": "d1d6c070f5a8c684727ee7ec35d930f9ebfa9758",
-    "inventory_archive": "evidence/20261009T084152Z-policy/export-inventory-current.json.gz",
-    "inventory_entries": 85,
-    "inherited_sources": [
-      {
-        "repository": "eumemic/integer-mult-bounds",
-        "commit": "d14e29157bc905be1ced0776dd893d0714013f3a",
-        "purpose": "47 pinned PR161 base deltas",
-        "inventory": "../frontier/pr161-file-inventory.json"
+  "release_blocker": "Both historical checkpoints fail the current public frontier and required 1% relative improvement. A new qualifying scientific identity, independent acceptance and coordinator release freeze are required. No actual release specification/script or broad make verify was produced.",
+  "research_git_publication_owner": "coordinator /root; this lane performs no Git mutations or real GitHub writes",
+  "minimum_python": [
+    3,
+    11
+  ],
+  "actual_tested_python": "3.14.4",
+  "independent_minimum_test_count": 4,
+  "independent_audit_receipt": "../publication-review/results/python311-audit-20261009.json",
+  "minimum_control_scope": "Reported version controls under CPython 3.14.4; these simulate older version reports and do not execute older interpreters. Startup, runtime and builder reject versions below 3.11 before package or network work.",
+  "provisional_exports": [
+    {
+      "candidate_id": "balanced-components-bit-complex-161-20261009",
+      "package_alias": "research/joint-balanced-frames",
+      "exact_kappa": "594087017/1000000000000",
+      "classification": "historical, regenerable, disposable; no release authorization",
+      "location_relative_to_sprint": "work/publication/unified-provisional/repository",
+      "base_repository": "https://github.com/CrocSwap/integer-mult-bounds.git",
+      "base_sha": "d1d6c070f5a8c684727ee7ec35d930f9ebfa9758",
+      "inventory_archive": "evidence/20261009T084152Z-policy/export-inventory-current.json.gz",
+      "inventory_entries": 85,
+      "inherited_sources": [
+        {
+          "repository": "eumemic/integer-mult-bounds",
+          "commit": "d14e29157bc905be1ced0776dd893d0714013f3a",
+          "purpose": "47 pinned PR161 base deltas",
+          "inventory": "../frontier/pr161-file-inventory.json"
+        },
+        {
+          "repository": "chafreaky/integer-mult-bounds",
+          "commit": "15c702a929b7d640107a95e196186ad74e876c82",
+          "purpose": "required PR163 mathematics",
+          "source_archive_manifest": "../frontier/pr163-archive-manifest.json"
+        },
+        {
+          "repository": "chafreaky/integer-mult-bounds",
+          "commit": "e1813796ef5c3ca38c5dd7b9e8d81b3908ff5997",
+          "purpose": "attribution-only NOTICE and SOURCE metadata",
+          "sha256_pins": "code/prepare_candidate_export.py"
+        }
+      ],
+      "authored_scientific_inputs": [
+        "../placement/fixtures/pr161-components-converged-frames.json",
+        "../placement/results/portable-replay.json",
+        "../bit/fixtures/",
+        "../bit/source-inputs.json",
+        "../bit/code/verify_bit_frames.py",
+        "../bit/code/bit_frame_search.py",
+        "../transfer/configs/unified-first.json",
+        "../transfer/publication/joint-balanced-frames/"
+      ],
+      "recovery": "The coordinator obtains the exact public snapshots using gh, prepares an upstream clone at the exact base, restores the lane files and source manifests at their recorded relative locations, and runs code/prepare_candidate_export.py. Full source/pin inventory is archived. An upstream export is not itself durable source.",
+      "lightweight_check": "python3 -B verify_transfer.py --check transfer-certificate.json from exported research/joint-balanced-frames",
+      "lightweight_result": "PASS exact transfer arithmetic and nine rejection controls; native finite/scientific release not asserted",
+      "broad_verification_run": false,
+      "record_script_generated": false
+    },
+    {
+      "candidate_id": "balanced-lifetime-fused-168-170-20261009",
+      "package_alias": "research/lifetime-fused-frames",
+      "exact_kappa": "61728289/100000000000",
+      "classification": "Historical conditional checkpoint, regenerable disposable export; no release authorization",
+      "location_relative_to_sprint": "work/publication/qualifying168-provisional/repository",
+      "base_repository": "https://github.com/CrocSwap/integer-mult-bounds.git",
+      "base_sha": "d1d6c070f5a8c684727ee7ec35d930f9ebfa9758",
+      "inventory_archive": "evidence/20261009T100641Z-lifetime-fused-python311/final-export-inventory.json.gz",
+      "inventory_entries": 123,
+      "inventory_bytes": 4064370,
+      "public_inventory_archive": "evidence/20261009T100641Z-lifetime-fused-python311/public-package-SOURCE.json.gz",
+      "inherited_sources": [
+        {
+          "repository": "eumemic/integer-mult-bounds",
+          "commit": "98c115b53742b6613ad630de4d493f37b0119da7",
+          "source_archive_manifest": "../frontier/pr168-archive-manifest.json"
+        },
+        {
+          "repository": "huxint/integer-mult-bounds",
+          "commit": "29892e2fe8a90714ef61bd8cbfb1a74bec6f8fd4",
+          "source_archive_manifest": "../frontier/pr170-archive-manifest.json"
+        }
+      ],
+      "authored_scientific_inputs": [
+        "../bit/candidates/binary-168-paired-lifetime-p12/",
+        "../signed/fixtures/fused168-98c115b-raised/",
+        "../signed/code/",
+        "../baseline/code/exact_aliased_core.py",
+        "../geometry/configs/fused168-portable-public-pins.json",
+        "../geometry/code/portable_complex_reflection.py",
+        "../geometry/code/reflected_paid_replay_fused168.py",
+        "../transfer/publication/lifetime-fused-frames/transfer/",
+        "../assembly/code/review_public_fused.py",
+        "../assembly/code/review_fused_lifetime.py",
+        "../assembly/code/review_balanced_unified.py",
+        "../assembly/code/review_rebuilt168_ceiling.py",
+        "fixtures/lifetime-fused-package/"
+      ],
+      "recovery": "Obtain the exact public predecessor snapshots using gh, map their extracted_root fields in research-local frontier manifests to those downloaded snapshots, and have the coordinator prepare the exact upstream-base clone at the declared work path. Restore the pinned lane sources and compact fixtures from the corresponding RaD snapshot, run code/prepare_lifetime_fused_export.py, and compare every byte/mode/path against the archived final inventory. Source and fixture inventories make this export reproducible; the ignored checkout alone is not a durable backup.",
+      "focused_checks": {
+        "compact_complex_constructor": "PASS actual copied minimal closure in 7.463 seconds; eight unchanged mathematical hashes and normalized protocol",
+        "author_arithmetic": "PASS from cwd /; full moments/bills/47+7 and 13 controls",
+        "independent_arithmetic": "PASS from cwd /; full moments/bills/47+7 and 22 controls; output SHA48b4e23ef224aba681c87bd61e727c1d24e3e76e3eebc109973c5407d2caaf52",
+        "allowlist_hashes_modes_private_paths": "PASS complete package before and after checks; inherited tracked diff empty"
       },
-      {
-        "repository": "chafreaky/integer-mult-bounds",
-        "commit": "15c702a929b7d640107a95e196186ad74e876c82",
-        "purpose": "required PR163 mathematics",
-        "source_archive_manifest": "../frontier/pr163-archive-manifest.json"
-      },
-      {
-        "repository": "chafreaky/integer-mult-bounds",
-        "commit": "e1813796ef5c3ca38c5dd7b9e8d81b3908ff5997",
-        "purpose": "attribution-only NOTICE and SOURCE metadata",
-        "sha256_pins": "code/prepare_candidate_export.py"
-      }
-    ],
-    "authored_scientific_inputs": [
-      "../placement/fixtures/pr161-components-converged-frames.json",
-      "../placement/results/portable-replay.json",
-      "../bit/fixtures/",
-      "../bit/source-inputs.json",
-      "../bit/code/verify_bit_frames.py",
-      "../bit/code/bit_frame_search.py",
-      "../transfer/configs/unified-first.json",
-      "../transfer/publication/joint-balanced-frames/"
-    ],
-    "recovery": "The coordinator obtains the exact public snapshots using gh, prepares an upstream clone at the exact base, restores the lane files and source manifests at their recorded relative locations, and runs code/prepare_candidate_export.py. Full source/pin inventory is archived. An upstream export is not itself durable source.",
-    "lightweight_check": "python3 -B verify_transfer.py --check transfer-certificate.json from exported research/joint-balanced-frames",
-    "lightweight_result": "PASS exact transfer arithmetic and nine rejection controls; native finite/scientific release not asserted",
-    "broad_verification_run": false,
-    "record_script_generated": false
-  },
-  "release_blocker": "The historical candidate is below the current public frontier and the user-required 1% threshold. Independent mathematical acceptance and coordinator freezing of a qualifying new candidate are still required.",
-  "research_git_publication_owner": "coordinator /root; this lane performs no Git mutations or real GitHub writes"
+      "wiring_receipt_archive": "evidence/20261009T100641Z-lifetime-fused-python311/wiring-receipt.json.gz",
+      "broad_verification_run": false,
+      "record_script_generated": false,
+      "publication_eligible": false
+    }
+  ],
+  "latest_observed_frontier": {
+    "observed_utc": "2026-10-09T09:59:51Z",
+    "pull_request": 176,
+    "head_sha": "96dc228f426252c969c99d3c4c1eb97cc44b7184",
+    "draft": true,
+    "exact_kappa": "81117750407097/125000000000000000",
+    "required_minimum_kappa": "8192892791116797/12500000000000000000",
+    "inventory": "../../public-frontier.json",
+    "scope": "Source-confirmed mathematical comparable assessment supplied by scout; pending full repository gate is separate and does not exclude a draft from numerical comparison."
+  }
 }

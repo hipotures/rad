@@ -16,7 +16,7 @@ from decimal import Decimal, localcontext
 from pathlib import Path
 
 from publication_runtime import (HEX40, HEX64, MINIMUM_RELATIVE_IMPROVEMENT,
-                                 UPSTREAM, Stop, fraction, safe_path)
+                                 UPSTREAM, Stop, fraction, require_python, safe_path)
 
 MAX_PAYLOAD = 32 * 1024 * 1024
 REQUIRED_GATES = ("exact_finite", "conditional_exponent", "independent_reproduction",
@@ -112,6 +112,7 @@ def normalize_frontier_rules(rules):
 
 
 def validate_spec(spec, payload_root):
+    require_python()
     if spec.get("upstream") != UPSTREAM or spec.get("default_branch") != "main":
         raise Stop("This builder targets only CrocSwap/integer-mult-bounds, verified main")
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,70}", spec.get("candidate_id", "")):
@@ -237,8 +238,6 @@ BOOTSTRAP = r'''
 import base64, hashlib, io, json, os, shutil, subprocess, sys, tarfile, tempfile
 from pathlib import Path, PurePosixPath
 mode = sys.argv[1]
-if sys.version_info < (3, 8):
-    raise SystemExit("Python 3.8 or newer is required")
 workspace = Path(tempfile.mkdtemp(prefix="publication-__CANDIDATE__-"))
 log = workspace / "bootstrap.log"
 def note(message):
@@ -250,6 +249,8 @@ def fail(message): raise RuntimeError(message)
 def sha(data): return hashlib.sha256(data).hexdigest()
 try:
     note("Fresh workspace: " + str(workspace))
+    if sys.version_info[:2] < (3, 11):
+        fail("Python 3.11 or newer is required; finite package tested with Python 3.14.4")
     for dependency in ("bash", "git", "python3", "gh"):
         if not shutil.which(dependency): fail("Missing prerequisite: " + dependency + "; install it yourself before retrying")
     encoded = """__PAYLOAD__"""
@@ -332,7 +333,7 @@ def build(spec, payload_root, output):
              "mode=publish\nif (( $# > 1 )); then printf 'Use no argument, --check, --dry-run or --self-test\\n' >&2; exit 2; fi\n"
              "if (( $# == 1 )); then\n  case \"$1\" in\n"
              "    --check|--dry-run|--self-test) mode=\"$1\" ;;\n"
-             "    --help) printf 'Default: publish after guards. --check: local integrity. --dry-run: read-only GitHub + prepared clone. --self-test: local integrity/path/arithmetic. Requires Bash, Git, Python 3.8+, authenticated gh.\\n'; exit 0 ;;\n"
+             "    --help) printf 'Default: publish after guards. --check: local integrity. --dry-run: read-only GitHub + prepared clone. --self-test: local integrity/path/arithmetic. Requires Bash, Git, Python 3.11+, authenticated gh; finite package tested with Python 3.14.4.\\n'; exit 0 ;;\n"
              "    *) printf 'Unknown argument: %s\\n' \"$1\" >&2; exit 2 ;;\n  esac\nfi\n"
              "python3 - \"$mode\" <<'PUBLICATION_BOOTSTRAP'\n" + bootstrap + "PUBLICATION_BOOTSTRAP\n")
     output.parent.mkdir(parents=True, exist_ok=True)

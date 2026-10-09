@@ -1,5 +1,22 @@
 # Independent complemented geometry review
 
+The latest complete source-specific review is the
+[fd25 terminal-sink finite gate](fd25-terminal-sink-review.md). Its new
+TB31 module and 42 target-backed sinks were independently reconstructed,
+including the actual compact word, full reflected physical chronology,
+rational inverses and complete paid inventory. The canonical run passes
+at `W=13,894`, rank mass 915,684 and deficit 1,320; it is conditional
+research evidence and carries no current 1% publication qualification.
+
+The historical [coherent singleton-fused winner](fused168-joint-winner-review.md)
+and its [clean portable replay](fused168-portable-review.md) are separately
+preserved, with byte-identical mathematical files and unchanged forward
+and reflected event digests. Earlier [PR165](pr165-reflection-review.md),
+[unchanged PR168](pr168-reflection-review.md) and
+[fused-components](fused168-components-review.md) controls retain their
+distinct code, input and complete evidence identities. Only the
+coordinator publishes this lane's research artifacts.
+
 Status: **EXACT_FINITE reflection gate passed** for
 `live161-components-converged`, upstream source
 `d14e29157bc905be1ced0776dd893d0714013f3a`.

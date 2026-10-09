@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "observed_utc": "2026-10-09T09:36:13.345071+00:00",
+  "scope": "Python3.11 prerequisite and exact1percent/safety regression audit; no actual record artifact",
+  "minimum_python": "3.11",
+  "actual_tested_python": "3.14.4",
+  "minimum_control_method": "Version tuple simulation under actual interpreter; no old interpreter installed/tested",
+  "minimum_relative_improvement": "1/100",
+  "source_hashes_before": {
+    "agents/publication/code/build_publication.py": "64b7947e2d46c12be6fd90155bf046900a7bef50b365cfa33a61587c0462db11",
+    "agents/publication/code/publication_runtime.py": "54a228e01b9403cac4ef14b004c5ace845649e3dc93c4d79dca493945fff4a76",
+    "agents/publication/code/test_publication.py": "74db52e771982ac54c5c6c0d9fc31f000195af8b03dfae168a3e7e48bd4d1e47",
+    "agents/publication-review/code/test_independent_publication.py": "23695ecb5b83488dd9dcb5896cc9d2fd5a911f9f2ebd7d5c8d9a091fd1e6f918",
+    "agents/publication-review/code/test_publication_policy.py": "7589b7fa820af1299e009c5d29ecb0e0a9776d59d22682accd1c7ca3d2845bff",
+    "agents/publication-review/code/test_publication_python_minimum.py": "43e16f4576cd2f618a0364c2b321e11e39c74540c7ec8ef576246f487426b58f"
+  },
+  "source_hashes_after": {
+    "agents/publication/code/build_publication.py": "64b7947e2d46c12be6fd90155bf046900a7bef50b365cfa33a61587c0462db11",
+    "agents/publication/code/publication_runtime.py": "54a228e01b9403cac4ef14b004c5ace845649e3dc93c4d79dca493945fff4a76",
+    "agents/publication/code/test_publication.py": "74db52e771982ac54c5c6c0d9fc31f000195af8b03dfae168a3e7e48bd4d1e47",
+    "agents/publication-review/code/test_independent_publication.py": "23695ecb5b83488dd9dcb5896cc9d2fd5a911f9f2ebd7d5c8d9a091fd1e6f918",
+    "agents/publication-review/code/test_publication_policy.py": "7589b7fa820af1299e009c5d29ecb0e0a9776d59d22682accd1c7ca3d2845bff",
+    "agents/publication-review/code/test_publication_python_minimum.py": "43e16f4576cd2f618a0364c2b321e11e39c74540c7ec8ef576246f487426b58f"
+  },
+  "sources_unchanged_during_checks": true,
+  "tests": [
+    {
+      "suite": "authored",
+      "count": 48,
+      "exit_code": 0,
+      "log": "work/publication-review/python311-audit/authored.log",
+      "log_sha256": "05ec2b002027203a33cc06fc6da732d2f9508176ad0bc1ae75d42d6a548744ae"
+    },
+    {
+      "suite": "independent-safety",
+      "count": 14,
+      "exit_code": 0,
+      "log": "work/publication-review/python311-audit/independent-safety.log",
+      "log_sha256": "44a0fb5189e444b968613f3ebb80784cf877ff1c25b81c2de13b082687840b3c"
+    },
+    {
+      "suite": "independent-policy",
+      "count": 7,
+      "exit_code": 0,
+      "log": "work/publication-review/python311-audit/independent-policy.log",
+      "log_sha256": "3a3d6a10046c04685caec750325b02d0ad48342411ff6efe13c96a7768143fc4"
+    },
+    {
+      "suite": "independent-python-minimum",
+      "count": 4,
+      "exit_code": 0,
+      "log": "work/publication-review/python311-audit/independent-python-minimum.log",
+      "log_sha256": "c2bf49931b449636edc0669f341db2c62493850bc911af1bbc51a5889887b151"
+    }
+  ],
+  "historical_failure": "Initial independent help test caught obsolete3.8 text after3.11 guards; log initial-minimum.log preserved",
+  "real_git_writes": false,
+  "real_github_requests": false,
+  "real_github_writes": false,
+  "publishing_cli_executed": false,
+  "candidate_release_reviewed": false
+}

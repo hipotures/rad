@@ -7,11 +7,14 @@ binds 141 author sources, 24 inputs and the additional reviewer closure to the
 actual finite, signed, prime, reflected, coefficient and complete arithmetic
 reviews. Both clean source and normalized public metadata recovery pass.
 The historical PR171 improvement was superseded before release. At
-2026-10-09 10:09:42 UTC the current PR176 claim is
-`81117750407097/125000000000000000`, with required one-percent score
-`8192892791116797/12500000000000000000`; this construction is below
+2026-10-09 10:50:52 UTC the current draft PR179 claim is
+`655920176686219/1000000000000000000`, with required one-percent score
+`66247937845308119/100000000000000000000`; this construction is below
 the raw leader and the submission gate. No actual script or broad contribution
-suite was run for it. Fresh fd25adb constructions are distinct pending work.
+suite was run for it. The distinct fd25adb construction series and final binary
+continuation have concluded below target. The [final assessment](final-sprint-assessment.md)
+records native screens, exact ceilings, the changing frontier and why further
+polishing of these fixed constructions has diminishing information value.
 
 Historical observation: 2026-10-09 08:58:16 UTC. The complete paginated comparison
 includes 120 active claims and drafts. Its threshold is PR171,

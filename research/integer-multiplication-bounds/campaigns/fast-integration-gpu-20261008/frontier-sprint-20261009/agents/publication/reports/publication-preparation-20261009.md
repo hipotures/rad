@@ -1,5 +1,7 @@
 # Publication preparation at the 1% policy boundary
 
+This report preserves the earlier 44-test source version and its hashes. The [later Python 3.11 gate and historical package report](lifetime-fused-historical-package-20261009.md) supersedes the declared interpreter minimum and records the new audited source version.
+
 The portable publication generator is prepared and independently audited. All 44 authored tests, 14 independent safety tests and seven independent policy tests pass. This evidence concerns publication safeguards, not mathematical acceptance. No real record script has been generated, no actual publication mode has been executed, and no GitHub mutation has occurred in this lane. The coordinator owns release freezing and Git publication of the research record.
 
 The immutable release policy is `minimum_relative_improvement: "1/100"`. The builder and both publication-time frontier checks use exact fractions and require `candidate >= (101/100)*F`, where `F` is the maximum comparable active claim or reviewed conservative upper bound, including drafts, and the retained reviewed main result. A score exactly at the 1% boundary passes. Missing, weaker or noncanonical policy fields stop generation and execution. No strict-gain fallback remains.

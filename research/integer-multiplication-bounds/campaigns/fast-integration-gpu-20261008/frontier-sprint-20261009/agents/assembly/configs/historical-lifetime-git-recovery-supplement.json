@@ -1,0 +1,106 @@
+{
+  "accepted_receipt": {
+    "bytes": 56040,
+    "path": "reports/accepted-lifetime-fused-candidate.json",
+    "sha256": "340f8cf135b5a976fb073ea1783c64fc7b4b5eabff304b4134d4c79add93f528"
+  },
+  "actual_executed_export_copy_verified": true,
+  "already_verified_acceptance_commit": "d9c4b990bf09ec25a8e6f78b1d028665689246e8",
+  "authored_import_closure": [
+    {
+      "bytes": 9306,
+      "path": "agents/assembly/code/bind_fused_reviews.py",
+      "sha256": "dc08850ce9a2b7e5cd681a00aaf6c603f0f6c15c48910e1e82625af4ad83dd29",
+      "tracked_at_supplement_creation": true
+    },
+    {
+      "bytes": 20268,
+      "path": "agents/assembly/code/review_fused_lifetime.py",
+      "sha256": "158ed7bd744be0ac1eb417cb8712c95f09b9ea0c8e65030ff64dd57875200127",
+      "tracked_at_supplement_creation": true
+    },
+    {
+      "bytes": 15370,
+      "path": "agents/assembly/code/review_rebuilt168_ceiling.py",
+      "sha256": "a347c65da1aef3867a46b8c63b93b4074fa5f68be8dc5ec49500dd8698cf25c0",
+      "tracked_at_supplement_creation": false
+    },
+    {
+      "bytes": 23187,
+      "path": "agents/assembly/code/review_balanced_unified.py",
+      "sha256": "ec94f77b0665ae1976d37df943a0d41065aa171f82416e307c36b9b0a5c0f9e9",
+      "tracked_at_supplement_creation": true
+    },
+    {
+      "bytes": 9552,
+      "path": "agents/assembly/code/review_public_fused.py",
+      "sha256": "bdb491b0a8d54bf02125813c067d3f5e5aaf00d7017592db5982ec217f367f08",
+      "tracked_at_supplement_creation": true
+    }
+  ],
+  "candidate_id": "balanced-lifetime-fused-168-170-20261009",
+  "executed_acceptance_manifest": {
+    "archived_path": "agents/assembly/evidence/20261009T-fused-lifetime-independent-review/acceptance-export-manifest.json.gz",
+    "archived_sha256": "453eb27155b6cc89dad5c027822c1e12932aedd3a133eeae32d6440b834e4872",
+    "binding_byte_output_identical": true,
+    "bytes": 43874,
+    "files": 184,
+    "input_records": 24,
+    "path": "work/assembly/20261009T-lifetime-fused-acceptance-clean-export/acceptance-export-manifest.json",
+    "sha256": "9521ad02fb8b273453deae6573d546d5b17a01798a60f4277e722b8064cda1dd",
+    "source_records": 141
+  },
+  "import_edges": [
+    {
+      "dependency": "agents/assembly/code/review_fused_lifetime.py",
+      "importer": "agents/assembly/code/bind_fused_reviews.py"
+    },
+    {
+      "dependency": "agents/assembly/code/review_balanced_unified.py",
+      "importer": "agents/assembly/code/review_fused_lifetime.py"
+    },
+    {
+      "dependency": "agents/assembly/code/review_rebuilt168_ceiling.py",
+      "importer": "agents/assembly/code/review_fused_lifetime.py"
+    },
+    {
+      "dependency": "agents/assembly/code/review_balanced_unified.py",
+      "importer": "agents/assembly/code/review_rebuilt168_ceiling.py"
+    },
+    {
+      "dependency": "agents/assembly/code/review_fused_lifetime.py",
+      "importer": "agents/assembly/code/review_public_fused.py"
+    }
+  ],
+  "kappa": "61728289/100000000000",
+  "legacy_artifacts_to_preserve": [
+    "agents/assembly/configs/rebuilt168-review-closure.json",
+    "agents/assembly/notes/rebuilt168-source-closure-v2.patch"
+  ],
+  "missing_dependency": {
+    "bytes": 15370,
+    "path": "agents/assembly/code/review_rebuilt168_ceiling.py",
+    "sha256": "a347c65da1aef3867a46b8c63b93b4074fa5f68be8dc5ec49500dd8698cf25c0"
+  },
+  "missing_dependency_was_present_in_executed_export": true,
+  "public_clean_export": {
+    "helper": {
+      "bytes": 15370,
+      "path": "independent/review_rebuilt168_ceiling.py",
+      "sha256": "a347c65da1aef3867a46b8c63b93b4074fa5f68be8dc5ec49500dd8698cf25c0"
+    },
+    "manifest_path": "work/assembly/20261009T-public-normalized-fused-review-v2/clean-reproduction.json",
+    "manifest_sha256": "964d8015a4f9855113a8d7d18e9b43433863d4f6e709598460f8af56a660eb18",
+    "output_byte_identical": true
+  },
+  "scientific_digest": "4432be0a906b7e09cc356846453fb5240505d948c166394a406badc7577f7b93",
+  "scope": "The exact helper bytes already supplied native_assembly during the successfully executed scientific and public clean reproductions. The prior Git commit omitted those readable source bytes. The next scoped commit restores durable Git recovery only. Candidate mathematical identity, original 141/24 pins, scientific digest, accepted root receipt and all prior review receipts remain unchanged. All other nonstdlib imports in the assembly closure, and all other authored Python paths across the executed 184-file acceptance inventory, are already tracked.",
+  "status": "GIT_RECOVERY_OMISSION_SUPPLEMENT_NO_MATHEMATICAL_CHANGE",
+  "untracked_authored_python_paths_in_entire_executed_acceptance_inventory": [
+    {
+      "bytes": 15370,
+      "path": "agents/assembly/code/review_rebuilt168_ceiling.py",
+      "sha256": "a347c65da1aef3867a46b8c63b93b4074fa5f68be8dc5ec49500dd8698cf25c0"
+    }
+  ]
+}
