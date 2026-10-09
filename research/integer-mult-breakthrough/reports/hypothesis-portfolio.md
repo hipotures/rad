@@ -308,3 +308,44 @@ line births, so containment blocks naive reuse. Broader recipient frames,
 shared features, grouped sources and joint cancellation are independent
 possibilities. Source/frame guards, dirty endpoints and the canonical
 primitive connection remain decisive before wider sweeps.
+
+## Ninth checkpoint: actual frame moves and dirty lifecycles
+
+The [scalable compiler](complex/scalable-actual-frame-interfaces.md) closes
+the algebraic interface gap: an actual relative between canonical subspaces
+uses one child of Grassmann width, with all affine, quadratic and global
+units retained. Its independent fixture review checks complete Pauli images
+and the missing global scalar. This changes the admissible circuit search
+space; it does not make native routing or metadata work free.
+
+The [equal-frame](synthesis/degenerate-birth-reuse-component.md) and
+[strict nested](synthesis/nested-degenerate-birth-and-moment.md) components
+retain source-dependent dirty birth values and finish one true chronological
+uncompute. Both remove one physical role while preserving deficit four.
+The nested concavity lemma improves complete moment slack if all actual
+birth-response and stock hypotheses hold. Public birth-cut and pair
+majorization mechanisms are credited separately from these new degenerate
+actual-operator components.
+
+The [reflected right-frame gauges](complex/right-reflected-actual-frame-gauges.md)
+permit exact zero-child monomial adjustments between the required actual
+representatives. Their repaired inverse-order control preserves its original
+failure. These gauges are candidates for a joint lifecycle across the three
+bodies of a signed SWAP, with helpers retained between bodies. No complete
+positive canonical ledger has been established.
+
+The [noncontained budget](transfers/noncontained-birth-budget.md) loses
+endpoint deficit and cannot improve a failed target near the reference
+boundary for any dimension 2 through 2048. A small positive large-dimension
+arithmetic margin is parked until a legal sink/birth chronology and enough
+global slack exist. The [routed-SWAP boundary](obstructions/routed-swap-alignment-boundary.md)
+restores full support at one otherwise smaller interface. The
+[separately restored bodies](synthesis/joint-signed-swap-independent-body-control.md)
+produce correct canonical raw data but exceed paid capacity. These are
+scoped negatives, not exclusions of shared or arbitrary circuits.
+
+The [ballot role budget](complex/ballot-center-review-and-role-budget.md)
+also rejects one fresh helper per basis gate under the declared two-axis
+profile. The next discriminators are whole shared lifecycles, a different
+canonical data boundary, native full-payload affine/quadratic routing, and
+alternative master recurrences. No larger campaign kappa is accepted.

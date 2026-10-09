@@ -326,3 +326,57 @@ and archived source snapshot. Early receipts remain unchanged. Registered CI
 uses the extended source. The full orthogonal Gauss-block trace likewise has
 an unchanged gzip copy and a separately named compact publication summary;
 neither original was overwritten to satisfy publication limits.
+
+## Scalable actual frames and dirty birth reuse
+
+The ninth checkpoint adds exact compact interfaces, two dirty-birth
+components and independently scoped budget controls. These standard-library
+commands use no downloaded source or solver:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/scalable_frame_review.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/complex/verify_right_reflected_interfaces.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/reflected_frame_review.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/complex/ballot_role_budget.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_birth_swap_components.py --case equal-birth
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_birth_swap_components.py --case nested-birth
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_birth_swap_components.py --case separate-swap
+python3 -B research/integer-mult-breakthrough/code/transfers/degenerate_birth_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/degenerate_birth_fixture_review.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/transfers/nested_birth_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/noncontained_birth_budget.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/obstructions/routed_swap_alignment.py --workers 1 --bounded
+```
+
+The birth wrapper replays all baseline and reused one-column physical basis
+columns, two-column bank origins and three complete Gaussian fields per
+case. It never promotes origin coverage to all two-column columns. The
+separate-body SWAP check returns canonical raw data and full transformed
+dirty banks, but its complete paid rank exceeds capacity. The routed test
+binds every coefficient and every pair column of its bounded case; it does
+not provide a helper word.
+
+The [scalable recovery config](configs/complex/scalable-interface-recovery.json)
+and [reflected recovery config](configs/complex/right-reflected-recovery.json)
+identify exact historical source patches. Copy the current corresponding
+source to an isolated directory preserving its repository path, then apply
+the configured patch with `patch --batch --forward -p1 -i <absolute-patch>`.
+Verify the recovered SHA-256 against the config. For the
+[joint-SWAP control repair](code/synthesis/patches/joint-swap-left-control-repair.patch),
+preserve its `code/synthesis/` path and use `--reverse` instead of `--forward`.
+GNU patch 2.7.6 was used for the coordinator's five exact recoveries. Originals
+remain unchanged. Historical failed controls are evidence of failed
+attempts, not successful certificates.
+
+The [birth-contract exporter](code/synthesis/dump_birth_contract.py) regenerates
+the nested mathematical fixture in a fresh output path. The original equal
+fixture is retained byte-for-byte and pinned independently. Gzip manifests
+retain complete historical receipts and logs; authored source, configs,
+fixtures and recovery patches remain readable. The artifact manifest records
+each full copy and its original namespace.
+
+Run the three populated CI groups using the fresh-directory commands above.
+Complete local results are recorded in the ninth validation run. Algebraic
+operator equality, conditional role moments and exact finite dirty components
+remain distinct from a native tape proof and a multiplication exponent.

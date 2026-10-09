@@ -1,0 +1,11 @@
+--- a/research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py
++++ b/research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py
+@@ -692,8 +692,6 @@
+                        scientific_scope='Finite exact matrix replay and seeded large algebraic controls support the explicit all-size symbolic algorithm. Native complete-stream movement, precision guards, recursive stock and exponent remain separate.')
+     if sha256(source.read_bytes()).hexdigest() != protocol['source_sha256']:
+         raise AssertionError('Compiler source changed during execution')
+-    if sha256(reference_file.read_bytes()).hexdigest() != protocol['actual_frame_source_sha256']:
+-        raise AssertionError('Imported actual frame source changed during execution')
+     if args.output:
+         (args.output / 'certificate.json').write_text(json.dumps(certificate, indent=2) + '\n')
+     print(json.dumps(certificate, indent=2), flush=True)

@@ -1,0 +1,13 @@
+--- a/research/integer-mult-breakthrough/code/complex/right_reflected_frame_gauges.py
++++ b/research/integer-mult-breakthrough/code/complex/right_reflected_frame_gauges.py
+@@ -116,8 +116,8 @@
+     gauge_word=exact.inverse_word(reflected_word(R,n))
+     gauge=compile_monomial(gauge_word,n)
+     normal=exact.compile_interface(R,F,n)
+-    original_word=(exact.inverse_word(exact.literal_word(E,n))
+-                   +exact.inverse_word(exact.literal_word(full(n),n))
++    original_word=(exact.inverse_word(exact.literal_word(full(n),n))
++                   +exact.inverse_word(exact.literal_word(E,n))
+                    +exact.literal_word(F,n))
+     compiled=exact.compiled_word(gauge)+exact.compiled_word(normal)
+     if exact.tableau(original_word,n)!=exact.tableau(compiled,n):

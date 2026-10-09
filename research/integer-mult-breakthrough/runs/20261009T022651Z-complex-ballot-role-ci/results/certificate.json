@@ -1,0 +1,90 @@
+{
+  "status": "PASS EXACT HYPOTHETICAL ROLE BUDGETS",
+  "protocol": {
+    "started_utc": "2026-10-09T02:26:52.002746+00:00",
+    "workers": 1,
+    "native_threads_each": 1,
+    "source_sha256": {
+      "ballot_role_budget.py": "ea7818be375c63619824e08da89e32e212fbc667f510b2ad56f074b22737291f",
+      "characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9"
+    },
+    "cases": [
+      [
+        26,
+        7
+      ]
+    ],
+    "seeds": null,
+    "target": "20/189981"
+  },
+  "completed_utc": "2026-10-09T02:26:52.145273+00:00",
+  "elapsed_seconds": 0.1424005209992174,
+  "incidence_control": {
+    "h": 10,
+    "k": 7,
+    "features": 120,
+    "source_labels": 120,
+    "all_incidence_entries": 14400,
+    "nonzeros": 5461
+  },
+  "cases": [
+    {
+      "h": 26,
+      "k": 7,
+      "r": 3,
+      "v": 657800,
+      "q": 2600,
+      "target": "20/189981",
+      "all_ballot_feature_incidences": 37939121,
+      "incidence_additions_per_source": "149957/2600",
+      "direct_nonpivot_gather_lower": 31179121,
+      "gather_lower_per_source": "31179121/657800",
+      "rankh_target_moment_at_gather_lower": [
+        "784644394576192323199027694426911495974681815533692600145/784637716923335095479473677900958302012794430558004314112",
+        "784644394576192323199027694426911495974681815533692615923/784637716923335095479473677900958302012794430558004314112"
+      ],
+      "direct_unreused_gate_helper_status": "excluded",
+      "budgets": [
+        {
+          "placement": "rank1",
+          "maximum_strict_integer_roles": 8699803,
+          "maximum_roles_per_source": "8699803/657800",
+          "accepted_role_target_moment": [
+            "6277101735376132434144130909124132711509764587893692466733/6277101735386680763835789423207666416102355444464034512896",
+            "3138550867688066217072065454562066355754882293946846505819/3138550867693340381917894711603833208051177722232017256448"
+          ],
+          "next_role_target_moment": [
+            "3138550867698250052660827572727380450707536748783622002009/3138550867693340381917894711603833208051177722232017256448",
+            "6277101735396500105321655145454760901415073497567244548923/6277101735386680763835789423207666416102355444464034512896"
+          ],
+          "target": "20/189981",
+          "scope": "Exact strict role threshold for this unattained full profile."
+        },
+        {
+          "placement": "rankh",
+          "maximum_strict_integer_roles": 15393638,
+          "maximum_roles_per_source": "592063/25300",
+          "accepted_role_target_moment": [
+            "6277101735386169857215045078866427766675302389235143416415/6277101735386680763835789423207666416102355444464034512896",
+            "392318858461635616075940317429151735417206399327196471575/392318858461667547739736838950479151006397215279002157056"
+          ],
+          "next_role_target_moment": [
+            "6277101735392882183225834809496681851435338696574282367115/6277101735386680763835789423207666416102355444464034512896",
+            "1569275433848220545806458702374170462858834674143570623975/1569275433846670190958947355801916604025588861116008628224"
+          ],
+          "target": "20/189981",
+          "scope": "Exact strict role threshold for this unattained full profile."
+        }
+      ],
+      "assumptions": [
+        "The old two-axis master admits the stated odd-k profile",
+        "Closed center loss2qh replaces every previous center charge",
+        "All local residual widths are at most h; rankh is optimistic and rank1 conservative",
+        "For the direct-gather comparison only, every scalar gate consumes a distinct physical helper",
+        "No role-reuse, phase, routing, guard or source/sink saving is assumed implicitly"
+      ],
+      "scope": "A sensitivity discriminator. A literal scalar gate count does not lower-bound helper stock in a different chronology."
+    }
+  ],
+  "scope": "No native circuit or exponent is certified. The direct-gather exclusion applies only to one-helper-per-gate stock in the unchanged hypothetical master."
+}

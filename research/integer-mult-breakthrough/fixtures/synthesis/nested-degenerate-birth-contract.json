@@ -1,0 +1,3166 @@
+{
+  "schema": "literal-birth-cut-contract-v2",
+  "producer_module": "nested_degenerate_birth_reuse",
+  "producer_sha256": "dc438259086fa4578bb45211ee9390f8e56fea5ea665ee3d1db5af33edf51778",
+  "hash_serialization": "UTF-8 JSON [integer Gaussian numerator matrix,denominator_bits], separators=(comma,colon), no trailing newline; rows and columns in ordinary binary order",
+  "selected_column_layout": "bit-major: address bit index = ambient_bit*columns+column",
+  "scalar_coefficient_semantics": "One constant coefficient per entire payload bank; it is not raised to the number of selected columns.",
+  "cases": [
+    {
+      "reuse": false,
+      "ambient_bits": 4,
+      "source_labels": [
+        1,
+        7
+      ],
+      "target_labels": [
+        8,
+        14
+      ],
+      "donor_subspace": [
+        1,
+        6
+      ],
+      "recipient_subspace": [
+        1,
+        6,
+        10
+      ],
+      "clean_events": [
+        [
+          "birth",
+          0
+        ],
+        [
+          "birth",
+          1
+        ],
+        [
+          "source",
+          0,
+          0,
+          1
+        ],
+        [
+          "source",
+          1,
+          1,
+          1
+        ],
+        [
+          "birth",
+          2
+        ],
+        [
+          "gate",
+          2,
+          0,
+          1
+        ],
+        [
+          "gate",
+          2,
+          1,
+          1
+        ],
+        [
+          "read",
+          2,
+          0,
+          1
+        ],
+        [
+          "birth",
+          3
+        ],
+        [
+          "gate",
+          3,
+          0,
+          2
+        ],
+        [
+          "gate",
+          3,
+          1,
+          3
+        ],
+        [
+          "read",
+          3,
+          1,
+          1
+        ]
+      ],
+      "cut_birth_responses": {
+        "8": [
+          0,
+          1
+        ],
+        "4": [
+          1,
+          0
+        ],
+        "1": [
+          1,
+          3
+        ],
+        "0": [
+          1,
+          2
+        ]
+      },
+      "physical_events": [
+        [
+          "birth-response",
+          4,
+          0,
+          [
+            1,
+            2
+          ]
+        ],
+        [
+          "birth-response",
+          5,
+          1,
+          [
+            1,
+            3
+          ]
+        ],
+        [
+          "move",
+          4,
+          "T0"
+        ],
+        [
+          "add",
+          4,
+          0,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "move",
+          5,
+          "T1"
+        ],
+        [
+          "add",
+          5,
+          1,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "move",
+          2,
+          "T2"
+        ],
+        [
+          "move",
+          3,
+          "T2"
+        ],
+        [
+          "move",
+          4,
+          "T4"
+        ],
+        [
+          "move",
+          5,
+          "T6"
+        ],
+        [
+          "move",
+          6,
+          "T2"
+        ],
+        [
+          "birth-response",
+          6,
+          4,
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          "add",
+          6,
+          4,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "add",
+          6,
+          5,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "add",
+          2,
+          6,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "move",
+          2,
+          "T8"
+        ],
+        [
+          "move",
+          3,
+          "T9"
+        ],
+        [
+          "move",
+          4,
+          "T9"
+        ],
+        [
+          "move",
+          5,
+          "T9"
+        ],
+        [
+          "move",
+          7,
+          "T3"
+        ],
+        [
+          "birth-response",
+          7,
+          8,
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          "add",
+          7,
+          4,
+          [
+            2,
+            1
+          ]
+        ],
+        [
+          "add",
+          7,
+          5,
+          [
+            3,
+            1
+          ]
+        ],
+        [
+          "add",
+          3,
+          7,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "move",
+          0,
+          "T5"
+        ],
+        [
+          "move",
+          1,
+          "T7"
+        ],
+        [
+          "move",
+          4,
+          "T11"
+        ],
+        [
+          "move",
+          5,
+          "T11"
+        ],
+        [
+          "move",
+          6,
+          "T10"
+        ],
+        [
+          "move",
+          7,
+          "T11"
+        ],
+        [
+          "add",
+          7,
+          5,
+          [
+            -3,
+            1
+          ]
+        ],
+        [
+          "add",
+          7,
+          4,
+          [
+            -2,
+            1
+          ]
+        ],
+        [
+          "add",
+          6,
+          5,
+          [
+            -1,
+            1
+          ]
+        ],
+        [
+          "add",
+          6,
+          4,
+          [
+            -1,
+            1
+          ]
+        ],
+        [
+          "add",
+          5,
+          1,
+          [
+            -1,
+            1
+          ]
+        ],
+        [
+          "add",
+          4,
+          0,
+          [
+            -1,
+            1
+          ]
+        ]
+      ],
+      "frames": [
+        {
+          "id": "F0",
+          "subspace": [],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [],
+            "rank": 0,
+            "gaussian_grid_bits": 0,
+            "anchor": "identity",
+            "word": []
+          },
+          "matrix_bits": 0,
+          "matrix_sha256": "1f3fcb8b84454705a48b2f579f952ab8f459748b4143e3d4bd730c5b99cfb2ed"
+        },
+        {
+          "id": "F1",
+          "subspace": [
+            1
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1
+            ],
+            "rank": 1,
+            "gaussian_grid_bits": 1,
+            "anchor": "odd-line-C",
+            "line": 1,
+            "word": [
+              [
+                "C_line",
+                1
+              ]
+            ]
+          },
+          "matrix_bits": 1,
+          "matrix_sha256": "cf9a9ada999f2c55a9d1c3d8e96af3075332b99e7bd69a10bfcf39069d419abd"
+        },
+        {
+          "id": "F2",
+          "subspace": [
+            7
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              7
+            ],
+            "rank": 1,
+            "gaussian_grid_bits": 1,
+            "anchor": "odd-line-C",
+            "line": 7,
+            "word": [
+              [
+                "C_line",
+                7
+              ]
+            ]
+          },
+          "matrix_bits": 1,
+          "matrix_sha256": "f54a3a0c2d2d1d1df9d5c231210b88e43df3a02bb71274055ae58ef0f6b37b29"
+        },
+        {
+          "id": "F3",
+          "subspace": [
+            1,
+            6
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1,
+              6
+            ],
+            "rank": 2,
+            "gaussian_grid_bits": 2,
+            "anchor": "generic-dyadic-H",
+            "routing_columns": [
+              1,
+              6,
+              2,
+              8
+            ],
+            "word": [
+              [
+                "quadratic_phase",
+                -1,
+                "weight-all-bits"
+              ],
+              [
+                "linear_route_inverse",
+                [
+                  1,
+                  6,
+                  2,
+                  8
+                ]
+              ],
+              [
+                "H_tilde",
+                2
+              ],
+              [
+                "linear_route",
+                [
+                  1,
+                  6,
+                  2,
+                  8
+                ]
+              ],
+              [
+                "quadratic_phase",
+                -1,
+                "weight-all-bits"
+              ]
+            ]
+          },
+          "matrix_bits": 2,
+          "matrix_sha256": "4a6183fd22f87dfd912314a893d5ac59eba1b9f1cd4bcb23043ab2699fec7654"
+        },
+        {
+          "id": "F4",
+          "subspace": [
+            1,
+            2,
+            4
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1,
+              2,
+              4
+            ],
+            "rank": 3,
+            "gaussian_grid_bits": 3,
+            "anchor": "odd-kernel-C",
+            "line": 8,
+            "word": [
+              [
+                "C_line_inverse",
+                8
+              ],
+              [
+                "C_full",
+                4
+              ]
+            ]
+          },
+          "matrix_bits": 3,
+          "matrix_sha256": "0092ffff7f767bdce1cf6ab5aad7c542d12a0d595852d794c8d822572632e391"
+        },
+        {
+          "id": "F5",
+          "subspace": [
+            1,
+            6,
+            10
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1,
+              6,
+              10
+            ],
+            "rank": 3,
+            "gaussian_grid_bits": 3,
+            "anchor": "odd-kernel-C",
+            "line": 14,
+            "word": [
+              [
+                "C_line_inverse",
+                14
+              ],
+              [
+                "C_full",
+                4
+              ]
+            ]
+          },
+          "matrix_bits": 3,
+          "matrix_sha256": "a28b2beb6f7428d5d91fffe3fdf0e1bcc22097a047557d23321018cd8df2a5ae"
+        },
+        {
+          "id": "F6",
+          "subspace": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1,
+              2,
+              4,
+              8
+            ],
+            "rank": 4,
+            "gaussian_grid_bits": 4,
+            "anchor": "full-C",
+            "word": [
+              [
+                "C_full",
+                4
+              ]
+            ]
+          },
+          "matrix_bits": 4,
+          "matrix_sha256": "b743e232c7587eabe6f0d15eada36d23591d4bb8f745b2f69acd9ae9a91dbea2"
+        }
+      ],
+      "transitions": [
+        {
+          "id": "T0",
+          "from_frame": "F0",
+          "to_frame": "F1",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "cf9a9ada999f2c55a9d1c3d8e96af3075332b99e7bd69a10bfcf39069d419abd",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              1,
+              2,
+              4,
+              8
+            ],
+            "input_columns": [
+              1,
+              2,
+              4,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T1",
+          "from_frame": "F0",
+          "to_frame": "F2",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "f54a3a0c2d2d1d1df9d5c231210b88e43df3a02bb71274055ae58ef0f6b37b29",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              7,
+              1,
+              2,
+              8
+            ],
+            "input_columns": [
+              7,
+              1,
+              2,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T2",
+          "from_frame": "F0",
+          "to_frame": "F3",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 2,
+          "rising_matrix_sha256": "4a6183fd22f87dfd912314a893d5ac59eba1b9f1cd4bcb23043ab2699fec7654",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 2,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              1,
+              6,
+              2,
+              8
+            ],
+            "input_columns": [
+              1,
+              6,
+              2,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              1,
+              1
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              3,
+              3,
+              2,
+              2,
+              3,
+              3,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                3,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                3,
+                2,
+                2
+              ],
+              "cross": [
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T3",
+          "from_frame": "F0",
+          "to_frame": "F5",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 3,
+          "rising_matrix_sha256": "a28b2beb6f7428d5d91fffe3fdf0e1bcc22097a047557d23321018cd8df2a5ae",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 3,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 2,
+            "output_columns": [
+              1,
+              6,
+              10,
+              2
+            ],
+            "input_columns": [
+              1,
+              10,
+              6,
+              2
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              3,
+              3,
+              0,
+              0,
+              0,
+              0,
+              3,
+              3,
+              3,
+              3,
+              0,
+              0,
+              0,
+              0,
+              3,
+              3
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                1,
+                1,
+                0
+              ],
+              "cross": [
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "input_quadratic": {
+              "constant": 3,
+              "linear": [
+                0,
+                1,
+                1,
+                0
+              ],
+              "cross": [
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T4",
+          "from_frame": "F1",
+          "to_frame": "F3",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "bea940b1d33f6cd0beb71468ebf9a162ed3d09dacd3aaa0fe6e5f97a361c913b",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              6,
+              1,
+              2,
+              8
+            ],
+            "input_columns": [
+              6,
+              1,
+              2,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              3,
+              0,
+              3,
+              0,
+              1,
+              0,
+              1,
+              0,
+              3,
+              0,
+              3,
+              0,
+              1,
+              0,
+              1
+            ],
+            "input_phase_exponents": [
+              0,
+              3,
+              0,
+              3,
+              2,
+              3,
+              2,
+              3,
+              2,
+              1,
+              2,
+              1,
+              0,
+              1,
+              0,
+              1
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                3,
+                0,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                3,
+                0,
+                2,
+                2
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T5",
+          "from_frame": "F1",
+          "to_frame": "F6",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 3,
+          "rising_matrix_sha256": "96c90041522bfc448c9d860ce7b31ad4b3a53cebed4dee6674b7e06e5ca09831",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 3,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              2,
+              4,
+              8,
+              1
+            ],
+            "input_columns": [
+              2,
+              4,
+              8,
+              1
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T6",
+          "from_frame": "F2",
+          "to_frame": "F3",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "fd3eaf6c1dba1b300f9b14628a71a197aa99767266d2a51374c9bd1f7a7c0045",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 1,
+            "output_columns": [
+              7,
+              1,
+              3,
+              8
+            ],
+            "input_columns": [
+              6,
+              1,
+              2,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              3,
+              2,
+              3,
+              2,
+              2,
+              3,
+              2,
+              3,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 3,
+              "linear": [
+                3,
+                0,
+                3,
+                2
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T7",
+          "from_frame": "F2",
+          "to_frame": "F6",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 3,
+          "rising_matrix_sha256": "8abf1623070a8327d8f587c768b9932e72d9ea1113993683f1fa3341d715fa64",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 3,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 1,
+            "output_columns": [
+              3,
+              5,
+              8,
+              1
+            ],
+            "input_columns": [
+              5,
+              3,
+              8,
+              1
+            ],
+            "output_phase_exponents": [
+              0,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            "input_phase_exponents": [
+              3,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              3
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ]
+            },
+            "input_quadratic": {
+              "constant": 3,
+              "linear": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T8",
+          "from_frame": "F3",
+          "to_frame": "F4",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "a7df06c0bb36fa06d41f3a94dadcda5e5da883594fd0342eda101509c64dbf2c",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              6,
+              1,
+              2,
+              8
+            ],
+            "input_columns": [
+              2,
+              1,
+              4,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3
+            ],
+            "input_phase_exponents": [
+              0,
+              2,
+              0,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                3,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                2,
+                0,
+                2,
+                2
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T9",
+          "from_frame": "F3",
+          "to_frame": "F5",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "3c43b681d577a8c6aafb76014f8150bc0ff289459c2f7940f5d827248755693f",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 8,
+            "output_columns": [
+              6,
+              1,
+              8,
+              2
+            ],
+            "input_columns": [
+              10,
+              1,
+              2,
+              4
+            ],
+            "output_phase_exponents": [
+              0,
+              3,
+              0,
+              3,
+              0,
+              1,
+              0,
+              1,
+              0,
+              3,
+              0,
+              3,
+              0,
+              1,
+              0,
+              1
+            ],
+            "input_phase_exponents": [
+              3,
+              0,
+              3,
+              0,
+              1,
+              2,
+              1,
+              2,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                3,
+                0,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "input_quadratic": {
+              "constant": 3,
+              "linear": [
+                1,
+                0,
+                2,
+                2
+              ],
+              "cross": [
+                [
+                  0,
+                  3,
+                  2
+                ],
+                [
+                  2,
+                  3,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T10",
+          "from_frame": "F3",
+          "to_frame": "F6",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 2,
+          "rising_matrix_sha256": "6cbdbd093711e6aa46e8c2621a7ed84ae6e05e95129a1b4cb1a5f5661968778e",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 2,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              6,
+              8,
+              1,
+              2
+            ],
+            "input_columns": [
+              2,
+              8,
+              1,
+              4
+            ],
+            "output_phase_exponents": [
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3
+            ],
+            "input_phase_exponents": [
+              0,
+              2,
+              2,
+              0,
+              0,
+              2,
+              2,
+              0,
+              2,
+              2,
+              0,
+              0,
+              2,
+              2,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                3,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                2,
+                2,
+                0,
+                2
+              ],
+              "cross": [
+                [
+                  0,
+                  3,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T11",
+          "from_frame": "F5",
+          "to_frame": "F6",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "61704cce53cc305b46481f2b63515877c49e67530a5ab578f1344909d6d55bbd",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              14,
+              1,
+              2,
+              4
+            ],
+            "input_columns": [
+              14,
+              1,
+              2,
+              4
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        }
+      ],
+      "payload_stock": 8,
+      "initial_frame_ids": [
+        "F1",
+        "F2",
+        "F0",
+        "F0",
+        "F0",
+        "F0",
+        "F0",
+        "F0"
+      ],
+      "final_frame_ids": [
+        "F6",
+        "F6",
+        "F4",
+        "F5",
+        "F6",
+        "F6",
+        "F6",
+        "F6"
+      ],
+      "child_width_histogram": {
+        "1": 11,
+        "2": 4,
+        "3": 3
+      },
+      "rank_charge": 28,
+      "deficit": 4
+    },
+    {
+      "reuse": true,
+      "ambient_bits": 4,
+      "source_labels": [
+        1,
+        7
+      ],
+      "target_labels": [
+        8,
+        14
+      ],
+      "donor_subspace": [
+        1,
+        6
+      ],
+      "recipient_subspace": [
+        1,
+        6,
+        10
+      ],
+      "clean_events": [
+        [
+          "birth",
+          0
+        ],
+        [
+          "birth",
+          1
+        ],
+        [
+          "source",
+          0,
+          0,
+          1
+        ],
+        [
+          "source",
+          1,
+          1,
+          1
+        ],
+        [
+          "birth",
+          2
+        ],
+        [
+          "gate",
+          2,
+          0,
+          1
+        ],
+        [
+          "gate",
+          2,
+          1,
+          1
+        ],
+        [
+          "read",
+          2,
+          0,
+          1
+        ],
+        [
+          "birth",
+          2
+        ],
+        [
+          "gate",
+          2,
+          0,
+          2
+        ],
+        [
+          "gate",
+          2,
+          1,
+          3
+        ],
+        [
+          "read",
+          2,
+          1,
+          1
+        ]
+      ],
+      "cut_birth_responses": {
+        "8": [
+          0,
+          1
+        ],
+        "4": [
+          1,
+          0
+        ],
+        "1": [
+          1,
+          3
+        ],
+        "0": [
+          1,
+          2
+        ]
+      },
+      "physical_events": [
+        [
+          "birth-response",
+          4,
+          0,
+          [
+            1,
+            2
+          ]
+        ],
+        [
+          "birth-response",
+          5,
+          1,
+          [
+            1,
+            3
+          ]
+        ],
+        [
+          "move",
+          4,
+          "T0"
+        ],
+        [
+          "add",
+          4,
+          0,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "move",
+          5,
+          "T1"
+        ],
+        [
+          "add",
+          5,
+          1,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "move",
+          2,
+          "T2"
+        ],
+        [
+          "move",
+          3,
+          "T2"
+        ],
+        [
+          "move",
+          4,
+          "T3"
+        ],
+        [
+          "move",
+          5,
+          "T5"
+        ],
+        [
+          "move",
+          6,
+          "T2"
+        ],
+        [
+          "birth-response",
+          6,
+          4,
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          "add",
+          6,
+          4,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "add",
+          6,
+          5,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "add",
+          2,
+          6,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "move",
+          2,
+          "T7"
+        ],
+        [
+          "move",
+          3,
+          "T8"
+        ],
+        [
+          "move",
+          4,
+          "T8"
+        ],
+        [
+          "move",
+          5,
+          "T8"
+        ],
+        [
+          "move",
+          6,
+          "T8"
+        ],
+        [
+          "birth-response",
+          6,
+          8,
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          "add",
+          6,
+          4,
+          [
+            2,
+            1
+          ]
+        ],
+        [
+          "add",
+          6,
+          5,
+          [
+            3,
+            1
+          ]
+        ],
+        [
+          "add",
+          3,
+          6,
+          [
+            1,
+            1
+          ]
+        ],
+        [
+          "move",
+          0,
+          "T4"
+        ],
+        [
+          "move",
+          1,
+          "T6"
+        ],
+        [
+          "move",
+          4,
+          "T9"
+        ],
+        [
+          "move",
+          5,
+          "T9"
+        ],
+        [
+          "move",
+          6,
+          "T9"
+        ],
+        [
+          "add",
+          6,
+          5,
+          [
+            -3,
+            1
+          ]
+        ],
+        [
+          "add",
+          6,
+          4,
+          [
+            -2,
+            1
+          ]
+        ],
+        [
+          "add",
+          6,
+          5,
+          [
+            -1,
+            1
+          ]
+        ],
+        [
+          "add",
+          6,
+          4,
+          [
+            -1,
+            1
+          ]
+        ],
+        [
+          "add",
+          5,
+          1,
+          [
+            -1,
+            1
+          ]
+        ],
+        [
+          "add",
+          4,
+          0,
+          [
+            -1,
+            1
+          ]
+        ]
+      ],
+      "frames": [
+        {
+          "id": "F0",
+          "subspace": [],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [],
+            "rank": 0,
+            "gaussian_grid_bits": 0,
+            "anchor": "identity",
+            "word": []
+          },
+          "matrix_bits": 0,
+          "matrix_sha256": "1f3fcb8b84454705a48b2f579f952ab8f459748b4143e3d4bd730c5b99cfb2ed"
+        },
+        {
+          "id": "F1",
+          "subspace": [
+            1
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1
+            ],
+            "rank": 1,
+            "gaussian_grid_bits": 1,
+            "anchor": "odd-line-C",
+            "line": 1,
+            "word": [
+              [
+                "C_line",
+                1
+              ]
+            ]
+          },
+          "matrix_bits": 1,
+          "matrix_sha256": "cf9a9ada999f2c55a9d1c3d8e96af3075332b99e7bd69a10bfcf39069d419abd"
+        },
+        {
+          "id": "F2",
+          "subspace": [
+            7
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              7
+            ],
+            "rank": 1,
+            "gaussian_grid_bits": 1,
+            "anchor": "odd-line-C",
+            "line": 7,
+            "word": [
+              [
+                "C_line",
+                7
+              ]
+            ]
+          },
+          "matrix_bits": 1,
+          "matrix_sha256": "f54a3a0c2d2d1d1df9d5c231210b88e43df3a02bb71274055ae58ef0f6b37b29"
+        },
+        {
+          "id": "F3",
+          "subspace": [
+            1,
+            6
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1,
+              6
+            ],
+            "rank": 2,
+            "gaussian_grid_bits": 2,
+            "anchor": "generic-dyadic-H",
+            "routing_columns": [
+              1,
+              6,
+              2,
+              8
+            ],
+            "word": [
+              [
+                "quadratic_phase",
+                -1,
+                "weight-all-bits"
+              ],
+              [
+                "linear_route_inverse",
+                [
+                  1,
+                  6,
+                  2,
+                  8
+                ]
+              ],
+              [
+                "H_tilde",
+                2
+              ],
+              [
+                "linear_route",
+                [
+                  1,
+                  6,
+                  2,
+                  8
+                ]
+              ],
+              [
+                "quadratic_phase",
+                -1,
+                "weight-all-bits"
+              ]
+            ]
+          },
+          "matrix_bits": 2,
+          "matrix_sha256": "4a6183fd22f87dfd912314a893d5ac59eba1b9f1cd4bcb23043ab2699fec7654"
+        },
+        {
+          "id": "F4",
+          "subspace": [
+            1,
+            2,
+            4
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1,
+              2,
+              4
+            ],
+            "rank": 3,
+            "gaussian_grid_bits": 3,
+            "anchor": "odd-kernel-C",
+            "line": 8,
+            "word": [
+              [
+                "C_line_inverse",
+                8
+              ],
+              [
+                "C_full",
+                4
+              ]
+            ]
+          },
+          "matrix_bits": 3,
+          "matrix_sha256": "0092ffff7f767bdce1cf6ab5aad7c542d12a0d595852d794c8d822572632e391"
+        },
+        {
+          "id": "F5",
+          "subspace": [
+            1,
+            6,
+            10
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1,
+              6,
+              10
+            ],
+            "rank": 3,
+            "gaussian_grid_bits": 3,
+            "anchor": "odd-kernel-C",
+            "line": 14,
+            "word": [
+              [
+                "C_line_inverse",
+                14
+              ],
+              [
+                "C_full",
+                4
+              ]
+            ]
+          },
+          "matrix_bits": 3,
+          "matrix_sha256": "a28b2beb6f7428d5d91fffe3fdf0e1bcc22097a047557d23321018cd8df2a5ae"
+        },
+        {
+          "id": "F6",
+          "subspace": [
+            1,
+            2,
+            4,
+            8
+          ],
+          "literal_spec": {
+            "n": 4,
+            "subspace": [
+              1,
+              2,
+              4,
+              8
+            ],
+            "rank": 4,
+            "gaussian_grid_bits": 4,
+            "anchor": "full-C",
+            "word": [
+              [
+                "C_full",
+                4
+              ]
+            ]
+          },
+          "matrix_bits": 4,
+          "matrix_sha256": "b743e232c7587eabe6f0d15eada36d23591d4bb8f745b2f69acd9ae9a91dbea2"
+        }
+      ],
+      "transitions": [
+        {
+          "id": "T0",
+          "from_frame": "F0",
+          "to_frame": "F1",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "cf9a9ada999f2c55a9d1c3d8e96af3075332b99e7bd69a10bfcf39069d419abd",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              1,
+              2,
+              4,
+              8
+            ],
+            "input_columns": [
+              1,
+              2,
+              4,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T1",
+          "from_frame": "F0",
+          "to_frame": "F2",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "f54a3a0c2d2d1d1df9d5c231210b88e43df3a02bb71274055ae58ef0f6b37b29",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              7,
+              1,
+              2,
+              8
+            ],
+            "input_columns": [
+              7,
+              1,
+              2,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T2",
+          "from_frame": "F0",
+          "to_frame": "F3",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 2,
+          "rising_matrix_sha256": "4a6183fd22f87dfd912314a893d5ac59eba1b9f1cd4bcb23043ab2699fec7654",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 2,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              1,
+              6,
+              2,
+              8
+            ],
+            "input_columns": [
+              1,
+              6,
+              2,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              1,
+              1
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              3,
+              3,
+              2,
+              2,
+              3,
+              3,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                3,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                3,
+                2,
+                2
+              ],
+              "cross": [
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T3",
+          "from_frame": "F1",
+          "to_frame": "F3",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "bea940b1d33f6cd0beb71468ebf9a162ed3d09dacd3aaa0fe6e5f97a361c913b",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              6,
+              1,
+              2,
+              8
+            ],
+            "input_columns": [
+              6,
+              1,
+              2,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              3,
+              0,
+              3,
+              0,
+              1,
+              0,
+              1,
+              0,
+              3,
+              0,
+              3,
+              0,
+              1,
+              0,
+              1
+            ],
+            "input_phase_exponents": [
+              0,
+              3,
+              0,
+              3,
+              2,
+              3,
+              2,
+              3,
+              2,
+              1,
+              2,
+              1,
+              0,
+              1,
+              0,
+              1
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                3,
+                0,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                3,
+                0,
+                2,
+                2
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T4",
+          "from_frame": "F1",
+          "to_frame": "F6",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 3,
+          "rising_matrix_sha256": "96c90041522bfc448c9d860ce7b31ad4b3a53cebed4dee6674b7e06e5ca09831",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 3,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              2,
+              4,
+              8,
+              1
+            ],
+            "input_columns": [
+              2,
+              4,
+              8,
+              1
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T5",
+          "from_frame": "F2",
+          "to_frame": "F3",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "fd3eaf6c1dba1b300f9b14628a71a197aa99767266d2a51374c9bd1f7a7c0045",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 1,
+            "output_columns": [
+              7,
+              1,
+              3,
+              8
+            ],
+            "input_columns": [
+              6,
+              1,
+              2,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              3,
+              2,
+              3,
+              2,
+              2,
+              3,
+              2,
+              3,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 3,
+              "linear": [
+                3,
+                0,
+                3,
+                2
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T6",
+          "from_frame": "F2",
+          "to_frame": "F6",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 3,
+          "rising_matrix_sha256": "8abf1623070a8327d8f587c768b9932e72d9ea1113993683f1fa3341d715fa64",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 3,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 1,
+            "output_columns": [
+              3,
+              5,
+              8,
+              1
+            ],
+            "input_columns": [
+              5,
+              3,
+              8,
+              1
+            ],
+            "output_phase_exponents": [
+              0,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            "input_phase_exponents": [
+              3,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0,
+              3
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ]
+            },
+            "input_quadratic": {
+              "constant": 3,
+              "linear": [
+                1,
+                1,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T7",
+          "from_frame": "F3",
+          "to_frame": "F4",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "a7df06c0bb36fa06d41f3a94dadcda5e5da883594fd0342eda101509c64dbf2c",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              6,
+              1,
+              2,
+              8
+            ],
+            "input_columns": [
+              2,
+              1,
+              4,
+              8
+            ],
+            "output_phase_exponents": [
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3,
+              0,
+              3
+            ],
+            "input_phase_exponents": [
+              0,
+              2,
+              0,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                3,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                2,
+                0,
+                2,
+                2
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T8",
+          "from_frame": "F3",
+          "to_frame": "F5",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "3c43b681d577a8c6aafb76014f8150bc0ff289459c2f7940f5d827248755693f",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 8,
+            "output_columns": [
+              6,
+              1,
+              8,
+              2
+            ],
+            "input_columns": [
+              10,
+              1,
+              2,
+              4
+            ],
+            "output_phase_exponents": [
+              0,
+              3,
+              0,
+              3,
+              0,
+              1,
+              0,
+              1,
+              0,
+              3,
+              0,
+              3,
+              0,
+              1,
+              0,
+              1
+            ],
+            "input_phase_exponents": [
+              3,
+              0,
+              3,
+              0,
+              1,
+              2,
+              1,
+              2,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                3,
+                0,
+                0,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  2,
+                  2
+                ]
+              ]
+            },
+            "input_quadratic": {
+              "constant": 3,
+              "linear": [
+                1,
+                0,
+                2,
+                2
+              ],
+              "cross": [
+                [
+                  0,
+                  3,
+                  2
+                ],
+                [
+                  2,
+                  3,
+                  2
+                ]
+              ]
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        },
+        {
+          "id": "T9",
+          "from_frame": "F5",
+          "to_frame": "F6",
+          "execute_rising_normal_form_inverse": false,
+          "rising_matrix_bits": 1,
+          "rising_matrix_sha256": "61704cce53cc305b46481f2b63515877c49e67530a5ab578f1344909d6d55bbd",
+          "one_child_normal_form": {
+            "selected_rank_per_column": 1,
+            "one_bulk_child_calls": 1,
+            "output_affine_offset": 0,
+            "output_columns": [
+              14,
+              1,
+              2,
+              4
+            ],
+            "input_columns": [
+              14,
+              1,
+              2,
+              4
+            ],
+            "output_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "input_phase_exponents": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "output_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "input_quadratic": {
+              "constant": 0,
+              "linear": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "cross": []
+            },
+            "exact_matrix_entries_checked": 256
+          }
+        }
+      ],
+      "payload_stock": 7,
+      "initial_frame_ids": [
+        "F1",
+        "F2",
+        "F0",
+        "F0",
+        "F0",
+        "F0",
+        "F0"
+      ],
+      "final_frame_ids": [
+        "F6",
+        "F6",
+        "F4",
+        "F5",
+        "F6",
+        "F6",
+        "F6"
+      ],
+      "child_width_histogram": {
+        "1": 12,
+        "2": 3,
+        "3": 2
+      },
+      "rank_charge": 24,
+      "deficit": 4
+    }
+  ],
+  "exporter_sha256": "a8a54884bbc5863511938486d031c5a7022c345cb0a7b319fd5c8c7bfd94cbb4"
+}

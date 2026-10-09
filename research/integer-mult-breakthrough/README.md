@@ -47,10 +47,34 @@ passes. The external native and analytic hypotheses remain explicit. This
 introduces birth-cut dirty-role reuse as a structural direction for new
 circuits; it is not adoption of that exponent as a campaign theorem.
 
-The registered verification set contains 80 bounded checks. Native scalable
-frame synthesis, paid whole primitive/SWAP chronology and a complete new
-multiplication transfer remain the active discriminators. Large arrays are
-not allocated merely to evaluate an optimistic profile.
+The [compact actual-frame compiler](reports/complex/scalable-actual-frame-interfaces.md)
+now supplies complete affine/quadratic interfaces with Grassmann-width
+children, including degenerate frames. Its
+[independent fixture review](reports/transfers/scalable-frame-independent-review.md)
+checks literal operators and global phases without importing the producer.
+[Reflected right backgrounds](reports/complex/right-reflected-actual-frame-gauges.md)
+also retain their exact monomial gauges and forward/reverse interfaces, with
+an [independent operator review](reports/transfers/reflected-frame-independent-review.md).
+
+[Equal-frame dirty births](reports/synthesis/degenerate-birth-reuse-component.md)
+and [strictly growing births](reports/synthesis/nested-degenerate-birth-and-moment.md)
+give actual arbitrary-dirty components with stock 8 to 7 and rank 28 to 24.
+The [independent equal-frame review](reports/transfers/degenerate-birth-independent-review.md)
+and [strict nested review](reports/transfers/strict-nested-birth-independent-review.md)
+bind their phase and event contracts. The scalar birth-cut idea is credited
+to the inspected public work; the new components retain degenerate actual
+frames, source-dependent old values and true chronological restoration.
+
+Separate [whole-SWAP body controls](reports/synthesis/joint-signed-swap-independent-body-control.md),
+[routed alignment](reports/obstructions/routed-swap-alignment-boundary.md),
+[noncontained birth budgets](reports/transfers/noncontained-birth-budget.md)
+and [ballot role budgets](reports/complex/ballot-center-review-and-role-budget.md)
+locate costs that consume proposed gains. Their exclusions apply only to
+the stated constructions and ledgers. A full shared chronology, native
+payload routing and complete multiplication transfer remain active work.
+The registry currently contains 93 bounded checks; all passed locally and validation is recorded
+in the corresponding checkpoint receipt. No large graph is allocated merely
+to evaluate an optimistic cost profile.
 
 ## Evidence and current directions
 
@@ -213,8 +237,8 @@ frames demonstrate an actual local escape; whole-network chronology must
 retain its benefit. The old library's alternating projector identity is
 credited separately and does not itself establish a larger saving.
 
-Sixty registered CI checks replay only their stated finite arithmetic and
-semantic controls. A separately contributed [Lean package](formal/README.md)
+The seventh checkpoint registered sixty CI checks, each limited to its stated
+finite arithmetic and semantic controls. A separately contributed [Lean package](formal/README.md)
 formalizes the named positive-matrix obstruction and finite-level extension;
 its pinned clean-runner workflow passed at remote commit `1576511c`. It does
 not formalize concrete moment roots, native networks, fixed-tape transfer or

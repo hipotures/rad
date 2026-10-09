@@ -1,0 +1,88 @@
+--- a/research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py
++++ b/research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py
+@@ -373,15 +373,14 @@
+     sums and binary elimination, never an array indexed by all addresses.
+     """
+     E, F = basis(E), basis(F)
+-    # This is the Grassmann distance for the actual L_E representatives.
+-    # Nested pairs give the absolute dimension difference, in either
+-    # direction; nonnested pairs retain their larger, fully paid width.
+-    rank = 2 * len(basis(E + F)) - len(E) - len(F)
++    if len(basis(E + F)) != len(F):
++        raise ValueError('Interface is not nested increasing')
++    rank = len(F) - len(E)
+     word = inverse_word(literal_word(E, n)) + literal_word(F, n)
+     X, Z = tableau(word, n)
+     source = basis(value[0] for value in Z)
+     if len(source) != rank:
+-        raise AssertionError(('Tableau mixing rank differs from Grassmann distance', E, F, n))
++        raise AssertionError(('Tableau mixing rank differs from nested dimension', E, F, n))
+     rows = [sum(((value[0] >> j) & 1) << k for k, value in enumerate(Z))
+             for j in range(n)]
+     _, pure_masks = solve_affine(rows, 0, n)
+@@ -539,20 +538,10 @@
+     digest = sha256()
+     for E in spaces:
+         for F in spaces:
++            if len(basis(E + F)) != len(F):
++                continue
+             normal = compile_interface(E, F, n)
+-            rank = normal['selected_rank_per_column']
+-            divisor = 1 << (len(E) + len(F) - rank)
+-            expected = [[(0, 0)] * (1 << n) for _ in range(1 << n)]
+-            A, B = frames[E]['numerator'], frames[F]['numerator']
+-            for x in range(1 << n):
+-                for y in range(1 << n):
+-                    value = (0, 0)
+-                    for k in range(1 << n):
+-                        term = multiply_gaussian(B[x][k], (A[y][k][0], -A[y][k][1]))
+-                        value = (value[0] + term[0], value[1] + term[1])
+-                    if any(coefficient % divisor for coefficient in value):
+-                        raise AssertionError('Relative matrix has a non-dyadic selected grid')
+-                    expected[x][y] = value[0] // divisor, value[1] // divisor
++            expected, rank = reference.relative_matrix(frames[E], frames[F])
+             for x in range(1 << n):
+                 for y in range(1 << n):
+                     if reconstructed_entry(normal, x, y) != expected[x][y]:
+@@ -590,7 +579,7 @@
+     digest = sha256()
+     for attempt in range(6):
+         dims = [(0, n), (1, n - 1), (n // 3, 2 * n // 3),
+-                (n // 2, n // 2 + 1), (n, n - 1), (1, 1)][attempt]
++                (n // 2, n // 2 + 1), (n - 1, n), (0, 1)][attempt]
+         if attempt == 1:
+             line = (1 << min(n, 5)) - 1
+             E, F = (line,), reference.perpendicular((line,), n)
+@@ -601,21 +590,11 @@
+                 F = reference.perpendicular((other,), n)
+         else:
+             columns = []
+-            needed = n if attempt == 3 else max(dims)
+-            while len(columns) < needed:
++            while len(columns) < dims[1]:
+                 value = rng.randrange(1, 1 << n)
+                 if len(basis(columns + [value])) > len(columns):
+                     columns.append(value)
+-            if attempt == 3:
+-                E, F = basis(columns[:dims[0]]), basis(columns[-dims[1]:])
+-            elif attempt == 5:
+-                left = rng.randrange(1, 1 << n)
+-                right = rng.randrange(1, 1 << n)
+-                while left == right:
+-                    right = rng.randrange(1, 1 << n)
+-                E, F = (left,), (right,)
+-            else:
+-                E, F = basis(columns[:dims[0]]), basis(columns[:dims[1]])
++            E, F = basis(columns[:dims[0]]), basis(columns)
+         normal = compile_interface(E, F, n)
+         word = inverse_word(literal_word(E, n)) + literal_word(F, n)
+         assert_complete_tableau(normal, word)
+@@ -692,8 +671,6 @@
+                        scientific_scope='Finite exact matrix replay and seeded large algebraic controls support the explicit all-size symbolic algorithm. Native complete-stream movement, precision guards, recursive stock and exponent remain separate.')
+     if sha256(source.read_bytes()).hexdigest() != protocol['source_sha256']:
+         raise AssertionError('Compiler source changed during execution')
+-    if sha256(reference_file.read_bytes()).hexdigest() != protocol['actual_frame_source_sha256']:
+-        raise AssertionError('Imported actual frame source changed during execution')
+     if args.output:
+         (args.output / 'certificate.json').write_text(json.dumps(certificate, indent=2) + '\n')
+     print(json.dumps(certificate, indent=2), flush=True)

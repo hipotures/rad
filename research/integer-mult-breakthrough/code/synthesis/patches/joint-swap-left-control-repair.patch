@@ -1,0 +1,29 @@
+--- a/code/synthesis/joint_signed_swap_control.py
++++ b/code/synthesis/joint_signed_swap_control.py
+@@ -171,9 +171,13 @@
+         if actual != wanted:raise ValueError('Complete signed exchange failed an arbitrary-dirty Gaussian field')
+         digest.update(str(actual).encode())
+     controls = {name: execute(spec, initial, columns, name) != wanted
+-                for name in ('omit first line alignment', 'omit helper F-squared repair',
+-                             'LEFT background during middle pass')}
++                for name in ('omit first line alignment', 'omit helper F-squared repair')}
+     if not all(controls.values()):raise ValueError('A signed-exchange orientation/helper/alignment control did not discriminate')
++    # LEFT conjugation changes individual frames/relative ranks, yet the
++    # complete framed shear has convolution end blocks commuting with F.
++    # Consequently an end-operator mismatch is the WRONG orientation test.
++    left_end_agrees = execute(spec, initial, columns, 'LEFT background during middle pass') == wanted
++    if not left_end_agrees:raise ValueError('The independently expected full-word F covariance failed')
+     histogram = {width: 3*count for width, count in spec['histogram'].items()}
+     rank = 3*spec['rank']; capacity = stock*h
+     if rank <= capacity:raise ValueError('Three individually restored bodies unexpectedly contracted')
+@@ -200,7 +204,9 @@
+                 scalar_body_count=3, actual_helper_return_paths_paid=3*(stock-2*spec['v']),
+                 actual_data_outputs='C_full applied to each original raw labeled bank after literal sign/permutation/exchange repairs',
+                 actual_dirty_outputs='C_full applied to original arbitrary dirty bank',
+-                negative_controls=controls, output_sha256=digest.hexdigest(),
++                negative_controls=controls, left_conjugated_complete_end_operator_agrees=left_end_agrees,
++                orientation_scope='RIGHT preserves each exact relative and paid rank. LEFT changes intermediate relatives but common conjugation cancels in this convolution complete end operator.',
++                output_sha256=digest.hexdigest(),
+                 seconds=time.monotonic()-start,
+                 scope='Exact finite raw-input canonical full-C operator with paid three-body recursive rank and explicit native event counts. Three individually dirty-restored bodies fail necessary capacity at all nonnegative savings under fixed stock. Native tape/precision costs are not derived, and this is not a useful C_h recurrence or new multiplier exponent.')
+ 

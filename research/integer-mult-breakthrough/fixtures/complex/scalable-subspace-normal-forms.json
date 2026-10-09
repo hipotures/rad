@@ -1,0 +1,2678 @@
+{
+  "schema": "compact-actual-subspace-interface-v1",
+  "generated_utc": "2026-10-09T02:18:29.890285+00:00",
+  "source_sha256": {
+    "make_scalable_interface_fixture.py": "7996b93154c6e2a99880a0191646eb4905784dc67ea1fd56125883dd361422a0",
+    "scalable_subspace_interfaces.py": "cc8542fd0d177b33a8092285b18588ac4437432b3fc22ca3d95e1f6dab329afa",
+    "canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b"
+  },
+  "cases": [
+    {
+      "n": 3,
+      "source_subspace": [],
+      "target_subspace": [
+        3,
+        5
+      ],
+      "source_actual_spec": {
+        "n": 3,
+        "subspace": [],
+        "rank": 0,
+        "gaussian_grid_bits": 0,
+        "anchor": "identity",
+        "word": []
+      },
+      "target_actual_spec": {
+        "n": 3,
+        "subspace": [
+          3,
+          5
+        ],
+        "rank": 2,
+        "gaussian_grid_bits": 2,
+        "anchor": "odd-kernel-C",
+        "line": 7,
+        "word": [
+          [
+            "C_line_inverse",
+            7
+          ],
+          [
+            "C_full",
+            3
+          ]
+        ]
+      },
+      "actual_relative_word": [
+        [
+          "C",
+          7,
+          -1
+        ],
+        [
+          "C",
+          1,
+          1
+        ],
+        [
+          "C",
+          2,
+          1
+        ],
+        [
+          "C",
+          4,
+          1
+        ]
+      ],
+      "normal_form": {
+        "n": 3,
+        "source_subspace": [],
+        "target_subspace": [
+          3,
+          5
+        ],
+        "selected_rank_per_column": 2,
+        "one_bulk_child_calls": 1,
+        "output_affine_offset": 1,
+        "output_columns": [
+          3,
+          5,
+          1
+        ],
+        "input_columns": [
+          5,
+          3,
+          1
+        ],
+        "output_quadratic": {
+          "constant": 0,
+          "linear": [
+            1,
+            1,
+            0
+          ],
+          "cross": [
+            [
+              0,
+              1,
+              2
+            ]
+          ]
+        },
+        "input_quadratic": {
+          "constant": 3,
+          "linear": [
+            1,
+            1,
+            0
+          ],
+          "cross": [
+            [
+              0,
+              1,
+              2
+            ]
+          ]
+        },
+        "global_unit_exponent": 3,
+        "compilation": {
+          "path_variables": 4,
+          "summed_free_variables": 1,
+          "binary_elimination_only": true,
+          "full_address_arrays_allocated": false
+        }
+      },
+      "generator_images_checked": 6,
+      "exact_global_coefficient_checked": true
+    },
+    {
+      "n": 4,
+      "source_subspace": [
+        3
+      ],
+      "target_subspace": [
+        3,
+        4
+      ],
+      "source_actual_spec": {
+        "n": 4,
+        "subspace": [
+          3
+        ],
+        "rank": 1,
+        "gaussian_grid_bits": 1,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          3,
+          1,
+          4,
+          8
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              3,
+              1,
+              4,
+              8
+            ]
+          ],
+          [
+            "H_tilde",
+            1
+          ],
+          [
+            "linear_route",
+            [
+              3,
+              1,
+              4,
+              8
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "target_actual_spec": {
+        "n": 4,
+        "subspace": [
+          3,
+          4
+        ],
+        "rank": 2,
+        "gaussian_grid_bits": 2,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          3,
+          4,
+          1,
+          8
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              3,
+              4,
+              1,
+              8
+            ]
+          ],
+          [
+            "H_tilde",
+            2
+          ],
+          [
+            "linear_route",
+            [
+              3,
+              4,
+              1,
+              8
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "actual_relative_word": [
+        [
+          "D",
+          1
+        ],
+        [
+          "P",
+          [
+            2,
+            3,
+            4,
+            8
+          ]
+        ],
+        [
+          "H",
+          0,
+          -1
+        ],
+        [
+          "P",
+          [
+            3,
+            1,
+            4,
+            8
+          ]
+        ],
+        [
+          "D",
+          1
+        ],
+        [
+          "D",
+          -1
+        ],
+        [
+          "P",
+          [
+            4,
+            5,
+            2,
+            8
+          ]
+        ],
+        [
+          "H",
+          0,
+          1
+        ],
+        [
+          "H",
+          1,
+          1
+        ],
+        [
+          "P",
+          [
+            3,
+            4,
+            1,
+            8
+          ]
+        ],
+        [
+          "D",
+          -1
+        ]
+      ],
+      "normal_form": {
+        "n": 4,
+        "source_subspace": [
+          3
+        ],
+        "target_subspace": [
+          3,
+          4
+        ],
+        "selected_rank_per_column": 1,
+        "one_bulk_child_calls": 1,
+        "output_affine_offset": 0,
+        "output_columns": [
+          4,
+          1,
+          2,
+          8
+        ],
+        "input_columns": [
+          4,
+          1,
+          2,
+          8
+        ],
+        "output_quadratic": {
+          "constant": 0,
+          "linear": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": []
+        },
+        "input_quadratic": {
+          "constant": 0,
+          "linear": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "cross": []
+        },
+        "global_unit_exponent": 0,
+        "compilation": {
+          "path_variables": 3,
+          "summed_free_variables": 1,
+          "binary_elimination_only": true,
+          "full_address_arrays_allocated": false
+        }
+      },
+      "generator_images_checked": 8,
+      "exact_global_coefficient_checked": true
+    },
+    {
+      "n": 4,
+      "source_subspace": [
+        7
+      ],
+      "target_subspace": [
+        7,
+        8
+      ],
+      "source_actual_spec": {
+        "n": 4,
+        "subspace": [
+          7
+        ],
+        "rank": 1,
+        "gaussian_grid_bits": 1,
+        "anchor": "odd-line-C",
+        "line": 7,
+        "word": [
+          [
+            "C_line",
+            7
+          ]
+        ]
+      },
+      "target_actual_spec": {
+        "n": 4,
+        "subspace": [
+          7,
+          8
+        ],
+        "rank": 2,
+        "gaussian_grid_bits": 2,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          7,
+          8,
+          1,
+          2
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              7,
+              8,
+              1,
+              2
+            ]
+          ],
+          [
+            "H_tilde",
+            2
+          ],
+          [
+            "linear_route",
+            [
+              7,
+              8,
+              1,
+              2
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "actual_relative_word": [
+        [
+          "C",
+          7,
+          -1
+        ],
+        [
+          "D",
+          -1
+        ],
+        [
+          "P",
+          [
+            4,
+            8,
+            13,
+            2
+          ]
+        ],
+        [
+          "H",
+          0,
+          1
+        ],
+        [
+          "H",
+          1,
+          1
+        ],
+        [
+          "P",
+          [
+            7,
+            8,
+            1,
+            2
+          ]
+        ],
+        [
+          "D",
+          -1
+        ]
+      ],
+      "normal_form": {
+        "n": 4,
+        "source_subspace": [
+          7
+        ],
+        "target_subspace": [
+          7,
+          8
+        ],
+        "selected_rank_per_column": 1,
+        "one_bulk_child_calls": 1,
+        "output_affine_offset": 7,
+        "output_columns": [
+          8,
+          6,
+          5,
+          4
+        ],
+        "input_columns": [
+          8,
+          1,
+          2,
+          4
+        ],
+        "output_quadratic": {
+          "constant": 0,
+          "linear": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": []
+        },
+        "input_quadratic": {
+          "constant": 1,
+          "linear": [
+            0,
+            1,
+            1,
+            0
+          ],
+          "cross": [
+            [
+              1,
+              2,
+              2
+            ]
+          ]
+        },
+        "global_unit_exponent": 1,
+        "compilation": {
+          "path_variables": 3,
+          "summed_free_variables": 1,
+          "binary_elimination_only": true,
+          "full_address_arrays_allocated": false
+        }
+      },
+      "generator_images_checked": 8,
+      "exact_global_coefficient_checked": true
+    },
+    {
+      "n": 4,
+      "source_subspace": [
+        7,
+        8
+      ],
+      "target_subspace": [
+        7
+      ],
+      "source_actual_spec": {
+        "n": 4,
+        "subspace": [
+          7,
+          8
+        ],
+        "rank": 2,
+        "gaussian_grid_bits": 2,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          7,
+          8,
+          1,
+          2
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              7,
+              8,
+              1,
+              2
+            ]
+          ],
+          [
+            "H_tilde",
+            2
+          ],
+          [
+            "linear_route",
+            [
+              7,
+              8,
+              1,
+              2
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "target_actual_spec": {
+        "n": 4,
+        "subspace": [
+          7
+        ],
+        "rank": 1,
+        "gaussian_grid_bits": 1,
+        "anchor": "odd-line-C",
+        "line": 7,
+        "word": [
+          [
+            "C_line",
+            7
+          ]
+        ]
+      },
+      "actual_relative_word": [
+        [
+          "D",
+          1
+        ],
+        [
+          "P",
+          [
+            4,
+            8,
+            13,
+            2
+          ]
+        ],
+        [
+          "H",
+          1,
+          -1
+        ],
+        [
+          "H",
+          0,
+          -1
+        ],
+        [
+          "P",
+          [
+            7,
+            8,
+            1,
+            2
+          ]
+        ],
+        [
+          "D",
+          1
+        ],
+        [
+          "C",
+          7,
+          1
+        ]
+      ],
+      "normal_form": {
+        "n": 4,
+        "source_subspace": [
+          7,
+          8
+        ],
+        "target_subspace": [
+          7
+        ],
+        "selected_rank_per_column": 1,
+        "one_bulk_child_calls": 1,
+        "output_affine_offset": 7,
+        "output_columns": [
+          8,
+          6,
+          5,
+          4
+        ],
+        "input_columns": [
+          8,
+          1,
+          2,
+          4
+        ],
+        "output_quadratic": {
+          "constant": 0,
+          "linear": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "cross": []
+        },
+        "input_quadratic": {
+          "constant": 2,
+          "linear": [
+            2,
+            3,
+            3,
+            0
+          ],
+          "cross": [
+            [
+              1,
+              2,
+              2
+            ]
+          ]
+        },
+        "global_unit_exponent": 2,
+        "compilation": {
+          "path_variables": 3,
+          "summed_free_variables": 1,
+          "binary_elimination_only": true,
+          "full_address_arrays_allocated": false
+        }
+      },
+      "generator_images_checked": 8,
+      "exact_global_coefficient_checked": true
+    },
+    {
+      "n": 4,
+      "source_subspace": [
+        3
+      ],
+      "target_subspace": [
+        5
+      ],
+      "source_actual_spec": {
+        "n": 4,
+        "subspace": [
+          3
+        ],
+        "rank": 1,
+        "gaussian_grid_bits": 1,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          3,
+          1,
+          4,
+          8
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              3,
+              1,
+              4,
+              8
+            ]
+          ],
+          [
+            "H_tilde",
+            1
+          ],
+          [
+            "linear_route",
+            [
+              3,
+              1,
+              4,
+              8
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "target_actual_spec": {
+        "n": 4,
+        "subspace": [
+          5
+        ],
+        "rank": 1,
+        "gaussian_grid_bits": 1,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          5,
+          1,
+          2,
+          8
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              5,
+              1,
+              2,
+              8
+            ]
+          ],
+          [
+            "H_tilde",
+            1
+          ],
+          [
+            "linear_route",
+            [
+              5,
+              1,
+              2,
+              8
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "actual_relative_word": [
+        [
+          "D",
+          1
+        ],
+        [
+          "P",
+          [
+            2,
+            3,
+            4,
+            8
+          ]
+        ],
+        [
+          "H",
+          0,
+          -1
+        ],
+        [
+          "P",
+          [
+            3,
+            1,
+            4,
+            8
+          ]
+        ],
+        [
+          "D",
+          1
+        ],
+        [
+          "D",
+          -1
+        ],
+        [
+          "P",
+          [
+            2,
+            4,
+            3,
+            8
+          ]
+        ],
+        [
+          "H",
+          0,
+          1
+        ],
+        [
+          "P",
+          [
+            5,
+            1,
+            2,
+            8
+          ]
+        ],
+        [
+          "D",
+          -1
+        ]
+      ],
+      "normal_form": {
+        "n": 4,
+        "source_subspace": [
+          3
+        ],
+        "target_subspace": [
+          5
+        ],
+        "selected_rank_per_column": 2,
+        "one_bulk_child_calls": 1,
+        "output_affine_offset": 0,
+        "output_columns": [
+          3,
+          5,
+          7,
+          8
+        ],
+        "input_columns": [
+          3,
+          5,
+          1,
+          8
+        ],
+        "output_quadratic": {
+          "constant": 0,
+          "linear": [
+            3,
+            3,
+            0,
+            0
+          ],
+          "cross": [
+            [
+              0,
+              1,
+              2
+            ]
+          ]
+        },
+        "input_quadratic": {
+          "constant": 3,
+          "linear": [
+            3,
+            3,
+            2,
+            0
+          ],
+          "cross": [
+            [
+              0,
+              1,
+              2
+            ]
+          ]
+        },
+        "global_unit_exponent": 3,
+        "compilation": {
+          "path_variables": 2,
+          "summed_free_variables": 0,
+          "binary_elimination_only": true,
+          "full_address_arrays_allocated": false
+        }
+      },
+      "generator_images_checked": 8,
+      "exact_global_coefficient_checked": true
+    },
+    {
+      "n": 16,
+      "source_subspace": [
+        3,
+        12,
+        48,
+        192
+      ],
+      "target_subspace": [
+        3,
+        12,
+        48,
+        192,
+        768,
+        3072,
+        12288,
+        49152
+      ],
+      "source_actual_spec": {
+        "n": 16,
+        "subspace": [
+          3,
+          12,
+          48,
+          192
+        ],
+        "rank": 4,
+        "gaussian_grid_bits": 4,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          3,
+          12,
+          48,
+          192,
+          1,
+          4,
+          16,
+          64,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              3,
+              12,
+              48,
+              192,
+              1,
+              4,
+              16,
+              64,
+              256,
+              512,
+              1024,
+              2048,
+              4096,
+              8192,
+              16384,
+              32768
+            ]
+          ],
+          [
+            "H_tilde",
+            4
+          ],
+          [
+            "linear_route",
+            [
+              3,
+              12,
+              48,
+              192,
+              1,
+              4,
+              16,
+              64,
+              256,
+              512,
+              1024,
+              2048,
+              4096,
+              8192,
+              16384,
+              32768
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "target_actual_spec": {
+        "n": 16,
+        "subspace": [
+          3,
+          12,
+          48,
+          192,
+          768,
+          3072,
+          12288,
+          49152
+        ],
+        "rank": 8,
+        "gaussian_grid_bits": 8,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          3,
+          12,
+          48,
+          192,
+          768,
+          3072,
+          12288,
+          49152,
+          1,
+          4,
+          16,
+          64,
+          256,
+          1024,
+          4096,
+          16384
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              3,
+              12,
+              48,
+              192,
+              768,
+              3072,
+              12288,
+              49152,
+              1,
+              4,
+              16,
+              64,
+              256,
+              1024,
+              4096,
+              16384
+            ]
+          ],
+          [
+            "H_tilde",
+            8
+          ],
+          [
+            "linear_route",
+            [
+              3,
+              12,
+              48,
+              192,
+              768,
+              3072,
+              12288,
+              49152,
+              1,
+              4,
+              16,
+              64,
+              256,
+              1024,
+              4096,
+              16384
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "actual_relative_word": [
+        [
+          "D",
+          1
+        ],
+        [
+          "P",
+          [
+            16,
+            17,
+            32,
+            34,
+            64,
+            68,
+            128,
+            136,
+            256,
+            512,
+            1024,
+            2048,
+            4096,
+            8192,
+            16384,
+            32768
+          ]
+        ],
+        [
+          "H",
+          3,
+          -1
+        ],
+        [
+          "H",
+          2,
+          -1
+        ],
+        [
+          "H",
+          1,
+          -1
+        ],
+        [
+          "H",
+          0,
+          -1
+        ],
+        [
+          "P",
+          [
+            3,
+            12,
+            48,
+            192,
+            1,
+            4,
+            16,
+            64,
+            256,
+            512,
+            1024,
+            2048,
+            4096,
+            8192,
+            16384,
+            32768
+          ]
+        ],
+        [
+          "D",
+          1
+        ],
+        [
+          "D",
+          -1
+        ],
+        [
+          "P",
+          [
+            256,
+            257,
+            512,
+            514,
+            1024,
+            1028,
+            2048,
+            2056,
+            4096,
+            4112,
+            8192,
+            8224,
+            16384,
+            16448,
+            32768,
+            32896
+          ]
+        ],
+        [
+          "H",
+          0,
+          1
+        ],
+        [
+          "H",
+          1,
+          1
+        ],
+        [
+          "H",
+          2,
+          1
+        ],
+        [
+          "H",
+          3,
+          1
+        ],
+        [
+          "H",
+          4,
+          1
+        ],
+        [
+          "H",
+          5,
+          1
+        ],
+        [
+          "H",
+          6,
+          1
+        ],
+        [
+          "H",
+          7,
+          1
+        ],
+        [
+          "P",
+          [
+            3,
+            12,
+            48,
+            192,
+            768,
+            3072,
+            12288,
+            49152,
+            1,
+            4,
+            16,
+            64,
+            256,
+            1024,
+            4096,
+            16384
+          ]
+        ],
+        [
+          "D",
+          -1
+        ]
+      ],
+      "normal_form": {
+        "n": 16,
+        "source_subspace": [
+          3,
+          12,
+          48,
+          192
+        ],
+        "target_subspace": [
+          3,
+          12,
+          48,
+          192,
+          768,
+          3072,
+          12288,
+          49152
+        ],
+        "selected_rank_per_column": 4,
+        "one_bulk_child_calls": 1,
+        "output_affine_offset": 0,
+        "output_columns": [
+          768,
+          3072,
+          12288,
+          49152,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          512,
+          2048,
+          8192,
+          32768
+        ],
+        "input_columns": [
+          768,
+          3072,
+          12288,
+          49152,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          1024,
+          4096,
+          16384
+        ],
+        "output_quadratic": {
+          "constant": 0,
+          "linear": [
+            3,
+            3,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": [
+            [
+              0,
+              12,
+              2
+            ],
+            [
+              1,
+              13,
+              2
+            ],
+            [
+              2,
+              14,
+              2
+            ],
+            [
+              3,
+              15,
+              2
+            ]
+          ]
+        },
+        "input_quadratic": {
+          "constant": 0,
+          "linear": [
+            3,
+            3,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": []
+        },
+        "global_unit_exponent": 0,
+        "compilation": {
+          "path_variables": 12,
+          "summed_free_variables": 4,
+          "binary_elimination_only": true,
+          "full_address_arrays_allocated": false
+        }
+      },
+      "generator_images_checked": 32,
+      "exact_global_coefficient_checked": true
+    },
+    {
+      "n": 16,
+      "source_subspace": [
+        7
+      ],
+      "target_subspace": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768
+      ],
+      "source_actual_spec": {
+        "n": 16,
+        "subspace": [
+          7
+        ],
+        "rank": 1,
+        "gaussian_grid_bits": 1,
+        "anchor": "odd-line-C",
+        "line": 7,
+        "word": [
+          [
+            "C_line",
+            7
+          ]
+        ]
+      },
+      "target_actual_spec": {
+        "n": 16,
+        "subspace": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "rank": 16,
+        "gaussian_grid_bits": 16,
+        "anchor": "full-C",
+        "word": [
+          [
+            "C_full",
+            16
+          ]
+        ]
+      },
+      "actual_relative_word": [
+        [
+          "C",
+          7,
+          -1
+        ],
+        [
+          "C",
+          1,
+          1
+        ],
+        [
+          "C",
+          2,
+          1
+        ],
+        [
+          "C",
+          4,
+          1
+        ],
+        [
+          "C",
+          8,
+          1
+        ],
+        [
+          "C",
+          16,
+          1
+        ],
+        [
+          "C",
+          32,
+          1
+        ],
+        [
+          "C",
+          64,
+          1
+        ],
+        [
+          "C",
+          128,
+          1
+        ],
+        [
+          "C",
+          256,
+          1
+        ],
+        [
+          "C",
+          512,
+          1
+        ],
+        [
+          "C",
+          1024,
+          1
+        ],
+        [
+          "C",
+          2048,
+          1
+        ],
+        [
+          "C",
+          4096,
+          1
+        ],
+        [
+          "C",
+          8192,
+          1
+        ],
+        [
+          "C",
+          16384,
+          1
+        ],
+        [
+          "C",
+          32768,
+          1
+        ]
+      ],
+      "normal_form": {
+        "n": 16,
+        "source_subspace": [
+          7
+        ],
+        "target_subspace": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "selected_rank_per_column": 15,
+        "one_bulk_child_calls": 1,
+        "output_affine_offset": 1,
+        "output_columns": [
+          3,
+          5,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768,
+          1
+        ],
+        "input_columns": [
+          5,
+          3,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768,
+          1
+        ],
+        "output_quadratic": {
+          "constant": 0,
+          "linear": [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": [
+            [
+              0,
+              1,
+              2
+            ]
+          ]
+        },
+        "input_quadratic": {
+          "constant": 3,
+          "linear": [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": [
+            [
+              0,
+              1,
+              2
+            ]
+          ]
+        },
+        "global_unit_exponent": 3,
+        "compilation": {
+          "path_variables": 17,
+          "summed_free_variables": 1,
+          "binary_elimination_only": true,
+          "full_address_arrays_allocated": false
+        }
+      },
+      "generator_images_checked": 32,
+      "exact_global_coefficient_checked": true
+    },
+    {
+      "n": 16,
+      "source_subspace": [
+        3,
+        5,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768
+      ],
+      "target_subspace": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768
+      ],
+      "source_actual_spec": {
+        "n": 16,
+        "subspace": [
+          3,
+          5,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "rank": 15,
+        "gaussian_grid_bits": 15,
+        "anchor": "odd-kernel-C",
+        "line": 7,
+        "word": [
+          [
+            "C_line_inverse",
+            7
+          ],
+          [
+            "C_full",
+            16
+          ]
+        ]
+      },
+      "target_actual_spec": {
+        "n": 16,
+        "subspace": [
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "rank": 15,
+        "gaussian_grid_bits": 15,
+        "anchor": "odd-kernel-C",
+        "line": 1,
+        "word": [
+          [
+            "C_line_inverse",
+            1
+          ],
+          [
+            "C_full",
+            16
+          ]
+        ]
+      },
+      "actual_relative_word": [
+        [
+          "C",
+          32768,
+          -1
+        ],
+        [
+          "C",
+          16384,
+          -1
+        ],
+        [
+          "C",
+          8192,
+          -1
+        ],
+        [
+          "C",
+          4096,
+          -1
+        ],
+        [
+          "C",
+          2048,
+          -1
+        ],
+        [
+          "C",
+          1024,
+          -1
+        ],
+        [
+          "C",
+          512,
+          -1
+        ],
+        [
+          "C",
+          256,
+          -1
+        ],
+        [
+          "C",
+          128,
+          -1
+        ],
+        [
+          "C",
+          64,
+          -1
+        ],
+        [
+          "C",
+          32,
+          -1
+        ],
+        [
+          "C",
+          16,
+          -1
+        ],
+        [
+          "C",
+          8,
+          -1
+        ],
+        [
+          "C",
+          4,
+          -1
+        ],
+        [
+          "C",
+          2,
+          -1
+        ],
+        [
+          "C",
+          1,
+          -1
+        ],
+        [
+          "C",
+          7,
+          1
+        ],
+        [
+          "C",
+          1,
+          -1
+        ],
+        [
+          "C",
+          1,
+          1
+        ],
+        [
+          "C",
+          2,
+          1
+        ],
+        [
+          "C",
+          4,
+          1
+        ],
+        [
+          "C",
+          8,
+          1
+        ],
+        [
+          "C",
+          16,
+          1
+        ],
+        [
+          "C",
+          32,
+          1
+        ],
+        [
+          "C",
+          64,
+          1
+        ],
+        [
+          "C",
+          128,
+          1
+        ],
+        [
+          "C",
+          256,
+          1
+        ],
+        [
+          "C",
+          512,
+          1
+        ],
+        [
+          "C",
+          1024,
+          1
+        ],
+        [
+          "C",
+          2048,
+          1
+        ],
+        [
+          "C",
+          4096,
+          1
+        ],
+        [
+          "C",
+          8192,
+          1
+        ],
+        [
+          "C",
+          16384,
+          1
+        ],
+        [
+          "C",
+          32768,
+          1
+        ]
+      ],
+      "normal_form": {
+        "n": 16,
+        "source_subspace": [
+          3,
+          5,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "target_subspace": [
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "selected_rank_per_column": 2,
+        "one_bulk_child_calls": 1,
+        "output_affine_offset": 0,
+        "output_columns": [
+          1,
+          6,
+          2,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "input_columns": [
+          6,
+          7,
+          2,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "output_quadratic": {
+          "constant": 0,
+          "linear": [
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": [
+            [
+              0,
+              1,
+              2
+            ]
+          ]
+        },
+        "input_quadratic": {
+          "constant": 3,
+          "linear": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": [
+            [
+              0,
+              1,
+              2
+            ]
+          ]
+        },
+        "global_unit_exponent": 3,
+        "compilation": {
+          "path_variables": 34,
+          "summed_free_variables": 18,
+          "binary_elimination_only": true,
+          "full_address_arrays_allocated": false
+        }
+      },
+      "generator_images_checked": 32,
+      "exact_global_coefficient_checked": true
+    },
+    {
+      "n": 16,
+      "source_subspace": [
+        3,
+        12,
+        48,
+        192,
+        768,
+        3072,
+        12288,
+        49152
+      ],
+      "target_subspace": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        128
+      ],
+      "source_actual_spec": {
+        "n": 16,
+        "subspace": [
+          3,
+          12,
+          48,
+          192,
+          768,
+          3072,
+          12288,
+          49152
+        ],
+        "rank": 8,
+        "gaussian_grid_bits": 8,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          3,
+          12,
+          48,
+          192,
+          768,
+          3072,
+          12288,
+          49152,
+          1,
+          4,
+          16,
+          64,
+          256,
+          1024,
+          4096,
+          16384
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              3,
+              12,
+              48,
+              192,
+              768,
+              3072,
+              12288,
+              49152,
+              1,
+              4,
+              16,
+              64,
+              256,
+              1024,
+              4096,
+              16384
+            ]
+          ],
+          [
+            "H_tilde",
+            8
+          ],
+          [
+            "linear_route",
+            [
+              3,
+              12,
+              48,
+              192,
+              768,
+              3072,
+              12288,
+              49152,
+              1,
+              4,
+              16,
+              64,
+              256,
+              1024,
+              4096,
+              16384
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "target_actual_spec": {
+        "n": 16,
+        "subspace": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128
+        ],
+        "rank": 8,
+        "gaussian_grid_bits": 8,
+        "anchor": "generic-dyadic-H",
+        "routing_columns": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096,
+          8192,
+          16384,
+          32768
+        ],
+        "word": [
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ],
+          [
+            "linear_route_inverse",
+            [
+              1,
+              2,
+              4,
+              8,
+              16,
+              32,
+              64,
+              128,
+              256,
+              512,
+              1024,
+              2048,
+              4096,
+              8192,
+              16384,
+              32768
+            ]
+          ],
+          [
+            "H_tilde",
+            8
+          ],
+          [
+            "linear_route",
+            [
+              1,
+              2,
+              4,
+              8,
+              16,
+              32,
+              64,
+              128,
+              256,
+              512,
+              1024,
+              2048,
+              4096,
+              8192,
+              16384,
+              32768
+            ]
+          ],
+          [
+            "quadratic_phase",
+            -1,
+            "weight-all-bits"
+          ]
+        ]
+      },
+      "actual_relative_word": [
+        [
+          "D",
+          1
+        ],
+        [
+          "P",
+          [
+            256,
+            257,
+            512,
+            514,
+            1024,
+            1028,
+            2048,
+            2056,
+            4096,
+            4112,
+            8192,
+            8224,
+            16384,
+            16448,
+            32768,
+            32896
+          ]
+        ],
+        [
+          "H",
+          7,
+          -1
+        ],
+        [
+          "H",
+          6,
+          -1
+        ],
+        [
+          "H",
+          5,
+          -1
+        ],
+        [
+          "H",
+          4,
+          -1
+        ],
+        [
+          "H",
+          3,
+          -1
+        ],
+        [
+          "H",
+          2,
+          -1
+        ],
+        [
+          "H",
+          1,
+          -1
+        ],
+        [
+          "H",
+          0,
+          -1
+        ],
+        [
+          "P",
+          [
+            3,
+            12,
+            48,
+            192,
+            768,
+            3072,
+            12288,
+            49152,
+            1,
+            4,
+            16,
+            64,
+            256,
+            1024,
+            4096,
+            16384
+          ]
+        ],
+        [
+          "D",
+          1
+        ],
+        [
+          "D",
+          -1
+        ],
+        [
+          "P",
+          [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096,
+            8192,
+            16384,
+            32768
+          ]
+        ],
+        [
+          "H",
+          0,
+          1
+        ],
+        [
+          "H",
+          1,
+          1
+        ],
+        [
+          "H",
+          2,
+          1
+        ],
+        [
+          "H",
+          3,
+          1
+        ],
+        [
+          "H",
+          4,
+          1
+        ],
+        [
+          "H",
+          5,
+          1
+        ],
+        [
+          "H",
+          6,
+          1
+        ],
+        [
+          "H",
+          7,
+          1
+        ],
+        [
+          "P",
+          [
+            1,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64,
+            128,
+            256,
+            512,
+            1024,
+            2048,
+            4096,
+            8192,
+            16384,
+            32768
+          ]
+        ],
+        [
+          "D",
+          -1
+        ]
+      ],
+      "normal_form": {
+        "n": 16,
+        "source_subspace": [
+          3,
+          12,
+          48,
+          192,
+          768,
+          3072,
+          12288,
+          49152
+        ],
+        "target_subspace": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128
+        ],
+        "selected_rank_per_column": 8,
+        "one_bulk_child_calls": 1,
+        "output_affine_offset": 0,
+        "output_columns": [
+          3,
+          12,
+          48,
+          192,
+          768,
+          3072,
+          12288,
+          49152,
+          2,
+          8,
+          32,
+          128,
+          512,
+          2048,
+          8192,
+          32768
+        ],
+        "input_columns": [
+          1,
+          4,
+          16,
+          64,
+          768,
+          3072,
+          12288,
+          49152,
+          2,
+          8,
+          32,
+          128,
+          256,
+          1024,
+          4096,
+          16384
+        ],
+        "output_quadratic": {
+          "constant": 0,
+          "linear": [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": [
+            [
+              4,
+              12,
+              2
+            ],
+            [
+              5,
+              13,
+              2
+            ],
+            [
+              6,
+              14,
+              2
+            ],
+            [
+              7,
+              15,
+              2
+            ]
+          ]
+        },
+        "input_quadratic": {
+          "constant": 0,
+          "linear": [
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "cross": []
+        },
+        "global_unit_exponent": 0,
+        "compilation": {
+          "path_variables": 16,
+          "summed_free_variables": 4,
+          "binary_elimination_only": true,
+          "full_address_arrays_allocated": false
+        }
+      },
+      "generator_images_checked": 32,
+      "exact_global_coefficient_checked": true
+    }
+  ],
+  "scope": "Literal finite normal-form data. Reviewer must independently bind canonical operators, support, phase and global unit. No native payload or exponent certificate."
+}

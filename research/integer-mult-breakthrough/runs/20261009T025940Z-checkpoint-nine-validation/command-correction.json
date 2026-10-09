@@ -1,0 +1,36 @@
+{
+  "scope": "Supplemental metadata correction; original protocol bytes remain unchanged",
+  "repository_working_directory": "/home/user/DEV/rad-breakthrough",
+  "original_protocol_field": "commands: output locations were recorded relative to the topic",
+  "actual_executed_commands": [
+    [
+      "python3",
+      "tools/run_ci.py",
+      "--group",
+      "repository",
+      "--all",
+      "--output",
+      "research/integer-mult-breakthrough/work/coordinator/checkpoint-nine/ci-repository"
+    ],
+    [
+      "python3",
+      "tools/run_ci.py",
+      "--group",
+      "smoke",
+      "--all",
+      "--output",
+      "research/integer-mult-breakthrough/work/coordinator/checkpoint-nine/ci-smoke"
+    ],
+    [
+      "python3",
+      "tools/run_ci.py",
+      "--group",
+      "certificates",
+      "--all",
+      "--output",
+      "research/integer-mult-breakthrough/work/coordinator/checkpoint-nine/ci-certificates"
+    ]
+  ],
+  "portable_reproduction": "Run from the repository root and replace every output with a fresh task-owned research/integer-mult-breakthrough/work/<unique> namespace",
+  "scientific_values_changed": false
+}
