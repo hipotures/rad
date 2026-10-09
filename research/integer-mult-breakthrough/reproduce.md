@@ -43,6 +43,52 @@ evidence is packed into this topic's evidence namespaces without altering
 originals. Run protocols, compact summaries and source hashes distinguish
 retained finite evidence from analytical assumptions.
 
+## Complete activity, routing and nonunit numerical guards
+
+The fifteenth checkpoint registers seven new checks, for 155 total. They
+need only standard-library Python and Git. From the repository root:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/prefix_activity_shape.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/activity_width_grouping_tapes.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_benes_control_fibers.py --component all
+python3 -B research/integer-mult-breakthrough/code/obstructions/activity_gate_moment.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/interleaved_local_norms.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/disk_safe_rounding.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/geometric_endpoint_guards.py --workers 1 --small
+```
+
+Expected outcomes are exact finite PASS controls and retained corruption
+rejections. The grouping consumer counts actual finite-alphabet tape
+operations. Its initial prefix route is excluded. Benes addresses and
+Gaussian fibers have complete scoped controls; their native time and
+recursive supplier remain conditional. The moment checker does not
+supply an eleven-gate circuit. The two numerical producers check their
+declared domain, whole-bank, inverse, fixed-grid and rounding premises.
+
+Full four-worker attempts and exact source/seed closures are listed in
+[the activity inventory](configs/complex/activity-shape-milestone.json),
+[the Benes inventory](configs/synthesis/benes-control-fiber-publication-manifest.json)
+and [the transfer inventory](configs/transfers/milestone-fifteen-freeze.json).
+Use a fresh ignored output for every attempt. The two numerical producers
+take a JSON FILE as `--output`; the activity/interleaving and Benes sources
+take a new DIRECTORY. Source-only reviews are not additional experimental
+replays. The coordinator separately invoked producer numerical APIs.
+
+The historical geometric report can be recovered with its current-to-prior
+patch in a fresh directory outside any repository ancestry. Copy the
+current report there under `geometric-nonunit-endpoint-guards.md`, then run
+`git apply --no-index --unsafe-paths -p0` with the absolute path to
+`fixtures/transfers/geometric-local-factor-contract.patch`. The recovered
+SHA-256 must be `8ef7c23dfe82b93dd27bf4d3303ce592a6bcf97a995eb10e73e891c76fc85456`.
+Never apply the historical patch to the live accepted report.
+
+Complete scalar rows and the full 136-check certificate report are retained
+unchanged as gzip. Their adjacent storage notes bind original byte counts
+and hashes. Decompress those complete copies to recover the plain originals;
+no row subset is substituted. Publication metadata records and preserves
+the archive-count helper failures and their repaired complete-byte review.
+
 ## Product bases, rounding and cancellation scope
 
 The fourteenth checkpoint adds eight bounded checks, for 148 in total.

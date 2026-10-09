@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "commit": "c21fb0c4dfe0e90cbefceeee390e6dd2182e3732",
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "group": "repository",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "publication-policy",
+      "scope": "Existing repository publication, retention and artifact-policy regressions",
+      "command": [
+        "{python}",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_archive_workspace.py",
+        "-v"
+      ],
+      "inputs_sha256": {
+        "tools/archive_workspace.py": "b41ba8fffeaeb149db972f673b27431a205ec07ed2e826baad48b924593d38e2",
+        "tools/test_archive_workspace.py": "a36e85df6e471492fcdd723d18d7cf9e8e87bda417f33fe954c4b4fc7973fd40",
+        "tools/text_evidence.py": "db11ba14b07d74a3171aba30a99e630644467fcb24289f51d9c36f22d79b8378",
+        "tools/import_external_workspaces.py": "9acf6547855d08225099e7ec921878c2b7e9b2eb71a4bec8a63bc94b04d8f34e",
+        ".gitignore": "a2dda8bf18c7a0bfdbc41838e85854a0d25e1b9759f82753b70ecbe28ca0b8b0"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 4.422
+    },
+    {
+      "id": "ci-runner-controls",
+      "scope": "Runner validation, failure propagation, timeouts, safe paths and evidence preservation",
+      "command": [
+        "{python}",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_ci.py",
+        "-v"
+      ],
+      "inputs_sha256": {
+        "tools/run_ci.py": "81d53069c65a1aed32567b9dccfda377b0c1ca62d983263c88002ec7f5233851",
+        "tools/test_ci.py": "9dda392c1b768d6e29bda0eb9f0252bce4fbbc6714d13ffc497ed39aefab8da9",
+        "tools/ci_archive_audit.py": "c270c858de16014cdb746051fe1c92eea0ba98af58d662b7ace04db9a031bc84",
+        "tools/ci_checks.json": "ed173e309d86fde8f3502a3d6e986f313e8f133b0e2a59061a6043c3396894b7"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 1.166
+    }
+  ],
+  "scope": "Registered checks only. Not formal verification, external peer review, or validation of unregistered research."
+}

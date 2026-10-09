@@ -1,0 +1,51 @@
+{
+  "question": "Paid fixed-tape stable activity-width grouping after an already completed prefix route",
+  "source": "code/complex/activity_width_grouping_tapes.py",
+  "source_sha256": "b2110ccbf6f5b366c56e930dc5384e08afdcd2c9e6f8bfbb2c3d8090ea5b8256",
+  "source_closure": {
+    "prefix_activity_shape.py": "b55dd778362a34b53b452ba73bd87cced70b680721a2547ac3f7e5689383c20d"
+  },
+  "workers": 4,
+  "tasks": [
+    [
+      3,
+      1,
+      1,
+      8
+    ],
+    [
+      3,
+      2,
+      1,
+      16
+    ],
+    [
+      3,
+      1,
+      2,
+      32
+    ],
+    [
+      3,
+      2,
+      2,
+      64
+    ]
+  ],
+  "seed_formula": "202610090702+100000*h+1000*f+100*K+component_bits",
+  "physical_tapes": 7,
+  "alphabet_symbols": 10,
+  "metadata": "ell-bit width header, complete original address tag, partition pattern and unary zero counts",
+  "complete_payload": "Four Gaussian fields, eight complete signed component bitstrings, all changed after grouping",
+  "cost": "O(V log(f+1)+M A^3) for width grouping and inverse, with complete copying/erasure/rewinds",
+  "scope": "Initial prefix permutation and native Gaussian/zeta supplier are not supplied",
+  "dependencies": "Python standard library and the pinned owned prefix source",
+  "reproduction": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/complex/activity_width_grouping_tapes.py",
+    "--workers",
+    "1",
+    "--bounded"
+  ]
+}

@@ -1,0 +1,52 @@
+--- geometric-nonunit-endpoint-guards.md
++++ geometric-nonunit-endpoint-guards.md
+@@ -17,13 +17,10 @@
+ Require the actual complete forward and inverse child endpoints to have
+ operator norm at most `2^(a*w+a0)` for fixed a,a0>=0. If an inverse is
+ never called, its norm is unnecessary, but any called inverse is a
+-separate actual type. For each node, the PRODUCT OF INDIVIDUAL operator
+-norms of all local steps in any prefix, suffix or interval is at most
++separate actual type. For each node, all prefixes, suffixes and intervals
++of the LOCAL word, excluding unresolved children, have norm at most
+ `2^(b*e+b0)`. This includes address-conditioned scalings and their actual
+-scalar temporaries. Cancellation between local factors separated by a
+-child may not reduce this charge. A bound on the multiplied local word
+-with the children omitted is insufficient when the child does not
+-commute with those factors. Rounded-payload-dependent routing is excluded unless
++scalar temporaries. Rounded-payload-dependent routing is excluded unless
+ a separate stability argument is supplied.
+ 
+ The number of local scalar steps may be fixed while their norm grows with
+@@ -90,9 +87,9 @@
+ 
+ ## Exact endpoint grid is also linear under geometric decrease
+ 
+-Suppose the SUM of the grid increments of all local literal factors
+-and temporary divisions at one node is at most `c*e+c0`, and the COMPLETE
+-endpoint matrix of a child of width w has grid increase at most `k*w+k0` on
++Suppose every local literal coefficient prefix/temporary increases its
++input fractional grid by at most `c*e+c0`, and the COMPLETE endpoint
++matrix of a child of width w has grid increase at most `k*w+k0` on
+ every arbitrary current dirty field. A completed child need not inherit
+ its entire internal grid excursion. The unresolved-stack ledger gives
+ 
+@@ -241,19 +238,3 @@
+ the transfer track independently derived the typed ledger, exact-grid
+ extension, sibling caveat and literal discriminator. AI-assisted internal
+ research and finite replay, not formal verification or external review.
+-
+-## Local-factor contract clarification
+-
+-The earlier bounded receipt pins report version
+-`8ef7c23dfe82b93dd27bf4d3303ce592a6bcf97a995eb10e73e891c76fc85456`.
+-Its local-prefix wording did not explicitly distinguish an operator
+-product bound from the product of the separate local factor norms. The
+-current general theorem requires the latter, so it cannot hide local
+-cancellations across a noncommuting child. Its grid premise similarly
+-charges the sum of actual local denominator increments. The literal
+-prototype already meets the stronger norm premise: the product of all
+-local factor bounds is at most `2^(2e+4)`. Its separate exact 4e grid
+-argument uses the known bank-specific divisibility structure and was
+-actually replayed on a fixed grid. Neither source, configuration nor
+-finite result changed. A retained current-to-original report patch
+-recovers the exact earlier version; its bounded protocol is unchanged.

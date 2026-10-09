@@ -21,6 +21,36 @@ The goal is a structural route to a conditional integer-multiplication exponent 
 
 ## Current structural checkpoint
 
+The fifteenth checkpoint binds [complete activity cylinders](reports/complex/prefix-activity-complete-chunk-shape.md),
+their [paid seven-tape width grouping](reports/complex/activity-width-tape-grouping.md)
+and a different [selected-only canonical control route](reports/synthesis/benes-control-fiber-native-interface.md).
+The route retains the earlier wrong-pairing version and its explicit
+negative witness. Its corrected literal address word and Gaussian child
+have an [independent source review](reports/complex/benes-canonical-control-independent-review.md).
+Grouping starts after the unpriced prefix permutation; the selected-only
+route is a separate conditional native interface, not a completed supplier.
+
+The [complete activity moment](reports/obstructions/activity-gate-moment-boundary.md)
+proves that ordinary twelve-gate zeta cannot gain from this packing alone.
+A hypothetical eleven-gate circuit has useful optimistic slack, but none
+has been supplied. [Independent grouping/moment review](reports/transfers/activity-width-grouping-and-moment-independent-review.md)
+keeps all complete payload and auxiliary-volume charges explicit.
+[Disk recovery](reports/transfers/uniform-endpoint-assembly-interface.md)
+and [geometric nonunit guards](reports/transfers/geometric-nonunit-endpoint-guards.md)
+provide conditional numerical interfaces, with a
+[coordinator review](reports/obstructions/transfer-numerics-coordinator-review.md).
+The [interleaving counterexample](reports/obstructions/interleaved-local-norm-contract.md)
+explains why local factors cannot cancel across omitted children in a norm bill.
+All 155 registered checks pass on 295 unchanged effective inputs; the
+[validation record](runs/20261009T075500Z-checkpoint-fifteen-validation/report.md)
+retains their scope and complete reproduction receipts.
+
+The [publication assessment](reports/publication-readiness.md) identifies
+results suitable for a technical report while qualifying literature novelty.
+In particular, the weighted-union algebra is a diagonal conjugate of the
+classical covering product; its application and paid conversion are the
+research question. No larger campaign exponent is asserted by this checkpoint.
+
 The fourteenth checkpoint adds a [weighted-union product basis](reports/complex/weighted-union-product-basis.md).
 Its exact direct form incidences fall from `4^s` to `3^s`, while the
 conversion from canonical inputs remains paid. The
@@ -121,7 +151,7 @@ and [ballot role budgets](reports/complex/ballot-center-review-and-role-budget.m
 locate costs that consume proposed gains. Their exclusions apply only to
 the stated constructions and ledgers. A full shared chronology, native
 payload routing and complete multiplication transfer remain active work.
-The registry currently contains 148 bounded checks; checkpoint receipts record
+The registry currently contains 155 bounded checks; checkpoint receipts record
 their actual validation results. No large graph is allocated merely
 to evaluate an optimistic cost profile.
 

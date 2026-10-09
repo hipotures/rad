@@ -1,0 +1,66 @@
+{
+  "completed_utc": "2026-10-09T07:39:13.592365+00:00",
+  "tasks": [
+    {
+      "label": "disk",
+      "argv": [
+        "python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/disk_safe_rounding.py",
+        "--workers",
+        "1",
+        "--small",
+        "--output",
+        "research/integer-mult-breakthrough/work/coordinator/checkpoint-fifteen/independent-transfer-replay/disk.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.047242941000149585
+    },
+    {
+      "label": "geometric",
+      "argv": [
+        "python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/geometric_endpoint_guards.py",
+        "--workers",
+        "1",
+        "--small",
+        "--output",
+        "research/integer-mult-breakthrough/work/coordinator/checkpoint-fifteen/independent-transfer-replay/geometric.json"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.04434872699494008
+    },
+    {
+      "label": "interleaved",
+      "argv": [
+        "python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/interleaved_local_norms.py",
+        "--workers",
+        "1",
+        "--bounded",
+        "--output",
+        "research/integer-mult-breakthrough/work/coordinator/checkpoint-fifteen/independent-transfer-replay/interleaved"
+      ],
+      "returncode": 0,
+      "elapsed_seconds": 0.08603528099774849
+    }
+  ],
+  "pins_before": {
+    "code/transfers/disk_safe_rounding.py": "d80c82e610dc1eab4abbb05a579c62d44e57ee2fd08421b95ffe1cfdfaeb4345",
+    "configs/transfers/disk-safe-rounding.json": "df1f5417dcfdb0a0e1287909610b5a2d17d9db7a90cf33189712390944b9bcff",
+    "code/transfers/geometric_endpoint_guards.py": "03b53aabd4178ec36d060067bafaa2a1c06db7520b93fc7d11adb4a915abe108",
+    "configs/transfers/geometric-endpoint-guards.json": "ec3e683eaba16e3641d505db7f09e866cd04d24eceae0e15c32c04e63a6a83d1",
+    "code/obstructions/interleaved_local_norms.py": "948e590dfd1e1ce69cb871848ee8d1219ba5035d4661e5b02570f3ca1785853d"
+  },
+  "pins_after": {
+    "code/transfers/disk_safe_rounding.py": "d80c82e610dc1eab4abbb05a579c62d44e57ee2fd08421b95ffe1cfdfaeb4345",
+    "configs/transfers/disk-safe-rounding.json": "df1f5417dcfdb0a0e1287909610b5a2d17d9db7a90cf33189712390944b9bcff",
+    "code/transfers/geometric_endpoint_guards.py": "03b53aabd4178ec36d060067bafaa2a1c06db7520b93fc7d11adb4a915abe108",
+    "configs/transfers/geometric-endpoint-guards.json": "ec3e683eaba16e3641d505db7f09e866cd04d24eceae0e15c32c04e63a6a83d1",
+    "code/obstructions/interleaved_local_norms.py": "948e590dfd1e1ce69cb871848ee8d1219ba5035d4661e5b02570f3ca1785853d"
+  },
+  "source_unchanged": true,
+  "all_pass": true
+}

@@ -1,0 +1,629 @@
+{
+  "schema": "benes-canonical-control-fiber-v1",
+  "status": "EXACT FINITE OPERATOR COMPONENT, CONDITIONAL NATIVE INTERFACE",
+  "source_sha256": {
+    "code/synthesis/benes_control_fiber_probe.py": "0090d94c72943abc24ac77bf01db254134f5c4d069fce47e53c7747fc470b02f",
+    "code/synthesis/benes_guarded_control_word.py": "b3f85a39a2c737dd91ba9888b6fe94c2b6da79a3e386c75ba8cddd9dfd169242",
+    "code/synthesis/benes_guarded_control_word_v3.py": "33274fe5b21f67f06a9a4b198923c25a3f243bf6b8c459ddf4136cc02be9fe56",
+    "code/synthesis/benes_gaussian_fiber_operator.py": "4250d8a35656b66f81ee93a3d71146debbe460d5ab6782784960e71dd4f7c0ea"
+  },
+  "canonical_layout": {
+    "active_bands": 3,
+    "active_chunks_each_band": "f, a power of two >=4",
+    "chunk_bits": "K>=1",
+    "selected_bit": "K-1",
+    "trailing_real_guard_chunks": 12,
+    "placed_layout": "Twelve quarters each with f/4 active K-chunks and one real terminal K-chunk",
+    "unused_planes": "All unselected bits, every guard bit, every complete control chunk"
+  },
+  "fixed_stage_ledger": {
+    "stages": "2 log2(f)-1",
+    "whole_band_alignment_xor_words": 6,
+    "quarter_switch_xor_words": 6,
+    "whole_band_inverse_xor_words": 6,
+    "rotations_each_xor_word": 8,
+    "exceptional_correction_each_xor_word": true,
+    "stock_swaps_each_placement_upper": 60,
+    "placements_each_gate_and_inverse_compaction": 4
+  },
+  "canonical_source_sink": "The same original complete address cube; only action selected positions are stably permuted. Both canonical control vectors and every other bit return exactly.",
+  "child": "For a active columns, diag(c^weight) Z_a diag(c^-weight) on the first a complete K-chunks, selected bit K-1; high inactive action chunks and every other plane stay spectator.",
+  "exact_inactive_alphabet": "Each inactive column retains all three nonmatching two-control patterns; no deletion, padding or zero initialization.",
+  "literal_negative_controls": {
+    "omitted_decoding": {
+      "original": 7909393,
+      "wrong": 7909394,
+      "expected": 7909400,
+      "pattern": [
+        0,
+        0
+      ]
+    },
+    "omitted_exceptional_correction": {
+      "original": 8417283,
+      "wrong": 2504101,
+      "expected": 8417283,
+      "pattern": [
+        0,
+        0
+      ]
+    },
+    "omitted_canonical_control_label_reconstruction": {
+      "original": 15106050,
+      "wrong": 15106052,
+      "expected": 15106050,
+      "pattern": [
+        0,
+        0
+      ]
+    }
+  },
+  "gaussian_fixtures": [
+    {
+      "coefficient": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "K": 1,
+      "fixtures": [
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 0,
+          "z": 0,
+          "complete_spectator_plane": 3686,
+          "a": 4,
+          "active": 15,
+          "action_permutation": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 1,
+          "z": 2,
+          "complete_spectator_plane": 2238,
+          "a": 2,
+          "active": 12,
+          "action_permutation": [
+            0,
+            4,
+            8,
+            12,
+            1,
+            5,
+            9,
+            13,
+            2,
+            6,
+            10,
+            14,
+            3,
+            7,
+            11,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 3,
+          "z": 4,
+          "complete_spectator_plane": 2960,
+          "a": 1,
+          "active": 8,
+          "action_permutation": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            1,
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 15,
+          "z": 0,
+          "complete_spectator_plane": 3109,
+          "a": 0,
+          "active": 0,
+          "action_permutation": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "coefficient": [
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "K": 2,
+      "fixtures": [
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 0,
+          "z": 0,
+          "complete_spectator_plane": 67989700382,
+          "a": 4,
+          "active": 15,
+          "action_permutation": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 1,
+          "z": 2,
+          "complete_spectator_plane": 44957835342,
+          "a": 2,
+          "active": 12,
+          "action_permutation": [
+            0,
+            4,
+            8,
+            12,
+            1,
+            5,
+            9,
+            13,
+            2,
+            6,
+            10,
+            14,
+            3,
+            7,
+            11,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 3,
+          "z": 4,
+          "complete_spectator_plane": 29256233609,
+          "a": 1,
+          "active": 8,
+          "action_permutation": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            1,
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 15,
+          "z": 0,
+          "complete_spectator_plane": 59074839613,
+          "a": 0,
+          "active": 0,
+          "action_permutation": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "coefficient": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "K": 6,
+      "fixtures": [
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 0,
+          "z": 0,
+          "complete_spectator_plane": 4070530454289924851294385005739578141944,
+          "a": 4,
+          "active": 15,
+          "action_permutation": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 1,
+          "z": 2,
+          "complete_spectator_plane": 4836602899554155593226294102836647035404,
+          "a": 2,
+          "active": 12,
+          "action_permutation": [
+            0,
+            4,
+            8,
+            12,
+            1,
+            5,
+            9,
+            13,
+            2,
+            6,
+            10,
+            14,
+            3,
+            7,
+            11,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 3,
+          "z": 4,
+          "complete_spectator_plane": 2727654590237744807499705215753224631912,
+          "a": 1,
+          "active": 8,
+          "action_permutation": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            1,
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 15,
+          "z": 0,
+          "complete_spectator_plane": 857096376604029287770186224100510584442,
+          "a": 0,
+          "active": 0,
+          "action_permutation": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "coefficient": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "K": 2,
+      "fixtures": [
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 0,
+          "z": 0,
+          "complete_spectator_plane": 14901615881,
+          "a": 4,
+          "active": 15,
+          "action_permutation": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 1,
+          "z": 2,
+          "complete_spectator_plane": 65091362758,
+          "a": 2,
+          "active": 12,
+          "action_permutation": [
+            0,
+            4,
+            8,
+            12,
+            1,
+            5,
+            9,
+            13,
+            2,
+            6,
+            10,
+            14,
+            3,
+            7,
+            11,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 3,
+          "z": 4,
+          "complete_spectator_plane": 51414766199,
+          "a": 1,
+          "active": 8,
+          "action_permutation": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10,
+            12,
+            14,
+            1,
+            3,
+            5,
+            7,
+            9,
+            11,
+            13,
+            15
+          ]
+        },
+        {
+          "pattern": [
+            0,
+            0
+          ],
+          "y": 15,
+          "z": 0,
+          "complete_spectator_plane": 49309084510,
+          "a": 0,
+          "active": 0,
+          "action_permutation": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        }
+      ]
+    }
+  ],
+  "native_unresolved": [
+    "Conditional generalized frozen-control stream/rotation and exceptional-record cost must be instantiated with full record length and all fields",
+    "Conditional equal-K swap fee for stock placement",
+    "Variable-width fiber traversal, row metadata and complete recursive caller layout",
+    "Faster exact/rounded Z_a supplier and a contracting complete profile",
+    "Local scaling implementation prefixes, all rounding/precision and root multiplication integration"
+  ],
+  "absent_claims": [
+    "No <=11-add Z3 word",
+    "No measured native tape time",
+    "No new kappa"
+  ],
+  "runs": [
+    {
+      "run": "runs/20261009T065823Z-synthesis-benes-control-fiber-probe",
+      "raw_root": "work/synthesis/20261009T065823Z-benes-control-fiber-probe",
+      "actual_start_utc": "2026-10-09T06:58:23.616010+00:00",
+      "scope": "Finite semantic XOR endpoints; native rotations were not executed.",
+      "raw_recovery": "Deterministically regenerable from pinned source and task/seed protocol; originals remain unchanged. Full execution log is in ignored raw storage until text-evidence publication."
+    },
+    {
+      "run": "runs/20261009T072521Z-synthesis-benes-guarded-control-word",
+      "raw_root": "work/synthesis/20261009T072521Z-benes-guarded-control-word",
+      "actual_start_utc": "2026-10-09T07:25:21.968030+00:00",
+      "scope": "Literal repaired rotations for the changed version-two matching; canonical same-column reconstruction remains absent.",
+      "raw_recovery": "Deterministically regenerable from pinned source and task/seed protocol; originals remain unchanged. Full execution log is in ignored raw storage until text-evidence publication."
+    },
+    {
+      "run": "runs/20261009T073016Z-synthesis-benes-canonical-control-v3",
+      "raw_root": "work/synthesis/20261009T073016Z-benes-canonical-control-v3",
+      "actual_start_utc": "2026-10-09T07:30:16.587779+00:00",
+      "scope": "Literal repaired rotations with both canonical control label orders restored in metadata.",
+      "raw_recovery": "Deterministically regenerable from pinned source and task/seed protocol; originals remain unchanged. Full execution log is in ignored raw storage until text-evidence publication."
+    },
+    {
+      "run": "runs/20261009T073622Z-synthesis-benes-gaussian-fiber-operator",
+      "raw_root": "work/synthesis/20261009T073622Z-benes-gaussian-fiber-operator",
+      "actual_start_utc": "2026-10-09T07:36:22.633152+00:00",
+      "scope": "Exact canonical Gaussian fiber kernels and arbitrary dirty fields; recursive child is an exact oracle.",
+      "raw_recovery": "Deterministically regenerable from pinned source and task/seed protocol; originals remain unchanged. Full execution log is in ignored raw storage until text-evidence publication."
+    }
+  ]
+}

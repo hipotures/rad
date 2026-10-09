@@ -510,3 +510,37 @@ circular, and additive scan probes do not supply that primitive. Changed
 bilinear product encodings and coupled recurrences are investigated in
 separate runs; their complete coefficient widths, carry/precision and decoder
 bills must be retained before any exponent transfer is accepted.
+
+## Fifteenth checkpoint: full activity and precision contracts
+
+The full-K prefix codec now has complete finite operator and volume
+controls. Its seven-tape stable width grouping has a paid pass ledger,
+including arbitrary changed payloads and journal restoration. The initial
+prefix permutation remains a separate unsupplied native operation.
+The alternative selected-only Benes route avoids moving the guard planes;
+its canonical control pairing and Gaussian gauges have exact finite
+controls and independent analytical review. Whole-child dispatch, recursive
+time, real guard endpoints and non-power-of-two remainder costs remain open.
+
+The exact activity law is binomial on the complete control cube. Ordinary
+twelve-gate Z3 has first moment one and fails every sublinear power in this
+same-volume model. An eleven-gate hypothesis can contract the optimistic
+moment, but requires an actual word and compatible paid routing exponent.
+Do not spend a large parameter sweep on unchanged twelve-gate counts.
+The new continuation tests are a shorter complete scalar word, a different
+activity profile or an independently improved native routing supplier.
+
+Disk-safe final recovery and geometric nonunit endpoint/grid ledgers
+address numerical feasibility. Individual local factors, complete dirty
+fields, scalar injections, disjoint regions and actual fixed grids must
+remain in the contracts. A unitary-child identity word independently
+refutes cancellation across omitted children as a local norm charge.
+These precision results do not provide the missing time contraction.
+
+The weighted-union basis is a diagonal conjugate of the classical BHKK
+covering product. Its paid connection to the canonical Gaussian product,
+rather than that existing transform identity, is the possible contribution.
+A separate primary lead on quenched degree rebalancing is retained with
+explicit exceptional-set and wire-overhead discriminators. All current
+claims remain finite certificates, conditional lemmas or scoped negatives;
+no larger campaign kappa is asserted.
