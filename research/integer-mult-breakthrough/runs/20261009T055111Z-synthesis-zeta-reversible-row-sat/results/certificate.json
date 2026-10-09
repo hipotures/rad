@@ -1,0 +1,311 @@
+{
+  "cases": [
+    {
+      "h": 2,
+      "field_order": 3,
+      "field_definition": "F3",
+      "arithmetic_gate_budget": 3,
+      "baseline_gate_count": 4,
+      "timeout_seconds": 120.0,
+      "random_seed": 31,
+      "solver_result": "unsat",
+      "build_seconds": 0.014443234002101235,
+      "smt_problem_sha256": "ca2788c87c05a1b1c7681f78043d5d8d6e050e4fbbede7baae51edf8020145e2",
+      "smt_problem_bytes": 31039,
+      "symmetry_scope": "Trailing noops, adjacent gate merge, lex order of commuting adjacent gates only.",
+      "free_model_operations": "Dyadic unit row scales and arbitrary row permutations; all field coefficients in row additions.",
+      "statistics": {
+        "sat mk var": 542,
+        "solve-eqs-steps": 552,
+        "solve-eqs-elim-vars": 16,
+        "sat mk clause 2ary": 675,
+        "sat mk clause nary": 1775,
+        "sat del clause": 23,
+        "sat conflicts": 72,
+        "sat decisions": 109,
+        "sat propagations 2ary": 4630,
+        "sat propagations nary": 6486,
+        "sat minimized lits": 179,
+        "sat subs resolution dyn": 3,
+        "sat units": 18,
+        "sat backjumps": 71,
+        "sat elim clauses": 18,
+        "sat elim literals": 5,
+        "num allocs": 468934,
+        "rlimit count": 26171,
+        "max memory": 25.63,
+        "memory": 17.25,
+        "time": 0.006
+      },
+      "scientific_scope": "Necessary finite-field relaxation of invertible Gaussian-dyadic row words; SAT requires exact lift; UNSAT is an unverified-solver finite result, not formal verification or a native time lower bound.",
+      "seconds": 0.0333929190019262
+    },
+    {
+      "h": 2,
+      "field_order": 9,
+      "field_definition": "F3[i], i^2=-1",
+      "arithmetic_gate_budget": 4,
+      "baseline_gate_count": 4,
+      "timeout_seconds": 120.0,
+      "random_seed": 41,
+      "solver_result": "sat",
+      "build_seconds": 0.09215376900101546,
+      "smt_problem_sha256": "8131a98e044373ac7c29b06456af88771f2f0ba83848ec3d7b874ecff8c97ea7",
+      "smt_problem_bytes": 200589,
+      "symmetry_scope": "Trailing noops, adjacent gate merge, lex order of commuting adjacent gates only.",
+      "free_model_operations": "Dyadic unit row scales and arbitrary row permutations; all field coefficients in row additions.",
+      "statistics": {
+        "sat mk var": 1981,
+        "solve-eqs-steps": 1962,
+        "solve-eqs-elim-vars": 20,
+        "sat mk clause 2ary": 3178,
+        "sat mk clause 3ary": 1223,
+        "sat mk clause nary": 8153,
+        "sat del clause": 2799,
+        "sat conflicts": 596,
+        "sat decisions": 1536,
+        "sat propagations 2ary": 99785,
+        "sat propagations nary": 123591,
+        "sat restarts": 61,
+        "sat minimized lits": 3715,
+        "sat subs resolution dyn": 356,
+        "sat units": 16,
+        "sat elim bool vars res": 488,
+        "sat backjumps": 596,
+        "sat elim clauses": 92,
+        "sat elim literals": 17,
+        "sat subsumed": 99,
+        "sat subs resolution": 17,
+        "sat scc elim binary": 1,
+        "sat probing assigned": 8,
+        "num allocs": 22174289,
+        "rlimit count": 310006,
+        "max memory": 27.01,
+        "memory": 17.68,
+        "time": 0.029
+      },
+      "scientific_scope": "Necessary finite-field relaxation of invertible Gaussian-dyadic row words; SAT requires exact lift; UNSAT is an unverified-solver finite result, not formal verification or a native time lower bound.",
+      "gates": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          3,
+          1
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ],
+      "endpoint_permutation_and_units": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "arithmetic_gate_count": 4,
+      "exact_lift": {
+        "status": "EXACT GAUSSIAN INTEGER WORD WITH DYADIC UNIT ENDPOINTS",
+        "gates": [
+          [
+            0,
+            1,
+            [
+              1,
+              0
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              1,
+              0
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              1,
+              0
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "endpoint_row_permutation_and_scalars": [
+          [
+            0,
+            [
+              1,
+              0
+            ],
+            0
+          ],
+          [
+            1,
+            [
+              1,
+              0
+            ],
+            0
+          ],
+          [
+            2,
+            [
+              1,
+              0
+            ],
+            0
+          ],
+          [
+            3,
+            [
+              1,
+              0
+            ],
+            0
+          ]
+        ],
+        "arithmetic_gate_count": 4,
+        "source_grid_bits": 0,
+        "scope": "Exact finite lifted row word; tensor activity compaction and native recurrence remain open."
+      },
+      "seconds": 0.19527968799957307
+    },
+    {
+      "h": 3,
+      "field_order": 3,
+      "field_definition": "F3",
+      "arithmetic_gate_budget": 11,
+      "baseline_gate_count": 12,
+      "timeout_seconds": 120.0,
+      "random_seed": 51,
+      "solver_result": "unknown",
+      "build_seconds": 0.039220266000484116,
+      "smt_problem_sha256": "28ceb43305aef73a4c43b415a8c1b9d68aee7b6d36eb29000618efe5e829d293",
+      "smt_problem_bytes": 566829,
+      "symmetry_scope": "Trailing noops, adjacent gate merge, lex order of commuting adjacent gates only.",
+      "free_model_operations": "Dyadic unit row scales and arbitrary row permutations; all field coefficients in row additions.",
+      "statistics": {
+        "sat mk var": 6143,
+        "solve-eqs-steps": 6308,
+        "solve-eqs-elim-vars": 96,
+        "sat mk clause 2ary": 7157,
+        "sat mk clause 3ary": 2766,
+        "sat mk clause nary": 1321023,
+        "sat gc clause": 1208556,
+        "sat del clause": 1250883,
+        "sat conflicts": 1283647,
+        "sat decisions": 2292301,
+        "sat propagations 2ary": 131775502,
+        "sat propagations nary": 655657254,
+        "sat restarts": 91061,
+        "sat minimized lits": 65985342,
+        "sat subs resolution dyn": 1369790,
+        "sat units": 21,
+        "sat elim bool vars res": 2115,
+        "sat backjumps": 1283647,
+        "sat elim clauses": 106,
+        "sat elim literals": 314092,
+        "sat subsumed": 6115,
+        "sat subs resolution": 20104,
+        "sat bce": 104,
+        "sat ate": 4392,
+        "sat scc elim vars": 91,
+        "sat scc elim binary": 165,
+        "sat tr": 341,
+        "rlimit count": 738278782,
+        "max memory": 64.67,
+        "memory": 18.54,
+        "num allocs": 9431477125.0,
+        "time": 120.005
+      },
+      "scientific_scope": "Necessary finite-field relaxation of invertible Gaussian-dyadic row words; SAT requires exact lift; UNSAT is an unverified-solver finite result, not formal verification or a native time lower bound.",
+      "reason_unknown": "timeout",
+      "seconds": 120.2567223090009
+    },
+    {
+      "h": 3,
+      "field_order": 9,
+      "field_definition": "F3[i], i^2=-1",
+      "arithmetic_gate_budget": 11,
+      "baseline_gate_count": 12,
+      "timeout_seconds": 120.0,
+      "random_seed": 61,
+      "solver_result": "unknown",
+      "build_seconds": 0.15703191100328695,
+      "smt_problem_sha256": "5ba893d8b648c944f78480dbf4d6b34ba61d653e6312cd8ed376290165f89edd",
+      "smt_problem_bytes": 1584063,
+      "symmetry_scope": "Trailing noops, adjacent gate merge, lex order of commuting adjacent gates only.",
+      "free_model_operations": "Dyadic unit row scales and arbitrary row permutations; all field coefficients in row additions.",
+      "statistics": {
+        "sat mk var": 16072,
+        "solve-eqs-steps": 16038,
+        "solve-eqs-elim-vars": 96,
+        "sat mk clause 2ary": 24261,
+        "sat mk clause 3ary": 7771,
+        "sat mk clause nary": 1037402,
+        "sat gc clause": 861177,
+        "sat del clause": 937312,
+        "sat conflicts": 943504,
+        "sat decisions": 2051797,
+        "sat propagations 2ary": 253265391,
+        "sat propagations nary": 875096449,
+        "sat restarts": 76590,
+        "sat minimized lits": 61674449,
+        "sat subs resolution dyn": 1398010,
+        "sat units": 28,
+        "sat elim bool vars res": 5322,
+        "sat backjumps": 943415,
+        "sat backtracks": 89,
+        "sat elim clauses": 191,
+        "sat elim literals": 170815,
+        "sat subsumed": 8904,
+        "sat subs resolution": 8921,
+        "sat bce": 124,
+        "sat ate": 9203,
+        "sat scc elim vars": 33,
+        "sat scc elim binary": 126,
+        "sat tr": 251,
+        "rlimit count": 1080872167,
+        "max memory": 110.41,
+        "memory": 51.41,
+        "num allocs": 41024384763.0,
+        "time": 120.071
+      },
+      "scientific_scope": "Necessary finite-field relaxation of invertible Gaussian-dyadic row words; SAT requires exact lift; UNSAT is an unverified-solver finite result, not formal verification or a native time lower bound.",
+      "reason_unknown": "timeout",
+      "seconds": 120.8083033360017
+    }
+  ]
+}

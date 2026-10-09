@@ -1,0 +1,13 @@
+--- weighted_union_product_basis.py
++++ weighted_union_product_basis.py
+@@ -67,2 +67,2 @@
+-    eval_matrix = [[c_power(a.bit_count()) if a & ~z == 0 else (0, 0)
+-                   for a in range(D)] for z in range(D)]
++    evaluator = [[c_power(a.bit_count()) if a & ~z == 0 else (0, 0)
++                  for a in range(D)] for z in range(D)]
+@@ -71 +71 @@
+-            product = [times(eval_matrix[z][a], eval_matrix[z][b]) for z in range(D)]
++            product = [times(evaluator[z][a], evaluator[z][b]) for z in range(D)]
+@@ -120 +120 @@
+-    nnz_evaluator = sum(value != (0, 0) for row in eval_matrix for value in row)
++    nnz_evaluator = sum(value != (0, 0) for row in evaluator for value in row)

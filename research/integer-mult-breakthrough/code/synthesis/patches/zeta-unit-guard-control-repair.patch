@@ -1,0 +1,11 @@
+--- a/verify_zeta_row_controls_v2.py
++++ b/verify_zeta_row_controls_v2.py
+@@ -49,7 +49,7 @@
+     # any historical accepted circuit used a zero multiplier.
+     bad_zero = [('scale', 0, ['0', '0'])]
+     old = original.apply(identity, bad_zero)
+-    if any(old[0]):
++    if any(entry != (0, 0) for entry in old[0]):
+         raise AssertionError('The original zero-scale boundary was not reproduced')
+     negatives = [('zero', ['0', '0']), ('odd-real-norm', ['3', '0']), ('odd-Gaussian-norm', ['1', '2'])]
+     rejected = []

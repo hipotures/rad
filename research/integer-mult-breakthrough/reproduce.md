@@ -43,6 +43,40 @@ evidence is packed into this topic's evidence namespaces without altering
 originals. Run protocols, compact summaries and source hashes distinguish
 retained finite evidence from analytical assumptions.
 
+## Product bases, rounding and cancellation scope
+
+The fourteenth checkpoint adds eight bounded checks, for 148 in total.
+All registered checks require only standard-library Python. Run the new
+components independently from the repository root:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/product_slice_wire_floor.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/approximate_product_slice_floor.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/weighted_union_product_basis.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_zeta_row_controls_v2.py
+python3 -B research/integer-mult-breakthrough/code/transfers/unitary_rounding_depth.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/obstructions/verify_nonlinear_rounding.py
+python3 -B research/integer-mult-breakthrough/code/obstructions/zeta_dependency_ancestry.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/rounded_product_recovery.py --workers 1 --bounded
+```
+
+Expected outcomes are complete finite PASS controls. The nonlinear adapter
+replays the producer API; it is not an independent implementation. The
+separate product and ancestry reviews are analytical/source reviews.
+Full discovery runs use four workers and are identified in the retained
+protocols and the [product](configs/complex/product-basis-milestone.json)
+and [row-search](configs/synthesis/zeta-row-publication-manifest-v2.json)
+publication manifests. Solver discovery additionally requires the pinned
+dependencies in `configs/synthesis/zeta-row-search-dependencies.json`;
+no solver is needed for the retained bounded row verifier.
+
+The validation run's `results/historical-recovery.json` binds three exact
+historical source reconstructions. Apply each patch in a fresh isolated
+tree with its recorded relative layout and direction. The weighted-union
+and initial v2 instrumentation failures must fail with the retained
+messages. The original rounding source has a weaker projection control
+and is retained as historical evidence, not the repaired control.
+
 ## Row pools, complete products and independent zeta synthesis
 
 The thirteenth checkpoint adds 16 bounded checks, bringing the registry to

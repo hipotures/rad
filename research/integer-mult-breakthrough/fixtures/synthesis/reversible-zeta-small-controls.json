@@ -1,0 +1,567 @@
+{
+  "schema_version": 1,
+  "input_provenance": "Unchanged small witnesses extracted from the retained completed producer runs; independent replay is required.",
+  "modular_control": {
+    "h": 2,
+    "field_order": 9,
+    "field_definition": "F3[i], i^2=-1",
+    "arithmetic_gate_budget": 4,
+    "baseline_gate_count": 4,
+    "timeout_seconds": 120.0,
+    "random_seed": 41,
+    "solver_result": "sat",
+    "build_seconds": 0.09215376900101546,
+    "smt_problem_sha256": "8131a98e044373ac7c29b06456af88771f2f0ba83848ec3d7b874ecff8c97ea7",
+    "smt_problem_bytes": 200589,
+    "symmetry_scope": "Trailing noops, adjacent gate merge, lex order of commuting adjacent gates only.",
+    "free_model_operations": "Dyadic unit row scales and arbitrary row permutations; all field coefficients in row additions.",
+    "statistics": {
+      "sat mk var": 1981,
+      "solve-eqs-steps": 1962,
+      "solve-eqs-elim-vars": 20,
+      "sat mk clause 2ary": 3178,
+      "sat mk clause 3ary": 1223,
+      "sat mk clause nary": 8153,
+      "sat del clause": 2799,
+      "sat conflicts": 596,
+      "sat decisions": 1536,
+      "sat propagations 2ary": 99785,
+      "sat propagations nary": 123591,
+      "sat restarts": 61,
+      "sat minimized lits": 3715,
+      "sat subs resolution dyn": 356,
+      "sat units": 16,
+      "sat elim bool vars res": 488,
+      "sat backjumps": 596,
+      "sat elim clauses": 92,
+      "sat elim literals": 17,
+      "sat subsumed": 99,
+      "sat subs resolution": 17,
+      "sat scc elim binary": 1,
+      "sat probing assigned": 8,
+      "num allocs": 22174289,
+      "rlimit count": 310006,
+      "max memory": 27.01,
+      "memory": 17.68,
+      "time": 0.029
+    },
+    "scientific_scope": "Necessary finite-field relaxation of invertible Gaussian-dyadic row words; SAT requires exact lift; UNSAT is an unverified-solver finite result, not formal verification or a native time lower bound.",
+    "gates": [
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        3,
+        1
+      ],
+      [
+        2,
+        3,
+        1
+      ],
+      [
+        0,
+        2,
+        1
+      ]
+    ],
+    "endpoint_permutation_and_units": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        1
+      ]
+    ],
+    "arithmetic_gate_count": 4,
+    "exact_lift": {
+      "status": "EXACT GAUSSIAN INTEGER WORD WITH DYADIC UNIT ENDPOINTS",
+      "gates": [
+        [
+          0,
+          1,
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          1,
+          3,
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          2,
+          3,
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          0,
+          2,
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "endpoint_row_permutation_and_scalars": [
+        [
+          0,
+          [
+            1,
+            0
+          ],
+          0
+        ],
+        [
+          1,
+          [
+            1,
+            0
+          ],
+          0
+        ],
+        [
+          2,
+          [
+            1,
+            0
+          ],
+          0
+        ],
+        [
+          3,
+          [
+            1,
+            0
+          ],
+          0
+        ]
+      ],
+      "arithmetic_gate_count": 4,
+      "source_grid_bits": 0,
+      "scope": "Exact finite lifted row word; tensor activity compaction and native recurrence remain open."
+    },
+    "seconds": 0.19527968799957307
+  },
+  "binary_control": {
+    "h": 2,
+    "arithmetic_gate_budget": 4,
+    "field": "F2=GaussianIntegers/(1+i)",
+    "fixed_labeled_endpoint": false,
+    "baseline_gate_count": 4,
+    "solver_result": "sat",
+    "timeout_seconds": 120.0,
+    "random_seed": 81,
+    "smt_problem_sha256": "50908ddf8a2a22f575bd546592571a4d016950ca1230bfa81ef89e445d81062e",
+    "smt_problem_bytes": 7571,
+    "statistics": {
+      "sat mk var": 299,
+      "solve-eqs-steps": 262,
+      "solve-eqs-elim-vars": 20,
+      "sat mk clause 2ary": 296,
+      "sat mk clause nary": 1022,
+      "sat del clause": 6,
+      "sat conflicts": 84,
+      "sat decisions": 137,
+      "sat propagations 2ary": 2539,
+      "sat propagations nary": 5028,
+      "sat minimized lits": 114,
+      "sat subs resolution dyn": 2,
+      "sat units": 6,
+      "sat backjumps": 84,
+      "sat elim clauses": 3,
+      "sat elim literals": 7,
+      "num allocs": 99310,
+      "rlimit count": 16269,
+      "max memory": 25.33,
+      "memory": 17.06,
+      "time": 0.005
+    },
+    "scope": "Necessary only for Gaussian-integer row additions and Gaussian integer unit scales, with stated final permutation. Dyadic divisions by(1+i) or2 remain open; UNSAT is an unverified finite solver result, not a native time lower bound.",
+    "gates": [
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        3,
+        1
+      ],
+      [
+        2,
+        3,
+        1
+      ],
+      [
+        0,
+        2,
+        1
+      ]
+    ],
+    "arithmetic_gate_count": 4,
+    "exact_sign_lift": {
+      "status": "EXACT GAUSSIAN INTEGER WORD WITH DYADIC UNIT ENDPOINTS",
+      "gates": [
+        [
+          0,
+          1,
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          1,
+          3,
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          2,
+          3,
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          0,
+          2,
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "endpoint_row_permutation_and_scalars": [
+        [
+          0,
+          [
+            1,
+            0
+          ],
+          0
+        ],
+        [
+          1,
+          [
+            1,
+            0
+          ],
+          0
+        ],
+        [
+          2,
+          [
+            1,
+            0
+          ],
+          0
+        ],
+        [
+          3,
+          [
+            1,
+            0
+          ],
+          0
+        ]
+      ],
+      "arithmetic_gate_count": 4,
+      "source_grid_bits": 0,
+      "scope": "Exact finite lifted row word; tensor activity compaction and native recurrence remain open.",
+      "sign_assignments_tested": 1
+    },
+    "seconds": 0.0184646839989
+  },
+  "real_unit_control": {
+    "status": "EXACT REAL DYADIC REVERSIBLE ZETA ROW WORD",
+    "arithmetic_gate_count": 4,
+    "unit_scale_count": 0,
+    "paid_row_permutation_swaps": 0,
+    "forward_word": [
+      [
+        "add",
+        3,
+        1,
+        "1"
+      ],
+      [
+        "add",
+        1,
+        0,
+        "1"
+      ],
+      [
+        "add",
+        2,
+        0,
+        "1"
+      ],
+      [
+        "add",
+        3,
+        2,
+        "1"
+      ]
+    ],
+    "backward_word": [
+      [
+        "add",
+        3,
+        2,
+        "-1"
+      ],
+      [
+        "add",
+        2,
+        0,
+        "-1"
+      ],
+      [
+        "add",
+        1,
+        0,
+        "-1"
+      ],
+      [
+        "add",
+        3,
+        1,
+        "-1"
+      ]
+    ],
+    "complete_forward_matrix_columns": 4,
+    "complete_inverse_matrix_columns": 4,
+    "exact_forward_prefix": {
+      "maximum_matrix_entry_grid_bits": 0,
+      "maximum_signed_matrix_numerator_bits": 2
+    },
+    "exact_inverse_prefix": {
+      "maximum_matrix_entry_grid_bits": 0,
+      "maximum_signed_matrix_numerator_bits": 2
+    },
+    "native_activity_compaction": false,
+    "native_faster_supplier": false
+  },
+  "gaussian_unit_control": {
+    "status": "EXACT GAUSSIAN DYADIC REVERSIBLE ROW WORD",
+    "forward_word": [
+      [
+        "add",
+        2,
+        0,
+        [
+          "1",
+          "0"
+        ]
+      ],
+      [
+        "add",
+        3,
+        1,
+        [
+          "1",
+          "0"
+        ]
+      ],
+      [
+        "add",
+        1,
+        0,
+        [
+          "1",
+          "0"
+        ]
+      ],
+      [
+        "add",
+        3,
+        2,
+        [
+          "1",
+          "0"
+        ]
+      ]
+    ],
+    "backward_word": [
+      [
+        "add",
+        3,
+        2,
+        [
+          "-1",
+          "0"
+        ]
+      ],
+      [
+        "add",
+        1,
+        0,
+        [
+          "-1",
+          "0"
+        ]
+      ],
+      [
+        "add",
+        3,
+        1,
+        [
+          "-1",
+          "0"
+        ]
+      ],
+      [
+        "add",
+        2,
+        0,
+        [
+          "-1",
+          "0"
+        ]
+      ]
+    ],
+    "arithmetic_gate_count": 4,
+    "explicit_unit_scale_count": 0,
+    "explicit_paid_row_swaps": 0,
+    "complete_forward_columns": 4,
+    "complete_inverse_columns": 4,
+    "forward_prefix": {
+      "maximum_prefix_grid_bits": 0,
+      "maximum_prefix_row_component_l1": "4"
+    },
+    "inverse_prefix": {
+      "maximum_prefix_grid_bits": 0,
+      "maximum_prefix_row_component_l1": "2"
+    },
+    "native_activity_compaction": false,
+    "complete_native_supplier": false
+  },
+  "cnf_control": {
+    "h": 2,
+    "arithmetic_gate_budget": 4,
+    "engine": "glucose42",
+    "solver_result": "SAT",
+    "variables": 442,
+    "clauses": 1993,
+    "timeout_seconds": 120.0,
+    "cnf_sha256": "a7075b85fe363e9d24092574fbe7c55b7c641ab13159c8d251256d7a2cb9e22c",
+    "cnf_bytes": 26274,
+    "statistics": {
+      "restarts": 1,
+      "conflicts": 92,
+      "decisions": 206,
+      "propagations": 5102
+    },
+    "source_pruning": true,
+    "sink_pruning": true,
+    "commuting_order": true,
+    "solver_proof_independently_checked": false,
+    "scope": "Finite F2 integer-row necessary model, final row permutation, no dyadic divisions. UNKNOWN is no exclusion; unverified solver UNSAT is not a formally checked theorem or native lower bound.",
+    "gates": [
+      [
+        1,
+        3
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "exact_sign_lift": {
+      "status": "EXACT INTEGER SIGN LIFT",
+      "tested_sign_assignments": 16,
+      "gates": [
+        [
+          1,
+          3,
+          1
+        ],
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          2,
+          3,
+          1
+        ]
+      ],
+      "endpoint_signed_row_permutation": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ]
+    },
+    "arithmetic_gate_count": 4,
+    "exhaustive_control_word_counts_0_to_4": [
+      0,
+      0,
+      0,
+      0,
+      12
+    ],
+    "seconds": 0.014469433997874148
+  },
+  "exhaustive_binary_h2_word_counts_0_to_4": [
+    0,
+    0,
+    0,
+    0,
+    12
+  ],
+  "native_activity_compaction": false,
+  "improved_kappa": false
+}

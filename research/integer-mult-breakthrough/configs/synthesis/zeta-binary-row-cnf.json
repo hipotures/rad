@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "protocol": {
+    "created_utc": "2026-10-09T06:14:48.320629+00:00",
+    "workers": 4,
+    "native_threads_each": 1,
+    "source_sha256": {
+      "zeta_binary_row_cnf.py": "c908197d033b029e7b6a7b1c465d1344f5bfd83aa61dd26fda4bb816a316e0c2"
+    },
+    "python_sat_version": "1.9.dev15",
+    "tasks": [
+      [
+        2,
+        3,
+        "glucose42"
+      ],
+      [
+        2,
+        4,
+        "glucose42"
+      ],
+      [
+        3,
+        11,
+        "glucose42"
+      ],
+      [
+        3,
+        11,
+        "maplechrono"
+      ]
+    ],
+    "hypotheses": [
+      "Direct one-hot CNF avoids large bitvector mux expansion.",
+      "Exact changed-row bounds from both endpoints prune impossible chronologies."
+    ],
+    "resource_preflight": {
+      "aggregate_memory_bytes_upper": 3221225472
+    }
+  },
+  "command_from_research_root": "env/bin/python code/synthesis/zeta_binary_row_cnf.py --workers 4 --seconds 120 --output work/synthesis/<fresh-run>/results",
+  "dependency_config": "configs/synthesis/zeta-row-search-dependencies.json",
+  "scientific_status": "Discovery/finite solver evidence. Timeout and bounded beam failure are not exclusions.",
+  "expected_control": "h2 three integer gates impossible; h2 four gates independently exact. h3 minimum remains unestablished."
+}

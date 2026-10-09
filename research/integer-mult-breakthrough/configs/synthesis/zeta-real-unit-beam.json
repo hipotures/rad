@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "protocol": {
+    "created_utc": "2026-10-09T06:06:12.369706+00:00",
+    "workers": 4,
+    "native_threads_each": 1,
+    "tasks": [
+      [
+        2,
+        4,
+        300,
+        "nnz",
+        1,
+        8,
+        60.0,
+        20261009061
+      ],
+      [
+        3,
+        11,
+        1200,
+        "nnz",
+        1,
+        8,
+        60.0,
+        20261009062
+      ],
+      [
+        3,
+        11,
+        1200,
+        "log",
+        2,
+        16,
+        60.0,
+        20261009063
+      ],
+      [
+        3,
+        11,
+        1200,
+        "interference",
+        1,
+        8,
+        60.0,
+        20261009064
+      ]
+    ],
+    "source_sha256": {
+      "zeta_dyadic_row_beam.py": "cf2be2ed65adf24d069589993644685b8572d78ad4072d47e857f908286cfab6"
+    },
+    "stdlib_only": true,
+    "hypothesis": "Fractional dyadic cancellation and free unit normalization may shorten the eight-entry zeta word beyond finite-field SAT timeouts; test exact reversible witnesses before any tensor architecture.",
+    "resource_preflight": {
+      "aggregate_memory_bytes_upper": 2147483648
+    }
+  },
+  "command_from_research_root": "python3 -B code/synthesis/zeta_dyadic_row_beam.py --workers 4 --seconds 60 --output work/synthesis/<fresh-run>/results",
+  "dependency_config": "configs/synthesis/zeta-row-search-dependencies.json",
+  "scientific_status": "Discovery/finite solver evidence. Timeout and bounded beam failure are not exclusions.",
+  "expected_control": "h2 three integer gates impossible; h2 four gates independently exact. h3 minimum remains unestablished."
+}

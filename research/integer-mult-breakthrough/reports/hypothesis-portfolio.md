@@ -6,6 +6,31 @@ subagents give four scientifically distinct tracks within the session's four
 agent slots. No old campaign queue, deadline, source whitelist, or CPU target
 is active.
 
+## Fourteenth checkpoint: changed product bases and numerical interfaces
+
+All 148 registered bounded checks pass. A weighted-union basis attains
+`3^s` direct form incidences rather than the canonical `4^s` floor, but
+the exact canonical conversion is a full paid tensor map. Fixed-coefficient
+approximation preserves the canonical slice rank below the stated tolerance;
+shared circuits and new representations remain outside that obstruction.
+The next discriminator is an actual cheaper conversion or a new integer
+assembly loading the changed basis directly.
+
+Complete scaled Gaussian polynomial recovery is independently accepted
+under its exact product and full-array error hypotheses. A uniform-endpoint
+recursive rounding lemma needs only additive logarithmic injection-count
+and linear-depth reserves. Literal canonical and noncanonical bank replays
+pass. Native arithmetic, every address route and outer integer assembly
+remain open; growing zeta norms require a separately derived extension.
+
+Zeta ancestry controls invalidate inference from final matrix zeros to
+forbidden computational paths. Eleven-gate width-three row searches remain
+UNKNOWN or heuristic failures, with no general twelve-gate lower bound.
+Tiny exact controls and a strict nonzero-unit verifier are retained. New
+activity-compaction and geometric-width precision hypotheses are being
+tested separately; their full routing and child distribution will decide
+whether they can supply a strict paid moment.
+
 ## Thirteenth checkpoint: row geometry, products and zeta primitives
 
 The [aligned row pool](obstructions/aligned-guard-row-lifecycle.md) splits

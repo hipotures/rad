@@ -21,6 +21,33 @@ The goal is a structural route to a conditional integer-multiplication exponent 
 
 ## Current structural checkpoint
 
+The fourteenth checkpoint adds a [weighted-union product basis](reports/complex/weighted-union-product-basis.md).
+Its exact direct form incidences fall from `4^s` to `3^s`, while the
+conversion from canonical inputs remains paid. The
+[canonical slice boundary](reports/complex/product-slice-wire-boundary.md)
+also survives sufficiently small fixed-coefficient perturbations; it does
+not constrain arbitrary shared evaluation circuits.
+
+[Rounded product recovery](reports/obstructions/rounded-product-coefficient-recovery.md)
+has complete Gaussian polynomial controls and an
+[independent analytical review](reports/transfers/rounded-product-independent-review.md).
+The [recursive rounding contract](reports/transfers/unitary-rounding-depth-contract.md)
+controls full intermediate banks under uniform endpoint norm assumptions.
+Its local replays include a noncanonical unitary family and a retained-bank
+counterexample to premature scratch projection. These are numerical and
+recovery interfaces; native execution and a larger exponent remain open.
+
+[Zeta ancestry controls](reports/obstructions/zeta-dependency-ancestry-scope.md)
+separate final zero coefficients from persistent computational paths.
+[Reversible row searches](reports/synthesis/reversible-zeta-row-search.md)
+retain exact tiny controls, unresolved solver outcomes and failed beams.
+They do not prove an eleven-gate construction or a general twelve-gate
+minimum. The [versioned verifier repair](reports/synthesis/reversible-zeta-row-guard-repair.md)
+rejects zero and odd-norm scales without replacing the original evidence.
+The registry contains 148 bounded checks; the current
+[validation record](runs/20261009T065212Z-checkpoint-fourteen-validation/report.md)
+binds their actual source identities and historical recovery scope.
+
 The thirteenth checkpoint adds a [corrected old-row split](reports/obstructions/aligned-guard-row-lifecycle.md)
 that retains complete fresh guard cubes without an initial exponentially
 large row stock. Its [independent review](reports/transfers/aligned-guard-row-independent-review.md)
@@ -94,7 +121,7 @@ and [ballot role budgets](reports/complex/ballot-center-review-and-role-budget.m
 locate costs that consume proposed gains. Their exclusions apply only to
 the stated constructions and ledgers. A full shared chronology, native
 payload routing and complete multiplication transfer remain active work.
-The registry currently contains 140 bounded checks; checkpoint receipts record
+The registry currently contains 148 bounded checks; checkpoint receipts record
 their actual validation results. No large graph is allocated merely
 to evaluate an optimistic cost profile.
 

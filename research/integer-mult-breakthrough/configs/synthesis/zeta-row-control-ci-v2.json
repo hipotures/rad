@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "source_sha256": {
+    "code/synthesis/verify_zeta_row_controls_v2.py": "6c00f045ca775b9eb934eeb59283b1bacab7b74972a79a0783cfac22eb0366b1",
+    "code/synthesis/verify_zeta_row_controls.py": "9514e482e72df80828021ac19239e41232abae28d3151fdd92f6060a7b8c131a"
+  },
+  "input_sha256": {
+    "fixtures/synthesis/reversible-zeta-small-controls.json": "43ffb312611ecfade9a08fbbb630ceaa06afae11d3b7f7b2744b9c95d33a3145"
+  },
+  "standard_library_only": true,
+  "invocation_from_repository_root": "python3 -B research/integer-mult-breakthrough/code/synthesis/verify_zeta_row_controls_v2.py",
+  "expected": {
+    "status": "PASS NONZERO-UNIT ROW CONTROLS V2",
+    "explicit_nonunit_controls_rejected": [
+      "zero",
+      "odd-real-norm",
+      "odd-Gaussian-norm"
+    ],
+    "historical_accepted_operators_unchanged": true
+  },
+  "previous_config": "configs/synthesis/zeta-row-control-ci.json",
+  "previous_config_sha256": "0f122db142c66de876939ea466f17f384530318d254477f66232f60ca23b4b33"
+}

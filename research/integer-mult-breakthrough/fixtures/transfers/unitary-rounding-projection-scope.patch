@@ -1,0 +1,31 @@
+--- a/research/integer-mult-breakthrough/code/transfers/unitary_rounding_depth.py
++++ b/research/integer-mult-breakthrough/code/transfers/unitary_rounding_depth.py
+@@ -132,7 +132,7 @@
+                 injections += 4*size
+             else:
+                 grid += 1
+-        if early_projection and index == 0:
++        if early_projection and index == 1:
+             values[0] = [(0, 0)]*size
+         if not fixed:
+             values, grid = reduced_reference(values, grid)
+@@ -287,8 +287,8 @@
+     data = [[(0, 0)]*size, [(int(x == 0), 0) for x in range(size)]]
+     wanted, wanted_grid, _ = apply(data, 0, gates)
+     broken, broken_grid, _ = apply(data, 0, gates, early_projection=True)
+-    if exact_equal(wanted, wanted_grid, broken, broken_grid):
+-        raise AssertionError('Premature projection negative did not discriminate')
++    if exact_equal([wanted[1]], wanted_grid, [broken[1]], broken_grid):
++        raise AssertionError('Premature projection did not corrupt the retained dirty bank')
+     return dict(status='PASS LITERAL UNITARY RECURSION ROUNDING DEPTH',width=width,
+                 family=family,coefficient_addresses=size,dirty_banks=2,Gaussian_fields=4,
+                 selected_target_precision=target_precision,fixed_fractional_grid=q,
+@@ -297,7 +297,7 @@
+                 inverse_injections_also_paid=injections,uniform_local_scalar_norm_upper=2,
+                 unresolved_scalar_gates_per_depth_upper=4,prefix_tail_norm_upper=str(tail_factor),
+                 forward_and_undo_l2_error_upper_units_of_grid_q=str(bound),
+-                premature_zero_bank_projection='REJECTED',matrix_certificate=certificate,
++                premature_zero_bank_projection='REJECTED ON RETAINED BANK',matrix_certificate=certificate,
+                 seed=seed,fields=rows,seconds=time.monotonic()-started,
+                 no_native_time_or_orbit_layout=True,no_faster_supplier=True,new_exponent=False)
+ 

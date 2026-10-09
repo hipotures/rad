@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "protocol": {
+    "created_utc": "2026-10-09T05:57:34.662625+00:00",
+    "workers": 4,
+    "native_threads_each": 1,
+    "tasks": [
+      [
+        2,
+        3,
+        false,
+        120.0,
+        71
+      ],
+      [
+        2,
+        4,
+        false,
+        120.0,
+        81
+      ],
+      [
+        3,
+        11,
+        false,
+        120.0,
+        91
+      ],
+      [
+        3,
+        11,
+        true,
+        120.0,
+        101
+      ]
+    ],
+    "source_sha256": {
+      "zeta_binary_row_sat.py": "0f9294fa221e6a6e227cfd6b40acdf3e7fbe1842655331b90984025ff731a2ba",
+      "zeta_reversible_row_sat.py": "89d24a35406f7340411affb24e455187e3d8a882be46ab71f8838370714b56af"
+    },
+    "solver_package_version": "4.15.4.0",
+    "solver_version": "4.15.4.0",
+    "hypothesis": "A packed binary necessary relaxation can discriminate integer row words from the dyadic escape left by F3/F9 timeouts.",
+    "resource_preflight": {
+      "aggregate_memory_bytes_upper": 2147483648
+    }
+  },
+  "command_from_research_root": "env/bin/python code/synthesis/zeta_binary_row_sat.py --workers 4 --timeout 120 --output work/synthesis/<fresh-run>/results",
+  "dependency_config": "configs/synthesis/zeta-row-search-dependencies.json",
+  "scientific_status": "Discovery/finite solver evidence. Timeout and bounded beam failure are not exclusions.",
+  "expected_control": "h2 three integer gates impossible; h2 four gates independently exact. h3 minimum remains unestablished."
+}

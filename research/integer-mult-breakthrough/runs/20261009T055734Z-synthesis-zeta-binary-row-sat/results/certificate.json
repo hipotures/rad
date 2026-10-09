@@ -1,0 +1,273 @@
+{
+  "cases": [
+    {
+      "h": 2,
+      "arithmetic_gate_budget": 3,
+      "field": "F2=GaussianIntegers/(1+i)",
+      "fixed_labeled_endpoint": false,
+      "baseline_gate_count": 4,
+      "solver_result": "unsat",
+      "timeout_seconds": 120.0,
+      "random_seed": 71,
+      "smt_problem_sha256": "e0d9c71c39ba1e2bd392b066587678cbb90e38aec9469f92cb7f95f637ddf8b3",
+      "smt_problem_bytes": 5735,
+      "statistics": {
+        "sat mk var": 216,
+        "solve-eqs-steps": 208,
+        "solve-eqs-elim-vars": 16,
+        "sat mk clause 2ary": 239,
+        "sat mk clause nary": 659,
+        "sat del clause": 6,
+        "sat conflicts": 20,
+        "sat decisions": 62,
+        "sat propagations 2ary": 656,
+        "sat propagations nary": 832,
+        "sat minimized lits": 16,
+        "sat units": 26,
+        "sat backjumps": 19,
+        "sat elim clauses": 3,
+        "sat elim literals": 7,
+        "num allocs": 82383,
+        "rlimit count": 8293,
+        "max memory": 25.29,
+        "memory": 17.02,
+        "time": 0.005
+      },
+      "scope": "Necessary only for Gaussian-integer row additions and Gaussian integer unit scales, with stated final permutation. Dyadic divisions by(1+i) or2 remain open; UNSAT is an unverified finite solver result, not a native time lower bound.",
+      "seconds": 0.017172776999359485
+    },
+    {
+      "h": 2,
+      "arithmetic_gate_budget": 4,
+      "field": "F2=GaussianIntegers/(1+i)",
+      "fixed_labeled_endpoint": false,
+      "baseline_gate_count": 4,
+      "solver_result": "sat",
+      "timeout_seconds": 120.0,
+      "random_seed": 81,
+      "smt_problem_sha256": "50908ddf8a2a22f575bd546592571a4d016950ca1230bfa81ef89e445d81062e",
+      "smt_problem_bytes": 7571,
+      "statistics": {
+        "sat mk var": 299,
+        "solve-eqs-steps": 262,
+        "solve-eqs-elim-vars": 20,
+        "sat mk clause 2ary": 296,
+        "sat mk clause nary": 1022,
+        "sat del clause": 6,
+        "sat conflicts": 84,
+        "sat decisions": 137,
+        "sat propagations 2ary": 2539,
+        "sat propagations nary": 5028,
+        "sat minimized lits": 114,
+        "sat subs resolution dyn": 2,
+        "sat units": 6,
+        "sat backjumps": 84,
+        "sat elim clauses": 3,
+        "sat elim literals": 7,
+        "num allocs": 99310,
+        "rlimit count": 16269,
+        "max memory": 25.33,
+        "memory": 17.06,
+        "time": 0.005
+      },
+      "scope": "Necessary only for Gaussian-integer row additions and Gaussian integer unit scales, with stated final permutation. Dyadic divisions by(1+i) or2 remain open; UNSAT is an unverified finite solver result, not a native time lower bound.",
+      "gates": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          3,
+          1
+        ],
+        [
+          2,
+          3,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ]
+      ],
+      "arithmetic_gate_count": 4,
+      "exact_sign_lift": {
+        "status": "EXACT GAUSSIAN INTEGER WORD WITH DYADIC UNIT ENDPOINTS",
+        "gates": [
+          [
+            0,
+            1,
+            [
+              1,
+              0
+            ]
+          ],
+          [
+            1,
+            3,
+            [
+              1,
+              0
+            ]
+          ],
+          [
+            2,
+            3,
+            [
+              1,
+              0
+            ]
+          ],
+          [
+            0,
+            2,
+            [
+              1,
+              0
+            ]
+          ]
+        ],
+        "endpoint_row_permutation_and_scalars": [
+          [
+            0,
+            [
+              1,
+              0
+            ],
+            0
+          ],
+          [
+            1,
+            [
+              1,
+              0
+            ],
+            0
+          ],
+          [
+            2,
+            [
+              1,
+              0
+            ],
+            0
+          ],
+          [
+            3,
+            [
+              1,
+              0
+            ],
+            0
+          ]
+        ],
+        "arithmetic_gate_count": 4,
+        "source_grid_bits": 0,
+        "scope": "Exact finite lifted row word; tensor activity compaction and native recurrence remain open.",
+        "sign_assignments_tested": 1
+      },
+      "seconds": 0.0184646839989
+    },
+    {
+      "h": 3,
+      "arithmetic_gate_budget": 11,
+      "field": "F2=GaussianIntegers/(1+i)",
+      "fixed_labeled_endpoint": false,
+      "baseline_gate_count": 12,
+      "solver_result": "unknown",
+      "timeout_seconds": 120.0,
+      "random_seed": 91,
+      "smt_problem_sha256": "a3a04f047bb8f2526b55685c08255e01973f5868d1d106ff0ddb30b4a98fa189",
+      "smt_problem_bytes": 60626,
+      "statistics": {
+        "sat mk var": 2753,
+        "solve-eqs-steps": 1428,
+        "solve-eqs-elim-vars": 96,
+        "sat mk clause 2ary": 2799,
+        "sat mk clause 3ary": 1943,
+        "sat mk clause nary": 1620711,
+        "sat gc clause": 1506275,
+        "sat del clause": 1536766,
+        "sat conflicts": 1604607,
+        "sat decisions": 2794187,
+        "sat propagations 2ary": 60411903,
+        "sat propagations nary": 353211442,
+        "sat restarts": 115148,
+        "sat minimized lits": 49677431,
+        "sat subs resolution dyn": 1847703,
+        "sat units": 21,
+        "sat elim bool vars res": 1240,
+        "sat backjumps": 1604607,
+        "sat elim clauses": 86,
+        "sat elim literals": 118357,
+        "sat subsumed": 6519,
+        "sat subs resolution": 45249,
+        "sat bce": 100,
+        "sat ate": 645,
+        "sat scc elim vars": 31,
+        "sat scc elim binary": 121,
+        "sat tr": 138,
+        "num allocs": 2355092028,
+        "rlimit count": 377279810,
+        "max memory": 56.41,
+        "memory": 17.5,
+        "time": 120.002
+      },
+      "scope": "Necessary only for Gaussian-integer row additions and Gaussian integer unit scales, with stated final permutation. Dyadic divisions by(1+i) or2 remain open; UNSAT is an unverified finite solver result, not a native time lower bound.",
+      "reason_unknown": "timeout",
+      "seconds": 120.0374440960004
+    },
+    {
+      "h": 3,
+      "arithmetic_gate_budget": 11,
+      "field": "F2=GaussianIntegers/(1+i)",
+      "fixed_labeled_endpoint": true,
+      "baseline_gate_count": 12,
+      "solver_result": "unknown",
+      "timeout_seconds": 120.0,
+      "random_seed": 101,
+      "smt_problem_sha256": "3451a51a66ee59766954cd144011b0c6234272e815e8d3ea4877ebe1940df651",
+      "smt_problem_bytes": 59354,
+      "statistics": {
+        "sat mk var": 2593,
+        "solve-eqs-steps": 1266,
+        "solve-eqs-elim-vars": 96,
+        "sat mk clause 2ary": 2610,
+        "sat mk clause 3ary": 2068,
+        "sat mk clause nary": 1560848,
+        "sat gc clause": 1460311,
+        "sat del clause": 1493489,
+        "sat conflicts": 1545130,
+        "sat decisions": 2674273,
+        "sat propagations 2ary": 70778422,
+        "sat propagations nary": 346158461,
+        "sat restarts": 112261,
+        "sat minimized lits": 38179349,
+        "sat subs resolution dyn": 839827,
+        "sat units": 17,
+        "sat elim bool vars res": 1270,
+        "sat backjumps": 1545130,
+        "sat elim clauses": 49,
+        "sat elim literals": 57725,
+        "sat subsumed": 8211,
+        "sat subs resolution": 60386,
+        "sat bce": 100,
+        "sat ate": 603,
+        "sat scc elim vars": 22,
+        "sat scc elim binary": 58,
+        "sat tr": 79,
+        "num allocs": 1747253560,
+        "rlimit count": 370386212,
+        "max memory": 52.46,
+        "memory": 18.79,
+        "time": 120.009
+      },
+      "scope": "Necessary only for Gaussian-integer row additions and Gaussian integer unit scales, with stated final permutation. Dyadic divisions by(1+i) or2 remain open; UNSAT is an unverified finite solver result, not a native time lower bound.",
+      "reason_unknown": "timeout",
+      "seconds": 120.04169110700605
+    }
+  ]
+}
