@@ -572,3 +572,44 @@ The old ordinary routing exponent caps the unchanged direct ledger; it is
 not a generic lower bound. A compatible improved ordinary supplier can change
 that premise. The eleven-gate Z3 word and non-power-of-two child dispatch are
 still missing, and a selected-width saving is not a final kappa.
+
+## Seventeenth checkpoint: endpoints and shared cap channels
+
+The maximum admissible rational endpoint, rather than only the minimum,
+produces a genuine fixed-port candidate in PR163 operation23272. Three block
+copies change widths `(4,1,2,15)` to `(5,3,14)` while conserving rank66,
+stock and deficit. An independent review proves a strict ideal power gain
+throughout `[0.999,1)`; the general star Gram determinant is four and its
+inverse is dyadic. This is useful evidence for endpoint selection and
+connected block search. The continuation criterion is a paid local-ring
+physical implementation with compatible chronological neighboring frames,
+then an updated global profile and transfer. No global root or kappa is
+inferred from this one cut.
+
+The five-coordinate paired cube has an exact paid scalar bank word and
+nondegenerate pair-star centers. A fully counted independent-edge side
+recipe at p9 fails complex saving0.0001: its moment lower bound already
+exceeds one, and its necessary saving is below approximately4.60e-6.
+Larger dimension alone therefore does not justify a parameter sweep. The
+changed hypothesis is shared cap-compatible materialization with actual
+common frames, not free dense scalar channels.
+
+The low-selector identity removes half the algebraic selector space, but
+naively expanding original source lines to complete cube frames introduces
+an extra two rank units per source/core and destroys the proposed deficit.
+The separate cap analysis gives exact finite integral decoders and the
+all-odd rank formula
+`R_j=sum_{a=max(0,j-r)}^{min(j,r)} binomial(j,a)` for k=2r+1.
+Distinct retained cap classes total
+`S_k=3^k-2 sum_{a=r+1}^k binomial(k,a)2^(k-a)`, asymptotically3^k.
+Their joint row space still has dimension2^(k-1). These are algebraic class
+counts, not universal physical-role lower bounds. Separate reversible
+completions at k5 park70 additional kernel directions and keep211 raw
+slots. The next decisive test must bind shared images, retained kernels,
+dirty reversal and simultaneous actual target representatives.
+
+Independent good-ring controls preserve the rational completion proof's
+scope. Unrestricted finite-ring Lorentz radical assumptions fail explicit
+prime-power examples. Native weighted compilers, exceptional classes,
+precision and all-size row setup remain separate interfaces. These results
+are exact components and scoped negatives, not a new multiplication theorem.

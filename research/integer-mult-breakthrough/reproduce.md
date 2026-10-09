@@ -43,6 +43,41 @@ evidence is packed into this topic's evidence namespaces without altering
 originals. Run protocols, compact summaries and source hashes distinguish
 retained finite evidence from analytical assumptions.
 
+## Maximum endpoints, paired-five words and cap channels
+
+The seventeenth checkpoint adds eight standard-library checks, for 170 total.
+From the repository root:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/paired_five_cube_discriminator.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/paired_five_complete_baseline.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/paired_cube_low_channel_boundary.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_rational_frame_block.py
+python3 -B research/integer-mult-breakthrough/code/transfers/rational_completion_modular_review.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/rational_chain_candidate_review.py
+python3 -B research/integer-mult-breakthrough/code/obstructions/paired_cube_cap_channels.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/paired_cube_cap_channel_census.py --workers 1 --bounded
+```
+
+Expected results are exact PASS receipts, including explicit scope-limited
+negative conclusions and adverse controls. The maximum endpoint changes one
+actual rational operation cut and all three block copies: twelve children
+become nine and rank remains 66 locally. Its complete profile rank remains
+1,934,000 with deficit 1,936. Neither this finite improvement nor the all-size
+star inverse proves an improved native bit supplier or multiplier exponent.
+The independent modular reviewer uses good-prime-power matrices as controls,
+not indiscriminate finite-ring completion or a field-only sampler.
+
+Removing `--bounded` regenerates the complete paired-five and cap experiments;
+the scientific reports specify their four-worker commands and exact cases.
+Always choose a new output path. All original runs and raw text have complete
+gzip copies indexed by
+[seventeenth recovery metadata](configs/recovery/checkpoint-seventeen-artifacts.json).
+Sources and fixtures remain readable. The connected-block discovery inventory
+records its heuristic shape filter and tested subset; its single positive
+candidate is not a global optimum. No frozen external package is required to
+run these bounded checks.
+
 ## Independent PR163 reviews and rational frame completion
 
 The sixteenth checkpoint adds seven checks, bringing the registry to 162.

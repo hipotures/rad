@@ -1,0 +1,3 @@
+# Exact cap-compatible cross-cube channels
+
+The full three-task/four-worker integer-rational discriminator passes for k=3,5,7 in0.282743 seconds. Raw channel counts19,211,2059 reduce algebraically to13,141,1429 independent actual-row channels within common parity/cap flags. Every retained decoder coefficient is integral. Literal complete source supports satisfy each target cap; full-cube expansion must reject at nonempty overlap. No physical channel stock, scalar word, native bill or exponent is asserted. See the source/configuration and [analytical report](../../reports/obstructions/paired-cube-cap-compatible-channels.md).

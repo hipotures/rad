@@ -1,0 +1,394 @@
+{
+  "status": "PASS exact paired-five scalar-bank/center discriminator",
+  "source_sha256": "720cf5d50d3afe4072a91ab013a5516e1cd28f3902b04edc608aefe5257c49c8",
+  "started_utc": "2026-10-09T08:56:09.686198+00:00",
+  "completed_utc": "2026-10-09T08:56:10.162574+00:00",
+  "seconds": 0.47637391700118314,
+  "workers": 1,
+  "bounded": true,
+  "scalar_words": [
+    {
+      "k": 3,
+      "banks_per_parity": 4,
+      "gates_per_parity": 31,
+      "forward_and_inverse_gates_per_source": "31/2",
+      "additions_per_parity": 16,
+      "scales_per_parity": 15,
+      "prefix": {
+        "row_l1": "8",
+        "fractional_bits": 1,
+        "includes_all_multiplication_temporaries": true
+      },
+      "inverse_prefix": {
+        "row_l1": "8",
+        "fractional_bits": 1,
+        "includes_all_multiplication_temporaries": true
+      },
+      "row_l1": "2",
+      "nonzero_amplitudes": [
+        "1/2"
+      ],
+      "flat_nonzero_columns": true,
+      "exact_scalar_columns": 32,
+      "dirty_gaussian_components": 32,
+      "all_sources_return": true,
+      "common_parity_frame_rank": 3,
+      "common_parity_radical": 2,
+      "omitted_normalization_rejected": true,
+      "schedule": "Both parity blocks stay in their own identical actual source frame; their output rows are assigned to opposite target caps. Apply the inverse within original slots at the common full frame before source cleanup.",
+      "scope": "Exact fixed scalar-bank word and parity geometry; no native frame/record execution or complete side word"
+    },
+    {
+      "k": 5,
+      "banks_per_parity": 16,
+      "gates_per_parity": 219,
+      "forward_and_inverse_gates_per_source": "219/8",
+      "additions_per_parity": 128,
+      "scales_per_parity": 91,
+      "prefix": {
+        "row_l1": "64",
+        "fractional_bits": 3,
+        "includes_all_multiplication_temporaries": true
+      },
+      "inverse_prefix": {
+        "row_l1": "32",
+        "fractional_bits": 3,
+        "includes_all_multiplication_temporaries": true
+      },
+      "row_l1": "7/2",
+      "nonzero_amplitudes": [
+        "1/8",
+        "3/8"
+      ],
+      "flat_nonzero_columns": false,
+      "exact_scalar_columns": 512,
+      "dirty_gaussian_components": 128,
+      "all_sources_return": true,
+      "common_parity_frame_rank": 5,
+      "common_parity_radical": 4,
+      "omitted_normalization_rejected": true,
+      "schedule": "Both parity blocks stay in their own identical actual source frame; their output rows are assigned to opposite target caps. Apply the inverse within original slots at the common full frame before source cleanup.",
+      "scope": "Exact fixed scalar-bank word and parity geometry; no native frame/record execution or complete side word"
+    }
+  ],
+  "center_cases": [
+    {
+      "p": 7,
+      "h": 14,
+      "k": 5,
+      "v": 672,
+      "centers": 84,
+      "center_rank_histogram": {
+        "10": 84
+      },
+      "center_radical_histogram": {
+        "0": 84
+      },
+      "copied_center_loss": 840,
+      "center_decoder_denominator": 160,
+      "new_fixed_odd_divisor": 5,
+      "exact_decoder_entries": 451584,
+      "complete_central_matrix": true,
+      "representative_centers": [
+        {
+          "coordinates": [
+            0,
+            2
+          ],
+          "basis": [
+            8197,
+            4101,
+            2053,
+            1029,
+            517,
+            261,
+            133,
+            69,
+            37,
+            21
+          ]
+        },
+        {
+          "coordinates": [
+            0,
+            3
+          ],
+          "basis": [
+            8201,
+            4105,
+            2057,
+            1033,
+            521,
+            265,
+            137,
+            73,
+            41,
+            25
+          ]
+        }
+      ],
+      "deficit_if_shared_ledger_holds": -1176,
+      "source_geodesic_widths": [
+        4,
+        8,
+        1
+      ],
+      "scope": "Exact pair-star spans and central scalar decoder. Copied-center, side and whole shared-core chronology remain hypotheses."
+    }
+  ],
+  "capacity_sensitivity": [
+    {
+      "p": 8,
+      "h": 16,
+      "v": 1792,
+      "centers": 112,
+      "loss": 1344,
+      "deficit": -448,
+      "target_b": 0.0001,
+      "necessary_max_physical_R_over_v": -46.78040335915056,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 8,
+      "h": 16,
+      "v": 1792,
+      "centers": 112,
+      "loss": 1344,
+      "deficit": -448,
+      "target_b": 0.001,
+      "necessary_max_physical_R_over_v": -6.4803845857064095,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 8,
+      "h": 16,
+      "v": 1792,
+      "centers": 112,
+      "loss": 1344,
+      "deficit": -448,
+      "target_b": 0.01,
+      "necessary_max_physical_R_over_v": -2.4503872064728944,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 9,
+      "h": 18,
+      "v": 4032,
+      "centers": 144,
+      "loss": 2016,
+      "deficit": 2016,
+      "target_b": 0.0001,
+      "necessary_max_physical_R_over_v": 78.11791896525236,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 9,
+      "h": 18,
+      "v": 4032,
+      "centers": 144,
+      "loss": 2016,
+      "deficit": 2016,
+      "target_b": 0.001,
+      "necessary_max_physical_R_over_v": 6.015959446072282,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 9,
+      "h": 18,
+      "v": 4032,
+      "centers": 144,
+      "loss": 2016,
+      "deficit": 2016,
+      "target_b": 0.01,
+      "necessary_max_physical_R_over_v": -1.1942285599419802,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 10,
+      "h": 20,
+      "v": 8064,
+      "centers": 180,
+      "loss": 2880,
+      "deficit": 7488,
+      "target_b": 0.0001,
+      "necessary_max_physical_R_over_v": 132.59435739069912,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 10,
+      "h": 20,
+      "v": 8064,
+      "centers": 180,
+      "loss": 2880,
+      "deficit": 7488,
+      "target_b": 0.001,
+      "necessary_max_physical_R_over_v": 11.466401492967188,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 10,
+      "h": 20,
+      "v": 8064,
+      "centers": 180,
+      "loss": 2880,
+      "deficit": 7488,
+      "target_b": 0.01,
+      "necessary_max_physical_R_over_v": -0.6463808831914628,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 11,
+      "h": 22,
+      "v": 14784,
+      "centers": 220,
+      "loss": 3960,
+      "deficit": 17688,
+      "target_b": 0.0001,
+      "necessary_max_physical_R_over_v": 156.31134542672098,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 11,
+      "h": 22,
+      "v": 14784,
+      "centers": 220,
+      "loss": 3960,
+      "deficit": 17688,
+      "target_b": 0.001,
+      "necessary_max_physical_R_over_v": 13.839293722790787,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 11,
+      "h": 22,
+      "v": 14784,
+      "centers": 220,
+      "loss": 3960,
+      "deficit": 17688,
+      "target_b": 0.01,
+      "necessary_max_physical_R_over_v": -0.40789603436367083,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 12,
+      "h": 24,
+      "v": 25344,
+      "centers": 264,
+      "loss": 5280,
+      "deficit": 34848,
+      "target_b": 0.0001,
+      "necessary_max_physical_R_over_v": 165.35701126146623,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 12,
+      "h": 24,
+      "v": 25344,
+      "centers": 264,
+      "loss": 5280,
+      "deficit": 34848,
+      "target_b": 0.001,
+      "necessary_max_physical_R_over_v": 14.744296674086687,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 12,
+      "h": 24,
+      "v": 25344,
+      "centers": 264,
+      "loss": 5280,
+      "deficit": 34848,
+      "target_b": 0.01,
+      "necessary_max_physical_R_over_v": -0.3169586032296674,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 14,
+      "h": 28,
+      "v": 64064,
+      "centers": 364,
+      "loss": 8736,
+      "deficit": 101920,
+      "target_b": 0.0001,
+      "necessary_max_physical_R_over_v": 164.87932714326797,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 14,
+      "h": 28,
+      "v": 64064,
+      "centers": 364,
+      "loss": 8736,
+      "deficit": 101920,
+      "target_b": 0.001,
+      "necessary_max_physical_R_over_v": 14.696457215005637,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 14,
+      "h": 28,
+      "v": 64064,
+      "centers": 364,
+      "loss": 8736,
+      "deficit": 101920,
+      "target_b": 0.01,
+      "necessary_max_physical_R_over_v": -0.32181381720371416,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 16,
+      "h": 32,
+      "v": 139776,
+      "centers": 480,
+      "loss": 13440,
+      "deficit": 239232,
+      "target_b": 0.0001,
+      "necessary_max_physical_R_over_v": 155.73309145332206,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 16,
+      "h": 32,
+      "v": 139776,
+      "centers": 480,
+      "loss": 13440,
+      "deficit": 239232,
+      "target_b": 0.001,
+      "necessary_max_physical_R_over_v": 13.781333644465894,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    },
+    {
+      "p": 16,
+      "h": 32,
+      "v": 139776,
+      "centers": 480,
+      "loss": 13440,
+      "deficit": 239232,
+      "target_b": 0.01,
+      "necessary_max_physical_R_over_v": -0.4138271730980907,
+      "hypothesis": "A completed three-orthogonal-block ledger with W=2v+R, loss=q(h-4), and maximum child<=h-1; scalar K words add fixed paid L/G work but no extra roles.",
+      "scope": "Floating sensitivity and necessary capacity ceiling only; not a child moment certificate or multiplier kappa"
+    }
+  ],
+  "scope": "Finite scalar words and spans; capacity is explicitly hypothetical and necessary only. No whole side/native supplier, child profile or kappa claim."
+}

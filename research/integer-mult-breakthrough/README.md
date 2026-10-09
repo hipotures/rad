@@ -21,6 +21,37 @@ The goal is a structural route to a conditional integer-multiplication exponent 
 
 ## Current structural checkpoint
 
+The seventeenth checkpoint has an independently reviewed
+[maximum-endpoint frame replacement](reports/synthesis/rational-frame-block-maximum-endpoint.md)
+inside the fixed PR163 operation ports. Its three-block child count decreases
+from twelve to nine with unchanged rank mass, scalar stock and deficit.
+The [independent star-frame review](reports/transfers/rational-chain-star-frame-independent-review.md)
+proves strict ideal improvement throughout `p in [0.999,1)` and a dyadic
+Gram inverse. This is one exact finite geometric candidate; the weighted
+native compiler, global chronology and a new multiplier exponent remain open.
+[Good-ring review](reports/transfers/rational-completion-odd-ring-independent-review.md)
+retains exact modular controls and counterexamples to unrestricted finite-ring
+completion assumptions.
+
+The [paired-five scalar word and complete side baseline](reports/complex/paired-five-cube-scalar-and-side-baseline.md)
+provide positive local components and a decisive negative full profile.
+That independent-edge recipe cannot attain complex saving `b>=0.0001`.
+[Low-selector channels](reports/complex/paired-cube-low-selector-boundary.md)
+identify a shared algebraic space, but a naive dense frame excursion destroys
+the deficit. [Cap-compatible channels](reports/obstructions/paired-cube-cap-compatible-channels.md)
+give exact finite decoders and an all-odd census: separate cap classes grow
+like `3^k`, while their combined row space has dimension `2^(k-1)`.
+Independent reversible completions still retain their kernel parking.
+Sharing these banks requires an actual dirty word with simultaneous target
+frames; neither the algebraic rank nor a capacity estimate supplies it.
+
+The registry now contains 170 bounded checks. The previous sixteenth commit's
+[remote CI](https://github.com/hipotures/rad/actions/runs/37908440888)
+passed all ten jobs. All170 checks pass on321 unchanged effective inputs; the
+[validation record](runs/20261009T093607Z-checkpoint-seventeen-validation/report.md) and chronological recovery inventory
+bind the exact scope and complete original archives.
+No larger campaign kappa is asserted.
+
 The sixteenth checkpoint records [external PR163 reproduction](reports/obstructions/pr163-reproduction-and-scope.md)
 at exact revision `15c702a929b7d640107a95e196186ad74e876c82`.
 Its unchanged author aggregate passes, with all 1,678 source pins unchanged.

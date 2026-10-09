@@ -1,0 +1,241 @@
+{
+  "status": "PASS complete paired-five baseline exclusion",
+  "started_utc": "2026-10-09T08:56:10.207188+00:00",
+  "completed_utc": "2026-10-09T08:56:10.338275+00:00",
+  "seconds": 0.13108236799598671,
+  "workers": 1,
+  "bounded": true,
+  "source_sha256": {
+    "paired_five_complete_baseline.py": "ccd35b2c0974b900a901482145c044e9969fc8185008ef31e2bf84482c29e55c",
+    "paired_five_cube_discriminator.py": "720cf5d50d3afe4072a91ab013a5516e1cd28f3902b04edc608aefe5257c49c8"
+  },
+  "result": {
+    "p": 7,
+    "h": 14,
+    "v": 672,
+    "m": 42,
+    "physical_side_roles": 215040,
+    "physical_center_copy_roles": 6720,
+    "all_auxiliary_roles": 221760,
+    "W": 223104,
+    "complete_rank": 9371544,
+    "deficit": -1176,
+    "side_rows": 672,
+    "side_edges_per_row": 320,
+    "exact_scalar_source_pairs": 451584,
+    "side_coefficients_over8": {
+      "-3": 53760,
+      "1": 161280
+    },
+    "local_histogram": {
+      "1": 437640,
+      "12": 215124,
+      "2": 168,
+      "11": 168,
+      "3": 336,
+      "10": 420,
+      "4": 3108,
+      "9": 3024,
+      "5": 2352,
+      "8": 2352,
+      "6": 672,
+      "7": 672
+    },
+    "original_source_histogram": {
+      "4": 672,
+      "8": 672,
+      "1": 672
+    },
+    "target_histogram": {
+      "13": 672
+    },
+    "complete_child_histogram": {
+      "1": 1314936,
+      "12": 645372,
+      "2": 1848,
+      "11": 504,
+      "3": 1008,
+      "10": 1260,
+      "4": 11340,
+      "9": 9072,
+      "5": 7056,
+      "8": 9072,
+      "6": 2016,
+      "7": 2016,
+      "13": 2016
+    },
+    "copied_center_loss": 840,
+    "maximum_child": 13,
+    "center_tree": {
+      "roles": 6720,
+      "literal_additions": 6636,
+      "centers": 84,
+      "copied_loss": 840,
+      "local_histogram": {
+        "1": 7560,
+        "12": 84,
+        "2": 168,
+        "11": 168,
+        "3": 336,
+        "10": 420,
+        "4": 3108,
+        "9": 3024,
+        "5": 2352,
+        "8": 2352,
+        "6": 672,
+        "7": 672
+      },
+      "examples": [
+        {
+          "pair": [
+            0,
+            2
+          ],
+          "input_count": 80,
+          "input_prefix": [
+            0,
+            4,
+            8,
+            12,
+            16,
+            20,
+            24,
+            28
+          ],
+          "prefix_ranks": [
+            1,
+            2,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6,
+            6
+          ],
+          "final_span": [
+            8197,
+            4101,
+            2053,
+            1029,
+            517,
+            261,
+            133,
+            69,
+            37,
+            21
+          ]
+        },
+        {
+          "pair": [
+            0,
+            3
+          ],
+          "input_count": 80,
+          "input_prefix": [
+            2,
+            6,
+            10,
+            14,
+            18,
+            22,
+            26,
+            30
+          ],
+          "prefix_ranks": [
+            1,
+            2,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6,
+            6
+          ],
+          "final_span": [
+            8201,
+            4105,
+            2057,
+            1033,
+            521,
+            265,
+            137,
+            73,
+            41,
+            25
+          ]
+        }
+      ],
+      "chronology": "For each pair in lexicographic order, inject all its independent source copies at their own lines before original-source mutation. Grow pivot and next copy to their actual span union, add the copy into pivot, retire the copy at full; root is copied at rankh\u22124 and then pivot reaches full. Reverse all sums at common full before source-copy subtraction."
+    },
+    "K_word": {
+      "k": 5,
+      "banks_per_parity": 16,
+      "gates_per_parity": 219,
+      "forward_and_inverse_gates_per_source": "219/8",
+      "additions_per_parity": 128,
+      "scales_per_parity": 91,
+      "prefix": {
+        "row_l1": "64",
+        "fractional_bits": 3,
+        "includes_all_multiplication_temporaries": true
+      },
+      "inverse_prefix": {
+        "row_l1": "32",
+        "fractional_bits": 3,
+        "includes_all_multiplication_temporaries": true
+      },
+      "row_l1": "7/2",
+      "nonzero_amplitudes": [
+        "1/8",
+        "3/8"
+      ],
+      "flat_nonzero_columns": false,
+      "exact_scalar_columns": 512,
+      "dirty_gaussian_components": 128,
+      "all_sources_return": true,
+      "common_parity_frame_rank": 5,
+      "common_parity_radical": 4,
+      "omitted_normalization_rejected": true,
+      "schedule": "Both parity blocks stay in their own identical actual source frame; their output rows are assigned to opposite target caps. Apply the inverse within original slots at the common full frame before source cleanup.",
+      "scope": "Exact fixed scalar-bank word and parity geometry; no native frame/record execution or complete side word"
+    },
+    "complete_K_forward_inverse_scalar_gates": 18396,
+    "center_and_side_source_injections": 221760,
+    "center_root_scatters": 56448,
+    "side_positive_and_old_correction_reads": 430080,
+    "conservative_complete_scalar_gate_recipe": 1031436,
+    "scalar_recipe_detail": "Four center M/M_inverse passes charge old JM formation and undo as well as signal formation and undo; 2R source copies/subtractions; both signs of every side and center scatter; complete K mutation/inverse. Record routing, phase gauges, scalar bit precision and full native execution are additional bills, not free.",
+    "literal_scalar_dirty_echo": {
+      "complete_gaussian_field_components": 3872,
+      "both_shear_signs": true,
+      "all_scalar_fields_return": true,
+      "missing_old_correction_rejected": true,
+      "scope": "Exact literal sum-tree and independent-edge scalar echoes; no Gaussian address-frame operators"
+    },
+    "all_original_sources_unmutated_before_cleanup": true,
+    "all_auxiliary_dirty_seeds_cancel_by_exact_linear_echo": true,
+    "new_odd_divisor5_requires_reinstantiated_grid": true,
+    "target_component_b": "1/10000",
+    "exact_moment_lower": "79697969/79680000",
+    "exact_target_moment_excess": "17969/79680000",
+    "necessary_b_upper": "-1/7969",
+    "conclusion": "REFUTED at b>=1/10000 within this fully counted independent-edge/independent-center-copy architecture",
+    "scope": "Complete finite scalar recipe and binary/Lagrangian rank ledger under the inherited completed-core lift. Native payload, actual all-size phase/router/grid construction and outer multiplier transfer are not proved."
+  }
+}
