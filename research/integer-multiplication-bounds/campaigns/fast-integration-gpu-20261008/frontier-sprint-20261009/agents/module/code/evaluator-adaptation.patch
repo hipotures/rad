@@ -1,0 +1,131 @@
+--- agents/signed/code/screen_pr168_fd25adb_local.py
++++ agents/module/code/screen_structural_modules.py
+@@ -1,8 +1,8 @@
+ #!/usr/bin/env python3
+-"""Bounded local signed synthesis on the actual PR168 fd25adb sink supplier.
+-
+-RaD; OpenAI GPT-6.1 Sol assistance; Apache-2.0. All native local and
+-module synthesis is retained, including its existing f8:00111100 fold.
++"""Bounded structural modules on the actual PR168 fd25adb sink supplier.
++
++RaD; OpenAI GPT-6.1 Sol assistance; Apache-2.0. Task-owned exact local/triple substitutions retain the native pair,
++all-but-one modules and existing f8:00111100 fold.
+ Changed carrier choices require newly compiled closures, gauges, literal
+ words and physical aliases. No prior source's plan or profile is imported.
+ """
+@@ -24,6 +24,9 @@
+ sys.dont_write_bytecode = True
+ if hasattr(sys, 'set_int_max_str_digits'):
+     sys.set_int_max_str_digits(0)
++
++SIGNED_CODE = Path(__file__).resolve().parents[2]/'signed/code'
++sys.path.insert(0, str(SIGNED_CODE))
+ 
+ import screen_signed_fusion as original_matching
+ from screen_signed_fusion import numerical_root, finite_scalar_bound
+@@ -133,8 +136,8 @@
+                      scope='Each destination-only non-gauged sink has an exact characteristic-zero formal-control identity; full body exact signed/dirty and inverse checks establish the unchanged remainder. Native gate rechecks all eligibility, complete literal reflected frame scans and paid per-class inventory.')
+ 
+ def run(task):
+-    source, export, plan_path, audit_path, interval_path, placement = map(Path, task[:6])
+-    name, target_text, outroot = task[6:]
++    source, export, plan_path, audit_path, interval_path, placement, candidates = map(Path, task[:7])
++    name, target_text, outroot = task[7:]
+     out = Path(outroot)/name
+     out.mkdir()
+     start = time.monotonic()
+@@ -153,12 +156,15 @@
+     from paired_cube import verify as native_verify
+     from paired_cube_physical import physical
+     src = source/'references/paired-cube/sources'
+-    local = json.loads((src/'local_L1.json').read_text())
+-    if name == 'cube_total_face0':local['F'] = 0
+-    elif name == 'cube_total_face1':local['F'] = 1
+-    elif name == 'edge12_fixed_difference':local['G']['1,2,1'] = 's'
++    candidate = candidates/name
++    module_manifest = json.loads((candidates/'manifest.json').read_text())
++    module_checks = module_manifest['variants'][name]
++    for filename, pin in module_checks['exported_pins'].items():
++        need(sha256((candidate/filename).read_bytes()).hexdigest() == pin['sha256'],
++             'task-owned module export pin '+name+'/'+filename)
++    local = json.loads((candidate/'local.json').read_text())
+     builder = Graph(11, local=local)
+-    graph = builder.finish(triple_module_from(src/'tmod_TB31_L1f8_5.9717259e-4.json', 11),
++    graph = builder.finish(triple_module_from(candidate/'triple.json', 11),
+                            pair_module_from(src/'pmod_H56snap_w02_5.6251423e-4.json', 10),
+                            all_but_one_from(src/'qmod_anneal_best01.json', 9))
+     graph = merge_outputs(graph, builder, 'f8:00111100')
+@@ -175,7 +181,8 @@
+     saving = float(target)
+     plan.cost = lambda rank, m: rank*math.expm1(saving*math.log(m/rank))/saving if rank else 0.
+     native_arcs = json.loads((export/'frames.json').read_text())['matching_arcs']
+-    adaptations = {'local_configuration':local}
++    adaptations = dict(local_configuration=local, triple_substitution=str(candidate/'triple.json'),
++                       module_checks=module_checks)
+     native_arcs = json.loads((export/'frames.json').read_text())['matching_arcs']
+     if name == 'control':
+         initial_arcs = native_arcs
+@@ -274,7 +281,10 @@
+     intervals = load_code('rad_changed168_intervals', interval_path)
+     lower, upper = intervals.moment(paid['m'],paid['W_per_vertex'],
+                                    {int(r):n for r,n in paid['child_histogram'].items()},target)
+-    result = dict(status='EXACT_FINITE_CHANGED168_CARRIER_SCREEN',variant=name,source_head=SOURCE_HEAD,
++    binding = {key:graph[key] for key in ('inputs','labels','args','signs','roots','centers')}
++    graph_hash = sha256(json.dumps(binding,separators=(',',':')).encode()).hexdigest()
++    result = dict(status='EXACT_FINITE_STRUCTURAL_MODULE_SCREEN',variant=name,source_head=SOURCE_HEAD,
++                  graph_binding_sha256=graph_hash, graph_counts=graph['counts'],
+                   initial_arcs=len(initial_arcs),matched=len(arcs),added_arcs=len(arcs)-len(initial_arcs),
+                   mapping=mapping,body_profile=body_paid,sink_checks=sink_checks,
+                   adaptations=adaptations,native_verifier_sha256=sha256(text.encode()).hexdigest(),
+@@ -289,7 +299,7 @@
+                                     classification='ACCEPTED' if upper<1 else 'REJECTED' if lower>1 else 'UNRESOLVED'),
+                   scalar_charge=finite_scalar_bound(row,paid),wall_seconds=time.monotonic()-start,
+                   peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+-                  scope='Fresh fd25adb annealed modules and f8 fold, with bounded local synthesis changes. '
++                  scope='Fresh fd25adb graph with task-owned exact positive triple/local signed circuit substitutions; native pair/all-but-one modules and f8 fold. '
+                         'Every variant rebuilds complete closure/gauges/word and then fresh physical pairs and frames '
+                         'under the same4round construction and component/global continuation. Complete paid inventory, '
+                         'exact body source/dirty response and inverse cleanup pass both shear signs; terminal substitution '
+@@ -304,31 +314,36 @@
+ 
+ def main():
+     p = argparse.ArgumentParser(description=__doc__)
+-    for name in ('source','export','plan','exact-core','interval-code','placement-code','output'):
++    for name in ('source','export','plan','exact-core','interval-code','placement-code','candidates','output'):
+         p.add_argument('--'+name,type=Path,required=True)
+     p.add_argument('--workers',type=int,default=4)
+-    p.add_argument('--trial-saving',default='655831073/1000000000000')
++    p.add_argument('--trial-saving',default='655861417/1000000000000')
+     a = p.parse_args()
+     need(not sys.flags.optimize,'assertion-disabled execution rejected')
++    need(1 <= a.workers <= 4,'one through four workers are permitted')
+     a.output.mkdir(parents=True,exist_ok=False)
+     start = time.monotonic()
+-    variants = ['control','cube_total_face0','cube_total_face1','edge12_fixed_difference']
+-    dependencies = [a.plan,a.exact_core,a.interval_code,Path(__file__).parent/'screen_fused_carriers.py',Path(__file__).parent/'screen_signed_fusion.py']+list(a.placement_code.glob('*.py'))
++    variants = ['control','all_edge','all_long','triple_balanced']
++    dependencies = [a.plan,a.exact_core,a.interval_code,SIGNED_CODE/'screen_fused_carriers.py',SIGNED_CODE/'screen_signed_fusion.py']+list(a.placement_code.glob('*.py'))
+     protocol = dict(started_utc=datetime.now(timezone.utc).isoformat(),source_head=SOURCE_HEAD,
+                     source=str(a.source.resolve()),immutable_control=str(a.export.resolve()),
+                     variants=variants,workers=a.workers,nested_library_threads=1,
++                    candidate_manifest=str(a.candidates.resolve()/'manifest.json'),
++                    candidate_manifest_sha256=sha256((a.candidates/'manifest.json').read_bytes()).hexdigest(),
++                    evaluator_seed=20261009, local_search_rounds=4, component_sweeps=6, global_lower_budget=8192,
++                    original_evaluator_sha256='ac1ff39e4af5a507a42f74442a663b024ed704f538cdb814cb1f472c506a1998',
+                     trial_saving=str(Fraction(a.trial_saving)),driver_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),
+                     dependency_pins={str(path):sha256(path.read_bytes()).hexdigest() for path in dependencies})
+     write(a.output/'protocol.json',protocol)
+     tasks = [tuple(str(path.resolve()) for path in
+-                   (a.source,a.export,a.plan,a.exact_core,a.interval_code,a.placement_code))+
++                   (a.source,a.export,a.plan,a.exact_core,a.interval_code,a.placement_code,a.candidates))+
+              (name,a.trial_saving,str(a.output.resolve())) for name in variants]
+     rows = []
+     with ProcessPoolExecutor(max_workers=a.workers) as pool:
+         for future in as_completed([pool.submit(run,task) for task in tasks]):
+             rows.append(future.result())
+     rows.sort(key=lambda row:variants.index(row['variant']))
+-    write(a.output/'batch-result.json',dict(status='COMPLETE_CHANGED168_CARRIER_BATCH',results=rows,
++    write(a.output/'batch-result.json',dict(status='COMPLETE_STRUCTURAL_MODULE_BATCH',results=rows,
+                                           protocol=protocol,elapsed_seconds=time.monotonic()-start))
+ 
+ 

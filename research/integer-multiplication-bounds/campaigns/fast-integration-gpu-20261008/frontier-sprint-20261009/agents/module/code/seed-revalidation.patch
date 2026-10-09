@@ -1,0 +1,39 @@
+--- screen_structural_modules.py:attempt1
++++ screen_structural_modules.py:seed-revalidation
+@@ -197,9 +197,17 @@
+         new = "        if g['signs'][x-1] < 0 and value(code) == args[x][0]: return False\n" + old
+         need(text.count(old) == 1,'declared shear-preserving carrier condition applies once')
+         namespace = dict(__name__='rad_shear_preserving_extended',__file__=str(plan_path))
+-        exec(compile(text.replace(old,new),'[shear-preserving-extension]','exec'),namespace)
++        adapted_plan = text.replace(old,new)
++        seed_old = "    for x, code in frozen: assert add(x, code, True), ('frozen arc rejected', x, code)"
++        seed_new = "    global SEED_REJECTIONS\n    SEED_REJECTIONS = []\n    for x, code in frozen:\n        if not add(x, code, True):\n            SEED_REJECTIONS.append([x, code])"
++        need(adapted_plan.count(seed_old) == 1,'declared full seed revalidation applies once')
++        adapted_plan = adapted_plan.replace(seed_old,seed_new)
++        exec(compile(adapted_plan,'[shear-safe-geometry-revalidated-extension]','exec'),namespace)
+         arcs = namespace['extended_arcs'](graph,initial_arcs)
+         adaptations['shear_preserving_extension'] = dict(old=old,new=new)
++        adaptations['seed_revalidation'] = dict(old=seed_old,new=seed_new,
++            rejected=namespace['SEED_REJECTIONS'],
++            method='Every mapped seed rechecked in sequence against current accumulated spans, frame intersections, acyclicity and unit-destination sign. Rejected seeds cause no state mutation.')
+     print(name+': fresh carrier closure '+str(len(arcs)), flush=True)
+     baseline, witness = compile_closure(graph, arcs)
+     row, word = select(graph, baseline, witness)
+@@ -317,13 +325,16 @@
+     for name in ('source','export','plan','exact-core','interval-code','placement-code','candidates','output'):
+         p.add_argument('--'+name,type=Path,required=True)
+     p.add_argument('--workers',type=int,default=4)
++    p.add_argument('--variants',nargs='+',choices=('control','all_edge','all_long','triple_balanced'),
++                   default=['control','all_edge','all_long','triple_balanced'])
+     p.add_argument('--trial-saving',default='655861417/1000000000000')
+     a = p.parse_args()
+     need(not sys.flags.optimize,'assertion-disabled execution rejected')
+     need(1 <= a.workers <= 4,'one through four workers are permitted')
+     a.output.mkdir(parents=True,exist_ok=False)
+     start = time.monotonic()
+-    variants = ['control','all_edge','all_long','triple_balanced']
++    variants = a.variants
++    need(len(variants) == len(set(variants)),'duplicate variant invocation')
+     dependencies = [a.plan,a.exact_core,a.interval_code,SIGNED_CODE/'screen_fused_carriers.py',SIGNED_CODE/'screen_signed_fusion.py']+list(a.placement_code.glob('*.py'))
+     protocol = dict(started_utc=datetime.now(timezone.utc).isoformat(),source_head=SOURCE_HEAD,
+                     source=str(a.source.resolve()),immutable_control=str(a.export.resolve()),
