@@ -1,0 +1,51 @@
+--- a/agents/assembly/code/review_public_fused.py
++++ b/agents/assembly/code/review_public_fused.py
+@@ -4,7 +4,7 @@
+ Apache-2.0; prepared for RaD with OpenAI GPT-6.1 Sol assistance.
+ This imports only the three explicitly distributed independent assembly
+ modules and stdlib, never the package author's transfer implementation.
+-The original141-source24-input scientific closure and independently executed
++The original 141-source, 24-input scientific closure and independently executed
+ finite proofs are preserved separately. The public arithmetic subset does
+ not pretend to rerun that full closure or establish a current record.
+ """
+@@ -26,6 +26,8 @@
+ IDENTITY = "dcfddaa8ec464b94fc0b0c31d8c5fac9a86c45e6067fcc478753d11f748c331f"
+ AUTHOR_CONFIG = "e423b802770cb3477ef83598d2ca00acfddfa2b9843e3ece0a72fb61aace119f"
+ AUTHOR_RECEIPT = "2f040351c0c1f27b11c7d4eba7734658eb014b57c5c0d7da8d8572ed76ce83ba"
++HYPOTHESES = "ebf7ca25618b2f97bd426940ba20b13f4b98399473f264ca9591efa4bec75cba"
++FINITE_PREREQUISITES = "00a5d6a0646a85a195a26099311ddeaa51b94e37a30956eb6578db7bd78d12de"
+ FIELDS = {"bit", "physical", "scalar", "bit_frames", "complex_frames",
+           "complex_pairs", "transfer_math.py", "verify_transfer.py"}
+ 
+@@ -42,6 +44,10 @@
+         for key,pin in science[section].items()} for section in ("sources", "inputs")}
+     encoded = json.dumps(reduced,sort_keys=True,separators=(",", ":")).encode()
+     need(sha256(encoded).hexdigest() == IDENTITY, "Normalized scientific metadata changed")
++    for name, expected in (("inherited_hypotheses", HYPOTHESES),
++                           ("finite_prerequisites", FINITE_PREREQUISITES)):
++        retained = json.dumps(science[name],sort_keys=True,separators=(",", ":")).encode()
++        need(sha256(retained).hexdigest() == expected, "Retained proof boundary changed: "+name)
+     return science
+ 
+ 
+@@ -113,6 +119,10 @@
+     reject("fabricated supplier interval",lambda:verify_author_intervals(mutation,own["independent_intervals"]))
+     mutation = copy.deepcopy(config);mutation["scientific_source_bindings"]["source_record_count"] = 140
+     reject("original scientific closure shortened",lambda:scientific_identity(mutation))
++    for field in ("inherited_hypotheses", "finite_prerequisites"):
++        mutation = copy.deepcopy(config)
++        mutation[field] = mutation["scientific_source_bindings"][field] = []
++        reject("retained boundary omitted "+field,lambda row=mutation:scientific_identity(row))
+     reject("public fixture corruption",lambda:pinned_bytes(args.directory,dict(config["files"]["bit_frames"],sha256="0"*64)))
+     reject("unsafe public fixture path",lambda:pinned_bytes(args.directory,dict(path="../escape",sha256="0"*64)))
+     probe = subprocess.run([sys.executable,"-O",str(Path(__file__).resolve()),"--help"],capture_output=True,text=True)
+@@ -128,7 +138,7 @@
+         independent_module_sha256={name:digest(Path(__file__).with_name(name)) for name in
+             ("review_fused_lifetime.py","review_balanced_unified.py","review_rebuilt168_ceiling.py")},
+         PUBLICATION_READY=False,
+-        scope="Fresh portable full-moment/fallback, complete component distribution, full paid bills,47+7 and cutoffs with eight actual file pins and immutable original metadata. Original141-source24-input byte closure and independent finite executions remain separately preserved scientific evidence; this subset does not rerun them or the live frontier.")
++        scope="Fresh portable full moments and fallback, complete component distribution, full paid bills, 47 strict constraints and seven margins, and cutoffs with eight actual file pins, immutable original metadata and retained hypothesis text. Original 141-source, 24-input byte closure and independent finite executions remain separately preserved scientific evidence; this subset does not rerun them or the live frontier.")
+     args.output.parent.mkdir(parents=True,exist_ok=True)
+     args.output.write_text(json.dumps(encode(output),sort_keys=True,indent=2)+"\n")
+     print("PASS independent portable arithmetic: "+str(KAPPA)+"; full moments/bills/47+7; "+str(len(controls))+" controls; historical nonqualifying")

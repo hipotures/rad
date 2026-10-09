@@ -1,5 +1,22 @@
 # Strict assembly and finite-cost certification
 
+The strongest completed result in this lane is now
+`kappa=61728289/100000000000 = 0.000617282890`, an
+`ACCEPTED_CONDITIONAL` coherent fused-complex/lifetime-bit composition.
+[Its report](reports/fused-lifetime-review.md),
+[native proof source](notes/fused-lifetime-review.tex),
+[independent arithmetic checker](code/review_fused_lifetime.py) and
+[finite receipt binder](code/bind_fused_reviews.py) join all native moments,
+full fallback, actual scalar/router/precision/row bills, 47+7, and independent
+binary/signed/reflected finite gates under an unchanged 141-source/24-input
+identity. A complete clean 184-file export independently reproduces all
+arithmetic and the byte-identical finite binding.
+The timestamped comparable PR168 observation at head `fd25adb7` claims
+`0.0006489120`, requiring the user's one-percent floor `0.00065540112`;
+this result is nonqualifying and
+`PUBLICATION_READY` is false. The pinned PR171 improvement is historical.
+All inherited all-size hypotheses and original prime exclusions remain explicit.
+
 The newer independent balanced composition review supports
 `kappa=594087017/10^12 = 0.000594087017` from the component-pair binary
 frames and frozen complex placement, with the original atom and backoffs.

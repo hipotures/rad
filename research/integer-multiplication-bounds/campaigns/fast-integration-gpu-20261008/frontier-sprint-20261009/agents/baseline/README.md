@@ -76,3 +76,14 @@ full G-complemented physical chronology, all rational frame/prime tests and
 the complete paid ledger. This is a separate below-threshold control;
 physical-lifetime variants require an additional independent gate. See the
 [native review and reproduction](review-pr168-native.md).
+
+## Paired-both binary lifetime candidate
+
+The independently reconstructed two-output-fusion and compensated-lifetime
+candidate passes all physical F2 inputs in both orientations, full
+G-complemented execution, exact local-ring projector certificates, the
+complete paid ledger and fallback moments. The actual alias-compensation
+and cleanup mutations fail as expected. Coarse binary saving is
+`161677519/250000000000`; final complex/ordinary assembly and the current
+publication-floor comparison are separate coordinator gates. See the
+[source-bound review and portable recovery](review-paired-both-lifetime.md).

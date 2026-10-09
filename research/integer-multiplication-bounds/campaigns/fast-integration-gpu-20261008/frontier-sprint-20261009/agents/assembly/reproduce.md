@@ -139,3 +139,61 @@ backoffs require complex saving strictly above approximately
 This excludes only the identified profile pair under the paid atom and
 balanced formulas. Further frame searches or a different word have their own
 identities and are not covered by this ceiling.
+# Frozen fused/lifetime composition
+
+Run from the sprint root with Python 3.11+ and the standard library.
+Restore the exact upstream revisions and explicit source bytes named in
+`agents/transfer/configs/lifetime-fused-168-170.json`, plus the ten
+supplemental reviewer/code/proof pins in
+`agents/assembly/configs/fused-lifetime-review-binding.json`.
+Use GitHub CLI acquisition at the original immutable revisions; never
+replace them by a moving pull-request head. The source inventories retain
+the PR117 LICENSE/NOTICE/SOURCE/DAG/replayed closure and PR170 notices.
+The source-clean test below was exercised from those pinned bytes; it is
+not a claim that every upstream acquisition route was retested in this lane.
+
+Frozen bit fixtures and deterministically reconstructed exports are preserved
+under `agents/bit/candidates/binary-168-paired-lifetime-p12/`; its reproduction
+recipe regenerates all five export bytes and replays the intact archived plan.
+The complete coherent complex input is preserved as whole gzip files under
+`agents/placement/evidence/pr168-placement-20261009T092200Z/`
+`fused168-joint-raise-frozen-20261009T0937Z/`. Restore each file to its
+original relative location recorded by the author configuration and verify
+the decoded SHA-256/size. All nine complex files and all four bit fixtures
+were checked against the original frozen bytes by this lane.
+Independent finite receipts and their executed sources are given by the
+supplemental binding; their full rerun commands belong to the baseline,
+signed and geometry lane reports. Arithmetic and identity binding are not
+replacement finite executions.
+
+```bash
+python3 agents/assembly/code/review_fused_lifetime.py \
+  --config agents/transfer/configs/lifetime-fused-168-170.json \
+  --certificate work/transfer/20261009T-lifetime-fused-168-170/receipt.json \
+  --output work/assembly/reproduced-fused-arithmetic/review.json
+
+python3 agents/assembly/code/bind_fused_reviews.py \
+  --config agents/transfer/configs/lifetime-fused-168-170.json \
+  --binding agents/assembly/configs/fused-lifetime-review-binding.json \
+  --output work/assembly/reproduced-fused-binding/binding.json
+
+python3 agents/assembly/code/export_fused_acceptance.py \
+  --config agents/transfer/configs/lifetime-fused-168-170.json \
+  --certificate work/transfer/20261009T-lifetime-fused-168-170/receipt.json \
+  --binding agents/assembly/configs/fused-lifetime-review-binding.json \
+  --binding-reference work/assembly/20261009T-independent-lifetime-fused/finite-binding.json \
+  --destination work/assembly/reproduced-fused-clean-export
+```
+
+The third command was tested: 184 files, 30,567,095 bytes, independent
+stable mathematical output equal and finite binding byte-identical.
+Outputs must have fresh identities. Original complete receipts are retained
+in `agents/assembly/evidence/20261009T-fused-lifetime-independent-review/`;
+restore the arithmetic review/finite binding to their manifest locations
+before replaying the binder. Its supplemental manifest additionally names
+six original independent receipts, which are archived by their owning lanes.
+Use no source expectations or saved PASS flag to bypass a recomputation.
+
+The later comparable PR168 observation and its source-bound target arithmetic
+are retained separately. The accepted frozen coefficient is below the current
+one-percent publication floor; these commands do not perform publication.

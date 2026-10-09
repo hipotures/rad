@@ -1,6 +1,19 @@
 # Construction status and conditional acceptance
 
-Current observation: 2026-10-09 08:58:16 UTC. The complete paginated comparison
+Latest coordinator checkpoint: the coherent lifetime/fused result
+`61728289/100000000000` is independently `ACCEPTED_CONDITIONAL`.
+[Its immutable scientific identity](accepted-lifetime-fused-candidate.json)
+binds 141 author sources, 24 inputs and the additional reviewer closure to the
+actual finite, signed, prime, reflected, coefficient and complete arithmetic
+reviews. Both clean source and normalized public metadata recovery pass.
+The historical PR171 improvement was superseded before release. At
+2026-10-09 10:09:42 UTC the current PR176 claim is
+`81117750407097/125000000000000000`, with required one-percent score
+`8192892791116797/12500000000000000000`; this construction is below
+the raw leader and the submission gate. No actual script or broad contribution
+suite was run for it. Fresh fd25adb constructions are distinct pending work.
+
+Historical observation: 2026-10-09 08:58:16 UTC. The complete paginated comparison
 includes 120 active claims and drafts. Its threshold is PR171,
 `305534205135809/500000000000000000`, at head
 `89d0c75f8bf97131db21bc610e7546b699afcb9a`. The user's added minimum
