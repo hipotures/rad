@@ -34,3 +34,18 @@ exact frame/reflected-edge checks and a fresh exact scalar-core audit passed.
 
 This lane reports a scoped negative result and independent finite checks, without
 claiming an accepted final kappa or full global reflected-word verification.
+
+The continued fused PR168 E1 experiment ran two coherent input batches. Each
+control and three distinct legal equal-rank orientation variants converged to
+identical final frames. Component placement on the stronger signed seed31 bundle
+nevertheless rigorously accepts native complex saving `617560360/10^12`, with
+root in `(617661229/10^12, 617661230/10^12)`. This is a component-descent result,
+not an additional orientation gain or accepted final exponent.
+
+- [Fused PR168 report and reproduction](pr168-fused-orientation-report.md)
+- [Fixed-alias batch](results/pr168-fused-orientations-v1.json)
+- [Coherent signed-alias batch](results/pr168-joint-best-orientations-v1.json)
+- [Frozen candidate exact complex moments](results/fused168-component-winner-exact-moments-v1.json)
+- [Frozen candidate signed audit](results/fused168-component-winner-signed-audit-v1.json)
+- [Frozen candidate frame audit](results/fused168-component-winner-frame-audit-v1.json)
+- [Fused input/attempt artifact manifest](results/pr168-orientation-artifact-manifest.json)
