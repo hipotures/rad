@@ -1,0 +1,157 @@
+{
+  "status": "PASS SPARSE PREPARATION AND VOLUME BOUNDARY",
+  "cases": [
+    {
+      "status": "PASS RESTRICTED SPARSE ENCODING",
+      "h": 3,
+      "columns": 1,
+      "label": 7,
+      "complete_sparse_basis_columns": 4,
+      "complete_basis_coefficients": 32,
+      "arbitrary_gaussian_fields": 3,
+      "address_volume": 8,
+      "arbitrary_input_records": 4,
+      "input_density": "1/2",
+      "exact_expansion_factor": 2,
+      "common_unreduced_denominator_bits": 1,
+      "reduced_coefficient_denominator_bits": 1,
+      "negative_controls": {
+        "omitted_address_phase": true,
+        "unsupported_dense_input": true
+      },
+      "output_sha256": "62453a196fda48cec71176cca99d9f0e5cf66703e10929a6a410ce3d7aa9939f",
+      "seconds": 0.0003455909973126836,
+      "scope": "Exact restricted source preparation and partial/full endpoint. Orbit-major copying can avoid arithmetic butterflies only after its actual layout/fanout is paid; no arbitrary-dirty native supplier."
+    },
+    {
+      "status": "PASS RESTRICTED SPARSE ENCODING",
+      "h": 4,
+      "columns": 2,
+      "label": 7,
+      "complete_sparse_basis_columns": 64,
+      "complete_basis_coefficients": 16384,
+      "arbitrary_gaussian_fields": 3,
+      "address_volume": 256,
+      "arbitrary_input_records": 64,
+      "input_density": "1/4",
+      "exact_expansion_factor": 4,
+      "common_unreduced_denominator_bits": 2,
+      "reduced_coefficient_denominator_bits": 1,
+      "negative_controls": {
+        "omitted_address_phase": true,
+        "unsupported_dense_input": true
+      },
+      "output_sha256": "3b299fd7d4eded7559d6ae0bd613f638fd00f595b6039c7b8d40670f186470ed",
+      "seconds": 0.06666164100170135,
+      "scope": "Exact restricted source preparation and partial/full endpoint. Orbit-major copying can avoid arithmetic butterflies only after its actual layout/fanout is paid; no arbitrary-dirty native supplier."
+    },
+    {
+      "status": "PASS RESTRICTED SPARSE ENCODING",
+      "h": 3,
+      "columns": 3,
+      "label": 7,
+      "complete_sparse_basis_columns": 64,
+      "complete_basis_coefficients": 32768,
+      "arbitrary_gaussian_fields": 3,
+      "address_volume": 512,
+      "arbitrary_input_records": 64,
+      "input_density": "1/8",
+      "exact_expansion_factor": 8,
+      "common_unreduced_denominator_bits": 3,
+      "reduced_coefficient_denominator_bits": 2,
+      "negative_controls": {
+        "omitted_address_phase": true,
+        "unsupported_dense_input": true
+      },
+      "output_sha256": "354952328250324210e1e570e22e1b388e224bba0e552d79304ec86105f0dc3b",
+      "seconds": 0.16523192999738967,
+      "scope": "Exact restricted source preparation and partial/full endpoint. Orbit-major copying can avoid arithmetic butterflies only after its actual layout/fanout is paid; no arbitrary-dirty native supplier."
+    },
+    {
+      "status": "PASS RESTRICTED SPARSE ENCODING",
+      "h": 6,
+      "columns": 1,
+      "label": 21,
+      "complete_sparse_basis_columns": 32,
+      "complete_basis_coefficients": 2048,
+      "arbitrary_gaussian_fields": 3,
+      "address_volume": 64,
+      "arbitrary_input_records": 32,
+      "input_density": "1/2",
+      "exact_expansion_factor": 2,
+      "common_unreduced_denominator_bits": 1,
+      "reduced_coefficient_denominator_bits": 1,
+      "negative_controls": {
+        "omitted_address_phase": true,
+        "unsupported_dense_input": true
+      },
+      "output_sha256": "bba7ce9e2af175ffbecf25296efd7891075e91a717dbd777dc371ff038dd9d48",
+      "seconds": 0.0075605319943861105,
+      "scope": "Exact restricted source preparation and partial/full endpoint. Orbit-major copying can avoid arithmetic butterflies only after its actual layout/fanout is paid; no arbitrary-dirty native supplier."
+    }
+  ],
+  "density": {
+    "status": "PASS INPUT DENSITY AND DECLARED GROWTH CONTROLS",
+    "original_assembly_samples": [
+      {
+        "input_bits": 191,
+        "radix_bits": 3,
+        "digits": 64,
+        "original_box": 256,
+        "density": "1/4",
+        "f_at_least_three_cannot_fit_without_repacking": true
+      },
+      {
+        "input_bits": 1279,
+        "radix_bits": 5,
+        "digits": 256,
+        "original_box": 1024,
+        "density": "1/4",
+        "f_at_least_three_cannot_fit_without_repacking": true
+      },
+      {
+        "input_bits": 9215,
+        "radix_bits": 9,
+        "digits": 1024,
+        "original_box": 4096,
+        "density": "1/4",
+        "f_at_least_three_cannot_fit_without_repacking": true
+      }
+    ],
+    "illustrative_growth": [
+      {
+        "polynomial_degree": 1,
+        "log2_precision": 72,
+        "dimension": 512,
+        "selected_columns": 128,
+        "log2_volume_overhead_lower_bound": 125,
+        "log2_polynomial_budget": 72,
+        "exact_overhead_exceeds_budget": true
+      },
+      {
+        "polynomial_degree": 4,
+        "log2_precision": 88,
+        "dimension": 2048,
+        "selected_columns": 512,
+        "log2_volume_overhead_lower_bound": 509,
+        "log2_polynomial_budget": 352,
+        "exact_overhead_exceeds_budget": true
+      },
+      {
+        "polynomial_degree": 10,
+        "log2_precision": 96,
+        "dimension": 4096,
+        "selected_columns": 1024,
+        "log2_volume_overhead_lower_bound": 1021,
+        "log2_polynomial_budget": 960,
+        "exact_overhead_exceeds_budget": true
+      }
+    ],
+    "general_density_bound": "q/T>1/8 and transversal records<=T/2^f",
+    "repacking_lower_bound": "new_volume/original_T>2^(f-3)",
+    "asymptotic_scope": "If f=Theta(p^epsilon) with fixed epsilon>0, 2^(f-3)/p^C tends to infinity for every fixed C. Numerical illustrations use epsilon=1/8 only.",
+    "exclusions": "Only the full f-direction sparse-transversal preparation model; different encodings, bounded f, structured suppliers and arithmetic fusion remain open."
+  },
+  "complete_native_supplier": false,
+  "new_multiplier_exponent": false
+}

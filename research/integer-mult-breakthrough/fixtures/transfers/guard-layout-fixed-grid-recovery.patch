@@ -1,0 +1,66 @@
+--- a/research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py
++++ b/research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py
+@@ -65,7 +65,7 @@
+         maximum_depth=max([event[3] if event[0]=='kernel' else event[3] for event in events],default=0))
+ 
+ 
+-def axis_kernel(payload,axis,k,rho,e,prefix,suffix,fixed_grid=False):
++def axis_kernel(payload,axis,k,rho,e,prefix,suffix):
+     mask=1<<(axis*k+rho);size=1<<(e*k);result=list(payload)
+     for head in range(prefix):
+         for address in range(size):
+@@ -77,9 +77,6 @@
+                     ar,ai=a[j:j+2];br,bi=b[j:j+2]
+                     left += [ar-ai+br+bi,ar+ai+bi-br]
+                     right += [ar+ai+br-bi,ai-ar+br+bi]
+-                if fixed_grid:
+-                    if any(x%2 for x in left+right):raise ValueError('Fixed physical grid reserve exhausted')
+-                    left=[x//2 for x in left];right=[x//2 for x in right]
+                 result[low]=tuple(left);result[high]=tuple(right)
+     return result
+ 
+@@ -95,20 +92,16 @@
+     return result
+ 
+ 
+-def run(spec,payload,k,rho,prefix,suffix,negative=None,fixed_grid=False):
+-    reserve=spec['total_elementary_C'] if fixed_grid else 0
+-    data=[tuple(x<<reserve for x in row) for row in payload];grid=3+reserve;guards_omitted=False
++def run(spec,payload,k,rho,prefix,suffix,negative=None):
++    data=list(payload);grid=3;guards_omitted=False
+     for event in spec['events']:
+         if event[0]=='kernel':
+             _,axis,category,level,label=event
+             if negative=='omit guard' and category=='complete-slot-guard' and not guards_omitted:
+                 guards_omitted=True;continue
+-            data=axis_kernel(data,axis,k,rho,spec['e'],prefix,suffix,fixed_grid)
+-            if not fixed_grid:grid+=1
++            data=axis_kernel(data,axis,k,rho,spec['e'],prefix,suffix);grid+=1
+             if negative=='duplicate guard' and category=='complete-slot-guard' and not guards_omitted:
+-                data=axis_kernel(data,axis,k,rho,spec['e'],prefix,suffix,fixed_grid)
+-                if not fixed_grid:grid+=1
+-                guards_omitted=True
++                data=axis_kernel(data,axis,k,rho,spec['e'],prefix,suffix);grid+=1;guards_omitted=True
+         else:
+             _,a,b,level,direction=event
+             if negative=='omit return swap' and direction=='return':continue
+@@ -156,9 +149,6 @@
+         values=[((i*7+field*11)%31-15,(i*13+field*17)%29-14,(i*19+field*5)%37-18,(i*23+field*3)%41-20) for i in range(size)]
+         actual=run(spec,values,k,rho,prefix,suffix);wanted=reference(spec,values,k,rho,prefix,suffix)
+         if not equal(actual,wanted):raise ValueError('Complete dirty Gaussian field factorization failed')
+-        fixed=run(spec,values,k,rho,prefix,suffix,fixed_grid=True)
+-        if fixed!=actual or fixed[1]!=3+spec['total_elementary_C']:
+-            raise ValueError('Literal fixed physical grid replay differs from variable-grid reference')
+         digest.update(str(actual).encode());field_receipts.append(dict(final_grid_bits=actual[1],maximum_numerator_bits=max(abs(x).bit_length() for row in actual[0] for x in row)))
+     names=['omit guard','duplicate guard']
+     has_return=any(event[0]=='chunk_swap' and event[-1]=='return' for event in spec['events'])
+@@ -176,8 +166,7 @@
+     return dict(e=e,k=k,rho=rho,prefix=prefix,suffix=suffix,root_native_r=r,
+         complete_records=size,all_payload_fields=4,complete_input_columns=columns,
+         complete_literal_tensor_coefficients=columns*size,full_dirty_fields=2,
+-        plan=spec,physical_global_grid_never_reduced=True,literal_fixed_physical_grid_replayed=True,
+-        fixed_physical_grid_bits=3+spec['total_elementary_C'],integer_C_halves_exact_without_normalization=True,field_receipts=field_receipts,
++        plan=spec,physical_global_grid_never_reduced=True,field_receipts=field_receipts,
+         complete_guard_axes_transformed_exactly_once=True,row_prefix_and_suffix_unchanged=True,
+         child_selected_axes_contiguous_and_guard_free=True,same_width_actual_e_strictly_decreases=True,
+         no_rows_or_address_ranges_added=True,negative_controls=controls,

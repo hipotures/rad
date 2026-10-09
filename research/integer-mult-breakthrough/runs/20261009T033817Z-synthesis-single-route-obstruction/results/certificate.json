@@ -1,0 +1,697 @@
+{
+  "status": "PASS SCOPED ALL-SIZE UNIQUE-PATH OBSTRUCTION",
+  "cases": [
+    {
+      "selected_columns": 2,
+      "layout": 1,
+      "physical_banks": 6,
+      "first_inverse_mixer": [
+        [
+          3,
+          0,
+          -2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          -2,
+          0,
+          0
+        ],
+        [
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          -2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          1
+        ]
+      ],
+      "second_inverse_mixer": [
+        [
+          3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          1
+        ]
+      ],
+      "source_block_paths": [
+        {
+          "output_bank": 0,
+          "source_bank": 0,
+          "route_bank": 0,
+          "coefficient": 9
+        },
+        {
+          "output_bank": 1,
+          "source_bank": 0,
+          "route_bank": 3,
+          "coefficient": -4
+        },
+        {
+          "output_bank": 1,
+          "source_bank": 1,
+          "route_bank": 1,
+          "coefficient": 9
+        },
+        {
+          "output_bank": 2,
+          "source_bank": 0,
+          "route_bank": 0,
+          "coefficient": -3
+        },
+        {
+          "output_bank": 3,
+          "source_bank": 0,
+          "route_bank": 3,
+          "coefficient": 2
+        },
+        {
+          "output_bank": 3,
+          "source_bank": 1,
+          "route_bank": 1,
+          "coefficient": -3
+        },
+        {
+          "output_bank": 4,
+          "source_bank": 1,
+          "route_bank": 4,
+          "coefficient": 6
+        },
+        {
+          "output_bank": 5,
+          "source_bank": 1,
+          "route_bank": 4,
+          "coefficient": -2
+        }
+      ],
+      "dense_source_blocks_per_output_bank": [
+        1,
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "finite_maximum_post_support_lower": 8,
+      "finite_recorded_maximum_post_support": 16,
+      "finite_necessary_post_layers": 2,
+      "all_size_lower": "T>=log_W(2*2^f); in particular T=Omega(f) for fixedW",
+      "premise": "Each source-bank block of B^-1 has exactly zero or one weighted route, and the amplitudes/routes are everywhere invertible.",
+      "algebra": "R=Q*B^-1*P0^-1; source P0_j=I, hence R_ij=C_f*(B^-1)_ij. A nonzero weighted monomial maps each dense C_f row to another fully dense row.",
+      "negative_controls": {
+        "repeat_same_bank_matching": "UNIQUE-PATH PREMISE REJECTED"
+      },
+      "scope": "This is a scoped all-size unique-path preword obstruction. Several routes per same bank block, another quotient/core, fused implementations or a changed assembly remain open."
+    },
+    {
+      "selected_columns": 2,
+      "layout": 0,
+      "physical_banks": 6,
+      "first_inverse_mixer": [
+        [
+          3,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          -1,
+          0,
+          0
+        ],
+        [
+          -2,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          -2,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          -1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          -2,
+          1
+        ]
+      ],
+      "second_inverse_mixer": [
+        [
+          3,
+          0,
+          0,
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          -1
+        ],
+        [
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -2,
+          0,
+          0,
+          1
+        ]
+      ],
+      "source_block_paths": [
+        {
+          "output_bank": 0,
+          "source_bank": 0,
+          "route_bank": 0,
+          "coefficient": 9
+        },
+        {
+          "output_bank": 1,
+          "source_bank": 0,
+          "route_bank": 3,
+          "coefficient": 2
+        },
+        {
+          "output_bank": 1,
+          "source_bank": 1,
+          "route_bank": 1,
+          "coefficient": 9
+        },
+        {
+          "output_bank": 2,
+          "source_bank": 0,
+          "route_bank": 0,
+          "coefficient": -6
+        },
+        {
+          "output_bank": 3,
+          "source_bank": 0,
+          "route_bank": 3,
+          "coefficient": -2
+        },
+        {
+          "output_bank": 3,
+          "source_bank": 1,
+          "route_bank": 1,
+          "coefficient": -6
+        },
+        {
+          "output_bank": 4,
+          "source_bank": 1,
+          "route_bank": 4,
+          "coefficient": -6
+        },
+        {
+          "output_bank": 5,
+          "source_bank": 1,
+          "route_bank": 4,
+          "coefficient": 4
+        }
+      ],
+      "dense_source_blocks_per_output_bank": [
+        1,
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "finite_maximum_post_support_lower": 8,
+      "finite_recorded_maximum_post_support": 16,
+      "finite_necessary_post_layers": 2,
+      "all_size_lower": "T>=log_W(2*2^f); in particular T=Omega(f) for fixedW",
+      "premise": "Each source-bank block of B^-1 has exactly zero or one weighted route, and the amplitudes/routes are everywhere invertible.",
+      "algebra": "R=Q*B^-1*P0^-1; source P0_j=I, hence R_ij=C_f*(B^-1)_ij. A nonzero weighted monomial maps each dense C_f row to another fully dense row.",
+      "negative_controls": {
+        "repeat_same_bank_matching": "UNIQUE-PATH PREMISE REJECTED"
+      },
+      "scope": "This is a scoped all-size unique-path preword obstruction. Several routes per same bank block, another quotient/core, fused implementations or a changed assembly remain open."
+    },
+    {
+      "selected_columns": 4,
+      "layout": 1,
+      "physical_banks": 6,
+      "first_inverse_mixer": [
+        [
+          3,
+          0,
+          -2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          -2,
+          0,
+          0
+        ],
+        [
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          -2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          1
+        ]
+      ],
+      "second_inverse_mixer": [
+        [
+          3,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          1
+        ]
+      ],
+      "source_block_paths": [
+        {
+          "output_bank": 0,
+          "source_bank": 0,
+          "route_bank": 0,
+          "coefficient": 9
+        },
+        {
+          "output_bank": 1,
+          "source_bank": 0,
+          "route_bank": 3,
+          "coefficient": -4
+        },
+        {
+          "output_bank": 1,
+          "source_bank": 1,
+          "route_bank": 1,
+          "coefficient": 9
+        },
+        {
+          "output_bank": 2,
+          "source_bank": 0,
+          "route_bank": 0,
+          "coefficient": -3
+        },
+        {
+          "output_bank": 3,
+          "source_bank": 0,
+          "route_bank": 3,
+          "coefficient": 2
+        },
+        {
+          "output_bank": 3,
+          "source_bank": 1,
+          "route_bank": 1,
+          "coefficient": -3
+        },
+        {
+          "output_bank": 4,
+          "source_bank": 1,
+          "route_bank": 4,
+          "coefficient": 6
+        },
+        {
+          "output_bank": 5,
+          "source_bank": 1,
+          "route_bank": 4,
+          "coefficient": -2
+        }
+      ],
+      "dense_source_blocks_per_output_bank": [
+        1,
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "finite_maximum_post_support_lower": 32,
+      "finite_recorded_maximum_post_support": 64,
+      "finite_necessary_post_layers": 2,
+      "all_size_lower": "T>=log_W(2*2^f); in particular T=Omega(f) for fixedW",
+      "premise": "Each source-bank block of B^-1 has exactly zero or one weighted route, and the amplitudes/routes are everywhere invertible.",
+      "algebra": "R=Q*B^-1*P0^-1; source P0_j=I, hence R_ij=C_f*(B^-1)_ij. A nonzero weighted monomial maps each dense C_f row to another fully dense row.",
+      "negative_controls": {
+        "repeat_same_bank_matching": "UNIQUE-PATH PREMISE REJECTED"
+      },
+      "scope": "This is a scoped all-size unique-path preword obstruction. Several routes per same bank block, another quotient/core, fused implementations or a changed assembly remain open."
+    },
+    {
+      "selected_columns": 4,
+      "layout": 0,
+      "physical_banks": 6,
+      "first_inverse_mixer": [
+        [
+          3,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          -1,
+          0,
+          0
+        ],
+        [
+          -2,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          -2,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          -1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          -2,
+          1
+        ]
+      ],
+      "second_inverse_mixer": [
+        [
+          3,
+          0,
+          0,
+          -1,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          -1
+        ],
+        [
+          -2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          -2,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -2,
+          0,
+          0,
+          1
+        ]
+      ],
+      "source_block_paths": [
+        {
+          "output_bank": 0,
+          "source_bank": 0,
+          "route_bank": 0,
+          "coefficient": 9
+        },
+        {
+          "output_bank": 1,
+          "source_bank": 0,
+          "route_bank": 3,
+          "coefficient": 2
+        },
+        {
+          "output_bank": 1,
+          "source_bank": 1,
+          "route_bank": 1,
+          "coefficient": 9
+        },
+        {
+          "output_bank": 2,
+          "source_bank": 0,
+          "route_bank": 0,
+          "coefficient": -6
+        },
+        {
+          "output_bank": 3,
+          "source_bank": 0,
+          "route_bank": 3,
+          "coefficient": -2
+        },
+        {
+          "output_bank": 3,
+          "source_bank": 1,
+          "route_bank": 1,
+          "coefficient": -6
+        },
+        {
+          "output_bank": 4,
+          "source_bank": 1,
+          "route_bank": 4,
+          "coefficient": -6
+        },
+        {
+          "output_bank": 5,
+          "source_bank": 1,
+          "route_bank": 4,
+          "coefficient": 4
+        }
+      ],
+      "dense_source_blocks_per_output_bank": [
+        1,
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "finite_maximum_post_support_lower": 32,
+      "finite_recorded_maximum_post_support": 64,
+      "finite_necessary_post_layers": 2,
+      "all_size_lower": "T>=log_W(2*2^f); in particular T=Omega(f) for fixedW",
+      "premise": "Each source-bank block of B^-1 has exactly zero or one weighted route, and the amplitudes/routes are everywhere invertible.",
+      "algebra": "R=Q*B^-1*P0^-1; source P0_j=I, hence R_ij=C_f*(B^-1)_ij. A nonzero weighted monomial maps each dense C_f row to another fully dense row.",
+      "negative_controls": {
+        "repeat_same_bank_matching": "UNIQUE-PATH PREMISE REJECTED"
+      },
+      "scope": "This is a scoped all-size unique-path preword obstruction. Several routes per same bank block, another quotient/core, fused implementations or a changed assembly remain open."
+    }
+  ]
+}

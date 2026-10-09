@@ -1,0 +1,67 @@
+{
+  "status": "PASS EXACT FAILED-SOURCE RECOVERIES",
+  "finished_utc": "2026-10-09T04:20:50.088532+00:00",
+  "rows": [
+    {
+      "name": "clifford-syntax",
+      "current_source": "code/complex/verify_general_clifford_anchors.py",
+      "current_sha256": "2f2d1f20e17c324bcbdf0ec7866850ae0a82971d4f8d13a08ee123b5aa22303f",
+      "patch": "fixtures/complex/general-clifford-syntax-recovery.patch",
+      "patch_sha256": "6c7398145180d13469a00fced14e7004dedf0a7e28631ec7550ef840cf2dc9c9",
+      "recovered_sha256": "e6345dbad855e2473166900ee976e3a004e127ff972f2c264169969f47b9297d",
+      "exact_hash_pass": true,
+      "live_source_unchanged": true
+    },
+    {
+      "name": "helper-orientation",
+      "current_source": "code/complex/one_helper_clifford_chronology.py",
+      "current_sha256": "d9c1935951bfe2664fb2bff8f0cc250cd18f239b5be6b91624af8ff15c015474",
+      "patch": "fixtures/complex/one-helper-address-orientation-recovery.patch",
+      "patch_sha256": "fba71f8f8a3c1464be5b60210756c04f38fd35c2d5644509411c398b6a9f4628",
+      "recovered_sha256": "6d829ef5f026c63d020aa55d654ff85515377fbe5fade784e2d7a2f13f895222",
+      "exact_hash_pass": true,
+      "live_source_unchanged": true
+    },
+    {
+      "name": "toffoli-parse",
+      "current_source": "code/transfers/packed_toffoli.py",
+      "current_sha256": "5fc6fb8ce5507fae0568e85d701918cd8ddfe65ed124810eb3edfbfff9fa7f80",
+      "patch": "fixtures/transfers/packed-toffoli-parse-recovery.patch",
+      "patch_sha256": "62beedb0b9a9f1c0ea7bb3df7abd9aff874b45aa9eb386809f5fd7fe108c555c",
+      "recovered_sha256": "7ce6b18dccbff5d295235fc8ff0caaf586e972fa1c2c934e385c733b36b43088",
+      "exact_hash_pass": true,
+      "live_source_unchanged": true
+    },
+    {
+      "name": "guard-layout-reference",
+      "current_source": "code/transfers/guarded_slot_layout.py",
+      "current_sha256": "5c5e9b8fdfbc9685582bd75ce6654fa0c78482e8cbe698a7c943811035eba99e",
+      "patch": "fixtures/transfers/guard-layout-fixed-grid-recovery.patch",
+      "patch_sha256": "4454b4f1f1f1051b539bd63ce4595f7a00479de5fc4bfdf55bf151661b446e2c",
+      "recovered_sha256": "bfd54a06c1e9fc05139a74327d90934cd74c818921095f912350b8c2d8044151",
+      "exact_hash_pass": true,
+      "live_source_unchanged": true
+    },
+    {
+      "name": "guard-layout-rejected-control",
+      "starting_sha256": "bfd54a06c1e9fc05139a74327d90934cd74c818921095f912350b8c2d8044151",
+      "patch": "fixtures/transfers/guard-layout-control-recovery.patch",
+      "recovered_sha256": "48324433aca0a1c3e9003b5e673d371b008f5d699a2314333fd2979ec95a90b0",
+      "exact_hash_pass": true,
+      "live_source_unchanged": true
+    },
+    {
+      "name": "streaming-density-interpretation",
+      "current_source": "code/synthesis/audit_streaming_scan_precision.py",
+      "current_sha256": "ba4e3de3df2f680101043df46b53dedd053dd291f63e1c93463650c0946a5bfe",
+      "patch": "code/synthesis/patches/streaming-density-scope-repair.patch",
+      "patch_sha256": "16b5f936f2595501d49163dbbac33a7b5bae0cfd7b73035f5d316d50d7906880",
+      "direction": "reverse",
+      "recovered_sha256": "3d09916778264f474bfe99ccff896eded81538a48382ca4880feee14aad02e31",
+      "exact_hash_pass": true,
+      "live_source_unchanged": true
+    }
+  ],
+  "scope": "Isolated source reconstruction only; no producer source was changed",
+  "coordinator_setup_correction": "Initial forward apply of the streaming repair was rejected in an isolated tree. The declared reverse direction was then used; live source was unchanged."
+}

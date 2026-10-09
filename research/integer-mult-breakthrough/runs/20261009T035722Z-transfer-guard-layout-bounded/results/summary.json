@@ -1,0 +1,329 @@
+{
+  "status": "EXACT SAME-VOLUME FULL GUARD C FACTORIZATION PASS",
+  "cases": [
+    {
+      "e": 8,
+      "k": 1,
+      "rho": 0,
+      "prefix": 1,
+      "suffix": 1,
+      "root_native_r": 4,
+      "complete_records": 256,
+      "all_payload_fields": 4,
+      "complete_input_columns": 0,
+      "complete_literal_tensor_coefficients": 0,
+      "full_dirty_fields": 2,
+      "plan": {
+        "e": 8,
+        "h": 4,
+        "root_r": 4,
+        "events": [
+          [
+            "kernel",
+            1,
+            "complete-slot-guard",
+            0,
+            1
+          ],
+          [
+            "kernel",
+            3,
+            "complete-slot-guard",
+            0,
+            3
+          ],
+          [
+            "kernel",
+            5,
+            "complete-slot-guard",
+            0,
+            5
+          ],
+          [
+            "kernel",
+            7,
+            "complete-slot-guard",
+            0,
+            7
+          ],
+          [
+            "chunk_swap",
+            1,
+            4,
+            0,
+            "enter"
+          ],
+          [
+            "chunk_swap",
+            3,
+            6,
+            0,
+            "enter"
+          ],
+          [
+            "kernel",
+            0,
+            "elementary-leaf",
+            1,
+            0
+          ],
+          [
+            "kernel",
+            1,
+            "elementary-leaf",
+            1,
+            4
+          ],
+          [
+            "kernel",
+            2,
+            "elementary-leaf",
+            1,
+            2
+          ],
+          [
+            "kernel",
+            3,
+            "elementary-leaf",
+            1,
+            6
+          ],
+          [
+            "chunk_swap",
+            3,
+            6,
+            0,
+            "return"
+          ],
+          [
+            "chunk_swap",
+            1,
+            4,
+            0,
+            "return"
+          ]
+        ],
+        "kernel_original_axes": {
+          "0": 1,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1
+        },
+        "children": [
+          {
+            "parent_e": 8,
+            "level": 0,
+            "native_r": 4,
+            "columns": 1,
+            "complete_slot_K_chunks": 2,
+            "guard_axes": [
+              1,
+              3,
+              5,
+              7
+            ],
+            "remainder_axes": [],
+            "elementary_preprocessing": 4,
+            "child_e": 4,
+            "old_child_upper": 8,
+            "compaction_swaps": [
+              [
+                1,
+                4
+              ],
+              [
+                3,
+                6
+              ]
+            ],
+            "child_active_axes_contiguous": true,
+            "already_transformed_guards_excluded": true,
+            "complete_payload_volume_unchanged": true
+          }
+        ],
+        "root_target_axes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "total_elementary_C": 8,
+        "total_whole_K_swaps": 4,
+        "maximum_depth": 1
+      },
+      "physical_global_grid_never_reduced": true,
+      "literal_fixed_physical_grid_replayed": true,
+      "fixed_physical_grid_bits": 11,
+      "integer_C_halves_exact_without_normalization": true,
+      "field_receipts": [
+        {
+          "final_grid_bits": 11,
+          "maximum_numerator_bits": 14
+        },
+        {
+          "final_grid_bits": 11,
+          "maximum_numerator_bits": 14
+        }
+      ],
+      "complete_guard_axes_transformed_exactly_once": true,
+      "row_prefix_and_suffix_unchanged": true,
+      "child_selected_axes_contiguous_and_guard_free": true,
+      "same_width_actual_e_strictly_decreases": true,
+      "no_rows_or_address_ranges_added": true,
+      "negative_controls": {
+        "omit guard": true,
+        "duplicate guard": true,
+        "omit return swap": true
+      },
+      "return_swap_control_applicable": true,
+      "output_sha256": "511c13d27f2fe20e913c39a874791b766d64b77b00f04eabb6e91115631ca70a",
+      "seconds": 0.011071774002630264,
+      "scope": "Exact finite guard preprocessing/compaction/C-factorization with complete four-field records; original tape costs and whole native network remain conditional"
+    },
+    {
+      "e": 9,
+      "k": 1,
+      "rho": 0,
+      "prefix": 3,
+      "suffix": 2,
+      "root_native_r": 1,
+      "complete_records": 3072,
+      "all_payload_fields": 4,
+      "complete_input_columns": 0,
+      "complete_literal_tensor_coefficients": 0,
+      "full_dirty_fields": 2,
+      "plan": {
+        "e": 9,
+        "h": 4,
+        "root_r": 1,
+        "events": [
+          [
+            "kernel",
+            1,
+            "complete-slot-guard",
+            0,
+            1
+          ],
+          [
+            "kernel",
+            3,
+            "complete-slot-guard",
+            0,
+            3
+          ],
+          [
+            "kernel",
+            5,
+            "complete-slot-guard",
+            0,
+            5
+          ],
+          [
+            "kernel",
+            7,
+            "complete-slot-guard",
+            0,
+            7
+          ],
+          [
+            "kernel",
+            8,
+            "remainder",
+            0,
+            8
+          ],
+          [
+            "kernel",
+            0,
+            "elementary-leaf",
+            1,
+            0
+          ]
+        ],
+        "kernel_original_axes": {
+          "0": 1,
+          "1": 1,
+          "3": 1,
+          "5": 1,
+          "7": 1,
+          "8": 1
+        },
+        "children": [
+          {
+            "parent_e": 9,
+            "level": 0,
+            "native_r": 1,
+            "columns": 1,
+            "complete_slot_K_chunks": 2,
+            "guard_axes": [
+              1,
+              3,
+              5,
+              7
+            ],
+            "remainder_axes": [
+              8
+            ],
+            "elementary_preprocessing": 5,
+            "child_e": 1,
+            "old_child_upper": 2,
+            "compaction_swaps": [],
+            "child_active_axes_contiguous": true,
+            "already_transformed_guards_excluded": true,
+            "complete_payload_volume_unchanged": true
+          }
+        ],
+        "root_target_axes": [
+          0,
+          1,
+          3,
+          5,
+          7,
+          8
+        ],
+        "total_elementary_C": 6,
+        "total_whole_K_swaps": 0,
+        "maximum_depth": 1
+      },
+      "physical_global_grid_never_reduced": true,
+      "literal_fixed_physical_grid_replayed": true,
+      "fixed_physical_grid_bits": 9,
+      "integer_C_halves_exact_without_normalization": true,
+      "field_receipts": [
+        {
+          "final_grid_bits": 9,
+          "maximum_numerator_bits": 12
+        },
+        {
+          "final_grid_bits": 9,
+          "maximum_numerator_bits": 12
+        }
+      ],
+      "complete_guard_axes_transformed_exactly_once": true,
+      "row_prefix_and_suffix_unchanged": true,
+      "child_selected_axes_contiguous_and_guard_free": true,
+      "same_width_actual_e_strictly_decreases": true,
+      "no_rows_or_address_ranges_added": true,
+      "negative_controls": {
+        "omit guard": true,
+        "duplicate guard": true
+      },
+      "return_swap_control_applicable": false,
+      "output_sha256": "c537cf4a8f818763c3ec46ae460383a868c9ab8b902a1467e901d2a82f195a17",
+      "seconds": 0.10730477700417396,
+      "scope": "Exact finite guard preprocessing/compaction/C-factorization with complete four-field records; original tape costs and whole native network remain conditional"
+    }
+  ],
+  "seconds": 0.16555329500260996,
+  "scope": "New conditional same-volume full guard allocation: pay h+remainder elementary C passes, compact every child with at most r equal-K whole-chunk swaps, exact return and complete dirty endpoints. The r=h child now strictly decreases actual selected e. Complete row-prefix and all K-bit spectators preserved. No contracting profile, compiled tape theorem or exponent.",
+  "whole_new_native_profile_certified": false,
+  "new_exponent": false
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "general-clifford-anchor-controls-v1",
+  "source": "code/complex/verify_general_clifford_anchors.py",
+  "general_frame_source_sha256": "1b9bce1af1b7ac39eafa9e765c5e58b362875ec0df1f81e91c80ada5d666b109",
+  "wrapper_source_sha256": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+  "fixture": {
+    "path": "fixtures/complex/noncommuting-four-incidence.json",
+    "sha256": "8ae3dd3489d18251dd540e2d7e5925c00e61f830bd67b6de9308df381894d96f"
+  },
+  "question": "Does the all-Lagrangian factory bind every phased finite matrix column and retain the original symmetric K port operators at the local 5 versus 6 shear?",
+  "workers": 4,
+  "columns": [1, 2],
+  "seeds": [],
+  "checks": [
+    "Every literal n3 frame matrix column matches its complete phased Pauli action and exact zero-column path sum",
+    "Non-isotropic frame is rejected",
+    "All four original K port-relative matrices match their compiled one-child words",
+    "Complete four-field two-bank payload matches inverse original input K, scalar shear, and original output K",
+    "Global phase corruption is rejected"
+  ],
+  "scope": "Finite local component and actual all-Lagrangian anchors. Full native Gaussian child, source/sink chronology, stock, and exponent remain separate."
+}

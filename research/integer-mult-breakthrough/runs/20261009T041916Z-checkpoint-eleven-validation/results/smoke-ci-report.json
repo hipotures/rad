@@ -1,0 +1,314 @@
+{
+  "version": 1,
+  "commit": "c05b74335b389abea34ce923ce763e805c4b3484",
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "group": "smoke",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "assembly-arithmetic-controls",
+      "scope": "Exact arithmetic and negative controls for frozen assumed inequalities; not an integer-multiplication proof",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py",
+        "--self-test"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py": "8955eb0e414aa67df52d51a76c9f95d4e7f706f2b5e7a55c684e79ad5718c5e0",
+        "research/integer-mult-breakthrough/fixtures/frozen-assembly-ceiling.json": "ee0f0458448a83fbc4c116d0075c9e17fcf9f31aa731a87d7c6bf39e14e22ab7"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.035
+    },
+    {
+      "id": "unitary-dyadic-controls",
+      "scope": "Exact finite Gaussian-dyadic unitary arithmetic and corruption/scope controls; no multiplier claim",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py",
+        "--self-test"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py": "947de5784756b2c790a1d66c2be3244e5dd54c059e4467917ef06aefcb5ef47a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "deferred-normalization-controls",
+      "scope": "Exact auxiliary finite-field/radix carry, representation and padding controls; no Gaussian all-size transfer",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/transfers/deferred_normalization.py",
+        "--workers",
+        "1",
+        "--cases",
+        "8"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/deferred_normalization.py": "e36c4d763a7e328656c8bc96bc4bb24e6f009deaa5e37ee768f88231846bb9a0"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "complex-structural-controls",
+      "scope": "Exact finite complex moments, scalar sides, feature frames and scoped optimistic envelopes; no complete new primitive or exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_complex.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/test_complex.py": "3d366c606c0fc99975071c4f02ec833672a2d24dfa0df258e0b37cbdcc0839a3",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/block_exclusion.py": "28c89e844561e34dbb7a79c47ddc5ccca44dc814b1ead378252db939ac8d12d2",
+        "research/integer-mult-breakthrough/code/complex/center_obstructions.py": "8f1dae0950b5d704b60f5456b357eab6d118c3c78a119c3a66bf20ad947b2e28",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/five_side_screen.py": "838b8293766939d2657f5ef950b8bcac29b279eba3ea4c2c52ddc6034855aca6",
+        "research/integer-mult-breakthrough/code/complex/tree_intersection.py": "ebb65e3884ec7b916b7c1e1aa4cedbf1a28e0fda5623e835c793511c25d2a15a",
+        "research/integer-mult-breakthrough/code/complex/frame_feasibility.py": "ea8c9af6baad4eebeb52af4a671f98e900e13417ef12c11db5012e35efa8b764",
+        "research/integer-mult-breakthrough/fixtures/complex/pr36-local-axis.json": "91a9e54b455ecc36c3150abcf4a1c9138691c8faab464b5ce159ba8e376764e7"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.565
+    },
+    {
+      "id": "odd-weight-kernel-controls",
+      "scope": "Exact finite odd-subset scalar kernels, binary feature spans and dyadic center reconstruction; no paid side circuit or multiplication exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/odd_weight_kernels.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/odd_weight_kernels.py": "ccf6c06f34b8b91104abfd42947c6d10d17495d58b139e784277628a32f6d218"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "same-width-row-budget-controls",
+      "scope": "Exact declared toy depth/row/guard recurrence with complete same-width calls; no native phase program or multiplication transfer",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/row_budget_recursion.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/row_budget_recursion.py": "3fd568d6506a480faf8d62b675d4c858e3d2f1c1fd6f516f9704625ac981fb16"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "general-quadratic-interface-controls",
+      "scope": "Exact small Gaussian-dyadic general symmetric quadratic rank normal forms, affine radical support and corrupted controls; physical tape and all-size guard unproved",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_quadratic_rank_interface.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/test_quadratic_rank_interface.py": "6c9d5e17fd2cbd912c7b1a5a00704a7e60c83357b249469f747c30c1671259d4",
+        "research/integer-mult-breakthrough/code/complex/quadratic_rank_interface.py": "c7435adc75bee5c38af1c59af4ae840a80bd6f33e53ce5e34d180c719b6a5c0a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "full-lagrangian-component-controls",
+      "scope": "Exact four charged phase incidences, local rank5/6 geometry, literal operators, dirty reverse and negative chirp controls; no complete motif or exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_lagrangian_phase_interface.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/test_lagrangian_phase_interface.py": "a30312328b9c20f8c3a2db6c9a3f4011b45a84b25bfd6d06b22bf1433a0000b6",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_gate_witness.py": "03ddabab75a80959facc8cec3bf2f4a3d698b9998f7a272329bf57da8f5956a1",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9",
+        "research/integer-mult-breakthrough/code/complex/quadratic_rank_interface.py": "c7435adc75bee5c38af1c59af4ae840a80bd6f33e53ce5e34d180c719b6a5c0a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "trimmed-side-dag-controls",
+      "scope": "Complete h8k5 scalar matrix and actual DAG scale/self-feature corruption controls plus full edge accounting; clean zero/fanout scalar model, no native rank profile",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/test_trimmed_side_transform.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/test_trimmed_side_transform.py": "b07380abc5139416011fc35a3cbc51c5eb0a5c8814f854ef555fbabbd1a43643",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "degenerate-clifford-frame-controls",
+      "scope": "Exact bounded degenerate-subspace geometry and literal arbitrary-dirty branching operator, including phase/retirement corruptions; no native tape or exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_degenerate_frames.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/test_degenerate_frames.py": "e39e047dd4f8e6827124c35c75f8675ac2f80801d37b98e381db3215a873c1c8",
+        "research/integer-mult-breakthrough/code/complex/degenerate_frame_geodesics.py": "799d25643b48552efc0523fd64966f9cba42d6b6b5272d9ac7f32436ce70bba9",
+        "research/integer-mult-breakthrough/code/complex/degenerate_branching_component.py": "e840a01881c08da4f08f763c64fb59676a9fd0e8e8efed5ed123e122bae1bfa0",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_gate_witness.py": "03ddabab75a80959facc8cec3bf2f4a3d698b9998f7a272329bf57da8f5956a1",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9",
+        "research/integer-mult-breakthrough/code/complex/quadratic_rank_interface.py": "c7435adc75bee5c38af1c59af4ae840a80bd6f33e53ce5e34d180c719b6a5c0a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 2.868
+    },
+    {
+      "id": "endpoint-bound-scope-controls",
+      "scope": "Exact finite same-endpoint scaling counterexamples; endpoint bounds alone do not certify internal registers",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/endpoint_guard_counterexamples.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/endpoint_guard_counterexamples.py": "33c7dc86dacf730809eeb3dd3c6f7aed67a4a21898d5ab0ea65ffa45140f137b"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "whole-cancellation-word-controls",
+      "scope": "Complete rational source/sink/dirty word, chronological frame costs, exact small binary cuts and corruption controls; no many-label optimum or Gaussian/native lift",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_word_frames.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/verify_word_frames.py": "632c15703d7a718c2e0c1515f78d14a216e4a1879439d64994a323918035994a",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.214
+    },
+    {
+      "id": "literal-tensor-chronology-controls",
+      "scope": "Exact bounded Gaussian source/sink/dirty tensor words, complete Pauli projections, factor conditioning and inverse-scale corruption; stages grow with h*f, no precision or exponent claim",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_tensor_chronologies.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/verify_tensor_chronologies.py": "ba4954f024fe763ba639305b8bbff542dc1fd84a6c1ed5a6faf5c4e401fe8c0a",
+        "research/integer-mult-breakthrough/code/synthesis/compressed_tensor_chronology.py": "0263b17e09503cee02ba291c5d55a2d587f33483fc184ce6b74356598891e61a",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "geodesic-transport-controls",
+      "scope": "Exact small all-Lagrangian geodesic intervals and scalar-flow/dirty/backtracking controls; scoped zero-excess transport lemma, no per-output sum or general multiplier lower bound",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/geodesic_transport.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/geodesic_transport.py": "b055ae36931054aab6aeffb1dab6b1cac9d6d3e2d9b60c3773d8dbd5cc15297c"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.314
+    },
+    {
+      "id": "finite-field-cyclic-core-controls",
+      "scope": "Exact signed cyclic core and zero-border Gaussian source/sink/arbitrary-dirty word; whole-volume products and nonlinear address routing have no native improved cost bound",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_field_cyclic.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/verify_field_cyclic.py": "8a84b7f5f30ff513527a3911696cb40b5da640d5dfbf33ad8ed0f38f084ccc17",
+        "research/integer-mult-breakthrough/code/synthesis/finite_field_cyclic_reduction.py": "7044ff3bfedeaf76ccf56c00885a90ebc0df80af94cfa46175b1d8dc45c3d17e",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.119
+    },
+    {
+      "id": "short-record-monotone-split-controls",
+      "scope": "Complete bounded payload/padding scan with literal finite-symbol tape motion and cleanup; no preceding guarded CRT or sparse exception repair is verified",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/monotone_split_tapes.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/monotone_split_tapes.py": "3d8339e0247f48535cf95226eee8e5e944bff99280ba9a5696592715ad2217e5"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "singer-prefix-route-controls",
+      "scope": "Both zero-border conventions reject direct aligned prefix-affine routing at degree>=3; exact arbitrary-prelinear counterexample prevents a general route or tape-time lower bound",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/verify_singer_routes.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/verify_singer_routes.py": "4117be75977e0007d5f320005d1cfb0819cbf621b6b9a6762e26c5d71087cac0",
+        "research/integer-mult-breakthrough/code/obstructions/singer_prefix_routes.py": "0fd474fddd95dedf769dfe750b93fa7aac5b8defe80262820404c7812db01ae6"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    }
+  ],
+  "scope": "Registered checks only. Not formal verification, external peer review, or validation of unregistered research."
+}

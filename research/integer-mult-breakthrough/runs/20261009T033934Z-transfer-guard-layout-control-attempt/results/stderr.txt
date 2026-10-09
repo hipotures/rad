@@ -1,0 +1,38 @@
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/concurrent/futures/process.py", line 254, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/usr/lib/python3.14/concurrent/futures/process.py", line 203, in _process_chunk
+    return [fn(*args) for args in chunk]
+            ~~^^^^^^^
+  File "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py", line 154, in probe
+    if not all(controls.values()):raise ValueError('A guard/complete-return negative did not discriminate')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: A guard/complete-return negative did not discriminate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py", line 193, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py", line 185, in main
+    with ProcessPoolExecutor(max_workers=args.workers) as pool:results=list(pool.map(probe,cases))
+                                                                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/process.py", line 617, in _chain_from_iterable_of_lists
+    for element in iterable:
+                   ^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 639, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 311, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 450, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 395, in __get_result
+    raise self._exception
+ValueError: A guard/complete-return negative did not discriminate

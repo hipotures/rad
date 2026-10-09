@@ -1,0 +1,11 @@
+--- a/research/integer-mult-breakthrough/code/complex/one_helper_clifford_chronology.py
++++ b/research/integer-mult-breakthrough/code/complex/one_helper_clifford_chronology.py
+@@ -120 +119,0 @@
+-            coefficient = columns[wrappers.column_vector(x,n,1,0)][wrappers.column_vector(y,n,1,0)]
+@@ -122 +121 @@
+-                a,b = general.exact.multiply_gaussian(coefficient, row[pair:pair+2])
++                a,b = general.exact.multiply_gaussian(columns[x][y], row[pair:pair+2])
+@@ -208,2 +207 @@
+-        shifted = wrappers.routes.scatter(raw[0],lambda a:wrappers.replace_column(
+-            a,wrappers.column_vector(a,n,1,0)^U,n,1,0))
++        shifted = wrappers.routes.scatter(raw[0],lambda a:a ^ U)

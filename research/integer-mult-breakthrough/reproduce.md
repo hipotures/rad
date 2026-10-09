@@ -429,3 +429,58 @@ and manifest hashes. New source, configurations, small fixtures and reports
 remain readable. The local validation receipt records all populated CI groups;
 green CI does not promote a conditional compiler or partial primitive to a
 multiplication theorem.
+
+## All-Lagrangian frames, nonlinear routing and nonunit boundaries
+
+The eleventh checkpoint's bounded commands use only the standard library.
+Run them from the repository root. They omit optional output directories;
+the nonunit wrapper captures the effective imported source closure without
+modifying a producer. The unique-path case also pins its original amplitude
+certificate as immutable input.
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/lagrangian_frame_interfaces.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/verify_general_clifford_anchors.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/one_helper_clifford_chronology.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/multiframe_helper_chronology.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py --case amplitude
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py --case paths
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py --case scan
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py --case scan-grid
+python3 -B research/integer-mult-breakthrough/code/transfers/packed_toffoli.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/obstructions/sparse_line_input_encoding.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/borrowed_bit_permutation_words.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/guard_slot_geometry_review.py --workers 1 --bounded
+```
+
+For complete experiments use each retained run protocol and a fresh output
+namespace. Full all-Lagrangian and gate-specific-helper experiments exceed
+the bounded CI instances. The streaming producer and integer auditor accept
+`--workers 4 --output <fresh-results-directory>`. Their full four-case matrices
+are deterministically reconstructed and hashed rather than published as dense
+dumps. Source snapshots and timing metadata are not substitutes for those
+reproduction commands.
+
+Six historical source hashes were independently recovered. The
+[Clifford syntax](configs/complex/general-clifford-recovery.json) and
+[helper orientation](configs/complex/one-helper-recovery.json) patches apply
+forward to current source in an isolated repository-shaped copy. The
+[Toffoli parse patch](fixtures/transfers/packed-toffoli-parse-recovery.patch)
+also applies forward. For the guard source, apply the
+[fixed-grid recovery](fixtures/transfers/guard-layout-fixed-grid-recovery.patch)
+first, then the [control recovery](fixtures/transfers/guard-layout-control-recovery.patch)
+to recover its earlier rejected control. The
+[streaming annotation patch](code/synthesis/patches/streaming-density-scope-repair.patch)
+instead applies in reverse to a topic-shaped copy. Use
+`git apply --unidiff-zero`, preserving each patch's paths, and compare hashes
+with [the coordinator receipt](runs/20261009T041916Z-checkpoint-eleven-validation/results/source-recovery.json).
+Never apply recovery patches to live research sources.
+
+The pinned original complete-stream section is downloadable from the
+immutable revision and path in `input-manifest.json` under `original-streams`.
+Its acquisition receipt is retained; no downloaded source checkout is required
+for bounded CI. Layout claims use existing complete address chunks and paid
+elementary selected-bit kernels. Borrowed-bit permutations have additional
+address-shape requirements. The record-volume obstruction applies only to the
+unchanged independent-coefficient representation.

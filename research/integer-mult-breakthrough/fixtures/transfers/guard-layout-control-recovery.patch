@@ -1,0 +1,24 @@
+--- a/research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py
++++ b/research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py
+@@ -150,11 +150,8 @@
+         actual=run(spec,values,k,rho,prefix,suffix);wanted=reference(spec,values,k,rho,prefix,suffix)
+         if not equal(actual,wanted):raise ValueError('Complete dirty Gaussian field factorization failed')
+         digest.update(str(actual).encode());field_receipts.append(dict(final_grid_bits=actual[1],maximum_numerator_bits=max(abs(x).bit_length() for row in actual[0] for x in row)))
+-    names=['omit guard','duplicate guard']
+-    has_return=any(event[0]=='chunk_swap' and event[-1]=='return' for event in spec['events'])
+-    if has_return:names.append('omit return swap')
+-    controls={name:not equal(run(spec,values,k,rho,prefix,suffix,name),wanted) for name in names}
+-    if not all(controls.values()):raise ValueError('An applicable guard/complete-return negative did not discriminate')
++    controls={name:not equal(run(spec,values,k,rho,prefix,suffix,name),wanted) for name in ('omit guard','duplicate guard','omit return swap')}
++    if not all(controls.values()):raise ValueError('A guard/complete-return negative did not discriminate')
+     # Sparse row/suffix origins bind block-diagonal endpoint semantics.
+     for head in range(prefix):
+         for tail in range(suffix):
+@@ -170,7 +167,6 @@
+         complete_guard_axes_transformed_exactly_once=True,row_prefix_and_suffix_unchanged=True,
+         child_selected_axes_contiguous_and_guard_free=True,same_width_actual_e_strictly_decreases=True,
+         no_rows_or_address_ranges_added=True,negative_controls=controls,
+-        return_swap_control_applicable=has_return,
+         output_sha256=digest.hexdigest(),seconds=time.monotonic()-started,
+         scope='Exact finite guard preprocessing/compaction/C-factorization with complete four-field records; original tape costs and whole native network remain conditional')
+ 

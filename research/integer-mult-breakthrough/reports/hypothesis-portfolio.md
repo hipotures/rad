@@ -6,6 +6,38 @@ subagents give four scientifically distinct tracks within the session's four
 agent slots. No old campaign queue, deadline, source whitelist, or CPU target
 is active.
 
+## Eleventh checkpoint and replacement directions
+
+The complete all-Lagrangian frame compiler and original-port binding are now
+exact finite components. The twelve-shear shared-helper exchange has minimum
+rank equal to its full capacity in both the common-frame and retained
+gate-specific-frame experiments. This excludes those chronologies as a source
+of gain; it is not a lower bound for arbitrary global circuits.
+
+Nonlinear packed Toffoli routing and existing-slot guard allocation are
+conditional positive components. Guards remove the nominal full-width
+nondecreasing child without increasing address volume, but no favorable
+whole-network child distribution follows automatically. Fixed-h arbitrary
+permutations with a restored dirty borrowed bit also do not solve a growing-h
+router because their general word length is exponential in h.
+
+Sparse transversal inputs make line preparation exact by copies and phases.
+Their available record density is at most 2^-f, incompatible with the original
+dense digit assembly at growing f unless the input representation changes.
+The independent review explicitly leaves payload packing and new product
+algebras open. Such a direction must pay packing, recovery and coefficient
+width before claiming a useful transfer.
+
+Streaming scans genuinely evade the earlier bounded-fan-in support model.
+The complete four-case operator and integer-grid controls pass, but the
+postoperator is dense and has no fast native implementation. The next
+discriminator asks whether one matrix and its Fourier image both belong to
+an explicit inexpensive scan space. An invertible exact candidate would
+justify native factorization, inverse, precision and volume work; a scoped
+negative would redirect the circuit architecture. Separate nonlinear matching
+and alternative product representations are being assessed outside this
+publication cutoff. No complete exponent at the campaign target is claimed.
+
 ## Tenth checkpoint and live structural tests
 
 - A fixed-dimensional native GL wrapper bill now follows conditionally from

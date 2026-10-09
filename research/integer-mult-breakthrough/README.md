@@ -72,7 +72,7 @@ and [ballot role budgets](reports/complex/ballot-center-review-and-role-budget.m
 locate costs that consume proposed gains. Their exclusions apply only to
 the stated constructions and ledgers. A full shared chronology, native
 payload routing and complete multiplication transfer remain active work.
-The registry currently contains 101 bounded checks; checkpoint receipts record
+The registry currently contains 114 bounded checks; checkpoint receipts record
 their actual validation results. No large graph is allocated merely
 to evaluate an optimistic cost profile.
 
@@ -101,6 +101,40 @@ They do not exclude arbitrary nonunit two-sided circuits. Those circuits,
 general actual Clifford frames and nonlinear reversible address routing remain
 active structural directions. No complete new multiplication exponent follows
 from these finite certificates or conditional compiler results.
+
+The eleventh checkpoint adds [actual frames for all binary Lagrangians](reports/complex/all-lagrangian-actual-frame-interfaces.md),
+with original-port binding and exact phases. A local nongraph gain survives
+that binding, but the [shared-helper exchange](reports/complex/shared-helper-canonical-chronology.md)
+has no rank saving in the tested complete twelve-shear chronology, even with
+independently chosen gate-specific frames. Its [independent analytical review](reports/synthesis/shared-helper-dynamic-review.md)
+states the named architecture and does not claim a general circuit bound.
+
+[Packed Toffoli routing](reports/transfers/packed-nonlinear-routing.md) extends
+the conditional full-stream route to a nonlinear control. The
+[same-volume guard layout](reports/transfers/guarded-slot-layout-transfer.md)
+uses existing address chunks, pays elementary guard transforms, and makes
+even a nominal full-width child strictly smaller. An
+[import-free review](reports/obstructions/guard-slot-independent-review.md)
+independently checks compaction and rational width majorants. A whole active
+Gaussian network, contracting moment and complete numerical bill remain required.
+
+[Fixed-dimensional permutation words](reports/obstructions/borrowed-bit-permutations-and-native-shape.md)
+restore a borrowed dirty bit exactly; their exponential dimensional dependence
+does not solve growing-dimensional field routing. A
+[sparse line preparation](reports/obstructions/sparse-line-input-volume-boundary.md)
+has an exact positive identity, but the unchanged independent-coefficient
+input representation requires exponentially greater address volume.
+
+[Nonunit amplitude and unique-path controls](reports/synthesis/nonunit-address-amplitude-preflight.md)
+retain their scoped obstructions. [Streaming scans](reports/synthesis/streaming-scan-boundary-preflight.md)
+escape bounded-coordinate support arguments and pass literal integer-grid
+tests. Their required postcomposition is still a dense oracle with no supplied
+fast native word. Simultaneously cheap pre/post scan spaces and changed
+product representations are the next discriminators.
+
+[Eleventh checkpoint local validation](runs/20261009T041916Z-checkpoint-eleven-validation/report.md)
+records all 114 passing checks, six exact historical source recoveries and
+unchanged source/input hashes. These results do not establish a new kappa.
 
 ## Evidence and current directions
 

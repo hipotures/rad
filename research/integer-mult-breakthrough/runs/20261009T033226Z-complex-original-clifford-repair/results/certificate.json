@@ -1,0 +1,967 @@
+{
+  "status": "PASS",
+  "started_utc": "2026-10-09T03:32:26.750876+00:00",
+  "completed_utc": "2026-10-09T03:32:26.850296+00:00",
+  "effective_sources": {
+    "verify_general_clifford_anchors.py": "2f2d1f20e17c324bcbdf0ec7866850ae0a82971d4f8d13a08ee123b5aa22303f",
+    "lagrangian_frame_interfaces.py": "1b9bce1af1b7ac39eafa9e765c5e58b362875ec0df1f81e91c80ada5d666b109",
+    "scalable_subspace_interfaces.py": "3da400b0b157cc28b546113e63a150e4b1672c71a5f2c74e724ac8fc3d1f4851",
+    "canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+    "native_frame_wrapper_plan.py": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+    "native_gl_routes.py": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54"
+  },
+  "workers": 4,
+  "bounded": false,
+  "cases": [
+    {
+      "kind": "complete-phased-frame-covariance",
+      "n": 3,
+      "frames": 135,
+      "literal_entries_checked": 8640,
+      "exact_zero_column_path_values": 1080,
+      "nonisotropic_frame_negative_rejected": true
+    },
+    {
+      "kind": "original-graph-port-common-frame-shear",
+      "n": 3,
+      "columns": 1,
+      "selected_edge_ranks": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "total_rank": 5,
+      "retained_all_graph_minimum": 6,
+      "original_K_ports_preserved": true,
+      "exact_edge_entries": 256,
+      "complete_two_bank_fields": 64,
+      "compiled_output_grids": [
+        2,
+        3
+      ],
+      "reference_output_grids": [
+        12,
+        12
+      ],
+      "native_wrapper_plans": [
+        {
+          "n": 3,
+          "selected_rank_per_column": 1,
+          "columns": 1,
+          "recursive_axis_count": 1,
+          "gaussian_children": 1,
+          "same_width_child": false,
+          "temporal_stages": [
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ]
+              ]
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 1,
+                "linear": [
+                  1,
+                  0,
+                  3
+                ],
+                "cross": [
+                  [
+                    1,
+                    2,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "C-child",
+              "selected_slots": [
+                0
+              ],
+              "columns": 1
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 0,
+                "linear": [
+                  1,
+                  0,
+                  0
+                ],
+                "cross": []
+              }
+            },
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  0,
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "affine-NOT",
+              "slots": []
+            }
+          ],
+          "transvection_calls": 10,
+          "packed_translation_calls": 0,
+          "unit_chirp_full_stream_passes": 2,
+          "separate_global_phase_calls": 0,
+          "aggregate_global_phase_mod4": 1,
+          "address_companion": "existing third complete fK-bit slot in the same role stream",
+          "extra_scalar_roles": 0,
+          "cost_scope": "Conditional complete-stream wrapper bill; C child, recursive termination and whole physical stock are separate."
+        },
+        {
+          "n": 3,
+          "selected_rank_per_column": 1,
+          "columns": 1,
+          "recursive_axis_count": 1,
+          "gaussian_children": 1,
+          "same_width_child": false,
+          "temporal_stages": [
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ]
+              ]
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 1,
+                "linear": [
+                  1,
+                  0,
+                  3
+                ],
+                "cross": [
+                  [
+                    1,
+                    2,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "C-child",
+              "selected_slots": [
+                0
+              ],
+              "columns": 1
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 0,
+                "linear": [
+                  2,
+                  0,
+                  0
+                ],
+                "cross": [
+                  [
+                    0,
+                    1,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  2,
+                  0
+                ]
+              ]
+            },
+            {
+              "kind": "affine-NOT",
+              "slots": []
+            }
+          ],
+          "transvection_calls": 9,
+          "packed_translation_calls": 0,
+          "unit_chirp_full_stream_passes": 2,
+          "separate_global_phase_calls": 0,
+          "aggregate_global_phase_mod4": 1,
+          "address_companion": "existing third complete fK-bit slot in the same role stream",
+          "extra_scalar_roles": 0,
+          "cost_scope": "Conditional complete-stream wrapper bill; C child, recursive termination and whole physical stock are separate."
+        },
+        {
+          "n": 3,
+          "selected_rank_per_column": 1,
+          "columns": 1,
+          "recursive_axis_count": 1,
+          "gaussian_children": 1,
+          "same_width_child": false,
+          "temporal_stages": [
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ]
+              ]
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 2,
+                "linear": [
+                  2,
+                  3,
+                  0
+                ],
+                "cross": [
+                  [
+                    1,
+                    2,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "C-child",
+              "selected_slots": [
+                0
+              ],
+              "columns": 1
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 0,
+                "linear": [
+                  1,
+                  0,
+                  0
+                ],
+                "cross": []
+              }
+            },
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  2,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  0,
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "affine-NOT",
+              "slots": []
+            }
+          ],
+          "transvection_calls": 10,
+          "packed_translation_calls": 0,
+          "unit_chirp_full_stream_passes": 2,
+          "separate_global_phase_calls": 0,
+          "aggregate_global_phase_mod4": 2,
+          "address_companion": "existing third complete fK-bit slot in the same role stream",
+          "extra_scalar_roles": 0,
+          "cost_scope": "Conditional complete-stream wrapper bill; C child, recursive termination and whole physical stock are separate."
+        },
+        {
+          "n": 3,
+          "selected_rank_per_column": 2,
+          "columns": 1,
+          "recursive_axis_count": 2,
+          "gaussian_children": 1,
+          "same_width_child": false,
+          "temporal_stages": [
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 2,
+                "linear": [
+                  3,
+                  3,
+                  3
+                ],
+                "cross": []
+              }
+            },
+            {
+              "kind": "C-child",
+              "selected_slots": [
+                0,
+                1
+              ],
+              "columns": 1
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 0,
+                "linear": [
+                  0,
+                  1,
+                  0
+                ],
+                "cross": [
+                  [
+                    0,
+                    2,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  0
+                ]
+              ]
+            },
+            {
+              "kind": "affine-NOT",
+              "slots": [
+                0
+              ]
+            }
+          ],
+          "transvection_calls": 10,
+          "packed_translation_calls": 1,
+          "unit_chirp_full_stream_passes": 2,
+          "separate_global_phase_calls": 0,
+          "aggregate_global_phase_mod4": 2,
+          "address_companion": "existing third complete fK-bit slot in the same role stream",
+          "extra_scalar_roles": 0,
+          "cost_scope": "Conditional complete-stream wrapper bill; C child, recursive termination and whole physical stock are separate."
+        }
+      ],
+      "extra_scalar_banks": 0,
+      "phase_corruption_negative_rejects": true,
+      "scope": "One finite two-role shear with all four original physical endpoints. No complete native primitive or exponent."
+    },
+    {
+      "kind": "original-graph-port-common-frame-shear",
+      "n": 3,
+      "columns": 2,
+      "selected_edge_ranks": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "total_rank": 5,
+      "retained_all_graph_minimum": 6,
+      "original_K_ports_preserved": true,
+      "exact_edge_entries": 256,
+      "complete_two_bank_fields": 512,
+      "compiled_output_grids": [
+        4,
+        6
+      ],
+      "reference_output_grids": [
+        24,
+        24
+      ],
+      "native_wrapper_plans": [
+        {
+          "n": 3,
+          "selected_rank_per_column": 1,
+          "columns": 2,
+          "recursive_axis_count": 2,
+          "gaussian_children": 1,
+          "same_width_child": false,
+          "temporal_stages": [
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ]
+              ]
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 1,
+                "linear": [
+                  1,
+                  0,
+                  3
+                ],
+                "cross": [
+                  [
+                    1,
+                    2,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "C-child",
+              "selected_slots": [
+                0
+              ],
+              "columns": 2
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 0,
+                "linear": [
+                  1,
+                  0,
+                  0
+                ],
+                "cross": []
+              }
+            },
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  0,
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "affine-NOT",
+              "slots": []
+            }
+          ],
+          "transvection_calls": 10,
+          "packed_translation_calls": 0,
+          "unit_chirp_full_stream_passes": 2,
+          "separate_global_phase_calls": 0,
+          "aggregate_global_phase_mod4": 2,
+          "address_companion": "existing third complete fK-bit slot in the same role stream",
+          "extra_scalar_roles": 0,
+          "cost_scope": "Conditional complete-stream wrapper bill; C child, recursive termination and whole physical stock are separate."
+        },
+        {
+          "n": 3,
+          "selected_rank_per_column": 1,
+          "columns": 2,
+          "recursive_axis_count": 2,
+          "gaussian_children": 1,
+          "same_width_child": false,
+          "temporal_stages": [
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ]
+              ]
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 1,
+                "linear": [
+                  1,
+                  0,
+                  3
+                ],
+                "cross": [
+                  [
+                    1,
+                    2,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "C-child",
+              "selected_slots": [
+                0
+              ],
+              "columns": 2
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 0,
+                "linear": [
+                  2,
+                  0,
+                  0
+                ],
+                "cross": [
+                  [
+                    0,
+                    1,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  2,
+                  0
+                ]
+              ]
+            },
+            {
+              "kind": "affine-NOT",
+              "slots": []
+            }
+          ],
+          "transvection_calls": 9,
+          "packed_translation_calls": 0,
+          "unit_chirp_full_stream_passes": 2,
+          "separate_global_phase_calls": 0,
+          "aggregate_global_phase_mod4": 2,
+          "address_companion": "existing third complete fK-bit slot in the same role stream",
+          "extra_scalar_roles": 0,
+          "cost_scope": "Conditional complete-stream wrapper bill; C child, recursive termination and whole physical stock are separate."
+        },
+        {
+          "n": 3,
+          "selected_rank_per_column": 1,
+          "columns": 2,
+          "recursive_axis_count": 2,
+          "gaussian_children": 1,
+          "same_width_child": false,
+          "temporal_stages": [
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ]
+              ]
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 2,
+                "linear": [
+                  2,
+                  3,
+                  0
+                ],
+                "cross": [
+                  [
+                    1,
+                    2,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "C-child",
+              "selected_slots": [
+                0
+              ],
+              "columns": 2
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 0,
+                "linear": [
+                  1,
+                  0,
+                  0
+                ],
+                "cross": []
+              }
+            },
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  2,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  0,
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "affine-NOT",
+              "slots": []
+            }
+          ],
+          "transvection_calls": 10,
+          "packed_translation_calls": 0,
+          "unit_chirp_full_stream_passes": 2,
+          "separate_global_phase_calls": 0,
+          "aggregate_global_phase_mod4": 0,
+          "address_companion": "existing third complete fK-bit slot in the same role stream",
+          "extra_scalar_roles": 0,
+          "cost_scope": "Conditional complete-stream wrapper bill; C child, recursive termination and whole physical stock are separate."
+        },
+        {
+          "n": 3,
+          "selected_rank_per_column": 2,
+          "columns": 2,
+          "recursive_axis_count": 4,
+          "gaussian_children": 1,
+          "same_width_child": false,
+          "temporal_stages": [
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 2,
+                "linear": [
+                  3,
+                  3,
+                  3
+                ],
+                "cross": []
+              }
+            },
+            {
+              "kind": "C-child",
+              "selected_slots": [
+                0,
+                1
+              ],
+              "columns": 2
+            },
+            {
+              "kind": "unit-chirp",
+              "quadratic": {
+                "constant": 0,
+                "linear": [
+                  0,
+                  1,
+                  0
+                ],
+                "cross": [
+                  [
+                    0,
+                    2,
+                    2
+                  ]
+                ]
+              }
+            },
+            {
+              "kind": "GL",
+              "transvections": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  0
+                ]
+              ]
+            },
+            {
+              "kind": "affine-NOT",
+              "slots": [
+                0
+              ]
+            }
+          ],
+          "transvection_calls": 10,
+          "packed_translation_calls": 1,
+          "unit_chirp_full_stream_passes": 2,
+          "separate_global_phase_calls": 0,
+          "aggregate_global_phase_mod4": 0,
+          "address_companion": "existing third complete fK-bit slot in the same role stream",
+          "extra_scalar_roles": 0,
+          "cost_scope": "Conditional complete-stream wrapper bill; C child, recursive termination and whole physical stock are separate."
+        }
+      ],
+      "extra_scalar_banks": 0,
+      "phase_corruption_negative_rejects": true,
+      "scope": "One finite two-role shear with all four original physical endpoints. No complete native primitive or exponent."
+    }
+  ],
+  "seconds": 0.09942383300221991,
+  "scope": "Full phased finite frames and original-port two-bank shear. Paid native wrapper and Gaussian child contracts remain conditional; no new whole chronology or exponent."
+}
