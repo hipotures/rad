@@ -25,53 +25,51 @@ separate from complete suppliers and formally verified results.
 - [Publication assessment](reports/publication-readiness.md): prior useful
   technical results and literature/novelty limitations.
 
-## Current checkpoint: scan barriers, target pivots and coupled costs
+## Current checkpoint: complete scan records and actual center budgets
 
-The nineteenth checkpoint preserves a complete local
-[target-pivot word](reports/complex/cap-target-pivot-and-interleaving.md)
-that absorbs three destination-only sinks while retaining all original dirty
-banks and ancestor responses. Tiny interleaving witnesses escape the fixed
-terminal-reader order. Actual global deadlines and a complete shared side
-profile remain open; local rank conservation supplies no new kappa.
+The twentieth checkpoint retains a [natural selected-fiber scan](reports/transfers/natural-selected-fiber-scan-tapes.md)
+with seven fixed tapes, all polynomial coefficients and arbitrary spectator
+fields. Its literal counters, table travel and ordinary scratch cleanup have
+an all-size linear-volume argument under the stated record contract. The
+[independent replay](reports/obstructions/natural-scan-independent-replay.md)
+passes 880 complete records and 46,528 signed values using a separately
+written reference; a [source review](reports/synthesis/natural-selected-scan-source-independent-review.md)
+separately accepts the asymptotic carry/countdown reasoning. High-flux order,
+subset zeta, descriptor framing and global precision remain distinct obligations.
 
-[Three natural/bit-reversal scans](reports/synthesis/three-ordered-scans-and-dyadic-lift.md)
-are excluded for growing fixed-label zeta even with arbitrary nonzero complex
-diagonal gauges. Its exact two-axis dyadic lift pays every scale and its
-additional grid bit. The
-[independent review](reports/obstructions/three-selected-scan-independent-review.md)
-accepts the all-size selected-order argument. Other orders and extra banks
-remain outside that theorem.
+[Repeated target pivots](reports/complex/repeated-target-pivot-chronology.md)
+have complete local dirty, kernel, ancestor and literal phase controls.
+The [fixed decoder rank boundary](reports/complex/target-pivot-rank-boundary.md)
+limits simultaneous common-zero pivots in that decoder class. Neither result
+supplies a global shared side or an exponent.
 
-The independent [general order cut proof](reports/obstructions/scan-order-cut-rank-and-flux.md)
-requires total positive transition flux at least f*2^(f-1), over every field.
-A mixed axis-lexicographic word therefore needs at least floor(f/2)+1 scans.
-All 891 finite order controls and unit minors pass. The
-[high-flux shear](reports/synthesis/nonlex-scan-flux-and-native-boundaries.md)
-escapes that obstruction, with its selected finite negatives and complete
-native ordering/precision obligations still separate.
+The [actual center/side budget](reports/complex/paired-cap-side-budget.md)
+permits an optimistic first-threshold sharing test at nine pairs, but excludes
+that unchanged center at the dated leading comparator even if side stock
+vanishes. At twelve pairs, the named retained-cap model also fails after its
+required bucket/cap/full pieces. A synchronized center with paid complete
+copies is a fresh hypothesis beyond this frozen checkpoint.
 
-The [classical Jordan basis discriminator](reports/obstructions/boolean-jordan-basis-cost-boundary.md)
-checks full rational bases, exact inverses and zeta through six coordinates.
-The named sequential realization has a linear factor in coordinate width;
-its odd inverses are not free Gaussian-dyadic gates. A different balanced
-coupling remains an unproved alternative.
+[Four selected high-flux topologies](reports/synthesis/gaussian-dyadic-high-flux-four-case-screen.md)
+fail an exact finite F5 screen, with determinant/unit reasoning transferring
+the negative to those pure Gaussian-dyadic scan words. A wider
+[singular response family](reports/synthesis/singular-two-scan-responses-and-four-entry-separator.md)
+has a complete small dirty-helper positive, but an all-field four-entry
+separator excludes its chosen two orders at every width f>=4. Different
+orders and outside gauges retain their separate scopes.
 
-[Direct activity self-bootstrap](reports/transfers/activity-self-bootstrap-and-packet-boundary.md)
-cannot fund its routing under the unchanged sufficient ledger. Available
-ordinary saving alpha, assembly saving a and desired complex saving b are
-kept distinct. Smaller serial tensor packets do not resolve that comparison
-when their complete payload and global precision are retained. An independently
-stronger ordinary supplier or changed native route would change the premises.
+[Paid phase XOR](reports/transfers/paid-phase-xor-coupled-boundary.md)
+is exact, but four same-volume zeta calls do not contract the unchanged
+coupled ledger. This is a scoped recurrence restriction.
 
-The registry contains 183 bounded checks. The preceding eighteenth commit
-`9ed8fd9c410893be15f14200496a75b29d6b9e8c` passed all ten
-[remote CI jobs](https://github.com/hipotures/rad/actions/runs/37918249532).
-All 183 local checks pass on 347 unchanged effective inputs. The
-[validation record](runs/20261009T105955Z-checkpoint-nineteen-validation/report.md) and complete original gzip copies are indexed by
-[recovery metadata](configs/recovery/checkpoint-nineteen-artifacts.json).
-These controls do not establish native transform hypotheses or a larger kappa.
-The [preceding cap/flag/router checkpoint](configs/recovery/checkpoint-eighteen-artifacts.json)
-and all earlier recovery records remain available.
+The registry contains 194 bounded checks. The preceding nineteenth commit
+`6959086b5c95aecad1cea91fe6df48f64d3b2936` passed all ten
+[remote CI jobs](https://github.com/hipotures/rad/actions/runs/37921514256).
+All 194 local checks pass on 361 unchanged effective inputs. The
+[validation record](runs/20261009T112707Z-checkpoint-twenty-validation/report.md) and complete original gzip copies are indexed by [recovery metadata](configs/recovery/checkpoint-twenty-artifacts.json).
+These controls establish no complete native zeta supplier or larger kappa.
+The [preceding order/basis/target checkpoint](configs/recovery/checkpoint-nineteen-artifacts.json)
+and every earlier recovery record remain available.
 
 ## Accepted preceding components and active leverage
 
@@ -88,8 +86,8 @@ side cannot attain complex saving0.0001. A shared physical side is required.
 [Cap classes](reports/obstructions/paired-cube-cap-compatible-channels.md)
 grow asymptotically like3^k despite a joint row space of dimension2^(k-1).
 Independent completions keep their kernel parking; scalar rank is not a
-physical stock reduction. Further repeated-pivot, actual-center budget and native scan experiments
-are separate from the frozen checkpoint until reviewed.
+physical stock reduction. Fresh synchronized-center and corrected high-flux ordering experiments
+remain outside the frozen checkpoint until independently reviewed.
 
 ## External comparisons and attribution
 

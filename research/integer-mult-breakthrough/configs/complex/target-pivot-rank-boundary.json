@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "question": "How many independent exclusive dirty target pivots can the fixed five-cube actual-row decoder support at one simultaneous cut?",
+  "source": "research/integer-mult-breakthrough/code/complex/target_pivot_rank_boundary.py",
+  "runtime_source_closure": [
+    "research/integer-mult-breakthrough/code/complex/target_pivot_rank_boundary.py",
+    "research/integer-mult-breakthrough/code/complex/paired_cap_dirty_completion.py"
+  ],
+  "pair_counts": [6, 7, 8, 9, 12],
+  "selector_bits": 5,
+  "maximum_target_character_degree": 2,
+  "exact_rank_expectations": [10, 15, 16, 16, 16],
+  "seeds": "Exhaustive finite decoder columns; no random data",
+  "dependency_contract": "Python standard library exact rational arithmetic",
+  "negative_controls": ["degree-three corrupted column", "duplicate channel cannot satisfy cross-pivot zeros"],
+  "scope": "One common-cut simultaneous identity-minor pivot class; no temporal reuse, arbitrary factorization, source stock, native compiler or exponent claim",
+  "nonunit_scope": "No j0/j1 actual-row-only runtime inverse is inferred"
+}

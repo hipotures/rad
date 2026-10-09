@@ -685,3 +685,46 @@ replayed or adopted here. No own complete kappa is established. A credible
 first-place route needs a changed supplier and all its physical/precision
 contracts; useful local words, analytical restrictions and native components
 remain independently publishable research evidence within their scopes.
+
+## Twentieth checkpoint: native component evidence and center changes
+
+The natural selected scan has seven fixed tapes and a complete growing
+polynomial record contract. Its actual carry/countdown work and spectator
+table travel are linear in full payload volume. A separate coordinator
+reference checks 880 new complete records and 46,528 signed values, true
+inverse and ordinary scratch cleanup. A source-only agent critique accepts
+the all-size control reasoning. Its magnitude reserve is f+O(1), with native
+w=Theta(p) yielding 1+o(1) inflation. K remains an address chunk width.
+This is not subset zeta, arbitrary-dirty scratch or an entire native supplier.
+
+Sequential common-zero target reuse is exact locally, with retained
+ancestor/kernel columns and complete phase interfaces. The rank ceiling for
+simultaneous pivots is restricted to the actual fixed cap decoder. Global
+source formation, timing and shared-cap kernel restoration remain the next
+decisive obligations. A small chronology is not a universal role lower bound.
+
+Exact full-center moments now distinguish the first threshold from the dated
+leading comparator. At nine pairs, unchanged center/data alone excludes the
+comparator even with zero side cost. At twelve pairs the named raw-cap model
+fails after actual required pieces. This rejects expanding that fixed family
+for a leading result. The new hypothesis synchronizes roots along a shared
+growing frame and uses one source helper instead of ten source copies. It
+must pay proper-width copies, complete dirty echo, erasure and its increased
+rank loss before a global moment or kappa can be accepted. A first exact
+full-profile feasibility test precedes larger array sweeps.
+
+The determinant-one endpoint forces every diagonal entry in a pure
+Gaussian-dyadic one-bank scan word to be a ring unit. The selected four-case
+F5 negative therefore has a justified complex-dyadic scope within those
+topologies. Allowing singular middle responses gives a small exact f3
+dirty-helper positive, but a four-entry support separator rules out every
+sum in the same chosen two-order response family at f>=4 over all fields.
+Independent review directly verifies all support lists and the target value1.
+Changing actual orders, outside gauges or deeper products is a different
+hypothesis; repeating excluded responses adds no information.
+
+Four same-volume zeta calls for phase XOR cannot contract the unchanged
+e=3f+12+u split when f>12+u. A corrected high-flux layout and a smaller
+constant response architecture remain fresh tests. All original source
+closures, failed attempts, full result bytes and paid precision boundaries
+are preserved. No own complete kappa>=1e-4 or first-place bound is established.

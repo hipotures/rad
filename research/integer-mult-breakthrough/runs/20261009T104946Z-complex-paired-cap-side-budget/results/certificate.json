@@ -1,0 +1,1711 @@
+{
+  "status": "PASS exact actual-center side-budget discriminator",
+  "started_utc": "2026-10-09T10:49:46.994584+00:00",
+  "completed_utc": "2026-10-09T10:49:55.877598+00:00",
+  "seconds": 8.883001854002941,
+  "workers": 3,
+  "source_sha256": {
+    "paired_cap_side_budget.py": "78337c484c5f0a0a2305d24cd9fd1a427ab1bbe1edad1774e0ababfba7a13dca",
+    "paired_five_complete_baseline.py": "ccd35b2c0974b900a901482145c044e9969fc8185008ef31e2bf84482c29e55c",
+    "paired_five_cube_discriminator.py": "720cf5d50d3afe4072a91ab013a5516e1cd28f3902b04edc608aefe5257c49c8",
+    "characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9"
+  },
+  "cases": [
+    {
+      "p": 7,
+      "h": 14,
+      "v": 672,
+      "m": 42,
+      "cap_stock_models": {
+        "blocks": [
+          {
+            "j": 3,
+            "raw_patterns_per_cube": 80,
+            "readable_channels_per_cube": 60,
+            "retained_kernel_patterns_per_cube": 20,
+            "input_bucket_rank": 3,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              3,
+              2,
+              9
+            ]
+          },
+          {
+            "j": 4,
+            "raw_patterns_per_cube": 80,
+            "readable_channels_per_cube": 30,
+            "retained_kernel_patterns_per_cube": 50,
+            "input_bucket_rank": 2,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              2,
+              3,
+              9
+            ]
+          }
+        ],
+        "retained_aggregate_and_kernel_roles": 3360,
+        "live_roles": 1890,
+        "parked_roles": 1470,
+        "raw_roles_per_original_source": "5",
+        "literal_independent_copy_tree_roles": 10080,
+        "literal_copy_tree_roles_per_source": 15,
+        "three_core_optimistic_raw_cap_profile": {
+          "3": 10080,
+          "2": 10080,
+          "9": 10080
+        },
+        "aggregate_formation_and_birth_reuse_verified": false
+      },
+      "rows": [
+        {
+          "target_clock": "optimistic one target-kernel child",
+          "actual_center_roles": 6720,
+          "actual_copied_center_loss": 840,
+          "actual_center_child_profile_one_core": {
+            "1": 7560,
+            "12": 84,
+            "2": 168,
+            "11": 168,
+            "3": 336,
+            "10": 420,
+            "4": 3108,
+            "9": 3024,
+            "5": 2352,
+            "8": 2352,
+            "6": 672,
+            "7": 672
+          },
+          "complete_fixed_profile_without_side_roles": {
+            "1": 24696,
+            "12": 252,
+            "2": 1848,
+            "11": 504,
+            "3": 1008,
+            "10": 1260,
+            "4": 11340,
+            "9": 9072,
+            "5": 7056,
+            "8": 9072,
+            "6": 2016,
+            "7": 2016,
+            "13": 2016
+          },
+          "W_without_side_roles": 8064,
+          "fixed_first_moment_deficit": -1176,
+          "target_levels": [
+            {
+              "budget": {
+                "b": "1/10000",
+                "fixed_unnormalized_moment": {
+                  "lower": "50803996804075504809012054333436077688367690994467110700234323/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "12700999201018876202253013583359019422091922748616781354517603/1569275433846670190958947355801916604025588861116008628224"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-46362102479327782360062106172363927229574172577287776519267/1569275433846670190958947355801916604025588861116008628224",
+                  "upper": "-185448409917311129440248424689455708918296690309136388240979/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "13": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "851203043515511920131511061473053281654668811976119315/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "425601521757755960065755530736526640827334405988550219/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "3150049405014602232701640273650550451907718935668843669409/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "1575024702507301116350820136825275225953859467834422290987/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "3146792659191218675400557977616438476256038383012714741967/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "3146792659191218675400557977616438476256038383012715530413/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 10080,
+                  "side_roles_per_v": "15",
+                  "complete_moment_interval": {
+                    "lower": "6287795548029755471154747428950011218020200227970089168481/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "3143897774014877735577373714475005609010100113985045262359/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "393356408406603254922188951762247614589688423074625115955/392318858461667547739736838950479151006397215279002157056",
+                    "upper": "3146851267252826039377511614097980916717507384597001852309/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "20/189981",
+                "fixed_unnormalized_moment": {
+                  "lower": "12701126964493517533410543225091053128927303919193397674587977/1569275433846670190958947355801916604025588861116008628224",
+                  "upper": "6350563482246758766705271612545526564463651959596700774255069/784637716923335095479473677900958302012794430558004314112"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-23244932976984556758795873952198817032477671576953985255901/784637716923335095479473677900958302012794430558004314112",
+                  "upper": "-46489865953969113517591747904397634064955343153904096589641/1569275433846670190958947355801916604025588861116008628224"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "13": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "448048388772984043178001851491530397139952638565183903/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "224024194386492021589000925745765198569976319282850215/1569275433846670190958947355801916604025588861116008628224"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "6300162184768609887604436123557070004428226150393550433823/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "1575040546192152471901109030889267501107056537598388088853/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "3146821628766013303260704724036414336400643839806718517923/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "3146821628766013303260704724036414336400643839806719348051/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 10080,
+                  "side_roles_per_v": "15",
+                  "complete_moment_interval": {
+                    "lower": "392990540971497036180753275199871718070806120488055737075/392318858461667547739736838950479151006397215279002157056",
+                    "upper": "6287848655543952578892052403197947489132897927808893221159/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "1573441664081056971665354103047629522960339464717001309809/1569275433846670190958947355801916604025588861116008628224",
+                    "upper": "6293766656324227886661416412190518091841357858868007186265/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "1/1000",
+                "fixed_unnormalized_moment": {
+                  "lower": "50891295212074143363958185733803010474428628700912403184617471/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "50891295212074143363958185733803010474428645460389336277717215/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-272746817915949684386379825056388494979251156231361965723871/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "-272746817915949684386379825056388494979234396754428872624127/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "13": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "8518461778091119569389030107808543957640180857660976321/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "1064807722261389946173628763476067994705272751293579491/784637716923335095479473677900958302012794430558004314112"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "6310924505465543571919417873735492370340851773426637299679/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "1577731126366385892979854468433873092585213462933697181229/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "787935257730958693235727255525024141502869113292118566487/784637716923335095479473677900958302012794430558004314112",
+                    "upper": "3151741030923834772942909022100096566011477480976158248327/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 10080,
+                  "side_roles_per_v": "15",
+                  "complete_moment_interval": {
+                    "lower": "98388539943899364070665909308193306044554488229713587925/98079714615416886934934209737619787751599303819750539264",
+                    "upper": "787108319551194912565327274465546448356436160268209314497/784637716923335095479473677900958302012794430558004314112"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "6304655942006772854383520400025311158824500763493670318231/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "3152327971003386427191760200012655579412251165762148525113/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "target_clock": "0 -> U5 -> target-kernel",
+          "actual_center_roles": 6720,
+          "actual_copied_center_loss": 840,
+          "actual_center_child_profile_one_core": {
+            "1": 7560,
+            "12": 84,
+            "2": 168,
+            "11": 168,
+            "3": 336,
+            "10": 420,
+            "4": 3108,
+            "9": 3024,
+            "5": 2352,
+            "8": 2352,
+            "6": 672,
+            "7": 672
+          },
+          "complete_fixed_profile_without_side_roles": {
+            "1": 24696,
+            "12": 252,
+            "2": 1848,
+            "11": 504,
+            "3": 1008,
+            "10": 1260,
+            "4": 11340,
+            "9": 9072,
+            "5": 9072,
+            "8": 11088,
+            "6": 2016,
+            "7": 2016
+          },
+          "W_without_side_roles": 8064,
+          "fixed_first_moment_deficit": -1176,
+          "target_levels": [
+            {
+              "budget": {
+                "b": "1/10000",
+                "fixed_unnormalized_moment": {
+                  "lower": "25402128909885045902804500352887816139755300896816833523327553/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "12701064454942522951402250176443908069877650448408420605926347/1569275433846670190958947355801916604025588861116008628224"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-46427356402974531509298699257252575015301872368927027928011/1569275433846670190958947355801916604025588861116008628224",
+                  "upper": "-92854712805949063018597398514505150030603744737846367330881/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "13": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "851203043515511920131511061473053281654668811976119315/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "425601521757755960065755530736526640827334405988550219/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "3150065589023443192312066015983112120505369654863198601603/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "6300131178046886384624132031966224241010739309726399110083/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "786701020799364838193155801874561678228300899140417791173/784637716923335095479473677900958302012794430558004314112",
+                    "upper": "1573402041598729676386311603749123356456601798280835990995/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 10080,
+                  "side_roles_per_v": "15",
+                  "complete_moment_interval": {
+                    "lower": "6287809933815391879697348088801177145662556422809515774875/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6287809933815391879697348088801177145662556422809517167445/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "3146862691259066716749576843979789153374672598145957350365/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "6293725382518133433499153687959578306749345196291916607773/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "20/189981",
+                "fixed_unnormalized_moment": {
+                  "lower": "50804782641053906473691754840511662897415714780874954482924705/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "25402391320526953236845877420255831448707857390437485336300817/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-93117123447856397059974465882520458983160238358498180304145/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "-186234246895712794119948931765040917966320476716980170931361/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "13": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "448048388772984043178001851491530397139952638565183903/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "224024194386492021589000925745765198569976319282850215/1569275433846670190958947355801916604025588861116008628224"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "1575049065012831921927447756712291136452620125895180880547/1569275433846670190958947355801916604025588861116008628224",
+                    "upper": "6300196260051327687709791026849164545810480503580725529837/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "98338551729262009110411966412447814277765572418818480395/98079714615416886934934209737619787751599303819750539264",
+                    "upper": "1573416827668192145766591462599165028444249158701096116571/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 10080,
+                  "side_roles_per_v": "15",
+                  "complete_moment_interval": {
+                    "lower": "3143931900057024689469438402330550309318061042390484360681/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "3143931900057024689469438402330550309318061042390485093785/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "3146895354732484931603186407257174766408533407029475474335/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "6293790709464969863206372814514349532817066814058952956447/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "1/1000",
+                "fixed_unnormalized_moment": {
+                  "lower": "50893909001276867106738814086095763350631306329315265113539939/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "50893909001276867106738814086095763350631323093511029192025115/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-275360607118673427167008177349141371181928789353054880031771/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "-275360607118673427167008177349141371181912025157290801546595/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "13": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "8518461778091119569389030107808543957640180857660976321/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "1064807722261389946173628763476067994705272751293579491/784637716923335095479473677900958302012794430558004314112"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "6311248636071040067799952143613065891695350487266277915865/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6311248636071040067799952143613065891695352566159601834329/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "6303710859922137660625018705290245029449657880811988966851/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "1575927714980534415156254676322561257362414984210104967001/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 10080,
+                  "side_roles_per_v": "15",
+                  "complete_moment_interval": {
+                    "lower": "6297010614456446632025077871225515374120153341741509901061/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6297010614456446632025077871225515374120155377445591453493/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 3360,
+                  "side_roles_per_v": "5",
+                  "complete_moment_interval": {
+                    "lower": "3152442370040620484561360530557681528125602868984355376593/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "788110592510155121140340132639420382031400913301550052697/784637716923335095479473677900958302012794430558004314112"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "omitted_endpoint_negative_rejected": true,
+      "scope": "Actual inherited centers and source bill, with optimistic explicitly stated side-role and target-clock models. Neither a stock ceiling nor a below1 hypothetical profile supplies aggregate formation, cross-cap chronology, native execution or a kappa."
+    },
+    {
+      "p": 9,
+      "h": 18,
+      "v": 4032,
+      "m": 54,
+      "cap_stock_models": {
+        "blocks": [
+          {
+            "j": 1,
+            "raw_patterns_per_cube": 10,
+            "readable_channels_per_cube": 10,
+            "retained_kernel_patterns_per_cube": 0,
+            "input_bucket_rank": 5,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              5,
+              13
+            ]
+          },
+          {
+            "j": 2,
+            "raw_patterns_per_cube": 40,
+            "readable_channels_per_cube": 40,
+            "retained_kernel_patterns_per_cube": 0,
+            "input_bucket_rank": 4,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              4,
+              1,
+              13
+            ]
+          },
+          {
+            "j": 3,
+            "raw_patterns_per_cube": 80,
+            "readable_channels_per_cube": 60,
+            "retained_kernel_patterns_per_cube": 20,
+            "input_bucket_rank": 3,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              3,
+              2,
+              13
+            ]
+          },
+          {
+            "j": 4,
+            "raw_patterns_per_cube": 80,
+            "readable_channels_per_cube": 30,
+            "retained_kernel_patterns_per_cube": 50,
+            "input_bucket_rank": 2,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              2,
+              3,
+              13
+            ]
+          }
+        ],
+        "retained_aggregate_and_kernel_roles": 26460,
+        "live_roles": 17640,
+        "parked_roles": 8820,
+        "raw_roles_per_original_source": "105/16",
+        "literal_independent_copy_tree_roles": 120960,
+        "literal_copy_tree_roles_per_source": 30,
+        "three_core_optimistic_raw_cap_profile": {
+          "5": 3780,
+          "13": 79380,
+          "4": 15120,
+          "1": 15120,
+          "3": 60480,
+          "2": 60480
+        },
+        "aggregate_formation_and_birth_reuse_verified": false
+      },
+      "rows": [
+        {
+          "target_clock": "optimistic one target-kernel child",
+          "actual_center_roles": 40320,
+          "actual_copied_center_loss": 2016,
+          "actual_center_child_profile_one_core": {
+            "1": 42336,
+            "16": 144,
+            "2": 288,
+            "15": 288,
+            "3": 576,
+            "14": 720,
+            "4": 23760,
+            "13": 23616,
+            "5": 12096,
+            "12": 12096,
+            "6": 1152,
+            "11": 1152,
+            "7": 1152,
+            "10": 1152,
+            "8": 1152,
+            "9": 1152
+          },
+          "complete_fixed_profile_without_side_roles": {
+            "1": 139104,
+            "16": 432,
+            "2": 8928,
+            "15": 864,
+            "3": 1728,
+            "14": 2160,
+            "4": 83376,
+            "13": 70848,
+            "5": 36288,
+            "12": 48384,
+            "6": 3456,
+            "11": 3456,
+            "7": 3456,
+            "10": 3456,
+            "8": 3456,
+            "9": 3456,
+            "17": 12096
+          },
+          "W_without_side_roles": 48384,
+          "fixed_first_moment_deficit": 2016,
+          "target_levels": [
+            {
+              "budget": {
+                "b": "1/10000",
+                "fixed_unnormalized_moment": {
+                  "lower": "303532039467404291477643258733080714480467898814273724890241099/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "303532039467404291477643258733080714480467898814273809188193115/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "179250897544870599787576719399017396228467010674036683766949/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "179250897544870599787576719399017396228467010674120981718965/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "17": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "824358420679776715459163273325499891743186765902916773/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "412179210339888357729581636662749945871593382951924805/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": "179250897544870599787576719399017396228467010674120981718965/824358420679776715459163273325499891743186765902916773",
+                "necessary_R_side_per_v_upper_bound": "179250897544870599787576719399017396228467010674120981718965/3323813152180859716731346318048415563508529040120560428736",
+                "status": "Optimistic necessary stock ceiling only"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "6273396979733058272934095129238606036716019734091305491283/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6273396979733058272934095129238606036716019734091307233553/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "6274998181678518670576523119172782862723421364392842035157/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "98046846588726854227758173737074732230053458818638179551/98079714615416886934934209737619787751599303819750539264"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 120960,
+                  "side_roles_per_v": "30",
+                  "complete_moment_interval": {
+                    "lower": "3138316030607351374901745227920155118100180901738021295065/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "3138316030607351374901745227920155118100180901738021877117/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "6275119190585186066298728258235805024018580356060013003079/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6275119190585186066298728258235805024018580356060014806625/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "optimistic model below1; aggregation/global chronology not supplied"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "20/189981",
+                "fixed_unnormalized_moment": {
+                  "lower": "151767472641314061981135125078301553221467607991321291231288153/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "303534945282628123962270250156603106442935215982642671222536669/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "176345082321038115160585295876625433761149842305174649423395/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "88172541160519057580292647938312716880574921152631704691879/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "17": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "54239764277329189705394693608524219038848772868144391/392318858461667547739736838950479151006397215279002157056",
+                  "upper": "867836228437267035286315097736387504621580365891292623/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "necessary_R_side_strict_upper_bound": "88172541160519057580292647938312716880574921152631704691879/433918114218633517643157548868193752310790182945155128",
+                "necessary_R_side_per_v_upper_bound": "88172541160519057580292647938312716880574921152631704691879/1749557836529530343137211237036557209317106017634865476096",
+                "status": "Optimistic necessary stock ceiling only"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "3136728518545677537639201493847171652229406580508459226837/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "6273457037091355075278402987694343304458813161016920288165/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "196095386799361065624465101658184049751138964070116840229/196159429230833773869868419475239575503198607639501078528",
+                    "upper": "6275052377579554099982883253061889592036446850243740420563/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 120960,
+                  "side_roles_per_v": "30",
+                  "complete_moment_interval": {
+                    "lower": "6276680276036900043558883523845100089564644492311923003301/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "1569170069009225010889720880961275022391161123077981057283/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "6275179769242268852351172763252239033732002143669520379895/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6275179769242268852351172763252239033732002143669522278823/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "optimistic model below1; aggregation/global chronology not supplied"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "1/1000",
+                "fixed_unnormalized_moment": {
+                  "lower": "304028404639298599709288405747486673852028031412591227085833009/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "152014202319649299854644202873743336926014101671088638897698641/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-158557137174718815928785147503470987665918758614715961718609/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "-317114274349437631857570295006941975331665587643381213872945/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "17": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "8249650024023322772824885470965057862822022872536505983/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "8249650024023322772824885470965057862825649815684291317/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "196364245307913385435583306043505261199484870652353584789/196159429230833773869868419475239575503198607639501078528",
+                    "upper": "785456981231653541742333224174021044797939926789272481077/784637716923335095479473677900958302012794430558004314112"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "6284255281615972286902789005867180570962891176290910376855/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6284255281615972286902789005867180570962894755716138065241/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 120960,
+                  "side_roles_per_v": "30",
+                  "complete_moment_interval": {
+                    "lower": "6284866946679996728702914732882499155227559865490497788699/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "1571216736669999182175728683220624788806890867858105489939/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "6285467199359989943905087380432783904344197285387812604451/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "3142733599679994971952543690216391952172100019428322649013/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "target_clock": "0 -> U5 -> target-kernel",
+          "actual_center_roles": 40320,
+          "actual_copied_center_loss": 2016,
+          "actual_center_child_profile_one_core": {
+            "1": 42336,
+            "16": 144,
+            "2": 288,
+            "15": 288,
+            "3": 576,
+            "14": 720,
+            "4": 23760,
+            "13": 23616,
+            "5": 12096,
+            "12": 12096,
+            "6": 1152,
+            "11": 1152,
+            "7": 1152,
+            "10": 1152,
+            "8": 1152,
+            "9": 1152
+          },
+          "complete_fixed_profile_without_side_roles": {
+            "1": 139104,
+            "16": 432,
+            "2": 8928,
+            "15": 864,
+            "3": 1728,
+            "14": 2160,
+            "4": 83376,
+            "13": 70848,
+            "5": 48384,
+            "12": 60480,
+            "6": 3456,
+            "11": 3456,
+            "7": 3456,
+            "10": 3456,
+            "8": 3456,
+            "9": 3456
+          },
+          "W_without_side_roles": 48384,
+          "fixed_first_moment_deficit": 2016,
+          "target_levels": [
+            {
+              "budget": {
+                "b": "1/10000",
+                "fixed_unnormalized_moment": {
+                  "lower": "303533487747749140172721780479738690916507686264522155268697459/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "75883371936937285043180445119934672729126921566130560831651675/1569275433846670190958947355801916604025588861116008628224"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "44450654300005476177263743185260240047169890106400636338341/1569275433846670190958947355801916604025588861116008628224",
+                  "upper": "177802617200021904709054972741040960188679560425690603262605/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "17": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "824358420679776715459163273325499891743186765902916773/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "412179210339888357729581636662749945871593382951924805/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": "177802617200021904709054972741040960188679560425690603262605/824358420679776715459163273325499891743186765902916773",
+                "necessary_R_side_per_v_upper_bound": "59267539066673968236351657580346986729559853475230201087535/1107937717393619905577115439349471854502843013373520142912",
+                "status": "Optimistic necessary stock ceiling only"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "6273426912775899887829071190470789742818032536882485021261/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "3136713456387949943914535595235394871409016268441243420621/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "784377191541559610783275576662834925000186280875665216413/784637716923335095479473677900958302012794430558004314112",
+                    "upper": "392188595770779805391637788331417462500093140437832702353/392318858461667547739736838950479151006397215279002157056"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 120960,
+                  "side_roles_per_v": "30",
+                  "complete_moment_interval": {
+                    "lower": "1569160153378164374229085189762376395200234222496952042531/1569275433846670190958947355801916604025588861116008628224",
+                    "upper": "6276640613512657496916340759049505580800936889987809356431/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "6275138541239144281988409752365701561296649238672492699227/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "3137569270619572140994204876182850780648324619336247276505/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "optimistic model below1; aggregation/global chronology not supplied"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "20/189981",
+                "fixed_unnormalized_moment": {
+                  "lower": "151768234976752387628577672996249345087286373371582981181692555/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "9485514686047024226786104562265584067955398335723939221301515/196159429230833773869868419475239575503198607639501078528"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "5463137857637088133609045624407553191363096305680962197237/196159429230833773869868419475239575503198607639501078528",
+                  "upper": "87410205722193410137744729990520851061809540890941754287477/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "17": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "54239764277329189705394693608524219038848772868144391/392318858461667547739736838950479151006397215279002157056",
+                  "upper": "867836228437267035286315097736387504621580365891292623/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "necessary_R_side_strict_upper_bound": "87410205722193410137744729990520851061809540890941754287477/433918114218633517643157548868193752310790182945155128",
+                "necessary_R_side_per_v_upper_bound": "87410205722193410137744729990520851061809540890941754287477/1749557836529530343137211237036557209317106017634865476096",
+                "status": "Optimistic necessary stock ceiling only"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "3136744274486449810445140397574597906069906857051566244661/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "6273488548972899620890280795149195812139813714103134405623/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "1568768187224229057619862681136963712381798670635474363957/1569275433846670190958947355801916604025588861116008628224",
+                    "upper": "3137536374448458115239725362273927424763597341270949520975/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 120960,
+                  "side_roles_per_v": "30",
+                  "complete_moment_interval": {
+                    "lower": "1569172319857906764147712152922335915796946876869853181943/1569275433846670190958947355801916604025588861116008628224",
+                    "upper": "6276689279431627056590848611689343663187787507479413976977/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "6275200140559630982847740234738204291222749975967678948395/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "3137600070279815491423870117369102145611374987983840450105/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "optimistic model below1; aggregation/global chronology not supplied"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "1/1000",
+                "fixed_unnormalized_moment": {
+                  "lower": "304042908183413408744151498729687630944902134336073921862683649/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "38005363522926676093018937341210953868112788294341541491162257/784637716923335095479473677900958302012794430558004314112"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-41452227308030833340082909650987383525742566223060757167249/784637716923335095479473677900958302012794430558004314112",
+                  "upper": "-331617818464246666720663277207899068205768511126075990723585/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "17": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "8249650024023322772824885470965057862822022872536505983/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "8249650024023322772824885470965057862825649815684291317/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "3141977804474758274885824846330270657086042228175367082741/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "1570988902237379137442912423165135328543022002907636470369/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "1571112266318544702567391619025320064888370243846532758211/1569275433846670190958947355801916604025588861116008628224",
+                    "upper": "6284449065274178810269566476101280259553484556001465601635/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 120960,
+                  "side_roles_per_v": "30",
+                  "complete_moment_interval": {
+                    "lower": "3142476296068039538041883637765302857012146874956023101811/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "3142476296068039538041883637765302857012148678189977556001/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 26460,
+                  "side_roles_per_v": "105/16",
+                  "complete_moment_interval": {
+                    "lower": "785707622877274558408983106333360449116848385560379157555/784637716923335095479473677900958302012794430558004314112",
+                    "upper": "1571415245754549116817966212666720898233697459785493208605/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "omitted_endpoint_negative_rejected": true,
+      "scope": "Actual inherited centers and source bill, with optimistic explicitly stated side-role and target-clock models. Neither a stock ceiling nor a below1 hypothetical profile supplies aggregate formation, cross-cap chronology, native execution or a kappa."
+    },
+    {
+      "p": 12,
+      "h": 24,
+      "v": 25344,
+      "m": 72,
+      "cap_stock_models": {
+        "blocks": [
+          {
+            "j": 0,
+            "raw_patterns_per_cube": 1,
+            "readable_channels_per_cube": 1,
+            "retained_kernel_patterns_per_cube": 0,
+            "input_bucket_rank": 6,
+            "common_cap_rank": 6,
+            "one_core_optimistic_role_child_pieces": [
+              6,
+              18
+            ]
+          },
+          {
+            "j": 1,
+            "raw_patterns_per_cube": 10,
+            "readable_channels_per_cube": 10,
+            "retained_kernel_patterns_per_cube": 0,
+            "input_bucket_rank": 5,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              5,
+              19
+            ]
+          },
+          {
+            "j": 2,
+            "raw_patterns_per_cube": 40,
+            "readable_channels_per_cube": 40,
+            "retained_kernel_patterns_per_cube": 0,
+            "input_bucket_rank": 4,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              4,
+              1,
+              19
+            ]
+          },
+          {
+            "j": 3,
+            "raw_patterns_per_cube": 80,
+            "readable_channels_per_cube": 60,
+            "retained_kernel_patterns_per_cube": 20,
+            "input_bucket_rank": 3,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              3,
+              2,
+              19
+            ]
+          },
+          {
+            "j": 4,
+            "raw_patterns_per_cube": 80,
+            "readable_channels_per_cube": 30,
+            "retained_kernel_patterns_per_cube": 50,
+            "input_bucket_rank": 2,
+            "common_cap_rank": 5,
+            "one_core_optimistic_role_child_pieces": [
+              2,
+              3,
+              19
+            ]
+          }
+        ],
+        "retained_aggregate_and_kernel_roles": 167112,
+        "live_roles": 111672,
+        "parked_roles": 55440,
+        "raw_roles_per_original_source": "211/32",
+        "literal_independent_copy_tree_roles": 785664,
+        "literal_copy_tree_roles_per_source": 31,
+        "three_core_optimistic_raw_cap_profile": {
+          "6": 2376,
+          "18": 2376,
+          "5": 23760,
+          "19": 498960,
+          "4": 95040,
+          "1": 95040,
+          "3": 380160,
+          "2": 380160
+        },
+        "aggregate_formation_and_birth_reuse_verified": false
+      },
+      "rows": [
+        {
+          "target_clock": "optimistic one target-kernel child",
+          "actual_center_roles": 253440,
+          "actual_copied_center_loss": 5280,
+          "actual_center_child_profile_one_core": {
+            "1": 258720,
+            "22": 264,
+            "2": 528,
+            "21": 528,
+            "3": 1056,
+            "20": 1320,
+            "4": 178728,
+            "19": 178464,
+            "5": 60192,
+            "18": 60192,
+            "6": 2112,
+            "17": 2112,
+            "7": 2112,
+            "16": 2112,
+            "8": 2112,
+            "15": 2112,
+            "9": 2112,
+            "14": 2112,
+            "10": 2112,
+            "13": 2112,
+            "11": 2112,
+            "12": 2112
+          },
+          "complete_fixed_profile_without_side_roles": {
+            "1": 852192,
+            "22": 792,
+            "2": 52272,
+            "21": 1584,
+            "3": 3168,
+            "20": 3960,
+            "4": 612216,
+            "19": 535392,
+            "5": 180576,
+            "18": 256608,
+            "6": 6336,
+            "17": 6336,
+            "7": 6336,
+            "16": 6336,
+            "8": 6336,
+            "15": 6336,
+            "9": 6336,
+            "14": 6336,
+            "10": 6336,
+            "13": 6336,
+            "11": 6336,
+            "12": 6336,
+            "23": 76032
+          },
+          "W_without_side_roles": 304128,
+          "fixed_first_moment_deficit": 34848,
+          "target_levels": [
+            {
+              "budget": {
+                "b": "1/10000",
+                "fixed_unnormalized_moment": {
+                  "lower": "1906328742431719218852223823072338559200176749371800720831954721/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "59572773200991225589131994471010579975005523417868786245766163/196159429230833773869868419475239575503198607639501078528"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "84801692123788390363348207155081643631262726317397764797421/196159429230833773869868419475239575503198607639501078528",
+                  "upper": "2713654147961228491627142628962612596200407242157167506079967/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "23": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "199598968338535753533169146701833158535353359496276299/1569275433846670190958947355801916604025588861116008628224",
+                  "upper": "399197936677071507066338293403666317070706718993013873/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": "2713654147961228491627142628962612596200407242157167506079967/798395873354143014132676586807332634141413437985105196",
+                "necessary_R_side_per_v_upper_bound": "2713654147961228491627142628962612596200407242157167506079967/20234545014287400550178555416045038279679982172294506087424",
+                "status": "Optimistic necessary stock ceiling only"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "783522374802599242281302536708367266085405137545622534275/784637716923335095479473677900958302012794430558004314112",
+                    "upper": "6268178998420793938250420293666938128683241100364981717779/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "6271626324520087794342008329117207062853387259760468175983/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "3135813162260043897171004164558603531426693629880234717397/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 785664,
+                  "side_roles_per_v": "31",
+                  "complete_moment_interval": {
+                    "lower": "6275187256979316497008200665526324273372797576728892359331/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6275187256979316497008200665526324273372797576728893427285/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "783966227540232073275620728858231578598038023581799844447/784637716923335095479473677900958302012794430558004314112",
+                    "upper": "6271729820321856586204965830865852628784304188654400146639/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "optimistic model below1; aggregation/global chronology not supplied"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "20/189981",
+                "fixed_unnormalized_moment": {
+                  "lower": "953172927719093075974365642104268666355886186392512141062711463/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "1906345855438186151948731284208537332711772372785024744493644061/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "2696541141494295395119681492763839084604783828933143844390627/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "1348270570747147697559840746381919542302391914466803106305881/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "23": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "840504261932675659370990965611254102682404804176953891/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "420252130966337829685495482805627051341202402088962853/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": "898847047164765131706560497587946361534927942977868737537254/280168087310891886456996988537084700894134934725651297",
+                "necessary_R_side_per_v_upper_bound": "49935947064709173983697805421552575640829330165437152085403/394476666933735776131451759860215258858941988093717026176",
+                "status": "Optimistic necessary stock ceiling only"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "1567058816878243824926290315433417288700623070536932050095/1569275433846670190958947355801916604025588861116008628224",
+                    "upper": "6268235267512975299705161261733669154802492282147729720689/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "6271677571917378068605480288901328645138521046286252518383/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "783959696489672258575685036112666080642315130785781730523/784637716923335095479473677900958302012794430558004314112"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 785664,
+                  "side_roles_per_v": "31",
+                  "complete_moment_interval": {
+                    "lower": "3137616658596078142102464046281112065511466054803340626453/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "6275233317192156284204928092562224131022932109606682377789/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "6271786526781730485470374941176869731952535275773601735699/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "783973315847716310683796867647108716494066909471700400075/784637716923335095479473677900958302012794430558004314112"
+                  },
+                  "classification": "optimistic model below1; aggregation/global chronology not supplied"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "1/1000",
+                "fixed_unnormalized_moment": {
+                  "lower": "1909251902141279465682435708066066033977210676953199466856122905/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "1909251902141279465682435708066066033977212649837090541986972175/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-209505561599018338584742364764862180835493223132653648937487/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "-209505561599018338584742364764862180833520339241578518088217/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "23": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "249676296278614006478490164433945402791081646678212111/196159429230833773869868419475239575503198607639501078528",
+                  "upper": "3994820740457824103655842630943126444660669449685085027/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "784723826045809439480430816985802866711224664020247834323/784637716923335095479473677900958302012794430558004314112",
+                    "upper": "3138895304183237757921723267943211466844901899590124128635/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "6280379620389562085756265216247835327217016050303334315017/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "3140189810194781042878132608123917663608511311071339259575/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 785664,
+                  "side_roles_per_v": "31",
+                  "complete_moment_interval": {
+                    "lower": "6283053953099841743336220762632400184721379988786829032765/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "3141526976549920871668110381316200092360693324121261909985/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "1570354058227964858270937555631234490421530168654083668235/1569275433846670190958947355801916604025588861116008628224",
+                    "upper": "6281416232911859433083750222524937961686125803216197208495/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "target_clock": "0 -> U5 -> target-kernel",
+          "actual_center_roles": 253440,
+          "actual_copied_center_loss": 5280,
+          "actual_center_child_profile_one_core": {
+            "1": 258720,
+            "22": 264,
+            "2": 528,
+            "21": 528,
+            "3": 1056,
+            "20": 1320,
+            "4": 178728,
+            "19": 178464,
+            "5": 60192,
+            "18": 60192,
+            "6": 2112,
+            "17": 2112,
+            "7": 2112,
+            "16": 2112,
+            "8": 2112,
+            "15": 2112,
+            "9": 2112,
+            "14": 2112,
+            "10": 2112,
+            "13": 2112,
+            "11": 2112,
+            "12": 2112
+          },
+          "complete_fixed_profile_without_side_roles": {
+            "1": 852192,
+            "22": 792,
+            "2": 52272,
+            "21": 1584,
+            "3": 3168,
+            "20": 3960,
+            "4": 612216,
+            "19": 535392,
+            "5": 256608,
+            "18": 332640,
+            "6": 6336,
+            "17": 6336,
+            "7": 6336,
+            "16": 6336,
+            "8": 6336,
+            "15": 6336,
+            "9": 6336,
+            "14": 6336,
+            "10": 6336,
+            "13": 6336,
+            "11": 6336,
+            "12": 6336
+          },
+          "W_without_side_roles": 304128,
+          "fixed_first_moment_deficit": 34848,
+          "target_levels": [
+            {
+              "budget": {
+                "b": "1/10000",
+                "fixed_unnormalized_moment": {
+                  "lower": "953168363135032832465478121948347429779488902356101140680574559/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "1906336726270065664930956243896694859558977804712202742953369787/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "2705670309614782412894721804606312237399351901755145384664901/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "1352835154807391206447360902303156118699675950877803488442785/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "23": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "199598968338535753533169146701833158535353359496276299/1569275433846670190958947355801916604025588861116008628224",
+                  "upper": "399197936677071507066338293403666317070706718993013873/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": "1352835154807391206447360902303156118699675950877803488442785/399197936677071507066338293403666317070706718992552598",
+                "necessary_R_side_per_v_upper_bound": "1352835154807391206447360902303156118699675950877803488442785/10117272507143700275089277708022519139839991086147253043712",
+                "status": "Optimistic necessary stock ceiling only"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "6268205249993639733700797834782377352821765193314006870005/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6268205249993639733700797834782377352821765193314008387763/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "3135821633355819347131462127405938541568872832983113258403/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "3135821633355819347131462127405938541568872832983113911745/3138550867693340381917894711603833208051177722232017256448"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 785664,
+                  "side_roles_per_v": "31",
+                  "complete_moment_interval": {
+                    "lower": "3137597291499822778101827431523455981915030057148031286057/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "6275194582999645556203654863046911963830060114296063660769/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "6271746762513407486125881756560522649068662594860157096399/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6271746762513407486125881756560522649068662594860158535335/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "optimistic model below1; aggregation/global chronology not supplied"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "20/189981",
+                "fixed_unnormalized_moment": {
+                  "lower": "476588565098260542323149195953885525118840710280883849076711717/1569275433846670190958947355801916604025588861116008628224",
+                  "upper": "953177130196521084646298391907771050237681420561767941212450839/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "1344068093319139025627090942879535660507157745211002956566505/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "672034046659569512813545471439767830253578872605623007796955/1569275433846670190958947355801916604025588861116008628224"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "23": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "840504261932675659370990965611254102682404804176953891/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "420252130966337829685495482805627051341202402088962853/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": "896045395546092683751393961919690440338105163474164010395940/280168087310891886456996988537084700894134934725651297",
+                "necessary_R_side_per_v_upper_bound": "224011348886523170937848490479922610084526290868541002598985/1775145001201810992591532919370968664865238946421726617792",
+                "status": "Optimistic necessary stock ceiling only"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "6121350491947733334154703107556243859478481180735422373/6129982163463555433433388108601236734474956488734408704",
+                    "upper": "6268262903754478934174415982137593712105964729073074108353/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "6271695407743827473036058125262853065314207465814541955149/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6271695407743827473036058125262853065314207465814543331349/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 785664,
+                  "side_roles_per_v": "31",
+                  "complete_moment_interval": {
+                    "lower": "6275241029631645670568441037791226333061110466888172688135/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6275241029631645670568441037791226333061110466888173834811/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "necessary floor permits; no attained chronology"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "6271804362608179889900952777538394152128221695301891172465/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "1567951090652044972475238194384598538032055423825473171941/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "optimistic model below1; aggregation/global chronology not supplied"
+                }
+              ]
+            },
+            {
+              "budget": {
+                "b": "1/1000",
+                "fixed_unnormalized_moment": {
+                  "lower": "1909331860587780412044876729099466395262973670936418146742268991/6277101735386680763835789423207666416102355444464034512896",
+                  "upper": "954665930293890206022438364549733197631487822831094722523099179/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "unnormalized_slack_for_side": {
+                  "lower": "-144732004049982350512881699082611733299244524115778354081835/3138550867693340381917894711603833208051177722232017256448",
+                  "upper": "-289464008099964701025763398165223466596514322460258404234303/6277101735386680763835789423207666416102355444464034512896"
+                },
+                "ideal_three_core_geodesic_profile_per_side_role": {
+                  "23": 3,
+                  "1": 3
+                },
+                "ideal_side_excess_per_role": {
+                  "lower": "249676296278614006478490164433945402791081646678212111/196159429230833773869868419475239575503198607639501078528",
+                  "upper": "3994820740457824103655842630943126444660669449685085027/3138550867693340381917894711603833208051177722232017256448"
+                },
+                "necessary_R_side_strict_upper_bound": null,
+                "necessary_R_side_per_v_upper_bound": null,
+                "status": "NO nonnegative side stock can fit this fixed profile"
+              },
+              "stock_models": [
+                {
+                  "scenario": "no side stock",
+                  "side_roles": 0,
+                  "side_roles_per_v": "0",
+                  "complete_moment_interval": {
+                    "lower": "6278053518872910130092844884717837210855211197049986014909/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "1569513379718227532523211221179459302713804422531129528559/1569275433846670190958947355801916604025588861116008628224"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "independent retained cap aggregates/kernels, ideal two-piece floor",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "6280549297086151819994532385913823701051501649962146554823/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "6280549297086151819994532385913823701051508225710072847007/6277101735386680763835789423207666416102355444464034512896"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "literal independent source-copy tree stock, ideal two-piece floor",
+                  "side_roles": 785664,
+                  "side_roles_per_v": "31",
+                  "complete_moment_interval": {
+                    "lower": "6283127323473730472894192394864422773697774561313713685879/6277101735386680763835789423207666416102355444464034512896",
+                    "upper": "785390915434216309111774049358052846712222652807441170181/784637716923335095479473677900958302012794430558004314112"
+                  },
+                  "classification": "excluded even by optimistic floor"
+                },
+                {
+                  "scenario": "retained raw cap stock with literal bucket/common-cap/full pieces",
+                  "side_roles": 167112,
+                  "side_roles_per_v": "211/32",
+                  "complete_moment_interval": {
+                    "lower": "3140792954804224583661008696095463167760303137137573456373/3138550867693340381917894711603833208051177722232017256448",
+                    "upper": "196299559675264036478813043505966447985019106461987235511/196159429230833773869868419475239575503198607639501078528"
+                  },
+                  "classification": "excluded under this optimistic cap model"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "omitted_endpoint_negative_rejected": true,
+      "scope": "Actual inherited centers and source bill, with optimistic explicitly stated side-role and target-clock models. Neither a stock ceiling nor a below1 hypothetical profile supplies aggregate formation, cross-cap chronology, native execution or a kappa."
+    }
+  ],
+  "scope": "Rigorous moments and necessary ceilings of declared optimistic paid stock profiles. No attained aggregate birth, whole Gaussian side/master supplier, native recurrence or exponent."
+}

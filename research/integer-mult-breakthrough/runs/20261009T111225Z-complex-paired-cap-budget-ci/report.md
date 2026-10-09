@@ -1,0 +1,1 @@
+PASS exact paid-center side-budget sensitivity. All compact original result/protocol bytes are under `results/`; the report `../../reports/complex/paired-cap-side-budget.md` states the hypotheses and exclusions. No positive hypothetical moment is an attained circuit or exponent. Full logs and effective source snapshots remain unchanged in the recorded ignored raw directory.

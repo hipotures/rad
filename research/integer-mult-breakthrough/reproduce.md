@@ -838,3 +838,40 @@ downloadable reference, and no bounded check depends on a downloaded paper.
 The new input-control bill and same-volume layout are conditional on the
 inherited stream-routing contracts and the explicitly unsupplied active
 Gaussian child. These commands do not implement a complete native multiplier.
+
+## Twentieth checkpoint: complete scan, target and budget controls
+
+The eleven newly registered bounded checks use only the retained
+standard-library runtime closures:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/target_pivot_rank_boundary.py
+python3 -B research/integer-mult-breakthrough/code/complex/cap_repeated_target_pivot.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/paired_cap_side_budget.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/paired_cap_leader_budget.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_gaussian_unit_nonlex_five.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_two_scan_response_components.py
+python3 -B research/integer-mult-breakthrough/code/transfers/selected_fiber_scan_tapes.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/selected_polynomial_scan_tapes.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/verify_selected_scan_native_records.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/phase_xor_coupled_budget.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/selected_scan_independent_replay.py --workers 1 --bounded
+```
+
+The last command imports the unchanged literal consumer but uses a new
+complete endpoint reference, not the author's verifier or carry reference.
+For its complete four-shape replay, replace the final flags with
+`--workers 4 --output NEW_OUTPUT_DIRECTORY`. Every output namespace must be
+fresh. Full run protocols retain exact seeds, worker counts and source hashes.
+The selected-source analytical review adds no runtime dependency.
+
+Complete long certificates are published whole through gzip evidence.
+Separate readable summaries explicitly name their omitted arrays and bind
+the complete original hash and byte count. In particular, the 1,470,225-byte
+coordinator scan certificate and the long target-pivot interface certificate
+are not split or cropped. Consult the chronological
+[twentieth recovery shard](configs/recovery/checkpoint-twenty-artifacts.json)
+for exact archive namespaces and manifests. The preceding nineteenth remote
+commit passed all ten matrix jobs. Local registry changes require all three
+groups to run under the unchanged CI runner. These checks do not certify
+whole native transforms, new global suppliers or multiplier exponents.
