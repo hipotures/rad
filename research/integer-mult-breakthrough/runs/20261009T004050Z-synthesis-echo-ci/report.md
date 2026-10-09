@@ -1,0 +1,5 @@
+# Bounded exact echo elimination checks
+
+The retained serial and reconstructed parallel kernels pass all bounded exact checks. Sixteen graph objectives each agree with independent enumeration of all 64 label assignments; the parallel run agrees on their objective values. The two-bit full-domain and three-bit L_E words have exact optima equal to capacity. Invalid inputs and uint16 overflow are rejected by guards; the completed large instance is regenerated and validated without rerunning its 271 billion candidate evaluation step.
+
+The initial verifier compared hashes despite different factor-cap headers, then used an incorrect fixture bound key. Both instrumentation failures are preserved with exact failed source hashes and recovery patches in [failure provenance](results/verifier-failures.json). Neither changes the successful optimization result. See [check](results/check.json), [protocol](results/protocol.json), [verifier](../../code/synthesis/verify_echo_elimination.py) and [method](../../reports/synthesis/color-center-release-topologies.md).

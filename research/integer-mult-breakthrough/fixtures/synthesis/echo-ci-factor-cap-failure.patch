@@ -1,0 +1,24 @@
+--- a/verify_echo_elimination.py
++++ b/failed-verify-echo.py
+@@ -87,11 +87,7 @@
+         os.environ['OMP_NUM_THREADS'] = '2'
+         os.environ['OMP_DYNAMIC'] = 'FALSE'
+         parallel_controls = dp.controls(native, work / 'parallel-controls')
+-        semantics = lambda receipt: (receipt['seed'], receipt['assignments_each'],
+-                                      [(case['case'], case['optimum']) for case in receipt['cases']])
+-        # Distinct storage caps are retained in their graph input headers,
+-        # so the input SHA must differ while the finite objective agrees.
+-        if semantics(parallel_controls) != semantics(control):
++        if parallel_controls != control:
+             raise ValueError('Serial/parallel exhaustive finite-factor controls differ')
+     finally:
+         dp.solve = old_solve
+@@ -129,7 +125,7 @@
+     unary = [[sum(table[j][ids[F]] for F in boundary) for j in range(len(frames))]
+              for boundary in boundaries]
+     guard = guard_graph(edges, unary, table, constant, estimate['order'])
+-    if guard['global_nonnegative_charge_bound'] != fixture['global_nonnegative_cost_bound']:
++    if guard['global_nonnegative_charge_bound'] != fixture['global_nonnegative_charge_bound']:
+         raise ValueError('Full-case guarded nonnegative charge bound changed')
+     fields = [len(word), len(frames), constant, parallel.FACTOR_MAX_ENTRIES]
+     fields += [x for row in table for x in row] + [x for row in unary for x in row]

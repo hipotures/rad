@@ -1,0 +1,16 @@
+{
+  "recorded_utc": "2026-10-09T00:51:47.501042+00:00",
+  "old_source_sha256": "14db465c322e20597206be33514e17fe9e2ce4319128f6fb81dcee6483a3c7c5",
+  "corrected_source_sha256": "3b0b0c073a5fdc6bbbd86987db34c0999a4479efee19c42989a4dad7c7a57e68",
+  "patch_sha256": "95fe12d1c2917ea637b7b80d00e4231c9ad35aad37398139b5dbfaa66f089af6",
+  "replay_command": [
+    "/usr/bin/python3",
+    "-B",
+    "-c",
+    "import importlib.util,sys;from pathlib import Path;sys.path.insert(0,sys.argv[2]);s=importlib.util.spec_from_file_location('old_release',sys.argv[1]);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);m.model(2,'product')",
+    "research/integer-mult-breakthrough/work/obstructions/20261009T005143Z-release-product-recovery/entangled_release_probe.py",
+    "research/integer-mult-breakthrough/code/synthesis"
+  ],
+  "expected_type_error_reproduced": true,
+  "scope": "Fresh isolated replay of product-domain API error; original67-frame successful run retains old source hash and is not modified"
+}

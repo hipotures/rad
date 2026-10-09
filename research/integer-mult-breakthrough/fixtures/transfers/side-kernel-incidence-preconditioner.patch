@@ -1,0 +1,81 @@
+--- a/code/transfers/side_kernel_completion.py
++++ b/code/transfers/side_kernel_completion.py
+@@ -3,6 +3,7 @@
+ 
+ Two-sided Euclidean reduction retains the right-column operations as explicit
+ reversible scalar words and the left-row operations as a rank certificate.
++An explicit integral ballot-incidence basis controls coefficient growth.
+ This independently determines rank and gives an actual integer projector onto
+ the kernel. Its noncommutation with K is the price of avoiding the forbidden
+ Gaussian-dyadic invariant spectral projector; no native phase cost is inferred.
+@@ -184,6 +185,38 @@
+                     [abs(op[3]).bit_length() for op in word if op[0] == 'add']+[1]))
+ 
+ 
++def incidence_preconditioner(labels, h, k):
++    ell = h-k
++    columns = [a for j in range(ell+1) for a in combinations(range(h), j)
++               if all(x >= 2*i+1 for i, x in enumerate(a))]
++    B = [[int(all(not(s & (1 << x)) for x in a)) for a in columns] for s in labels]
++    n = len(labels)
++    if len(columns) != n:
++        raise ValueError('Ballot-incidence basis count failed')
++    rows = [row+unit for row, unit in zip(B, identity(n))]
++    undo = []
++    for j in range(n):
++        pivot = next(i for i in range(j, n) if rows[i][j])
++        if pivot != j:
++            rows[j], rows[pivot] = rows[pivot], rows[j]
++            undo.append(['swap', j, pivot, 0])
++        if abs(rows[j][j]) != 1:
++            raise ValueError('Incidence preconditioner requires a nonunit pivot')
++        if rows[j][j] < 0:
++            rows[j] = [-x for x in rows[j]]
++            undo.append(['negate', j, j, 0])
++        for i in range(n):
++            if i == j or not rows[i][j]:
++                continue
++            coefficient = -rows[i][j]
++            rows[i] = [x+coefficient*y for x, y in zip(rows[i], rows[j])]
++            undo.append(['add', i, j, coefficient])
++    Bi = [row[n:] for row in rows]
++    if [row[:n] for row in rows] != identity(n) or product(B, Bi) != identity(n):
++        raise ValueError('Incidence preconditioner exact inverse failed')
++    return B, Bi, columns, undo
++
++
+ def case(task):
+     order, config = task
+     started = time.monotonic()
+@@ -203,11 +236,14 @@
+     if any(z.denominator != 1 for row in H for z in row):
+         raise ValueError('Scaled side matrix is not integral')
+     H = [[int(z) for z in row] for row in H]
+-    reduced, V, column_word, pivots, row_word, diagonal, U = euclidean_columns(H, config)
++    B, Bi, incidence_columns, incidence_undo = incidence_preconditioner(labels, h, k)
++    Hpre = product(product(Bi, H), B)
++    reduced, V, column_word, pivots, row_word, diagonal, U = euclidean_columns(Hpre, config)
++    reduced, V, U = product(B, reduced), product(B, V), product(U, Bi)
+     r = len(pivots)
+-    if r != 36 or product(H, V) != reduced:
++    if r != 36 or product(H, V) != reduced or product(product(U, H), V) != diagonal:
+         raise ValueError('Rank or literal right-coordinate certificate failed')
+-    word = scalar_word(column_word)
++    word = scalar_word(column_word)+inverse_word(incidence_undo)
+     undo = inverse_word(word)
+     basis_outputs = [apply_word([int(i == j) for i in range(n)], word) for j in range(n)]
+     inverse_outputs = [apply_word([int(i == j) for i in range(n)], undo) for j in range(n)]
+@@ -236,9 +272,12 @@
+     witness = next((i, j, PH[i][j]) for i in range(n) for j in range(n) if PH[i][j])
+     return dict(source_order=order, labels=labels, volume=n, rank=r, nullity=n-r,
+         pivots=pivots, column_word=column_word, rank_certificate_row_word=row_word,
++        incidence_basis_columns=[list(a) for a in incidence_columns],
++        incidence_basis_inverse_word=incidence_undo, incidence_basis_sha256=digest(B),
++        incidence_basis_inverse_sha256=digest(Bi),
+         diagonal_rank_certificate_sha256=digest(diagonal), U_sha256=digest(U),
+         exact_UHV_diagonal=True,
+-        scalar_word_convention='Reverse column operation order; column target+=c*source becomes data source+=c*target.',
++        scalar_word_convention='First reverse preconditioned column operations: column target+=c*source becomes data source+=c*target. Then apply the inverse of incidence_basis_inverse_word to return to physical scalar coordinates.',
+         scalar_operations=len(word), scalar_operation_counts={kind: sum(op[0] == kind for op in word)
+             for kind in ['add', 'swap', 'negate']}, V_max_bits=integer_bits(V),
+         inverse_max_bits=integer_bits(Vinv), V_sha256=digest(V), inverse_sha256=digest(Vinv),

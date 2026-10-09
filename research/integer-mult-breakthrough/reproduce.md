@@ -217,3 +217,59 @@ Execution namespace names, including documented manually selected future
 names, are recovery paths; protocol clock fields supply actual run times.
 The hypothetical capacity tests and scoped routing/release proofs establish
 only their named contracts, without a larger multiplication exponent.
+
+## Seventh-checkpoint bounded components
+
+These checks require Python's standard library:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/test_point_center_basis.py
+python3 -B research/integer-mult-breakthrough/code/complex/test_conditioned_frames.py
+python3 -B research/integer-mult-breakthrough/code/complex/test_total_centers.py
+python3 -B research/integer-mult-breakthrough/code/complex/test_triple_total_centers.py
+python3 -B research/integer-mult-breakthrough/code/complex/wht_dirty_echo_review.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/transfers/odd_weight_spectrum.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/side_kernel_completion.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/transfers/total_center_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/obstructions/wht_arithmetic_dirty_echo.py --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/full_domain_lookup_boundary.py --bounded
+```
+
+Two exact elimination checks additionally need a C++17 compiler, GNU patch
+and OpenMP. Generated sources, binaries and factor inputs are temporary:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_echo_elimination.py
+python3 -B research/integer-mult-breakthrough/code/obstructions/verify_entangled_release.py
+```
+
+All 60 registered checks passed locally in three populated groups. Run each
+with its own fresh evidence directory:
+
+```sh
+python3 tools/run_ci.py --group repository --all --output research/integer-mult-breakthrough/work/REPRO-UNIQUE/ci-repository
+python3 tools/run_ci.py --group smoke --all --output research/integer-mult-breakthrough/work/REPRO-UNIQUE/ci-smoke
+python3 tools/run_ci.py --group certificates --all --output research/integer-mult-breakthrough/work/REPRO-UNIQUE/ci-certificates
+```
+
+The selectable full group currently has no entries; it does not combine groups.
+Each group report retains command logs and effective input hashes. The larger
+full 135-frame experiment needs about 5.35 GB of factor payload plus reserve;
+bounded CI binds its input, patch, preflight and witness without rerunning that
+minimum. The two-copy 67-frame case is small enough for complete replay.
+Optional SMT discoveries use the existing pinned solver setup; these bounded
+checks do not import it. UNKNOWN solver cases remain inconclusive.
+
+Completed text evidence is retained in seventh-checkpoint gzip namespaces.
+The readable coupled-kernel summary identifies omitted operation arrays,
+original hash and exact recovery copy. Downloaded primary PDFs are excluded
+and recoverable at pinned version URLs in the source configs. Retained patches
+reconstruct historical own-source failures; that optional recovery is separate
+from mathematical CI. Exact starts are explicitly unavailable where manual
+aliases had no recorded launch clock. All original evidence bytes are unchanged.
+
+These results provide scalar constructions, conditional analytical lemmas,
+finite certificates and structural negatives. No complete new multiplier or
+kappa>=10^-4 is certified. Native center/side integration continues on fresh
+paths outside this publication.

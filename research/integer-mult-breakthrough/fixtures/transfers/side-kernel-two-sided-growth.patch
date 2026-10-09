@@ -1,0 +1,128 @@
+--- a/code/transfers/side_kernel_completion.py
++++ b/code/transfers/side_kernel_completion.py
+@@ -1,7 +1,8 @@
+ #!/usr/bin/env python3
+ """Integral nonspectral completion of the exceptional five-subset side kernel.
+ 
+-Column Euclidean operations are retained as explicit reversible scalar words.
++Two-sided Euclidean reduction retains the right-column operations as explicit
++reversible scalar words and the left-row operations as a rank certificate.
+ This independently determines rank and gives an actual integer projector onto
+ the kernel. Its noncommutation with K is the price of avoiding the forbidden
+ Gaussian-dyadic invariant spectral projector; no native phase cost is inferred.
+@@ -61,35 +62,64 @@
+ def euclidean_columns(matrix, config):
+     a = [row[:] for row in matrix]
+     v = identity(len(a[0]))
+-    word, pivots = [], []
++    u = identity(len(a))
++    word, row_word, pivots = [], [], []
+ 
+     def record(op):
+         apply_column(a, op)
+         apply_column(v, op)
+         word.append(op)
+-        if len(word) > config['maximum_column_operations']:
++        if len(word)+len(row_word) > config['maximum_column_operations']:
+             raise ValueError('Column-operation guard exceeded')
+-        if integer_bits(v) > config['maximum_integer_bits']:
++        if max(integer_bits(v), integer_bits(u), integer_bits(a)) > config['maximum_integer_bits']:
+             raise ValueError('Integer coefficient guard exceeded')
+ 
++    def record_row(op):
++        kind, target, source, coefficient = op
++        for matrix in (a, u):
++            if kind == 'add':
++                matrix[target] = [x+coefficient*y for x, y in zip(matrix[target], matrix[source])]
++            elif kind == 'swap':
++                matrix[target], matrix[source] = matrix[source], matrix[target]
++            elif kind == 'negate':
++                matrix[target] = [-x for x in matrix[target]]
++        row_word.append(op)
++        if len(word)+len(row_word) > config['maximum_column_operations']:
++            raise ValueError('Two-sided operation guard exceeded')
++        if max(integer_bits(v), integer_bits(u), integer_bits(a)) > config['maximum_integer_bits']:
++            raise ValueError('Integer coefficient guard exceeded')
++
+     r = 0
+-    for row in range(len(a)):
+-        candidates = [j for j in range(r, len(a[0])) if a[row][j]]
++    while r < min(len(a), len(a[0])):
++        candidates = [(i, j) for i in range(r, len(a))
++                      for j in range(r, len(a[0])) if a[i][j]]
+         if not candidates:
+-            continue
+-        first = min(candidates, key=lambda j: (abs(a[row][j]), j))
+-        if first != r:
+-            record(['swap', r, first, 0])
+-        for j in range(r+1, len(a[0])):
+-            while a[row][j]:
+-                quotient = a[row][j]//a[row][r]
+-                if quotient:
+-                    record(['add', j, r, -quotient])
+-                if a[row][j]:
+-                    record(['swap', j, r, 0])
+-        if a[row][r] < 0:
++            break
++        first_row, first_col = min(candidates, key=lambda ij: (abs(a[ij[0]][ij[1]]), ij))
++        if first_row != r:
++            record_row(['swap', r, first_row, 0])
++        if first_col != r:
++            record(['swap', r, first_col, 0])
++        while True:
++            for i in range(r+1, len(a)):
++                while a[i][r]:
++                    quotient = a[i][r]//a[r][r]
++                    if quotient:
++                        record_row(['add', i, r, -quotient])
++                    if a[i][r]:
++                        record_row(['swap', i, r, 0])
++            for j in range(r+1, len(a[0])):
++                while a[r][j]:
++                    quotient = a[r][j]//a[r][r]
++                    if quotient:
++                        record(['add', j, r, -quotient])
++                    if a[r][j]:
++                        record(['swap', j, r, 0])
++            if not any(a[i][r] for i in range(r+1, len(a))):
++                break
++        if a[r][r] < 0:
+             record(['negate', r, r, 0])
+-        pivots.append([row, r, a[row][r]])
++        pivots.append([r, r, a[r][r]])
+         r += 1
+         if r == len(a[0]):
+             break
+@@ -98,7 +128,11 @@
+     for i, j, value in pivots:
+         if value <= 0 or any(a[i][k] for k in range(j+1, len(a[0]))):
+             raise ValueError('Nonzero triangular rank certificate failed')
+-    return a, v, word, pivots
++    if any(a[i][j] for i in range(len(a)) for j in range(len(a[0])) if i != j):
++        raise ValueError('Two-sided diagonal rank certificate failed')
++    if product(product(u, matrix), v) != a:
++        raise ValueError('Literal U*H*V diagonal certificate failed')
++    return product(matrix, v), v, word, pivots, row_word, a, u
+ 
+ 
+ def scalar_word(column_word):
+@@ -169,7 +203,7 @@
+     if any(z.denominator != 1 for row in H for z in row):
+         raise ValueError('Scaled side matrix is not integral')
+     H = [[int(z) for z in row] for row in H]
+-    reduced, V, column_word, pivots = euclidean_columns(H, config)
++    reduced, V, column_word, pivots, row_word, diagonal, U = euclidean_columns(H, config)
+     r = len(pivots)
+     if r != 36 or product(H, V) != reduced:
+         raise ValueError('Rank or literal right-coordinate certificate failed')
+@@ -201,7 +235,9 @@
+     ci, cj, cv = couplings[0]
+     witness = next((i, j, PH[i][j]) for i in range(n) for j in range(n) if PH[i][j])
+     return dict(source_order=order, labels=labels, volume=n, rank=r, nullity=n-r,
+-        pivots=pivots, column_word=column_word,
++        pivots=pivots, column_word=column_word, rank_certificate_row_word=row_word,
++        diagonal_rank_certificate_sha256=digest(diagonal), U_sha256=digest(U),
++        exact_UHV_diagonal=True,
+         scalar_word_convention='Reverse column operation order; column target+=c*source becomes data source+=c*target.',
+         scalar_operations=len(word), scalar_operation_counts={kind: sum(op[0] == kind for op in word)
+             for kind in ['add', 'swap', 'negate']}, V_max_bits=integer_bits(V),

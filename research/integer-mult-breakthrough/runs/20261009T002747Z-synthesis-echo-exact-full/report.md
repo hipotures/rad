@@ -1,0 +1,5 @@
+# Exact full-domain dirty-center echo minimum
+
+The specified three-bit side-inside word has exact minimum rank charge 21, equal to its seven-bank capacity. All 135 Lagrangians were eligible. The finite elimination took 136.223 seconds on four native workers, with an exact 5,353,959,600-byte factor/argmin payload preflight matching the completed engine. The full input, source, patch, generated source, compiler, order, factor sizes and backtracking identities are retained. Complete scalar and chronological rank replay pass.
+
+This is an exact scoped finite minimum, not a universal circuit obstruction or a multiplier improvement. See [protocol](results/protocol.json), [compact result](results/summary.json), [original identities](results/persistence.json), [input/witness fixture](../../fixtures/synthesis/dirty-center-full-preflight.json) and [method and commands](../../reports/synthesis/color-center-release-topologies.md). The original complete receipt remains unchanged at the path in persistence; compiled binaries and factor tables are ignored and regenerable.

@@ -1,0 +1,8 @@
+--- a/triple_total_guard.py
++++ b/triple_total_guard.py
+@@ -75,4 +75 @@
+-    # Endpoint coefficients are at most two, but a future-point withdrawal
+-    # can transiently put coefficient three on a nonpivot triple{4,5,6}.
+-    assert backward['maximum_coefficient'] <= 3
+-    assert max(abs(c) for row in inverse_rows for c in row.values()) <= 2
++    assert backward['maximum_coefficient'] <= 2

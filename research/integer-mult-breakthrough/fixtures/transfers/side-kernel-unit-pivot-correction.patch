@@ -1,0 +1,48 @@
+--- a/code/transfers/side_kernel_completion.py
++++ b/code/transfers/side_kernel_completion.py
+@@ -195,22 +195,38 @@
+         raise ValueError('Ballot-incidence basis count failed')
+     rows = [row+unit for row, unit in zip(B, identity(n))]
+     undo = []
++
++    def record(op):
++        kind, target, source, coefficient = op
++        if kind == 'add':
++            rows[target] = [x+coefficient*y for x, y in zip(rows[target], rows[source])]
++        elif kind == 'swap':
++            rows[target], rows[source] = rows[source], rows[target]
++        elif kind == 'negate':
++            rows[target] = [-x for x in rows[target]]
++        undo.append(op)
++
+     for j in range(n):
+-        pivot = next(i for i in range(j, n) if rows[i][j])
++        candidates = [i for i in range(j, n) if rows[i][j]]
++        pivot = min(candidates, key=lambda i: (abs(rows[i][j]), i))
+         if pivot != j:
+-            rows[j], rows[pivot] = rows[pivot], rows[j]
+-            undo.append(['swap', j, pivot, 0])
++            record(['swap', j, pivot, 0])
++        for i in range(j+1, n):
++            while rows[i][j]:
++                quotient = rows[i][j]//rows[j][j]
++                if quotient:
++                    record(['add', i, j, -quotient])
++                if rows[i][j]:
++                    record(['swap', i, j, 0])
+         if abs(rows[j][j]) != 1:
+             raise ValueError('Incidence preconditioner requires a nonunit pivot')
+         if rows[j][j] < 0:
+-            rows[j] = [-x for x in rows[j]]
+-            undo.append(['negate', j, j, 0])
++            record(['negate', j, j, 0])
+         for i in range(n):
+             if i == j or not rows[i][j]:
+                 continue
+             coefficient = -rows[i][j]
+-            rows[i] = [x+coefficient*y for x, y in zip(rows[i], rows[j])]
+-            undo.append(['add', i, j, coefficient])
++            record(['add', i, j, coefficient])
+     Bi = [row[n:] for row in rows]
+     if [row[:n] for row in rows] != identity(n) or product(B, Bi) != identity(n):
+         raise ValueError('Incidence preconditioner exact inverse failed')

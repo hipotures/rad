@@ -140,6 +140,33 @@ remain hypotheses. The [short-record monotone split](reports/transfers/short-rec
 also passed [coordinator review](reports/obstructions/short-record-split-independent-review.md),
 without promoting a complete guarded CRT transfer.
 
+Seventh-checkpoint results include the [single-total k5 basis](reports/complex/single-total-center-basis.md)
+and its [independent uniform inverse/guard proof](reports/transfers/total-center-independent-review.md),
+plus an [integral k3 alternative](reports/complex/triple-total-integral-alternative.md).
+Their explicitly hypothetical complete profiles cross the necessary complex
+threshold with a closed release charge; no complete native implementation or
+larger kappa is established. The [small point completion](reports/complex/small-base-point-completion.md)
+fails as a fitting kernel when odd intersection one becomes possible.
+
+The [conditioned-frame screen](reports/complex/conditioned-common-frame-boundary.md)
+and [independent review](reports/transfers/conditioned-frame-independent-review.md)
+find Clifford substitutes within the tested nonunitary family.
+[Complete dirty-echo minima](reports/synthesis/color-center-release-topologies.md)
+and the [two-copy discriminator](reports/obstructions/two-copy-shared-release-discriminator.md)
+retain no deficit in their selected exact models. The [spectral channel report](reports/transfers/odd-weight-spectral-channels.md)
+constructs an integer kernel completion with a coupled 20-dimensional unit
+block; an independent invariant dyadic split is obstructed, so those channels
+are not free savings.
+
+The [Walsh arithmetic/dirty transcription](reports/obstructions/wht-arithmetic-and-dirty-transcription.md)
+passes [independent review](reports/complex/wht-dirty-echo-independent-review.md).
+Its arithmetic improvement and conditional scalar guard are separate from
+native costs. The [full-domain lookup boundary](reports/obstructions/full-domain-lookup-boundary.md)
+and [source-model literature review](reports/synthesis/walsh-source-model-screen.md)
+charge table setup and distinguish RAM access from fixed-tape access.
+Closed native center-only components and their full side integration remain
+active work beyond this checkpoint.
+
 Live structural work includes cancellation-allowing reversible synthesis,
 changed spectral interfaces, and a weight-five complex family. The latter uses
 `f(t)=(t-1)(t-3)/8` on five-subset intersections, keeping binary label dimension
@@ -152,7 +179,7 @@ frames demonstrate an actual local escape; whole-network chronology must
 retain its benefit. The old library's alternating projector identity is
 credited separately and does not itself establish a larger saving.
 
-Forty-seven registered Python CI checks replay only their stated finite arithmetic and
+Sixty registered CI checks replay only their stated finite arithmetic and
 semantic controls. A separately contributed [Lean package](formal/README.md)
 formalizes the named positive-matrix obstruction and finite-level extension;
 its pinned clean-runner workflow passed at remote commit `1576511c`. It does

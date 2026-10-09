@@ -1,0 +1,37 @@
+{
+  "attempt": "20261009T002708Z-complex-conditioned-frames",
+  "scope": "Finite Gaussian-dyadic conditioned frame screen",
+  "source_sha256": {
+    "conditioned_frame_screen.py": "2d9dd976cd6471c166e2cf2d795eb42517da1a0f2bf9f48519ebfcc9c0c6d9b6",
+    "test_conditioned_frames.py": "27c62e16c5516d97d3c57432608e68f02cd34c5e526c462d455dfe45449e0a24",
+    "nonlinear_common_frame_screen.py": "e1da5bbccb5d61bdbb2958b8514826c17d09e5312b0608947e0e2786f6ea5aff",
+    "lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9",
+    "quadratic_rank_interface.py": "c7435adc75bee5c38af1c59af4ae840a80bd6f33e53ce5e34d180c719b6a5c0a"
+  },
+  "fixture_sha256": "51922bc6fc6d9037f75f576f939177cd708b9a4534aa56982f31ff422b018d1d",
+  "worker_processes": 4,
+  "native_threads_per_worker": 1,
+  "seed": null,
+  "python": "3.14.4",
+  "commands": [
+    "python3 research/integer-mult-breakthrough/code/complex/conditioned_frame_screen.py --family singleton --output research/integer-mult-breakthrough/work/complex/20261009T002708Z-conditioned-frames/singleton.json",
+    "python3 research/integer-mult-breakthrough/code/complex/conditioned_frame_screen.py --family pair-control --output research/integer-mult-breakthrough/work/complex/20261009T002708Z-conditioned-frames/pair-control.json",
+    "python3 research/integer-mult-breakthrough/code/complex/conditioned_frame_screen.py --family parity --output research/integer-mult-breakthrough/work/complex/20261009T002708Z-conditioned-frames/parity.json",
+    "python3 research/integer-mult-breakthrough/code/complex/conditioned_frame_screen.py --family bit --output research/integer-mult-breakthrough/work/complex/20261009T002708Z-conditioned-frames/bit.json"
+  ],
+  "validation": "python3 research/integer-mult-breakthrough/code/complex/test_conditioned_frames.py",
+  "parameters": {
+    "dimension": 3,
+    "clifford_parents": 135,
+    "graph_endpoints": 64,
+    "gaussian_units": [
+      "1+i",
+      "(1+i)^(-1)",
+      "2",
+      "1/2"
+    ]
+  },
+  "precision": "Integer Gaussian dyadics; no floating point",
+  "regenerable": true,
+  "limitations": "No native router, full scalar chronology, complete tensor compilation or asymptotic transfer."
+}

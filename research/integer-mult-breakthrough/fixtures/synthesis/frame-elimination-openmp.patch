@@ -1,0 +1,61 @@
+--- a/frame_variable_elimination.cpp
++++ b/frame_variable_elimination_parallel.cpp
+@@ -9,6 +9,7 @@
+ #include <stdexcept>
+ #include <string>
+ #include <vector>
++#include <omp.h>
+ 
+ struct Factor {
+     std::vector<int> variables;
+@@ -78,6 +79,12 @@
+         std::vector<Decision> decisions;
+         std::size_t evaluations=0,peak_live_entries=0;
+         int maximum_width=0;
++        int worker_threads=1;
++        unsigned global_charge_bound=constant;
++        for (const auto& row: unary) global_charge_bound+=*std::max_element(row.begin(),row.end());
++        auto maximum_distance=*std::max_element(distances.begin(),distances.end());
++        for (const auto& edge: edges) global_charge_bound+=edge.weight*maximum_distance;
++        if (global_charge_bound>=65535) throw std::runtime_error("Global nonnegative cost bound exceeds uint16");
+         for (int variable: order) {
+             std::vector<Factor> selected, remaining;
+             std::set<int> neighbor_set;
+@@ -113,8 +120,13 @@
+                 if (!variable_stride) throw std::runtime_error("Eliminated variable missing from factor");
+                 coordinates.push_back(std::move(terms));variable_strides.push_back(variable_stride);
+             }
++            #pragma omp parallel reduction(+:evaluations)
++            {
++            #pragma omp single
++            worker_threads=omp_get_num_threads();
+             std::vector<int> labels(neighbors.size());
+             std::vector<std::size_t> offsets(selected.size());
++            #pragma omp for schedule(static)
+             for (std::size_t index=0; index<entries; ++index) {
+                 auto left=index;
+                 for (auto& label: labels) { label=left%domain; left/=domain; }
+@@ -130,10 +142,13 @@
+                         cost+=selected[j].costs[offsets[j]+label*variable_strides[j]];
+                     if (cost<best) { best=cost; argmin=label; }
+                 }
+-                if (best>=65535 || argmin<0) throw std::runtime_error("Min-sum factor charge overflow");
++                // The predeclared global nonnegative bound above proves
++                // best<65535; domain>=1 ensures an argmin. No exception
++                // crosses an OpenMP worker boundary.
+                 result.costs[index]=best;decision.choices[index]=argmin;
+                 evaluations+=domain;
+             }
++            } // End parallel neighboring-assignment sweep.
+             std::size_t live=entries*2;
+             for (const auto& f: selected) live+=f.costs.size();
+             for (const auto& f: remaining) live+=f.costs.size();
+@@ -163,6 +178,8 @@
+         if (replay!=optimum) throw std::runtime_error("Reconstructed assignment does not achieve exact optimum");
+         std::cout << "{\"status\":\"EXACT FINITE MIN-SUM PASS\",\"optimum\":" << optimum
+                   << ",\"maximum_width\":" << maximum_width
++                  << ",\"parallel_worker_threads\":" << worker_threads
++                  << ",\"global_nonnegative_cost_bound\":" << global_charge_bound
+                   << ",\"candidate_cost_evaluations\":" << evaluations
+                   << ",\"peak_live_uint16_entries\":" << peak_live_entries
+                   << ",\"assignment\":[";

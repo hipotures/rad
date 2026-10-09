@@ -1,0 +1,11 @@
+--- a/code/transfers/total_center_review.py
++++ b/code/transfers/total_center_review.py
+@@ -94,7 +94,7 @@
+         raise ValueError('Independent closed-form total pivot inverse failed')
+     if any((4*x).denominator != 1 for row in inverse for x in row):
+         raise ValueError('Uniform all-h 1/4 inverse grid failed')
+-    if max(abs(x) for row in inverse for x in row) != (Q(3, 2) if h == 7 else Q(6)):
++    if max(abs(x) for row in inverse for x in row) != Q(6):
+         raise ValueError('Complete inverse maximum coefficient changed')
+     return pairs, pivots, matrix, inverse, coefficient_classes
+ 

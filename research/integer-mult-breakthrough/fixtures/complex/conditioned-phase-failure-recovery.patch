@@ -1,0 +1,7 @@
+--- a/conditioned_frame_screen.py
++++ b/conditioned_frame_screen.py
+@@ -36,2 +36,2 @@
+-    # 2^(-d) = i^d (1+i)^(-2d).
+-    return power-2*denominator, (roots.index((a, b))+denominator) % 4
++    # Dividing by 2^d also removes i^d, since (1+i)^(2d)=2^d i^d.
++    return power-2*denominator, (roots.index((a, b))-denominator) % 4

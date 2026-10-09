@@ -218,3 +218,54 @@ counterexample. A paid nonlinear route, retained layout or independently
 cheaper kernel is the next discriminator. The short-record split improves
 metadata charges but leaves guarded rotations, real sparse keys and repair
 open. No new kappa is accepted.
+
+## Seventh checkpoint and current discriminators
+
+The single-total k5 completion keeps q=binom(h,2) features and has a complete
+dyadic scalar word. Import-free review proves grid 1/4 and maximum pivot inverse
+coefficient six for every h>=7, with a conditional common-frame inverse prefix
+grid P+4 and endpoint grid P+2. The integral k3 alternative keeps h features
+and requires no extra fractional scalar bits. Its inverse prefixes need
+coefficient three, although endpoints need at most two. Original failed bound
+assertions and their corrections are retained.
+
+Necessary capacity now charges a closed full-width release replacing the
+previous center chronology. The declared k5 profile at h30 has a rigorous
+complex-root bracket (112120106,112120107)/10^12, above 20/189981 by about 6.5%.
+The k3 alternative at h48 reaches (110455647,110455648)/10^12 under its own
+declared costs, about 4.9% above the threshold. These are exact consequences of
+unattained profiles. Scalar word expansion does not establish the native role
+budget, and the previous center chronology must actually be removed before
+replacing its cost. Wider parameter sweeps await native chronology.
+
+The complete full 135-frame dirty one-helper echo has minimum rank 21 equal to
+capacity 21. Bounded CI validates that completed input and witness and exhausts
+smaller serial/parallel factor controls; it does not rerun the large width-four
+minimum. The two-copy h2 discriminator has minimum 20 in both 25 product and 67
+diagonal-subspace frames. This is a fixed-word negative, not an all-size tensor
+copy bound. The tested conditioned nonunitary family has componentwise Clifford
+dominators. Import-free review reconstructs each retained normal form and
+all dominance rows without repeating every producer edge classification.
+
+The spectral discriminator isolates 20 unit kernel coordinates at h8/k5 with
+an integer reversible basis, but the complement remains coupled. An invariant
+direct split would require projector diagonal 5/14 outside the Gaussian-dyadic
+ring. Large scalar prefix guards and nonzero coupling are explicit costs. A
+cheaper coupled quotient is a hypothesis; unit multiplicity is not a saving.
+
+Primary Walsh literature supplies an exact 23-operation eight-way arithmetic
+macro and a generic arbitrary-dirty SSA echo. Arithmetic counts, helper stock
+and conditional scalar precision do not price native children. Full-domain
+finite-field lookup with paid materialization permits only O(log log N) grouped
+address bits. A fixed exponent consequence also needs the recorded global-size
+or global-setup premise. Partial structured domains remain open.
+
+Live synthesis beyond this publication has a physically checked center-only
+echo with closed feature returns. Independent Gaussian interface and ledger
+reviews are running. A proposed embedding uses each outer odd-label subspace
+E_s=s tensor F2^h: its induced binary Gram is identity, so an h-dimensional
+center can act on inner labels while retaining spectator coordinates. Repeating
+over outer labels could make the source saving scale with the number of pairs.
+Separate actual spectator maps, second-axis composition and the side chronology
+must be constructed and charged. This is an integration hypothesis, not a
+realization of the old complete master histogram. No new kappa is accepted.

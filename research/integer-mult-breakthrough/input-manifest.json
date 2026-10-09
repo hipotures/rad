@@ -3,7 +3,7 @@
   "research": "integer-mult-breakthrough",
   "created_date": "2026-10-08",
   "branch": "research/integer-mult-breakthrough-20261008",
-  "status": "Active parallel structural research; all findings remain scoped, no kappa >= 1e-4 result claimed.",
+  "status": "Active structural campaign. Seventh checkpoint retains sixty bounded checks, exact scalar constructions and scoped negatives; no larger kappa or complete native multiplier is claimed.",
   "sources": [
     {
       "id": "prior-cpu-checkpoint",
@@ -491,6 +491,154 @@
       "seed_formula": "202610090100+n+j, with n=1..4 and j=0..3",
       "generation": "All isotropic binary subspaces; complete pairs through n3,4096 seeded pairs at n4;96 constant-scalar gates per sampled word",
       "usage": "Exact metric/invariant tests; random words are not asserted to implement identity or restore dirty fields"
+    },
+    {
+      "id": "checkpoint-seven-primary-2211.06459v2",
+      "title": "Faster Walsh-Hadamard and Discrete Fourier Transforms From Matrix Non-Rigidity",
+      "revision": "v2",
+      "url": "https://arxiv.org/pdf/2211.06459v2",
+      "local_path": "research/integer-mult-breakthrough/work/obstructions/20261009T003250Z-primary-wht-macros/inputs/2211.06459v2.pdf",
+      "bytes": 419012,
+      "sha256": "970ed267620853cd942d5e4ef20beef891bd45857b5260b632e7dbd3950bb36d",
+      "downloaded_utc": "2026-10-09T00:32:50.914420+00:00",
+      "usage": "Exact arithmetic macro; physical/native cost must be derived separately",
+      "recovery": "Downloadable at pinned revision; no PDF payload committed",
+      "provenance_config": "configs/obstructions/wht-primary-source-pins.json"
+    },
+    {
+      "id": "checkpoint-seven-primary-2211.04643v1",
+      "title": "Faster Walsh-Hadamard Transform and Matrix Multiplication over Finite Fields using Lookup Tables",
+      "revision": "v1",
+      "url": "https://arxiv.org/pdf/2211.04643v1",
+      "local_path": "research/integer-mult-breakthrough/work/obstructions/20261009T003250Z-primary-wht-macros/inputs/2211.04643v1.pdf",
+      "bytes": 159193,
+      "sha256": "d9d4f08a08433f6f0e588bdfe479858f32f3af08bc9bc607d0aed805b5cdee07",
+      "downloaded_utc": "2026-10-09T00:32:50.914420+00:00",
+      "usage": "Full-domain table amortization and uniform fixed-tape access boundary",
+      "recovery": "Downloadable at pinned revision; no PDF payload committed",
+      "provenance_config": "configs/obstructions/wht-primary-source-pins.json"
+    },
+    {
+      "id": "checkpoint-seven-primary-2608.06592v1",
+      "title": "Superlogarithmic-Rank Matrix Rigidity for the Walsh-Hadamard Transform",
+      "revision": "v1",
+      "url": "https://arxiv.org/pdf/2608.06592v1",
+      "local_path": "research/integer-mult-breakthrough/work/obstructions/20261009T003250Z-primary-wht-macros/inputs/2608.06592v1.pdf",
+      "bytes": 345085,
+      "sha256": "147d2ea5dd0b7adf13eb82270dbf2b1ae77271e499e4d9c743922552dbf2c208",
+      "downloaded_utc": "2026-10-09T00:32:50.914420+00:00",
+      "usage": "Field/sparsity/rank scope differs from Gaussian-dyadic circuits",
+      "recovery": "Downloadable at pinned revision; no PDF payload committed",
+      "provenance_config": "configs/obstructions/wht-primary-source-pins.json"
+    },
+    {
+      "id": "checkpoint-seven-primary-1710.08029v1",
+      "title": "Characterizing and Enumerating Walsh-Hadamard Transform Algorithms",
+      "authors": "Francois Serre and Markus Pueschel",
+      "source_revision_date": "2017-10-22",
+      "url": "https://arxiv.org/pdf/1710.08029v1",
+      "local_immutable_path": "research/integer-mult-breakthrough/work/synthesis/20261009T004500Z-walsh-literature/inputs/1710.08029v1.pdf",
+      "bytes": 571057,
+      "sha256": "69071b7993f7ebe496fb149235b4a9950b96fd6dd9c79de52be3a3af95b034bc",
+      "acquisition": "Python urllib HTTPS, timeout30seconds",
+      "status": "AVAILABLE",
+      "recovery": "Download the pinned version URL and verify SHA256; original read-only input remains ignored, not in the Git clone.",
+      "provenance_config": "configs/synthesis/walsh-literature-screen.json",
+      "usage": "Primary mathematical literature; exact bounded checks need no PDF payload"
+    },
+    {
+      "title": "Intersection matrices revisited",
+      "authors": [
+        "N. Ghareghani",
+        "E. Ghorbani",
+        "M. Mohammad-Noori"
+      ],
+      "arxiv_version": "0902.4367v4",
+      "version_date": "2011-11-13",
+      "url": "https://arxiv.org/pdf/0902.4367v4",
+      "supporting_location": "Lemma8 and Theorem9, page12 in PDF numbering; complement/shift reduction is independently applied in this experiment",
+      "acquired_utc": "2026-10-09T00:28:32.549247+00:00",
+      "bytes": 218177,
+      "sha256": "2842e1c7849367dc2594c99f34521a6ed9f3b62dc9f4bf1c038bc7142107af09",
+      "local_ignored_pdf": "work/transfers/20261009T002832Z-intersection-primary/intersection-matrices-revisited-v4.pdf",
+      "recovery": "Download exact arXiv v4 URL; PDF is not required by executable check.",
+      "id": "checkpoint-seven-primary-0902.4367v4",
+      "provenance_config": "configs/transfers/odd-weight-spectrum.json",
+      "usage": "Primary mathematical literature; exact bounded checks need no PDF payload"
+    },
+    {
+      "id": "checkpoint-seven-fixture-conditioned-frame-cases",
+      "location": "fixtures/complex/conditioned-frame-cases.json",
+      "bytes": 229780,
+      "sha256": "51922bc6fc6d9037f75f576f939177cd708b9a4534aa56982f31ff422b018d1d",
+      "generator_provenance": {
+        "source_sha256": "2d9dd976cd6471c166e2cf2d795eb42517da1a0f2bf9f48519ebfcc9c0c6d9b6"
+      },
+      "acquisition": "Generated immutable fixture or separately named compact export; producing run/source hashes are retained in the fixture and protocol",
+      "usage": "Exact deterministic finite mathematical checks; no statistical split",
+      "recovery": "Retained in Git. Complete omitted arrays, if any, have an exact gzip recovery entry in the compact export."
+    },
+    {
+      "id": "checkpoint-seven-fixture-total-center-local-words",
+      "location": "fixtures/complex/total-center-local-words.json",
+      "bytes": 27620,
+      "sha256": "11d8de267891f2ee4cc19ec503c93c73c9d06416995e32278b9e3de9bd63dfc7",
+      "generator_provenance": {
+        "source_sha256": "8c809e5ef5ac062c127622892f6be494f94f78adbcee970d2b6ab9a2cefc9bed"
+      },
+      "acquisition": "Generated immutable fixture or separately named compact export; producing run/source hashes are retained in the fixture and protocol",
+      "usage": "Exact deterministic finite mathematical checks; no statistical split",
+      "recovery": "Retained in Git. Complete omitted arrays, if any, have an exact gzip recovery entry in the compact export."
+    },
+    {
+      "id": "checkpoint-seven-fixture-triple-total-local-word",
+      "location": "fixtures/complex/triple-total-local-word.json",
+      "bytes": 1694,
+      "sha256": "e2cbc57c3c82ed13663587a8ad3314b411658046c8d962366b9e5c558d26e61d",
+      "generator_provenance": {
+        "source_sha256": "eb928d37fde72316f2d0d123af06e795a3d3fe20031518ad85ad2f60ed8ff29e",
+        "scope": "Complete integral scalar word only; identical actual address operators and native phase chronology remain separate."
+      },
+      "acquisition": "Generated immutable fixture or separately named compact export; producing run/source hashes are retained in the fixture and protocol",
+      "usage": "Exact deterministic finite mathematical checks; no statistical split",
+      "recovery": "Retained in Git. Complete omitted arrays, if any, have an exact gzip recovery entry in the compact export."
+    },
+    {
+      "id": "checkpoint-seven-fixture-dirty-center-full-preflight",
+      "location": "fixtures/synthesis/dirty-center-full-preflight.json",
+      "bytes": 1697,
+      "sha256": "98c829a07b76ba493f22d82cd5371a1675b06091176c4074efc1d2a6e4190546",
+      "generator_provenance": {
+        "source_sha256": {
+          "dirty_color_echo_full_dp.py": "6d690c6666e6e63548f2b210d17ee85fcd350a60addd784bc8bdb9bcb6a4a87f",
+          "dirty_color_echo_dp.py": "c710df4aecd2e50bef348a5dfef8c300dbfcce3785967304a1bc2235aeabdccf",
+          "frame_variable_elimination.cpp": "ccbdbbed15a0a9a4065bd3af1a7fe89cffdcf6efe77a30f4988454f49ce125ed",
+          "frame-elimination-openmp.patch": "2c5712ee7a021a2d18c3c8b7e79b3cee4f9c476d9a489ba87fa1bf57a109247b",
+          "global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+          "lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+          "trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+          "trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced"
+        },
+        "generated_parallel_source_sha256": "beff4656adc00cfb1d10f1af91831dc55b500368069e95eeee104a905f967ee9",
+        "scope": "Exact completed finite input and argmin witness. This fixture checks source/input identity and replay, not the large optimization by itself."
+      },
+      "acquisition": "Generated immutable fixture or separately named compact export; producing run/source hashes are retained in the fixture and protocol",
+      "usage": "Exact deterministic finite mathematical checks; no statistical split",
+      "recovery": "Retained in Git. Complete omitted arrays, if any, have an exact gzip recovery entry in the compact export."
+    },
+    {
+      "id": "checkpoint-seven-fixture-side-kernel-lexicographic-summary",
+      "location": "fixtures/transfers/side-kernel-lexicographic-summary.json",
+      "bytes": 8400,
+      "sha256": "7057031f50649e1da591b7e5ad00e3506cb8787167dae9b7ba77b7c67e6c232d",
+      "generator_provenance": {
+        "producer_source_sha256": "7f47829f5bd7f0b79a88270b04f51cccbc7d4246647ac18caa82f089ba17b550",
+        "raw_summary_sha256": "61bd94f70670a567325978b0d79d7bf06a25b7494da2df0a42db58e3624fb5d5",
+        "scope": "Literal finite scalar and rank certificate; no physical transport or native circuit is supplied."
+      },
+      "acquisition": "Generated immutable fixture or separately named compact export; producing run/source hashes are retained in the fixture and protocol",
+      "usage": "Exact deterministic finite mathematical checks; no statistical split",
+      "recovery": "Retained in Git. Complete omitted arrays, if any, have an exact gzip recovery entry in the compact export."
     }
   ],
   "source_policy": "Discover further primary sources and public research automatically; pin revisions and preserve attribution. No inherited source whitelist restricts this new campaign."

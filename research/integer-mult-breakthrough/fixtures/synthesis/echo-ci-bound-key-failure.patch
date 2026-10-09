@@ -1,0 +1,11 @@
+--- a/verify_echo_elimination.py
++++ b/failed-verify-echo.py
+@@ -129,7 +129,7 @@
+     unary = [[sum(table[j][ids[F]] for F in boundary) for j in range(len(frames))]
+              for boundary in boundaries]
+     guard = guard_graph(edges, unary, table, constant, estimate['order'])
+-    if guard['global_nonnegative_charge_bound'] != fixture['global_nonnegative_cost_bound']:
++    if guard['global_nonnegative_charge_bound'] != fixture['global_nonnegative_charge_bound']:
+         raise ValueError('Full-case guarded nonnegative charge bound changed')
+     fields = [len(word), len(frames), constant, parallel.FACTOR_MAX_ENTRIES]
+     fields += [x for row in table for x in row] + [x for row in unary for x in row]
