@@ -1,13 +1,13 @@
 # Structural routes to faster integer multiplication
 
-**Campaign closed at the user's request on2026-10-09; started2026-10-08 21:01UTC.** Work runs in the
+**Campaign closed at the user's request on 2026-10-09; started 2026-10-08 21:01 UTC.** Work ran in the
 verified isolated worktree `/home/user/DEV/rad-breakthrough`, on branch
 `research/integer-mult-breakthrough-20261008`. The initial branch revision was
 `cb2ae8734a58eae09432b307409b5553a19d79db`. A coordinator and three autonomous
-agents investigate complex primitives, reversible circuits, coupled transfers
+agents investigated complex primitives, reversible circuits, coupled transfers
 and independent mathematical limitations.
 
-The first objective is a structural route to conditional **kappa>=1e-4**,
+The first objective was a structural route to conditional **kappa >= 1e-4**,
 followed by substantially larger improvements. **No complete own multiplier
 exponent at that threshold has been established.** Finite improvements and conditional interfaces remain
 separate from complete suppliers and formally verified results. All research
@@ -29,21 +29,21 @@ tracks were drained without starting new experiments after the stop request.
 
 The [closeout report](reports/campaign-closeout-20261009.md) records the
 scientific outcome, completed work, remaining interfaces and shutdown scope.
-No own complete kappa>=1e-4 or first-place multiplier result is established.
+No own complete kappa >= 1e-4 or first-place multiplier result is established.
 
 The [paid total/direct-full centers](reports/complex/paid-total-and-direct-full-centers.md)
-remove the odd-divisor5 decoder interface and simplify the literal frame
+remove the odd-divisor-5 decoder interface and simplify the literal frame
 chronology. Complete small dirty Gaussian fields and inverse controls pass.
 An [independent ledger](reports/transfers/dyadic-total-and-direct-full-center-review.md)
 rebuilds all eight finite profiles and brackets. The twelve-pair direct model
-has an optimistic root between0.001065427890 and0.001065427891, but the global
+has an optimistic root between 0.001065427890 and 0.001065427891, but the global
 source/cap word and native interface remain unconstructed.
 
 The [mixed source/K/cap splice](reports/complex/mixed-source-center-cap-splice.md)
 retains the current original source, every kernel and complete dirty cleanup.
 Sharing helpers reduces stock and endpoint rank together. At unchanged
 37-role stock, finishing center reads before target advancement removes one
-width3 side copy: local rank293 becomes290, with local deficit still-31.
+width-3 side copy: local rank 293 becomes 290, with local deficit still -31.
 Separate [copied-splice](reports/synthesis/mixed-source-cap-splice-independent-review.md)
 and [target-cut](reports/synthesis/mixed-source-target-cut-independent-review.md)
 reviews retain those distinctions.
@@ -63,11 +63,17 @@ coordinate-only wrapper substitute fails the retained first-moment bill.
 This algebraic endpoint is not a native timing or Gaussian reconstruction
 result. The final typed-router source is explicitly unexecuted exploration.
 
-The preceding commit `6057afe8470567b943595e26ab1e06cb883b8a28` passed all ten
-[remote CI jobs](https://github.com/hipotures/rad/actions/runs/37930896964).
+The final scientific commit `aba6e1e195b24cd86986ae3c219ec57349fe88a6` was
+pushed and its exact remote head verified. All ten
+[remote CI jobs](https://github.com/hipotures/rad/actions/runs/37934680489)
+passed on Python 3.11, 3.13 and 3.14.
 The registry contains 207 bounded checks. All 207 local checks pass on 389 unchanged effective inputs. The
 [validation record](runs/20261009T130048Z-checkpoint-twenty-two-validation/report.md) and whole original gzip copies are indexed by
 [final recovery metadata](configs/recovery/checkpoint-twenty-two-artifacts.json).
+The [publication closeout](runs/20261009T131555Z-campaign-publication-closeout/report.md)
+and [publication recovery shard](configs/recovery/campaign-publication-closeout-artifacts.json)
+preserve the complete commit/push and remote CI receipts. The final metadata
+commit adds no scientific experiment or changed verifier.
 The [twenty-first center/formation checkpoint](configs/recovery/checkpoint-twenty-one-artifacts.json)
 and every earlier recovery record remain available.
 
