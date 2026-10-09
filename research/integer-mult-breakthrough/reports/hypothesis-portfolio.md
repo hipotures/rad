@@ -613,3 +613,39 @@ scope. Unrestricted finite-ring Lorentz radical assumptions fail explicit
 prime-power examples. Native weighted compilers, exceptional classes,
 precision and all-size row setup remain separate interfaces. These results
 are exact components and scoped negatives, not a new multiplication theorem.
+
+## Eighteenth checkpoint: actual decoder flags and non-padded routing
+
+Exact reversible cap completions retain all four or eight dirty bank
+coordinates, even though only three rows are active. The original cap class
+count is independently accepted as algebraic rather than physical stock.
+Whole-cube terminal readers lose their rank deficit once actual fanout spans
+and the final original-source cap are charged. Changed interleaving and target
+mixing remain live hypotheses; a positive result must preserve kernel parking,
+all dirty input columns and actual common frames at every read.
+
+General idempotent completion solves arbitrary image/kernel flag constraints
+over fields. With the old paired-source flags it retains the old radical bound.
+The continuation target is therefore an actual chronology with changed flags,
+not a numerical choice of a smaller unattained projection. Two ordered prefix
+or difference scans fail growing Boolean zeta in the invertible one-bank model;
+complete fixed-label two-axis certificates and adverse controls are retained.
+Cancellation with extra banks and changed general orders is outside that
+exclusion and remains a separate direction.
+
+The irregular mask router has a literal general-width word and complete
+12-guard checks, without padding to the next power of two. An independent
+source review accepts the permutation semantics. Its native complete-record
+and ordinary exponent contracts remain conditional. The unchanged activity
+moment still requires a genuinely shorter primitive or a changed coupled
+supplier; address correctness alone is not a time contraction. Two earlier
+failed negative controls were reconstructed from exact ordered patches and
+rejected again, while the accepted four-width control passes.
+
+All 177 bounded checks pass with 335 effective inputs unchanged. The current
+public comparison is a dated set of external conditional claims, not an
+imported exponent. Our accepted 12-to-9 rational endpoint and new exact scalar
+components remain local evidence. The next decisive tests are a full paid
+changed target chronology, a complete nonlexicographic zeta word or an
+independently stronger compatible ordinary supplier, with precision, dirty
+restoration and all-size transfer stated separately.

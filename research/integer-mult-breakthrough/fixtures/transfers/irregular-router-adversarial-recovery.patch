@@ -1,0 +1,12 @@
+--- a/research/integer-mult-breakthrough/code/transfers/irregular_activity_router.py
++++ b/research/integer-mult-breakthrough/code/transfers/irregular_activity_router.py
+@@ -407,8 +407,7 @@
+         # control-selected bits are one and every unselected/guard plane is
+         # zero here, forcing a nonzero two-bit full-slot mask at the first
+         # linear shear. The corrected complete word must still pass.
+-        address=((1<<((f+1)*K-1))|(1<<((f+2)*K-1))|
+-                 (1<<((2*f+1)*K-1)))
++        address=(1<<((f+1)*K-1))|(1<<((f+2)*K-1))
+         pattern=(0,0)
+         expected=reference(address,f,K,pattern)
+         actual=compact(address,f,K,pattern)

@@ -1,0 +1,29 @@
+--- a/research/integer-mult-breakthrough/code/transfers/irregular_activity_router.py
++++ b/research/integer-mult-breakthrough/code/transfers/irregular_activity_router.py
+@@ -402,26 +402,6 @@
+                     if wrong!=expected:
+                         wrong_repair=dict(original=address,wrong=wrong,expected=expected,pattern=pattern)
+             cases+=1
+-    if wrong_repair is None:
+-        # Random long guards rarely force an actual carry failure. Both first
+-        # control-selected bits are one and every unselected/guard plane is
+-        # zero here, forcing a nonzero two-bit full-slot mask at the first
+-        # linear shear. The corrected complete word must still pass.
+-        address=(1<<((f+1)*K-1))|(1<<((f+2)*K-1))
+-        pattern=(0,0)
+-        expected=reference(address,f,K,pattern)
+-        actual=compact(address,f,K,pattern)
+-        require(actual==expected and compact(actual,f,K,pattern,inverse=True)==address,
+-                'The adversarial complete guard-plane input must pass with repair')
+-        try:
+-            wrong=compact(address,f,K,pattern,omit_repair=True)
+-        except (AssertionError,ValueError) as error:
+-            wrong_repair=dict(original=address,rejected=str(error),pattern=pattern,
+-                              deterministic_zero_guard_planes=True)
+-        else:
+-            if wrong!=expected:
+-                wrong_repair=dict(original=address,wrong=wrong,expected=expected,pattern=pattern,
+-                                  deterministic_zero_guard_planes=True)
+     require(wrong_decode is not None and wrong_repair is not None,'Control decoding and repair negatives must discriminate')
+     require(f%4<2 or wrong_residual is not None,'Every tested real residual-pair path must discriminate')
+     swaps,orders=stock_layout(f)

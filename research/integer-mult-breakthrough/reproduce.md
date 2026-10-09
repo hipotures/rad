@@ -43,6 +43,51 @@ evidence is packed into this topic's evidence namespaces without altering
 originals. Run protocols, compact summaries and source hashes distinguish
 retained finite evidence from analytical assumptions.
 
+## Dirty cap banks, general flags and irregular routes
+
+The eighteenth checkpoint adds seven standard-library checks, for 177 total.
+Run the bounded commands from the worktree root:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/paired_cap_dirty_completion.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/paired_cap_fanout_flags.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_idempotent_flags.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_ordered_scan_products.py
+python3 -B research/integer-mult-breakthrough/code/transfers/irregular_activity_router.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/verify_irregular_route_shapes.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/paired_cube_cap_review.py --workers 1 --bounded
+```
+
+Expected PASS receipts bind retained dirty auxiliary banks and true scalar
+inverses, actual fanout flags, arbitrary image/kernel idempotent completion,
+two-scan support restrictions, and literal general-width routing with all
+12 guards. The independent cap review reconstructs small coefficients and
+supports without importing the producer; its separate review of gate words
+is analytical and does not rerun complete earlier words or every historical
+failure. These checks do not supply a fast zeta primitive, native tape
+implementation, arbitrary cancellation lower bound, or larger kappa.
+
+Full four-worker commands and fresh output paths are recorded in the three
+scientific reports and frozen source inventories. The two original complete
+fixed-label scan certificates are 972,253 and 964,037 bytes. Readable summaries
+state their omissions; the complete certificates remain unchanged in gzip
+copies, without splitting. The routing inventory preserves two failed
+negative-control attempts. Its ordered recovery patches reproduce historical
+source versions only in an isolated mirror: first apply the adversarial
+recovery patch to the accepted source, then the negative recovery patch to
+that intermediate source. Never apply them to the active worktree. The
+[control recovery run](runs/20261009T101623Z-irregular-control-recovery/report.md)
+reconstructs both exact hashes and reproduces both rejected controls before
+checking the accepted full f4/f5/f6/f7, K10 route.
+
+All 177 local checks passed on 335 unchanged effective inputs. Complete
+original run text, validation reports, control-recovery outputs and selected
+public API metadata are indexed by
+[eighteenth recovery metadata](configs/recovery/checkpoint-eighteen-artifacts.json).
+Downloaded third-party source remains outside these archives and is identified
+by obtainable pinned URLs and hashes. All preceding recovery shards and the
+[historical index](reports/checkpoint-index-through-seventeen.md) remain intact.
+
 ## Maximum endpoints, paired-five words and cap channels
 
 The seventeenth checkpoint adds eight standard-library checks, for 170 total.

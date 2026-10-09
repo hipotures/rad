@@ -1,0 +1,41 @@
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/concurrent/futures/process.py", line 254, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File "/usr/lib/python3.14/concurrent/futures/process.py", line 203, in _process_chunk
+    return [fn(*args) for args in chunk]
+            ~~^^^^^^^
+  File "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/transfers/verify_irregular_route_shapes.py", line 34, in measured_probe
+    row=I.probe(task)
+  File "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/transfers/irregular_activity_router.py", line 405, in probe
+    require(wrong_decode is not None and wrong_repair is not None,'Control decoding and repair negatives must discriminate')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/transfers/irregular_activity_router.py", line 37, in require
+    raise AssertionError(reason)
+AssertionError: Control decoding and repair negatives must discriminate
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/transfers/verify_irregular_route_shapes.py", line 76, in <module>
+    main()
+    ~~~~^^
+  File "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/transfers/verify_irregular_route_shapes.py", line 62, in main
+    rows=list(pool.map(measured_probe,tasks))
+  File "/usr/lib/python3.14/concurrent/futures/process.py", line 617, in _chain_from_iterable_of_lists
+    for element in iterable:
+                   ^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 639, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 311, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 450, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 395, in __get_result
+    raise self._exception
+AssertionError: Control decoding and repair negatives must discriminate
