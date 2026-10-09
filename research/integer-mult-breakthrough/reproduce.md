@@ -273,3 +273,56 @@ These results provide scalar constructions, conditional analytical lemmas,
 finite certificates and structural negatives. No complete new multiplier or
 kappa>=10^-4 is certified. Native center/side integration continues on fresh
 paths outside this publication.
+
+## Closed components, actual frames and birth-reuse input
+
+The eighth checkpoint adds 20 checks to the existing registry, for 80 total.
+These commands exercise bounded actual operators and compact arithmetic:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_closed_center_release.py
+python3 -B research/integer-mult-breakthrough/code/complex/verify_closed_center_interfaces.py
+python3 -B research/integer-mult-breakthrough/code/complex/verify_phase_frame_primitives.py
+python3 -B research/integer-mult-breakthrough/code/complex/frame_background_orientation.py
+python3 -B research/integer-mult-breakthrough/code/transfers/closed_center_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/ballot_center_completion.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/ballot_bier_words.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/encoding_slack.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/pr127_transfer_review.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/obstructions/materialized_side_release_bound.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/geodesic_side_capacity.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/canonical_framed_shear_boundary.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_component_words.py --case two-axis
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_component_words.py --case native-exchanges
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_component_words.py --case closed-side
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_component_words.py --case geodesic-side
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_component_words.py --case canonical-geodesic
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_component_words.py --case tensor-preflight
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_component_words.py --case geodesic-moment
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_component_words.py --case source-cycle
+```
+
+The central component adds Kx, not the complete identity. Generic geodesic
+replay checks all384 h4/f1 physical columns and rejects both omitted cleanup
+and free generic gauge changes. The smaller coordinate side is a separate
+component. Two-axis controls check complete kernels, child matrices and full
+spectator routers. The source-cycle bounded check replays scalar columns and
+the stored witness; it does not recompute the expensive finite minimum. Exact
+conditional moments never certify the missing canonical primitive or transfer.
+
+External PR127 reproduction is separate from these standard-library checks.
+Follow [its run report](runs/20261009T015802Z-pr127-reproduction/report.md) and
+[source pins](configs/obstructions/pr127-source-pins.json) to acquire the
+unchanged downloadable checkout at the exact commit. The independent compact
+arithmetic command above requires only the retained fixture, not that checkout.
+The [scope review](reports/transfers/pr127-transfer-independent-review.md)
+distinguishes three moments, aggregate rebilling, scalar costs and seven margins
+from all47 constraints and the inherited native assumptions.
+
+An early six-case coordinator wrapper was extended to two additional cases.
+The initial source hash is recoverable through the exact
+[coverage extension patch](fixtures/synthesis/component-word-coverage-extension.patch)
+and archived source snapshot. Early receipts remain unchanged. Registered CI
+uses the extended source. The full orthogonal Gauss-block trace likewise has
+an unchanged gzip copy and a separately named compact publication summary;
+neither original was overwritten to satisfy publication limits.

@@ -5,7 +5,8 @@
 The verified isolated worktree is `/home/user/DEV/rad-breakthrough`, starting
 from `cb2ae8734a58eae09432b307409b5553a19d79db`. The coordinator and three
 autonomous agents are investigating four independent tracks. Their first
-discriminators have run; there is no new claim of kappa >= 1e-4.
+experiments and internal reviews are preserved in milestone commits. There is
+no campaign claim of kappa >= 1e-4.
 
 The goal is a structural route to a conditional integer-multiplication exponent **kappa >= 1e-4**, with larger improvements as the continuing objective. This is not another campaign to optimize the last digits of the current public record.
 
@@ -17,6 +18,39 @@ The goal is a structural route to a conditional integer-multiplication exponent 
 - [Hypothesis portfolio](reports/hypothesis-portfolio.md): bottlenecks, leverage,
   changed assumptions and continuation criteria for the live tracks.
 - [Reproduction](reproduce.md) and [artifact recovery](artifact-manifest.json).
+
+## Current structural checkpoint
+
+The [closed central component](reports/synthesis/closed-center-release-component.md)
+now has an actual arbitrary-dirty Gaussian word, with independent
+[complex/odd-line review](reports/complex/closed-center-and-odd-line-independent-review.md)
+and [transfer review](reports/transfers/closed-center-independent-review.md).
+It implements Kx, with full feature returns paid. The
+[integral ballot completion](reports/transfers/ballot-integral-center-completion.md)
+adds an all-size scalar basis and a constructive unit-shear/sign word.
+
+[Actual subspace representatives](reports/complex/canonical-subspace-actual-frames.md)
+cover degenerate nested frames. Independent
+[two-axis phases](reports/complex/outer-axis-independent-phase-review.md)
+retain their affine offsets and per-column global units. A
+[literal geodesic side](reports/synthesis/canonical-geodesic-side-physical-review.md)
+passes complete small source/sink/dirty checks, but the
+[separate canonical wrapper](reports/obstructions/canonical-framed-shear-boundary.md)
+erases its apparent saving. Closed full materialization and a naive per-edge
+tensor side have separate, explicitly scoped negative results.
+
+The user-supplied [external PR127](https://github.com/CrocSwap/integer-mult-bounds/pull/127)
+reports conditional kappa=1.1239534209971e-4 using a changed inherited bit
+supplier. Its [unchanged author package reproduces locally](reports/obstructions/pr127-reproduction-and-birth-reuse.md),
+and an [independent compact arithmetic review](reports/transfers/pr127-transfer-independent-review.md)
+passes. The external native and analytic hypotheses remain explicit. This
+introduces birth-cut dirty-role reuse as a structural direction for new
+circuits; it is not adoption of that exponent as a campaign theorem.
+
+The registered verification set contains 80 bounded checks. Native scalable
+frame synthesis, paid whole primitive/SWAP chronology and a complete new
+multiplication transfer remain the active discriminators. Large arrays are
+not allocated merely to evaluate an optimistic profile.
 
 ## Evidence and current directions
 

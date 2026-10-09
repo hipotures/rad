@@ -1,0 +1,5 @@
+# Closed center release
+
+The literal center-only dirty echo passes all four cases. It adds Kx while restoring virtual x and dirty z, and produces the required physical full-frame dirty output. The actual closed feature loss is 2qh with v dirty helper banks. See [proof and integration limits](../../reports/synthesis/closed-center-release-component.md), [protocol](results/protocol.json), [compact results](results/summary.json), [complete original identities](results/persistence.json) and [supplemental transitive dependency pin](results/dependency-provenance.json). Complete originals remain unchanged at the declared ignored raw location. No full identity shear or multiplier exponent is asserted.
+
+The raw namespace 20261009T012000Z is a manually selected unique path label. Actual start is 2026-10-09T01:04:35.820277+00:00; the raw label is 924.180 seconds later. The durable run ID uses the recorded start. See [namespace provenance](results/namespace-provenance.json); original protocol bytes are unchanged.

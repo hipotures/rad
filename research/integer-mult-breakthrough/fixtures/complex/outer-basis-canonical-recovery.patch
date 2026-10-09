@@ -1,0 +1,15 @@
+--- a/research/integer-mult-breakthrough/code/complex/outer_axis_interface_review.py
++++ b/research/integer-mult-breakthrough/code/complex/outer_axis_interface_review.py
+@@ -52,7 +52,11 @@
+             if value >> bit & 1:
+                 value ^= pivots[bit]
+         if value:
+-            pivots[value.bit_length() - 1] = value
++            new_bit = value.bit_length() - 1
++            for bit in pivots:
++                if pivots[bit] >> new_bit & 1:
++                    pivots[bit] ^= value
++            pivots[new_bit] = value
+     return tuple(pivots[bit] for bit in sorted(pivots))
+ 
+ 

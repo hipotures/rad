@@ -1,0 +1,147 @@
+{
+  "status": "PASS ALL-H NAIVE TENSOR-CENTER SIDE EXCLUSION",
+  "saving": "1/10000",
+  "cases": [
+    {
+      "profile": {
+        "h": 13,
+        "v": 1287,
+        "q": 78,
+        "N": 1656369,
+        "m": 169,
+        "M": 714968366112,
+        "W": 714973335219,
+        "base_nonzero_K_row_entries": 657,
+        "side_helpers_per_product_source": 431648,
+        "child_multiplicities": {
+          "1": 714970022481,
+          "168": 714973335219,
+          "169": 12168
+        },
+        "rank_charge": 120830492395665,
+        "deficit": 1256346,
+        "scope": "Optimistic LOWER moment bound for the naive one-dirty-helper-per-product-side-edge chronology; not a realizable improved profile."
+      },
+      "saving": "1/10000",
+      "exact_lower_moment_interval": [
+        "6277124431956168979958420232744842687427736950343575339371/6277101735386680763835789423207666416102355444464034512896",
+        "6277124431956168979958420232744842687427736950343575371999/6277101735386680763835789423207666416102355444464034512896"
+      ],
+      "exact_positive_lower_gap": "22696569488216122630809537176271325381505879540826475/6277101735386680763835789423207666416102355444464034512896"
+    },
+    {
+      "profile": {
+        "h": 16,
+        "v": 4368,
+        "q": 120,
+        "N": 19079424,
+        "m": 256,
+        "M": 89677547511552,
+        "W": 89677604749824,
+        "base_nonzero_K_row_entries": 2168,
+        "side_helpers_per_product_source": 4700223,
+        "child_multiplicities": {
+          "1": 89677566590976,
+          "255": 89677604749824,
+          "256": 28800
+        },
+        "rank_charge": 22957466785168896,
+        "deficit": 30786048,
+        "scope": "Optimistic LOWER moment bound for the naive one-dirty-helper-per-product-side-edge chronology; not a realizable improved profile."
+      },
+      "saving": "1/10000",
+      "exact_lower_moment_interval": [
+        "6277117774667368326908586823375461585531265739711877918619/6277101735386680763835789423207666416102355444464034512896",
+        "1569279443666842081727146705843865396382816434927969486079/1569275433846670190958947355801916604025588861116008628224"
+      ],
+      "exact_positive_lower_gap": "16039280687563072797400167795169428910295247843405723/6277101735386680763835789423207666416102355444464034512896"
+    },
+    {
+      "profile": {
+        "h": 20,
+        "v": 15504,
+        "q": 190,
+        "N": 240374016,
+        "m": 400,
+        "M": 13990161944586240,
+        "W": 13990162665708288,
+        "base_nonzero_K_row_entries": 7629,
+        "side_helpers_per_product_source": 58201640,
+        "child_multiplicities": {
+          "1": 13990162184960256,
+          "399": 13990162665708288,
+          "400": 72200
+        },
+        "rank_charge": 5596065065831447168,
+        "deficit": 451868032,
+        "scope": "Optimistic LOWER moment bound for the naive one-dirty-helper-per-product-side-edge chronology; not a realizable improved profile."
+      },
+      "saving": "1/10000",
+      "exact_lower_moment_interval": [
+        "1569278176816812633686425596794173329612936097704285780417/1569275433846670190958947355801916604025588861116008628224",
+        "3138556353633625267372851193588346659225872195408571570083/3138550867693340381917894711603833208051177722232017256448"
+      ],
+      "exact_positive_lower_gap": "2742970142442727478240992256725587347236588277152193/1569275433846670190958947355801916604025588861116008628224"
+    }
+  ],
+  "small_h_nonpositive_center_controls": [
+    {
+      "h": 7,
+      "v": 21,
+      "q": 21,
+      "product_center_deficit": -42336
+    },
+    {
+      "h": 8,
+      "v": 56,
+      "q": 28,
+      "product_center_deficit": -94080
+    },
+    {
+      "h": 9,
+      "v": 126,
+      "q": 36,
+      "product_center_deficit": -178200
+    },
+    {
+      "h": 10,
+      "v": 252,
+      "q": 45,
+      "product_center_deficit": -277992
+    },
+    {
+      "h": 11,
+      "v": 462,
+      "q": 55,
+      "product_center_deficit": -305162
+    },
+    {
+      "h": 12,
+      "v": 792,
+      "q": 66,
+      "product_center_deficit": 0
+    }
+  ],
+  "all_h_ge_13_proof": {
+    "first_nonzero_count": 657,
+    "log169_lower": "527839369071947411107870646800478213859519053475066592215141342747972346833701873205942403260019097375001717853977689790676622595455051427351949859334132307711112654587476268082775591336123025757037561202945275053103023361671113543932848516813764454561112032465109848192/102894696056365070516620318085637854630385782954840482419167802009937278850066226583373847237828036599243856332207825118965918331773119844268384047363461371548930154792448997153901519478388230409673298409792153193751500259940811179602836416413767948057617588824128461425",
+    "ln_m_greater_than_one": true,
+    "normalized_numerator_margin_per_N_lower": "25728/625",
+    "inequality": "moment >= 1 + [b*M*ln(m)-2*N+2*q^2*m]/(W*m) > 1",
+    "premises": [
+      "h>=13; m=h^2>=169",
+      "c(h)=C(h-5,5)+10*C(h-5,3)+5*(h-5)+1 is nondecreasing",
+      "M/N=c(h)^2-1>=657^2-1",
+      "Each edge helper has an obligatory width-one source-line entrance",
+      "The remaining helper geodesic moment is at least its rank at b0",
+      "The product center closes q^2 full\u2192zero\u2192full releases"
+    ]
+  },
+  "not_excluded": [
+    "Shared or factorized side helpers",
+    "A different joint signed exchange",
+    "A different center release or endpoint architecture",
+    "A changed transfer beyond this direct product frame word"
+  ],
+  "scope": "Conditional all-h obstruction for the declared naive O(v^4) product-side stock. It does not exclude K tensor K fitting algebra or general multiplier improvements."
+}

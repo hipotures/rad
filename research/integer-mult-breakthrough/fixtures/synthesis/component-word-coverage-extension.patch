@@ -1,0 +1,93 @@
+--- verify_component_words.py.initial
++++ verify_component_words.py
+@@ -6,6 +6,7 @@
+ """
+ 
+ import argparse
++from collections import Counter
+ from datetime import datetime, timezone
+ from hashlib import sha256
+ import importlib
+@@ -76,6 +77,61 @@
+     if kind == 'tensor-preflight':
+         p = importlib.import_module('tensor_center_side_preflight')
+         return p.verify()
++    if kind == 'geodesic-moment':
++        p = importlib.import_module('certify_geodesic_edge_moment')
++        path = Path(__file__).resolve().parents[2] / 'runs/20261009T014025Z-synthesis-geodesic-edge-side/results/certificate.json'
++        data = json.loads(path.read_text())
++        rows = [p.certify(case['rank_ledger']) for case in data['cases'] if case['kind'] == 'rank']
++        if sorted(row['h'] for row in rows) != [9, 12, 16]:
++            raise AssertionError('Pinned abstract profile coverage changed')
++        return dict(input_path=str(path.relative_to(path.parents[3])),
++                    input_sha256=sha256(path.read_bytes()).hexdigest(),
++                    cases=p.intervals.serializable(rows),
++                    scope='Exact conditional moments for the three retained abstract side ledgers; no canonical primitive or multiplier exponent.')
++    if kind == 'source-cycle':
++        p = importlib.import_module('source_cycle_echo_search')
++        path = Path(__file__).resolve().parents[2] / 'runs/20261009T005332Z-synthesis-source-cycle-echo/results/summary.json'
++        data = json.loads(path.read_text())
++        rows = []
++        n = m = 3
++        f = p.dp.f
++        zero, full = f.le((), n), f.le((1, 2, 4), n)
++        starts = [f.le((1 << j,), n) for j in range(m)] + [zero] * m
++        ends = [full] * m + [f.le(f.perpendicular((1 << j,), n), n) for j in range(m)]
++        for case in data['cases']:
++            word = p.operations(case['topology'])
++            scalar = p.scalar_columns(word, m)
++            p.scalar_columns(word, m, True)
++            shears = [(e[1], e[2], e[3]) for e in word if e[0] == 'add']
++            frames = f.lagrangians(n) if case['frame_kind'] == 'all-Lagrangian' else [f.le(e, n) for e in f.subspaces(n)]
++            frames = sorted(frames)
++            assignment = case['exact_min_sum']['assignment']
++            if len(assignment) != len(shears):
++                raise AssertionError('Frozen source-cycle assignment length changed')
++            current = list(starts)
++            histogram = Counter()
++            for (a, b, _), frame_id in zip(shears, assignment):
++                frame = frames[frame_id]
++                for role in (a, b):
++                    distance = f.distance(current[role], frame, n)
++                    if distance:
++                        histogram[distance] += 1
++                    current[role] = frame
++            for before, after in zip(current, ends):
++                distance = f.distance(before, after, n)
++                if distance:
++                    histogram[distance] += 1
++            if sum(width * count for width, count in histogram.items()) != 18:
++                raise AssertionError('Frozen source-cycle witness charge changed')
++            if dict(histogram) != {int(k): v for k, v in case['chronological_histogram'].items()}:
++                raise AssertionError('Frozen complete source-cycle histogram changed')
++            rows.append(dict(topology=case['topology'], frame_kind=case['frame_kind'],
++                             scalar_columns=scalar, witness_histogram=dict(histogram),
++                             witness_charge=18))
++        if len(rows) != 4:
++            raise AssertionError('Frozen source-cycle coverage changed')
++        return dict(input_sha256=sha256(path.read_bytes()).hexdigest(), cases=rows,
++                    scope='Complete scalar source/sink identity and retained assignment replay in four domains. The expensive finite minimum is not recomputed by this bounded check.')
+     raise ValueError('Unknown component check')
+ 
+ 
+@@ -99,7 +155,8 @@
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument('--case', required=True, choices=('two-axis', 'native-exchanges',
+-                        'closed-side', 'geodesic-side', 'canonical-geodesic', 'tensor-preflight'))
++                        'closed-side', 'geodesic-side', 'canonical-geodesic', 'tensor-preflight',
++                        'geodesic-moment', 'source-cycle'))
+     parser.add_argument('--output', type=Path)
+     args = parser.parse_args()
+     started = datetime.now(timezone.utc).isoformat()
+@@ -108,7 +165,9 @@
+                'closed-side': 'closed_center_side_splice',
+                'geodesic-side': 'geodesic_edge_side_splice',
+                'canonical-geodesic': 'canonical_geodesic_side_review',
+-               'tensor-preflight': 'tensor_center_side_preflight'}
++               'tensor-preflight': 'tensor_center_side_preflight',
++               'geodesic-moment': 'certify_geodesic_edge_moment',
++               'source-cycle': 'source_cycle_echo_search'}
+     importlib.import_module(modules[args.case])
+     root = Path(__file__).resolve().parents[1]
+     hashes = {str(path.relative_to(root)): sha256(path.read_bytes()).hexdigest()

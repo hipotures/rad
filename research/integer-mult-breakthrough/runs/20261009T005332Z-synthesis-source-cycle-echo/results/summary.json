@@ -1,0 +1,787 @@
+{
+  "cases": [
+    {
+      "topology": "global-cycle",
+      "frame_kind": "L_E",
+      "active_bits": 3,
+      "data_roles": 3,
+      "frame_count": 16,
+      "payload_stock": 6,
+      "capacity": 18,
+      "complete_endpoint_floor": 12,
+      "scalar_columns": {
+        "all_initial_columns": 6,
+        "source_columns": 3,
+        "arbitrary_sink_columns": 3,
+        "corruption_detected": false
+      },
+      "wrong_copy_control": {
+        "all_initial_columns": 6,
+        "source_columns": 3,
+        "arbitrary_sink_columns": 3,
+        "corruption_detected": true
+      },
+      "scalar_operation_counts": {
+        "add": 16,
+        "scale": 2
+      },
+      "nonunit_scales": [
+        "2",
+        "1/2"
+      ],
+      "guarded_instance": {
+        "vertices": 16,
+        "frame_domain": 16,
+        "global_nonnegative_charge_bound": 111
+      },
+      "preflight": {
+        "order": [
+          15,
+          0,
+          1,
+          2,
+          13,
+          14,
+          12,
+          5,
+          8,
+          9,
+          10,
+          3,
+          4,
+          6,
+          7,
+          11
+        ],
+        "stages": [
+          {
+            "variable": 15,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 6912
+          },
+          {
+            "variable": 0,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 6896
+          },
+          {
+            "variable": 1,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 6880
+          },
+          {
+            "variable": 2,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 6864
+          },
+          {
+            "variable": 13,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 6848
+          },
+          {
+            "variable": 14,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 6576
+          },
+          {
+            "variable": 12,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 6560
+          },
+          {
+            "variable": 5,
+            "width": 3,
+            "factor_entries": 4096,
+            "live_uint16_entries": 13968
+          },
+          {
+            "variable": 8,
+            "width": 3,
+            "factor_entries": 4096,
+            "live_uint16_entries": 21376
+          },
+          {
+            "variable": 9,
+            "width": 3,
+            "factor_entries": 4096,
+            "live_uint16_entries": 28784
+          },
+          {
+            "variable": 10,
+            "width": 3,
+            "factor_entries": 4096,
+            "live_uint16_entries": 36192
+          },
+          {
+            "variable": 3,
+            "width": 4,
+            "factor_entries": 65536,
+            "live_uint16_entries": 166480
+          },
+          {
+            "variable": 4,
+            "width": 3,
+            "factor_entries": 4096,
+            "live_uint16_entries": 162112
+          },
+          {
+            "variable": 6,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 92720
+          },
+          {
+            "variable": 7,
+            "width": 1,
+            "factor_entries": 16,
+            "live_uint16_entries": 88384
+          },
+          {
+            "variable": 11,
+            "width": 0,
+            "factor_entries": 1,
+            "live_uint16_entries": 88114
+          }
+        ],
+        "peak_factor_and_decision_bytes": 332960,
+        "candidate_cost_evaluations": 1409296,
+        "maximum_factor_entries": 65536
+      },
+      "native_worker_threads": 4,
+      "memory_budget_GiB": 8.0,
+      "status": "EXACT FINITE MINIMUM WITHOUT RANK DEFICIT",
+      "minimum_rank_charge": 18,
+      "deficit": 0,
+      "exact_min_sum": {
+        "status": "EXACT FINITE MIN-SUM PASS",
+        "optimum": 18,
+        "maximum_width": 4,
+        "parallel_worker_threads": 4,
+        "global_nonnegative_cost_bound": 111,
+        "candidate_cost_evaluations": 1409296,
+        "peak_live_uint16_entries": 166480,
+        "assignment": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "graph_input_sha256": "3ad608edd07b15e9b27754109f78bef7a84165a503c44989665f405610f4eade",
+        "elimination_order": [
+          15,
+          0,
+          1,
+          2,
+          13,
+          14,
+          12,
+          5,
+          8,
+          9,
+          10,
+          3,
+          4,
+          6,
+          7,
+          11
+        ]
+      },
+      "chronological_histogram": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "seconds": 0.007064887999149505,
+      "scope": "Exact finite metric optimum for this complete source-as-helper word/domain. Every logical source/sink column, scale/inverse and physical frame path is retained. Literal Gaussian lifts, tape movement, coefficient precision, dirty auxiliary C stock and multiplier transfer remain separate."
+    },
+    {
+      "topology": "sequential-commutators",
+      "frame_kind": "L_E",
+      "active_bits": 3,
+      "data_roles": 3,
+      "frame_count": 16,
+      "payload_stock": 6,
+      "capacity": 18,
+      "complete_endpoint_floor": 12,
+      "scalar_columns": {
+        "all_initial_columns": 6,
+        "source_columns": 3,
+        "arbitrary_sink_columns": 3,
+        "corruption_detected": false
+      },
+      "wrong_copy_control": {
+        "all_initial_columns": 6,
+        "source_columns": 3,
+        "arbitrary_sink_columns": 3,
+        "corruption_detected": true
+      },
+      "scalar_operation_counts": {
+        "add": 12
+      },
+      "nonunit_scales": [],
+      "guarded_instance": {
+        "vertices": 12,
+        "frame_domain": 16,
+        "global_nonnegative_charge_bound": 88
+      },
+      "preflight": {
+        "order": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          11,
+          10,
+          3,
+          5,
+          7,
+          8,
+          9
+        ],
+        "stages": [
+          {
+            "variable": 0,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 5312
+          },
+          {
+            "variable": 1,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 5296
+          },
+          {
+            "variable": 2,
+            "width": 1,
+            "factor_entries": 16,
+            "live_uint16_entries": 4544
+          },
+          {
+            "variable": 4,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 4528
+          },
+          {
+            "variable": 6,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 4512
+          },
+          {
+            "variable": 11,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 4240
+          },
+          {
+            "variable": 10,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 4224
+          },
+          {
+            "variable": 3,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 3952
+          },
+          {
+            "variable": 5,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 3920
+          },
+          {
+            "variable": 7,
+            "width": 2,
+            "factor_entries": 256,
+            "live_uint16_entries": 3648
+          },
+          {
+            "variable": 8,
+            "width": 1,
+            "factor_entries": 16,
+            "live_uint16_entries": 3152
+          },
+          {
+            "variable": 9,
+            "width": 0,
+            "factor_entries": 1,
+            "live_uint16_entries": 2370
+          }
+        ],
+        "peak_factor_and_decision_bytes": 10624,
+        "candidate_cost_evaluations": 37392,
+        "maximum_factor_entries": 256
+      },
+      "native_worker_threads": 4,
+      "memory_budget_GiB": 8.0,
+      "status": "EXACT FINITE MINIMUM WITHOUT RANK DEFICIT",
+      "minimum_rank_charge": 18,
+      "deficit": 0,
+      "exact_min_sum": {
+        "status": "EXACT FINITE MIN-SUM PASS",
+        "optimum": 18,
+        "maximum_width": 2,
+        "parallel_worker_threads": 4,
+        "global_nonnegative_cost_bound": 88,
+        "candidate_cost_evaluations": 37392,
+        "peak_live_uint16_entries": 5312,
+        "assignment": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "graph_input_sha256": "808ae998e2dc3f5776345d6b240d79b0518ac0bf12d4ee416a3fb911b2d5a188",
+        "elimination_order": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          11,
+          10,
+          3,
+          5,
+          7,
+          8,
+          9
+        ]
+      },
+      "chronological_histogram": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "seconds": 0.005518041994946543,
+      "scope": "Exact finite metric optimum for this complete source-as-helper word/domain. Every logical source/sink column, scale/inverse and physical frame path is retained. Literal Gaussian lifts, tape movement, coefficient precision, dirty auxiliary C stock and multiplier transfer remain separate."
+    },
+    {
+      "topology": "sequential-commutators",
+      "frame_kind": "all-Lagrangian",
+      "active_bits": 3,
+      "data_roles": 3,
+      "frame_count": 135,
+      "payload_stock": 6,
+      "capacity": 18,
+      "complete_endpoint_floor": 12,
+      "scalar_columns": {
+        "all_initial_columns": 6,
+        "source_columns": 3,
+        "arbitrary_sink_columns": 3,
+        "corruption_detected": false
+      },
+      "wrong_copy_control": {
+        "all_initial_columns": 6,
+        "source_columns": 3,
+        "arbitrary_sink_columns": 3,
+        "corruption_detected": true
+      },
+      "scalar_operation_counts": {
+        "add": 12
+      },
+      "nonunit_scales": [],
+      "guarded_instance": {
+        "vertices": 12,
+        "frame_domain": 135,
+        "global_nonnegative_charge_bound": 90
+      },
+      "preflight": {
+        "order": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          11,
+          10,
+          3,
+          5,
+          7,
+          8,
+          9
+        ],
+        "stages": [
+          {
+            "variable": 0,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 366120
+          },
+          {
+            "variable": 1,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 365985
+          },
+          {
+            "variable": 2,
+            "width": 1,
+            "factor_entries": 135,
+            "live_uint16_entries": 311445
+          },
+          {
+            "variable": 4,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 311310
+          },
+          {
+            "variable": 6,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 311175
+          },
+          {
+            "variable": 11,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 292815
+          },
+          {
+            "variable": 10,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 292680
+          },
+          {
+            "variable": 3,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 274320
+          },
+          {
+            "variable": 5,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 274050
+          },
+          {
+            "variable": 7,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 255690
+          },
+          {
+            "variable": 8,
+            "width": 1,
+            "factor_entries": 135,
+            "live_uint16_entries": 219375
+          },
+          {
+            "variable": 9,
+            "width": 0,
+            "factor_entries": 1,
+            "live_uint16_entries": 164567
+          }
+        ],
+        "peak_factor_and_decision_bytes": 732240,
+        "candidate_cost_evaluations": 22179960,
+        "maximum_factor_entries": 18225
+      },
+      "native_worker_threads": 4,
+      "memory_budget_GiB": 8.0,
+      "status": "EXACT FINITE MINIMUM WITHOUT RANK DEFICIT",
+      "minimum_rank_charge": 18,
+      "deficit": 0,
+      "exact_min_sum": {
+        "status": "EXACT FINITE MIN-SUM PASS",
+        "optimum": 18,
+        "maximum_width": 2,
+        "parallel_worker_threads": 4,
+        "global_nonnegative_cost_bound": 90,
+        "candidate_cost_evaluations": 22179960,
+        "peak_live_uint16_entries": 366120,
+        "assignment": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "graph_input_sha256": "8b1d92ba25c92c6a9b299dc21aaf88a8a8cee825ab75e55a43304b98f85afa6a",
+        "elimination_order": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          11,
+          10,
+          3,
+          5,
+          7,
+          8,
+          9
+        ]
+      },
+      "chronological_histogram": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "seconds": 0.15397901800315594,
+      "scope": "Exact finite metric optimum for this complete source-as-helper word/domain. Every logical source/sink column, scale/inverse and physical frame path is retained. Literal Gaussian lifts, tape movement, coefficient precision, dirty auxiliary C stock and multiplier transfer remain separate."
+    },
+    {
+      "topology": "global-cycle",
+      "frame_kind": "all-Lagrangian",
+      "active_bits": 3,
+      "data_roles": 3,
+      "frame_count": 135,
+      "payload_stock": 6,
+      "capacity": 18,
+      "complete_endpoint_floor": 12,
+      "scalar_columns": {
+        "all_initial_columns": 6,
+        "source_columns": 3,
+        "arbitrary_sink_columns": 3,
+        "corruption_detected": false
+      },
+      "wrong_copy_control": {
+        "all_initial_columns": 6,
+        "source_columns": 3,
+        "arbitrary_sink_columns": 3,
+        "corruption_detected": true
+      },
+      "scalar_operation_counts": {
+        "add": 16,
+        "scale": 2
+      },
+      "nonunit_scales": [
+        "2",
+        "1/2"
+      ],
+      "guarded_instance": {
+        "vertices": 16,
+        "frame_domain": 135,
+        "global_nonnegative_charge_bound": 114
+      },
+      "preflight": {
+        "order": [
+          15,
+          0,
+          1,
+          2,
+          13,
+          14,
+          12,
+          5,
+          8,
+          9,
+          10,
+          3,
+          4,
+          6,
+          7,
+          11
+        ],
+        "stages": [
+          {
+            "variable": 15,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 476010
+          },
+          {
+            "variable": 0,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 475875
+          },
+          {
+            "variable": 1,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 475740
+          },
+          {
+            "variable": 2,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 475605
+          },
+          {
+            "variable": 13,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 475470
+          },
+          {
+            "variable": 14,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 457110
+          },
+          {
+            "variable": 12,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 456975
+          },
+          {
+            "variable": 5,
+            "width": 3,
+            "factor_entries": 2460375,
+            "live_uint16_entries": 5322915
+          },
+          {
+            "variable": 8,
+            "width": 3,
+            "factor_entries": 2460375,
+            "live_uint16_entries": 10188855
+          },
+          {
+            "variable": 9,
+            "width": 3,
+            "factor_entries": 2460375,
+            "live_uint16_entries": 15054795
+          },
+          {
+            "variable": 10,
+            "width": 3,
+            "factor_entries": 2460375,
+            "live_uint16_entries": 19920735
+          },
+          {
+            "variable": 3,
+            "width": 4,
+            "factor_entries": 332150625,
+            "live_uint16_entries": 684167175
+          },
+          {
+            "variable": 4,
+            "width": 3,
+            "factor_entries": 2460375,
+            "live_uint16_entries": 681688440
+          },
+          {
+            "variable": 6,
+            "width": 2,
+            "factor_entries": 18225,
+            "live_uint16_entries": 347095530
+          },
+          {
+            "variable": 7,
+            "width": 1,
+            "factor_entries": 135,
+            "live_uint16_entries": 344617065
+          },
+          {
+            "variable": 11,
+            "width": 0,
+            "factor_entries": 1,
+            "live_uint16_entries": 344598707
+          }
+        ],
+        "peak_factor_and_decision_bytes": 1368334350,
+        "candidate_cost_evaluations": 46520788860,
+        "maximum_factor_entries": 332150625
+      },
+      "native_worker_threads": 4,
+      "memory_budget_GiB": 8.0,
+      "status": "EXACT FINITE MINIMUM WITHOUT RANK DEFICIT",
+      "minimum_rank_charge": 18,
+      "deficit": 0,
+      "exact_min_sum": {
+        "status": "EXACT FINITE MIN-SUM PASS",
+        "optimum": 18,
+        "maximum_width": 4,
+        "parallel_worker_threads": 4,
+        "global_nonnegative_cost_bound": 114,
+        "candidate_cost_evaluations": 46520788860,
+        "peak_live_uint16_entries": 684167175,
+        "assignment": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "graph_input_sha256": "6650e001f8ea6e98f391e95853e39edd500bec8abf7f7ef8d467968af719df6c",
+        "elimination_order": [
+          15,
+          0,
+          1,
+          2,
+          13,
+          14,
+          12,
+          5,
+          8,
+          9,
+          10,
+          3,
+          4,
+          6,
+          7,
+          11
+        ]
+      },
+      "chronological_histogram": {
+        "1": 3,
+        "2": 3,
+        "3": 3
+      },
+      "seconds": 31.38979732300504,
+      "scope": "Exact finite metric optimum for this complete source-as-helper word/domain. Every logical source/sink column, scale/inverse and physical frame path is retained. Literal Gaussian lifts, tape movement, coefficient precision, dirty auxiliary C stock and multiplier transfer remain separate."
+    }
+  ],
+  "full_original": "research/integer-mult-breakthrough/work/synthesis/20261009T010000Z-source-cycle-echo/results/certificate.json",
+  "full_original_bytes": 42965,
+  "full_original_sha256": "4155b1f4ea8640d216580f2bf261435f46446c690113ec822c5bc83dd210489f",
+  "omitted": [
+    "complete_frames",
+    "complete_operations"
+  ]
+}

@@ -269,3 +269,42 @@ over outer labels could make the source saving scale with the number of pairs.
 Separate actual spectator maps, second-axis composition and the side chronology
 must be constructed and charged. This is an integration hypothesis, not a
 realization of the old complete master histogram. No new kappa is accepted.
+
+## Eighth checkpoint and new birth-reuse direction
+
+Closed central Kx is now a complete physical component with all dirty helpers
+ending F times their initial virtual data. Independent interfaces retain
+odd-line affine shifts, global units and f-column semantics. The integral
+ballot/Bier word gives q=choose(h,r) in-place features with unit shears and
+signs; its uniform inverse prefix bound and native chronology remain open.
+Actual degenerate F_E representatives and exact small nested transitions are
+available. A scalable tableau/path-sum compiler is being investigated in fresh
+runs rather than extrapolating the bounded matrix compiler.
+
+Geodesic per-edge side helpers make the complete framed identity shear obey
+Wh-2v+2qh. Independent physical replay includes nonconvolution generic frames;
+origin-only XOR covariance is explicitly rejected. Conditional geometric
+profiles cross the frozen necessary complex threshold, but two separate
+canonical line wrappers add2v width-one calls and remove the saving. The
+three complete shear signed-SWAP wrapper cycles the same helper stock three
+times; its large bill is a scoped negative. A joint topology still needs its
+own actual complete word and stock accounting.
+
+The user introduced external draft PR127. Its reported conditional
+kappa=1.1239534209971e-4 is reproduced by the unchanged author finite runner
+and independently checked compact arithmetic. It uses a changed inherited
+stopped-product bit supplier, so it does not contradict the original frozen
+ceiling. Native complete-row, copied-stream, whole-residual, prime, recovery,
+all-size and fixed-tape hypotheses are retained assumptions of that package.
+No campaign exponent is established by this reproduction.
+
+The new structural hypothesis is to reuse dead arbitrary-dirty roles at
+larger deferred birth frames, cancelling their exact future clean-word
+responses with backward cuts at later births. Every source injection is
+reversed in its actual chronology. A legal merge preserves absolute rank
+deficit while reducing stock and improves a feasible paid concave moment.
+The current per-edge side has mostly high-dimensional donor frames and
+line births, so containment blocks naive reuse. Broader recipient frames,
+shared features, grouped sources and joint cancellation are independent
+possibilities. Source/frame guards, dirty endpoints and the canonical
+primitive connection remain decisive before wider sweeps.
