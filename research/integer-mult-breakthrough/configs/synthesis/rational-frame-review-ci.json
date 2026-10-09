@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scope": "Self-contained rational constructor and three retained operation cuts; complete external F2 replay is a separately retained experiment",
+  "stdlib_only": true,
+  "source_hashes": {
+    "rational_frame_completion.py": "8a35ffa3b5b354b4e0ec83ee75a19d76a497d47c883121d4c7a289836fd88f4c",
+    "rational_paid_chain_endpoints.py": "de9c2080bb6fb8d08903c3149b3b31be5b3fe917038ec8ff39107582a12f8eb2",
+    "verify_rational_frame_completion.py": "642924b175d3de7e7ed1c2b5759dee668127929baf642f3316f7e8249694508e",
+    "pr163_bit_frame_review.py": "fcca0d11b8bb52ab39dcecdb38c7d41357abba2203d3a8ef8871ce83b14dc1c3",
+    "pr163_bit_frame_witness_v2.py": "1d2733ed6ed7a625a3db47060ff439730409a28fb21c82244314998589f6c660",
+    "pr163_paid_chain_probe.py": "cf04a3711c688ed49d4be282e0a18d3cdff636c22085d1c2472def029dfccad2",
+    "verify_pr163_frame_contract.py": "efb938bcad74b061f58e1dfba2723be69073d07f1866b0f52ffb761ed434b4f3"
+  },
+  "fixture_sha256": "c369870fde9e57f0ef57f96f7f678f20383522b9bb17e6aad4b1bb5faf171fd1",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_rational_frame_completion.py"
+      ],
+      "expected_status": "PASS RATIONAL COMPLETION AND PAID ENDPOINT CONTROLS",
+      "exact_completion_cases": 6,
+      "negative_controls": 4
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_pr163_frame_contract.py"
+      ],
+      "expected_status": "PASS BOUNDED PR163 RATIONAL FRAME CONTRACT",
+      "cuts": 3,
+      "operation_indices": [
+        17436,
+        20980,
+        27619
+      ],
+      "negative_controls": 2
+    }
+  ],
+  "outputs": "Both entrypoints accept --output <fresh-file> and reject overwriting an existing receipt"
+}

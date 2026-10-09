@@ -1,0 +1,21 @@
+--- a/pr163_balanced_transfer_review.py
++++ b/pr163_balanced_transfer_review.py
+@@ -14,7 +14,6 @@
+ import json
+ from math import prod
+ from pathlib import Path
+-import sys
+ import time
+ 
+ 
+@@ -251,10 +250,6 @@
+     args = parser.parse_args()
+     if args.workers<1:
+         parser.error('workers must be positive')
+-    # The pinned 24 KiB fixture has a 5899-digit complete scalar gap.
+-    # Keep a bounded parser, without weakening any mathematical check.
+-    if hasattr(sys, 'set_int_max_str_digits'):
+-        sys.set_int_max_str_digits(10000)
+     source = Path(__file__).resolve()
+     source_hash = sha256(source.read_bytes()).hexdigest()
+     require(sha256(FIXTURE.read_bytes()).hexdigest()==FIXTURE_SHA, 'Mathematical input drift')

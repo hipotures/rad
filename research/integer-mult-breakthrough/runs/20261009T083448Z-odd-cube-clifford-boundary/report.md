@@ -1,0 +1,3 @@
+# Odd-cube reflection and single-Clifford discriminator
+
+Exact integer kernels pass for k=3,5,7,9. Every circulant Gram shift, complete opposite-parity matrix and selected Pauli conjugation row is checked. The conjugated row support is respectively 1,8,32,128, excluding a single Clifford operation for the larger cases. Four workers were requested; the complete finite run took 0.0877251 seconds. The general Pauli obstruction is proved in [the report](../../reports/obstructions/odd-cube-clifford-boundary.md). No native scalar bank word, physical chronology or exponent is supplied. A changed kernel coefficient rejects in every case.

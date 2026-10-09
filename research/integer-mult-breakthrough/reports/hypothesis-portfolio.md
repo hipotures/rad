@@ -544,3 +544,31 @@ A separate primary lead on quenched degree rebalancing is retained with
 explicit exceptional-set and wire-overhead discriminators. All current
 claims remain finite certificates, conditional lemmas or scoped negatives;
 no larger campaign kappa is asserted.
+
+## Sixteenth checkpoint: larger cubes, minimal frames and ordinary coupling
+
+External PR163 passes unchanged author replay and independent scoped complex,
+bit and transfer reconstructions. Its completed three-block sharing and paid
+birth splices change assumptions of earlier failed helper words. These are
+inputs for new mechanisms, with attribution and all-size contracts retained;
+we do not chase its arithmetic grid or claim its exponent as our own.
+
+The exact rational completion theorem replaces arbitrary padding with attained
+min/max frames inside future caps. Fixed-neighbor cuts are mostly locked, so
+joint connected-block changes are the next discriminator. A positive result
+must retain actual role chronology, conservative current spans, determinant
+height and exceptional prime fees. Characteristic-zero radical bounds do not
+transfer indiscriminately to finite fields.
+
+The five-coordinate paired-cube majority reflection has exact unitary scalar
+algebra but is not a single Clifford frame. A paid fixed bank scalar word is
+possible. Its complete side chronology, dirty return, original-source cleanup,
+core word and full child histogram must be counted before a parameter sweep.
+The first explicit baseline will quantify the necessary sharing rather than
+use an unattained role count as a certificate.
+
+Selected activity fibers are complete cubes including all chunk/guard bits.
+The old ordinary routing exponent caps the unchanged direct ledger; it is
+not a generic lower bound. A compatible improved ordinary supplier can change
+that premise. The eleven-gate Z3 word and non-power-of-two child dispatch are
+still missing, and a selected-width saving is not a final kappa.

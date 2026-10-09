@@ -21,6 +21,34 @@ The goal is a structural route to a conditional integer-multiplication exponent 
 
 ## Current structural checkpoint
 
+The sixteenth checkpoint records [external PR163 reproduction](reports/obstructions/pr163-reproduction-and-scope.md)
+at exact revision `15c702a929b7d640107a95e196186ad74e876c82`.
+Its unchanged author aggregate passes, with all 1,678 source pins unchanged.
+Independent [complex](reports/complex/pr163-complex-fusion-and-reuse-review.md),
+[bit](reports/synthesis/pr163-bit-frame-independent-review.md) and
+[paid transfer](reports/transfers/pr163-paid-balanced-transfer-independent-review.md)
+reviews agree within their separate finite and conditional scopes.
+The reported conditional `kappa=5.93970203079492e-4` belongs to the external
+authors; this campaign does not adopt it as a completed multiplier theorem.
+A later credit-only head update is recorded without silently replacing inputs.
+
+[Exact rational completion](reports/synthesis/rational-frame-completion-and-paid-chains.md)
+constructs minimum and maximum admissible operation frames inside future caps.
+The first fixed-neighbor probe finds no further ideal improvement in 32 cuts;
+connected frame blocks remain open. [Selected-action complete cylinders](reports/complex/selected-action-full-chunk-cylinders.md)
+retain every guard plane, while the [native activity ledger](reports/transfers/activity-native-routing-exponent.md)
+limits only its unchanged old supplier. An improved compatible ordinary
+supplier is a new coupling hypothesis, not an automatically available gain.
+
+The [odd-cube Pauli obstruction](reports/obstructions/odd-cube-clifford-boundary.md)
+excludes one Clifford frame for dimensions at least five. A paid fixed bank
+scalar mixer remains viable and is being given a complete side chronology.
+[Coordinator review](reports/obstructions/rational-and-pr163-coordinator-review.md)
+keeps rational, finite-field, Gaussian and native interfaces separate.
+The fifteenth commit's [remote CI](https://github.com/hipotures/rad/actions/runs/37904025977)
+passed all ten jobs. All162 registered checks pass on308 unchanged effective inputs;
+[the validation record](runs/20261009T084856Z-checkpoint-sixteen-validation/report.md) binds their exact scope.
+
 The fifteenth checkpoint binds [complete activity cylinders](reports/complex/prefix-activity-complete-chunk-shape.md),
 their [paid seven-tape width grouping](reports/complex/activity-width-tape-grouping.md)
 and a different [selected-only canonical control route](reports/synthesis/benes-control-fiber-native-interface.md).
@@ -151,7 +179,7 @@ and [ballot role budgets](reports/complex/ballot-center-review-and-role-budget.m
 locate costs that consume proposed gains. Their exclusions apply only to
 the stated constructions and ledgers. A full shared chronology, native
 payload routing and complete multiplication transfer remain active work.
-The registry currently contains 155 bounded checks; checkpoint receipts record
+The registry currently contains 162 bounded checks; checkpoint receipts record
 their actual validation results. No large graph is allocated merely
 to evaluate an optimistic cost profile.
 

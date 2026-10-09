@@ -43,6 +43,51 @@ evidence is packed into this topic's evidence namespaces without altering
 originals. Run protocols, compact summaries and source hashes distinguish
 retained finite evidence from analytical assumptions.
 
+## Independent PR163 reviews and rational frame completion
+
+The sixteenth checkpoint adds seven checks, bringing the registry to 162.
+All bounded checks require only standard-library Python and retained source
+or small fixtures. From the repository root:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/selected_activity_cylinders.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/pr163_complex_frame_audit.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_rational_frame_completion.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_pr163_frame_contract.py
+python3 -B research/integer-mult-breakthrough/code/transfers/activity_native_tau_budget.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/pr163_balanced_transfer_review.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/obstructions/odd_cube_clifford_boundary.py --workers 1 --bounded
+```
+
+Expected results are exact PASS controls and retained domain/chronology
+rejections. These do not rerun the full external author package or establish
+native/all-size hypotheses. Full independent complex/bit audit commands and
+immutable external acquisition instructions are in their scientific reports.
+The [author replay record](reports/obstructions/pr163-reproduction-and-scope.md)
+binds its unchanged 1,678-file closure, exact revision and excluded full gate.
+The newer credit-only PR head is distinct from the replayed revision.
+
+The main artifact manifest links [chronological sixteenth recovery metadata](configs/recovery/checkpoint-sixteen-artifacts.json). Complete gzip copies retain all original rows; no payload is
+split to meet a storage limit. The full143-check report has an adjacent
+readable storage note binding its unchanged bytes and original hash.
+
+[Selected cylinder inventory](configs/complex/selected-activity-milestone.json),
+[complex audit inventory](configs/complex/pr163-complex-review-milestone.json),
+[rational/bit inventory](configs/synthesis/rational-frame-review-publication-manifest.json)
+and [transfer inventory](configs/transfers/milestone-sixteen-freeze.json)
+bind complete original evidence, inputs and bounded closures. The odd-cube
+producer takes a fresh DIRECTORY as `--output`; the two bounded rational
+verifiers accept fresh FILE paths. Use a unique path for every attempt.
+
+The failed arithmetic reviewer is recoverable from its current-to-prior
+patch in an isolated directory outside Git ancestry. Preserve
+`code/transfers/` and `fixtures/transfers/` beneath that temporary topic,
+then apply `git apply --no-index --unsafe-paths -p1` from its code directory.
+The recovered source must have SHA-256
+`b16ab31dffc61c15b12e9ec7510741132897c463e9fd62b94eb28510bcaf81b7`.
+Its expected 4300-digit parser failure was independently replayed; do not
+apply this historical patch to the live repaired source.
+
 ## Complete activity, routing and nonunit numerical guards
 
 The fifteenth checkpoint registers seven new checks, for 155 total. They

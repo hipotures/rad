@@ -1,0 +1,42 @@
+{
+  "question": "Complete Gaussian cylinder shape after selected-action-only stable compaction",
+  "source": "code/complex/selected_activity_cylinders.py",
+  "source_sha256": "350c67fa14f1a88b1df69f3869e06e81b04590e84b5f27568bbd0a91800af7ee",
+  "workers": 4,
+  "tasks": [
+    [
+      3,
+      2,
+      1
+    ],
+    [
+      3,
+      3,
+      1
+    ],
+    [
+      3,
+      2,
+      2
+    ],
+    [
+      4,
+      1,
+      2
+    ]
+  ],
+  "seed_formula": "202610090741+10000*h+100*f+K",
+  "dependencies": "Python standard library only, no producer imports",
+  "coefficient": "(1-i)/2",
+  "inverse_weight": "1+i",
+  "data": "Four arbitrary Gaussian fields on grid3 in every complete address",
+  "scope": "All-size shape and exact finite operator. Initial compaction is an address oracle; native Benes/guard/routing/supplier remains separate.",
+  "reproduction": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/complex/selected_activity_cylinders.py",
+    "--workers",
+    "1",
+    "--bounded"
+  ]
+}
