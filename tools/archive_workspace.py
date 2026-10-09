@@ -157,6 +157,9 @@ def reason(path, data=None):
         extensions = extensions | {".js", ".html", ".css"}
     if parts[0] == "benchmarks":
         extensions = extensions | {".tsv", ".stdout", ".stderr", ".sha256"}
+    if parts[0] == "research":
+        # Authored mathematical proof sources follow the ordinary text budget.
+        extensions = extensions | {".tex"}
     if path.name not in names and path.suffix not in extensions:
         return "non-durable-format"
     if path.suffix == ".png" and not ({"plots", "figures"} & set(parts)):
