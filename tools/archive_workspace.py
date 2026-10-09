@@ -192,9 +192,20 @@ def reason(path, data=None):
                 return "notebook-execution-payload"
         if isinstance(parsed, dict) and "messages" in parsed and "model" in parsed:
             return "request-payload"
+        def file_pin(value):
+            # A typed byte/hash inventory remains provenance regardless of its
+            # filename. Additional result fields must retain the row guard.
+            if not isinstance(value, dict) or set(value) != {"path", "bytes", "sha256"}:
+                return False
+            name, size, digest = value["path"], value["bytes"], value["sha256"]
+            return (isinstance(name, str) and 0 < len(name) <= 4096 and
+                    isinstance(size, str) and 0 < len(size) <= 20 and
+                    size.isascii() and size.isdecimal() and
+                    isinstance(digest, str) and len(digest) == 64 and
+                    all(c in "0123456789abcdefABCDEF" for c in digest))
         def rows(value):
             if isinstance(value, list):
-                return len(value) > 128 or any(rows(v) for v in value)
+                return (len(value) > 128 and not all(file_pin(v) for v in value)) or any(rows(v) for v in value)
             return isinstance(value, dict) and any(rows(v) for v in value.values())
         # Hash/provenance inventories are durable references to local payloads.
         inventory = any(word in path.name for word in ["manifest", "inventory", "index", "catalog"]) or parts[:2] == ("docs", "compact-results") or relative == Path("docs/external-workspaces.json")

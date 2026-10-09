@@ -42,6 +42,13 @@ be relabeled as fixtures. JSON structural validation accepts exact integers
 with thousands of digits without converting them to Python integers; request,
 row-array and notebook-execution checks still apply.
 
+Byte/hash inventories remain readable provenance even when their filename does
+not contain `manifest` or `inventory`. Large arrays receive this role only when
+every entry contains exactly `path`, nonnegative integer `bytes`, and a valid
+64-character hexadecimal `sha256`. Extra result fields, malformed hashes or a
+separate large result array retain the row-level evidence guard. The ordinary
+file, directory, credential and aggregate limits still apply.
+
 The ordinary staged-content budget remains 20 MiB, counting whole changed
 blobs. A larger import requires a durable, indexed, scoped decision. The full
 2026-10-07 backfill has an explicit [one-time 512 MiB aggregate decision](text-evidence-backfill-policy.json),

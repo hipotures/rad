@@ -112,6 +112,32 @@ class PublicationTests(unittest.TestCase):
                           '{"cells":[{"execution_count":' + bound + ',"outputs":[]}]}\n')
         self.assertEqual(ARCHIVE.reason(path), "notebook-execution-payload")
 
+    def test_typed_hash_inventory_does_not_depend_on_filename(self):
+        files = [{"path": "research/fresh/code/" + "x" * 160 + f"/file-{i}.py",
+                  "bytes": i + 1, "sha256": "a" * 64} for i in range(500)]
+        path = self.write("research/fresh/configs/ready-files.json",
+                          json.dumps({"groups": {"candidate": {"files": files}}}))
+        self.assertGreater(path.stat().st_size, 128 * 1024)
+        self.assertIsNone(ARCHIVE.reason(path))
+        self.git("add", "--", str(path.relative_to(self.root)))
+        status, report, _ = self.audit()
+        self.assertEqual(status, 0, report)
+
+    def test_inventory_like_result_rows_keep_payload_guard(self):
+        files = [{"path": "research/fresh/code/" + "x" * 160 + f"/file-{i}.py",
+                  "bytes": i + 1, "sha256": "a" * 64} for i in range(500)]
+        for mutation in [{"sha256": "not-a-hash"}, {"bytes": -1},
+                         {"bytes": 1.5}, {"result": "measured output"}]:
+            with self.subTest(mutation=mutation):
+                changed = [dict(row) for row in files]
+                changed[0].update(mutation)
+                path = self.write("research/fresh/results/ready-files.json",
+                                  json.dumps({"files": changed}))
+                self.assertEqual(ARCHIVE.reason(path), "row-level-result-dump")
+        path = self.write("research/fresh/results/ready-files.json",
+                          json.dumps({"files": files, "results": ["x" * 1024] * 129}))
+        self.assertEqual(ARCHIVE.reason(path), "row-level-result-dump")
+
     def test_bounded_research_fixtures_are_distinct_from_row_results(self):
         rows = '{"frames":[' + ','.join('"' + 'x' * 1024 + '"' for _ in range(129)) + ']}\n'
         fixture = self.write("research/fresh/fixtures/fixed-frames.json", rows)
