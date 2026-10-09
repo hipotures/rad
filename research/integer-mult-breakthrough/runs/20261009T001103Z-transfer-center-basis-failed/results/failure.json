@@ -1,0 +1,27 @@
+{
+  "status": "FAILED BEFORE CASE REPLAY",
+  "recorded_utc": "2026-10-09T00:11:21.595021+00:00",
+  "exception": "ValueError: Declared local prefix constants changed",
+  "location": "center_basis_review.py main() local_prefix equality",
+  "source_sha256": "eda38a8669f292667a32a2a7831a6efd3e72aa9983c113ec01ec425cc444cf8f",
+  "explanation": "Multiplication temporaries in scalar shears are now observed, so old endpoint-only constants were insufficient. All-h inverse algebra had passed before this assertion.",
+  "actual_prefix_constants": {
+    "base_forward": {
+      "fractional_bits": 0,
+      "maximum_row_l1": "260"
+    },
+    "base_inverse": {
+      "fractional_bits": 5,
+      "maximum_row_l1": "384"
+    },
+    "border_forward": {
+      "fractional_bits": 0,
+      "maximum_row_l1": "8"
+    },
+    "border_inverse": {
+      "fractional_bits": 2,
+      "maximum_row_l1": "7"
+    }
+  },
+  "reconstructible_source_copy": "research/integer-mult-breakthrough/work/transfers/20261009T001102Z-center-basis-small/results/effective-source-before-repair.py"
+}

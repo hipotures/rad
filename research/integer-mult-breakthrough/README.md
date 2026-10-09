@@ -122,6 +122,24 @@ These facts constrain their stated fixed models, not other algorithms.
   necessary polynomial order; reduction modulo two requires different premises
   from the dyadic construction.
 
+Sixth-checkpoint components include a [constructive dyadic center basis](reports/complex/dyadic-center-null-basis.md),
+its [independent all-h inverse and scalar-prefix proof](reports/transfers/center-basis-independent-review.md),
+and [hypothetical capacity assessment](reports/complex/center-native-capacity-assessment.md).
+The capacity profile can cross the required complex threshold under declared
+unattained costs; the first [fully paid port words](reports/synthesis/paid-center-port-chronologies.md)
+found no heuristic deficit. A complete shared-release topology remains open.
+The [coherent fitting-rank lemma](reports/obstructions/coherent-release-minrank-bound.md)
+quantifies necessary shared releases without a separate penalty per output.
+
+A different [finite-field cyclic core](reports/synthesis/finite-field-cyclic-core.md)
+passed [independent algebra and signed-packing review](reports/transfers/field-cyclic-independent-review.md).
+Its [same-coordinate convolution boundary](reports/synthesis/convolution-gauge-boundary.md)
+and [prefix-routing boundary](reports/obstructions/singer-prefix-routing-boundary.md)
+exclude specific shortcuts, while independent kernel cost and nonlinear routing
+remain hypotheses. The [short-record monotone split](reports/transfers/short-record-monotone-split.md)
+also passed [coordinator review](reports/obstructions/short-record-split-independent-review.md),
+without promoting a complete guarded CRT transfer.
+
 Live structural work includes cancellation-allowing reversible synthesis,
 changed spectral interfaces, and a weight-five complex family. The latter uses
 `f(t)=(t-1)(t-3)/8` on five-subset intersections, keeping binary label dimension
@@ -134,7 +152,7 @@ frames demonstrate an actual local escape; whole-network chronology must
 retain its benefit. The old library's alternating projector identity is
 credited separately and does not itself establish a larger saving.
 
-Thirty-seven registered Python CI checks replay only their stated finite arithmetic and
+Forty-seven registered Python CI checks replay only their stated finite arithmetic and
 semantic controls. A separately contributed [Lean package](formal/README.md)
 formalizes the named positive-matrix obstruction and finite-level extension;
 its pinned clean-runner workflow passed at remote commit `1576511c`. It does

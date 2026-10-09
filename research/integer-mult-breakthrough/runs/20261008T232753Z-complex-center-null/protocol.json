@@ -1,0 +1,94 @@
+{
+  "run_id": "20261008T232753Z-complex-center-null",
+  "started_utc": "2026-10-08T23:27:53.917299+00:00",
+  "question": "Does the two-D bank remove odd Smith obstructions and admit a complete Gaussian-dyadic center/null basis?",
+  "scope": "Exact finite scalar basis and inverse, not native phase/circuit cost",
+  "python": "3.14.4",
+  "dependencies": "Python standard library only",
+  "source_sha256": {
+    "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813"
+  },
+  "workers": 4,
+  "memory_limit_bytes_per_process": 1073741824,
+  "cases": [
+    {
+      "h": 8,
+      "mixed": false
+    },
+    {
+      "h": 8,
+      "mixed": true
+    },
+    {
+      "h": 10,
+      "mixed": false
+    },
+    {
+      "h": 10,
+      "mixed": true
+    }
+  ],
+  "randomness": "None; deterministic complete integer reduction",
+  "raw_log_location": "research/integer-mult-breakthrough/work/complex/20261008T232753Z-complex-center-null",
+  "completion": [
+    {
+      "case": "h8-original",
+      "command": [
+        "python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py",
+        "--h",
+        "8",
+        "--output",
+        "research/integer-mult-breakthrough/runs/20261008T232753Z-complex-center-null/results/h8-original.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.14368217999435728
+    },
+    {
+      "case": "h8-mixed",
+      "command": [
+        "python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py",
+        "--h",
+        "8",
+        "--output",
+        "research/integer-mult-breakthrough/runs/20261008T232753Z-complex-center-null/results/h8-mixed.json",
+        "--mixed"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.15417003099719295
+    },
+    {
+      "case": "h10-original",
+      "command": [
+        "python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py",
+        "--h",
+        "10",
+        "--output",
+        "research/integer-mult-breakthrough/runs/20261008T232753Z-complex-center-null/results/h10-original.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 3.39878913800203
+    },
+    {
+      "case": "h10-mixed",
+      "command": [
+        "python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py",
+        "--h",
+        "10",
+        "--output",
+        "research/integer-mult-breakthrough/runs/20261008T232753Z-complex-center-null/results/h10-mixed.json",
+        "--mixed"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 3.6483664710031007
+    }
+  ],
+  "finished_utc": "2026-10-08T23:27:57.567074+00:00"
+}

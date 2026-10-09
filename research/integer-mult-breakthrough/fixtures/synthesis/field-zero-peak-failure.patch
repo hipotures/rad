@@ -1,0 +1,11 @@
+--- a/finite_field_cyclic_reduction.py
++++ b/finite_field_cyclic_reduction.py
+@@ -126,7 +126,7 @@
+     def note(label):
+         nonlocal peak
+         current=max(abs(q) for z in values for q in z)
+-        if not record or current>peak:peak=current;record.update(stage=label,maximum_real_or_imaginary_component=str(current))
++        if current>peak:peak=current;record.update(stage=label,maximum_real_or_imaginary_component=str(current))
+         events.append(label)
+     def scales(coefficients):
+         for j,c in enumerate(coefficients):values[j]=g.mul(c,values[j])

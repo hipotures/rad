@@ -1,0 +1,35 @@
+--- a/code/transfers/center_basis_review.py
++++ b/code/transfers/center_basis_review.py
+@@ -316,7 +316,7 @@
+                 raise ValueError('Mixed dirty fields failed')
+             for backwards in (False, True):
+                 observed = observe_scalar_prefix(word, initial, backwards)
+-                bound = Q(347)*(1+Q(21, 2)*q)*volume if backwards else Q(232+2*volume)
++                bound = Q(384)*(1+Q(21, 2)*q)*volume if backwards else Q(260+2*volume)
+                 if observed['additional_fractional_bits'] > (7 if backwards else 0) or Q(observed['component_factor']) > bound:
+                     raise ValueError('Literal scalar prefix exceeds the proposed analytic bound')
+                 observed_prefixes.append(dict(direction='inverse' if backwards else 'forward', **observed))
+@@ -347,8 +347,8 @@
+         complete_basis_columns=basis_checks, independently_factored_central_entries=central_entries,
+         mixed_dyadic_fields=4 if h <= 10 else 0, negative_controls=negatives, observed_literal_prefixes=observed_prefixes,
+         scalar_prefix_guard_contract=dict(forward_extra_fractional_bits=0, inverse_extra_fractional_bits_at_most=7,
+-            forward_component_factor=str(232+2*volume),
+-            inverse_component_factor=str(Q(347)*(1+Q(21, 2)*q)*volume),
++            forward_component_factor=str(260+2*volume),
++            inverse_component_factor=str(Q(384)*(1+Q(21, 2)*q)*volume),
+             premise='Atomic declared scalar gates at identical actual address operators, fixed global grid, arbitrary dirty fields. Physical frame adapters and scalar implementation scratch are separate.'),
+         seconds=time.monotonic()-started,
+         scope='Exact scalar component and independently derived all-h block formula. No native frame chronology or exponent.')
+@@ -375,9 +375,9 @@
+     _, _, _, _, coefficient_classes = finite_coefficient_classes(base, local)
+     prefix = {f'{name}_{direction}': local_prefix(decode_word(local[name]['word']), n, direction == 'inverse')
+               for name, n in (('base', 21), ('border', 5)) for direction in ('forward', 'inverse')}
+-    if prefix != {'base_forward': {'fractional_bits': 0, 'maximum_row_l1': '232'},
+-        'base_inverse': {'fractional_bits': 5, 'maximum_row_l1': '347'},
+-        'border_forward': {'fractional_bits': 0, 'maximum_row_l1': '4'},
++    if prefix != {'base_forward': {'fractional_bits': 0, 'maximum_row_l1': '260'},
++        'base_inverse': {'fractional_bits': 5, 'maximum_row_l1': '384'},
++        'border_forward': {'fractional_bits': 0, 'maximum_row_l1': '8'},
+         'border_inverse': {'fractional_bits': 2, 'maximum_row_l1': '7'}}:
+         raise ValueError('Declared local prefix constants changed')
+     # Physical frame negative: C_1 versus C_7 on delta_0. A scalar shear

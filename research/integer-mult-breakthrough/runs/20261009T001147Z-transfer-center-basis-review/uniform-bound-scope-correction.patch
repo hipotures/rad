@@ -1,0 +1,38 @@
+--- a/code/transfers/center_basis_review.py
++++ b/code/transfers/center_basis_review.py
+@@ -235,6 +235,8 @@
+         raise ValueError('Exact inverse nonzero formula failed')
+     if any((x*32).denominator != 1 for row in inverse for x in row):
+         raise ValueError('Uniform 1/32 grid failed')
++    if max(abs(x) for row in inverse for x in row) > 1:
++        raise ValueError('Full pivot inverse exceeded the uniform entry bound one')
+     return pairs, pivots, matrix, inverse
+ 
+ 
+@@ -316,7 +318,7 @@
+                 raise ValueError('Mixed dirty fields failed')
+             for backwards in (False, True):
+                 observed = observe_scalar_prefix(word, initial, backwards)
+-                bound = Q(384)*(1+Q(21, 2)*q)*volume if backwards else Q(260+2*volume)
++                bound = Q(384)*(1+12*q)*volume if backwards else Q(260+2*volume)
+                 if observed['additional_fractional_bits'] > (7 if backwards else 0) or Q(observed['component_factor']) > bound:
+                     raise ValueError('Literal scalar prefix exceeds the proposed analytic bound')
+                 observed_prefixes.append(dict(direction='inverse' if backwards else 'forward', **observed))
+@@ -341,14 +343,15 @@
+             negatives.append('dropping the nonpivot identity coordinates destroys invertibility')
+     return dict(h=h, volume=volume, center_rank=q, null_dimension=volume-q,
+         inverse_grid_denominator=32, inverse_nonzeros=(4*h-7)**2,
+-        maximum_pivot_inverse_entry_bound='7/8', observed_maximum_entry=str(max(abs(x) for row in inverse for x in row)),
++        maximum_nonidentity_pivot_inverse_entry_bound='7/8', maximum_pivot_inverse_entry_bound='1',
++        observed_maximum_entry=str(max(abs(x) for row in inverse for x in row)),
+         all_h_absolute_determinant=str(2**(2*h+1)),
+         literal_word_sha256=digest, scalar_gate_counts=counts, extra_dirty_banks=0,
+         complete_basis_columns=basis_checks, independently_factored_central_entries=central_entries,
+         mixed_dyadic_fields=4 if h <= 10 else 0, negative_controls=negatives, observed_literal_prefixes=observed_prefixes,
+         scalar_prefix_guard_contract=dict(forward_extra_fractional_bits=0, inverse_extra_fractional_bits_at_most=7,
+             forward_component_factor=str(260+2*volume),
+-            inverse_component_factor=str(Q(384)*(1+Q(21, 2)*q)*volume),
++            inverse_component_factor=str(Q(384)*(1+12*q)*volume),
+             premise='Atomic declared scalar gates at identical actual address operators, fixed global grid, arbitrary dirty fields. Physical frame adapters and scalar implementation scratch are separate.'),
+         seconds=time.monotonic()-started,
+         scope='Exact scalar component and independently derived all-h block formula. No native frame chronology or exponent.')

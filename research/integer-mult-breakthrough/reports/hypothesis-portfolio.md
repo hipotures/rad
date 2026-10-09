@@ -196,3 +196,25 @@ is monitored, and there is no synthetic utilization workload.
 
 Authored by Codex agents with model-assisted internal analysis; this is not
 external human peer review or formal verification.
+
+## Sixth checkpoint and next discriminators
+
+The all-h center completion and independent uniform inverse/grid proof are
+constructive scalar results. A hypothetical complete k5 capacity profile has
+rigorously enclosed complex roots above the required threshold at h20/24/28,
+but its helper budget and phase loss are unachieved assumptions. A full closed
+center cycle exceeds the measured hypothetical margin; paid matched or permuted
+center-port words found no heuristic deficit. The next hypothesis changes the
+fitting completion and shared-release topology, retaining actual scalar/frame
+operations. The coherent minrank release lemma is a scoped necessary cost,
+with a stronger tensor factor only under an extra repeated-frame premise.
+
+The exact finite-field cyclic core has full dirty algebra and an import-free
+review. Its fixed kernel, coefficient transposes, nonlinear permutations and
+native guards still need independent costs; the unchanged outer organization
+cannot bootstrap its own assumed multiplier saving. Both zero-border layouts
+have a direct prefix-affine obstruction, with an explicit prelinear scope
+counterexample. A paid nonlinear route, retained layout or independently
+cheaper kernel is the next discriminator. The short-record split improves
+metadata charges but leaves guarded rotations, real sparse keys and repair
+open. No new kappa is accepted.

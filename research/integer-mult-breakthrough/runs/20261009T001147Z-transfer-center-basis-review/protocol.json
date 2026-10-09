@@ -1,0 +1,35 @@
+{
+  "created_utc": "2026-10-09T00:11:47.752122+00:00",
+  "workers": 4,
+  "native_threads_per_worker": 1,
+  "source_and_input_sha256": {
+    "code/transfers/center_basis_review.py": "0bd6e0516aa237747b22c9a068a73b6e994682b79e337cff2d6c712590457e7b",
+    "fixtures/transfers/center-basis-word-contract.json": "4465f3320ba8c1def51d02df2e3bb3faa232b4acdac159247c5e7f6c16c9d675",
+    "fixtures/complex/center-basis-local-words.json": "21ec23e394ebc1baa967c40192bdcebe9575bdae462e6bfde1e3d08312b8ae4f",
+    "fixtures/complex/mixed-center-h7-inverse.json": "21c0d2959d2add8d79edb25da2703b29108b28a8a7d8f26df759d6ec78a1bb0e"
+  },
+  "producer_source_sha256": {
+    "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+    "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+    "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813"
+  },
+  "cases": [
+    7,
+    8,
+    10,
+    16
+  ],
+  "seeds": "20261009+h",
+  "independence": "No producer imports; literal local gates consumed as immutable data, all incidence matrices and full words independently reconstructed.",
+  "executed_command": "python3 -B research/integer-mult-breakthrough/code/transfers/center_basis_review.py --workers 4 --output research/integer-mult-breakthrough/work/transfers/20261009T001147Z-center-basis-repaired/results",
+  "raw_evidence": [
+    {
+      "path": "work/transfers/20261009T001147Z-center-basis-repaired/results/summary.json",
+      "bytes": 22237,
+      "sha256": "16504dc8098bc28c3061dbaba63366b6ececf6acd2b2d24ce84b2e96d52a0aae",
+      "recovery": "Exact byte copy retained in results; regenerate from pinned source/fixtures."
+    }
+  ],
+  "raw_protocol_sha256": "e1a296275913a20ef4ed79b7cab4f7d6734a16b67118110a2b595e5550fe15f1",
+  "source_recovery": "Reverse uniform-bound-scope-correction.patch against final center_basis_review.py to recover SHA0bd6e0516aa237747b22c9a068a73b6e994682b79e337cff2d6c712590457e7b."
+}

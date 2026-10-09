@@ -1,0 +1,1448 @@
+{
+  "cases": [
+    {
+      "status": "EXACT CYCLIC REDUCTION AND NONCIRCULAR INTEGER REPLAY PASS",
+      "active_bits": 3,
+      "dimension": 8,
+      "geometry": {
+        "n": 3,
+        "d": 8,
+        "L": 7,
+        "polynomial": 11,
+        "powers": [
+          1,
+          2,
+          4,
+          3,
+          6,
+          7,
+          5
+        ],
+        "trace_Gram_columns": [
+          1,
+          4,
+          2
+        ],
+        "dual_columns": [
+          1,
+          4,
+          2
+        ],
+        "kernel": [
+          -1,
+          1,
+          1,
+          -1,
+          1,
+          -1,
+          -1
+        ],
+        "input_order": [
+          0,
+          1,
+          5,
+          7,
+          6,
+          3,
+          4,
+          2
+        ],
+        "output_order": [
+          0,
+          1,
+          4,
+          2,
+          5,
+          6,
+          7,
+          3
+        ],
+        "field_multiply_calls_in_exact_geometry_checks": 320
+      },
+      "complete_Gaussian_initial_columns": 24,
+      "real_imaginary_directions_each": 2,
+      "complete_column_direction_checks": 96,
+      "normalization_placements": [
+        "late",
+        "early"
+      ],
+      "all_column_hashes": {
+        "late": "7b12557f2b332f0a9653a610ee681776ac36e610680fe41a861e7705916d87d5",
+        "early": "7b12557f2b332f0a9653a610ee681776ac36e610680fe41a861e7705916d87d5"
+      },
+      "verification_only_integer_products": 576,
+      "algorithm_cyclic_convolutions_per_data_dirty_word": 3,
+      "algorithm_real_fixed_kernel_integer_products": 6,
+      "generic_forward_integer_interface": {
+        "direction": "forward",
+        "real_product": {
+          "variable_integer_bits": 92,
+          "fixed_kernel_integer_bits": 85,
+          "product_integer_bits": 176,
+          "packed_digit_bits": 14,
+          "ordinary_product_digits": 13,
+          "cyclic_output_digits": 7
+        },
+        "imag_product": {
+          "variable_integer_bits": 93,
+          "fixed_kernel_integer_bits": 85,
+          "product_integer_bits": 177,
+          "packed_digit_bits": 14,
+          "ordinary_product_digits": 13,
+          "cyclic_output_digits": 7
+        },
+        "exact_input_denominator": 4,
+        "exact_kernel_denominator": 1,
+        "signed_ordinary_coefficient_absolute_bound": 7042
+      },
+      "generic_inverse_integer_interface": {
+        "direction": "inverse",
+        "real_product": {
+          "variable_integer_bits": 111,
+          "fixed_kernel_integer_bits": 70,
+          "product_integer_bits": 180,
+          "packed_digit_bits": 17,
+          "ordinary_product_digits": 13,
+          "cyclic_output_digits": 7
+        },
+        "imag_product": {
+          "variable_integer_bits": 112,
+          "fixed_kernel_integer_bits": 70,
+          "product_integer_bits": 181,
+          "packed_digit_bits": 17,
+          "ordinary_product_digits": 13,
+          "cyclic_output_digits": 7
+        },
+        "exact_input_denominator": 2,
+        "exact_kernel_denominator": 8,
+        "signed_ordinary_coefficient_absolute_bound": 35112
+      },
+      "matched_single_payload_controls": [
+        {
+          "normalization": "late",
+          "corruption": "omit zero-coordinate scale",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "1/8",
+            "0"
+          ]
+        },
+        {
+          "normalization": "late",
+          "corruption": "omit zero-border sum",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "15/8",
+            "0"
+          ]
+        },
+        {
+          "normalization": "late",
+          "corruption": "truncate inverse kernel",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 1,
+          "expected": [
+            "0",
+            "0"
+          ],
+          "observed": [
+            "0",
+            "1/4"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "omit zero-coordinate scale",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "1/8",
+            "0"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "omit zero-border sum",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "15/8",
+            "0"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "truncate inverse kernel",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 1,
+          "expected": [
+            "0",
+            "0"
+          ],
+          "observed": [
+            "0",
+            "1/4"
+          ]
+        }
+      ],
+      "word_basis_component_peaks": {
+        "late": "8",
+        "early": "2"
+      },
+      "zero_source_temporary_peak": {
+        "late": {
+          "stage": "zero-coordinate dyadic scale",
+          "maximum_real_or_imaginary_component": "8"
+        },
+        "early": {
+          "stage": "zero-coordinate dyadic scale",
+          "maximum_real_or_imaginary_component": "2"
+        },
+        "source_endpoint_maximum": "1",
+        "sink_endpoint_component_bound": "1/4"
+      },
+      "seconds": 0.06451098200341221,
+      "scope": "Complete finite Gaussian source/sink/dirty word, exact field permutations, zero-border factorization and explicit balanced signed-integer convolution. Same-volume fixed-kernel products, discrete-log routing, field generation, tape movement and buffer precision are paid unresolved native costs. No improved multiplier oracle or exponent is assumed."
+    },
+    {
+      "status": "EXACT CYCLIC REDUCTION AND NONCIRCULAR INTEGER REPLAY PASS",
+      "active_bits": 4,
+      "dimension": 16,
+      "geometry": {
+        "n": 4,
+        "d": 16,
+        "L": 15,
+        "polynomial": 19,
+        "powers": [
+          1,
+          2,
+          4,
+          8,
+          3,
+          6,
+          12,
+          11,
+          5,
+          10,
+          7,
+          14,
+          15,
+          13,
+          9
+        ],
+        "trace_Gram_columns": [
+          8,
+          4,
+          2,
+          9
+        ],
+        "dual_columns": [
+          9,
+          4,
+          2,
+          1
+        ],
+        "kernel": [
+          1,
+          1,
+          1,
+          -1,
+          1,
+          1,
+          -1,
+          -1,
+          1,
+          -1,
+          1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "input_order": [
+          0,
+          1,
+          9,
+          13,
+          15,
+          14,
+          7,
+          10,
+          5,
+          11,
+          12,
+          6,
+          3,
+          8,
+          4,
+          2
+        ],
+        "output_order": [
+          0,
+          8,
+          4,
+          2,
+          9,
+          12,
+          6,
+          11,
+          5,
+          10,
+          13,
+          14,
+          15,
+          7,
+          3,
+          1
+        ],
+        "field_multiply_calls_in_exact_geometry_checks": 1435
+      },
+      "complete_Gaussian_initial_columns": 48,
+      "real_imaginary_directions_each": 2,
+      "complete_column_direction_checks": 192,
+      "normalization_placements": [
+        "late",
+        "early"
+      ],
+      "all_column_hashes": {
+        "late": "8c16862ced26c996ecd544d6a080c093f34e3bdb47c1a1dca93dc0b95e3fd829",
+        "early": "8c16862ced26c996ecd544d6a080c093f34e3bdb47c1a1dca93dc0b95e3fd829"
+      },
+      "verification_only_integer_products": 1152,
+      "algorithm_cyclic_convolutions_per_data_dirty_word": 3,
+      "algorithm_real_fixed_kernel_integer_products": 6,
+      "generic_forward_integer_interface": {
+        "direction": "forward",
+        "real_product": {
+          "variable_integer_bits": 220,
+          "fixed_kernel_integer_bits": 211,
+          "product_integer_bits": 430,
+          "packed_digit_bits": 15,
+          "ordinary_product_digits": 29,
+          "cyclic_output_digits": 15
+        },
+        "imag_product": {
+          "variable_integer_bits": 218,
+          "fixed_kernel_integer_bits": 211,
+          "product_integer_bits": 428,
+          "packed_digit_bits": 15,
+          "ordinary_product_digits": 29,
+          "cyclic_output_digits": 15
+        },
+        "exact_input_denominator": 4,
+        "exact_kernel_denominator": 1,
+        "signed_ordinary_coefficient_absolute_bound": 15285
+      },
+      "generic_inverse_integer_interface": {
+        "direction": "inverse",
+        "real_product": {
+          "variable_integer_bits": 258,
+          "fixed_kernel_integer_bits": 218,
+          "product_integer_bits": 475,
+          "packed_digit_bits": 18,
+          "ordinary_product_digits": 29,
+          "cyclic_output_digits": 15
+        },
+        "imag_product": {
+          "variable_integer_bits": 264,
+          "fixed_kernel_integer_bits": 218,
+          "product_integer_bits": 481,
+          "packed_digit_bits": 18,
+          "ordinary_product_digits": 29,
+          "cyclic_output_digits": 15
+        },
+        "exact_input_denominator": 2,
+        "exact_kernel_denominator": 16,
+        "signed_ordinary_coefficient_absolute_bound": 98070
+      },
+      "matched_single_payload_controls": [
+        {
+          "normalization": "late",
+          "corruption": "omit zero-coordinate scale",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "1/16",
+            "0"
+          ]
+        },
+        {
+          "normalization": "late",
+          "corruption": "omit zero-border sum",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "31/16",
+            "0"
+          ]
+        },
+        {
+          "normalization": "late",
+          "corruption": "truncate inverse kernel",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 1,
+          "expected": [
+            "0",
+            "0"
+          ],
+          "observed": [
+            "0",
+            "1/8"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "omit zero-coordinate scale",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "1/16",
+            "0"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "omit zero-border sum",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "31/16",
+            "0"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "truncate inverse kernel",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 1,
+          "expected": [
+            "0",
+            "0"
+          ],
+          "observed": [
+            "0",
+            "1/8"
+          ]
+        }
+      ],
+      "word_basis_component_peaks": {
+        "late": "16",
+        "early": "4"
+      },
+      "zero_source_temporary_peak": {
+        "late": {
+          "stage": "zero-coordinate dyadic scale",
+          "maximum_real_or_imaginary_component": "16"
+        },
+        "early": {
+          "stage": "zero-coordinate dyadic scale",
+          "maximum_real_or_imaginary_component": "4"
+        },
+        "source_endpoint_maximum": "1",
+        "sink_endpoint_component_bound": "1/4"
+      },
+      "seconds": 0.23699915500037605,
+      "scope": "Complete finite Gaussian source/sink/dirty word, exact field permutations, zero-border factorization and explicit balanced signed-integer convolution. Same-volume fixed-kernel products, discrete-log routing, field generation, tape movement and buffer precision are paid unresolved native costs. No improved multiplier oracle or exponent is assumed."
+    },
+    {
+      "status": "EXACT CYCLIC REDUCTION AND NONCIRCULAR INTEGER REPLAY PASS",
+      "active_bits": 5,
+      "dimension": 32,
+      "geometry": {
+        "n": 5,
+        "d": 32,
+        "L": 31,
+        "polynomial": 37,
+        "powers": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          5,
+          10,
+          20,
+          13,
+          26,
+          17,
+          7,
+          14,
+          28,
+          29,
+          31,
+          27,
+          19,
+          3,
+          6,
+          12,
+          24,
+          21,
+          15,
+          30,
+          25,
+          23,
+          11,
+          22,
+          9,
+          18
+        ],
+        "trace_Gram_columns": [
+          9,
+          20,
+          26,
+          13,
+          6
+        ],
+        "dual_columns": [
+          23,
+          25,
+          9,
+          22,
+          11
+        ],
+        "kernel": [
+          -1,
+          1,
+          1,
+          -1,
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          1,
+          1,
+          1,
+          -1,
+          -1,
+          1,
+          -1,
+          -1,
+          -1,
+          1,
+          -1,
+          1,
+          -1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "input_order": [
+          0,
+          1,
+          18,
+          9,
+          22,
+          11,
+          23,
+          25,
+          30,
+          15,
+          21,
+          24,
+          12,
+          6,
+          3,
+          19,
+          27,
+          31,
+          29,
+          28,
+          14,
+          7,
+          17,
+          26,
+          13,
+          20,
+          10,
+          5,
+          16,
+          8,
+          4,
+          2
+        ],
+        "output_order": [
+          0,
+          9,
+          20,
+          26,
+          13,
+          6,
+          19,
+          25,
+          28,
+          30,
+          31,
+          15,
+          7,
+          3,
+          17,
+          24,
+          12,
+          22,
+          27,
+          29,
+          14,
+          23,
+          11,
+          21,
+          10,
+          5,
+          2,
+          1,
+          16,
+          8,
+          4,
+          18
+        ],
+        "field_multiply_calls_in_exact_geometry_checks": 6480
+      },
+      "complete_Gaussian_initial_columns": 96,
+      "real_imaginary_directions_each": 2,
+      "complete_column_direction_checks": 384,
+      "normalization_placements": [
+        "late",
+        "early"
+      ],
+      "all_column_hashes": {
+        "late": "a20517b6c708bbf19afb996f74e60c87eeeee82d0cdcea30d57237d0d28c9a1a",
+        "early": "a20517b6c708bbf19afb996f74e60c87eeeee82d0cdcea30d57237d0d28c9a1a"
+      },
+      "verification_only_integer_products": 2304,
+      "algorithm_cyclic_convolutions_per_data_dirty_word": 3,
+      "algorithm_real_fixed_kernel_integer_products": 6,
+      "generic_forward_integer_interface": {
+        "direction": "forward",
+        "real_product": {
+          "variable_integer_bits": 489,
+          "fixed_kernel_integer_bits": 481,
+          "product_integer_bits": 969,
+          "packed_digit_bits": 16,
+          "ordinary_product_digits": 61,
+          "cyclic_output_digits": 31
+        },
+        "imag_product": {
+          "variable_integer_bits": 490,
+          "fixed_kernel_integer_bits": 481,
+          "product_integer_bits": 970,
+          "packed_digit_bits": 16,
+          "ordinary_product_digits": 61,
+          "cyclic_output_digits": 31
+        },
+        "exact_input_denominator": 4,
+        "exact_kernel_denominator": 1,
+        "signed_ordinary_coefficient_absolute_bound": 30442
+      },
+      "generic_inverse_integer_interface": {
+        "direction": "inverse",
+        "real_product": {
+          "variable_integer_bits": 611,
+          "fixed_kernel_integer_bits": 562,
+          "product_integer_bits": 1172,
+          "packed_digit_bits": 20,
+          "ordinary_product_digits": 61,
+          "cyclic_output_digits": 31
+        },
+        "imag_product": {
+          "variable_integer_bits": 612,
+          "fixed_kernel_integer_bits": 562,
+          "product_integer_bits": 1173,
+          "packed_digit_bits": 20,
+          "ordinary_product_digits": 61,
+          "cyclic_output_digits": 31
+        },
+        "exact_input_denominator": 4,
+        "exact_kernel_denominator": 32,
+        "signed_ordinary_coefficient_absolute_bound": 515902
+      },
+      "matched_single_payload_controls": [
+        {
+          "normalization": "late",
+          "corruption": "omit zero-coordinate scale",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "1/32",
+            "0"
+          ]
+        },
+        {
+          "normalization": "late",
+          "corruption": "omit zero-border sum",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "63/32",
+            "0"
+          ]
+        },
+        {
+          "normalization": "late",
+          "corruption": "truncate inverse kernel",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 1,
+          "expected": [
+            "0",
+            "0"
+          ],
+          "observed": [
+            "0",
+            "1/16"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "omit zero-coordinate scale",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "1/32",
+            "0"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "omit zero-border sum",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "63/32",
+            "0"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "truncate inverse kernel",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 1,
+          "expected": [
+            "0",
+            "0"
+          ],
+          "observed": [
+            "0",
+            "1/16"
+          ]
+        }
+      ],
+      "word_basis_component_peaks": {
+        "late": "32",
+        "early": "4"
+      },
+      "zero_source_temporary_peak": {
+        "late": {
+          "stage": "zero-coordinate dyadic scale",
+          "maximum_real_or_imaginary_component": "32"
+        },
+        "early": {
+          "stage": "zero-coordinate dyadic scale",
+          "maximum_real_or_imaginary_component": "4"
+        },
+        "source_endpoint_maximum": "1",
+        "sink_endpoint_component_bound": "1/8"
+      },
+      "seconds": 0.9443606550048571,
+      "scope": "Complete finite Gaussian source/sink/dirty word, exact field permutations, zero-border factorization and explicit balanced signed-integer convolution. Same-volume fixed-kernel products, discrete-log routing, field generation, tape movement and buffer precision are paid unresolved native costs. No improved multiplier oracle or exponent is assumed."
+    },
+    {
+      "status": "EXACT CYCLIC REDUCTION AND NONCIRCULAR INTEGER REPLAY PASS",
+      "active_bits": 6,
+      "dimension": 64,
+      "geometry": {
+        "n": 6,
+        "d": 64,
+        "L": 63,
+        "polynomial": 67,
+        "powers": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          3,
+          6,
+          12,
+          24,
+          48,
+          35,
+          5,
+          10,
+          20,
+          40,
+          19,
+          38,
+          15,
+          30,
+          60,
+          59,
+          53,
+          41,
+          17,
+          34,
+          7,
+          14,
+          28,
+          56,
+          51,
+          37,
+          9,
+          18,
+          36,
+          11,
+          22,
+          44,
+          27,
+          54,
+          47,
+          29,
+          58,
+          55,
+          45,
+          25,
+          50,
+          39,
+          13,
+          26,
+          52,
+          43,
+          21,
+          42,
+          23,
+          46,
+          31,
+          62,
+          63,
+          61,
+          57,
+          49,
+          33
+        ],
+        "trace_Gram_columns": [
+          32,
+          16,
+          8,
+          4,
+          2,
+          33
+        ],
+        "dual_columns": [
+          33,
+          16,
+          8,
+          4,
+          2,
+          1
+        ],
+        "kernel": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          1,
+          -1,
+          1,
+          -1,
+          1,
+          1,
+          -1,
+          -1,
+          -1,
+          -1,
+          1,
+          -1,
+          1,
+          1,
+          1,
+          -1,
+          -1,
+          -1,
+          1,
+          1,
+          -1,
+          1,
+          1,
+          -1,
+          1,
+          -1,
+          -1,
+          1,
+          -1,
+          -1,
+          -1,
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          -1,
+          -1,
+          1,
+          -1,
+          1,
+          -1,
+          1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "input_order": [
+          0,
+          1,
+          33,
+          49,
+          57,
+          61,
+          63,
+          62,
+          31,
+          46,
+          23,
+          42,
+          21,
+          43,
+          52,
+          26,
+          13,
+          39,
+          50,
+          25,
+          45,
+          55,
+          58,
+          29,
+          47,
+          54,
+          27,
+          44,
+          22,
+          11,
+          36,
+          18,
+          9,
+          37,
+          51,
+          56,
+          28,
+          14,
+          7,
+          34,
+          17,
+          41,
+          53,
+          59,
+          60,
+          30,
+          15,
+          38,
+          19,
+          40,
+          20,
+          10,
+          5,
+          35,
+          48,
+          24,
+          12,
+          6,
+          3,
+          32,
+          16,
+          8,
+          4,
+          2
+        ],
+        "output_order": [
+          0,
+          32,
+          16,
+          8,
+          4,
+          2,
+          33,
+          48,
+          24,
+          12,
+          6,
+          35,
+          17,
+          40,
+          20,
+          10,
+          37,
+          50,
+          57,
+          60,
+          30,
+          47,
+          23,
+          11,
+          5,
+          34,
+          49,
+          56,
+          28,
+          14,
+          39,
+          19,
+          9,
+          36,
+          18,
+          41,
+          52,
+          26,
+          45,
+          54,
+          59,
+          29,
+          46,
+          55,
+          27,
+          13,
+          38,
+          51,
+          25,
+          44,
+          22,
+          43,
+          21,
+          42,
+          53,
+          58,
+          61,
+          62,
+          63,
+          31,
+          15,
+          7,
+          3,
+          1
+        ],
+        "field_multiply_calls_in_exact_geometry_checks": 29365
+      },
+      "complete_Gaussian_initial_columns": 192,
+      "real_imaginary_directions_each": 2,
+      "complete_column_direction_checks": 768,
+      "normalization_placements": [
+        "late",
+        "early"
+      ],
+      "all_column_hashes": {
+        "late": "85b6ed5d60b17d88fe7847133a3a2438ced9444b5c547634d2b9171dd6c93a8c",
+        "early": "85b6ed5d60b17d88fe7847133a3a2438ced9444b5c547634d2b9171dd6c93a8c"
+      },
+      "verification_only_integer_products": 4608,
+      "algorithm_cyclic_convolutions_per_data_dirty_word": 3,
+      "algorithm_real_fixed_kernel_integer_products": 6,
+      "generic_forward_integer_interface": {
+        "direction": "forward",
+        "real_product": {
+          "variable_integer_bits": 1063,
+          "fixed_kernel_integer_bits": 1055,
+          "product_integer_bits": 2117,
+          "packed_digit_bits": 17,
+          "ordinary_product_digits": 125,
+          "cyclic_output_digits": 63
+        },
+        "imag_product": {
+          "variable_integer_bits": 1061,
+          "fixed_kernel_integer_bits": 1055,
+          "product_integer_bits": 2115,
+          "packed_digit_bits": 17,
+          "ordinary_product_digits": 125,
+          "cyclic_output_digits": 63
+        },
+        "exact_input_denominator": 4,
+        "exact_kernel_denominator": 1,
+        "signed_ordinary_coefficient_absolute_bound": 64512
+      },
+      "generic_inverse_integer_interface": {
+        "direction": "inverse",
+        "real_product": {
+          "variable_integer_bits": 1313,
+          "fixed_kernel_integer_bits": 1220,
+          "product_integer_bits": 2532,
+          "packed_digit_bits": 21,
+          "ordinary_product_digits": 125,
+          "cyclic_output_digits": 63
+        },
+        "imag_product": {
+          "variable_integer_bits": 1312,
+          "fixed_kernel_integer_bits": 1220,
+          "product_integer_bits": 2531,
+          "packed_digit_bits": 21,
+          "ordinary_product_digits": 125,
+          "cyclic_output_digits": 63
+        },
+        "exact_input_denominator": 2,
+        "exact_kernel_denominator": 64,
+        "signed_ordinary_coefficient_absolute_bound": 928116
+      },
+      "matched_single_payload_controls": [
+        {
+          "normalization": "late",
+          "corruption": "omit zero-coordinate scale",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "1/64",
+            "0"
+          ]
+        },
+        {
+          "normalization": "late",
+          "corruption": "omit zero-border sum",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "127/64",
+            "0"
+          ]
+        },
+        {
+          "normalization": "late",
+          "corruption": "truncate inverse kernel",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 1,
+          "expected": [
+            "0",
+            "0"
+          ],
+          "observed": [
+            "0",
+            "1/32"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "omit zero-coordinate scale",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "1/64",
+            "0"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "omit zero-border sum",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 0,
+          "expected": [
+            "1",
+            "0"
+          ],
+          "observed": [
+            "127/64",
+            "0"
+          ]
+        },
+        {
+          "normalization": "early",
+          "corruption": "truncate inverse kernel",
+          "single_initial_payload": {
+            "bank": 0,
+            "address": 0,
+            "Gaussian_value": [
+              "1",
+              "0"
+            ]
+          },
+          "output_bank": 0,
+          "output_address": 1,
+          "expected": [
+            "0",
+            "0"
+          ],
+          "observed": [
+            "0",
+            "1/32"
+          ]
+        }
+      ],
+      "word_basis_component_peaks": {
+        "late": "64",
+        "early": "8"
+      },
+      "zero_source_temporary_peak": {
+        "late": {
+          "stage": "zero-coordinate dyadic scale",
+          "maximum_real_or_imaginary_component": "64"
+        },
+        "early": {
+          "stage": "zero-coordinate dyadic scale",
+          "maximum_real_or_imaginary_component": "8"
+        },
+        "source_endpoint_maximum": "1",
+        "sink_endpoint_component_bound": "1/8"
+      },
+      "seconds": 3.884796564998396,
+      "scope": "Complete finite Gaussian source/sink/dirty word, exact field permutations, zero-border factorization and explicit balanced signed-integer convolution. Same-volume fixed-kernel products, discrete-log routing, field generation, tape movement and buffer precision are paid unresolved native costs. No improved multiplier oracle or exponent is assumed."
+    }
+  ]
+}

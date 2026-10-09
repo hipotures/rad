@@ -1,0 +1,8 @@
+--- a/research/integer-mult-breakthrough/code/complex/center_native_leverage.py
++++ b/research/integer-mult-breakthrough/code/complex/center_native_leverage.py
+@@ -67,4 +67 @@
+-            candidates=[(1-value)/slope for value in target
+-                        for slope in (slope_low,slope_high)]
+-            tolerance=[min(candidates),max(candidates)]
+-            assert tolerance[0]<=tolerance[1]
++            tolerance=[(1-target[1])/slope_high,(1-target[0])/slope_low]

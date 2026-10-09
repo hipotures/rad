@@ -1,0 +1,43 @@
+{
+  "run_id": "20261008T233720Z-transfer-monotone-split-tapes",
+  "status": "pre-execution protocol",
+  "question": "Can the strictly monotone complete-record CRT split use O(B) measured tape work per slot at payload widthQ>=B, replacing only the older quadratic metadata placeholder?",
+  "git_head_before_execution": "f33ca603769edd1f7b58b5cc052d58fd1b885835",
+  "source_closure_sha256": {
+    "code/transfers/monotone_split_tapes.py": "3d8339e0247f48535cf95226eee8e5e944bff99280ba9a5696592715ad2217e5"
+  },
+  "reference_source_record": "configs/transfers/short-record-CRT-source.json",
+  "reference_source_record_sha256": "2d2412e1172b2f6df1133a66fc9b7ba902cdaaa949f1103bd041ce63f567954c",
+  "python": "3.14.4",
+  "workers": 4,
+  "seeds": [
+    20261008701,
+    20261008702,
+    20261008703,
+    20261008704
+  ],
+  "generator": "Explicit groups, capacities, payload bit widths and seeds in authored source; oracle uses independent numeric division outside consumer",
+  "finite_alphabet": "bit0, bit1, field delimiter, start, end, blank and template full-interval flags; 7 tapes independent of field count",
+  "measured_operations": "every single-cell head step, cell read/write, metadata template/counter scan and return, ripple increment, full payload bit/delimiter read/write, zero-template scan/return, input/output rewind and workspace erase",
+  "command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/transfers/monotone_split_tapes.py",
+    "--workers",
+    "4",
+    "--output",
+    "research/integer-mult-breakthrough/work/transfers/20261008T233720Z-transfer-monotone-split-tapes/results/full.json"
+  ],
+  "ci_command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/transfers/monotone_split_tapes.py",
+    "--workers",
+    "1",
+    "--small"
+  ],
+  "raw_result": "work/transfers/20261008T233720Z-transfer-monotone-split-tapes/results/full.json",
+  "compact_result": "results/summary.json",
+  "exception_repair_scope": "The monotone split has no guarded nonlinear rotation and no exceptional set. Upstream actual repair must complete before known-zero invalid records are deleted; no full guarded CRT acceptance is implied.",
+  "limitations": "Scalar descriptor/template setup has a separate polynomial bound; this finite tape model is not a formal transition table. Guarded rotations, layouts, sparse keys/repair and full multiplication remain separate."
+}

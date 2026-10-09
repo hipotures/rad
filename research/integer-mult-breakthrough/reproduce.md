@@ -184,3 +184,36 @@ namespaces. Large convex Toffoli rows have compact summaries with exact original
 hashes and omission lists. Downloaded primary PDFs remain ignored and have
 versioned URLs, byte sizes, hashes and recovery entries. All original attempts,
 including rejected numeric guards and failed operator words, are unchanged.
+
+## Sixth-checkpoint bounded components
+
+These source/fixture checks need only Python's standard library:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/test_center_null_basis.py
+python3 -B research/integer-mult-breakthrough/code/complex/test_center_native_leverage.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_convolution_gauges.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_field_cyclic.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_center_ports.py
+python3 -B research/integer-mult-breakthrough/code/transfers/monotone_split_tapes.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/field_cyclic_cost_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/center_basis_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/obstructions/verify_singer_routes.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/coherent_release_bound.py --workers 1 --bounded
+```
+
+Each experiment protocol records the full four-worker attempt, exact source
+identities, parameters and original output locations. The solver-dependent
+padded-convolution discovery additionally uses the pinned existing
+`configs/synthesis/solver-requirements.txt`; its bounded witness replay above
+needs no solver. Timed-out solver cases are UNKNOWN. Historical failed source
+versions are recoverable with the retained patches and GNU patch; that optional
+recovery prerequisite is not required by the mathematical CI checks.
+
+Large original Smith operation rows and center-port word/frame data are
+retained unchanged locally and published as complete gzip evidence. Newly
+named summaries identify omitted fields, hashes and complete recovery copies.
+Execution namespace names, including documented manually selected future
+names, are recovery paths; protocol clock fields supply actual run times.
+The hypothetical capacity tests and scoped routing/release proofs establish
+only their named contracts, without a larger multiplication exponent.
