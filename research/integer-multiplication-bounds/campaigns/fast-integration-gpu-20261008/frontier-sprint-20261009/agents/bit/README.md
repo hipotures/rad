@@ -1,6 +1,8 @@
 # Binary structural construction lane
 
-Status: native finite suppliers and negative structural trials are preserved.
+Status: this bounded lane is concluded; native finite suppliers and negative
+structural trials are preserved. The final current-source native coarse saving
+is `655174925/10^12`, below the latest sufficient `663301643/10^12` target.
 The earlier source161 and source168/170 candidates have completed independent
 review. Current fd25 trials remain below the user's one-percent final
 publication threshold. This lane retains partner-pair source mixing,
@@ -29,3 +31,4 @@ the sprint coordinator stages, commits, pushes or prepares upstream publication.
 - [Independently closed source168/170 lifetime candidate](candidates/binary-168-paired-lifetime-p12/README.md)
 - [Current fd25 control and three structural discriminators](runs/current-fd25-discriminators-20261009T0954/report.md)
 - [Three actual local L1 association trials](runs/current-fd25-local-associations-20261009T1001/report.md)
+- [Final complete seed continuation and lane conclusion](runs/current-fd25-final-continuation-20261009T1011/report.md)
