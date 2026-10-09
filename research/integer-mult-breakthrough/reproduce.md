@@ -875,3 +875,35 @@ for exact archive namespaces and manifests. The preceding nineteenth remote
 commit passed all ten matrix jobs. Local registry changes require all three
 groups to run under the unchanged CI runner. These checks do not certify
 whole native transforms, new global suppliers or multiplier exponents.
+
+## Twenty-first checkpoint: center sharing and formation barriers
+
+The seven newly registered checks use these frozen standard-library closures:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/verify_synchronized_centers.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/two_response_outer_gauge_rank.py --workers 4 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/singleton_fanout_release_probe.py --workers 4 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/high_flux_selected_scan_adapter.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/synchronized_center_review.py --input research/integer-mult-breakthrough/fixtures/transfers/synchronized-center-moment-review.json --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/center_current_source_clock.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/odd_cube_dyadic_moments.py --workers 1 --bounded
+```
+
+Complete four-worker attempts, exact source pins, fixtures and command/output
+contracts are retained in the linked run protocols and publication inventories.
+Source-only reviews have no executable PASS entry. The dyadic feature runner
+and center reviewer use exact rational enclosures; their optimistic moment
+profiles are explicitly separated from literal Gaussian components.
+
+The high-flux first attempt failed an overbroad negative control. In a
+disposable topic-shaped copy, applying
+[its exact recovery patch](fixtures/transfers/high-flux-negative-recovery.patch)
+to the retained accepted source must recover the rejected hash recorded in
+the publication manifest. Never patch a live research source to reconstruct
+a historical run. All failed and accepted original text is archived whole.
+
+The [twenty-first recovery shard](configs/recovery/checkpoint-twenty-one-artifacts.json)
+indexes complete scientific, registry-validation and publication provenance.
+Previous recovery shards remain necessary historical evidence. None of these
+commands implements a whole native multiplier or proves a new kappa.

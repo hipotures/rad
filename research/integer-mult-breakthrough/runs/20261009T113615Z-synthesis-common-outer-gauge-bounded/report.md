@@ -1,0 +1,1 @@
+PASS 6144 complete integer generator equations, target rank-three minor and common-diagonal rank invariance, with zero-gauge and invalid-f4 scope controls. This run supports the separately written all-size obstruction; no native cost or multiplier exponent. See [the report](../../reports/synthesis/common-outside-gauges-and-two-response-rank.md).

@@ -1,0 +1,230 @@
+{
+  "status": "PASS DYADIC ODD-CUBE FEATURES AND SCOPED FORMATION BUDGETS",
+  "started_utc": "2026-10-09T12:07:19.742141+00:00",
+  "workers": 1,
+  "source_sha256": {
+    "odd_cube_dyadic_moments.py": "767ae606a79a38298d7054ff53112f376ae07365cef9d3f219da638b2ca39d54",
+    "characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9"
+  },
+  "decoders": [
+    {
+      "k": 3,
+      "degree": 1,
+      "grid_denominator": 4,
+      "Newton_coefficients": [
+        "-1/2",
+        "1/2"
+      ],
+      "all_intersection_values": [
+        "-1/2",
+        "0",
+        "1/2",
+        "1"
+      ],
+      "symmetric_top_only_odd_denominator_parts": [
+        3,
+        1
+      ],
+      "top_only_not_a_universal_compression_lower_bound": true
+    },
+    {
+      "k": 5,
+      "degree": 2,
+      "grid_denominator": 16,
+      "Newton_coefficients": [
+        "3/8",
+        "-3/8",
+        "1/4"
+      ],
+      "all_intersection_values": [
+        "3/8",
+        "0",
+        "-1/8",
+        "0",
+        "3/8",
+        "1"
+      ],
+      "symmetric_top_only_odd_denominator_parts": [
+        5,
+        1,
+        1
+      ],
+      "top_only_not_a_universal_compression_lower_bound": true
+    },
+    {
+      "k": 7,
+      "degree": 3,
+      "grid_denominator": 64,
+      "Newton_coefficients": [
+        "-5/16",
+        "5/16",
+        "-1/4",
+        "1/8"
+      ],
+      "all_intersection_values": [
+        "-5/16",
+        "0",
+        "1/16",
+        "0",
+        "-1/16",
+        "0",
+        "5/16",
+        "1"
+      ],
+      "symmetric_top_only_odd_denominator_parts": [
+        7,
+        3,
+        5,
+        1
+      ],
+      "top_only_not_a_universal_compression_lower_bound": true
+    }
+  ],
+  "complete_scalar_matrices": [
+    {
+      "k": 3,
+      "p": 3,
+      "sources": 8,
+      "designated_feature_roots_including_total": 7,
+      "complete_scalar_matrix_entries": 64,
+      "all_input_and_output_labels_retained": true,
+      "omitted_total_feature_rejected": true,
+      "physical_address_and_dirty_phase_word_not_executed": true
+    },
+    {
+      "k": 5,
+      "p": 5,
+      "sources": 32,
+      "designated_feature_roots_including_total": 51,
+      "complete_scalar_matrix_entries": 1024,
+      "all_input_and_output_labels_retained": true,
+      "omitted_total_feature_rejected": true,
+      "physical_address_and_dirty_phase_word_not_executed": true
+    }
+  ],
+  "release_bounds": [
+    {
+      "k": 3,
+      "cube_sources": 8,
+      "minimum_extra_rank_per_core": 4,
+      "one_minimizing_released_source_count": 2,
+      "continuous_lower_bound_per_source": "1/2",
+      "three_core_extra_per_source": "3/2",
+      "excludes_all_positive_deficits_below_2v": false,
+      "scope": "Pure per-source carried helpers, direct scalar writes, monotone literal singleton buckets; mixing/copies/new births excluded"
+    },
+    {
+      "k": 5,
+      "cube_sources": 32,
+      "minimum_extra_rank_per_core": 24,
+      "one_minimizing_released_source_count": 12,
+      "continuous_lower_bound_per_source": "3/4",
+      "three_core_extra_per_source": "9/4",
+      "excludes_all_positive_deficits_below_2v": true,
+      "scope": "Pure per-source carried helpers, direct scalar writes, monotone literal singleton buckets; mixing/copies/new births excluded"
+    },
+    {
+      "k": 7,
+      "cube_sources": 128,
+      "minimum_extra_rank_per_core": 108,
+      "one_minimizing_released_source_count": 54,
+      "continuous_lower_bound_per_source": "5/6",
+      "three_core_extra_per_source": "81/32",
+      "excludes_all_positive_deficits_below_2v": true,
+      "scope": "Pure per-source carried helpers, direct scalar writes, monotone literal singleton buckets; mixing/copies/new births excluded"
+    }
+  ],
+  "optimistic_profiles": [
+    {
+      "k": 3,
+      "p": 12,
+      "h": 24,
+      "v": 1760,
+      "feature_roots": 25,
+      "retained_raw_side_roles": 4180,
+      "W": 9485,
+      "m": 72,
+      "deficit": 1720,
+      "child_multiplicities": {
+        "1": 18480,
+        "23": 5280,
+        "24": 150,
+        "2": 16720,
+        "20": 11220,
+        "3": 9240,
+        "4": 660,
+        "21": 11880
+      },
+      "center_growing_chronology_not_attained": true,
+      "raw_side_formation_and_actual_global_word_not_attained": true,
+      "moment_tests": [
+        {
+          "b": "20/189981",
+          "lower": "3131145455710075286999544216976970493186863237250607923653/3138550867693340381917894711603833208051177722232017256448",
+          "upper": "3131145455710075286999544216976970493186863237250608511323/3138550867693340381917894711603833208051177722232017256448",
+          "classification": "optimistic model permits; not attained"
+        },
+        {
+          "b": "3279447/4996720553",
+          "lower": "6267521620708812663943632533052551023890218664894491583437/6277101735386680763835789423207666416102355444464034512896",
+          "upper": "6267521620708812663943632533052551023890218687129317657095/6277101735386680763835789423207666416102355444464034512896",
+          "classification": "optimistic model permits; not attained"
+        },
+        {
+          "b": "1/1000",
+          "lower": "3135393372403043388608480142965454011708967062822632277771/3138550867693340381917894711603833208051177722232017256448",
+          "upper": "6270786744806086777216960285930908023417939429303936006215/6277101735386680763835789423207666416102355444464034512896",
+          "classification": "optimistic model permits; not attained"
+        }
+      ]
+    }
+  ],
+  "three_cube_direct_all_p_bound": {
+    "strict_component_saving_upper_boundary": "1/5000",
+    "lower_moment_at_boundary": [
+      "6277129151691922994503652079793735837778037807596430079853/6277101735386680763835789423207666416102355444464034512896",
+      "3138564575845961497251826039896867918889018903798215802727/3138550867693340381917894711603833208051177722232017256448"
+    ],
+    "rational_controls": [
+      {
+        "p": 6,
+        "actual_relaxed_density": "-1/81",
+        "closed_relaxation": "-22/1935",
+        "continuous_bound": "1/4644"
+      },
+      {
+        "p": 12,
+        "actual_relaxed_density": "-23/17073",
+        "closed_relaxation": "-53/42570",
+        "continuous_bound": "1/4644"
+      },
+      {
+        "p": 22,
+        "actual_relaxed_density": "1/39759",
+        "closed_relaxation": "2/49665",
+        "continuous_bound": "1/4644"
+      },
+      {
+        "p": 36,
+        "actual_relaxed_density": "533/2763837",
+        "closed_relaxation": "271/1381590",
+        "continuous_bound": "1/4644"
+      },
+      {
+        "p": 80,
+        "actual_relaxed_density": "1571/10599123",
+        "closed_relaxation": "787/5299320",
+        "continuous_bound": "1/4644"
+      },
+      {
+        "p": 1000,
+        "actual_relaxed_density": "36259/2381727667",
+        "closed_relaxation": "54389/3572590500",
+        "continuous_bound": "1/4644"
+      }
+    ],
+    "scope": "k3 fixed retained raw stock, paid singleton+total copies, pure-helper direct monotone bucket formation; all-p proof in report, not a universal lower bound"
+  },
+  "physical_native_supplier_or_kappa_not_certified": true,
+  "elapsed_seconds": 0.10061146799125709
+}

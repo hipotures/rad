@@ -1,0 +1,29 @@
+--- a/research/integer-mult-breakthrough/code/transfers/high_flux_selected_scan_adapter.py
++++ b/research/integer-mult-breakthrough/code/transfers/high_flux_selected_scan_adapter.py
+@@ -194,7 +194,7 @@
+             witness = {'before': physical, 'actual': literal_address(physical, s, omit_repair=True), 'expected': wanted}
+         if no_last is None and literal_address(physical, s, omit_last_swap=True) != wanted:
+             no_last = {'before': physical, 'actual': literal_address(physical, s, omit_last_swap=True), 'expected': wanted}
+-    poly.require(no_last is not None, 'Omitted swap restoration must discriminate in every complete cube')
++    poly.require(witness is not None and no_last is not None, 'Omitted current-address repair and swap restoration must discriminate')
+     grouped = order_reference(original, s['compact_selected'], grouped=True)
+     poly.require(grouped != expected, 'Grouped evens-first order must not be misidentified with the alternating high-flux order')
+     return {'kind': 'complete_relevant_cube_and_Gaussian_pipeline', 'spec': s,
+@@ -202,7 +202,7 @@
+             'signed_component_values': 8 * count, 'literal_rotations_per_forward_pipeline': 16,
+             'current_address_repairs_per_forward_pipeline': 2, 'fixed_two_digit_swaps': 4,
+             'remaining_address_planes': 'Untouched identity factor by the exact read/write set; not materialized in this finite quotient',
+-            'omitted_repair_witness': witness, 'small_cube_needs_repair': witness is not None, 'omitted_last_swap_witness': no_last,
++            'omitted_repair_witness': witness, 'omitted_last_swap_witness': no_last,
+             'grouped_order_negative_rejected': True, 'natural_scan': scan_stats, 'inverse_scan': inverse_stats,
+             'fractional_grid_bits': grid, 'reserved_component_width': word,
+             'routing_is_finite_array_oracle_not_measured_tape_time': True}
+@@ -265,8 +265,6 @@
+     else:
+         with ProcessPoolExecutor(max_workers=args.workers) as pool:
+             rows = list(pool.map(dispatch, tasks))
+-    poly.require(any(row.get('omitted_repair_witness') is not None for row in rows),
+-                 'At least one complete carry/repair case must reject omission; one-active-bit small cubes can already be exact')
+     poly.require(all(sha256(path.read_bytes()).hexdigest() == before[path.name] for path in paths), 'All source bytes stay unchanged')
+     result = {'status': 'PASS exact alternating high-flux selected scan adapter',
+               'started_utc': started, 'completed_utc': datetime.now(timezone.utc).isoformat(),

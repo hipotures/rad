@@ -728,3 +728,46 @@ e=3f+12+u split when f>12+u. A corrected high-flux layout and a smaller
 constant response architecture remain fresh tests. All original source
 closures, failed attempts, full result bytes and paid precision boundaries
 are preserved. No own complete kappa>=1e-4 or first-place bound is established.
+
+## Twenty-first checkpoint: a center gain and its remaining source bill
+
+Synchronized pair roots replace ten source copies by one source helper while
+all roots share a growing frame. Exact small full dirty Gaussian controls and
+independently reconstructed stock/moment enclosures support the mechanism.
+The twelve-pair retained-cap hypothetical profile contracts at b=0.001. Its
+unconstructed source/cap chronology and conditional native complete-copy
+interface are the decisive missing obligations. The continuation test is an
+actual mixed-helper source/side splice with complete kernel and dirty cleanup,
+priced before accepting the raw-cap profile. A fresh total-root variant may
+remove the odd-factor decoder interface but must pay its own stock and rank.
+
+Pure carried-source direct singleton fanout cannot supply the five-coordinate
+profile: releasing sources is legal but costs frame distance, and the exact
+minimum still exceeds the available master deficit. A naive early gather
+from original X instead pays two detours per source and likewise fails.
+These are restrictions of stated architectures, not general multiplier
+lower bounds. Mixed helpers, source copies, changed births or endpoints are
+new hypotheses. A synchronized small quotient-root preparation is a fresh
+constructive discriminator, with every root and complete copy paid.
+
+Odd-cube phase values have a general dyadic finite-difference expansion if
+all necessary lower-degree features, including total, are retained. Full
+finite scalar maps confirm the formula. Optimistic three-coordinate profiles
+have more margin at b=0.001 than the five-coordinate baseline; the unchanged
+pure/direct three-coordinate family is nevertheless proved to require
+b<0.0002 for all pair counts. Smaller physical mixed constructions therefore
+deserve targeted tests; seven-coordinate optimistic profiles already fail
+the dated leading comparator and do not justify a broad sweep.
+
+The high-flux P0 adapter now has the correct swap/mask/swap chronology, a
+paid address repair and true inverse. Complete relevant-coordinate Gaussian
+pipelines pass. It still routes with an ordinary supplier. A faster native
+route or an independently justified balanced transfer must replace that
+bill before an asymptotic saving is inferred. The unchanged direct route's
+ordinary-atom cap is not a universal cap on balanced external transfers.
+
+The chosen two-response family is excluded even with common nonzero outside
+gauges, by a rank-three target minor versus rank at most two. Independent
+orders, separately gauged summands or deeper products change the premise;
+repeating a ruled-out scan screen has no value. All finite components,
+analytical proofs, conditional budgets and source-only reviews remain distinct.

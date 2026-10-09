@@ -1,0 +1,41 @@
+{
+  "started_utc": "2026-10-09T12:17:34.023073+00:00",
+  "source_commit": "896bf9e871a2c024b72f94a03177bbb944839d07",
+  "registry_sha256": "7d05a226c321f79f0fff81c3cf8313279ab70edfd8f3d52577fb0142433d8193",
+  "uncommitted_owned_inputs": true,
+  "commands": [
+    [
+      "python3",
+      "-B",
+      "tools/run_ci.py",
+      "--group",
+      "repository",
+      "--all",
+      "--output",
+      "NEW_PATH"
+    ],
+    [
+      "python3",
+      "-B",
+      "tools/run_ci.py",
+      "--group",
+      "smoke",
+      "--all",
+      "--output",
+      "NEW_PATH"
+    ],
+    [
+      "python3",
+      "-B",
+      "tools/run_ci.py",
+      "--group",
+      "certificates",
+      "--all",
+      "--output",
+      "NEW_PATH"
+    ]
+  ],
+  "effective_inputs": 375,
+  "complete_input_maps": "work/coordinator/20261009T121734Z-checkpoint-twenty-one-validation/receipt.json",
+  "scope": "All registered checks rerun on frozen inputs; later total/full-frame and mixed-source experiments excluded"
+}
