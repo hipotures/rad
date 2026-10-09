@@ -72,7 +72,7 @@ and [ballot role budgets](reports/complex/ballot-center-review-and-role-budget.m
 locate costs that consume proposed gains. Their exclusions apply only to
 the stated constructions and ledgers. A full shared chronology, native
 payload routing and complete multiplication transfer remain active work.
-The registry currently contains 114 bounded checks; checkpoint receipts record
+The registry currently contains 124 bounded checks; checkpoint receipts record
 their actual validation results. No large graph is allocated merely
 to evaluate an optimistic cost profile.
 
@@ -135,6 +135,45 @@ product representations are the next discriminators.
 [Eleventh checkpoint local validation](runs/20261009T041916Z-checkpoint-eleven-validation/report.md)
 records all 114 passing checks, six exact historical source recoveries and
 unchanged source/input hashes. These results do not establish a new kappa.
+
+The twelfth checkpoint supplies a [selected bit-reversal component](reports/obstructions/frozen-control-selected-bit-reversal.md).
+Its literal rotation word restores borrowed dirty payload and preserves
+unselected records. The inherited native routing bill extends conditionally
+to polynomially computable controls held fixed during each word. A
+same-volume two-guard layout reserves complete address subslots and gives
+a strictly smaller full-width child. The whole active Gaussian child,
+contracting recurrence and native tape realization remain assumptions.
+An [independent review](reports/transfers/general-control-reversal-independent-review.md)
+checks both the literal map and the geometry, including guard independence.
+
+[Nonlinear matching frames](reports/complex/nonlinear-matching-canonical-boundary.md)
+do not improve the tested canonical ports. Their all-size support argument
+and arbitrary-common-frame column-branching bound cover explicitly named
+one-child interfaces; helpers and cancellation circuits remain outside.
+[Aligned coherent matching routes](reports/transfers/coherent-matching-routing-boundary.md)
+also retain full support. These are structural exclusions of particular
+interfaces, not lower bounds for general multiplication circuits.
+
+The [weighted-scan classification](reports/synthesis/weighted-scan-intertwiner-structure.md)
+and [independent proof review](reports/obstructions/weighted-scan-classification-independent-review.md)
+bound the complete additive scan channel space at every dimension in scope.
+A [separate cut-rank review](reports/transfers/coupled-cut-rank-transfer-boundary.md)
+and [streaming precision review](reports/transfers/streaming-boundary-independent-review.md)
+retain their different premises. Changed scan orders, products of scans and
+nonunitary primitives are active alternatives.
+
+A [single cyclic-convolution representation boundary](reports/obstructions/walsh-single-cyclic-convolution-boundary.md)
+uses the exact affine symmetry of the Walsh kernel. The
+[independent scope review](reports/complex/cyclic-embedding-scope-review.md)
+accepts its all-size exclusion of monomial equivalence to one full cyclic or
+negacyclic kernel for f >= 3. Nonmonomial algebra embeddings, multiple
+convolutions and field-core-plus-border constructions remain open.
+
+[Twelfth checkpoint local validation](runs/20261009T045847Z-checkpoint-twelve-validation/report.md)
+records all 124 passing checks, two exact historical source recoveries and
+unchanged effective input hashes. Complete original text evidence includes
+the failed coordinate caller and the failed review-publication setup.
+No larger campaign kappa is claimed.
 
 ## Evidence and current directions
 

@@ -1,0 +1,2175 @@
+{
+  "version": 1,
+  "commit": "d465eaf3ae9861af03f7b49ba0c7cd798c403d92",
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "group": "certificates",
+  "status": "pass",
+  "checks": [
+    {
+      "id": "frozen-assembly-ceiling",
+      "scope": "Exact consequences of a < (1-beta)b and kappa < a/(1+a), under explicitly assumed fixed inputs",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/check_assembly_ceiling.py": "8955eb0e414aa67df52d51a76c9f95d4e7f706f2b5e7a55c684e79ad5718c5e0",
+        "research/integer-mult-breakthrough/fixtures/frozen-assembly-ceiling.json": "ee0f0458448a83fbc4c116d0075c9e17fcf9f31aa731a87d7c6bf39e14e22ab7"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "unitary-dyadic-finite-replay",
+      "scope": "Bounded exact row enumeration and complete finite Walsh Gram/entropy replay; analytic all-size lemmas are not formalized",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py",
+        "--workers",
+        "1",
+        "--max-row-power",
+        "4",
+        "--max-butterfly-power",
+        "4"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py": "947de5784756b2c790a1d66c2be3244e5dd54c059e4467917ef06aefcb5ef47a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "wider-unitary-macro",
+      "scope": "Exact literal three-gate Gaussian-dyadic unitary macro; no free macro cost or recurrence saving",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/wider_unitary.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/wider_unitary.py": "93caebd59d21251c9eb3ea7970fc792d0c9798c67220a6a50da5c1ad4fa55983",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py": "947de5784756b2c790a1d66c2be3244e5dd54c059e4467917ef06aefcb5ef47a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "positive-type-mixing-barrier",
+      "scope": "Exact complete frozen moment arithmetic and finite nonnegative type-mixing controls; scoped polynomial-certificate obstruction, no multiplication lower bound",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/transfers/coupled_moments.py",
+        "--workers",
+        "1",
+        "--cases",
+        "8"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/coupled_moments.py": "2870c1781132983040f40a128e5a3911fbeb86547fa459e2dfcdb3fe25ce7c63",
+        "research/integer-mult-breakthrough/fixtures/transfers/frozen-full-moments.json": "a2ba54780c8327fa19cbe043c1c75e9462812ce0e2605bdfdff7d9ce54c79398"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.364
+    },
+    {
+      "id": "synthesis-auxiliary-certificates",
+      "scope": "Exact auxiliary source/sink/dirty scalar words and necessary frozen native ledger bracket; no physical network or all-size theorem",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_certificates.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/verify_certificates.py": "9d0f829ff055943e0ca7da9053c2888ce8e11097376b8edf92efed97806a5a52",
+        "research/integer-mult-breakthrough/code/synthesis/frozen_ledger_bound.py": "fe77fd80b904e083e0eb607e3e0c2aca3929b8c93fdfc251754e35173e6250f1",
+        "research/integer-mult-breakthrough/code/synthesis/global_incidence.py": "048d1ff0394e7f6a270899d7fe79095ee83152b8b880aeb202eb8b41d5bd6cf7",
+        "research/integer-mult-breakthrough/code/synthesis/run_discriminators.py": "6f75849193a0225403e866d9b4fb617e30bc3138e07c52401b811035c2d24f66",
+        "research/integer-mult-breakthrough/fixtures/synthesis/auxiliary-scalar-and-ledger.json": "854cb0f601246d1742d15589109be86944a871f513b078d8b77037992708877a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 5.473
+    },
+    {
+      "id": "static-joint-frame-controls",
+      "scope": "Exact diagonal identities, rational channel closure and four-target inconsistency in auxiliary stationary intertwiner model; no dynamic circuit lower bound",
+      "command": [
+        "{python}",
+        "-B",
+        "-c",
+        "import sys; sys.path.insert(0, 'research/integer-mult-breakthrough/code/synthesis'); from static_joint_frame import probe; results=[probe(h) for h in (5,6,23)]; print('Exact finite stationary-intertwiner controls:', len(results))"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/static_joint_frame.py": "6aae446bbf1efd74e529bf0fadf90b48f60136192105c6fc5d4d1c5cd795b9dd",
+        "research/integer-mult-breakthrough/code/synthesis/global_incidence.py": "048d1ff0394e7f6a270899d7fe79095ee83152b8b880aeb202eb8b41d5bd6cf7"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "shared-twist-scatter-controls",
+      "scope": "Exact auxiliary shared factorization and literal arbitrary-dirty odd-field scatter with missing-inverse controls; no integrated native cost ledger",
+      "command": [
+        "{python}",
+        "-B",
+        "-c",
+        "import sys; sys.path.insert(0, 'research/integer-mult-breakthrough/code/synthesis'); from shared_twist_factorization import probe; probe((6,11)); print('Exact auxiliary every-address dirty scatter and inverse controls pass')"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/shared_twist_factorization.py": "bbfa6d40f47d8917dac6cd8bd2efbf24bca3892ccba5722bc96d7779cbd72d0f",
+        "research/integer-mult-breakthrough/code/synthesis/global_incidence.py": "048d1ff0394e7f6a270899d7fe79095ee83152b8b880aeb202eb8b41d5bd6cf7"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "copied-center-independent-controls",
+      "scope": "Independent finite copied-phase arrays, eight-bit scatter coefficient and serialized side-DAG radical witness; no full native compiler or all-size transfer",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/copied_center_review.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/copied_center_review.py": "ef235e84b3a370d3ed7b58b8216cad6292646e8497f7b7a7472cd6481897d4e5",
+        "research/integer-mult-breakthrough/fixtures/transfers/weighted-tree-h8-frame-witness.json": "755cc986df530126649fe6b025298b67193885887194e994c0debafce70d1579"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.765
+    },
+    {
+      "id": "independent-general-phase-review",
+      "scope": "Independent bounded full-payload Gaussian phase differences including singular radical translation; finite array routing, physical guard and native transfer unproved",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/general_phase_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/general_phase_review.py": "56a20daa853c24d1a111961046b4cb3dbc46a2d79b568e0158b846e0c41664eb"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.314
+    },
+    {
+      "id": "paid-affine-translation-controls",
+      "scope": "Bounded constant-control packed address word, quotient representatives, dirty restoration and unpaid-repair counterexamples; fixed-tape cost conditional on original primitives",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/packed_translation.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/packed_translation.py": "761dd777652a8e7921f1a779d547209d85e5b95bcf432d6be526939eb21b9add"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "independent-four-incidence-review",
+      "scope": "Independent literal Gaussian-dyadic four-port matrices and complete payload replay, actual Pauli phases and omitted-offset/cropped/constant controls; no full network, recursive guard or exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/lagrangian_component_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/lagrangian_component_review.py": "6d1d98bab1517a6942e0e031123e88f2417f13f692ae098c4983edfdb98fefe0",
+        "research/integer-mult-breakthrough/fixtures/transfers/four-incidence-gate-witness.json": "b998258be35b201d12baa59efe99f9c5cee5cd77168afb3af29788577daaf1e4"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.264
+    },
+    {
+      "id": "bare-exchange-lagrangian-bound",
+      "scope": "Bounded exhaustive full-Lagrangian metric replay and negative cost/endpoint controls for fixed bare three-shear two-role exchange; helper networks and multiplier lower bounds excluded",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/lagrangian_exchange.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/lagrangian_exchange.py": "a9798de43e6c266ac480130d330ed4d6259b61efb46fad164f9b455b0717d15e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "trimmed-side-scalar-replay",
+      "scope": "Bounded exact cancellation-allowing Newton-weighted trimmed zeta circuit and arithmetic counts; arbitrary-dirty compilation, physical frames and exponent unproved",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "global-helper-rank-controls",
+      "scope": "Bounded actual GF2/F9 global helper exclusions, F3 free-unit quotient, field axioms, complete dirty endpoints and corruption controls; restricted constant-coefficient finite frame model, no general lower bound",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_rank_search.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/verify_rank_search.py": "7ccefe21158c4ad149940513906e04f67542ad2ff6f7e8af0c4c8b67ad5b2fe5",
+        "research/integer-mult-breakthrough/code/synthesis/dirty_helper_rank_search.py": "cf3f79a574f4a9155f6cb263b28105365b5442267c30ab629541d1b0059730b2",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/scalar_field_rank_search.py": "99a6735cb3579775deb2dd0a420a3d5b388d9eea095021b1f9ff8c236c67be8a",
+        "research/integer-mult-breakthrough/code/synthesis/scalar_projective_rank_search.py": "0e7589fe1425c5cef8b35de48d5072bab894cbfa70cad2c3ae33b043551ec59c"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.865
+    },
+    {
+      "id": "independent-trimmed-side-review",
+      "scope": "Independent bounded characteristic-zero side kernel and down/up zeta columns, omitted-self/corruption controls and scoped nested-feature obstruction witnesses; no producer role-count, dirty compiler or exponent verification",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/trimmed_side_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/trimmed_side_review.py": "a8e85b3a84f09385d5f9276414abac53d36591fc17d210c90265efa4593e88d0"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "trimmed-cancellation-frontier",
+      "scope": "Regenerate exact h8 k5 scalar coefficients and support-span cancellation frontier; scoped SSA geometry, no global physical lower bound",
+      "command": [
+        "{python}",
+        "-B",
+        "-c",
+        "import sys;sys.path.insert(0,'research/integer-mult-breakthrough/code/complex');from trimmed_frame_frontier import run;r=run(8,5);print(r['status'],r['all_coefficient_checks'],r['final_output_rank_drops'])"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/trimmed_frame_frontier.py": "7d8d9754362edbc1374d8c7b66b492419ee5b19d33118f7e7533dc4461c8795a",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "endpoint-aware-literal-guard",
+      "scope": "Exact finite literal-register controls for a conditional active-child precision induction; no fast volume ledger, native motif or all-size exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/endpoint_guard_literal.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/endpoint_guard_literal.py": "f0e4044b5b8d3edc0060f6d86ad5fd4d0699ebd803e84a8db36eb76ca68f4ad1",
+        "research/integer-mult-breakthrough/code/transfers/endpoint_guard.py": "22a2761f996dcd1eeb43624f1b9ed804e6812df631a00eed27a470667607e620"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "independent-degenerate-branching",
+      "scope": "Independent literal dirty physical branching operator, phases, complete auxiliary/external ranks and graph-chart comparison; paid tape interface conditional, no whole-motif or exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/branching_component_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/branching_component_review.py": "bb444815b613933b08a02fcbed77e4446a3d69e6c1a87052251c2a0c47a5dc2b",
+        "research/integer-mult-breakthrough/code/transfers/lagrangian_component_review.py": "6d1d98bab1517a6942e0e031123e88f2417f13f692ae098c4983edfdb98fefe0",
+        "research/integer-mult-breakthrough/fixtures/transfers/degenerate-branching-candidates.json": "e8bad63d0c1b61ca27c13e54cf4b502ec020d58b0b27cebb7c9e23c46956cf64"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 4.221
+    },
+    {
+      "id": "nonlinear-direct-sum-controls",
+      "scope": "Exact four small nonlinear block families and fixed convex rank certificates; conditional asymptotic local tensor-moment obstruction, no finite-f dominance or native router",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_nonlinear_blocks.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/test_nonlinear_blocks.py": "7f703ec6991b6c46f8c27b26f03bdb3ca86bee982ad3df2aa314aaac35a09489",
+        "research/integer-mult-breakthrough/code/complex/nonlinear_common_frame_screen.py": "e1da5bbccb5d61bdbb2958b8514826c17d09e5312b0608947e0e2786f6ea5aff",
+        "research/integer-mult-breakthrough/code/complex/nonuniform_phase_blocks.py": "7dfe33e92a19ba3bf5317b6037f8d7826ff80550ac88a9d34d60afc096a977c2",
+        "research/integer-mult-breakthrough/code/complex/nonuniform_convex_certificate.py": "3853f926dd4284d72c8f347e3b6d6c7c2923be89738c764ae5a9d378f03e32cd",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9",
+        "research/integer-mult-breakthrough/code/complex/quadratic_rank_interface.py": "c7435adc75bee5c38af1c59af4ae840a80bd6f33e53ce5e34d180c719b6a5c0a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 3.971
+    },
+    {
+      "id": "routing-aware-stopping-controls",
+      "scope": "Thirty exact declared stopped recurrences with complete rows, fixed routing chunk and corrected guard illustration; conditional analytical bound, no implemented native motif or exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/routing_budget_transfer.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/routing_budget_transfer.py": "55a391b221f21aea1b1f0053dc150ed00e3cce929eb86ecd02e6d1bf3be91c8a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "central-minrank-field-controls",
+      "scope": "Exact paired identity minors, small odd-prime rank bounds and characteristic-two premise corruptions; no minrank optimum, dyadic basis compiler or exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/central_minrank_controls.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/central_minrank_controls.py": "fa53fc36a724c3708d683189fcd98198ee1925074f8c9c0add51e894eb08a70f"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "dyadic-center-basis-controls",
+      "scope": "Exact small Smith/basis inverses, all-h dyadic pivot construction and complete reversible scalar words; native common-frame conversion and release chronology open",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_center_null_basis.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/test_center_null_basis.py": "011df03c46a0c1b547a96d6c3ad2583263227be570c24c8fd3a6f086694247f4",
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/fixtures/complex/mixed-center-h7-inverse.json": "21c0d2959d2add8d79edb25da2703b29108b28a8a7d8f26df759d6ec78a1bb0e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 1.667
+    },
+    {
+      "id": "hypothetical-center-capacity-controls",
+      "scope": "Exact declared hypothetical moments, signed tolerance and crossing controls; scalar gate count is only an explicit helper proxy, no achieved native saving or kappa",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_center_native_leverage.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/test_center_native_leverage.py": "1bd71536d08584f37c50392d50373b368701696ed5c518b27e71f6c7d3230636",
+        "research/integer-mult-breakthrough/code/complex/center_native_leverage.py": "83bea750feb440a1bfe8085344c2c12c9f76ab7b72cbc3e1c35454a8d0155006",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 1.416
+    },
+    {
+      "id": "convolution-gauge-boundary-controls",
+      "scope": "Complete small gauge scan, affine-cycle controls and exact padded phase witness with corruption; no unpadded convolution shortcut or all-size padded native family",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_convolution_gauges.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/verify_convolution_gauges.py": "853cf16377c16c16506dac5f352e6514e0257ed39963eb003d80af33760d0cb4",
+        "research/integer-mult-breakthrough/code/synthesis/convolution_gauge_screen.py": "21c1c5b3a2d5e94f77ab46a18f8fb1b11d244088354143c339aca7faff30b141",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/fixtures/synthesis/padded-convolution-eight.json": "b40c4b7ac3005a772e9f7b2a12593e7b1f98571b7440c4853907964644d196bb"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.414
+    },
+    {
+      "id": "paid-center-port-controls",
+      "scope": "Complete small scalar words and paid port swaps, exact zero/full cut chronology and corruptions; many-label negative discovery is heuristic and no literal Gaussian phase lift is supplied",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_center_ports.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/verify_center_ports.py": "58be7359ebd62c1468f3fd363e7a3a327d0e4d78e2d9163149f1b7a5762323ac",
+        "research/integer-mult-breakthrough/code/synthesis/center_basis_port_search.py": "8f589a21e324b47ed4efed60ce6da4c732c41a9a312f3b08a7f01d070b68b1d8",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.414
+    },
+    {
+      "id": "field-cyclic-independent-controls",
+      "scope": "Import-free exact field/trace/kernel/packing and complete dirty column review; explicit unchanged-outer bootstrap and routing/transpose boundaries, no exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/field_cyclic_cost_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/field_cyclic_cost_review.py": "f0cb1950a4f3e7a4dcde0a7d251c1b3b9f16c787531a5cb4798eadf067764206",
+        "research/integer-mult-breakthrough/fixtures/transfers/field-cyclic-producer-contract.json": "7d0b1a3beeee86a1f5371d787889c9588304ffac7e281b208a09d04d36328984"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "coherent-release-minrank-controls",
+      "scope": "Exact small arbitrary-Lagrangian metric and shared scalar defect invariants; conditional all-size central minrank release bound requires common actual frames and excludes operator-valued gauges",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/coherent_release_bound.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/coherent_release_bound.py": "cbd53658b1e5279a4aba396dfbd7c5dda11c55045ff636cb91d2844af74d31e5",
+        "research/integer-mult-breakthrough/code/obstructions/geodesic_transport.py": "b055ae36931054aab6aeffb1dab6b1cac9d6d3e2d9b60c3773d8dbd5cc15297c"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "center-basis-independent-controls",
+      "scope": "Import-free scalar basis/word and all-h bounded inverse review, scalar multiplication temporary guards and common-frame corruption; complete native phase ledger open",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/center_basis_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/center_basis_review.py": "db257bc4078829c5203e8c482f88be36a83267ceaec35cc1d28015d5c919d0be",
+        "research/integer-mult-breakthrough/fixtures/transfers/center-basis-word-contract.json": "4465f3320ba8c1def51d02df2e3bb3faa232b4acdac159247c5e7f6c16c9d675",
+        "research/integer-mult-breakthrough/fixtures/complex/center-basis-local-words.json": "21ec23e394ebc1baa967c40192bdcebe9575bdae462e6bfde1e3d08312b8ae4f",
+        "research/integer-mult-breakthrough/fixtures/complex/mixed-center-h7-inverse.json": "21c0d2959d2add8d79edb25da2703b29108b28a8a7d8f26df759d6ec78a1bb0e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.364
+    },
+    {
+      "id": "point-center-basis-controls",
+      "scope": "Exact finite h6/h7/h8 point-center basis and full scalar decoder; h10 odd-intersection failure retained, no native circuit",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_point_center_basis.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9",
+        "research/integer-mult-breakthrough/code/complex/point_center_basis.py": "0e19d9e16d4454290ebd8308880b7e94ef6cffda15d4647bc557b9b1424ae0fb",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/test_point_center_basis.py": "cc9a5434c6d39a5a8d3d9c37c927a12f7cee01323a4880407350c764c4aeadef"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.915
+    },
+    {
+      "id": "conditioned-frame-controls",
+      "scope": "Exact Gaussian-dyadic variable-block normal forms, dirty inverses, nonunitary phase and wrapper corruptions for the named finite family",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_conditioned_frames.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/conditioned_frame_screen.py": "2d9dd976cd6471c166e2cf2d795eb42517da1a0f2bf9f48519ebfcc9c0c6d9b6",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_phase_screen.py": "5ba265c232e754b873e65e5e8be2254063898684196880bf117f8d244a168eb9",
+        "research/integer-mult-breakthrough/code/complex/nonlinear_common_frame_screen.py": "e1da5bbccb5d61bdbb2958b8514826c17d09e5312b0608947e0e2786f6ea5aff",
+        "research/integer-mult-breakthrough/code/complex/quadratic_rank_interface.py": "c7435adc75bee5c38af1c59af4ae840a80bd6f33e53ce5e34d180c719b6a5c0a",
+        "research/integer-mult-breakthrough/code/complex/test_conditioned_frames.py": "27c62e16c5516d97d3c57432608e68f02cd34c5e526c462d455dfe45449e0a24"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "single-total-center-controls",
+      "scope": "Exact dyadic basis, complete decoder and explicitly hypothetical closed-feature capacity profiles; no realized complete native costs",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_total_centers.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_native_leverage.py": "83bea750feb440a1bfe8085344c2c12c9f76ab7b72cbc3e1c35454a8d0155006",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/test_total_centers.py": "d22ca4ce71425f47e3ffbcec763a74e31a753947df57c1c651c6cdc29e3e9aeb",
+        "research/integer-mult-breakthrough/code/complex/total_center_basis.py": "8c809e5ef5ac062c127622892f6be494f94f78adbcee970d2b6ab9a2cefc9bed",
+        "research/integer-mult-breakthrough/code/complex/total_center_capacity.py": "1a38af3ad2da2c68c6a88afe1f840c25d14040652483800aaf0e591f0e02d09b"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.565
+    },
+    {
+      "id": "integral-triple-center-controls",
+      "scope": "Exact integral triple feature basis, complete scalar prefix guards and hypothetical capacity threshold; no native exponent",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/test_triple_total_centers.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/test_triple_total_centers.py": "85cbda1a5e43e998b40a93599098e4316d9252158afe6b329eb748dba0021a60",
+        "research/integer-mult-breakthrough/code/complex/triple_total_centers.py": "eb928d37fde72316f2d0d123af06e795a3d3fe20031518ad85ad2f60ed8ff29e",
+        "research/integer-mult-breakthrough/code/complex/triple_total_guard.py": "7f007552a681ff0c3065b14d5d221561b36f20a0ff0f8f84ca469519cba5c372"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.314
+    },
+    {
+      "id": "wht-dirty-echo-independent-controls",
+      "scope": "Import-free literal arithmetic macro and arbitrary-dirty SSA echo with complete columns and omitted-echo/inverse controls",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/wht_dirty_echo_review.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/wht_dirty_echo_review.py": "929312022e2b446f70bc14301fb3699dba57c480d8cb69a02a2a1a8596faa330"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "dirty-center-exact-elimination-controls",
+      "scope": "Bounded exact dirty words, exhaustive serial/OpenMP factor controls and full135-frame input/witness binding; full width-four minimum not rerun",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_echo_elimination.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/dirty_color_echo_dp.py": "c710df4aecd2e50bef348a5dfef8c300dbfcce3785967304a1bc2235aeabdccf",
+        "research/integer-mult-breakthrough/code/synthesis/dirty_color_echo_full_dp.py": "6d690c6666e6e63548f2b210d17ee85fcd350a60addd784bc8bdb9bcb6a4a87f",
+        "research/integer-mult-breakthrough/code/synthesis/frame_factor_guards.py": "92821935be418e837267b37b17804cb3c197890e3b1d4e4788f1fadd27710bcf",
+        "research/integer-mult-breakthrough/code/synthesis/frame_variable_elimination.cpp": "ccbdbbed15a0a9a4065bd3af1a7fe89cffdcf6efe77a30f4988454f49ce125ed",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_echo_elimination.py": "e828946f3f1658cbd1f6ed263b8f8fdd4ae021b6ca1897ad8438530f37d3d189",
+        "research/integer-mult-breakthrough/fixtures/synthesis/dirty-center-full-preflight.json": "98c829a07b76ba493f22d82cd5371a1675b06091176c4074efc1d2a6e4190546",
+        "research/integer-mult-breakthrough/fixtures/synthesis/frame-elimination-openmp.patch": "2c5712ee7a021a2d18c3c8b7e79b3cee4f9c476d9a489ba87fa1bf57a109247b"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 1.617
+    },
+    {
+      "id": "odd-weight-spectrum-controls",
+      "scope": "Exact finite odd-slice spectra and direct matrix ranks; no paid basis or characteristic saving",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/odd_weight_spectrum.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/odd_weight_spectrum.py": "c3e63cdaa82008c9743d12aea51fefdb286b3d538527c7b276b9a44042c1d6b5",
+        "research/integer-mult-breakthrough/configs/transfers/odd-weight-spectrum.json": "1cbf4752ebd25fa543c6655ac7947c3c9bfb158e391490f6a7892b3a7070324a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.214
+    },
+    {
+      "id": "coupled-side-kernel-controls",
+      "scope": "Exact integer kernel completion, full dirty inverse and nonzero coupling; no invariant dyadic unit split or native cost gain",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/side_kernel_completion.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/odd_weight_spectrum.py": "c3e63cdaa82008c9743d12aea51fefdb286b3d538527c7b276b9a44042c1d6b5",
+        "research/integer-mult-breakthrough/code/transfers/side_kernel_completion.py": "7f47829f5bd7f0b79a88270b04f51cccbc7d4246647ac18caa82f089ba17b550",
+        "research/integer-mult-breakthrough/configs/transfers/odd-weight-spectrum.json": "1cbf4752ebd25fa543c6655ac7947c3c9bfb158e391490f6a7892b3a7070324a",
+        "research/integer-mult-breakthrough/configs/transfers/side-kernel-completion.json": "1ef8b888008b1d3e9d64668e1c4fdb24467fdbcb96c2ea70f312dcf6cb4ad045"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.564
+    },
+    {
+      "id": "conditioned-frame-independent-controls",
+      "scope": "Import-free literal variable-block Gaussian certificate and dirty inverse review; full producer edge classification not independently repeated",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/configs/transfers/conditioned-frame-review.json": "34f364bf20c2b7e312bba3104b70565a3e3d4806d15b0badbdfb7da995860acd",
+        "research/integer-mult-breakthrough/fixtures/complex/conditioned-frame-cases.json": "51922bc6fc6d9037f75f576f939177cd708b9a4534aa56982f31ff422b018d1d"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.314
+    },
+    {
+      "id": "single-total-independent-controls",
+      "scope": "Independent complete basis/decoder and all-h inverse coefficient classes with conditional common-frame scalar guard; native interfaces open",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/total_center_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/center_basis_review.py": "db257bc4078829c5203e8c482f88be36a83267ceaec35cc1d28015d5c919d0be",
+        "research/integer-mult-breakthrough/code/transfers/total_center_review.py": "a29dc80f82c5e6030c09023bcddc04f2c24f5621ef92541a087f71fdc9117dc6",
+        "research/integer-mult-breakthrough/configs/transfers/total-center-review.json": "fc9c57b8fc989c4a3390745f39716f019db562010ffa4f130495eb93da413c58",
+        "research/integer-mult-breakthrough/fixtures/complex/total-center-local-words.json": "11d8de267891f2ee4cc19ec503c93c73c9d06416995e32278b9e3de9bd63dfc7"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.314
+    },
+    {
+      "id": "wht-arithmetic-dirty-controls",
+      "scope": "Exact arithmetic Algorithm5 macro and arbitrary-dirty SSA echo; arithmetic count and conditional prefix guard are separate from native costs",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/wht_arithmetic_dirty_echo.py",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/wht_arithmetic_dirty_echo.py": "239e5625194c769eb82a06b87cc6e675a09fd59102313479336d113403daa753",
+        "research/integer-mult-breakthrough/configs/obstructions/wht-primary-source-pins.json": "ac3da9f34648f7248603fbd77e3fa035c91bc7abcbb099ce3ae5f069a472ff13"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "full-domain-lookup-controls",
+      "scope": "Exact finite tables and charged abstract scan; scoped paid full-domain setup obstruction, not an optimal access lower bound",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/full_domain_lookup_boundary.py",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/full_domain_lookup_boundary.py": "d5f45b353e7755464b2c2b94de6dc9df335eb6a5291415686fb21ce196012569",
+        "research/integer-mult-breakthrough/configs/obstructions/wht-primary-source-pins.json": "ac3da9f34648f7248603fbd77e3fa035c91bc7abcbb099ce3ae5f069a472ff13"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "entangled-fixed-word-controls",
+      "scope": "Complete selected one-copy and two-copy L_E minima for a fixed dirty word, path and scalar replay; no all-Lagrangian or all-size tensor-factor theorem",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/verify_entangled_release.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/entangled_release_probe.py": "3b0b0c073a5fdc6bbbd86987db34c0999a4479efee19c42989a4dad7c7a57e68",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/obstructions/verify_entangled_release.py": "2b6d70a4766d73cf229046b51d4ad18ec3a45735e21a1a8d5fcc8c45eaf80527",
+        "research/integer-mult-breakthrough/code/synthesis/dirty_color_echo_dp.py": "c710df4aecd2e50bef348a5dfef8c300dbfcce3785967304a1bc2235aeabdccf",
+        "research/integer-mult-breakthrough/code/synthesis/dirty_color_echo_full_dp.py": "6d690c6666e6e63548f2b210d17ee85fcd350a60addd784bc8bdb9bcb6a4a87f",
+        "research/integer-mult-breakthrough/code/synthesis/frame_factor_guards.py": "92821935be418e837267b37b17804cb3c197890e3b1d4e4788f1fadd27710bcf",
+        "research/integer-mult-breakthrough/code/synthesis/frame_variable_elimination.cpp": "ccbdbbed15a0a9a4065bd3af1a7fe89cffdcf6efe77a30f4988454f49ce125ed",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/fixtures/synthesis/frame-elimination-openmp.patch": "2c5712ee7a021a2d18c3c8b7e79b3cee4f9c476d9a489ba87fa1bf57a109247b"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.965
+    },
+    {
+      "id": "closed-center-physical-controls",
+      "scope": "Exact bounded closed central Kx source/sink/physical dirty maps, feature returns, scalar basis and paid single-child interface; no full I or multiplier claim",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_closed_center_release.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/closed_center_release.py": "684cd04a567881dae1c117d9966bbd59a8f9b48f1cfa674bca91ac4968948252",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_closed_center_release.py": "dd63edf1f74232bc90963b9c0f020a503be8b392bb340810b7e3c06b490ffbea"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.815
+    },
+    {
+      "id": "closed-center-independent-interface-controls",
+      "scope": "Import-free bounded scalar/physical center interfaces and odd-line affine/per-column-unit corrections; no full primitive",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/verify_closed_center_interfaces.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/closed_center_interface_review.py": "fd5861c9734abb73d898ad90b2fc6e6c365ae572da7b91ac9e83db3e84abfc39",
+        "research/integer-mult-breakthrough/code/complex/verify_closed_center_interfaces.py": "2b0591cc401251a116c4750e17f5551e19690cede94b7852d2fbf79adf3cc866",
+        "research/integer-mult-breakthrough/fixtures/complex/total-center-local-words.json": "11d8de267891f2ee4cc19ec503c93c73c9d06416995e32278b9e3de9bd63dfc7",
+        "research/integer-mult-breakthrough/fixtures/complex/triple-total-local-word.json": "e2cbc57c3c82ed13663587a8ad3314b411658046c8d962366b9e5c558d26e61d"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.865
+    },
+    {
+      "id": "closed-center-transfer-independent-controls",
+      "scope": "Independent exact actual Gaussian center source/sink/dirty interfaces and negative controls; larger generic word is an analytical identity",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/closed_center_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/closed_center_review.py": "f871e875927cb518ecd91c7480a4d4942bbd23c8ab4c00f01ca1ceab1c1bdcc5",
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/configs/transfers/closed-center-review.json": "0255421db046ae021b115e62093766f70e55d7ed8cfc41a284c423aad173073f"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.965
+    },
+    {
+      "id": "actual-subspace-phase-frame-controls",
+      "scope": "Exact bounded actual subspace frames, degenerate nested interfaces and independent two-axis affine/global-unit normal forms; scalable native compiler is not supplied",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/verify_phase_frame_primitives.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/outer_axis_interface_review.py": "b4db409f7ff3e1a2d0dc55fdd8a84a6447931a66d5f66a1111db70fe51f735b6",
+        "research/integer-mult-breakthrough/code/complex/verify_phase_frame_primitives.py": "7a40cb4abc900517167cc62d5e806aa5319ef4a266330651c581341e5fb6fa39"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.264
+    },
+    {
+      "id": "common-background-orientation-controls",
+      "scope": "Exact right-versus-left common background controls; right lift preserves relatives while tested nongraph left lifts cost two extra ranks",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/frame_background_orientation.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/frame_background_orientation.py": "5cdc8dce26efa8102f26b1227dad2310c4363e765c1e15ae3d83ae2f5d2af9df"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "ballot-integral-center-controls",
+      "scope": "Bounded integral ballot center/null completion, complete dirty scalar columns and dyadic decoder; all-size/native premises explicit",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/ballot_center_completion.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/ballot_center_completion.py": "1acb46642f9a45d909ab544ff7b71377550c534a300ceeed78380ef3021ce54d",
+        "research/integer-mult-breakthrough/configs/transfers/ballot-center-completion.json": "10e5303a13e77262cf6a77b27b1249ebf0bc2cb36059a849e215e6baf39a7d87"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "ballot-unit-word-controls",
+      "scope": "Bounded constructive unit-shear/sign Bier word and prefix controls, not a native tape or exponent certificate",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/ballot_bier_words.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/ballot_bier_words.py": "e14695738f1b6e1ed3eb5ab6e78c99492e8ea40bf114ecd96175175e02431607",
+        "research/integer-mult-breakthrough/code/transfers/ballot_center_completion.py": "1acb46642f9a45d909ab544ff7b71377550c534a300ceeed78380ef3021ce54d",
+        "research/integer-mult-breakthrough/configs/transfers/ballot-bier-words.json": "501c93ae5c962d5f35fb7b8ee40ecc00409243c81ce9f3ef1b42eb63aadf8aea",
+        "research/integer-mult-breakthrough/configs/transfers/ballot-center-completion.json": "10e5303a13e77262cf6a77b27b1249ebf0bc2cb36059a849e215e6baf39a7d87"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "canonical-encoding-slack-controls",
+      "scope": "Exact canonical pair encoding algebra and conditional integer width-one overhead budgets; no cheaper adapter asserted",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/encoding_slack.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/code/transfers/encoding_slack.py": "9ca0f4d46d3322a0b55c9c9bf7b507507e4c1db27dd3d58f589a8bbac011904c",
+        "research/integer-mult-breakthrough/configs/transfers/encoding-slack.json": "33af7901603421194243ec7462655b08757ba2252fb7fa16ee667b94969d475b",
+        "research/integer-mult-breakthrough/fixtures/transfers/geodesic-encoding-profiles.json": "2e8cb6df921d5873e732913e66ea8da13084e820d905335ed707769bc6301499"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "pr127-independent-conditional-arithmetic",
+      "scope": "Independent compact pinned PR127 moments, aggregate birth rebilling, complete scalar bill, seven margins and next-grid rejection; inherited native/analytic suppliers and all 47 constraints are not independently proved",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/pr127_transfer_review.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/code/transfers/encoding_slack.py": "9ca0f4d46d3322a0b55c9c9bf7b507507e4c1db27dd3d58f589a8bbac011904c",
+        "research/integer-mult-breakthrough/code/transfers/pr127_transfer_review.py": "1ea75303d494f3e62e6edbdcbc5aba5943a7770365598e3a1b1135e0f6f0e0b8",
+        "research/integer-mult-breakthrough/configs/transfers/pr127-transfer-review.json": "5caa2cf59d25b3397a8e6609d50c6793363edade6e9c394f5d9c5c790140ab55",
+        "research/integer-mult-breakthrough/fixtures/transfers/pr127-transfer-input.json": "99fe5b4310fa5d0ae3681548df56d6706bcb1fe7a3d54d5d8005bc07d6586db3"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.515
+    },
+    {
+      "id": "materialized-side-release-controls",
+      "scope": "Finite exact controls for the conditional separate-channel closed-helper side release obstruction; not a general circuit lower bound",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/materialized_side_release_bound.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/materialized_side_release_bound.py": "e84dcb6eb5afbcc10f36b73733c7f2ab42035c7b3ba76d2261a340190c6c04fb"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "geodesic-side-capacity-controls",
+      "scope": "Exact complete triple-edge geometric ledger and conditional moment for h9; no physical canonical primitive or multiplier bound",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/geodesic_side_capacity.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/obstructions/geodesic_side_capacity.py": "0086cbf9ca467486abe6573e2938bb22190995c88b9629c8e4194484dd7bdba2"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.214
+    },
+    {
+      "id": "canonical-shear-wrapper-controls",
+      "scope": "Complete bounded raw Gaussian canonical wrapper and its above-one paid moment; other joint wrappers remain open",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/canonical_framed_shear_boundary.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/obstructions/canonical_framed_shear_boundary.py": "3aa9ef4ca0b191f5c2658c3b51da9f2f67d941cdc2bae6ab394c8884297bfc42",
+        "research/integer-mult-breakthrough/code/obstructions/geodesic_side_capacity.py": "0086cbf9ca467486abe6573e2938bb22190995c88b9629c8e4194484dd7bdba2",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py": "947de5784756b2c790a1d66c2be3244e5dd54c059e4467917ef06aefcb5ef47a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 1.466
+    },
+    {
+      "id": "component-two-axis-controls",
+      "scope": "Complete small convolution kernels, all active child coefficients and all spectator router images. Full physical matrix entries follow from convolution and the exact routing identities; this bounded check does not serialize all matrix entries or compose a full master word.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py",
+        "--case",
+        "two-axis"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/outer_axis_frame_splice.py": "1ba1a41d3438844c0d71e0039e4bb36b3c26ad99694592b264d0dc5426ec559b",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py": "35cf57593ab8eda6dcb475d5572f73f1dda89d5b089578d3d1224ddd39d0298e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.314
+    },
+    {
+      "id": "component-native-exchanges-controls",
+      "scope": "Complete finite physical operators and the zero/full metric optimum for these four fixed no-helper words; no general circuit lower bound.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py",
+        "--case",
+        "native-exchanges"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py": "35cf57593ab8eda6dcb475d5572f73f1dda89d5b089578d3d1224ddd39d0298e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.865
+    },
+    {
+      "id": "component-closed-side-controls",
+      "scope": "This literal word cannot improve the phase exponent because its rank charge exceeds Wh. Rewired nonmonotone joint cancellation, compressed channels with different endpoints, address-dependent gauges and other words remain open.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py",
+        "--case",
+        "closed-side"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_native_leverage.py": "83bea750feb440a1bfe8085344c2c12c9f76ab7b72cbc3e1c35454a8d0155006",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/total_center_basis.py": "8c809e5ef5ac062c127622892f6be494f94f78adbcee970d2b6ab9a2cefc9bed",
+        "research/integer-mult-breakthrough/code/complex/total_center_capacity.py": "1a38af3ad2da2c68c6a88afe1f840c25d14040652483800aaf0e591f0e02d09b",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/closed_center_release.py": "684cd04a567881dae1c117d9966bbd59a8f9b48f1cfa674bca91ac4968948252",
+        "research/integer-mult-breakthrough/code/synthesis/closed_center_side_splice.py": "f7c48fa3353f091a6236810247866ec8461c2149ab7538a8e44937bea174869d",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py": "35cf57593ab8eda6dcb475d5572f73f1dda89d5b089578d3d1224ddd39d0298e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.564
+    },
+    {
+      "id": "component-geodesic-side-controls",
+      "scope": "Complete orthogonal-color physical columns and dirty cleanup. This coordinate case alone does not validate generic nonconvolution representatives or a canonical primitive.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py",
+        "--case",
+        "geodesic-side"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_native_leverage.py": "83bea750feb440a1bfe8085344c2c12c9f76ab7b72cbc3e1c35454a8d0155006",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/total_center_basis.py": "8c809e5ef5ac062c127622892f6be494f94f78adbcee970d2b6ab9a2cefc9bed",
+        "research/integer-mult-breakthrough/code/complex/total_center_capacity.py": "1a38af3ad2da2c68c6a88afe1f840c25d14040652483800aaf0e591f0e02d09b",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/closed_center_release.py": "684cd04a567881dae1c117d9966bbd59a8f9b48f1cfa674bca91ac4968948252",
+        "research/integer-mult-breakthrough/code/synthesis/geodesic_edge_side_splice.py": "3cea312533061c31983b258d81262f4ee8de264201c20b869775658ada18b02b",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py": "35cf57593ab8eda6dcb475d5572f73f1dda89d5b089578d3d1224ddd39d0298e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.514
+    },
+    {
+      "id": "component-canonical-geodesic-controls",
+      "scope": "Exact finite framed identity shear through noncoordinate/degenerate actual operators. It is not a raw-input C_h primitive, native fixed-tape compiler, asymptotic guard proof or multiplier exponent.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py",
+        "--case",
+        "canonical-geodesic"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_native_leverage.py": "83bea750feb440a1bfe8085344c2c12c9f76ab7b72cbc3e1c35454a8d0155006",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/total_center_basis.py": "8c809e5ef5ac062c127622892f6be494f94f78adbcee970d2b6ab9a2cefc9bed",
+        "research/integer-mult-breakthrough/code/complex/total_center_capacity.py": "1a38af3ad2da2c68c6a88afe1f840c25d14040652483800aaf0e591f0e02d09b",
+        "research/integer-mult-breakthrough/code/complex/triple_total_centers.py": "eb928d37fde72316f2d0d123af06e795a3d3fe20031518ad85ad2f60ed8ff29e",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/canonical_geodesic_side_review.py": "6790cd39743fe74e3e34f059bf554773079971c8ff924b0548fbb4bdb608a9c1",
+        "research/integer-mult-breakthrough/code/synthesis/closed_center_release.py": "684cd04a567881dae1c117d9966bbd59a8f9b48f1cfa674bca91ac4968948252",
+        "research/integer-mult-breakthrough/code/synthesis/geodesic_edge_side_splice.py": "3cea312533061c31983b258d81262f4ee8de264201c20b869775658ada18b02b",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py": "35cf57593ab8eda6dcb475d5572f73f1dda89d5b089578d3d1224ddd39d0298e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.414
+    },
+    {
+      "id": "component-tensor-preflight-controls",
+      "scope": "Conditional all-h obstruction for the declared naive O(v^4) product-side stock. It does not exclude K tensor K fitting algebra or general multiplier improvements.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py",
+        "--case",
+        "tensor-preflight"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/synthesis/tensor_center_side_preflight.py": "115fe038048e8ed73e4639ca9118d791333c77662f0324efb8e87d2f836a3ace",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py": "35cf57593ab8eda6dcb475d5572f73f1dda89d5b089578d3d1224ddd39d0298e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "component-geodesic-moment-controls",
+      "scope": "Exact conditional moments for the three retained abstract side ledgers; no canonical primitive or multiplier exponent.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py",
+        "--case",
+        "geodesic-moment"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/synthesis/certify_geodesic_edge_moment.py": "6ce0b69f54c2b9c5d5043c83598ff457eac48087af2c94539b4f18c049a4087f",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py": "35cf57593ab8eda6dcb475d5572f73f1dda89d5b089578d3d1224ddd39d0298e",
+        "research/integer-mult-breakthrough/runs/20261009T014025Z-synthesis-geodesic-edge-side/results/certificate.json": "1d0ad8c4bfed46546c28cf85d185625fe09f2e0afade38937becb04048ea9716"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.415
+    },
+    {
+      "id": "component-source-cycle-controls",
+      "scope": "Complete scalar source/sink identity and retained assignment replay in four domains. The expensive finite minimum is not recomputed by this bounded check.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py",
+        "--case",
+        "source-cycle"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/dirty_color_echo_dp.py": "c710df4aecd2e50bef348a5dfef8c300dbfcce3785967304a1bc2235aeabdccf",
+        "research/integer-mult-breakthrough/code/synthesis/dirty_color_echo_full_dp.py": "6d690c6666e6e63548f2b210d17ee85fcd350a60addd784bc8bdb9bcb6a4a87f",
+        "research/integer-mult-breakthrough/code/synthesis/frame_factor_guards.py": "92821935be418e837267b37b17804cb3c197890e3b1d4e4788f1fadd27710bcf",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/source_cycle_echo_search.py": "bda02157b7fd826d8a6fddfd810c63b8052a5dfe1ddce3bd88a4756f4ac9f4e7",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_component_words.py": "35cf57593ab8eda6dcb475d5572f73f1dda89d5b089578d3d1224ddd39d0298e",
+        "research/integer-mult-breakthrough/runs/20261009T005332Z-synthesis-source-cycle-echo/results/summary.json": "cc3a2ec0aabb58d66b40028638d862bc4a5d879f307e6dbf869f85e16d7e37ff"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "scalable-grassmann-interface-controls",
+      "scope": "All 256 small ordered subspace interfaces, exact Gaussian coefficients and phase corruption controls; algebraic compiler only, no native tape or exponent.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py": "3da400b0b157cc28b546113e63a150e4b1672c71a5f2c74e724ac8fc3d1f4851"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.314
+    },
+    {
+      "id": "scalable-frame-independent-controls",
+      "scope": "Independent literal fixture, complete Pauli images and actual global units without producer imports; no native payload claim.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/scalable_frame_review.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/code/transfers/scalable_frame_review.py": "a79a9e01bddc580d417134accaeeecb0aeca2f40871f171bbb0ee5050352168f",
+        "research/integer-mult-breakthrough/configs/transfers/scalable-frame-review.json": "b237d01801d3a3d8ff297fa5bf1651e90da9efcc3ccc2c7e555b1ded57850884",
+        "research/integer-mult-breakthrough/fixtures/complex/scalable-subspace-normal-forms.json": "77fb258dcf779ae58e07a3839564114dd846694d0f49353dc3ec4439bc27cd42"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "ballot-role-budget-controls",
+      "scope": "Exact necessary role budgets for a declared hypothetical complete profile; excludes one-helper-per-gate within that profile, not general circuit synthesis.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/ballot_role_budget.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/ballot_role_budget.py": "ea7818be375c63619824e08da89e32e212fbc667f510b2ad56f074b22737291f",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/configs/complex/ballot-role-budget.json": "225003fed53eeeeebc37d641078c6333f4c4ea4c78078ec985f9e3597382b5bd"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.214
+    },
+    {
+      "id": "equal-frame-dirty-birth-controls",
+      "scope": "All physical f=1 columns plus explicit f=2 origins and arbitrary-dirty fields; actual adapters, dirty endpoints and complete component rank ledger. No covariance promotion or multiplier claim.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_birth_swap_components.py",
+        "--case",
+        "equal-birth"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_native_leverage.py": "83bea750feb440a1bfe8085344c2c12c9f76ab7b72cbc3e1c35454a8d0155006",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/total_center_basis.py": "8c809e5ef5ac062c127622892f6be494f94f78adbcee970d2b6ab9a2cefc9bed",
+        "research/integer-mult-breakthrough/code/complex/total_center_capacity.py": "1a38af3ad2da2c68c6a88afe1f840c25d14040652483800aaf0e591f0e02d09b",
+        "research/integer-mult-breakthrough/code/complex/triple_total_centers.py": "eb928d37fde72316f2d0d123af06e795a3d3fe20031518ad85ad2f60ed8ff29e",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/canonical_geodesic_side_review.py": "6790cd39743fe74e3e34f059bf554773079971c8ff924b0548fbb4bdb608a9c1",
+        "research/integer-mult-breakthrough/code/synthesis/closed_center_release.py": "684cd04a567881dae1c117d9966bbd59a8f9b48f1cfa674bca91ac4968948252",
+        "research/integer-mult-breakthrough/code/synthesis/degenerate_birth_reuse_probe.py": "38c0d21d5b9b26e3532cbf2c71b381f83590fff6d766569f4cdf8a5a9e81f265",
+        "research/integer-mult-breakthrough/code/synthesis/geodesic_edge_side_splice.py": "3cea312533061c31983b258d81262f4ee8de264201c20b869775658ada18b02b",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_birth_swap_components.py": "9a390a17606d2df223efb8ee038ebd3ceae567cd6fdd49682fa0f0d7d8746f55"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.515
+    },
+    {
+      "id": "nested-frame-dirty-birth-controls",
+      "scope": "All physical f=1 columns plus explicit f=2 origins and arbitrary-dirty fields; actual adapters, dirty endpoints and complete component rank ledger. No covariance promotion or multiplier claim.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_birth_swap_components.py",
+        "--case",
+        "nested-birth"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_native_leverage.py": "83bea750feb440a1bfe8085344c2c12c9f76ab7b72cbc3e1c35454a8d0155006",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/total_center_basis.py": "8c809e5ef5ac062c127622892f6be494f94f78adbcee970d2b6ab9a2cefc9bed",
+        "research/integer-mult-breakthrough/code/complex/total_center_capacity.py": "1a38af3ad2da2c68c6a88afe1f840c25d14040652483800aaf0e591f0e02d09b",
+        "research/integer-mult-breakthrough/code/complex/triple_total_centers.py": "eb928d37fde72316f2d0d123af06e795a3d3fe20031518ad85ad2f60ed8ff29e",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/canonical_geodesic_side_review.py": "6790cd39743fe74e3e34f059bf554773079971c8ff924b0548fbb4bdb608a9c1",
+        "research/integer-mult-breakthrough/code/synthesis/closed_center_release.py": "684cd04a567881dae1c117d9966bbd59a8f9b48f1cfa674bca91ac4968948252",
+        "research/integer-mult-breakthrough/code/synthesis/degenerate_birth_reuse_probe.py": "38c0d21d5b9b26e3532cbf2c71b381f83590fff6d766569f4cdf8a5a9e81f265",
+        "research/integer-mult-breakthrough/code/synthesis/geodesic_edge_side_splice.py": "3cea312533061c31983b258d81262f4ee8de264201c20b869775658ada18b02b",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/nested_degenerate_birth_reuse.py": "dc438259086fa4578bb45211ee9390f8e56fea5ea665ee3d1db5af33edf51778",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_birth_swap_components.py": "9a390a17606d2df223efb8ee038ebd3ceae567cd6fdd49682fa0f0d7d8746f55"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.565
+    },
+    {
+      "id": "separate-body-signed-swap-controls",
+      "scope": "All physical f=1 columns plus explicit f=2 origins and arbitrary-dirty fields; actual adapters, dirty endpoints and complete component rank ledger. No covariance promotion or multiplier claim.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_birth_swap_components.py",
+        "--case",
+        "separate-swap"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_native_leverage.py": "83bea750feb440a1bfe8085344c2c12c9f76ab7b72cbc3e1c35454a8d0155006",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/total_center_basis.py": "8c809e5ef5ac062c127622892f6be494f94f78adbcee970d2b6ab9a2cefc9bed",
+        "research/integer-mult-breakthrough/code/complex/total_center_capacity.py": "1a38af3ad2da2c68c6a88afe1f840c25d14040652483800aaf0e591f0e02d09b",
+        "research/integer-mult-breakthrough/code/complex/triple_total_centers.py": "eb928d37fde72316f2d0d123af06e795a3d3fe20031518ad85ad2f60ed8ff29e",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/canonical_geodesic_side_review.py": "6790cd39743fe74e3e34f059bf554773079971c8ff924b0548fbb4bdb608a9c1",
+        "research/integer-mult-breakthrough/code/synthesis/closed_center_release.py": "684cd04a567881dae1c117d9966bbd59a8f9b48f1cfa674bca91ac4968948252",
+        "research/integer-mult-breakthrough/code/synthesis/geodesic_edge_side_splice.py": "3cea312533061c31983b258d81262f4ee8de264201c20b869775658ada18b02b",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/joint_signed_swap_control.py": "0d664f09a9d0b4ff4b292518927057064299186118760779d7c16877ea0faca8",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_birth_swap_components.py": "9a390a17606d2df223efb8ee038ebd3ceae567cd6fdd49682fa0f0d7d8746f55"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 48.05
+    },
+    {
+      "id": "degenerate-birth-independent-controls",
+      "scope": "Independent literal equal-frame dirty-birth review, actual phases, all f=1 physical columns and false chronological-cleanup control; no full canonical primitive.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/degenerate_birth_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/code/transfers/degenerate_birth_review.py": "cec063126547a4fa67d7987f17caf56bb0be9d3ba95ca40ab17f4ecbae573a0d",
+        "research/integer-mult-breakthrough/configs/transfers/degenerate-birth-review.json": "0a8953e0a47f7dc3a6612b06f72ce0bd30c6d2e8c1c0758e74ccc9e17eabfa0e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 4.271
+    },
+    {
+      "id": "degenerate-birth-fixture-binding",
+      "scope": "Independent reconstruction of every retained actual adapter and producer physical event; fixture hashes are bindings, not proof authority.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/degenerate_birth_fixture_review.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/code/transfers/degenerate_birth_fixture_review.py": "434c6adc44c3523478e32bcb54f4a8616294aa52b6c8d014d5f8120af7cf16c1",
+        "research/integer-mult-breakthrough/code/transfers/degenerate_birth_review.py": "cec063126547a4fa67d7987f17caf56bb0be9d3ba95ca40ab17f4ecbae573a0d",
+        "research/integer-mult-breakthrough/configs/transfers/degenerate-birth-fixture-review.json": "0db437be19fae1ef4503a5120d39368811e50bcf5165555444b130d9523755d9",
+        "research/integer-mult-breakthrough/fixtures/synthesis/degenerate-birth-reuse-contract.json": "ac6e33b8c21d5a61cef2a27514adbb18986f21b18a527940d8c439004cd1f0e2"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.414
+    },
+    {
+      "id": "routed-swap-alignment-controls",
+      "scope": "Complete routed and unrouted Gaussian interfaces and raw signed-SWAP pair columns; full-support boundary excludes only one smaller child with monomial/diagonal wrappers.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/routed_swap_alignment.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/obstructions/canonical_framed_shear_boundary.py": "3aa9ef4ca0b191f5c2658c3b51da9f2f67d941cdc2bae6ab394c8884297bfc42",
+        "research/integer-mult-breakthrough/code/obstructions/geodesic_side_capacity.py": "0086cbf9ca467486abe6573e2938bb22190995c88b9629c8e4194484dd7bdba2",
+        "research/integer-mult-breakthrough/code/obstructions/routed_swap_alignment.py": "215a9d1b84df93c01ac1cd2b09c4475d3b2f388616fa9bfd0f85cbeab3285af5",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py": "947de5784756b2c790a1d66c2be3244e5dd54c059e4467917ef06aefcb5ef47a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.214
+    },
+    {
+      "id": "noncontained-birth-budget-controls",
+      "scope": "Exact proposed noncontained birth ledger, paid transition and uniform near-boundary exclusion for 2<=h<=2048; larger positive arithmetic is not a legal circuit or exponent.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/noncontained_birth_budget.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/code/transfers/encoding_slack.py": "9ca0f4d46d3322a0b55c9c9bf7b507507e4c1db27dd3d58f589a8bbac011904c",
+        "research/integer-mult-breakthrough/code/transfers/noncontained_birth_budget.py": "5b1564de3678cca59c59c18e285e78e193129f9e036a074c6251f6c88bb17928",
+        "research/integer-mult-breakthrough/configs/transfers/noncontained-birth-budget.json": "5f3e214fdde1000d72fadcbae0ebc8d0913be38cbee2363aa85b6ff75b08dfa7"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.314
+    },
+    {
+      "id": "right-reflected-frame-interface-controls",
+      "scope": "Exact common RIGHT background, zero-child monomial gauges and forward/reverse actual interfaces, with inverse-order controls; no full helper chronology or native time claim.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/verify_right_reflected_interfaces.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/right_reflected_frame_gauges.py": "3e10a8017eb78dce2aaefe7366e6cde32e1e5a1701b209fc5151affb79c8ebf4",
+        "research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py": "3da400b0b157cc28b546113e63a150e4b1672c71a5f2c74e724ac8fc3d1f4851",
+        "research/integer-mult-breakthrough/code/complex/verify_right_reflected_interfaces.py": "04eb62795ca5e868e5dae49c7bb5abbdd3982724354d27c50c51c5463384fdf6"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.214
+    },
+    {
+      "id": "nested-birth-independent-controls",
+      "scope": "Import-free independent literal fixture reconstruction, exact actual global phases and corruption controls in the stated bounded cases. No native execution time or multiplier exponent.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/nested_birth_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/code/transfers/degenerate_birth_fixture_review.py": "434c6adc44c3523478e32bcb54f4a8616294aa52b6c8d014d5f8120af7cf16c1",
+        "research/integer-mult-breakthrough/code/transfers/degenerate_birth_review.py": "cec063126547a4fa67d7987f17caf56bb0be9d3ba95ca40ab17f4ecbae573a0d",
+        "research/integer-mult-breakthrough/code/transfers/nested_birth_review.py": "5ac7bb0a666f1919683860a72719ebe4363c76b9bef3262863c2f18de0b9d84e",
+        "research/integer-mult-breakthrough/configs/transfers/nested-birth-review.json": "186a01b0d139244729a2fc25c44cf09b6dd8d2aaa3365894ff5b40cd833ab2a3",
+        "research/integer-mult-breakthrough/fixtures/synthesis/nested-degenerate-birth-contract.json": "068d19770d47e72f3d939c16f16519144e4c0a6e47a897caf7fc15760eb271cd"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 4.771
+    },
+    {
+      "id": "reflected-frame-independent-controls",
+      "scope": "Import-free independent literal fixture reconstruction, exact actual global phases and corruption controls in the stated bounded cases. No native execution time or multiplier exponent.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/reflected_frame_review.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/code/transfers/reflected_frame_review.py": "0458e7bac457c72b58b4d09b8b3c418868a7842f1219589dd9c3393e2164a862",
+        "research/integer-mult-breakthrough/code/transfers/scalable_frame_review.py": "a79a9e01bddc580d417134accaeeecb0aeca2f40871f171bbb0ee5050352168f",
+        "research/integer-mult-breakthrough/configs/transfers/reflected-frame-review.json": "9726b7bcdbb174395e8c1c56101fd28808c879e420b659b90c1106874f664448",
+        "research/integer-mult-breakthrough/fixtures/complex/right-reflected-frame-interfaces.json": "d59ea7611f919da38c6a1cb7ee49d22c79155171c9f6de8ec7f9fdb8e0c12d31"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "native-packed-gl-controls",
+      "scope": "Exact native-K guarded selected-bit route controls and GL payload oracles; fixed-tape bill is conditional on pinned original complete-chunk and radix contracts.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/native_gl_routes.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/native_gl_routes.py": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.464
+    },
+    {
+      "id": "native-frame-wrapper-controls",
+      "scope": "Complete bounded four-field forward/inverse wrapper oracles and exactly-once global phase controls; no native runtime proof.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/native_frame_wrapper_plan.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/native_frame_wrapper_plan.py": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+        "research/integer-mult-breakthrough/code/complex/native_gl_routes.py": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54",
+        "research/integer-mult-breakthrough/fixtures/complex/right-reflected-frame-interfaces.json": "d59ea7611f919da38c6a1cb7ee49d22c79155171c9f6de8ec7f9fdb8e0c12d31",
+        "research/integer-mult-breakthrough/fixtures/complex/scalable-subspace-normal-forms.json": "77fb258dcf779ae58e07a3839564114dd846694d0f49353dc3ec4439bc27cd42"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "native-wrapper-endpoint-controls",
+      "scope": "Complete actual source, sink and dirty endpoint wrapper oracles with paid stages; no global helper word or exponent.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/native_wrapper_endpoints.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/native_frame_wrapper_plan.py": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+        "research/integer-mult-breakthrough/code/complex/native_gl_routes.py": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54",
+        "research/integer-mult-breakthrough/code/complex/native_wrapper_endpoints.py": "fbecb880cd6a953581a50cdd30de369b99811679ccde2d71633041b45e57709d"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "joint-mutable-birth-controls",
+      "scope": "All producer cases: exact actual joint core and paid canonical boundaries, or separately scoped post-only/pointwise/unitary boundary witnesses. No complete native algorithm.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_joint_boundary_components.py",
+        "--case",
+        "joint-mutable"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/center_basis_scalar_word.py": "ae67e07a60efd8b0572f329899a05a83b6623e804a54a299a62b7ac58a4be163",
+        "research/integer-mult-breakthrough/code/complex/center_native_leverage.py": "83bea750feb440a1bfe8085344c2c12c9f76ab7b72cbc3e1c35454a8d0155006",
+        "research/integer-mult-breakthrough/code/complex/center_null_basis.py": "e23b9a6619c20631bb9e1ce2feb4b81c70a373e86eda19489fa026ba288ed813",
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/complex/five_subset_envelope.py": "4186aae1cffc5cc824f4177d123c6b21a4bc2aec355a67d829678f3cfe970646",
+        "research/integer-mult-breakthrough/code/complex/structured_center_basis.py": "994ac0b6cdac804eda7c47f46540c4e00c752f233ddb0cc2481e0640fac54361",
+        "research/integer-mult-breakthrough/code/complex/total_center_basis.py": "8c809e5ef5ac062c127622892f6be494f94f78adbcee970d2b6ab9a2cefc9bed",
+        "research/integer-mult-breakthrough/code/complex/total_center_capacity.py": "1a38af3ad2da2c68c6a88afe1f840c25d14040652483800aaf0e591f0e02d09b",
+        "research/integer-mult-breakthrough/code/complex/triple_total_centers.py": "eb928d37fde72316f2d0d123af06e795a3d3fe20031518ad85ad2f60ed8ff29e",
+        "research/integer-mult-breakthrough/code/obstructions/trimmed_side_transform.py": "c7093318d5892d7a2161f5614135f7f94be474a91dcd4a95ef5eb0b1ef498ced",
+        "research/integer-mult-breakthrough/code/synthesis/canonical_geodesic_side_review.py": "6790cd39743fe74e3e34f059bf554773079971c8ff924b0548fbb4bdb608a9c1",
+        "research/integer-mult-breakthrough/code/synthesis/closed_center_release.py": "684cd04a567881dae1c117d9966bbd59a8f9b48f1cfa674bca91ac4968948252",
+        "research/integer-mult-breakthrough/code/synthesis/geodesic_edge_side_splice.py": "3cea312533061c31983b258d81262f4ee8de264201c20b869775658ada18b02b",
+        "research/integer-mult-breakthrough/code/synthesis/global_word_frame_search.py": "fbe86d93dc0a45d3d24fdd15c3b51daeaf5b07e6f27cb4b0a864cd9ebb610dec",
+        "research/integer-mult-breakthrough/code/synthesis/joint_mutable_birth_swap.py": "ffc15ea17653c1bb523394c3d2f100b3d6addde06fe74ad11ae976f19a064b13",
+        "research/integer-mult-breakthrough/code/synthesis/joint_signed_swap_control.py": "0d664f09a9d0b4ff4b292518927057064299186118760779d7c16877ea0faca8",
+        "research/integer-mult-breakthrough/code/synthesis/lagrangian_graph_completion.py": "4a864b20bb9bab68d919a74eb6fb2afca915a616666ff1bf1a93ee4beb861e68",
+        "research/integer-mult-breakthrough/code/synthesis/literal_bank_exchange_control.py": "d99bb389ce308ffdafd09389a02b5a4aac4e731f73fe756730293d96f3635d0b",
+        "research/integer-mult-breakthrough/code/synthesis/pauli_tensor_discriminator.py": "511743c64bb8e5cd97336ddbb2767efbe1a82c469be5a01a018fa271aaaa924f",
+        "research/integer-mult-breakthrough/code/synthesis/trimmed_zeta_dirty_probe.py": "c4aed4973ac911b70fd50d829d1af16c24d77194cd7d0c27625473a68d981cff",
+        "research/integer-mult-breakthrough/code/synthesis/verify_joint_boundary_components.py": "d7152cb9ab7673b13ef088c646fdec885a569b3cdfcd3393b42ea4299c5035b1"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 2.618
+    },
+    {
+      "id": "address-boundary-model-controls",
+      "scope": "All producer cases: exact actual joint core and paid canonical boundaries, or separately scoped post-only/pointwise/unitary boundary witnesses. No complete native algorithm.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/synthesis/verify_joint_boundary_components.py",
+        "--case",
+        "address-boundary"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/address_boundary_discriminator.py": "4c1e4ab0769be59b8fc4546dce340908784135d1b4bfe269e9475769e83b1b16",
+        "research/integer-mult-breakthrough/code/synthesis/verify_joint_boundary_components.py": "d7152cb9ab7673b13ef088c646fdec885a569b3cdfcd3393b42ea4299c5035b1"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.665
+    },
+    {
+      "id": "joint-mutable-birth-independent-controls",
+      "scope": "Independent literal fixture binding, suffix-derived current-data CUT responses, all one-column physical endpoints and explicit two-column fields; no producer imports or new exponent.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/joint_mutable_birth_review.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/code/transfers/degenerate_birth_fixture_review.py": "434c6adc44c3523478e32bcb54f4a8616294aa52b6c8d014d5f8120af7cf16c1",
+        "research/integer-mult-breakthrough/code/transfers/degenerate_birth_review.py": "cec063126547a4fa67d7987f17caf56bb0be9d3ba95ca40ab17f4ecbae573a0d",
+        "research/integer-mult-breakthrough/code/transfers/joint_mutable_birth_review.py": "93197fbeac1a17fe52cb4d1ee983931e701ba0710c2709c0879522dd8124b7b2",
+        "research/integer-mult-breakthrough/configs/transfers/joint-mutable-birth-review.json": "a22e6ab1eca94356ccfb0637a499ee77260371c8ea7fbbb2f5f59fc81da53d33",
+        "research/integer-mult-breakthrough/fixtures/synthesis/joint-mutable-birth-contract.json": "9c3f77b5062ac314eefa7dd073544aa861c46bc6d11f33361b6cbf659c68dd9b"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 12.135
+    },
+    {
+      "id": "native-gl-independent-controls",
+      "scope": "Independent native-K6 guarded word and toy GL/chirp payload controls; analytical tape composition assumes the pinned original routing primitives.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/transfers/native_gl_review.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/native_gl_review.py": "1ae606d030f1f71ebe2d2497399601f1cdc6e59aa4e3209527533ecf57432d19",
+        "research/integer-mult-breakthrough/configs/transfers/native-gl-review.json": "a47537f0a369cb5994af35b98dbf26204a74bafbc5a9a5af039317e7102bb531"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.414
+    },
+    {
+      "id": "partial-output-normalization-controls",
+      "scope": "Exact bounded partial source operator and outward moment intervals; strict subadditivity excludes only the stated unit-weight mixed-output profile, not other coupled mechanisms.",
+      "command": [
+        "{python}",
+        "-B",
+        "research/integer-mult-breakthrough/code/obstructions/partial_output_budget.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/characteristic.py": "9acd5ae4f916d902c1c9f904188b3fd38f8f87c4ea7e1276980ef86476f5b5f9",
+        "research/integer-mult-breakthrough/code/obstructions/canonical_framed_shear_boundary.py": "3aa9ef4ca0b191f5c2658c3b51da9f2f67d941cdc2bae6ab394c8884297bfc42",
+        "research/integer-mult-breakthrough/code/obstructions/geodesic_side_capacity.py": "0086cbf9ca467486abe6573e2938bb22190995c88b9629c8e4194484dd7bdba2",
+        "research/integer-mult-breakthrough/code/obstructions/partial_output_budget.py": "9665d3fdb9fb4eaacb9f546f78312d407e8b9b481dcd3ff757ed8c605424fd15",
+        "research/integer-mult-breakthrough/code/obstructions/unitary_dyadic.py": "947de5784756b2c790a1d66c2be3244e5dd54c059e4467917ef06aefcb5ef47a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "all-lagrangian-frame-controls",
+      "scope": "Exact bounded all-Lagrangian frames, canonical operator anchors and residual dyadic phases; no native network or exponent",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_frame_interfaces.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_frame_interfaces.py": "1b9bce1af1b7ac39eafa9e765c5e58b362875ec0df1f81e91c80ada5d666b109",
+        "research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py": "3da400b0b157cc28b546113e63a150e4b1672c71a5f2c74e724ac8fc3d1f4851",
+        "research/integer-mult-breakthrough/configs/complex/lagrangian-frame-interfaces.json": "ba76f28f3fcff637ecee1aa966134d485c41c169aaa83a90910c067c3adf1aa4",
+        "research/integer-mult-breakthrough/fixtures/complex/noncommuting-four-incidence.json": "8ae3dd3489d18251dd540e2d7e5925c00e61f830bd67b6de9308df381894d96f"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "general-clifford-original-port-controls",
+      "scope": "Exact original four-port binding to complete Clifford interfaces; no free gauge replacement",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/complex/verify_general_clifford_anchors.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_frame_interfaces.py": "1b9bce1af1b7ac39eafa9e765c5e58b362875ec0df1f81e91c80ada5d666b109",
+        "research/integer-mult-breakthrough/code/complex/native_frame_wrapper_plan.py": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+        "research/integer-mult-breakthrough/code/complex/native_gl_routes.py": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54",
+        "research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py": "3da400b0b157cc28b546113e63a150e4b1672c71a5f2c74e724ac8fc3d1f4851",
+        "research/integer-mult-breakthrough/code/complex/verify_general_clifford_anchors.py": "2f2d1f20e17c324bcbdf0ec7866850ae0a82971d4f8d13a08ee123b5aa22303f",
+        "research/integer-mult-breakthrough/configs/complex/general-clifford-anchor-controls.json": "9e21bc994b77169b216b505a00c71bfb915646365d4fe087e21836ab976c94c5",
+        "research/integer-mult-breakthrough/fixtures/complex/noncommuting-four-incidence.json": "8ae3dd3489d18251dd540e2d7e5925c00e61f830bd67b6de9308df381894d96f"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "shared-helper-chronology-controls",
+      "scope": "Literal twelve-shear chronology with a shared dirty helper, original endpoints and paid rank ledger; no general helper lower bound",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/complex/one_helper_clifford_chronology.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_frame_interfaces.py": "1b9bce1af1b7ac39eafa9e765c5e58b362875ec0df1f81e91c80ada5d666b109",
+        "research/integer-mult-breakthrough/code/complex/native_frame_wrapper_plan.py": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+        "research/integer-mult-breakthrough/code/complex/native_gl_routes.py": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54",
+        "research/integer-mult-breakthrough/code/complex/one_helper_clifford_chronology.py": "d9c1935951bfe2664fb2bff8f0cc250cd18f239b5be6b91624af8ff15c015474",
+        "research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py": "3da400b0b157cc28b546113e63a150e4b1672c71a5f2c74e724ac8fc3d1f4851",
+        "research/integer-mult-breakthrough/configs/complex/one-helper-clifford-chronology.json": "2a5688f1f16c8659c256625a18ddcc7290317141e25fde067052d3d3d48896e0",
+        "research/integer-mult-breakthrough/fixtures/complex/noncommuting-four-incidence.json": "8ae3dd3489d18251dd540e2d7e5925c00e61f830bd67b6de9308df381894d96f"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "gate-specific-helper-controls",
+      "scope": "Bounded dynamic program over independently paid gate-specific frames with exact dirty helper replay; named architecture only",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/complex/multiframe_helper_chronology.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_frame_interfaces.py": "1b9bce1af1b7ac39eafa9e765c5e58b362875ec0df1f81e91c80ada5d666b109",
+        "research/integer-mult-breakthrough/code/complex/multiframe_helper_chronology.py": "fc7d491a0da537629e5399324d03249c1b8b7acf19c6fa45979d70495454f59f",
+        "research/integer-mult-breakthrough/code/complex/native_frame_wrapper_plan.py": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+        "research/integer-mult-breakthrough/code/complex/native_gl_routes.py": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54",
+        "research/integer-mult-breakthrough/code/complex/one_helper_clifford_chronology.py": "d9c1935951bfe2664fb2bff8f0cc250cd18f239b5be6b91624af8ff15c015474",
+        "research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py": "3da400b0b157cc28b546113e63a150e4b1672c71a5f2c74e724ac8fc3d1f4851",
+        "research/integer-mult-breakthrough/configs/complex/multiframe-helper-chronology.json": "7ed5d2c022a59c220d7a04f173527258684c32ba92cb9033e6895d32ceb0f40a"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "nonunit-amplitude-boundary-controls",
+      "scope": "Complete four-case finite amplitude boundary replay with exact source/input freeze; separately scoped obstruction; no native post-word or exponent",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py",
+        "--case",
+        "amplitude"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/nonunit_address_amplitude_preflight.py": "b1ddb07507be5b093ae88bc16364c3284f8db14366f57fa9916e96b17ed5a50a",
+        "research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py": "0acf65a04c45d4ac7e534eb96f25a80270c03da2b7dc44ce27648c053ef02a2e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 2.87
+    },
+    {
+      "id": "unique-path-boundary-controls",
+      "scope": "Complete four-case finite paths boundary replay with exact source/input freeze; separately scoped obstruction; no native post-word or exponent",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py",
+        "--case",
+        "paths"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/single_route_prepost_obstruction.py": "32dfe5d1c3de20d8d68868914b07afdadb64a25c3749c96d9f80d1845ade6fca",
+        "research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py": "0acf65a04c45d4ac7e534eb96f25a80270c03da2b7dc44ce27648c053ef02a2e",
+        "research/integer-mult-breakthrough/runs/20261009T033016Z-synthesis-nonunit-amplitude-preflight/results/certificate.json": "7bf6b5e41c361a2e4a01de0ed9cf7bd372d56706a922d6a87510a58091ae8892"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.032
+    },
+    {
+      "id": "streaming-scan-boundary-controls",
+      "scope": "Complete four-case finite scan boundary replay with exact source/input freeze; separately scoped obstruction; no native post-word or exponent",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py",
+        "--case",
+        "scan"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/nonunit_address_amplitude_preflight.py": "b1ddb07507be5b093ae88bc16364c3284f8db14366f57fa9916e96b17ed5a50a",
+        "research/integer-mult-breakthrough/code/synthesis/streaming_scan_boundary_preflight.py": "835fbd189c6ea0c8ab50e99aca8ee17e02bc66f408bc854c2c313b186480637c",
+        "research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py": "0acf65a04c45d4ac7e534eb96f25a80270c03da2b7dc44ce27648c053ef02a2e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 3.971
+    },
+    {
+      "id": "streaming-scan-fixed-grid-controls",
+      "scope": "Complete four-case finite scan-grid boundary replay with exact source/input freeze; separately scoped obstruction; no native post-word or exponent",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py",
+        "--case",
+        "scan-grid"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/audit_streaming_scan_precision.py": "ba4e3de3df2f680101043df46b53dedd053dd291f63e1c93463650c0946a5bfe",
+        "research/integer-mult-breakthrough/code/synthesis/nonunit_address_amplitude_preflight.py": "b1ddb07507be5b093ae88bc16364c3284f8db14366f57fa9916e96b17ed5a50a",
+        "research/integer-mult-breakthrough/code/synthesis/streaming_scan_boundary_preflight.py": "835fbd189c6ea0c8ab50e99aca8ee17e02bc66f408bc854c2c313b186480637c",
+        "research/integer-mult-breakthrough/code/synthesis/verify_nonunit_prepost_components.py": "0acf65a04c45d4ac7e534eb96f25a80270c03da2b7dc44ce27648c053ef02a2e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 1.817
+    },
+    {
+      "id": "packed-toffoli-routing-controls",
+      "scope": "Exact quotient rotations, full dirty payload restoration and guarded correction; native all-size bill conditional",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/transfers/packed_toffoli.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/native_gl_review.py": "1ae606d030f1f71ebe2d2497399601f1cdc6e59aa4e3209527533ecf57432d19",
+        "research/integer-mult-breakthrough/code/transfers/packed_toffoli.py": "5fc6fb8ce5507fae0568e85d701918cd8ddfe65ed124810eb3edfbfff9fa7f80",
+        "research/integer-mult-breakthrough/configs/transfers/packed-toffoli.json": "3ad7bcdb5e3c0ced19391d1f0dec5b688e17755ffd5c377962c72c1d5d368910"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 1.366
+    },
+    {
+      "id": "guarded-slot-layout-controls",
+      "scope": "Same-volume guard geometry, whole-chunk compaction and exact static-grid Gaussian fields; whole recursive network remains conditional",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py": "5c5e9b8fdfbc9685582bd75ce6654fa0c78482e8cbe698a7c943811035eba99e",
+        "research/integer-mult-breakthrough/configs/transfers/guarded-slot-layout.json": "f3800fa4209260a223a88e58ab8de4f51def2ae1b07360f461d5d0381d44ca2e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.264
+    },
+    {
+      "id": "sparse-line-input-controls",
+      "scope": "Exact sparse-transversal encoded input identity and coefficient-record volume restriction; no general multiplication obstruction",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/sparse_line_input_encoding.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/sparse_line_input_encoding.py": "9b2eaf90f0e1f977fce5cf6553d9c0f132966ecf7f23a3bb6b71df0de5d99229"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "borrowed-bit-permutation-controls",
+      "scope": "Exact arbitrary fixed-h permutations using restored dirty borrowed bit and paid NOT/CNOT/Toffoli words; no free complete native slot",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/borrowed_bit_permutation_words.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/borrowed_bit_permutation_words.py": "844ee99e9ca7c43f3cda065da14ef88a9123fc643d5110fa8667400bee276e26"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "independent-guard-geometry-controls",
+      "scope": "Import-free independent whole-chunk label compaction and rational child-width majorants; no full native network",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/guard_slot_geometry_review.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/guard_slot_geometry_review.py": "682d3fb4215762ebc5a6c678ccd66edcb97614f238e2c9a6c7b0ea1b3a764613",
+        "research/integer-mult-breakthrough/code/transfers/guarded_slot_layout.py": "5c5e9b8fdfbc9685582bd75ce6654fa0c78482e8cbe698a7c943811035eba99e",
+        "research/integer-mult-breakthrough/configs/transfers/guarded-slot-layout.json": "f3800fa4209260a223a88e58ab8de4f51def2ae1b07360f461d5d0381d44ca2e"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "nonlinear-matching-frame-controls",
+      "scope": "Exact nonlinear matching frame screen with original ports and phases; named finite candidates, no native improvement",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/complex/nonlinear_matching_frames.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_frame_interfaces.py": "1b9bce1af1b7ac39eafa9e765c5e58b362875ec0df1f81e91c80ada5d666b109",
+        "research/integer-mult-breakthrough/code/complex/native_frame_wrapper_plan.py": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+        "research/integer-mult-breakthrough/code/complex/native_gl_routes.py": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54",
+        "research/integer-mult-breakthrough/code/complex/nonlinear_matching_frames.py": "e0048d6949270f8e3abd34de7323bde72ff97d66e8b10e80ee20b49e9068b640",
+        "research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py": "3da400b0b157cc28b546113e63a150e4b1672c71a5f2c74e724ac8fc3d1f4851",
+        "research/integer-mult-breakthrough/configs/complex/nonlinear-matching-frames.json": "7c6235873c94c782e29204669cf9ee399feb4b385be4a0fc10d2182147e23bb9",
+        "research/integer-mult-breakthrough/fixtures/complex/noncommuting-four-incidence.json": "8ae3dd3489d18251dd540e2d7e5925c00e61f830bd67b6de9308df381894d96f"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.364
+    },
+    {
+      "id": "canonical-matching-graph-controls",
+      "scope": "Complete105 three-bit matching canonical source/sink graph; no general circuit lower bound",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/complex/nonlinear_canonical_matching_graph.py"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_subspace_frames.py": "ddb0255a0668d43dd61c5183f3a0de56015f02b6acc462c4b8ad5b3f8173598b",
+        "research/integer-mult-breakthrough/code/complex/lagrangian_frame_interfaces.py": "1b9bce1af1b7ac39eafa9e765c5e58b362875ec0df1f81e91c80ada5d666b109",
+        "research/integer-mult-breakthrough/code/complex/native_frame_wrapper_plan.py": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+        "research/integer-mult-breakthrough/code/complex/native_gl_routes.py": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54",
+        "research/integer-mult-breakthrough/code/complex/nonlinear_canonical_matching_graph.py": "a4954115c6322918a048592a9347fb4671816c41b15cc1891d905b8c78cc269c",
+        "research/integer-mult-breakthrough/code/complex/nonlinear_matching_frames.py": "e0048d6949270f8e3abd34de7323bde72ff97d66e8b10e80ee20b49e9068b640",
+        "research/integer-mult-breakthrough/code/complex/scalable_subspace_interfaces.py": "3da400b0b157cc28b546113e63a150e4b1672c71a5f2c74e724ac8fc3d1f4851",
+        "research/integer-mult-breakthrough/configs/complex/nonlinear-canonical-matching-graph.json": "aa68291504249fb99f306b2c175684c4f3f51ab4db08f36373bd728a645ce6d4"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "column-branching-port-controls",
+      "scope": "Import-free exact crossed-port support and scoped paid-child column branching bound",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/complex/column_branching_port_bound.py",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/column_branching_port_bound.py": "bca4f73590fc0bc360a32b76917c31ed0b462ebf17e322b56ab8d821936d45e6",
+        "research/integer-mult-breakthrough/configs/complex/column-branching-port-bound.json": "d8ea0754bbe7b8e8bbd84f4179dc298f5b4ea5a6769d62829ef0dee661f7ee11",
+        "research/integer-mult-breakthrough/fixtures/complex/noncommuting-four-incidence.json": "8ae3dd3489d18251dd540e2d7e5925c00e61f830bd67b6de9308df381894d96f"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "canonical-matching-support-controls",
+      "scope": "Exact complete-support-block controls for a separately stated all-size one-child matching obstruction",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/complex/canonical_matching_support_obstruction.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/complex/canonical_matching_support_obstruction.py": "d5bd30f0dee017521baf38732612d23e392ed06cc8eba7cf8585400e898e5056",
+        "research/integer-mult-breakthrough/configs/complex/canonical-matching-support-obstruction.json": "da93bcc3bcc65cc2f83f729843fb91cf9ddedeb52941b7eac19a384d82ac7528"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.064
+    },
+    {
+      "id": "weighted-scan-space-controls",
+      "scope": "Bounded exact additive weighted-scan solver and complete input capacity; all-size proof separately scoped, no native boundary",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/synthesis/verify_weighted_scan_components.py",
+        "--case",
+        "solver"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/verify_weighted_scan_components.py": "32acd6dbccd027f38f80c8268a4a00370bf26e236de016769d6efb3b6ee6b465",
+        "research/integer-mult-breakthrough/code/synthesis/weighted_scan_intertwiners.py": "0e6e1e3af2da37a0ada5eb599ec568f7125479dd88717148335a7c484f4e12ac"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.164
+    },
+    {
+      "id": "weighted-scan-structure-controls",
+      "scope": "Bounded exact additive weighted-scan structure and complete input capacity; all-size proof separately scoped, no native boundary",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/synthesis/verify_weighted_scan_components.py",
+        "--case",
+        "structure"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/synthesis/verify_weighted_scan_components.py": "32acd6dbccd027f38f80c8268a4a00370bf26e236de016769d6efb3b6ee6b465",
+        "research/integer-mult-breakthrough/code/synthesis/weighted_scan_structure.py": "d5257962c4812e7a8310c70a61098350b5974a355bd2ced54b3601b824ceafa0"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "coherent-matching-route-controls",
+      "scope": "Exact aligned nonlinear/weighted matching conjugacy and full-support boundary; multiple-bank nonaligned circuits remain open",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/transfers/coherent_matching_routing.py",
+        "--workers",
+        "1",
+        "--small"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/transfers/coherent_matching_routing.py": "e2e86563a2c1c11e41d9398e780093865efba57d5fe926d42d5cff04405ea4bf",
+        "research/integer-mult-breakthrough/code/transfers/conditioned_frame_review.py": "f663a51af46de2a8da18f8e2a7eeceb0cabc23aeb1569e61aeb198590aadf018",
+        "research/integer-mult-breakthrough/configs/transfers/coherent-matching-routing.json": "d1f73727d27c902cd72c445a8cc10b6aea23f12b62f1572d1c687a0ef3d1b25f"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "walsh-cyclic-embedding-controls",
+      "scope": "Exact affine cycle enumeration and cyclic small exception; one full cyclic/negacyclic monomial representation obstruction only",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/walsh_cyclic_embedding.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/walsh_cyclic_embedding.py": "d9d35fe680a3dcb014f9a20f3aaee59493c8786c1f1f8a5d980c1fc81b5a5655"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    },
+    {
+      "id": "frozen-control-reversal-controls",
+      "scope": "Literal frozen masks,24rotations/current-record repairs, complete dirty payload and nonlinear-exchange negative; native bill conditional",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/general_control_bit_reversal.py",
+        "--workers",
+        "1"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/general_control_bit_reversal.py": "250750e128f26661840613858ca7d31ef365e4c571a39e50b5845082353458c2",
+        "research/integer-mult-breakthrough/code/transfers/native_gl_review.py": "1ae606d030f1f71ebe2d2497399601f1cdc6e59aa4e3209527533ecf57432d19"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.815
+    },
+    {
+      "id": "double-guard-layout-controls",
+      "scope": "Exact same-volume two-guard whole-range compaction and rational child majorant; full active Gaussian child remains an assumption",
+      "command": [
+        "{python}",
+        "research/integer-mult-breakthrough/code/obstructions/double_guard_reversal_layout.py",
+        "--workers",
+        "1",
+        "--bounded"
+      ],
+      "inputs_sha256": {
+        "research/integer-mult-breakthrough/code/obstructions/double_guard_reversal_layout.py": "529d8a87eb122461e4adf443259e567b86de3a68f6db4bac7828972ecff06b29"
+      },
+      "status": "pass",
+      "exit_code": 0,
+      "seconds": 0.114
+    }
+  ],
+  "scope": "Registered checks only. Not formal verification, external peer review, or validation of unregistered research."
+}

@@ -1,0 +1,76 @@
+{
+  "run_id": "20261009T042404Z-complex-nonlinear-matching-ci",
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "frames",
+      "command": [
+        "python3",
+        "research/integer-mult-breakthrough/code/complex/nonlinear_matching_frames.py",
+        "--workers",
+        "1",
+        "--bounded",
+        "--output",
+        "research/integer-mult-breakthrough/work/complex/20261009T042404Z-complex-nonlinear-matching-ci/results/frames.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS EXACT FINITE SCREEN\", \"candidates\": 12, \"minima\": {\"matching\": 9, \"left\": 10, \"right\": 10, \"conjugate\": 10}, \"nonclifford\": 11, \"fields\": 5760, \"seconds\": 0.2733888529983233}",
+      "stderr": ""
+    },
+    {
+      "check": "graph",
+      "command": [
+        "python3",
+        "research/integer-mult-breakthrough/code/complex/nonlinear_canonical_matching_graph.py",
+        "--output",
+        "research/integer-mult-breakthrough/work/complex/20261009T042404Z-complex-nonlinear-matching-ci/results/graph.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS EXACT CANONICAL MATCHING DISCRIMINATOR\", \"candidates\": 105, \"parity_flipping_matchings\": 24, \"admitted\": 4, \"admitted_nonclifford\": 0, \"complete_endpoint_fields\": 576, \"seconds\": 0.04500239899789449}",
+      "stderr": ""
+    },
+    {
+      "check": "branch",
+      "command": [
+        "python3",
+        "research/integer-mult-breakthrough/code/complex/column_branching_port_bound.py",
+        "--bounded",
+        "--output",
+        "research/integer-mult-breakthrough/work/complex/20261009T042404Z-complex-nonlinear-matching-ci/results/branch.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS EXACT LOCAL COLUMN-BRANCHING BOUND\", \"necessary_total_width\": 5, \"attaining_edge_widths\": [1, 1, 1, 2], \"seeded_support_controls\": 64, \"seconds\": 0.007504652996431105}",
+      "stderr": ""
+    },
+    {
+      "check": "support",
+      "command": [
+        "python3",
+        "research/integer-mult-breakthrough/code/complex/canonical_matching_support_obstruction.py",
+        "--workers",
+        "1",
+        "--bounded",
+        "--output",
+        "research/integer-mult-breakthrough/work/complex/20261009T042404Z-complex-nonlinear-matching-ci/results/support.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS EXACT CANONICAL MATCHING SUPPORT OBSTRUCTION\", \"cases\": 1, \"seconds\": 0.005391867998696398}",
+      "stderr": ""
+    }
+  ],
+  "recoveries": [
+    {
+      "source": "nonlinear_matching_frames.py",
+      "recovered_sha256": "4a8b2f18402ba4cc78edb96b669a38f29d53aa23a8464ea8eb653737fea1ca7c",
+      "expected_sha256": "4a8b2f18402ba4cc78edb96b669a38f29d53aa23a8464ea8eb653737fea1ca7c",
+      "success": true
+    },
+    {
+      "source": "nonlinear_canonical_matching_graph.py",
+      "recovered_sha256": "cb31c65b74c058caa7a9cf6406f59a59a2194e0e19ac1124bea8267efe6f955e",
+      "expected_sha256": "cb31c65b74c058caa7a9cf6406f59a59a2194e0e19ac1124bea8267efe6f955e",
+      "success": true
+    }
+  ],
+  "closure_unchanged": true
+}

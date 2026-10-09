@@ -406,3 +406,35 @@ also rejects one fresh helper per basis gate under the declared two-axis
 profile. The next discriminators are whole shared lifecycles, a different
 canonical data boundary, native full-payload affine/quadratic routing, and
 alternative master recurrences. No larger campaign kappa is accepted.
+
+## Twelfth checkpoint: changed order and product interfaces
+
+The [selected reversal word](obstructions/frozen-control-selected-bit-reversal.md)
+permits a growing-dimensional bit reversal using three linear-involution
+shears on existing whole address subslots, with a restored borrowed slot.
+Frozen polynomial-time controls give a conditional native metadata bill.
+The two-guard layout uses the same address volume and charges elementary
+guard transforms; it does not certify one complete active Gaussian child.
+The leverage hypothesis is to enable a different scan order or a recursive
+product interface without first paying a full independent payload permutation.
+The next discriminator is an actual pre/post circuit whose full channel
+capacity and inverse route are both cheap. Guard-dependent control changes
+need a separate commuting proof.
+
+The [matching interface boundary](complex/nonlinear-matching-canonical-boundary.md)
+and [coherent route boundary](transfers/coherent-matching-routing-boundary.md)
+exclude their single-child or fully aligned constructions. The
+[weighted-scan classification](synthesis/weighted-scan-intertwiner-structure.md)
+limits the complete additive one-order family. The
+[cyclic boundary](obstructions/walsh-single-cyclic-convolution-boundary.md)
+excludes one full monomial cyclic/negacyclic representation for f >= 3.
+These negatives do not exclude helper cancellation, changed order,
+nonmonomial encoders, multiple products or different primitives.
+
+Independent subset-zeta transforms are a new primitive hypothesis: the exact
+factorization of C through zeta, a diagonal weight and transposed zeta could
+transfer an independently established saving. Deriving zeta from C would be
+circular, and additive scan probes do not supply that primitive. Changed
+bilinear product encodings and coupled recurrences are investigated in
+separate runs; their complete coefficient widths, carry/precision and decoder
+bills must be retained before any exponent transfer is accepted.

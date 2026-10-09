@@ -484,3 +484,41 @@ for bounded CI. Layout claims use existing complete address chunks and paid
 elementary selected-bit kernels. Borrowed-bit permutations have additional
 address-shape requirements. The record-volume obstruction applies only to the
 unchanged independent-coefficient representation.
+
+## Matching, weighted scans and selected reversal
+
+The twelfth checkpoint registers these ten reproducible bounded checks:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/nonlinear_matching_frames.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/nonlinear_canonical_matching_graph.py
+python3 -B research/integer-mult-breakthrough/code/complex/column_branching_port_bound.py --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/canonical_matching_support_obstruction.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_weighted_scan_components.py --case solver
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_weighted_scan_components.py --case structure
+python3 -B research/integer-mult-breakthrough/code/transfers/coherent_matching_routing.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/obstructions/walsh_cyclic_embedding.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/general_control_bit_reversal.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/obstructions/double_guard_reversal_layout.py --workers 1 --bounded
+```
+
+Expected outcomes are exact component passes, with the scope printed by each
+runner. The complete matching screen retains 510 candidate frames; full
+weighted-scan experiments use the larger dimensions and commands in their
+run protocols. The full cyclic experiment enumerates 323,930 affine maps;
+the full two-guard experiment checks 4,160 layouts. These remain distinct
+from the bounded CI cases. Use a fresh output path for every regeneration.
+
+The two [matching recovery patches](configs/complex/nonlinear-matching-recovery.json)
+and [graph annotation recovery](configs/complex/canonical-matching-recovery.json)
+apply forward from the retained current sources in disposable copies.
+`git apply --unidiff-zero` must recover the hashes in the
+[twelfth recovery receipt](runs/20261009T045847Z-checkpoint-twelve-validation/results/historical-source-recovery.json).
+Never mutate live sources to reconstruct historical attempts.
+
+The cyclic boundary's university-hosted author manuscript is pinned by URL,
+size and SHA-256 in the input manifest. Its PDF remains an external,
+downloadable reference, and no bounded check depends on a downloaded paper.
+The new input-control bill and same-volume layout are conditional on the
+inherited stream-routing contracts and the explicitly unsupplied active
+Gaussian child. These commands do not implement a complete native multiplier.

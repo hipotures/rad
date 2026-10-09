@@ -1,0 +1,16 @@
+{
+  "status": "EXACT BOUNDED ADDITIVE SCAN STRUCTURE CONTROLS",
+  "effective_source_closure": {
+    "code/synthesis/weighted_scan_structure.py": "d5257962c4812e7a8310c70a61098350b5974a355bd2ced54b3601b824ceafa0"
+  },
+  "command_from_topic_root": "python3 -B code/synthesis/weighted_scan_structure.py --workers 2 --columns 4 5 --output work/ci/<fresh>-weighted-scan-structure/results",
+  "probe_api": "weighted_scan_structure.component(f)",
+  "expected_columns": [
+    4,
+    5
+  ],
+  "expected_status": "PASS EXACT WEIGHTED SCAN STRUCTURE CONTROLS",
+  "expected_scalar_rank_upper": 3,
+  "expected_six_bank_input_column_rank_upper": 10,
+  "scope": "Literal bounded recurrence and all local-column controls; accompanying all-size proof is mathematical, not formal. Additive weighted scan sums only; products/global permutations and native implementation outside."
+}
