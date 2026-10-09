@@ -1,0 +1,544 @@
+{
+  "argument_provenance": "Commands below reproduce retained inputs/configuration. -B/PYTHONDONTWRITEBYTECODE are added recovery hygiene. Requested caps for interrupted-era runs were not fully retained; converged runs need at least five passes and stop automatically at a no-move pass.",
+  "max_concurrent_workers": 4,
+  "output_policy": "All attempts have distinct immutable directories; do not rerun into existing output names.",
+  "runs": [
+    {
+      "exact_output_frames_sha256": "e277807ba3cd1fa06e6949dff662e14feaf7975ea57cf6db734bbb1c4b506e92",
+      "executed_passes": 3,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": null,
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_search.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-components",
+        "--variant",
+        "components",
+        "--seed",
+        "20261009",
+        "--passes",
+        "3"
+      ],
+      "requested_max_passes": "Not separately retained for original physical_search calls; the reproduction cap is sufficient.",
+      "run_id": "live161-components"
+    },
+    {
+      "exact_output_frames_sha256": "f02a59311c667316b1f2e21916cebf71c58f79fbfbd3a126a24743d1d7ff016a",
+      "executed_passes": 5,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": null,
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_search.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-components-converged",
+        "--variant",
+        "components",
+        "--seed",
+        "20261009",
+        "--passes",
+        "6"
+      ],
+      "requested_max_passes": "Not separately retained for original physical_search calls; the reproduction cap is sufficient.",
+      "run_id": "live161-components-converged"
+    },
+    {
+      "exact_output_frames_sha256": "151035274e1a4253e929975aa0e1842ba5db3f9cef1eca4320da6d992552b5ef",
+      "executed_passes": 5,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": {
+        "physical_exchanges.py": "99fa402405383230bcf84fb4f9f54e32e83b20c7c1963f3f44d899c9c4dc890c",
+        "physical_search.py": "edff851fdb57ec33ab9e297c524af0fd47ad57dc0e4f019ba937261d76be8f68"
+      },
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_exchanges.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-components-largest",
+        "--policy",
+        "components",
+        "--order",
+        "largest-first",
+        "--seed",
+        "20261009",
+        "--passes",
+        "6",
+        "--max-nodes",
+        "256"
+      ],
+      "requested_max_passes": 6,
+      "run_id": "live161-components-largest"
+    },
+    {
+      "exact_output_frames_sha256": "7445dffa7efc098e5df4105e973df61fbb35e5c67a6cb5030078e6cfa7beaf39",
+      "executed_passes": 6,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": {
+        "physical_exchanges.py": "99fa402405383230bcf84fb4f9f54e32e83b20c7c1963f3f44d899c9c4dc890c",
+        "physical_search.py": "edff851fdb57ec33ab9e297c524af0fd47ad57dc0e4f019ba937261d76be8f68"
+      },
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_exchanges.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-components-random",
+        "--policy",
+        "components",
+        "--order",
+        "random",
+        "--seed",
+        "20261010",
+        "--passes",
+        "6",
+        "--max-nodes",
+        "256"
+      ],
+      "requested_max_passes": 6,
+      "run_id": "live161-components-random"
+    },
+    {
+      "exact_output_frames_sha256": "a8b8c2f29326e57962a4d93cf66361eb194a0c0e66f98f1435baff79c975c124",
+      "executed_passes": 6,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": {
+        "physical_exchanges.py": "99fa402405383230bcf84fb4f9f54e32e83b20c7c1963f3f44d899c9c4dc890c",
+        "physical_search.py": "edff851fdb57ec33ab9e297c524af0fd47ad57dc0e4f019ba937261d76be8f68"
+      },
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_exchanges.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-components-reverse",
+        "--policy",
+        "components",
+        "--order",
+        "reverse",
+        "--seed",
+        "20261009",
+        "--passes",
+        "6",
+        "--max-nodes",
+        "256"
+      ],
+      "requested_max_passes": 6,
+      "run_id": "live161-components-reverse"
+    },
+    {
+      "exact_output_frames_sha256": "854411775c9c52046ef3596f63e3dc22c5c5749c40277426f11f6b1d0de5190d",
+      "executed_passes": 0,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": null,
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_search.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-control",
+        "--variant",
+        "control",
+        "--seed",
+        "20261009",
+        "--passes",
+        "3"
+      ],
+      "requested_max_passes": "Not separately retained for original physical_search calls; the reproduction cap is sufficient.",
+      "run_id": "live161-control"
+    },
+    {
+      "exact_output_frames_sha256": "17f51a49827c497d91236a524bed86d0ec332ea45c649598a46d33e8bf9e588a",
+      "executed_passes": 2,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": {
+        "physical_exchanges.py": "99fa402405383230bcf84fb4f9f54e32e83b20c7c1963f3f44d899c9c4dc890c",
+        "physical_search.py": "edff851fdb57ec33ab9e297c524af0fd47ad57dc0e4f019ba937261d76be8f68"
+      },
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_exchanges.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-op-and-component-pairs",
+        "--policy",
+        "component-pairs",
+        "--order",
+        "alternating",
+        "--seed",
+        "20261009",
+        "--passes",
+        "6",
+        "--max-nodes",
+        "256",
+        "--start-frames",
+        "work/placement/live161-unequal-op-pairs/frames.json"
+      ],
+      "requested_max_passes": 6,
+      "run_id": "live161-op-and-component-pairs"
+    },
+    {
+      "exact_output_frames_sha256": "2a1ca3c957b0efc89e6a174b8ac8be55047a051017620955fd081c5f0e6abcc7",
+      "executed_passes": 3,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": null,
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_search.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-pairs",
+        "--variant",
+        "pairs",
+        "--seed",
+        "20261009",
+        "--passes",
+        "3"
+      ],
+      "requested_max_passes": "Not separately retained for original physical_search calls; the reproduction cap is sufficient.",
+      "run_id": "live161-pairs"
+    },
+    {
+      "exact_output_frames_sha256": "85f614653281f128a38531f711e0ac2523afe3efaaa16d56ed7d9cc80348f2e7",
+      "executed_passes": 3,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": null,
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_search.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-singletons",
+        "--variant",
+        "singletons",
+        "--seed",
+        "20261009",
+        "--passes",
+        "3"
+      ],
+      "requested_max_passes": "Not separately retained for original physical_search calls; the reproduction cap is sufficient.",
+      "run_id": "live161-singletons"
+    },
+    {
+      "exact_output_frames_sha256": "34423c200101ffe7415aff822dc60a27067f4f8bc87a446e40417805c6d3b4d3",
+      "executed_passes": 2,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": {
+        "physical_exchanges.py": "99fa402405383230bcf84fb4f9f54e32e83b20c7c1963f3f44d899c9c4dc890c",
+        "physical_search.py": "edff851fdb57ec33ab9e297c524af0fd47ad57dc0e4f019ba937261d76be8f68"
+      },
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_exchanges.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-unequal-component-pairs",
+        "--policy",
+        "component-pairs",
+        "--order",
+        "alternating",
+        "--seed",
+        "20261009",
+        "--passes",
+        "6",
+        "--max-nodes",
+        "256",
+        "--start-frames",
+        "work/placement/live161-components-converged/frames.json"
+      ],
+      "requested_max_passes": 6,
+      "run_id": "live161-unequal-component-pairs"
+    },
+    {
+      "exact_output_frames_sha256": "3eb465be5a8ee7cad5e1b0d5e2ca96967bf64a8da385aab157828e1df0966b2a",
+      "executed_passes": 3,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": {
+        "physical_exchanges.py": "99fa402405383230bcf84fb4f9f54e32e83b20c7c1963f3f44d899c9c4dc890c",
+        "physical_search.py": "edff851fdb57ec33ab9e297c524af0fd47ad57dc0e4f019ba937261d76be8f68"
+      },
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_exchanges.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-unequal-op-pairs",
+        "--policy",
+        "op-pairs",
+        "--order",
+        "alternating",
+        "--seed",
+        "20261009",
+        "--passes",
+        "6",
+        "--max-nodes",
+        "256",
+        "--start-frames",
+        "work/placement/live161-components-converged/frames.json"
+      ],
+      "requested_max_passes": 6,
+      "run_id": "live161-unequal-op-pairs"
+    },
+    {
+      "exact_output_frames_sha256": "306f19150268852876fbeb88b541fca6c5ceff1ac1be44b55b05146fa0fe69f8",
+      "executed_passes": 2,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": {
+        "physical_exchanges.py": "99fa402405383230bcf84fb4f9f54e32e83b20c7c1963f3f44d899c9c4dc890c",
+        "physical_search.py": "edff851fdb57ec33ab9e297c524af0fd47ad57dc0e4f019ba937261d76be8f68"
+      },
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_exchanges.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-unequal-op-pairs-polished",
+        "--policy",
+        "components",
+        "--order",
+        "alternating",
+        "--seed",
+        "20261009",
+        "--passes",
+        "6",
+        "--max-nodes",
+        "256",
+        "--start-frames",
+        "work/placement/live161-unequal-op-pairs/frames.json"
+      ],
+      "requested_max_passes": 6,
+      "run_id": "live161-unequal-op-pairs-polished"
+    },
+    {
+      "exact_output_frames_sha256": "3eb465be5a8ee7cad5e1b0d5e2ca96967bf64a8da385aab157828e1df0966b2a",
+      "executed_passes": 3,
+      "explicit_thread_environment": {
+        "MKL_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "recorded_search_sha256": {
+        "physical_exchanges.py": "99fa402405383230bcf84fb4f9f54e32e83b20c7c1963f3f44d899c9c4dc890c",
+        "physical_search.py": "edff851fdb57ec33ab9e297c524af0fd47ad57dc0e4f019ba937261d76be8f68"
+      },
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/physical_exchanges.py",
+        "--source",
+        "work/repos/pr161-d14e291",
+        "--export",
+        "work/baseline/pr161-complex-export",
+        "--output",
+        "work/placement/live161-unequal-op-pairs-random",
+        "--policy",
+        "op-pairs",
+        "--order",
+        "random",
+        "--seed",
+        "20261011",
+        "--passes",
+        "6",
+        "--max-nodes",
+        "256",
+        "--start-frames",
+        "work/placement/live161-components-converged/frames.json"
+      ],
+      "requested_max_passes": 6,
+      "run_id": "live161-unequal-op-pairs-random"
+    },
+    {
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/screen_placement.py",
+        "--source",
+        "work/repos/pr120-bfc5466",
+        "--word",
+        "work/placement/pr120-control-word.json",
+        "--output",
+        "work/placement/batch1-control",
+        "--variant",
+        "control"
+      ],
+      "run_id": "batch1-control",
+      "scope": "Historical PR120 control and variants; not the current publication baseline."
+    },
+    {
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/screen_placement.py",
+        "--source",
+        "work/repos/pr120-bfc5466",
+        "--word",
+        "work/placement/pr120-control-word.json",
+        "--output",
+        "work/placement/batch1-cost_density",
+        "--variant",
+        "cost_density"
+      ],
+      "run_id": "batch1-cost_density",
+      "scope": "Historical PR120 control and variants; not the current publication baseline."
+    },
+    {
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/screen_placement.py",
+        "--source",
+        "work/repos/pr120-bfc5466",
+        "--word",
+        "work/placement/pr120-control-word.json",
+        "--output",
+        "work/placement/batch1-dynamic_cost",
+        "--variant",
+        "dynamic_cost"
+      ],
+      "run_id": "batch1-dynamic_cost",
+      "scope": "Historical PR120 control and variants; not the current publication baseline."
+    },
+    {
+      "reproduction_argv": [
+        "python3",
+        "-B",
+        "agents/placement/code/screen_placement.py",
+        "--source",
+        "work/repos/pr120-bfc5466",
+        "--word",
+        "work/placement/pr120-control-word.json",
+        "--output",
+        "work/placement/batch1-static_cost",
+        "--variant",
+        "static_cost"
+      ],
+      "run_id": "batch1-static_cost",
+      "scope": "Historical PR120 control and variants; not the current publication baseline."
+    }
+  ],
+  "source_snapshot_commit": "d14e29157bc905be1ced0776dd893d0714013f3a",
+  "status": "DISCOVERY",
+  "threadpools_per_job": 1,
+  "trial_moment": "5885669/10000000000 for PR161; 109140237/10^12 for historical PR120",
+  "unchanged_components": [
+    "selected scalar DAG",
+    "gauges",
+    "slot alias pairs",
+    "compensation deadlines",
+    "binary supplier",
+    "stopping and assembly parameters during placement screening"
+  ],
+  "workers_per_job": 1
+}

@@ -96,6 +96,33 @@ class PublicationTests(unittest.TestCase):
         self.assertEqual(status, 1)
         self.assertFinding(report, "worktree changed after staging", "README.md")
 
+    def test_exact_large_integer_bounds_preserve_structural_payload_guards(self):
+        bound = "9" * 6000
+        path = self.write("research/fresh/results/exact-bound.json",
+                          '{"bound":' + bound + '}\n')
+        self.assertIsNone(ARCHIVE.reason(path))
+        rows = ','.join('"' + 'x' * 1024 + '"' for _ in range(129))
+        path = self.write("research/fresh/results/large-rows.json",
+                          '{"bound":' + bound + ',"rows":[' + rows + ']}\n')
+        self.assertEqual(ARCHIVE.reason(path), "row-level-result-dump")
+        path = self.write("research/fresh/results/request.json",
+                          '{"bound":' + bound + ',"model":"fixture","messages":[]}\n')
+        self.assertEqual(ARCHIVE.reason(path), "request-payload")
+        path = self.write("research/fresh/results/executed.ipynb",
+                          '{"cells":[{"execution_count":' + bound + ',"outputs":[]}]}\n')
+        self.assertEqual(ARCHIVE.reason(path), "notebook-execution-payload")
+
+    def test_bounded_research_fixtures_are_distinct_from_row_results(self):
+        rows = '{"frames":[' + ','.join('"' + 'x' * 1024 + '"' for _ in range(129)) + ']}\n'
+        fixture = self.write("research/fresh/fixtures/fixed-frames.json", rows)
+        self.assertIsNone(ARCHIVE.reason(fixture))
+        result = self.write("research/fresh/results/frame-rows.json", rows)
+        self.assertEqual(ARCHIVE.reason(result), "row-level-result-dump")
+        oversized = self.write("research/fresh/fixtures/oversized.json", '"' + 'x' * (1024 * 1024) + '"')
+        self.assertEqual(ARCHIVE.reason(oversized), "large-artifact")
+        request = self.write("research/fresh/fixtures/request.json", '{"model":"fixture","messages":[]}')
+        self.assertEqual(ARCHIVE.reason(request), "request-payload")
+
     def test_new_formats_do_not_change_legacy_import_selection(self):
         for name in ["reference.html", "query.sql", ".gitattributes"]:
             relative = ARCHIVE.STUDY + "/sources/" + name

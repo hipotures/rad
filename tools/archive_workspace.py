@@ -178,7 +178,10 @@ def reason(path, data=None):
             return "non-utf8-content"
     if path.suffix in {".json", ".ipynb"}:
         try:
-            parsed = json.loads(data)
+            # Policy inspects structure, not numeric magnitude. Exact research
+            # bounds may exceed Python's integer digit limit; do not evaluate
+            # these integers or disable the process-wide conversion safeguard.
+            parsed = json.loads(data, parse_int=str)
         except json.JSONDecodeError:
             return "invalid-notebook" if path.suffix == ".ipynb" else None
         if path.suffix == ".ipynb":
@@ -195,7 +198,10 @@ def reason(path, data=None):
             return isinstance(value, dict) and any(rows(v) for v in value.values())
         # Hash/provenance inventories are durable references to local payloads.
         inventory = any(word in path.name for word in ["manifest", "inventory", "index", "catalog"]) or parts[:2] == ("docs", "compact-results") or relative == Path("docs/external-workspaces.json")
-        if size > 128 * 1024 and not inventory and rows(parsed):
+        # Indispensable finite reference inputs are a distinct storage role.
+        # The ordinary per-file, credential and directory rules still apply.
+        fixture = parts[0] == "research" and "fixtures" in parts
+        if size > 128 * 1024 and not inventory and not fixture and rows(parsed):
             return "row-level-result-dump"
     return None
 

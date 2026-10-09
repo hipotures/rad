@@ -1,0 +1,185 @@
+# Conditional assembly proof source
+
+This source addendum preserves the complete finite charges and states the inherited hypotheses. Its exact LaTeX source is retained in [the native source](placement-assembly.tex) and [the source patch](placement-assembly.tex.patch); applying that patch to an upstream checkout creates `notes/moment-aware-placement-assembly.tex`. The coordinator extended the research archive policy to preserve the native `.tex` source.
+
+```tex
+% Apache-2.0. Prepared for RaD with OpenAI GPT-6.1 Sol assistance.
+% Retains icekylinx's PR161 semantic/bulk expressions and all their hypotheses.
+% Read together with the source notices and the independent finite receipts.
+\subsection{Complete-moment operation-frame placement}
+The scalar graph, signed operation list, selected entrance gauges, aliased
+role pairs and compensation deadlines are those of PR161 at
+\texttt{d14e29157bc905be1ced0776dd893d0714013f3a}. Only the common frame
+of certain actual operations changes. A connected set of equal-frame
+operations may move to either endpoint of its permitted interval:
+the lower endpoint spans its value directions and incoming frames, and
+the upper endpoint intersects its outgoing frames. The full finite check
+reconstructs every chain after these choices. It does not infer physical
+validity from the moment improvement.
+
+For the frozen component-placement witness the complete per-vertex data are
+\[
+ h=22,\quad v=1320,\quad R=16011,\quad R_{\rm physical}=13041,
+ \quad m_c=66,\quad w_c=15681,
+\]
+\[
+ s_c=1033626,\quad m_cw_c-s_c=1320,\quad r_{\max}=20.
+\]
+All 2,970 donor/recipient pairs and their late-read deadlines are retained.
+There are 12,827 operations whose final frame differs from the original
+backward-intersection frame; 6,030 differ from PR161's physical-frame
+witness. These counts describe different reference comparisons.
+Each entrance, copied centre, internal transition, source and target
+endpoint, cross-stage correction and final rank-two data child remains
+in the complete histogram. The three-stage normalization is $m_cw_c$.
+
+\subsection{Strict supplier enclosure and the available bit interface}
+The accepted complex saving is
+\[
+ b=\frac{594561016}{10^{12}}
+   =\frac{74320127}{125000000000}.
+\]
+For $H_c(s)=\sum_r n_r r/(m_cw_c)\exp(s\log(m_c/r))$, the certificate
+encloses $H_c(b)<1$ and $H_c(b+10^{-12})>1$ with rational endpoints.
+The logarithm uses forty positive atanh terms after power-of-two range
+reduction and an explicit geometric tail; the exponential uses a
+degree-nine Taylor polynomial and an explicit geometric tail. Operations
+round outwards to a $2^{-180}$ grid. This certifies a supplied full moment
+only after the fresh finite word determines its histogram.
+
+The regenerated bit producer retains
+\[
+ m_b=72,\quad w_b=26888,\quad s_b=1934000,\quad
+ a_0=\frac{5936323}{10^{10}}.
+\]
+Its characteristic includes the full $32m_b^2$-child local-ring fallback
+on a fraction $10^{-16}$ of every ideal edge. The rank moment includes
+that same allowance. The unchanged atom exponent is $\theta=10^{-3}$,
+and the retained ordinary leaf saving is $384599/10^{10}$. Thus
+\[
+ A_b=(1-\theta)a_0+\theta\frac{384599}{10^{10}}
+     =\frac{5930771276}{10^{13}}
+     =\frac{1482692819}{2500000000000}.
+\]
+The ordinary wrapper, prime exclusion, internally borrowed selector rows,
+adapters and their tolls remain charged. In particular,
+$A_b<\theta<1-A_b$.
+
+There is a factual correction to the predecessor's written assembly:
+its $A_b$ exceeded its complex saving $5885669/10^{10}$. Its driver used
+\[
+ a_{\rm predecessor}
+ =\min\{A_b,(1-10^{-9})5885669/10^{10}-10^{-10}\},
+\]
+rather than $a=A_b$. For this new placement,
+$(1-10^{-9})b-A_b>0$, so the unchanged driver's rule permits
+\[
+ a=\min\{A_b,(1-10^{-9})b-10^{-10}\}=A_b.
+\]
+This is a consequence of the changed complex moment, not an improvement
+to the binary supplier or a change in the stopping policy.
+
+\subsection{Unnormalized finite scalar and routing charge}
+Let $M=32426$ be the retained signed mixer-operation count, and let
+$q_{\rm roots}=4477$. Since the scalar graph and its signs are unchanged,
+the existing dirty-response numerator bound remains valid:
+$3q_{\rm roots}2^M<2^{M+15}$, with $M+16$ signed binary digits sufficient.
+The direct dirty readout allowance is still $8Rv(M+16)$. Moving frames
+does not remove any such readout, coefficient bit or inverse operation.
+The original-source involutions and their inverses retain charge $32v$.
+Put
+\[
+ L=4(c+v)+10v+4hv+4h^2+8h+8+2h+8Rv(M+16)+32v,
+\]
+where $c=17735$. The full ambient cover uses
+\[
+ V=2^{1089}\prod_{i=1}^{32}(2^{2i}-1),\qquad
+ W=Vw_c,\quad s=Vs_c,\quad N=Vv.
+\]
+The group factor cancels from the normalized characteristic. It is
+retained in all literal scalar, row and permutation costs:
+\[
+ K=3VL+8W+4N+8m_cRV,\qquad
+ G=64(m_c+1)^3(K+1)(W+1)^2.
+\]
+This overcharges a complete $W$-role permutation per logical group and
+its fixed binary/phase adapters, including actual rank-zero frame and
+endpoint reconciliations. Set
+\[
+ E=64(W+m_c+G+1)^3,\quad B=s+E,\quad C_0=32m_cB^2.
+\]
+The exact receipt verifies
+\[
+ 2GW^2+8s+4W+4+32m_c<E,\quad
+ 2B(m_c-r_{\max})\ge s+E,\quad 2B+18<C_0.
+\]
+Here $r_{\max}=20$; the predecessor text's occurrence of 60 was a stale
+bit-side value, although its executable complex guard used 20.
+The completed-child semantic constant remains $C_1=1$. The common
+precision grid is $2^{-P}3^{-K_{\rm grid}}$, with
+$K_{\rm grid}=G(D_c+1)$. Child returns are exact, retain the incoming
+odd exponent, and are not rounded. Only completed outer recovery permits
+unscaling, with the retained integer conversion cost.
+
+Since $66>2\cdot20$, the complex halving degree is one. The full role
+stock has 2,159 bits. Including the conservative old coarse bit reserve
+9,909 and ordinary-leaf reserve 252, the row coefficient is
+\[
+ 2159+9909+252=12320,\qquad
+ 70000-\frac{51}{25}\,12320=\frac{224336}{5}>0.
+\]
+The external row degree remains 70,000. The radix-$q$ selector stock
+is borrowed and restored internally rather than added to this external
+polynomial stock. Prefix and padding costs remain paid once.
+
+\subsection{The retained 47 strict conditions and seven savings}
+Retain $\eta=10^{-8}$ and $\beta=10^{-9}$. With $a=A_b$ and $b$ above,
+define
+\[
+ \tau=1-a,\quad\sigma=1-b,\quad q_0=a(1-2\eta),\quad
+ c_0=q_0(1+\eta),\quad
+ \epsilon=\frac{1-\eta}{1+c_0+q_0},
+\]
+\[
+ \lambda'=1-q_0,\quad\lambda=(\tau+\lambda')/2,\quad
+ g=\epsilon q_0,\quad r=(g+1-\epsilon)/2,\quad\delta=\eta/8.
+\]
+The exact certificate checks all 47 retained strict constraints, including
+$(1-\beta)b>a$, the finite scalar and row guards, and each final excess.
+The seven savings are
+\[
+ 1-\epsilon(1+c_0),\quad a,\quad g,\quad a,\quad
+ \min(1-\epsilon-\delta,r-\delta),\quad
+ 1-\epsilon-\delta,\quad\epsilon.
+\]
+Their minimum is
+\[
+ g=\frac{7413463872596078632692819}
+          {12514826927967596075667307181}
+   >\frac{296187231}{500000000000}.
+\]
+The strict excess is about $3.2906\times10^{-13}$. The reported final
+saving is deliberately below this minimum, not equal to a rounded root.
+
+\begin{proposition}[Conditional assembly of the selected placement]
+If the selected physical word satisfies the exact signed forward and
+complemented reflected contracts, and the inherited arbitrary-subspace
+Clifford, completed-core sharing, uniform stopped-recursion,
+semantic-precision, analytic resampling, exact-recovery and fixed-tape
+interfaces hold with their retained paid costs, then
+\[
+ T(n)=O\!\left(n(\log n)^{1-\kappa}\right),\qquad
+ \kappa=\frac{296187231}{500000000000}=0.000592374462.
+\]
+\end{proposition}
+\begin{proof}
+The fresh finite reconstruction determines the complete child profile.
+The rational supplier bounds, full fallback/rank allowance, exact finite
+scalar/router guard and row reserve satisfy the unchanged assembly
+interfaces. Substitution gives the seven savings displayed above.
+Their strict excess over $\kappa$ absorbs the retained fixed logarithmic
+overheads. This argument neither removes the inherited all-size
+hypotheses nor substitutes a forward-only finite replay for the required
+complemented reflected contract.
+\end{proof}
+```

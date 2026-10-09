@@ -1,0 +1,57 @@
+{
+  "context_prepare_argv": [
+    "python3",
+    "-B",
+    "agents/placement/code/prepare_context.py",
+    "--source",
+    "work/frontier/pr165-7518fed/extracted/chafreaky-integer-mult-bounds-7518fed",
+    "--input",
+    "work/signed/pr165-control-20261009T0827Z",
+    "--output",
+    "work/placement/pr165-context-7518fed",
+    "--source-commit",
+    "7518fed2688baf25c7c32bae32674f3334b517da"
+  ],
+  "environment": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "fixture_bytes": 466363,
+  "fixture_sha256": "bdc55fb425a1c1d771878c0b1070baf7d84a88255f15dea18212cfc978be7718",
+  "max_processes": 1,
+  "raw_frames_sha256": "4b1128969203d0ba6e44379cc5f59169a44104ac792823f78105a1e51341220d",
+  "search_argv": [
+    "python3",
+    "-B",
+    "agents/placement/code/physical_exchanges.py",
+    "--source",
+    "work/placement/pr165-context-7518fed/source",
+    "--export",
+    "work/placement/pr165-context-7518fed/export",
+    "--policy",
+    "components",
+    "--passes",
+    "3",
+    "--trial",
+    "0.000595515952485",
+    "--output",
+    "work/placement/pr165-components-7518fed"
+  ],
+  "search_sha256": {
+    "physical_exchanges.py": "99fa402405383230bcf84fb4f9f54e32e83b20c7c1963f3f44d899c9c4dc890c",
+    "physical_search.py": "edff851fdb57ec33ab9e297c524af0fd47ad57dc0e4f019ba937261d76be8f68"
+  },
+  "source_head": "7518fed2688baf25c7c32bae32674f3334b517da",
+  "source_sha256": {
+    "certificates/paired-cube-complex-input.json": "41ac30d9fe49726b7014e65ce89c2feb4d591997461ff7e1b34df85c4489c903",
+    "certificates/paired-cube-physical-input.json": "d3664b57b2af442b33592b2262bcbdd2011a3a275cf61c217c1d28aaa6d5da37",
+    "references/paired-cube/physical/frames.json": "cdb0ad45d8308797bd7dc120e99777a693a50081ede4b4dc2f7c1a03d90bb58f",
+    "references/paired-cube/physical/pairs.json": "cbf69c61962cdbbe8f492a5bc7fcfd028f2263d9065a77986f6a95d0e1ce1ca4",
+    "scripts/paired_cube/frames.py": "7d897418dbfee47de0723ea4983098a982610ccba45e1bac9000a79626d8421c",
+    "scripts/paired_cube_physical.py": "9c9ea1ea29e551ab6116d7c8ca09f4703ff9e2fa102032d5055327fde07ba319"
+  },
+  "status": "DISCOVERY",
+  "threadpools": 1
+}

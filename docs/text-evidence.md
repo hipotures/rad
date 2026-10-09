@@ -32,6 +32,16 @@ source trees, environments, weights, binaries and caches remain excluded.
 Historical process metadata may be preserved as evidence; an archived PID
 record is never authority to stop or control a live process.
 
+Small indispensable JSON fixtures under a research `fixtures/` directory may
+remain readable, including fixed construction frame plans. They retain the
+ordinary 1 MiB file limit, credential and request-payload checks, execution
+directory exclusions and aggregate budget. The same large array under a
+results directory remains row-level evidence and uses the complete gzip path.
+This distinction does not permit downloaded datasets or execution payloads to
+be relabeled as fixtures. JSON structural validation accepts exact integers
+with thousands of digits without converting them to Python integers; request,
+row-array and notebook-execution checks still apply.
+
 The ordinary staged-content budget remains 20 MiB, counting whole changed
 blobs. A larger import requires a durable, indexed, scoped decision. The full
 2026-10-07 backfill has an explicit [one-time 512 MiB aggregate decision](text-evidence-backfill-policy.json),

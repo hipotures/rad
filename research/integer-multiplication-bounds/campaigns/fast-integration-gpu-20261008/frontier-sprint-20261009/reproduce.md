@@ -28,7 +28,7 @@ python3 research/paired-cube-bit/paired_cube_bit_word.py --p 12 --check
 python3 research/paired-cube-bit/check_paired_cube_bit.py --dir research/paired-cube-bit/out --p 12
 ```
 
-The baseline lane also supplies independent exact integer dirty-state response and interval/assembly code; its final report will record portable invocations and the frozen input hashes. Focused checks do not establish the inherited all-size Clifford, uniform recurrence, recovery or fixed-tape assumptions. Broad `make verify` is reserved for a frozen publication candidate under the upstream contribution policy.
+The baseline lane also supplies independent exact integer dirty-state response and interval/assembly code. The first conditionally accepted combined candidate has tested recovery recipes in the [baseline](agents/baseline/review-binary-component-pairs.md), [geometry](agents/geometry/README.md), [assembly](agents/assembly/reproduce.md), and [transfer](agents/transfer/reproduce.md) lanes. Its frozen science and checker hashes are bound in [accepted-first-candidate.json](reports/accepted-first-candidate.json). It is below the user's publication threshold. Focused checks do not establish the inherited all-size Clifford, uniform recurrence, recovery or fixed-tape assumptions. Broad `make verify` is reserved for a frozen publication candidate under the upstream contribution policy.
 
 ## Current comparison
 
@@ -36,4 +36,4 @@ The baseline lane also supplies independent exact integer dirty-state response a
 python3 code/refresh_frontier.py
 ```
 
-This collects all pages and current source heads through `gh`. It deliberately leaves mathematical comparison unresolved until certificate and assumption assessment is completed. A successful API response alone is not a publication gate.
+This collects all pages and current source heads through `gh`. It deliberately leaves mathematical comparison unresolved until certificate and assumption assessment is completed. A successful API response alone is not a publication gate. The [frontier lane](agents/frontier/README.md) records pinned certificates and full draft-inclusive comparisons. Freezing and both live publication guards require the accepted final score to be at least `101/100` times the current comparable maximum, including retained main.

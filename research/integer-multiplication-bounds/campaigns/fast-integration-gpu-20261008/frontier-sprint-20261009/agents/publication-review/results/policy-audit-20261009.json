@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "observed_utc": "2026-10-09T08:43:03.843828+00:00",
+  "scope": "Independent policy update and safety regression audit; synthetic fixtures only; no candidate approval",
+  "minimum_relative_improvement": "1/100",
+  "acceptance_rule": "candidate >= (101/100) * max(active comparable exact claims or reviewed conservative bounds including drafts, retained main)",
+  "source_hashes_before": {
+    "agents/publication/code/build_publication.py": "695c17525668eb7b4546196eae38ec8c52591bd8be6d445864ef8e6432b0a159",
+    "agents/publication/code/publication_runtime.py": "bf8601a55b4f9e71cf9b03d7d633d0e98b5cca62a8331fc970a0715ffd7720e6",
+    "agents/publication/code/test_publication.py": "5434f5d5c2873db2919a6c5f91dacec2e5ec5444e904b2552c34146c116fcd82",
+    "agents/publication-review/code/test_independent_publication.py": "23695ecb5b83488dd9dcb5896cc9d2fd5a911f9f2ebd7d5c8d9a091fd1e6f918",
+    "agents/publication-review/code/test_publication_policy.py": "7589b7fa820af1299e009c5d29ecb0e0a9776d59d22682accd1c7ca3d2845bff"
+  },
+  "source_hashes_after": {
+    "agents/publication/code/build_publication.py": "695c17525668eb7b4546196eae38ec8c52591bd8be6d445864ef8e6432b0a159",
+    "agents/publication/code/publication_runtime.py": "bf8601a55b4f9e71cf9b03d7d633d0e98b5cca62a8331fc970a0715ffd7720e6",
+    "agents/publication/code/test_publication.py": "5434f5d5c2873db2919a6c5f91dacec2e5ec5444e904b2552c34146c116fcd82",
+    "agents/publication-review/code/test_independent_publication.py": "23695ecb5b83488dd9dcb5896cc9d2fd5a911f9f2ebd7d5c8d9a091fd1e6f918",
+    "agents/publication-review/code/test_publication_policy.py": "7589b7fa820af1299e009c5d29ecb0e0a9776d59d22682accd1c7ca3d2845bff"
+  },
+  "sources_unchanged_during_checks": true,
+  "tests": [
+    {
+      "suite": "authored",
+      "count": 44,
+      "exit_code": 0,
+      "log": "work/publication-review/policy-20261009/authored.log",
+      "log_sha256": "0ef656c1b61ffdb886448fd110a844a3c72b48006ff9426c9d6366c27695e261"
+    },
+    {
+      "suite": "independent-safety",
+      "count": 14,
+      "exit_code": 0,
+      "log": "work/publication-review/policy-20261009/independent-safety.log",
+      "log_sha256": "58e73e10e1ed0313deb6c78924c72bf35e8265c6003c100c3eee78ff0b8e10bd"
+    },
+    {
+      "suite": "independent-policy",
+      "count": 7,
+      "exit_code": 0,
+      "log": "work/publication-review/policy-20261009/independent-policy.log",
+      "log_sha256": "c23812ad4475433e30c048af5e96e2bde0c75e7ea11d6baee4cdc6871a5d6681"
+    }
+  ],
+  "boundary_delta": "1/1000000000000000000000000000000",
+  "boundary_sources": [
+    "active exact",
+    "rounded conservative upper bound",
+    "retained main"
+  ],
+  "boundary_layers": [
+    "builder",
+    "initial production execution frontier",
+    "isolated final submit frontier"
+  ],
+  "real_git_writes": false,
+  "real_github_requests": false,
+  "real_github_writes": false,
+  "publishing_cli_executed": false,
+  "candidate_release_reviewed": false
+}
