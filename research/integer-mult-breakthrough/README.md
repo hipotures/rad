@@ -72,9 +72,35 @@ and [ballot role budgets](reports/complex/ballot-center-review-and-role-budget.m
 locate costs that consume proposed gains. Their exclusions apply only to
 the stated constructions and ledgers. A full shared chronology, native
 payload routing and complete multiplication transfer remain active work.
-The registry currently contains 93 bounded checks; all passed locally and validation is recorded
-in the corresponding checkpoint receipt. No large graph is allocated merely
+The registry currently contains 101 bounded checks; checkpoint receipts record
+their actual validation results. No large graph is allocated merely
 to evaluate an optimistic cost profile.
+
+[Tenth checkpoint local validation](runs/20261009T033628Z-checkpoint-ten-validation/report.md)
+records 101 passing checks and two exact historical source recoveries.
+
+The tenth checkpoint adds a [paid native GL route](reports/complex/native-gl-routing-contract.md)
+and its [independent review](reports/transfers/native-gl-independent-review.md).
+Under the pinned original complete-stream routing contracts, fixed-dimensional
+affine/quadratic wrappers have the required sublinear-in-address-width local
+bill. [Complete wrapper and endpoint oracles](reports/complex/native-frame-wrapper-plan.md)
+retain tensor phases and both inverse stages. Their Python array timing is
+verification work, not evidence of native tape runtime.
+
+A [genuinely joint mutable-source birth word](reports/synthesis/joint-mutable-birth-algebraic-cleanup.md)
+keeps two arbitrary dirty carriers through three correlated lives and restores
+them from paid final-data preimages. Its core has stock 6 and rank 22 against
+24 nominal full directions. The complete canonical boundary costs two more
+line children, giving rank 24. An [independent literal review](reports/transfers/joint-mutable-birth-independent-review.md)
+confirms both maps and the current-data birth cuts. Retaining the partial
+outputs also fails the stated [uniform mixed-output moment](reports/obstructions/partial-output-normalization-boundary.md).
+
+[Address-dependent boundary discriminators](reports/synthesis/address-dependent-boundary-obstructions.md)
+separate post-only support, one pointwise sandwich and unitary-layer models.
+They do not exclude arbitrary nonunit two-sided circuits. Those circuits,
+general actual Clifford frames and nonlinear reversible address routing remain
+active structural directions. No complete new multiplication exponent follows
+from these finite certificates or conditional compiler results.
 
 ## Evidence and current directions
 

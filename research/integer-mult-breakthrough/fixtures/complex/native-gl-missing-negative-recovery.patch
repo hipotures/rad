@@ -1,0 +1,14 @@
+--- a/research/integer-mult-breakthrough/code/complex/native_gl_routes.py
++++ b/research/integer-mult-breakthrough/code/complex/native_gl_routes.py
+@@ -331,9 +331,8 @@
+     started = time.monotonic()
+     samples = 256 if args.bounded else 2048
+-    controlled = [(6, 1, 5, 202610090301, samples), (6, 2, 5, 202610090302, samples),
+-                  (6, 3, 0, 202610090303, samples)]
++    controlled = [(6, 1, 5, 202610090301, samples), (6, 2, 5, 202610090302, samples)]
+     streams = [(3, 1, 2, 0, (3, 6, 4), 2, 2)]
+     if not args.bounded:
+-        controlled += [(8, 3, 0, 202610090304, samples),
++        controlled += [(6, 3, 0, 202610090303, samples), (8, 3, 0, 202610090304, samples),
+                        (2, 3, 0, 202610090305, samples)]
+         streams += [(3, 2, 2, 1, (3, 6, 4), 2, 2),

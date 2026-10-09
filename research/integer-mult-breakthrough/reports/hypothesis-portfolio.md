@@ -6,6 +6,31 @@ subagents give four scientifically distinct tracks within the session's four
 agent slots. No old campaign queue, deadline, source whitelist, or CPU target
 is active.
 
+## Tenth checkpoint and live structural tests
+
+- A fixed-dimensional native GL wrapper bill now follows conditionally from
+  the original packed-variable-control and complete-stream contracts. Exact
+  payload and endpoint oracles plus an independent review are retained. This
+  resolves a specific routing obligation; it does not certify a whole motif.
+- A joint three-life mutable-source birth core restores its arbitrary dirty
+  carriers at rank 22 with six banks. Its canonical endpoint has rank 24;
+  retaining its two partial outputs does not contract the stated uniform
+  mixed-output power moment. New circuits must save beyond these charged
+  boundaries rather than reuse their unprovided full-output capacity.
+- General actual Clifford frames are being compiled with physical phase and
+  original-port binding. The first next discriminator is a shared complete
+  dirty chronology that retains a nongraph local saving.
+- Nonlinear reversible address controls are being tested with complete guard
+  chunks, payload repair and decreasing active child size. Existing address
+  spectators and extra scalar roles have separate cost obligations.
+- Nonunit address-dependent two-sided adapters remain open. Post-only support
+  and pointwise/unitary restrictions apply only to their named models. A
+  compact inverse or a large Pauli expansion alone does not supply a complete
+  native boundary repair.
+
+Detailed evidence is indexed in the README and separate run receipts. No
+complete campaign kappa >= 1e-4 certificate has been established.
+
 ## Initial mathematical assessment
 
 The inherited balanced assembly assumes `a < (1-beta)b` and

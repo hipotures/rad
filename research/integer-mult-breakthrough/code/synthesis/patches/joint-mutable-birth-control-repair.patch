@@ -1,0 +1,41 @@
+--- a/code/synthesis/joint_mutable_birth_swap.py
++++ b/code/synthesis/joint_mutable_birth_swap.py
+@@ -83,8 +83,6 @@
+         if list(response['current_data_preimage'])!=expected:
+             raise ValueError('Backward CUT/current-data preimage does not match the literal life compensation')
+     inverse=scalar_inverse(S)
+-    expected_rows=[[-Q(inverse[i][k]) if role==2+k else Q(0) for role in range(4)]
+-                   for i in range(2) for k in ()]
+     # Complete clean four-data matrix, derived independently from the births.
+     wanted=[[Q(0)]*4 for _ in range(4)]
+     for row in range(2):
+@@ -201,9 +199,16 @@
+             actual,receipt=execute(spec,initial,columns,canonical);wanted=expected(spec,initial,columns,canonical)
+             if actual!=wanted:raise ValueError('Joint mutable-source algebraic dirty cleanup failed a Gaussian field')
+             digest.update(str(actual).encode())
+-    controls={name:execute(spec,initial,columns,True,name)[0]!=wanted for name in
+-              ('omit future CUT','omit correlated second birth','wrong mutable-source cleanup',
+-               'omit one helper reflected phase','omit source-line raw repair')}
++    controls={};control_scope={}
++    for name in ('omit future CUT','omit correlated second birth','wrong mutable-source cleanup',
++                 'omit one helper reflected phase','omit source-line raw repair'):
++        try:
++            controls[name]=execute(spec,initial,columns,True,name)[0]!=wanted
++            control_scope[name]='Complete actual source/sink/dirty operator disagrees'
++        except ValueError as error:
++            if name!='omit future CUT' or str(error)!='Non-dyadic scalar coefficient':raise
++            controls[name]=True
++            control_scope[name]='Forbidden odd-denominator current-data preimage rejected; not an executed Gaussian-dyadic corruption circuit'
+     if not all(controls.values()) or not dependent:raise ValueError('A joint source/birth/cleanup/gauge control did not discriminate')
+     return dict(status='PASS JOINT MUTABLE BIRTH SWAP; RAW BOUNDARY ERASES CORE DEFICIT',S=S,columns=columns,
+                 ambient_bits=4,payload_stock=6,core_child_histogram=spec['core_histogram'],core_rank=22,core_capacity=24,core_deficit=2,
+@@ -224,7 +229,8 @@
+                 canonical_total_scalar_bank_gates=receipt['scalar_bank_gates'],
+                 paid_reflection_monomial_bank_events=receipt['paid_reflection_monomial_bank_events'],
+                 native_final_sign_bank_events=2,native_final_full_bank_exchanges=2,
+-                negative_controls=controls,output_sha256=digest.hexdigest(),seconds=time.monotonic()-start,
++                negative_controls=controls,negative_control_scope=control_scope,
++                output_sha256=digest.hexdigest(),seconds=time.monotonic()-start,
+                 scope='Complete finite genuinely joint mutable-source dirty-helper chronology. Core has rank-two deficit; canonical source-line repairs consume it. No native tape/precision theorem, contracting recurrence or multiplier exponent follows.')
+ 
+ 

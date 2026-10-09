@@ -1,0 +1,145 @@
+{
+  "status": "PASS",
+  "started_utc": "2026-10-09T03:10:18.989436+00:00",
+  "completed_utc": "2026-10-09T03:10:18.997682+00:00",
+  "source_sha256": "3b2fa9fb3e992104ffdde75f5bbd407782691792c9189cf875324a509b1b069d",
+  "routing_source_sha256": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54",
+  "fixture_sha256": {
+    "scalable-subspace-normal-forms.json": "77fb258dcf779ae58e07a3839564114dd846694d0f49353dc3ec4439bc27cd42",
+    "right-reflected-frame-interfaces.json": "d59ea7611f919da38c6a1cb7ee49d22c79155171c9f6de8ec7f9fdb8e0c12d31"
+  },
+  "workers": 1,
+  "bounded": true,
+  "seconds": 0.00825364900083514,
+  "cases": [
+    {
+      "fixture_case": "scalable-subspace-normal-forms.json:0",
+      "n": 3,
+      "columns": 2,
+      "plan": {
+        "n": 3,
+        "selected_rank_per_column": 2,
+        "columns": 2,
+        "recursive_axis_count": 4,
+        "gaussian_children": 1,
+        "same_width_child": false,
+        "temporal_stages": [
+          {
+            "kind": "GL",
+            "transvections": [
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                0,
+                2
+              ]
+            ]
+          },
+          {
+            "kind": "unit-chirp",
+            "quadratic": {
+              "constant": 3,
+              "linear": [
+                1,
+                1,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ]
+            }
+          },
+          {
+            "kind": "C-child",
+            "selected_slots": [
+              0,
+              1
+            ],
+            "columns": 2
+          },
+          {
+            "kind": "unit-chirp",
+            "quadratic": {
+              "constant": 0,
+              "linear": [
+                1,
+                1,
+                0
+              ],
+              "cross": [
+                [
+                  0,
+                  1,
+                  2
+                ]
+              ]
+            }
+          },
+          {
+            "kind": "GL",
+            "transvections": [
+              [
+                1,
+                2
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          },
+          {
+            "kind": "affine-NOT",
+            "slots": [
+              0
+            ]
+          }
+        ],
+        "transvection_calls": 9,
+        "packed_translation_calls": 1,
+        "unit_chirp_full_stream_passes": 2,
+        "separate_global_phase_calls": 0,
+        "aggregate_global_phase_mod4": 2,
+        "address_companion": "existing third complete fK-bit slot in the same role stream",
+        "extra_scalar_roles": 0,
+        "cost_scope": "Conditional complete-stream wrapper bill; C child, recursive termination and whole physical stock are separate."
+      },
+      "GL_basis_images": 6,
+      "full_payload_reference": true,
+      "complete_records": 64,
+      "fields": 4,
+      "forward_reference_fields": 256,
+      "inverse_fields": 256,
+      "grid_increment": 4,
+      "inverse_grid_increment": 4,
+      "double_global_phase_negative_discriminates": true
+    }
+  ],
+  "scope": "Exact whole dyadic wrapper reference plus explicit paid route plan. Native wrapper time is conditional; the Gaussian child, complete recursive stock and termination are not implemented or certified."
+}

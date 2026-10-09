@@ -1,0 +1,65 @@
+{
+  "status": "PASS LOCAL CI AND EXACT SOURCE RECOVERY",
+  "groups": {
+    "repository": {
+      "checks": 2,
+      "status": "pass",
+      "report": "work/coordinator/checkpoint-ten/ci-repository/report.json",
+      "report_sha256": "f24207e9e24d62fd2808b48dd58d0dbbc408f2caccea1dd2b9bf789f1c45dca0"
+    },
+    "smoke": {
+      "checks": 17,
+      "status": "pass",
+      "report": "work/coordinator/checkpoint-ten/ci-smoke/report.json",
+      "report_sha256": "c366d50f793152f2160f5215232c9dcd4ea1438391fc2ddae54449eaec061e72"
+    },
+    "certificates": {
+      "checks": 82,
+      "status": "pass",
+      "report": "work/coordinator/checkpoint-ten/ci-certificates/report.json",
+      "report_sha256": "14e2b013129b204634c590d19c676c6e744c74c863de1721c781fafc00639271"
+    }
+  },
+  "all_checks": 101,
+  "new_checks": 8,
+  "scientific_runs": 12,
+  "failed_source_recoveries": {
+    "status": "PASS",
+    "verified_utc": "2026-10-09T03:32:44.814708+00:00",
+    "recoveries": [
+      {
+        "name": "native-gl-negative-coverage",
+        "status": "PASS EXACT RECOVERY",
+        "command": [
+          "patch",
+          "--batch",
+          "--forward",
+          "-p1",
+          "-i",
+          "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/fixtures/complex/native-gl-missing-negative-recovery.patch"
+        ],
+        "current_source_sha256": "fc1b0bcc04fbc5bcaeb43b1db3e7fc16acd9d03d2d8a9fe87f7329b71eb79f54",
+        "recovered_source_sha256": "2295ca66638697439e73c423bd7e88aa57d6139d1c6e94139ba7fcc119fa3d8e",
+        "expected_source_sha256": "2295ca66638697439e73c423bd7e88aa57d6139d1c6e94139ba7fcc119fa3d8e",
+        "original_unchanged": true
+      },
+      {
+        "name": "joint-mutable-control-domain",
+        "status": "PASS EXACT RECOVERY",
+        "command": [
+          "patch",
+          "--batch",
+          "--reverse",
+          "-p1",
+          "-i",
+          "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/synthesis/patches/joint-mutable-birth-control-repair.patch"
+        ],
+        "current_source_sha256": "ffc15ea17653c1bb523394c3d2f100b3d6addde06fe74ad11ae976f19a064b13",
+        "recovered_source_sha256": "9bb4aa118846a57aa530f2c19b240dc5dd382d9e7b2af7cb4753954ffde29663",
+        "expected_source_sha256": "9bb4aa118846a57aa530f2c19b240dc5dd382d9e7b2af7cb4753954ffde29663",
+        "original_unchanged": true
+      }
+    ]
+  },
+  "complete_multiplier_exponent_established": false
+}

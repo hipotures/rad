@@ -380,3 +380,52 @@ Run the three populated CI groups using the fresh-directory commands above.
 Complete local results are recorded in the ninth validation run. Algebraic
 operator equality, conditional role moments and exact finite dirty components
 remain distinct from a native tape proof and a multiplication exponent.
+
+## Joint mutable births and conditional native wrappers
+
+The tenth checkpoint adds the following standard-library checks. All commands
+are from the repository root; omission of optional output arguments makes them
+safe to repeat without overwriting retained evidence.
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/native_gl_routes.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/native_frame_wrapper_plan.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/native_wrapper_endpoints.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/native_gl_review.py --workers 1
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_joint_boundary_components.py --case joint-mutable
+python3 -B research/integer-mult-breakthrough/code/transfers/joint_mutable_birth_review.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_joint_boundary_components.py --case address-boundary
+python3 -B research/integer-mult-breakthrough/code/obstructions/partial_output_budget.py --workers 1 --bounded
+```
+
+The new component wrapper retains all four original cases. Joint births check
+both core and canonical maps, all one-column physical inputs, and explicit
+two-column origins and Gaussian fields. The address check keeps its separately
+scoped obstruction models. Runtime source freezing includes the dynamically
+loaded scalar helper source; the registry lists the complete effective closure.
+The joint independent reviewer imports no producer and binds the retained
+fixture with its own suffix-based derivation of current-data responses.
+
+The [joint contract exporter](code/synthesis/dump_joint_mutable_birth.py) accepts
+`--output <fresh-contract.json>`. Retained fixture bytes, exporter identity and
+historical protocols distinguish regeneration from verification. The initial
+failed joint source is reconstructed in a fresh topic-shaped directory using
+the [control-domain repair patch](code/synthesis/patches/joint-mutable-birth-control-repair.patch)
+with `patch --batch --reverse -p1`; its expected hash is in the failed run's
+`failure.json`. The [native GL recovery config](configs/complex/native-gl-recovery.json)
+instead uses its forward patch and repository-shaped source path. Both exact
+failed-source recoveries were independently repeated by the coordinator with
+GNU patch 2.7.6. These failures remain failed evidence.
+
+The native routing bill applies the pinned `original-layers` input contract.
+It explicitly charges full payloads, exceptional repair, descriptor work,
+three complete address slots and any growing-dimensional gate count. A third
+address slot does not create a free scalar bank. Same-width recursion,
+stopping, precision and complete role stock require their own proof. Read the
+linked native route report before using its long-record simplification.
+
+Completed receipts and logs have complete gzip copies with unchanged originals
+and manifest hashes. New source, configurations, small fixtures and reports
+remain readable. The local validation receipt records all populated CI groups;
+green CI does not promote a conditional compiler or partial primitive to a
+multiplication theorem.
