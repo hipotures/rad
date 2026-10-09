@@ -13,6 +13,11 @@ per-file identities and explicit omissions.
 
 ## Integer multiplication bounds
 
+The [2026-10-09 frontier sprint](../research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/frontier-sprint-20261009/README.md)
+continues construction research from the supplied 14-page review, with current
+public comparison, independent finite audits and staged publication gates.
+It preserves the older campaigns' frozen results and clocks.
+
 [Integer multiplication bounds](../research/integer-multiplication-bounds/README.md)
 is an active mathematical research campaign, started 2026-10-07
 22:25:21 UTC. The user explicitly extended its original ten-hour deadline

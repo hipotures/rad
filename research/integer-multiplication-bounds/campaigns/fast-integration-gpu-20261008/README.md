@@ -7,3 +7,9 @@ The strongest accepted **conditional** construction is **κ = 5.143624568e-5**, 
 [Proof](reports/selected-source-coframe-final-proof.md), [acceptance](reports/selected-source-coframe-final-acceptance.json), [exact certificate](evidence/final-selected-source-coframe-core/certificate.json.gz), [reproduction](reproduce.md), [final handoff](reports/final-campaign-handoff.md), [scientific status](reports/current-status.md), [construction ledger](reports/construction-ledger.json).
 
 Earlier accepted results and historical evidence are preserved. The final negative catalog distinguishes exact candidates, unsuccessful constructions, unfinished work and scoped obstructions. All owned experiment queues and GPU jobs have stopped. The scientific record remains on `research/fast-gpu-20261008`. No public PR was opened and no separate CPU campaign was accessed.
+
+
+The subsequent [frontier sprint of 2026-10-09](frontier-sprint-20261009/README.md)
+is active in a task-owned subdirectory. It reads the supplied new review and
+tests current public construction mechanisms; the completed campaign above
+retains its original status, results and scheduling record.

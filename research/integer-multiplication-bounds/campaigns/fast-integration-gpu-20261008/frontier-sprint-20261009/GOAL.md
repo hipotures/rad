@@ -1,0 +1,5 @@
+# Frontier construction sprint
+
+Execute the supplied `docs/new/CODEX_FRONTIER_SPRINT_PROMPT.md` in full. Read the matched 14-page review, refresh the exact public frontier including drafts, run independent construction lanes E1–E3, and certify any improvement through finite, conditional, independent-reproduction and publication gates. Prepare a self-contained publication script only for a qualifying verified winner; the user alone runs publishing mode. Preserve the current checkout and branch. Continue useful batches until instructed otherwise or decisive diminishing returns.
+
+The initial session supported three concurrent child agents. After the user increased the limit, the resumed session supports 17 agents including the coordinator; four construction/review lanes now run concurrently. The user requires GPT-6.1-Sol for every subagent, with effort selected from medium through max. All outputs remain English. Inputs/downloaded source are immutable in ignored sprint-owned storage. Only the coordinator manages Git.
