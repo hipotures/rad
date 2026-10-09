@@ -1,0 +1,36 @@
+{
+  "run_id": "20261009T124402Z-transfer-dyadic-total-center-bounded",
+  "started_utc": "2026-10-09T12:44:02.420140+00:00",
+  "command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/transfers/dyadic_total_center_review.py",
+    "--input",
+    "research/integer-mult-breakthrough/fixtures/transfers/dyadic-total-center-moment-review.json",
+    "--workers",
+    "1",
+    "--bounded",
+    "--output",
+    "research/integer-mult-breakthrough/work/transfers/20261009T124402Z-transfer-dyadic-total-center-bounded/results/certificate.json"
+  ],
+  "runtime_closure": [
+    {
+      "path": "code/transfers/dyadic_total_center_review.py",
+      "sha256": "198182d49255f187ecd0e418f288587414ed020395d489b671861cc3d12363a8"
+    },
+    {
+      "path": "code/transfers/synchronized_center_review.py",
+      "sha256": "5052f8511801ce08f4cdc3fb7b2778cb997c6db0893833c4d024347c0329c79f"
+    },
+    {
+      "path": "fixtures/transfers/dyadic-total-center-moment-review.json",
+      "sha256": "e57048582143b74e57b374144b9c4a39b00a7c2e8cf2acd81cd1095b1c22b5a7"
+    },
+    {
+      "path": "configs/transfers/dyadic-total-center-review-ci.json",
+      "sha256": "c63f34c5cf58719e87dab79cdb5b301846dbeee4a83c933f46caf157c38d61f4"
+    }
+  ],
+  "dependencies": "Python standard library plus pinned prior independent checker only",
+  "scope": "p12 four full models, exact scalar identity and dirty echo; no producer module imports"
+}

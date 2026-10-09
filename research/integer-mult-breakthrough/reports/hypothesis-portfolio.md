@@ -771,3 +771,34 @@ gauges, by a rank-three target minor versus rank at most two. Independent
 orders, separately gauged summands or deeper products change the premise;
 repeating a ruled-out scan screen has no value. All finite components,
 analytical proofs, conditional budgets and source-only reviews remain distinct.
+
+## Final checkpoint and user-directed closeout
+
+The user requested gentle shutdown, completion of existing work and final
+commit/push, with no new experiments. Every research track reports no live
+scientific process, and all completed source/result inventories are frozen.
+Open hypotheses are preserved as a handoff, not a scheduled continuation.
+
+Paid total roots remove odd5 from the center scalar decoder. Direct-full
+chronology improves the hypothetical p12 root while keeping the source helper,
+all dirty roots and proper full copies. Independent exact moments agree.
+The actual mixed source/K/side component now preserves kernel columns and
+current-source ordering. Sharing saves stock and rank together; a separate
+37-role target cut saves three ranks but has negative local deficit. These
+components still lack a complete global cap/master construction.
+
+The singleton quotient supplies exact finite responses at a paid common
+frame and has its full immutable contract and prefix bounds retained. The
+independent general partial-overlap Fourier formula identifies the missing
+higher-J query rank: in the explicitly separate fixed-Q copy interface,
+highest proper overlaps alone exceed the unspent2v master deficit for every
+odd k>=3. That interface cannot extend the singleton positive to a multiplier.
+Shared/evolving copies or a different geometric/master ledger remain open.
+
+F5 reduction returns bit routes exactly and avoids Gaussian precision only
+for its finite coefficient interface. The developed typed-router recurrence
+and multiple-defect questions are unfinished. A source created before the
+stop but never executed is retained explicitly as untested exploration.
+Native lane formatting/copy/routing, actual extra child counts, ordinary
+suppliers and balanced integration remain unresolved. No new own kappa or
+first-place claim is made.

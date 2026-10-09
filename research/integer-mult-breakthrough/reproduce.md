@@ -907,3 +907,31 @@ The [twenty-first recovery shard](configs/recovery/checkpoint-twenty-one-artifac
 indexes complete scientific, registry-validation and publication provenance.
 Previous recovery shards remain necessary historical evidence. None of these
 commands implements a whole native multiplier or proves a new kappa.
+
+## Final twenty-second checkpoint
+
+These six checks verify completed components and frozen mathematical controls:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/verify_paid_total_and_splice.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/singleton_quotient_copies.py --workers 4 --bounded
+python3 -B research/integer-mult-breakthrough/code/synthesis/audit_singleton_quotient_prefix.py
+python3 -B research/integer-mult-breakthrough/code/transfers/finite_field_router_bootstrap.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/transfers/dyadic_total_center_review.py --input research/integer-mult-breakthrough/fixtures/transfers/dyadic-total-center-moment-review.json --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/partial_overlap_fourier_rank.py --workers 1 --bounded
+```
+
+Complete four-worker source runs, exact invocation snapshots, scalar/field
+scopes and immutable outputs are retained in their inventories. The complete
+singleton quotient contract is632,999 bytes and is published whole through
+gzip; its compact index identifies its hash and deterministic exporter.
+Source-only reviews add no runtime PASS. Typed F5 recurrence source was
+never scientifically executed; its static syntax receipt is not evidence
+for the proposed algorithm. Future reproduction is separate authorization
+after the user-directed shutdown.
+
+The [final recovery shard](configs/recovery/checkpoint-twenty-two-artifacts.json)
+retains all original scientific text, CI outputs and final publication
+provenance. All prior shards and source closures remain intact. The final
+verification reruns the existing repository/smoke/certificate infrastructure;
+it launches no new research configuration or parameter sweep.
