@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "local_blocks": [3, 4],
+  "target_parity": 0,
+  "common_cap_dimension": 5,
+  "target_banks_per_parity_block": 16,
+  "source_basis_banks": [4, 8],
+  "all_kernel_banks_retained": [1, 5],
+  "extra_destination_only_sink_copies_removed": 3,
+  "source_signal_banks_are_arbitrary_read_only_inputs": true,
+  "same_frame_cuts": {
+    "early_and_pre": "F0=identity",
+    "producer_and_post": "identical actual F_U on both operands",
+    "retained_basis_inverse": "full"
+  },
+  "overlap_condition": "Every pivot is exclusive; groups may overlap only on nonpivot target destinations; no target-controlled producer operations",
+  "upstream_primary": {
+    "repository": "https://github.com/CrocSwap/integer-mult-bounds",
+    "pull_request": 166,
+    "head": "4dbc2af5f223a0fbf22542c9d6c3f71442b6a3a6",
+    "proof_path": "research/paired-cube-target-accumulator/PROOF.md",
+    "proof_sha256": "36f5b7ffb9b6454b38d2c6f8934ca1c370512f1315220c129daf2f6c9fd2e8a6",
+    "read_only_local_input_directory": "work/complex/20261009T095904Z-complex-pr166-sink-source/inputs",
+    "acquisition_receipt": "work/complex/20261009T095904Z-complex-pr166-sink-source/inputs/acquisition.json",
+    "recovery": "gh api repos/CrocSwap/integer-mult-bounds/contents/<path>?ref=<head>; base64-decode the immutable blob and verify its recorded hash",
+    "foreign_code_executed": false,
+    "scalar_antecedent_credit": "PR166 credits Dumas and Grenet, arXiv:2307.12712"
+  },
+  "interleaving_case": "Actual j4 caps of two/three/four source cubes with four common paired coordinates and distinct fifth pairs; initially zero target frames, optimistic outside contributions omitted",
+  "scope": "Exact local retained-column dirty scalar operators, both cuts and finite geometric interleaving witnesses. Global target deadlines, actual full Gaussian/native stream compiler, guards and recurrence remain open."
+}

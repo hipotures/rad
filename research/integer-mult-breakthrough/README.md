@@ -25,44 +25,53 @@ separate from complete suppliers and formally verified results.
 - [Publication assessment](reports/publication-readiness.md): prior useful
   technical results and literature/novelty limitations.
 
-## Current checkpoint: general flags, retained banks and irregular routing
+## Current checkpoint: scan barriers, target pivots and coupled costs
 
-The eighteenth checkpoint preserves exact
-[dirty cap-bank completions](reports/complex/cap-dirty-completion-and-fanout-boundary.md)
-with their complete scalar inverses and retained kernel directions.
-Three active channels still require four or eight dirty banks. The
-[independent cap review](reports/transfers/paired-five-cap-independent-review.md)
-checks small coefficients/supports separately from its analytical source
-review. The whole-cube terminal-reader architecture fails its rank ledger;
-interleaving, copied readers and target-bank mixing remain open.
+The nineteenth checkpoint preserves a complete local
+[target-pivot word](reports/complex/cap-target-pivot-and-interleaving.md)
+that absorbs three destination-only sinks while retaining all original dirty
+banks and ancestor responses. Tiny interleaving witnesses escape the fixed
+terminal-reader order. Actual global deadlines and a complete shared side
+profile remain open; local rank conservation supplies no new kappa.
 
-[General image/kernel flags](reports/synthesis/general-idempotent-image-kernel-flags.md)
-construct arbitrary idempotent endpoint operators. Fixed paired-source
-constraints retain their former radical bound, so a useful chronology must
-change actual flags. [Two ordered scans](reports/synthesis/two-ordered-scan-products.md)
-fail for growing Boolean zeta in the precise invertible one-bank model;
-complete fixed-label two-axis controls are also retained. The
-[coordinator proof review](reports/obstructions/idempotent-and-scan-independent-review.md)
-distinguishes those analytical exclusions from finite tests and other circuit
-classes that remain open.
+[Three natural/bit-reversal scans](reports/synthesis/three-ordered-scans-and-dyadic-lift.md)
+are excluded for growing fixed-label zeta even with arbitrary nonzero complex
+diagonal gauges. Its exact two-axis dyadic lift pays every scale and its
+additional grid bit. The
+[independent review](reports/obstructions/three-selected-scan-independent-review.md)
+accepts the all-size selected-order argument. Other orders and extra banks
+remain outside that theorem.
 
-[Irregular activity routing](reports/transfers/irregular-activity-routing-and-transfer.md)
-provides a literal general-width address word without power-of-two padding,
-with all twelve guard chunks present. Its
-[negative-control repairs](reports/transfers/irregular-routing-negative-control-repairs.md)
-retain both failed attempts and exact historical source recovery. An
-[independent source review](reports/synthesis/irregular-route-source-independent-review.md)
-accepts address semantics while leaving the ordinary routing exponent,
-full record/tape implementation and child/precision contracts explicit.
-No faster eleven-gate zeta supplier is supplied.
+The independent [general order cut proof](reports/obstructions/scan-order-cut-rank-and-flux.md)
+requires total positive transition flux at least f*2^(f-1), over every field.
+A mixed axis-lexicographic word therefore needs at least floor(f/2)+1 scans.
+All 891 finite order controls and unit minors pass. The
+[high-flux shear](reports/synthesis/nonlex-scan-flux-and-native-boundaries.md)
+escapes that obstruction, with its selected finite negatives and complete
+native ordering/precision obligations still separate.
 
-The registry now contains177 bounded checks. The preceding seventeenth
-commit`f5915327a31b1820b51f031e593a2bffe15549f8` passed all ten
-[remote CI jobs](https://github.com/hipotures/rad/actions/runs/37913408239).
-All177 local checks pass on335 unchanged effective inputs. The
-[validation record](runs/20261009T101043Z-checkpoint-eighteen-validation/report.md) and complete original gzip copies are indexed by
-[recovery metadata](configs/recovery/checkpoint-eighteen-artifacts.json).
-This verification does not establish native hypotheses or a larger kappa.
+The [classical Jordan basis discriminator](reports/obstructions/boolean-jordan-basis-cost-boundary.md)
+checks full rational bases, exact inverses and zeta through six coordinates.
+The named sequential realization has a linear factor in coordinate width;
+its odd inverses are not free Gaussian-dyadic gates. A different balanced
+coupling remains an unproved alternative.
+
+[Direct activity self-bootstrap](reports/transfers/activity-self-bootstrap-and-packet-boundary.md)
+cannot fund its routing under the unchanged sufficient ledger. Available
+ordinary saving alpha, assembly saving a and desired complex saving b are
+kept distinct. Smaller serial tensor packets do not resolve that comparison
+when their complete payload and global precision are retained. An independently
+stronger ordinary supplier or changed native route would change the premises.
+
+The registry contains 183 bounded checks. The preceding eighteenth commit
+`9ed8fd9c410893be15f14200496a75b29d6b9e8c` passed all ten
+[remote CI jobs](https://github.com/hipotures/rad/actions/runs/37918249532).
+All 183 local checks pass on 347 unchanged effective inputs. The
+[validation record](runs/20261009T105955Z-checkpoint-nineteen-validation/report.md) and complete original gzip copies are indexed by
+[recovery metadata](configs/recovery/checkpoint-nineteen-artifacts.json).
+These controls do not establish native transform hypotheses or a larger kappa.
+The [preceding cap/flag/router checkpoint](configs/recovery/checkpoint-eighteen-artifacts.json)
+and all earlier recovery records remain available.
 
 ## Accepted preceding components and active leverage
 
@@ -79,8 +88,8 @@ side cannot attain complex saving0.0001. A shared physical side is required.
 [Cap classes](reports/obstructions/paired-cube-cap-compatible-channels.md)
 grow asymptotically like3^k despite a joint row space of dimension2^(k-1).
 Independent completions keep their kernel parking; scalar rank is not a
-physical stock reduction. New target-pivot and interleaving experiments are
-separate from the frozen current checkpoint until reviewed.
+physical stock reduction. Further repeated-pivot, actual-center budget and native scan experiments
+are separate from the frozen checkpoint until reviewed.
 
 ## External comparisons and attribution
 
@@ -92,9 +101,9 @@ all-size premise. Its reported conditional kappa5.93970203079492e-4 belongs
 to its external authors. [External PR127](reports/obstructions/pr127-reproduction-and-birth-reuse.md)
 is separately pinned and credited.
 
-The [dated public comparison](reports/obstructions/current-ranking-and-structural-leverage.md)
-records reviewed-main kappa4.609169e-4 and PR168's newer reported conditional
-kappa6.489120e-4 at the2026-10-09 snapshot. The newer package was not replayed
-here. That comparison is not an exhaustive current world ranking or a
-probability estimate. A first-place result requires a complete construction,
-not projection of an unattained role density or a local ideal gain.
+The [dated public update](reports/obstructions/public-ranking-update-20261009T103848Z.md)
+records reviewed-main kappa 4.609169e-4 and PR168's reported conditional
+kappa 6.558894e-4 at 2026-10-09 10:38:48 UTC. This newer package was not
+replayed here. The earlier snapshot remains preserved. These are external
+claims, not an exhaustive world ranking or a numerical probability estimate.
+A first-place result requires a complete construction with its paid interfaces.

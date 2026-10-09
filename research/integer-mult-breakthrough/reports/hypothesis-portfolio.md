@@ -649,3 +649,39 @@ components remain local evidence. The next decisive tests are a full paid
 changed target chronology, a complete nonlexicographic zeta word or an
 independently stronger compatible ordinary supplier, with precision, dirty
 restoration and all-size transfer stated separately.
+
+## Nineteenth checkpoint: general order budget and actual basis costs
+
+Destination-only target pivots have complete local dirty-matrix, inverse,
+ancestor and timing controls. Interleaving escapes the whole-cube last-reader
+architecture, but actual global target cuts and a shared Gaussian side word
+remain required. Repeated temporal reuse and paid center-budget tests are
+next discriminators, not an exponent extrapolation from a local zero cut.
+
+Three natural/bit-reversal scans are excluded at every growing width even
+with arbitrary nonzero complex gauges. The independent fixed-label order-cut
+proof works over every field and requires enough positive bit-transition
+flux. It rules out a constant number of mixed lexicographic scans while
+exhibiting the exact high-flux shear escape. Selected finite high-flux
+negatives retain their real-dyadic scope. A native ordering and complete
+coefficient/record contract are the next useful positive targets.
+
+Classical Jordan chains are a literature-led changed representation. Full
+small exact inverse/zeta controls pass, but the named sequential basis has
+Theta(n*2^n) optimistic addition cost and non-dyadic inverse coefficients.
+A balanced coupling could change that premise; it must first show a paid
+per-merge map and scalar/precision cost before a broad synthesis search.
+
+The unchanged direct activity route cannot bootstrap itself when its
+ordinary saving is inferred from the same smaller balanced assembly result.
+Serial packetization preserves that mismatch and full-volume traffic. An
+independent ordinary atom, a genuinely cheaper native route or a different
+coupled master is required. The natural selected-fiber accumulator proposal
+is a separate positive layout hypothesis, with actual wide records and
+magnitude reserve under review beyond this frozen checkpoint.
+
+The dated public claim increased to conditional kappa 6.558894e-4. It is not
+replayed or adopted here. No own complete kappa is established. A credible
+first-place route needs a changed supplier and all its physical/precision
+contracts; useful local words, analytical restrictions and native components
+remain independently publishable research evidence within their scopes.

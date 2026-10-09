@@ -43,6 +43,44 @@ evidence is packed into this topic's evidence namespaces without altering
 originals. Run protocols, compact summaries and source hashes distinguish
 retained finite evidence from analytical assumptions.
 
+## Target pivots, selected scans and general order rank
+
+The nineteenth checkpoint adds six bounded checks, for 183 total:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/verify_cap_pivot_and_interleaving.py
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_three_scan_components.py --component selected
+python3 -B research/integer-mult-breakthrough/code/synthesis/verify_three_scan_components.py --component flux
+python3 -B research/integer-mult-breakthrough/code/transfers/activity_self_bootstrap_packets.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/scan_order_cut_rank.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/boolean_jordan_basis_cost.py --workers 1 --bounded
+```
+
+Expected PASS receipts are scoped finite controls. The local pivot word
+retains every dirty and ancestor column; the complete fixed-label three-scan
+controls preserve the original failed simple sign lift and the later exact
+dyadic lift. The two selected/flux commands eagerly import the same nine-file
+closure; publish both packages together as their inventories specify. Their
+complex all-size selected-order proof is independently reviewed, rather than
+inferred from the F3 real-unit screen. General cut controls independently
+check complete integer factorizations and unit minors, including characteristic
+two. The Jordan source credits the pinned classical primary paper and pays
+the two-way sequential basis ledger separately from uncharged scalar gates.
+
+Full four-worker commands use fresh paths in their scientific reports. The
+complete 1,053,367-byte general-order certificate stays unchanged in a whole
+gzip copy; its readable summary omits and identifies individual order rows.
+Source-only analytical reviews are labeled separately from new measurements.
+The coupling note keeps the available ordinary atom distinct from the new
+assembly output and accounts for every tensor packet's complete volume.
+
+Complete run text, validation, selected public metadata and recovery material
+are indexed by
+[nineteenth recovery metadata](configs/recovery/checkpoint-nineteen-artifacts.json).
+The downloaded main commit patch response is excluded; its pinned semantic
+metadata and complete PR body are retained. All prior evidence shards remain.
+These checks do not prove a faster native zeta supplier or multiplier exponent.
+
 ## Dirty cap banks, general flags and irregular routes
 
 The eighteenth checkpoint adds seven standard-library checks, for 177 total.
