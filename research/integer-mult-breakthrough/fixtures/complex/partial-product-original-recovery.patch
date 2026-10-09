@@ -1,0 +1,39 @@
+--- a/research/integer-mult-breakthrough/code/complex/partial_kernel_product_algebra.py
++++ b/research/integer-mult-breakthrough/code/complex/partial_kernel_product_algebra.py
+@@ -90,28 +89,0 @@
+-
+-
+-def q_real_packed(A,B):
+-    """A bijective real-to-half-Gaussian packing, not sparse address padding.
+-
+-    Pack a0,a1 as ((a0+a1)+i(a0-a1))/2. One C_(f-1) produces half
+-    the spectrum; the other half follows by complement conjugacy. Multiply
+-    the retained halves, invert C_(f-1), and recover real a0/a1 by Re±Im.
+-    No claim is made about arbitrary dirty Gaussian input/output banks.
+-    """
+-    if any(im for re,im in A+B):
+-        raise ValueError('the half-spectrum contract requires real operand fields')
+-    half = len(A)//2
+-    def pack(values):
+-        return [(x[0]+y[0],x[0]-y[0]) for x,y in zip(values[:half],values[half:])]
+-    a,ga = C_apply(pack(A))
+-    b,gb = C_apply(pack(B))
+-    product = [multiply(x,y) for x,y in zip(a,b)]
+-    decoded,gc = C_apply(product,inverse=True)
+-    # Each input pack has one denominator bit. Product clears both, then
+-    # the inverse child's bits are retained without truncation.
+-    output = [(re+im,0) for re,im in decoded]+[(re-im,0) for re,im in decoded]
+-    return output,2+ga+gb+gc,dict(Gaussian_products=half,complex_transform_widths=[ga,gb,gc],
+-                                  input_real_fields=2*len(A),output_real_fields=len(A),
+-                                  independent_half_spectrum_real_fields=2*half,
+-                                  packed_input_grid_charge=1,
+-                                  complete_output_grid_bits=2+ga+gb+gc,
+-                                  arbitrary_dirty_Gaussian_contract=False)
+@@ -165,5 +136,0 @@
+-    packed,gpacked,packed_contract = q_real_packed(A,B)
+-    reference,greference = q_direct(A,B)
+-    if not equal(packed,gpacked,reference,greference):
+-        raise AssertionError('real half-volume packed product differs from the complete Gaussian tensor algebra')
+-    checked += 2*size
+@@ -217 +183,0 @@
+-                real_half_volume_product=packed_contract,

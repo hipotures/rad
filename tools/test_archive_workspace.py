@@ -81,6 +81,24 @@ class PublicationTests(unittest.TestCase):
         self.assertEqual(status, 0, report)
         self.assertEqual(report["files"], 6)
 
+    def test_large_ci_registry_is_configuration_only_at_exact_valid_path(self):
+        checks = [dict(id=f"check-{i}", group="smoke", command=["{python}", "check.py"],
+                       inputs=["check.py"], paths=["tools/**"], timeout_seconds=10,
+                       scope="Explicit check scope. " * 60) for i in range(140)]
+        content = json.dumps(dict(version=1, checks=checks))
+        self.assertGreater(len(content.encode()), 128 * 1024)
+        registry = self.write("tools/ci_checks.json", content)
+        self.assertIsNone(ARCHIVE.reason(registry))
+        for relative in ["tools/other_checks.json", "research/fresh/code/ci_checks.json"]:
+            self.assertEqual(ARCHIVE.reason(self.write(relative, content)), "row-level-result-dump")
+        malformed = dict(version=1, checks=[dict(value="Execution row. " * 100)] * 140)
+        self.assertEqual(ARCHIVE.reason(self.write("tools/ci_checks.json", json.dumps(malformed))),
+                         "row-level-result-dump")
+        self.write("tools/ci_checks.json", content)
+        self.git("add", "--", "tools/ci_checks.json")
+        status, report, _ = self.audit()
+        self.assertEqual(status, 0, report)
+
     def test_staged_only_preserves_unrelated_unstaged_edits(self):
         self.write("research/fresh/code/main.py", "print('durable work')\n")
         self.git("add", "--", "research/fresh/code/main.py")

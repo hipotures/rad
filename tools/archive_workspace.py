@@ -192,6 +192,24 @@ def reason(path, data=None):
             return isinstance(value, dict) and any(rows(v) for v in value.values())
         # Hash/provenance inventories are durable references to local payloads.
         inventory = any(word in path.name for word in ["manifest", "inventory", "index", "catalog"]) or parts[:2] == ("docs", "compact-results") or relative == Path("docs/external-workspaces.json")
+        # The explicit CI registry is authored configuration, even above 128 checks.
+        # Bind the exception to its exact path and configuration shape; payloads
+        # elsewhere, malformed registries, size limits and secret checks retain
+        # their ordinary rules. The CI runner performs full schema validation.
+        checks = parsed.get("checks") if isinstance(parsed, dict) else None
+        ci_fields = {"id", "group", "command", "inputs", "paths", "timeout_seconds", "scope"}
+        ci_registry = (
+            relative == Path("tools/ci_checks.json")
+            and isinstance(parsed, dict) and set(parsed) == {"version", "checks"}
+            and parsed["version"] == 1 and isinstance(checks, list)
+            and all(isinstance(c, dict) and set(c) == ci_fields
+                    and all(isinstance(c[k], str) for k in ("id", "group", "scope"))
+                    and all(isinstance(c[k], list) and all(isinstance(v, str) for v in c[k])
+                            for k in ("command", "inputs", "paths"))
+                    and type(c["timeout_seconds"]) is int and c["timeout_seconds"] > 0
+                    for c in checks)
+        )
+        inventory = inventory or ci_registry
         if size > 128 * 1024 and not inventory and rows(parsed):
             return "row-level-result-dump"
     return None

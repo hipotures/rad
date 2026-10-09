@@ -43,6 +43,79 @@ evidence is packed into this topic's evidence namespaces without altering
 originals. Run protocols, compact summaries and source hashes distinguish
 retained finite evidence from analytical assumptions.
 
+## Row pools, complete products and independent zeta synthesis
+
+The thirteenth checkpoint adds 16 bounded checks, bringing the registry to
+140. These use only standard-library Python; the full registered verification
+commands above remain sufficient. To run the new scientific components alone:
+
+```sh
+python3 -B research/integer-mult-breakthrough/code/complex/partial_kernel_product_algebra.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/dyadic_quotient_channel_capacity.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/partial_product_prefix_audit.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/complex/partial_polynomial_product_packets.py --workers 1 --bounded
+for case_name in scan-order scan-bit zeta matching origin; do
+  python3 -B research/integer-mult-breakthrough/code/synthesis/verify_extended_zeta_components.py --case "$case_name"
+done
+python3 -B research/integer-mult-breakthrough/code/transfers/bilinear_ring_packing.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/power_two_ring_capacity.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/xor_compatible_packing.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/transfers/fused_packet_envelope.py --workers 1 --small
+python3 -B research/integer-mult-breakthrough/code/obstructions/zeta_rectangle_rebalancing.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/retired_guard_row_pool.py --workers 1 --bounded
+python3 -B research/integer-mult-breakthrough/code/obstructions/aligned_guard_row_pool.py --workers 1 --bounded
+```
+
+The frozen [product milestone manifest](configs/complex/product-algebra-milestone.json)
+lists all eight complete product runs, exact artifact hashes, runtime closures
+and historical recovery directions. Full producer protocols in the retained
+run directories specify their four-worker commands and source/config inputs.
+Use fresh output paths. The signed matching fixture binds literal full matrices
+and complete dirty fields; its checker does not trust stored hashes as proof.
+
+The [local validation receipt](runs/20261009T055823Z-checkpoint-thirteen-validation/results/historical-recovery.json)
+records four independently reproduced historical versions. Reconstruct them
+without modifying the live tree:
+
+```sh
+campaign_root=$(pwd)
+recovery_root="$campaign_root/research/integer-mult-breakthrough/work/REPRO-UNIQUE/historical"
+mkdir -p "$recovery_root/research/integer-mult-breakthrough/code/complex"
+mkdir -p "$recovery_root/research/integer-mult-breakthrough/reports/complex"
+mkdir -p "$recovery_root/code/synthesis"
+cp research/integer-mult-breakthrough/code/complex/partial_kernel_product_algebra.py "$recovery_root/research/integer-mult-breakthrough/code/complex/"
+cp research/integer-mult-breakthrough/reports/complex/partial-gaussian-product-fusion.md "$recovery_root/research/integer-mult-breakthrough/reports/complex/"
+cp research/integer-mult-breakthrough/reports/complex/dyadic-quotient-channel-volume.md "$recovery_root/research/integer-mult-breakthrough/reports/complex/"
+cp research/integer-mult-breakthrough/code/synthesis/two_order_scan_channels.py "$recovery_root/code/synthesis/"
+cp research/integer-mult-breakthrough/code/synthesis/weighted_scan_intertwiners.py "$recovery_root/code/synthesis/"
+git -C "$recovery_root" apply --unidiff-zero "$campaign_root/research/integer-mult-breakthrough/fixtures/complex/partial-product-original-recovery.patch"
+git -C "$recovery_root" apply --unidiff-zero "$campaign_root/research/integer-mult-breakthrough/fixtures/complex/partial-product-budget-scope-recovery.patch"
+git -C "$recovery_root" apply --unidiff-zero "$campaign_root/research/integer-mult-breakthrough/fixtures/complex/dyadic-quotient-budget-scope-recovery.patch"
+git -C "$recovery_root" apply --reverse --unidiff-zero "$campaign_root/research/integer-mult-breakthrough/code/synthesis/patches/two-order-cut-control-repair.patch"
+python3 -B "$recovery_root/research/integer-mult-breakthrough/code/complex/partial_kernel_product_algebra.py" --workers 1 --bounded
+```
+
+Compare the reconstructed SHA256 values with the receipt before replaying
+further work. Importing the recovered two-order module and calling
+`probe((3,"bit_reverse"))` must reproduce the recorded cut-control assertion;
+it must not be treated as a successful full scientific run.
+
+Finite allocation and arithmetic checks do not measure native tape time.
+The conditional row recurrence assumes a complete supplied strict profile,
+paid overhead and growing-depth precision. Product/ring obstructions retain
+their declared embedding or encoder scopes; none is a general multiplication
+lower bound. Independent analytical reviews are not formal verification.
+
+The [narrow CI registry role repair](runs/20261009T060901Z-ci-registry-role-repair/report.md)
+retains the original archive rejection and current regression checks.
+Its [exact patch](fixtures/infrastructure/ci-registry-role.patch) applies
+with `git apply --unidiff-zero` to published base commit
+`512b27a08986bb8bd4395e0401fcdd3d11300d52` in an isolated checkout or directory
+outside the live repository's Git ancestry. It reproduces both existing
+infrastructure files exactly. Run the repository verification group and
+the ordinary staged archive audit after applying it. The exception classifies
+the exact valid CI configuration; other payload and size rules remain.
+
 ## Additional structural components
 
 ```sh

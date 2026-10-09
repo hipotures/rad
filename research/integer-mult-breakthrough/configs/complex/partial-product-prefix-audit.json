@@ -1,0 +1,50 @@
+{
+  "source": "code/complex/partial_product_prefix_audit.py",
+  "source_sha256": "12fdf73ca5d4b0963b42db1dd5b4ec55e4429e31823ff82508594ea2eedc4219",
+  "dependencies": [
+    {
+      "path": "code/complex/partial_kernel_product_algebra.py",
+      "sha256": "3e56ceb544baa77441c6371c248ddabe770769940e8c3dc32b6ac683a9393553"
+    }
+  ],
+  "workers": 4,
+  "tasks": [
+    [
+      1,
+      4,
+      true
+    ],
+    [
+      2,
+      8,
+      false
+    ],
+    [
+      4,
+      16,
+      true
+    ],
+    [
+      6,
+      32,
+      false
+    ]
+  ],
+  "seed_generator": "202610090525+packet_axes+component_width+int(real)",
+  "bounded_command": [
+    "python3",
+    "-B",
+    "research/integer-mult-breakthrough/code/complex/partial_product_prefix_audit.py",
+    "--workers",
+    "1",
+    "--bounded"
+  ],
+  "scope": "Literal scalar prefix and logical recyclable array buffers; extra scalar working registers separately bounded. No CPython memory/native orbit layout/dirty word/exponent.",
+  "primary_parameter_source": {
+    "url": "https://github.com/GamingPuzzled/integer-mult-bounds/blob/ca8725485a822769f24c2e4e9b8955b31a42b044/upstream/build/sections/05-layers.tex",
+    "revision": "ca8725485a822769f24c2e4e9b8955b31a42b044",
+    "sha256": "20cfc8d12099d4e4ed9e3e7eeb6162edd9b6e0e076f24693364cd24377252594",
+    "used_material": "Only native E=mf shape, K=d^c and internal stopping/overhead definitions; no headline result adopted.",
+    "runtime_dependency": false
+  }
+}

@@ -6,6 +6,53 @@ subagents give four scientifically distinct tracks within the session's four
 agent slots. No old campaign queue, deadline, source whitelist, or CPU target
 is active.
 
+## Thirteenth checkpoint: row geometry, products and zeta primitives
+
+The [aligned row pool](obstructions/aligned-guard-row-lifecycle.md) splits
+only old rows before appending each fresh guard cube. Every role then keeps
+the required Cartesian guard shape. A fixed root padding factor is paid;
+nonroot padding is at most W*2^(-2hK). The initial combined-index split
+passed finite endpoint controls but lacked that native shape. Both versions,
+the geometry qualification and its independent review are retained.
+
+The [reviewed stopped recurrence](transfers/aligned-guard-row-independent-review.md)
+uses H=max(4h,ceil(K^(tau/(1-tau)))) and a supplied strict moment Phi(p)<1,
+0<tau<=p<1. With a complete local bill V((eK)^tau+1), it gives selected-width
+cost O(d^p K^(tau(1-p)/(1-tau))). The actual canonical arbitrary-dirty word,
+uniform metadata, every route and precision remain obligations. The moment
+proof permits linear branch depth and does not inherit a polynomial node
+count. A new discriminator is whether completed unitary children admit
+smaller approximate error reserves than an exact denominator-grid argument;
+nonunitary signed-zeta children require separate norm analysis.
+
+[Partial Gaussian product algebra](complex/partial-gaussian-product-fusion.md)
+and [complete polynomial packets](complex/partial-product-packet-prefix.md)
+now separate logical array stock, scalar temporaries and signed-radix operand
+lengths. The internal allowance is V(EK)^tau, with fused axes s distinct from
+E and K. Full inherited packets fail the stated exponential capacity or
+native overhead envelopes. Logarithmic packets are not excluded locally;
+their complete composition across all selected axes and decoder bill remain
+the decisive test. Historical overbroad budget statements are recoverable
+without altering the original successful runs.
+
+[Two scan orders](synthesis/two-order-weighted-scan-screen.md) can lift scalar
+operator rank, but the declared paid multibank capacities and exact inverse
+conditions do not yield a primitive. Independent [subset-zeta synthesis](synthesis/subset-zeta-primitive-screen.md)
+instead targets the full factored transform. Nonlinear matching complements
+have exact positive finite examples, while closed point-star and origin-color
+ledgers remain capacity-limited. These statements do not exclude dynamic
+release or arbitrary cancellation. The next useful search is for a shorter
+complete reversible scalar word, followed by its paid tensor activity,
+wrapper and layout contract.
+
+[Rectangle rebalancing](obstructions/zeta-rectangle-rebalancing-scope.md)
+reconstructs a literature-motivated arithmetic family with W_h=Theta((1+sqrt(2))^h).
+Its explicit arbitrary-dirty shear costs 2W_h incidences. The normalized wire
+overhead remains exponential, and an arithmetic factorization is not a
+native inplace supplier. Changed shared circuits and small fused packets
+remain independent hypotheses. All 140 registered local checks pass; no
+new complete multiplication exponent follows from this checkpoint.
+
 ## Eleventh checkpoint and replacement directions
 
 The complete all-Lagrangian frame compiler and original-port binding are now

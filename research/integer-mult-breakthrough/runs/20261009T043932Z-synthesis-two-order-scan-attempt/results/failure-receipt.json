@@ -1,0 +1,13 @@
+{
+  "status": "FAILED TEST ASSERTION",
+  "created_utc": "2026-10-09T04:39:32.139139+00:00",
+  "effective_source_sha256": "c2848f2abd97bfa2b4364a666a1acab1942950d0623559501bda72466cf6aca2",
+  "failure": "AssertionError: bit reversal did not lift the old bounded-cut-rank premise",
+  "failing_case": [
+    3,
+    "bit_reverse"
+  ],
+  "cause": "At f3 the exact bit-reversal crossing rank is D/4=2, equal to the old rank2 bound. The assertion incorrectly required a strict increase at f>=3.",
+  "evidence_scope": "Main aborted before certificate.json. One successful f3 Gray case was printed, but the four-case run is not a completed certificate.",
+  "repair": "Check the exact rank D/4 identity instead of asserting strict increase for the f3 control."
+}

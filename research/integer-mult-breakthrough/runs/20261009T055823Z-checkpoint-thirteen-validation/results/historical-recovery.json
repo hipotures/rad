@@ -1,0 +1,74 @@
+{
+  "status": "PASS EXACT FOUR HISTORICAL RECOVERIES",
+  "completed_utc": "2026-10-09T05:59:36.192120+00:00",
+  "inputs_unchanged": true,
+  "recovered": [
+    {
+      "path": "code/complex/partial_kernel_product_algebra.py",
+      "patch": "fixtures/complex/partial-product-original-recovery.patch",
+      "expected": "35067f7e5d408009ba931ba0a2a1cf519bf402d70974000c9b4e463b22ebff4f",
+      "reverse": false,
+      "repo_prefix": true,
+      "recovered_sha256": "35067f7e5d408009ba931ba0a2a1cf519bf402d70974000c9b4e463b22ebff4f",
+      "apply_command": [
+        "git",
+        "apply",
+        "--unidiff-zero",
+        "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/fixtures/complex/partial-product-original-recovery.patch"
+      ],
+      "sha256_matches": true,
+      "bounded_replay": "PASS",
+      "bounded_stdout": "{\"status\": \"PASS EXACT PARTIAL GAUSSIAN PRODUCT ALGEBRA\", \"cases\": 2, \"fields\": 72, \"product_counts\": [3, 9], \"seconds\": 0.0006125700019765645}\n"
+    },
+    {
+      "path": "reports/complex/partial-gaussian-product-fusion.md",
+      "patch": "fixtures/complex/partial-product-budget-scope-recovery.patch",
+      "expected": "11c5e1dcb069b08b573fa5fecc488491b741c7f01b7379e2f82c26e0f03498c9",
+      "reverse": false,
+      "repo_prefix": true,
+      "recovered_sha256": "11c5e1dcb069b08b573fa5fecc488491b741c7f01b7379e2f82c26e0f03498c9",
+      "apply_command": [
+        "git",
+        "apply",
+        "--unidiff-zero",
+        "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/fixtures/complex/partial-product-budget-scope-recovery.patch"
+      ],
+      "sha256_matches": true
+    },
+    {
+      "path": "reports/complex/dyadic-quotient-channel-volume.md",
+      "patch": "fixtures/complex/dyadic-quotient-budget-scope-recovery.patch",
+      "expected": "8a3656cf9fd1088e7ed5e1a5d42609f1388609ce2084da9e33facb7ca2ae4b2e",
+      "reverse": false,
+      "repo_prefix": true,
+      "recovered_sha256": "8a3656cf9fd1088e7ed5e1a5d42609f1388609ce2084da9e33facb7ca2ae4b2e",
+      "apply_command": [
+        "git",
+        "apply",
+        "--unidiff-zero",
+        "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/fixtures/complex/dyadic-quotient-budget-scope-recovery.patch"
+      ],
+      "sha256_matches": true
+    },
+    {
+      "path": "code/synthesis/two_order_scan_channels.py",
+      "patch": "code/synthesis/patches/two-order-cut-control-repair.patch",
+      "expected": "c2848f2abd97bfa2b4364a666a1acab1942950d0623559501bda72466cf6aca2",
+      "reverse": true,
+      "repo_prefix": false,
+      "recovered_sha256": "c2848f2abd97bfa2b4364a666a1acab1942950d0623559501bda72466cf6aca2",
+      "apply_command": [
+        "git",
+        "apply",
+        "--unidiff-zero",
+        "--reverse",
+        "/home/user/DEV/rad-breakthrough/research/integer-mult-breakthrough/code/synthesis/patches/two-order-cut-control-repair.patch"
+      ],
+      "sha256_matches": true,
+      "bounded_failure_replayed": true,
+      "expected_assertion": "bit reversal did not lift the old bounded-cut-rank premise"
+    }
+  ],
+  "recovery_bytes_location": "Disposable case directories; hashes and retained source/patches recover every version",
+  "scope": "Exact isolated historical source/report recovery and bounded replay; no live source mutation."
+}

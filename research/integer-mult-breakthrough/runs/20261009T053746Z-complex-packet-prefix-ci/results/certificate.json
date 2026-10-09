@@ -1,0 +1,66 @@
+{
+  "status": "PASS BOUNDED PACKET PREFIX/POLYNOMIAL CHECKS AND REPORT RECOVERY",
+  "completed_utc": "2026-10-09T05:37:46.938680+00:00",
+  "checks": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/partial_product_prefix_audit.py",
+        "--workers",
+        "1",
+        "--bounded",
+        "--output",
+        "research/integer-mult-breakthrough/work/complex/20261009T053746Z-complex-packet-prefix-ci/partial_product_prefix_audit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04456332200061297,
+      "stdout": "{\"status\": \"PASS LITERAL PARTIAL PRODUCT PREFIX AND BUFFER AUDIT\", \"cases\": 2, \"products\": [3, 27], \"seconds\": 0.00025678000383777544}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "research/integer-mult-breakthrough/code/complex/partial_polynomial_product_packets.py",
+        "--workers",
+        "1",
+        "--bounded",
+        "--output",
+        "research/integer-mult-breakthrough/work/complex/20261009T053746Z-complex-packet-prefix-ci/partial_polynomial_product_packets.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.041838999997708015,
+      "stdout": "{\"status\": \"PASS EXACT PARTIAL POLYNOMIAL PRODUCT PACKETS\", \"cases\": 2, \"integer_products\": [9, 9], \"seconds\": 0.00045335900358622894}\n",
+      "stderr": ""
+    },
+    {
+      "check": "Exact isolated original report recovery",
+      "path": "reports/complex/partial-gaussian-product-fusion.md",
+      "recovered_sha256": "11c5e1dcb069b08b573fa5fecc488491b741c7f01b7379e2f82c26e0f03498c9",
+      "expected_sha256": "11c5e1dcb069b08b573fa5fecc488491b741c7f01b7379e2f82c26e0f03498c9",
+      "status": "PASS"
+    },
+    {
+      "check": "Exact isolated original report recovery",
+      "path": "reports/complex/dyadic-quotient-channel-volume.md",
+      "recovered_sha256": "8a3656cf9fd1088e7ed5e1a5d42609f1388609ce2084da9e33facb7ca2ae4b2e",
+      "expected_sha256": "8a3656cf9fd1088e7ed5e1a5d42609f1388609ce2084da9e33facb7ca2ae4b2e",
+      "status": "PASS"
+    }
+  ],
+  "source_closure": [
+    {
+      "path": "code/complex/partial_product_prefix_audit.py",
+      "sha256": "12fdf73ca5d4b0963b42db1dd5b4ec55e4429e31823ff82508594ea2eedc4219"
+    },
+    {
+      "path": "code/complex/partial_polynomial_product_packets.py",
+      "sha256": "b9fff086ff47cf80cdb0073bd9cc62f4d3b62f45236fbaf2794a5bdd529bc0f7"
+    },
+    {
+      "path": "code/complex/partial_kernel_product_algebra.py",
+      "sha256": "3e56ceb544baa77441c6371c248ddabe770769940e8c3dc32b6ac683a9393553"
+    }
+  ]
+}

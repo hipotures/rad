@@ -1,0 +1,13 @@
+--- a/code/synthesis/two_order_scan_channels.py
++++ b/code/synthesis/two_order_scan_channels.py
+@@ -132,8 +132,8 @@
+     # omission of P produces the already-excluded one-order problem.
+     P=[[(int(i==table[j]),0) for j in range(D)] for i in range(D)]
+     lower_cross=s.rank([row[:D//2] for row in P[D//2:]])
+-    if lower_cross<=2 and kind=='bit_reverse' and f>=3:
+-        raise AssertionError('bit reversal did not lift the old bounded-cut-rank premise')
++    if kind=='bit_reverse' and lower_cross!=D//4:
++        raise AssertionError('bit reversal crossing rank disagrees with its exact D/4 count')
+     return dict(status='PASS EXACT TWO-ORDER SCAN CHANNEL SCREEN',selected_columns=f,address_dimension=D,
+                 second_order=kind,explicit_order_table=table,order_fixed_cut_rank=lower_cross,
+                 scan_sum_dimension=k,chosen_generator_indices=chosen,exact_constraint_rank=len(pivots),

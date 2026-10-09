@@ -1,0 +1,38 @@
+{
+  "actual_protocol_start": "2026-10-09T04:39:32.139139+00:00",
+  "raw_namespace_utc": "2026-10-09T04:39:32+00:00",
+  "namespace_difference_seconds": 0.139139,
+  "original_output": "work/synthesis/20261009T043932Z-two-order-scan-channels",
+  "raw_originals_unchanged": true,
+  "raw_files": {
+    "work/synthesis/20261009T043932Z-two-order-scan-channels/results/protocol.json": {
+      "bytes": 870,
+      "sha256": "57a7df0ffdf45b6e72bb90bf5a3612ef997668e322cf733396ef38da6d52c96d"
+    },
+    "work/synthesis/20261009T043932Z-two-order-scan-channels/failure-receipt.json": {
+      "bytes": 752,
+      "sha256": "ccc7affd93f365b993d70ecd83d1f083c4ded1a51ebc2e8f234d53459fcfe16a"
+    },
+    "work/synthesis/20261009T050120Z-two-order-source-recovery/receipt.json": {
+      "bytes": 565,
+      "sha256": "e4d28f9e3f66f3a9242fcc3da1bba8e9d367e412696b3c7c7e7198701e06d417"
+    }
+  },
+  "effective_source_closure": {
+    "code/synthesis/two_order_scan_channels.py": "c2848f2abd97bfa2b4364a666a1acab1942950d0623559501bda72466cf6aca2",
+    "code/synthesis/weighted_scan_intertwiners.py": "0e6e1e3af2da37a0ada5eb599ec568f7125479dd88717148335a7c484f4e12ac"
+  },
+  "stdlib_only": true,
+  "pre_execution_git_head": "Not captured in original protocol",
+  "publication_git_head": "d465eaf3ae9861af03f7b49ba0c7cd798c403d92",
+  "publication": "Original protocol and failure annotation copied unchanged. No four-case certificate exists. Exact source reconstruction and bounded failure replay are separately retained.",
+  "scope": "Finite exact source-capacity/operator controls with mathematical restriction claims stated in the linked report; no native supplier or new exponent.",
+  "failed_source_recovery": {
+    "current_source": "code/synthesis/two_order_scan_channels.py",
+    "current_sha256": "1fa8acee9498c536cab6c671dfe0327401d64b28f376db4af6c67cb80ab1f71d",
+    "original_sha256": "c2848f2abd97bfa2b4364a666a1acab1942950d0623559501bda72466cf6aca2",
+    "reverse_patch": "code/synthesis/patches/two-order-cut-control-repair.patch",
+    "patch_sha256": "b0f9e16eb07cb1ef10be4016d0f0f028d511dbda06df069c1593c42e94c05888",
+    "command": "patch -R -p1 --input <absolute-recovery-patch> in an isolated topic-layout copy; bounded recovered probe((3,bit_reverse)) reproduces the assertion"
+  }
+}

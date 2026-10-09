@@ -1,0 +1,39 @@
+--- a/research/integer-mult-breakthrough/reports/complex/dyadic-quotient-channel-volume.md
++++ b/research/integer-mult-breakthrough/reports/complex/dyadic-quotient-channel-volume.md
+@@ -104,19 +104,5 @@
+-multiplication. The actual native budget is `V(EK)^tau`: `E` counts
+-selected axes of the call, and `f` here counts partial-product packet
+-axes. They cannot be silently identified in a new product interface.
+-
+-In the inherited internal shape, `E=mf` for fixed `m`,
+-`K=floor(d^c)`, `E>=d^beta`, and
+-`tau(1+c/beta)<lambda<1`. Thus
+-
+-    f/(EK)^tau = Theta(E^(1-tau)/d^(c*tau))
+-               >= constant*d^(beta*(1-tau)-c*tau) -> infinity.
+-
+-The exponent is positive by the strict condition. Complete uniform-width
+-quotient streams cannot fit that inherited internal budget. Small packet
+-axes, smaller native calls at the stopping boundary, or a different
+-relation between `E` and `f` are not excluded by this comparison. The
+-[packet audit](partial-product-packet-prefix.md) keeps these scales
+-separate. A coefficient-degree lower bound alone is not a bit-time bound:
+-variable record widths, sparse support, partial decoding, or avoiding full
+-polynomial materialization need separate analysis.
++multiplication. It cannot fit the retained `V f^tau` stream budget with
++`tau<1`. That rejects this named supplier as a route to a larger complex
++saving under that budget. A coefficient-degree lower bound alone is not
++a bit-time bound: variable record widths, sparse support, partial decoding,
++or avoiding full polynomial materialization need separate analysis.
+@@ -187,11 +172,0 @@
+-
+-## Parameter-scope correction
+-
+-The initial unpublished report used `f^tau` in its native comparison.
+-This revision restores the actual `(EK)^tau` budget and states the
+-inherited relation `E=mf` explicitly. The idempotent and degree arguments,
+-source bytes and original finite certificate are unchanged. The original
+-report is exactly recoverable through
+-[dyadic-quotient-budget-scope-recovery.patch](../../fixtures/complex/dyadic-quotient-budget-scope-recovery.patch);
+-both versions are pinned by the correction receipt. Small packets and
+-changed size relations remain open hypotheses.

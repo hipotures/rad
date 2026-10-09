@@ -1,0 +1,3 @@
+# Zeta and polynomial interface independent review
+
+This attempt records independent analytical reconstruction and source inspection only; no producer was imported or independently executed. The [zeta report](../../reports/transfers/zeta-supplier-independent-review.md) accepts the exact subset identity, signed matching/dirty control, scoped closed-center obstructions and elementary rectangle-family proof. The [polynomial report](../../reports/transfers/polynomial-packet-independent-review.md) accepts the complete signed-radix recovery and actual full-record operand ledger. The [receipt](results/receipt.json) pins every reviewed producer and dependency. All native supplier, dirty-layout, fixed-tape and exponent claims remain outside this review.

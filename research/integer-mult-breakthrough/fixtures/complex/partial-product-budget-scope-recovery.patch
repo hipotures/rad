@@ -1,0 +1,30 @@
+--- a/research/integer-mult-breakthrough/reports/complex/partial-gaussian-product-fusion.md
++++ b/research/integer-mult-breakthrough/reports/complex/partial-gaussian-product-fusion.md
+@@ -76,12 +76,2 @@
+-that grows exponentially in the packet axes `f`. The actual native
+-budget is `V(EK)^tau`, where `E` is the selected width of the native call
+-and `K` is its chunk width. Exponential growth in `f` is not automatically
+-fatal if a changed product type leaves only logarithmically many packet
+-axes. In the inherited internal shape `E=mf`, fixed `m`,
+-`K=floor(d^c)`, `E>=d^beta`, the strict condition
+-`tau(1+c/beta)<lambda<1` makes that budget polynomial in `E`, while
+-`(3/2)^f` is exponential in `E`. Thus the named construction fails in
+-that full-size inherited shape. Small packets remain a separate
+-conditional possibility; their signed product bit widths, orbit layout
+-and full recurrence must be paid. See the
+-[complete packet prefix audit](partial-product-packet-prefix.md).
++that grows exponentially in `f` and cannot fit the retained per-volume
++`f^tau` primitive budget with `tau<1`.
+@@ -196,12 +185,0 @@
+-
+-## Parameter-scope correction
+-
+-The initial unpublished analysis compared packet inflation to `f^tau`,
+-rather than the actual `(EK)^tau` native budget. The revised comparison
+-above separates packet axes from native selected width and retains the
+-chunk factor. The algebraic identities, character proof, source bytes and
+-all original run certificates are unchanged. Exact original report bytes
+-are recoverable with
+-[partial-product-budget-scope-recovery.patch](../../fixtures/complex/partial-product-budget-scope-recovery.patch);
+-the correction receipt records both hashes. This correction leaves
+-logarithmic packets open and preserves the full-size inherited exclusion.

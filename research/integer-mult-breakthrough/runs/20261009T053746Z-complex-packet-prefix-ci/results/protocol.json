@@ -1,0 +1,38 @@
+{
+  "run_id": "20261009T053746Z-complex-packet-prefix-ci",
+  "started_utc": "2026-10-09T05:37:46.889548+00:00",
+  "sources": [
+    {
+      "path": "code/complex/partial_product_prefix_audit.py",
+      "sha256": "12fdf73ca5d4b0963b42db1dd5b4ec55e4429e31823ff82508594ea2eedc4219"
+    },
+    {
+      "path": "code/complex/partial_polynomial_product_packets.py",
+      "sha256": "b9fff086ff47cf80cdb0073bd9cc62f4d3b62f45236fbaf2794a5bdd529bc0f7"
+    },
+    {
+      "path": "code/complex/partial_kernel_product_algebra.py",
+      "sha256": "3e56ceb544baa77441c6371c248ddabe770769940e8c3dc32b6ac683a9393553"
+    }
+  ],
+  "workers_per_check": 1,
+  "commands": [
+    [
+      "/usr/bin/python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/partial_product_prefix_audit.py",
+      "--workers",
+      "1",
+      "--bounded"
+    ],
+    [
+      "/usr/bin/python3",
+      "-B",
+      "research/integer-mult-breakthrough/code/complex/partial_polynomial_product_packets.py",
+      "--workers",
+      "1",
+      "--bounded"
+    ]
+  ],
+  "scope": "Two new bounded packet entrypoints and exact isolated recovery of the original scope reports; unchanged050213Z algebra checks reused."
+}

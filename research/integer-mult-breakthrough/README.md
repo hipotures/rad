@@ -21,6 +21,28 @@ The goal is a structural route to a conditional integer-multiplication exponent 
 
 ## Current structural checkpoint
 
+The thirteenth checkpoint adds a [corrected old-row split](reports/obstructions/aligned-guard-row-lifecycle.md)
+that retains complete fresh guard cubes without an initial exponentially
+large row stock. Its [independent review](reports/transfers/aligned-guard-row-independent-review.md)
+proves a conditional stopped-recurrence bound for a supplied strict paid
+moment. The finite allocation and conjugation controls pass; a complete
+arbitrary-dirty circuit and its growing-depth precision remain open.
+
+[Complete polynomial product packets](reports/complex/partial-product-packet-prefix.md)
+now charge actual signed-radix operands and coefficient recovery.
+[Native packet envelopes](reports/transfers/fused-packet-size-envelope.md)
+separate selected width, fused axes, chunk width and long-record operand
+length. Full inherited packets fail the stated capacity envelopes; smaller
+packets and changed coupled architectures remain open.
+
+[Signed subset-zeta matching](reports/synthesis/signed-zeta-matching-boundaries.md)
+has exact finite complement controls and independently reviewed dirty
+returns. The [rebalanced rectangle word](reports/obstructions/zeta-rectangle-rebalancing-scope.md)
+improves an explicit arithmetic factorization while retaining its exponential
+wire overhead and native-layout gap. These components do not supply a new
+multiplier exponent. [Local validation](runs/20261009T055823Z-checkpoint-thirteen-validation/report.md)
+records all 140 passing checks and four exact historical recoveries.
+
 The [closed central component](reports/synthesis/closed-center-release-component.md)
 now has an actual arbitrary-dirty Gaussian word, with independent
 [complex/odd-line review](reports/complex/closed-center-and-odd-line-independent-review.md)
@@ -72,7 +94,7 @@ and [ballot role budgets](reports/complex/ballot-center-review-and-role-budget.m
 locate costs that consume proposed gains. Their exclusions apply only to
 the stated constructions and ledgers. A full shared chronology, native
 payload routing and complete multiplication transfer remain active work.
-The registry currently contains 124 bounded checks; checkpoint receipts record
+The registry currently contains 140 bounded checks; checkpoint receipts record
 their actual validation results. No large graph is allocated merely
 to evaluate an optimistic cost profile.
 
