@@ -80,6 +80,12 @@ identity must not. The coordinator exercised this binding and verified all
 30 whole gzip copies against the originals. Broad contribution verification
 was not run for this below-threshold historical candidate.
 
+The [executed reviewer dependency supplement](agents/assembly/configs/historical-lifetime-git-recovery-supplement.json)
+pins the additional imported `review_rebuilt168_ceiling.py` against the already
+executed acceptance export. Restore that authored source from Git along with
+the other lane code; the original accepted scientific digest and receipts are
+unchanged.
+
 The portable transfer package's three small `inputs/` JSON files follow the
 same whole-file evidence policy. Restore their exact bytes from
 `agents/transfer/evidence/portable-lifetime-fused-inputs-20261009T1021Z/inputs/`

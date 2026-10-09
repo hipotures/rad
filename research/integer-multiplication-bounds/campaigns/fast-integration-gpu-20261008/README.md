@@ -10,6 +10,9 @@ Earlier accepted results and historical evidence are preserved. The final negati
 
 
 The subsequent [frontier sprint of 2026-10-09](frontier-sprint-20261009/README.md)
-is active in a task-owned subdirectory. It reads the supplied new review and
-tests current public construction mechanisms; the completed campaign above
+has concluded its bounded construction series in a task-owned subdirectory.
+Its independently accepted conditional kappa is `61728289/100000000000`, below
+the user's one-percent publication threshold. The [final assessment](frontier-sprint-20261009/reports/final-sprint-assessment.md)
+records actual construction tests, independent recovery and the dated public
+comparison; the completed campaign above
 retains its original status, results and scheduling record.
