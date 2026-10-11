@@ -168,8 +168,10 @@ below.
    Its binding input, however, is #471's unreproduced complex b (section 4).
    A repair replay of #471 is therefore the cheapest check of the current top.
    The idle-data hosting lemma is still unreviewed upstream.
-2. The cross-copy finding is suitable for an upstream review comment on
-   #448/#480. Posting requires the user's authorization.
+2. The cross-copy finding was posted upstream on 2026-10-11, on
+   [#448](https://github.com/CrocSwap/integer-mult-bounds/pull/448#issuecomment-6113791847)
+   and [#480](https://github.com/CrocSwap/integer-mult-bounds/pull/480#issuecomment-6113805810)
+   ([texts](upstream-comments/)). The next step is to follow the replies.
 3. Optional: rerun the five Dugongue packages with a single documented
    deviation, tolerating exactly the missing `.gitattributes` key. Those
    verifiers call `integrity()` only inside their own package. None of the five
