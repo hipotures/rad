@@ -216,7 +216,9 @@ verifier's own exclusion rule.
 2. The cross-copy finding was posted upstream on 2026-10-11, on
    [#448](https://github.com/CrocSwap/integer-mult-bounds/pull/448#issuecomment-6113791847)
    and [#480](https://github.com/CrocSwap/integer-mult-bounds/pull/480#issuecomment-6113805810)
-   ([texts](upstream-comments/)). The next step is to follow the replies.
+   ([texts](upstream-comments/)). The author accepted it and retitled #448,
+   #480 and #494 as not established
+   ([replies](upstream-comments/README.md#replies-checked-2026-10-11-2140-utc)).
 3. The five Dugongue packages would pass without any deviation if their
    commits included the `.gitattributes` listed in their manifests. This could
    be mentioned to the author; nothing has been posted.

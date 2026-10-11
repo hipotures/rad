@@ -14,7 +14,8 @@ Its reviewed selected witness is **kappa = 7.23571590007464e-4** (PR276 + PR279)
 None of them is reviewed upstream, and CI is mixed.
 Our best accepted result is the 2026-10-09 sprint's 6.1728e-4 (0.853 x main).
 The idle-data hosting tier above 1.14e-3 adds an unreviewed assumption, and
-cross-copy hosting above 1.33e-3 is disputed. Our construction mechanisms
+cross-copy hosting above 1.33e-3 has been retitled "not established"
+by its author after our review. Our construction mechanisms
 already have applied upstream counterparts worth at most about 0.5% per step.
 See the [frontier inventory](runs/20261011T1916Z-upstream-frontier-inventory/report.md)
 and the [mechanism comparison](runs/20261011T1945Z-upstream-mechanism-comparison/report.md).

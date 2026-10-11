@@ -9,7 +9,9 @@ the [results report](report.md). In brief:
   without cross-copy, and its binding complex input (#471) reproduces.
 - Every cross-copy claim splits 22-34% of its hosted residuals across two
   copies, and job 1 shows that a split is not a program of the fixed local
-  word under single-stream registers.
+  word under single-stream registers. The author of #448, #480 and #494
+  accepted this and retitled the three as "not established"
+  ([replies](upstream-comments/README.md#replies-checked-2026-10-11-2140-utc)).
 - Only E8 (and implausibly Leech) can drive #370's template.
 
 See [GOAL.md](GOAL.md) for the brief and completion criteria.
