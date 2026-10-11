@@ -120,7 +120,7 @@ case "${1:-}" in
   4)
     preflight 2; RUN=$(new_run 4); set +e
     "$PY" -B "$CODE/job4_repair_replays.py" --config "$CONF/job2-replays.json" --clone "$CLONE" --work "$RUN" \
-      --python "$PY" --timeout-min "${TIMEOUT_MIN:-150}" 2>&1 | tee "$RUN/job4.log"
+      --python "$PY" --timeout-min "${TIMEOUT_MIN:-150}" ${ONLY:+--only "$ONLY"} 2>&1 | tee "$RUN/job4.log"
     rc=${PIPESTATUS[0]}; set -e; finish "$RUN" "$rc"
     ;;
   status)

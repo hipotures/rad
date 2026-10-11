@@ -35,7 +35,7 @@ python3 code/job2_hosting_ledger.py --run "$RAD_WORK_ROOT/runs/<UTC>-job2" \
 Follow-up job 4 (repair replays; one documented deviation applied in memory, worktrees unmodified):
 
 ```bash
-./run.sh 4          # TIMEOUT_MIN=<m> optional
+./run.sh 4          # TIMEOUT_MIN=<m>, ONLY=<pr,pr> optional
 ```
 
 Expected check: each record has `eligible: true` (the package differs from its manifest only by the absent

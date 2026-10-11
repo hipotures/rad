@@ -37,11 +37,17 @@ COMPLEX_KEY = re.compile(r'complex.*(lower|saving)|^b$|complex_b', re.I)
 
 
 def manifest_precheck(pkg):
-    """Package vs its MANIFEST.json under the verifier's own exclusion of the root manifest."""
+    """Package vs its MANIFEST.json under the verifier's own exclusion rule, read from its verify.py:
+    `p.name!='MANIFEST.json'` excludes every file of that name, `p!=ROOT/'MANIFEST.json'` only the root one."""
     m = json.loads((pkg / 'MANIFEST.json').read_text(encoding='utf-8'))
+    src = (pkg / 'verify.py').read_text(encoding='utf-8')
+    by_name = "p.name!='MANIFEST.json'" in src
+    assert by_name or "p!=ROOT/'MANIFEST.json'" in src, 'unknown manifest exclusion rule'
+    skip = (lambda p: p.name == 'MANIFEST.json') if by_name else (lambda p: p == pkg / 'MANIFEST.json')
     actual = {p.relative_to(pkg).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
-              for p in pkg.rglob('*') if p.is_file() and p != pkg / 'MANIFEST.json' and '__pycache__' not in p.parts}
-    return dict(manifest_entries=len(m), package_files=len(actual),
+              for p in pkg.rglob('*') if p.is_file() and not skip(p) and '__pycache__' not in p.parts}
+    return dict(exclusion='every MANIFEST.json' if by_name else 'root MANIFEST.json',
+                manifest_entries=len(m), package_files=len(actual),
                 missing=sorted(set(m) - set(actual)), extra=sorted(set(actual) - set(m)),
                 changed=sorted(k for k in m if k in actual and m[k] != actual[k]))
 
