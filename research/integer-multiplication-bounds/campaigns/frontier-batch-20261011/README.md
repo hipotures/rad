@@ -4,7 +4,9 @@ Status: **complete (2026-10-11).** All three jobs ran on the shared host; see
 the [results report](report.md). In brief:
 - 34 of 39 pinned claims reproduce. The 5 failures are integrity-check
   failures of one author's browser-uploaded packages.
-- #493 (1.30353e-3) is the top reproduced claim without cross-copy.
+- #493 (1.30353e-3) is the top claim without cross-copy whose verifier
+  passes, but it is capped by #471's complex supplier, and #471 did not
+  replay.
 - Every cross-copy claim splits 22-34% of its hosted residuals across two
   copies, and job 1 shows that a split is not a program of the fixed local
   word under single-stream registers.

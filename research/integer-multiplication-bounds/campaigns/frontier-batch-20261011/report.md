@@ -126,11 +126,48 @@ Our price function reproduces #370's R865 saving exactly
 - We recommend no further work on replacing the lattice unless a cheap helper
   construction for Leech appears.
 
+## 4. Follow-up: what #493's kappa rests on (agent, post hoc)
+
+A dependency check from the replay outputs and the pinned packages. The
+mathematical audit of the hosting lemma was deliberately not pursued; see
+below.
+
+- **The complex supplier binds.** #493's README gives the bit side
+  c = 1.565442e-3 and reports every composition as complex-bound. Its title
+  kappa 1.303530097714685e-3 is the cap of #471's complex supplier
+  (b = 1305231506267591/10^18). `code/cited.py` reads that b from #471's
+  receipt and does not rebuild it.
+- **#471 itself did not replay.** At its pinned SHA it fails its own integrity
+  check (section 2).
+- **Other claims use the same b.** The replay outputs of #473, #490 and #491
+  carry the same `complex_lower` = 1305231506267591/10^18 as an input. #473's
+  own README says that "fresh full default replay remains pending" for its
+  complex supplier.
+- **Highest claims without #471:**
+  - #472 (1.292099559e-3) uses #458's b, and #458 replayed in this batch.
+  - #493's own verifier prices its word with #458's b at 1.295523322678044e-3.
+    That is an information value, not a title claim.
+- **The hosting lemma (#442 §2) is unchecked.** The lemma rests on two inherited
+  facts:
+  - a dirty invocation acts on a helper stream as an exact coordinate factor,
+    whatever the prior contents;
+  - an idle child is a commuting product of coordinate factors.
+
+  The authors state that the global operator identity is not replayed
+  numerically. Upstream has no review or comment on #442. What this batch adds:
+  - job 1's stream model (whole hosting valid in 13 of 13 cases);
+  - the ledger (0 overlaps, windows re-derived), across all whole-hosting
+    templates.
+
+  Neither is a proof of the two inherited facts at full size. The user decided
+  not to pursue that audit further in this batch.
+
 ## Recommended next steps
 
-1. Take #493 (1.30353e-3, whole-residual hosting, reproduced exactly) as the
-   reproducible top claim without cross-copy. The idle-data hosting
-   assumption itself is still unreviewed upstream and is the next audit target.
+1. #493 (1.30353e-3) is the top claim without cross-copy whose verifier passes.
+   Its binding input, however, is #471's unreproduced complex b (section 4).
+   A repair replay of #471 is therefore the cheapest check of the current top.
+   The idle-data hosting lemma is still unreviewed upstream.
 2. The cross-copy finding is suitable for an upstream review comment on
    #448/#480. Posting requires the user's authorization.
 3. Optional: rerun the five Dugongue packages with a single documented
