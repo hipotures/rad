@@ -90,8 +90,9 @@ These smoke tests are not the results; the operator's runs are authoritative.
     `.gitattributes` repair, a declined repair, a computational failure, exact versus 1e-19-close decimals,
     `a/10^k` strings, JSON numbers parsed exactly, and the `{BOOST}` substitution.
   - On the real packages, #498 failed as-is at its integrity assertion, as predicted. Its repair attempt passed
-    in 225 s with the exact title kappa, and its `complex_lower` is #471's b. #496 passed its Boost probe with
-    the substituted `--boost-include` and ran its suppliers.
+    in 225 s with the exact title kappa, and its `complex_lower` is #471's b. #496 passed as-is in 522 s with the
+    substituted `--boost-include`, exact title kappa, and `complex_lower` = 133385415620840915601/10^23 (its own
+    pooled supplier). The operator's run remains authoritative.
   - `code/job5_hosting_ledger.py` on the job 4 outputs now parses #471's complex template, the one template
     job 2's ledger could not read: 43,120 slots, 0 cross-copy, 0 overlaps, windows re-derived 12 of 12.
 
