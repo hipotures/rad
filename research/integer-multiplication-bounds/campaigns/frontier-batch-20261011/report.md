@@ -1,8 +1,9 @@
 # Frontier batch 2026-10-11: results
 
 Operator runs on the shared host (16 cores, 2 x RTX 4090, Python 3.14.7),
-campaign commit `01db37d2` (jobs 1-3) and the follow-up job 4 at `77950181` and
-`213f503d`, clean tree each time. All runs finished with exit 0.
+campaign commit `01db37d2` (jobs 1-3), the follow-up job 4 at `77950181` and
+`213f503d`, and job 5 at `9eea85ed`, clean tree each time. All runs finished
+with exit 0.
 
 | Run | Wall time | Outcome |
 |---|---|---|
@@ -10,6 +11,7 @@ campaign commit `01db37d2` (jobs 1-3) and the follow-up job 4 at `77950181` and
 | `20261011T202331Z-job2` | 23.6 min (15 parallel) | 34 of 39 replays pass |
 | `20261011T205141Z-job3` | 49 s | E8 price validation matches #370 |
 | `20261011T211954Z-job4`, `20261011T213109Z-job4` | 5.8 + 3.7 min | 5 of 5 repair replays pass (section 5) |
+| `20261011T220322Z-job5` | 19.3 min (9 parallel) | 8 of 9 newer frontier packages pass, one after the job 4 repair (section 6) |
 
 The evidence is in [evidence/](evidence/) as gzip copies; the full outputs and
 worktrees stay in `RAD_WORK_ROOT` (see [Evidence](#evidence)).
@@ -207,21 +209,140 @@ verifier's own exclusion rule.
 - The job 2 failures were a packaging defect, not a computational one.
 - All results remain conditional on the authors' declared interfaces.
 
+## 6. Fresh replays of the newer frontier (job 5)
+
+**Question.** Do the nine frontier packages opened after job 2 was pinned
+reproduce with their authors' verifiers? Which complex supplier does each claim
+bind to? Does the hosting in their templates pass our independent ledger? The
+packages are #484 and #495-#502, pinned on 2026-10-11 at 21:54 UTC.
+
+**Method.**
+- **Replays.** Job 2's procedure is unchanged: a fresh worktree, a fresh output
+  directory and the author's entry point. A second attempt, job 4's repair
+  replay, runs only if a package stops at its own integrity assertion. It is
+  recorded separately under `repair/`.
+- **Claim check.** `checks/pr-N.json` searches every output JSON under 5 MB for
+  the claimed value. JSON numbers are parsed as exact decimals. The claim is the
+  title kappa, or #484's b because #484 claims no kappa.
+- **Ledger.** `code/job5_hosting_ledger.py` reuses job 2's checks. It adds
+  #471's two layouts, #496's `pooled_slots` and a per-call owner summary.
+- **Controls.** A synthetic smoke test passes 12 of 12 checks. The pooled audit
+  flags 6 of 6 mutation controls (`analysis/ledger-mutations.txt`).
+
+**Replays** (run `20261011T220322Z-job5`, 9 in parallel, 19.3 min):
+
+| PR | Claim | Result | Binding side (exact lower bound) | Wall |
+|---|---|---|---|---|
+| #484 | b = 1.326789535340266e-3 (supplier only) | pass, exact | complex, its own b | 767 s |
+| #495 | 1.307044366925301e-3 | pass, exact | complex (`binding_component`) | 193 s |
+| #496 | 1.332077359286333e-3 | pass, exact | complex b = 133385415620840915601/10^23 (pooled #484 word) | 794 s |
+| #497 | 1.325117552367841e-3 | pass, exact | complex b = 1326875818805153/10^18 (re-packed #484 word) | 836 s |
+| #498 | 1.301970637653655e-3 | as-is: integrity failure; repair: pass, exact | bit c ~ 1.303668e-3; its complex b is #471's 1305231506267591/10^18 | 0.2 + 256 s |
+| #499 (cross-copy) | 1.452948511251494e-3 | pass, exact | complex b = 1455062642351477/10^18 (cross-copy slot) | 416 s |
+| #500 | 1.308501945841842e-3 | pass, exact (no `EXPECTED.json` at the pin) | complex b = 1310216366506891/10^18 (#471's footprint rule) | 761 s |
+| #501 | 1.343518018117309e-3 | **fail** at its own source-word pin (below) | - | 817 s |
+| #502 | 1.343518018117309e-3 | pass, exact | complex b = 1345325487149526878087/10^24 | 1131 s |
+
+The bit side of #496, #497, #499 and #502 is #493's freshly rebuilt
+c = 391360506745414227149/(2.5*10^23), about 1.565442e-3.
+
+**#498: the same packaging defect as job 4.** Its manifest lists a
+`.gitattributes` that the commit lacks. The job 4 deviation (log line
+`remaining_equal=True`) is the only change, and with it the package passes
+with the exact title kappa.
+
+**#501: not reproduced from fresh sources.**
+- **Where it stops.** The verifier stops in `apply-frame-map`, after both
+  suppliers have passed. `apply_retime.py` requires the canonical-JSON SHA-256
+  of the freshly built #484 `gauge80-kernel42` FULL-WORD to equal the pin in
+  `data/RETIME-FRAMES.json.gz`, `52f89042...`.
+- **Our builds agree with each other but not with the pin.** Six independent
+  builds of that word in this run all give `6d5ce907...`: inside #484, #496,
+  #497, #500, #501 and #502. Their portable CANONICAL-WORD hash `c85d1438...`
+  is the one #484's own `EXPECTED.json` pins, and #484 passes.
+- **The float hypothesis fails.** We tested whether last-bit float differences
+  in the word's three report floats could explain the pin. No combination
+  within ±8 ulps matches (4,913 tried).
+- **The author's input differs.** The author's provenance names a macOS build,
+  `/private/tmp/pr484-independent-full-proof/...`, with yet another file hash.
+- **Cause unknown.** Most likely the frame map was frozen against a word that
+  differs from the published #484 source. This is a diagnosis, not a proven
+  cause (`code/job5_pr501_word_check.py`, `analysis/pr501-source-word.json`).
+- **#502 reaches the same value independently.** It has the same kappa and the
+  same paid profile, reached by a different frame transfer, and it passes.
+
+**Ledger** (`analysis/hosting-ledger.txt`):
+- **Overall.** 56 templates were read, 45 with a hosting section, of which 43
+  were parsed. Across them there are 0 overlaps, 0 duplicate helpers, 0
+  intervals outside a child's rank and 0 rows outside the stored or re-derived
+  window. No window disagrees, and no owner entry repeats within a call.
+- **#471's complex template now parses and is clean.** It was the one
+  template job 2's ledger could not read, and it is the binding input of #493
+  and #498. It has 43,120 slots, 0 cross-copy, and windows re-derived 12 of 12.
+- **Cross-copy appears only where expected.** Its only occurrence is #494's
+  complex template inside #499: 1,715 of 5,040 residuals, as in #448.
+- **#496's pooled allocation, which #502 also uses, is clean.**
+  - 40,320 helper occurrences, each hosted exactly once.
+  - 35,280 of them (87.5%) on a family of another replica.
+  - At most one helper per family per call.
+  - Family numbering is consistent on every slot.
+  - Every hosted child is tiled exactly: 5,392 fully hosted and 8,992 with a
+    paid remainder.
+  - Every slot lies inside the window re-derived from the cover-sweep schedule.
+- **Several owners in one family are standard.** Within one call this is the
+  norm in the bank templates of the main lineage and in #442's hosted bit
+  templates (for example 8,916 shared families in #493's bit template). #471
+  and #500 apply it to complex hosts: 9,160 and 9,576, at most 5-7 per family.
+  It is not a new admission. Different routes give different cover classes,
+  so the registers stay distinct.
+- **Not parsed:**
+  - #495's `complex-eleven-hosted-v1`, which has no slot rows;
+  - #499's hybrid cross-copy template, which has 5-field rows;
+  - #498's `nonroot-paired-whole-owner-v1`, which has owners only: 60,984
+    coordinate-whole and 1,936 paired-rational. Its pairs are checked only by
+    its author's verifier.
+
+**Result.**
+- **Top claim.** The top claim without cross-copy that reproduces here is
+  #502 at 1.343518018117309e-3, 3.07% above #493.
+- **What it rests on.**
+  - #484's gauge/kernel word, conditional on #484's Lemma A (the global
+    spectator realisation) and Lemma G;
+  - #495's retiming;
+  - #496's cross-replica pooled allocation, which passes our ledger;
+  - #493's bit word.
+- **Without Lemma G.** The best reproduced claim is #500 at
+  1.308501945841842e-3. It uses #471's footprint rule, which is the standard
+  bank mechanism.
+- **Conditions.** Everything remains conditional on the authors' declared
+  interfaces and on the hosting lemma (#442 §2), which is still unreviewed.
+- **Newer claims not replayed.** During the run, #503, #504 and #505 appeared;
+  #505 claims 1.357701757628940e-3.
+
 ## Recommended next steps
 
-1. #493 (1.30353e-3) is the top claim without cross-copy. Its verifier and its
-   binding complex input (#471, job 4) both reproduce. The open item is the
-   idle-data hosting lemma (#442 §2), which is still unreviewed upstream;
-   the user deferred that audit.
+1. #502 (1.343518e-3) is the top reproduced claim without cross-copy (job 5).
+   #493 (1.30353e-3) and its binding input #471 also reproduce. Two items
+   separate these tiers from a reviewed result:
+   - #484's Lemma A and Lemma G, which are the review points its author names;
+   - the idle-data hosting lemma (#442 §2), which is still unreviewed upstream
+     and whose audit the user deferred.
+
+   Further replays have diminishing value while new claims appear every 30-60
+   minutes.
 2. The cross-copy finding was posted upstream on 2026-10-11, on
    [#448](https://github.com/CrocSwap/integer-mult-bounds/pull/448#issuecomment-6113791847)
    and [#480](https://github.com/CrocSwap/integer-mult-bounds/pull/480#issuecomment-6113805810)
    ([texts](upstream-comments/)). The author accepted it and retitled #448,
    #480 and #494 as not established
    ([replies](upstream-comments/README.md#replies-checked-2026-10-11-2140-utc)).
-3. The five Dugongue packages would pass without any deviation if their
-   commits included the `.gitattributes` listed in their manifests. This could
-   be mentioned to the author; nothing has been posted.
+3. The five Dugongue packages of job 4, and #498, would pass without any
+   deviation if their commits included the `.gitattributes` listed in their
+   manifests. This could be mentioned to the author; nothing has been posted.
+4. #501's frame map pins a source word that a fresh build of the published
+   #484 source does not produce. Our six builds agree with each other and with
+   #484's own pin. This could be reported to #501's author with
+   `analysis/pr501-source-word.json`; nothing has been posted.
 
 ## Evidence
 
@@ -239,3 +360,14 @@ verifier's own exclusion rule.
   `/srv/ai/work/rad/integer-multiplication-bounds/frontier-batch-20261011/runs/`.
 - Ledger regeneration:
   `python3 code/job2_hosting_ledger.py --run <job2 run> --out <file>` (17 s).
+- Job 5 publishes 318 files (0.57 MB gzip):
+  - records, replay logs, `checks/`, `SUMMARY.json`;
+  - receipt/result/audit/failure JSON from `out/` and `repair/out/`;
+  - `analysis/`: the ledger, the mutation controls and the #501 diagnosis.
+
+  Not published: the worktrees (1.7 GB) and bulk outputs (0.8 GB), which stay in
+  the run directory. Regenerate them:
+  - the run: `./run.sh 5`;
+  - the ledger: `python3 code/job5_hosting_ledger.py --run <job5 run> --run <job4 runs> --out <file>` (10 s);
+  - the controls: `python3 code/test_job5_ledger_mutations.py <#496 hosted template>` (2 s);
+  - the #501 diagnosis: `python3 code/job5_pr501_word_check.py --run <job5 run> --out <file>` (2 s).

@@ -23,7 +23,10 @@ The offline [frontier batch of 2026-10-11](campaigns/frontier-batch-20261011/REA
 reproduced 34 of 39 pinned claims; the other 5 reproduce once one absent
 manifest file is tolerated. Its top claim without cross-copy is #493 at
 1.30353e-3, and #493's binding complex input (#471) reproduces. Its cross-copy claims rest on split residuals, which our
-exact stream model rejects as unpriced. See the [report](campaigns/frontier-batch-20261011/report.md).
+exact stream model rejects as unpriced.
+Follow-up job 5 reproduced the newer frontier: #502 at 1.343518e-3 is the top
+reproduced claim without cross-copy, conditional on #484's Lemma A and Lemma G.
+#501 (same value) fails from fresh sources at its own source-word pin. See the [report](campaigns/frontier-batch-20261011/report.md).
 The campaign sections below are historical.
 
 ## Current campaign

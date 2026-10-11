@@ -48,6 +48,75 @@ def rows_of(hosting):
 L.rows_of = rows_of  # audit() looks the layout reader up at call time
 
 
+def audit_pooled(t):
+    """#496's cross-replica whole-owner layout (`hosting.pooled_slots`), checked from the template alone.
+
+    Every hosted (child, family) must be tiled exactly from coordinate 0: up to the stated `hosted` count when a
+    paid remainder record exists (remainder at pending_offset == hosted), else over the child's whole rank.
+    Family numbering is inferred, then verified on every slot: family = replica*F + (2*pair+side)*P
+    + port, with P = ports and F = 4*2*P families per replica. Windows are re-derived from the cover-sweep schedule:
+    a child of pair p admits the stages of local sweeps strictly between the last local sweep or bridge touching p
+    and the child's idle sweep, on stages whose active pair (from `calls`) is not p.
+    """
+    ho, slots = t['hosting'], t['hosting']['pooled_slots']
+    P = 1 + max(s['port'] for s in slots)
+    F = 8 * P
+    pair_of_stage = {}
+    for c in t['calls']:
+        assert pair_of_stage.setdefault(c['stage'], c['pair']) == c['pair']
+    last, allowed, child_pair, local_stages = {}, {}, {}, []
+    for pos, e in enumerate(t['execution_schedule']):
+        k = e.get('kind')
+        if k == 'local_cover_sweep':
+            local_stages.append((pos, e['stage']))
+            last[pair_of_stage[e['stage']]] = pos
+        elif k == 'bridge':
+            last[e['src']] = last[e['dst']] = pos
+        elif k == 'idle_cover_sweep':
+            lo = last.get(e['pair'], -1)
+            for ci in e['child_indices']:
+                child_pair[ci] = e['pair']
+                allowed[ci] = {s for q, s in local_stages if lo < q < pos and pair_of_stage[s] != e['pair']}
+    helper = Counter((s['stage'], s['replica'], s['helper']) for s in slots)
+    per_call = Counter((s['stage'], s['replica'], s['family']) for s in slots)
+    remainder = {(r['child'], r['family']): r for r in t['idle_children']}
+    coords, bad_family, bad_window, outside = defaultdict(list), 0, 0, 0
+    for s in slots:
+        f = s['family']
+        rep, pair, port = f // F, (f % F) // (2 * P), f % P
+        bad_family += (rep != s['owner_replica'] or port != s['port'] or pair != child_pair.get(s['child']))
+        bad_window += s['stage'] not in allowed.get(s['child'], ())
+        coords[(s['child'], f)].append((s['offset'], s['offset'] + s['width']))
+    child_rank = defaultdict(set)
+    for (ci, f), r in remainder.items():
+        child_rank[ci].add(r['hosted'] + r['rank'])
+    overlaps = fully_hosted = 0
+    for key, iv in coords.items():
+        iv.sort()
+        overlaps += sum(a[1] > b[0] for a, b in zip(iv, iv[1:]))
+        tiles = iv[0][0] == 0 and all(a[1] == b[0] for a, b in zip(iv, iv[1:]))
+        r = remainder.get(key)
+        if r is None:  # no paid remainder: the hosted intervals must tile the whole child
+            fully_hosted += 1
+            ranks = child_rank.get(key[0], set())
+            outside += not (tiles and len(ranks) == 1 and iv[-1][1] == next(iter(ranks)))
+        else:          # hosted [0, hosted), paid remainder [hosted, hosted + rank)
+            outside += not (tiles and iv[-1][1] == r['hosted'] == r['pending_offset'])
+    return dict(version=t.get('version'), layout='pooled_slots', parsed=True, hosted_residuals=len(slots),
+                hosted_coordinates=sum(s['width'] for s in slots), cross_copy_residuals=0,
+                helpers_in_more_than_one_row=sum(n > 1 for n in helper.values()),
+                distinct_helper_occurrences=len(helper),
+                cross_replica_slots=sum(s['owner_replica'] != s['replica'] for s in slots),
+                helpers_per_family_per_call_max=max(per_call.values()),
+                family_numbering_mismatches=bad_family, interval_overlaps=overlaps,
+                children_fully_hosted=fully_hosted, children_with_paid_remainder=len(coords) - fully_hosted,
+                intervals_outside_child_rank=outside, rows_outside_stored_window=bad_window,
+                child_ranks_constant=all(len(v) == 1 for v in child_rank.values()),
+                window_rederivation=dict(children=len(allowed), mismatched_children=[], n_mismatched=0,
+                                         note='windows are not stored in this layout; rows_outside_stored_window '
+                                              'counts slots outside the re-derived window'))
+
+
 def owner_summary(t):
     calls = t.get('calls')
     if not isinstance(calls, list) or not calls or not isinstance(calls[0], dict) or 'owners' not in calls[0]:
@@ -96,7 +165,13 @@ def main():
                 raw = p.read_bytes()
                 assert hashlib.sha256(raw).hexdigest() == tpl['sha256'], p
                 t = json.loads(gzip.decompress(raw) if p.name.endswith('.gz') else raw)
-                res = L.audit(t) if isinstance(t.get('hosting'), dict) else dict(version=t.get('version'), layout=None)
+                ho = t.get('hosting')
+                if isinstance(ho, dict) and 'pooled_slots' in ho:
+                    res = audit_pooled(t)
+                elif isinstance(ho, dict):
+                    res = L.audit(t)
+                else:
+                    res = dict(version=t.get('version'), layout=None)
                 own = owner_summary(t)
                 if own is not None:
                     res['owners'] = own

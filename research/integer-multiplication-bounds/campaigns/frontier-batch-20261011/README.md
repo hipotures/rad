@@ -14,10 +14,17 @@ the [results report](report.md). In brief:
   ([replies](upstream-comments/README.md#replies-checked-2026-10-11-2140-utc)).
 - Only E8 (and implausibly Leech) can drive #370's template.
 
-Follow-up **job 5 is prepared and awaits the operator run**. It replays the
-frontier claims opened after job 2 was pinned: #484 and #495-#502, nine
-packages at heads pinned 2026-10-11 21:54 UTC. Their tops are #501 and #502 at
-1.343518e-3 without cross-copy.
+Follow-up **job 5** replayed the nine frontier packages opened after job 2
+was pinned: #484 and #495-#502, at heads pinned 2026-10-11 21:54 UTC
+([report section 6](report.md#6-fresh-replays-of-the-newer-frontier-job-5)).
+- 8 of 9 pass with the exact claimed value. #498 needs job 4's
+  `.gitattributes` repair.
+- #502 at 1.343518e-3 is the top reproduced claim without cross-copy. It is
+  conditional on #484's Lemma A and Lemma G.
+- #501 claims the same value, but it fails from fresh sources: its frame map
+  pins a #484 source word that six identical builds here do not produce.
+- Our ledger finds the hosting clean, including #496's cross-replica pooling
+  and #471's complex template.
 
 See [GOAL.md](GOAL.md) for the brief and completion criteria.
 
@@ -104,4 +111,6 @@ These smoke tests are not the results; the operator's runs are authoritative.
 - `evidence/`: created by `pack.sh` after the runs
 - `code/job2_hosting_ledger.py`: agent's post-hoc independent ledger of the hosted templates
 - `code/job5_hosting_ledger.py`: its extension for job 5 (#471's layouts, per-call owner summary)
+- `code/test_job5_ledger_mutations.py`: mutation controls of the pooled-slot audit
+- `code/job5_pr501_word_check.py`: diagnosis of #501's source-word pin
 - `report.md`: results and interpretation
