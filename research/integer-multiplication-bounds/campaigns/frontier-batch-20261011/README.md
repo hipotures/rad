@@ -14,6 +14,11 @@ the [results report](report.md). In brief:
   ([replies](upstream-comments/README.md#replies-checked-2026-10-11-2140-utc)).
 - Only E8 (and implausibly Leech) can drive #370's template.
 
+Follow-up **job 5 is prepared and awaits the operator run**. It replays the
+frontier claims opened after job 2 was pinned: #484 and #495-#502, nine
+packages at heads pinned 2026-10-11 21:54 UTC. Their tops are #501 and #502 at
+1.343518e-3 without cross-copy.
+
 See [GOAL.md](GOAL.md) for the brief and completion criteria.
 
 This campaign continues the
@@ -32,6 +37,7 @@ export RAD_WORK_ROOT=/srv/ai/work/rad/integer-multiplication-bounds/frontier-bat
 ./run.sh 2         # about 1-3 hours, uses all cores
 ./run.sh 3         # about 2 minutes, CPU + one GPU
 ./run.sh 4         # follow-up: repair replays of 5 packages, about 30 minutes
+./run.sh 5         # follow-up: fresh replays of the 9 newer frontier packages, about 1 hour
 ./run.sh status
 ```
 
@@ -59,6 +65,7 @@ export RAD_WORK_ROOT=/srv/ai/work/rad/integer-multiplication-bounds/frontier-bat
 | 1 | Is cross-copy hosting (#448) a program of the fixed local word when each register is bound to one stream? | [job1_stream_model.py](code/job1_stream_model.py) | 1 core, seconds |
 | 2 | Do 39 pinned frontier claims reproduce from a fresh checkout with their authors' own verifiers? | [job2_replays.py](code/job2_replays.py), [config](configs/job2-replays.json) | all cores; replays are single-threaded and run concurrently |
 | 3 | Can any other root system or lattice replace E8 in #370's five-stage bit template? | [job3_lattice_screen.py](code/job3_lattice_screen.py) | CPU; the exact Leech span check uses a free GPU, else CPU |
+| 5 (follow-up) | Do the 9 frontier claims opened after job 2's pinning (#484, #495-#502) reproduce with their authors' verifiers? Which complex supplier b does each bind to? A repair attempt runs only under job 4's condition (#498 lists an absent `.gitattributes`). | [job5_replays.py](code/job5_replays.py), [config](configs/job5-replays.json), [smoke test](code/test_job5_smoke.py) | 9 replays in parallel |
 | 4 (follow-up) | Do #471/#476/#478/#483/#492 reproduce when the one missing manifest key (`.gitattributes`) is tolerated? #471's complex b caps #493 and feeds #473/#490/#491. | [job4_repair_replays.py](code/job4_repair_replays.py), [job4_launcher.py](code/job4_launcher.py) | 5 cores, one replay each |
 
 ## Pre-run smoke tests (agent, 2026-10-11)
@@ -78,6 +85,16 @@ These smoke tests are not the results; the operator's runs are authoritative.
   masks has rank 2599, confirmed by an exact check of all 98,280 rows on the GPU
   (38 s in total).
 
+- **Job 5** (2026-10-11, before the operator run):
+  - `code/test_job5_smoke.py` passes 12 of 12 checks on a synthetic repository. They cover the as-is pass, the
+    `.gitattributes` repair, a declined repair, a computational failure, exact versus 1e-19-close decimals,
+    `a/10^k` strings, JSON numbers parsed exactly, and the `{BOOST}` substitution.
+  - On the real packages, #498 failed as-is at its integrity assertion, as predicted. Its repair attempt passed
+    in 225 s with the exact title kappa, and its `complex_lower` is #471's b. #496 passed its Boost probe with
+    the substituted `--boost-include` and ran its suppliers.
+  - `code/job5_hosting_ledger.py` on the job 4 outputs now parses #471's complex template, the one template
+    job 2's ledger could not read: 43,120 slots, 0 cross-copy, 0 overlaps, windows re-derived 12 of 12.
+
 ## Layout
 
 - `run.sh`, `pack.sh`: operator entry points
@@ -85,4 +102,5 @@ These smoke tests are not the results; the operator's runs are authoritative.
 - `configs/`: pinned replays, Python requirements
 - `evidence/`: created by `pack.sh` after the runs
 - `code/job2_hosting_ledger.py`: agent's post-hoc independent ledger of the hosted templates
+- `code/job5_hosting_ledger.py`: its extension for job 5 (#471's layouts, per-call owner summary)
 - `report.md`: results and interpretation

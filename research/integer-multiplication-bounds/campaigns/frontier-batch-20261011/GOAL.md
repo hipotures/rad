@@ -36,6 +36,18 @@ pack, commit and push.
   recommended next step. Evidence is packed with `pack.sh`, committed and
   pushed only after review.
 
+## Follow-up objectives (added 2026-10-11)
+
+4. **Job 4.** Repair replays of the five packages that failed job 2 only
+   because their manifests list an absent `.gitattributes`.
+5. **Job 5.** After the upstream author retitled #448, #480 and #494 as not
+   established, the open frontier without cross-copy moved to nine newer
+   packages: #484 and #495-#502. Rerun their authors' verifiers fresh, record
+   which complex supplier each claim binds to, and give the agent's post-hoc
+   audit the emitted templates. The audit checks the new hosting admissions
+   per call: footprint sharing (#471, #498, #500) and pooled cross-replica
+   owners (#496, #501, #502).
+
 ## Constraints
 
 - Inputs are pinned by commit SHA; open PR heads move every hour.

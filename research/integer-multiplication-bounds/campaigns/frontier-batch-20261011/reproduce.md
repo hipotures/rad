@@ -38,5 +38,26 @@ Follow-up job 4 (repair replays; one documented deviation applied in memory, wor
 ./run.sh 4          # TIMEOUT_MIN=<m>, ONLY=<pr,pr> optional
 ```
 
-Expected check: each record has `eligible: true` (the package differs from its manifest only by the absent
+Follow-up job 5 (fresh replays of #484 and #495-#502; repair attempt only under job 4's condition):
+
+```bash
+./run.sh test5      # synthetic smoke test of the harness, under a second, no network
+./run.sh 5          # TIMEOUT_MIN=<m> (default 180), ONLY=<pr,pr> optional
+```
+
+Expected checks: `SUMMARY.json` has 9 rows and `harness_errors: 0`. Each
+`checks/pr-N.json` states whether the claimed value (the title kappa, or #484's
+configured b) occurs exactly in the passing attempt's outputs. A repair attempt
+appears only under `repair/`, with its own worktree, output directory and record.
+
+Post-hoc ledger of job 5's templates (agent analysis; job 2's checks plus #471's 9-field slots, replica-pooled
+pieces and a per-call owner summary). Pass the job 4 runs as well to include #471:
+
+```bash
+python3 code/job5_hosting_ledger.py --run "$RAD_WORK_ROOT/runs/<UTC>-job5" \
+  --run "$RAD_WORK_ROOT/runs/20261011T211954Z-job4" --run "$RAD_WORK_ROOT/runs/20261011T213109Z-job4" \
+  --out "$RAD_WORK_ROOT/runs/<UTC>-job5/analysis/hosting-ledger.json"
+```
+
+For job 4, expected check: each record has `eligible: true` (the package differs from its manifest only by the absent
 `.gitattributes`) and a `# JOB4 DEVIATION ... remaining_equal=True` line in its log.

@@ -7,6 +7,7 @@
 #   ./run.sh 2         # parallel fresh replays of 39 pinned upstream claims (~1-3 h, all cores)
 #   ./run.sh 3         # exact lattice/root-system screen incl. Leech          (~2 min, CPU+GPU)
 #   ./run.sh 4         # repair replays of #471/#476/#478/#483/#492, one documented deviation (~30 min)
+#   ./run.sh 5         # fresh replays of #484 and #495-#502 (new frontier), repair only if job 4's condition (~1 h)
 #   ./run.sh status    # what has finished
 #
 # Every job writes to a fresh $RAD_WORK_ROOT/runs/<UTC>-job<N>/ and never deletes
@@ -29,16 +30,20 @@ stamp() { date -u +%Y%m%dT%H%M%SZ; }
 say() { printf '[%s] %s\n' "$(date -u +%H:%M:%S)" "$*"; }
 die() { say "PREFLIGHT FAILED: $*" >&2; exit 3; }
 
-pinned_shas() {
-  "$PY" -c 'import json,sys; print("\n".join(r["sha"] for r in json.load(open(sys.argv[1]))["replays"]))' "$CONF/job2-replays.json"
-  echo "$PR370_SHA"
+pinned_shas() {  # $1 = replay config (default: job 2's, plus the #370 producer)
+  "$PY" -c 'import json,sys; print("\n".join(r["sha"] for r in json.load(open(sys.argv[1]))["replays"]))' "${1:-$CONF/job2-replays.json}"
+  [ -n "${1:-}" ] || echo "$PR370_SHA"
+}
+config_prs() {  # $1 = replay config
+  "$PY" -c 'import json,sys; print(" ".join(str(r["pr"]) for r in json.load(open(sys.argv[1]))["replays"]))' "$1"
 }
 
 preflight() {  # $1 = job
   [ -x "$PY" ] || die "missing $PY (run ./run.sh setup)"
   "$PY" - "$1" <<'EOF' || die "python environment"
 import sys, importlib
-mods = {'1': ['numpy'], '2': ['numpy', 'scipy', 'sympy', 'mpmath'], '3': ['numpy']}[sys.argv[1]]
+mods = {'1': ['numpy'], '2': ['numpy', 'scipy', 'sympy', 'mpmath'], '3': ['numpy'],
+        '5': ['numpy', 'scipy', 'sympy', 'mpmath']}[sys.argv[1]]
 for m in mods:
     importlib.import_module(m)
 assert sys.version_info >= (3, 11), sys.version
@@ -47,7 +52,10 @@ EOF
   if [ "$1" != 1 ]; then
     for s in $(pinned_shas); do git -C "$CLONE" cat-file -e "$s^{commit}" 2>/dev/null || die "commit $s not in clone (run ./run.sh setup)"; done
   fi
-  if [ "$1" = 2 ]; then
+  if [ "$1" = 5 ]; then
+    for s in $(pinned_shas "$CONF/job5-replays.json"); do git -C "$CLONE" cat-file -e "$s^{commit}" 2>/dev/null || die "commit $s not in clone (run ./run.sh setup)"; done
+  fi
+  if [ "$1" = 2 ] || [ "$1" = 5 ]; then
     command -v g++ >/dev/null || die "g++ not found (some upstream packages compile C++)"
     [ -d "${BOOST_INCLUDE:-/usr/include}/boost" ] || die "Boost headers not found; set BOOST_INCLUDE"
     free_gb=$(df -Pk "$ROOT" | awk 'NR==2{print int($4/1048576)}')
@@ -91,13 +99,13 @@ case "${1:-}" in
     [ -x "$PY" ] || uv venv -q "$ROOT/envs/batch" --python 3.14
     uv pip install -q --python "$PY" -r "$CONF/requirements.txt"
     [ -d "$CLONE/.git" ] || git clone -q --no-checkout "$UPSTREAM" "$CLONE"
-    for n in $("$PY" -c 'import json,sys; print(" ".join(str(r["pr"]) for r in json.load(open(sys.argv[1]))["replays"]))' "$CONF/job2-replays.json") 370; do
+    for n in $(config_prs "$CONF/job2-replays.json") 370 $(config_prs "$CONF/job5-replays.json"); do
       git -C "$CLONE" fetch -q origin "pull/$n/head:refs/remotes/pr/$n" || say "warning: could not fetch PR $n head"
     done
-    for s in $(pinned_shas); do
+    for s in $(pinned_shas) $(pinned_shas "$CONF/job5-replays.json"); do
       git -C "$CLONE" cat-file -e "$s^{commit}" 2>/dev/null || git -C "$CLONE" fetch -q origin "$s" || say "warning: pinned $s unavailable"
     done
-    for j in 1 2 3; do preflight "$j"; done
+    for j in 1 2 3 5; do preflight "$j"; done
     ;;
   1)
     preflight 1; RUN=$(new_run 1); set +e
@@ -123,11 +131,20 @@ case "${1:-}" in
       --python "$PY" --timeout-min "${TIMEOUT_MIN:-150}" ${ONLY:+--only "$ONLY"} 2>&1 | tee "$RUN/job4.log"
     rc=${PIPESTATUS[0]}; set -e; finish "$RUN" "$rc"
     ;;
+  5)
+    preflight 5; RUN=$(new_run 5); set +e
+    "$PY" -B "$CODE/job5_replays.py" --config "$CONF/job5-replays.json" --clone "$CLONE" --work "$RUN" \
+      --python "$PY" --timeout-min "${TIMEOUT_MIN:-180}" ${ONLY:+--only "$ONLY"} 2>&1 | tee "$RUN/job5.log"
+    rc=${PIPESTATUS[0]}; set -e; finish "$RUN" "$rc"
+    ;;
+  test5)
+    "$PY" -B "$CODE/test_job5_smoke.py"
+    ;;
   status)
     for d in "$ROOT"/runs/*-job*; do
       [ -d "$d" ] || continue
       "$PY" -c 'import json,sys; d=json.load(open(sys.argv[1]+"/protocol.json")); print(sys.argv[1].rsplit("/",1)[-1], "finished" if "finished_utc" in d else "RUNNING/INTERRUPTED", "exit=%s" % d.get("exit_code"))' "$d"
     done
     ;;
-  *) sed -n '2,14p' "$0"; exit 2;;
+  *) sed -n '2,15p' "$0"; exit 2;;
 esac

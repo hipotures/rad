@@ -34,7 +34,8 @@ for p in sorted(run.rglob('*')):
     if not p.is_file() or p.suffix not in ('.json', '.jsonl', '.log', '.txt'):
         continue
     rel = p.relative_to(run)
-    top = rel.parts[0]
+    parts = rel.parts[1:] if rel.parts[0] == 'repair' else rel.parts  # job 5 repair attempts
+    top = parts[0]
     if top in ('trees', 'tmp', 'pr370'):
         continue
     if top == 'out':
