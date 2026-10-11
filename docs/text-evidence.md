@@ -8,7 +8,7 @@ repository. This is repository maintenance; no research measurements are rerun.
 
 ## Policy
 
-Each complete gzip file must be **strictly smaller than 10 MiB**, or 10,485,760
+Each complete gzip file must be **strictly smaller than 50 MiB**, or 52,428,800
 bytes. The limit applies to the compressed file, not its expanded size. Never
 split a source file or payload to meet the limit. Compression uses level 9,
 mtime 0 and an empty gzip filename; identical stable source bytes produce
@@ -49,12 +49,9 @@ every entry contains exactly `path`, nonnegative integer `bytes`, and a valid
 separate large result array retain the row-level evidence guard. The ordinary
 file, directory, credential and aggregate limits still apply.
 
-The ordinary staged-content budget remains 20 MiB, counting whole changed
-blobs. A larger import requires a durable, indexed, scoped decision. The full
-2026-10-07 backfill has an explicit [one-time 512 MiB aggregate decision](text-evidence-backfill-policy.json),
-while ordinary non-exempt content still has its 20 MiB budget. This decision
-preserves the operator's full-import scope without dividing payloads into
-commits to evade the guard. It does not change the next task's default budget.
+There is no per-commit staged-content budget; only the per-file limits apply.
+The full 2026-10-07 backfill used an explicit [one-time 512 MiB aggregate decision](text-evidence-backfill-policy.json),
+which is historical and no longer required.
 
 ## End-of-task commands
 

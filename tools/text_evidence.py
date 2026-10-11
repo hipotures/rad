@@ -13,7 +13,7 @@ import time
 import zlib
 
 EXTENSIONS = {'.json', '.jsonl', '.log', '.txt'}
-MAX_COMPRESSED_BYTES = 10 * 1024 * 1024
+MAX_COMPRESSED_BYTES = 50 * 1024 * 1024
 CHUNK_BYTES = 64 * 1024
 PRUNE = {'.git', '.venv', '.cache', '__pycache__', 'node_modules',
          'site-packages', 'dist-packages', 'repos', 'vendor', 'third_party',

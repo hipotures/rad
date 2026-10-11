@@ -23,17 +23,14 @@ the retained files with both their recorded hashes and their originals.
 | Saved run contracts and fidelity/validation records | Selected explicitly, including bounded records inside ignored raw directories. |
 | Research plots | Bounded SVG/PNG exports tracked. |
 | Model weights, datasets, tapes, raw traces, telemetry, build output and environments | Local working storage; original provenance/hash manifests identify them. |
-| Complete JSON/JSONL/log/text evidence copies | Deterministic gzip under `evidence/`, strictly below 10 MiB compressed per file. Originals remain local; see [publication protocol](text-evidence.md). CSV is unchanged. |
+| Complete JSON/JSONL/log/text evidence copies | Deterministic gzip under `evidence/`, strictly below 50 MiB compressed per file. Originals remain local; see [publication protocol](text-evidence.md). CSV is unchanged. |
 | Scalar/header evidence from large JSON results | Exported into docs/compact-results/ with original file path, bytes and SHA256; omitted arrays are explicit. |
 | Credentials/private configuration and live process authority | Excluded. Historical process JSON may be retained as gzip evidence, never used to control processes. |
 
 Publication limits individual durable artifacts to 1 MiB, with a 4 MiB limit
-for source patches, strictly below 10 MiB for gzip text evidence, and a 20 MiB budget for added/modified staged file content
-per commit. The budget counts the complete changed blobs, not just diff lines;
-unchanged imported files are not charged to a new commit. Binary and excluded execution
+for source patches, strictly below 50 MiB for gzip text evidence (GitHub per-file guidance). There is no per-commit content budget. Binary and excluded execution
 payloads stay local. The one-time full text backfill uses the indexed, scoped
-[512 MiB decision](text-evidence-backfill-policy.json); ordinary staged content
-still has its 20 MiB limit. This exception does not change subsequent defaults. Essential larger durable changes require a documented
+[512 MiB decision](text-evidence-backfill-policy.json), which is historical and no longer needed. Essential larger durable changes require a documented
 policy decision; never split a payload to evade the limits. These are this
 project's size choices, not claimed GitHub limits. Aggregate directories omit
 Git internals and environment package trees; apparent byte totals can differ

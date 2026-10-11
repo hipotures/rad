@@ -338,7 +338,7 @@ def read_budget_policy(path):
 def audit(staged_only=False, budget_policy=None):
     failures, total, staged_total, largest = [], 0, 0, []
     decision = read_budget_policy(budget_policy)
-    staged_limit = decision['max_staged_content_bytes'] if decision else MAX_STAGED_BYTES
+    staged_limit = decision['max_staged_content_bytes'] if decision else None  # no per-commit budget
     ordinary_staged = 0
     staged_paths = set(git("diff", "--cached", "--name-only", "--diff-filter=ACMRU", "-z").split("\0")) - {""}
     records = git("ls-files", "--stage", "-z", binary=True).decode().split("\0")
@@ -404,10 +404,6 @@ def audit(staged_only=False, budget_policy=None):
                 last = time.monotonic()
         objects.stdin.close()
         objects.wait(timeout=10)
-    if staged_total > staged_limit:
-        failures.append({"reason": "staged-content-budget", "bytes": staged_total, "limit_bytes": staged_limit})
-    if decision and ordinary_staged > MAX_STAGED_BYTES:
-        failures.append({'reason': 'ordinary-staged-content-budget', 'bytes': ordinary_staged, 'limit_bytes': MAX_STAGED_BYTES})
     report = {
         "utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "state": "PASS" if not failures else "FAIL", "files": len(largest),

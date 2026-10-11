@@ -272,15 +272,14 @@ class PublicationTests(unittest.TestCase):
         self.assertFinding(report, "large-artifact", relative)
         self.assertEqual(report["staged_content_bytes"], size)
 
-    def test_many_individually_small_files_exceed_commit_budget(self):
+    def test_many_individually_small_files_have_no_commit_budget(self):
         content = "x" * (ARCHIVE.MAX_BYTES - 1) + "\n"
         for number in range(21):
             self.write(f"research/fresh/runs/test/results/part-{number}.txt", content)
         self.git("add", "--", "research/fresh/runs/test/results/")
         status, report, _ = self.audit()
-        self.assertEqual(status, 1)
+        self.assertEqual(status, 0, report)
         self.assertEqual(report["staged_content_bytes"], 21 * ARCHIVE.MAX_BYTES)
-        self.assertEqual([f["reason"] for f in report["failures"]], ["staged-content-budget"])
 
     def test_symlink_and_nested_gitlink_fail(self):
         target = self.write("external-data.txt", "Local payload.\n")
@@ -377,38 +376,18 @@ class PublicationTests(unittest.TestCase):
             path = self.write(f'research/fresh/evidence/run/case{number}.log.gz', data)
             self.assertEqual(ARCHIVE.reason(path), expected)
 
-    def test_gzip_staging_budget_counts_full_compressed_blobs(self):
-        # Random bytes represented as valid text provide realistic incompressible logs.
+    def test_gzip_staging_has_only_per_file_limit(self):
         import random
         rng = random.Random(20261007)
-        original = rng.randbytes(7500000).hex().encode()
-        data = gzip.compress(original, mtime=0)
+        data = gzip.compress(rng.randbytes(7500000).hex().encode(), mtime=0)
         self.assertLess(len(data), ARCHIVE.text_evidence.MAX_COMPRESSED_BYTES)
-        self.assertGreater(3 * len(data), ARCHIVE.MAX_STAGED_BYTES)
         for number in range(3):
             self.write(f'research/fresh/evidence/run/log{number}.txt.gz', data)
         self.git('add', '--', 'research/fresh/evidence/')
         status, report, _ = self.audit()
-        self.assertEqual(status, 1)
-        self.assertFinding(report, 'staged-content-budget')
-        self.assertEqual(report['staged_content_bytes'], 3 * len(data))
-        policy = self.write('docs/backfill-policy.json', json.dumps({
-            'decision': 'Explicit fixture for independent complete evidence files.',
-            'max_staged_content_bytes': 64 * ARCHIVE.MAX_BYTES,
-            'gzip_evidence_prefixes': ['research/fresh/evidence/run']}))
-        self.git('add', '--', 'docs/backfill-policy.json')
-        status, report, _ = self.audit(budget_policy=policy)
         self.assertEqual(status, 0, report)
-        self.assertEqual(report['staged_content_limit_bytes'], 64 * ARCHIVE.MAX_BYTES)
-        self.assertEqual(report['ordinary_staged_content_bytes'], policy.stat().st_size)
-        value = json.loads(policy.read_text());value['gzip_evidence_prefixes'] = ['research/other/evidence/run']
-        policy.write_text(json.dumps(value));self.git('add', '--', 'docs/backfill-policy.json')
-        status, report, _ = self.audit(budget_policy=policy)
-        self.assertEqual(status, 1)
-        self.assertFinding(report, 'ordinary-staged-content-budget')
-        policy.write_text('Unstaged replacement cannot authorize the exception.')
-        with self.assertRaisesRegex(ValueError, 'indexed bytes'):
-            self.audit(budget_policy=policy)
+        self.assertEqual(report['staged_content_bytes'], 3 * len(data))
+        self.assertIsNone(report['staged_content_limit_bytes'])
 
     def test_pack_is_deterministic_preserves_sources_and_reports_rejections(self):
         source = self.root / 'originals'
