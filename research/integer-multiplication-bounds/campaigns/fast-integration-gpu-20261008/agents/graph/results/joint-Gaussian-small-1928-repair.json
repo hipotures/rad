@@ -1,0 +1,206 @@
+{
+  "command": [
+    "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_gaussian_word_search_v2.py",
+    "--source",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+    "--work",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-Gaussian-small-1928-repair",
+    "--output",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-Gaussian-small-1928-repair.json",
+    "--workers",
+    "1",
+    "--small"
+  ],
+  "completed_utc": "2026-10-08T19:25:00.332081+00:00",
+  "configurations": [
+    {
+      "budget": 0,
+      "carries": "reverse",
+      "h": 10,
+      "outputs": "reverse",
+      "phase": "carry-first",
+      "reclaim": "same-frame",
+      "units": "reverse"
+    },
+    {
+      "budget": 0,
+      "carries": "future-high",
+      "h": 10,
+      "outputs": "formal-sparsity",
+      "phase": "output-first",
+      "reclaim": "highest-rank",
+      "units": "forward"
+    },
+    {
+      "budget": 0,
+      "carries": "ordered",
+      "h": 10,
+      "outputs": "fanout",
+      "phase": "carry-first",
+      "reclaim": "original",
+      "units": "reverse"
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "10-0-reverse-reverse-carry-first-reverse-same-frame",
+      "compiled": {
+        "all_physical_frame_inclusions": true,
+        "baseline_pr48_roles": null,
+        "complete_dirty_basis_both_orientations": true,
+        "dirty_basis_vectors": 1816,
+        "elementary_xors": 6118,
+        "h": 10,
+        "histogram": {
+          "0": 12395,
+          "1": 3147,
+          "2": 2125,
+          "3": 772,
+          "4": 404,
+          "5": 401,
+          "6": 363,
+          "8": 31,
+          "9": 10
+        },
+        "mode": {
+          "matching": true,
+          "reclaim": true
+        },
+        "rank_mass": 15850,
+        "roles": 1576,
+        "seconds": 0.0861356258392334,
+        "stats": {
+          "augmentations": 44,
+          "clearing_xors": 256,
+          "matched": 710,
+          "multi_node_regions": 430,
+          "reclaimed": 69,
+          "regions": 1615
+        }
+      },
+      "completed_utc": "2026-10-08T19:25:00.031024+00:00",
+      "configuration": {
+        "budget": 0,
+        "carries": "reverse",
+        "h": 10,
+        "outputs": "reverse",
+        "phase": "carry-first",
+        "reclaim": "same-frame",
+        "units": "reverse"
+      },
+      "seconds": 0.17061766609549522,
+      "source_revision": "ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+      "source_sha256": "214fa0f572ca208627f30afeaff61469fc3c2f3f8bfe4e8a3e4ead866e1c82b0",
+      "status": "actual Gaussian/carry/completion word full source/dirty/address PASS",
+      "word_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-Gaussian-small-1928-repair/raw/10-0-reverse-reverse-carry-first-reverse-same-frame/word.json.gz",
+      "word_sha256": "9162953ca6ba508187d89772734ddcfc4b3ec0de923fd759fa9f4da4e1b8d5d3"
+    },
+    {
+      "case_id": "10-0-formal-sparsity-future-high-output-first-forward-highest-rank",
+      "compiled": {
+        "all_physical_frame_inclusions": true,
+        "baseline_pr48_roles": null,
+        "complete_dirty_basis_both_orientations": true,
+        "dirty_basis_vectors": 1806,
+        "elementary_xors": 5587,
+        "h": 10,
+        "histogram": {
+          "0": 11344,
+          "1": 3150,
+          "2": 2107,
+          "3": 772,
+          "4": 367,
+          "5": 438,
+          "6": 351,
+          "8": 27,
+          "9": 10
+        },
+        "mode": {
+          "matching": true,
+          "reclaim": true
+        },
+        "rank_mass": 15750,
+        "roles": 1566,
+        "seconds": 0.07643675804138184,
+        "stats": {
+          "augmentations": 44,
+          "clearing_xors": 136,
+          "matched": 710,
+          "multi_node_regions": 430,
+          "reclaimed": 79,
+          "regions": 1615
+        }
+      },
+      "completed_utc": "2026-10-08T19:25:00.188930+00:00",
+      "configuration": {
+        "budget": 0,
+        "carries": "future-high",
+        "h": 10,
+        "outputs": "formal-sparsity",
+        "phase": "output-first",
+        "reclaim": "highest-rank",
+        "units": "forward"
+      },
+      "seconds": 0.15338609204627573,
+      "source_revision": "ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+      "source_sha256": "214fa0f572ca208627f30afeaff61469fc3c2f3f8bfe4e8a3e4ead866e1c82b0",
+      "status": "actual Gaussian/carry/completion word full source/dirty/address PASS",
+      "word_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-Gaussian-small-1928-repair/raw/10-0-formal-sparsity-future-high-output-first-forward-highest-rank/word.json.gz",
+      "word_sha256": "182c35c3803e9e2293b778160f126da9b3251a2eabce0d59a2575c59c863e3e7"
+    },
+    {
+      "case_id": "10-0-fanout-ordered-carry-first-reverse-original",
+      "compiled": {
+        "all_physical_frame_inclusions": true,
+        "baseline_pr48_roles": null,
+        "complete_dirty_basis_both_orientations": true,
+        "dirty_basis_vectors": 1816,
+        "elementary_xors": 6152,
+        "h": 10,
+        "histogram": {
+          "0": 12453,
+          "1": 3146,
+          "2": 2132,
+          "3": 772,
+          "4": 418,
+          "5": 402,
+          "6": 356,
+          "8": 27,
+          "9": 10
+        },
+        "mode": {
+          "matching": true,
+          "reclaim": true
+        },
+        "rank_mass": 15850,
+        "roles": 1576,
+        "seconds": 0.06531834602355957,
+        "stats": {
+          "augmentations": 44,
+          "clearing_xors": 260,
+          "matched": 710,
+          "multi_node_regions": 430,
+          "reclaimed": 69,
+          "regions": 1615
+        }
+      },
+      "completed_utc": "2026-10-08T19:25:00.325003+00:00",
+      "configuration": {
+        "budget": 0,
+        "carries": "ordered",
+        "h": 10,
+        "outputs": "fanout",
+        "phase": "carry-first",
+        "reclaim": "original",
+        "units": "reverse"
+      },
+      "seconds": 0.1338309650309384,
+      "source_revision": "ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+      "source_sha256": "214fa0f572ca208627f30afeaff61469fc3c2f3f8bfe4e8a3e4ead866e1c82b0",
+      "status": "actual Gaussian/carry/completion word full source/dirty/address PASS",
+      "word_path": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-Gaussian-small-1928-repair/raw/10-0-fanout-ordered-carry-first-reverse-original/word.json.gz",
+      "word_sha256": "cd155c849f4802b2480358f1e23a930bec6df2ddadbd4b386a6fac1c07c6c5bd"
+    }
+  ],
+  "status": "complete"
+}

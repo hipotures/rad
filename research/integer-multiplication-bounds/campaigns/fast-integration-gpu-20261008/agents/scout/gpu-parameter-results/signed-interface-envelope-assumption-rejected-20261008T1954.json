@@ -1,0 +1,26 @@
+{
+  "utc": "2026-10-08T19:55:48.452757+00:00",
+  "status": "REJECTED OVERSCOPED TERMINAL-ENVELOPE ASSUMPTION",
+  "failed_source": {
+    "path": "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/audit_signed_joint_word_interfaces_v1_failed.py",
+    "sha256": "7d423071db4f7d487ca0a3722238d4a254d89f5f0274d03d4d0b2257b13cc724"
+  },
+  "failed_check": "Ordinary signed terminal rank was incorrectly required to equal h\u22123 and its exact space to equal the original E(core,cover).",
+  "actual_reconstruction": {
+    "23": {
+      "ordinary_outputs": 5313,
+      "actual_rank": 21,
+      "old_rank": 20,
+      "actual_side_singletons": 10626
+    },
+    "25": {
+      "ordinary_outputs": 6900,
+      "actual_rank": 23,
+      "old_rank": 22,
+      "actual_side_singletons": 13800
+    }
+  },
+  "scope": "This is a verifier assumption failure, not a failed construction. All actual signed terminal columns satisfy the correct normalized target-kernel identity.",
+  "diagnosis": "For every admissible beta, normalized source dual mu_T and L_beta obey mu_T L_beta x = (3 sum_{i in T} x_i \u2212 sum_i x_i)/6. Signed terminals retain the extra allowed direction supported on the two noncommon target coordinates with opposite signs. Original E is contained, but equality need not hold. Actual rank and paid cleanup must be charged.",
+  "repair": "Require actual signed terminal columns in this kernel, original-E containment, h\u22123 <= actualrank <= h\u22122; require unchanged copied-center spaces separately. Recount side singleton charges from actual ranks."
+}

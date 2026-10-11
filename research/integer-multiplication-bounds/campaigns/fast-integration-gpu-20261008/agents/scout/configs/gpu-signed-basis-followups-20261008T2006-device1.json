@@ -1,0 +1,85 @@
+{
+  "created_utc": "2026-10-08T20:07:53.611923+00:00",
+  "device": 1,
+  "predecessor": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-boundary-entry16975-20261008T1946-device1",
+  "predecessor_source_sha256": "7ff650b392800a52cf2601fff301891418a93e310ab960caa9bb73207638c9c6",
+  "predecessor_orders": 271,
+  "queue_work": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/signed-basis-followups-20261008T2006/device1",
+  "environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "jobs": [
+    {
+      "kind": "whole_family",
+      "source": "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/gpu_basis_configured_full_family.py",
+      "source_sha256": "64e71062004631b2e7f895236b9d3131a613b42ef0ac3a60422e2d7429ff5249",
+      "output": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-basis-half51-seven207-20261008T2006-device1",
+      "question": "Complete new signed-projector root source-family geometry beta23=1/51, beta25=7/207; 4073300 pairs in both proven fields, exact actual source weights and retained pivot arrays for independent proof.",
+      "command": [
+        "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/gpu/bin/python",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/gpu_basis_configured_full_family.py",
+        "--device",
+        "1",
+        "--seed",
+        "2026102007",
+        "--batch",
+        "32768",
+        "--candidate",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/gpu-parameter-results/joint-new-rational-basis-candidate.json",
+        "--baseline-histogram",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/results/both-negative-data-histogram.json",
+        "--beta23",
+        "1/51",
+        "--beta25",
+        "7/207",
+        "--whole-family",
+        "--output",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-basis-half51-seven207-20261008T2006-device1"
+      ],
+      "immutable_inputs": [
+        {
+          "path": "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/gpu-parameter-results/joint-new-rational-basis-candidate.json",
+          "sha256": "1e7cfd3d27e599fefaf31bad6042cdb66165a06a62ab86764cee814a844b7384"
+        },
+        {
+          "path": "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/results/both-negative-data-histogram.json",
+          "sha256": "12e6a17f9282827881c9aebe46dbf0bfd4737173a774b1581509374d12e08186"
+        }
+      ],
+      "baseline_scope": "Old negative histogram is comparison metadata only; new all-pair matrices are generated and independently certified."
+    },
+    {
+      "kind": "boundary_catalogue",
+      "source": "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/gpu_boundary_single_swap_valid_full_family.py",
+      "source_sha256": "7ff650b392800a52cf2601fff301891418a93e310ab960caa9bb73207638c9c6",
+      "output": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-boundary-one15-negative25-20261008T2006-device1",
+      "question": "New basis/order interaction at selected signed-construction beta23=1/15,beta25=1/21; actual tree-admissible endpoints and every source pair. Disjoint catalogue halves, no prior tests under these weights.",
+      "command": [
+        "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/gpu/bin/python",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/gpu_boundary_single_swap_valid_full_family.py",
+        "--device",
+        "1",
+        "--seed",
+        "2026102017",
+        "--batch",
+        "32768",
+        "--start",
+        "472",
+        "--end",
+        "945",
+        "--beta23",
+        "1/15",
+        "--beta25",
+        "1/21",
+        "--output",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-boundary-one15-negative25-20261008T2006-device1"
+      ],
+      "orders": 271
+    }
+  ],
+  "scope": "DISCOVERY until source-only graph, actual local CRT, fullN exact geometry, full physical moments and strict assembly gates independently close. No artificial runtime or repetitions."
+}

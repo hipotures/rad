@@ -1,0 +1,19 @@
+{
+  "created_utc": "2026-10-08T19:13:47.736132+00:00",
+  "status": "AUDITOR ASSUMPTION CORRECTED; NO SCIENTIFIC FAILURE",
+  "failed_source": "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/audit_changed_joint_word_interfaces_v2_failed.py",
+  "failed_source_sha256": "f11a951ed6e7935291b6e4da6bb802a0228cfcf237d3ab791f842d22b39c6d70",
+  "prior_failed_receipt": "changed-word-event-bound-failed-attempt-20261008T1910.json",
+  "correction": "The prior diagnosis of DATA-bank event slots exceeding R was incorrect. Every event slot is in the scratch bank [0,R). The failing assertion rejected the legitimate previous-frame sentinel a=-1 used exactly once at the first initialization of each scratch register. Subsequent events agree exactly with the current per-register frame. Complete dirty-basis cardinality remains R+2v, distinct from this scratch-event bank.",
+  "independent_controls": {
+    "23": {
+      "initializations": 27904,
+      "chronological_events": 444924
+    },
+    "25": {
+      "initializations": 36574,
+      "chronological_events": 613585
+    }
+  },
+  "fresh_check": "Require exactly one a=-1 initial event per scratch slot, all b valid and every later a equal the previous b. Recheck every source first frame, output and center; do not loosen chronological checks."
+}

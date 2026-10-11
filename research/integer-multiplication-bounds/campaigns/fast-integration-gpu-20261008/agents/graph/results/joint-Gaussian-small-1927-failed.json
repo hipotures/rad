@@ -1,0 +1,98 @@
+{
+  "command": [
+    "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/graph/code/joint_gaussian_word_search.py",
+    "--source",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/public-sources-interval-joint-20261008T1810/snapshots/pr62-ad0f25ff7b23cff7f08ad237c2254e6ecf74257e",
+    "--work",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/joint-Gaussian-small-1927",
+    "--output",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/graph/raw/joint-Gaussian-small-1927.json",
+    "--workers",
+    "1",
+    "--small"
+  ],
+  "completed_utc": "2026-10-08T19:24:03.335315+00:00",
+  "configurations": [
+    {
+      "budget": 0,
+      "carries": "reverse",
+      "h": 10,
+      "outputs": "reverse",
+      "phase": "carry-first",
+      "reclaim": "same-frame",
+      "units": "reverse"
+    },
+    {
+      "budget": 0,
+      "carries": "future-high",
+      "h": 10,
+      "outputs": "formal-sparsity",
+      "phase": "output-first",
+      "reclaim": "highest-rank",
+      "units": "forward"
+    },
+    {
+      "budget": 0,
+      "carries": "ordered",
+      "h": 10,
+      "outputs": "fanout",
+      "phase": "carry-first",
+      "reclaim": "original",
+      "units": "reverse"
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "10-0-reverse-reverse-carry-first-reverse-same-frame",
+      "completed_utc": "2026-10-08T19:24:03.325895+00:00",
+      "configuration": {
+        "budget": 0,
+        "carries": "reverse",
+        "h": 10,
+        "outputs": "reverse",
+        "phase": "carry-first",
+        "reclaim": "same-frame",
+        "units": "reverse"
+      },
+      "error": "AssertionError()",
+      "seconds": 0.0019412030233070254,
+      "source_sha256": "17d8ebad9e7e91730ba66a62127b92d9515240d393d8b760c4155e8ab09ec843",
+      "status": "failed"
+    },
+    {
+      "case_id": "10-0-formal-sparsity-future-high-output-first-forward-highest-rank",
+      "completed_utc": "2026-10-08T19:24:03.329053+00:00",
+      "configuration": {
+        "budget": 0,
+        "carries": "future-high",
+        "h": 10,
+        "outputs": "formal-sparsity",
+        "phase": "output-first",
+        "reclaim": "highest-rank",
+        "units": "forward"
+      },
+      "error": "AssertionError()",
+      "seconds": 0.0012122460175305605,
+      "source_sha256": "17d8ebad9e7e91730ba66a62127b92d9515240d393d8b760c4155e8ab09ec843",
+      "status": "failed"
+    },
+    {
+      "case_id": "10-0-fanout-ordered-carry-first-reverse-original",
+      "completed_utc": "2026-10-08T19:24:03.331951+00:00",
+      "configuration": {
+        "budget": 0,
+        "carries": "ordered",
+        "h": 10,
+        "outputs": "fanout",
+        "phase": "carry-first",
+        "reclaim": "original",
+        "units": "reverse"
+      },
+      "error": "AssertionError()",
+      "seconds": 0.0011711560655385256,
+      "source_sha256": "17d8ebad9e7e91730ba66a62127b92d9515240d393d8b760c4155e8ab09ec843",
+      "status": "failed"
+    }
+  ],
+  "status": "complete"
+}

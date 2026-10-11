@@ -1,0 +1,38 @@
+{
+  "question": "Reoptimize complete actual physical matching costs at alpha nearer the current certified recurrence root",
+  "cases": 288,
+  "alpha_values": [
+    "0.000046",
+    "0.000047"
+  ],
+  "input": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/root-public54-mapped-alpha-20261008T1759-input.json",
+  "input_sha256": "3df55015a68ebf9fbdf2713ef007ead41151fa6158853f9d9926bca4f01518db",
+  "matcher_source": "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/code/positive_frame_alpha_match.cpp",
+  "matcher_source_sha256": "24004bae21320cfb8556f3fe2d61b24e2cbbe75bcdb84e7ab0af19e83ba9b61e",
+  "matcher_binary_sha256": "da5370adcaf526c49309267a2e9f3fca5879fbb91082543411609ff3a7bd0ffd",
+  "controller_pid": 4124709,
+  "command": [
+    "python3",
+    "-u",
+    "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/code/launch_after_receipt.py",
+    "--receipt",
+    "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/reports/public54-mapped-matrix-1751.json",
+    "--",
+    "python3",
+    "-u",
+    "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/geometry/code/run_positive_weighted.py",
+    "--input",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/root-public54-mapped-alpha-20261008T1759-input.json",
+    "--matcher",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/builds/root-variable-alpha-20261008T1759/positive_frame_alpha_match",
+    "--profiler",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/geometry/builds/positive_frame_profiles",
+    "--work",
+    "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/root-public54-mapped-alpha-20261008T1759",
+    "--output",
+    "research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/reports/public54-mapped-alpha-1759.json",
+    "--workers",
+    "3"
+  ],
+  "classification": "EXPERIMENTAL; independent profiles and full recurrence required"
+}

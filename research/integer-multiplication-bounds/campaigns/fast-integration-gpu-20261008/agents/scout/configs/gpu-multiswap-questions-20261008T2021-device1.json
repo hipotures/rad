@@ -1,0 +1,92 @@
+{
+  "created_utc": "2026-10-08T20:23:43.351778+00:00",
+  "device": 1,
+  "predecessor": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-boundary-one15-negative25-20261008T2006-device1",
+  "predecessor_source_sha256": "7ff650b392800a52cf2601fff301891418a93e310ab960caa9bb73207638c9c6",
+  "predecessor_orders": 271,
+  "queue_work": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/multiswap-questions-20261008T2021/device1",
+  "environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "jobs": [
+    {
+      "kind": "boundary_catalogue",
+      "method_kind": "full_source_family_multiswap_catalogue",
+      "source": "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/gpu_boundary_multiswap_full_family.py",
+      "source_sha256": "520c3ca6da5b229dc23420aa74c16483d344541762f1c0c2c9b6a60bab8842e3",
+      "output": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-boundary-multiswap-0-48-20261008T2021-device1",
+      "command": [
+        "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/gpu/bin/python",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/gpu_boundary_multiswap_full_family.py",
+        "--catalogue",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/configs/boundary-multiswap-catalogue-20261008T2020.json",
+        "--device",
+        "1",
+        "--seed",
+        "2026102121",
+        "--batch",
+        "32768",
+        "--start",
+        "0",
+        "--end",
+        "48",
+        "--beta23",
+        "1/15",
+        "--beta25",
+        "7/207",
+        "--output",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-boundary-multiswap-0-48-20261008T2021-device1"
+      ],
+      "orders": 48,
+      "question": "Novel two-swap boundary architecture indices[0,48), all4073300 source pairs at1/15+7/207, two proven fields and exact Fraction sample controls. All old single-swap signatures excluded.",
+      "immutable_inputs": [
+        {
+          "path": "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/configs/boundary-multiswap-catalogue-20261008T2020.json",
+          "sha256": "c95a9900871fc820880865d74a7f74ec851fd3bcc3c935413b15928e9e9cf14a"
+        }
+      ]
+    },
+    {
+      "kind": "boundary_catalogue",
+      "method_kind": "full_source_family_multiswap_catalogue",
+      "source": "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/gpu_boundary_multiswap_full_family.py",
+      "source_sha256": "520c3ca6da5b229dc23420aa74c16483d344541762f1c0c2c9b6a60bab8842e3",
+      "output": "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-boundary-multiswap-48-96-20261008T2021-device1",
+      "command": [
+        "/srv/ai/work/rad/integer-multiplication-bounds/20261007T222521Z/envs/gpu/bin/python",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/code/gpu_boundary_multiswap_full_family.py",
+        "--catalogue",
+        "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/configs/boundary-multiswap-catalogue-20261008T2020.json",
+        "--device",
+        "1",
+        "--seed",
+        "2026102169",
+        "--batch",
+        "32768",
+        "--start",
+        "48",
+        "--end",
+        "96",
+        "--beta23",
+        "1/15",
+        "--beta25",
+        "7/207",
+        "--output",
+        "/srv/ai/work/rad/integer-multiplication-bounds/fast-integration-gpu-20261008/derived/scout/gpu-boundary-multiswap-48-96-20261008T2021-device1"
+      ],
+      "orders": 48,
+      "question": "Novel two-swap boundary architecture indices[48,96), all4073300 source pairs at1/15+7/207, two proven fields and exact Fraction sample controls. All old single-swap signatures excluded.",
+      "immutable_inputs": [
+        {
+          "path": "/srv/ai/research/research/integer-multiplication-bounds/campaigns/fast-integration-gpu-20261008/agents/scout/configs/boundary-multiswap-catalogue-20261008T2020.json",
+          "sha256": "c95a9900871fc820880865d74a7f74ec851fd3bcc3c935413b15928e9e9cf14a"
+        }
+      ]
+    }
+  ],
+  "validation_scope": "Existing CUDA kernels, same mathematical rank reconstruction and exact sample controls; only supplied endpoint catalogue and field partition scheduling differ. PublicPR54 snapshot is solely the immutable inherited DATA recovery source, never its role denominator. Every output is DISCOVERY until full physical/geometry/assembly acceptance."
+}
