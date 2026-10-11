@@ -157,6 +157,9 @@ def reason(path, data=None):
         extensions = extensions | {".js", ".html", ".css"}
     if parts[0] == "benchmarks":
         extensions = extensions | {".tsv", ".stdout", ".stderr", ".sha256"}
+    if parts[:2] == ("docs", "new"):
+        # Frontier sprint input package: binary inputs named by docs/new/INPUT_MANIFEST.json.
+        extensions = extensions | {".zip", ".pdf"}
     if parts[0] == "research":
         # Authored mathematical proof sources follow the ordinary text budget.
         extensions = extensions | {".tex"}
@@ -169,6 +172,8 @@ def reason(path, data=None):
         return "large-artifact"
     if data is None:
         data = path.read_bytes()
+    if path.suffix in {".zip", ".pdf"}:
+        return None  # admitted only under docs/new above; opaque inputs listed in INPUT_MANIFEST.json
     if path.suffix != ".png":
         if b"\0" in data:
             return "binary-content"

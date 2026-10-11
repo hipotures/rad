@@ -281,6 +281,11 @@ class PublicationTests(unittest.TestCase):
         self.assertEqual(status, 0, report)
         self.assertEqual(report["staged_content_bytes"], 21 * ARCHIVE.MAX_BYTES)
 
+    def test_docs_new_permits_zip_and_pdf_only_there(self):
+        for relative, expected in (('docs/new/package.zip', None), ('docs/new/review.pdf', None),
+                                   ('docs/other/package.zip', 'non-durable-format')):
+            self.assertEqual(ARCHIVE.reason(self.write(relative, b'PK\x03\x04binary')), expected)
+
     def test_symlink_and_nested_gitlink_fail(self):
         target = self.write("external-data.txt", "Local payload.\n")
         link = self.root / "research/fresh/code/link.py"
