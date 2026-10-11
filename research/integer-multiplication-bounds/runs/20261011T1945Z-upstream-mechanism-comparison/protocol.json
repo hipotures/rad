@@ -1,0 +1,33 @@
+{
+  "run_id": "20261011T1945Z-upstream-mechanism-comparison",
+  "question": "Do our accepted mechanisms still add value on the current upstream frontier, and which next direction has the highest information value?",
+  "inputs": [
+    "upstream-frontier-12a4934d",
+    "upstream-frontier-pr-bodies-20261011",
+    "upstream-frontier-issue-comments-20261011",
+    "upstream-frontier-check-runs-20261011"
+  ],
+  "depends_on_runs": [
+    "20261011T1916Z-upstream-frontier-inventory"
+  ],
+  "code": [
+    "code/upstream_frontier_tiers.py"
+  ],
+  "commands": [
+    "python3 code/upstream_frontier_tiers.py --pulls <decompressed evidence/20261011T1916Z-upstream-frontier-inventory/pr-bodies-20261011/pulls-full.json.gz> --inventory runs/20261011T1916Z-upstream-frontier-inventory/results/pull-inventory.csv --selected-kappa 90446448750933/125000000000000000 --out runs/20261011T1945Z-upstream-mechanism-comparison/results"
+  ],
+  "manual_inputs": [
+    "results/mechanism-map.json was written by hand from our accepted records (campaigns/fast-integration-gpu-20261008 and its frontier-sprint-20261009) and the PR titles/bodies cited in it",
+    "Upstream package reading: research/five-stage-gen4-banks/PROOF.md and docs/research/community-pr279-review.md at 12a4934d",
+    "PR bodies read in full or in part: 275, 370, 373, 376, 434, 442, 445, 448, 451, 453; issue comments on 450, 451, 457, 459, 466"
+  ],
+  "settings": {
+    "max_plausible_kappa": "1/100",
+    "tier_rule": "hosting if the PR or any earlier PR it references mentions hosting; else E8 if the PR or a referenced PR mentions E8; else other"
+  },
+  "limitations": [
+    "Keyword tiers are indicators, not verified properties",
+    "No construction was replayed in this run",
+    "Self-reported upstream gains"
+  ]
+}

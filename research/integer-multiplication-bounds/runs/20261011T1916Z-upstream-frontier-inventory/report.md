@@ -72,8 +72,11 @@ Our own upstream PRs are:
 - #41, open: 4.034168124e-5
 - #20, open draft: the source-framed h53 witness above 2^-20
 
-The best result of our 2026-10-08 fast-integration campaign is about
-5.14e-5, roughly 14 times below the current main selection.
+Our best independently accepted result is the 2026-10-09 frontier sprint's
+`61728289/10^11` = 6.1728e-4, which is 0.853 x the current main selection.
+(Correction, 2026-10-11: this report first gave the earlier fast-integration
+campaign's 5.14e-5 as our best result. See the
+[mechanism comparison](../20261011T1945Z-upstream-mechanism-comparison/report.md).)
 
 ## Interpretation
 
@@ -90,12 +93,13 @@ The best result of our 2026-10-08 fast-integration campaign is about
   Most late claims are small increments (+0.01% to +2%) stacked on each
   other's heads. A specific claim can be invalidated when an earlier link in
   its chain fails review.
-- **Inference:** our techniques (interval joint compilation, positive frames,
-  matrix-weighted allocation, skip-prefix strips) belong to the PR51-PR62 era.
-  They are 1-2 orders of magnitude below the current constructions. Those
-  constructions use five- to eleven-stage words, E8 units, completed banks and
-  cross-copy hosting. Whether any of our mechanisms still adds value on top of
-  them is untested.
+- **Inference:** our first-campaign techniques (interval joint compilation,
+  positive frames, matrix-weighted allocation, skip-prefix strips) belong to the
+  PR51-PR62 era. Our sprint mechanisms (lifetime programs, frame placement,
+  fusion) were applied to PR161-PR170 words. Current
+  frontier constructions use five- to eleven-stage words, E8 units, completed banks and
+  cross-copy hosting. The mechanism comparison addresses whether any of ours
+  still adds value.
 
 ## Confidence and limitations
 

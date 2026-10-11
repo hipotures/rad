@@ -628,3 +628,19 @@ exactly, decompress the published inputs from
 `evidence/20261011T1916Z-upstream-frontier-inventory/` and use them as
 `--pulls` and `--check-runs`. The upstream checkout must still be at
 `12a4934d`.
+
+## Upstream mechanism comparison (2026-10-11)
+
+After the inventory above, from the topic directory (with `pulls-full.json`
+decompressed from the published evidence):
+
+```bash
+python3 code/upstream_frontier_tiers.py --pulls "$W/pulls-full.json" \
+  --inventory runs/20261011T1916Z-upstream-frontier-inventory/results/pull-inventory.csv \
+  --selected-kappa 90446448750933/125000000000000000 \
+  --out runs/20261011T1945Z-upstream-mechanism-comparison/results
+```
+
+This regenerates `record-steps.csv` and `tiers.json`. `mechanism-map.json`
+and the report are hand-written analyses whose sources are listed in the run's
+`protocol.json`.
