@@ -19,7 +19,9 @@ already have applied upstream counterparts worth at most about 0.5% per step.
 See the [frontier inventory](runs/20261011T1916Z-upstream-frontier-inventory/report.md)
 and the [mechanism comparison](runs/20261011T1945Z-upstream-mechanism-comparison/report.md).
 The offline [frontier batch of 2026-10-11](campaigns/frontier-batch-20261011/README.md)
-(cross-copy model, 39 pinned replays, lattice screen) is prepared for the operator.
+reproduced 34 of 39 pinned claims. Its top reproduced claim without cross-copy
+is #493 at 1.30353e-3. Its cross-copy claims rest on split residuals, which our
+exact stream model rejects as unpriced. See the [report](campaigns/frontier-batch-20261011/report.md).
 The campaign sections below are historical.
 
 ## Current campaign

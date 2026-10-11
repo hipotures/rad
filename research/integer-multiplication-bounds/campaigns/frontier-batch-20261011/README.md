@@ -1,7 +1,15 @@
 # Frontier batch, 2026-10-11
 
-Status: **prepared, waiting for the operator's runs.** Code and configs are
-smoke-tested. Results are analyzed only after all three jobs have finished.
+Status: **complete (2026-10-11).** All three jobs ran on the shared host; see
+the [results report](report.md). In brief:
+- 34 of 39 pinned claims reproduce. The 5 failures are integrity-check
+  failures of one author's browser-uploaded packages.
+- #493 (1.30353e-3) is the top reproduced claim without cross-copy.
+- Every cross-copy claim splits 22-34% of its hosted residuals across two
+  copies, and job 1 shows that a split is not a program of the fixed local
+  word under single-stream registers.
+- Only E8 (and implausibly Leech) can drive #370's template.
+
 See [GOAL.md](GOAL.md) for the brief and completion criteria.
 
 This campaign continues the
@@ -70,3 +78,5 @@ These smoke tests are not the results; the operator's runs are authoritative.
 - `code/`: job sources
 - `configs/`: pinned replays, Python requirements
 - `evidence/`: created by `pack.sh` after the runs
+- `code/job2_hosting_ledger.py`: agent's post-hoc independent ledger of the hosted templates
+- `report.md`: results and interpretation

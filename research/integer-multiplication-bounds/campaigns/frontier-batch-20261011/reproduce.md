@@ -24,3 +24,10 @@ Expected checks:
 Pinned versions: Python 3.14 in a uv venv with `configs/requirements.txt`;
 upstream commits in `configs/job2-replays.json`; the #370 producer at
 `b7fe9cdf2da009c947ff6b334c562bc190b30373`.
+
+Post-hoc ledger of the hosted templates (agent analysis, about 20 s, no upstream code):
+
+```bash
+python3 code/job2_hosting_ledger.py --run "$RAD_WORK_ROOT/runs/<UTC>-job2" \
+  --out "$RAD_WORK_ROOT/runs/<UTC>-job2/analysis/hosting-ledger.json"
+```
