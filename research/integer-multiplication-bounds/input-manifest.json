@@ -153,6 +153,28 @@
       "usage": "New conditional claims, not independently verified theorems. PR13 endpoint mechanism explicitly credited; no PR14 corners or PR15 all-residual construction imported",
       "proof_file_provenance": "runs/20261008T0936Z-review-auxiliary-source-frames/results/literature-inputs.json",
       "recovery": "gh api repositories/contents at the exact obtainable commit; original downloaded sources remain external"
+    },
+    {
+      "id": "upstream-frontier-12a4934d",
+      "source": "https://github.com/CrocSwap/integer-mult-bounds",
+      "revision": "12a4934d15006e8c10f9b2264f13f8f341be802b",
+      "commit_date": "2026-10-10T14:13:23Z",
+      "retrieved_utc": "2026-10-11T19:16:00+00:00",
+      "acquisition": "gh api repos/CrocSwap/integer-mult-bounds/commits/main; git clone --no-checkout then detached checkout of the pinned commit; gh api --paginate repos/CrocSwap/integer-mult-bounds/pulls?state=all&per_page=100 reduced to number/state/title/dates/head_sha/head_repo/user/draft",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/upstream-frontier-20261011T1916Z/repos/upstream-frontier",
+      "pull_snapshot": {
+        "location": "/srv/ai/work/rad/integer-multiplication-bounds/upstream-frontier-20261011T1916Z/inputs/pulls.json",
+        "sha256": "3dd3b763a79ee6b8a6077fce63b4738a3efa8cbd3afaa622c925a23a0773bd3b",
+        "bytes": 238857,
+        "pull_requests": 481,
+        "open": 408,
+        "merged": 36,
+        "highest_number": 481,
+        "published_copy": "research/integer-multiplication-bounds/evidence/20261011-upstream-frontier-snapshot/"
+      },
+      "usage": "Current upstream frontier baseline (131 commits ahead of upstream-compact-6e564879). Supersedes PR54 as the comparison target for later work; earlier inputs remain unchanged.",
+      "status": "acquired clean immutable input; open PR heads are mutable upstream and are pinned only by head_sha in the snapshot",
+      "recovery": "Main revision is downloadable by SHA; PR heads are downloadable by head_sha only while the upstream or fork objects exist, so the published snapshot is the durable record"
     }
   ],
   "literature_protocols": [
