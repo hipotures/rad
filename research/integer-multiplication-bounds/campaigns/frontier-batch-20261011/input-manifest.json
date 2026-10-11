@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "inputs": [
+    {
+      "id": "upstream-pinned-pr-heads-20261011",
+      "source": "https://github.com/CrocSwap/integer-mult-bounds",
+      "revision": "39 pull-request head SHAs listed in configs/job2-replays.json (field sha); live heads at pinning are recorded as live_head_at_config",
+      "acquisition": "./run.sh setup: git clone --no-checkout, then git fetch origin pull/<N>/head and, if needed, git fetch origin <sha>",
+      "location": "$RAD_WORK_ROOT/repos/upstream (outside Git)",
+      "usage": "Job 2 replays; each SHA is checked out in a fresh detached worktree",
+      "recovery": "Downloadable while the upstream or fork objects exist; the pinned SHAs and titles are recorded in the config"
+    },
+    {
+      "id": "upstream-pr370-e8-bit-producer",
+      "source": "https://github.com/CrocSwap/integer-mult-bounds/pull/370",
+      "revision": "b7fe9cdf2da009c947ff6b334c562bc190b30373",
+      "path": "research/e8-bit/code/bit/producer",
+      "usage": "Job 3 validation: our price function must reproduce the R865 word's saving 904072820242522/10^18",
+      "recovery": "git archive of the pinned commit"
+    },
+    {
+      "id": "generated-line-systems",
+      "generator": "code/job3_lattice_screen.py (E8 shells by the D8 u D8+1/2 construction, D_n, A_n, E7/E6 inside E8, BW16 from RM(1,4), Leech from the extended QR Golay code)",
+      "usage": "Job 3",
+      "recovery": "Deterministically regenerable; no seeds except the fixed random-row order (seed 20261011) of the Leech rank computation, whose result is checked exactly on every row"
+    }
+  ],
+  "upstream_main_reference": "upstream-frontier-12a4934d in ../../input-manifest.json"
+}

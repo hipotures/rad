@@ -18,6 +18,8 @@ cross-copy hosting above 1.33e-3 is disputed. Our construction mechanisms
 already have applied upstream counterparts worth at most about 0.5% per step.
 See the [frontier inventory](runs/20261011T1916Z-upstream-frontier-inventory/report.md)
 and the [mechanism comparison](runs/20261011T1945Z-upstream-mechanism-comparison/report.md).
+The offline [frontier batch of 2026-10-11](campaigns/frontier-batch-20261011/README.md)
+(cross-copy model, 39 pinned replays, lattice screen) is prepared for the operator.
 The campaign sections below are historical.
 
 ## Current campaign
