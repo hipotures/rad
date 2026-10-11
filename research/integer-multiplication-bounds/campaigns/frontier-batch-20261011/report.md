@@ -1,13 +1,15 @@
 # Frontier batch 2026-10-11: results
 
 Operator runs on the shared host (16 cores, 2 x RTX 4090, Python 3.14.7),
-campaign commit `01db37d2`, clean tree. All three jobs finished with exit 0.
+campaign commit `01db37d2` (jobs 1-3) and the follow-up job 4 at `77950181` and
+`213f503d`, clean tree each time. All runs finished with exit 0.
 
 | Run | Wall time | Outcome |
 |---|---|---|
 | `20261011T202316Z-job1` | 10 s | `MODEL_CONSISTENT` |
 | `20261011T202331Z-job2` | 23.6 min (15 parallel) | 34 of 39 replays pass |
 | `20261011T205141Z-job3` | 49 s | E8 price validation matches #370 |
+| `20261011T211954Z-job4`, `20261011T213109Z-job4` | 5.8 + 3.7 min | 5 of 5 repair replays pass (section 5) |
 
 The evidence is in [evidence/](evidence/) as gzip copies; the full outputs and
 worktrees stay in `RAD_WORK_ROOT` (see [Evidence](#evidence)).
@@ -137,13 +139,14 @@ below.
   kappa 1.303530097714685e-3 is the cap of #471's complex supplier
   (b = 1305231506267591/10^18). `code/cited.py` reads that b from #471's
   receipt and does not rebuild it.
-- **#471 itself did not replay.** At its pinned SHA it fails its own integrity
-  check (section 2).
+- **#471 did not replay in job 2, but does with one deviation (job 4).** At its
+  pinned SHA it fails its own integrity check (section 2). It passes once the
+  absent `.gitattributes` is tolerated, and it recomputes this b (section 5).
 - **Other claims use the same b.** The replay outputs of #473, #490 and #491
   carry the same `complex_lower` = 1305231506267591/10^18 as an input. #473's
   own README says that "fresh full default replay remains pending" for its
   complex supplier.
-- **Highest claims without #471:**
+- **Highest claims that avoid #471** (they need no deviation):
   - #472 (1.292099559e-3) uses #458's b, and #458 replayed in this batch.
   - #493's own verifier prices its word with #458's b at 1.295523322678044e-3.
     That is an information value, not a title claim.
@@ -162,25 +165,61 @@ below.
   Neither is a proof of the two inherited facts at full size. The user decided
   not to pursue that audit further in this batch.
 
+## 5. Repair replays of the five integrity failures (job 4)
+
+**Method.** Job 2's procedure is reused: a fresh detached worktree at the
+pinned SHA, a fresh output directory and the author's `verify.py`. There is one
+documented deviation. `code/job4_launcher.py` replaces the integrity assertion
+in memory, so that the manifest key `.gitattributes` is tolerated only if the
+file is absent. Any changed, extra or other missing file still fails, and the
+worktree is not modified.
+
+The launcher was unit-tested on a synthetic package: 1 accepted case and 4
+rejected ones. A precheck compares each package with its manifest under the
+verifier's own exclusion rule.
+
+**Runs.**
+- Run `20261011T211954Z-job4` (5 parallel, 5.8 min) passed 4 of 5.
+- It skipped #483 because of a harness defect. The precheck excluded only the
+  root `MANIFEST.json`, while #483's verifier excludes every file of that name.
+  The defect was fixed in `213f503d`.
+- Run `20261011T213109Z-job4` passed #483.
+
+| PR | Title kappa | Result | Wall |
+|---|---|---|---|
+| #471 | 1.274548075945587e-3 | pass, exact | 277 s |
+| #476 | 1.291542455423938e-3 | pass, exact | 277 s |
+| #478 | 1.295508560071773e-3 | pass, exact | 278 s |
+| #483 | 1.296606691405309e-3 | pass, exact | 221 s |
+| #492 | 1.297375468897877e-3 | pass, exact | 329 s |
+
+- **One difference in every package.** Each differs from its manifest only by
+  the absent `.gitattributes` (log line `# JOB4 DEVIATION ...
+  remaining_equal=True`). No worktree was modified.
+- **#471's b is recomputed, not copied.** Each package recomputes
+  b = 1305231506267591/10^18. In #471, `code/assemble.py` certifies b from the
+  complex profile built in the same run, then compares it with `EXPECTED.json`.
+
+**Result.**
+- With this single deviation, all 39 pinned claims of the batch reproduce with
+  their authors' verifiers.
+- The input that caps #493 and feeds #473, #490 and #491 is reproducible.
+- The job 2 failures were a packaging defect, not a computational one.
+- All results remain conditional on the authors' declared interfaces.
+
 ## Recommended next steps
 
-1. #493 (1.30353e-3) is the top claim without cross-copy whose verifier passes.
-   Its binding input, however, is #471's unreproduced complex b (section 4).
-   A repair replay of #471 is therefore the cheapest check of the current top.
-   Job 4 does this (see the campaign README). In the agent's smoke test #471
-   passed in 218 s with the single deviation and reproduced its title kappa
-   and b = 1305231506267591/10^18. The b is recomputed from the complex
-   profile built in that run. The operator's `./run.sh 4` run is
-   authoritative.
-   The idle-data hosting lemma is still unreviewed upstream.
+1. #493 (1.30353e-3) is the top claim without cross-copy. Its verifier and its
+   binding complex input (#471, job 4) both reproduce. The open item is the
+   idle-data hosting lemma (#442 §2), which is still unreviewed upstream;
+   the user deferred that audit.
 2. The cross-copy finding was posted upstream on 2026-10-11, on
    [#448](https://github.com/CrocSwap/integer-mult-bounds/pull/448#issuecomment-6113791847)
    and [#480](https://github.com/CrocSwap/integer-mult-bounds/pull/480#issuecomment-6113805810)
    ([texts](upstream-comments/)). The next step is to follow the replies.
-3. Optional: rerun the five Dugongue packages with a single documented
-   deviation, tolerating exactly the missing `.gitattributes` key. Those
-   verifiers call `integrity()` only inside their own package. None of the five
-   claims exceeds #493.
+3. The five Dugongue packages would pass without any deviation if their
+   commits included the `.gitattributes` listed in their manifests. This could
+   be mentioned to the author; nothing has been posted.
 
 ## Evidence
 
