@@ -175,6 +175,42 @@
       "usage": "Current upstream frontier baseline (131 commits ahead of upstream-compact-6e564879). Supersedes PR54 as the comparison target for later work; earlier inputs remain unchanged.",
       "status": "acquired clean immutable input; open PR heads are mutable upstream and are pinned only by head_sha in the snapshot",
       "recovery": "Main revision is downloadable by SHA; PR heads are downloadable by head_sha only while the upstream or fork objects exist, so the published snapshot is the durable record"
+    },
+    {
+      "id": "upstream-frontier-pr-bodies-20261011",
+      "retrieved_utc": "2026-10-11T19:18:44Z",
+      "acquisition": "gh api --paginate 'repos/CrocSwap/integer-mult-bounds/pulls?state=all&per_page=100'; pages concatenated into one JSON array sorted by number",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/upstream-frontier-20261011T1916Z/inputs/pr-bodies-20261011/pulls-full.json",
+      "bytes": 10552689,
+      "sha256": "7d87f2059fa4b87288461f692ae64317bc5deba3154212bcd663f8449c461b0f",
+      "source": "https://github.com/CrocSwap/integer-mult-bounds",
+      "published_copy": "research/integer-multiplication-bounds/evidence/20261011T1916Z-upstream-frontier-inventory/",
+      "recovery": "Not re-downloadable as the same snapshot (PR bodies, comments and CI change); the published gzip copy is the durable record",
+      "usage": "Upstream frontier inventory run 20261011T1916Z-upstream-frontier-inventory"
+    },
+    {
+      "id": "upstream-frontier-issue-comments-20261011",
+      "retrieved_utc": "2026-10-11T19:19:07Z",
+      "acquisition": "gh api --paginate 'repos/CrocSwap/integer-mult-bounds/issues/comments?per_page=100'; pages concatenated",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/upstream-frontier-20261011T1916Z/inputs/pr-bodies-20261011/issue-comments.json",
+      "bytes": 344708,
+      "sha256": "018a4850ae9efbd94241ba38820c3e0d6f6e20f19bf52fbbdb9a90c9f40f8044",
+      "source": "https://github.com/CrocSwap/integer-mult-bounds",
+      "published_copy": "research/integer-multiplication-bounds/evidence/20261011T1916Z-upstream-frontier-inventory/",
+      "recovery": "Not re-downloadable as the same snapshot (PR bodies, comments and CI change); the published gzip copy is the durable record",
+      "usage": "Upstream frontier inventory run 20261011T1916Z-upstream-frontier-inventory"
+    },
+    {
+      "id": "upstream-frontier-check-runs-20261011",
+      "retrieved_utc": "2026-10-11T19:22:58Z",
+      "acquisition": "code/fetch_upstream_check_runs.py over the 259 PR numbers in check-run-numbers.txt (sha256 a79b7b59b8d3ec44f8d7b3444761778894a2f14bd04bf9e27e0925631f87d5df)",
+      "location": "/srv/ai/work/rad/integer-multiplication-bounds/upstream-frontier-20261011T1916Z/inputs/check-runs-20261011.json",
+      "bytes": 1489355,
+      "sha256": "ab02afa7654c8764d3e37a937d7a6f8bd72e0ee8a185bd24adadfadd4da9d32a",
+      "source": "https://github.com/CrocSwap/integer-mult-bounds",
+      "published_copy": "research/integer-multiplication-bounds/evidence/20261011T1916Z-upstream-frontier-inventory/",
+      "recovery": "Not re-downloadable as the same snapshot (PR bodies, comments and CI change); the published gzip copy is the durable record",
+      "usage": "Upstream frontier inventory run 20261011T1916Z-upstream-frontier-inventory"
     }
   ],
   "literature_protocols": [

@@ -602,3 +602,29 @@ Targeted publication checks passed full twelve-row arithmetic replay,
 unrelated-path relocation, corruption rejection and fresh patch recovery.
 These checks do not repeat historical finite reconstruction or change the
 conditional native-table/shared-prime/eventual-threshold qualifications.
+
+
+## Upstream frontier inventory (2026-10-11)
+
+Choose a fresh work root `W`, then from the topic directory:
+
+```bash
+gh api repos/CrocSwap/integer-mult-bounds/commits/main --jq .sha
+git clone --no-checkout https://github.com/CrocSwap/integer-mult-bounds "$W/repos/upstream-frontier"
+git -C "$W/repos/upstream-frontier" checkout --detach 12a4934d15006e8c10f9b2264f13f8f341be802b
+gh api --paginate 'repos/CrocSwap/integer-mult-bounds/pulls?state=all&per_page=100' > "$W/pulls.raw"
+python3 -c 'import json,sys; t=open(sys.argv[1]).read(); d=json.JSONDecoder(); i=0; out=[]
+while i < len(t):
+    v, i = d.raw_decode(t, i); out += v
+    while i < len(t) and t[i].isspace(): i += 1
+json.dump(sorted(out, key=lambda p: p["number"]), open(sys.argv[2], "w"))' "$W/pulls.raw" "$W/pulls-full.json"
+python3 code/fetch_upstream_check_runs.py "$W/pulls-full.json" runs/20261011T1916Z-upstream-frontier-inventory/results/check-run-numbers.txt "$W/check-runs.json"
+python3 code/upstream_frontier_inventory.py --pulls "$W/pulls-full.json" --check-runs "$W/check-runs.json" \
+  --checkout "$W/repos/upstream-frontier" --selected-kappa 90446448750933/125000000000000000 --out "$W/inventory"
+```
+
+A fresh fetch gives a newer snapshot. To regenerate the retained results
+exactly, decompress the published inputs from
+`evidence/20261011T1916Z-upstream-frontier-inventory/` and use them as
+`--pulls` and `--check-runs`. The upstream checkout must still be at
+`12a4934d`.

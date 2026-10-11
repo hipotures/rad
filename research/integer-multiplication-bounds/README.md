@@ -6,6 +6,17 @@ This investigation seeks stronger defensible conditional bounds of the form
 Larger `kappa` is stronger. Finite witnesses, mathematical transfer arguments,
 and upstream algorithmic assumptions must be distinguished.
 
+## Upstream frontier (2026-10-11)
+
+Upstream `main` was re-pinned at `12a4934d` (input `upstream-frontier-12a4934d`).
+Its reviewed selected witness is **kappa = 7.23571590007464e-4** (PR276 + PR279).
+173 open pull requests claim more; the highest is #480 at 1.3726e-3 (1.90 x main).
+None of them is reviewed upstream, and CI is mixed.
+Our best results (merged PR51 at 4.17e-5, campaign best about 5.14e-5) are
+about 14 times below main. See the
+[frontier inventory](runs/20261011T1916Z-upstream-frontier-inventory/report.md).
+The campaign sections below are historical.
+
 ## Current campaign
 
 The campaign `20261007T222521Z` began at 2026-10-07 22:25:21 UTC.
