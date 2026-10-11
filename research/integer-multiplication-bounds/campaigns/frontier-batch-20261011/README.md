@@ -29,6 +29,7 @@ export RAD_WORK_ROOT=/srv/ai/work/rad/integer-multiplication-bounds/frontier-bat
 ./run.sh 1         # about 1 minute
 ./run.sh 2         # about 1-3 hours, uses all cores
 ./run.sh 3         # about 2 minutes, CPU + one GPU
+./run.sh 4         # follow-up: repair replays of 5 packages, about 30 minutes
 ./run.sh status
 ```
 
@@ -56,6 +57,7 @@ export RAD_WORK_ROOT=/srv/ai/work/rad/integer-multiplication-bounds/frontier-bat
 | 1 | Is cross-copy hosting (#448) a program of the fixed local word when each register is bound to one stream? | [job1_stream_model.py](code/job1_stream_model.py) | 1 core, seconds |
 | 2 | Do 39 pinned frontier claims reproduce from a fresh checkout with their authors' own verifiers? | [job2_replays.py](code/job2_replays.py), [config](configs/job2-replays.json) | all cores; replays are single-threaded and run concurrently |
 | 3 | Can any other root system or lattice replace E8 in #370's five-stage bit template? | [job3_lattice_screen.py](code/job3_lattice_screen.py) | CPU; the exact Leech span check uses a free GPU, else CPU |
+| 4 (follow-up) | Do #471/#476/#478/#483/#492 reproduce when the one missing manifest key (`.gitattributes`) is tolerated? #471's complex b caps #493 and feeds #473/#490/#491. | [job4_repair_replays.py](code/job4_repair_replays.py), [job4_launcher.py](code/job4_launcher.py) | 5 cores, one replay each |
 
 ## Pre-run smoke tests (agent, 2026-10-11)
 

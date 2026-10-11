@@ -167,6 +167,11 @@ below.
 1. #493 (1.30353e-3) is the top claim without cross-copy whose verifier passes.
    Its binding input, however, is #471's unreproduced complex b (section 4).
    A repair replay of #471 is therefore the cheapest check of the current top.
+   Job 4 does this (see the campaign README). In the agent's smoke test #471
+   passed in 218 s with the single deviation and reproduced its title kappa
+   and b = 1305231506267591/10^18. The b is recomputed from the complex
+   profile built in that run. The operator's `./run.sh 4` run is
+   authoritative.
    The idle-data hosting lemma is still unreviewed upstream.
 2. The cross-copy finding was posted upstream on 2026-10-11, on
    [#448](https://github.com/CrocSwap/integer-mult-bounds/pull/448#issuecomment-6113791847)

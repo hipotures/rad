@@ -6,6 +6,7 @@
 #   ./run.sh 1         # stream-model check of whole vs cross-copy hosting   (~1 min, CPU)
 #   ./run.sh 2         # parallel fresh replays of 39 pinned upstream claims (~1-3 h, all cores)
 #   ./run.sh 3         # exact lattice/root-system screen incl. Leech          (~2 min, CPU+GPU)
+#   ./run.sh 4         # repair replays of #471/#476/#478/#483/#492, one documented deviation (~30 min)
 #   ./run.sh status    # what has finished
 #
 # Every job writes to a fresh $RAD_WORK_ROOT/runs/<UTC>-job<N>/ and never deletes
@@ -116,11 +117,17 @@ case "${1:-}" in
       --e8-producer "$RUN/pr370/research/e8-bit/code/bit/producer" 2>&1 | tee "$RUN/job3.log"
     rc=${PIPESTATUS[0]}; set -e; finish "$RUN" "$rc"
     ;;
+  4)
+    preflight 2; RUN=$(new_run 4); set +e
+    "$PY" -B "$CODE/job4_repair_replays.py" --config "$CONF/job2-replays.json" --clone "$CLONE" --work "$RUN" \
+      --python "$PY" --timeout-min "${TIMEOUT_MIN:-150}" 2>&1 | tee "$RUN/job4.log"
+    rc=${PIPESTATUS[0]}; set -e; finish "$RUN" "$rc"
+    ;;
   status)
     for d in "$ROOT"/runs/*-job*; do
       [ -d "$d" ] || continue
       "$PY" -c 'import json,sys; d=json.load(open(sys.argv[1]+"/protocol.json")); print(sys.argv[1].rsplit("/",1)[-1], "finished" if "finished_utc" in d else "RUNNING/INTERRUPTED", "exit=%s" % d.get("exit_code"))' "$d"
     done
     ;;
-  *) sed -n '2,13p' "$0"; exit 2;;
+  *) sed -n '2,14p' "$0"; exit 2;;
 esac

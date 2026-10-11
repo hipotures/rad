@@ -31,3 +31,12 @@ Post-hoc ledger of the hosted templates (agent analysis, about 20 s, no upstream
 python3 code/job2_hosting_ledger.py --run "$RAD_WORK_ROOT/runs/<UTC>-job2" \
   --out "$RAD_WORK_ROOT/runs/<UTC>-job2/analysis/hosting-ledger.json"
 ```
+
+Follow-up job 4 (repair replays; one documented deviation applied in memory, worktrees unmodified):
+
+```bash
+./run.sh 4          # TIMEOUT_MIN=<m> optional
+```
+
+Expected check: each record has `eligible: true` (the package differs from its manifest only by the absent
+`.gitattributes`) and a `# JOB4 DEVIATION ... remaining_equal=True` line in its log.
