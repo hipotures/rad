@@ -198,6 +198,13 @@ verifier's own exclusion rule.
 - **One difference in every package.** Each differs from its manifest only by
   the absent `.gitattributes` (log line `# JOB4 DEVIATION ...
   remaining_equal=True`). No worktree was modified.
+- **The missing file cannot change the computation.** The manifest's hash of the
+  absent `.gitattributes` (`48747480...`) equals the blob `** -text` found in
+  other packages (`research/r715-basis-exchange84/` and two more). That line
+  only tells Git not to normalise line endings. No package code reads the file.
+  Without it, the repository root's `* text=auto eol=lf` applies. Every other
+  package file is byte-identical to the author's manifest, so the verifiers ran
+  on exactly the author's inputs. The same holds for #498 in job 5.
 - **#471's b is recomputed, not copied.** Each package recomputes
   b = 1305231506267591/10^18. In #471, `code/assemble.py` certifies b from the
   complex profile built in the same run, then compares it with `EXPECTED.json`.
