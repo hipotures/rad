@@ -3,7 +3,7 @@
 # Local only: nothing is staged, committed or pushed. Originals stay unchanged.
 #
 #   export RAD_WORK_ROOT=<task-owned work directory>
-#   ./pack.sh                 # every finished run not yet packed
+#   ./pack.sh                 # every finished (or operator-stopped and annotated) run not yet packed
 #   ./pack.sh <run-dir>...    # selected runs
 #
 # Selected: protocol, configs, job logs and results, per-replay records and logs,
@@ -21,7 +21,7 @@ for run in "${runs[@]}"; do
   run="$(cd "$run" && pwd)"; id="$(basename "$run")"
   dest="$HERE/evidence/$id"
   if [ -e "$dest" ]; then echo "skip $id (already packed)"; continue; fi
-  if ! "$PY" -c 'import json,sys; sys.exit(0 if "finished_utc" in json.load(open(sys.argv[1])) else 1)' "$run/protocol.json"; then
+  if ! "$PY" -c 'import json,sys; d = json.load(open(sys.argv[1])); sys.exit(0 if "finished_utc" in d or "stopped_by_operator" in d else 1)' "$run/protocol.json"; then
     echo "skip $id (not finished)"; continue
   fi
   list="$(mktemp)"

@@ -23,6 +23,7 @@ table from these checkpoints every --progress-min minutes; every reported state 
 
 usage: job6_retime_search.py --out DIR (--run RUN ... | --word WORD.json.gz ...) [--hours H | --deadline-epoch S]
                              [--workers N] [--seed S]
+       job6_retime_search.py --out DIR --summarize     # summary of a stopped search from its checkpoints
 """
 import argparse
 import gzip
@@ -38,6 +39,7 @@ from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 from pathlib import Path
 
 M = 73                       # ambient rank of the complex recursion
+STATES = 'annealer-states'   # per-annealer records (not 'checkpoints': the archive validator skips that name)
 PH = [r * math.log(M / r) if r else 0.0 for r in range(10)]
 INF = float('inf')
 
@@ -427,6 +429,35 @@ def discover(runs, words):
     return out
 
 
+def summarize(out):
+    """Per-word summary rebuilt from the annealers' checkpoints alone, for a search stopped before its deadline
+    (no SUMMARY.json is written then). Written to SUMMARY-FROM-CHECKPOINTS.json; nothing else is changed."""
+    words = json.loads((out / 'WORDS.json').read_text())
+    states = out / STATES if (out / STATES).exists() else out / 'checkpoints'  # 'checkpoints': runs before 2026-10-12 08 UTC
+    recs = [json.loads(p.read_text()) for p in sorted(states.glob('*.json'))]
+    per = defaultdict(list)
+    for r in recs:
+        per[r['word_id']].append(r)
+    best = {}
+    for wid, rs in sorted(per.items()):
+        b = min(rs, key=lambda r: r['phi_climbs_best'])
+        best[wid] = dict({k: b[k] for k in ('word', 'word_sha256', 'phi_climbs_start', 'phi_climbs_best', 'phi_gain',
+                                            'changed_gates', 'local_profile_start', 'local_profile_best')},
+                         annealers=len(rs), iterations=sum(r['iterations'] for r in rs),
+                         accepted=sum(r['accepted'] for r in rs), cycles=sum(r['cycles'] for r in rs),
+                         seconds_max=max(r['seconds'] for r in rs), all_final=all(r['final'] for r in rs))
+    summary = dict(source='annealer checkpoints', stopped_before_deadline=not all(r['final'] for r in recs),
+                   words=len(words), supported=sum(w.get('status') == 'ok' for w in words), annealers=len(recs),
+                   iterations=sum(r['iterations'] for r in recs), accepted=sum(r['accepted'] for r in recs),
+                   best=best, annealer_records=[{k: r[k] for k in ('word_id', 'seed', 'final', 'phi_climbs_best', 'phi_gain',
+                                                                   'iterations', 'accepted', 'cycles', 'seconds')}
+                                                for r in recs])
+    (out / 'SUMMARY-FROM-CHECKPOINTS.json').write_text(json.dumps(summary, indent=1))
+    print(json.dumps({wid: {k: b[k] for k in ('phi_climbs_start', 'phi_climbs_best', 'phi_gain', 'annealers', 'iterations',
+                                              'accepted', 'seconds_max')} for wid, b in best.items()}, indent=1))
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--out', required=True)
@@ -438,10 +469,13 @@ def main():
     ap.add_argument('--cycle-min', type=float, default=10.0, help='length of one annealing cycle')
     ap.add_argument('--progress-min', type=float, default=10.0, help='interval of the console progress table')
     ap.add_argument('--seed', type=int, default=20261012)
+    ap.add_argument('--summarize', action='store_true', help='only rebuild the summary of a stopped search from --out')
     a = ap.parse_args()
+    if a.summarize:
+        return summarize(Path(a.out))
     deadline = a.deadline_epoch if a.deadline_epoch else time.time() + 3600 * (a.hours if a.hours is not None else 1)
     out = Path(a.out)
-    (out / 'checkpoints').mkdir(parents=True, exist_ok=True)
+    (out / STATES).mkdir(parents=True, exist_ok=True)
     words = discover(a.run, a.word)
     (out / 'WORDS.json').write_text(json.dumps(words, indent=1))
     # annealers are dealt round-robin, newest frontier words first (#527, then #523), then the rest
@@ -456,7 +490,7 @@ def main():
     for i, w in enumerate(ok):
         w['word_id'] = f'w{i:02d}-{w["sha256"][:10]}'
     tasks = [dict(path=ok[k % len(ok)]['path'], word_id=ok[k % len(ok)]['word_id'], seed=a.seed + k,
-                  deadline=deadline, out_dir=str(out / 'checkpoints'), cycle_s=60 * a.cycle_min,
+                  deadline=deadline, out_dir=str(out / STATES), cycle_s=60 * a.cycle_min,
                   heartbeat_s=min(120.0, 30 * a.progress_min))
              for k in range(max(a.workers, len(ok)))]
     print(f'{len(ok)} supported word(s), {len(tasks)} annealers on {a.workers} processes, '
@@ -467,7 +501,7 @@ def main():
 
     def progress():
         best = {}
-        for p in (out / 'checkpoints').glob('*.json'):
+        for p in (out / STATES).glob('*.json'):
             try:
                 r = json.loads(p.read_text())
             except (OSError, ValueError):

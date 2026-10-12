@@ -26,11 +26,14 @@ was pinned: #484 and #495-#502, at heads pinned 2026-10-11 21:54 UTC
 - Our ledger finds the hosting clean, including #496's cross-replica pooling
   and #471's complex template.
 
-Follow-up **job 6** (built 2026-10-12, operator run pending) moves from verification to search. The asynchronous
-whole-owner allocation of the newest claims is already solver-optimal and governs only 4.7% of the first-order
-complex cost; 95% sits in the local word, 72 copies of it
-([report section 7](report.md#7-where-the-complex-cost-sits-agent-2026-10-12)). Job 6 builds the #523 and #527 words
-and anneals their gate frame timings for a given number of hours.
+Follow-up **job 6** (2026-10-12) moved from verification to search
+([report section 7](report.md#7-where-the-complex-cost-sits-agent-2026-10-12)).
+- The asynchronous whole-owner allocation of the newest claims is already solver-optimal. It governs only 4.7% of
+  the first-order complex cost; 95% sits in the local word, which is repeated 72 times.
+- #523 and #527 reproduce exactly from fresh sources. At 1.467289e-3, #527 (a draft) is the highest claim
+  reproduced here.
+- 13 billion annealing moves over 5.3 h found no cheaper frame timing for the #514, #522, #523 or #527 words.
+  Frame retiming with a fixed gate sequence is exhausted in this lineage.
 
 See [GOAL.md](GOAL.md) for the brief and completion criteria.
 

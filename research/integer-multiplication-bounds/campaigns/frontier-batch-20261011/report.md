@@ -362,7 +362,38 @@ gained nothing. Frame retiming is therefore already exhausted on the words that 
 is exhausted on #522's rank-sector factory and on #523/#527's 112-port words is what job 6 measures. Those words
 contain gates whose frames were transferred rather than re-optimized.
 
-A gain found by job 6 is only a candidate until the agent re-emits the word and passes the package's own checks:
+**Job 6 result (operator run `20261012T014457Z-job6`, budget 8 h, stopped by the operator after 5.33 h of
+search).**
+- **Builds.** Both builds passed as-is with the exact title kappa in 235 s each (peak RSS 0.27 GB):
+  #523 (0.001457945761723368) and #527 (0.001467289440740487, draft at pinning). #527 is the highest
+  independently reproduced claim of this campaign; it carries the same inherited conditions as its lineage.
+  They yield four new words: #514 (`baseline514`), #522 (`source522`), #523 (`base112`) and #527 (`base112`).
+- **Search.** All five words, including the #502 control, passed the format gate. 15 annealers (3 per word)
+  ran 13.0 billion moves and accepted 15.2 million of them, worse moves included, over 33 reheating cycles
+  each. No annealer found any timing below its word's published one.
+
+| Word | Published Phi of paid climbs | Best found | Moves | Accepted |
+|---|---:|---:|---:|---:|
+| #527 `base112` | 22,810.28 | 22,810.28 | 2.61e9 | 3.67e6 |
+| #522 (`source522` in #527) | 23,093.29 | 23,093.29 | 2.60e9 | 3.00e6 |
+| #523 `base112` | 22,976.06 | 22,976.06 | 2.61e9 | 3.10e6 |
+| #514 (`baseline514` in #523) | 23,259.07 | 23,259.07 | 2.61e9 | 2.37e6 |
+| #502 control | 23,269.31 | 23,269.31 | 2.55e9 | 3.06e6 |
+
+The operator pressed Ctrl-C at 07:09 UTC, and the agent recorded the stop in `protocol.json` (`stopped_by_operator`).
+The summary was rebuilt from the annealer records with `job6_retime_search.py --summarize`
+(`search/SUMMARY-FROM-CHECKPOINTS.json`).
+
+**Interpretation.**
+- Measured: from unretimed #484 words, this search reaches the retimed optimum within seconds.
+- Measured: on every newest word it finds nothing in billions of moves.
+- Conclusion: the authors' timings are at least deep local optima for the move set used, which is plateau raise
+  and lower with cascades, plus random intermediate frames. Frame retiming with a fixed gate sequence is not a
+  route to a higher kappa in this lineage.
+- Limitation: this is a search result, not an optimality proof. Moves that change the gate order, or the gates
+  themselves, are outside it.
+
+Any gain a later search finds is only a candidate until the agent re-emits the word and passes the package's own checks:
 the local replay of all columns, the Clifford phase lowering of every new edge, the owner audit with unchanged
 helper widths, and both moment engines. The deeper lever, frame chains shared by more than two targets (#520 §3),
 changes the gate sequence itself and is not part of job 6.
@@ -392,6 +423,11 @@ changes the gate sequence itself and is not part of job 6.
    #484's own pin. This could be reported to #501's author with
    `analysis/pr501-source-word.json`; nothing has been posted.
 
+5. Job 6 closes frame retiming with a fixed gate sequence for the newest words. The remaining freedom inside the
+   current construction is the gate order: many gates commute, and a different order changes every register's
+   frame chain. A search over commuting reorders jointly with frames is the next computation of this kind.
+   Beyond it lie the shared delivery chains of #520 §3, which change the gates themselves.
+
 ## Evidence
 
 - `evidence/<run-id>/` holds gzip copies of each run's protocol, configs and
@@ -419,3 +455,12 @@ changes the gate sequence itself and is not part of job 6.
   - the ledger: `python3 code/job5_hosting_ledger.py --run <job5 run> --run <job4 runs> --out <file>` (10 s);
   - the controls: `python3 code/test_job5_ledger_mutations.py <#496 hosted template>` (2 s);
   - the #501 diagnosis: `python3 code/job5_pr501_word_check.py --run <job5 run> --out <file>` (2 s).
+- Job 6 publishes 45 files (0.05 MB gzip):
+  - protocol with the operator stop, configs, build and search logs;
+  - the two build records, checks, logs and result/audit JSON;
+  - `search/WORDS.json` and `search/SUMMARY-FROM-CHECKPOINTS.json`, with all 15 annealer records.
+
+  The per-annealer files under `search/checkpoints/` (735 bytes each) are not copied separately, because the
+  archive validator skips that directory name. Later runs use `search/annealer-states/`. Not published: the
+  worktrees and build outputs (0.4 GB), including the five searched words. Rebuild them with `./run.sh 6 <hours>`;
+  their SHA-256 hashes are in `search/WORDS.json`.
