@@ -400,7 +400,7 @@ gates on some register whose frames should appear in the other order. `code/job7
 next to a commuting neighbour on one of its registers, inside the window that commutation allows on all its
 registers, and keeps job 6's frame moves. Toy words show the effect exists: in a random search, about 1 in 120
 toy words admits a reorder that saves 2*Phi(1) - Phi(2) = 1.386 over the best fixed-order timing, and job 7 finds
-it where job 6 cannot. On the real words a 2.7-minute probe (151 M moves, 24 M accepted gate moves) found nothing.
+it where job 6 cannot. On the real words a 2.7-minute probe (187 M moves, 24 M accepted gate moves) found nothing.
 The operator's run will tell whether the newest words have any such slack.
 
 Any gain a later search finds is only a candidate until the agent re-emits the word and passes the package's own checks:

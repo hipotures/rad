@@ -136,7 +136,7 @@ These smoke tests are not the results; the operator's runs are authoritative.
     - A swapped non-commuting pair is rejected, and its exact replay differs from the original.
     - On #527's word, 2,927 random gate moves change 3,552 positions, and the exact rational replay still gives the
       original contents for every register.
-  - A 2.7-minute probe with 15 processes (151 M moves, 24 M accepted gate moves) found no gain on the #527, #523 or
+  - A 2.7-minute probe with 15 processes (187 M moves, 24 M accepted gate moves) found no gain on the #527, #523 or
     #502 words. The operator's run remains authoritative.
 
 ## Layout
