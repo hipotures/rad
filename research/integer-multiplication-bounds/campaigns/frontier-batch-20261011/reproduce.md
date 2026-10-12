@@ -86,7 +86,8 @@ Follow-up job 7 (gate orders and frame timings of the words job 6 built; needs a
 ```
 
 Console: every 10 min one row per word (start Phi, best Phi, gain, moves tried, accepted gate moves). The newest
-words (#527, #523) get two annealer slots per round. Expected checks: `search/SUMMARY.json` (or, if the run is
+words (every word built by the #527 and #523 replays) are listed twice in the slot list, so they get
+about twice the annealers. Expected checks: `search/SUMMARY.json` (or, if the run is
 stopped, `job7_reorder_search.py --out <run>/search --summarize`). Every final record has
 `exact_replay_checked: true`: its order passed the pairwise commutation check and an exact rational replay of
 phases A and B. `BEST-<word>.json` holds the best order (`order_a_best`, `order_b_best`, original gate indices) and

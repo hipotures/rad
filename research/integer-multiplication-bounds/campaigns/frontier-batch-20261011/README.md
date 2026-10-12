@@ -35,9 +35,10 @@ Follow-up **job 6** (2026-10-12) moved from verification to search
 - 13 billion annealing moves over 5.3 h found no cheaper frame timing for the #514, #522, #523 or #527 words.
   Frame retiming with a fixed gate sequence is exhausted in this lineage.
 
-Follow-up **job 7** (built 2026-10-12, operator run pending) widens the search to gate orders. Gates that commute may
-change places, and their frames are searched jointly. A 2.7-minute probe on the #527, #523 and #502 words found no
-gain.
+Follow-up **job 7** (2026-10-12) widened the search to gate orders. Gates that commute may change places, and their
+frames are searched jointly. In 2 h, 8.7 billion moves (1.08 billion accepted reorderings at equal cost) found no
+cheaper order and timing for any of the five words. Mechanical search of the current construction is exhausted;
+the next lever is a new gate sequence (#520 §3 shared delivery chains), which is construction work, not search.
 
 See [GOAL.md](GOAL.md) for the brief and completion criteria.
 
@@ -137,7 +138,9 @@ These smoke tests are not the results; the operator's runs are authoritative.
     - On #527's word, 2,927 random gate moves change 3,552 positions, and the exact rational replay still gives the
       original contents for every register.
   - A 2.7-minute probe with 15 processes (187 M moves, 24 M accepted gate moves) found no gain on the #527, #523 or
-    #502 words. The operator's run remains authoritative.
+    #502 words.
+  - Operator run `20261012T081035Z-job7` (2 h, exit 0): no gain on any word; every final record passed the exact
+    replay ([report section 7](report.md#7-where-the-complex-cost-sits-agent-2026-10-12)).
 
 ## Layout
 

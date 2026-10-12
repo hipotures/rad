@@ -393,7 +393,7 @@ The summary was rebuilt from the annealer records with `job6_retime_search.py --
 - Limitation: this is a search result, not an optimality proof. Moves that change the gate order, or the gates
   themselves, are outside it.
 
-**Job 7 (built 2026-10-12, operator run pending).** With frames free, the gate order matters only through
+**Job 7 (2026-10-12).** With frames free, the gate order matters only through
 admissibility. For a given frame assignment, each register's cost depends only on the set of frames it visits.
 Reordering helps only if it admits a cheaper assignment that the original order forbids. That requires commuting
 gates on some register whose frames should appear in the other order. `code/job7_reorder_search.py` moves a gate
@@ -401,12 +401,34 @@ next to a commuting neighbour on one of its registers, inside the window that co
 registers, and keeps job 6's frame moves. Toy words show the effect exists: in a random search, about 1 in 120
 toy words admits a reorder that saves 2*Phi(1) - Phi(2) = 1.386 over the best fixed-order timing, and job 7 finds
 it where job 6 cannot. On the real words a 2.7-minute probe (187 M moves, 24 M accepted gate moves) found nothing.
-The operator's run will tell whether the newest words have any such slack.
+
+**Job 7 result (operator run `20261012T081035Z-job7`, budget 2 h, finished with exit code 0).** The five words of
+job 6 (the #502 word as control) passed the format gate. 15 annealers ran 2 h each with 12 reheating cycles. Every
+word built by the #527 and #523 replays was listed twice in the slot list, which gave 4/4/4/2/1 annealers in table
+order. They tried 8.72 billion moves and accepted 1.08 billion, of which 1.076 billion were gate moves: commuting
+gates really did change places, at no change in Phi. No annealer found any order and timing below its word's
+published one, and every final record passed the pairwise commutation check and the exact rational replay.
+
+| Word | Published Phi of paid climbs | Best found | Annealers | Moves | Accepted gate moves |
+|---|---:|---:|---:|---:|---:|
+| #527 `base112` | 22,810.28 | 22,810.28 | 4 | 2.36e9 | 2.66e8 |
+| #522 (`source522` in #527) | 23,093.29 | 23,093.29 | 4 | 2.36e9 | 2.66e8 |
+| #523 `base112` | 22,976.06 | 22,976.06 | 4 | 2.29e9 | 3.08e8 |
+| #514 (`baseline514` in #523) | 23,259.07 | 23,259.07 | 2 | 1.15e9 | 1.54e8 |
+| #502 control | 23,269.31 | 23,269.31 | 1 | 0.55e9 | 0.83e8 |
+
+**Interpretation.**
+- Measured: the search wanders through about a billion equal-cost reorderings and never reaches a strictly
+  cheaper order and timing; on toy words built to have such slack it finds it within seconds.
+- Conclusion: in these words the commuting freedom gives no cheaper frame assignment for the move set used
+  (adjacent commuting moves within the allowed window, plus job 6's frame moves). Together with job 6, mechanical
+  search of the current construction (same gates, same linear map) is exhausted for the #514/#522/#523/#527 words.
+- Limitation: as for job 6, a search result, not an optimality proof. Changing the gates themselves is outside it.
 
 Any gain a later search finds is only a candidate until the agent re-emits the word and passes the package's own checks:
 the local replay of all columns, the Clifford phase lowering of every new edge, the owner audit with unchanged
 helper widths, and both moment engines. The deeper lever, frame chains shared by more than two targets (#520 §3),
-changes the gate sequence itself and is not part of job 6.
+changes the gate sequence itself and is not part of jobs 6 or 7.
 
 ## Recommended next steps
 
@@ -435,8 +457,10 @@ changes the gate sequence itself and is not part of job 6.
 
 5. Job 6 closes frame retiming with a fixed gate sequence for the newest words. The remaining freedom inside the
    current construction is the gate order: many gates commute, and a different order changes every register's
-   frame chain. Job 7 searches commuting reorders jointly with frames; its operator run is pending. Beyond it lie
-   the shared delivery chains of #520 §3, which change the gates themselves.
+   frame chain. Job 7 searched commuting reorders jointly with frames for 2 h (8.7 billion moves) and found no
+   gain either. Mechanical search of the current construction is therefore exhausted. The next lever is the
+   shared delivery chains of #520 §3, which change the gates themselves; that is a construction task, not a
+   search.
 
 ## Evidence
 

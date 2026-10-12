@@ -516,7 +516,8 @@ def main():
         return 1
     for i, w in enumerate(ok):
         w['word_id'] = f'w{i:02d}-{w["sha256"][:10]}'
-    # the newest words (#527, #523) get two annealer slots per round, every other word one
+    # every word built by the #527 and #523 replays (their own words and the source words they rebuild) is listed
+    # twice in the slot list, every other word once; tasks cycle through the list
     slots = [w for w in ok for _ in range(2 if rank(w)[0] < 2 else 1)]
     tasks = [dict(path=slots[k % len(slots)]['path'], word_id=slots[k % len(slots)]['word_id'], seed=a.seed + k,
                   deadline=deadline, out_dir=str(out / STATES), cycle_s=60 * a.cycle_min,
