@@ -56,6 +56,11 @@ pack, commit and push.
    found, validated from scratch, with its profile. A gain becomes a claim only after the package's own
    checks and moment engines pass on the re-emitted word.
 
+7. **Job 7 (2026-10-12).** Job 6 found no cheaper frame timing for a fixed gate sequence. Job 7 also lets gates that
+   commute change places (the local linear map is unchanged) and searches orders and frames jointly. The start
+   parameter is again the wall-clock budget in hours. Completion criteria are as for job 6, plus an exact rational
+   replay of the reordered phases for every final record.
+
 ## Constraints
 
 - Inputs are pinned by commit SHA; open PR heads move every hour.

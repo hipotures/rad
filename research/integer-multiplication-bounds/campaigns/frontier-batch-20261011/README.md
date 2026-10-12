@@ -35,6 +35,10 @@ Follow-up **job 6** (2026-10-12) moved from verification to search
 - 13 billion annealing moves over 5.3 h found no cheaper frame timing for the #514, #522, #523 or #527 words.
   Frame retiming with a fixed gate sequence is exhausted in this lineage.
 
+Follow-up **job 7** (built 2026-10-12, operator run pending) widens the search to gate orders. Gates that commute may
+change places, and their frames are searched jointly. A 2.7-minute probe on the #527, #523 and #502 words found no
+gain.
+
 See [GOAL.md](GOAL.md) for the brief and completion criteria.
 
 This campaign continues the
@@ -83,6 +87,7 @@ export RAD_WORK_ROOT=/srv/ai/work/rad/integer-multiplication-bounds/frontier-bat
 | 3 | Can any other root system or lattice replace E8 in #370's five-stage bit template? | [job3_lattice_screen.py](code/job3_lattice_screen.py) | CPU; the exact Leech span check uses a free GPU, else CPU |
 | 5 (follow-up) | Do the 9 frontier claims opened after job 2's pinning (#484, #495-#502) reproduce with their authors' verifiers? Which complex supplier b does each bind to? A repair attempt runs only under job 4's condition (#498 lists an absent `.gitattributes`). | [job5_replays.py](code/job5_replays.py), [config](configs/job5-replays.json), [smoke test](code/test_job5_smoke.py) | 9 replays in parallel |
 | 6 (follow-up) | Can a different frame timing of the newest complex words (#514/#522/#523/#527, built fresh) lower their paid recursive cost Phi, keeping every gate, coefficient and fixed frame? | [job6_retime_search.py](code/job6_retime_search.py), [config](configs/job6-builds.json), [smoke test](code/test_job6_smoke.py) | 2 builds in parallel, then all cores annealing until the hour budget ends |
+| 7 (follow-up) | Does moving commuting gates (same linear map) together with their frames lower Phi of the job 6 words? | [job7_reorder_search.py](code/job7_reorder_search.py), [smoke test](code/test_job7_smoke.py) | all cores annealing until the hour budget ends; no rebuild |
 | 4 (follow-up) | Do #471/#476/#478/#483/#492 reproduce when the one missing manifest key (`.gitattributes`) is tolerated? #471's complex b caps #493 and feeds #473/#490/#491. | [job4_repair_replays.py](code/job4_repair_replays.py), [job4_launcher.py](code/job4_launcher.py) | 5 cores, one replay each |
 
 ## Pre-run smoke tests (agent, 2026-10-11)
@@ -122,6 +127,18 @@ These smoke tests are not the results; the operator's runs are authoritative.
     Unretimed #484-lineage words drop by 180-252 Phi; one reaches 23,249.83, the value of the retimed #495 word.
     The retimed words (#495, #502) gain nothing. The operator's run remains authoritative.
 
+- **Job 7** (2026-10-12, before the operator run):
+  - `code/test_job7_smoke.py` passes 14 of 14 checks:
+    - On two toy words, the best timing over all admissible gate orders is strictly cheaper than the best for the
+      original order (brute force), and was found by a random search over toys.
+    - Job 6's annealer reaches only the fixed-order optimum on both toys. Job 7's annealer reaches the reorder
+      optimum.
+    - A swapped non-commuting pair is rejected, and its exact replay differs from the original.
+    - On #527's word, 2,927 random gate moves change 3,552 positions, and the exact rational replay still gives the
+      original contents for every register.
+  - A 2.7-minute probe with 15 processes (151 M moves, 24 M accepted gate moves) found no gain on the #527, #523 or
+    #502 words. The operator's run remains authoritative.
+
 ## Layout
 
 - `run.sh`, `pack.sh`: operator entry points
@@ -133,4 +150,5 @@ These smoke tests are not the results; the operator's runs are authoritative.
 - `code/test_job5_ledger_mutations.py`: mutation controls of the pooled-slot audit
 - `code/job5_pr501_word_check.py`: diagnosis of #501's source-word pin
 - `code/job6_retime_search.py`, `code/test_job6_smoke.py`: job 6 frame-timing search and its smoke test
+- `code/job7_reorder_search.py`, `code/test_job7_smoke.py`: job 7 gate-order and frame search and its smoke test
 - `report.md`: results and interpretation

@@ -9,6 +9,7 @@
 #   ./run.sh 4         # repair replays of #471/#476/#478/#483/#492, one documented deviation (~30 min)
 #   ./run.sh 5         # fresh replays of #484 and #495-#502 (new frontier), repair only if job 4's condition (~1 h)
 #   ./run.sh 6 <hours> # build #523/#527 words, then search frame timings until <hours> after the start (all cores)
+#   ./run.sh 7 <hours> # search gate orders and frame timings of job 6's built words for <hours> (all cores)
 #   ./run.sh status    # what has finished
 #
 # Every job writes to a fresh $RAD_WORK_ROOT/runs/<UTC>-job<N>/ and never deletes
@@ -44,7 +45,7 @@ preflight() {  # $1 = job
   "$PY" - "$1" <<'EOF' || die "python environment"
 import sys, importlib
 mods = {'1': ['numpy'], '2': ['numpy', 'scipy', 'sympy', 'mpmath'], '3': ['numpy'],
-        '5': ['numpy', 'scipy', 'sympy', 'mpmath'], '6': []}[sys.argv[1]]
+        '5': ['numpy', 'scipy', 'sympy', 'mpmath'], '6': [], '7': []}[sys.argv[1]]
 for m in mods:
     importlib.import_module(m)
 assert sys.version_info >= (3, 11), sys.version
@@ -161,11 +162,30 @@ case "${1:-}" in
       --deadline-epoch "$deadline" --workers "${JOBS:-$(( $(nproc) - 1 ))}" 2>&1 | tee "$RUN/job6-search.log"
     rc=${PIPESTATUS[0]}; set -e; finish "$RUN" "$rc"
     ;;
+  7)
+    hours="${2:-}"; [ -n "$hours" ] || { echo "usage: ./run.sh 7 <hours>   (wall-clock budget, e.g. 6 or 7.5)"; exit 2; }
+    preflight 7
+    job6=$(ls -d "$ROOT"/runs/*-job6 2>/dev/null | tail -n 1)
+    [ -n "$job6" ] && ls "$job6"/out/*/*/split-centres/CANONICAL-WORD.json.gz >/dev/null 2>&1 \
+      || die "job 7 searches the words built by job 6; run ./run.sh 6 first"
+    deadline=$("$PY" -c 'import sys,time; h=float(sys.argv[1]); assert h>0; print(int(time.time()+3600*h))' "$hours") \
+      || { echo "hours must be a positive number"; exit 2; }
+    RUN=$(new_run 7); set +e
+    say "job 7: budget ${hours} h (deadline $(date -u -d "@$deadline" +%FT%TZ)); words from $(basename "$job6")"
+    echo "$job6" > "$RUN/words-from-run.txt"
+    control=$(ls "$ROOT"/runs/*-job5/out/pr-502-*/gauge80-kernel42/split-centres/CANONICAL-WORD.json.gz 2>/dev/null | head -n 1)
+    "$PY" -B "$CODE/job7_reorder_search.py" --out "$RUN/search" --run "$job6" ${control:+--word "$control"} \
+      --deadline-epoch "$deadline" --workers "${JOBS:-$(( $(nproc) - 1 ))}" 2>&1 | tee "$RUN/job7-search.log"
+    rc=${PIPESTATUS[0]}; set -e; finish "$RUN" "$rc"
+    ;;
   test5)
     "$PY" -B "$CODE/test_job5_smoke.py"
     ;;
   test6)
     "$PY" -B "$CODE/test_job6_smoke.py"
+    ;;
+  test7)
+    "$PY" -B "$CODE/test_job7_smoke.py"
     ;;
   status)
     for d in "$ROOT"/runs/*-job*; do
@@ -173,5 +193,5 @@ case "${1:-}" in
       "$PY" -c 'import json,sys; d=json.load(open(sys.argv[1]+"/protocol.json")); print(sys.argv[1].rsplit("/",1)[-1], "finished" if "finished_utc" in d else "RUNNING/INTERRUPTED", "exit=%s" % d.get("exit_code"))' "$d"
     done
     ;;
-  *) sed -n '2,16p' "$0"; exit 2;;
+  *) sed -n '2,17p' "$0"; exit 2;;
 esac

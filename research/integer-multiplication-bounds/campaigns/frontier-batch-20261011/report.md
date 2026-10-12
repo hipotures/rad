@@ -393,6 +393,16 @@ The summary was rebuilt from the annealer records with `job6_retime_search.py --
 - Limitation: this is a search result, not an optimality proof. Moves that change the gate order, or the gates
   themselves, are outside it.
 
+**Job 7 (built 2026-10-12, operator run pending).** With frames free, the gate order matters only through
+admissibility. For a given frame assignment, each register's cost depends only on the set of frames it visits.
+Reordering helps only if it admits a cheaper assignment that the original order forbids. That requires commuting
+gates on some register whose frames should appear in the other order. `code/job7_reorder_search.py` moves a gate
+next to a commuting neighbour on one of its registers, inside the window that commutation allows on all its
+registers, and keeps job 6's frame moves. Toy words show the effect exists: in a random search, about 1 in 120
+toy words admits a reorder that saves 2*Phi(1) - Phi(2) = 1.386 over the best fixed-order timing, and job 7 finds
+it where job 6 cannot. On the real words a 2.7-minute probe (151 M moves, 24 M accepted gate moves) found nothing.
+The operator's run will tell whether the newest words have any such slack.
+
 Any gain a later search finds is only a candidate until the agent re-emits the word and passes the package's own checks:
 the local replay of all columns, the Clifford phase lowering of every new edge, the owner audit with unchanged
 helper widths, and both moment engines. The deeper lever, frame chains shared by more than two targets (#520 §3),
@@ -425,8 +435,8 @@ changes the gate sequence itself and is not part of job 6.
 
 5. Job 6 closes frame retiming with a fixed gate sequence for the newest words. The remaining freedom inside the
    current construction is the gate order: many gates commute, and a different order changes every register's
-   frame chain. A search over commuting reorders jointly with frames is the next computation of this kind.
-   Beyond it lie the shared delivery chains of #520 §3, which change the gates themselves.
+   frame chain. Job 7 searches commuting reorders jointly with frames; its operator run is pending. Beyond it lie
+   the shared delivery chains of #520 §3, which change the gates themselves.
 
 ## Evidence
 

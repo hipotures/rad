@@ -78,5 +78,20 @@ lists every distinct built word; `status: ok` means this model's replay reproduc
 re-checks from scratch. A positive gain is only a candidate: the agent then re-emits the word and runs the
 package's own local replay, Clifford phase lowering, owner audit and moment engines before any value is stated.
 
+Follow-up job 7 (gate orders and frame timings of the words job 6 built; needs a job 6 run, nothing is rebuilt):
+
+```bash
+./run.sh test7      # smoke test, about 20 s; uses job 6's #527 word for the exact-replay check when present
+./run.sh 7 7.5      # wall-clock budget in hours; JOBS sets the number of annealing processes (default cores - 1)
+```
+
+Console: every 10 min one row per word (start Phi, best Phi, gain, moves tried, accepted gate moves). The newest
+words (#527, #523) get two annealer slots per round. Expected checks: `search/SUMMARY.json` (or, if the run is
+stopped, `job7_reorder_search.py --out <run>/search --summarize`). Every final record has
+`exact_replay_checked: true`: its order passed the pairwise commutation check and an exact rational replay of
+phases A and B. `BEST-<word>.json` holds the best order (`order_a_best`, `order_b_best`, original gate indices) and
+one frame basis per original gate. A gain is a candidate only until the package's own checks pass on the re-emitted
+word.
+
 For job 4, expected check: each record has `eligible: true` (the package differs from its manifest only by the absent
 `.gitattributes`) and a `# JOB4 DEVIATION ... remaining_equal=True` line in its log.
