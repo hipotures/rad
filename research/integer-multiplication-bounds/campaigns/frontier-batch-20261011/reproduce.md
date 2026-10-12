@@ -59,5 +59,20 @@ python3 code/job5_hosting_ledger.py --run "$RAD_WORK_ROOT/runs/<UTC>-job5" \
   --out "$RAD_WORK_ROOT/runs/<UTC>-job5/analysis/hosting-ledger.json"
 ```
 
+Follow-up job 6 (build the #523 and #527 words, then search frame timings until the hour budget ends):
+
+```bash
+./run.sh test6      # smoke test, about 30 s; uses job 5's #502 word for the cascade check when present
+./run.sh 6 7.5      # total wall-clock budget in hours; TIMEOUT_MIN caps the build stage (default 120,
+                    # at most half the budget); JOBS sets the number of annealing processes (default cores - 1)
+```
+
+Expected checks: `job6-build.log` ends with both replays passed (their claimed kappa exact). `search/WORDS.json`
+lists every distinct built word; `status: ok` means this model's replay reproduces that word's own
+`local_profile`. `search/SUMMARY.json` gives, per word, the start and best first-order Phi of the paid climbs.
+`search/BEST-<word>.json` holds the best timing (one canonical frame basis per A/B gate), which `validate_state`
+re-checks from scratch. A positive gain is only a candidate: the agent then re-emits the word and runs the
+package's own local replay, Clifford phase lowering, owner audit and moment engines before any value is stated.
+
 For job 4, expected check: each record has `eligible: true` (the package differs from its manifest only by the absent
 `.gitattributes`) and a `# JOB4 DEVIATION ... remaining_equal=True` line in its log.

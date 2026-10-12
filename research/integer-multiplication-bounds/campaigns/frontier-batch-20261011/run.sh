@@ -8,6 +8,7 @@
 #   ./run.sh 3         # exact lattice/root-system screen incl. Leech          (~2 min, CPU+GPU)
 #   ./run.sh 4         # repair replays of #471/#476/#478/#483/#492, one documented deviation (~30 min)
 #   ./run.sh 5         # fresh replays of #484 and #495-#502 (new frontier), repair only if job 4's condition (~1 h)
+#   ./run.sh 6 <hours> # build #523/#527 words, then search frame timings until <hours> after the start (all cores)
 #   ./run.sh status    # what has finished
 #
 # Every job writes to a fresh $RAD_WORK_ROOT/runs/<UTC>-job<N>/ and never deletes
@@ -43,7 +44,7 @@ preflight() {  # $1 = job
   "$PY" - "$1" <<'EOF' || die "python environment"
 import sys, importlib
 mods = {'1': ['numpy'], '2': ['numpy', 'scipy', 'sympy', 'mpmath'], '3': ['numpy'],
-        '5': ['numpy', 'scipy', 'sympy', 'mpmath']}[sys.argv[1]]
+        '5': ['numpy', 'scipy', 'sympy', 'mpmath'], '6': []}[sys.argv[1]]
 for m in mods:
     importlib.import_module(m)
 assert sys.version_info >= (3, 11), sys.version
@@ -51,6 +52,11 @@ EOF
   [ -d "$CLONE/.git" ] || die "missing upstream clone $CLONE (run ./run.sh setup)"
   if [ "$1" != 1 ]; then
     for s in $(pinned_shas); do git -C "$CLONE" cat-file -e "$s^{commit}" 2>/dev/null || die "commit $s not in clone (run ./run.sh setup)"; done
+  fi
+  if [ "$1" = 6 ]; then
+    for s in $(pinned_shas "$CONF/job6-builds.json"); do git -C "$CLONE" cat-file -e "$s^{commit}" 2>/dev/null || die "commit $s not in clone (run ./run.sh setup)"; done
+    free_gb=$(df -Pk "$ROOT" | awk 'NR==2{print int($4/1048576)}')
+    [ "$free_gb" -ge 20 ] || die "only ${free_gb} GiB free under $ROOT; need >= 20"
   fi
   if [ "$1" = 5 ]; then
     for s in $(pinned_shas "$CONF/job5-replays.json"); do git -C "$CLONE" cat-file -e "$s^{commit}" 2>/dev/null || die "commit $s not in clone (run ./run.sh setup)"; done
@@ -99,13 +105,13 @@ case "${1:-}" in
     [ -x "$PY" ] || uv venv -q "$ROOT/envs/batch" --python 3.14
     uv pip install -q --python "$PY" -r "$CONF/requirements.txt"
     [ -d "$CLONE/.git" ] || git clone -q --no-checkout "$UPSTREAM" "$CLONE"
-    for n in $(config_prs "$CONF/job2-replays.json") 370 $(config_prs "$CONF/job5-replays.json"); do
+    for n in $(config_prs "$CONF/job2-replays.json") 370 $(config_prs "$CONF/job5-replays.json") $(config_prs "$CONF/job6-builds.json"); do
       git -C "$CLONE" fetch -q origin "pull/$n/head:refs/remotes/pr/$n" || say "warning: could not fetch PR $n head"
     done
-    for s in $(pinned_shas) $(pinned_shas "$CONF/job5-replays.json"); do
+    for s in $(pinned_shas) $(pinned_shas "$CONF/job5-replays.json") $(pinned_shas "$CONF/job6-builds.json"); do
       git -C "$CLONE" cat-file -e "$s^{commit}" 2>/dev/null || git -C "$CLONE" fetch -q origin "$s" || say "warning: pinned $s unavailable"
     done
-    for j in 1 2 3 5; do preflight "$j"; done
+    for j in 1 2 3 5 6; do preflight "$j"; done
     ;;
   1)
     preflight 1; RUN=$(new_run 1); set +e
@@ -137,8 +143,25 @@ case "${1:-}" in
       --python "$PY" --timeout-min "${TIMEOUT_MIN:-180}" ${ONLY:+--only "$ONLY"} 2>&1 | tee "$RUN/job5.log"
     rc=${PIPESTATUS[0]}; set -e; finish "$RUN" "$rc"
     ;;
+  6)
+    hours="${2:-}"; [ -n "$hours" ] || { echo "usage: ./run.sh 6 <hours>   (total wall-clock budget, e.g. 6 or 7.5)"; exit 2; }
+    preflight 6
+    read -r deadline build_min < <("$PY" -c 'import sys,time; h=float(sys.argv[1]); assert h>0; print(int(time.time()+3600*h), max(10, min(int(sys.argv[2]), int(30*h))))' "$hours" "${TIMEOUT_MIN:-120}") \
+      || { echo "hours must be a positive number"; exit 2; }
+    RUN=$(new_run 6); set +e
+    say "job 6: budget ${hours} h (deadline $(date -u -d "@$deadline" +%FT%TZ)); build timeout ${build_min} min"
+    "$PY" -B "$CODE/job5_replays.py" --config "$CONF/job6-builds.json" --clone "$CLONE" --work "$RUN" \
+      --python "$PY" --timeout-min "$build_min" 2>&1 | tee "$RUN/job6-build.log"
+    control=$(ls "$ROOT"/runs/*-job5/out/pr-502-*/gauge80-kernel42/split-centres/CANONICAL-WORD.json.gz 2>/dev/null | head -n 1)
+    "$PY" -B "$CODE/job6_retime_search.py" --out "$RUN/search" --run "$RUN" ${control:+--word "$control"} \
+      --deadline-epoch "$deadline" --workers "${JOBS:-$(( $(nproc) - 1 ))}" 2>&1 | tee "$RUN/job6-search.log"
+    rc=${PIPESTATUS[0]}; set -e; finish "$RUN" "$rc"
+    ;;
   test5)
     "$PY" -B "$CODE/test_job5_smoke.py"
+    ;;
+  test6)
+    "$PY" -B "$CODE/test_job6_smoke.py"
     ;;
   status)
     for d in "$ROOT"/runs/*-job*; do
@@ -146,5 +169,5 @@ case "${1:-}" in
       "$PY" -c 'import json,sys; d=json.load(open(sys.argv[1]+"/protocol.json")); print(sys.argv[1].rsplit("/",1)[-1], "finished" if "finished_utc" in d else "RUNNING/INTERRUPTED", "exit=%s" % d.get("exit_code"))' "$d"
     done
     ;;
-  *) sed -n '2,15p' "$0"; exit 2;;
+  *) sed -n '2,16p' "$0"; exit 2;;
 esac

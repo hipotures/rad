@@ -26,6 +26,12 @@ was pinned: #484 and #495-#502, at heads pinned 2026-10-11 21:54 UTC
 - Our ledger finds the hosting clean, including #496's cross-replica pooling
   and #471's complex template.
 
+Follow-up **job 6** (built 2026-10-12, operator run pending) moves from verification to search. The asynchronous
+whole-owner allocation of the newest claims is already solver-optimal and governs only 4.7% of the first-order
+complex cost; 95% sits in the local word, 72 copies of it
+([report section 7](report.md#7-where-the-complex-cost-sits-agent-2026-10-12)). Job 6 builds the #523 and #527 words
+and anneals their gate frame timings for a given number of hours.
+
 See [GOAL.md](GOAL.md) for the brief and completion criteria.
 
 This campaign continues the
@@ -73,6 +79,7 @@ export RAD_WORK_ROOT=/srv/ai/work/rad/integer-multiplication-bounds/frontier-bat
 | 2 | Do 39 pinned frontier claims reproduce from a fresh checkout with their authors' own verifiers? | [job2_replays.py](code/job2_replays.py), [config](configs/job2-replays.json) | all cores; replays are single-threaded and run concurrently |
 | 3 | Can any other root system or lattice replace E8 in #370's five-stage bit template? | [job3_lattice_screen.py](code/job3_lattice_screen.py) | CPU; the exact Leech span check uses a free GPU, else CPU |
 | 5 (follow-up) | Do the 9 frontier claims opened after job 2's pinning (#484, #495-#502) reproduce with their authors' verifiers? Which complex supplier b does each bind to? A repair attempt runs only under job 4's condition (#498 lists an absent `.gitattributes`). | [job5_replays.py](code/job5_replays.py), [config](configs/job5-replays.json), [smoke test](code/test_job5_smoke.py) | 9 replays in parallel |
+| 6 (follow-up) | Can a different frame timing of the newest complex words (#514/#522/#523/#527, built fresh) lower their paid recursive cost Phi, keeping every gate, coefficient and fixed frame? | [job6_retime_search.py](code/job6_retime_search.py), [config](configs/job6-builds.json), [smoke test](code/test_job6_smoke.py) | 2 builds in parallel, then all cores annealing until the hour budget ends |
 | 4 (follow-up) | Do #471/#476/#478/#483/#492 reproduce when the one missing manifest key (`.gitattributes`) is tolerated? #471's complex b caps #493 and feeds #473/#490/#491. | [job4_repair_replays.py](code/job4_repair_replays.py), [job4_launcher.py](code/job4_launcher.py) | 5 cores, one replay each |
 
 ## Pre-run smoke tests (agent, 2026-10-11)
@@ -103,6 +110,15 @@ These smoke tests are not the results; the operator's runs are authoritative.
   - `code/job5_hosting_ledger.py` on the job 4 outputs now parses #471's complex template, the one template
     job 2's ledger could not read: 43,120 slots, 0 cross-copy, 0 overlaps, windows re-derived 12 of 12.
 
+- **Job 6** (2026-10-12, before the operator run):
+  - `code/test_job6_smoke.py` passes 12 of 12 checks. On two toy words, the replay reproduces hand-computed
+    profiles and the annealer's best equals the brute-force optimum over all 16^4 timings. `validate_state` rejects
+    a decreasing frame and a target that leaves its level before the centres phase. 1,687 random cascaded moves on
+    #502's word keep every chain admissible, and incremental Phi equals from-scratch Phi.
+  - A 108 s search over the 7 distinct words of job 5 shows that the model reproduces every word's own profile.
+    Unretimed #484-lineage words drop by 180-252 Phi; one reaches 23,249.83, the value of the retimed #495 word.
+    The retimed words (#495, #502) gain nothing. The operator's run remains authoritative.
+
 ## Layout
 
 - `run.sh`, `pack.sh`: operator entry points
@@ -113,4 +129,5 @@ These smoke tests are not the results; the operator's runs are authoritative.
 - `code/job5_hosting_ledger.py`: its extension for job 5 (#471's layouts, per-call owner summary)
 - `code/test_job5_ledger_mutations.py`: mutation controls of the pooled-slot audit
 - `code/job5_pr501_word_check.py`: diagnosis of #501's source-word pin
+- `code/job6_retime_search.py`, `code/test_job6_smoke.py`: job 6 frame-timing search and its smoke test
 - `report.md`: results and interpretation

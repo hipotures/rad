@@ -20,6 +20,15 @@
       "recovery": "Downloadable while the upstream or fork objects exist; #496, #500 and #501 were drafts at pinning and may be force-updated"
     },
     {
+      "id": "upstream-pinned-pr-heads-job6-20261012",
+      "source": "https://github.com/CrocSwap/integer-mult-bounds",
+      "revision": "#523 a900f98be8ff2c09d3292b5112d4731dbd0c8438 and #527 2080903b9e6bd01e3f64cc4c7c62ea1b3af0aa6a (configs/job6-builds.json), pinned 2026-10-12T01:36:30Z",
+      "acquisition": "./run.sh setup fetches pull/<N>/head for every PR of the three configs and any missing pinned SHA",
+      "location": "$RAD_WORK_ROOT/repos/upstream (outside Git)",
+      "usage": "Job 6 stage 1 builds; their CANONICAL-WORD.json.gz files are the inputs of the stage 2 search. Job 5's #502 word (runs/<UTC>-job5) is the control word",
+      "recovery": "Downloadable while the upstream or fork objects exist; #527 was a draft at pinning and may be force-updated. The built words are deterministically regenerable by rerunning the pinned verifiers"
+    },
+    {
       "id": "upstream-pr370-e8-bit-producer",
       "source": "https://github.com/CrocSwap/integer-mult-bounds/pull/370",
       "revision": "b7fe9cdf2da009c947ff6b334c562bc190b30373",

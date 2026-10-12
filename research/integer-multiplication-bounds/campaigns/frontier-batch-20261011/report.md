@@ -326,6 +326,47 @@ with the exact title kappa.
 - **Newer claims not replayed.** During the run, #503, #504 and #505 appeared;
   #505 claims 1.357701757628940e-3.
 
+## 7. Where the complex cost sits (agent, 2026-10-12)
+
+The operator asked for computation on the asynchronous whole-owner mechanism (#505 and its lineage) rather than
+another audit. Before building a search, the agent measured how much of the complex saving that mechanism controls.
+All numbers come from published plans and from words built in job 5. They are agent analyses, not operator runs.
+
+**First-order form of b.** The moment engine solves sum_r (r*n_r)/(m*W) * (m/r)^b = 1 with m = 73. To first
+order this gives b = D / Phi, where D = m*W - rank mass is the deficit and Phi = sum_r r*n_r*ln(73/r). For #523's
+published plan (`inputs/ASYNC112-PLAN.json` at a900f98b), D = 2,560 and Phi = 1,748,788. Their ratio,
+1.4638707e-3, equals the plan's own `linear_saving` exactly.
+
+**The asynchronous allocation governs 4.7% of Phi.** The allocation decides only the idle remainders. In #523
+they are `{3:3354, 5:3270, 7:60, 48:230}` with Phi 81,564. The rest, 1,667,224 (95.3%), is 72 copies of the local
+word's paid profile, which per call is about `{1:2531, 2:160, 3:530, 4:88, 5:298, 6:68}`. Rank-one children alone
+are 44.7% of Phi, rank 3 is 22.7% and rank 5 is 19.0%. Three facts close off the allocation lever:
+- #523's integer nomination stopped at a MIP gap of 5e-5;
+- #520's open allocator reproduces #505's profile as the optimum, and on #507's widths it reaches the timing-free
+  ceiling (all windows open);
+- #514's notes report no gain from T = 16, K = 5, offsets 4/6/8/12 or modulo-4 overlap.
+
+Even the unattainable floor, with all 37,872 units of leftover rank in untouched rank-48 ports, would raise b by at
+most 3.9%.
+
+**Frame timings of the local word.** Every A/B gate of a split-centre word carries a frame (a subspace of F_2^9).
+Registers climb to it, and every climb is a paid child of rank Δdim. With gates and coefficients fixed, the frame
+timing is free within the emitter's rules:
+- every register's frames form an inclusion chain from its start frame to its final frame;
+- registers enter the centres phase exactly at their centre frame or target level.
+
+`code/job6_retime_search.py` replays this model and reproduces the stored `local_profile` of all 7 distinct
+#484-lineage words built in job 5. In a 108 s probe, the annealer took unretimed #484 words down by 180-252 Phi.
+One of them reached 23,249.83, which is exactly the value of #495's retimed word. The retimed #495 and #502 words
+gained nothing. Frame retiming is therefore already exhausted on the words that #495/#501/#502 retimed. Whether it
+is exhausted on #522's rank-sector factory and on #523/#527's 112-port words is what job 6 measures. Those words
+contain gates whose frames were transferred rather than re-optimized.
+
+A gain found by job 6 is only a candidate until the agent re-emits the word and passes the package's own checks:
+the local replay of all columns, the Clifford phase lowering of every new edge, the owner audit with unchanged
+helper widths, and both moment engines. The deeper lever, frame chains shared by more than two targets (#520 §3),
+changes the gate sequence itself and is not part of job 6.
+
 ## Recommended next steps
 
 1. #502 (1.343518e-3) is the top reproduced claim without cross-copy (job 5).

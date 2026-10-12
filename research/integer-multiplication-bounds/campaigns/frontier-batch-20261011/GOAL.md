@@ -48,6 +48,14 @@ pack, commit and push.
    per call: footprint sharing (#471, #498, #500) and pooled cross-replica
    owners (#496, #501, #502).
 
+6. **Job 6 (2026-10-12).** The operator asked for new computation on the asynchronous whole-owner mechanism
+   rather than another audit. The agent's analysis found that mechanism's own freedom exhausted (section 7 of the
+   report), so job 6 searches the freedom that remains in the local word with a fixed gate sequence. It re-chooses
+   the frame of every A/B gate under the upstream emitter's admissibility rules to lower the first-order paid
+   cost. The start parameter is the wall-clock budget in hours. Completion: per built word, the best timing
+   found, validated from scratch, with its profile. A gain becomes a claim only after the package's own
+   checks and moment engines pass on the re-emitted word.
+
 ## Constraints
 
 - Inputs are pinned by commit SHA; open PR heads move every hour.
