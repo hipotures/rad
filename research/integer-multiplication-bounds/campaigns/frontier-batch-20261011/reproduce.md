@@ -67,6 +67,10 @@ Follow-up job 6 (build the #523 and #527 words, then search frame timings until 
                     # at most half the budget); JOBS sets the number of annealing processes (default cores - 1)
 ```
 
+Console during the run: every 5 min of the build stage, the last line of each package's own log; then every
+10 min of the search, one row per word with start Phi, best Phi so far, gain (% of local climbs) and moves tried.
+The control word (job 5's #502) should stay at gain 0.
+
 Expected checks: `job6-build.log` ends with both replays passed (their claimed kappa exact). `search/WORDS.json`
 lists every distinct built word; `status: ok` means this model's replay reproduces that word's own
 `local_profile`. `search/SUMMARY.json` gives, per word, the start and best first-order Phi of the paid climbs.

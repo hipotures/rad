@@ -150,8 +150,12 @@ case "${1:-}" in
       || { echo "hours must be a positive number"; exit 2; }
     RUN=$(new_run 6); set +e
     say "job 6: budget ${hours} h (deadline $(date -u -d "@$deadline" +%FT%TZ)); build timeout ${build_min} min"
+    ( while sleep 300; do  # build progress: last line of each package's own log every 5 min
+        for f in "$RUN"/logs/pr-*.log; do [ -f "$f" ] && say "  $(basename "$f" .log): $(tail -n 1 "$f" | cut -c1-140)"; done
+      done ) & monitor=$!
     "$PY" -B "$CODE/job5_replays.py" --config "$CONF/job6-builds.json" --clone "$CLONE" --work "$RUN" \
       --python "$PY" --timeout-min "$build_min" 2>&1 | tee "$RUN/job6-build.log"
+    kill "$monitor" 2>/dev/null
     control=$(ls "$ROOT"/runs/*-job5/out/pr-502-*/gauge80-kernel42/split-centres/CANONICAL-WORD.json.gz 2>/dev/null | head -n 1)
     "$PY" -B "$CODE/job6_retime_search.py" --out "$RUN/search" --run "$RUN" ${control:+--word "$control"} \
       --deadline-epoch "$deadline" --workers "${JOBS:-$(( $(nproc) - 1 ))}" 2>&1 | tee "$RUN/job6-search.log"

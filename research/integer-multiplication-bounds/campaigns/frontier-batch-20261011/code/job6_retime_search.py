@@ -17,7 +17,8 @@ Search: simulated annealing with cyclic reheating. A move raises a register's fr
 on) or lowers it (up to its last slot) to the neighbouring plateau's frame or to a random intermediate subspace;
 every changed gate frame cascades to the gate's other register (raises forward, lowers backward) until inclusion
 holds again. A move that would change a fixed slot is rejected. Each worker keeps its best timing and writes a
-checkpoint at most once a minute and at the end; every reported state is re-validated from scratch
+checkpoint (best so far, moves tried) every two minutes and at the end; the driver prints a per-word progress
+table from these checkpoints every --progress-min minutes; every reported state is re-validated from scratch
 (validate_state) independently of the annealer's incremental bookkeeping.
 
 usage: job6_retime_search.py --out DIR (--run RUN ... | --word WORD.json.gz ...) [--hours H | --deadline-epoch S]
@@ -33,7 +34,7 @@ import random
 import sys
 import time
 from collections import Counter, defaultdict
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 from pathlib import Path
 
 M = 73                       # ambient rank of the complex recursion
@@ -316,6 +317,7 @@ def sub_between(lo, hi, rng):
 def anneal(task):
     path, word_id, seed, deadline, out_dir, cycle_s = (task[k] for k in
                                                        ('path', 'word_id', 'seed', 'deadline', 'out_dir', 'cycle_s'))
+    heartbeat = task.get('heartbeat_s', 120)
     c, sha = load_word(path)
     w = Word(c)
     rng = random.Random(seed)
@@ -361,7 +363,7 @@ def anneal(task):
                 if now - c0 >= c_len or now >= deadline:
                     break
                 T = T0 * max(0.0, 1 - (now - c0) / c_len) + 1e-4
-                if now - last_ckpt > 60 and best < start_phi - 1e-9:
+                if now - last_ckpt > heartbeat:  # progress record, also when nothing improved
                     write(False)
                     last_ckpt = now
             r = rng.randrange(w.n)
@@ -434,6 +436,7 @@ def main():
     ap.add_argument('--deadline-epoch', type=float, help='absolute end time (seconds since epoch); overrides --hours')
     ap.add_argument('--workers', type=int, default=max(1, (os.cpu_count() or 2) - 1))
     ap.add_argument('--cycle-min', type=float, default=10.0, help='length of one annealing cycle')
+    ap.add_argument('--progress-min', type=float, default=10.0, help='interval of the console progress table')
     ap.add_argument('--seed', type=int, default=20261012)
     a = ap.parse_args()
     deadline = a.deadline_epoch if a.deadline_epoch else time.time() + 3600 * (a.hours if a.hours is not None else 1)
@@ -453,23 +456,57 @@ def main():
     for i, w in enumerate(ok):
         w['word_id'] = f'w{i:02d}-{w["sha256"][:10]}'
     tasks = [dict(path=ok[k % len(ok)]['path'], word_id=ok[k % len(ok)]['word_id'], seed=a.seed + k,
-                  deadline=deadline, out_dir=str(out / 'checkpoints'), cycle_s=60 * a.cycle_min)
+                  deadline=deadline, out_dir=str(out / 'checkpoints'), cycle_s=60 * a.cycle_min,
+                  heartbeat_s=min(120.0, 30 * a.progress_min))
              for k in range(max(a.workers, len(ok)))]
     print(f'{len(ok)} supported word(s), {len(tasks)} annealers on {a.workers} processes, '
           f'{(deadline - time.time()) / 3600:.2f} h left', flush=True)
+    label = {w['word_id']: '/'.join(w['path'].split('/out/')[-1].split('/')[:2]) for w in ok}
+    seeds = Counter(t['word_id'] for t in tasks)
+    t_begin = time.time()
+
+    def progress():
+        best = {}
+        for p in (out / 'checkpoints').glob('*.json'):
+            try:
+                r = json.loads(p.read_text())
+            except (OSError, ValueError):
+                continue  # being replaced
+            b = best.setdefault(r['word_id'], dict(start=r['phi_climbs_start'], best=r['phi_climbs_best'], it=0, n=0))
+            b['best'] = min(b['best'], r['phi_climbs_best'])
+            b['it'] += r['iterations']
+            b['n'] += 1
+        print(f"--- progress {time.strftime('%H:%M:%S')}  elapsed {(time.time() - t_begin) / 3600:.2f} h, "
+              f"left {max(0, deadline - time.time()) / 3600:.2f} h", flush=True)
+        for wid in sorted(label):
+            b = best.get(wid)
+            if b is None:
+                print(f'  {wid} {label[wid]:<44} no record yet ({seeds[wid]} annealers)', flush=True)
+                continue
+            g = b['start'] - b['best']
+            print(f"  {wid} {label[wid]:<44} Phi {b['start']:.2f} -> {b['best']:.2f}  gain {g:8.2f} "
+                  f"({100 * g / b['start']:.3f}% of local climbs)  {b['n']}/{seeds[wid]} annealers, {b['it'] / 1e6:.0f}M moves",
+                  flush=True)
+
     results = []
     with ProcessPoolExecutor(max_workers=a.workers) as pool:
         futs = {pool.submit(anneal, t): t for t in tasks}
-        for f in as_completed(futs):
-            t = futs[f]
-            try:
-                r = f.result()
-            except Exception as exc:  # a failing annealer never stops the others
-                r = dict(word_id=t['word_id'], seed=t['seed'], error=repr(exc))
-            results.append(r)
-            print(f"{r['word_id']} seed {r['seed']}: " + (r['error'] if 'error' in r else
-                  f"Phi {r['phi_climbs_start']:.3f} -> {r['phi_climbs_best']:.3f} (gain {r['phi_gain']:.3f}, "
-                  f"{r['changed_gates']} gates, {r['iterations']} it)"), flush=True)
+        pending = set(futs)
+        while pending:
+            done, pending = wait(pending, timeout=60 * a.progress_min, return_when=FIRST_COMPLETED)
+            if not done:
+                progress()
+            for f in done:
+                t = futs[f]
+                try:
+                    r = f.result()
+                except Exception as exc:  # a failing annealer never stops the others
+                    r = dict(word_id=t['word_id'], seed=t['seed'], error=repr(exc))
+                results.append(r)
+                print(f"{r['word_id']} seed {r['seed']}: " + (r['error'] if 'error' in r else
+                      f"Phi {r['phi_climbs_start']:.3f} -> {r['phi_climbs_best']:.3f} (gain {r['phi_gain']:.3f}, "
+                      f"{r['changed_gates']} gates, {r['iterations']} it)"), flush=True)
+    progress()
     per_word = {}
     for r in results:
         if 'error' in r:
