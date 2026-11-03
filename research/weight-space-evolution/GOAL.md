@@ -1,107 +1,25 @@
-# Goal: Establish the Weight-Space Evolution Research Laboratory
+# Phase D — Parent-to-Editor Bootstrap
 
-## Mission
+## Objective
 
-Build a reproducible, executable research environment for **direct neural-network weight programming**, using **Codex Sol** as the initially available model-driven investigator and weight editor.
+Determine whether a frontier parent can create a Qwen3.5-0.8B candidate with measurably better ability to edit separate neural networks, using direct numerical weight modifications only. The initial laboratory goal is complete; its brief is preserved in [reports/initial_goal_completed.md](reports/initial_goal_completed.md).
 
-The long-term hypothesis is that a frontier-model parent might directly edit the weights of small (e.g. 0.8B) language models so that they become specialized **editors of other neural networks**, and that a diverse population of such editors might improve itself through cross-editing and selection. This is not an established result.
+## Fixed scientific contract
 
-The **current task is an initial laboratory and feasibility study**, not a claim of bootstrapped or recursive self-improvement.
+Use the unchanged [frozen Phase D v2 protocol](configs/phaseD_v2/protocol_v2_frozen.json), its 15 primary cells, manifests, decoding, scoring, baselines, paired instance-cluster bootstrap and Holm correction. Use the validated persistent evaluator, content-addressed patch registry and one explicitly allocated worker per GPU. No gradients, training, LoRA, optimizer updates or population/recursive follow-up. Gold is immutable.
 
-## Required context
+## Execution sequence
 
-Read local `AGENTS.md`, `README.md`, and applicable parent-repository instructions. **The current directory is your complete workspace, including all model downloads and temporary experiment payloads.** Use relative paths only. Do not search for a historical or alternative project root.
+1. Commit and push this goal, the proposed budget and four independent session briefs before parent execution.
+2. Verify every local benchmark payload against the frozen manifest commitments, Gold integrity, salt commitment and isolation. Never regenerate a missing salt. Parents receive only the exported dev prompts and dev metrics through a broker; no repository, unrestricted shell, evaluator queue, select/test/transfer files or provider credentials.
+3. Obtain explicit operator approval of the exact parent model/version/effort, token caps and USD caps. Review the selected provider's current applicable terms before launch. Record approval verbatim without credentials. A private persistent backup of the salt must be identified before launch; a second local copy is not a backup.
+4. Run four fresh conversations with separate histories, scratch directories, budgets and Gold-rooted lineages. No communication or shared candidate feedback. Same task brief with different initial search approaches; these are not assigned specializations. Charge failures/retries against budgets. Stop before a request whose worst-case cost exceeds any remaining cap. No automatic paid retries or budget increases.
+5. Each parent seals exactly one candidate (or records failure). Use select once per sealed candidate, operator-only; do not return select feedback or repair a candidate after confirmation. Evaluate E0, all four sealed candidates and controls independently at the end on test/transfer; a non-confirmed candidate remains a reported negative, not a replacement opportunity. Identical patch hashes count as duplicates, not four distinct discoveries.
+6. Report the frozen primary endpoint, per-domain validity/effectiveness/regressions, valid-only results, matched random/no-op/heuristic comparisons, transfer and measured tokens/GPU time. Distinguish reduced harm from useful repair. A significant positive candidate–E0 difference alone does not establish a new capability, general intelligence, or recursive improvement. The broader design's tentative baseline margin and ordinary-task regression threshold are unresolved secondary gate criteria, not additions to the frozen primary endpoint; settle these before launch or report them as untested.
+7. Preserve prompts, responses, tool calls, numerical edit recipes, patch lineage/hashes, exact configurations, compact results and failures. Archive completed text evidence using the repository pack-text tool, audit, commit, push and verify remote publication.
 
-Primary research article:
-https://rikiyat.github.io/blog/weight-space-programming/
+## Budget and completion
 
-Upstream public artifacts:
-https://github.com/RikiyaT/lm_understand-logs
+[budget.json](configs/phaseD_bootstrap/budget.json) is a proposal, not authorization. No paid parent session may start until approval is recorded. All work and payloads stay under this topic (large/transient data in ignored work/).
 
-Pin the upstream source to commit:
-`4d09ba6d6a7e891dd8063974dfe81b3d78e3494f`
-
-Priority source material:
-- `exp8_math/` — Qwen3.5-0.8B Gold, p50c weight patch, reconstruction scripts, test conditions and full interaction logs
-- `exp4_fix_car/` — one-shot weight repair on a small network
-- `exp5_write_from_scratch/` — generating small network weights
-- `exp6_go_from_scratch/` — constrained direct edits with feedback
-- `harness/` — example sandbox and model-facing Codex setup
-
-The original repo contains scripts and experimental records, but **not** the complete live server/harness for Experiment 8.
-
-## Explicitly out of scope
-
-- LoRA, QLoRA, fine-tuning, SFT, gradient descent, backward passes, optimizer-based training.
-- Creation of ten 0.8B candidates before the basic laboratory is verified.
-- Claims that a small model gained weight-editing expertise merely because its ordinary benchmark scores improved.
-- Heavy open-ended paid-model experiments without bounded budgets.
-- Building a production MoE/router, JEPA/basal selector, or answer-synthesis system.
-
-## Phase A — Reference and reproducibility audit
-
-1. Inspect the upstream repository at the pinned commit, including license information.
-2. Inventory available scripts, datasets, logged interactions, weight diffs, and evaluation code.
-3. Review how p50c was proposed, applied, tested and evaluated. Clearly identify what was visible to the editor and what remained held out.
-4. Reconstruct the published p50c edit from the pinned Qwen3.5-0.8B public base revision. If weights or hardware are unavailable, provide an executable, verified prerequisite check and document the exact blocker.
-5. Check the patch manifest, tensor names, shapes, affected parameter counts and expected hashes. A hash-valid reconstruction is not automatically a reproduced MATH-500 score.
-
-## Phase B — Minimal edit harness
-
-Implement a small, modular harness with:
-- read-only Gold registration;
-- versioned and validated patch application;
-- bounded tensor inspection/edit API;
-- isolated sandbox for editor-submitted Python;
-- controlled forward-pass/evaluation API with explicit budgets;
-- provenance and candidate-lineage manifests;
-- unbiased baseline-versus-candidate test comparisons;
-- development/test separation and clear controls.
-
-Build only what is needed to execute a first controlled experiment. Avoid unnecessary frameworks.
-
-## Phase C — First executable experiment
-
-Use a small, objectively evaluated network (prefer a well-documented upstream example where practical).
-
-- Record baseline behavior and define the defect or improvement objective.
-- Give Codex Sol a **bounded** opportunity to inspect permitted weights, propose a direct numerical edit, and observe development-feedback results.
-- Apply the proposal only to a candidate, never to Gold.
-- Evaluate success against unchanged Gold and at least one naive or random edit control on independent cases.
-- Record measured quality, patch size, resource use, tool/forward-pass count, failures, and remaining uncertainty.
-- If model calls or evaluation facilities cannot be exercised, run the non-model portions and document the exact unverified components.
-
-## Phase D — Design the bootstrap gate (no population run yet)
-
-Specify the first falsifiable study for the next goal:
-
-Can a large parent using **only direct weight edits** create at least one variant of a small Gold language model that edits *other neural networks* more effectively than Gold and appropriate non-agent baselines?
-
-Design it to compare several independently generated candidates on a task matrix and identify *measured* specializations after evaluation, rather than imposing them in advance. Plan for later cross-editing/recursive comparison only if this bootstrap gate passes.
-
-Crucially, distinguish **the target task score** from **the editor's ability to improve target models**. Use held-out target models/problems and explicit resource-normalized measures.
-
-## Deliverables
-
-Within this topic directory, produce and maintain as appropriate:
-- `README.md` — research index/current state
-- `GOAL.md` — this mission, updated only to reflect genuine changes in scope
-- `reproduce.md` — precise acquisition/setup/run/recovery commands
-- `code/` — working authored harness, tests and utilities
-- `configs/` — pinned settings/budgets
-- `input-manifest.json` and `artifact-manifest.json` when relevant
-- `runs/<id>/` — compact protocol, metrics and a report
-- `reports/` — cross-run findings and next-step recommendation
-
-Use English for all artifacts. **All work happens physically inside this current directory.** Author harness code, tests, protocols, configurations, compact outputs, reports and manifests here and commit/push meaningful milestones. Downloaded Gold weights, upstream source clones, caches, datasets, environments and bulky raw logs belong in this topic's ignored `work/` subdirectory: they remain on disk under the current directory but are not staged in Git. Track their relative locations, hashes and recovery details. Do not work in an external tree and do not hard-code an absolute path.
-
-Carry out meaningful implementation and verification in this session. If a phase is blocked, preserve its exact status and proceed with feasible work. Persist resulting source, methodology and compact evidence using the normal repository commit/push workflow.
-
-## Completion criteria
-
-Success for this initial goal requires:
-1. A verified upstream audit and pinned provenance.
-2. A functioning minimal patch/harness flow with tests.
-3. At least one executed bounded validation case, or a precise, reproducible external blocker.
-4. A factual report distinguishing reproduced results, partial reproductions and untested hypotheses.
-5. Durable committed and pushed source, results and reproduction instructions.
+Preparation completes with published configuration, four session specifications, verified benchmark integrity and a factual readiness report. The research goal completes only after authorized execution and independent analysis, or a documented external blocker. A null result is valid evidence; preparation alone is not an experimental result.

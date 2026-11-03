@@ -1,12 +1,12 @@
 # Weight-Space Evolution
 
-**Status:** Research laboratory initialized; empirical claims remain unverified in this repository.
+**Status:** Initial laboratory goal complete. Phase D parent-to-editor bootstrap preparation is active; paid parent execution awaits explicit model/token/spending approval.
 
 This directory is the working root for Codex Sol research into **direct weight-space programming** of neural networks and the longer-term possibility of population-based recursive improvement through model-to-model edits.
 
 Start here:
 - [Agent instructions](AGENTS.md) — roles, harness requirements, scientific and operational constraints.
-- [Current execution goal](GOAL.md) — the initial laboratory build and controlled reproduction.
+- [Current execution goal](GOAL.md) — Phase D parent-to-editor bootstrap; [completed initial brief](reports/initial_goal_completed.md).
 
 ## Research questions
 
@@ -52,3 +52,10 @@ Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.js
 queue frozen and validated; [readiness report](reports/phaseD_v2_readiness.md)). Before launching: operator approval
 of parent budgets/provider terms, and a private backup of the held-out salt. Parents submit candidates to the dev
 queue only; select confirms, test is used once.
+
+## Active Phase D execution
+
+The [execution goal](GOAL.md), [proposed budget](configs/phaseD_bootstrap/budget.json),
+[four independent session specifications](configs/phaseD_bootstrap/sessions.json) and
+[preparation report](runs/20261103T-phaseD-bootstrap-preparation/report.md) start the next research goal.
+The benchmark protocol remains unchanged. No paid parents have launched and no bootstrap result exists yet.

@@ -1,0 +1,55 @@
+{
+  "version": "phaseD-bootstrap-execution-1",
+  "status": "AWAITING_EXPLICIT_OPERATOR_APPROVAL",
+  "paid_launch_enabled": false,
+  "parent": {
+    "provider": null,
+    "model": null,
+    "model_revision": null,
+    "effort": null
+  },
+  "approval": null,
+  "proposed_limits": {
+    "sessions": 4,
+    "per_session": {
+      "input_tokens": 375000,
+      "output_tokens_including_reasoning": 125000,
+      "total_tokens": 500000,
+      "usd": 50,
+      "dev_evaluation_passes": 30,
+      "sandbox_runs": 200,
+      "wall_seconds": 14400
+    },
+    "campaign": {
+      "total_tokens": 2000000,
+      "usd": 200,
+      "dev_evaluation_passes": 120,
+      "sandbox_runs": 800
+    },
+    "evaluation_pass": {
+      "split": "dev",
+      "instances": 104,
+      "tiers": [
+        "T0",
+        "T1",
+        "T2",
+        "T2P"
+      ],
+      "samples_per_instance_tier": 4,
+      "T2P_probe_passes_per_trial": 1
+    },
+    "local_evaluation_gpu_hours": 4
+  },
+  "accounting": "All parent context input, output, reasoning, tool-loop tokens, retries and failures count; reserve worst-case cost before each request. Exact current prices and context feasibility must be verified for the approved model. Stop at the first binding cap.",
+  "scope_note": "Full 104-instance v2 dev passes follow the v2 readiness estimate; the earlier design's provisional <=64 was not a frozen benchmark rule. No extra development inference outside these passes.",
+  "launch_prerequisites": [
+    "explicit exact model/effort, token and USD approval",
+    "provider terms review",
+    "current price table and enforceable request reservation ledger",
+    "private persistent salt backup identified",
+    "parent tool transport isolation and budget enforcement tested",
+    "preflight passes against the committed lock"
+  ],
+  "executed_paid_sessions": 0,
+  "actual_parent_usd": 0
+}

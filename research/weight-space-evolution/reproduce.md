@@ -258,3 +258,39 @@ $W/envs/wse/bin/python -m wse.pd2_figures --e2e <results> --swap <swap results>/
 
 Protocol freeze (already done; re-running on the same pilot results must reproduce the committed file except for the
 `status` text): `python -m wse.pd2_freeze --pilot ../runs/20261103T-phaseD-v2-pilot/results/editor_results_pilot.json --out-dir ../configs/phaseD_v2`.
+
+
+## 11. Phase D parent-bootstrap preparation (no paid calls)
+
+From this topic directory, with existing environments and acquired benchmark inputs from section 10:
+
+```bash
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_prepare
+PYTHONPATH=code work/envs/wse/bin/python -m pytest -q code/tests/test_bootstrap_prepare.py code/tests/test_phaseD_v2.py
+```
+
+Unset `WSE_WORK_ROOT` and `WSE_BENCH_DIR`; preparation refuses overrides. The preparation tool checks the committed
+source/protocol lock, the original salt commitment, all five manifests and all 595 JSON/NPZ payload pairs, then
+verifies immutable Gold, tightens private file permissions and writes four separate prompt views under
+`work/phaseD-bootstrap/phaseD-parent-*/view/`. It never creates a salt, scores held-out targets or launches a model.
+A missing or corrupt original is an error; recover it from its recorded source or private backup, never regenerate
+a replacement salt. The exported dev views omit oracle fields, baselines and T0 answer keys. Prompts themselves
+contain the intended task information, including all T0 options.
+
+The existing sandbox must pass `Sandbox.selftest` with the topic, salt and select/test/transfer paths forbidden.
+Only allowlisted Gold views and per-session scratch are mounted. Parents must not be launched as unrestricted
+workspace agents. The sandbox test verifies numerical-code isolation, not a future provider/tool broker.
+The broker must enforce dev-only admission, per-session ledgers and patch-lineage ownership before execution.
+The prepared configuration does not implement a paid-provider transport or authorize any calls.
+
+Before paid execution, record explicit approval in `configs/phaseD_bootstrap/budget.json`, verify current pricing and
+provider terms for that exact model, identify a private persistent salt backup, and validate the broker. Use the
+existing `wse.pd2_eval` queue and workers on discovered GPU UUIDs (one engine each, profile3, direct mode with
+verified reload fallback). Keep the frozen protocol and source lock intact. Register sealed candidate patches only
+after their numerical recipes and lineage have been retained; do not overwrite the frozen integration registry.
+Use a campaign-specific registry binding or a reviewed evaluator adapter and preserve its source separately.
+Do not treat `paid_launch_enabled` as access control; no executable paid launcher is supplied by preparation.
+
+Seal one candidate per parent before select. Run select once operator-side, return no feedback, then run the final
+fixed candidate set with E0 and controls on test/transfer once. Preserve every failure and duplicate hash. Use the
+frozen primary cells, decoding and `pd2_report` inference; no candidate replacement after select or test.

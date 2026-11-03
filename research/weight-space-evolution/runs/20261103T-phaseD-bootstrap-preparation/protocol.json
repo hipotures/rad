@@ -1,0 +1,19 @@
+{
+  "run_id": "20261103T-phaseD-bootstrap-preparation",
+  "purpose": "No-cost operator-side preparation for the next Phase D goal",
+  "benchmark": "configs/phaseD_v2/protocol_v2_frozen.json",
+  "frozen_lock": "configs/phaseD_bootstrap/frozen-lock.json",
+  "budget": "configs/phaseD_bootstrap/budget.json",
+  "sessions": "configs/phaseD_bootstrap/sessions.json",
+  "inputs": "Existing immutable Gold and all existing Phase D v2 benchmark payloads; no acquisition or regeneration",
+  "seed": "No inference or stochastic search; committed input identities checked",
+  "validation": [
+    "595 payload pairs and 5 manifest commitments",
+    "Gold checksum and read-only files",
+    "secret salt commitment without outputting salt",
+    "existing bubblewrap numerical sandbox selftest",
+    "17 CPU preparation and frozen-benchmark tests"
+  ],
+  "paid_calls": 0,
+  "heldout_evaluation_calls": 0
+}

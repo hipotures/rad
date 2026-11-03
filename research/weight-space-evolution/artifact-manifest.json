@@ -218,6 +218,13 @@
    "path": "raw/20261103T-persistent-swap-evaluator/, raw/20261103T-phaseD-v2-pilot/, raw/20261103T-phaseD-v2-e2e*/, raw/20261103T-phaseD-v2-select*/",
    "class": "published as gzip evidence",
    "how": "evidence/<run id>/ (per-sample generations, scores, worker logs)"
+  },
+  {
+   "path": "work/phaseD-bootstrap/phaseD-parent-{01,02,03,04}/view/",
+   "class": "regenerable",
+   "what": "Isolated per-session dev prompt views and briefs; no held-out answers or salt",
+   "how": "PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_prepare; configs/phaseD_bootstrap defines sessions and exact frozen source lock",
+   "note": "Private salt recovery gap remains as recorded above; these views do not supply provider/tool isolation."
   }
  ]
 }
