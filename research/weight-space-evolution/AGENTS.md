@@ -8,6 +8,14 @@ Read this file, `GOAL.md`, and `README.md` first. The repository-wide `../../AGE
 
 Do not create a separate repository here, nor a new sibling research topic for this investigation. Use relative paths for project artifacts. You may identify the enclosing Git repository with Git, but do not make assumptions about where it is mounted.
 
+## Repository-first execution and mandatory publication
+
+**This directory is the sole development and research workspace.** Write all original harness code, utilities, tests, experiment drivers, small test fixtures, configurations, procedures, research notes, compact run results, reports, and manifests **here**, in this Git repository. Execute commands from this directory when possible. Do not create a parallel implementation or relocate the authored project into a separate checkout, temporary directory, or external data volume.
+
+**Every meaningful research milestone must be committed and pushed** to the enclosing `hipotures/rad` repository, following its root `AGENTS.md`. Before concluding a task, verify that all durable task-owned source code and reproducible results are committed and the remote commit is visible. Code written and left only in a scratch workspace is unfinished work.
+
+The sole exception is **large and transient payload storage**, not the location of the project: downloaded upstream source clones, model weight files, full checkpoints, environments, datasets, caches, and large raw logs are excluded from Git under the parent repository storage policy. Their paths, identities, hashes and acquisition/reproduction steps belong in tracked manifests. If an upstream script is adapted, preserve our changes as tracked authored code or a tracked patch here. Never use an external payload directory as a substitute for committing results.
+
 ## Roles
 
 - **You (Codex Sol):** research executor and infrastructure engineer. Inspect references, implement and test the experimental harness, propose controlled studies, evaluate evidence, and preserve durable research results.
@@ -46,7 +54,7 @@ Do not hard-code a host-specific absolute path, GPU index, GPU type, or local st
 
 Build a **minimal, auditable research harness**, not a general agent framework.
 
-- **Reference ingestion:** obtain the upstream experiment repository in disposable/external working storage, record the exact source commit and applicable third-party licenses. Do not copy large downloads or the upstream source tree into this Git repository.
+- **Reference ingestion:** obtain the upstream experiment repository as an untracked, read-only dependency in payload storage, record its exact source commit and applicable third-party licenses. All original analysis, adaptations, authored code, tests, and reports must remain in this research directory and be committed. Do not commit a copied upstream source tree or large downloads.
 - **Gold registry:** each model has an immutable source identity, revision, tensor-shape manifest and checksums. Make destructive writes impossible through the public interface.
 - **Tensor inspection and edits:** expose a narrow, documented interface to list/select tensors, inspect statistics and selected slices, propose bounded numerical edits, validate shapes/dtypes/finite values/allowed targets, and write isolated patch artifacts. Log every operation.
 - **Patch lineage:** patches refer to a specific base revision and parent candidate; record affected tensor names, counts, method, checksums, rationale, authoring session, and application success/failure. Store small reproducible edit descriptions in Git where appropriate; large binary weights remain outside Git.
@@ -54,7 +62,7 @@ Build a **minimal, auditable research harness**, not a general agent framework.
 - **Forward-pass service:** only this component loads and runs a model for evaluation. Enforce a fixed budget, deterministic seeds where possible, consistent decoding and comparable base/candidate conditions; do not let editors call an unrestricted evaluator.
 - **Evaluation:** separate development feedback from held-out verification. For weight-editor studies, measure the target network's quality before/after an edit under identical conditions; include success rate, degree of improvement, edit size, computational cost, regressions, and transfer to unseen targets. Include random/naive patch baselines.
 - **Provenance:** log the editor model/version/effort, prompts, proposals, tool calls, responses, test inputs, model revisions, sample settings, durations, errors, and relevant environment versions. Do not commit secrets, personally identifying data, or paid-provider credentials.
-- **Recovery:** preserve compact evidence and the exact instructions necessary to reconstruct essential large artifacts from public inputs. Put generated model checkpoints, datasets, environments, raw workspaces and large logs outside version control as required by the parent repository policy.
+- **Recovery:** preserve compact evidence, small run results and the exact instructions necessary to reconstruct essential large artifacts from public inputs **inside this Git repository**. Keep only large model checkpoints, datasets, external source clones, environments, caches and raw bulky logs outside version control, as required by the parent repository policy.
 
 ## Study sequence
 
