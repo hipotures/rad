@@ -10,7 +10,7 @@ The **current task is an initial laboratory and feasibility study**, not a claim
 
 ## Required context
 
-Read local \`AGENTS.md\`, \`README.md\`, and applicable parent-repository instructions. Work from the current directory; do not assume a fixed local path.
+Read local `AGENTS.md`, `README.md`, and applicable parent-repository instructions. Work from the current directory; do not assume a fixed local path.
 
 Primary research article:
 https://rikiyat.github.io/blog/weight-space-programming/
@@ -19,14 +19,14 @@ Upstream public artifacts:
 https://github.com/RikiyaT/lm_understand-logs
 
 Pin the upstream source to commit:
-\`4d09ba6d6a7e891dd8063974dfe81b3d78e3494f\`
+`4d09ba6d6a7e891dd8063974dfe81b3d78e3494f`
 
 Priority source material:
-- \`exp8_math/\` — Qwen3.5-0.8B Gold, p50c weight patch, reconstruction scripts, test conditions and full interaction logs
-- \`exp4_fix_car/\` — one-shot weight repair on a small network
-- \`exp5_write_from_scratch/\` — generating small network weights
-- \`exp6_go_from_scratch/\` — constrained direct edits with feedback
-- \`harness/\` — example sandbox and model-facing Codex setup
+- `exp8_math/` — Qwen3.5-0.8B Gold, p50c weight patch, reconstruction scripts, test conditions and full interaction logs
+- `exp4_fix_car/` — one-shot weight repair on a small network
+- `exp5_write_from_scratch/` — generating small network weights
+- `exp6_go_from_scratch/` — constrained direct edits with feedback
+- `harness/` — example sandbox and model-facing Codex setup
 
 The original repo contains scripts and experimental records, but **not** the complete live server/harness for Experiment 8.
 
@@ -84,14 +84,14 @@ Crucially, distinguish **the target task score** from **the editor's ability to 
 ## Deliverables
 
 Within this topic directory, produce and maintain as appropriate:
-- \`README.md\` — research index/current state
-- \`GOAL.md\` — this mission, updated only to reflect genuine changes in scope
-- \`reproduce.md\` — precise acquisition/setup/run/recovery commands
-- \`code/\` — working authored harness, tests and utilities
-- \`configs/\` — pinned settings/budgets
-- \`input-manifest.json\` and \`artifact-manifest.json\` when relevant
-- \`runs/<id>/\` — compact protocol, metrics and a report
-- \`reports/\` — cross-run findings and next-step recommendation
+- `README.md` — research index/current state
+- `GOAL.md` — this mission, updated only to reflect genuine changes in scope
+- `reproduce.md` — precise acquisition/setup/run/recovery commands
+- `code/` — working authored harness, tests and utilities
+- `configs/` — pinned settings/budgets
+- `input-manifest.json` and `artifact-manifest.json` when relevant
+- `runs/<id>/` — compact protocol, metrics and a report
+- `reports/` — cross-run findings and next-step recommendation
 
 Use English for all artifacts. Put large checkpoints, source clones, caches, datasets, environments and raw logs outside Git in storage discovered from this machine and recorded in the manifest, without hard-coding an absolute path into project instructions.
 
