@@ -93,7 +93,7 @@ Within this topic directory, produce and maintain as appropriate:
 - `runs/<id>/` — compact protocol, metrics and a report
 - `reports/` — cross-run findings and next-step recommendation
 
-Use English for all artifacts. Put large checkpoints, source clones, caches, datasets, environments and raw logs outside Git in storage discovered from this machine and recorded in the manifest, without hard-coding an absolute path into project instructions.
+Use English for all artifacts. **All authored research work happens and is saved in this Git-tracked directory:** harness and supporting code, tests, protocols, configurations, compact experiment outputs, reports and manifests. Commit and push meaningful milestones, and verify the final remote commit. Only large or disposable payloads (public model checkpoints, upstream source clones, caches, datasets, environments and bulky raw logs) reside outside Git, with their provenance and recovery information committed here. Never develop the project itself in an external working tree or scratch directory, and never hard-code a host-specific absolute path.
 
 Carry out meaningful implementation and verification in this session. If a phase is blocked, preserve its exact status and proceed with feasible work. Persist resulting source, methodology and compact evidence using the normal repository commit/push workflow.
 
