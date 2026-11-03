@@ -109,7 +109,9 @@ Splits (decided before any parent session, by seeded generator, recorded in the 
 Status 2026-11-03: items 1-3 piloted for F1-F3 ([pilot report](../runs/20261103T-phaseD-pilot-e0/report.md)). Required
 revisions before freezing: F1/F2 are solved by a 3-rule heuristic (0.98/1.00 recovery) and must be hardened; T2 is at
 floor for E0 (0% valid) and needs format-constrained decoding; thinking mode truncates at 4k tokens; F4/F5 are not yet
-implemented.
+implemented. Constrained-decoding follow-up ([report](../runs/20261103T-phaseD-pilot-constrained/report.md)): format fixed,
+edits mostly harmful on F1/F2; F3/T2 constrained (E0 0.12, heuristic 0.47, oracle 1.0, 92% valid) is the usable primary
+cell so far; T0 needs position balancing (E0 picks D/C in 85% of answers).
 
 1. Implement the target generator (F1–F5) with seeds and a manifest; verify ceilings and defect severities.
 2. Implement the edit DSL parser on top of `wse.patch` and the editor-evaluation pass in `wse.lab`.

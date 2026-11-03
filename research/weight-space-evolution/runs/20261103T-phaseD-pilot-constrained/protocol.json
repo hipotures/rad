@@ -1,0 +1,8 @@
+{
+ "run_id": "20261103T-phaseD-pilot-constrained",
+ "question": "Phase D design baseline 5 ('format-fixed' editor): with grammar-constrained decoding (vLLM structured outputs), do E0 and p50c show editing signal on F1-F3 once format failures are removed?",
+ "same_as": "20261103T-phaseD-pilot-e0 (identical instances, prompts, samples=4, seed 0, non-thinking sampling temperature 0.7 / top_p 0.8 / top_k 20)",
+ "change": "--constrained 1: T0 output restricted to 'ANSWER: A'..'ANSWER: D'; T1/T2 output restricted to a ```edit block of 1-8 DSL statements (regex DSL_REGEX in code/wse/editor_pilot.py); no free-text reasoning is possible",
+ "editors": {"E0": "work/derived/qwen3.5-0.8B-text-gold on GPU-6c849b47", "p50c": "work/derived/qwen3.5-0.8B-text-p50c on GPU-81ac6e96"},
+ "scoring": "wse.pilot_rescore (strict), compared with the unconstrained non-thinking runs of 20261103T-phaseD-pilot-e0"
+}

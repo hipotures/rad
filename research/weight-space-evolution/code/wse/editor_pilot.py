@@ -18,6 +18,12 @@ from . import editor_tasks as K
 from . import targets as T
 
 TIERS = ("T0", "T1", "T2")
+_I = r"(\d{1,2}|:|\d{1,2}:\d{1,2})"
+_N = r"-?\d{1,3}(\.\d{1,4})?"
+_OP = r" (=|\+=|-=|\*=) "
+_ST = (rf"(b[123]\[\d{{1,2}}\]{_OP}{_N}|W[123]\[{_I}, {_I}\]{_OP}{_N}|"
+       rf"swap b[123]\[{_I}\] b[123]\[{_I}\]|swap W[123]\[{_I}, {_I}\] W[123]\[{_I}, {_I}\])")
+DSL_REGEX = rf"```edit\n({_ST}\n){{1,8}}```"
 
 
 def baselines(insts, rng):
@@ -57,11 +63,15 @@ def main(argv=None):
     ap.add_argument("--thinking", type=int, default=0)
     ap.add_argument("--max-tokens", type=int, default=4096)
     ap.add_argument("--gpu-mem", type=float, default=0.85)
+    ap.add_argument("--constrained", type=int, default=0,
+                    help="1: grammar-constrained output (T0: one of 'ANSWER: A..D'; T1/T2: a ```edit block of 1-8 DSL "
+                         "statements); non-thinking mode only (design baseline 5, 'format-fixed' editor)")
     a = ap.parse_args(argv)
     out, raw = Path(a.out), Path(a.raw_dir)
     (out / "results").mkdir(parents=True, exist_ok=True)
     raw.mkdir(parents=True, exist_ok=True)
-    tag = f"{a.label}_think{a.thinking}"
+    assert not (a.constrained and a.thinking), "constrained decoding is defined for non-thinking mode only"
+    tag = f"{a.label}_think{a.thinking}" + ("_constrained" if a.constrained else "")
     assert not (out / "results" / f"{tag}_summary.json").exists(), "never overwritten"
     t0 = time.time()
     insts = [T.build(f, "pilot", i) for f in T.FAMILIES for i in range(a.per_family)]
@@ -79,10 +89,17 @@ def main(argv=None):
     texts = [tok.apply_chat_template([{"role": "user", "content": p}], tokenize=False, add_generation_prompt=True,
                                      enable_thinking=bool(a.thinking)) for _, _, p, _ in jobs]
     sp = (dict(temperature=0.6, top_p=0.95, top_k=20) if a.thinking else dict(temperature=0.7, top_p=0.8, top_k=20))
+    sps = [SamplingParams(n=a.samples, max_tokens=a.max_tokens, seed=0, **sp)] * len(jobs)
+    if a.constrained:
+        from vllm.sampling_params import StructuredOutputsParams
+        sps = [SamplingParams(n=a.samples, max_tokens=a.max_tokens, seed=0, **sp,
+                              structured_outputs=StructuredOutputsParams(
+                                  choice=[f"ANSWER: {c}" for c in "ABCD"]) if tier == "T0" else
+                              StructuredOutputsParams(regex=DSL_REGEX)) for _, tier, _, _ in jobs]
     llm = LLM(model=a.model, dtype="bfloat16", gpu_memory_utilization=a.gpu_mem,
               max_model_len=a.max_tokens + 3072, seed=0)
     t1 = time.time()
-    outs = llm.generate(texts, SamplingParams(n=a.samples, max_tokens=a.max_tokens, seed=0, **sp))
+    outs = llm.generate(texts, sps)
     gen_s = time.time() - t1
 
     rows, raw_rows = [], []
@@ -106,7 +123,7 @@ def main(argv=None):
                               for k in ("heuristic", "oracle", "random_mean")} for f in T.FAMILIES},
             "t0_chance_recovery_note": "T0 chance = 1/4 of the oracle recovery plus 3/4 of the distractors' recovery"}
     (out / "results" / f"{tag}_summary.json").write_text(json.dumps(summ, indent=1))
-    (out / "results" / f"{tag}_per_sample.json").write_text(json.dumps(rows))
+    (raw / f"{tag}_per_sample.json").write_text(json.dumps(rows))   # row-level: raw dir (packed as evidence)
     (out / "results" / "baselines_per_instance.json").write_text(json.dumps(base))
     with open(raw / f"{tag}_generations.jsonl", "w") as f:
         for r in raw_rows:
