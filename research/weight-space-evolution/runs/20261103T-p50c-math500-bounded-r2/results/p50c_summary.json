@@ -1,0 +1,31 @@
+{
+ "label": "p50c",
+ "ckpt": "/home/user/DEV/rad/research/weight-space-evolution/work/derived/qwen3.5-0.8B-text-p50c",
+ "protocol": "upstream think35 (reduced)",
+ "sampling": {
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "presence_penalty": 1.5,
+  "max_tokens": 32768,
+  "seed": 0
+ },
+ "subset": "MATH-500 test.jsonl rows[::5]",
+ "problems": 100,
+ "samples": 2,
+ "acc": 0.475,
+ "ok": 95,
+ "total": 200,
+ "cut_share": 0.335,
+ "mean_tokens": 23066.8,
+ "no_answer_finished": 16,
+ "load_s": 76.6,
+ "generate_s": 1334.3,
+ "gen_tokens_per_s": 3457.5,
+ "peak_reserved_gib_torch_process": 0.0,
+ "versions": {
+  "vllm": "0.33.0",
+  "torch": "2.14.0+cu130"
+ },
+ "cuda_visible_devices": "GPU-81ac6e96-0bfe-390d-beb1-241466569d6b"
+}

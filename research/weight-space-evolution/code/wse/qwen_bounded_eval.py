@@ -40,6 +40,7 @@ def main(argv=None):
     ap.add_argument("--samples", type=int, default=2)
     ap.add_argument("--max-tokens", type=int, default=32768)
     ap.add_argument("--gpu-mem", type=float, default=0.85)
+    ap.add_argument("--shard", default=None, help="i/k: keep subset problems i, i+k, ... (balance work across GPUs)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--raw", required=True)
     a = ap.parse_args(argv)
@@ -50,6 +51,10 @@ def main(argv=None):
     import vllm
 
     rows = [json.loads(l) for l in open(a.math500)][:: a.stride]
+    if a.shard:
+        i, k = map(int, a.shard.split("/"))
+        rows = rows[i::k]
+    tag = a.label + (f"_s{a.shard.replace('/', 'of')}" if a.shard else "")
     tok = AutoTokenizer.from_pretrained(a.ckpt)
     prompts = [tok.apply_chat_template([{"role": "user", "content": Q.build_prompt(r["problem"])}], tokenize=False,
                                        add_generation_prompt=True, enable_thinking=True) for r in rows]
@@ -63,7 +68,7 @@ def main(argv=None):
     t_gen = time.time() - t0 - t_load
     per, ok, tot, cut, toks, noans = [], 0, 0, 0, 0, 0
     Path(a.raw).mkdir(parents=True, exist_ok=True)
-    with gzip.open(Path(a.raw) / f"{a.label}_generations.jsonl.gz", "wt") as raw:
+    with gzip.open(Path(a.raw) / f"{tag}_generations.jsonl.gz", "wt") as raw:
         for r, o in zip(rows, outs):
             c = []
             for k, s in enumerate(o.outputs):
@@ -80,17 +85,17 @@ def main(argv=None):
                         "tokens": [len(s.token_ids) for s in o.outputs]})
             ok += sum(c)
             tot += len(c)
-    res = {"label": a.label, "ckpt": a.ckpt, "protocol": "upstream think35 (reduced)", "sampling": sampling,
+    res = {"label": a.label, "shard": a.shard, "ckpt": a.ckpt, "protocol": "upstream think35 (reduced)", "sampling": sampling,
            "subset": f"MATH-500 test.jsonl rows[::{a.stride}]", "problems": len(rows), "samples": a.samples,
            "acc": ok / tot, "ok": ok, "total": tot, "cut_share": cut / tot, "mean_tokens": toks / tot,
            "no_answer_finished": noans, "load_s": round(t_load, 1), "generate_s": round(t_gen, 1),
            "gen_tokens_per_s": round(toks / t_gen, 1),
-           "peak_reserved_gib_torch_process": round(torch.cuda.max_memory_reserved() / 2 ** 30, 2) if torch.cuda.is_available() else None,
+           "gpu_memory_note": "vLLM's engine runs in a separate process; see nvidia_smi.csv for device memory",
            "versions": {"vllm": vllm.__version__, "torch": torch.__version__},
            "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES")}
     Path(a.out).mkdir(parents=True, exist_ok=True)
-    (Path(a.out) / f"{a.label}_summary.json").write_text(json.dumps(res, indent=1))
-    (Path(a.out) / f"{a.label}_per_problem.json").write_text(json.dumps(per))
+    (Path(a.out) / f"{tag}_summary.json").write_text(json.dumps(res, indent=1))
+    (Path(a.out) / f"{tag}_per_problem.json").write_text(json.dumps(per))
     print(json.dumps(res, indent=1))
 
 

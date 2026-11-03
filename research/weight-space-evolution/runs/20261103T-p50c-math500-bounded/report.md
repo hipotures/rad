@@ -1,6 +1,7 @@
 # Bounded MATH-500 check, Gold vs p50c — report
 
-**Outcome: not completed (interrupted).** No scores were produced.
+**Outcome: not completed (interrupted).** No scores were produced. Superseded by
+[`20261103T-p50c-math500-bounded-r2`](../20261103T-p50c-math500-bounded-r2/report.md).
 
 - Protocol: upstream `think35` (vLLM 0.33.0, text-only export, thinking on, T 0.6 / top_p 0.95 / top_k 20 /
   presence 1.5, ≤ 32,768 tokens, seed 0), MATH-500 rows[::5] (100 problems) × 2 samples; Gold on GPU0, p50c on GPU1

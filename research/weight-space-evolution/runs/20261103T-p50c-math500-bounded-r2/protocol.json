@@ -1,0 +1,13 @@
+{
+ "run_id": "20261103T-p50c-math500-bounded-r2",
+ "question": "Does the reconstructed p50c checkpoint reproduce the published MATH-500 behaviour change relative to Gold under the upstream think35 protocol (bounded sample)?",
+ "replaces": "20261103T-p50c-math500-bounded (interrupted by a host restart, no results)",
+ "inputs": ["qwen3.5-0.8B-2fc0636", "math500-6e4ed1a", "upstream-lm_understand-logs@4d09ba6 (mathqa.py grader, text-only config)"],
+ "checkpoints": {"gold": "work/derived/qwen3.5-0.8B-text-gold (model sha256 68194c7b...)", "p50c": "work/derived/qwen3.5-0.8B-text-p50c (model sha256 b42d7679..., WSE patch p-4b2661ed6f35)"},
+ "protocol": "vLLM 0.33.0 bf16, chat template with enable_thinking=True, prompt = problem + newline + Qwen boxed instruction, temperature 0.6, top_p 0.95, top_k 20, presence_penalty 1.5, max_tokens 32768, seed 0, max_model_len 34816, gpu_memory_utilization 0.85; last \\boxed{} graded by math-verify 0.9.0 via upstream mathqa.py",
+ "subset": "MATH-500 test.jsonl rows[::5] = 100 problems, 2 samples each (upstream: 500 x 4)",
+ "devices": {"gold": "GPU-6c849b47-7111-9265-9d42-ff8eddc05a2d (RTX 4090)", "p50c": "GPU-81ac6e96-0bfe-390d-beb1-241466569d6b (RTX 4090)"},
+ "launcher": "RUN=20261103T-p50c-math500-bounded-r2 GPU_GOLD=<uuid0> GPU_P50C=<uuid1> code/scripts/run_p50c_math500_bounded.sh",
+ "analysis": "python -m wse.compare_math500 --ours runs/<run>/results --upstream-eval work/repos/lm_understand-logs/exp8_math/eval --out runs/<run>/results/comparison_vs_upstream.json",
+ "started_utc": "2026-11-03T04:14", "finished_utc": "2026-11-03T04:51"
+}

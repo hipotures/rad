@@ -1,0 +1,31 @@
+{
+ "label": "gold",
+ "ckpt": "/home/user/DEV/rad/research/weight-space-evolution/work/derived/qwen3.5-0.8B-text-gold",
+ "protocol": "upstream think35 (reduced)",
+ "sampling": {
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "presence_penalty": 1.5,
+  "max_tokens": 32768,
+  "seed": 0
+ },
+ "subset": "MATH-500 test.jsonl rows[::5]",
+ "problems": 100,
+ "samples": 2,
+ "acc": 0.065,
+ "ok": 13,
+ "total": 200,
+ "cut_share": 0.95,
+ "mean_tokens": 31365.7,
+ "no_answer_finished": 0,
+ "load_s": 76.5,
+ "generate_s": 2128.6,
+ "gen_tokens_per_s": 2947.1,
+ "peak_reserved_gib_torch_process": 0.0,
+ "versions": {
+  "vllm": "0.33.0",
+  "torch": "2.14.0+cu130"
+ },
+ "cuda_visible_devices": "GPU-6c849b47-7111-9265-9d42-ff8eddc05a2d"
+}

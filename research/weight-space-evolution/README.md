@@ -32,7 +32,7 @@ All research code, reports and documentation are written in English. All work, i
 | Phase | Status | Evidence |
 |---|---|---|
 | A — upstream audit | Done. p10c/p25c/p50c rebuild bit-exactly from public Gold (independent tool + upstream tool agree). p50c is a rank-1 removal of a "loop" direction from 64 MLP columns in layers 15/19; upstream strata indicate it mainly rescues truncated (looping) answers. | [audit](reports/phaseA_upstream_audit.md), [run](runs/20261103T-p50c-reconstruction/report.md) |
-| A — behavioural check | Not completed (interrupted by host restart); must be re-run. | [run](runs/20261103T-p50c-math500-bounded/report.md) |
+| A — behavioural check | Done (bounded): MATH-500 100 problems × 2 samples — Gold 6.5% (95% cut), reconstructed p50c 47.5% (33.5% cut); upstream on the same problems 6.2% / 45.0%, full published 7.9% / 48.1%. Partial reproduction of the published effect. | [run](runs/20261103T-p50c-math500-bounded-r2/report.md) (first attempt [interrupted](runs/20261103T-p50c-math500-bounded/report.md)) |
 | B — harness | Done: read-only Gold registry, content-addressed validated patches with lineage, bubblewrap sandbox (fail-closed self-test), budgeted lab, MinAtar forward-pass service (validated vs published exp5 scores), held-out verifier with matched controls; 14 tests. | [`code/wse/`](code/wse/), [validation](runs/20261103T-minatar-evaluator-validation/report.md) |
 | C — first bounded edit | Ran end to end. Editor (Claude Opus 5.5 subagent) proposed 3 hand-derived edits; submitted 2-entry edit B: held-out +1.83 ± 1.89 (not significant), reverse edit −2.96 ± 0.50 (significant). **No demonstrated improvement.** | [report](runs/20261103T-phaseC-seaquest-v1-e1/report.md) |
 | D — bootstrap gate | Designed, not executed. | [design](reports/phaseD_bootstrap_gate_design.md) |
@@ -40,5 +40,6 @@ All research code, reports and documentation are written in English. All work, i
 Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.json](input-manifest.json),
 [artifact-manifest.json](artifact-manifest.json). Payloads live in the ignored `work/` directory.
 
-**Next useful step:** re-run the bounded MATH-500 check; then run several independent Phase C editor sessions with
-larger dev passes and "active-weight" random controls before implementing the Phase D gate.
+**Next useful step:** run several independent Phase C editor sessions with larger dev passes and "active-weight"
+random controls, then implement the Phase D target generator and edit DSL and pilot the small Gold editor (no parent
+sessions yet). For GPU evaluations use the problem-sharded launcher (`code/scripts/run_math500_sharded.sh`).

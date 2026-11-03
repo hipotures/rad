@@ -72,8 +72,14 @@ $W/envs/wse/bin/python -m wse.text_export --gold-id 'qwen3.5-0.8B@2fc0636' --hf-
    --text-config-dir $U --out $W/derived/qwen3.5-0.8B-text-gold
 $W/envs/wse/bin/python -m wse.text_export --gold-id 'qwen3.5-0.8B@2fc0636' --patch-id p-4b2661ed6f35 \
    --hf-dir $W/inputs/qwen3.5-0.8B-2fc0636 --text-config-dir $U --out $W/derived/qwen3.5-0.8B-text-p50c
-cd $TOPIC && RUN=<new-run-id> GPU_GOLD=<uuid|0> GPU_P50C=<uuid|1> code/scripts/run_p50c_math500_bounded.sh
+# recorded run used the per-model split:  RUN=<id> GPU_GOLD=<uuid> GPU_P50C=<uuid> code/scripts/run_p50c_math500_bounded.sh
+# preferred (balanced, problem-sharded across GPUs):
+cd $TOPIC && RUN=<new-run-id> GPUS="<uuid0> <uuid1>" code/scripts/run_math500_sharded.sh
+cd code && $W/envs/wse/bin/python -m wse.compare_math500 --ours $TOPIC/runs/<new-run-id>/results \
+   --upstream-eval $E/eval --out $TOPIC/runs/<new-run-id>/results/comparison_vs_upstream.json
 ```
+
+Expected (bounded subset, sampling noise ±~8 pp): Gold ≈ 6–8% with ≈ 93–95% cut; p50c ≈ 45–48% with ≈ 33% cut.
 
 ## 4. Harness tests
 

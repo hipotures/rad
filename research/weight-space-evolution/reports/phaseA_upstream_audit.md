@@ -75,12 +75,20 @@ Minor discrepancy: our float64 `relative_change` differs from the manifest's in 
 
 **This is a patch reconstruction, not a benchmark reproduction.** See section 5 for the bounded behavioural check.
 
-## 5. Bounded behavioural check (run `runs/20261103T-p50c-math500-bounded/`)
+## 5. Bounded behavioural check (run `runs/20261103T-p50c-math500-bounded-r2/`)
 
-See that run's `report.md` for the result. Protocol: upstream `think35` settings, text-only export as upstream,
-MATH-500 rows[::5] (100 problems) × 2 samples, Gold on GPU0 and p50c on GPU1 in parallel, upstream `mathqa.py`
-grading with math-verify 0.9.0. Published reference: Gold 7.9% (93.0% cut), p50c 48.1% (33.1% cut) on the full
-500 × 4 samples.
+Upstream `think35` protocol on the text-only exports, MATH-500 rows[::5] (100 problems) × 2 samples, Gold and p50c on
+separate RTX 4090s, upstream `mathqa.py` grading (math-verify 0.9.0):
+
+| Model | Ours | Upstream, same 100 problems | Upstream, full 500 | Ours cut / upstream cut |
+|---|---|---|---|---|
+| Gold | 6.5% (CI 2.5–11.0) | 6.2% | 7.9% | 95.0% / 93.0% |
+| p50c | 47.5% (CI 39.0–56.0) | 45.0% | 48.1% | 33.5% / 33.1% |
+| p50c − Gold (paired) | +41.0 pp (CI 33.0–49.0) | +38.75 pp | +40.2 pp | |
+
+**Partial reproduction confirmed:** the reconstructed edit reproduces the published MATH-500 behaviour change within
+sampling error on this subset (other benchmarks not re-run). An earlier attempt was interrupted by a host restart
+(`runs/20261103T-p50c-math500-bounded/`).
 
 ## 6. Interpretation and caveats
 

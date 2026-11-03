@@ -12,8 +12,9 @@
   {"path": "derived/qwen3.5-0.8B-text-gold", "class": "regenerable", "model_sha256": "68194c7beef8da37beaddb33b02a3b076f0930d81b55808be59998ba10cfc9fb", "how": "wse.text_export"},
   {"path": "derived/qwen3.5-0.8B-text-p50c", "class": "regenerable", "model_sha256": "b42d767992c3421943a54d047d8e22d7524c045cd00f550ec177dafa5015d1d6", "how": "wse.text_export --patch-id p-4b2661ed6f35"},
   {"path": "derived/p{10,25,50}c-upstream-npy", "class": "regenerable", "how": "upstream apply_edit.py (cross-check output)"},
-  {"path": "raw/20261103T-p50c-math500-bounded/*_generations.jsonl.gz", "class": "archived", "what": "full generated texts of the bounded MATH-500 check", "evidence": "packed copy under evidence/ (see run report)"},
-  {"path": "logs/20261103T-p50c-math500-bounded/", "class": "archived", "what": "vLLM logs and nvidia-smi samples", "evidence": "packed copy under evidence/"},
+  {"path": "raw/20261103T-p50c-math500-bounded-r2/*_generations.jsonl.gz", "class": "archived", "what": "full generated texts of the bounded MATH-500 check (400 generations)", "evidence": "evidence/20261103T-p50c-math500-bounded-r2/generations/"},
+  {"path": "logs/20261103T-p50c-math500-bounded-r2/", "class": "archived", "what": "vLLM logs (progress-bar lines dropped) and nvidia-smi samples", "evidence": "evidence/20261103T-p50c-math500-bounded-r2/logs/"},
+  {"path": "logs/20261103T-p50c-math500-bounded/", "class": "disposable", "what": "logs of the interrupted first attempt (no results)"},
   {"path": "sessions/phaseC-seaquest-v1-e1/", "class": "archived", "what": "editor session: config, state, log.jsonl (every lab call incl. editor code and outputs), pass results", "evidence": "packed copy under evidence/; the editor's conversational transcript is not stored by the harness (see run report)"},
   {"path": "sessions/smoke-1-failclosed-nproc, sessions/smoke-2", "class": "disposable", "what": "harness smoke tests (first shows the fail-closed refusal)"}
  ]
