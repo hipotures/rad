@@ -22,7 +22,7 @@ The existing expert-residency investigation stays in
 Its original absolute path remains
 `/srv/ai/research/iq3s-residency-20261004T230051Z`, so measured launchers, frozen
 manifests and existing reproduction commands retain their original addressing.
-The repository root on this host is `/srv/ai/research`.
+The checkout location is not fixed. Determine the repository root from the current working directory using `git rev-parse --show-toplevel`; historical absolute paths above are archival references, not current working-directory instructions.
 
 Start with the [research index](docs/research-index.md). A prior completed
 study is [Golden Swap Phase 3](iq3s-residency-20261004T230051Z/campaigns/golden-swap-phase3-20261007T150955Z/report.md):
@@ -56,9 +56,7 @@ See [storage and reproduction](docs/storage.md) and the
 
 For a fresh task, read [AGENTS.md](AGENTS.md) before creating files. Durable
 material goes in `research/<topic>/`: authored `code/`, small `fixtures/`,
-`configs/`, isolated run results, reports and recovery manifests. Large inputs,
-downloaded repositories, environments and compiled output belong in a task-owned
-directory under `/srv/ai/work/rad/`. Create/check `.gitignore` before execution.
+`configs/`, isolated run results, reports and recovery manifests. Large inputs, downloaded repositories, environments and compiled output belong in task-owned ignored storage, as specified by the active topic instructions. For topics requiring all work to stay under the current directory, use the topic's ignored `work/` directory. Create/check `.gitignore` before execution.
 
 Before the final commit, package completed text evidence into a fresh namespace:
 
@@ -71,7 +69,7 @@ At completion, stage the actual task-owned paths explicitly, inspect the diff
 and run the publication check:
 
 ```bash
-cd /srv/ai/research
+cd "$(git rev-parse --show-toplevel)"
 git status --short --branch
 git add -- <actual-task-owned-paths>
 git diff --cached --stat
