@@ -99,6 +99,7 @@ def main():
         if len(records)!=2 or not all(r['final_audit']['ok'] for r in records):raise RuntimeError('worker final Gold audit missing or failed')
         result['worker_audits'][campaign]=[{'worker':r['worker'],'audit':r['final_audit'],'final_memory':r['final_memory'],
                                             'startup_s':r['startup_s'],'wall_s':r['wall_s']} for r in records]
+    result['select_and_test_confirmed']={sid:bool(result['splits']['select']['primary_endpoint'][sid]['positive_significant'] and result['splits']['test']['primary_endpoint'][sid]['positive_significant']) for sid in parents}
     result['frozen_primary_positive']=any(v['positive_significant'] for v in result['splits']['test']['primary_endpoint'].values())
     out=TOPIC/'runs/20261103T-phaseD-bootstrap-execution/results'
     (out/'final_analysis.json').write_text(json.dumps(result,indent=2)+'\n')

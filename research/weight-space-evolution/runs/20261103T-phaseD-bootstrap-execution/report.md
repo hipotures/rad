@@ -1,6 +1,6 @@
 # Phase D parent-to-editor bootstrap execution
 
-Status: four independent parent sessions running under the supervised existing-Codex campaign. This report supersedes the
+Status: all four parents completed and sealed; independent final evaluation is running. This report supersedes the
 preparation report's approval-waiting status following explicit user steering on 2026-11-03. The original benchmark
 protocol and its source remain unchanged.
 
@@ -60,3 +60,30 @@ legacy controls plus its own E0. A select-only Gold repeat must agree before hel
 and a technical select diagnostic change no frozen instances, scoring, decoding, primary samples or statistical
 endpoint. If the technical repeat fails, investigate before opening test/transfer rather than silently accepting
 unreliable comparisons.
+
+
+## Completed parent search
+
+All four parent processes and both development evaluators exited zero. The supervised search lasted 1122.37 s;
+53 full dev passes completed without failed evaluator jobs. There were 46 distinct accepted proposed patches and
+85 sandbox calls. Each parent independently stopped within its fixed maximum budget after 12–15 dev passes and
+sealed one Gold-rooted candidate. Terminal reports are retained in parent_reports/; they are the parents' own
+interpretation, not independent confirmation. No held-out output was returned to a parent.
+
+| parent | sealed patch | dev passes | sandbox calls |
+|---|---|---:|---:|
+| 01 | p-a1a9a0be281a | 12 | 19 |
+| 02 | p-9378a8c33b6a | 15 | 17 |
+| 03 | p-41d9a0038798 | 14 | 26 |
+| 04 | p-f6dc81f3da9a | 12 | 23 |
+
+The completed search archive retains all lab calls, failures, terminal conversation events and lossless deltas
+for all 46 accepted patches, not only winners. Complete per-sample dev outputs are archived separately. Private
+Codex login homes and account/session databases are excluded. The original provider snapshot revision is not
+exposed; the configured model ID, effort, CLI version, conversation IDs, exact prompts via source/templates,
+responses and actual usage are retained. Remote model re-execution is therefore not claimed bit reproducible.
+
+Preserved evidence: [parent provenance](../../evidence/20261103T-phaseD-bootstrap-parent-provenance/) and
+[dev measurements](../../evidence/20261103T-phaseD-bootstrap-dev/). The fixed final population and generated matched
+controls are recorded before final outcomes in results/final_plan.json. Select-only Gold-repeat diagnostics and
+independent test/transfer outcomes remain pending.

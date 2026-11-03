@@ -1,0 +1,274 @@
+{
+  "campaign": "20261103T-phaseD-bootstrap-final",
+  "sealed": {
+    "phaseD-parent-01": "p-a1a9a0be281a",
+    "phaseD-parent-02": "p-9378a8c33b6a",
+    "phaseD-parent-03": "p-41d9a0038798",
+    "phaseD-parent-04": "p-f6dc81f3da9a"
+  },
+  "editors": [
+    {
+      "editor_id": "E0",
+      "patch_id": null,
+      "kind": "Gold editor (unmodified Qwen3.5-0.8B text export)",
+      "gold_id": "qwen3.5-0.8B@2fc0636"
+    },
+    {
+      "editor_id": "p50c",
+      "patch_id": "p-4b2661ed6f35",
+      "kind": "upstream import",
+      "gold_id": "qwen3.5-0.8B@2fc0636"
+    },
+    {
+      "editor_id": "rand-dir-0",
+      "patch_id": "p-7249a5181b02",
+      "kind": "random control",
+      "gold_id": "qwen3.5-0.8B@2fc0636"
+    },
+    {
+      "editor_id": "rand-dir-1",
+      "patch_id": "p-01382f1d86a6",
+      "kind": "random control",
+      "gold_id": "qwen3.5-0.8B@2fc0636"
+    },
+    {
+      "editor_id": "rand-dir-2",
+      "patch_id": "p-d081394783ab",
+      "kind": "random control",
+      "gold_id": "qwen3.5-0.8B@2fc0636"
+    },
+    {
+      "editor_id": "rand-dir-3",
+      "patch_id": "p-e6255be7813d",
+      "kind": "random control",
+      "gold_id": "qwen3.5-0.8B@2fc0636"
+    },
+    {
+      "editor_id": "rand-sparse-0",
+      "patch_id": "p-e7ae27b2ce75",
+      "kind": "random control",
+      "gold_id": "qwen3.5-0.8B@2fc0636"
+    },
+    {
+      "editor_id": "E0-controls",
+      "patch_id": null,
+      "gold_id": "qwen3.5-0.8B@2fc0636"
+    },
+    {
+      "editor_id": "phaseD-parent-01",
+      "patch_id": "p-a1a9a0be281a",
+      "gold_id": "qwen3.5-0.8B@2fc0636",
+      "author_session": "phaseD-parent-01"
+    },
+    {
+      "editor_id": "matched-phaseD-parent-01",
+      "patch_id": "p-6a23881edb14",
+      "gold_id": "qwen3.5-0.8B@2fc0636",
+      "kind": "matched random editor control"
+    },
+    {
+      "editor_id": "phaseD-parent-02",
+      "patch_id": "p-9378a8c33b6a",
+      "gold_id": "qwen3.5-0.8B@2fc0636",
+      "author_session": "phaseD-parent-02"
+    },
+    {
+      "editor_id": "matched-phaseD-parent-02",
+      "patch_id": "p-25781db18c95",
+      "gold_id": "qwen3.5-0.8B@2fc0636",
+      "kind": "matched random editor control"
+    },
+    {
+      "editor_id": "phaseD-parent-03",
+      "patch_id": "p-41d9a0038798",
+      "gold_id": "qwen3.5-0.8B@2fc0636",
+      "author_session": "phaseD-parent-03"
+    },
+    {
+      "editor_id": "matched-phaseD-parent-03",
+      "patch_id": "p-aa1449a8e880",
+      "gold_id": "qwen3.5-0.8B@2fc0636",
+      "kind": "matched random editor control"
+    },
+    {
+      "editor_id": "phaseD-parent-04",
+      "patch_id": "p-f6dc81f3da9a",
+      "gold_id": "qwen3.5-0.8B@2fc0636",
+      "author_session": "phaseD-parent-04"
+    },
+    {
+      "editor_id": "matched-phaseD-parent-04",
+      "patch_id": "p-352d6e5108f6",
+      "gold_id": "qwen3.5-0.8B@2fc0636",
+      "kind": "matched random editor control"
+    }
+  ],
+  "splits": [
+    "select",
+    "test",
+    "transfer"
+  ],
+  "rule": "fixed candidates, no replacement or parent feedback; primary Holm family includes four parents",
+  "timestamp": 1793729379.8187954,
+  "matched_controls": {
+    "phaseD-parent-01": {
+      "editor_id": "matched-phaseD-parent-01",
+      "patch_id": "p-6a23881edb14",
+      "details": [
+        {
+          "tensor": "model.language_model.layers.11.mlp.down_proj.weight",
+          "candidate_entries": 36864,
+          "control_entries": 36236,
+          "candidate_delta_l2": 0.21342771443186126,
+          "control_delta_l2": 0.2134435139954383,
+          "exclude_candidate_positions": true
+        }
+      ]
+    },
+    "phaseD-parent-02": {
+      "editor_id": "matched-phaseD-parent-02",
+      "patch_id": "p-25781db18c95",
+      "details": [
+        {
+          "tensor": "model.language_model.layers.11.self_attn.q_norm.weight",
+          "candidate_entries": 1,
+          "control_entries": 1,
+          "candidate_delta_l2": 0.5703125,
+          "control_delta_l2": 0.57421875,
+          "exclude_candidate_positions": true
+        }
+      ]
+    },
+    "phaseD-parent-03": {
+      "editor_id": "matched-phaseD-parent-03",
+      "patch_id": "p-aa1449a8e880",
+      "details": [
+        {
+          "tensor": "model.language_model.layers.0.linear_attn.dt_bias",
+          "candidate_entries": 5,
+          "control_entries": 5,
+          "candidate_delta_l2": 2.243099226656057,
+          "control_delta_l2": 2.243099226656057,
+          "exclude_candidate_positions": true
+        },
+        {
+          "tensor": "model.language_model.layers.12.linear_attn.dt_bias",
+          "candidate_entries": 13,
+          "control_entries": 13,
+          "candidate_delta_l2": 3.605618987254477,
+          "control_delta_l2": 3.6122063434926788,
+          "exclude_candidate_positions": false
+        },
+        {
+          "tensor": "model.language_model.layers.16.linear_attn.dt_bias",
+          "candidate_entries": 7,
+          "control_entries": 7,
+          "candidate_delta_l2": 2.6457513110645907,
+          "control_delta_l2": 2.642985581071819,
+          "exclude_candidate_positions": true
+        },
+        {
+          "tensor": "model.language_model.layers.20.linear_attn.dt_bias",
+          "candidate_entries": 5,
+          "control_entries": 5,
+          "candidate_delta_l2": 2.2291240747488685,
+          "control_delta_l2": 2.2291240747488685,
+          "exclude_candidate_positions": true
+        },
+        {
+          "tensor": "model.language_model.layers.4.linear_attn.dt_bias",
+          "candidate_entries": 4,
+          "control_entries": 4,
+          "candidate_delta_l2": 2.0078580977312614,
+          "control_delta_l2": 2.0,
+          "exclude_candidate_positions": true
+        },
+        {
+          "tensor": "model.language_model.layers.8.linear_attn.dt_bias",
+          "candidate_entries": 10,
+          "control_entries": 10,
+          "candidate_delta_l2": 3.1648340108773874,
+          "control_delta_l2": 3.1642969868744273,
+          "exclude_candidate_positions": false
+        }
+      ]
+    },
+    "phaseD-parent-04": {
+      "editor_id": "matched-phaseD-parent-04",
+      "patch_id": "p-352d6e5108f6",
+      "details": [
+        {
+          "tensor": "model.language_model.layers.10.linear_attn.dt_bias",
+          "candidate_entries": 12,
+          "control_entries": 12,
+          "candidate_delta_l2": 0.4330127018922193,
+          "control_delta_l2": 0.4330127018922193,
+          "exclude_candidate_positions": false
+        },
+        {
+          "tensor": "model.language_model.layers.12.linear_attn.dt_bias",
+          "candidate_entries": 12,
+          "control_entries": 12,
+          "candidate_delta_l2": 0.4308223649675699,
+          "control_delta_l2": 0.4286208351357876,
+          "exclude_candidate_positions": false
+        },
+        {
+          "tensor": "model.language_model.layers.13.linear_attn.dt_bias",
+          "candidate_entries": 9,
+          "control_entries": 9,
+          "candidate_delta_l2": 0.3724686700331318,
+          "control_delta_l2": 0.36992001880474107,
+          "exclude_candidate_positions": false
+        },
+        {
+          "tensor": "model.language_model.layers.14.linear_attn.dt_bias",
+          "candidate_entries": 8,
+          "control_entries": 8,
+          "candidate_delta_l2": 0.3563904602486576,
+          "control_delta_l2": 0.3535533905932738,
+          "exclude_candidate_positions": true
+        },
+        {
+          "tensor": "model.language_model.layers.8.linear_attn.dt_bias",
+          "candidate_entries": 10,
+          "control_entries": 10,
+          "candidate_delta_l2": 0.39528470752104744,
+          "control_delta_l2": 0.3943777257761636,
+          "exclude_candidate_positions": false
+        },
+        {
+          "tensor": "model.language_model.layers.9.linear_attn.dt_bias",
+          "candidate_entries": 13,
+          "control_entries": 13,
+          "candidate_delta_l2": 0.44886195069447576,
+          "control_delta_l2": 0.447022484403749,
+          "exclude_candidate_positions": false
+        }
+      ]
+    }
+  },
+  "gpu_cohorts": {
+    "primary": [
+      "E0",
+      "phaseD-parent-01",
+      "matched-phaseD-parent-01",
+      "phaseD-parent-02",
+      "matched-phaseD-parent-02",
+      "phaseD-parent-03",
+      "matched-phaseD-parent-03",
+      "phaseD-parent-04",
+      "matched-phaseD-parent-04"
+    ],
+    "controls": [
+      "E0-controls",
+      "p50c",
+      "rand-dir-0",
+      "rand-dir-1",
+      "rand-dir-2",
+      "rand-dir-3",
+      "rand-sparse-0"
+    ]
+  },
+  "rationale": "Keep E0, four parent candidates and their matched random controls on the same GPU; secondary legacy controls use the other GPU with an additional E0 reference. This is scheduling only; frozen instances, samples, decoding and scoring are unchanged."
+}
