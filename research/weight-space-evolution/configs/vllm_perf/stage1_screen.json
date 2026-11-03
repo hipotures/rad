@@ -1,0 +1,328 @@
+[
+ {
+  "name": "s_mnbt2048",
+  "engine": {
+   "max_num_batched_tokens": 2048
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_mnbt4096",
+  "engine": {
+   "max_num_batched_tokens": 4096
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_mnbt16384",
+  "engine": {
+   "max_num_batched_tokens": 16384
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_mnbt32768",
+  "engine": {
+   "max_num_batched_tokens": 32768
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_nochunk",
+  "engine": {
+   "enable_chunked_prefill": false,
+   "max_num_batched_tokens": 32768
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_noasync",
+  "engine": {
+   "async_scheduling": false
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_mns64",
+  "engine": {
+   "max_num_seqs": 64
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_mns512",
+  "engine": {
+   "max_num_seqs": 512
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_mns1024",
+  "engine": {
+   "max_num_seqs": 1024
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_perf_throughput",
+  "engine": {
+   "performance_mode": "throughput"
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "s_perf_interactivity",
+  "engine": {
+   "performance_mode": "interactivity"
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "c_eager",
+  "engine": {
+   "enforce_eager": true
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "c_O0",
+  "engine": {
+   "optimization_level": 0
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "c_O1",
+  "engine": {
+   "optimization_level": 1
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "c_O3",
+  "engine": {
+   "optimization_level": 3
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "c_cg_piecewise",
+  "engine": {
+   "compilation_config": {
+    "cudagraph_mode": "PIECEWISE"
+   }
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "c_cg_full_decode_only",
+  "engine": {
+   "compilation_config": {
+    "cudagraph_mode": "FULL_DECODE_ONLY"
+   }
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "m_gmu050",
+  "engine": {
+   "gpu_memory_utilization": 0.5
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "m_gmu095",
+  "engine": {
+   "gpu_memory_utilization": 0.95
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "m_noprefix",
+  "engine": {
+   "enable_prefix_caching": false
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "m_attn_flashinfer",
+  "engine": {
+   "attention_backend": "FLASHINFER"
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "m_attn_triton",
+  "engine": {
+   "attention_backend": "TRITON_ATTN"
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "m_mamba_flashinfer",
+  "engine": {
+   "mamba_backend": "flashinfer"
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "m_kv_fp8",
+  "engine": {
+   "kv_cache_dtype": "fp8"
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ]
+ },
+ {
+  "name": "m_v2_runner",
+  "engine": {},
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ],
+  "env": {
+   "VLLM_USE_V2_MODEL_RUNNER": "1"
+  }
+ },
+ {
+  "name": "sp_mtp1",
+  "engine": {
+   "speculative_config": {
+    "method": "mtp",
+    "num_speculative_tokens": 1
+   }
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ],
+  "model": "derived/qwen3.5-0.8B-text-gold-mtp"
+ },
+ {
+  "name": "sp_mtp2",
+  "engine": {
+   "speculative_config": {
+    "method": "mtp",
+    "num_speculative_tokens": 2
+   }
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ],
+  "model": "derived/qwen3.5-0.8B-text-gold-mtp"
+ },
+ {
+  "name": "sp_mtp3",
+  "engine": {
+   "speculative_config": {
+    "method": "mtp",
+    "num_speculative_tokens": 3
+   }
+  },
+  "workloads": "A,B,C,D,E",
+  "args": [
+   "--repeats",
+   "3"
+  ],
+  "model": "derived/qwen3.5-0.8B-text-gold-mtp"
+ }
+]

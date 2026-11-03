@@ -1,0 +1,46 @@
+{
+ "date_utc": "2026-11-03",
+ "host": {
+  "cpu": "AMD Ryzen 9 7950X3D 16-Core Processor",
+  "logical_cpus": 32,
+  "ram_gib": 183,
+  "kernel": "7.0.0-38-generic",
+  "virtualization": "none"
+ },
+ "gpus": [
+  "index, uuid, name, pci.bus_id, memory.total [MiB], power.limit [W], clocks.max.sm [MHz], clocks.max.memory [MHz], compute_cap, vbios_version, pcie.link.gen.max, pcie.link.width.current, persistence_mode",
+  "0, GPU-6c849b47-7111-9265-9d42-ff8eddc05a2d, NVIDIA GeForce RTX 4090, 00000000:01:00.0, 24564 MiB, 480.00 W, 3165 MHz, 10501 MHz, 8.9, 95.02.3C.40.D1, 4, 8, Disabled",
+  "1, GPU-81ac6e96-0bfe-390d-beb1-241466569d6b, NVIDIA GeForce RTX 4090, 00000000:03:00.0, 24564 MiB, 480.00 W, 3165 MHz, 10501 MHz, 8.9, 95.02.3C.40.D1, 4, 8, Disabled"
+ ],
+ "driver": "NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  615.71.09  Release Build  (dvs-builder@U22-I3-F05-2-4)  Fri Sep  4 22:33:33 UTC 2026",
+ "p2p": "not supported between the two GPUs (nvidia-smi topo -p2p r: GNS); topology PHB",
+ "tensor_unlock": {
+  "status": "active on both GPUs during every measurement of this campaign",
+  "evidence": [
+   "kernel cmdline contains gpu_unlock.targets=0000:01:00.0,0000:03:00.0",
+   "lsmod: gpu_unlock loaded",
+   "kernel log 2026-11-03 03:59:57: 'pci 0000:01:00.0: gpu_unlock: unlocked', 'pci 0000:03:00.0: gpu_unlock: unlocked'",
+   "read-only RM getter NV2080_CTRL_CMD_GR_GET_SM_ISSUE_RATE: fmla32=0 (full rate) on both GPUs (results/env/sm-rates_*.json)"
+  ],
+  "tool": "gpu-unlock-ada commit 4e7fefc, installed by an earlier operator study outside this repository (~/DEV/test-20271025, results/tensor_unlock/REPORT.md); that study measured mma FP16/BF16->FP32 x2.00, TF32 x1.98, cuBLAS 8192^3 BF16 +16-17%",
+  "consequence": "absolute numbers here are for unlocked cards; no stock-state vLLM measurement was made (it needs a reboot into the stock boot entry)"
+ },
+ "software": {
+  "vllm": "0.33.0",
+  "torch": "2.14.0+cu130",
+  "cuda_runtime": "13.0",
+  "triton": "3.8.0",
+  "flashinfer": "0.7.2.post1",
+  "transformers": "5.20.2",
+  "tokenizers": "0.23.3",
+  "xgrammar": "0.2.8",
+  "llguidance": "1.7.6",
+  "python": "3.12.14",
+  "lock": "configs/requirements-vllm.lock.txt (verified identical to the installed environment before benchmarking; no upgrades)"
+ },
+ "model": {
+  "id": "Qwen/Qwen3.5-0.8B @ 2fc0636, text-only export work/derived/qwen3.5-0.8B-text-gold (model.safetensors sha256 68194c7b...)",
+  "arch": "Qwen3_5ForCausalLM: 24 layers, 18 Gated DeltaNet (linear_attention) + 6 full-attention (GQA 8q/2kv, head_dim 256), hidden 1024, vocab 248320, tied embeddings, bf16; mamba_ssm_dtype float32",
+  "mtp_variant": "work/derived/qwen3.5-0.8B-text-gold-mtp = same backbone file (hard link) + Gold's 15 mtp.* tensors (model-mtp.safetensors sha256 b3d623fe...), built by code/bench/add_mtp_head.py"
+ }
+}

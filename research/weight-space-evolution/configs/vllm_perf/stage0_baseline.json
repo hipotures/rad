@@ -1,0 +1,7 @@
+[
+ {"name": "baseline_g0", "engine": {}, "workloads": "A,B,C,D,E", "args": ["--repeats", "3"], "gpu": 0},
+ {"name": "baseline_g1", "engine": {}, "workloads": "A,B,C,D,E", "args": ["--repeats", "3"], "gpu": 1},
+ {"name": "pilot_exact_g0", "engine": {"max_model_len": 7168}, "workloads": "P", "args": ["--repeats", "1"], "gpu": 0},
+ {"name": "baseline_coldcache_g1", "engine": {}, "workloads": "A", "args": ["--repeats", "1"], "gpu": 1,
+  "cache": "cache/bench-cold/c1/vllm", "env": {"TRITON_CACHE_DIR": "${WORK}/cache/bench-cold/c1/triton", "TORCHINDUCTOR_CACHE_DIR": "${WORK}/cache/bench-cold/c1/inductor", "XDG_CACHE_HOME": "${WORK}/cache/bench-cold/c1/xdg", "FLASHINFER_WORKSPACE_BASE": "${WORK}/cache/bench-cold/c1/xdg"}}
+]
