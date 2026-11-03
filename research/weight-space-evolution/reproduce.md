@@ -325,3 +325,31 @@ repository, credentials or torch; Gold tensor views are read-only. The outer Cod
 hides the topic from any remaining builtin file tool, and the privileged broker is outside over a session-specific
 Unix socket. Model network access is used only by Codex itself; no model-controlled shell/browser/network tool is
 exposed. Probes and executable namespace checks must pass before launch.
+
+
+After all four parents have sealed and the development supervisor is terminal:
+
+```bash
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_final --root "$PWD/work/phaseD-bootstrap/execution"
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_analyze --root "$PWD/work/phaseD-bootstrap/execution"
+```
+
+The final driver refuses an unsealed population or a previous final plan. It uses one persistent engine per GPU,
+waits for select completion before test and for test before transfer, and stops both workers at completion.
+All candidates remain fixed, including select-negative candidates; no feedback reaches any parent. Random editor
+controls use predetermined seeds and each candidate's actual tensor footprint/deltas. Target-level non-agent
+baselines remain those in the frozen instances. The analyzer verifies complete identical sample grids before
+calling frozen pairing/bootstrap routines, retains four hypotheses in Holm correction, and reports jointly valid
+pairs and matched-random contrasts as secondary. F5 transfer is reported per cell; it is not silently added to the
+frozen F1–F4 primary cells.
+
+Recover every exported lineage member in parent-first order after obtaining the registered Gold from section 10:
+
+```bash
+# After decompressing the archived patch exports to an ignored local directory:
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_patch_archive recover work/recovery/<patch-id>.json
+```
+
+Lossless exports record indices and target-dtype bit patterns, including BF16. Recovery validates the resulting
+content-addressed patch ID. The original compressed NPZ container may differ, while all recovered tensor bytes
+and patch IDs must match. Do not use the float-oriented legacy patch exporter to reinterpret BF16 bits.

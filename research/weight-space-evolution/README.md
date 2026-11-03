@@ -48,10 +48,8 @@ Goal summary (completion criteria, reproduced vs untested): [reports/summary.md]
 Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.json](input-manifest.json),
 [artifact-manifest.json](artifact-manifest.json). Payloads live in the ignored `work/` directory.
 
-**Next useful step:** the four-parent Phase D bootstrap gate is technically ready (benchmark, protocol, evaluator and
-queue frozen and validated; [readiness report](reports/phaseD_v2_readiness.md)). Before launching: operator approval
-of parent budgets/provider terms, and a private backup of the held-out salt. Parents submit candidates to the dev
-queue only; select confirms, test is used once.
+**Active next goal:** the four-parent Phase D bootstrap experiment is running through existing Codex access,
+authorized by subsequent user steering. The benchmark stays frozen; see the [execution report](runs/20261103T-phaseD-bootstrap-execution/report.md).
 
 ## Active Phase D execution
 

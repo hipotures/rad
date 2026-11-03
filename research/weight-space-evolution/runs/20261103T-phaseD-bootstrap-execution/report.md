@@ -1,6 +1,6 @@
 # Phase D parent-to-editor bootstrap execution
 
-Status: infrastructure validated; parent experiment about to launch. This report supersedes the
+Status: four independent parent sessions running under the supervised existing-Codex campaign. This report supersedes the
 preparation report's approval-waiting status following explicit user steering on 2026-11-03. The original benchmark
 protocol and its source remain unchanged.
 
@@ -34,3 +34,17 @@ Final parent results, independent select/test/transfer outcomes, resource measur
 reproduction material will be added after the supervised experiment finishes.
 
 Infrastructure verification: 22 tests pass (75.68 s under concurrent GPU/CPU smoke load). The synthetic two-GPU smoke completed five full 104-instance dev jobs in 211.0 s including cold engine startup; both workers exited zero and their final Gold audits passed. No benchmark source, thresholds, manifest or decoding was modified.
+
+
+The four fresh conversations launched after commit ebe8ab98e was pushed. The operator-only final procedure is
+implemented before any held-out scoring: seal all four candidates, complete select confirmation without feedback,
+then test and transfer on the fixed set. Two persistent engines continue across all three splits. Existing
+upstream/random editor controls remain, and one candidate-matched random live-position delta control is generated
+per sealed candidate with predetermined seeds. BF16 quantization can slightly alter control entry counts/norms;
+report the measured mismatch rather than claiming exact size/norm equality. Holm correction retains all four
+parent hypotheses, including failures; controls are secondary contrasts and do not redefine the primary family.
+
+Lossless BF16-bit-pattern export and reconstruction pass a tiny two-generation fixture test (including deletion of
+the original patches, recovery of both IDs, and rejection of a corrupted export). A bounded representative p50c
+export reconstructs its exact content-addressed identity as well. Final lineage exports will preserve bytes, not
+just machine-local IDs or a transcript-dependent recipe.
