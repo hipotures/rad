@@ -1,6 +1,6 @@
 # Phase C — bounded direct-edit session on MinAtar Seaquest — report
 
-**Outcome: negative/inconclusive.** The editor's submitted edit did not significantly improve Gold on held-out
+**Outcome: negative.** (Re-verified on 2,000 new episodes with active-weight controls: −2.97 ± 1.32, see [`../20261103T-phaseC-seaquest-v1-e1-activecontrols/report.md`](../20261103T-phaseC-seaquest-v1-e1-activecontrols/report.md).) The editor's submitted edit did not significantly improve Gold on held-out
 episodes. The harness flow (Gold → sandboxed analysis → validated patch → paired dev passes → submission → held-out
 verification with controls) ran end to end.
 

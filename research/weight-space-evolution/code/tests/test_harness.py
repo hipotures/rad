@@ -183,3 +183,21 @@ def test_active_masks_and_active_controls_change_policy_paths():
     for name in ("permuted_0", "gaussian_1"):
         d = cs[name]["W1"] != g["W1"]
         assert d.sum() == 1 and m["W1"][d].all()
+
+
+def test_holm_and_p_values():
+    from wse.compare_candidates import holm, p_two_sided
+    assert holm([0.01, 0.04, 0.03]) == pytest.approx([0.03, 0.06, 0.06])
+    assert p_two_sided(0.0, 1.0) == pytest.approx(1.0)
+    assert p_two_sided(1.959964, 1.0) == pytest.approx(0.05, abs=1e-5)
+
+
+def test_export_patches_sparse_delta(wroot):
+    from wse import patch
+    from wse.export_patches import main
+    gid, w = tiny_gold(wroot)
+    W3 = w["W3"].copy(); W3[2, 1] = 7.0
+    p = patch.create(gid, {"W3": W3}, POLICY, {"method": "t"})
+    main(["--out", str(wroot / "exp"), p["patch_id"]])
+    d = json.loads((wroot / "exp" / f"{p['patch_id']}.delta.json").read_text())
+    assert d == {"W3": {"flat_indices": [2 * 6 + 1], "new_values": [7.0]}}

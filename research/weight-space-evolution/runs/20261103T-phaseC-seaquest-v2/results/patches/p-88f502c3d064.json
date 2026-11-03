@@ -1,0 +1,51 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-88f502c3d064",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T05:02:23Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 8,
+ "delta_l2_total": 8.48528137423857,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W1",
+   "shape": [
+    600,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "base_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "edited_sha256": "fbd397950e143230cb7bd4cd88ccb6bfd0dac33c74b6f74f9e0cc4a84ea7a1cd",
+   "changed_entries": 8,
+   "delta_l2": 8.48528137423857,
+   "relative_change": 0.06907163821049461
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Danger detectors h1_16..23: remove reward-channel cancellation at col 7 so an enemy fish/sub one cell right of the sub's back (col 7) counts as danger; blocks ascending/moving into rows with an approaching enemy from the right",
+  "session": "phaseC-seaquest-v2-e2",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v2: 3 independent sessions in parallel, same brief; each ~160k subagent tokens expected (v1 measured), total budget <= 600k tokens"
+  }
+ },
+ "delta_sha256": "540365196b9e3872b93a678a4239df2bec199e7fe5e9bc239fb8e702f7d26a34"
+}

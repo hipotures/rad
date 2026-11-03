@@ -1,0 +1,65 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-fa2f19291b16",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T05:04:58Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 139,
+ "delta_l2_total": 3.3391621335266075,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W2",
+   "shape": [
+    32,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "base_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "edited_sha256": "28a0abedfdb2f7c0f69c149e16aeee0bfcb6dc373016c27f42e47e7cd5eef9df",
+   "changed_entries": 116,
+   "delta_l2": 1.7467111637837278,
+   "relative_change": 0.033768554802791555
+  },
+  {
+   "key": "t1",
+   "name": "b2",
+   "shape": [
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "base_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "edited_sha256": "5615307f4c13ceb24995fdec516d9bf6a5abdc55e7bb1133d1dcc6302f5d86bd",
+   "changed_entries": 23,
+   "delta_l2": 2.8458748855652916,
+   "relative_change": 0.053655887457477326
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Hunting gain x2: double W2 weights from h1[25..31] (left-side enemy row detectors, which steer the sub toward rows with shootable enemies left of it) with b2 compensated so the no-enemy baseline is unchanged. Own simulator reimplementation from given source: +5.3 and +8.1 paired on 400-episode sets.",
+  "session": "phaseC-seaquest-v2-e3",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v2: 3 independent sessions in parallel, same brief; each ~160k subagent tokens expected (v1 measured), total budget <= 600k tokens"
+  }
+ },
+ "delta_sha256": "a138eec94f46c2c40e8f9a5d396005f11844edd783a21906ad0f02a90c301d65"
+}

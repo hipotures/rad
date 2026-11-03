@@ -120,3 +120,12 @@ Splits (decided before any parent session, by seeded generator, recorded in the 
   targets favour low-noise scores (classification accuracy) for the primary endpoint.
 - Random matched-size edits are cheap and must be part of every comparison; they can coincide with the edit under
   test for tiny tensors, so control positions exclude the tested edit's own entries.
+- Phase C v2: three independent sessions of the same editor model converged on the identical 2-entry edit, which
+  had no effect. Several sessions with one brief are not independent searches. The gate needs diverse briefs or
+  strategies per parent and must count distinct candidates, not sessions.
+- Phase C v2: the one successful edit (+10 held-out) came from a session that rebuilt the environment from the supplied
+  source and simulated it, outside the dev-pass budget. A sandbox cannot prevent this once source-level dynamics are
+  supplied. Editor protocols must either withhold source-level dynamics or allow self-simulation as an explicit,
+  budgeted resource, and must count simulated steps in the resource-normalised measures (section 4).
+- Size-matched random edits must be restricted to live weights. Otherwise many controls are no-ops in sparse
+  hand-written networks.

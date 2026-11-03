@@ -1,0 +1,18 @@
+{
+ "run_id": "20261103T-phaseC-seaquest-v2",
+ "question": "With larger dev passes (<=1000 paired episodes) and active-weight random controls, can independent bounded model-editor sessions improve the hand-written Seaquest policy (exp5 Gold, ~53) by direct weight edits on held-out episodes?",
+ "classification": "editing a network that already has the capability (improvement), not creating a new capability",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "config": "configs/phaseC_seaquest_v2.json (6 dev passes x <=1000 paired episodes, 25 sandbox runs, <=2000 changed entries, ~60 min per session; total editor budget <=600k subagent tokens)",
+ "brief": "configs/phaseC_seaquest_brief.md + game source (work/derived/editor-context/seaquest_game_source.txt)",
+ "sessions": ["phaseC-seaquest-v2-e1", "phaseC-seaquest-v2-e2", "phaseC-seaquest-v2-e3"],
+ "editor": {"model": "claude-opus-5-5", "interface": "three Claude Code general-purpose subagents launched in parallel, each with its own session wrapper work/lab-phaseC-seaquest-v2-e<i>.sh (absolute machine paths; not tracked) and scratch dir work/editor-scratch/phaseC-seaquest-v2-e<i>/; identical brief; no communication between sessions", "isolation": "editor Python ran in the bubblewrap sandbox (selftest all true for each session); the subagent's own shell was restricted by instruction only"},
+ "dev_seeds": "1,000,000 + 10,000*k + [0, n) for pass k (identical across sessions: the same pass index sees the same seeds)",
+ "heldout_per_session": "2,000 episodes, seed base 2e9 + secrets.randbelow(1e8) drawn after submission; arms gold, candidate, flip, permuted_0..2, gaussian_0..2 (active-weight controls); runs 20261103T-phaseC-seaquest-v2-heldout-e{1,2,3}",
+ "joint_comparison": "4,000 episodes on one shared seed base 3e9 + secrets.randbelow(1e8): Gold vs each distinct submitted patch (v1-e1, v2-e1, v2-e2 submitted the same p-38e02409d21a); Holm-adjusted p-values; run 20261103T-phaseC-seaquest-joint-comparison-r2 (attempt 1 failed on a printing bug before any candidate arm, recorded)",
+ "protocol_deviations": {
+  "phaseC-seaquest-v2-e3": "re-implemented MinAtar Seaquest from the printed game source inside LAB py and used full simulated episodes to compare ~8 edit variants (brief rule 2: do not reach the game simulator other than through devpass). Self-reported. Held-out evaluated and reported, but classified as a protocol deviation.",
+  "phaseC-seaquest-v2-e1": "one trivial python3 -c outside LAB py to parse LAB status JSON (self-reported; no experimental effect)"
+ },
+ "editor_usage": "editor_usage.jsonl"
+}

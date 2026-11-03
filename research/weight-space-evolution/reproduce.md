@@ -120,6 +120,23 @@ $W/envs/wse/bin/python -m wse.heldout --session <session-id> --out-dir $TOPIC/ru
    --raw-dir $W/raw/<new-run-id> --episodes 1000 --control-seeds 3
 ```
 
+v2 used `configs/phaseC_seaquest_v2.json` (three sessions `phaseC-seaquest-v2-e{1,2,3}`), with
+`--episodes 2000 --control-seeds 3 --active-controls --workers 6` for the per-session held-out. Joint comparison of all
+submitted candidates on one shared fresh seed set, and the post-hoc ablation arms:
+
+```bash
+$W/envs/wse/bin/python -m wse.compare_candidates --sessions phaseC-seaquest-v1-e1 phaseC-seaquest-v2-e1 \
+   phaseC-seaquest-v2-e2 phaseC-seaquest-v2-e3 --out-dir $TOPIC/runs/<new-run-id> --raw-dir $W/raw/<new-run-id> --episodes 4000 --workers 8
+$W/envs/wse/bin/python -m wse.ablate_patch p-8255708841a2 --keep W1 --rationale "gate only"        # -> p-ed1458fd3f44
+$W/envs/wse/bin/python -m wse.ablate_patch p-8255708841a2 --keep W2 b2 --rationale "hunting only"  # -> p-fa2f19291b16
+$W/envs/wse/bin/python -m wse.compare_candidates --sessions phaseC-seaquest-v2-e3 \
+   --extra-patches p-fa2f19291b16 p-ed1458fd3f44 p-ba49fc57d8c2 --out-dir $TOPIC/runs/<new-run-id> --raw-dir $W/raw/<new-run-id> --episodes 4000 --workers 8
+$W/envs/wse/bin/python -m wse.export_patches --out $TOPIC/runs/<run>/results/patches <patch ids>   # compact Git copies
+```
+
+Without the original sessions, a patch can be recreated from its Git delta (`results/patches/<id>.delta.json`: flat
+indices and new float32 values per tensor) with `wse.patch.create`; the content-addressed id must match.
+
 The held-out seed base is drawn at that moment (recorded in `protocol.json`), so a re-run uses new seeds; compare
 distributions, not exact values. To re-score an existing candidate on the recorded seeds, use
 `wse.minatar_eval.evaluate` with `range(test_seed_base, test_seed_base + 1000)` and the patch from

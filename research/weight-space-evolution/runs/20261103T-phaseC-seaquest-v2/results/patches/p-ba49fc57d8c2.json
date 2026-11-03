@@ -1,0 +1,65 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-ba49fc57d8c2",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T05:06:59Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 300,
+ "delta_l2_total": 4.072991608978786,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W2",
+   "shape": [
+    32,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "base_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "edited_sha256": "fc94cf5226211099844e8bdc0d847f8554e36d3faa0c052fb820fc6c424cc317",
+   "changed_entries": 277,
+   "delta_l2": 2.899189529027038,
+   "relative_change": 0.05604901515746585
+  },
+  {
+   "key": "t1",
+   "name": "b2",
+   "shape": [
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "base_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "edited_sha256": "601fb144c58dcf2a83e54a716dd18b877f00416781a89555c5fa32c7c9eb313f",
+   "changed_entries": 23,
+   "delta_l2": 2.8607622623335156,
+   "relative_change": 0.053936572815946354
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "F2 (hunting gain x2 on h1[25..31] rows of W2) plus diver-row attraction x0.5 (W2 rows 9..15), b2 compensated to keep the empty-scene baseline. Own-sim: diver attraction pulls the sub into risky rows; x1.5 strongly worse, x0.5 +3.6+-3.0 vs F2.",
+  "session": "phaseC-seaquest-v2-e3",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v2: 3 independent sessions in parallel, same brief; each ~160k subagent tokens expected (v1 measured), total budget <= 600k tokens"
+  }
+ },
+ "delta_sha256": "6828e9f14cae157974382b8d1f1cdc98641976c2670a65a25610804de130b74c"
+}

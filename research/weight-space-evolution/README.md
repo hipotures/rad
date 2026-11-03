@@ -33,13 +33,15 @@ All research code, reports and documentation are written in English. All work, i
 |---|---|---|
 | A — upstream audit | Done. p10c/p25c/p50c rebuild bit-exactly from public Gold (independent tool + upstream tool agree). p50c is a rank-1 removal of a "loop" direction from 64 MLP columns in layers 15/19; upstream strata indicate it mainly rescues truncated (looping) answers. | [audit](reports/phaseA_upstream_audit.md), [run](runs/20261103T-p50c-reconstruction/report.md) |
 | A — behavioural check | Done (bounded): MATH-500 100 problems × 2 samples — Gold 6.5% (95% cut), reconstructed p50c 47.5% (33.5% cut); upstream on the same problems 6.2% / 45.0%, full published 7.9% / 48.1%. Partial reproduction of the published effect. | [run](runs/20261103T-p50c-math500-bounded-r2/report.md) (first attempt [interrupted](runs/20261103T-p50c-math500-bounded/report.md)) |
-| B — harness | Done: read-only Gold registry, content-addressed validated patches with lineage, bubblewrap sandbox (fail-closed self-test), budgeted lab, MinAtar forward-pass service (validated vs published exp5 scores), held-out verifier with matched controls; 14 tests. | [`code/wse/`](code/wse/), [validation](runs/20261103T-minatar-evaluator-validation/report.md) |
-| C — first bounded edit | Ran end to end. Editor (Claude Opus 5.5 subagent) proposed 3 hand-derived edits; submitted 2-entry edit B: held-out +1.83 ± 1.89 (not significant), reverse edit −2.96 ± 0.50 (significant). **No demonstrated improvement.** | [report](runs/20261103T-phaseC-seaquest-v1-e1/report.md) |
+| B — harness | Done: read-only Gold registry, content-addressed validated patches with lineage, bubblewrap sandbox (fail-closed self-test), budgeted lab, MinAtar forward-pass service (validated vs published exp5 scores), held-out verifier with matched (active-weight) controls, joint multi-candidate comparison; 17 tests. | [`code/wse/`](code/wse/), [validation](runs/20261103T-minatar-evaluator-validation/report.md) |
+| C — bounded edits (v1) | Ran end to end. Submitted 2-entry edit: held-out +1.83 ± 1.89 (1,000 ep.), re-verified −2.97 ± 1.32 (2,000 ep., active controls). **No improvement.** | [report](runs/20261103T-phaseC-seaquest-v1-e1/report.md), [re-verification](runs/20261103T-phaseC-seaquest-v1-e1-activecontrols/report.md) |
+| C — bounded edits (v2, 3 sessions) | Two sessions converged on v1's 2-entry edit again (held-out +0.19, −0.65; no effect). Session e3 submitted a 146-entry edit (stronger "hunting" + diver-attraction gating): **held-out +9.90 [7.45, 12.49]**, joint 4,000-episode test +10.93 ± 0.95 (Holm p ≈ 5e−30), far above size-matched random edits. **Protocol deviation:** e3 re-implemented the game from the supplied source inside the sandbox and selected among ~8 variants with it. Post-hoc ablation: both components help (+4.4, +5.8). | [report](runs/20261103T-phaseC-seaquest-v2/report.md) |
 | D — bootstrap gate | Designed, not executed. | [design](reports/phaseD_bootstrap_gate_design.md) |
 
 Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.json](input-manifest.json),
 [artifact-manifest.json](artifact-manifest.json). Payloads live in the ignored `work/` directory.
 
-**Next useful step:** run several independent Phase C editor sessions with larger dev passes and "active-weight"
-random controls, then implement the Phase D target generator and edit DSL and pilot the small Gold editor (no parent
-sessions yet). For GPU evaluations use the problem-sharded launcher (`code/scripts/run_math500_sharded.sh`).
+**Next useful step:** Phase C v3 with the environment-model question pre-registered: condition S (source supplied,
+budgeted self-simulation allowed) vs condition N (prose rules only, no source), 3 sessions each, joint held-out test.
+Then implement the Phase D target generator and edit DSL and pilot the small Gold editor. For GPU evaluations use the
+problem-sharded launcher (`code/scripts/run_math500_sharded.sh`).

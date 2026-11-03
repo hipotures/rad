@@ -1,0 +1,51 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-9848544c5c15",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T05:05:49Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 2,
+ "delta_l2_total": 5.656854249492381,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W2",
+   "shape": [
+    32,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "base_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "edited_sha256": "adddba5887e39287411d81bc527d37c3410b878a620b670e438abb861be18ebd",
+   "changed_entries": 2,
+   "delta_l2": 5.656854249492381,
+   "relative_change": 0.10936198078770606
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Prevent accidental no-diver surfacing: row-3 up-unit h2[9] gated by ascent feature h1[24] (W2[24,9] 0.75->4.75) with own-row danger h1[18] restoring the gold dodge (W2[18,9] 0->4). Removes empty-water drift from row 3 into rows 2/1 where sticky 'up' repeats surface the sub with no divers (fatal). Ascent and dodge logits unchanged.",
+  "session": "phaseC-seaquest-v2-e1",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v2: 3 independent sessions in parallel, same brief; each ~160k subagent tokens expected (v1 measured), total budget <= 600k tokens"
+  }
+ },
+ "delta_sha256": "3a075b04f0007a01afb2093b9ba3342e56ba7846d347e1d380acad44349e9eab"
+}

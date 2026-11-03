@@ -1,21 +1,126 @@
 {
  "note": "Large/transient artifacts kept in this topic's ignored work/ directory (paths relative to work/). Recovery class: downloadable, regenerable (deterministic from inputs + tracked code), or archived (compact text evidence tracked under evidence/ or runs/). Nothing listed here is irreplaceable unless stated.",
  "artifacts": [
-  {"path": "repos/lm_understand-logs", "class": "downloadable", "how": "git clone + checkout 4d09ba6d6a7e891dd8063974dfe81b3d78e3494f (reproduce.md §2)"},
-  {"path": "inputs/qwen3.5-0.8B-2fc0636", "class": "downloadable", "bytes": 1746942600, "sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696", "how": "reproduce.md §2"},
-  {"path": "inputs/math500/test.jsonl", "class": "downloadable", "sha256": "35dc41080a3680858b27fa7e0533d2d547825316fc5dafe5d316f4ccc5a06132"},
-  {"path": "envs/{wse,vllm,sandbox}", "class": "regenerable", "how": "uv + configs/requirements-*.lock.txt (reproduce.md §1)"},
-  {"path": "gold/qwen3.5-0.8B@2fc0636", "class": "regenerable", "how": "wse.p50c registers it (hard link of the input file, read-only, manifest with 488 tensor hashes)"},
-  {"path": "gold/minatar-seaquest-exp5-hand@4d09ba6", "class": "regenerable", "file_sha256": "9af9c4751c2314a79699e1405092e8d62f7d4aa2a597e25ee6edc5e175fbf3c6", "how": "wse.register_minatar"},
-  {"path": "patches/p-4b2661ed6f35", "class": "regenerable", "what": "p50c as WSE patch", "delta_sha256": "bcf6fe3e682fbc28bc05ced872d4c0ccb2eb259c9aabb39ffcc1545346ce5502", "how": "wse.p50c"},
-  {"path": "patches/p-8cd661ba832c", "class": "regenerable", "what": "p10c as WSE patch", "how": "wse.p50c --run-name p10c"},
-  {"path": "derived/qwen3.5-0.8B-text-gold", "class": "regenerable", "model_sha256": "68194c7beef8da37beaddb33b02a3b076f0930d81b55808be59998ba10cfc9fb", "how": "wse.text_export"},
-  {"path": "derived/qwen3.5-0.8B-text-p50c", "class": "regenerable", "model_sha256": "b42d767992c3421943a54d047d8e22d7524c045cd00f550ec177dafa5015d1d6", "how": "wse.text_export --patch-id p-4b2661ed6f35"},
-  {"path": "derived/p{10,25,50}c-upstream-npy", "class": "regenerable", "how": "upstream apply_edit.py (cross-check output)"},
-  {"path": "raw/20261103T-p50c-math500-bounded-r2/*_generations.jsonl.gz", "class": "archived", "what": "full generated texts of the bounded MATH-500 check (400 generations)", "evidence": "evidence/20261103T-p50c-math500-bounded-r2/generations/"},
-  {"path": "logs/20261103T-p50c-math500-bounded-r2/", "class": "archived", "what": "vLLM logs (progress-bar lines dropped) and nvidia-smi samples", "evidence": "evidence/20261103T-p50c-math500-bounded-r2/logs/"},
-  {"path": "logs/20261103T-p50c-math500-bounded/", "class": "disposable", "what": "logs of the interrupted first attempt (no results)"},
-  {"path": "sessions/phaseC-seaquest-v1-e1/", "class": "archived", "what": "editor session: config, state, log.jsonl (every lab call incl. editor code and outputs), pass results", "evidence": "packed copy under evidence/; the editor's conversational transcript is not stored by the harness (see run report)"},
-  {"path": "sessions/smoke-1-failclosed-nproc, sessions/smoke-2", "class": "disposable", "what": "harness smoke tests (first shows the fail-closed refusal)"}
+  {
+   "path": "repos/lm_understand-logs",
+   "class": "downloadable",
+   "how": "git clone + checkout 4d09ba6d6a7e891dd8063974dfe81b3d78e3494f (reproduce.md §2)"
+  },
+  {
+   "path": "inputs/qwen3.5-0.8B-2fc0636",
+   "class": "downloadable",
+   "bytes": 1746942600,
+   "sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
+   "how": "reproduce.md §2"
+  },
+  {
+   "path": "inputs/math500/test.jsonl",
+   "class": "downloadable",
+   "sha256": "35dc41080a3680858b27fa7e0533d2d547825316fc5dafe5d316f4ccc5a06132"
+  },
+  {
+   "path": "envs/{wse,vllm,sandbox}",
+   "class": "regenerable",
+   "how": "uv + configs/requirements-*.lock.txt (reproduce.md §1)"
+  },
+  {
+   "path": "gold/qwen3.5-0.8B@2fc0636",
+   "class": "regenerable",
+   "how": "wse.p50c registers it (hard link of the input file, read-only, manifest with 488 tensor hashes)"
+  },
+  {
+   "path": "gold/minatar-seaquest-exp5-hand@4d09ba6",
+   "class": "regenerable",
+   "file_sha256": "9af9c4751c2314a79699e1405092e8d62f7d4aa2a597e25ee6edc5e175fbf3c6",
+   "how": "wse.register_minatar"
+  },
+  {
+   "path": "patches/p-4b2661ed6f35",
+   "class": "regenerable",
+   "what": "p50c as WSE patch",
+   "delta_sha256": "bcf6fe3e682fbc28bc05ced872d4c0ccb2eb259c9aabb39ffcc1545346ce5502",
+   "how": "wse.p50c"
+  },
+  {
+   "path": "patches/p-8cd661ba832c",
+   "class": "regenerable",
+   "what": "p10c as WSE patch",
+   "how": "wse.p50c --run-name p10c"
+  },
+  {
+   "path": "derived/qwen3.5-0.8B-text-gold",
+   "class": "regenerable",
+   "model_sha256": "68194c7beef8da37beaddb33b02a3b076f0930d81b55808be59998ba10cfc9fb",
+   "how": "wse.text_export"
+  },
+  {
+   "path": "derived/qwen3.5-0.8B-text-p50c",
+   "class": "regenerable",
+   "model_sha256": "b42d767992c3421943a54d047d8e22d7524c045cd00f550ec177dafa5015d1d6",
+   "how": "wse.text_export --patch-id p-4b2661ed6f35"
+  },
+  {
+   "path": "derived/p{10,25,50}c-upstream-npy",
+   "class": "regenerable",
+   "how": "upstream apply_edit.py (cross-check output)"
+  },
+  {
+   "path": "raw/20261103T-p50c-math500-bounded-r2/*_generations.jsonl.gz",
+   "class": "archived",
+   "what": "full generated texts of the bounded MATH-500 check (400 generations)",
+   "evidence": "evidence/20261103T-p50c-math500-bounded-r2/generations/"
+  },
+  {
+   "path": "logs/20261103T-p50c-math500-bounded-r2/",
+   "class": "archived",
+   "what": "vLLM logs (progress-bar lines dropped) and nvidia-smi samples",
+   "evidence": "evidence/20261103T-p50c-math500-bounded-r2/logs/"
+  },
+  {
+   "path": "logs/20261103T-p50c-math500-bounded/",
+   "class": "disposable",
+   "what": "logs of the interrupted first attempt (no results)"
+  },
+  {
+   "path": "sessions/phaseC-seaquest-v1-e1/",
+   "class": "archived",
+   "what": "editor session: config, state, log.jsonl (every lab call incl. editor code and outputs), pass results",
+   "evidence": "packed copy under evidence/; the editor's conversational transcript is not stored by the harness (see run report)"
+  },
+  {
+   "path": "sessions/smoke-1-failclosed-nproc, sessions/smoke-2",
+   "class": "disposable",
+   "what": "harness smoke tests (first shows the fail-closed refusal)"
+  },
+  {
+   "path": "sessions/phaseC-seaquest-v2-e{1,2,3}/ (+ -failclosed-venvpath, -e1-operator-probe)",
+   "class": "archived",
+   "what": "v2 editor sessions: config, state, log.jsonl (every lab call incl. editor code and outputs)",
+   "evidence": "evidence/20261103T-phaseC-seaquest-v2/sessions/; per-pass result files and editor transcripts are not archived"
+  },
+  {
+   "path": "raw/20261103T-phaseC-seaquest-v2-heldout-e{1,2,3}, raw/20261103T-phaseC-seaquest-joint-comparison-r2, raw/20261103T-phaseC-seaquest-e3-posthoc-ablation",
+   "class": "archived",
+   "what": "per-episode held-out scores/lengths of every arm",
+   "evidence": "evidence/20261103T-phaseC-seaquest-v2/raw/"
+  },
+  {
+   "path": "patches/p-* (v2 candidates and ablations)",
+   "class": "regenerable",
+   "what": "content-addressed patches",
+   "how": "recreate from runs/20261103T-phaseC-seaquest-v2/results/patches/<id>.delta.json via wse.patch.create (ids must match)"
+  },
+  {
+   "path": "editor-scratch/phaseC-seaquest-v2-e{1,2,3}/",
+   "class": "archived",
+   "what": "editor-written sandbox scripts and notebook",
+   "evidence": "runs/20261103T-phaseC-seaquest-v2/editor_scripts/"
+  },
+  {
+   "path": "lab-phaseC-seaquest-v2-e{1,2,3}.sh",
+   "class": "regenerable",
+   "what": "editor wrapper with machine-specific absolute paths",
+   "how": "reproduce.md §6"
+  }
  ]
 }

@@ -1,0 +1,50 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-38e02409d21a",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T03:45:44Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 2,
+ "delta_l2_total": 8.48528137423857,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W1",
+   "shape": [
+    600,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "base_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "edited_sha256": "adbfda021e126ca2264fd2e0cdfdbb7ff633f382f56f50a8796774374451c8d4",
+   "changed_entries": 2,
+   "delta_l2": 8.48528137423857,
+   "relative_change": 0.0690716382104946
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "B: low-oxygen surfacing trigger moved from gauge col2 (ox<60) to col1 (ox<40) in H1[24]; fewer surfacings per step -> slower difficulty ramp and fewer risky climbs",
+  "session": "phaseC-seaquest-v1-e1",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default"
+  }
+ },
+ "delta_sha256": "fbdfd1c44bf39879bc4b6c6dab047a97be521ed0245801f9ac0db3d253bf663e"
+}

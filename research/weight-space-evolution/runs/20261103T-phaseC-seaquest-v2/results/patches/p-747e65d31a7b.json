@@ -1,0 +1,51 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-747e65d31a7b",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T05:03:24Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 2,
+ "delta_l2_total": 8.48528137423857,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W1",
+   "shape": [
+    600,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "base_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "edited_sha256": "e8c81dc23751103185bcfdf2560fb1b36dade5195e1e85e62892fd8e7530a882",
+   "changed_entries": 2,
+   "delta_l2": 8.48528137423857,
+   "relative_change": 0.06907163821049461
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Surface later (dose check): unit-24 low-oxygen detector moved from gauge col 2 (ox<60) to col 0 (ox<20)",
+  "session": "phaseC-seaquest-v2-e2",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v2: 3 independent sessions in parallel, same brief; each ~160k subagent tokens expected (v1 measured), total budget <= 600k tokens"
+  }
+ },
+ "delta_sha256": "01e550d7f55c7e3f5672b1221c54bc04cadda75aea96cb38c7291249300ff777"
+}

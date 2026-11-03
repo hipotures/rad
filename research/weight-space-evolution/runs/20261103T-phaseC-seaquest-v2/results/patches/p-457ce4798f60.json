@@ -1,0 +1,123 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-457ce4798f60",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T05:15:15Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 264,
+ "delta_l2_total": 310.0274333096165,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W1",
+   "shape": [
+    600,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "base_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "edited_sha256": "4511352f2100740f6c4629fb63b23fb15edc4493c644c2fa1f96d425eae6c488",
+   "changed_entries": 67,
+   "delta_l2": 41.923859617337406,
+   "relative_change": 0.34126737065759893
+  },
+  {
+   "key": "t1",
+   "name": "W2",
+   "shape": [
+    32,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "base_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "edited_sha256": "ed5fb45b9cf222edd628511ca077a52965c34426c01bfb8632e2ccc9edbded28",
+   "changed_entries": 157,
+   "delta_l2": 68.44743238346992,
+   "relative_change": 1.3232702231917262
+  },
+  {
+   "key": "t2",
+   "name": "W3",
+   "shape": [
+    32,
+    6
+   ],
+   "dtype": "float32",
+   "gold_sha256": "fc66bd5ffed0cd6da8f0ff88fe97906ffdf55ff819be772f9b3a894522c349bc",
+   "base_sha256": "fc66bd5ffed0cd6da8f0ff88fe97906ffdf55ff819be772f9b3a894522c349bc",
+   "edited_sha256": "064d6a97193ab9285ec59b3df7475b3424c2c89693aae7505eb0354d03c71320",
+   "changed_entries": 4,
+   "delta_l2": 243.3105012119288,
+   "relative_change": 1.6235137733925666
+  },
+  {
+   "key": "t3",
+   "name": "b1",
+   "shape": [
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "438a68ce4b16104ab00c38b628f9b666003a16894e3c30e3f9d5b585bce97732",
+   "base_sha256": "438a68ce4b16104ab00c38b628f9b666003a16894e3c30e3f9d5b585bce97732",
+   "edited_sha256": "e9a34f7924ea87a65b234bdb8d36df990b264fedfc827023295b68abf0b048bc",
+   "changed_entries": 7,
+   "delta_l2": 29.546573405388315,
+   "relative_change": 1.226854683242112
+  },
+  {
+   "key": "t4",
+   "name": "b2",
+   "shape": [
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "base_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "edited_sha256": "a05e095f2779fa8ee3dd38415be52f59b9296c45260e7eafeb6fccb1e021e379",
+   "changed_entries": 27,
+   "delta_l2": 97.98647360628989,
+   "relative_change": 1.8474287913503362
+  },
+  {
+   "key": "t5",
+   "name": "b3",
+   "shape": [
+    6
+   ],
+   "dtype": "float32",
+   "gold_sha256": "64e9925ccfe4d95027d5710351ab6b38e7c5cf081a70cf4e628f1f9ce59571e5",
+   "base_sha256": "64e9925ccfe4d95027d5710351ab6b38e7c5cf081a70cf4e628f1f9ce59571e5",
+   "edited_sha256": "e04783ed96e28199817ff52470c2be5f54980ced39d10e5359f706639ec6e732",
+   "changed_entries": 2,
+   "delta_l2": 141.42135407939168,
+   "relative_change": 0.3126166059729957
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Turn-to-shoot module: Gold's sub never moves horizontally and only shoots left, so enemies approaching from the right are never killed. Repurpose h1[25..31] (Gold's left-danger units, rows 2-8; their small gold W2 effects re-wired to preserve same-row behaviour) into: Pr (sub displaced right, player channel only) and six player-gated signed side detectors S_r rows 3-8 (+1 left danger, -1 approaching object at cols 8-9, 0 none). New h2 units: TRIG_R (own-row right target & home position & no nearby danger -> 'r', twice -> x7 facing right), FIRE_R (displaced & target -> fire), TRIG_L (displaced & no target & no danger -> 'l' back home), GO_L (x>=8 -> 'l'). Ascent logits stay dominant.",
+  "session": "phaseC-seaquest-v2-e1",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v2: 3 independent sessions in parallel, same brief; each ~160k subagent tokens expected (v1 measured), total budget <= 600k tokens"
+  }
+ },
+ "delta_sha256": "be402cb8f087c31e0c76df141833623cec4c42323ee7f4a5f58ea2865b4329e6"
+}
