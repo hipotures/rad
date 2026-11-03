@@ -54,7 +54,7 @@ def _sel(w, name, i, j):
     return (_index(i, a.shape[0]),) if a.ndim == 1 else (_index(i, a.shape[0]), _index(j, a.shape[1]))
 
 
-def parse(text, lenient=False):
+def parse(text, lenient=False, max_statements=MAX_STATEMENTS):
     """Return a list of statement dicts; raise EditError on the first invalid line (lenient: skip such lines)."""
     out = []
     for raw in extract_block(text).splitlines():
@@ -78,12 +78,12 @@ def parse(text, lenient=False):
             raise EditError(f"cannot parse: {line[:80]}")
     if not out:
         raise EditError("empty edit")
-    if len(out) > MAX_STATEMENTS:
-        raise EditError(f"{len(out)} statements > {MAX_STATEMENTS}")
+    if len(out) > max_statements:
+        raise EditError(f"{len(out)} statements > {max_statements}")
     return out
 
 
-def apply(weights, stmts):
+def apply(weights, stmts, max_entries=MAX_ENTRIES):
     """Apply statements to a copy of weights; return (edited, n_changed). Raises EditError if limits are exceeded."""
     w = {k: np.array(v, dtype=np.float32, copy=True) for k, v in weights.items()}
     for s in stmts:
@@ -109,16 +109,17 @@ def apply(weights, stmts):
         if not np.isfinite(t).all() or np.abs(t).max() > 1e4:
             raise EditError(f"{k}: non-finite or exploding values after edit")
     n = int(sum((w[k] != np.asarray(weights[k], np.float32)).sum() for k in w))
-    if n > MAX_ENTRIES:
-        raise EditError(f"{n} changed entries > {MAX_ENTRIES}")
+    if n > max_entries:
+        raise EditError(f"{n} changed entries > {max_entries}")
     return w, n
 
 
-def run(weights, text, lenient=False):
-    """Parse+apply; returns dict(valid, error, edited, n_changed, statements). lenient: ignore unparseable lines."""
+def run(weights, text, lenient=False, max_statements=MAX_STATEMENTS, max_entries=MAX_ENTRIES):
+    """Parse+apply; returns dict(valid, error, edited, n_changed, statements). lenient: ignore unparseable lines.
+    Limits default to the v1 values; benchmark v2 passes per-family limits explicitly."""
     try:
-        st = parse(text, lenient)
-        e, n = apply(weights, st)
+        st = parse(text, lenient, max_statements)
+        e, n = apply(weights, st, max_entries)
         return {"valid": True, "error": None, "edited": e, "n_changed": n, "statements": [s["text"] for s in st]}
     except EditError as ex:
         return {"valid": False, "error": str(ex), "edited": None, "n_changed": 0, "statements": []}

@@ -1,0 +1,100 @@
+{
+ "gold_id": "qwen3.5-0.8B@2fc0636",
+ "seed": 20261103,
+ "members": [
+  {
+   "label": "p50c",
+   "patch_id": "p-4b2661ed6f35",
+   "kind": "upstream import"
+  },
+  {
+   "label": "p25c",
+   "patch_id": "p-b6000ab1175a",
+   "kind": "upstream import"
+  },
+  {
+   "label": "p10c",
+   "patch_id": "p-8cd661ba832c",
+   "kind": "upstream import"
+  },
+  {
+   "label": "rand-dir-0",
+   "patch_id": "p-7249a5181b02",
+   "kind": "random control",
+   "layers": [
+    4,
+    20
+   ],
+   "changed_entries": 110407
+  },
+  {
+   "label": "rand-dir-1",
+   "patch_id": "p-01382f1d86a6",
+   "kind": "random control",
+   "layers": [
+    11,
+    19
+   ],
+   "changed_entries": 110618
+  },
+  {
+   "label": "rand-dir-2",
+   "patch_id": "p-d081394783ab",
+   "kind": "random control",
+   "layers": [
+    14,
+    21
+   ],
+   "changed_entries": 112813
+  },
+  {
+   "label": "rand-dir-3",
+   "patch_id": "p-e6255be7813d",
+   "kind": "random control",
+   "layers": [
+    0,
+    20
+   ],
+   "changed_entries": 110044
+  },
+  {
+   "label": "rand-sparse-0",
+   "patch_id": "p-e7ae27b2ce75",
+   "kind": "random control",
+   "tensor": "model.language_model.layers.15.self_attn.o_proj.weight",
+   "entries": 2048,
+   "changed_entries": 1868
+  },
+  {
+   "label": "rand-sparse-1",
+   "patch_id": "p-40db96cbffe4",
+   "kind": "random control",
+   "tensor": "model.language_model.layers.16.linear_attn.out_proj.weight",
+   "entries": 2048,
+   "changed_entries": 1905
+  },
+  {
+   "label": "rand-sparse-2",
+   "patch_id": "p-aec753ddbfee",
+   "kind": "random control",
+   "tensor": "model.language_model.layers.17.mlp.down_proj.weight",
+   "entries": 2048,
+   "changed_entries": 1882
+  },
+  {
+   "label": "rand-fused",
+   "patch_id": "p-3de18b3fa13b",
+   "kind": "random control",
+   "tensor": "model.language_model.layers.6.mlp.gate_proj.weight",
+   "entries": 1024,
+   "changed_entries": 935
+  },
+  {
+   "label": "chain-p50c",
+   "patch_id": "p-59261e57a698",
+   "kind": "lineage control",
+   "parent": "p-4b2661ed6f35",
+   "changed_entries": 240
+  }
+ ]
+}
