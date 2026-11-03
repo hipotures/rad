@@ -2,7 +2,7 @@
 
 ## Scope and working directory
 
-You are operating inside the **Weight-Space Evolution** research directory. Your current working directory is the authoritative root of this investigation. Start and conduct work here; do not assume any particular host, username, mount, or absolute filesystem path, and do not relocate this project.
+You are operating inside the **Weight-Space Evolution** research directory. **The directory from which Codex was launched is the complete working directory for this study.** Keep all project development, downloads, model weights, candidate artifacts, and temporary experiment data physically under this directory. Keep authored code and compact evidence Git-tracked; put large/transient payloads in its ignored `work/` subdirectory. Do not search for, switch to, or require any old absolute machine path.
 
 Read this file, `GOAL.md`, and `README.md` first. The repository-wide `../../AGENTS.md` also applies, including its English-only artifact policy, evidence requirements, safe Git workflow, commit/push obligations, and storage rules. Where instructions differ, follow the higher-priority instructions and the current user goal.
 
@@ -14,7 +14,7 @@ Do not create a separate repository here, nor a new sibling research topic for t
 
 **Every meaningful research milestone must be committed and pushed** to the enclosing `hipotures/rad` repository, following its root `AGENTS.md`. Before concluding a task, verify that all durable task-owned source code and reproducible results are committed and the remote commit is visible. Code written and left only in a scratch workspace is unfinished work.
 
-The sole exception is **large and transient payload storage**, not the location of the project: downloaded upstream source clones, model weight files, full checkpoints, environments, datasets, caches, and large raw logs are excluded from Git under the parent repository storage policy. Their paths, identities, hashes and acquisition/reproduction steps belong in tracked manifests. If an upstream script is adapted, preserve our changes as tracked authored code or a tracked patch here. Never use an external payload directory as a substitute for committing results.
+Large/transient payloads are the sole **Git-tracking exception**, not a different working location: downloaded upstream source clones, model weights, checkpoints, environments, datasets, caches and bulky logs must live under the ignored `work/` directory **inside this current directory**. Track their relative locations, identities, hashes and acquisition/reproduction steps in manifests. If an upstream script is adapted, preserve authored changes as Git-tracked source or patches here.
 
 ## Roles
 
@@ -48,13 +48,13 @@ At the beginning of execution:
 4. Use explicit device allocation (GPU UUIDs, `CUDA_VISIBLE_DEVICES`, or framework-equivalent settings). Avoid cross-experiment VRAM contention, oversubscription, and unexpected CPU offloading. Keep Gold and candidate evaluations under comparable conditions.
 5. Measure throughput, peak allocated/reserved VRAM, wall-clock time and utilization for the first representative runs. Revise scheduling based on evidence rather than intuition. Do not leave background GPU jobs running after the bounded study unless explicitly required by the goal.
 
-Do not hard-code a host-specific absolute path, GPU index, GPU type, or local storage location into the research instructions. Discover and document the actual environment at runtime.
+Do not hard-code a host-specific absolute path, GPU index, GPU type, or separate storage location into research instructions. Discover hardware at runtime and use relative locations underneath the current topic directory.
 
 ## Harness contract
 
 Build a **minimal, auditable research harness**, not a general agent framework.
 
-- **Reference ingestion:** obtain the upstream experiment repository as an untracked, read-only dependency in payload storage, record its exact source commit and applicable third-party licenses. All original analysis, adaptations, authored code, tests, and reports must remain in this research directory and be committed. Do not commit a copied upstream source tree or large downloads.
+- **Reference ingestion:** clone the upstream experiment repository into this topic's ignored `work/repos/` directory as an untracked dependency, pin its commit and record applicable licenses. All original analysis, adaptations, authored code, tests and reports must remain in this topic and be committed. Do not commit the copied upstream source tree or large downloads.
 - **Gold registry:** each model has an immutable source identity, revision, tensor-shape manifest and checksums. Make destructive writes impossible through the public interface.
 - **Tensor inspection and edits:** expose a narrow, documented interface to list/select tensors, inspect statistics and selected slices, propose bounded numerical edits, validate shapes/dtypes/finite values/allowed targets, and write isolated patch artifacts. Log every operation.
 - **Patch lineage:** patches refer to a specific base revision and parent candidate; record affected tensor names, counts, method, checksums, rationale, authoring session, and application success/failure. Store small reproducible edit descriptions in Git where appropriate; large binary weights remain outside Git.
@@ -62,7 +62,7 @@ Build a **minimal, auditable research harness**, not a general agent framework.
 - **Forward-pass service:** only this component loads and runs a model for evaluation. Enforce a fixed budget, deterministic seeds where possible, consistent decoding and comparable base/candidate conditions; do not let editors call an unrestricted evaluator.
 - **Evaluation:** separate development feedback from held-out verification. For weight-editor studies, measure the target network's quality before/after an edit under identical conditions; include success rate, degree of improvement, edit size, computational cost, regressions, and transfer to unseen targets. Include random/naive patch baselines.
 - **Provenance:** log the editor model/version/effort, prompts, proposals, tool calls, responses, test inputs, model revisions, sample settings, durations, errors, and relevant environment versions. Do not commit secrets, personally identifying data, or paid-provider credentials.
-- **Recovery:** preserve compact evidence, small run results and the exact instructions necessary to reconstruct essential large artifacts from public inputs **inside this Git repository**. Keep only large model checkpoints, datasets, external source clones, environments, caches and raw bulky logs outside version control, as required by the parent repository policy.
+- **Recovery:** preserve compact evidence, small run results and exact instructions to reconstruct large artifacts **inside this Git repository**. Keep model checkpoints, datasets, upstream source clones, environments, caches and bulky logs **inside this topic's ignored `work/` directory**, not at a separate absolute location.
 
 ## Study sequence
 
