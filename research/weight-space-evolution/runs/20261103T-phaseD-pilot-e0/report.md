@@ -121,6 +121,6 @@ Pairing is instance × tier × sample, with identical prompts and seed.
 
 - `results/`:
   - `rescore.json` gives the primary numbers: strict/lenient, chance and pairwise.
-  - `*_summary.json` and `*_per_sample.json` are the in-run scoring (superseded for T0, see above).
+  - `*_summary.json` is the in-run scoring (superseded for T0, see above). Per-sample rows: `evidence/20261103T-phaseD-pilot-e0-per-sample/`.
   - `baselines_per_instance.json`.
 - Full generations, with prompts and outputs: `evidence/20261103T-phaseD-pilot-e0/` (gzip text).
