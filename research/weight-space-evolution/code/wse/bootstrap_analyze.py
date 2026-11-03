@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import sqlite3
 
-from . import patch
+from . import patch, registry
 from . import pd2_report as R
 from .bootstrap_prepare import TOPIC
 from .tensors import sha256_array
@@ -15,7 +15,8 @@ from .tensors import sha256_array
 def state_identity(pid):
     names=sorted({t['name'] for p in patch.lineage(pid) for t in patch.load_patch(p)['tensors']})
     state=patch.materialize(patch.load_patch(pid)['gold_id'],pid,names)
-    pairs=[(n,sha256_array(state[n][1])) for n in names]
+    gold=registry.manifest(patch.load_patch(pid)['gold_id'])
+    pairs=[(n,sha256_array(state[n][1])) for n in names if sha256_array(state[n][1])!=gold['tensors'][n]['sha256']]
     return hashlib.sha256(json.dumps(pairs).encode()).hexdigest()
 
 

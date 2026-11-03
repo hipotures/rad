@@ -24,5 +24,7 @@
     "method": "Permute each candidate-Gold tensor delta onto equally many random live positions in the same tensor; exclude edited positions when capacity permits; BF16-round and report observed count/norm mismatch.",
     "selection": "Generated only after candidate seal, never optimized or returned to parents."
   },
-  "independent_final_split_order": "All select jobs finish before any test jobs; all test jobs finish before transfer. Persistent engines remain alive across phases."
+  "independent_final_split_order": "All select jobs finish before any test jobs; all test jobs finish before transfer. Persistent engines remain alive across phases.",
+  "final_gpu_allocation": "E0, all parent candidates and candidate-matched controls share the first discovered GPU; secondary legacy controls and a second E0 use the other GPU. After select, repeat E0 on the primary GPU and require identical outputs before any held-out scoring. No extra primary samples are introduced.",
+  "allocation_reason": "Observed dev repeat variability across GPU workers; numerical scores and protocol remain frozen."
 }

@@ -48,3 +48,15 @@ Lossless BF16-bit-pattern export and reconstruction pass a tiny two-generation f
 the original patches, recovery of both IDs, and rejection of a corrupted export). A bounded representative p50c
 export reconstructs its exact content-addressed identity as well. Final lineage exports will preserve bytes, not
 just machine-local IDs or a transcript-dependent recipe.
+
+
+A dev anomaly was observed before held-out access: two repeated editor states on different GPU workers produced
+some different outputs despite fixed seeds and prefix resets, whereas several other repeats agreed exactly. The
+measured pairs are retained in results/dev_repeat_audit.json and complete rows in the eventual evidence archive.
+This is narrower than a claim that the swap is incorrect: transition hashes pass, and the cause is not established.
+It contradicts an unrestricted claim of bit reproducibility across concurrent workers. Final primary comparisons
+therefore keep E0, all four parents and their matched random controls on one discovered GPU; the second GPU runs
+legacy controls plus its own E0. A select-only Gold repeat must agree before held-out scoring begins. Scheduling
+and a technical select diagnostic change no frozen instances, scoring, decoding, primary samples or statistical
+endpoint. If the technical repeat fails, investigate before opening test/transfer rather than silently accepting
+unreliable comparisons.
