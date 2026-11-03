@@ -201,3 +201,32 @@ def test_export_patches_sparse_delta(wroot):
     main(["--out", str(wroot / "exp"), p["patch_id"]])
     d = json.loads((wroot / "exp" / f"{p['patch_id']}.delta.json").read_text())
     assert d == {"W3": {"flat_indices": [2 * 6 + 1], "new_values": [7.0]}}
+
+
+def test_targets_deterministic_and_oracle_repairs():
+    from wse import editor_tasks as K, targets as T
+    for fam in T.FAMILIES:
+        a, b = T.build(fam, "pilot", 0), T.build(fam, "pilot", 0)
+        assert a["seed"] == b["seed"] and np.array_equal(a["damaged"]["W1"], b["damaged"]["W1"])
+        assert a["ceiling"] - a["damaged_acc"] > 0.05            # the defect is measurable
+        r = K.evaluate_answer(a, "T2", K.oracle_edit(a), {})
+        assert r["valid"] and r["recovery"] > 0.85
+
+
+def test_edit_dsl_refusals_and_swap():
+    from wse import edit_dsl as E
+    w = {"W": np.arange(6, dtype=np.float32).reshape(2, 3), "b": np.zeros(3, np.float32)}
+    r = E.run(w, "```edit\nswap W[:, 0] W[:, 2]\nb[1] += 2.5\n```")
+    assert r["valid"] and r["edited"]["W"][0, 0] == 2 and r["edited"]["b"][1] == 2.5 and r["n_changed"] == 5
+    for bad in ["import os", "W[5, 0] = 1", "b[0] = 1e9", "W[0] = 1", "nope[0] = 1", "", "swap W[0, 0:2] b[:]"]:
+        assert not E.run(w, bad)["valid"], bad
+    assert E.run(w, "\n".join(f"b[0] += 1" for _ in range(17)))["error"].startswith("17 statements")
+
+
+def test_t0_answer_parsing():
+    from wse import editor_tasks as K, targets as T
+    inst = T.build("F2", "pilot", 1)
+    p, meta = K.render(inst, "T0", np.random.default_rng(0))
+    good = "ABCD"[meta["options"].index(K.oracle_edit(inst))]
+    assert K.evaluate_answer(inst, "T0", f"blah\nANSWER: {good}", meta)["recovery"] > 0.85
+    assert not K.evaluate_answer(inst, "T0", "no idea", meta)["valid"]

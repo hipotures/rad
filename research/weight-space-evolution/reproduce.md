@@ -156,3 +156,20 @@ distributions, not exact values. To re-score an existing candidate on the record
 - Everything under `work/` is downloadable or deterministically regenerable from the commands above,
   except editor session transcripts and raw logs, which are archived as text evidence under `evidence/`.
 - Gold directories are made read-only; to delete a work root, first `chmod -R u+w $W/gold $W/sessions`.
+
+## 8. Phase D pilot (E0 / p50c as editors of F1-F3 targets)
+
+```bash
+cd $TOPIC/code
+export OMP_NUM_THREADS=4 HF_HOME=$W/cache/hf VLLM_CACHE_ROOT=$W/cache/vllm XDG_CACHE_HOME=$W/cache TRITON_CACHE_DIR=$W/cache/triton \
+  FLASHINFER_WORKSPACE_BASE=$W/cache TORCHINDUCTOR_CACHE_DIR=$W/cache/inductor TMPDIR=$W/tmp
+for M in gold:E0 p50c:p50c; do for K in 0 1; do      # one (model, mode) per GPU; GPU UUIDs from nvidia-smi
+  CUDA_VISIBLE_DEVICES=<uuid> $W/envs/vllm/bin/python -m wse.editor_pilot --model $W/derived/qwen3.5-0.8B-text-${M%%:*} \
+     --label ${M##*:} --thinking $K --out $TOPIC/runs/<new-run-id> --raw-dir $W/raw/<new-run-id>
+done; done
+$W/envs/wse/bin/python -m wse.pilot_rescore --gens $W/raw/<new-run-id> --out $TOPIC/runs/<new-run-id>/results/rescore.json \
+   E0_think0 p50c_think0 E0_think1 p50c_think1
+```
+
+Targets are deterministic from (family, split, index) (`wse.targets.build`), so no target files need to be stored;
+`python -m wse.targets generate --family F2 --split pilot --n 16 --out $W/derived/targets` writes them with a manifest.

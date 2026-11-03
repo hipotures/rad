@@ -37,12 +37,12 @@ All research code, reports and documentation are written in English. All work, i
 | C — bounded edits (v1) | Ran end to end. Submitted 2-entry edit: held-out +1.83 ± 1.89 (1,000 ep.), re-verified −2.97 ± 1.32 (2,000 ep., active controls). **No improvement.** | [report](runs/20261103T-phaseC-seaquest-v1-e1/report.md), [re-verification](runs/20261103T-phaseC-seaquest-v1-e1-activecontrols/report.md) |
 | C — bounded edits (v2, 3 sessions) | Two sessions converged on v1's 2-entry edit again (held-out +0.19, −0.65; no effect). Session e3 submitted a 146-entry edit (stronger "hunting" + diver-attraction gating): **held-out +9.90 [7.45, 12.49]**, joint 4,000-episode test +10.93 ± 0.95 (Holm p ≈ 5e−30), far above size-matched random edits. **Protocol deviation:** e3 re-implemented the game from the supplied source inside the sandbox and selected among ~8 variants with it. Post-hoc ablation: both components help (+4.4, +5.8). | [report](runs/20261103T-phaseC-seaquest-v2/report.md) |
 | C — v3: environment model S vs N (preregistered, 3+3 sessions) | Source + self-simulation (S): **3/3 sessions succeed** on held-out (+18.97 [16.7, 21.3], +4.07, +3.96); prose rules only (N): 1/3 (+4.54 [2.4, 6.6]; others +0.77, +0.12). Joint 4,000-episode test: best edit (42 entries, sticky-action lookahead veto) +18.2 ± 0.9, Gold 53 → 71. n = 3 per condition: descriptive (Fisher p = 0.2). Sandbox CPU-limit bug found (≈ 31 s effective) and fixed after the round. | [report](runs/20261103T-phaseC-seaquest-v3/report.md) |
-| D — bootstrap gate | Designed, not executed. | [design](reports/phaseD_bootstrap_gate_design.md) |
+| D — bootstrap gate | Designed, gate not executed. **Pilot done** (prerequisites 1–3, no parents): target generator F1–F3, edit DSL, tiers T0–T2. E0 (Qwen3.5-0.8B) is at floor on free-form editing (T2: 0% valid) and only above chance on F3/T0 (+0.37 vs +0.05); thinking mode truncates 100% at 4k tokens. p50c raises answer availability in thinking mode (truncation 87.5%) but not edit quality. A 3-rule heuristic solves F1/F2 (0.98/1.00), so they must be hardened before a gate run. | [design](reports/phaseD_bootstrap_gate_design.md), [pilot](runs/20261103T-phaseD-pilot-e0/report.md) |
 
 Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.json](input-manifest.json),
 [artifact-manifest.json](artifact-manifest.json). Payloads live in the ignored `work/` directory.
 
-**Next useful step:** Phase D pilot (target generator, edit DSL, small Gold editor E0 and baselines) with an explicitly
-budgeted environment model in the editor protocol; optionally a larger S-vs-N replication (≥ 6 sessions per
-condition, second editor model). For GPU evaluations use the problem-sharded launcher
-(`code/scripts/run_math500_sharded.sh`).
+**Next useful step:** revise the Phase D task matrix per the pilot (harden F1/F2 against the heuristic baseline,
+format-constrained decoding for T1/T2, executable probe passes for the editor, F4/F5 families), re-pilot E0, freeze
+tiers/thresholds in Git, then obtain operator approval of parent budgets before any parent session. For GPU
+evaluations use the problem-sharded launcher (`code/scripts/run_math500_sharded.sh`).

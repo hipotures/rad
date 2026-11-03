@@ -1,0 +1,12 @@
+{
+ "run_id": "20261103T-phaseD-pilot-e0",
+ "question": "Phase D prerequisite 3: does the Gold small editor E0 (Qwen3.5-0.8B text-only export of the Phase A Gold) have non-zero signal on the F1-F3 target families at tiers T0/T1/T2, and how do non-agent baselines compare? Decides which tiers/families are usable for a gate run.",
+ "editor": "E0 = work/derived/qwen3.5-0.8B-text-gold (Qwen/Qwen3.5-0.8B @ 2fc06364715b967f1860aea9cf38778875588b17, text-only export); no parent, no candidate editors",
+ "targets": "code/wse/targets.py, split 'pilot' (never used for gate dev/test), 16 instances per family F1 dead-units, F2 swap-output, F3 bias-shift; deterministic seeds sha256('wse-target/<family>/pilot/<index>')",
+ "tiers": "T0 select among 4 edits (1 oracle + 3 distractors), T1 template fill with the family named, T2 free-form DSL (code/wse/editor_tasks.py)",
+ "decoding": {"samples": 4, "seed": 0, "thinking0": "temperature 0.7, top_p 0.8, top_k 20, max 4096 tokens", "thinking1": "temperature 0.6, top_p 0.95, top_k 20, max 4096 tokens"},
+ "scoring": "each sample scored independently on the instance's 3,000-input test set; recovery = (acc_edit - acc_damaged)/(ceiling - acc_damaged); invalid edits = no-op (recovery 0), validity reported separately",
+ "baselines": "oracle (ground-truth repair), heuristic best-of-3 rule-based repairs chosen on the probe set, random 4-entry edits (N(0,0.5) increments)",
+ "gpus": "two RTX 4090 (UUIDs in reports/environment.json): thinking0 on GPU-6c849b47, thinking1 on GPU-81ac6e96, run concurrently",
+ "target_construction_note": "the base classifiers are trained with plain numpy Adam (target construction is allowed any recorded means per the Phase D design); editors only produce direct DSL edits"
+}

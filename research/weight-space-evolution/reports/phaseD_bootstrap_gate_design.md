@@ -106,6 +106,11 @@ Splits (decided before any parent session, by seeded generator, recorded in the 
 
 ## 9. Prerequisites before the gate run
 
+Status 2026-11-03: items 1-3 piloted for F1-F3 ([pilot report](../runs/20261103T-phaseD-pilot-e0/report.md)). Required
+revisions before freezing: F1/F2 are solved by a 3-rule heuristic (0.98/1.00 recovery) and must be hardened; T2 is at
+floor for E0 (0% valid) and needs format-constrained decoding; thinking mode truncates at 4k tokens; F4/F5 are not yet
+implemented.
+
 1. Implement the target generator (F1–F5) with seeds and a manifest; verify ceilings and defect severities.
 2. Implement the edit DSL parser on top of `wse.patch` and the editor-evaluation pass in `wse.lab`.
 3. Pilot `E0` and baselines on all tiers (no parent). Freeze tiers and thresholds in Git.
