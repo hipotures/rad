@@ -10,7 +10,7 @@ The **current task is an initial laboratory and feasibility study**, not a claim
 
 ## Required context
 
-Read local `AGENTS.md`, `README.md`, and applicable parent-repository instructions. Work from the current directory; do not assume a fixed local path.
+Read local `AGENTS.md`, `README.md`, and applicable parent-repository instructions. **The current directory is your complete workspace, including all model downloads and temporary experiment payloads.** Use relative paths only. Do not search for a historical or alternative project root.
 
 Primary research article:
 https://rikiyat.github.io/blog/weight-space-programming/
@@ -93,7 +93,7 @@ Within this topic directory, produce and maintain as appropriate:
 - `runs/<id>/` — compact protocol, metrics and a report
 - `reports/` — cross-run findings and next-step recommendation
 
-Use English for all artifacts. **All authored research work happens and is saved in this Git-tracked directory:** harness and supporting code, tests, protocols, configurations, compact experiment outputs, reports and manifests. Commit and push meaningful milestones, and verify the final remote commit. Only large or disposable payloads (public model checkpoints, upstream source clones, caches, datasets, environments and bulky raw logs) reside outside Git, with their provenance and recovery information committed here. Never develop the project itself in an external working tree or scratch directory, and never hard-code a host-specific absolute path.
+Use English for all artifacts. **All work happens physically inside this current directory.** Author harness code, tests, protocols, configurations, compact outputs, reports and manifests here and commit/push meaningful milestones. Downloaded Gold weights, upstream source clones, caches, datasets, environments and bulky raw logs belong in this topic's ignored `work/` subdirectory: they remain on disk under the current directory but are not staged in Git. Track their relative locations, hashes and recovery details. Do not work in an external tree and do not hard-code an absolute path.
 
 Carry out meaningful implementation and verification in this session. If a phase is blocked, preserve its exact status and proceed with feasible work. Persist resulting source, methodology and compact evidence using the normal repository commit/push workflow.
 
