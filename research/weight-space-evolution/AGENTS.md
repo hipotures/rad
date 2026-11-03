@@ -4,7 +4,7 @@
 
 You are operating inside the **Weight-Space Evolution** research directory. Your current working directory is the authoritative root of this investigation. Start and conduct work here; do not assume any particular host, username, mount, or absolute filesystem path, and do not relocate this project.
 
-Read this file, \`GOAL.md\`, and \`README.md\` first. The repository-wide \`../../AGENTS.md\` also applies, including its English-only artifact policy, evidence requirements, safe Git workflow, commit/push obligations, and storage rules. Where instructions differ, follow the higher-priority instructions and the current user goal.
+Read this file, `GOAL.md`, and `README.md` first. The repository-wide `../../AGENTS.md` also applies, including its English-only artifact policy, evidence requirements, safe Git workflow, commit/push obligations, and storage rules. Where instructions differ, follow the higher-priority instructions and the current user goal.
 
 Do not create a separate repository here, nor a new sibling research topic for this investigation. Use relative paths for project artifacts. You may identify the enclosing Git repository with Git, but do not make assumptions about where it is mounted.
 
@@ -45,7 +45,7 @@ Build a **minimal, auditable research harness**, not a general agent framework.
 
 ## Study sequence
 
-Follow \`GOAL.md\` as the current executable brief. Use the following general progression:
+Follow `GOAL.md` as the current executable brief. Use the following general progression:
 
 1. Inventory and inspect the upstream logs, edit patches, code, protocol and licenses.
 2. Rebuild the released Qwen3.5-0.8B p50c edit from public Gold weights and verify patch checksums and affected tensors. Distinguish patch reconstruction from full benchmark reproduction.
@@ -58,7 +58,7 @@ The original publication does **not** release the full executable Experiment 8 o
 ## Execution and persistence
 
 - Prefer small, discriminating runnable experiments, with isolated runs and clear pass/fail gates.
-- Keep an evolving \`README.md\` index, a reproducible command guide, source/inputs manifests, authored code under \`code/\`, and compact reports/results.
+- Keep an evolving `README.md` index, a reproducible command guide, source/inputs manifests, authored code under `code/`, and compact reports/results.
 - Preserve failed work and negative findings when they inform the hypothesis.
-- Commit and push completed task-owned durable work according to \`../../AGENTS.md\`. Do not impose arbitrary \`no push\` or \`local commits only\` restrictions.
+- Commit and push completed task-owned durable work according to `../../AGENTS.md`. Do not impose arbitrary `no push` or `local commits only` restrictions.
 - End with a concise report of what actually ran, checks passed/failed, artifact locations, commit SHA, remaining limitations, and the next useful experiment.
