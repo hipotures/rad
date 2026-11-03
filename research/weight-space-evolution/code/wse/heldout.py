@@ -25,8 +25,29 @@ from . import patch
 from .lab import jload, sdir, weights_of
 
 
-def controls(gold, cand, n_seeds):
+def active_masks(gold):
+    """Entries on a path from an input the network reads to the output (MLP W1-b1-W2-b2-W3-b3 only).
+
+    A W1 row is read if it has any non-zero weight; a hidden unit is live if it receives a non-zero input weight or
+    bias AND has a non-zero outgoing weight. Edits outside these masks cannot change the policy, so random controls
+    restricted to them are informative (Phase C v1: 3 of 6 unrestricted controls were exact no-ops)."""
+    if set(gold) != {"W1", "b1", "W2", "b2", "W3", "b3"}:
+        return {k: np.ones(v.shape, bool) for k, v in gold.items()}
+    W1, b1, W2, b2, W3 = (gold[k] != 0 for k in ("W1", "b1", "W2", "b2", "W3"))
+    rows = W1.any(1)
+    h2_out = W3.any(1)
+    h2_live = (W2.any(0) | b2) & h2_out
+    h1_out = (W2 & h2_live[None, :]).any(1)
+    h1_live = (W1.any(0) | b1) & h1_out
+    return {"W1": rows[:, None] & h1_live[None, :], "b1": h1_live.copy(),
+            "W2": h1_live[:, None] & h2_live[None, :], "b2": h2_live.copy(),
+            "W3": h2_live[:, None] & np.ones(W3.shape[1], bool)[None, :], "b3": np.ones(gold["b3"].shape, bool)}
+
+
+def controls(gold, cand, n_seeds, active=False):
+    """Matched-size controls. active=True restricts random positions to active_masks(gold)."""
     out = {"flip": {k: gold[k] - (cand[k] - gold[k]) for k in gold}}
+    masks = active_masks(gold) if active else {k: np.ones(v.shape, bool) for k, v in gold.items()}
     for s in range(n_seeds):
         rng = np.random.default_rng([2026, s])
         perm, gau = {}, {}
@@ -38,7 +59,10 @@ def controls(gold, cand, n_seeds):
                 gau[k] = gold[k].copy()
                 continue
             # positions outside the candidate's own edited entries when the tensor has room (else anywhere)
-            pool = np.setdiff1d(np.arange(g.size), idx) if g.size - idx.size >= idx.size else np.arange(g.size)
+            allowed = np.flatnonzero(masks[k].reshape(-1))
+            pool = np.setdiff1d(allowed, idx) if allowed.size - np.intersect1d(allowed, idx).size >= idx.size else allowed
+            if pool.size < idx.size:
+                pool = np.arange(g.size)
             pos = rng.choice(pool, idx.size, replace=False)
             p = g.reshape(-1).copy()
             p[pos] += d.reshape(-1)[idx]
@@ -60,6 +84,7 @@ def main(argv=None):
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--episodes", type=int, default=1000)
     ap.add_argument("--control-seeds", type=int, default=3)
+    ap.add_argument("--active-controls", action="store_true", help="random controls only on active weights")
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--raw-dir", required=True, help="disk directory for per-episode records (packed as evidence later)")
     a = ap.parse_args(argv)
@@ -77,11 +102,12 @@ def main(argv=None):
              "gold_id": cfg["gold_id"], "game": cfg["game"], "episodes": a.episodes, "test_seed_base": base,
              "test_seeds": [base, base + a.episodes - 1], "seed_drawn_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
              "submitted_utc": st.get("submitted_utc"), "control_seeds": a.control_seeds,
+             "active_controls": a.active_controls,
              "dev_seed_range": [cfg["dev_seed_base"], cfg["dev_seed_base"] + 10_000 * (cfg["budgets"]["dev_passes"] + 1)]}
     proto_p.write_text(json.dumps(proto, indent=1))
     gold = weights_of(cfg, "gold")
     cand = weights_of(cfg, pid)
-    arms = {"gold": gold, "candidate": cand, **controls(gold, cand, a.control_seeds)}
+    arms = {"gold": gold, "candidate": cand, **controls(gold, cand, a.control_seeds, active=a.active_controls)}
     seeds = range(base, base + a.episodes)
     res, eps = {"protocol": proto, "arms": {}}, {}
     for name, w in arms.items():

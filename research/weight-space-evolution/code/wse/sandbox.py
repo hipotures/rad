@@ -49,6 +49,9 @@ def saved():
 '''
 
 
+VENV_MOUNT = "/opt/venv"
+
+
 class SandboxUnavailable(RuntimeError):
     pass
 
@@ -56,7 +59,7 @@ class SandboxUnavailable(RuntimeError):
 def _python_roots(venv: Path):
     """(host source, sandbox path) pairs: the venv and the base interpreter it links to, both under the literal
     symlink path and the resolved path (uv links through a versionless directory symlink)."""
-    pairs = [(venv, venv)]
+    pairs = [(venv, Path(VENV_MOUNT))]   # neutral mount point: the host path may lie inside the repository
     link = venv / "bin" / "python"
     lit = Path(os.readlink(link)) if link.is_symlink() else link
     lit = lit if lit.is_absolute() else (link.parent / lit)
@@ -97,7 +100,7 @@ class Sandbox:
               "--setenv", "HOME", "/tmp", "--setenv", "TMPDIR", "/tmp", "--setenv", "PATH", "/usr/bin",
               "--setenv", "OMP_NUM_THREADS", str(self.threads), "--setenv", "OPENBLAS_NUM_THREADS", str(self.threads),
               "--setenv", "CUDA_VISIBLE_DEVICES", "",
-              str(self.venv / "bin" / "python"), "-I", "-c", PRELUDE + "\n" + code]
+              VENV_MOUNT + "/bin/python", "-I", "-c", PRELUDE + "\n" + code]
         return c
 
     def run(self, code):

@@ -221,10 +221,11 @@ def cmd_devpass(sid, cfg, st, a):
     k = st["passes_used"] + 1
     seeds = list(range(cfg["dev_seed_base"] + 10_000 * k, cfg["dev_seed_base"] + 10_000 * k + n))
     trace = seeds[: min(a.trace, b["trace_episodes_max"])]
-    gs, ge = M.evaluate(cfg["game"], weights_of(cfg, "gold"), seeds, trace_seeds=trace)
+    wk = cfg.get("eval_workers", 6)
+    gs, ge = M.evaluate(cfg["game"], weights_of(cfg, "gold"), seeds, trace_seeds=trace, workers=wk)
     out = {"pass": k, "candidate": a.id, "episodes": n, "gold": gs}
     if a.id != "gold":
-        cs, ce = M.evaluate(cfg["game"], weights_of(cfg, a.id), seeds, trace_seeds=trace)
+        cs, ce = M.evaluate(cfg["game"], weights_of(cfg, a.id), seeds, trace_seeds=trace, workers=wk)
         out.update(candidate_summary=cs, paired=M.paired(ge, ce))
     else:
         ce = None

@@ -29,7 +29,7 @@ held-out episodes that do not exist yet, against unchanged Gold and against rand
   outside the lab folders and pass the file path.
 - `LAB propose --rationale "..."` — validates everything saved in `/work/edit/` against Gold and returns a candidate
   id. Free; refused edits are reported.
-- `LAB devpass ID [--episodes N] [--trace K]` — ONE PASS: plays N (<= 300) fresh development episodes with Gold and
+- `LAB devpass ID [--episodes N] [--trace K]` — ONE PASS: plays N (<= episodes_per_pass_max) fresh development episodes with Gold and
   with candidate ID on the same seeds (paired) and returns mean scores, the paired difference with SE and a bootstrap
   95% interval, episode lengths and action counts. `--trace K` (K <= 3) also stores step-by-step records
   (action, reward, sub x/y, oxygen, diver count, surface flag) of the first K episodes for BOTH networks in

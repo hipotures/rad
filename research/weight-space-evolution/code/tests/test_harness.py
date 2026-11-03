@@ -165,3 +165,21 @@ def test_sandbox_isolation(wroot):
     assert "['W'] 1.0" in r["output"]
     assert sb.run("save('X', np.zeros(2))")["returncode"] != 0
     assert "timed out" in Sandbox(venv, g, wroot / "work", wroot / "tmp", timeout=3).run("while True: pass")["output"]
+
+
+def test_active_masks_and_active_controls_change_policy_paths():
+    from wse.heldout import active_masks, controls
+    g = {"W1": np.zeros((600, 32), np.float32), "b1": np.zeros(32, np.float32), "W2": np.zeros((32, 32), np.float32),
+         "b2": np.zeros(32, np.float32), "W3": np.zeros((32, 6), np.float32), "b3": np.zeros(6, np.float32)}
+    g["W1"][5, 3] = 1.0; g["W2"][3, 7] = 1.0; g["W3"][7, 2] = 1.0     # one live path: input 5 -> h1[3] -> h2[7] -> a2
+    g["W1"][9, 4] = 1.0                                                 # h1[4] has no outgoing weight: dead
+    m = active_masks(g)
+    assert m["W1"][5, 3] and not m["W1"][9, 4] and not m["W1"][0, 3]
+    assert m["W2"][3, 7] and not m["W2"][4, 7] and m["b1"][3] and not m["b1"][4]
+    assert m["W3"][7].all() and not m["W3"][0].any()
+    c = {k: v.copy() for k, v in g.items()}
+    c["W1"][5, 3] = 2.0
+    cs = controls(g, c, 2, active=True)
+    for name in ("permuted_0", "gaussian_1"):
+        d = cs[name]["W1"] != g["W1"]
+        assert d.sum() == 1 and m["W1"][d].all()
