@@ -129,3 +129,7 @@ Splits (decided before any parent session, by seeded generator, recorded in the 
   budgeted resource, and must count simulated steps in the resource-normalised measures (section 4).
 - Size-matched random edits must be restricted to live weights. Otherwise many controls are no-ops in sparse
   hand-written networks.
+- Phase C v3 (preregistered, n = 3 per condition): editors with the environment source and a self-written simulator
+  succeeded 3/3 (best +18 points, +35%), prose-only editors 1/3. Executable environment models are the main lever for
+  locating failure mechanisms; Phase D editors (and the small Gold editor) should get a budgeted simulator of each
+  target task, with simulated steps counted as a resource.

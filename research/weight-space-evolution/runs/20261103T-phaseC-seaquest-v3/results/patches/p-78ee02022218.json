@@ -1,0 +1,65 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-78ee02022218",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T07:32:13Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 30,
+ "delta_l2_total": 49.17329198983272,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W2",
+   "shape": [
+    32,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "base_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "edited_sha256": "0598e1bae934f386230bb09cc5d187f23e2104a74073982d9d3e5016bd58003b",
+   "changed_entries": 15,
+   "delta_l2": 34.85685011586675,
+   "relative_change": 0.6738752678723234
+  },
+  {
+   "key": "t1",
+   "name": "b2",
+   "shape": [
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "base_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "edited_sha256": "4924b8aa479cecdd1d460071ae7a6aeb6e9a5750c0bc5818ba4bff2acf7e0849",
+   "changed_entries": 15,
+   "delta_l2": 34.684472680399026,
+   "relative_change": 0.6539381517089327
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Strengthen the veto of the row-danger units h1[16..23] on the vertical-move units (up from row below, down from row above): W2 -3 -> -12 with b2 bias compensation at no-danger baseline. Gold's low-oxygen ascent drive (h1[24]) overrides partially detected enemies (e.g. col 7, approaching from the unshootable right) in the row above; traces show most deaths occur at oxygen ~55-60, i.e. during ascent.",
+  "session": "phaseC-seaquest-v3N-e1",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v3: 2 conditions x 3 independent parallel sessions, same budgets as v2; total editor budget <= 1.2M subagent tokens (v2 measured 95k-179k per session)"
+  }
+ },
+ "delta_sha256": "e4cf567bdb8b80784f845e10c8a33dab81e6c3fd163ae11f1d9faee3f78c0057"
+}

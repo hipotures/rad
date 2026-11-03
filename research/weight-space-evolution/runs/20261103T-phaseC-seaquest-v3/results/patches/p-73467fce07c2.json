@@ -1,0 +1,50 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-73467fce07c2",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T07:30:13Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 2,
+ "delta_l2_total": 2.8284271247461903,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "b3",
+   "shape": [
+    6
+   ],
+   "dtype": "float32",
+   "gold_sha256": "64e9925ccfe4d95027d5710351ab6b38e7c5cf081a70cf4e628f1f9ce59571e5",
+   "base_sha256": "64e9925ccfe4d95027d5710351ab6b38e7c5cf081a70cf4e628f1f9ce59571e5",
+   "edited_sha256": "f325fbf97877ca619349e8ba143118653b74d5e69d413044d5c2050fbce12aa5",
+   "changed_entries": 2,
+   "delta_l2": 2.8284271247461903,
+   "relative_change": 0.006252332214862896
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Reduce idle random vertical movement: b3 up and down -2 (evasion/diver/surfacing drives unchanged in ordering)",
+  "session": "phaseC-seaquest-v3N-e3",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v3: 2 conditions x 3 independent parallel sessions, same budgets as v2; total editor budget <= 1.2M subagent tokens (v2 measured 95k-179k per session)"
+  }
+ },
+ "delta_sha256": "25b3cde2d26f5fe7f71d45546c265431512f57eaf056d4ce4abe240c65bf21cc"
+}

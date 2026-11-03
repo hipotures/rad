@@ -1,0 +1,50 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-e16dae33cb40",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T07:35:54Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 1,
+ "delta_l2_total": 2.0,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "b3",
+   "shape": [
+    6
+   ],
+   "dtype": "float32",
+   "gold_sha256": "64e9925ccfe4d95027d5710351ab6b38e7c5cf081a70cf4e628f1f9ce59571e5",
+   "base_sha256": "64e9925ccfe4d95027d5710351ab6b38e7c5cf081a70cf4e628f1f9ce59571e5",
+   "edited_sha256": "7efb5b86a9caa69bef96ab3dadeadf0b9c876b054eca7c15da2603e3b171b82e",
+   "changed_entries": 1,
+   "delta_l2": 2.0,
+   "relative_change": 0.00442106650736066
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Lower down-action bias b3[4] 244->242: in idle states (no steering unit active) Gold samples 'down' with p~0.87 vs fire ~0.1, drifting downward into danger rows; reducing it shifts idle behavior toward staying/firing. Own simulator: +4.8 (SE 2.0) on 600 paired episodes.",
+  "session": "phaseC-seaquest-v3S-e3",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v3: 2 conditions x 3 independent parallel sessions, same budgets as v2; total editor budget <= 1.2M subagent tokens (v2 measured 95k-179k per session)"
+  }
+ },
+ "delta_sha256": "134f4476219f0c01a0b725c92dad1bcbfacef97f97051d149cdf307a0480eeb0"
+}

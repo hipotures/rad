@@ -1,0 +1,51 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-adfbbf2635e8",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T07:29:59Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 32,
+ "delta_l2_total": 13.338665548948628,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W1",
+   "shape": [
+    600,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "base_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "edited_sha256": "7743f05dd642bf1a6c369e597d6f990184be965123d72285985741d2301d3907",
+   "changed_entries": 32,
+   "delta_l2": 13.338665548948628,
+   "relative_change": 0.10857901351449804
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Danger row units h1[16..23]: remove the right-side reward-channel subtraction (cols 6-8) and raise danger weight at col 8 to 5, so enemies approaching from the unshootable right side (sub faces left) are detected one-two cells earlier, both for dodging in own row and for not climbing into a row with an approaching enemy during oxygen ascent.",
+  "session": "phaseC-seaquest-v3N-e1",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v3: 2 conditions x 3 independent parallel sessions, same budgets as v2; total editor budget <= 1.2M subagent tokens (v2 measured 95k-179k per session)"
+  }
+ },
+ "delta_sha256": "8d5cd5f210c90bb789d927230255dc43e5cc436b66d2368413d6909b2f7cb3e8"
+}

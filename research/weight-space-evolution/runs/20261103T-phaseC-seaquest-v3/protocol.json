@@ -31,5 +31,13 @@
   "S": "f83f41566b10f3fa05ffc00f95bdd8e3919be1e0b89b438a88d2a7854523fa48",
   "N": "cda7e33bdf1360ebeb23acf71910ec3767b2e19bb1440275c1386f55aad57b2f"
  },
- "prose_context_derivation": "work/derived/editor-context/seaquest_rules_prose.txt = seaquest_game_source.txt up to the line starting 'The game's exact implementation' + the 'THE INPUT' section up to (excluding) 'How the 6 channels are built' (reproduce.md)"
+ "prose_context_derivation": "work/derived/editor-context/seaquest_rules_prose.txt = seaquest_game_source.txt up to the line starting 'The game's exact implementation' + the 'THE INPUT' section up to (excluding) 'How the 6 channels are built' (reproduce.md)",
+ "execution_notes": [
+  "2026-11-03 ~05:26Z: all 6 sessions launched in parallel",
+  "~05:3xZ: all 6 subagents stopped by an account API rate limit (HTTP 429, 5-hour usage limit) after 2-4 sandbox runs each (only v3N-e2 had used 1 dev pass); no submissions; session state preserved",
+  "07:28Z: each subagent resumed from its own transcript with an identical operator message (same rules, remaining budgets, ~50 min wall-clock from resumption)"
+ ],
+ "harness_findings": [
+  "Sandbox CPU limit bug (affects v1, v2, v3 equally): RLIMIT_CPU is set to timeout+5 = 125 CPU-seconds, which counts all threads of the process; with OMP/OPENBLAS threads = 4, multi-threaded numpy work is killed (SIGKILL, rc 137) after ~31 s wall-clock instead of the documented 120 s. Evidence: session v3S-e2 runs 8 (rc 0, 31.02 s), 9 and 10 (rc 137, 31.4 s). Not fixed during v3 to keep conditions identical across running sessions; fix scheduled after v3."
+ ]
 }

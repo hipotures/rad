@@ -1,0 +1,51 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-309bd39c143d",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T07:29:49Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 16,
+ "delta_l2_total": 9.895453432092387,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W1",
+   "shape": [
+    600,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "base_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "edited_sha256": "035d0b5ca58f185b13f33b88abb7bc5862ea893b18adc9aa93588b9fdb79c301",
+   "changed_entries": 16,
+   "delta_l2": 9.895453432092387,
+   "relative_change": 0.0805506793758641
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "A: remove reward-channel cancellation of danger at cols 7-8 in row-danger units 16-23 (enemies behind the left-facing sub cannot be shot, so they should be dodged like bullets)",
+  "session": "phaseC-seaquest-v3N-e2",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v3: 2 conditions x 3 independent parallel sessions, same budgets as v2; total editor budget <= 1.2M subagent tokens (v2 measured 95k-179k per session)"
+  }
+ },
+ "delta_sha256": "e7efd6cc372c2c6986cec910a28058e5e9e6d6c4461a6fc2fbadd8f573ac32a8"
+}

@@ -1,0 +1,65 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-e54b98937b93",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T07:31:53Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 26,
+ "delta_l2_total": 13.733352303689248,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W2",
+   "shape": [
+    32,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "base_sha256": "62ef33c9544d96b8b82161989e15c8c6d9819d6d19d4322a33b7c8ab9ca2ccfe",
+   "edited_sha256": "ae4f58d85a49b770576b666650696d8bf9df89443a079b4a7208f025c9801b94",
+   "changed_entries": 13,
+   "delta_l2": 9.73498840077125,
+   "relative_change": 0.18820311917161775
+  },
+  {
+   "key": "t1",
+   "name": "b2",
+   "shape": [
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "base_sha256": "92c7cccb3f6c2bddc04fdca648393a1a33e9499b0fae2606afc0cd6fcee5a0c5",
+   "edited_sha256": "9aee0adb1729d3a5deee5ca66d4debd193a52d7c7d9cceff76b18dcebc839704",
+   "changed_entries": 13,
+   "delta_l2": 9.686845014456253,
+   "relative_change": 0.18263496703596233
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Two-row lookahead veto: strengthen W2 entries linking danger detector of row r-2 (r+2) to up (down) units from -0.3 to -3.0, bias-compensated in b2 for the inactive-detector baseline tanh(-3). Prevents sticky-action repeats of up/down moves from carrying the sub into an enemy two rows away (65% of collision deaths in my simulator were sticky-forced moves).",
+  "session": "phaseC-seaquest-v3S-e1",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v3: 2 conditions x 3 independent parallel sessions, same budgets as v2; total editor budget <= 1.2M subagent tokens (v2 measured 95k-179k per session)"
+  }
+ },
+ "delta_sha256": "115e809fac6a5363ae6cd61d0c27ee9a6890af3bf5c9d7f962554ac4fc8a2d4c"
+}

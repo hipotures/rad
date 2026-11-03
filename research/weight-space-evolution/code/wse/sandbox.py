@@ -107,7 +107,8 @@ class Sandbox:
         t0 = time.time()
         try:
             p = subprocess.run(self.cmd(code), capture_output=True, text=True, timeout=self.timeout,
-                               preexec_fn=_limits(self.mem, self.timeout + 5, self.fsize, self.nproc))
+                               preexec_fn=_limits(self.mem, (self.timeout + 5) * max(1, self.threads), self.fsize, self.nproc))
+            # RLIMIT_CPU counts CPU-seconds of all threads; scale by the BLAS thread count so the wall-clock timeout binds
             out = p.stdout + (("\n[stderr]\n" + p.stderr[-6000:]) if p.stderr.strip() else "")
             rc = p.returncode
         except subprocess.TimeoutExpired:

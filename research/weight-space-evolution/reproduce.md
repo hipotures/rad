@@ -120,6 +120,15 @@ $W/envs/wse/bin/python -m wse.heldout --session <session-id> --out-dir $TOPIC/ru
    --raw-dir $W/raw/<new-run-id> --episodes 1000 --control-seeds 3
 ```
 
+v3 (preregistered in `runs/20261103T-phaseC-seaquest-v3/protocol.json`) runs two conditions with configs
+`configs/phaseC_seaquest_v3{S,N}.json`; condition N needs the prose-only context:
+
+```bash
+S=$W/derived/editor-context/seaquest_game_source.txt; N=$W/derived/editor-context/seaquest_rules_prose.txt
+{ awk '/^The game.s exact implementation/{exit} {print}' $S; awk '/^THE INPUT/{p=1} /^How the 6 channels are built/{exit} p{print}' $S; } > $N
+sha256sum $N    # cda7e33bdf1360ebeb23acf71910ec3767b2e19bb1440275c1386f55aad57b2f (checked by `lab brief --game-source`)
+```
+
 v2 used `configs/phaseC_seaquest_v2.json` (three sessions `phaseC-seaquest-v2-e{1,2,3}`), with
 `--episodes 2000 --control-seeds 3 --active-controls --workers 6` for the per-session held-out. Joint comparison of all
 submitted candidates on one shared fresh seed set, and the post-hoc ablation arms:

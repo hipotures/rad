@@ -1,0 +1,65 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-7146d3cade78",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T07:31:22Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 35,
+ "delta_l2_total": 35.4964786985977,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W1",
+   "shape": [
+    600,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "base_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "edited_sha256": "4d4bb6555735219517d3c07c2180887e4b73a0b2b1e99ed41749acfd231fa79e",
+   "changed_entries": 28,
+   "delta_l2": 31.74901573277509,
+   "relative_change": 0.2584424053268744
+  },
+  {
+   "key": "t1",
+   "name": "b1",
+   "shape": [
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "438a68ce4b16104ab00c38b628f9b666003a16894e3c30e3f9d5b585bce97732",
+   "base_sha256": "438a68ce4b16104ab00c38b628f9b666003a16894e3c30e3f9d5b585bce97732",
+   "edited_sha256": "ad606796a75fd4890988c6b78079bd9ef329272efa3ff6d6c25b06b701cefa6b",
+   "changed_entries": 7,
+   "delta_l2": 15.874507866387544,
+   "relative_change": 0.6591530616030618
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "Left-side target-seeking detectors h1[25..31] (rows 2-8, cols 0-3) now require danger AND reward (enemy), so enemy bullets no longer attract the sub into their row",
+  "session": "phaseC-seaquest-v3N-e3",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default",
+   "note": "v3: 2 conditions x 3 independent parallel sessions, same budgets as v2; total editor budget <= 1.2M subagent tokens (v2 measured 95k-179k per session)"
+  }
+ },
+ "delta_sha256": "b756815a11c816dd435734ed1cd3b802a1d3770e05e5e92b215c2cad3d52410f"
+}
