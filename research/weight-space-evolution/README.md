@@ -39,6 +39,8 @@ All research code, reports and documentation are written in English. All work, i
 | C — v3: environment model S vs N (preregistered, 3+3 sessions) | Source + self-simulation (S): **3/3 sessions succeed** on held-out (+18.97 [16.7, 21.3], +4.07, +3.96); prose rules only (N): 1/3 (+4.54 [2.4, 6.6]; others +0.77, +0.12). Joint 4,000-episode test: best edit (42 entries, sticky-action lookahead veto) +18.2 ± 0.9, Gold 53 → 71. n = 3 per condition: descriptive (Fisher p = 0.2). Sandbox CPU-limit bug found (≈ 31 s effective) and fixed after the round. | [report](runs/20261103T-phaseC-seaquest-v3/report.md) |
 | D — bootstrap gate | Designed, gate not executed. **Pilot done** (prerequisites 1–3, no parents): target generator F1–F3, edit DSL, tiers T0–T2. E0 (Qwen3.5-0.8B) is at floor on free-form editing (T2: 0% valid) and only above chance on F3/T0 (+0.37 vs +0.05); thinking mode truncates 100% at 4k tokens. p50c raises answer availability in thinking mode (truncation 87.5%) but not edit quality. A 3-rule heuristic solves F1/F2 (0.98/1.00), so they must be hardened before a gate run. With grammar-constrained decoding outputs become valid (≥ 88% on T2) but mostly harmful on F1/F2; F3 is the only family with E0 signal (T0 +0.41, T2 +0.12 [0.04, 0.20]). | [design](reports/phaseD_bootstrap_gate_design.md), [pilot](runs/20261103T-phaseD-pilot-e0/report.md), [constrained](runs/20261103T-phaseD-pilot-constrained/report.md) |
 
+Goal summary (completion criteria, reproduced vs untested): [reports/summary.md](reports/summary.md).
+
 Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.json](input-manifest.json),
 [artifact-manifest.json](artifact-manifest.json). Payloads live in the ignored `work/` directory.
 
