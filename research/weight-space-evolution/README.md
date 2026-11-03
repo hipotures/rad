@@ -21,7 +21,7 @@ Questions 2–4 are hypotheses for later investigation. Do not presume they have
 
 - Article: https://rikiyat.github.io/blog/weight-space-programming/
 - Released logs/code/weight patches: https://github.com/RikiyaT/lm_understand-logs
-- Pinned upstream commit: \`4d09ba6d6a7e891dd8063974dfe81b3d78e3494f\`
+- Pinned upstream commit: `4d09ba6d6a7e891dd8063974dfe81b3d78e3494f`
 
 The first task is to inspect and reproduce the published edit mechanism, then establish a bounded harness and test a small, objectively scorable weight edit using Codex Sol.
 
