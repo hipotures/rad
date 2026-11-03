@@ -20,6 +20,7 @@ Held-out verification is a separate program (wse.heldout) run after submission o
 import argparse
 import contextlib
 import fcntl
+import hashlib
 import json
 import os
 import shutil
@@ -112,8 +113,12 @@ def cmd_brief(sid, cfg, st, a):
     txt = Path(TOPIC / cfg["brief_file"]).read_text()
     txt = txt.replace("{BUDGETS}", json.dumps(b, indent=1)).replace("{POLICY}", json.dumps(cfg["policy"], indent=1))
     if a.game_source:
-        txt += "\n\n=== GAME SOURCE AND INPUT DESCRIPTION (upstream exp5 prompt, MinAtar 1.0.15, GPL-3.0) ===\n"
-        txt += (work_root() / cfg["game_source_file"]).read_text()
+        txt += "\n\n=== " + cfg.get("game_source_header",
+                                "GAME SOURCE AND INPUT DESCRIPTION (upstream exp5 prompt, MinAtar 1.0.15, GPL-3.0)") + " ===\n"
+        gs = (work_root() / cfg["game_source_file"]).read_bytes()
+        if cfg.get("game_source_sha256") and hashlib.sha256(gs).hexdigest() != cfg["game_source_sha256"]:
+            raise ValueError("game context file does not match the configured sha256")
+        txt += gs.decode()
     return txt
 
 

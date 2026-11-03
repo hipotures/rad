@@ -1,0 +1,35 @@
+{
+ "run_id": "20261103T-phaseC-seaquest-v3",
+ "question": "How much does access to an environment model (full game source with permitted self-simulation) contribute to a bounded model editor's ability to improve the Seaquest Gold policy by direct weight edits, versus prose rules only?",
+ "preregistered_before_launch": true,
+ "conditions": {
+  "S": "configs/phaseC_seaquest_v3S.json + configs/phaseC_seaquest_brief_v3S.md; prompt editor_prompt_S.txt",
+  "N": "configs/phaseC_seaquest_v3N.json + configs/phaseC_seaquest_brief_v3N.md; prompt editor_prompt_N.txt"
+ },
+ "sessions": {
+  "S": [
+   "phaseC-seaquest-v3S-e1",
+   "phaseC-seaquest-v3S-e2",
+   "phaseC-seaquest-v3S-e3"
+  ],
+  "N": [
+   "phaseC-seaquest-v3N-e1",
+   "phaseC-seaquest-v3N-e2",
+   "phaseC-seaquest-v3N-e3"
+  ]
+ },
+ "editor": "claude-opus-5-5 via Claude Code general-purpose subagents, 6 in parallel, no communication; budgets as v2",
+ "budget": "<= 1.2M subagent tokens total; 6 dev passes x <= 1000 episodes, 25 sandbox runs, ~60 min per session",
+ "primary_endpoint": "per-session held-out paired difference vs Gold (2,000 fresh episodes, active controls); success = 95% CI above 0 and above the best control",
+ "secondary": [
+  "number of successful sessions per condition (S vs N); with n=3 per condition this is descriptive, not a powered test",
+  "joint comparison of all distinct submitted patches on 4,000 shared fresh seeds with Holm correction",
+  "dev-vs-held-out agreement; distinct candidates per condition (convergence); rule compliance (self-reported and from session logs)"
+ ],
+ "operator_actions_before_launch": "operator called `brief --game-source` once in sessions v3S-e1 and v3N-e1 to verify the condition-specific context (logged in those session logs)",
+ "game_context_sha256": {
+  "S": "f83f41566b10f3fa05ffc00f95bdd8e3919be1e0b89b438a88d2a7854523fa48",
+  "N": "cda7e33bdf1360ebeb23acf71910ec3767b2e19bb1440275c1386f55aad57b2f"
+ },
+ "prose_context_derivation": "work/derived/editor-context/seaquest_rules_prose.txt = seaquest_game_source.txt up to the line starting 'The game's exact implementation' + the 'THE INPUT' section up to (excluding) 'How the 6 channels are built' (reproduce.md)"
+}

@@ -1,0 +1,50 @@
+{
+ "experiment": "phaseC-seaquest-direct-edit-v3S",
+ "game": "seaquest",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "brief_file": "configs/phaseC_seaquest_brief_v3S.md",
+ "game_source_file": "derived/editor-context/seaquest_game_source.txt",
+ "network_text": "600 -> 32 (tanh) -> 32 (tanh) -> 6 logits; h1 = tanh(x @ W1 + b1), h2 = tanh(h1 @ W2 + b2), logits = h2 @ W3 + b3; input index (row*10+col)*6+channel",
+ "editor_identity": {
+  "model": "claude-opus-5-5",
+  "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+  "effort": "default",
+  "note": "v3: 2 conditions x 3 independent parallel sessions, same budgets as v2; total editor budget <= 1.2M subagent tokens (v2 measured 95k-179k per session)"
+ },
+ "budgets": {
+  "dev_passes": 6,
+  "python_runs": 25,
+  "episodes_per_pass_max": 1000,
+  "trace_episodes_max": 3,
+  "sandbox_timeout_s": 120,
+  "sandbox_mem_gib": 4,
+  "editor_wall_clock_min": 60
+ },
+ "dev_seed_base": 1000000,
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "heldout": {
+  "episodes": 1000,
+  "control_seeds": 3,
+  "seed_source": "secrets.randbelow at verification time, base >= 2e9",
+  "active_controls": true
+ },
+ "eval_workers": 2,
+ "game_source_sha256": "f83f41566b10f3fa05ffc00f95bdd8e3919be1e0b89b438a88d2a7854523fa48",
+ "condition": "full game source supplied; self-written simulator inside LAB py explicitly allowed (counts against sandbox runs/time)",
+ "changes_from_v2": [
+  "condition-specific brief and game context; budgets, policy, seeds, held-out protocol unchanged",
+  "6 parallel sessions with eval_workers 2 each (32 CPU cores available)"
+ ]
+}
