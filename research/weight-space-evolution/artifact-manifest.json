@@ -4,14 +4,14 @@
   {
    "path": "repos/lm_understand-logs",
    "class": "downloadable",
-   "how": "git clone + checkout 4d09ba6d6a7e891dd8063974dfe81b3d78e3494f (reproduce.md §2)"
+   "how": "git clone + checkout 4d09ba6d6a7e891dd8063974dfe81b3d78e3494f (reproduce.md \u00a72)"
   },
   {
    "path": "inputs/qwen3.5-0.8B-2fc0636",
    "class": "downloadable",
    "bytes": 1746942600,
    "sha256": "04b1c301231dd422b8860db31311ab2721511346a32cb1e079c4c4e5f1fe4696",
-   "how": "reproduce.md §2"
+   "how": "reproduce.md \u00a72"
   },
   {
    "path": "inputs/math500/test.jsonl",
@@ -21,7 +21,7 @@
   {
    "path": "envs/{wse,vllm,sandbox}",
    "class": "regenerable",
-   "how": "uv + configs/requirements-*.lock.txt (reproduce.md §1)"
+   "how": "uv + configs/requirements-*.lock.txt (reproduce.md \u00a71)"
   },
   {
    "path": "gold/qwen3.5-0.8B@2fc0636",
@@ -120,7 +120,7 @@
    "path": "lab-phaseC-seaquest-v2-e{1,2,3}.sh",
    "class": "regenerable",
    "what": "editor wrapper with machine-specific absolute paths",
-   "how": "reproduce.md §6"
+   "how": "reproduce.md \u00a76"
   },
   {
    "path": "sessions/phaseC-seaquest-v3{S,N}-e{1,2,3}/",
@@ -138,7 +138,7 @@
    "path": "derived/editor-context/seaquest_rules_prose.txt",
    "class": "regenerable",
    "sha256": "cda7e33bdf1360ebeb23acf71910ec3767b2e19bb1440275c1386f55aad57b2f",
-   "how": "reproduce.md §6 (v3)"
+   "how": "reproduce.md \u00a76 (v3)"
   },
   {
    "path": "editor-scratch/phaseC-seaquest-v3*/",
@@ -155,6 +155,21 @@
    "path": "Phase D target instances",
    "class": "regenerable",
    "how": "wse.targets.build(family, split, index), deterministic seeds"
+  },
+  {
+   "path": "work/derived/qwen3.5-0.8B-text-gold-mtp/",
+   "class": "regenerable",
+   "how": "python -m bench.add_mtp_head (reproduce.md \u00a79); model.safetensors hard link to the text export, model-mtp.safetensors 40,907,328 bytes sha256 b3d623fe186d4a1af87373d133751de382e05a4a7ec5f232e7e0cee81d892f4b"
+  },
+  {
+   "path": "work/raw/20261103T-vllm-perf-32k/, work/logs/20261103T-vllm-perf-32k/",
+   "class": "published as gzip evidence",
+   "how": "evidence/20261103T-vllm-perf-32k/ (per-repeat rows, meta, editor texts, engine logs); regenerable by reproduce.md \u00a79 up to numerical nondeterminism"
+  },
+  {
+   "path": "work/cache/vllm-bench/, work/cache/triton/, work/cache/inductor/",
+   "class": "regenerable cache",
+   "how": "rebuilt on first engine start (cold start about 120 s instead of about 19 s)"
   }
  ]
 }

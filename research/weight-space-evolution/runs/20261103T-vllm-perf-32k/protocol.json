@@ -1,0 +1,61 @@
+{
+ "run_id": "20261103T-vllm-perf-32k",
+ "goal": "Empirical vLLM runtime optimization of Qwen3.5-0.8B BF16 at a 32,768-token context on 2x RTX 4090; inference only (weights, tokenizer, prompts, sampling and scoring unchanged)",
+ "model": "work/derived/qwen3.5-0.8B-text-gold (Qwen/Qwen3.5-0.8B @ 2fc0636 text export, model.safetensors sha256 68194c7b...); MTP runs: work/derived/qwen3.5-0.8B-text-gold-mtp (code/bench/add_mtp_head.py); swap test also work/derived/qwen3.5-0.8B-text-p50c",
+ "environment": "results/env/environment.json (vLLM 0.33.0, torch 2.14.0+cu130, lock verified; both GPUs tensor-unlocked)",
+ "harness": "code/bench/vllm_bench.py (offline vllm.LLM, one engine per config per GPU), queue.py, run_one.sh, summarize.py, check_outputs.py, plots.py, weight_swap.py, run_swap.sh, run_stage_f.sh, gemm_probe.py",
+ "baseline_engine": {
+  "dtype": "bfloat16",
+  "max_model_len": 32768,
+  "gpu_memory_utilization": 0.85,
+  "seed": 0,
+  "disable_log_stats": false
+ },
+ "measurement": "1 discarded warm-up + 2-3 repeats per case; prefix cache reset before every repeat; startup timed separately; greedy ignore_eos for synthetic token-id workloads; Phase D pilot sampling (T=0.7, top_p 0.8, top_k 20, n=4, seed 0) for C/P",
+ "stages": [
+  {
+   "stage": 0,
+   "jobs": "configs/vllm_perf/stage0_baseline.json",
+   "what": "baseline both GPUs (A,B,C,D,E x3), exact pilot reproduction (P), cold-cache start"
+  },
+  {
+   "stage": 1,
+   "jobs": "configs/vllm_perf/stage1_screen.json (25 configs run; the 3 MTP configs were superseded by the reduced stage1b list to shorten wall time)",
+   "what": "one-factor screen"
+  },
+  {
+   "stage": "1b",
+   "jobs": "configs/vllm_perf/stage1b_mtp_reduced.json",
+   "what": "MTP 1/2/3 draft tokens, A,B,C,D(1,8,32) x2"
+  },
+  {
+   "stage": 2,
+   "jobs": "configs/vllm_perf/stage2_finalists.json",
+   "what": "combined finalists vs fresh baseline, D up to 64, x2"
+  },
+  {
+   "stage": "F",
+   "jobs": "code/bench/run_stage_f.sh (stage_f_solo/pair/tp2.json)",
+   "what": "solo vs simultaneous vs TP=2"
+  },
+  {
+   "stage": 3,
+   "jobs": "configs/vllm_perf/stage3_holdout.json",
+   "what": "hold-out workload mixes not used for selection"
+  },
+  {
+   "stage": "swap",
+   "jobs": "code/bench/run_swap.sh",
+   "what": "in-place reload_weights Gold->p50c->Gold vs fresh p50c engine"
+  }
+ ],
+ "execution_notes": [
+  "Stage 1 originally ran full workloads per config (~10 min each); after operator feedback that the benchmark took too long, the queue was stopped after 25 configs and remaining/next stages used 2 repeats and fewer concurrency levels (dispersion CV <= 0.3% justified it)",
+  "A first stage-2 launch failed immediately (relative interpreter path in a background shell); relaunched with absolute paths; no results were affected",
+  "An early smoke run left an orphaned EngineCore holding GPU0 memory (os._exit without engine shutdown); fixed by explicit engine_core.shutdown() and per-job session reaping in run_one.sh before the campaign"
+ ],
+ "outputs": {
+  "compact": "results/ (summary.json, cases.csv, startup.csv, output_equivalence.json, swap_*.swap.json, figures/, env/)",
+  "raw": "evidence/20261103T-vllm-perf-32k/ (per-repeat jsonl rows, meta, editor texts, engine logs; gzip)"
+ }
+}

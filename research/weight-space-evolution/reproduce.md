@@ -173,3 +173,38 @@ $W/envs/wse/bin/python -m wse.pilot_rescore --gens $W/raw/<new-run-id> --out $TO
 
 Targets are deterministic from (family, split, index) (`wse.targets.build`), so no target files need to be stored;
 `python -m wse.targets generate --family F2 --split pilot --n 16 --out $W/derived/targets` writes them with a manifest.
+
+## 9. vLLM 32K performance campaign (inference tuning only)
+
+Prerequisites: the vLLM environment (`work/envs/vllm`, lock `configs/requirements-vllm.lock.txt`), the text export
+`work/derived/qwen3.5-0.8B-text-gold` (§3), and for the swap test `work/derived/qwen3.5-0.8B-text-p50c`. Record the
+GPU unlock state first (absolute numbers depend on it; see `runs/20261103T-vllm-perf-32k/results/env/environment.json`).
+
+```bash
+cd code
+C=20261103T-vllm-perf-32k          # use a fresh campaign id for a new attempt; results are never overwritten
+PY=../work/envs/vllm/bin/python
+# MTP drafter checkpoint (backbone hard-linked, Gold's mtp.* head copied)
+$PY -m bench.add_mtp_head --text-dir ../work/derived/qwen3.5-0.8B-text-gold \
+    --gold-st "../work/gold/qwen3.5-0.8B@2fc0636/weights.safetensors" --out ../work/derived/qwen3.5-0.8B-text-gold-mtp
+# stages (each job: one engine on one GPU; two GPUs in parallel)
+for s in stage0_baseline stage1_screen stage1b_mtp_reduced stage2_finalists; do
+  $PY -m bench.queue ../configs/vllm_perf/$s.json --campaign $C; done
+CAMPAIGN=$C bench/run_stage_f.sh                      # solo / both GPUs / TP=2
+$PY -m bench.queue ../configs/vllm_perf/stage3_holdout.json --campaign $C
+CAMPAIGN=$C bench/run_swap.sh                         # in-place checkpoint swap vs fresh engine
+# summaries, behaviour checks, figures
+R=../runs/$C/results
+$PY -m bench.summarize --campaign $C --out $R
+$PY -m bench.check_outputs --campaign $C --pilot ../work/raw/20261103T-phaseD-pilot-e0/E0_think0_generations.jsonl \
+    --case P_free_max4096 --cand pilot_exact_g0 --out $R/output_equivalence.json
+$PY -m bench.check_outputs --campaign $C --ref baseline_g0 --cand baseline_g1 m_attn_flashinfer s_mns1024 m_kv_fp8 \
+    sp_mtp1 sp_mtp2 sp_mtp3 --out $R/output_equivalence.json
+../work/envs/wse/bin/python -m bench.plots --summary $R/summary.json --out $R/figures --ref fin_ref_baseline \
+    --highlight fin_p1_flashinfer,fin_p3_fi_mns1024_mnbt16k,fin_p2_fi_mnbt32k_mns512_kvfp8
+```
+
+Expected checks: `pilot_exact_g0` reproduces the committed pilot texts (identical_share 1.0); `baseline_g0` and
+`baseline_g1` agree within about 1%; swap hashes equal the fresh-engine hashes. Using a profile in the Phase D pilot:
+`python -m wse.editor_pilot ... --engine-json '{"attention_backend": "FLASHINFER", "max_num_seqs": 1024,
+"max_num_batched_tokens": 16384}'` (opt-in; the default engine is unchanged and remains the bit-exact reference).

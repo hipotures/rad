@@ -1,0 +1,13 @@
+{
+ "purpose": "Profile 1: fastest single request at 32K (prefill/TTFT and sustained decode, concurrency 1)",
+ "llm_kwargs": {
+  "dtype": "bfloat16",
+  "max_model_len": 32768,
+  "gpu_memory_utilization": 0.85,
+  "seed": 0,
+  "attention_backend": "FLASHINFER"
+ },
+ "kept_defaults": "async scheduling on, chunked prefill with max_num_batched_tokens 8192, CUDA graphs FULL_AND_PIECEWISE (-O2), prefix caching on (Mamba 'align' mode)",
+ "rejected": "MTP speculative decoding (slower at concurrency 1 for 16-32K contexts), eager/-O0/-O1/PIECEWISE graphs (decode -25% to -75%)",
+ "vllm_serve_cli": "--dtype bfloat16 --max-model-len 32768 --gpu-memory-utilization 0.85 --seed 0 --attention-backend FLASHINFER"
+}

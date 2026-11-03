@@ -118,7 +118,7 @@ def main(argv=None):
                                                               for k, v in d.items() if k != "output_sha256"},
                               "output_sha12": d["output_sha256"][0][:12]})
         summ[name] = cfg
-    (out / "summary.json").write_text(json.dumps(summ, indent=1))
+    (out / "summary.json").write_text(json.dumps(summ, separators=(",", ":")))
     for fn, rows in (("cases.csv", case_rows), ("startup.csv", start_rows)):
         if rows:
             keys = list(dict.fromkeys(k for r in rows for k in r))

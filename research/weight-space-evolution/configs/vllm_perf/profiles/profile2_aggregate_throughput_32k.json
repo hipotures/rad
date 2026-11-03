@@ -1,0 +1,26 @@
+{
+ "purpose": "Profile 2: maximum batched throughput at 32K, one independent engine per GPU",
+ "llm_kwargs": {
+  "dtype": "bfloat16",
+  "max_model_len": 32768,
+  "gpu_memory_utilization": 0.85,
+  "seed": 0,
+  "attention_backend": "FLASHINFER",
+  "max_num_batched_tokens": 16384,
+  "max_num_seqs": 1024
+ },
+ "do_not": "raise gpu_memory_utilization above 0.85 with max_num_batched_tokens 32768 (0.92 OOMs in the GDN prefill kernel on a 30K prompt); use tensor_parallel_size=2 (no P2P: slower than one GPU)",
+ "optional_nonequivalent": {
+  "kv_cache_dtype": "fp8",
+  "note": "+27% (32 x 30K) / +43% (64 x 30K) more throughput, KV capacity 1.31M -> 2.23M tokens, but outputs change (39-79% of Phase D samples identical); acceptable only where bit-reproducibility versus BF16-KV results is not needed"
+ },
+ "vllm_serve_cli": "--dtype bfloat16 --max-model-len 32768 --gpu-memory-utilization 0.85 --seed 0 --attention-backend FLASHINFER --max-num-batched-tokens 16384 --max-num-seqs 1024",
+ "aggressive_variant": {
+  "llm_kwargs_override": {
+   "max_num_batched_tokens": 32768,
+   "max_num_seqs": 512
+  },
+  "gain_vs_recommended": "+1.5% at 32 x 30K (35.2k vs 34.7k total tok/s)",
+  "risk": "NVML peak 24.3 GB of 24.5 GB (activation memory of the 32K-token GDN prefill chunk exceeds the profiler estimate); with gpu_memory_utilization 0.92 it OOMs"
+ }
+}

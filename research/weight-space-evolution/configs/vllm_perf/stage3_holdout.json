@@ -1,0 +1,67 @@
+[
+ {
+  "name": "ho_ref_baseline",
+  "engine": {},
+  "workloads": "D,P",
+  "args": [
+   "--repeats",
+   "2",
+   "--d-shapes",
+   "16384x2048,8192x256",
+   "--d-levels",
+   "2,24"
+  ]
+ },
+ {
+  "name": "ho_p2_fi_mnbt32k_mns512",
+  "engine": {
+   "attention_backend": "FLASHINFER",
+   "max_num_batched_tokens": 32768,
+   "max_num_seqs": 512
+  },
+  "workloads": "D,P",
+  "args": [
+   "--repeats",
+   "2",
+   "--d-shapes",
+   "16384x2048,8192x256",
+   "--d-levels",
+   "2,24"
+  ]
+ },
+ {
+  "name": "ho_p3_fi_mns1024_mnbt16k",
+  "engine": {
+   "attention_backend": "FLASHINFER",
+   "max_num_seqs": 1024,
+   "max_num_batched_tokens": 16384
+  },
+  "workloads": "D,P",
+  "args": [
+   "--repeats",
+   "2",
+   "--d-shapes",
+   "16384x2048,8192x256",
+   "--d-levels",
+   "2,24"
+  ]
+ },
+ {
+  "name": "ho_p2_kvfp8",
+  "engine": {
+   "attention_backend": "FLASHINFER",
+   "max_num_batched_tokens": 32768,
+   "max_num_seqs": 512,
+   "kv_cache_dtype": "fp8"
+  },
+  "workloads": "D,P",
+  "args": [
+   "--repeats",
+   "2",
+   "--d-shapes",
+   "16384x2048,8192x256",
+   "--d-levels",
+   "2,24"
+  ]
+ }
+]

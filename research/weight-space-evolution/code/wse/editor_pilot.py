@@ -66,6 +66,10 @@ def main(argv=None):
     ap.add_argument("--constrained", type=int, default=0,
                     help="1: grammar-constrained output (T0: one of 'ANSWER: A..D'; T1/T2: a ```edit block of 1-8 DSL "
                          "statements); non-thinking mode only (design baseline 5, 'format-fixed' editor)")
+    ap.add_argument("--engine-json", default="{}",
+                    help="extra vllm.LLM keyword arguments (JSON), e.g. a profile from configs/vllm_perf/profiles/; "
+                         "default {} keeps the original pilot engine settings. Not bit-identical to the default "
+                         "engine when scheduling/kernels change (see runs/20261103T-vllm-perf-32k/report.md)")
     a = ap.parse_args(argv)
     out, raw = Path(a.out), Path(a.raw_dir)
     (out / "results").mkdir(parents=True, exist_ok=True)
@@ -96,8 +100,10 @@ def main(argv=None):
                               structured_outputs=StructuredOutputsParams(
                                   choice=[f"ANSWER: {c}" for c in "ABCD"]) if tier == "T0" else
                               StructuredOutputsParams(regex=DSL_REGEX)) for _, tier, _, _ in jobs]
-    llm = LLM(model=a.model, dtype="bfloat16", gpu_memory_utilization=a.gpu_mem,
-              max_model_len=a.max_tokens + 3072, seed=0)
+    engine = dict(model=a.model, dtype="bfloat16", gpu_memory_utilization=a.gpu_mem,
+                  max_model_len=a.max_tokens + 3072, seed=0)
+    engine.update(json.loads(a.engine_json))
+    llm = LLM(**engine)
     t1 = time.time()
     outs = llm.generate(texts, sps)
     gen_s = time.time() - t1
@@ -113,7 +119,7 @@ def main(argv=None):
             raw_rows.append({"id": inst["id"], "tier": tier, "sample": k, "prompt": prompt if k == 0 else None,
                              "output": txt, **{x: r[x] for x in ("valid", "error", "recovery")}})
     base = baselines(insts, np.random.default_rng(12345))
-    summ = {"label": a.label, "model": a.model, "thinking": a.thinking, "samples": a.samples,
+    summ = {"label": a.label, "model": a.model, "engine_overrides": json.loads(a.engine_json), "thinking": a.thinking, "samples": a.samples,
             "per_family": a.per_family, "max_tokens": a.max_tokens, "sampling": sp,
             "build_s": round(build_s, 1), "generation_s": round(gen_s, 1),
             "gen_tokens_total": int(sum(r["gen_tokens"] for r in rows)),

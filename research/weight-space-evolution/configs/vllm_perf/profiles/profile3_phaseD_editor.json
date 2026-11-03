@@ -1,0 +1,22 @@
+{
+ "purpose": "Profile 3: Weight-Space Evolution Phase D editor workload (144 prompts x 4 samples, short/constrained outputs, repeated candidate evaluation)",
+ "llm_kwargs": {
+  "dtype": "bfloat16",
+  "max_model_len": 32768,
+  "gpu_memory_utilization": 0.85,
+  "seed": 0,
+  "attention_backend": "FLASHINFER",
+  "max_num_seqs": 1024,
+  "max_num_batched_tokens": 16384
+ },
+ "requirements": "keep prefix caching ON (n=4 samples share the prompt; off = -45% to -61%); max_num_seqs must be >= number of sequences in one generate() call (576) to avoid queueing",
+ "usage": "python -m wse.editor_pilot <usual args> --engine-json '{\"attention_backend\": \"FLASHINFER\", \"max_num_seqs\": 1024, \"max_num_batched_tokens\": 16384}'",
+ "llm_kwargs_pilot_override": {
+  "attention_backend": "FLASHINFER",
+  "max_num_seqs": 1024,
+  "max_num_batched_tokens": 16384
+ },
+ "caveat": "not bit-identical to the original pilot engine (sampled texts differ for 4-46% of samples; mean recovery differences within noise). For exact reproduction of the committed Phase D pilot results use the default engine (no --engine-json).",
+ "candidate_swap": "see report section 'Checkpoint swap' for in-place reload_weights between candidates",
+ "vllm_serve_cli": "--dtype bfloat16 --max-model-len 32768 --gpu-memory-utilization 0.85 --seed 0 --attention-backend FLASHINFER --max-num-seqs 1024 --max-num-batched-tokens 16384"
+}
