@@ -4,9 +4,9 @@
 
 This repository is the persistent execution workspace for the RaD project.
 
-The canonical remote is `hipotures/rad` on GitHub. On this host the checkout root is `/srv/ai/research`; the old timestamped study is a child directory. If launched elsewhere, locate this checkout or use a clone of the canonical repository and verify its origin before creating task files. Do not treat an arbitrary current directory as the research repository.
+The canonical remote is `hipotures/rad` on GitHub. The repository checkout is relocatable: determine its root with `git rev-parse --show-toplevel` and verify its origin. If the agent is launched inside a designated research topic directory, **that current directory is its working directory**; do not relocate it or search for an old absolute checkout path. Use the Git root only for repository-wide policy, Git operations, and locating shared files. The old timestamped studies are historical subdirectories.
 
-Historical `/srv/ai/benchmarks` and the timestamped residency laboratory are parts of the same research record. Durable benchmark files are versioned under `benchmarks/`; user-owned serving starters/configurations are under `launchers/`. Read `docs/workspaces.md` and the shared index before deciding that only the current directory belongs to the project. External execution locations remain stable; the recorded mappings distinguish the Git snapshot from the live workspace.
+Historical benchmark and timestamped residency laboratories are part of the research record; old absolute paths in historical reports are **not current workspace instructions**. Durable benchmark files are versioned under `benchmarks/`; user-owned serving starters/configurations are under `launchers/`. Read `docs/workspaces.md` and the shared index as historical/contextual records, not as authority to change the current working directory.
 
 Agents working here are research executors. They are given a concrete goal and are expected to investigate, test, analyze, implement, measure, document, and preserve results. Do not stop at planning when the requested work can be carried out.
 
@@ -108,7 +108,7 @@ research/<topic>/
 
 Authored source goes in `code/`. Global `src/` and `source/` exclusions protect legacy source clones; do not put new authored code there and silently lose it. Check whether every essential new file is ignored with `git check-ignore -v <path>`, and correct a narrowly scoped rule when needed. New languages/formats must be permitted by both `.gitignore` and the archive validator before publication.
 
-Large/disposable work belongs outside the Git checkout by default. On this host use a task-owned root such as `/srv/ai/work/rad/<topic>/<run-id>/`; elsewhere choose and record a writable equivalent. An optional `RAD_WORK_ROOT` configuration must not embed a machine-specific absolute path in otherwise portable code. Keep separate subdirectories such as:
+Large/disposable work must be excluded from Git. Prefer a task-owned ignored `work/` subdirectory **inside the active research topic** when that topic's instructions require work to remain in the current directory; otherwise an explicitly configured external data root may be used. Never infer a current location from historical paths. An optional `RAD_WORK_ROOT` configuration must not embed a machine-specific absolute path in otherwise portable code. Within the selected work directory, keep separate subdirectories such as:
 
 ```text
 inputs/     # Original large inputs; read-only after acquisition/validation
@@ -121,7 +121,7 @@ logs/       # Full execution logs
 tmp/        # Disposable temporary work
 ```
 
-If local work must live inside the topic, use an ignored `work/` directory. Do not compile into `code/`, copy a downloaded repository into the durable tree, create nested Git links, or stage a symlink to a large external directory. Record external paths in manifests instead. Do not reuse another task's writable build/output directory.
+When local work belongs inside the topic, use an ignored `work/` directory and store all downloaded weights, third-party checkouts, build outputs and ephemeral data there. Do not compile into `code/`, copy a downloaded repository into the durable source tree, create nested Git links, or stage a symlink to a large external directory. Record relative work paths, provenance and recovery instructions in tracked manifests. Do not reuse another task's writable build/output directory.
 
 The topic `.gitignore` must exist before execution and cover any task-specific outputs. A minimal starting point is:
 
