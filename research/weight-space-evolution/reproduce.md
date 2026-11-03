@@ -1,12 +1,15 @@
 # Reproduction guide
 
-All commands run from this topic directory unless stated. Large/disposable material lives in a disk-backed work root
-outside Git; **do not use /tmp** (RAM-backed on the reference host). Set:
+All commands run from this topic directory unless stated. Large/disposable material lives in this topic's ignored
+`work/` directory (inside the working directory, excluded from Git tracking). **Do not use /tmp** (RAM-backed on the
+reference host). Set:
 
 ```bash
-export WSE_WORK_ROOT=$HOME/work/rad/weight-space-evolution   # any writable disk path
-export TMPDIR=$WSE_WORK_ROOT/tmp
-W=$WSE_WORK_ROOT; TOPIC=$PWD
+TOPIC=$PWD; W=$TOPIC/work
+export WSE_WORK_ROOT=$W TMPDIR=$W/tmp      # WSE_WORK_ROOT defaults to <topic>/work when unset
+# keep every tool cache inside the topic (nothing is written to $HOME or /tmp)
+export UV_CACHE_DIR=$W/cache/uv HF_HOME=$W/cache/hf XDG_CACHE_HOME=$W/cache VLLM_CACHE_ROOT=$W/cache/vllm \
+       TRITON_CACHE_DIR=$W/cache/triton FLASHINFER_WORKSPACE_BASE=$W/cache TORCHINDUCTOR_CACHE_DIR=$W/cache/inductor
 mkdir -p $W/{repos,inputs,derived,envs,raw,logs,tmp,cache}
 ```
 
@@ -118,6 +121,6 @@ distributions, not exact values. To re-score an existing candidate on the record
 
 ## 7. Recovery notes
 
-- Everything under `$WSE_WORK_ROOT` is downloadable or deterministically regenerable from the commands above,
+- Everything under `work/` is downloadable or deterministically regenerable from the commands above,
   except editor session transcripts and raw logs, which are archived as text evidence under `evidence/`.
 - Gold directories are made read-only; to delete a work root, first `chmod -R u+w $W/gold $W/sessions`.

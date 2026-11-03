@@ -9,7 +9,7 @@ TOPIC_ROOT = Path(__file__).resolve().parents[2]
 
 
 def work_root() -> Path:
-    """Disk-backed execution root. Set WSE_WORK_ROOT; fallback is the topic's ignored work/ directory.
+    """Execution root for large/transient payloads: the topic's ignored work/ directory (override: WSE_WORK_ROOT).
 
     Never defaults to /tmp (RAM-backed on the reference host)."""
     p = Path(os.environ.get("WSE_WORK_ROOT") or (TOPIC_ROOT / "work"))

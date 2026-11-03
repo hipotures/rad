@@ -26,3 +26,12 @@ Questions 2–4 are hypotheses for later investigation. Do not presume they have
 The first task is to inspect and reproduce the published edit mechanism, then establish a bounded harness and test a small, objectively scorable weight edit using Codex Sol.
 
 All research code, reports and documentation are written in English. All work, including model downloads and experiments, takes place inside this directory. Large checkpoints, dependencies and transient execution payloads live in ignored `work/` here (outside **Git tracking**, not outside the working directory).
+
+## Current state (2026-11-03, interrupted by a host restart)
+
+- Phase A: [audit](reports/phaseA_upstream_audit.md); p10c/p25c/p50c rebuild bit-exactly ([run](runs/20261103T-p50c-reconstruction/report.md)).
+- Phase B: harness in [`code/wse/`](code/wse/) (14 tests pass); MinAtar evaluator validated against published exp5 scores ([run](runs/20261103T-minatar-evaluator-validation/report.md)).
+- Phase C: editor session `phaseC-seaquest-v1-e1` was in progress (2 of 6 dev passes, 1 candidate, not submitted) when the host was restarted; its lab state and log persist in `work/sessions/`, but the editor conversation is lost. Not yet evaluated.
+- Bounded MATH-500 check of Gold vs p50c (`code/scripts/run_p50c_math500_bounded.sh`) was interrupted before writing results; must be re-run.
+- Phase D: [bootstrap gate design](reports/phaseD_bootstrap_gate_design.md) (not executed).
+- Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.json](input-manifest.json), [artifact-manifest.json](artifact-manifest.json). Payloads live in ignored `work/`.
