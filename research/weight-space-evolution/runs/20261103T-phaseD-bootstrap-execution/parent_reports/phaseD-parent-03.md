@@ -1,6 +1,6 @@
 ## Sealed candidate
 
-**`p-41d9a0038798` (M100)**  
+**`p-41d9a0038798` (M100)**
 Complete lineage: **Gold → M100**, with `parent_id=null`. No imported patches.
 
 **Outcome:** reduced aggregate harm, plus one reproducible full repair—not demonstrated broad repair capability.

@@ -1,6 +1,6 @@
 ## Sealed candidate
 
-**`p-f6dc81f3da9a`**  
+**`p-f6dc81f3da9a`**
 Complete lineage: **Gold → sealed patch**, with no imported patches.
 
 **Outcome: reduced harm, not demonstrated useful repair.** The null hypothesis remains unrefuted.

@@ -1,6 +1,6 @@
 ## Sealed candidate
 
-**`p-9378a8c33b6a`**  
+**`p-9378a8c33b6a`**
 Complete lineage: **Gold → candidate**, with no intermediate parent.
 
 Exact submitted recipe:

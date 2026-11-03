@@ -353,3 +353,27 @@ PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_patch_archive recover 
 Lossless exports record indices and target-dtype bit patterns, including BF16. Recovery validates the resulting
 content-addressed patch ID. The original compressed NPZ container may differ, while all recovered tensor bytes
 and patch IDs must match. Do not use the float-oriented legacy patch exporter to reinterpret BF16 bits.
+
+
+Completed run: four parents, 53 admitted dev passes, 46 accepted patches and four sealed candidates; 49 independent
+final jobs. The final driver separates GPU cohorts: E0, parents and their matched controls share the primary GPU;
+legacy controls have a separate E0 on the other GPU. It also checks a select-only E0 repeat before admitting test.
+This scheduling addresses the observed dev repeat anomaly without changing the frozen benchmark. The final report
+and `results/final_analysis.json` retain all per-cell statistics, valid-only comparisons, transfer and resource costs.
+
+Analysis/report and lossless recovery verification, with the completed local payloads present:
+
+```bash
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_repeat_audit
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_analyze --root "$PWD/work/phaseD-bootstrap/execution"
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_report
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_recovery_check
+```
+
+The recovery check was actually exercised for all 46 parent patches, in a new registry whose only shared payload
+is a read-only hard link to Gold. All patch IDs and tensor checksums matched. Production Gold remained unchanged.
+The provider's immutable model build revision is unavailable; reproducibility of frontier proposals is not claimed.
+The proposals themselves are losslessly recoverable from the committed gzip evidence and public pinned Gold.
+Held-out target regeneration still requires the original private salt (artifact-manifest.json records the backup gap).
+Private CLI homes must never be archived; task-created authentication copies were removed after parent completion.
+Readable parent reports normalize Markdown trailing whitespace; the exact original outputs remain in event archives.

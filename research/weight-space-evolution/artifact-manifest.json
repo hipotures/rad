@@ -225,6 +225,46 @@
    "what": "Isolated per-session dev prompt views and briefs; no held-out answers or salt",
    "how": "PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_prepare; configs/phaseD_bootstrap defines sessions and exact frozen source lock",
    "note": "Private salt recovery gap remains as recorded above; these views do not supply provider/tool isolation."
+  },
+  {
+   "path": "raw/20261103T-phaseD-bootstrap-execution/",
+   "class": "published as gzip evidence",
+   "what": "53 full dev evaluation jobs and two worker records",
+   "evidence": "evidence/20261103T-phaseD-bootstrap-dev/"
+  },
+  {
+   "path": "raw/20261103T-phaseD-bootstrap-parent-provenance/",
+   "class": "published as gzip evidence",
+   "what": "all four parent event streams, lab tool journals, completed control state and lossless JSON exports of all 46 accepted patches",
+   "evidence": "evidence/20261103T-phaseD-bootstrap-parent-provenance/",
+   "recovery": "Obtain pinned Gold, decompress patch-exports, recover ancestors before children with wse.bootstrap_patch_archive. All 46 IDs and tensor hashes were verified in a fresh registry."
+  },
+  {
+   "path": "raw/20261103T-phaseD-bootstrap-final/",
+   "class": "published as gzip evidence",
+   "what": "49 operator-only final jobs: select/test/transfer for 16 fixed evaluator entries plus a technical Gold select repeat; includes all final/control lineage exports",
+   "evidence": "evidence/20261103T-phaseD-bootstrap-final/"
+  },
+  {
+   "path": "phaseD-bootstrap/execution/{ledger.sqlite,queue,final-queue-primary,final-queue-controls}/",
+   "class": "completed control state; research content archived, binary database and queues disposable",
+   "what": "not an authority to control future live processes; session and candidate state plus tool events are preserved in the provenance archive"
+  },
+  {
+   "path": "phaseD-bootstrap/*/homes/",
+   "class": "private excluded execution state",
+   "what": "never archived or committed; contains local CLI account/session state. Eight task-created authentication copies were removed after all parent conversations terminated. Original existing login was not modified."
+  },
+  {
+   "path": "tmp/bootstrap-recovery-*/",
+   "class": "disposable validation payload",
+   "what": "fresh registry used to reconstruct every archived parent patch; Gold weights are read-only hard links, not new downloads"
+  },
+  {
+   "path": "raw/20261103T-phaseD-bootstrap-broker-smoke/",
+   "class": "published as gzip evidence",
+   "what": "five operator-authored synthetic transport controls and two Gold audits; not parent-bootstrap evidence",
+   "evidence": "evidence/20261103T-phaseD-bootstrap-broker-smoke/"
   }
  ]
 }

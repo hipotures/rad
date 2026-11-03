@@ -1,5 +1,7 @@
 # Phase D — Parent-to-Editor Bootstrap
 
+**Status:** Completed bounded experiment on 2026-11-03. Four independent parents and independent select/test/transfer evaluation produced no confirmed editing improvement. See [the final report](runs/20261103T-phaseD-bootstrap-execution/report.md).
+
 ## Objective
 
 Determine whether a frontier parent can create a Qwen3.5-0.8B candidate with measurably better ability to edit separate neural networks, using direct numerical weight modifications only. The initial laboratory goal is complete; its brief is preserved in [reports/initial_goal_completed.md](reports/initial_goal_completed.md).

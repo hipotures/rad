@@ -26,7 +26,9 @@ def read_rows(raw, split, editors, expected_instances):
         path=raw/(eid+'__'+split+'.jsonl')
         rows=[json.loads(line) for line in path.read_text().splitlines()]
         keys={(r['id'],r['tier'],r['sample']) for r in rows}
-        if len(rows)!=expected_instances*16 or len(keys)!=len(rows):
+        ids={r['id'] for r in rows}
+        expected={(iid,tier,sample) for iid in ids for tier in ('T0','T1','T2','T2P') for sample in range(4)}
+        if len(ids)!=expected_instances or keys!=expected or len(rows)!=expected_instances*16 or len(keys)!=len(rows):
             raise ValueError('incomplete or duplicated final sample grid')
         if any(r['editor_id']!=eid or r['tier'] not in ('T0','T1','T2','T2P') or r['sample'] not in range(4) for r in rows):
             raise ValueError('unexpected editor/tier/sample identity')
@@ -74,6 +76,12 @@ def main():
                                  for cell in sorted({f"{r['family']}/{r['tier']}" for r in er})}}
             summary=json.loads((raw/(eid+'__'+split+'.summary.json')).read_text())
             stats[eid]['resources']={'generation':summary['gen'],'transition':summary['transition'],'score_s':summary['score_s']}
+            g=summary['gen']; gpu_seconds=g['generate_s']+g['round2_s']+summary['transition'].get('total_s',0.0)
+            total_recovery=sum(r['recovery'] for r in er)
+            stats[eid]['resource_normalized']={'recovery_per_1k_generated_tokens':total_recovery*1000/max(g['gen_tokens'],1),
+                       'recovery_per_gpu_second':total_recovery/max(gpu_seconds,1e-9),'gpu_seconds':gpu_seconds,
+                       'definition':'sum recovery over all frozen cells divided by tokens or generation+round2+transition seconds; CPU scoring and probe feedback time reported separately'}
+
         contrasts={}
         for sid in available:
             arows=[r for r in rows if r['editor_id']==sid and f"{r['family']}/{r['tier']}" in cells]
@@ -85,8 +93,18 @@ def main():
             contrasts[sid]={'jointly_valid_vs_E0':R.paired(jointly_valid,ref,with_p=True),
                             'vs_matched_random':R.paired(arows,null,with_p=True),
                             'note':'Secondary contrasts; no additional gate threshold is asserted.'}
+        for label in ('jointly_valid_vs_E0','vs_matched_random'):
+            adjusted_secondary=R.holm({sid:contrasts.get(sid,{}).get(label,{}).get('p_boot') or 1.0 for sid in parents})
+            for sid in available:contrasts[sid][label]['p_holm_across_four_parents']=adjusted_secondary[sid]
+        f5={}
+        if split=='transfer':
+            reference=[r for r in rows if r['editor_id']=='E0' and r['family']=='F5']
+            for sid in available:
+                f5[sid]=R.paired([r for r in rows if r['editor_id']==sid and r['family']=='F5'],reference,with_p=True)
+            adjusted_f5=R.holm({sid:f5.get(sid,{}).get('p_boot') or 1.0 for sid in parents})
+            for sid in available:f5[sid]['p_holm_across_four_parents']=adjusted_f5[sid]
         result['splits'][split]={'verified_sample_grid':True,'instances_per_editor':protocol['manifests'][split]['n'],
-                                 'primary_endpoint':endpoints,'editors':stats,'secondary_contrasts':contrasts}
+                                 'primary_endpoint':endpoints,'editors':stats,'secondary_contrasts':contrasts,'F5_secondary':f5}
     with sqlite3.connect(root/'ledger.sqlite') as db:
         result['tool_counts']={sid:json.loads(counts) for sid,counts in db.execute('SELECT id,counts FROM sessions')}
     for sid in parents:

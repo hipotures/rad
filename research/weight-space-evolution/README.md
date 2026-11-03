@@ -1,6 +1,6 @@
 # Weight-Space Evolution
 
-**Status:** Initial laboratory goal complete. Phase D parent-to-editor bootstrap execution is active using existing Codex access, authorized by user steering; the benchmark remains frozen.
+**Status:** Phase D bootstrap study completed: four frontier-parent sessions, 53 dev passes, four distinct sealed candidates; none improved the frozen test endpoint or showed confirmed transfer.
 
 This directory is the working root for Codex Sol research into **direct weight-space programming** of neural networks and the longer-term possibility of population-based recursive improvement through model-to-model edits.
 
@@ -48,12 +48,21 @@ Goal summary (completion criteria, reproduced vs untested): [reports/summary.md]
 Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.json](input-manifest.json),
 [artifact-manifest.json](artifact-manifest.json). Payloads live in the ignored `work/` directory.
 
-**Active next goal:** the four-parent Phase D bootstrap experiment is running through existing Codex access,
-authorized by subsequent user steering. The benchmark stays frozen; see the [execution report](runs/20261103T-phaseD-bootstrap-execution/report.md).
+**Phase D result:** the completed [parent-to-editor bootstrap study](runs/20261103T-phaseD-bootstrap-execution/report.md)
+found no confirmed gain from four independent gpt-6.1-sol / medium parents. The best test delta was +0.004645
+[−0.001639, +0.011901], Holm p 0.748. None of the four test confidence intervals excluded zero; transfer also
+showed no confirmed improvement. This is a bounded negative result, not a general impossibility claim.
 
-## Active Phase D execution
+## Completed Phase D execution
 
-The [execution goal](GOAL.md), [proposed budget](configs/phaseD_bootstrap/budget.json),
-[four independent session specifications](configs/phaseD_bootstrap/sessions.json) and
-[preparation report](runs/20261103T-phaseD-bootstrap-preparation/report.md) start the next research goal.
-The benchmark protocol remains unchanged. The user withdrew the earlier monetary/token approval wait; see the [execution report](runs/20261103T-phaseD-bootstrap-execution/report.md) and updated [authorization](configs/phaseD_bootstrap/budget.json). Bootstrap outcomes are not established yet.
+- [Final report](runs/20261103T-phaseD-bootstrap-execution/report.md), [complete per-domain analysis](runs/20261103T-phaseD-bootstrap-execution/results/final_analysis.json), [parent reports](runs/20261103T-phaseD-bootstrap-execution/parent_reports/).
+- [Execution goal](GOAL.md), [four session specifications](configs/phaseD_bootstrap/sessions.json), [configuration and authorization](configs/phaseD_bootstrap/budget.json).
+- [All 46 proposals and parent tool histories](evidence/20261103T-phaseD-bootstrap-parent-provenance/), [dev rows](evidence/20261103T-phaseD-bootstrap-dev/), [final rows](evidence/20261103T-phaseD-bootstrap-final/).
+
+The frozen benchmark is unchanged. All 46 archived patches were recovered with identical tensor hashes in a
+fresh registry. Dev repeats exposed occasional cross-GPU output differences; final primary comparisons used one
+GPU and passed a 1,664-sample Gold repeat before held-out scoring. Both GPUs were shut down cleanly. The
+held-out salt's private backup location remains an explicit recovery gap.
+
+The next useful investigation is the dev repeat variability and a different bounded parent mechanism, before
+any larger population or recursive experiment.
