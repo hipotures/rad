@@ -127,8 +127,9 @@ def main():
     if not result['gold_verified']:
         raise ValueError('Gold integrity failed')
     result['paid_sessions_launched'] = 0
-    result['salt_backup_status'] = 'external private persistent backup not identified; launch prerequisite'
-    out = TOPIC / 'runs/20261103T-phaseD-bootstrap-preparation/results/preflight.json'
+    result['salt_backup_status'] = 'private persistent backup not identified; recovery gap disclosed'
+    out = TOPIC / 'runs/20261103T-phaseD-bootstrap-execution/results/preflight.json'
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result, indent=2))
 

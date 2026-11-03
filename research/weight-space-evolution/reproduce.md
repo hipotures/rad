@@ -294,3 +294,34 @@ Do not treat `paid_launch_enabled` as access control; no executable paid launche
 Seal one candidate per parent before select. Run select once operator-side, return no feedback, then run the final
 fixed candidate set with E0 and controls on test/transfer once. Preserve every failure and duplicate hash. Use the
 frozen primary cells, decoding and `pd2_report` inference; no candidate replacement after select or test.
+
+
+## 12. Authorized existing-Codex four-parent execution
+
+Section 11 describes the earlier preparation milestone. The user subsequently withdrew the proposed monetary/token
+caps and approval waiting. The updated execution authorization and bounded local tool budgets are in
+`configs/phaseD_bootstrap/budget.json`; the model is the currently configured gpt-6.1-sol / medium through the
+existing ChatGPT login. No new service credential is created. Do not archive `work/phaseD-bootstrap/*/homes/`:
+those private directories contain a copy of the existing CLI login.
+
+```bash
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_prepare
+PYTHONPATH=code work/envs/wse/bin/python -m pytest -q code/tests/test_bootstrap_broker.py code/tests/test_bootstrap_prepare.py code/tests/test_phaseD_v2.py
+# Synthetic transport/evaluator smoke, only once; no parent edits:
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_smoke
+# Four fresh parent conversations plus one persistent evaluator on each discovered GPU UUID:
+PYTHONPATH=code work/envs/wse/bin/python -m wse.bootstrap_campaign
+```
+
+These entrypoints refuse to overwrite existing runs. A running campaign is identified by its live supervisor
+process, CLI/worker process handles and logs; inspect before resuming. Do not restart because an observation times
+out. The SQLite ledger preserves counters across tool-server restarts. The supervisor owns child process groups,
+drains the queue after parents finish, and stops workers. No held-out job is admitted by the parent broker or dev
+worker. The frozen evaluator is imported by `bootstrap_worker` with an operator-only live registry mapping; frozen
+files are neither edited nor overwritten.
+
+Only the narrow lab tool is authorized for parent research. Numerical Python runs with no network, host home,
+repository, credentials or torch; Gold tensor views are read-only. The outer Codex filesystem namespace independently
+hides the topic from any remaining builtin file tool, and the privileged broker is outside over a session-specific
+Unix socket. Model network access is used only by Codex itself; no model-controlled shell/browser/network tool is
+exposed. Probes and executable namespace checks must pass before launch.
