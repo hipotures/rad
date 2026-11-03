@@ -1,0 +1,9 @@
+{
+ "run_id": "20261103T-minatar-evaluator-validation",
+ "question": "Does the WSE MinAtar forward-pass service reproduce upstream exp5 scores of the published hand-written networks?",
+ "inputs": ["upstream-lm_understand-logs@4d09ba6 (exp5 networks + eval/minatar_eval.json)", "minatar-1.0.15"],
+ "protocol": "1,000 episodes per game, seeds 0..999 (upstream seeds unpublished), sticky 0.1, softmax sampling, 10k-step cap, difficulty ramping on",
+ "acceptance": "|z| < 3 for the difference of means vs published (both SEs)",
+ "code": ["code/wse/minatar_eval.py", "code/wse/validate_minatar.py"],
+ "outputs": {"results/validation.json": "per-game summaries"}
+}

@@ -1,0 +1,26 @@
+{
+ "experiment": "phaseC-seaquest-direct-edit-v1",
+ "game": "seaquest",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "brief_file": "configs/phaseC_seaquest_brief.md",
+ "game_source_file": "derived/editor-context/seaquest_game_source.txt",
+ "network_text": "600 -> 32 (tanh) -> 32 (tanh) -> 6 logits; h1 = tanh(x @ W1 + b1), h2 = tanh(h1 @ W2 + b2), logits = h2 @ W3 + b3; input index (row*10+col)*6+channel",
+ "editor_identity": {"model": "claude-opus-5-5", "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer", "effort": "default"},
+ "budgets": {
+  "dev_passes": 6,
+  "python_runs": 25,
+  "episodes_per_pass_max": 300,
+  "trace_episodes_max": 3,
+  "sandbox_timeout_s": 120,
+  "sandbox_mem_gib": 4,
+  "editor_wall_clock_min": 60
+ },
+ "dev_seed_base": 1000000,
+ "policy": {
+  "allowed_tensors": ["W1", "b1", "W2", "b2", "W3", "b3"],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "heldout": {"episodes": 1000, "control_seeds": 3, "seed_source": "secrets.randbelow at verification time, base >= 2e9"}
+}
