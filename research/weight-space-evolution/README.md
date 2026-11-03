@@ -25,4 +25,4 @@ Questions 2–4 are hypotheses for later investigation. Do not presume they have
 
 The first task is to inspect and reproduce the published edit mechanism, then establish a bounded harness and test a small, objectively scorable weight edit using Codex Sol.
 
-All research code, reports and documentation are written in English. Large checkpoints and execution payloads stay outside Git according to the parent repository policy.
+All research code, reports and documentation are written in English. All work, including model downloads and experiments, takes place inside this directory. Large checkpoints, dependencies and transient execution payloads live in ignored `work/` here (outside **Git tracking**, not outside the working directory).
