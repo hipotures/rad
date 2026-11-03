@@ -29,6 +29,19 @@ The final research objective is a population of small specialist *weight editors
 7. Control model/provider spending: record the intended budgets before initiating long or potentially expensive runs. Start with tiny diagnostic cases and bounded smoke tests. Do not perform a large population experiment unless a subsequent goal authorizes it.
 8. Review provider terms and any applicable use restrictions before scaling commercial-model-generated edits or model distillation. Record uncertainty rather than silently assuming permission.
 
+## Hardware discovery, GPU scheduling, and model acquisition
+
+The research environment is expected to have access to **two GPUs**, but do not assume their models, VRAM capacities, physical placement, or that both are visible to the same process.
+
+At the beginning of execution:
+1. Inspect available compute devices with `nvidia-smi`, including GPU model, index/UUID, total and currently free VRAM, utilization, and driver/CUDA versions. Check PyTorch CUDA device discovery and relevant framework versions. Record this inventory in the run/environment manifest. If fewer than two GPUs are visible, document the discrepancy and proceed with available resources.
+2. Check free disk space and expected download sizes before acquiring model checkpoints and datasets. Download the pinned, publicly available Gold weights and necessary reference artifacts autonomously when practical, using official sources and respecting their licenses. Verify exact model revisions and integrity; reuse valid existing local downloads rather than duplicating large files. Do not download unrelated giant models.
+3. Plan use of **both GPUs when it provides a measurable advantage**. Prefer independent candidate evaluation, parallel bounded tests, or a producer/evaluator split for small models; do not use tensor/model parallelism merely because two GPUs exist. For heterogeneous GPUs, schedule according to actual capacities and throughput.
+4. Use explicit device allocation (GPU UUIDs, `CUDA_VISIBLE_DEVICES`, or framework-equivalent settings). Avoid cross-experiment VRAM contention, oversubscription, and unexpected CPU offloading. Keep Gold and candidate evaluations under comparable conditions.
+5. Measure throughput, peak allocated/reserved VRAM, wall-clock time and utilization for the first representative runs. Revise scheduling based on evidence rather than intuition. Do not leave background GPU jobs running after the bounded study unless explicitly required by the goal.
+
+Do not hard-code a host-specific absolute path, GPU index, GPU type, or local storage location into the research instructions. Discover and document the actual environment at runtime.
+
 ## Harness contract
 
 Build a **minimal, auditable research harness**, not a general agent framework.
