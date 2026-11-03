@@ -1,0 +1,18 @@
+{
+ "run_id": "20261103T-phaseD-v2-e2e",
+ "question": "Does the integrated editor-evaluation pipeline (queue -> persistent engine per GPU -> tiers -> CPU scoring -> report) work for a population of candidates, and what is its full-cycle throughput by transition mode and GPU count? Secondary: effects of fixed population patches on editing ability (dev exploration, select confirmation).",
+ "benchmark": {"version": "phaseD-v2", "protocol": "configs/phaseD_v2/protocol_v2_frozen.json", "splits_used": ["dev (104 instances)", "select (104 instances)"], "heldout_used": false},
+ "editors": "configs/phaseD_v2/editors.json (E0 + 12 patches of configs/phaseD_v2/editor_population.json)",
+ "engine": "profile3 (FLASHINFER, max_num_seqs 1024, max_num_batched_tokens 16384, BF16), vLLM 0.33.0, prefix cache reset before every generate",
+ "hardware": "2x RTX 4090 24 GiB, 32 CPU cores",
+ "campaigns": {
+  "20261103T-phaseD-v2-e2e": "dev, 13 editors, direct, GPUs 0+1",
+  "20261103T-phaseD-v2-e2e-direct1": "dev, 13 editors, direct, GPU 0",
+  "20261103T-phaseD-v2-e2e-reload2-all": "dev, 13 editors, reload, GPUs 0+1",
+  "20261103T-phaseD-v2-e2e-restart2-all": "dev, 13 editors, restart, GPUs 0+1",
+  "20261103T-phaseD-v2-e2e-reload2": "dev, 6 editors (E0,p50c,p25c,p10c,rand-dir-0,rand-fused), reload, GPUs 0+1 (first attempt, short-run tail effects)",
+  "20261103T-phaseD-v2-e2e-restart2": "same 6 editors, restart, GPUs 0+1 (first attempt)",
+  "20261103T-phaseD-v2-select": "select, 13 editors, direct, GPUs 0+1 (confirmation of the dev p25c observation)"},
+ "metrics": "primary endpoint of the frozen protocol (paired difference vs E0 over primary cells, cluster bootstrap, Holm across 12 candidates); candidates per minute and per GPU-hour from first claim to last completion (engine startup excluded); per-phase medians",
+ "code": ["code/wse/pd2_eval.py", "code/wse/pd2_scorer.py", "code/wse/swap_engine.py", "code/wse/vllm_ext.py", "code/wse/pd2_report.py", "code/wse/pd2_throughput.py", "code/wse/pd2_figures.py", "code/scripts/run_pd2_workers.sh", "code/scripts/run_pd2_throughput_modes.sh"]
+}
