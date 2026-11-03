@@ -69,12 +69,12 @@ At completion, stage the actual task-owned paths explicitly, inspect the diff
 and run the publication check:
 
 ```bash
-cd "$(git rev-parse --show-toplevel)"
+# Run from the current research directory; do not change directories.
 git status --short --branch
-git add -- <actual-task-owned-paths>
+git add -- <task-owned-paths-relative-to-current-directory>
 git diff --cached --stat
 git diff --cached --check
-python3 tools/archive_workspace.py audit --staged-only
+python3 "$(git rev-parse --show-toplevel)/tools/archive_workspace.py" audit --staged-only
 git commit -m "Record the task outcome and reproduction material"
 git push origin <actual-branch>
 ```
