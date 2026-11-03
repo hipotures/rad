@@ -78,8 +78,14 @@ class Scorer:
                     return json.loads(line[2:])
 
     def close(self):
+        """EOF on stdin; a scorer still tearing down its episode pool after 30 s is killed (results are already
+        persisted at this point; seen once in the restart-mode throughput run)."""
         self.p.stdin.close()
-        self.p.wait(timeout=30)
+        try:
+            self.p.wait(timeout=30)
+        except subprocess.TimeoutExpired:
+            self.p.kill()
+            self.p.wait()
 
 
 def load_split(split, ids=None):

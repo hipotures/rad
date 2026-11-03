@@ -208,3 +208,53 @@ Expected checks: `pilot_exact_g0` reproduces the committed pilot texts (identica
 `baseline_g1` agree within about 1%; swap hashes equal the fresh-engine hashes. Using a profile in the Phase D pilot:
 `python -m wse.editor_pilot ... --engine-json '{"attention_backend": "FLASHINFER", "max_num_seqs": 1024,
 "max_num_batched_tokens": 16384}'` (opt-in; the default engine is unchanged and remains the bit-exact reference).
+
+## 10. Phase D v2 benchmark and persistent weight-swap evaluator
+
+Prerequisites: environments `work/envs/wse` (numpy/torch CPU, MinAtar) and `work/envs/vllm` (vLLM 0.33), the text
+export `work/derived/qwen3.5-0.8B-text-gold` (§3), the upstream clone (§2) and both MinAtar Gold networks:
+
+```bash
+cd $TOPIC/code
+$W/envs/wse/bin/python -m wse.register_minatar --exp5 $W/repos/lm_understand-logs/exp5_write_from_scratch --game seaquest
+$W/envs/wse/bin/python -m wse.register_minatar --exp5 $W/repos/lm_understand-logs/exp5_write_from_scratch --game asterix
+```
+
+Benchmark instances (CPU; F4 episodes dominate, about 10-20 min per split on 24 cores). The held-out salt
+`work/benchmarks/phaseD-v2/secret_salt.txt` is created on first use; to regenerate the *same* test/transfer splits the
+original salt file must be restored (its sha256 is `salt_sha256` in `configs/phaseD_v2/protocol_v2_frozen.json`).
+Without it a new salt defines a new benchmark version.
+
+```bash
+for s in pilot dev select test transfer; do CUDA_VISIBLE_DEVICES= $W/envs/wse/bin/python -m wse.pd2_bench generate --split $s; done
+for s in pilot dev select test transfer; do $W/envs/wse/bin/python -m wse.pd2_bench rebaseline --split $s; done
+$W/envs/wse/bin/python -m wse.pd2_bench verify --split dev            # regenerates 6 instances, must be byte-identical
+CUDA_VISIBLE_DEVICES= $W/envs/wse/bin/python -m pytest -q -p no:cacheprovider --basetemp=$W/tmp/pytest-base tests/test_phaseD_v2.py
+$W/envs/wse/bin/python -m wse.editor_population --out ../configs/phaseD_v2/editor_population.json   # 12 patches (seed 20261103)
+```
+
+Persistent evaluator integrity tests (both GPUs, about 15 min) and the determinism probe:
+
+```bash
+CAMPAIGN=<new-id> P=r2_ EXT=32 EXTSEED=1 EXTFULL=--ext-full scripts/run_swap_tests.sh
+$W/envs/wse/bin/python -m wse.swap_analyze --raw $W/raw/<new-id> --prefix r2_ --out <results>/swap_tests_r2.json
+scripts/run_determinism_probe.sh
+```
+
+Expected: every visit `identical_to_some_fresh` for greedy, sampled and constrained; all Gold audits ok.
+
+Editor evaluation (job queue; one persistent engine per GPU; held-out splits require `--allow-heldout`):
+
+```bash
+Q=$W/queues/<campaign>; EDS=$(python3 -c "import json;print(','.join(e['editor_id'] for e in json.load(open('../configs/phaseD_v2/editors.json'))['editors']))")
+PYTHONPATH=. $W/envs/vllm/bin/python -m wse.pd2_eval submit --queue $Q --editors $EDS --split dev
+date +%s > $W/tmp/<campaign>.start
+CAMPAIGN=<campaign> QUEUE=$Q GPUS="0 1" SWAP_MODE=direct scripts/run_pd2_workers.sh
+$W/envs/wse/bin/python -m wse.pd2_report --campaign <campaign> --split dev --out <results>
+$W/envs/wse/bin/python -m wse.pd2_throughput --campaign <campaign> --label direct-2gpu --since $(cat $W/tmp/<campaign>.start) --out <results>/throughput_direct-2gpu.json
+BASE=<campaign> scripts/run_pd2_throughput_modes.sh      # restart / reload on 2 GPUs, direct on 1 GPU
+$W/envs/wse/bin/python -m wse.pd2_figures --e2e <results> --swap <swap results>/swap_tests_r2.json --out <run>/figures
+```
+
+Protocol freeze (already done; re-running on the same pilot results must reproduce the committed file except for the
+`status` text): `python -m wse.pd2_freeze --pilot ../runs/20261103T-phaseD-v2-pilot/results/editor_results_pilot.json --out-dir ../configs/phaseD_v2`.

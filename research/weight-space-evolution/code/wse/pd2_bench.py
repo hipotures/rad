@@ -287,13 +287,48 @@ def retarget(inst, text, rng):
     return re.sub(r"(\w+)\[\s*([\d:]+)\s*(?:,\s*([\d:]+)\s*)?\]", rep, text)
 
 
+def random_matched(inst, rng, n=8):
+    """n size/form-matched random edits that differ from the oracle (a retarget identical to the oracle, e.g. an
+    edit addressing a whole tensor with ':', is not a control); [] if no distinct retarget exists."""
+    out = []
+    for _ in range(40 * n):
+        e = retarget(inst, inst["oracle"], rng)
+        if e != inst["oracle"]:
+            out.append(score_edit(inst, e)["recovery"])
+        if len(out) == n:
+            break
+    return out
+
+
+def rebaseline_random(split):
+    """Recompute random_matched excluding oracle-identical retargets (fix of 2026-11-03, applied before the protocol
+    freeze): always for F1-F3/F5 (cheap); for F4 only where a retarget can coincide with the oracle (episode cost).
+    Deterministic rng per instance; all other baselines unchanged."""
+    d = bench_dir() / split
+    fixed = []
+    for f in sorted(d.glob("*.json")):
+        meta = json.loads(f.read_text())
+        inst = load(split, meta["id"])
+        if meta["family"] == "F4":
+            rng = np.random.default_rng([meta["index"], 99])
+            if all(retarget(inst, meta["oracle"], rng) != meta["oracle"] for _ in range(16)):
+                continue
+        rnd = random_matched(inst, np.random.default_rng([meta["index"], 100]))
+        meta["baselines"]["random_matched"] = rnd
+        meta["baselines"]["random_matched_mean"] = float(np.mean(rnd)) if rnd else None
+        meta["baselines"]["random_matched_note"] = "recomputed excluding oracle-identical retargets"
+        f.write_text(json.dumps(meta, indent=1))
+        fixed.append(meta["id"])
+    return fixed
+
+
 def baselines(inst, rng):
     M = fam_module(inst["family"])
     sc = lambda e: score_edit(inst, e)["recovery"] if e else 0.0   # noqa: E731
-    rnd = [sc(retarget(inst, inst["oracle"], rng)) for _ in range(8)]
+    rnd = random_matched(inst, rng)
     hs, ns = _best_on_probe(inst, M.simple_heuristic_edits(inst))
     hi, ni = _best_on_probe(inst, M.improved_heuristic_edits(inst))
-    return {"noop": 0.0, "random_matched_mean": float(np.mean(rnd)), "random_matched": rnd,
+    return {"noop": 0.0, "random_matched_mean": float(np.mean(rnd)) if rnd else None, "random_matched": rnd,
             "heuristic_simple": sc(hs), "heuristic_simple_edit": hs, "heuristic_simple_probe_evals": ns,
             "heuristic_improved": sc(hi), "heuristic_improved_edit": hi, "heuristic_improved_probe_evals": ni,
             "oracle": inst["oracle_recovery"]}
@@ -376,7 +411,7 @@ def manifest(split):
         rows.append({"id": iid, "family": f, "subtype": s, "index": i, "attempt": rec["attempt"],
                      "held_out_subtype": rec["held_out_subtype"], "ceiling": rec["ceiling"],
                      "damaged": rec["damaged_metric"], "oracle_recovery": rec["oracle_recovery"],
-                     "baselines": {k: v for k, v in rec["baselines"].items() if isinstance(v, (int, float)) and not isinstance(v, bool)},
+                     "baselines": {k: v for k, v in rec["baselines"].items() if (isinstance(v, (int, float)) and not isinstance(v, bool)) or (v is None and k == "random_matched_mean")},
                      "t0_chance": float(np.mean(rec["t0_option_recovery"])),
                      "npz_sha256": sha256_file(d / f"{iid}.npz"), "json_sha256": sha256_file(d / f"{iid}.json")})
     return rows
@@ -389,7 +424,8 @@ def aggregate(rows):
         out["/".join(key)] = {"n": len(rs), "ceiling": float(np.mean([r["ceiling"] for r in rs])),
                               "damaged": float(np.mean([r["damaged"] for r in rs])),
                               "oracle": float(np.mean([r["oracle_recovery"] for r in rs])),
-                              **{b: float(np.mean([r["baselines"][b] for r in rs]))
+                              **{b: (float(np.mean([r["baselines"][b] for r in rs if r["baselines"].get(b) is not None]))
+                                     if any(r["baselines"].get(b) is not None for r in rs) else None)
                                  for b in ("random_matched_mean", "heuristic_simple", "heuristic_improved")},
                               "t0_chance": float(np.mean([r["t0_chance"] for r in rs]))}
     return out
@@ -404,6 +440,8 @@ def main(argv=None):
     m = sp.add_parser("manifest")
     m.add_argument("--split", required=True)
     m.add_argument("--out", required=True)
+    rb = sp.add_parser("rebaseline")
+    rb.add_argument("--split", required=True)
     v = sp.add_parser("verify")
     v.add_argument("--split", required=True)
     v.add_argument("--n", type=int, default=6)
@@ -422,6 +460,9 @@ def main(argv=None):
             body["salt_sha256"] = salt_commitment()
         Path(a.out).write_text(json.dumps(body, indent=1))
         print(json.dumps(body["aggregate"], indent=1))
+    elif a.cmd == "rebaseline":
+        fx = rebaseline_random(a.split)
+        print(a.split, "random_matched recomputed for", len(fx), fx[:6])
     elif a.cmd == "verify":
         rows = {r["id"]: r for r in manifest(a.split)}
         rng = np.random.default_rng(0)

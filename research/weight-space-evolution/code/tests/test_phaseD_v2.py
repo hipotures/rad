@@ -115,3 +115,11 @@ def test_swap_spec_roundtrip(bdir):
     flat = cur["model.language_model.layers.0.mlp.down_proj.weight"].reshape(-1).copy()
     flat[z[t["key"] + "_idx"]] = z[t["key"] + "_val"]
     assert np.array_equal(flat.reshape(3, 4), tgt["model.language_model.layers.0.mlp.down_proj.weight"])
+
+
+def test_holm_and_bootstrap_p():
+    from wse.pd2_report import boot_ci, holm
+    adj = holm({"a": 0.01, "b": 0.04, "c": 0.03})
+    assert adj == pytest.approx({"a": 0.03, "c": 0.06, "b": 0.06})
+    m, lo, hi, p = boot_ci([[1.0, 1.2], [0.9], [1.1]], with_p=True)
+    assert lo > 0 and p == pytest.approx(1 / 2000)

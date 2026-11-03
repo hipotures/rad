@@ -1,0 +1,20 @@
+{
+ "run_id": "20261103T-persistent-swap-evaluator",
+ "question": "Can one long-lived vLLM engine per GPU switch between Gold and candidate checkpoints (apply / reload / restore) without restart, with outputs bit-identical to a freshly started engine on the same weights?",
+ "source_commit_base": "2f641cc5960dc2293374914d7bd73db3ed104815 (plus the uncommitted harness files published in the same commit as this report)",
+ "code": ["code/wse/vllm_ext.py", "code/wse/swap_engine.py", "code/wse/swap_test.py", "code/wse/swap_analyze.py", "code/wse/determinism_probe.py", "code/wse/editor_population.py", "code/scripts/run_swap_tests.sh", "code/scripts/run_determinism_probe.sh"],
+ "gold": {"id": "qwen3.5-0.8B@2fc0636", "path": "work/derived/qwen3.5-0.8B-text-gold (text-only export, see artifact-manifest.json)"},
+ "population": "configs/phaseD_v2/editor_population.json (12 patches: p50c/p25c/p10c upstream, 4 matched random directions, 3 random sparse, 1 random touching a fused tensor, 1 chained child of p50c)",
+ "engine": {"vllm": "0.33.0", "torch": "2.14.0+cu130", "dtype": "bfloat16", "seed": 0, "max_model_len": 32768, "gpu_memory_utilization": 0.85,
+            "attention_backend": "FLASHINFER", "max_num_seqs": 1024, "max_num_batched_tokens": 16384, "worker_extension_cls": "wse.vllm_ext.WSEWorkerExtension",
+            "prefix_cache": "enabled; reset after every transition and (round 2) before every generate()"},
+ "hardware": "2x NVIDIA GeForce RTX 4090 24 GiB, driver 615.71.09, CUDA 13.0; GPU0 = direct sequence + extended cycles, GPU1 = restart reference + reload sequence",
+ "modes": {"direct": "sparse BF16 index write into runtime parameter storage for checkpoint-identical tensors, sha256 before/after, rollback on mismatch; falls back to reload when a touched tensor is fused/transformed at load time",
+           "reload": "LLM.collective_rpc reload_weights from an exported candidate checkpoint directory",
+           "restart": "new LLM engine per state (reference)"},
+ "sequence": "gold,p50c,gold,p25c,p50c,gold,p10c,rand-dir-0,rand-fused,chain-p50c,gold",
+ "extended": {"round1": "74 random transitions, seed 1, greedy case only", "round2": "32 random transitions, seed 1, all three cases"},
+ "cases": {"greedy": "temperature 0, n 1, 64 tokens", "sampled": "temperature 0.7, top-p 0.8, n 4, seed 0, 256 tokens", "constrained": "sampled + v1 structured outputs (choice / DSL regex)", "prompts": "Phase D v1 pilot prompts (144)"},
+ "metrics": ["per-request token-id hash identity versus the fresh-engine reference for the same state", "transition time split (prepare/export/apply/reset/verify)", "full-runtime Gold fingerprint audits", "worker GPU memory", "engine startup time"],
+ "rounds": {"round1": "prefix cache reset only at transitions (warm cache between cases) -> raw files without prefix", "round2": "prefix cache reset before every generate() (prefix r2_)"}
+}

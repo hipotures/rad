@@ -170,6 +170,54 @@
    "path": "work/cache/vllm-bench/, work/cache/triton/, work/cache/inductor/",
    "class": "regenerable cache",
    "how": "rebuilt on first engine start (cold start about 120 s instead of about 19 s)"
+  },
+  {
+   "path": "gold/minatar-asterix-exp5-hand@4d09ba6",
+   "class": "regenerable",
+   "how": "wse.register_minatar --game asterix (reproduce.md \u00a710)"
+  },
+  {
+   "path": "benchmarks/phaseD-v2/{pilot,dev,select,test,transfer}/",
+   "class": "regenerable",
+   "bytes_total_approx": 185000000,
+   "what": "Phase D v2 instances (damaged/clean weights, oracle, tiers, baselines); 595 instances",
+   "how": "wse.pd2_bench generate + rebaseline (reproduce.md \u00a710); manifest hashes in configs/phaseD_v2/protocol_v2_frozen.json"
+  },
+  {
+   "path": "benchmarks/phaseD-v2/secret_salt.txt",
+   "class": "irreplaceable (secret by design, not in Git)",
+   "sha256": "cc1e5683eddd77c5bc2759c29f9ca8bc13e6fba0682b10202957af74f87cc096",
+   "what": "held-out seed salt for the test/transfer splits",
+   "recovery_gap": "no off-repo backup exists yet; if lost, the committed test/transfer manifests cannot be regenerated and a new salt must define phaseD-v3 held-out splits. The operator should copy this file to private persistent storage.",
+   "note": "the committed commitment is salt_sha256 in protocol_v2_frozen.json (sha256 of the salt string as used by pd2_bench.salt)"
+  },
+  {
+   "path": "benchmarks/phaseD-v2/manifest-{test,transfer}.json",
+   "class": "regenerable (with the salt)",
+   "what": "per-instance held-out manifests; only their sha256 is public"
+  },
+  {
+   "path": "patches/p-* (Phase D v2 editor population)",
+   "class": "regenerable",
+   "what": "12 population patches listed in configs/phaseD_v2/editor_population.json",
+   "how": "wse.p50c (p10c/p25c/p50c) and wse.editor_population (seed 20261103)"
+  },
+  {
+   "path": "derived/candidates/<patch id>/",
+   "class": "regenerable",
+   "bytes_total_approx": 16000000000,
+   "what": "exported full candidate checkpoints for reload mode (about 1.5 GB each)",
+   "how": "created on demand by wse.swap_engine.PersistentEngine.checkpoint_dir; may be deleted"
+  },
+  {
+   "path": "queues/<campaign>/",
+   "class": "disposable",
+   "what": "file-queue job specs/claims"
+  },
+  {
+   "path": "raw/20261103T-persistent-swap-evaluator/, raw/20261103T-phaseD-v2-pilot/, raw/20261103T-phaseD-v2-e2e*/, raw/20261103T-phaseD-v2-select*/",
+   "class": "published as gzip evidence",
+   "how": "evidence/<run id>/ (per-sample generations, scores, worker logs)"
   }
  ]
 }

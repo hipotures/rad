@@ -1,0 +1,370 @@
+{
+ "version": "phaseD-v2",
+ "status": "FROZEN 2026-11-03 after the v2 Gold/p50c pilot; any change requires a new benchmark version",
+ "benchmark": "configs/phaseD_v2/benchmark_v2.json (split plan); generators code/wse/pd2_bench.py, pd2_mlp.py, pd2_policy.py, pd2_algo.py",
+ "families": {
+  "F1": "MLP dead/disabled units",
+  "F2": "MLP output/hidden mapping",
+  "F3": "MLP bias/activation",
+  "F4": "MinAtar policy behaviour (Seaquest/Asterix exp5 hand networks)",
+  "F5": "algorithmic transformers (held-out transfer family)"
+ },
+ "tiers": {
+  "T0": "select 1 of 4 complete edits; 4 rotations per instance, oracle once at each position, 1 sample per rotation (seed = rotation)",
+  "T1": "subtype named, oracle template with numbers blanked; constrained to the template regex; n = 4, seed 0",
+  "T2": "free-form DSL edit constrained to the instance DSL regex (1-12 statements); n = 4, seed 0",
+  "T2P": "T2 with one budgeted probe pass: trial edit (n = 4, seed 0) -> probe-set feedback -> final edit (n = 1 per trial, seed 1); probe passes counted"
+ },
+ "decoding": {
+  "chat_template": "non-thinking",
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "top_k": 20,
+  "max_tokens": {
+   "T0": 8,
+   "T1": 256,
+   "T2": 384,
+   "T2P": 384
+  },
+  "prefix_cache": "reset before every generate() call (makes sampled outputs bit-reproducible run to run)"
+ },
+ "engine": {
+  "default": "profile3 (FLASHINFER, max_num_seqs 1024, max_num_batched_tokens 16384, BF16, max_model_len 32768, gpu_memory_utilization 0.85)",
+  "reproducibility_baseline": "vLLM defaults via --engine-profile default",
+  "excluded": [
+   "FP8 KV cache",
+   "MTP speculative decoding"
+  ]
+ },
+ "scoring": {
+  "recovery": "(metric(edited) - metric(damaged)) / (metric(clean) - metric(damaged)) on the instance test set",
+  "invalid": "invalid or missing edits are scored as no-ops (recovery 0) and reported separately as invalid",
+  "regression": "recovery < -0.02 (F1-F3, F5) or < -0.05 (F4)",
+  "effective": "recovery >= 0.5",
+  "full_repair": "recovery >= 0.9"
+ },
+ "cell_acceptance_rule": {
+  "unit": "family x tier cell, core families F1-F4, decided on the pilot split",
+  "criteria": [
+   "oracle mean recovery >= 0.90 (the reference repair is achievable)",
+   "headroom over the trivial non-agent repairer: simple-heuristic mean recovery <= 0.60 (for T0 additionally: chance <= 0.40)",
+   "Gold E0 is not at ceiling: E0 mean recovery <= 0.80",
+   "format is not the bottleneck: E0 valid rate >= 0.50"
+  ],
+  "floor_cells": "cells where E0 mean recovery <= 0.02 are kept but flagged (improvement must come from candidates)",
+  "reporting": "the improved (probe-search) heuristic is reported as the stronger non-agent reference; it is not an acceptance criterion"
+ },
+ "primary_endpoint": "paired mean recovery difference candidate - E0 over accepted cells on the test split (pairing: instance x tier x sample), instance-cluster bootstrap CI, Holm correction across candidates",
+ "secondary": [
+  "transfer split (held-out F1-F4 subtypes and the F5 family)",
+  "per-family/tier recovery, valid, effective, regression rates",
+  "resource-normalized recovery per 1k generated tokens and per GPU-second"
+ ],
+ "heldout_access": "test/transfer seeds use a secret salt (work/benchmarks/phaseD-v2/secret_salt.txt, sha256 committed); the evaluator refuses held-out splits without --allow-heldout; parent sessions receive dev-split material only",
+ "salt_sha256": "cc1e5683eddd77c5bc2759c29f9ca8bc13e6fba0682b10202957af74f87cc096",
+ "manifests": {
+  "pilot": {
+   "n": 95,
+   "manifest_sha256": "3f9d80bea3b76c7737d8405087ddefed63dc712b5623116bf05ecfffd6c655b1"
+  },
+  "dev": {
+   "n": 104,
+   "manifest_sha256": "4196746b2ee60f3531ffebd1a472dee94794811e6aaa749e52a6c6f8ba85f962"
+  },
+  "select": {
+   "n": 104,
+   "manifest_sha256": "22836772cc685bd7c18afba5d0844f6d059b2e383a4929c9a7d1b3f57103c14a"
+  },
+  "test": {
+   "n": 200,
+   "manifest_sha256": "02167e30e53b2d424c10c2c87b2d8a824f7aeacfb50bbfef73f10afc18d9d3bd"
+  },
+  "transfer": {
+   "n": 92,
+   "manifest_sha256": "2781fb2c7c50626e1beef7d9a03f77d195960f27af70874271e26c4f459bce0f"
+  }
+ },
+ "cells": {
+  "F1/T0": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true,
+    "t0_chance<=0.40": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.644526400845235,
+   "E0_valid_rate": 1.0,
+   "oracle": 1.0,
+   "heuristic_simple": 0.22391882569374827,
+   "heuristic_improved": 0.5546669208244455,
+   "t0_chance": -0.7163886343952005
+  },
+  "F1/T1": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.1292416143484471,
+   "E0_valid_rate": 0.625,
+   "oracle": 1.0,
+   "heuristic_simple": 0.22391882569374827,
+   "heuristic_improved": 0.5546669208244455,
+   "t0_chance": -0.7163886343952005
+  },
+  "F1/T2": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.15847556644044714,
+   "E0_valid_rate": 0.5125,
+   "oracle": 1.0,
+   "heuristic_simple": 0.22391882569374827,
+   "heuristic_improved": 0.5546669208244455,
+   "t0_chance": -0.7163886343952005
+  },
+  "F1/T2P": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.03886924804614796,
+   "E0_valid_rate": 0.6625,
+   "oracle": 1.0,
+   "heuristic_simple": 0.22391882569374827,
+   "heuristic_improved": 0.5546669208244455,
+   "t0_chance": -0.7163886343952005
+  },
+  "F2/T0": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true,
+    "t0_chance<=0.40": true
+   },
+   "floor": false,
+   "E0_mean_recovery": 0.07525399497317647,
+   "E0_valid_rate": 1.0,
+   "oracle": 1.0,
+   "heuristic_simple": 0.2671560554202287,
+   "heuristic_improved": 0.4983719004084512,
+   "t0_chance": 0.06329505160272701
+  },
+  "F2/T1": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.15389303372834756,
+   "E0_valid_rate": 0.734375,
+   "oracle": 1.0,
+   "heuristic_simple": 0.2671560554202287,
+   "heuristic_improved": 0.4983719004084512,
+   "t0_chance": 0.06329505160272701
+  },
+  "F2/T2": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.05919055543943183,
+   "E0_valid_rate": 0.609375,
+   "oracle": 1.0,
+   "heuristic_simple": 0.2671560554202287,
+   "heuristic_improved": 0.4983719004084512,
+   "t0_chance": 0.06329505160272701
+  },
+  "F2/T2P": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.011935959229191441,
+   "E0_valid_rate": 0.65625,
+   "oracle": 1.0,
+   "heuristic_simple": 0.2671560554202287,
+   "heuristic_improved": 0.4983719004084512,
+   "t0_chance": 0.06329505160272701
+  },
+  "F3/T0": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true,
+    "t0_chance<=0.40": true
+   },
+   "floor": false,
+   "E0_mean_recovery": 0.06545720178371663,
+   "E0_valid_rate": 1.0,
+   "oracle": 1.0,
+   "heuristic_simple": 0.3462143024473491,
+   "heuristic_improved": 0.8402879296924699,
+   "t0_chance": 0.049597328547999114
+  },
+  "F3/T1": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": false,
+   "E0_mean_recovery": 0.08007511359646277,
+   "E0_valid_rate": 0.525,
+   "oracle": 1.0,
+   "heuristic_simple": 0.3462143024473491,
+   "heuristic_improved": 0.8402879296924699,
+   "t0_chance": 0.049597328547999114
+  },
+  "F3/T2": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.027609051945696156,
+   "E0_valid_rate": 0.575,
+   "oracle": 1.0,
+   "heuristic_simple": 0.3462143024473491,
+   "heuristic_improved": 0.8402879296924699,
+   "t0_chance": 0.049597328547999114
+  },
+  "F3/T2P": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.012652035319086482,
+   "E0_valid_rate": 0.675,
+   "oracle": 1.0,
+   "heuristic_simple": 0.3462143024473491,
+   "heuristic_improved": 0.8402879296924699,
+   "t0_chance": 0.049597328547999114
+  },
+  "F4/T0": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true,
+    "t0_chance<=0.40": true
+   },
+   "floor": false,
+   "E0_mean_recovery": 0.04334410866709534,
+   "E0_valid_rate": 1.0,
+   "oracle": 1.0,
+   "heuristic_simple": 0.07568436351481414,
+   "heuristic_improved": 0.445950545704948,
+   "t0_chance": 0.06408293406993223
+  },
+  "F4/T1": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.08787616472202277,
+   "E0_valid_rate": 0.75,
+   "oracle": 1.0,
+   "heuristic_simple": 0.07568436351481414,
+   "heuristic_improved": 0.445950545704948,
+   "t0_chance": 0.06408293406993223
+  },
+  "F4/T2": {
+   "accepted": false,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": false
+   },
+   "floor": true,
+   "E0_mean_recovery": -0.022614400369643003,
+   "E0_valid_rate": 0.43333333333333335,
+   "oracle": 1.0,
+   "heuristic_simple": 0.07568436351481414,
+   "heuristic_improved": 0.445950545704948,
+   "t0_chance": 0.06408293406993223
+  },
+  "F4/T2P": {
+   "accepted": true,
+   "criteria": {
+    "oracle>=0.90": true,
+    "simple_heuristic<=0.60": true,
+    "E0<=0.80": true,
+    "E0_valid>=0.50": true
+   },
+   "floor": true,
+   "E0_mean_recovery": 0.00017487437365315347,
+   "E0_valid_rate": 0.55,
+   "oracle": 1.0,
+   "heuristic_simple": 0.07568436351481414,
+   "heuristic_improved": 0.445950545704948,
+   "t0_chance": 0.06408293406993223
+  }
+ },
+ "primary_cells": [
+  "F1/T0",
+  "F1/T1",
+  "F1/T2",
+  "F1/T2P",
+  "F2/T0",
+  "F2/T1",
+  "F2/T2",
+  "F2/T2P",
+  "F3/T0",
+  "F3/T1",
+  "F3/T2",
+  "F3/T2P",
+  "F4/T0",
+  "F4/T1",
+  "F4/T2P"
+ ],
+ "excluded_cells": [
+  "F4/T2"
+ ],
+ "pilot_results": "runs/20261103T-phaseD-v2-pilot/results/editor_results_pilot.json"
+}

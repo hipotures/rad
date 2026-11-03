@@ -1,0 +1,13 @@
+{
+ "run_id": "20261103T-phaseD-v2-pilot",
+ "question": "Gold (E0) and p50c behaviour on the Phase D v2 benchmark pilot split; decides which family x tier cells enter the primary endpoint under the pre-registered rule in configs/phaseD_v2/protocol_v2_draft.json.",
+ "benchmark": {"version": "phaseD-v2", "split": "pilot", "instances": 95, "manifest": "configs/phaseD_v2/manifests/pilot.json",
+               "manifest_sha256": "3f9d80bea3b76c7737d8405087ddefed63dc712b5623116bf05ecfffd6c655b1", "split_plan": "configs/phaseD_v2/benchmark_v2.json"},
+ "editors": {"E0": "qwen3.5-0.8B@2fc0636 (Gold)", "p50c": "upstream p50c patch p-4b2661ed6f35 applied in direct mode"},
+ "tiers": ["T0 (4 rotations)", "T1 (n 4)", "T2 (n 4)", "T2P (n 4 trial + probe feedback + n 1 final)"],
+ "decoding": "non-thinking chat template, temperature 0.7, top-p 0.8, top-k 20, seeds 0 (round 1) / 1 (T2P round 2), structured outputs, max_tokens T0 8 / T1 256 / T2 384 / T2P 384, prefix cache reset before every generate",
+ "engine": "profile3 (FLASHINFER, max_num_seqs 1024, max_num_batched_tokens 16384, BF16, max_model_len 32768, gpu_memory_utilization 0.85), vLLM 0.33.0, one persistent engine per RTX 4090",
+ "code": ["code/wse/pd2_bench.py", "code/wse/pd2_mlp.py", "code/wse/pd2_policy.py", "code/wse/pd2_algo.py", "code/wse/pd2_eval.py", "code/wse/pd2_scorer.py", "code/wse/pd2_report.py", "code/wse/pd2_freeze.py"],
+ "metrics": "recovery = (m_edited - m_damaged)/(m_clean - m_damaged) on the instance test set; invalid edits = no-op; valid/effective(>=0.5)/full-repair(>=0.9)/regression rates; instance-cluster bootstrap 95% CI (2000 resamples, seed 0)",
+ "outputs": {"results": "results/editor_results_pilot.json", "frozen_protocol": "configs/phaseD_v2/protocol_v2_frozen.json"}
+}

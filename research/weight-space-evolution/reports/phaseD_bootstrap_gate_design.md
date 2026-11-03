@@ -1,4 +1,4 @@
-# Phase D — Bootstrap gate design (not executed)
+# Phase D — Bootstrap gate design (gate not executed; benchmark v2 frozen 2026-11-03)
 
 **Gate question.** Can a large parent, using **only direct weight edits**, create at least one variant of a small
 Gold language model that **edits other neural networks** more effectively than (a) Gold and (b) appropriate non-agent
@@ -112,6 +112,25 @@ floor for E0 (0% valid) and needs format-constrained decoding; thinking mode tru
 implemented. Constrained-decoding follow-up ([report](../runs/20261103T-phaseD-pilot-constrained/report.md)): format fixed,
 edits mostly harmful on F1/F2; F3/T2 constrained (E0 0.12, heuristic 0.47, oracle 1.0, 92% valid) is the usable primary
 cell so far; T0 needs position balancing (E0 picks D/C in 85% of answers).
+
+**Status update 2026-11-03 (benchmark v2, frozen).** Items 1–3 are done for v2. The details are in the
+[v2 pilot report](../runs/20261103T-phaseD-v2-pilot/report.md), the
+[frozen protocol](../configs/phaseD_v2/protocol_v2_frozen.json), the
+[persistent evaluator](../runs/20261103T-persistent-swap-evaluator/report.md) and the
+[end-to-end evaluation](../runs/20261103T-phaseD-v2-e2e/report.md).
+
+- **Families and tiers.** F1–F3 are hardened: the simple heuristic now scores 0.22–0.35 instead of 0.98–1.00. F4
+  is MinAtar policy repair and F5 covers algorithmic transformers (transfer only). T0 uses 4 balanced rotations,
+  T1/T2 use regex-constrained output, and T2P adds one probe pass.
+- **Splits and baselines.** Splits are dev/select (public) and test/transfer (secret salt). Baselines are no-op,
+  matched random, simple and improved heuristics, and the oracle.
+- **Primary cells.** 15 primary cells were fixed by the pre-registered rule; F4/T2 is excluded because its validity
+  is 0.43.
+- **Gold.** E0 is at or below no-op almost everywhere. That leaves the headroom up to the improved heuristic
+  (0.68–0.75) and the oracle (1.0).
+- **Section 7 amendments.** The primary endpoint is computed over the frozen primary cells. Validity is reported
+  alongside recovery: invalid edits count as no-op, and recovery on valid edits only is reported separately.
+- **Remaining before a gate run.** Only item 4 is left (operator approval of parent budgets and provider terms).
 
 1. Implement the target generator (F1–F5) with seeds and a manifest; verify ceilings and defect severities.
 2. Implement the edit DSL parser on top of `wse.patch` and the editor-evaluation pass in `wse.lab`.
