@@ -123,7 +123,7 @@ def main(argv=None):
         if rows:
             keys = list(dict.fromkeys(k for r in rows for k in r))
             with open(out / fn, "w", newline="") as f:
-                w = csv.DictWriter(f, keys)
+                w = csv.DictWriter(f, keys, lineterminator="\n")
                 w.writeheader()
                 w.writerows(rows)
     print(f"{len(summ)} configs, {len(case_rows)} case rows -> {out}")
