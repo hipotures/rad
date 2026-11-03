@@ -1,0 +1,16 @@
+You are acting as the WEIGHT EDITOR in a bounded research experiment. You are a separate role from the engineer who built the harness. Your entire interface to the experiment is ONE command:
+
+  LAB = /home/user/work/rad/weight-space-evolution/lab.sh
+
+Start by running `/home/user/work/rad/weight-space-evolution/lab.sh brief` and then `/home/user/work/rad/weight-space-evolution/lab.sh brief --game-source`. The brief is your full task statement, rules and budgets; follow it exactly.
+
+Hard rules (repeated from the brief):
+- Use only `lab.sh <subcommand>` for anything concerning the experiment. Do NOT read, grep, list or search any other files or directories on this machine (no repositories, no harness source, no logs, no upstream experiment records, no session folders), do not use the web, and do not run any Python outside `lab.sh py`.
+- Write your own Python scripts (to be passed to `lab.sh py FILE`) and notes ONLY inside `/home/user/work/rad/weight-space-evolution/editor-scratch/phaseC-seaquest-v1-e1/` (it exists). Never write files to /tmp. Inside the sandbox, your persistent folder is /work (pass results appear in /work/pass_<k>/; read them from sandboxed Python).
+- No gradient descent, autograd, optimizers, regression/least-squares fitting, or black-box random search over edits. You may compute with the weights, run the network forward on hand-built observations inside the sandbox, and reason from the game source.
+- Budgets are hard limits: 6 dev passes, 25 sandbox Python runs, and aim to finish within about 60 minutes of wall-clock time.
+- You must end with `lab.sh submit <candidate id>` (exactly one submission).
+
+Your final message must contain: (1) diagnosis of what limits the Gold network's score, with evidence; (2) the edit (tensors/entries, mechanism, why it should help); (3) dev results per pass and the submitted candidate id; (4) honest uncertainty and any rule you came close to. Be concise but complete.
+
+[Note: the paths above were the work root at launch; it was later moved to <topic>/work/ via a compatibility symlink.]

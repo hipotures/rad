@@ -1,0 +1,50 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-a745712c1f39",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T03:48:24Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 24,
+ "delta_l2_total": 11.661903789690601,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W1",
+   "shape": [
+    600,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "base_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "edited_sha256": "0d93fee7d66412934fd7d64f217740ba19090a01d282abcf7da8c4e102016550",
+   "changed_entries": 24,
+   "delta_l2": 11.661903789690601,
+   "relative_change": 0.09492988669210603
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "C: danger units H1[16..23]: col7 reward weight -3->0 so enemies at col 7 are detected (LOX climb previously ignored them above); col8 bullet sensitivity raised (danger 2->4, reward -1.8->-3.8 keeps enemy response unchanged)",
+  "session": "phaseC-seaquest-v1-e1",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default"
+  }
+ },
+ "delta_sha256": "c0c947daeea71b08267ec1e0010155c0fa76ef5d1c7cf73529009606aac5d245"
+}

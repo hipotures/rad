@@ -1,0 +1,64 @@
+{
+ "patch_version": 1,
+ "patch_id": "p-2c6337e46fac",
+ "gold_id": "minatar-seaquest-exp5-hand@4d09ba6",
+ "parent_id": null,
+ "created_utc": "2026-11-03T03:50:02Z",
+ "policy": {
+  "allowed_tensors": [
+   "W1",
+   "b1",
+   "W2",
+   "b2",
+   "W3",
+   "b3"
+  ],
+  "max_abs_value": 1000.0,
+  "max_changed_entries": 2000,
+  "forbid_uniform_scale": true
+ },
+ "changed_entries_total": 63,
+ "delta_l2_total": 26.589471600616662,
+ "tensors": [
+  {
+   "key": "t0",
+   "name": "W1",
+   "shape": [
+    600,
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "base_sha256": "edc4eb3189edd7dd5c538106ebfc02bdfaacb9df77cffb8192215a70fbd182f1",
+   "edited_sha256": "584d4617027b889c7e6d66375f68fa7599c98ae66356b16c65bdd808bf4c4a28",
+   "changed_entries": 56,
+   "delta_l2": 26.457513110645905,
+   "relative_change": 0.21536867110572866
+  },
+  {
+   "key": "t1",
+   "name": "b1",
+   "shape": [
+    32
+   ],
+   "dtype": "float32",
+   "gold_sha256": "438a68ce4b16104ab00c38b628f9b666003a16894e3c30e3f9d5b585bce97732",
+   "base_sha256": "438a68ce4b16104ab00c38b628f9b666003a16894e3c30e3f9d5b585bce97732",
+   "edited_sha256": "c30378e5c24eb652014869fecb9951a984735ca5216fba08f514f29d8e0ac66c",
+   "changed_entries": 7,
+   "delta_l2": 2.6457513110645907,
+   "relative_change": 0.10985884360051029
+  }
+ ],
+ "meta": {
+  "method": "editor direct edit",
+  "rationale": "D: left-side attack units H1[25..31] respond to enemies (danger+reward) but no longer to lone enemy bullets (danger 6->3, reward 0->4, bias -3->-4); stops the sub from moving into rows with incoming bullets",
+  "session": "phaseC-seaquest-v1-e1",
+  "editor": {
+   "model": "claude-opus-5-5",
+   "interface": "Claude Code subagent (general-purpose), separate session from the harness engineer",
+   "effort": "default"
+  }
+ },
+ "delta_sha256": "0a56df5826129b4611ef1f1bccb9482e04d1399d01e0ff2d1e0106cd877bd67c"
+}

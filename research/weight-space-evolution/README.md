@@ -27,11 +27,18 @@ The first task is to inspect and reproduce the published edit mechanism, then es
 
 All research code, reports and documentation are written in English. All work, including model downloads and experiments, takes place inside this directory. Large checkpoints, dependencies and transient execution payloads live in ignored `work/` here (outside **Git tracking**, not outside the working directory).
 
-## Current state (2026-11-03, interrupted by a host restart)
+## Current state (2026-11-03)
 
-- Phase A: [audit](reports/phaseA_upstream_audit.md); p10c/p25c/p50c rebuild bit-exactly ([run](runs/20261103T-p50c-reconstruction/report.md)).
-- Phase B: harness in [`code/wse/`](code/wse/) (14 tests pass); MinAtar evaluator validated against published exp5 scores ([run](runs/20261103T-minatar-evaluator-validation/report.md)).
-- Phase C: editor session `phaseC-seaquest-v1-e1` was in progress (2 of 6 dev passes, 1 candidate, not submitted) when the host was restarted; its lab state and log persist in `work/sessions/`, but the editor conversation is lost. Not yet evaluated.
-- Bounded MATH-500 check of Gold vs p50c (`code/scripts/run_p50c_math500_bounded.sh`) was interrupted before writing results; must be re-run.
-- Phase D: [bootstrap gate design](reports/phaseD_bootstrap_gate_design.md) (not executed).
-- Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.json](input-manifest.json), [artifact-manifest.json](artifact-manifest.json). Payloads live in ignored `work/`.
+| Phase | Status | Evidence |
+|---|---|---|
+| A — upstream audit | Done. p10c/p25c/p50c rebuild bit-exactly from public Gold (independent tool + upstream tool agree). p50c is a rank-1 removal of a "loop" direction from 64 MLP columns in layers 15/19; upstream strata indicate it mainly rescues truncated (looping) answers. | [audit](reports/phaseA_upstream_audit.md), [run](runs/20261103T-p50c-reconstruction/report.md) |
+| A — behavioural check | Not completed (interrupted by host restart); must be re-run. | [run](runs/20261103T-p50c-math500-bounded/report.md) |
+| B — harness | Done: read-only Gold registry, content-addressed validated patches with lineage, bubblewrap sandbox (fail-closed self-test), budgeted lab, MinAtar forward-pass service (validated vs published exp5 scores), held-out verifier with matched controls; 14 tests. | [`code/wse/`](code/wse/), [validation](runs/20261103T-minatar-evaluator-validation/report.md) |
+| C — first bounded edit | Ran end to end. Editor (Claude Opus 5.5 subagent) proposed 3 hand-derived edits; submitted 2-entry edit B: held-out +1.83 ± 1.89 (not significant), reverse edit −2.96 ± 0.50 (significant). **No demonstrated improvement.** | [report](runs/20261103T-phaseC-seaquest-v1-e1/report.md) |
+| D — bootstrap gate | Designed, not executed. | [design](reports/phaseD_bootstrap_gate_design.md) |
+
+Reproduction: [reproduce.md](reproduce.md); inputs/artifacts: [input-manifest.json](input-manifest.json),
+[artifact-manifest.json](artifact-manifest.json). Payloads live in the ignored `work/` directory.
+
+**Next useful step:** re-run the bounded MATH-500 check; then run several independent Phase C editor sessions with
+larger dev passes and "active-weight" random controls before implementing the Phase D gate.
