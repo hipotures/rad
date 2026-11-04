@@ -1,6 +1,6 @@
 # Weight-Space Evolution
 
-**Status:** Phase D bootstrap study completed: four frontier-parent sessions, 53 dev passes, four distinct sealed candidates; none improved the frozen test endpoint or showed confirmed transfer.
+**Status:** Closed (2026-11-04). The Phase D bootstrap study completed with a negative result: four frontier-parent sessions, 53 dev passes, four distinct sealed candidates; none improved the frozen test endpoint or showed confirmed transfer. Based on this result the user decided not to pursue this research direction further; no follow-up phase is planned.
 
 This directory is the working root for Codex Sol research into **direct weight-space programming** of neural networks and the longer-term possibility of population-based recursive improvement through model-to-model edits.
 
@@ -64,5 +64,8 @@ fresh registry. Dev repeats exposed occasional cross-GPU output differences; fin
 GPU and passed a 1,664-sample Gold repeat before held-out scoring. Both GPUs were shut down cleanly. The
 held-out salt's private backup location remains an explicit recovery gap.
 
-The next useful investigation is the dev repeat variability and a different bounded parent mechanism, before
-any larger population or recursive experiment.
+**Direction discontinued (user decision, 2026-11-04).** After reviewing the negative Phase D result, the user
+decided not to continue the parent-to-editor bootstrap / population / recursive-editing path. The follow-ups
+suggested in the report (cross-GPU dev repeat diagnosis, a different parent interface) are not scheduled. They
+remain recorded only as open questions should the topic ever be reopened under a new goal. The unresolved
+cross-GPU output variability and the held-out salt backup gap remain documented limitations of the existing evidence.
